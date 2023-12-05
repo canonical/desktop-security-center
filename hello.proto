@@ -1,0 +1,14 @@
+syntax = "proto3";
+option go_package = "./";
+
+service Hi {
+  rpc TransHelloWorld (Request) returns (Reply) {}
+}
+
+message Request {
+  string language = 1;
+}
+
+message Reply {
+  string message = 1;
+}
