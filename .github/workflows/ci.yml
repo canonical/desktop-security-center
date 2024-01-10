@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  go-sanity:
+    name: "Build Go"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Go
+        run: |
+          set -eu
+          cd packages/desktop_security_center_grpc
+          go build .
