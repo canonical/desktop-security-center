@@ -1,0 +1,11 @@
+syntax = "proto3";
+option go_package = "./";
+import "google/protobuf/empty.proto";
+
+service Hardware {
+  rpc IsSecureBootEnabled (google.protobuf.Empty) returns (IsSecureBootEnabledResponse) {}
+}
+
+message IsSecureBootEnabledResponse {
+    bool enabled = 1;
+}

@@ -1,0 +1,10 @@
+[Unit]
+Description=Desktop security center backend
+Requires=desktop-security-center.socket
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/desktop-security-center
+
+[Install]
+WantedBy=multi-user.target
