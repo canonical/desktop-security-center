@@ -15,8 +15,8 @@ func TransHelloWorld(lang string) string {
     return helloWorlds["en"]
 }
 
-//func main() {
+func main() {
 //    fmt.Println(TransHelloWorld("lt"))
 //    fmt.Println(TransHelloWorld("en"))
 //    fmt.Println(TransHelloWorld("no"))
-//}
+}
