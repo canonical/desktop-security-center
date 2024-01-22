@@ -9,7 +9,7 @@ import (
     "google.golang.org/protobuf/types/known/emptypb"
 )
 
-func (s *HardwareServer) IsSecureBootEnabled(ctx context.Context, p *emptypb.Empty) (*pb.IsSecureBootEnabledResponse, error) {
+func (s *HardwareServer) IsSecureBootEnabled(ctx context.Context, _ *emptypb.Empty) (*pb.IsSecureBootEnabledResponse, error) {
     cmd := exec.Command("mokutil", "--sb-state")
     out, err := cmd.Output()
     if err != nil {
