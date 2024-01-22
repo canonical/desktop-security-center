@@ -20,22 +20,9 @@ func New(ctx context.Context)  {
 		panic("Unexpected number of socket activation fds")
 	}
 
-    //var x = []byte{'c','a','t', '\n'}
-    fo, err := os.Create("/tmp/c.txt")
-    if err != nil {
-        panic(err)
-    }
-
     var opts []grpc.ServerOption
     grpcServer := grpc.NewServer(opts...)
     pb.RegisterHardwareServer(grpcServer, &HardwareServer{})
-
-    //trash
-    fo.WriteString("u\n")
-    fo.WriteString(listeners[0].Addr().String())
-    fo.WriteString("\n")
-    grpcServer.Serve(listeners[0])
-    fo.WriteString("END\n")
 }
 
 func main() {
