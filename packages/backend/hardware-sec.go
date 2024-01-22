@@ -13,7 +13,7 @@ func (s *HardwareServer) IsSecureBootEnabled(ctx context.Context, p *emptypb.Emp
     cmd := exec.Command("mokutil", "--sb-state")
     out, err := cmd.Output()
     if err != nil {
-        return &pb.IsSecureBootEnabledResponse{ Enabled: true }, status.Errorf(codes.NotFound, "couldn't execute mokutil")
+        return nil, status.Errorf(codes.NotFound, "couldn't execute mokutil")
     }
     out_s := string(out)
     if strings.Contains(out_s, "SecureBoot enabled") {
@@ -21,6 +21,6 @@ func (s *HardwareServer) IsSecureBootEnabled(ctx context.Context, p *emptypb.Emp
     } else if strings.Contains(out_s, "SecureBoot disabled") {
         return &pb.IsSecureBootEnabledResponse{ Enabled: false }, nil
     } else {
-        return &pb.IsSecureBootEnabledResponse{ Enabled: true }, status.Errorf(codes.Internal, "unexpected mokutil output")
+        return nil, status.Errorf(codes.Internal, "unexpected mokutil output")
     }
 }
