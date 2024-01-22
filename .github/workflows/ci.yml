@@ -17,5 +17,5 @@ jobs:
       - name: Build Go
         run: |
           set -eu
-          cd packages/desktop_security_center_grpc
+          cd packages/backend/
           go build .
