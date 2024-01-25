@@ -7,6 +7,7 @@ import 'package:yaru_widgets/yaru_widgets.dart';
 typedef AppPage = ({
   Widget Function(BuildContext context, bool selected) tileBuilder,
   WidgetBuilder pageBuilder,
+  String Function(BuildContext context) label,
 });
 
 final pages = <AppPage>[
@@ -16,6 +17,7 @@ final pages = <AppPage>[
           leading: Icon(UbuntuProPage.pageDetail(context).iconData),
         ),
     pageBuilder: (_) => const UbuntuProPage(),
+    label: (context) => UbuntuProPage.pageDetail(context).label,
   ),
 ];
 
@@ -34,7 +36,9 @@ class DesktopSecurityCenterApp extends ConsumerWidget {
       tileBuilder: (context, index, selected, availableWidth) =>
           pages[index].tileBuilder(context, selected),
       pageBuilder: (context, index) => Scaffold(
-        appBar: const YaruWindowTitleBar(),
+        appBar: YaruWindowTitleBar(
+          title: Text(pages[index].label(context)),
+        ),
         body: pages[index].pageBuilder(context),
       ),
       layoutDelegate: const YaruMasterFixedPaneDelegate(
