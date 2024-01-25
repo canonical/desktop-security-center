@@ -22,6 +22,7 @@ func New(ctx context.Context)  {
     var opts []grpc.ServerOption
     grpcServer := grpc.NewServer(opts...)
     pb.RegisterHardwareServer(grpcServer, &HardwareServer{})
+    grpcServer.Serve(listeners[0])
 }
 
 func main() {
