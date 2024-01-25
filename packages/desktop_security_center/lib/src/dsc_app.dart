@@ -30,6 +30,7 @@ class DesktopSecurityCenterApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    YaruWindow.of(context).setTitle(l10n.appTitle);
     return YaruMasterDetailPage(
       appBar: YaruWindowTitleBar(title: Text(l10n.appTitle)),
       controller: ref.watch(yaruPageControllerProvider),
