@@ -3,9 +3,36 @@ option go_package = "./";
 import "google/protobuf/empty.proto";
 
 service Hardware {
-  rpc IsSecureBootEnabled (google.protobuf.Empty) returns (IsSecureBootEnabledResponse) {}
+    rpc IsSecureBootEnabled (google.protobuf.Empty) returns (IsSecureBootEnabledResponse) {}
 }
 
 message IsSecureBootEnabledResponse {
     bool enabled = 1;
+}
+
+
+service Pro {
+    rpc IsMachineProAttached (google.protobuf.Empty) returns (Boolean) {}
+    rpc IsEsmInfraEnabled (google.protobuf.Empty) returns (Boolean) {}
+    rpc IsEsmAppsEnabled (google.protobuf.Empty) returns (Boolean) {}
+    rpc IsKernelLivePatchEnabled (google.protobuf.Empty) returns (Boolean) {}
+
+    rpc AttachProToMachine (AttachRequest) returns (google.protobuf.Empty) {}
+
+    rpc EnableInfra (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc DisableInfra (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+
+    rpc EnableEsmApps (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc DisableEsmApps (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+
+    rpc EnableKernelLivePatch (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc DisableKernelLivePatch (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}
+
+message Boolean {
+    bool ret = 1;
+}
+
+message AttachRequest {
+    string token = 1;
 }
