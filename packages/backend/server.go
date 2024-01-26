@@ -7,6 +7,7 @@ import (
 )
 
 type HardwareServer struct{pb.UnimplementedHardwareServer}
+type ProServer struct{pb.UnimplementedProServer}
 
 func New(ctx context.Context)  {
  
@@ -22,6 +23,7 @@ func New(ctx context.Context)  {
     var opts []grpc.ServerOption
     grpcServer := grpc.NewServer(opts...)
     pb.RegisterHardwareServer(grpcServer, &HardwareServer{})
+    pb.RegisterProServer(grpcServer, &ProServer{})
     grpcServer.Serve(listeners[0])
 }
 
