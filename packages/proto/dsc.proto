@@ -18,7 +18,7 @@ service Pro {
     rpc IsKernelLivePatchEnabled (google.protobuf.Empty) returns (Boolean) {}
 
     rpc ProInitiate (google.protobuf.Empty) returns (InitiateResponse) {}
-    rpc AttachProToMachine (AttachRequest) returns (Boolean) {}
+    rpc AttachProToMachine (AttachRequest) returns (google.protobuf.Empty) {}
 
     rpc EnableInfra (google.protobuf.Empty) returns (google.protobuf.Empty) {}
     rpc DisableInfra (google.protobuf.Empty) returns (google.protobuf.Empty) {}

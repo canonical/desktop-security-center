@@ -16,7 +16,6 @@ var isServiceEnabled = map[string]bool {
     "esm-apps": false,
     "livepatch": false,
 }
-var reqId string
 
 /* Sets isServiceEnabled items to true if the corresponding service is enabled. */
 func initializeServicesStatus() (error) {
@@ -56,6 +55,15 @@ func (s *ProServer) IsKernelLivePatchEnabled (ctx context.Context, _ *emptypb.Em
     return &pb.Boolean{ Ret: isServiceEnabled["livepatch"] }, nil
 }
 
+func pollProInitiate (reqId string) {
+    cmd := exec.Command("pro", "api", "u.pro.attach.magic.wait.v1", "--args", "magic_token=" + reqId)
+    /* TODO log this error */
+    out, _ := cmd.Output()
+    outs := string(out)
+    token := gjson.Get(outs, "data.attributes.cotract_token").String()
+    attach(token)
+}
+
 func (s *ProServer) ProInitiate (ctx context.Context, _ *emptypb.Empty) (*pb.InitiateResponse, error) {
     cmd := exec.Command("pro", "api", "u.pro.attach.magic.initiate.v1")
     out, err := cmd.Output()
@@ -65,17 +73,18 @@ func (s *ProServer) ProInitiate (ctx context.Context, _ *emptypb.Empty) (*pb.Ini
     outs := string(out)
     pin := gjson.Get(outs, "data.attributes.user_code").String()
     expires := gjson.Get(outs, "data.attributes.expires_in").Int()
-    reqId = gjson.Get(outs, "data.attributes.token").String()
+    reqId := gjson.Get(outs, "data.attributes.token").String()
+    go pollProInitiate(reqId)
     return &pb.InitiateResponse {
         Pin: pin,
         Expires: expires,
     }, nil
 }
 
-func (s *ProServer) AttachProToMachine (ctx context.Context, req *pb.AttachRequest) (*pb.Boolean, error) {
+func attach(token string) error {
     conn, err := dbus.ConnectSystemBus()
     if err != nil {
-        return &pb.Boolean{ Ret: false }, err
+        return err
     }
     obj := conn.Object(
         "com.canonical.UbuntuAdvantage",
@@ -84,10 +93,14 @@ func (s *ProServer) AttachProToMachine (ctx context.Context, req *pb.AttachReque
     call := obj.Call(
         "com.canonical.UbuntuAdvantage.Manager.Attach",
         dbus.FlagAllowInteractiveAuthorization,
-        req.GetToken(),
+        token,
     )
     if call.Err != nil {
-		return &pb.Boolean{ Ret: false }, call.Err
-	}
-    return &pb.Boolean{ Ret: true }, nil
+        return call.Err
+    }
+    return nil
+}
+
+func (s *ProServer) AttachProToMachine (ctx context.Context, req *pb.AttachRequest) (*emptypb.Empty, error) {
+    return nil, attach(req.GetToken())
 }
