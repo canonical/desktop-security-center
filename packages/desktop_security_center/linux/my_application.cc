@@ -23,6 +23,7 @@ static void my_application_activate(GApplication *application)
   GtkWindow *window = GTK_WINDOW(hdy_application_window_new());
   gtk_window_set_application(window, GTK_APPLICATION(application));
 
+
   // Use a header bar when running in GNOME as this is the common style used
   // by applications and is the setup most users will be using (e.g. Ubuntu
   // desktop).
@@ -82,6 +83,7 @@ static void my_application_activate(GApplication *application)
 static gboolean my_application_local_command_line(GApplication *application, gchar ***arguments, int *exit_status)
 {
   MyApplication *self = MY_APPLICATION(application);
+
   // Strip out the first argument as it is the binary name.
   self->dart_entrypoint_arguments = g_strdupv(*arguments + 1);
 
@@ -106,6 +108,7 @@ static void my_application_dispose(GObject *object)
   g_clear_pointer(&self->dart_entrypoint_arguments, g_strfreev);
   G_OBJECT_CLASS(my_application_parent_class)->dispose(object);
 }
+
 
 static void my_application_class_init(MyApplicationClass *klass)
 {
