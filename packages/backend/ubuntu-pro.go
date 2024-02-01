@@ -55,6 +55,71 @@ func (s *ProServer) IsKernelLivePatchEnabled (ctx context.Context, _ *emptypb.Em
     return &pb.Boolean{ Ret: isServiceEnabled["livepatch"] }, nil
 }
 
+var dbusServices map[dbus.ObjectPath]map[string]map[string]dbus.Variant
+
+func enableService(basename string, able string) error {
+    conn, err := dbus.ConnectSystemBus()
+    if err != nil {
+        return err
+    }
+
+    /* XXX: Would this be better? Can the paths change?
+
+    nameToPath := make(map[string]dbus.ObjectPath)
+    bus := conn.Object("com.canonical.UbuntuAdvantage", "/")
+    err = bus.Call("org.freedesktop.DBus.ObjectManager.GetManagedObjects", 0).Store(&dbusServices)
+    if err != nil {
+        return err
+    }
+    for pat, properties := range dbusServices {
+        path := string(pat)
+        if strings.HasPrefix(path, "/com/canonical/UbuntuAdvantage/Services/") {
+            idx := properties["com.canonical.UbuntuAdvantage.Service"]["Name"].String()
+            nameToPath[idx] = pat
+        }
+    }
+    obj := conn.Object("com.canonical.UbuntuAdvantage", nameToPath[arag])
+
+    */
+
+    obj := conn.Object(
+        "com.canonical.UbuntuAdvantage",
+        dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/" + basename),
+    )
+    call := obj.Call(
+        "com.canonical.UbuntuAdvantage.Service." + able,
+        dbus.FlagAllowInteractiveAuthorization,
+    )
+    if call.Err != nil {
+        return call.Err
+    }
+    return nil
+}
+
+func (s *ProServer) EnableKernelLivePatch (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+    return nil, enableService("livepatch", "Enable")
+}
+
+func (s *ProServer) DisableKernelLivePatch (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+    return nil, enableService("livepatch", "Disable")
+}
+
+func (s *ProServer) EnableEsmApps (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+    return nil, enableService("esm_2dapps", "Enable")
+}
+
+func (s *ProServer) DisableEsmApps (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+    return nil, enableService("esm_2dapps", "Disable")
+}
+
+func (s *ProServer) EnableInfra (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+    return nil, enableService("esm_2dinfra", "Enable")
+}
+
+func (s *ProServer) DisableInfra (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+    return nil, enableService("esm_2dinfra", "Disable")
+}
+
 func pollProInitiate (reqId string) {
     cmd := exec.Command("pro", "api", "u.pro.attach.magic.wait.v1", "--args", "magic_token=" + reqId)
     /* TODO log this error */
