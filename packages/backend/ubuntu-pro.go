@@ -10,59 +10,56 @@ import (
     "github.com/godbus/dbus/v5"
 )
 
-/* Only services with which the front-end deals have to be listed. */
-var isServiceEnabled = map[string]bool {
-    "esm-infra": false,
-    "esm-apps": false,
-    "livepatch": false,
-}
+var conn *dbus.Conn
 
-/* Sets isServiceEnabled items to true if the corresponding service is enabled. */
-func initializeServicesStatus() (error) {
-    cmd := exec.Command("pro", "api", "u.pro.status.enabled_services.v1")
-    out, err := cmd.Output()
+func isServiceEnabled(basename string) (bool, error) {
+    obj := conn.Object(
+        "com.canonical.UbuntuAdvantage",
+        dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/" + basename),
+    )
+    status, err := obj.GetProperty("com.canonical.UbuntuAdvantage.Service.Status")
     if err != nil {
-        return status.Errorf(codes.NotFound, "couldn't query Pro services")
+        return false, err
     }
-
-    result := gjson.Get(string(out), "data.attributes.enabled_services.#.name")
-    for _, val := range result.Value().([]interface{}) {
-        isServiceEnabled[val.(string)] = true
-    }
-
-    return nil
+    return status.Value().(string) == "enabled", nil
 }
 
 func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
-    cmd := exec.Command("pro", "api", "u.pro.status.is_attached.v1")
-    out, err := cmd.Output()
+    obj := conn.Object(
+        "com.canonical.UbuntuAdvantage",
+        "/com/canonical/UbuntuAdvantage/Manager",
+    )
+    isAttached, err := obj.GetProperty("com.canonical.UbuntuAdvantage.Manager.Attached")
     if err != nil {
-        return nil, status.Errorf(codes.NotFound, "couldn't query Pro status")
+        return nil, err
     }
-    val := gjson.Get(string(out), "data.attributes.is_attached")
-    return &pb.Boolean{ Ret: val.Bool() }, nil
+
+    return &pb.Boolean{ Ret: isAttached.Value().(bool) }, nil
 }
 
 func (s *ProServer) IsEsmInfraEnabled (ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
-    return &pb.Boolean{ Ret: isServiceEnabled["esm-infra"] }, nil
+    enabled, err := isServiceEnabled("esm_2dinfra")
+    return &pb.Boolean{ Ret: enabled }, err
 }
 
 func (s *ProServer) IsEsmAppsEnabled (ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
-    return &pb.Boolean{ Ret: isServiceEnabled["esm-apps"] }, nil
+    enabled, err := isServiceEnabled("esm_2dapps")
+    return &pb.Boolean{ Ret: enabled }, err
 }
 
 func (s *ProServer) IsKernelLivePatchEnabled (ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
-    return &pb.Boolean{ Ret: isServiceEnabled["livepatch"] }, nil
+    enabled, err := isServiceEnabled("livepatch")
+    return &pb.Boolean{ Ret: enabled }, err
 }
 
 var dbusServices map[dbus.ObjectPath]map[string]map[string]dbus.Variant
+func connectToSystemBus() error {
+    var err error
+    conn, err = dbus.ConnectSystemBus()
+    return err
+}
 
 func enableService(basename string, able string) error {
-    conn, err := dbus.ConnectSystemBus()
-    if err != nil {
-        return err
-    }
-
     /* XXX: Would this be better? Can the paths change?
 
     nameToPath := make(map[string]dbus.ObjectPath)
@@ -147,10 +144,6 @@ func (s *ProServer) ProInitiate (ctx context.Context, _ *emptypb.Empty) (*pb.Ini
 }
 
 func attach(token string) error {
-    conn, err := dbus.ConnectSystemBus()
-    if err != nil {
-        return err
-    }
     obj := conn.Object(
         "com.canonical.UbuntuAdvantage",
         "/com/canonical/UbuntuAdvantage/Manager",

@@ -29,7 +29,7 @@ func New(ctx context.Context)  {
 
 func main() {
     ctx := context.Background()
-    New(ctx)
 
-    initializeServicesStatus()
+    connectToSystemBus()
+    New(ctx)
 }
