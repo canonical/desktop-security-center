@@ -14,8 +14,7 @@ class AttachMachineDialog extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
 
     return Dialog(
-      backgroundColor: YaruColors
-          .titleBarLight, //TODO: Revisit this color, only work in light theme
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.8,
         child: SingleChildScrollView(
@@ -36,7 +35,7 @@ class AttachMachineDialog extends StatelessWidget {
                   right: kDefaultPadding,
                   bottom: kDefaultPadding,
                 ),
-                color: YaruTheme.of(context).theme?.colorScheme.background,
+                color: Theme.of(context).dialogBackgroundColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -94,9 +93,12 @@ class AttachMachineDialog extends StatelessWidget {
                     Text(
                       l10n.proDialogAddTokenManually,
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: l10n.proDialogTokenPlaceholder,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: l10n.proDialogTokenPlaceholder,
+                        ),
                       ),
                     ),
                     Center(
