@@ -1,12 +1,11 @@
 import 'package:desktop_security_center/src/config.dart';
 import 'package:desktop_security_center/src/spacing.dart';
 import 'package:desktop_security_center/src/ubuntu_pro/attach_machine_dialog.dart';
-import 'package:flutter/gestures.dart';
+import 'package:desktop_security_center/src/widgets/feature_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import 'package:yaru/yaru.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
@@ -115,104 +114,37 @@ class _UbuntuProPageState extends ConsumerState<UbuntuProPage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l10n.proEsmMainPackages,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(fontWeight: FontWeight.w500),
-                      ),
-                      Text(
-                        l10n.proEsmMainPackagesDesc,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Switch(
-                  value: false,
-                  onChanged: (_) {},
-                ),
-              ],
+            child: FeatureSwitch(
+              titleLabel: l10n.proEsmMainPackages,
+              descriptionLabel: l10n.proEsmMainPackagesDesc,
+              switchValue: false,
+              onChanged: () {},
             ),
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.proEsmUniversePackages,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.copyWith(fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      l10n.proEsmUniversePackagesDesc,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 12),
-              Switch(
-                value: false,
-                onChanged: (_) {},
-              ),
-            ],
+          FeatureSwitch(
+            titleLabel: l10n.proEsmUniversePackages,
+            descriptionLabel: l10n.proEsmUniversePackagesDesc,
+            switchValue: false,
+            onChanged: () {},
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: kLargePadding),
             child: Divider(),
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.proKernelLivepatchLabel,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.copyWith(fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      l10n.proKernelLivepatchDesc,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 25),
-                      child: Row(
-                        children: [
-                          Checkbox(value: true, onChanged: (_) {}),
-                          Expanded(
-                              child: Text(l10n.proShowLivepatchStatusInTopBar)),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(width: 12),
-              Switch(
-                value: false,
-                onChanged: (_) {},
-              ),
-            ],
+          FeatureSwitch(
+            titleLabel: l10n.proKernelLivepatchLabel,
+            descriptionLabel: l10n.proKernelLivepatchDesc,
+            switchValue: false,
+            onChanged: () {},
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: kDefaultPadding),
+            child: Row(
+              children: [
+                Checkbox(value: true, onChanged: (_) {}),
+                Expanded(child: Text(l10n.proShowLivepatchStatusInTopBar)),
+              ],
+            ),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: kLargePadding),
@@ -254,101 +186,23 @@ class _UbuntuProPageState extends ConsumerState<UbuntuProPage> {
               ),
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                l10n.proUsg,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.w500),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: l10n.proUsgDesc,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          TextSpan(
-                            text: l10n.proUsgDocumentation,
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                launchUrlString(kUsgDocumentationLink);
-                              },
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(
-                                    color: YaruColors.of(context).link,
-                                    decoration: TextDecoration.underline),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Switch(
-                    value: false,
-                    onChanged: (_) {},
-                  ),
-                ],
-              ),
-            ],
+          FeatureSwitch(
+            titleLabel: l10n.proUsg,
+            descriptionLabel: l10n.proUsgDesc,
+            switchValue: false,
+            descriptionLinkLabel: l10n.proUsgDocumentation,
+            descriptionLinkUrl: kUsgDocumentationLink,
+            onChanged: () {},
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  l10n.proFips,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(fontWeight: FontWeight.w500),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: l10n.proFipsDesc,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            TextSpan(
-                              text: l10n.proFipsDocumentation,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  launchUrlString(kFipsDocumentationLink);
-                                },
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(
-                                      color: YaruColors.of(context).link,
-                                      decoration: TextDecoration.underline),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Switch(
-                      value: false,
-                      onChanged: (_) {},
-                    ),
-                  ],
-                ),
-              ],
+            child: FeatureSwitch(
+              titleLabel: l10n.proFips,
+              descriptionLabel: l10n.proFipsDesc,
+              switchValue: false,
+              descriptionLinkLabel: l10n.proFipsDocumentation,
+              descriptionLinkUrl: kFipsDocumentationLink,
+              onChanged: () {},
             ),
           ),
           Padding(
