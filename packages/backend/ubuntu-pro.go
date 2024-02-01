@@ -94,27 +94,27 @@ func enableService(basename string, able string) error {
 }
 
 func (s *ProServer) EnableKernelLivePatch (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
-    return nil, enableService("livepatch", "Enable")
+    return new(emptypb.Empty), enableService("livepatch", "Enable")
 }
 
 func (s *ProServer) DisableKernelLivePatch (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
-    return nil, enableService("livepatch", "Disable")
+    return new(emptypb.Empty), enableService("livepatch", "Disable")
 }
 
 func (s *ProServer) EnableEsmApps (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
-    return nil, enableService("esm_2dapps", "Enable")
+    return new(emptypb.Empty), enableService("esm_2dapps", "Enable")
 }
 
 func (s *ProServer) DisableEsmApps (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
-    return nil, enableService("esm_2dapps", "Disable")
+    return new(emptypb.Empty), enableService("esm_2dapps", "Disable")
 }
 
 func (s *ProServer) EnableInfra (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
-    return nil, enableService("esm_2dinfra", "Enable")
+    return new(emptypb.Empty), enableService("esm_2dinfra", "Enable")
 }
 
 func (s *ProServer) DisableInfra (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
-    return nil, enableService("esm_2dinfra", "Disable")
+    return new(emptypb.Empty), enableService("esm_2dinfra", "Disable")
 }
 
 func pollProInitiate (reqId string) {
@@ -160,5 +160,5 @@ func attach(token string) error {
 }
 
 func (s *ProServer) AttachProToMachine (ctx context.Context, req *pb.AttachRequest) (*emptypb.Empty, error) {
-    return nil, attach(req.GetToken())
+    return new(emptypb.Empty), attach(req.GetToken())
 }
