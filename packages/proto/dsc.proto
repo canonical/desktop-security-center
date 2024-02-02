@@ -17,7 +17,12 @@ service Pro {
     rpc IsEsmAppsEnabled (google.protobuf.Empty) returns (Boolean) {}
     rpc IsKernelLivePatchEnabled (google.protobuf.Empty) returns (Boolean) {}
 
-    rpc ProInitiate (google.protobuf.Empty) returns (InitiateResponse) {}
+    /* For a magic flow, the front-end shall call Initiate and then immediately
+     * Wait. Then finally, upon user confirmation, Attach shall be called.
+     *
+     * Attach shall be called directly if the full token flow is selected. */
+    rpc InitiateProMagicFlow (google.protobuf.Empty) returns (InitiateResponse) {}
+    rpc WaitProMagicFlow (google.protobuf.Empty) returns (WaitResponse) {}
     rpc AttachProToMachine (AttachRequest) returns (google.protobuf.Empty) {}
 
     rpc EnableInfra (google.protobuf.Empty) returns (google.protobuf.Empty) {}
@@ -40,5 +45,9 @@ message AttachRequest {
 
 message InitiateResponse {
     string pin = 1;
-    int64 expires = 2;
+    int64 expiresIn = 2;
+}
+
+message WaitResponse {
+    string token = 1;
 }

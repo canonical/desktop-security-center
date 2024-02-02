@@ -12,6 +12,7 @@ import (
 )
 
 var conn *dbus.Conn
+var reqId string
 
 func isServiceEnabled(basename string) (bool, error) {
     obj := conn.Object(
@@ -118,20 +119,20 @@ func (s *ProServer) DisableInfra (ctx context.Context, _ *emptypb.Empty) (*empty
     return new(emptypb.Empty), enableService("esm_2dinfra", "Disable")
 }
 
-func pollProInitiate(reqId string) {
+func (s *ProServer) WaitProMagicFlow(ctx context.Context, _ *emptypb.Empty) (*pb.WaitResponse, error) {
     cmd := exec.Command("pro", "api", "u.pro.attach.magic.wait.v1", "--args", "magic_token=" + reqId)
     out, err := cmd.Output()
     if err != nil {
         log.Println("Couldn't wait for magic attachment")
-        return
+        return nil, err
     }
     outs := string(out)
     if err = collectProApiErrors(outs); err != nil {
         log.Println(err)
-        return
+        return nil, err
     }
-    token := gjson.Get(outs, "data.attributes.cotract_token").String()
-    attach(token)
+    token := gjson.Get(outs, "data.attributes.contract_token").String()
+    return &pb.WaitResponse{ Token: token }, nil
 }
 
 func collectProApiErrors(stdout string) error {
@@ -145,7 +146,7 @@ func collectProApiErrors(stdout string) error {
     return nil
 }
 
-func (s *ProServer) ProInitiate (ctx context.Context, _ *emptypb.Empty) (*pb.InitiateResponse, error) {
+func (s *ProServer) InitiateProMagicFlow (ctx context.Context, _ *emptypb.Empty) (*pb.InitiateResponse, error) {
     cmd := exec.Command("pro", "api", "u.pro.attach.magic.initiate.v1")
     out, err := cmd.Output()
     if err != nil {
@@ -156,12 +157,11 @@ func (s *ProServer) ProInitiate (ctx context.Context, _ *emptypb.Empty) (*pb.Ini
         return nil, err
     }
     pin := gjson.Get(outs, "data.attributes.user_code").String()
-    expires := gjson.Get(outs, "data.attributes.expires_in").Int()
-    reqId := gjson.Get(outs, "data.attributes.token").String()
-    go pollProInitiate(reqId)
+    expiresIn := gjson.Get(outs, "data.attributes.expires_in").Int()
+    reqId = gjson.Get(outs, "data.attributes.token").String()
     return &pb.InitiateResponse {
         Pin: pin,
-        Expires: expires,
+        ExpiresIn: expiresIn,
     }, nil
 }
 
