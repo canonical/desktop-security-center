@@ -39,17 +39,17 @@ func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *emptypb.Empty) 
     return &pb.Boolean{ Ret: isAttached.Value().(bool) }, nil
 }
 
-func (s *ProServer) IsEsmInfraEnabled (ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
+func (s *ProServer) IsEsmInfraEnabled(ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
     enabled, err := isServiceEnabled("esm_2dinfra")
     return &pb.Boolean{ Ret: enabled }, err
 }
 
-func (s *ProServer) IsEsmAppsEnabled (ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
+func (s *ProServer) IsEsmAppsEnabled(ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
     enabled, err := isServiceEnabled("esm_2dapps")
     return &pb.Boolean{ Ret: enabled }, err
 }
 
-func (s *ProServer) IsKernelLivePatchEnabled (ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
+func (s *ProServer) IsKernelLivePatchEnabled(ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
     enabled, err := isServiceEnabled("livepatch")
     return &pb.Boolean{ Ret: enabled }, err
 }
@@ -62,25 +62,6 @@ func connectToSystemBus() error {
 }
 
 func enableService(basename string, able string) error {
-    /* XXX: Would this be better? Can the paths change?
-
-    nameToPath := make(map[string]dbus.ObjectPath)
-    bus := conn.Object("com.canonical.UbuntuAdvantage", "/")
-    err = bus.Call("org.freedesktop.DBus.ObjectManager.GetManagedObjects", 0).Store(&dbusServices)
-    if err != nil {
-        return err
-    }
-    for pat, properties := range dbusServices {
-        path := string(pat)
-        if strings.HasPrefix(path, "/com/canonical/UbuntuAdvantage/Services/") {
-            idx := properties["com.canonical.UbuntuAdvantage.Service"]["Name"].String()
-            nameToPath[idx] = pat
-        }
-    }
-    obj := conn.Object("com.canonical.UbuntuAdvantage", nameToPath[arag])
-
-    */
-
     obj := conn.Object(
         "com.canonical.UbuntuAdvantage",
         dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/" + basename),
@@ -95,27 +76,27 @@ func enableService(basename string, able string) error {
     return nil
 }
 
-func (s *ProServer) EnableKernelLivePatch (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+func (s *ProServer) EnableKernelLivePatch(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
     return new(emptypb.Empty), enableService("livepatch", "Enable")
 }
 
-func (s *ProServer) DisableKernelLivePatch (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+func (s *ProServer) DisableKernelLivePatch(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
     return new(emptypb.Empty), enableService("livepatch", "Disable")
 }
 
-func (s *ProServer) EnableEsmApps (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+func (s *ProServer) EnableEsmApps(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
     return new(emptypb.Empty), enableService("esm_2dapps", "Enable")
 }
 
-func (s *ProServer) DisableEsmApps (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+func (s *ProServer) DisableEsmApps(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
     return new(emptypb.Empty), enableService("esm_2dapps", "Disable")
 }
 
-func (s *ProServer) EnableInfra (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+func (s *ProServer) EnableInfra(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
     return new(emptypb.Empty), enableService("esm_2dinfra", "Enable")
 }
 
-func (s *ProServer) DisableInfra (ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+func (s *ProServer) DisableInfra(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
     return new(emptypb.Empty), enableService("esm_2dinfra", "Disable")
 }
 
@@ -123,12 +104,10 @@ func (s *ProServer) WaitProMagicFlow(ctx context.Context, _ *emptypb.Empty) (*pb
     cmd := exec.Command("pro", "api", "u.pro.attach.magic.wait.v1", "--args", "magic_token=" + reqId)
     out, err := cmd.Output()
     if err != nil {
-        log.Println("Couldn't wait for magic attachment")
         return nil, err
     }
     outs := string(out)
     if err = collectProApiErrors(outs); err != nil {
-        log.Println(err)
         return nil, err
     }
     token := gjson.Get(outs, "data.attributes.contract_token").String()
@@ -146,7 +125,7 @@ func collectProApiErrors(stdout string) error {
     return nil
 }
 
-func (s *ProServer) InitiateProMagicFlow (ctx context.Context, _ *emptypb.Empty) (*pb.InitiateResponse, error) {
+func (s *ProServer) InitiateProMagicFlow(ctx context.Context, _ *emptypb.Empty) (*pb.InitiateResponse, error) {
     cmd := exec.Command("pro", "api", "u.pro.attach.magic.initiate.v1")
     out, err := cmd.Output()
     if err != nil {
@@ -181,6 +160,6 @@ func attach(token string) error {
     return nil
 }
 
-func (s *ProServer) AttachProToMachine (ctx context.Context, req *pb.AttachRequest) (*emptypb.Empty, error) {
+func (s *ProServer) AttachProToMachine(ctx context.Context, req *pb.AttachRequest) (*emptypb.Empty, error) {
     return new(emptypb.Empty), attach(req.GetToken())
 }
