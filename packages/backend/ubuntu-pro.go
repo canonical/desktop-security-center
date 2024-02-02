@@ -8,6 +8,7 @@ import (
     "google.golang.org/protobuf/types/known/emptypb"
     "github.com/tidwall/gjson"
     "github.com/godbus/dbus/v5"
+    "log"
 )
 
 var conn *dbus.Conn
@@ -117,13 +118,31 @@ func (s *ProServer) DisableInfra (ctx context.Context, _ *emptypb.Empty) (*empty
     return new(emptypb.Empty), enableService("esm_2dinfra", "Disable")
 }
 
-func pollProInitiate (reqId string) {
+func pollProInitiate(reqId string) {
     cmd := exec.Command("pro", "api", "u.pro.attach.magic.wait.v1", "--args", "magic_token=" + reqId)
-    /* TODO log this error */
-    out, _ := cmd.Output()
+    out, err := cmd.Output()
+    if err != nil {
+        log.Println("Couldn't wait for magic attachment")
+        return
+    }
     outs := string(out)
+    if err = collectProApiErrors(outs); err != nil {
+        log.Println(err)
+        return
+    }
     token := gjson.Get(outs, "data.attributes.cotract_token").String()
     attach(token)
+}
+
+func collectProApiErrors(stdout string) error {
+    var errorCodes string
+    if gjson.Get(stdout, "result").String() != "success" {
+        for _, code := range gjson.Get(stdout, "errors.#.code").Array() {
+            errorCodes += code.String() + "\n"
+        }
+        return status.Errorf(codes.Unknown, errorCodes)
+    }
+    return nil
 }
 
 func (s *ProServer) ProInitiate (ctx context.Context, _ *emptypb.Empty) (*pb.InitiateResponse, error) {
@@ -133,6 +152,9 @@ func (s *ProServer) ProInitiate (ctx context.Context, _ *emptypb.Empty) (*pb.Ini
         return nil, status.Errorf(codes.NotFound, "couldn't initiate Pro magic attachment")
     }
     outs := string(out)
+    if err = collectProApiErrors(outs); err != nil {
+        return nil, err
+    }
     pin := gjson.Get(outs, "data.attributes.user_code").String()
     expires := gjson.Get(outs, "data.attributes.expires_in").Int()
     reqId := gjson.Get(outs, "data.attributes.token").String()
