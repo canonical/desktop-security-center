@@ -1,0 +1,82 @@
+This is the back-end of Ubuntu Desktop Security Center.
+
+##############
+## Overview ##
+##############
+
+Back-end is jargon for "code that doesn't directly surface to the user,
+but instead is consumed by a front-end via specific end-points (APIs).
+With that, the front-end directly provides the user interface."
+
+This back-end was designed to be run a Systemd service. The program might
+also be referred as a daemon or simply as a server here and there.
+
+The service is automatically kicked off by Systemd whenever a client connects
+to its socket, namely /run/user/$UID/desktop-security-center.
+
+The back-end and front-end exchange messages via the GRPC protocol.  This GRPC
+"contract" is set by the files in proto/.
+
+For example, the contract currently used by us establishes this end-point:
+
+  rpc IsMachineProAttached (google.protobuf.Empty) returns (Boolean) {}
+
+This is just a barren statement. To generate the actual importable code files
+for the project, one must run the contract through the Protobuf compiler,
+specifying the project's language. Both front-end and back-end need to do
+this. Then the magic code is generated, and only then the project will compile.
+
+##############
+## Building ##
+##############
+
+Assuming the current directory is the one above this README file,
+
+--->
+# Build the back-end
+cd proto
+protoc --go_out=. \
+       --go_opt=paths=source_relative --go-grpc_out=. \
+       --go-grpc_opt=paths=source_relative \
+       ./dsc.proto
+cd ../backend
+go build -o b server.go ubuntu-pro.go hardware-sec.go
+
+# Put it where Systemd expects it
+mv b /usr/bin/desktop-security-center
+
+# Install the Systemd files and kick the units off
+cp ../systemd/* /usr/lib/systemd/user
+systemctl start --user desktop-security-center.socket
+systemctl restart --user desktop-security-center.service
+<---
+
+############
+## Trying ##
+############
+
+A simple consumer client or Grpcurl can then test it via the
+/run/user/$UID/desktop-security-center socket. For example,
+
+--->
+package main
+import (
+    "context"
+    "fmt"
+    "google.golang.org/grpc"
+    pb "github.com/canonical/desktop-security-center/packages/proto"
+    "google.golang.org/protobuf/types/known/emptypb"
+)
+func main() {
+    conn, err := grpc.Dial("unix:///run/user/1000/desktop-security-center.socket", grpc.WithInsecure())
+    if err != nil {
+        panic("Did not connect")
+    }
+    h := pb.NewHardwareClient(conn)
+    context := context.Background()
+    r, err := h.IsSecureBootEnabled(context, new(emptypb.Empty))
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(r)
+<---
