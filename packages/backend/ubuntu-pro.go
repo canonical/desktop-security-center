@@ -2,13 +2,11 @@ package main
 import (
     "os/exec"
     "context"
-    "google.golang.org/grpc/codes"
-    "google.golang.org/grpc/status"
+    "errors"
     pb "github.com/canonical/desktop-security-center/packages/proto"
     "google.golang.org/protobuf/types/known/emptypb"
     "github.com/tidwall/gjson"
     "github.com/godbus/dbus/v5"
-    "log"
 )
 
 var conn *dbus.Conn
@@ -120,7 +118,7 @@ func collectProApiErrors(stdout string) error {
         for _, code := range gjson.Get(stdout, "errors.#.code").Array() {
             errorCodes += code.String() + "\n"
         }
-        return status.Errorf(codes.Unknown, errorCodes)
+        return errors.New(errorCodes)
     }
     return nil
 }
@@ -129,7 +127,7 @@ func (s *ProServer) InitiateProMagicFlow(ctx context.Context, _ *emptypb.Empty) 
     cmd := exec.Command("pro", "api", "u.pro.attach.magic.initiate.v1")
     out, err := cmd.Output()
     if err != nil {
-        return nil, status.Errorf(codes.NotFound, "couldn't initiate Pro magic attachment")
+        return nil, err
     }
     outs := string(out)
     if err = collectProApiErrors(outs); err != nil {
