@@ -31,5 +31,6 @@ func main() {
     ctx := context.Background()
 
     connectToSystemBus()
+    defer conn.Close()
     New(ctx)
 }
