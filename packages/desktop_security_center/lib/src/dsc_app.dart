@@ -32,13 +32,17 @@ class DesktopSecurityCenterApp extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     YaruWindow.of(context).setTitle(l10n.appTitle);
     return YaruMasterDetailPage(
-      appBar: YaruWindowTitleBar(title: Text(l10n.appTitle)),
+      appBar: YaruWindowTitleBar(
+        title: Text(l10n.appTitle),
+      ),
       controller: ref.watch(yaruPageControllerProvider),
       tileBuilder: (context, index, selected, availableWidth) =>
           pages[index].tileBuilder(context, selected),
       pageBuilder: (context, index) => Scaffold(
         appBar: YaruWindowTitleBar(
-          title: Text(pages[index].label(context)),
+          title: Text(
+            pages[index].label(context),
+          ),
         ),
         body: pages[index].pageBuilder(context),
       ),

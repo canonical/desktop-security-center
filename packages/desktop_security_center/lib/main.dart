@@ -19,7 +19,9 @@ Future<void> main() async {
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-            routes: {'/': (context) => const DesktopSecurityCenterApp()},
+            routes: {
+              '/': (context) => const DesktopSecurityCenterApp(),
+            },
           );
         },
       ),

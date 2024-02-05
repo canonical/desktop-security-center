@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:yaru/yaru.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 class FeatureSwitch extends StatelessWidget {
   const FeatureSwitch({
@@ -62,8 +63,9 @@ class FeatureSwitch extends StatelessWidget {
                                       .textTheme
                                       .bodyMedium
                                       ?.copyWith(
-                                          color: YaruColors.of(context).link,
-                                          decoration: TextDecoration.underline),
+                                        color: YaruColors.of(context).link,
+                                        decoration: TextDecoration.underline,
+                                      ),
                                 ),
                             ],
                           ),
@@ -74,7 +76,7 @@ class FeatureSwitch extends StatelessWidget {
                 ],
               ),
             ),
-            Switch(
+            YaruSwitch(
               value: false,
               onChanged: (_) {},
             ),

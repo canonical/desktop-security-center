@@ -141,8 +141,13 @@ class _UbuntuProPageState extends ConsumerState<UbuntuProPage> {
             padding: const EdgeInsets.only(top: kDefaultPadding),
             child: Row(
               children: [
-                Checkbox(value: true, onChanged: (_) {}),
-                Expanded(child: Text(l10n.proShowLivepatchStatusInTopBar)),
+                Checkbox(
+                  value: true,
+                  onChanged: (_) {},
+                ),
+                Expanded(
+                  child: Text(l10n.proShowLivepatchStatusInTopBar),
+                ),
               ],
             ),
           ),
@@ -162,16 +167,18 @@ class _UbuntuProPageState extends ConsumerState<UbuntuProPage> {
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
               decoration: BoxDecoration(
-                  color: const Color.fromRGBO(249, 238, 229, 0.5),
-                  border:
-                      Border.all(color: const Color.fromRGBO(199, 90, 0, 1)),
-                  borderRadius: BorderRadius.circular(4)),
+                color: const Color.fromRGBO(249, 238, 229, 0.5),
+                border: Border.all(color: const Color.fromRGBO(199, 90, 0, 1)),
+                borderRadius: BorderRadius.circular(4),
+              ),
               child: Row(
                 children: [
-                  const Icon(YaruIcons.warning,
-                      //TODO: Add colors to YaruColor
-                      color: Color.fromRGBO(199, 90, 0, 1),
-                      size: 24),
+                  const Icon(
+                    YaruIcons.warning,
+                    //TODO: Add colors to YaruColor
+                    color: Color.fromRGBO(199, 90, 0, 1),
+                    size: 24,
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -209,7 +216,9 @@ class _UbuntuProPageState extends ConsumerState<UbuntuProPage> {
             padding: const EdgeInsets.only(
                 top: kDefaultPadding, bottom: kLargePadding),
             child: OutlinedButton(
-                onPressed: () {}, child: Text(l10n.proDisablePro)),
+              onPressed: () {},
+              child: Text(l10n.proDisablePro),
+            ),
           ),
         ]),
       ),
