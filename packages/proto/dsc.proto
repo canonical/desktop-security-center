@@ -1,6 +1,7 @@
 syntax = "proto3";
 option go_package = "./";
 import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
 
 service Hardware {
     rpc IsSecureBootEnabled (google.protobuf.Empty) returns (IsSecureBootEnabledResponse) {}
@@ -12,10 +13,10 @@ message IsSecureBootEnabledResponse {
 
 
 service Pro {
-    rpc IsMachineProAttached (google.protobuf.Empty) returns (Boolean) {}
-    rpc IsEsmInfraEnabled (google.protobuf.Empty) returns (Boolean) {}
-    rpc IsEsmAppsEnabled (google.protobuf.Empty) returns (Boolean) {}
-    rpc IsKernelLivePatchEnabled (google.protobuf.Empty) returns (Boolean) {}
+    rpc IsMachineProAttached (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
+    rpc IsEsmInfraEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
+    rpc IsEsmAppsEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
+    rpc IsKernelLivePatchEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
 
     /* For a magic flow, the front-end shall call Initiate and then immediately
      * Wait. Then finally, upon user confirmation, Attach shall be called.
@@ -33,10 +34,6 @@ service Pro {
 
     rpc EnableKernelLivePatch (google.protobuf.Empty) returns (google.protobuf.Empty) {}
     rpc DisableKernelLivePatch (google.protobuf.Empty) returns (google.protobuf.Empty) {}
-}
-
-message Boolean {
-    bool ret = 1;
 }
 
 message AttachRequest {

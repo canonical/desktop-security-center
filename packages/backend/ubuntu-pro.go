@@ -5,6 +5,7 @@ import (
     "errors"
     pb "github.com/canonical/desktop-security-center/packages/proto"
     "google.golang.org/protobuf/types/known/emptypb"
+    wpb "google.golang.org/protobuf/types/known/wrapperspb"
     "github.com/tidwall/gjson"
     "github.com/godbus/dbus/v5"
 )
@@ -24,7 +25,7 @@ func isServiceEnabled(basename string) (bool, error) {
     return status.Value().(string) == "enabled", nil
 }
 
-func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
+func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *emptypb.Empty) (*wpb.BoolValue, error) {
     obj := conn.Object(
         "com.canonical.UbuntuAdvantage",
         "/com/canonical/UbuntuAdvantage/Manager",
@@ -34,22 +35,22 @@ func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *emptypb.Empty) 
         return nil, err
     }
 
-    return &pb.Boolean{ Ret: isAttached.Value().(bool) }, nil
+    return wpb.Bool(isAttached.Value().(bool)), nil
 }
 
-func (s *ProServer) IsEsmInfraEnabled(ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
+func (s *ProServer) IsEsmInfraEnabled(ctx context.Context, _ *emptypb.Empty) (*wpb.BoolValue, error) {
     enabled, err := isServiceEnabled("esm_2dinfra")
-    return &pb.Boolean{ Ret: enabled }, err
+    return wpb.Bool(enabled), err
 }
 
-func (s *ProServer) IsEsmAppsEnabled(ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
+func (s *ProServer) IsEsmAppsEnabled(ctx context.Context, _ *emptypb.Empty) (*wpb.BoolValue, error) {
     enabled, err := isServiceEnabled("esm_2dapps")
-    return &pb.Boolean{ Ret: enabled }, err
+    return wpb.Bool(enabled), err
 }
 
-func (s *ProServer) IsKernelLivePatchEnabled(ctx context.Context, _ *emptypb.Empty) (*pb.Boolean, error) {
+func (s *ProServer) IsKernelLivePatchEnabled(ctx context.Context, _ *emptypb.Empty) (*wpb.BoolValue, error) {
     enabled, err := isServiceEnabled("livepatch")
-    return &pb.Boolean{ Ret: enabled }, err
+    return wpb.Bool(enabled), err
 }
 
 var dbusServices map[dbus.ObjectPath]map[string]map[string]dbus.Variant
