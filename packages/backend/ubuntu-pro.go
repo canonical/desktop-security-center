@@ -149,22 +149,26 @@ func (s *ProServer) DisableInfra(ctx context.Context, _ *epb.Empty) (*epb.Empty,
  * time of reading), retrieves and returns the attachment token. */
 func (s *ProServer) WaitProMagicFlow(ctx context.Context, _ *epb.Empty) (*pb.WaitResponse, error) {
     cmd := exec.Command("pro", "api", "u.pro.attach.magic.wait.v1", "--args", "magic_token=" + reqId)
-    out, err := cmd.Output()
-    if err != nil {
-        return nil, err
-    }
+    out, execErr := cmd.Output()
     outs := string(out)
-    if err = collectProApiErrors(outs); err != nil {
+    if err := collectProApiErrors(outs, execErr); err != nil {
         return nil, err
     }
     token := gjson.Get(outs, "data.attributes.contract_token").String()
     return &pb.WaitResponse{ Token: token }, nil
 }
 
-func collectProApiErrors(stdout string) error {
+/* Extracts and returns errors from a Pro API call, if any. */
+func collectProApiErrors(json string, execErr error) error {
     var errorCodes string
-    if gjson.Get(stdout, "result").String() != "success" {
-        for _, code := range gjson.Get(stdout, "errors.#.code").Array() {
+    if !gjson.Valid(json) {
+        if execErr != nil {
+            return execErr
+        }
+        return status.Errorf(codes.Internal, "Invalid Pro API response: %s", json)
+    }
+    if gjson.Get(json, "result").String() != "success" {
+        for _, code := range gjson.Get(json, "errors.#.code").Array() {
             errorCodes += code.String() + "\n"
         }
         return errors.New(errorCodes)
@@ -179,12 +183,9 @@ func collectProApiErrors(stdout string) error {
  */
 func (s *ProServer) InitiateProMagicFlow(ctx context.Context, _ *epb.Empty) (*pb.InitiateResponse, error) {
     cmd := exec.Command("pro", "api", "u.pro.attach.magic.initiate.v1")
-    out, err := cmd.Output()
-    if err != nil {
-        return nil, err
-    }
+    out, execErr := cmd.Output()
     outs := string(out)
-    if err = collectProApiErrors(outs); err != nil {
+    if err := collectProApiErrors(outs, execErr); err != nil {
         return nil, err
     }
     pin := gjson.Get(outs, "data.attributes.user_code").String()
