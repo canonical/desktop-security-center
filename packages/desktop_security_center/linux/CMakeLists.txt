@@ -13,6 +13,8 @@ set(APPLICATION_ID "com.example.desktop_security_center")
 # versions of CMake.
 cmake_policy(SET CMP0063 NEW)
 
+set(USE_LIBHANDY ON)
+
 # Load bundled libraries from the lib/ directory relative to the binary.
 set(CMAKE_INSTALL_RPATH "$ORIGIN/lib")
 
