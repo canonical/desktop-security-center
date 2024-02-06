@@ -8,6 +8,8 @@ import (
     wpb "google.golang.org/protobuf/types/known/wrapperspb"
     "github.com/tidwall/gjson"
     "github.com/godbus/dbus/v5"
+    "google.golang.org/grpc/codes"
+    "google.golang.org/grpc/status"
 )
 
 var conn *dbus.Conn
@@ -33,7 +35,7 @@ func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *epb.Empty) (*wp
     )
     isAttached, err := obj.GetProperty("com.canonical.UbuntuAdvantage.Manager.Attached")
     if err != nil {
-        return nil, err
+        return nil, status.Errorf(codes.Internal, "%v", err)
     }
 
     return wpb.Bool(isAttached.Value().(bool)), nil
@@ -42,19 +44,28 @@ func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *epb.Empty) (*wp
 /* Determines if the ESM Infra service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsEsmInfraEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
     enabled, err := isServiceEnabled("esm_2dinfra")
-    return wpb.Bool(enabled), err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return wpb.Bool(enabled), nil
 }
 
 /* Determines if the ESM Apps service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsEsmAppsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
     enabled, err := isServiceEnabled("esm_2dapps")
-    return wpb.Bool(enabled), err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return wpb.Bool(enabled), nil
 }
 
 /* Determines if the Livepatch service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsKernelLivePatchEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
     enabled, err := isServiceEnabled("livepatch")
-    return wpb.Bool(enabled), err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return wpb.Bool(enabled), nil
 }
 
 var dbusServices map[dbus.ObjectPath]map[string]map[string]dbus.Variant
@@ -81,32 +92,56 @@ func enableService(basename string, able string) error {
 
 /* Enables Livepatch service of Ubuntu Pro. */
 func (s *ProServer) EnableKernelLivePatch(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    return new(epb.Empty), enableService("livepatch", "Enable")
+    err := enableService("livepatch", "Enable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
 }
 
 /* Disables Livepatch service of Ubuntu Pro. */
 func (s *ProServer) DisableKernelLivePatch(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    return new(epb.Empty), enableService("livepatch", "Disable")
+    err := enableService("livepatch", "Disable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
 }
 
 /* Enables ESM Apps service of Ubuntu Pro. */
 func (s *ProServer) EnableEsmApps(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    return new(epb.Empty), enableService("esm_2dapps", "Enable")
+    err := enableService("esm_2dapps", "Enable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
 }
 
 /* Disables ESM Apps service of Ubuntu Pro. */
 func (s *ProServer) DisableEsmApps(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    return new(epb.Empty), enableService("esm_2dapps", "Disable")
+    err := enableService("esm_2dapps", "Disable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
 }
 
 /* Enables ESM Infra service of Ubuntu Pro. */
 func (s *ProServer) EnableInfra(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    return new(epb.Empty), enableService("esm_2dinfra", "Enable")
+    err := enableService("esm_2dinfra", "Enable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
 }
 
 /* Disables ESM Infra service of Ubuntu Pro. */
 func (s *ProServer) DisableInfra(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    return new(epb.Empty), enableService("esm_2dinfra", "Disable")
+    err := enableService("esm_2dinfra", "Disable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
 }
 
 /* Waits until the user enters his PIN, retrieved via InitiateProMagicFlow, in
