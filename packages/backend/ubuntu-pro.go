@@ -4,7 +4,7 @@ import (
     "context"
     "errors"
     pb "github.com/canonical/desktop-security-center/packages/proto"
-    "google.golang.org/protobuf/types/known/emptypb"
+    epb "google.golang.org/protobuf/types/known/emptypb"
     wpb "google.golang.org/protobuf/types/known/wrapperspb"
     "github.com/tidwall/gjson"
     "github.com/godbus/dbus/v5"
@@ -25,7 +25,7 @@ func isServiceEnabled(basename string) (bool, error) {
     return status.Value().(string) == "enabled", nil
 }
 
-func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *emptypb.Empty) (*wpb.BoolValue, error) {
+func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
     obj := conn.Object(
         "com.canonical.UbuntuAdvantage",
         "/com/canonical/UbuntuAdvantage/Manager",
@@ -38,17 +38,17 @@ func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *emptypb.Empty) 
     return wpb.Bool(isAttached.Value().(bool)), nil
 }
 
-func (s *ProServer) IsEsmInfraEnabled(ctx context.Context, _ *emptypb.Empty) (*wpb.BoolValue, error) {
+func (s *ProServer) IsEsmInfraEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
     enabled, err := isServiceEnabled("esm_2dinfra")
     return wpb.Bool(enabled), err
 }
 
-func (s *ProServer) IsEsmAppsEnabled(ctx context.Context, _ *emptypb.Empty) (*wpb.BoolValue, error) {
+func (s *ProServer) IsEsmAppsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
     enabled, err := isServiceEnabled("esm_2dapps")
     return wpb.Bool(enabled), err
 }
 
-func (s *ProServer) IsKernelLivePatchEnabled(ctx context.Context, _ *emptypb.Empty) (*wpb.BoolValue, error) {
+func (s *ProServer) IsKernelLivePatchEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
     enabled, err := isServiceEnabled("livepatch")
     return wpb.Bool(enabled), err
 }
@@ -75,31 +75,31 @@ func enableService(basename string, able string) error {
     return nil
 }
 
-func (s *ProServer) EnableKernelLivePatch(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
-    return new(emptypb.Empty), enableService("livepatch", "Enable")
+func (s *ProServer) EnableKernelLivePatch(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    return new(epb.Empty), enableService("livepatch", "Enable")
 }
 
-func (s *ProServer) DisableKernelLivePatch(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
-    return new(emptypb.Empty), enableService("livepatch", "Disable")
+func (s *ProServer) DisableKernelLivePatch(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    return new(epb.Empty), enableService("livepatch", "Disable")
 }
 
-func (s *ProServer) EnableEsmApps(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
-    return new(emptypb.Empty), enableService("esm_2dapps", "Enable")
+func (s *ProServer) EnableEsmApps(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    return new(epb.Empty), enableService("esm_2dapps", "Enable")
 }
 
-func (s *ProServer) DisableEsmApps(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
-    return new(emptypb.Empty), enableService("esm_2dapps", "Disable")
+func (s *ProServer) DisableEsmApps(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    return new(epb.Empty), enableService("esm_2dapps", "Disable")
 }
 
-func (s *ProServer) EnableInfra(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
-    return new(emptypb.Empty), enableService("esm_2dinfra", "Enable")
+func (s *ProServer) EnableInfra(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    return new(epb.Empty), enableService("esm_2dinfra", "Enable")
 }
 
-func (s *ProServer) DisableInfra(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
-    return new(emptypb.Empty), enableService("esm_2dinfra", "Disable")
+func (s *ProServer) DisableInfra(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    return new(epb.Empty), enableService("esm_2dinfra", "Disable")
 }
 
-func (s *ProServer) WaitProMagicFlow(ctx context.Context, _ *emptypb.Empty) (*pb.WaitResponse, error) {
+func (s *ProServer) WaitProMagicFlow(ctx context.Context, _ *epb.Empty) (*pb.WaitResponse, error) {
     cmd := exec.Command("pro", "api", "u.pro.attach.magic.wait.v1", "--args", "magic_token=" + reqId)
     out, err := cmd.Output()
     if err != nil {
@@ -124,7 +124,7 @@ func collectProApiErrors(stdout string) error {
     return nil
 }
 
-func (s *ProServer) InitiateProMagicFlow(ctx context.Context, _ *emptypb.Empty) (*pb.InitiateResponse, error) {
+func (s *ProServer) InitiateProMagicFlow(ctx context.Context, _ *epb.Empty) (*pb.InitiateResponse, error) {
     cmd := exec.Command("pro", "api", "u.pro.attach.magic.initiate.v1")
     out, err := cmd.Output()
     if err != nil {
@@ -159,6 +159,6 @@ func attach(token string) error {
     return nil
 }
 
-func (s *ProServer) AttachProToMachine(ctx context.Context, req *pb.AttachRequest) (*emptypb.Empty, error) {
-    return new(emptypb.Empty), attach(req.GetToken())
+func (s *ProServer) AttachProToMachine(ctx context.Context, req *pb.AttachRequest) (*epb.Empty, error) {
+    return new(epb.Empty), attach(req.GetToken())
 }
