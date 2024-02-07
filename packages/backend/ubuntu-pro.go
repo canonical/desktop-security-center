@@ -12,14 +12,61 @@ import (
     "google.golang.org/grpc/status"
 )
 
-var conn *dbus.Conn
-var reqId string
+type ProServer struct {
+    pb.UnimplementedProServer
+    conn             *dbus.Conn
+    apps             dbus.BusObject
+    infra            dbus.BusObject
+    livepatch        dbus.BusObject
+    manager          dbus.BusObject
+    reqId            string
+}
 
-func isServiceEnabled(basename string) (bool, error) {
-    obj := conn.Object(
+func NewProServer(conn *dbus.Conn) (*ProServer, error) {
+    s := &ProServer{
+        conn: conn,
+    }
+
+    s.infra = conn.Object(
         "com.canonical.UbuntuAdvantage",
-        dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/" + basename),
+        "/com/canonical/UbuntuAdvantage/Services/esm_2dinfra",
     )
+    err := s.infra.Call("org.freedesktop.DBus.Peer.Ping", 0).Err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "failed to ping DBus ESM-Infra object")
+    }
+
+    s.apps = conn.Object(
+        "com.canonical.UbuntuAdvantage",
+        "/com/canonical/UbuntuAdvantage/Services/esm_2dapps",
+    )
+    err = s.apps.Call("org.freedesktop.DBus.Peer.Ping", 0).Err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "failed to ping DBus ESM-Apps object")
+    }
+
+    s.livepatch = conn.Object(
+        "com.canonical.UbuntuAdvantage",
+        "/com/canonical/UbuntuAdvantage/Services/livepatch",
+    )
+    err = s.livepatch.Call("org.freedesktop.DBus.Peer.Ping", 0).Err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "failed to ping DBus ESM-Apps object")
+    }
+
+    s.manager = conn.Object(
+        "com.canonical.UbuntuAdvantage",
+        "/com/canonical/UbuntuAdvantage/Manager",
+    )
+    err = s.manager.Call("org.freedesktop.DBus.Peer.Ping", 0).Err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "failed to ping DBus Manager object")
+    }
+
+    return s, nil
+}
+
+func isServiceEnabled(obj dbus.BusObject) (bool, error) {
     status, err := obj.GetProperty("com.canonical.UbuntuAdvantage.Service.Status")
     if err != nil {
         return false, err
@@ -29,11 +76,7 @@ func isServiceEnabled(basename string) (bool, error) {
 
 /* Determines if system is attached to Ubuntu Pro. */
 func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    obj := conn.Object(
-        "com.canonical.UbuntuAdvantage",
-        "/com/canonical/UbuntuAdvantage/Manager",
-    )
-    isAttached, err := obj.GetProperty("com.canonical.UbuntuAdvantage.Manager.Attached")
+    isAttached, err := s.manager.GetProperty("com.canonical.UbuntuAdvantage.Manager.Attached")
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -43,7 +86,7 @@ func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *epb.Empty) (*wp
 
 /* Determines if the ESM Infra service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsEsmInfraEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    enabled, err := isServiceEnabled("esm_2dinfra")
+    enabled, err := isServiceEnabled(s.infra)
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -52,7 +95,7 @@ func (s *ProServer) IsEsmInfraEnabled(ctx context.Context, _ *epb.Empty) (*wpb.B
 
 /* Determines if the ESM Apps service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsEsmAppsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    enabled, err := isServiceEnabled("esm_2dapps")
+    enabled, err := isServiceEnabled(s.apps)
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -61,25 +104,14 @@ func (s *ProServer) IsEsmAppsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.Bo
 
 /* Determines if the Livepatch service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsKernelLivePatchEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    enabled, err := isServiceEnabled("livepatch")
+    enabled, err := isServiceEnabled(s.livepatch)
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
     return wpb.Bool(enabled), nil
 }
 
-var dbusServices map[dbus.ObjectPath]map[string]map[string]dbus.Variant
-func connectToSystemBus() error {
-    var err error
-    conn, err = dbus.ConnectSystemBus()
-    return err
-}
-
-func enableService(basename string, able string) error {
-    obj := conn.Object(
-        "com.canonical.UbuntuAdvantage",
-        dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/" + basename),
-    )
+func enableService(obj dbus.BusObject, able string) error {
     call := obj.Call(
         "com.canonical.UbuntuAdvantage.Service." + able,
         dbus.FlagAllowInteractiveAuthorization,
@@ -92,7 +124,7 @@ func enableService(basename string, able string) error {
 
 /* Enables Livepatch service of Ubuntu Pro. */
 func (s *ProServer) EnableKernelLivePatch(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    err := enableService("livepatch", "Enable")
+    err := enableService(s.livepatch, "Enable")
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -101,7 +133,7 @@ func (s *ProServer) EnableKernelLivePatch(ctx context.Context, _ *epb.Empty) (*e
 
 /* Disables Livepatch service of Ubuntu Pro. */
 func (s *ProServer) DisableKernelLivePatch(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    err := enableService("livepatch", "Disable")
+    err := enableService(s.livepatch, "Disable")
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -110,7 +142,7 @@ func (s *ProServer) DisableKernelLivePatch(ctx context.Context, _ *epb.Empty) (*
 
 /* Enables ESM Apps service of Ubuntu Pro. */
 func (s *ProServer) EnableEsmApps(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    err := enableService("esm_2dapps", "Enable")
+    err := enableService(s.apps, "Enable")
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -119,7 +151,7 @@ func (s *ProServer) EnableEsmApps(ctx context.Context, _ *epb.Empty) (*epb.Empty
 
 /* Disables ESM Apps service of Ubuntu Pro. */
 func (s *ProServer) DisableEsmApps(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    err := enableService("esm_2dapps", "Disable")
+    err := enableService(s.apps, "Disable")
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -128,7 +160,7 @@ func (s *ProServer) DisableEsmApps(ctx context.Context, _ *epb.Empty) (*epb.Empt
 
 /* Enables ESM Infra service of Ubuntu Pro. */
 func (s *ProServer) EnableInfra(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    err := enableService("esm_2dinfra", "Enable")
+    err := enableService(s.infra, "Enable")
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -137,7 +169,7 @@ func (s *ProServer) EnableInfra(ctx context.Context, _ *epb.Empty) (*epb.Empty, 
 
 /* Disables ESM Infra service of Ubuntu Pro. */
 func (s *ProServer) DisableInfra(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    err := enableService("esm_2dinfra", "Disable")
+    err := enableService(s.infra, "Disable")
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -148,7 +180,7 @@ func (s *ProServer) DisableInfra(ctx context.Context, _ *epb.Empty) (*epb.Empty,
  * ubuntu.com/pro/attach (or whatever happens to be the appropriate URL at the
  * time of reading), retrieves and returns the attachment token. */
 func (s *ProServer) WaitProMagicFlow(ctx context.Context, _ *epb.Empty) (*pb.WaitResponse, error) {
-    cmd := exec.Command("pro", "api", "u.pro.attach.magic.wait.v1", "--args", "magic_token=" + reqId)
+    cmd := exec.Command("pro", "api", "u.pro.attach.magic.wait.v1", "--args", "magic_token=" + s.reqId)
     out, execErr := cmd.Output()
     outs := string(out)
     if err := collectProApiErrors(outs, execErr); err != nil {
@@ -193,27 +225,11 @@ func (s *ProServer) InitiateProMagicFlow(ctx context.Context, _ *epb.Empty) (*pb
     /* Let's not call this 'token' lest we confuse it with the other token
      * used for attaching Ubuntu Pro. This on the other hand is more of a
      * request identifier. */
-    reqId = gjson.Get(outs, "data.attributes.token").String()
+    s.reqId = gjson.Get(outs, "data.attributes.token").String()
     return &pb.InitiateResponse {
         Pin: pin,
         ExpiresIn: expiresIn,
     }, nil
-}
-
-func attach(token string) error {
-    obj := conn.Object(
-        "com.canonical.UbuntuAdvantage",
-        "/com/canonical/UbuntuAdvantage/Manager",
-    )
-    call := obj.Call(
-        "com.canonical.UbuntuAdvantage.Manager.Attach",
-        dbus.FlagAllowInteractiveAuthorization,
-        token,
-    )
-    if call.Err != nil {
-        return call.Err
-    }
-    return nil
 }
 
 /* Attaches the system to Ubuntu Pro given the token. If the user chose the
@@ -221,5 +237,13 @@ func attach(token string) error {
  * InitiateProMagicFlow and WaitProMagicFlow. If the user supplied the token
  * directly, then the consumer is supposed to call this directly with it. */
 func (s *ProServer) AttachProToMachine(ctx context.Context, req *pb.AttachRequest) (*epb.Empty, error) {
-    return new(epb.Empty), attach(req.GetToken())
+    call := s.manager.Call(
+        "com.canonical.UbuntuAdvantage.Manager.Attach",
+        dbus.FlagAllowInteractiveAuthorization,
+        req.GetToken(),
+    )
+    if call.Err != nil {
+        return new(epb.Empty), call.Err
+    }
+    return new(epb.Empty), nil
 }
