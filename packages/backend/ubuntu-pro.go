@@ -1,6 +1,7 @@
 package main
 import (
     "os/exec"
+    "log"
     "context"
     "errors"
     pb "github.com/canonical/desktop-security-center/packages/proto"
@@ -69,6 +70,7 @@ func NewProServer(conn *dbus.Conn) (*ProServer, error) {
 func isServiceEnabled(obj dbus.BusObject) (bool, error) {
     status, err := obj.GetProperty("com.canonical.UbuntuAdvantage.Service.Status")
     if err != nil {
+        log.Println(obj.Path(), err)
         return false, err
     }
     return status.Value().(string) == "enabled", nil
@@ -78,6 +80,7 @@ func isServiceEnabled(obj dbus.BusObject) (bool, error) {
 func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
     isAttached, err := s.manager.GetProperty("com.canonical.UbuntuAdvantage.Manager.Attached")
     if err != nil {
+        log.Println(err)
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
 
@@ -117,6 +120,7 @@ func enableService(obj dbus.BusObject, able string) error {
         dbus.FlagAllowInteractiveAuthorization,
     )
     if call.Err != nil {
+        log.Println(obj.Path(), call.Err)
         return call.Err
     }
     return nil
@@ -184,6 +188,7 @@ func (s *ProServer) WaitProMagicFlow(ctx context.Context, _ *epb.Empty) (*pb.Wai
     out, execErr := cmd.Output()
     outs := string(out)
     if err := collectProApiErrors(outs, execErr); err != nil {
+        log.Println(err)
         return nil, err
     }
     token := gjson.Get(outs, "data.attributes.contract_token").String()
@@ -218,6 +223,7 @@ func (s *ProServer) InitiateProMagicFlow(ctx context.Context, _ *epb.Empty) (*pb
     out, execErr := cmd.Output()
     outs := string(out)
     if err := collectProApiErrors(outs, execErr); err != nil {
+        log.Println(err)
         return nil, err
     }
     pin := gjson.Get(outs, "data.attributes.user_code").String()
@@ -243,6 +249,7 @@ func (s *ProServer) AttachProToMachine(ctx context.Context, req *pb.AttachReques
         req.GetToken(),
     )
     if call.Err != nil {
+        log.Println(call.Err)
         return new(epb.Empty), call.Err
     }
     return new(epb.Empty), nil

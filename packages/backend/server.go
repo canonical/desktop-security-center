@@ -26,7 +26,7 @@ func NewProServerManager(ctx context.Context) (*Manager, error) {
 
     userService, err := NewProServer(conn)
     if err != nil {
-        return nil, status.Errorf(codes.Internal, "failed to create user service: %s", err)
+        return nil, status.Errorf(codes.Internal, "Failed to create user service: %s", err)
     }
 
     return &Manager{
@@ -58,8 +58,13 @@ func New(ctx context.Context) error {
 
 func main() {
     ctx := context.Background()
+    setUpLogging()
     err := New(ctx)
     if err != nil {
         log.Println(err)
     }
+}
+
+func setUpLogging() {
+    log.SetFlags(log.LstdFlags | log.LUTC | log.Lshortfile)
 }
