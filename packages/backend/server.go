@@ -3,6 +3,8 @@ import (
     "github.com/coreos/go-systemd/activation"
     "google.golang.org/grpc"
     "context"
+    "errors"
+    "log"
     pb "github.com/canonical/desktop-security-center/packages/proto"
     "github.com/godbus/dbus/v5"
     "google.golang.org/grpc/codes"
@@ -33,14 +35,13 @@ func NewProServerManager(ctx context.Context) (*Manager, error) {
     }, nil
 }
 
-func New(ctx context.Context)  {
+func New(ctx context.Context) error {
     listeners, err := activation.Listeners()
     if err != nil {
-        panic(err)
+        return err
     }
-
     if len(listeners) != 1 {
-        panic("Unexpected number of socket activation fds")
+        return errors.New("Unexpected number of socket activation file descriptors")
     }
 
     var opts []grpc.ServerOption
@@ -48,13 +49,17 @@ func New(ctx context.Context)  {
     pb.RegisterHardwareServer(grpcServer, &HardwareServer{})
     sss, err := NewProServerManager(ctx)
     if err != nil {
-        panic(err)
+        return(err)
     }
     pb.RegisterProServer(grpcServer, sss.userService)
     grpcServer.Serve(listeners[0])
+    return nil
 }
 
 func main() {
     ctx := context.Background()
-    New(ctx)
+    err := New(ctx)
+    if err != nil {
+        log.Println(err)
+    }
 }
