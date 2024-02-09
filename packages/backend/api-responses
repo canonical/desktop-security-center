@@ -1,0 +1,29 @@
+$ pro api u.pro.status.enabled_services.v1
+
+{
+  "_schema_version": "v1",
+  "data": {
+    "attributes": {
+      "enabled_services": [
+        {
+          "name": "esm-infra",
+          "variant_enabled": false,
+          "variant_name": null
+        },
+        {
+          "name": "livepatch",
+          "variant_enabled": false,
+          "variant_name": null
+        }
+      ]
+    },
+    "meta": {
+      "environment_vars": []
+    },
+    "type": "EnabledServices"
+  },
+  "errors": [],
+  "result": "success",
+  "version": "30~18.04",
+  "warnings": []
+}

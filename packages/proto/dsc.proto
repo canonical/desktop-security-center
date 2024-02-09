@@ -1,11 +1,50 @@
 syntax = "proto3";
 option go_package = "./";
 import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
 
 service Hardware {
-  rpc IsSecureBootEnabled (google.protobuf.Empty) returns (IsSecureBootEnabledResponse) {}
+    rpc IsSecureBootEnabled (google.protobuf.Empty) returns (IsSecureBootEnabledResponse) {}
 }
 
 message IsSecureBootEnabledResponse {
     bool enabled = 1;
+}
+
+
+service Pro {
+    rpc IsMachineProAttached (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
+    rpc IsEsmInfraEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
+    rpc IsEsmAppsEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
+    rpc IsKernelLivePatchEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
+
+    /* For a magic flow, the front-end shall call Initiate and then immediately
+     * Wait. Then finally, upon user confirmation, Attach shall be called.
+     *
+     * Attach shall be called directly if the full token flow is selected. */
+    rpc InitiateProMagicFlow (google.protobuf.Empty) returns (InitiateResponse) {}
+    rpc WaitProMagicFlow (google.protobuf.Empty) returns (WaitResponse) {}
+    rpc AttachProToMachine (AttachRequest) returns (google.protobuf.Empty) {}
+
+    rpc EnableInfra (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc DisableInfra (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+
+    rpc EnableEsmApps (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc DisableEsmApps (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+
+    rpc EnableKernelLivePatch (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc DisableKernelLivePatch (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}
+
+message AttachRequest {
+    string token = 1;
+}
+
+message InitiateResponse {
+    string pin = 1;
+    int64 expiresIn = 2;
+}
+
+message WaitResponse {
+    string token = 1;
 }

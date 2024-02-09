@@ -1,0 +1,256 @@
+package main
+import (
+    "os/exec"
+    "log"
+    "context"
+    "errors"
+    pb "github.com/canonical/desktop-security-center/packages/proto"
+    epb "google.golang.org/protobuf/types/known/emptypb"
+    wpb "google.golang.org/protobuf/types/known/wrapperspb"
+    "github.com/tidwall/gjson"
+    "github.com/godbus/dbus/v5"
+    "google.golang.org/grpc/codes"
+    "google.golang.org/grpc/status"
+)
+
+type ProServer struct {
+    pb.UnimplementedProServer
+    conn             *dbus.Conn
+    apps             dbus.BusObject
+    infra            dbus.BusObject
+    livepatch        dbus.BusObject
+    manager          dbus.BusObject
+    reqId            string
+}
+
+func NewProServer(conn *dbus.Conn) (*ProServer, error) {
+    s := &ProServer{
+        conn: conn,
+    }
+
+    s.infra = conn.Object(
+        "com.canonical.UbuntuAdvantage",
+        "/com/canonical/UbuntuAdvantage/Services/esm_2dinfra",
+    )
+    err := s.infra.Call("org.freedesktop.DBus.Peer.Ping", 0).Err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "failed to ping DBus ESM-Infra object")
+    }
+
+    s.apps = conn.Object(
+        "com.canonical.UbuntuAdvantage",
+        "/com/canonical/UbuntuAdvantage/Services/esm_2dapps",
+    )
+    err = s.apps.Call("org.freedesktop.DBus.Peer.Ping", 0).Err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "failed to ping DBus ESM-Apps object")
+    }
+
+    s.livepatch = conn.Object(
+        "com.canonical.UbuntuAdvantage",
+        "/com/canonical/UbuntuAdvantage/Services/livepatch",
+    )
+    err = s.livepatch.Call("org.freedesktop.DBus.Peer.Ping", 0).Err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "failed to ping DBus ESM-Apps object")
+    }
+
+    s.manager = conn.Object(
+        "com.canonical.UbuntuAdvantage",
+        "/com/canonical/UbuntuAdvantage/Manager",
+    )
+    err = s.manager.Call("org.freedesktop.DBus.Peer.Ping", 0).Err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "failed to ping DBus Manager object")
+    }
+
+    return s, nil
+}
+
+func isServiceEnabled(obj dbus.BusObject) (bool, error) {
+    status, err := obj.GetProperty("com.canonical.UbuntuAdvantage.Service.Status")
+    if err != nil {
+        log.Println(obj.Path(), err)
+        return false, err
+    }
+    return status.Value().(string) == "enabled", nil
+}
+
+/* Determines if system is attached to Ubuntu Pro. */
+func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
+    isAttached, err := s.manager.GetProperty("com.canonical.UbuntuAdvantage.Manager.Attached")
+    if err != nil {
+        log.Println(err)
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+
+    return wpb.Bool(isAttached.Value().(bool)), nil
+}
+
+/* Determines if the ESM Infra service of Ubuntu Pro is enabled. */
+func (s *ProServer) IsEsmInfraEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
+    enabled, err := isServiceEnabled(s.infra)
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return wpb.Bool(enabled), nil
+}
+
+/* Determines if the ESM Apps service of Ubuntu Pro is enabled. */
+func (s *ProServer) IsEsmAppsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
+    enabled, err := isServiceEnabled(s.apps)
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return wpb.Bool(enabled), nil
+}
+
+/* Determines if the Livepatch service of Ubuntu Pro is enabled. */
+func (s *ProServer) IsKernelLivePatchEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
+    enabled, err := isServiceEnabled(s.livepatch)
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return wpb.Bool(enabled), nil
+}
+
+func enableService(obj dbus.BusObject, able string) error {
+    call := obj.Call(
+        "com.canonical.UbuntuAdvantage.Service." + able,
+        dbus.FlagAllowInteractiveAuthorization,
+    )
+    if call.Err != nil {
+        log.Println(obj.Path(), call.Err)
+        return call.Err
+    }
+    return nil
+}
+
+/* Enables Livepatch service of Ubuntu Pro. */
+func (s *ProServer) EnableKernelLivePatch(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    err := enableService(s.livepatch, "Enable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
+}
+
+/* Disables Livepatch service of Ubuntu Pro. */
+func (s *ProServer) DisableKernelLivePatch(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    err := enableService(s.livepatch, "Disable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
+}
+
+/* Enables ESM Apps service of Ubuntu Pro. */
+func (s *ProServer) EnableEsmApps(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    err := enableService(s.apps, "Enable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
+}
+
+/* Disables ESM Apps service of Ubuntu Pro. */
+func (s *ProServer) DisableEsmApps(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    err := enableService(s.apps, "Disable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
+}
+
+/* Enables ESM Infra service of Ubuntu Pro. */
+func (s *ProServer) EnableInfra(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    err := enableService(s.infra, "Enable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
+}
+
+/* Disables ESM Infra service of Ubuntu Pro. */
+func (s *ProServer) DisableInfra(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    err := enableService(s.infra, "Disable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
+}
+
+/* Waits until the user enters his PIN, retrieved via InitiateProMagicFlow, in
+ * ubuntu.com/pro/attach (or whatever happens to be the appropriate URL at the
+ * time of reading), retrieves and returns the attachment token. */
+func (s *ProServer) WaitProMagicFlow(ctx context.Context, _ *epb.Empty) (*pb.WaitResponse, error) {
+    cmd := exec.Command("pro", "api", "u.pro.attach.magic.wait.v1", "--args", "magic_token=" + s.reqId)
+    out, execErr := cmd.Output()
+    outs := string(out)
+    if err := collectProApiErrors(outs, execErr); err != nil {
+        log.Println(err)
+        return nil, err
+    }
+    token := gjson.Get(outs, "data.attributes.contract_token").String()
+    return &pb.WaitResponse{ Token: token }, nil
+}
+
+/* Extracts and returns errors from a Pro API call, if any. */
+func collectProApiErrors(json string, execErr error) error {
+    var errorCodes string
+    if !gjson.Valid(json) {
+        if execErr != nil {
+            return execErr
+        }
+        return status.Errorf(codes.Internal, "Invalid Pro API response: %s", json)
+    }
+    if gjson.Get(json, "result").String() != "success" {
+        for _, code := range gjson.Get(json, "errors.#.code").Array() {
+            errorCodes += code.String() + "\n"
+        }
+        return errors.New(errorCodes)
+    }
+    return nil
+}
+
+/* Initiates the Pro magic flow[1]. The PIN and its expiration time is returned.
+ * The user is supposed to input the PIN at ubuntu.com/pro/attach (or whatever
+ * happens to be the appropriate URL at the time of reading).
+ * [1] https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/references/api/#u-pro-attach-magic-initiate-v1
+ */
+func (s *ProServer) InitiateProMagicFlow(ctx context.Context, _ *epb.Empty) (*pb.InitiateResponse, error) {
+    cmd := exec.Command("pro", "api", "u.pro.attach.magic.initiate.v1")
+    out, execErr := cmd.Output()
+    outs := string(out)
+    if err := collectProApiErrors(outs, execErr); err != nil {
+        log.Println(err)
+        return nil, err
+    }
+    pin := gjson.Get(outs, "data.attributes.user_code").String()
+    expiresIn := gjson.Get(outs, "data.attributes.expires_in").Int()
+    /* Let's not call this 'token' lest we confuse it with the other token
+     * used for attaching Ubuntu Pro. This on the other hand is more of a
+     * request identifier. */
+    s.reqId = gjson.Get(outs, "data.attributes.token").String()
+    return &pb.InitiateResponse {
+        Pin: pin,
+        ExpiresIn: expiresIn,
+    }, nil
+}
+
+/* Attaches the system to Ubuntu Pro given the token. If the user chose the
+ * magic flow, the consumer is supposed to already have called both
+ * InitiateProMagicFlow and WaitProMagicFlow. If the user supplied the token
+ * directly, then the consumer is supposed to call this directly with it. */
+func (s *ProServer) AttachProToMachine(ctx context.Context, req *pb.AttachRequest) (*epb.Empty, error) {
+    call := s.manager.Call(
+        "com.canonical.UbuntuAdvantage.Manager.Attach",
+        dbus.FlagAllowInteractiveAuthorization,
+        req.GetToken(),
+    )
+    if call.Err != nil {
+        log.Println(call.Err)
+        return new(epb.Empty), call.Err
+    }
+    return new(epb.Empty), nil
+}
