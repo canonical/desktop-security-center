@@ -14,23 +14,23 @@ import (
 type HardwareServer struct{pb.UnimplementedHardwareServer}
 
 type Manager struct {
-    userService   *ProServer
+    proServer     *ProServer
     conn          *dbus.Conn
 }
 
-func NewProServerManager(ctx context.Context) (*Manager, error) {
+func NewServerManager (ctx context.Context) (*Manager, error) {
     conn, err := dbus.ConnectSystemBus()
     if err != nil {
         return nil, status.Errorf(codes.Internal, "Failed to connect to system bus: %s", err)
     }
 
-    userService, err := NewProServer(conn)
+    proServer, err := NewProServer(conn)
     if err != nil {
         return nil, status.Errorf(codes.Internal, "Failed to create user service: %s", err)
     }
 
     return &Manager{
-        userService:    userService,
+        proServer:      proServer,
         conn:           conn,
     }, nil
 }
@@ -47,11 +47,11 @@ func New(ctx context.Context) error {
     var opts []grpc.ServerOption
     grpcServer := grpc.NewServer(opts...)
     pb.RegisterHardwareServer(grpcServer, &HardwareServer{})
-    sss, err := NewProServerManager(ctx)
+    manager, err := NewServerManager(ctx)
     if err != nil {
         return(err)
     }
-    pb.RegisterProServer(grpcServer, sss.userService)
+    pb.RegisterProServer(grpcServer, manager.proServer)
     grpcServer.Serve(listeners[0])
     return nil
 }
