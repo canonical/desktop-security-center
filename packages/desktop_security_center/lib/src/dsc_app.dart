@@ -1,3 +1,4 @@
+import 'package:desktop_security_center/src/snap_permissions/snap_permissions_page.dart';
 import 'package:desktop_security_center/src/ubuntu_pro/ubuntu_pro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,6 +19,14 @@ final pages = <AppPage>[
         ),
     pageBuilder: (_) => const UbuntuProPage(),
     label: (context) => UbuntuProPage.pageDetail(context).label,
+  ),
+  (
+    tileBuilder: (context, selected) => YaruMasterTile(
+          title: Text(SnapPermissionsPage.pageDetail(context).label),
+          leading: Icon(SnapPermissionsPage.pageDetail(context).iconData),
+        ),
+    pageBuilder: (_) => const SnapPermissionsPage(),
+    label: (context) => SnapPermissionsPage.pageDetail(context).label,
   ),
 ];
 
@@ -43,7 +52,7 @@ class DesktopSecurityCenterApp extends ConsumerWidget {
         body: pages[index].pageBuilder(context),
       ),
       layoutDelegate: const YaruMasterFixedPaneDelegate(
-        paneWidth: 204.0,
+        paneWidth: 300.0,
       ),
       breakpoint: 0,
     );

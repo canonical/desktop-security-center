@@ -59,7 +59,7 @@ static void my_application_activate(GApplication *application)
 
   GdkGeometry geometry;
 
-  geometry.min_width = 800 + 52;  // account for shadow from libhandy
+  geometry.min_width = 1000 + 52;  // account for shadow from libhandy
   geometry.min_height = 600 + 52;
   gtk_window_set_geometry_hints(window, nullptr, &geometry, GDK_HINT_MIN_SIZE);
 
