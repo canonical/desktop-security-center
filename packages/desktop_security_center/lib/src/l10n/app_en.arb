@@ -2,6 +2,7 @@
     
     "appTitle": "Desktop Security Center",
     "ubuntuPro": "Ubuntu Pro",
+    "snapPermissions": "Snap Permissions",
     "ubuntuProEnabled": "Ubuntu Pro is enabled",
     "ubuntuProDisabled": "Not protected with Ubuntu Pro",
     "getUbuntuPro": "Get Ubuntu Pro",
@@ -33,5 +34,10 @@
     "proDialogTokenDesc": "Enter a token from your system administrator or from ",
     "proDialogTokenLinkLabel": "ubuntu.com/pro",
     "proDialogCancel": "Cancel",
-    "proDialogAttach": "Attach"
+    "proDialogAttach": "Attach",
+    "snapRequireSystemPermission": "Require snaps to ask for system permissions",
+    "snapRequireSystemPermissionDesc": "This is an experimental feature for controlling access to your system’s resources. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "snapExperimental": "Experimental",
+    "snapManageOtherAppPermissionsIn": "You can manage other app permissions in ",
+    "snapSettingsApplicationsPathLabel": "Settings › Applications."
 }

@@ -37,7 +37,7 @@ class _UbuntuProPageState extends ConsumerState<UbuntuProPage> {
 
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
+        padding: const EdgeInsets.symmetric(horizontal: kLargePadding),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Center(
             child: Column(
