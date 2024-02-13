@@ -14,8 +14,9 @@ import (
 type HardwareServer struct{pb.UnimplementedHardwareServer}
 
 type Manager struct {
-    proServer     *ProServer
-    conn          *dbus.Conn
+    proServer        *ProServer
+    permissionServer *PermissionServer
+    conn             *dbus.Conn
 }
 
 func NewServerManager (ctx context.Context, conns ...*dbus.Conn) (*Manager, error) {
@@ -37,9 +38,15 @@ func NewServerManager (ctx context.Context, conns ...*dbus.Conn) (*Manager, erro
         return nil, status.Errorf(codes.Internal, "Failed to create user service: %s", err)
     }
 
+    permissionServer, err := NewPermissionServer()
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "Failed to create permission server: %s", err)
+    }
+
     return &Manager{
-        proServer:      proServer,
-        conn:           conn,
+        proServer:        proServer,
+        permissionServer: permissionServer,
+        conn:             conn,
     }, nil
 }
 
@@ -64,6 +71,7 @@ func New(ctx context.Context) error {
         return(err)
     }
     pb.RegisterProServer(grpcServer, manager.proServer)
+    pb.RegisterPermissionServer(grpcServer, manager.permissionServer)
     grpcServer.Serve(listeners[0])
     return nil
 }
