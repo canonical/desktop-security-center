@@ -3,17 +3,123 @@ package main
 import (
     "testing"
     "context"
-    epb "google.golang.org/protobuf/types/known/emptypb"
+    //epb "google.golang.org/protobuf/types/known/emptypb"
+    "github.com/canonical/desktop-security-center/packages/testtools/testutils"
+    "fmt"
+    "os"
+    "github.com/godbus/dbus/v5"
+	"github.com/godbus/dbus/v5/introspect"
+    pb "github.com/canonical/desktop-security-center/packages/proto"
 )
 
-func TestIsKernelLivePatchEnabled(t *testing.T) {
+func TestAttachProToMachine(t *testing.T) {
+	t.Cleanup(testutils.StartLocalSystemBus())
+
     ctx := context.Background()
-    manager, _ := NewServerManager(ctx)
-    a, _ := manager.proServer.IsKernelLivePatchEnabled(ctx, new(epb.Empty))
-    if a.GetValue() != false {
-         t.Fatalf("Fatal")
+    conn := testutils.NewDbusConn(t)
+
+    manager, err := NewServerManager(ctx, conn)
+    if err != nil {
+        t.Fatal("Couldn't get a manager", err)
     }
+
+    req := new(pb.AttachRequest)
+    req.Token = "incorrect"
+    _, err = manager.proServer.AttachProToMachine(ctx, req)
+    if err == nil {
+         t.Fatal("I expected error for incorrect token, but didn't get one.")
+    }
+    
+    req.Token = "correct"
+    _, err = manager.proServer.AttachProToMachine(ctx, req)
+    if err != nil {
+         t.Fatal("I expected no error for a correct token, got ", err)
+    }
+
+    _, err = manager.proServer.IsMachineProAttached(ctx, nil)
+    isAttached, err := manager.proServer.IsMachineProAttached(ctx, nil)
+    fmt.Println(isAttached)
 }
+
+func TestMain(m *testing.M){
+    defer testutils.StartLocalSystemBus()()
+    fmt.Println(os.Getenv("DBUS_SYSTEM_BUS_ADDRESS"))
+
+	conn, err := testutils.GetSystemBusConnection()
+	if err != nil {
+        fmt.Println(err)
+		os.Exit(7)
+	}
+
+    if er := ExportAttachMock(conn); er != nil {
+        fmt.Println(er)
+        os.Exit(8)
+    }
+    m.Run()
+}
+
+/*Mocking, consult https://github.com/canonical/ubuntu-desktop-provision/blob/main/provd/internal/testutils/accounts_mock.go#L61 for example*/
+type prodbus struct{}
+
+func (a prodbus) Ping() *dbus.Error {
+	return nil
+}
+
+func (a prodbus) Attach(token string) (*dbus.Error) {
+	if token != "correct" {
+		return dbus.NewError("com.canonical.UbuntuAdvantage.Error.AttachError", []interface{}{"error requested in AttachError mocked method. Argument: " + token})
+	}
+	return nil
+}
+
+func (a prodbus) Dettach() (*dbus.Error) {
+
+	return nil
+}
+
+func ExportAttachMock(conn *dbus.Conn) error {
+    a := prodbus{}
+    mock:=fmt.Sprintf(`
+    <node name="/">
+      <interface name='com.canonical.UbuntuAdvantage.Manager'>
+        <method name='Attach'>
+          <arg type='s' name='token' direction='in'/>
+        </method>
+        <method name='Detach'/>
+        <property name='Attached' type='b' access='read'/>
+      </interface>
+
+      <interface name="org.freedesktop.DBus.Properties">
+          <method name="Get">
+              <arg name="interface" direction="in" type="s"/>
+              <arg name="property" direction="in" type="s"/>
+              <arg name="value" direction="out" type="v"/>
+          </method>
+      </interface>
+    %s</node>
+    `, introspect.IntrospectDataString)
+    if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Manager"), "com.canonical.UbuntuAdvantage.Manager"); err != nil {
+        return fmt.Errorf("could not export  mock: %w", err)
+    }
+    if err := conn.Export(introspect.Introspectable(mock), dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Manager"), "org.freedesktop.DBus.Introspectable"); err != nil {
+        return fmt.Errorf("could not export introspectable for accounts mock: %w", err)
+    }
+		if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Manager"), "com.canonical.UbuntuAdvantage.Manager"); err != nil {
+			return fmt.Errorf("could not export DBus Properties mock: %w", err)
+		}
+
+	reply, err := conn.RequestName("com.canonical.UbuntuAdvantage", dbus.NameFlagDoNotQueue)
+	if err != nil {
+		return fmt.Errorf("failed to acquire account name on local system bus: %w", err)
+	}
+	if reply != dbus.RequestNameReplyPrimaryOwner {
+		return fmt.Errorf("failed to acquire account name on local system bus: name is already taken")
+	}
+
+    return nil
+    
+}
+
     /*
 	t.Parallel()
 
