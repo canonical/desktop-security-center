@@ -12,6 +12,8 @@ import (
     pb "github.com/canonical/desktop-security-center/packages/proto"
 )
 
+var ret string
+
 func TestAttachProToMachine(t *testing.T) {
 	t.Cleanup(testutils.StartLocalSystemBus())
 
@@ -36,13 +38,78 @@ func TestAttachProToMachine(t *testing.T) {
          t.Fatal("I expected no error for a correct token, got ", err)
     }
 
+    /* IsMachineProAttached */
+    ret = "true"
+    i, err := manager.proServer.IsMachineProAttached(ctx, nil)
+    if i.GetValue() != true || err != nil {
+        t.Fatal("")
+    }
+
+    ret = "false"
+    i, err = manager.proServer.IsMachineProAttached(ctx, nil)
+    if i.GetValue() != false || err != nil {
+        t.Fatal("")
+    }
+    /* Hangs, why though? 
+    fmt.Println(3)
+    ret = "error"
     _, err = manager.proServer.IsMachineProAttached(ctx, nil)
-    isAttached, err := manager.proServer.IsMachineProAttached(ctx, nil)
-    fmt.Println(isAttached)
+    fmt.Println(4)
+    if err != nil{
+         t.Fatal("I expected error but got none")
+    }
+    */
+    
+    /* IsServiceEnabled */
+    ret = "disabled"
+    i, err = manager.proServer.IsEsmInfraEnabled(ctx, nil)
+    if i.GetValue() != false || err != nil {
+        t.Fatal(i.GetValue(), err)
+    }
+    i, err = manager.proServer.IsEsmAppsEnabled(ctx, nil)
+    if i.GetValue() != false || err != nil {
+        t.Fatal(i.GetValue(), err)
+    }
+    i, err = manager.proServer.IsKernelLivePatchEnabled(ctx, nil)
+    if i.GetValue() != false || err != nil {
+        t.Fatal(i.GetValue(), err)
+    }
+
+    ret = "enabled"
+    i, err = manager.proServer.IsEsmInfraEnabled(ctx, nil)
+    if i.GetValue() != true || err != nil {
+        t.Fatal()
+    }
+    i, err = manager.proServer.IsEsmAppsEnabled(ctx, nil)
+    if i.GetValue() != true || err != nil {
+        t.Fatal()
+    }
+    i, err = manager.proServer.IsKernelLivePatchEnabled(ctx, nil)
+    if i.GetValue() != true || err != nil {
+        t.Fatal()
+    }
+    /* Hangs, why though?
+    ret = "error"
+    i, err = manager.proServer.IsEsmInfraEnabled(ctx, nil)
+    if err != nil {
+        t.Fatal("Ni;")
+    }
+    */
 }
 
+func (a prodbus) Get(interfaceName string, propertyName string) (interface{}, *dbus.Error) {
+  defer fmt.Println("deferred", ret)
+  switch ret {
+  case "true": return true, nil
+  case "false": return false, nil
+  case "enabled": return "enabled", nil
+  case "disabled": return "disabled", nil
+  }
+  return "", dbus.NewError("failed", []interface{}{"fooerror"})
+}
 func TestMain(m *testing.M){
     defer testutils.StartLocalSystemBus()()
+    //For debugging with D-Feet
     fmt.Println(os.Getenv("DBUS_SYSTEM_BUS_ADDRESS"))
 
 	conn, err := testutils.GetSystemBusConnection()
@@ -61,6 +128,7 @@ func TestMain(m *testing.M){
 /*Mocking, consult https://github.com/canonical/ubuntu-desktop-provision/blob/main/provd/internal/testutils/accounts_mock.go#L61 for example*/
 type prodbus struct{}
 
+
 func (a prodbus) Ping() *dbus.Error {
 	return nil
 }
@@ -72,13 +140,16 @@ func (a prodbus) Attach(token string) (*dbus.Error) {
 	return nil
 }
 
-func (a prodbus) Dettach() (*dbus.Error) {
-
-	return nil
-}
-
 func ExportAttachMock(conn *dbus.Conn) error {
     a := prodbus{}
+    servicesMock:=fmt.Sprintf(`
+    <node name="/">
+      <interface name='com.canonical.UbuntuAdvantage.Service'>
+        <method name='Enable'/>
+        <method name='Disable'/>
+      </interface>
+    %s</node>
+    `, introspect.IntrospectDataString)
     mock:=fmt.Sprintf(`
     <node name="/">
       <interface name='com.canonical.UbuntuAdvantage.Manager'>
@@ -101,12 +172,41 @@ func ExportAttachMock(conn *dbus.Conn) error {
     if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Manager"), "com.canonical.UbuntuAdvantage.Manager"); err != nil {
         return fmt.Errorf("could not export  mock: %w", err)
     }
+    if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/esm_2dapps"), "com.canonical.UbuntuAdvantage.Service"); err != nil {
+        return fmt.Errorf("could not export  mock: %w", err)
+    }
+    if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/esm_2dinfra"), "com.canonical.UbuntuAdvantage.Service"); err != nil {
+        return fmt.Errorf("could not export  mock: %w", err)
+    }
+    if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/livepatch"), "com.canonical.UbuntuAdvantage.Service"); err != nil {
+        return fmt.Errorf("could not export  mock: %w", err)
+    }
+
     if err := conn.Export(introspect.Introspectable(mock), dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Manager"), "org.freedesktop.DBus.Introspectable"); err != nil {
         return fmt.Errorf("could not export introspectable for accounts mock: %w", err)
     }
-		if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Manager"), "com.canonical.UbuntuAdvantage.Manager"); err != nil {
-			return fmt.Errorf("could not export DBus Properties mock: %w", err)
-		}
+	if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Manager"), "org.freedesktop.DBus.Properties"); err != nil {
+		return fmt.Errorf("could not export DBUS PROPERTIES mock: %w", err)
+	}
+
+    if err := conn.Export(introspect.Introspectable(servicesMock), dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/livepatch"), "org.freedesktop.DBus.Introspectable"); err != nil {
+        return fmt.Errorf("could not export introspectable for accounts mock: %w", err)
+    }
+	if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/livepatch"), "org.freedesktop.DBus.Properties"); err != nil {
+		return fmt.Errorf("could not export DBUS PROPERTIES mock: %w", err)
+	}
+    if err := conn.Export(introspect.Introspectable(servicesMock), dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/esm_2dinfra"), "org.freedesktop.DBus.Introspectable"); err != nil {
+        return fmt.Errorf("could not export introspectable for accounts mock: %w", err)
+    }
+	if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/esm_2dinfra"), "org.freedesktop.DBus.Properties"); err != nil {
+		return fmt.Errorf("could not export DBUS PROPERTIES mock: %w", err)
+	}
+    if err := conn.Export(introspect.Introspectable(servicesMock), dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/esm_2dapps"), "org.freedesktop.DBus.Introspectable"); err != nil {
+        return fmt.Errorf("could not export introspectable for accounts mock: %w", err)
+    }
+	if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/esm_2dapps"), "org.freedesktop.DBus.Properties"); err != nil {
+		return fmt.Errorf("could not export DBUS PROPERTIES mock: %w", err)
+	}
 
 	reply, err := conn.RequestName("com.canonical.UbuntuAdvantage", dbus.NameFlagDoNotQueue)
 	if err != nil {
@@ -119,73 +219,3 @@ func ExportAttachMock(conn *dbus.Conn) error {
     return nil
     
 }
-
-    /*
-	t.Parallel()
-
-	tests := map[string]struct {
-		locale       string
-		emptyRequest bool
-
-		wantError bool
-	}{
-		// Success case
-		"Successcully sets a valid locale": {locale: "en_US.UTF-8"},
-
-		// Error cases
-		"Error on empty request":                {emptyRequest: true, wantError: true},
-		"Error when locale is empty":            {locale: "", wantError: true},
-		"Error when SetLocale returns an error": {locale: "locale_error", wantError: true},
-		"Error on invalid locale":               {locale: "bad_locale", wantError: true},
-        
-	}
-	for name, tc := range tests {
-		tc := tc
-		t.Run(name, func(t *testing.T) {
-			t.Parallel()
-			t.Cleanup(testutils.StartLocalSystemBus())
-
-			client := newLocaleClient(t)
-
-			var req *pb.SetLocaleRequest
-			if !tc.emptyRequest {
-				req = &pb.SetLocaleRequest{Locale: tc.locale}
-			} else {
-				req = nil
-			}
-
-			got, err := client.SetLocale(context.Background(), req)
-			if tc.wantError {
-				require.Error(t, err, "SetLocale should have returned an error, but did not")
-				return
-			}
-			require.NoError(t, err, "SetLocale should not return an error, but did")
-			require.NotNil(t, got, "SetLocale should return an empty not nil response when not in error")
-		})
-	}
-}
-
-
-
-func TestMain(m *testing.M) {
-	testutils.InstallUpdateFlag()
-	flag.Parse()
-
-	defer testutils.StartLocalSystemBus()()
-
-	conn, err := testutils.GetSystemBusConnection()
-
-	if err != nil {
-		slog.Error(fmt.Sprintf("Could not get system bus connection: %v", err))
-		os.Exit(1)
-	}
-
-	err = testutils.ExportLocaleMock(conn)
-	if err != nil {
-		slog.Error(fmt.Sprintf("Could not export locale mock: %v", err))
-		os.Exit(1)
-	}
-
-	m.Run()
-}
-*/
