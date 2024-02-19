@@ -26,10 +26,10 @@ func NewServerManager (ctx context.Context, conns ...*dbus.Conn) (*Manager, erro
         conn = conns[0]
     } else {
         /* Branch taken in real executions, */
-    conn, err = dbus.ConnectSystemBus()
-    if err != nil {
-        return nil, status.Errorf(codes.Internal, "Failed to connect to system bus: %s", err)
-    }
+        conn, err = dbus.ConnectSystemBus()
+        if err != nil {
+            return nil, status.Errorf(codes.Internal, "Failed to connect to system bus: %s", err)
+        }
     }
 
     proServer, err := NewProServer(conn)
