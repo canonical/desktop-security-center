@@ -10,13 +10,99 @@ import (
 	"github.com/godbus/dbus/v5"
 	"github.com/godbus/dbus/v5/introspect"
 	"os"
+	"os/exec"
 )
 
 type prodbus struct{}
+const (
+    initiateJson = `{
+              "_schema_version": "v1",
+              "data": {
+                "attributes": {
+                  "expires": "2024-02-20T07:45:35+00:00",
+                  "expires_in": %d,
+                  "token": "%s",
+                  "user_code": "%s"
+                },
+                "meta": {
+                  "environment_vars": []
+                },
+                "type": "MagicAttachInitiate"
+              },
+              "errors": [%s],
+              "result": "%s",
+              "version": "30.1",
+              "warnings": []
+            }`
+)
 
 var getResponse string
 var manager *Manager
 var ctx context.Context
+
+func TestInitiateProMagicFlow(t *testing.T) {
+    cases := []struct {
+        name string
+        pin string
+        expiresIn int64
+        errors string
+        reqId string
+        result string
+        wantError bool
+    }{
+        {
+            name: "Valid request",
+            pin: "89T4SR",
+            expiresIn: 600,
+            reqId: "Ca1xQ10aB9Xpp",
+            result: "success",
+        },
+        {
+            name: "Invalid response, broken JSON",
+            wantError: true,
+            pin: ",\"\"{{{",
+            result: "success",
+        },
+        {
+            name: "Invalid response, has failure",
+            wantError: true,
+            result: "failure",
+            errors: `{
+                        "msg": "Failed to connect to authentication server",
+                        "code": "connectivity-error",
+                        "meta": {}
+                     }`,
+        },
+    }
+
+
+    for _, tc := range cases {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+            execMocker := func(name string, arg ...string) *exec.Cmd {
+                ret := fmt.Sprintf(initiateJson, tc.expiresIn, tc.reqId, tc.pin, tc.errors, tc.result)
+                return exec.Command("printf", "%s", ret)
+            }
+
+            manager.proServer.execer = execMocker
+            r, err := manager.proServer.InitiateProMagicFlow(ctx, nil)
+            if tc.wantError && err == nil {
+			    t.Fatal("Expected error, got nothing.")
+            }
+            if !tc.wantError {
+                if err != nil {
+                    t.Fatal("Expected no error, got ", err)
+                }
+                pin := r.GetPin()
+                expiresIn := r.GetExpiresIn()
+                if pin != tc.pin || expiresIn != tc.expiresIn {
+                    t.Fatal("Unmatched response fields: ", pin, tc.pin, expiresIn, tc.expiresIn)
+                }
+            }
+        })
+    }
+}
 
 func TestAttachProToMachine(t *testing.T) {
 	t.Cleanup(testutils.StartLocalSystemBus())
