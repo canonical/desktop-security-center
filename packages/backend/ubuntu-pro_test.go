@@ -15,11 +15,26 @@ import (
 
 type prodbus struct{}
 const (
+    waitJson = `{
+              "_schema_version": "v1",
+              "data": {
+                "attributes": {
+                  "contract_token": "%s"
+                },
+                "meta": {
+                  "environment_vars": []
+                },
+                "type": "MagicAttachInitiate"
+              },
+              "errors": [%s],
+              "result": "%s",
+              "version": "30.1",
+              "warnings": []
+            }`
     initiateJson = `{
               "_schema_version": "v1",
               "data": {
                 "attributes": {
-                  "expires": "2024-02-20T07:45:35+00:00",
                   "expires_in": %d,
                   "token": "%s",
                   "user_code": "%s"
@@ -39,6 +54,62 @@ const (
 var getResponse string
 var manager *Manager
 var ctx context.Context
+
+func TestWaitProMagicFlow(t *testing.T) {
+    cases := []struct {
+        name string
+        errors string
+        contract string
+        result string
+        wantError bool
+    }{
+        {
+            name: "Confirmed contract",
+            contract: "Ca1xQ10aB9Xpp",
+            result: "success",
+        },
+        {
+            name: "Invalid response, broken JSON",
+            wantError: true,
+            contract: ",\"\"{{{",
+            result: "success",
+        },
+        {
+            name: "Invalid response, has failure",
+            wantError: true,
+            result: "failure",
+            errors: `{
+                        "msg": "Failed to connect to authentication server",
+                        "code": "connectivity-error",
+                        "meta": {}
+                     }`,
+        },
+    }
+    for _, tc := range cases {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+            execMocker := func(name string, arg ...string) *exec.Cmd {
+                ret := fmt.Sprintf(waitJson, tc.contract, tc.errors, tc.result)
+                return exec.Command("printf", "%s", ret)
+            }
+            manager.proServer.execer = execMocker
+            r, err := manager.proServer.WaitProMagicFlow(ctx, nil)
+            if tc.wantError && err == nil {
+			    t.Fatal("Expected error, got nothing.")
+            }
+            if !tc.wantError {
+                if err != nil {
+                    t.Fatal("Expected no error, got ", err)
+                }
+                contract := r.GetToken()
+                if contract != tc.contract {
+                    t.Fatal("Unmatched response fields: ", contract, tc.contract)
+                }
+            }
+        })
+    }
+}
 
 func TestInitiateProMagicFlow(t *testing.T) {
     cases := []struct {
