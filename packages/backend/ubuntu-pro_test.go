@@ -51,7 +51,11 @@ const (
             }`
 )
 
+/* Variables for adjusting test results */
 var getResponse string
+var failEnable bool
+var failDisable bool
+
 var manager *Manager
 var ctx context.Context
 
@@ -192,6 +196,66 @@ func TestAttachProToMachine(t *testing.T) {
 	}
 }
 
+func TestDisableService(t *testing.T) {
+    failDisable = false
+    _, err := manager.proServer.DisableEsmApps(ctx, nil)
+    if err != nil {
+		t.Fatal(err)
+    }
+    _, err = manager.proServer.DisableInfra(ctx, nil)
+    if err != nil {
+		t.Fatal(err)
+    }
+    _, err = manager.proServer.DisableKernelLivePatch(ctx, nil)
+    if err != nil {
+		t.Fatal(err)
+    }
+
+    failDisable = true
+    _, err = manager.proServer.DisableEsmApps(ctx, nil)
+    if err == nil {
+		t.Fatal("I expected an error, but didn't get one")
+    }
+    _, err = manager.proServer.DisableInfra(ctx, nil)
+    if err == nil {
+		t.Fatal("I expected an error, but didn't get one")
+    }
+    _, err = manager.proServer.DisableKernelLivePatch(ctx, nil)
+    if err == nil {
+		t.Fatal("I expected an error, but didn't get one")
+    }
+}
+
+func TestEnableService(t *testing.T) {
+    failEnable = false
+    _, err := manager.proServer.EnableEsmApps(ctx, nil)
+    if err != nil {
+		t.Fatal(err)
+    }
+    _, err = manager.proServer.EnableInfra(ctx, nil)
+    if err != nil {
+		t.Fatal(err)
+    }
+    _, err = manager.proServer.EnableKernelLivePatch(ctx, nil)
+    if err != nil {
+		t.Fatal(err)
+    }
+
+    failEnable = true
+    _, err = manager.proServer.EnableEsmApps(ctx, nil)
+    if err == nil {
+		t.Fatal("I expected an error, but didn't get one")
+    }
+    _, err = manager.proServer.EnableInfra(ctx, nil)
+    if err == nil {
+		t.Fatal("I expected an error, but didn't get one")
+    }
+    _, err = manager.proServer.EnableKernelLivePatch(ctx, nil)
+    if err == nil {
+		t.Fatal("I expected an error, but didn't get one")
+    }
+}
+
 func TestIsMachineProAttached(t *testing.T) {
 	getResponse = "true"
 	i, err := manager.proServer.IsMachineProAttached(ctx, nil)
@@ -211,6 +275,7 @@ func TestIsMachineProAttached(t *testing.T) {
 		t.Fatal("I expected an error, but didn't get one")
 	}
 }
+
 
 func TestIsServiceEnabled(t *testing.T) {
 	getResponse = "disabled"
@@ -256,23 +321,6 @@ func TestIsServiceEnabled(t *testing.T) {
 	}
 }
 
-func (a prodbus) Get(interfaceName string, propertyName string) (interface{}, *dbus.Error) {
-	switch getResponse {
-	case "true":
-		return true, nil
-	case "false":
-		return false, nil
-	case "enabled":
-		return "enabled", nil
-	case "disabled":
-		return "disabled", nil
-	}
-	return "", dbus.NewError(
-		"com.canonical.UbuntuAdvantage.Error.GetError",
-		[]interface{}{"error requested in Get mocked method."},
-	)
-}
-
 func TestMain(m *testing.M) {
 	defer testutils.StartLocalSystemBus()()
 	//For debugging with D-Feet
@@ -296,6 +344,43 @@ func TestMain(m *testing.M) {
 		os.Exit(9)
 	}
 	m.Run()
+}
+
+func (a prodbus) Get(interfaceName string, propertyName string) (interface{}, *dbus.Error) {
+	switch getResponse {
+	case "true":
+		return true, nil
+	case "false":
+		return false, nil
+	case "enabled":
+		return "enabled", nil
+	case "disabled":
+		return "disabled", nil
+	}
+	return "", dbus.NewError(
+		"com.canonical.UbuntuAdvantage.Error.GetError",
+		[]interface{}{"error requested in Get mocked method."},
+	)
+}
+
+func (a prodbus) Disable() *dbus.Error {
+    if failDisable {
+        return dbus.NewError(
+            "com.canonical.UbuntuAdvantage.Error.DisableError",
+            []interface{}{"error requested in Disable mocked method"},
+        )
+    }
+    return nil
+}
+
+func (a prodbus) Enable() *dbus.Error {
+    if failEnable {
+        return dbus.NewError(
+            "com.canonical.UbuntuAdvantage.Error.EnableError",
+            []interface{}{"error requested in Enable mocked method"},
+        )
+    }
+    return nil
 }
 
 func (a prodbus) Attach(token string) *dbus.Error {
