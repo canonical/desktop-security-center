@@ -3,7 +3,7 @@ package testutils
 
 import (
 	"fmt"
-	"log/slog"
+	"log"
 	"os"
 )
 
@@ -37,13 +37,13 @@ func WriteActionToFile(action string, opts ...Option) {
 	// Use the configured file path
 	f, err := os.OpenFile(o.filePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0600)
 	if err != nil {
-		slog.Error(fmt.Sprintf("Error opening file: %v", err))
+		log.Println(fmt.Sprintf("Error opening file: %v", err))
 		os.Exit(1)
 	}
 	defer f.Close()
 
 	if _, err := f.WriteString(action + "\n"); err != nil {
-		slog.Error(fmt.Sprintf("Error writing to file: %v", err))
+		log.Println(fmt.Sprintf("Error writing to file: %v", err))
 		os.Exit(1)
 	}
 }
