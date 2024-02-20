@@ -6,7 +6,7 @@ import (
 	//epb "google.golang.org/protobuf/types/known/emptypb"
 	"fmt"
 	pb "github.com/canonical/desktop-security-center/packages/proto"
-	"github.com/canonical/desktop-security-center/packages/testtools/testutils"
+	"github.com/canonical/desktop-security-center/packages/testutils"
 	"github.com/godbus/dbus/v5"
 	"github.com/godbus/dbus/v5/introspect"
 	"os"
