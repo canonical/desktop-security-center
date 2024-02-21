@@ -103,6 +103,8 @@ func (s *PermissionServer) DisableAppPermissions(ctx context.Context, _ *epb.Emp
 }
 
 func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
+    /* Attention! This will only retrieve rules from the user running
+     * the backend process. */
     o, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/requests/rules", nil)
     if err != nil {
         return nil, err
@@ -111,7 +113,7 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
     //    log.Println(o)
     //    return nil, status.Errorf(codes.Internal, "Invalid Json")
     //}
-    return wpb.Bool(gjson.Get(o, "result.#.id").Exists()), nil
+    return wpb.Bool(gjson.Get(o, "result.#").Uint() > 0), nil
 }
 
 func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _ *epb.Empty) (*pb.ListOfPersionalFolderRules, error) {
