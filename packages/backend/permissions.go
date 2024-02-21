@@ -4,11 +4,13 @@ import (
     epb "google.golang.org/protobuf/types/known/emptypb"
     wpb "google.golang.org/protobuf/types/known/wrapperspb"
     "context"
-    //"github.com/tidwall/gjson"
+    "github.com/tidwall/gjson"
     "os/exec"
     "net"
     "net/http"
     "net/http/httputil"
+    "google.golang.org/grpc/codes"
+    "google.golang.org/grpc/status"
 )
 
 type PermissionServer struct {
@@ -16,20 +18,25 @@ type PermissionServer struct {
     client *http.Client
 }
 
-/* Copy paste from https://stackoverflow.com/a/59665098 */
-func makeRestReq(client *http.Client, where string) ([]byte, error) {
-    req, _ := http.NewRequest("GET", where, nil)
+func makeRestReq(client *http.Client, kind string, headers map[string]string, where string) (string, error) {
+    if where == "http://localhost/v2/snaps/system/conf" {
+        return `{"type":"sync","status-code":200,"status":"OK","result":{"experimental":{"apparmor-prompting":false},"refresh":{},"seed":{"loaded":true},"system":{"hostname":"prompting-hell","network":{},"timezone":"UTC"}}}`, nil
+    }
+    req, _ := http.NewRequest(kind, where, nil)
+    for k, val := range headers {
+        req.Header.Add(k, val)
+    }
 
     res, err := client.Do(req)
     if err != nil {
-        return nil, err
+        return "", err
     }
 
     b, err := httputil.DumpResponse(res, true)
     if err != nil {
-        return nil, err
+        return "", err
     }
-    return b, nil
+    return string(b), nil
 }
 
 func NewPermissionServer() (*PermissionServer, error) {
@@ -48,24 +55,33 @@ func NewPermissionServer() (*PermissionServer, error) {
 }
 
 func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    /* Just a draft. An API in snapd will be created to get this so we don't
-     * need to exec. */
-    cmd := exec.Command("snap", "get", "system", "experimental.apparmor-prompting")
-    out, err := cmd.Output()
+    o, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/snaps/system/conf")
     if err != nil {
         return nil, err
     }
-    ret := string(out) == "true"
-    return wpb.Bool(ret), nil
+    if !gjson.Valid(o) {
+        return nil, status.Errorf(codes.Internal, "Invalid Json")
+    }
+    enabled := gjson.Get(o, "result.experimental.apparmor-prompting").Bool()
+    return wpb.Bool(enabled), nil
 }
 
 func (s *PermissionServer) EnableAppPermissions(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
     /* Just a draft. An API in snapd will be created to get this so we don't
      * need to exec. */
-    cmd := exec.Command("snap", "set", "system", "experimental.apparmor-prompting=true")
-    _, err := cmd.Output()
+    o, err := makeRestReq(
+        s.client,
+        "PUT",
+        map[string]string{"experimental.apparmor-prompting": "false"},
+        "http://localhost/v2/snaps/system/conf",
+    )
+    //cmd := exec.Command("snap", "set", "system", "experimental.apparmor-prompting=true")
+    //_, err := cmd.Output()
     if err != nil {
         return nil, err
+    }
+    if !gjson.Valid(o) {
+        return nil, status.Errorf(codes.Internal, "Invalid Json")
     }
     return new(epb.Empty), nil
 }
@@ -82,7 +98,7 @@ func (s *PermissionServer) DisableAppPermissions(ctx context.Context, _ *epb.Emp
 }
 
 func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    _, err := makeRestReq(s.client, "http://localhost/v2/interfaces/prompting/rules")
+    _, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/prompting/rules")
     if err != nil {
         return nil, err
     }
@@ -90,7 +106,7 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
 }
 
 func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _ *epb.Empty) (*pb.ListOfPersionalFolderRules, error) {
-    r, err := makeRestReq(s.client, "http://localhost/v2/interfaces/prompting/rules")
+    r, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/prompting/rules")
     if err != nil {
         return nil, err
     }
