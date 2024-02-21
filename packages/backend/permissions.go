@@ -5,8 +5,11 @@ import (
     wpb "google.golang.org/protobuf/types/known/wrapperspb"
     "context"
     "github.com/tidwall/gjson"
-    "os/exec"
     "net"
+    "io"
+    "bytes"
+    "log"
+    "fmt"
     "net/http"
     "net/http/httputil"
     "google.golang.org/grpc/codes"
@@ -18,11 +21,11 @@ type PermissionServer struct {
     client *http.Client
 }
 
-func makeRestReq(client *http.Client, kind string, headers map[string]string, where string) (string, error) {
+func makeRestReq(client *http.Client, kind string, headers map[string]string, where string, body io.Reader) (string, error) {
     if where == "http://localhost/v2/snaps/system/conf" {
         return `{"type":"sync","status-code":200,"status":"OK","result":{"experimental":{"apparmor-prompting":false},"refresh":{},"seed":{"loaded":true},"system":{"hostname":"prompting-hell","network":{},"timezone":"UTC"}}}`, nil
     }
-    req, _ := http.NewRequest(kind, where, nil)
+    req, _ := http.NewRequest(kind, where, body)
     for k, val := range headers {
         req.Header.Add(k, val)
     }
@@ -55,7 +58,7 @@ func NewPermissionServer() (*PermissionServer, error) {
 }
 
 func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    o, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/snaps/system/conf")
+    o, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/snaps/system/conf", nil)
     if err != nil {
         return nil, err
     }
@@ -66,39 +69,42 @@ func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.E
     return wpb.Bool(enabled), nil
 }
 
-func (s *PermissionServer) EnableAppPermissions(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    /* Just a draft. An API in snapd will be created to get this so we don't
-     * need to exec. */
+func enableAppPermissions(client *http.Client, enable bool) error {
+    var body string
+    if enable {
+        body = fmt.Sprintf(`{"experimental.apparmor-prompting":%s}`, "true")
+    } else {
+        body = fmt.Sprintf(`{"experimental.apparmor-prompting":%s}`, "false")
+    }
     o, err := makeRestReq(
-        s.client,
+        client,
         "PUT",
-        map[string]string{"experimental.apparmor-prompting": "false"},
+        nil,
         "http://localhost/v2/snaps/system/conf",
+        bytes.NewReader([]byte(body)),
     )
-    //cmd := exec.Command("snap", "set", "system", "experimental.apparmor-prompting=true")
-    //_, err := cmd.Output()
     if err != nil {
-        return nil, err
+        return err
     }
     if !gjson.Valid(o) {
-        return nil, status.Errorf(codes.Internal, "Invalid Json")
+        log.Println(o)
+        return status.Errorf(codes.Internal, "Invalid Json")
     }
-    return new(epb.Empty), nil
+    return nil
+}
+
+func (s *PermissionServer) EnableAppPermissions(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    err := enableAppPermissions(s.client, true)
+    return new(epb.Empty), err
 }
 
 func (s *PermissionServer) DisableAppPermissions(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
-    /* Just a draft. An API in snapd will be created to get this so we don't
-     * need to exec. */
-    cmd := exec.Command("snap", "set", "system", "experimental.apparmor-prompting=false")
-    _, err := cmd.Output()
-    if err != nil {
-        return nil, err
-    }
-    return new(epb.Empty), nil
+    err := enableAppPermissions(s.client, false)
+    return new(epb.Empty), err
 }
 
 func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    _, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/prompting/rules")
+    _, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/prompting/rules", nil)
     if err != nil {
         return nil, err
     }
@@ -106,7 +112,7 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
 }
 
 func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _ *epb.Empty) (*pb.ListOfPersionalFolderRules, error) {
-    r, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/prompting/rules")
+    r, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/prompting/rules", nil)
     if err != nil {
         return nil, err
     }
