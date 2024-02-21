@@ -22,9 +22,6 @@ type PermissionServer struct {
 }
 
 func makeRestReq(client *http.Client, kind string, headers map[string]string, where string, body io.Reader) (string, error) {
-    if where == "http://localhost/v2/snaps/system/conf" {
-        return `{"type":"sync","status-code":200,"status":"OK","result":{"experimental":{"apparmor-prompting":false},"refresh":{},"seed":{"loaded":true},"system":{"hostname":"prompting-hell","network":{},"timezone":"UTC"}}}`, nil
-    }
     req, _ := http.NewRequest(kind, where, body)
     for k, val := range headers {
         req.Header.Add(k, val)
@@ -76,6 +73,7 @@ func enableAppPermissions(client *http.Client, enable bool) error {
     } else {
         body = fmt.Sprintf(`{"experimental.apparmor-prompting":%s}`, "false")
     }
+    log.Println(body)
     o, err := makeRestReq(
         client,
         "PUT",
