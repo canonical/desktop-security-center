@@ -103,7 +103,7 @@ func (s *PermissionServer) DisableAppPermissions(ctx context.Context, _ *epb.Emp
 }
 
 func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    o, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/prompting/rules", nil)
+    o, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/requests/rules", nil)
     if err != nil {
         return nil, err
     }
@@ -115,7 +115,7 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
 }
 
 func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _ *epb.Empty) (*pb.ListOfPersionalFolderRules, error) {
-    r, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/prompting/rules", nil)
+    r, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/requests/rules", nil)
     if err != nil {
         return nil, err
     }
