@@ -54,6 +54,7 @@ func NewPermissionServer() (*PermissionServer, error) {
     return s, nil
 }
 
+
 func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
     o, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/snaps/system/conf", nil)
     if err != nil {
@@ -102,11 +103,15 @@ func (s *PermissionServer) DisableAppPermissions(ctx context.Context, _ *epb.Emp
 }
 
 func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    _, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/prompting/rules", nil)
+    o, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/prompting/rules", nil)
     if err != nil {
         return nil, err
     }
-    return wpb.Bool(true), nil
+    //if !gjson.Valid(o) {
+    //    log.Println(o)
+    //    return nil, status.Errorf(codes.Internal, "Invalid Json")
+    //}
+    return wpb.Bool(gjson.Get(o, "result.#.id").Exists()), nil
 }
 
 func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _ *epb.Empty) (*pb.ListOfPersionalFolderRules, error) {
