@@ -140,9 +140,26 @@ func (s *PermissionServer) RemoveAppPermissions(ctx context.Context, _ *pb.Remov
 
 /* List all permissions to personal directories */
 func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _ *epb.Empty) (*pb.ListOfPersionalFolderRules, error) {
-    r, err := makeRestReq(s.client, "GET", nil, rulesApi, nil)
+    o, err := makeRestReq(s.client, "GET", nil, rulesApi, nil)
     if err != nil {
         return nil, err
     }
-    return &pb.ListOfPersionalFolderRules{Foo: string(r)}, nil
+    //if !gjson.Valid(o) {
+    	log.Println(o) 
+      //  return nil, status.Errorf(codes.Internal, "Invalid Json")
+    //}
+    snap := gjson.Get(o, "result.#(interface=\"home\")#.snap")
+    path := gjson.Get(o, "result.#(interface=\"home\")#.path-pattern")
+    pathSnap := make(map[string]string)
+    for i, p := range path {
+        pathSnap[p] = snap[i]
+    }
+    //result.ForEach(func(key, value gjson.Result) bool {
+    //        snap := gjson.Get(value, "snap").String()
+    //        path := gjson.Get(value, "path-pattern").String()
+    //	log.Println(snap, path, value.String()) 
+    //    return true // keep iterating
+    //})
+    log.Println(pathSnap)
+    return &pb.ListOfPersionalFolderRules{Foo: string(o)}, nil
 }
