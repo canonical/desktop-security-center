@@ -148,18 +148,16 @@ func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _
     	log.Println(o) 
       //  return nil, status.Errorf(codes.Internal, "Invalid Json")
     //}
-    snap := gjson.Get(o, "result.#(interface=\"home\")#.snap")
-    path := gjson.Get(o, "result.#(interface=\"home\")#.path-pattern")
-    pathSnap := make(map[string]string)
+    snap := gjson.Get(o, "result.#(interface=\"home\")#.snap").Array()
+    path := gjson.Get(o, "result.#(interface=\"home\")#.path-pattern").Array()
+    pathSnaps := make(map[string][]string)
+    pP := make(map[string]*pb.Array)
     for i, p := range path {
-        pathSnap[p] = snap[i]
+        pathSnaps[p.String()] = append(pathSnaps[p.String()], snap[i].String())
     }
-    //result.ForEach(func(key, value gjson.Result) bool {
-    //        snap := gjson.Get(value, "snap").String()
-    //        path := gjson.Get(value, "path-pattern").String()
-    //	log.Println(snap, path, value.String()) 
-    //    return true // keep iterating
-    //})
-    log.Println(pathSnap)
-    return &pb.ListOfPersionalFolderRules{Foo: string(o)}, nil
+    for i, p := range pathSnaps {
+        pP[i] = &pb.Array{E: p}
+    }
+    log.Println(pathSnaps)
+    return &pb.ListOfPersionalFolderRules{Pathsnaps: pP}, nil
 }
