@@ -69,7 +69,8 @@ service Permission {
     rpc ListPersonalFoldersPermissions (google.protobuf.Empty) returns (ListOfPersionalFolderRules) {}
 }
 message RemoveAppPermissionRequest {
-    string bar = 1;
+    string removepath = 1;
+    string removesnap = 2;
 }
 
 message Array {
