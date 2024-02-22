@@ -134,7 +134,13 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
 
 /* Remove access to the path for a given application */
 func (s *PermissionServer) RemoveAppPermissions(ctx context.Context, _ *pb.RemoveAppPermissionRequest) (*epb.Empty, error) {
-    makeRestReq(s.client, "POST", nil, rulesApi, nil)
+    makeRestReq(
+        s.client,
+        "POST",
+        map[string]string{"X-Allow-Interaction": "true"},
+        rulesApi,
+        nil,
+    )
     return nil, nil
 }
 
