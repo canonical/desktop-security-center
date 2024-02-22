@@ -139,13 +139,14 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
 func (s *PermissionServer) RemoveAppPermission(ctx context.Context, req *pb.RemoveAppPermissionRequest) (*epb.Empty, error) {
     snap := req.GetRemovesnap()
     path := req.GetRemovepath()
+    if len(snapPathId) == 0 {getSnapPathIdMaps(s.client)}
     id := snapPathId[snap + sep + path] // TODO ccalculate this based on snap and path
     print(snap , path) // DELETEME
     o, err := makeRestReq(
         s.client,
         "POST",
         map[string]string{"X-Allow-Interaction": "true"},
-        rulesApi + id,
+        rulesApi + "/" + id,
         bytes.NewReader([]byte(removeBody)),
     )
     log.Println(o)
@@ -153,7 +154,15 @@ func (s *PermissionServer) RemoveAppPermission(ctx context.Context, req *pb.Remo
     return nil, err
 }
 
-func getSnapPathIdMaps(o string) (map[string][]string) {
+func getSnapPathIdMaps(client *http.Client) (map[string][]string, error) {
+    o, err := makeRestReq(client, "GET", nil, rulesApi, nil)
+    if err != nil {
+        return nil, err
+    }
+    //if !gjson.Valid(o) {
+    	log.Println(o)
+      //  return nil, status.Errorf(codes.Internal, "Invalid Json")
+    //}
     pathSnaps := make(map[string][]string)
     snapAr := gjson.Get(o, "result.#(interface=\"home\")#.snap").Array()
     pathAr := gjson.Get(o, "result.#(interface=\"home\")#.path-pattern").Array()
@@ -165,20 +174,12 @@ func getSnapPathIdMaps(o string) (map[string][]string) {
         pathSnaps[path] = append(pathSnaps[path], snap)
         snapPathId[snap + sep + path] = id
     }
-    return pathSnaps
+    return pathSnaps, nil
 }
 
 /* List all permissions to personal directories */
 func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _ *epb.Empty) (*pb.ListOfPersionalFolderRules, error) {
-    o, err := makeRestReq(s.client, "GET", nil, rulesApi, nil)
-    if err != nil {
-        return nil, err
-    }
-    //if !gjson.Valid(o) {
-    	log.Println(o)
-      //  return nil, status.Errorf(codes.Internal, "Invalid Json")
-    //}
-    pathSnaps := getSnapPathIdMaps(o)
+    pathSnaps, _ := getSnapPathIdMaps(s.client)
     log.Println(pathSnaps)
 
     /* This is just juggling Protobuf, nothing substantially interesting */
