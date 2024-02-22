@@ -151,13 +151,16 @@ func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _
     snap := gjson.Get(o, "result.#(interface=\"home\")#.snap").Array()
     path := gjson.Get(o, "result.#(interface=\"home\")#.path-pattern").Array()
     pathSnaps := make(map[string][]string)
-    pP := make(map[string]*pb.Array)
     for i, p := range path {
         pathSnaps[p.String()] = append(pathSnaps[p.String()], snap[i].String())
     }
-    for i, p := range pathSnaps {
-        pP[i] = &pb.Array{E: p}
-    }
     log.Println(pathSnaps)
-    return &pb.ListOfPersionalFolderRules{Pathsnaps: pP}, nil
+
+    /* This is just juggling Protobuf, nothing substantially interesting */
+    pathSnapsGrpc := make(map[string]*pb.Array)
+    for i, p := range pathSnaps {
+        pathSnapsGrpc[i] = &pb.Array{E: p}
+    }
+
+    return &pb.ListOfPersionalFolderRules{Pathsnaps: pathSnapsGrpc}, nil
 }
