@@ -19,6 +19,7 @@ import (
 const (
   rulesApi = "http://localhost/v2/interfaces/requests/rules"
   confApi = "http://localhost/v2/snaps/system/conf"
+  removeBody = `{"action":"remove"}`
 )
 var  pathSnaps = map[string][]string{}
 
@@ -134,18 +135,21 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
 }
 
 /* Remove access to the path for a given application */
-func (s *PermissionServer) RemoveAppPermissions(ctx context.Context, req *pb.RemoveAppPermissionRequest) (*epb.Empty, error) {
+func (s *PermissionServer) RemoveAppPermission(ctx context.Context, req *pb.RemoveAppPermissionRequest) (*epb.Empty, error) {
     snap := req.GetRemovesnap()
     path := req.GetRemovepath()
-log.Println(snap,path)
-    makeRestReq(
+    id := "/C1Y1012===" // TODO ccalculate this based on snap and path
+    print(snap , path) // DELETEME
+    o, err := makeRestReq(
         s.client,
         "POST",
         map[string]string{"X-Allow-Interaction": "true"},
-        rulesApi,
-        nil, 
+        rulesApi + id,
+        bytes.NewReader([]byte(removeBody)),
     )
-    return nil, nil
+    log.Println(o)
+    log.Println(err)
+    return nil, err
 }
 
 /* List all permissions to personal directories */
