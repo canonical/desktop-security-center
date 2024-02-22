@@ -20,6 +20,7 @@ const (
   rulesApi = "http://localhost/v2/interfaces/requests/rules"
   confApi = "http://localhost/v2/snaps/system/conf"
 )
+var  pathSnaps = map[string][]string{}
 
 type PermissionServer struct {
     pb.UnimplementedPermissionServer
@@ -133,13 +134,16 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
 }
 
 /* Remove access to the path for a given application */
-func (s *PermissionServer) RemoveAppPermissions(ctx context.Context, _ *pb.RemoveAppPermissionRequest) (*epb.Empty, error) {
+func (s *PermissionServer) RemoveAppPermissions(ctx context.Context, req *pb.RemoveAppPermissionRequest) (*epb.Empty, error) {
+    snap := req.GetRemovesnap()
+    path := req.GetRemovepath()
+log.Println(snap,path)
     makeRestReq(
         s.client,
         "POST",
         map[string]string{"X-Allow-Interaction": "true"},
         rulesApi,
-        nil,
+        nil, 
     )
     return nil, nil
 }
@@ -156,7 +160,6 @@ func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _
     //}
     snap := gjson.Get(o, "result.#(interface=\"home\")#.snap").Array()
     path := gjson.Get(o, "result.#(interface=\"home\")#.path-pattern").Array()
-    pathSnaps := make(map[string][]string)
     for i, p := range path {
         pathSnaps[p.String()] = append(pathSnaps[p.String()], snap[i].String())
     }
