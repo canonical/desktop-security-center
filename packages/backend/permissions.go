@@ -16,6 +16,11 @@ import (
     "google.golang.org/grpc/status"
 )
 
+const (
+  rulesApi = "http://localhost/v2/interfaces/requests/rules"
+  confApi = "http://localhost/v2/snaps/system/conf"
+)
+
 type PermissionServer struct {
     pb.UnimplementedPermissionServer
     client *http.Client
@@ -54,9 +59,9 @@ func NewPermissionServer() (*PermissionServer, error) {
     return s, nil
 }
 
-
+/* This returns 'snap get system experimental.apparmor-prompting' */
 func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    o, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/snaps/system/conf", nil)
+    o, err := makeRestReq(s.client, "GET", nil, confApi, nil)
     if err != nil {
         return nil, err
     }
@@ -79,7 +84,7 @@ func enableAppPermissions(client *http.Client, enable bool) error {
         client,
         "PUT",
         nil,
-        "http://localhost/v2/snaps/system/conf",
+        confApi,
         bytes.NewReader([]byte(body)),
     )
     if err != nil {
@@ -92,32 +97,50 @@ func enableAppPermissions(client *http.Client, enable bool) error {
     return nil
 }
 
+/* This does the equivalent of
+ * snap set system experimental.apparmor-prompting=true
+ */
 func (s *PermissionServer) EnableAppPermissions(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
     err := enableAppPermissions(s.client, true)
     return new(epb.Empty), err
 }
 
+/* This does the equivalent of
+ * snap set system experimental.apparmor-prompting=false
+ */
 func (s *PermissionServer) DisableAppPermissions(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
     err := enableAppPermissions(s.client, false)
     return new(epb.Empty), err
 }
 
+/* Determine if there is at least one Apparmor rule applied __for the user who
+ * owns the backend process__
+ */
 func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    /* Attention! This will only retrieve rules from the user running
-     * the backend process. */
-    o, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/requests/rules", nil)
+    o, err := makeRestReq(s.client, "GET", nil, rulesApi, nil)
     if err != nil {
         return nil, err
     }
-    //if !gjson.Valid(o) {
-    //    log.Println(o)
-    //    return nil, status.Errorf(codes.Internal, "Invalid Json")
-    //}
+    /* This is actually triggered when not found, why on earth though? Example:
+     * {"type":"error","status-code":404,"status":"Not Found","result":{"message":"not found"}}
+     * Looks like a valid Json, or?
+    if !gjson.Valid(o) {
+        log.Println(o)
+        return nil, status.Errorf(codes.Internal, "Invalid Json")
+    }
+    */
     return wpb.Bool(gjson.Get(o, "result.#").Uint() > 0), nil
 }
 
+/* Remove access to the path for a given application */
+func (s *PermissionServer) RemoveAppPermissions(ctx context.Context, _ *pb.RemoveAppPermissionRequest) (*epb.Empty, error) {
+    makeRestReq(s.client, "POST", nil, rulesApi, nil)
+    return nil, nil
+}
+
+/* List all permissions to personal directories */
 func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _ *epb.Empty) (*pb.ListOfPersionalFolderRules, error) {
-    r, err := makeRestReq(s.client, "GET", nil, "http://localhost/v2/interfaces/requests/rules", nil)
+    r, err := makeRestReq(s.client, "GET", nil, rulesApi, nil)
     if err != nil {
         return nil, err
     }
