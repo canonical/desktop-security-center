@@ -11,7 +11,6 @@ import (
     "log"
     "fmt"
     "net/http"
-    "net/http/httputil"
     "google.golang.org/grpc/codes"
     "google.golang.org/grpc/status"
 )
@@ -24,28 +23,11 @@ const (
 )
 var empty = new(epb.Empty)
 var snapPathId = map[string]string{}
+var authHeader = map[string]string{"X-Allow-Interaction": "true"}
 
 type PermissionServer struct {
     pb.UnimplementedPermissionServer
     client *http.Client
-}
-
-func makeRestReq(client *http.Client, kind string, headers map[string]string, where string, body io.Reader) (string, error) {
-    req, _ := http.NewRequest(kind, where, body)
-    for k, val := range headers {
-        req.Header.Add(k, val)
-    }
-
-    res, err := client.Do(req)
-    if err != nil {
-        return "", err
-    }
-
-    b, err := httputil.DumpResponse(res, true)
-    if err != nil {
-        return "", err
-    }
-    return string(b), nil
 }
 
 func NewPermissionServer() (*PermissionServer, error) {
@@ -63,17 +45,58 @@ func NewPermissionServer() (*PermissionServer, error) {
     return s, nil
 }
 
-/* This returns 'snap get system experimental.apparmor-prompting' */
-func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    o, err := makeRestReq(s.client, "GET", nil, confApi, nil)
+func makeRestReq(client *http.Client, kind string, headers map[string]string, where string, reqBody io.Reader) (string, error) {
+    req, err := http.NewRequest(kind, where, reqBody)
+    if err != nil {
+        return "", err
+    }
+    for k, val := range headers {
+        req.Header.Add(k, val)
+    }
+    res, err := client.Do(req)
+    if err != nil {
+        return "", err
+    }
+    defer res.Body.Close()
+    /* Do we need this? The JSON should have the status code
+    if res.StatusCode != http.StatusOK {
+        return "", fmt.Errorf("Rest request to %s gave code %d.", where, res.StatusCode)
+    }
+    */
+    resBody, err := io.ReadAll(res.Body)
+    if err != nil {
+        return "", err
+    }
+    return string(resBody), nil
+}
+
+/* The front-end wants paths mapped to the snaps that have permission to write
+ * to them. It may ask "us", the back-end, to revoke such snap-path permission,
+ * but to do that we need to give the permission ID to the Snapd API.
+ * As such, we keep a map({snap}:{path})->id for ourselves and hand a
+ * map(path)->snaps to the front-end.
+ */
+func getSnapPathIdMaps(client *http.Client) (map[string][]string, error) {
+    o, err := makeRestReq(client, "GET", nil, rulesApi, nil)
     if err != nil {
         return nil, err
     }
     if !gjson.Valid(o) {
+        log.Println(o)
         return nil, status.Errorf(codes.Internal, "Invalid Json")
     }
-    enabled := gjson.Get(o, "result.experimental.apparmor-prompting").Bool()
-    return wpb.Bool(enabled), nil
+    pathSnaps := make(map[string][]string)
+    snapAr := gjson.Get(o, "result.#(interface=\"home\")#.snap").Array()
+    pathAr := gjson.Get(o, "result.#(interface=\"home\")#.path-pattern").Array()
+    idAr := gjson.Get(o, "result.#(interface=\"home\")#.id").Array()
+    for idx, path := range pathAr {
+        snap := snapAr[idx].String()
+        path := path.String()
+        id := idAr[idx].String()
+        pathSnaps[path] = append(pathSnaps[path], snap)
+        snapPathId[snap + sep + path] = id
+    }
+    return pathSnaps, nil
 }
 
 func enableAppPermissions(client *http.Client, enable bool) error {
@@ -86,7 +109,7 @@ func enableAppPermissions(client *http.Client, enable bool) error {
     o, err := makeRestReq(
         client,
         "PUT",
-        nil,
+        authHeader,
         confApi,
         bytes.NewReader([]byte(body)),
     )
@@ -98,6 +121,20 @@ func enableAppPermissions(client *http.Client, enable bool) error {
         return status.Errorf(codes.Internal, "Invalid Json")
     }
     return nil
+}
+
+/* This returns 'snap get system experimental.apparmor-prompting' */
+func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
+    o, err := makeRestReq(s.client, "GET", authHeader, confApi, nil)
+    if err != nil {
+        return nil, err
+    }
+    if !gjson.Valid(o) {
+        return nil, status.Errorf(codes.Internal, "Invalid Json")
+    }
+    log.Println(">", o, "<")
+    enabled := gjson.Get(o, "result.experimental.apparmor-prompting").Bool()
+    return wpb.Bool(enabled), nil
 }
 
 /* This does the equivalent of
@@ -126,12 +163,11 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
     }
     /* This is actually triggered when not found, why on earth though? Example:
      * {"type":"error","status-code":404,"status":"Not Found","result":{"message":"not found"}}
-     * Looks like a valid Json, or?
+     * Looks like a valid Json, or?*/
     if !gjson.Valid(o) {
         log.Println(o)
         return nil, status.Errorf(codes.Internal, "Invalid Json")
     }
-    */
     return wpb.Bool(gjson.Get(o, "result.#").Uint() > 0), nil
 }
 
@@ -150,34 +186,11 @@ func (s *PermissionServer) RemoveAppPermission(ctx context.Context, req *pb.Remo
     _, err := makeRestReq(
         s.client,
         "POST",
-        map[string]string{"X-Allow-Interaction": "true"},
+        authHeader,
         rulesApi + "/" + id,
         bytes.NewReader([]byte(removeBody)),
     )
     return empty, err
-}
-
-func getSnapPathIdMaps(client *http.Client) (map[string][]string, error) {
-    o, err := makeRestReq(client, "GET", nil, rulesApi, nil)
-    if err != nil {
-        return nil, err
-    }
-    //if !gjson.Valid(o) {
-    	log.Println(o)
-      //  return nil, status.Errorf(codes.Internal, "Invalid Json")
-    //}
-    pathSnaps := make(map[string][]string)
-    snapAr := gjson.Get(o, "result.#(interface=\"home\")#.snap").Array()
-    pathAr := gjson.Get(o, "result.#(interface=\"home\")#.path-pattern").Array()
-    idAr := gjson.Get(o, "result.#(interface=\"home\")#.id").Array()
-    for idx, path := range pathAr {
-        snap := snapAr[idx].String()
-        path := path.String()
-        id := idAr[idx].String()
-        pathSnaps[path] = append(pathSnaps[path], snap)
-        snapPathId[snap + sep + path] = id
-    }
-    return pathSnaps, nil
 }
 
 /* List all permissions to personal directories */
