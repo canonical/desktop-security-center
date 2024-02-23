@@ -22,7 +22,8 @@ const (
   removeBody = `{"action":"remove"}`
   sep = ":"
 )
-var  snapPathId = map[string]string{}
+var empty = new(epb.Empty)
+var snapPathId = map[string]string{}
 
 type PermissionServer struct {
     pb.UnimplementedPermissionServer
@@ -82,7 +83,6 @@ func enableAppPermissions(client *http.Client, enable bool) error {
     } else {
         body = fmt.Sprintf(`{"experimental.apparmor-prompting":%s}`, "false")
     }
-    log.Println(body)
     o, err := makeRestReq(
         client,
         "PUT",
@@ -105,7 +105,7 @@ func enableAppPermissions(client *http.Client, enable bool) error {
  */
 func (s *PermissionServer) EnableAppPermissions(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
     err := enableAppPermissions(s.client, true)
-    return new(epb.Empty), err
+    return empty, err
 }
 
 /* This does the equivalent of
@@ -113,7 +113,7 @@ func (s *PermissionServer) EnableAppPermissions(ctx context.Context, _ *epb.Empt
  */
 func (s *PermissionServer) DisableAppPermissions(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
     err := enableAppPermissions(s.client, false)
-    return new(epb.Empty), err
+    return empty, err
 }
 
 /* Determine if there is at least one Apparmor rule applied __for the user who
@@ -139,19 +139,22 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
 func (s *PermissionServer) RemoveAppPermission(ctx context.Context, req *pb.RemoveAppPermissionRequest) (*epb.Empty, error) {
     snap := req.GetRemovesnap()
     path := req.GetRemovepath()
-    if len(snapPathId) == 0 {getSnapPathIdMaps(s.client)}
-    id := snapPathId[snap + sep + path] // TODO ccalculate this based on snap and path
-    print(snap , path) // DELETEME
-    o, err := makeRestReq(
+    /* Use the cached map if it was already populated */
+    if len(snapPathId) == 0 {
+        _, err := getSnapPathIdMaps(s.client)
+        if err != nil {
+            return empty, err
+        }
+    }
+    id := snapPathId[snap + sep + path]
+    _, err := makeRestReq(
         s.client,
         "POST",
         map[string]string{"X-Allow-Interaction": "true"},
         rulesApi + "/" + id,
         bytes.NewReader([]byte(removeBody)),
     )
-    log.Println(o)
-    log.Println(err)
-    return nil, err
+    return empty, err
 }
 
 func getSnapPathIdMaps(client *http.Client) (map[string][]string, error) {
@@ -180,7 +183,6 @@ func getSnapPathIdMaps(client *http.Client) (map[string][]string, error) {
 /* List all permissions to personal directories */
 func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _ *epb.Empty) (*pb.ListOfPersionalFolderRules, error) {
     pathSnaps, _ := getSnapPathIdMaps(s.client)
-    log.Println(pathSnaps)
 
     /* This is just juggling Protobuf, nothing substantially interesting */
     pathSnapsGrpc := make(map[string]*pb.Array)
