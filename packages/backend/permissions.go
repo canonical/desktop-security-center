@@ -48,6 +48,7 @@ func NewPermissionServer() (*PermissionServer, error) {
 func makeRestReq(client *http.Client, kind string, headers map[string]string, where string, reqBody io.Reader) (string, error) {
     req, err := http.NewRequest(kind, where, reqBody)
     if err != nil {
+        log.Printf("Couldn't create %s request to %s.", kind, where)
         return "", err
     }
     for k, val := range headers {
@@ -55,6 +56,7 @@ func makeRestReq(client *http.Client, kind string, headers map[string]string, wh
     }
     res, err := client.Do(req)
     if err != nil {
+        log.Printf("Couldn't send %s request to %s.", kind, where)
         return "", err
     }
     defer res.Body.Close()
@@ -65,6 +67,7 @@ func makeRestReq(client *http.Client, kind string, headers map[string]string, wh
     */
     resBody, err := io.ReadAll(res.Body)
     if err != nil {
+        log.Printf("Couldn't read response from %s request to %s.", kind, where)
         return "", err
     }
     return string(resBody), nil
@@ -82,7 +85,7 @@ func getSnapPathIdMaps(client *http.Client) (map[string][]string, error) {
         return nil, err
     }
     if !gjson.Valid(o) {
-        log.Println(o)
+        log.Printf("Invalid Json: >%s<", o)
         return nil, status.Errorf(codes.Internal, "Invalid Json")
     }
     pathSnaps := make(map[string][]string)
@@ -117,7 +120,7 @@ func enableAppPermissions(client *http.Client, enable bool) error {
         return err
     }
     if !gjson.Valid(o) {
-        log.Println(o)
+        log.Printf("Invalid Json: >%s<", o)
         return status.Errorf(codes.Internal, "Invalid Json")
     }
     return nil
@@ -130,9 +133,9 @@ func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.E
         return nil, err
     }
     if !gjson.Valid(o) {
+        log.Printf("Invalid Json: >%s<", o)
         return nil, status.Errorf(codes.Internal, "Invalid Json")
     }
-    log.Println(">", o, "<")
     enabled := gjson.Get(o, "result.experimental.apparmor-prompting").Bool()
     return wpb.Bool(enabled), nil
 }
@@ -161,11 +164,8 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
     if err != nil {
         return nil, err
     }
-    /* This is actually triggered when not found, why on earth though? Example:
-     * {"type":"error","status-code":404,"status":"Not Found","result":{"message":"not found"}}
-     * Looks like a valid Json, or?*/
     if !gjson.Valid(o) {
-        log.Println(o)
+        log.Printf("Invalid Json: >%s<", o)
         return nil, status.Errorf(codes.Internal, "Invalid Json")
     }
     return wpb.Bool(gjson.Get(o, "result.#").Uint() > 0), nil
