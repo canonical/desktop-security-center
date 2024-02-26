@@ -3,7 +3,6 @@ Description=Socket for desktop-security-center backend/frontend communication
 
 [Socket]
 ListenStream=%t/desktop-security-center.socket
-Accept=true
 
 [Install]
 WantedBy=sockets.target
