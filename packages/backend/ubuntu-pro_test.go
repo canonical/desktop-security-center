@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"testing"
-	//epb "google.golang.org/protobuf/types/known/emptypb"
 	"fmt"
 	pb "github.com/canonical/desktop-security-center/packages/proto"
 	"github.com/canonical/desktop-security-center/packages/testutils"
