@@ -8,6 +8,7 @@ import (
 	"github.com/canonical/desktop-security-center/packages/testutils"
 	"github.com/godbus/dbus/v5"
 	"github.com/godbus/dbus/v5/introspect"
+    "github.com/stretchr/testify/require"
 	"os"
 	"os/exec"
 )
@@ -98,17 +99,14 @@ func TestWaitProMagicFlow(t *testing.T) {
             }
             manager.proServer.execer = execMocker
             r, err := manager.proServer.WaitProMagicFlow(ctx, nil)
-            if tc.wantError && err == nil {
-			    t.Fatal("Expected error, got nothing.")
+            if tc.wantError {
+                require.Error(t, err, "Expected error, got nothing.")
             }
             if !tc.wantError {
-                if err != nil {
-                    t.Fatal("Expected no error, got ", err)
-                }
-                contract := r.GetToken()
-                if contract != tc.contract {
-                    t.Fatal("Unmatched response fields: ", contract, tc.contract)
-                }
+                require.NoErrorf(t, err, "Expected no error, got %w", err)
+                got := r.GetToken()
+                want := tc.contract
+                require.Equalf(t, want, got, "Expected token %s, got %s", want, got)
             }
         })
     }
@@ -161,18 +159,20 @@ func TestInitiateProMagicFlow(t *testing.T) {
 
             manager.proServer.execer = execMocker
             r, err := manager.proServer.InitiateProMagicFlow(ctx, nil)
-            if tc.wantError && err == nil {
-			    t.Fatal("Expected error, got nothing.")
+            if tc.wantError {
+                require.Error(t, err, "Expected error, got nothing.")
             }
             if !tc.wantError {
-                if err != nil {
-                    t.Fatal("Expected no error, got ", err)
-                }
-                pin := r.GetPin()
-                expiresIn := r.GetExpiresIn()
-                if pin != tc.pin || expiresIn != tc.expiresIn {
-                    t.Fatal("Unmatched response fields: ", pin, tc.pin, expiresIn, tc.expiresIn)
-                }
+                require.NoErrorf(t, err, "Expect no error, got %w", err)
+                wantPin := tc.pin
+                wantExpiresIn := tc.expiresIn
+                gotPin := r.GetPin()
+                gotExpiresIn := r.GetExpiresIn()
+                require.Equalf(t, wantPin, gotPin, "Expected pin %s, got %s",
+                               wantPin, gotPin)
+                require.Equalf(t, wantExpiresIn, gotExpiresIn,
+                               "Expected expiresIn %s, got %s",
+                               wantExpiresIn, gotExpiresIn)
             }
         })
     }
@@ -184,140 +184,102 @@ func TestAttachProToMachine(t *testing.T) {
 	req := new(pb.AttachRequest)
 	req.Token = "incorrect"
 	_, err := manager.proServer.AttachProToMachine(ctx, req)
-	if err == nil {
-		t.Fatal("I expected error for incorrect token, but didn't get one.")
-	}
+    require.Error(t, err, "Expected error for incorrect token, got nothing.")
 
 	req.Token = "correct"
 	_, err = manager.proServer.AttachProToMachine(ctx, req)
-	if err != nil {
-		t.Fatal("I expected no error for a correct token, got ", err)
-	}
+    require.NoErrorf(t, err, "Expected no error for correct token, got %w.", err)
 }
 
 func TestDisableService(t *testing.T) {
     failDisable = false
     _, err := manager.proServer.DisableEsmApps(ctx, nil)
-    if err != nil {
-		t.Fatal(err)
-    }
+    require.NoError(t, err, err)
     _, err = manager.proServer.DisableInfra(ctx, nil)
-    if err != nil {
-		t.Fatal(err)
-    }
+    require.NoError(t, err, err)
     _, err = manager.proServer.DisableKernelLivePatch(ctx, nil)
-    if err != nil {
-		t.Fatal(err)
-    }
+    require.NoError(t, err, err)
 
     failDisable = true
     _, err = manager.proServer.DisableEsmApps(ctx, nil)
-    if err == nil {
-		t.Fatal("I expected an error, but didn't get one")
-    }
+    require.Error(t, err, "I expected an error, but didn't get one")
     _, err = manager.proServer.DisableInfra(ctx, nil)
-    if err == nil {
-		t.Fatal("I expected an error, but didn't get one")
-    }
+    require.Error(t, err, "I expected an error, but didn't get one")
     _, err = manager.proServer.DisableKernelLivePatch(ctx, nil)
-    if err == nil {
-		t.Fatal("I expected an error, but didn't get one")
-    }
+    require.Error(t, err, "I expected an error, but didn't get one")
 }
 
 func TestEnableService(t *testing.T) {
     failEnable = false
     _, err := manager.proServer.EnableEsmApps(ctx, nil)
-    if err != nil {
-		t.Fatal(err)
-    }
+    require.NoError(t, err, err)
     _, err = manager.proServer.EnableInfra(ctx, nil)
-    if err != nil {
-		t.Fatal(err)
-    }
+    require.NoError(t, err, err)
     _, err = manager.proServer.EnableKernelLivePatch(ctx, nil)
-    if err != nil {
-		t.Fatal(err)
-    }
+    require.NoError(t, err, err)
 
     failEnable = true
     _, err = manager.proServer.EnableEsmApps(ctx, nil)
-    if err == nil {
-		t.Fatal("I expected an error, but didn't get one")
-    }
+    require.Error(t, err, "I expected an error, but didn't get one")
     _, err = manager.proServer.EnableInfra(ctx, nil)
-    if err == nil {
-		t.Fatal("I expected an error, but didn't get one")
-    }
+    require.Error(t, err, "I expected an error, but didn't get one")
     _, err = manager.proServer.EnableKernelLivePatch(ctx, nil)
-    if err == nil {
-		t.Fatal("I expected an error, but didn't get one")
-    }
+    require.Error(t, err, "I expected an error, but didn't get one")
 }
 
 func TestIsMachineProAttached(t *testing.T) {
 	getResponse = "true"
 	i, err := manager.proServer.IsMachineProAttached(ctx, nil)
-	if i.GetValue() != true || err != nil {
-		t.Fatal(i.GetValue(), err)
-	}
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), true)
 
 	getResponse = "false"
 	i, err = manager.proServer.IsMachineProAttached(ctx, nil)
-	if i.GetValue() != false || err != nil {
-		t.Fatal(i.GetValue(), err)
-	}
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), false)
 
 	getResponse = "error"
 	_, err = manager.proServer.IsMachineProAttached(ctx, nil)
-	if err == nil {
-		t.Fatal("I expected an error, but didn't get one")
-	}
+    require.Error(t, err, "Expected error, got nothing")
 }
 
 
 func TestIsServiceEnabled(t *testing.T) {
 	getResponse = "disabled"
 	i, err := manager.proServer.IsEsmInfraEnabled(ctx, nil)
-	if i.GetValue() != false || err != nil {
-		t.Fatal(i.GetValue(), err)
-	}
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), false)
+
 	i, err = manager.proServer.IsEsmAppsEnabled(ctx, nil)
-	if i.GetValue() != false || err != nil {
-		t.Fatal(i.GetValue(), err)
-	}
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), false)
+
 	i, err = manager.proServer.IsKernelLivePatchEnabled(ctx, nil)
-	if i.GetValue() != false || err != nil {
-		t.Fatal(i.GetValue(), err)
-	}
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), false)
 
 	getResponse = "enabled"
 	i, err = manager.proServer.IsEsmInfraEnabled(ctx, nil)
-	if i.GetValue() != true || err != nil {
-		t.Fatal(i.GetValue(), err)
-	}
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), true)
+
 	i, err = manager.proServer.IsEsmAppsEnabled(ctx, nil)
-	if i.GetValue() != true || err != nil {
-		t.Fatal(i.GetValue(), err)
-	}
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), true)
+
 	i, err = manager.proServer.IsKernelLivePatchEnabled(ctx, nil)
-	if i.GetValue() != true || err != nil {
-		t.Fatal(i.GetValue(), err)
-	}
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), true)
 
 	getResponse = "error"
 	i, err = manager.proServer.IsEsmInfraEnabled(ctx, nil)
-	if err == nil {
-		t.Fatal("I expected no error, but didn't get one")
-	}
+    require.Error(t, err, "Expected error, got nothing")
+
 	i, err = manager.proServer.IsEsmAppsEnabled(ctx, nil)
-	if err == nil {
-		t.Fatal("I expected no error, but didn't get one")
-	}
+    require.Error(t, err, "Expected error, got nothing")
+
 	i, err = manager.proServer.IsKernelLivePatchEnabled(ctx, nil)
-	if err == nil {
-		t.Fatal("I expected no error, but didn't get one")
-	}
+    require.Error(t, err, "Expected error, got nothing")
 }
 
 func TestMain(m *testing.M) {
