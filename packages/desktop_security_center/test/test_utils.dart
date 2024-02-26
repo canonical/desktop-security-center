@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 extension WidgetTesterX on WidgetTester {
@@ -23,5 +24,24 @@ extension WidgetTesterX on WidgetTester {
         home: Scaffold(body: Builder(builder: builder)),
       ),
     );
+  }
+}
+
+ProviderContainer makeContainer(List<Override> overrides) {
+  final container = ProviderContainer(overrides: overrides);
+  addTearDown(container.dispose);
+  return container;
+}
+
+class RiverpodTestableWidget extends StatelessWidget {
+  const RiverpodTestableWidget(
+      {required this.child, required this.container, super.key});
+
+  final Widget child;
+  final ProviderContainer container;
+
+  @override
+  Widget build(BuildContext context) {
+    return UncontrolledProviderScope(container: container, child: child);
   }
 }
