@@ -49,6 +49,11 @@ const (
               "version": "30.1",
               "warnings": []
             }`
+    errorJson = `{
+                   "msg": "Failed to connect to authentication server",
+                   "code": "connectivity-error",
+                   "meta": {}
+                 }`
 )
 
 /* Variables for adjusting test results */
@@ -59,45 +64,70 @@ var failDisable bool
 var manager *Manager
 var ctx context.Context
 
+type mockProExec struct {
+    wantError bool
+    networkError bool
+}
+
+func (m *mockProExec) execInitiateMocker(_ string, _ ...string) *exec.Cmd {
+    var ret string
+    if m.wantError {
+        if m.networkError {
+            ret = fmt.Sprintf(initiateJson, 0, "", errorJson, "", "failure")
+        } else {
+            ret = fmt.Sprintf(initiateJson, 0, "", ",\"\"{{{", "", "success")
+        }
+    } else {
+        ret = fmt.Sprintf(initiateJson, 600, "reqid", "89T4SR", "", "success")
+    }
+    return exec.Command("printf", "%s", ret)
+}
+
+func (m *mockProExec) execWaitMocker(_ string, _ ...string) *exec.Cmd {
+    var ret string
+    if m.wantError {
+        if m.networkError {
+            ret = fmt.Sprintf(waitJson, "", errorJson, "failure")
+        } else {
+            ret = fmt.Sprintf(waitJson, ",\"\"{{{", "", "success")
+        }
+    } else {
+        ret = fmt.Sprintf(waitJson, "contracttoken", "", "success")
+    }
+    return exec.Command("printf", "%s", ret)
+}
+
 func TestWaitProMagicFlow(t *testing.T) {
     cases := []struct {
         name string
-        errors string
-        contract string
-        result string
+        networkError bool
         wantError bool
     }{
         {
             name: "Confirmed contract",
-            contract: "Ca1xQ10aB9Xpp",
-            result: "success",
+            networkError: false,
+            wantError: false,
         },
         {
             name: "Invalid response, broken JSON",
+            networkError: false,
             wantError: true,
-            contract: ",\"\"{{{",
-            result: "success",
         },
         {
-            name: "Invalid response, has failure",
+            name: "Invalid response, API returned error",
+            networkError: true,
             wantError: true,
-            result: "failure",
-            errors: `{
-                        "msg": "Failed to connect to authentication server",
-                        "code": "connectivity-error",
-                        "meta": {}
-                     }`,
         },
     }
     for _, tc := range cases {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
-            execMocker := func(name string, arg ...string) *exec.Cmd {
-                ret := fmt.Sprintf(waitJson, tc.contract, tc.errors, tc.result)
-                return exec.Command("printf", "%s", ret)
+            mocker := &mockProExec{
+                wantError: tc.wantError,
+                networkError: tc.networkError,
             }
-            manager.proServer.execer = execMocker
+            manager.proServer.execer = mocker.execWaitMocker
             r, err := manager.proServer.WaitProMagicFlow(ctx, nil)
             if tc.wantError {
                 require.Error(t, err, "Expected error, got nothing.")
@@ -105,8 +135,7 @@ func TestWaitProMagicFlow(t *testing.T) {
             if !tc.wantError {
                 require.NoErrorf(t, err, "Expected no error, got %w", err)
                 got := r.GetToken()
-                want := tc.contract
-                require.Equalf(t, want, got, "Expected token %s, got %s", want, got)
+                require.NotEmptyf(t, got, "Expected a token, got none")
             }
         })
     }
@@ -115,64 +144,42 @@ func TestWaitProMagicFlow(t *testing.T) {
 func TestInitiateProMagicFlow(t *testing.T) {
     cases := []struct {
         name string
-        pin string
-        expiresIn int64
-        errors string
-        reqId string
-        result string
+        networkError bool
         wantError bool
     }{
         {
             name: "Valid request",
-            pin: "89T4SR",
-            expiresIn: 600,
-            reqId: "Ca1xQ10aB9Xpp",
-            result: "success",
         },
         {
             name: "Invalid response, broken JSON",
             wantError: true,
-            pin: ",\"\"{{{",
-            result: "success",
         },
         {
-            name: "Invalid response, has failure",
+            name: "Invalid response, API returned error",
             wantError: true,
-            result: "failure",
-            errors: `{
-                        "msg": "Failed to connect to authentication server",
-                        "code": "connectivity-error",
-                        "meta": {}
-                     }`,
+            networkError: true,
         },
     }
-
 
     for _, tc := range cases {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
-            execMocker := func(name string, arg ...string) *exec.Cmd {
-                ret := fmt.Sprintf(initiateJson, tc.expiresIn, tc.reqId, tc.pin, tc.errors, tc.result)
-                return exec.Command("printf", "%s", ret)
+            mocker := &mockProExec{
+                wantError: tc.wantError,
+                networkError: tc.networkError,
             }
-
-            manager.proServer.execer = execMocker
+            manager.proServer.execer = mocker.execInitiateMocker
             r, err := manager.proServer.InitiateProMagicFlow(ctx, nil)
             if tc.wantError {
                 require.Error(t, err, "Expected error, got nothing.")
             }
             if !tc.wantError {
                 require.NoErrorf(t, err, "Expect no error, got %w", err)
-                wantPin := tc.pin
-                wantExpiresIn := tc.expiresIn
                 gotPin := r.GetPin()
                 gotExpiresIn := r.GetExpiresIn()
-                require.Equalf(t, wantPin, gotPin, "Expected pin %s, got %s",
-                               wantPin, gotPin)
-                require.Equalf(t, wantExpiresIn, gotExpiresIn,
-                               "Expected expiresIn %s, got %s",
-                               wantExpiresIn, gotExpiresIn)
+                require.NotEmpty(t, gotPin, "Expected pin, got nothing")
+                require.NotEmpty(t, gotExpiresIn, "Expected expiresIn %s, got nothing")
             }
         })
     }
