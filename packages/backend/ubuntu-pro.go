@@ -340,7 +340,7 @@ func (s *ProServer) DetachPro(ctx context.Context, _ *epb.Empty) (*epb.Empty, er
     )
     if call.Err != nil {
         log.Println(call.Err)
-        return nil, status.Errorf(codes.Internal, "Couldn't detach: %w", call.Err)
+        return nil, status.Errorf(codes.Internal, "Couldn't detach: %v", call.Err)
     }
     return new(epb.Empty), nil
 }
@@ -356,7 +356,7 @@ func (s *ProServer) ShowLivepatchTray(ctx context.Context, show *wpb.BoolValue) 
     _, err := cmd.Output()
     if err != nil {
         log.Println(err)
-        return nil, status.Errorf(codes.Internal, "Couldn't set gsettings: %w", err)
+        return nil, status.Errorf(codes.Internal, "Couldn't set gsettings: %v", err)
     }
     return new(epb.Empty), nil
 }
