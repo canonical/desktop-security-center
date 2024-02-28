@@ -132,7 +132,7 @@ func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *epb.Empty) (*wp
 
 /* Determines if the USG service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsUsgEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    enabled, err := isServiceEnabled(s.usg)
+    enabled, err := isServiceEnabled(s.usg, s.manager)
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -141,7 +141,7 @@ func (s *ProServer) IsUsgEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolVa
 
 /* Determines if the FIPS service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsFipsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    enabled, err := isServiceEnabled(s.fips)
+    enabled, err := isServiceEnabled(s.fips, s.manager)
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
