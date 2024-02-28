@@ -16,6 +16,8 @@ service Pro {
     rpc IsMachineProAttached (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
     rpc IsEsmInfraEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
     rpc IsEsmAppsEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
+    rpc IsUsgEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
+    rpc IsFipsEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
     rpc IsKernelLivePatchEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
 
     /* For a magic flow, the front-end shall call Initiate and then immediately
@@ -25,6 +27,13 @@ service Pro {
     rpc InitiateProMagicFlow (google.protobuf.Empty) returns (InitiateResponse) {}
     rpc WaitProMagicFlow (google.protobuf.Empty) returns (WaitResponse) {}
     rpc AttachProToMachine (AttachRequest) returns (google.protobuf.Empty) {}
+    rpc DetachPro (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+
+    rpc EnableFips (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc DisableFips (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+
+    rpc EnableUsg (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc DisableUsg (google.protobuf.Empty) returns (google.protobuf.Empty) {}
 
     rpc EnableInfra (google.protobuf.Empty) returns (google.protobuf.Empty) {}
     rpc DisableInfra (google.protobuf.Empty) returns (google.protobuf.Empty) {}
@@ -34,6 +43,7 @@ service Pro {
 
     rpc EnableKernelLivePatch (google.protobuf.Empty) returns (google.protobuf.Empty) {}
     rpc DisableKernelLivePatch (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc ShowLivepatchTray (google.protobuf.BoolValue) returns (google.protobuf.Empty) {}
 }
 
 message AttachRequest {

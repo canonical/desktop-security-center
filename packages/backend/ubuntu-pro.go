@@ -20,6 +20,8 @@ type ProServer struct {
     apps             dbus.BusObject
     infra            dbus.BusObject
     livepatch        dbus.BusObject
+    fips             dbus.BusObject
+    usg              dbus.BusObject
     manager          dbus.BusObject
     reqId            string
     execer           ExecCommand
@@ -58,6 +60,24 @@ func NewProServer(conn *dbus.Conn) (*ProServer, error) {
         return nil, status.Errorf(codes.Internal, "failed to ping DBus ESM-Apps object")
     }
 
+    s.fips = conn.Object(
+        "com.canonical.UbuntuAdvantage",
+        "/com/canonical/UbuntuAdvantage/Services/fips",
+    )
+    err = s.fips.Call("org.freedesktop.DBus.Peer.Ping", 0).Err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "failed to ping DBus FIPS object")
+    }
+
+    s.usg = conn.Object(
+        "com.canonical.UbuntuAdvantage",
+        "/com/canonical/UbuntuAdvantage/Services/usg",
+    )
+    err = s.usg.Call("org.freedesktop.DBus.Peer.Ping", 0).Err
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "failed to ping DBus USG object")
+    }
+
     s.manager = conn.Object(
         "com.canonical.UbuntuAdvantage",
         "/com/canonical/UbuntuAdvantage/Manager",
@@ -88,6 +108,24 @@ func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *epb.Empty) (*wp
     }
 
     return wpb.Bool(isAttached.Value().(bool)), nil
+}
+
+/* Determines if the USG service of Ubuntu Pro is enabled. */
+func (s *ProServer) IsUsgEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
+    enabled, err := isServiceEnabled(s.usg)
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return wpb.Bool(enabled), nil
+}
+
+/* Determines if the FIPS service of Ubuntu Pro is enabled. */
+func (s *ProServer) IsFipsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
+    enabled, err := isServiceEnabled(s.fips)
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return wpb.Bool(enabled), nil
 }
 
 /* Determines if the ESM Infra service of Ubuntu Pro is enabled. */
@@ -141,6 +179,42 @@ func (s *ProServer) EnableKernelLivePatch(ctx context.Context, _ *epb.Empty) (*e
 /* Disables Livepatch service of Ubuntu Pro. */
 func (s *ProServer) DisableKernelLivePatch(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
     err := enableService(s.livepatch, "Disable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
+}
+
+/* Enables USG service of Ubuntu Pro. */
+func (s *ProServer) EnableUsg(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    err := enableService(s.usg, "Enable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
+}
+
+/* Disables USG service of Ubuntu Pro. */
+func (s *ProServer) DisableUsg(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    err := enableService(s.usg, "Disable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
+}
+
+/* Enables FIPS service of Ubuntu Pro. */
+func (s *ProServer) EnableFips(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    err := enableService(s.fips, "Enable")
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
+    return new(epb.Empty), nil
+}
+
+/* Disables FIPS service of Ubuntu Pro. */
+func (s *ProServer) DisableFips(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    err := enableService(s.fips, "Disable")
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -254,6 +328,35 @@ func (s *ProServer) AttachProToMachine(ctx context.Context, req *pb.AttachReques
     if call.Err != nil {
         log.Println(call.Err)
         return new(epb.Empty), call.Err
+    }
+    return new(epb.Empty), nil
+}
+
+/* Detaches the system from Ubuntu Pro. */
+func (s *ProServer) DetachPro(ctx context.Context, _ *epb.Empty) (*epb.Empty, error) {
+    call := s.manager.Call(
+        "com.canonical.UbuntuAdvantage.Manager.Detach",
+        dbus.FlagAllowInteractiveAuthorization,
+    )
+    if call.Err != nil {
+        log.Println(call.Err)
+        return nil, status.Errorf(codes.Internal, "Couldn't detach: %v", call.Err)
+    }
+    return new(epb.Empty), nil
+}
+
+/* Sets existance of Livepatch icon in system tray */
+func (s *ProServer) ShowLivepatchTray(ctx context.Context, show *wpb.BoolValue) (*epb.Empty, error) {
+    set := "false"
+    if show.GetValue() {
+        set = "true"
+    }
+    cmd := s.execer("gsettings", "set", "com.ubuntu.update-notifier",
+                    "show-livepatch-status-icon", set)
+    _, err := cmd.Output()
+    if err != nil {
+        log.Println(err)
+        return nil, status.Errorf(codes.Internal, "Couldn't set gsettings: %v", err)
     }
     return new(epb.Empty), nil
 }
