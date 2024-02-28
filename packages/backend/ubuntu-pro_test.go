@@ -259,6 +259,14 @@ func TestIsServiceEnabled(t *testing.T) {
     require.NoError(t, err, err)
     require.Equal(t, i.GetValue(), false)
 
+	i, err = manager.proServer.IsUsgEnabled(ctx, nil)
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), false)
+
+	i, err = manager.proServer.IsFipsEnabled(ctx, nil)
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), false)
+
 	getResponseEnabled = "enabled"
 	i, err = manager.proServer.IsEsmInfraEnabled(ctx, nil)
     require.NoError(t, err, err)
@@ -272,6 +280,14 @@ func TestIsServiceEnabled(t *testing.T) {
     require.NoError(t, err, err)
     require.Equal(t, i.GetValue(), true)
 
+	i, err = manager.proServer.IsUsgEnabled(ctx, nil)
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), true)
+
+	i, err = manager.proServer.IsFipsEnabled(ctx, nil)
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), true)
+
 	getResponseEnabled = "error"
 	i, err = manager.proServer.IsEsmInfraEnabled(ctx, nil)
     require.Error(t, err, "Expected error, got nothing")
@@ -280,6 +296,12 @@ func TestIsServiceEnabled(t *testing.T) {
     require.Error(t, err, "Expected error, got nothing")
 
 	i, err = manager.proServer.IsKernelLivePatchEnabled(ctx, nil)
+    require.Error(t, err, "Expected error, got nothing")
+
+	i, err = manager.proServer.IsFipsEnabled(ctx, nil)
+    require.Error(t, err, "Expected error, got nothing")
+
+	i, err = manager.proServer.IsUsgEnabled(ctx, nil)
     require.Error(t, err, "Expected error, got nothing")
 }
 
@@ -394,6 +416,8 @@ func ExportAttachMock(conn *dbus.Conn) error {
 		"esm_2dapps",
 		"esm_2dinfra",
 		"livepatch",
+        "fips",
+        "usg",
 	} {
 		if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/"+val), "com.canonical.UbuntuAdvantage.Service"); err != nil {
 			return fmt.Errorf("could not export service mock: %w", err)
