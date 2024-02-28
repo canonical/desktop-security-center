@@ -124,6 +124,9 @@ func isMachineProAttached(manager dbus.BusObject) (bool, error) {
 /* Determines if system is attached to Ubuntu Pro. */
 func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
     isAttached, err := isMachineProAttached(s.manager)
+    if err != nil {
+        return nil, status.Errorf(codes.Internal, "%v", err)
+    }
     return wpb.Bool(isAttached), err
 }
 
