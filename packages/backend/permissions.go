@@ -5,6 +5,7 @@ import (
     wpb "google.golang.org/protobuf/types/known/wrapperspb"
     "context"
     "github.com/tidwall/gjson"
+    "strings"
     "net"
     "io"
     "bytes"
@@ -148,7 +149,7 @@ func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.E
         log.Println(err)
         return nil, err
     }
-    o := string(out)
+    o := strings.TrimRight(string(out), "\n")
     return wpb.Bool(o == "true"), nil
 
     /* Original attempt to which we must eventually return cannot work yet, as
