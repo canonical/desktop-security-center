@@ -13,6 +13,7 @@ import (
     "google.golang.org/grpc/status"
 )
 
+type ExecCommand func(string, ...string) *exec.Cmd
 type ProServer struct {
     pb.UnimplementedProServer
     conn             *dbus.Conn
@@ -21,11 +22,13 @@ type ProServer struct {
     livepatch        dbus.BusObject
     manager          dbus.BusObject
     reqId            string
+    execer           ExecCommand
 }
 
 func NewProServer(conn *dbus.Conn) (*ProServer, error) {
     s := &ProServer{
         conn: conn,
+        execer: exec.Command,
     }
 
     s.infra = conn.Object(
@@ -184,7 +187,7 @@ func (s *ProServer) DisableInfra(ctx context.Context, _ *epb.Empty) (*epb.Empty,
  * ubuntu.com/pro/attach (or whatever happens to be the appropriate URL at the
  * time of reading), retrieves and returns the attachment token. */
 func (s *ProServer) WaitProMagicFlow(ctx context.Context, _ *epb.Empty) (*pb.WaitResponse, error) {
-    cmd := exec.Command("pro", "api", "u.pro.attach.magic.wait.v1", "--args", "magic_token=" + s.reqId)
+    cmd := s.execer("pro", "api", "u.pro.attach.magic.wait.v1", "--args", "magic_token=" + s.reqId)
     out, execErr := cmd.Output()
     outs := string(out)
     if err := collectProApiErrors(outs, execErr); err != nil {
@@ -219,7 +222,7 @@ func collectProApiErrors(json string, execErr error) error {
  * [1] https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/references/api/#u-pro-attach-magic-initiate-v1
  */
 func (s *ProServer) InitiateProMagicFlow(ctx context.Context, _ *epb.Empty) (*pb.InitiateResponse, error) {
-    cmd := exec.Command("pro", "api", "u.pro.attach.magic.initiate.v1")
+    cmd := s.execer("pro", "api", "u.pro.attach.magic.initiate.v1")
     out, execErr := cmd.Output()
     outs := string(out)
     if err := collectProApiErrors(outs, execErr); err != nil {

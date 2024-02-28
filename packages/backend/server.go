@@ -18,10 +18,18 @@ type Manager struct {
     conn          *dbus.Conn
 }
 
-func NewServerManager (ctx context.Context) (*Manager, error) {
-    conn, err := dbus.ConnectSystemBus()
-    if err != nil {
-        return nil, status.Errorf(codes.Internal, "Failed to connect to system bus: %s", err)
+func NewServerManager (ctx context.Context, conns ...*dbus.Conn) (*Manager, error) {
+    var conn *dbus.Conn
+    var err error
+    if len(conns) == 1 {
+        /* Branch taken when testing. */
+        conn = conns[0]
+    } else {
+        /* Branch taken in real executions, */
+        conn, err = dbus.ConnectSystemBus()
+        if err != nil {
+            return nil, status.Errorf(codes.Internal, "Failed to connect to system bus: %s", err)
+        }
     }
 
     proServer, err := NewProServer(conn)
