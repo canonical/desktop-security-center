@@ -9,7 +9,7 @@ import (
     "io"
     "bytes"
     "log"
-    "fmt"
+    "os/exec"
     "net/http"
     "google.golang.org/grpc/codes"
     "google.golang.org/grpc/status"
@@ -103,6 +103,19 @@ func getSnapPathIdMaps(client *http.Client) (map[string][]string, error) {
 }
 
 func enableAppPermissions(client *http.Client, enable bool) error {
+    var set string
+    if enable {
+        set = "true"
+    } else {
+        set = "false"
+    }
+    cmd := exec.Command("pkexec", "snap", "set", "system", "experimental.apparmor-prompting=" + set)
+    _, err := cmd.Output()
+    return err
+
+    /* Original attempt to which we must eventually return cannot work yet, as
+     * authentication isn't ready yet, see
+     * https://forum.snapcraft.io/t/get-on-authenticated-endpoints-fail-despite-x-allow-interaction/39067
     var body string
     if enable {
         body = fmt.Sprintf(`{"experimental.apparmor-prompting":%s}`, "true")
@@ -124,10 +137,23 @@ func enableAppPermissions(client *http.Client, enable bool) error {
         return status.Errorf(codes.Internal, "Invalid Json")
     }
     return nil
+    */
 }
 
 /* This returns 'snap get system experimental.apparmor-prompting' */
 func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
+    cmd := exec.Command("pkexec", "snap", "get", "system", "experimental.apparmor-prompting")
+    out, err := cmd.Output()
+    if err != nil {
+        log.Println(err)
+        return nil, err
+    }
+    o := string(out)
+    return wpb.Bool(o == "true"), nil
+
+    /* Original attempt to which we must eventually return cannot work yet, as
+     * authentication isn't ready yet, see
+     * https://forum.snapcraft.io/t/get-on-authenticated-endpoints-fail-despite-x-allow-interaction/39067
     o, err := makeRestReq(s.client, "GET", authHeader, confApi, nil)
     if err != nil {
         return nil, err
@@ -138,6 +164,7 @@ func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.E
     }
     enabled := gjson.Get(o, "result.experimental.apparmor-prompting").Bool()
     return wpb.Bool(enabled), nil
+    */
 }
 
 /* This does the equivalent of
