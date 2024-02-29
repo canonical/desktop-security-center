@@ -90,7 +90,20 @@ func NewProServer(conn *dbus.Conn) (*ProServer, error) {
     return s, nil
 }
 
-func isServiceEnabled(obj dbus.BusObject) (bool, error) {
+func (s *ProServer) isServiceEnabled(obj dbus.BusObject) (bool, error) {
+    /* Although it is pointless to call isServiceEnabled if the machine is
+     * unattached, we shouldn't assume the front-end knows this detail of the
+     * Ubuntu Pro functionality.
+     * Thus, if the front-end calls this function, we need to check if it is
+     * attached lest the Get is attempted on a inexisting object. */
+    isAttached, err := s.isAttached()
+    if err != nil {
+        return false, err
+    }
+    if !isAttached {
+        return false, nil
+    }
+
     status, err := obj.GetProperty("com.canonical.UbuntuAdvantage.Service.Status")
     if err != nil {
         log.Println(obj.Path(), err)
@@ -99,20 +112,27 @@ func isServiceEnabled(obj dbus.BusObject) (bool, error) {
     return status.Value().(string) == "enabled", nil
 }
 
-/* Determines if system is attached to Ubuntu Pro. */
-func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
+func (s *ProServer) isAttached() (bool, error) {
     isAttached, err := s.manager.GetProperty("com.canonical.UbuntuAdvantage.Manager.Attached")
     if err != nil {
         log.Println(err)
+        return false, status.Errorf(codes.Internal, "%v", err)
+    }
+    return isAttached.Value().(bool), nil
+}
+
+/* Determines if system is attached to Ubuntu Pro. */
+func (s *ProServer) IsMachineProAttached(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
+    isAttached, err := s.isAttached()
+    if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
-
-    return wpb.Bool(isAttached.Value().(bool)), nil
+    return wpb.Bool(isAttached), err
 }
 
 /* Determines if the USG service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsUsgEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    enabled, err := isServiceEnabled(s.usg)
+    enabled, err := s.isServiceEnabled(s.usg)
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -121,7 +141,7 @@ func (s *ProServer) IsUsgEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolVa
 
 /* Determines if the FIPS service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsFipsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    enabled, err := isServiceEnabled(s.fips)
+    enabled, err := s.isServiceEnabled(s.fips)
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -130,7 +150,7 @@ func (s *ProServer) IsFipsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolV
 
 /* Determines if the ESM Infra service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsEsmInfraEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    enabled, err := isServiceEnabled(s.infra)
+    enabled, err := s.isServiceEnabled(s.infra)
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -139,7 +159,7 @@ func (s *ProServer) IsEsmInfraEnabled(ctx context.Context, _ *epb.Empty) (*wpb.B
 
 /* Determines if the ESM Apps service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsEsmAppsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    enabled, err := isServiceEnabled(s.apps)
+    enabled, err := s.isServiceEnabled(s.apps)
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }
@@ -148,7 +168,7 @@ func (s *ProServer) IsEsmAppsEnabled(ctx context.Context, _ *epb.Empty) (*wpb.Bo
 
 /* Determines if the Livepatch service of Ubuntu Pro is enabled. */
 func (s *ProServer) IsKernelLivePatchEnabled(ctx context.Context, _ *epb.Empty) (*wpb.BoolValue, error) {
-    enabled, err := isServiceEnabled(s.livepatch)
+    enabled, err := s.isServiceEnabled(s.livepatch)
     if err != nil {
         return nil, status.Errorf(codes.Internal, "%v", err)
     }

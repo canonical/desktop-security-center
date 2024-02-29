@@ -52,7 +52,8 @@ const (
 )
 
 /* Variables for adjusting test results */
-var getResponse string
+var getResponseEnabled string
+var getResponseAttached string
 var failEnable bool
 var failDisable bool
 
@@ -151,7 +152,6 @@ func TestInitiateProMagicFlow(t *testing.T) {
     for _, tc := range cases {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
-			t.Parallel()
             execMocker := func(name string, arg ...string) *exec.Cmd {
                 ret := fmt.Sprintf(initiateJson, tc.expiresIn, tc.reqId, tc.pin, tc.errors, tc.result)
                 return exec.Command("printf", "%s", ret)
@@ -228,24 +228,25 @@ func TestEnableService(t *testing.T) {
 }
 
 func TestIsMachineProAttached(t *testing.T) {
-	getResponse = "true"
+	getResponseAttached = "true"
 	i, err := manager.proServer.IsMachineProAttached(ctx, nil)
     require.NoError(t, err, err)
     require.Equal(t, i.GetValue(), true)
 
-	getResponse = "false"
+	getResponseAttached = "false"
 	i, err = manager.proServer.IsMachineProAttached(ctx, nil)
     require.NoError(t, err, err)
     require.Equal(t, i.GetValue(), false)
 
-	getResponse = "error"
+	getResponseAttached = "error"
 	_, err = manager.proServer.IsMachineProAttached(ctx, nil)
     require.Error(t, err, "Expected error, got nothing")
 }
 
 
 func TestIsServiceEnabled(t *testing.T) {
-	getResponse = "disabled"
+	getResponseAttached = "true"
+	getResponseEnabled = "disabled"
 	i, err := manager.proServer.IsEsmInfraEnabled(ctx, nil)
     require.NoError(t, err, err)
     require.Equal(t, i.GetValue(), false)
@@ -258,7 +259,15 @@ func TestIsServiceEnabled(t *testing.T) {
     require.NoError(t, err, err)
     require.Equal(t, i.GetValue(), false)
 
-	getResponse = "enabled"
+	i, err = manager.proServer.IsUsgEnabled(ctx, nil)
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), false)
+
+	i, err = manager.proServer.IsFipsEnabled(ctx, nil)
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), false)
+
+	getResponseEnabled = "enabled"
 	i, err = manager.proServer.IsEsmInfraEnabled(ctx, nil)
     require.NoError(t, err, err)
     require.Equal(t, i.GetValue(), true)
@@ -271,7 +280,15 @@ func TestIsServiceEnabled(t *testing.T) {
     require.NoError(t, err, err)
     require.Equal(t, i.GetValue(), true)
 
-	getResponse = "error"
+	i, err = manager.proServer.IsUsgEnabled(ctx, nil)
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), true)
+
+	i, err = manager.proServer.IsFipsEnabled(ctx, nil)
+    require.NoError(t, err, err)
+    require.Equal(t, i.GetValue(), true)
+
+	getResponseEnabled = "error"
 	i, err = manager.proServer.IsEsmInfraEnabled(ctx, nil)
     require.Error(t, err, "Expected error, got nothing")
 
@@ -279,6 +296,12 @@ func TestIsServiceEnabled(t *testing.T) {
     require.Error(t, err, "Expected error, got nothing")
 
 	i, err = manager.proServer.IsKernelLivePatchEnabled(ctx, nil)
+    require.Error(t, err, "Expected error, got nothing")
+
+	i, err = manager.proServer.IsFipsEnabled(ctx, nil)
+    require.Error(t, err, "Expected error, got nothing")
+
+	i, err = manager.proServer.IsUsgEnabled(ctx, nil)
     require.Error(t, err, "Expected error, got nothing")
 }
 
@@ -308,16 +331,22 @@ func TestMain(m *testing.M) {
 }
 
 func (a prodbus) Get(interfaceName string, propertyName string) (interface{}, *dbus.Error) {
-	switch getResponse {
-	case "true":
-		return true, nil
-	case "false":
-		return false, nil
-	case "enabled":
-		return "enabled", nil
-	case "disabled":
-		return "disabled", nil
-	}
+    switch propertyName {
+    case "Attached":
+        switch getResponseAttached {
+        case "true":
+            return true, nil
+        case "false":
+            return false, nil
+        }
+    case "Status":
+        switch getResponseEnabled {
+        case "enabled":
+            return "enabled", nil
+        case "disabled":
+            return "disabled", nil
+        }
+    }
 	return "", dbus.NewError(
 		"com.canonical.UbuntuAdvantage.Error.GetError",
 		[]interface{}{"error requested in Get mocked method."},
@@ -387,6 +416,8 @@ func ExportAttachMock(conn *dbus.Conn) error {
 		"esm_2dapps",
 		"esm_2dinfra",
 		"livepatch",
+        "fips",
+        "usg",
 	} {
 		if err := conn.Export(a, dbus.ObjectPath("/com/canonical/UbuntuAdvantage/Services/"+val), "com.canonical.UbuntuAdvantage.Service"); err != nil {
 			return fmt.Errorf("could not export service mock: %w", err)
