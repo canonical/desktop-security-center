@@ -49,7 +49,11 @@ func New(ctx context.Context) error {
         return err
     }
     if len(listeners) != 1 {
-        return errors.New("Unexpected number of socket activation file descriptors")
+        log.Printf("Expected only 1 listener, got %d.", len(listeners))
+        return errors.New(`Unexpected number of socket activation file descriptors.
+        Hint: If you trying to run the binary directly, you shouldn't.
+        This service assumes that Systemd spawns it when a listener binds to the
+        installed socket.`)
     }
 
     var opts []grpc.ServerOption
