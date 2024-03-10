@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^2.4.6
   flutter_svg: ^2.0.9
-  handy_window: ^0.3.1
+  handy_window: ^0.4.0
   provider: ^6.0.5
   ubuntu_logger: ^0.1.0
   ubuntu_service: ^0.3.0
