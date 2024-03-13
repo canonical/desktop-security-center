@@ -64,3 +64,10 @@ scripts:
   test: >
     melos exec -c 1 --fail-fast --dir-exists=test -- \
       flutter test
+
+  protoc:
+    run: |
+      rm -rf ./packages/desktop_security_center/lib/src/generated/* &&
+      protoc --dart_out=grpc:./packages/desktop_security_center/lib/src/generated \
+        -Iprotos ./packages/proto/dsc.proto \
+        -I=./packages/proto google/protobuf/empty.proto google/protobuf/wrappers.proto

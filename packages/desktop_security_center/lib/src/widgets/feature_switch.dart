@@ -77,8 +77,10 @@ class FeatureSwitch extends StatelessWidget {
               ),
             ),
             YaruSwitch(
-              value: false,
-              onChanged: (_) {},
+              value: switchValue,
+              onChanged: (_) {
+                onChanged();
+              },
             ),
           ],
         ),
