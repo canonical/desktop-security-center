@@ -9,7 +9,7 @@
     "esmLabel": "Erweiterte Sicherheitswartung (ESM)",
     "esmDesc": "ESM bietet zusätzliche Sicherheitspatches für 10 Jahre für mehr als 23.000 Open-Source-Pakete. Es ermöglicht ein kontinuierliches Schwachstellenmanagement für kritische, hohe und mittlere CVEs.",
     "proKernelLivepatchLabel": "Kernel-Livepatch",
-    "proEsmMainPackages": "Hauptpakete (esm-infra)",
+    "proEsmMainPackages": "Main-Pakete (esm-infra)",
     "proEsmMainPackagesDesc": "Sicherheitsaktualisierungen für 2.300 Ubuntu Main-Pakete bis 2034",
     "proEsmUniversePackages": "Universe-Pakete (esm-apps)",
     "proEsmUniversePackagesDesc": "Zusätzliche Sicherheitsaktualisierungen für 23.000 Ubuntu Universe-Pakete bis 2034",
