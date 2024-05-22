@@ -1,6 +1,8 @@
 import 'package:desktop_security_center/src/config.dart';
 import 'package:desktop_security_center/src/spacing.dart';
 import 'package:desktop_security_center/src/ubuntu_pro/attach_machine_dialog.dart';
+import 'package:desktop_security_center/src/ubuntu_pro/pro_feature_controller.dart';
+import 'package:desktop_security_center/src/ubuntu_pro/pro_provider.dart';
 import 'package:desktop_security_center/src/widgets/feature_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -115,27 +117,45 @@ class _UbuntuProPageState extends ConsumerState<UbuntuProPage> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
             child: FeatureSwitch(
+              key: const ValueKey(ProFeature.esmApps),
               titleLabel: l10n.proEsmMainPackages,
               descriptionLabel: l10n.proEsmMainPackagesDesc,
-              switchValue: false,
-              onChanged: () {},
+              switchValue:
+                  ref.watch(isFeatureEnabledProvider(ProFeature.esmApps)),
+              onChanged: () {
+                ref.read(proFeatureControllerProvider.notifier).toggleFeature(
+                      ProFeature.esmApps,
+                    );
+              },
             ),
           ),
           FeatureSwitch(
+            key: const ValueKey(ProFeature.esmInfra),
             titleLabel: l10n.proEsmUniversePackages,
             descriptionLabel: l10n.proEsmUniversePackagesDesc,
-            switchValue: false,
-            onChanged: () {},
+            switchValue:
+                ref.watch(isFeatureEnabledProvider(ProFeature.esmInfra)),
+            onChanged: () {
+              ref.read(proFeatureControllerProvider.notifier).toggleFeature(
+                    ProFeature.esmInfra,
+                  );
+            },
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: kLargePadding),
             child: Divider(),
           ),
           FeatureSwitch(
+            key: const ValueKey(ProFeature.kernelLivePatch),
             titleLabel: l10n.proKernelLivepatchLabel,
             descriptionLabel: l10n.proKernelLivepatchDesc,
-            switchValue: false,
-            onChanged: () {},
+            switchValue:
+                ref.watch(isFeatureEnabledProvider(ProFeature.kernelLivePatch)),
+            onChanged: () {
+              ref.read(proFeatureControllerProvider.notifier).toggleFeature(
+                    ProFeature.kernelLivePatch,
+                  );
+            },
           ),
           Padding(
             padding: const EdgeInsets.only(top: kDefaultPadding),
