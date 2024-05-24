@@ -38,7 +38,7 @@ func NewServerManager (ctx context.Context, conns ...*dbus.Conn) (*Manager, erro
         return nil, status.Errorf(codes.Internal, "Failed to create user service: %s", err)
     }
 
-    permissionServer, err := NewPermissionServer()
+    permissionServer, err := NewPermissionServer("/run/snapd.socket")
     if err != nil {
         return nil, status.Errorf(codes.Internal, "Failed to create permission server: %s", err)
     }

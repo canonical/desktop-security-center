@@ -30,12 +30,12 @@ type PermissionServer struct {
     client *http.Client
 }
 
-func NewPermissionServer() (*PermissionServer, error) {
+func NewPermissionServer(url string) (*PermissionServer, error) {
     /* Copy paste from https://stackoverflow.com/a/59665098 */
     c := &http.Client{
         Transport: &http.Transport{
             DialContext: func(ctx context.Context, network, addr string) (net.Conn, error) {
-                return (&net.Dialer{}).DialContext(ctx, "unix", "/run/snapd.socket")
+                return (&net.Dialer{}).DialContext(ctx, "unix", url)
             },
         },
     }
