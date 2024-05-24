@@ -90,7 +90,7 @@ func getSnapPathIdMaps(client *http.Client) (map[string][]string, error) {
     }
     pathSnaps := make(map[string][]string)
     snapAr := gjson.Get(o, "result.#(interface=\"home\")#.snap").Array()
-    pathAr := gjson.Get(o, "result.#(interface=\"home\")#.path-pattern").Array()
+    pathAr := gjson.Get(o, "result.#(interface=\"home\")#.constraints.path-pattern").Array()
     idAr := gjson.Get(o, "result.#(interface=\"home\")#.id").Array()
     for idx, path := range pathAr {
         snap := snapAr[idx].String()
