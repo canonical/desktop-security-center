@@ -12,18 +12,24 @@ $ sudo snap install snapcraft --classic
 ## Spinning up a VM via lxd
 
 ```bash
-$ lxc launch images:ubuntu/24.04/desktop aa-testing \
-  --vm \
-  -c limits.cpu=4 \
-  -c limits.memory=4GiB \
-  --console=vga
+$ make create-vm
 
-# Later to restart
-$ lxc start aa-testing --console=vga
+# In a second terminal
+$ make copy-vm-bootstrap
+$ make update-client-in-vm
+
+# In a terminal in the vm
+$ sudo ./bootstrap-vm.sh
 ```
 
-The [bootstrap-vm.sh](./bootstrap-vm.sh) script should be sufficient to set up a newly
-created vm to be able to run to tests held in this repo.
+
+## Running the example CLI client
+```bash
+$ ./aa-prompt-client
+
+# In another terminal
+$ aa-prompting-test.read
+```
 
 
 ## TODO

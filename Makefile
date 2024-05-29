@@ -17,3 +17,27 @@ bounce-snapd:
 	snap refresh snapd --channel=latest/edge/prompting
 	snap set system experimental.apparmor-prompting=false
 	snap set system experimental.apparmor-prompting=true
+
+.PHONY: create-vm
+create-vm:
+	lxc launch images:ubuntu/24.04/desktop aa-testing \
+	  --vm \
+	  -c limits.cpu=4 \
+	  -c limits.memory=4GiB \
+	  --console=vga
+
+.PHONY: attach-vm
+attach-vm:
+	lxc console --type=vga aa-testing
+
+.PHONY: copy-vm-bootstrap
+copy-vm-bootstrap:
+	snapcraft
+	lxc file push Makefile aa-testing/home/ubuntu/
+	lxc file push bootstrap-vm.sh aa-testing/home/ubuntu/
+	lxc file push aa-prompting-test_0.1_amd64.snap aa-testing/home/ubuntu/
+
+.PHONY: update-client-in-vm
+update-client-in-vm:
+	cd aa-prompt-client && cargo build
+	lxc file push aa-prompt-client/target/debug/aa-prompt-client aa-testing/home/ubuntu/
