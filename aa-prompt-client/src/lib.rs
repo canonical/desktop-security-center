@@ -21,6 +21,9 @@ pub enum Error {
 
     #[error("the apparmor-prompting feature is not supported: {reason}")]
     NotSupported { reason: String },
+
+    #[error("error message returned from snapd: {message}")]
+    SnapdError { message: String },
 }
 
 pub type Result<T> = std::result::Result<T, Error>;

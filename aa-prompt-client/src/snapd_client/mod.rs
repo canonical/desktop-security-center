@@ -2,12 +2,16 @@ use crate::{
     socket_client::{body_json, UnixSocketClient},
     Error, Result,
 };
+use chrono::{DateTime, SecondsFormat, Utc};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use std::collections::BTreeMap;
+use tracing::debug;
 
+const FEATURE_NAME: &str = "apparmor-prompting";
+const LONG_POLL_TIMEOUT: &str = "1h";
+const NOTICE_TYPES: &str = "interfaces-requests-prompt";
 const SNAPD_BASE_URI: &str = "http://localhost/v2";
 const SNAPD_SOCKET: &str = "/run/snapd.socket";
-const FEATURE_NAME: &str = "apparmor-prompting";
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
@@ -16,13 +20,20 @@ struct SnapdResponse<T> {
     ty: String,
     status_code: u16,
     status: String,
-    result: T,
+    result: ResOrErr<T>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(untagged)]
+enum ResOrErr<T> {
+    Err { message: String },
+    Res(T),
 }
 
 #[derive(Debug)]
 pub struct SnapdClient {
     client: UnixSocketClient,
-    notices_after: Option<String>,
+    notices_after: String,
 }
 
 impl Default for SnapdClient {
@@ -33,14 +44,20 @@ impl Default for SnapdClient {
 
 impl SnapdClient {
     pub fn new() -> Self {
+        Self::new_with_notices_after(Utc::now())
+    }
+
+    pub fn new_with_notices_after(dt: DateTime<Utc>) -> Self {
         Self {
             client: UnixSocketClient::new(SNAPD_SOCKET),
-            notices_after: None,
+            notices_after: dt.to_rfc3339_opts(SecondsFormat::Nanos, true),
         }
     }
 
-    // TODO: handle errors
-    async fn get_json<T: DeserializeOwned>(&self, path: &str) -> Result<T> {
+    async fn get_json<T>(&self, path: &str) -> Result<T>
+    where
+        T: DeserializeOwned,
+    {
         let res = self
             .client
             .get(
@@ -51,8 +68,33 @@ impl SnapdClient {
             .await?;
 
         let resp: SnapdResponse<T> = body_json(res).await?;
+        match resp.result {
+            ResOrErr::Res(t) => Ok(t),
+            ResOrErr::Err { message } => Err(Error::SnapdError { message }),
+        }
+    }
 
-        Ok(resp.result)
+    async fn post_json<T, U>(&self, path: &str, body: U) -> Result<T>
+    where
+        T: DeserializeOwned,
+        U: Serialize,
+    {
+        let res = self
+            .client
+            .post(
+                format!("{SNAPD_BASE_URI}/{path}")
+                    .parse()
+                    .expect("valid uri"),
+                "application/json",
+                serde_json::to_vec(&body)?,
+            )
+            .await?;
+
+        let resp: SnapdResponse<T> = body_json(res).await?;
+        match resp.result {
+            ResOrErr::Res(t) => Ok(t),
+            ResOrErr::Err { message } => Err(Error::SnapdError { message }),
+        }
     }
 
     /// Check whether or not the apparmor-prompting feature is enabled on this system
@@ -62,13 +104,21 @@ impl SnapdClient {
         info.prompting_enabled()
     }
 
-    pub async fn pending_prompts(&self) -> Result<Vec<PromptId>> {
-        let mut path = "notices?types=interfaces-requests-prompt".to_string();
-        if let Some(after) = &self.notices_after {
-            path = format!("{path}?{after}");
-        }
+    /// HTTP long poll on the /v2/notices API from snapd to await prompt requests for the user we
+    /// are running under.
+    ///
+    /// Calling this method will update our [Self::notices_after] field when we successfully obtain
+    /// new notices from snapd.
+    pub async fn pending_prompts(&mut self) -> Result<Vec<PromptId>> {
+        let path = format!(
+            "notices?types={NOTICE_TYPES}&timeout={LONG_POLL_TIMEOUT}&after={}",
+            self.notices_after
+        );
 
         let notices: Vec<Notice> = self.get_json(&path).await?;
+        if let Some(n) = notices.last() {
+            n.last_occurred.clone_into(&mut self.notices_after);
+        }
 
         return Ok(notices.into_iter().map(|n| n.key).collect());
 
@@ -78,8 +128,27 @@ impl SnapdClient {
         #[serde(rename_all = "kebab-case")]
         struct Notice {
             key: PromptId,
-            // last_occurred: String,
+            last_occurred: String,
         }
+    }
+
+    /// Pull details for a specific prompt from snapd
+    pub async fn prompt_details(&self, p: &PromptId) -> Result<Prompt> {
+        let prompt: Prompt = self
+            .get_json(&format!("interfaces/requests/prompts/{}", p.0))
+            .await?;
+
+        Ok(prompt)
+    }
+
+    pub async fn reply_to_prompt(&self, p: &PromptId, reply: PromptReply) -> Result<()> {
+        let resp: serde_json::Value = self
+            .post_json(&format!("interfaces/requests/prompts/{}", p.0), reply)
+            .await?;
+
+        debug!(prompt = p.0, ?resp, "response from snapd");
+
+        Ok(())
     }
 }
 
@@ -110,12 +179,12 @@ struct Feature {
     unsupported_reason: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]
 pub struct PromptId(String);
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
-struct PromptDetails {
+pub struct Prompt {
     id: PromptId,
     timestamp: String,
     snap: String,
@@ -129,6 +198,55 @@ struct Constraints {
     path: String,
     permissions: Vec<String>,
     available_permissions: Vec<String>,
+}
+
+impl Prompt {
+    pub fn summary(&self) -> String {
+        format!(
+            "\
+id:          {}
+snap:        {}
+timestamp:   {}
+path:        {}
+permissions: {:?}
+",
+            self.id.0,
+            self.snap,
+            self.timestamp,
+            self.constraints.path,
+            self.constraints.permissions
+        )
+    }
+
+    fn simple_reply(self, action: Action, lifespan: Lifespan) -> PromptReply {
+        PromptReply {
+            action,
+            lifespan,
+            duration: None,
+            constraints: ReplyConstraints {
+                path_pattern: self.constraints.path,
+                permissions: self.constraints.permissions,
+            },
+        }
+    }
+
+    pub fn into_allow_once(self) -> PromptReply {
+        self.simple_reply(Action::Allow, Lifespan::Single)
+    }
+
+    pub fn into_deny_once(self) -> PromptReply {
+        self.simple_reply(Action::Deny, Lifespan::Single)
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "kebab-case")]
+pub struct PromptReply {
+    action: Action,
+    lifespan: Lifespan,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    duration: Option<String>,
+    constraints: ReplyConstraints,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
@@ -145,15 +263,6 @@ enum Lifespan {
     Session,
     Forever,
     Timespan,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
-#[serde(rename_all = "kebab-case")]
-struct PromptReply {
-    action: Action,
-    lifespan: Lifespan,
-    duration: Option<String>,
-    constraints: ReplyConstraints,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]

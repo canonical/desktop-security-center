@@ -1,9 +1,9 @@
 use crate::Result;
-use http_body_util::{BodyExt, Empty};
+use http_body_util::{BodyExt, Empty, Full};
 use hyper::{
-    body::{Bytes, Incoming},
+    body::{Body, Bytes, Incoming},
     client::conn::http1,
-    header::HOST,
+    header::{CONTENT_TYPE, HOST},
     Request, Response, Uri,
 };
 use hyper_util::rt::TokioIo;
@@ -26,14 +26,12 @@ impl UnixSocketClient {
         }
     }
 
-    pub async fn get(&self, uri: Uri) -> Result<Response<Incoming>> {
-        let authority = uri.authority().unwrap().clone();
-
-        let req = Request::builder()
-            .uri(uri.path())
-            .header(HOST, authority.as_str())
-            .body(Empty::<Bytes>::new())?;
-
+    async fn do_req<T>(&self, req: Request<T>) -> Result<Response<Incoming>>
+    where
+        T: Body + Send + Sync + 'static,
+        T::Error: std::error::Error + Send + Sync,
+        T::Data: Send + Sync,
+    {
         let stream = UnixStream::connect(&self.socket_path).await?;
         let (mut sender, conn) = http1::handshake(TokioIo::new(stream)).await?;
         tokio::task::spawn(async move {
@@ -45,6 +43,31 @@ impl UnixSocketClient {
         let res = sender.send_request(req).await?;
 
         Ok(res)
+    }
+
+    pub async fn get(&self, uri: Uri) -> Result<Response<Incoming>> {
+        let req = Request::builder()
+            .uri(uri.path_and_query().expect("valid uri").as_str())
+            .header(HOST, uri.authority().expect("valid uri").as_str())
+            .body(Empty::<Bytes>::new())?;
+
+        self.do_req(req).await
+    }
+
+    pub async fn post(
+        &self,
+        uri: Uri,
+        content_type: &str,
+        body: Vec<u8>,
+    ) -> Result<Response<Incoming>> {
+        let req = Request::builder()
+            .method("POST")
+            .uri(uri.path_and_query().expect("valid uri").as_str())
+            .header(HOST, uri.authority().expect("valid uri").as_str())
+            .header(CONTENT_TYPE, content_type)
+            .body(Full::new(Bytes::from(body)))?;
+
+        self.do_req(req).await
     }
 }
 
