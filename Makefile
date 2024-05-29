@@ -35,6 +35,7 @@ copy-vm-bootstrap:
 	snapcraft
 	lxc file push Makefile aa-testing/home/ubuntu/
 	lxc file push bootstrap-vm.sh aa-testing/home/ubuntu/
+	lxc file push prompt-loop.sh aa-testing/home/ubuntu/
 	lxc file push aa-prompting-test_0.1_amd64.snap aa-testing/home/ubuntu/
 
 .PHONY: update-client-in-vm

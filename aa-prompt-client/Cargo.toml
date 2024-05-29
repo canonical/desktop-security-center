@@ -3,6 +3,10 @@ name = "aa-prompt-client"
 version = "0.1.0"
 edition = "2021"
 
+[profile.release]
+strip = true
+lto = true
+
 [dependencies]
 chrono = "0.4.38"
 http-body-util = "0.1.1"
