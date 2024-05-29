@@ -1,0 +1,33 @@
+name: aa-prompting-test
+base: core22
+version: '0.1'
+summary: A simple helper for testing out apparmor prompting
+description: |
+  Just a wrapper around a handful of commands to help with testing the
+  interactions between snapd and an apparmor-prompting client without
+  needing to do everything manually.
+grade: devel
+confinement: strict
+
+parts:
+  scripts:
+    plugin: dump
+    source: scripts/
+
+apps:
+  read:
+    command: ./read.sh
+    plugs:
+      - home
+  read-nested:
+    command: ./read-nested.sh
+    plugs:
+      - home
+  create:
+    command: ./create.sh
+    plugs:
+      - home
+  create-nested:
+    command: ./create-nested.sh
+    plugs:
+      - home

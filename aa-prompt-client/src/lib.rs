@@ -1,0 +1,26 @@
+pub mod snapd_client;
+
+mod socket_client;
+
+#[derive(Debug, thiserror::Error)]
+pub enum Error {
+    #[error(transparent)]
+    Hyper(#[from] hyper::Error),
+
+    #[error(transparent)]
+    HyperHttp(#[from] hyper::http::Error),
+
+    #[error(transparent)]
+    Io(#[from] std::io::Error),
+
+    #[error(transparent)]
+    Json(#[from] serde_json::Error),
+
+    #[error("the apparmor-prompting feature is not available")]
+    NotAvailable,
+
+    #[error("the apparmor-prompting feature is not supported: {reason}")]
+    NotSupported { reason: String },
+}
+
+pub type Result<T> = std::result::Result<T, Error>;
