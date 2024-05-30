@@ -9,23 +9,34 @@ use tokio::{process::Command, spawn};
 
 const TEST_SNAP: &str = "aa-prompting-test";
 
-fn spawn_for_output(cmd: &'static str) -> Receiver<String> {
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct Output {
+    stdout: String,
+    stderr: String,
+}
+
+fn spawn_for_output(cmd: &'static str) -> Receiver<Output> {
     let (tx, rx) = channel();
     spawn(async move {
         let mut c = Command::new(cmd);
         let output = c.output().await.expect("to be able to spawn child process");
-        let s = String::from_utf8(output.stdout).expect("valid utf8");
+        let stdout = String::from_utf8(output.stdout).expect("valid utf8");
+        let stderr = String::from_utf8(output.stderr).expect("valid utf8");
 
-        tx.send(s).expect("send to succeed");
+        tx.send(Output { stdout, stderr }).expect("send to succeed");
     });
 
     rx
 }
 
-#[test_case(Action::Allow, "testing testing 1 2 3"; "allow")]
-#[test_case(Action::Deny, "cat: /home/ubuntu/readme.txt: Permission denied"; "deny")]
+#[test_case(Action::Allow, "testing testing 1 2 3\n", ""; "allow")]
+#[test_case(Action::Deny, "", "cat: /home/ubuntu/readme.txt: Permission denied\n"; "deny")]
 #[tokio::test]
-async fn happy_path_read(action: Action, expected: &str) -> Result<()> {
+async fn happy_path_read(
+    action: Action,
+    expected_stdout: &str,
+    expected_stderr: &str,
+) -> Result<()> {
     // TODO: ensure that test file is present
     let path = "/home/ubuntu/readme.txt";
 
@@ -49,7 +60,8 @@ async fn happy_path_read(action: Action, expected: &str) -> Result<()> {
     c.reply_to_prompt(id, reply).await?;
 
     let output = rx.recv().expect("to be able recv");
-    assert_eq!(output, expected);
+    assert_eq!(output.stdout, expected_stdout, "stdout");
+    assert_eq!(output.stderr, expected_stderr, "stderr");
 
     Ok(())
 }
