@@ -158,10 +158,10 @@ where
     }
 
     /// Pull details for a specific prompt from snapd
-    pub async fn prompt_details(&self, p: &PromptId) -> Result<Prompt> {
+    pub async fn prompt_details(&self, id: &PromptId) -> Result<Prompt> {
         let prompt: Prompt = self
             .client
-            .get_json(&format!("interfaces/requests/prompts/{}", p.0))
+            .get_json(&format!("interfaces/requests/prompts/{}", id.0))
             .await?;
 
         // TODO: Pull and merge in the additional metadata we need for rendering
@@ -171,13 +171,13 @@ where
     }
 
     /// Submit a reply to the given prompt
-    pub async fn reply_to_prompt(&self, p: &PromptId, reply: PromptReply) -> Result<()> {
+    pub async fn reply_to_prompt(&self, id: &PromptId, reply: PromptReply) -> Result<()> {
         let resp: serde_json::Value = self
             .client
-            .post_json(&format!("interfaces/requests/prompts/{}", p.0), reply)
+            .post_json(&format!("interfaces/requests/prompts/{}", id.0), reply)
             .await?;
 
-        debug!(prompt = p.0, ?resp, "response from snapd");
+        debug!(prompt = id.0, ?resp, "response from snapd");
 
         Ok(())
     }
@@ -232,6 +232,22 @@ struct Constraints {
 }
 
 impl Prompt {
+    pub fn snap(&self) -> &str {
+        &self.snap
+    }
+
+    pub fn interface(&self) -> &str {
+        &self.interface
+    }
+
+    pub fn path(&self) -> &str {
+        &self.constraints.path
+    }
+
+    pub fn requested_permissions(&self) -> &[String] {
+        &self.constraints.permissions
+    }
+
     pub fn summary(&self) -> String {
         format!(
             "\
@@ -249,7 +265,7 @@ permissions: {:?}
         )
     }
 
-    fn simple_reply(self, action: Action, lifespan: Lifespan) -> PromptReply {
+    pub fn simple_reply(self, action: Action, lifespan: Lifespan) -> PromptReply {
         PromptReply {
             action,
             lifespan,
@@ -282,14 +298,14 @@ pub struct PromptReply {
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "lowercase")]
-enum Action {
+pub enum Action {
     Allow,
     Deny,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "lowercase")]
-enum Lifespan {
+pub enum Lifespan {
     Single,
     Session,
     Forever,

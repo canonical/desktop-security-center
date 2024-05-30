@@ -21,3 +21,4 @@ tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 
 [dev-dependencies]
 simple_test_case = "1.2.0"
+tokio = { version = "1.37.0", features = ["process"] }

@@ -27,6 +27,8 @@ async fn main() -> Result<()> {
     run_simple_client(c).await
 }
 
+/// This is a bare bones client implementation that only supports responding to prompts
+/// with "allow single" or "deny single".
 async fn run_simple_client(mut c: SnapdSocketClient) -> Result<()> {
     let mut prev_id = PromptId::default();
 
