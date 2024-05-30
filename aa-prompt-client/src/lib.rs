@@ -16,6 +16,9 @@ pub enum Error {
     #[error(transparent)]
     Json(#[from] serde_json::Error),
 
+    #[error("{uri} is not valid: {reason}")]
+    InvalidUri { reason: &'static str, uri: String },
+
     #[error("the apparmor-prompting feature is not available")]
     NotAvailable,
 

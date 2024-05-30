@@ -1,5 +1,5 @@
 use aa_prompt_client::{
-    snapd_client::{PromptId, SnapdClient},
+    snapd_client::{PromptId, SnapdSocketClient},
     Result,
 };
 use std::io::{stdin, stdout, Write};
@@ -16,7 +16,7 @@ async fn main() -> Result<()> {
 
     set_global_default(subscriber).expect("unable to set a global tracing subscriber");
 
-    let c = SnapdClient::default();
+    let c = SnapdSocketClient::default();
 
     if !c.is_prompting_enabled().await? {
         warn!("prompting is not enabled");
@@ -27,7 +27,7 @@ async fn main() -> Result<()> {
     run_simple_client(c).await
 }
 
-async fn run_simple_client(mut c: SnapdClient) -> Result<()> {
+async fn run_simple_client(mut c: SnapdSocketClient) -> Result<()> {
     let mut prev_id = PromptId::default();
 
     loop {

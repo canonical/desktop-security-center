@@ -3,8 +3,9 @@ use crate::{
     Error, Result,
 };
 use chrono::{DateTime, SecondsFormat, Utc};
+use hyper::Uri;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
-use std::collections::BTreeMap;
+use std::{collections::BTreeMap, str::FromStr};
 use tracing::debug;
 
 const FEATURE_NAME: &str = "apparmor-prompting";
@@ -30,42 +31,32 @@ enum ResOrErr<T> {
     Res(T),
 }
 
-#[derive(Debug)]
-pub struct SnapdClient {
-    client: UnixSocketClient,
-    notices_after: String,
+/// Abstraction layer to make swapping out the underlying client possible for
+/// testing.
+#[allow(async_fn_in_trait)]
+pub trait Client {
+    async fn get_json<T>(&self, path: &str) -> Result<T>
+    where
+        T: DeserializeOwned;
+
+    async fn post_json<T, U>(&self, path: &str, body: U) -> Result<T>
+    where
+        T: DeserializeOwned,
+        U: Serialize;
 }
 
-impl Default for SnapdClient {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-impl SnapdClient {
-    pub fn new() -> Self {
-        Self::new_with_notices_after(Utc::now())
-    }
-
-    pub fn new_with_notices_after(dt: DateTime<Utc>) -> Self {
-        Self {
-            client: UnixSocketClient::new(SNAPD_SOCKET),
-            notices_after: dt.to_rfc3339_opts(SecondsFormat::Nanos, true),
-        }
-    }
-
+impl Client for UnixSocketClient {
     async fn get_json<T>(&self, path: &str) -> Result<T>
     where
         T: DeserializeOwned,
     {
-        let res = self
-            .client
-            .get(
-                format!("{SNAPD_BASE_URI}/{path}")
-                    .parse()
-                    .expect("valid uri"),
-            )
-            .await?;
+        let s = format!("{SNAPD_BASE_URI}/{path}");
+        let uri = Uri::from_str(&s).map_err(|_| Error::InvalidUri {
+            reason: "malformed",
+            uri: s,
+        })?;
+
+        let res = self.get(uri).await?;
 
         let resp: SnapdResponse<T> = body_json(res).await?;
         match resp.result {
@@ -79,15 +70,14 @@ impl SnapdClient {
         T: DeserializeOwned,
         U: Serialize,
     {
+        let s = format!("{SNAPD_BASE_URI}/{path}");
+        let uri = Uri::from_str(&s).map_err(|_| Error::InvalidUri {
+            reason: "malformed",
+            uri: s,
+        })?;
+
         let res = self
-            .client
-            .post(
-                format!("{SNAPD_BASE_URI}/{path}")
-                    .parse()
-                    .expect("valid uri"),
-                "application/json",
-                serde_json::to_vec(&body)?,
-            )
+            .post(uri, "application/json", serde_json::to_vec(&body)?)
             .await?;
 
         let resp: SnapdResponse<T> = body_json(res).await?;
@@ -96,10 +86,45 @@ impl SnapdClient {
             ResOrErr::Err { message } => Err(Error::SnapdError { message }),
         }
     }
+}
 
+#[derive(Debug)]
+pub struct SnapdClient<C>
+where
+    C: Client,
+{
+    client: C,
+    notices_after: String,
+}
+
+pub type SnapdSocketClient = SnapdClient<UnixSocketClient>;
+
+impl Default for SnapdSocketClient {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl SnapdSocketClient {
+    pub fn new() -> Self {
+        Self::new_with_notices_after(Utc::now())
+    }
+
+    pub fn new_with_notices_after(dt: DateTime<Utc>) -> Self {
+        Self {
+            client: UnixSocketClient::new(SNAPD_SOCKET),
+            notices_after: dt.to_rfc3339_opts(SecondsFormat::Nanos, true),
+        }
+    }
+}
+
+impl<C> SnapdClient<C>
+where
+    C: Client,
+{
     /// Check whether or not the apparmor-prompting feature is enabled on this system
     pub async fn is_prompting_enabled(&self) -> Result<bool> {
-        let info: SysInfo = self.get_json("system-info").await?;
+        let info: SysInfo = self.client.get_json("system-info").await?;
 
         info.prompting_enabled()
     }
@@ -115,7 +140,7 @@ impl SnapdClient {
             self.notices_after
         );
 
-        let notices: Vec<Notice> = self.get_json(&path).await?;
+        let notices: Vec<Notice> = self.client.get_json(&path).await?;
         if let Some(n) = notices.last() {
             n.last_occurred.clone_into(&mut self.notices_after);
         }
@@ -135,14 +160,20 @@ impl SnapdClient {
     /// Pull details for a specific prompt from snapd
     pub async fn prompt_details(&self, p: &PromptId) -> Result<Prompt> {
         let prompt: Prompt = self
+            .client
             .get_json(&format!("interfaces/requests/prompts/{}", p.0))
             .await?;
+
+        // TODO: Pull and merge in the additional metadata we need for rendering
+        // the UI (window ID, icon, publisher details etc)
 
         Ok(prompt)
     }
 
+    /// Submit a reply to the given prompt
     pub async fn reply_to_prompt(&self, p: &PromptId, reply: PromptReply) -> Result<()> {
         let resp: serde_json::Value = self
+            .client
             .post_json(&format!("interfaces/requests/prompts/{}", p.0), reply)
             .await?;
 

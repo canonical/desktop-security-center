@@ -1,9 +1,10 @@
-use crate::Result;
+use crate::{Error, Result};
 use http_body_util::{BodyExt, Empty, Full};
 use hyper::{
     body::{Body, Bytes, Incoming},
     client::conn::http1,
     header::{CONTENT_TYPE, HOST},
+    http::request::Builder,
     Request, Response, Uri,
 };
 use hyper_util::rt::TokioIo;
@@ -12,7 +13,7 @@ use std::path::PathBuf;
 use tokio::net::UnixStream;
 
 #[derive(Debug)]
-pub(crate) struct UnixSocketClient {
+pub struct UnixSocketClient {
     socket_path: PathBuf,
 }
 
@@ -46,10 +47,7 @@ impl UnixSocketClient {
     }
 
     pub async fn get(&self, uri: Uri) -> Result<Response<Incoming>> {
-        let req = Request::builder()
-            .uri(uri.path_and_query().expect("valid uri").as_str())
-            .header(HOST, uri.authority().expect("valid uri").as_str())
-            .body(Empty::<Bytes>::new())?;
+        let req = request_builder(&uri)?.body(Empty::<Bytes>::new())?;
 
         self.do_req(req).await
     }
@@ -60,15 +58,35 @@ impl UnixSocketClient {
         content_type: &str,
         body: Vec<u8>,
     ) -> Result<Response<Incoming>> {
-        let req = Request::builder()
+        let req = request_builder(&uri)?
             .method("POST")
-            .uri(uri.path_and_query().expect("valid uri").as_str())
-            .header(HOST, uri.authority().expect("valid uri").as_str())
             .header(CONTENT_TYPE, content_type)
             .body(Full::new(Bytes::from(body)))?;
 
         self.do_req(req).await
     }
+}
+
+fn request_builder(uri: &Uri) -> Result<Builder> {
+    let path_and_query = uri
+        .path_and_query()
+        .ok_or(Error::InvalidUri {
+            reason: "missing path",
+            uri: uri.to_string(),
+        })?
+        .as_str();
+
+    let authority = uri
+        .authority()
+        .ok_or(Error::InvalidUri {
+            reason: "missing authority",
+            uri: uri.to_string(),
+        })?
+        .as_str();
+
+    Ok(Request::builder()
+        .uri(path_and_query)
+        .header(HOST, authority))
 }
 
 pub(crate) async fn body_json<T>(res: Response<Incoming>) -> Result<T>
