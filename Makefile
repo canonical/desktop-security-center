@@ -30,13 +30,16 @@ create-vm:
 attach-vm:
 	lxc console --type=vga aa-testing
 
-.PHONY: copy-vm-bootstrap
-copy-vm-bootstrap:
+.PHONY: update-test-snap
+update-test-snap:
 	snapcraft
+	lxc file push aa-prompting-test_0.1_amd64.snap aa-testing/home/ubuntu/
+
+.PHONY: copy-vm-bootstrap
+copy-vm-bootstrap: update-test-snap
 	lxc file push Makefile aa-testing/home/ubuntu/
 	lxc file push bootstrap-vm.sh aa-testing/home/ubuntu/
 	lxc file push prompt-loop.sh aa-testing/home/ubuntu/
-	lxc file push aa-prompting-test_0.1_amd64.snap aa-testing/home/ubuntu/
 
 .PHONY: update-client-in-vm
 update-client-in-vm:

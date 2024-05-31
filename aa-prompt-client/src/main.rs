@@ -43,7 +43,14 @@ async fn run_simple_client(mut c: SnapdSocketClient) -> Result<()> {
                 continue;
             }
 
-            let p = c.prompt_details(&id).await?;
+            let p = match c.prompt_details(&id).await {
+                Ok(p) => p,
+                Err(e) => {
+                    // In a real client this shouldn't be treated as a hard error
+                    warn!(%e, "unable to pull prompt");
+                    continue;
+                }
+            };
             println!("{}", p.summary());
 
             let reply = if should_allow()? {
@@ -52,7 +59,10 @@ async fn run_simple_client(mut c: SnapdSocketClient) -> Result<()> {
                 p.into_deny_once()
             };
 
-            c.reply_to_prompt(&id, reply).await?;
+            if let Err(e) = c.reply_to_prompt(&id, reply).await {
+                warn!(%e, "error in replying to prompt");
+            }
+
             prev_id = id;
         }
     }
