@@ -57,26 +57,6 @@ Once you have set up an `aa-testing` VM you will be able to build and run the in
 tests from your host like so:
 ```bash
 $ make integration-tests
-
-cd aa-prompt-client && cargo test --no-run
-   Compiling aa-prompt-client v0.1.0 (/home/sminez/repos/work/aa-prompting-test/aa-prompt-client)
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.54s
-  Executable unittests src/lib.rs (target/debug/deps/aa_prompt_client-208be0c7a2e75c42)
-  Executable unittests src/main.rs (target/debug/deps/aa_prompt_client-2aae3f7f9ccf39b4)
-  Executable tests/integration.rs (target/debug/deps/integration-e761308092f656c9)
-FNAME=$(ls -ht aa-prompt-client/target/debug/deps/integration* | grep -Ev '\.d' | head -n1); \
-cp $FNAME integration-tests; \
-lxc file push integration-tests aa-testing/home/ubuntu/; \
-rm integration-tests; \
-lxc exec --user=1000 aa-testing /home/ubuntu/integration-tests;
-
-running 4 tests
-test happy_path_create_multiple::allow ... ok
-test happy_path_create_multiple::deny ... ok
-test happy_path_read_single::deny ... ok
-test happy_path_read_single::allow ... ok
-
-test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.78s
 ```
 
 
