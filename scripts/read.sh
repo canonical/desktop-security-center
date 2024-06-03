@@ -1,3 +1,5 @@
 #!/usr/bin/env sh
 
-cat "$SNAP_REAL_HOME/readme.txt"
+prefix="$1"
+
+cat "${SNAP_REAL_HOME}/test/${prefix}/test.txt"

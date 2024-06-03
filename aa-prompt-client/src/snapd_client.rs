@@ -27,8 +27,8 @@ struct SnapdResponse<T> {
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(untagged)]
 enum ResOrErr<T> {
-    Err { message: String },
     Res(T),
+    Err { message: String },
 }
 
 /// Abstraction layer to make swapping out the underlying client possible for
@@ -277,6 +277,25 @@ permissions: {:?}
         }
     }
 
+    pub fn build_reply(
+        self,
+        action: Action,
+        lifespan: Lifespan,
+        duration: Option<impl Into<String>>,
+        path: Option<impl Into<String>>,
+        perms: Option<Vec<String>>,
+    ) -> PromptReply {
+        PromptReply {
+            action,
+            lifespan,
+            duration: duration.map(Into::into),
+            constraints: ReplyConstraints {
+                path_pattern: path.map(Into::into).unwrap_or(self.constraints.path),
+                permissions: perms.unwrap_or(self.constraints.permissions),
+            },
+        }
+    }
+
     pub fn into_allow_once(self) -> PromptReply {
         self.simple_reply(Action::Allow, Lifespan::Single)
     }
@@ -296,14 +315,14 @@ pub struct PromptReply {
     constraints: ReplyConstraints,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Action {
     Allow,
     Deny,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Lifespan {
     Single,

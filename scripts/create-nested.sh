@@ -1,3 +1,5 @@
 #!/usr/bin/env sh
 
-echo "test" >> "$SNAP_REAL_HOME/nested/top-level.txt"
+prefix="$1"
+
+printf "test\n" > "${SNAP_REAL_HOME}/test/${prefix}/nested/test.txt"
