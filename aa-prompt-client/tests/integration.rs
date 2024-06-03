@@ -104,18 +104,14 @@ async fn happy_path_create_multiple(action: Action) -> Result<()> {
     // Creating the client before spawning the test snap so that our polling `after`
     // is correct to pick up the prompt.
     let mut c = SnapdSocketClient::default();
-    println!("setup test dir");
     let (prefix, dir_path) = setup_test_dir(None, &[])?;
 
-    println!("spawn test snap");
     let _rx = spawn_for_output("aa-prompting-test.create", vec![prefix]);
 
-    println!("await prompts");
     let pending = c.pending_prompts().await?;
     assert_eq!(pending.len(), 1, "expected a single prompt");
 
     let id = &pending[0];
-    println!("await prompt details");
     let p = c.prompt_details(id).await?;
 
     let files = &[
@@ -129,7 +125,6 @@ async fn happy_path_create_multiple(action: Action) -> Result<()> {
     assert_eq!(p.path(), format!("{dir_path}/test-1.txt"));
     assert_eq!(p.requested_permissions(), &["write"]);
 
-    println!("reply");
     let reply = p.build_reply(
         action,
         Lifespan::Timespan,
@@ -139,14 +134,12 @@ async fn happy_path_create_multiple(action: Action) -> Result<()> {
     );
     c.reply_to_prompt(id, reply).await?;
 
-    println!("wait for test snap to exit");
     // We're just using the recv to wait for the test snap to finish running
     // so we don't care about the output
     // FIXME: work out why this hangs even when the test snap has output
     // _ = rx.recv().expect("to be able recv");
     tokio::time::sleep(std::time::Duration::from_millis(200)).await;
 
-    println!("check files");
     for (p, s) in files {
         let res = fs::read_to_string(format!("{dir_path}/{p}"));
         match action {
