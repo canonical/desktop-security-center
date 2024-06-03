@@ -34,14 +34,25 @@ attach-vm:
 update-test-snap:
 	snapcraft
 	lxc file push aa-prompting-test_0.1_amd64.snap aa-testing/home/ubuntu/
+	lxc exec aa-testing snap install --dangerous /home/ubuntu/aa-prompting-test_0.1_amd64.snap
 
 .PHONY: copy-vm-bootstrap
 copy-vm-bootstrap: update-test-snap
 	lxc file push Makefile aa-testing/home/ubuntu/
 	lxc file push bootstrap-vm.sh aa-testing/home/ubuntu/
 	lxc file push prompt-loop.sh aa-testing/home/ubuntu/
+	lxc exec aa-testing /home/ubuntu/bootstrap-vm.sh
 
 .PHONY: update-client-in-vm
 update-client-in-vm:
 	cd aa-prompt-client && cargo build
 	lxc file push aa-prompt-client/target/debug/aa-prompt-client aa-testing/home/ubuntu/
+
+.PHONY: integration-tests
+integration-tests:
+	cd aa-prompt-client && cargo test --no-run
+	FNAME=$$(ls -ht aa-prompt-client/target/debug/deps/integration* | grep -Ev '\.d' | head -n1); \
+	cp $$FNAME integration-tests; \
+	lxc file push integration-tests aa-testing/home/ubuntu/; \
+	rm integration-tests; \
+	lxc exec --user=1000 aa-testing /home/ubuntu/integration-tests;
