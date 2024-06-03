@@ -34,7 +34,7 @@ attach-vm:
 update-test-snap:
 	snapcraft
 	lxc file push aa-prompting-test_0.1_amd64.snap aa-testing/home/ubuntu/
-	lxc exec aa-testing snap install --dangerous /home/ubuntu/aa-prompting-test_0.1_amd64.snap
+	lxc exec aa-testing -- snap install --dangerous /home/ubuntu/aa-prompting-test_0.1_amd64.snap
 
 .PHONY: copy-vm-bootstrap
 copy-vm-bootstrap: update-test-snap
