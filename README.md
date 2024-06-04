@@ -26,38 +26,30 @@ The first time you are setting up your test VM, running the following from
 your host should be sufficient to get you a local testing environment. Please
 note that you will need a local rust compiler to be able to build the client.
 ```bash
-$ make create-vm
-
-# In a second terminal
-$ make copy-vm-bootstrap
-$ make update-client-in-vm
+$ make prepare-vm
 ```
-
-Then inside of the VM itself run the following to set up the VM:
-```bash
-$ sudo ./bootstrap-vm.sh
-```
-
 
 ## Running the example CLI client
 
-Inside of your prepared VM you should then be able to run the following in
-order to demo the client interaction with snapd for allowing and denying
-prompts:
+You should be able to run the following in order to demo the client
+interaction with snapd for allowing and denying prompts:
 ```bash
-$ ./aa-prompt-client
+$ make run-prompt-client
 
 # In another terminal
+$ make attach-vm-bash
+# In the new bash shell
 $ aa-prompting-test.read
 ```
 
 ## Running the integration tests
 
-Once you have set up an `aa-testing` VM you will be able to build and run the integration
-tests from your host like so:
+You may build and run the integration tests from your host like so:
 ```bash
 $ make integration-tests
 ```
+
+Note that this shares the same `aa-testing` VM as the other `make` directives.
 
 
 ## TODO
