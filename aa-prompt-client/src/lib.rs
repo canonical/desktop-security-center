@@ -16,6 +16,12 @@ pub enum Error {
     #[error(transparent)]
     Json(#[from] serde_json::Error),
 
+    #[error("invalid custom permissions: requested={requested:?} but available={available:?}")]
+    InvalidCustomPermissions {
+        requested: Vec<String>,
+        available: Vec<String>,
+    },
+
     #[error("{uri} is not valid: {reason}")]
     InvalidUri { reason: &'static str, uri: String },
 

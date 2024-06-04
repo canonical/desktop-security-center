@@ -1,5 +1,5 @@
 use aa_prompt_client::{
-    snapd_client::{PromptId, SnapdSocketClient},
+    snapd_client::{Action, PromptId, SnapdSocketClient},
     Result,
 };
 use std::io::{stdin, stdout, Write};
@@ -54,9 +54,9 @@ async fn run_simple_client(mut c: SnapdSocketClient) -> Result<()> {
             println!("{}", p.summary());
 
             let reply = if should_allow()? {
-                p.into_allow_once()
+                p.into_reply(Action::Allow)
             } else {
-                p.into_deny_once()
+                p.into_reply(Action::Deny)
             };
 
             if let Err(e) = c.reply_to_prompt(&id, reply).await {
