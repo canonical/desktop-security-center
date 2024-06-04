@@ -170,9 +170,9 @@ where
         Ok(prompt)
     }
 
-    /// Submit a reply to the given prompt
+    /// Submit a reply to the given prompt to snapd
     pub async fn reply_to_prompt(&self, id: &PromptId, reply: PromptReply) -> Result<()> {
-        let resp: serde_json::Value = self
+        let resp: Vec<String> = self
             .client
             .post_json(&format!("interfaces/requests/prompts/{}", id.0), reply)
             .await?;
@@ -265,43 +265,21 @@ permissions: {:?}
         )
     }
 
-    pub fn simple_reply(self, action: Action, lifespan: Lifespan) -> PromptReply {
+    /// Convert this [Prompt] into a [PromptReply] with a default lifespan of [Lifespan::Single]
+    /// and constraints matching those that were requested in the initial prompt.
+    ///
+    /// The returned `PromptReply` supports a builder API for modifying the details of the reply.
+    pub fn into_reply(self, action: Action) -> PromptReply {
         PromptReply {
             action,
-            lifespan,
+            lifespan: Lifespan::Single,
             duration: None,
             constraints: ReplyConstraints {
                 path_pattern: self.constraints.path,
                 permissions: self.constraints.permissions,
             },
+            available_permissions: self.constraints.available_permissions,
         }
-    }
-
-    pub fn build_reply(
-        self,
-        action: Action,
-        lifespan: Lifespan,
-        duration: Option<impl Into<String>>,
-        path: Option<impl Into<String>>,
-        perms: Option<Vec<String>>,
-    ) -> PromptReply {
-        PromptReply {
-            action,
-            lifespan,
-            duration: duration.map(Into::into),
-            constraints: ReplyConstraints {
-                path_pattern: path.map(Into::into).unwrap_or(self.constraints.path),
-                permissions: perms.unwrap_or(self.constraints.permissions),
-            },
-        }
-    }
-
-    pub fn into_allow_once(self) -> PromptReply {
-        self.simple_reply(Action::Allow, Lifespan::Single)
-    }
-
-    pub fn into_deny_once(self) -> PromptReply {
-        self.simple_reply(Action::Deny, Lifespan::Single)
     }
 }
 
@@ -313,6 +291,60 @@ pub struct PromptReply {
     #[serde(skip_serializing_if = "Option::is_none")]
     duration: Option<String>,
     constraints: ReplyConstraints,
+    #[serde(skip)]
+    available_permissions: Vec<String>,
+}
+
+impl PromptReply {
+    /// Set this reply to apply for the remainder of the user's current session.
+    pub fn for_session(mut self) -> Self {
+        self.lifespan = Lifespan::Session;
+        self
+    }
+
+    /// Set this reply to create a new permanent rule.
+    pub fn for_forever(mut self) -> Self {
+        self.lifespan = Lifespan::Forever;
+        self
+    }
+
+    /// Set this reply to apply for the specified timespan.
+    ///
+    /// Timespans are provided in the format parsable by go's [ParseDuration](https://pkg.go.dev/time#ParseDuration).
+    pub fn for_timespan(mut self, duration: impl Into<String>) -> Self {
+        self.lifespan = Lifespan::Timespan;
+        self.duration = Some(duration.into());
+        self
+    }
+
+    /// Specify a custom path pattern to replace the one originally requested in the parent [Prompt].
+    ///
+    /// If the path pattern provided is invalid or does not apply to the path originally requested
+    /// in the parent prompt then submitting this reply will result in an error being returned by
+    /// snapd.
+    pub fn with_custom_path_pattern(mut self, path_pattern: impl Into<String>) -> Self {
+        self.constraints.path_pattern = path_pattern.into();
+        self
+    }
+
+    /// Attempt to set a custom permission set for this reply.
+    ///
+    /// This method will error if the requested permissions are not available on the parent
+    /// [Prompt].
+    pub fn try_with_custom_permissions(mut self, permissions: Vec<String>) -> Result<Self> {
+        if permissions
+            .iter()
+            .all(|p| self.available_permissions.contains(p))
+        {
+            self.constraints.permissions = permissions;
+            Ok(self)
+        } else {
+            Err(Error::InvalidCustomPermissions {
+                requested: permissions,
+                available: self.available_permissions,
+            })
+        }
+    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
