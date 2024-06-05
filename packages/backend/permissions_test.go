@@ -19,7 +19,7 @@ const (
     {
       "experimental":
         {
-          "apparmor-prompting": true
+          "apparmor-prompting": %v
         }
     }
 }
@@ -31,10 +31,14 @@ const (
     DisableAppPermissions Function = iota
     EnableAppPermissions
     IsAppPermissionsEnabled
+    AreCustomRulesApplied
+    RemoveAppPermission
+    ListOfPersionalFolderRules
 )
 
 type ClientMock struct {
     wantError bool
+    isEnabled bool
     testedFun Function
 }
 func (c *ClientMock) Do(req *http.Request) (*http.Response, error) {
@@ -44,8 +48,8 @@ func (c *ClientMock) Do(req *http.Request) (*http.Response, error) {
 
     switch c.testedFun {
     case IsAppPermissionsEnabled:
-        return &http.Response{Body: io.NopCloser(strings.NewReader(appPermissionsEnabled))},
-        nil
+        r := fmt.Sprintf(appPermissionsEnabled, c.isEnabled)
+        return &http.Response{Body: io.NopCloser(strings.NewReader(r))}, nil
     case DisableAppPermissions:
         fallthrough
     case EnableAppPermissions:
@@ -115,23 +119,19 @@ func TestIsAppPermissionsEnabled(t *testing.T) {
         name     string
         wantError  bool
         isEnabled  bool
-        testedFun Function
     }{
         {
             name: "yes",
             isEnabled: true,
-            testedFun: IsAppPermissionsEnabled,
             wantError: false,
         },
         {
             name: "no",
             isEnabled: false,
-            testedFun: IsAppPermissionsEnabled,
             wantError: false,
         },
         {
             name: "error",
-            testedFun: IsAppPermissionsEnabled,
             wantError: true,
         },
     }
@@ -142,9 +142,50 @@ func TestIsAppPermissionsEnabled(t *testing.T) {
             client := &ClientMock{
                 wantError: tc.wantError,
                 testedFun: IsAppPermissionsEnabled,
+                isEnabled: tc.isEnabled,
+            }
+            r, err := NewPermissionServer(client).IsAppPermissionsEnabled(ctx, nil)
+            if tc.wantError {
+                require.Error(t, err)
+            } else {
+                require.NoError(t, err)
+                require.Equal(t, tc.isEnabled, r.GetValue())
+            }
+        })
+    }
+}
+/*
+func TestAreCustomRulesApplied(t *testing.T) {
+    tt := []struct {
+        name     string
+        wantError  bool
+        isEnabled  bool
+    }{
+        {
+            name: "yes",
+            isEnabled: true,
+            wantError: false,
+        },
+        {
+            name: "no",
+            isEnabled: false,
+            wantError: false,
+        },
+        {
+            name: "error",
+            wantError: true,
+        },
+    }
+    for i := range tt {
+        tc := tt[i]
+        t.Run(tc.name, func(t *testing.T) {
+            t.Parallel()
+            client := &ClientMock{
+                wantError: tc.wantError,
+                testedFun: AreCustomRulesApplied,
             }
             var err error
-            _, err = NewPermissionServer(client).IsAppPermissionsEnabled(ctx, nil)
+            _, err = NewPermissionServer(client).AreCustomRulesApplied(ctx, nil)
             if tc.wantError {
                 require.Error(t, err)
             } else {
@@ -153,3 +194,4 @@ func TestIsAppPermissionsEnabled(t *testing.T) {
         })
     }
 }
+*/
