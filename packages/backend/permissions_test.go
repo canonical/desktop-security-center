@@ -7,6 +7,7 @@ import (
     "net/http"
     "strings"
     "io"
+    "reflect"
 )
 
 const (
@@ -31,6 +32,11 @@ const (
 {"type":"sync","status-code":200,"status":"OK","result":[]}
 `
 )
+
+var listOfPersonalFoldersPerm = map[string][]string {
+    "/home/ubuntu/.config/fobar": []string{"simple-notepad"},
+    "/home/ubuntu/Documents/fobar": []string{"simple-notepad"},
+}
 
 type Function int
 const (
@@ -242,7 +248,15 @@ func TestListPersonalFoldersPermissions(t *testing.T) {
                 require.Error(t, err)
             } else {
                 require.NoError(t, err)
-                fmt.Println(r.GetPathsnaps())
+                /* This is frustrating. GRPC converts our map[string][]string
+                 * into a map[string]*__.Array. We cannot compare that AFAIK,
+                 * so first we need to reencode that to map[string][]string
+                 */
+                m := make(map[string][]string)
+                for idx, v := range(r.GetPathsnaps()) {
+                    m[idx] = v.GetE()
+                }
+                require.True(t, reflect.DeepEqual(m, listOfPersonalFoldersPerm))
             }
         })
     }
