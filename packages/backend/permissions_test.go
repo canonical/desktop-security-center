@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"testing"
 	"fmt"
     "github.com/stretchr/testify/require"
@@ -9,8 +8,6 @@ import (
     "strings"
     "io"
 )
-
-var ctx context.Context
 
 type ClientMock struct {
     wantError bool
@@ -29,11 +26,6 @@ func (c *ClientMock) Do(req *http.Request) (*http.Response, error) {
     } else {
         return &http.Response{}, fmt.Errorf("Error")
     }
-}
-
-func TestMain(m *testing.M) {
-	ctx = context.Background()
-	m.Run()
 }
 
 func testToggleAppPermissions(t *testing.T, enable bool) {
