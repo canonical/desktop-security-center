@@ -39,9 +39,9 @@ jobs:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #   workdir: ./aa-prompt-client
 
-      - name: Setup snapd
+      - name: Setup snapd and testing snap
         run: |
-          sudo snap install lxd
+          sudo lxd init --auto
           sudo snap install snapcraft --classic
           sudo snapcraft
           sudo snap install ./aa-prompting-test_0.1_amd64.snap --dangerous
