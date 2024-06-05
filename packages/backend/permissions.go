@@ -191,7 +191,7 @@ func (s *PermissionServer) RemoveAppPermission(ctx context.Context, req *pb.Remo
 
 /* List all permissions to personal directories */
 func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _ *epb.Empty) (*pb.ListOfPersionalFolderRules, error) {
-    pathSnaps, _ := getSnapPathIdMaps(s.client)
+    pathSnaps, err := getSnapPathIdMaps(s.client)
 
     /* This is just juggling Protobuf, nothing substantially interesting */
     pathSnapsGrpc := make(map[string]*pb.Array)
@@ -199,5 +199,5 @@ func (s *PermissionServer) ListPersonalFoldersPermissions(ctx context.Context, _
         pathSnapsGrpc[i] = &pb.Array{E: p}
     }
 
-    return &pb.ListOfPersionalFolderRules{Pathsnaps: pathSnapsGrpc}, nil
+    return &pb.ListOfPersionalFolderRules{Pathsnaps: pathSnapsGrpc}, err
 }
