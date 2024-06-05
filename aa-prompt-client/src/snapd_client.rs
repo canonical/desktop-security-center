@@ -6,6 +6,7 @@ use chrono::{DateTime, SecondsFormat, Utc};
 use hyper::Uri;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use std::{collections::BTreeMap, str::FromStr};
+use strum::{Display, EnumString};
 use tracing::debug;
 
 const FEATURE_NAME: &str = "apparmor-prompting";
@@ -347,15 +348,17 @@ impl PromptReply {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize, Display, EnumString)]
 #[serde(rename_all = "lowercase")]
+#[strum(serialize_all = "lowercase")]
 pub enum Action {
     Allow,
     Deny,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize, Display, EnumString)]
 #[serde(rename_all = "lowercase")]
+#[strum(serialize_all = "lowercase")]
 pub enum Lifespan {
     Single,
     Session,
