@@ -5,6 +5,8 @@ import (
     "context"
     "errors"
     "log"
+    "net"
+    "net/http"
     pb "github.com/canonical/desktop-security-center/packages/proto"
     "github.com/godbus/dbus/v5"
     "google.golang.org/grpc/codes"
@@ -38,10 +40,14 @@ func NewServerManager (ctx context.Context, conns ...*dbus.Conn) (*Manager, erro
         return nil, status.Errorf(codes.Internal, "Failed to create user service: %s", err)
     }
 
-    permissionServer, err := NewPermissionServer("/run/snapd.socket")
-    if err != nil {
-        return nil, status.Errorf(codes.Internal, "Failed to create permission server: %s", err)
+    c := &http.Client{
+        Transport: &http.Transport{
+            DialContext: func(ctx context.Context, network, addr string) (net.Conn, error) {
+                return (&net.Dialer{}).DialContext(ctx, "unix", "/run/snapd.socket")
+            },
+        },
     }
+    permissionServer := NewPermissionServer(c)
 
     return &Manager{
         proServer:        proServer,

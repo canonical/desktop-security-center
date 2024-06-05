@@ -5,7 +5,6 @@ import (
     wpb "google.golang.org/protobuf/types/known/wrapperspb"
     "context"
     "github.com/tidwall/gjson"
-    "net"
     "io"
     "bytes"
     "log"
@@ -25,27 +24,24 @@ var empty = new(epb.Empty)
 var snapPathId = map[string]string{}
 var authHeader = map[string]string{"X-Allow-Interaction": "true"}
 
-type PermissionServer struct {
-    pb.UnimplementedPermissionServer
-    client *http.Client
+type HttpClient interface {
+    Do(req *http.Request) (*http.Response, error)
 }
 
-func NewPermissionServer(url string) (*PermissionServer, error) {
+type PermissionServer struct {
+    pb.UnimplementedPermissionServer
+    client HttpClient
+}
+
+func NewPermissionServer(c HttpClient) (*PermissionServer) {
     /* Copy paste from https://stackoverflow.com/a/59665098 */
-    c := &http.Client{
-        Transport: &http.Transport{
-            DialContext: func(ctx context.Context, network, addr string) (net.Conn, error) {
-                return (&net.Dialer{}).DialContext(ctx, "unix", url)
-            },
-        },
-    }
     s := &PermissionServer{
         client: c,
     }
-    return s, nil
+    return s
 }
 
-func makeRestReq(client *http.Client, kind string, headers map[string]string, where string, reqBody io.Reader) (string, error) {
+func makeRestReq(client HttpClient, kind string, headers map[string]string, where string, reqBody io.Reader) (string, error) {
     req, err := http.NewRequest(kind, where, reqBody)
     if err != nil {
         log.Printf("Couldn't create %s request to %s.", kind, where)
@@ -79,7 +75,7 @@ func makeRestReq(client *http.Client, kind string, headers map[string]string, wh
  * As such, we keep a map({snap}:{path})->id for ourselves and hand a
  * map(path)->snaps to the front-end.
  */
-func getSnapPathIdMaps(client *http.Client) (map[string][]string, error) {
+func getSnapPathIdMaps(client HttpClient) (map[string][]string, error) {
     o, err := makeRestReq(client, "GET", nil, rulesApi, nil)
     if err != nil {
         return nil, err
@@ -102,7 +98,7 @@ func getSnapPathIdMaps(client *http.Client) (map[string][]string, error) {
     return pathSnaps, nil
 }
 
-func enableAppPermissions(client *http.Client, enable bool) error {
+func enableAppPermissions(client HttpClient, enable bool) error {
     var body string
     if enable {
         body = fmt.Sprintf(`{"experimental.apparmor-prompting":%s}`, "true")
