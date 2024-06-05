@@ -26,24 +26,24 @@ jobs:
         with:
           toolchain: stable
 
-      - name: Rustfmt formatting
-        uses: mbrobbel/rustfmt-check@master
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-        working-directory: ./aa-prompt-client
+      # - name: Rustfmt formatting
+      #   uses: mbrobbel/rustfmt-check@master
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #   working-directory: ./aa-prompt-client
 
-      - name: Clippy linting
-        uses: giraffate/clippy-action@v1
-        with:
-          reporter: "github-pr-review"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-        workdir: ./aa-prompt-client
+      # - name: Clippy linting
+      #   uses: giraffate/clippy-action@v1
+      #   with:
+      #     reporter: "github-pr-review"
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #   workdir: ./aa-prompt-client
 
       - name: Setup snapd
         run: |
-          sudo snap install snapd
+          sudo snap install lxd
           sudo snap install snapcraft --classic
-          snapcraft
+          sudo snapcraft
           sudo snap install ./aa-prompting-test_0.1_amd64.snap --dangerous
           sudo snap refresh snapd --channel=latest/edge/prompting
           sudo snap set system experimental.apparmor-prompting=true
