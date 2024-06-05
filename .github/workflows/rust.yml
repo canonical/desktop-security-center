@@ -47,8 +47,9 @@ jobs:
         run: |
           sudo snap install --dangerous ${{ steps.snapcraft.outputs.snap }}
           sudo snap refresh snapd --channel=latest/edge/prompting
-          sudo snap set system experimental.apparmor-prompting=true
 
       - name: Run tests
         working-directory: ./aa-prompt-client
-        run: cargo test
+        run: |
+          sudo snap set system experimental.apparmor-prompting=true
+          cargo test
