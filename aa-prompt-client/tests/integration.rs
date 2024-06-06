@@ -13,7 +13,7 @@ use aa_prompt_client::{
 use serial_test::serial;
 use simple_test_case::test_case;
 use std::{
-    fs,
+    env, fs,
     io::{self, ErrorKind},
     sync::mpsc::{channel, Receiver},
 };
@@ -44,11 +44,16 @@ fn spawn_for_output(cmd: &'static str, args: Vec<String>) -> Receiver<Output> {
     rx
 }
 
+fn get_home() -> String {
+    env::var("HOME").expect("HOME env var to be set")
+}
+
 fn setup_test_dir(subdir: Option<&str>, files: &[(&str, &str)]) -> io::Result<(String, String)> {
     let prefix = Uuid::new_v4().to_string();
+    let home = get_home();
     let path = match subdir {
-        Some(s) => format!("/home/ubuntu/test/{prefix}/{s}"),
-        None => format!("/home/ubuntu/test/{prefix}"),
+        Some(s) => format!("{home}/test/{prefix}/{s}"),
+        None => format!("{home}/test/{prefix}"),
     };
 
     fs::create_dir_all(&path)?;
@@ -93,7 +98,7 @@ async fn ensure_prompting_is_enabled() -> Result<()> {
 }
 
 #[test_case(Action::Allow, "testing testing 1 2 3\n", ""; "allow")]
-#[test_case(Action::Deny, "", "cat: /home/ubuntu/test/<PATH>/test.txt: Permission denied\n"; "deny")]
+#[test_case(Action::Deny, "", "cat: <HOME>/test/<PATH>/test.txt: Permission denied\n"; "deny")]
 #[tokio::test]
 #[serial]
 async fn happy_path_read_single(
@@ -113,7 +118,9 @@ async fn happy_path_read_single(
     assert_eq!(output.stdout, expected_stdout, "stdout");
     assert_eq!(
         output.stderr,
-        expected_stderr.replace("<PATH>", &prefix),
+        expected_stderr
+            .replace("<HOME>", &get_home())
+            .replace("<PATH>", &prefix),
         "stderr"
     );
 

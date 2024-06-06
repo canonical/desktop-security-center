@@ -55,4 +55,4 @@ integration-tests:
 	cp $$FNAME integration-tests; \
 	lxc file push integration-tests aa-testing/home/ubuntu/; \
 	rm integration-tests; \
-	lxc exec --user=1000 aa-testing /home/ubuntu/integration-tests;
+	lxc exec --user=1000 --env HOME=/home/ubuntu aa-testing /home/ubuntu/integration-tests;

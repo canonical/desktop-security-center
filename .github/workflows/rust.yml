@@ -27,25 +27,19 @@ jobs:
           toolchain: stable
           components: clippy, rustfmt
 
-      # FIXME: need to be able to run the integration tests in CI as well but
-      # that is going to involve tweaking how we identify the home directory
-      # rather than hard-coding to /home/ubuntu
+      - name: Build testing snap
+        id: snapcraft
+        uses: snapcore/action-build@v1
 
-      # - name: Build testing snap
-      #   id: snapcraft
-      #   uses: snapcore/action-build@v1
-
-      # - name: Setup snapd and test snap
-      #   run: |
-      #     sudo snap install --dangerous ${{ steps.snapcraft.outputs.snap }}
-      #     sudo snap refresh snapd --channel=latest/edge/prompting
-      #     sudo snap set system experimental.apparmor-prompting=true
+      - name: Setup snapd and test snap
+        run: |
+          sudo snap install --dangerous ${{ steps.snapcraft.outputs.snap }}
+          sudo snap refresh snapd --channel=latest/edge/prompting
+          sudo snap set system experimental.apparmor-prompting=true
 
       - name: Run tests
         working-directory: ./aa-prompt-client
         run: |
           cargo fmt -- --check
           cargo clippy -- -D warnings
-          # FIXME: remove the --lib once we have the integration tests sorted
-          # for running in CI
-          cargo test --lib
+          cargo test
