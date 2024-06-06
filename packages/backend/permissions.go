@@ -71,7 +71,7 @@ func validateApiResponse(res string) error {
         return status.Errorf(codes.Internal, "Invalid Json")
     }
     statusCode := gjson.Get(res, "status-code").Int()
-    if statusCode != 200 {
+    if statusCode < 200 || statusCode >= 300 {
         return fmt.Errorf("API response %s gave code %d.", res, statusCode)
     }
     return nil
