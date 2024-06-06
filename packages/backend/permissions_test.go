@@ -55,35 +55,42 @@ type ClientMock struct {
 }
 func (c *ClientMock) Do(req *http.Request) (*http.Response, error) {
     if c.wantError {
-        return &http.Response{}, fmt.Errorf("Error")
+        return &http.Response{}, fmt.Errorf("Error requested")
     }
 
-    switch c.testedFun {
-    case IsAppPermissionsEnabled:
-        r := fmt.Sprintf(appPermissionsJson, c.isEnabled)
-        return &http.Response{Body: io.NopCloser(strings.NewReader(r))}, nil
-    case ListPersonalFoldersPermissions:
-        fallthrough
-    case AreCustomRulesApplied:
-        var r string
-        if c.isEnabled {
-            r = customRulesJson
-        } else {
-            r = noCustomRulesJson
+    switch req.URL.String() {
+    case confApi:
+        switch req.Method {
+        case "PUT":
+            si, err := io.ReadAll(req.Body)
+            s := string(si)
+            if err != nil {
+                return nil, fmt.Errorf("Malformed request body, %s. %w", s, err)
+            }
+            if s == fmt.Sprintf(promptBody, "false") ||
+               s == fmt.Sprintf(promptBody, "true") {
+                return &http.Response{
+                   Body: io.NopCloser(strings.NewReader("{}")),
+               }, nil
+            } else {
+                return &http.Response{}, fmt.Errorf("Error")
+            }
+        case "GET":
+            r := fmt.Sprintf(appPermissionsJson, c.isEnabled)
+            return &http.Response{Body: io.NopCloser(strings.NewReader(r))}, nil
         }
-        return &http.Response{Body: io.NopCloser(strings.NewReader(r))}, nil
-    case DisableAppPermissions:
-        fallthrough
-    case EnableAppPermissions:
-        s, err := io.ReadAll(req.Body)
-        if err != nil {
-            return nil, fmt.Errorf("Error %w", err)
-        }
-        if string(s) == `{"experimental.apparmor-prompting":false}` ||
-           string(s) == `{"experimental.apparmor-prompting":true}` {
-            return &http.Response{ Body: io.NopCloser(strings.NewReader("{}"))}, nil
-        } else {
-            return &http.Response{}, fmt.Errorf("Error")
+    case rulesApi:
+        switch req.Method {
+        case "PUT":
+            fallthrough
+        case "GET":
+            var r string
+            if c.isEnabled {
+                r = customRulesJson
+            } else {
+                r = noCustomRulesJson
+            }
+            return &http.Response{Body: io.NopCloser(strings.NewReader(r))}, nil
         }
     }
     panic("Not reached")
