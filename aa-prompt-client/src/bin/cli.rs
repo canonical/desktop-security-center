@@ -4,7 +4,11 @@ use aa_prompt_client::{
     Result,
 };
 use clap::{Parser, Subcommand};
-use std::io::{stdin, stdout, Write};
+use std::{
+    fs,
+    io::{stderr, stdin, stdout, Write},
+};
+use tokio::{select, signal::ctrl_c};
 use tracing::subscriber::set_global_default;
 use tracing::{debug, info, warn};
 use tracing_subscriber::FmtSubscriber;
@@ -13,6 +17,14 @@ use tracing_subscriber::FmtSubscriber;
 enum Command {
     /// Run a simple allow/deny once listener
     Loop,
+
+    /// Echo all prompts seen on stdout
+    Echo {
+        /// Optionally record events to a specified file on Ctrl-C
+        #[clap(short, long, value_name = "FILE")]
+        record: Option<String>,
+    },
+
     /// Listen for and handle a single targetted prompt
     Target {
         /// The name of the snap triggering the expected prompt
@@ -31,6 +43,9 @@ enum Command {
         /// When lifespan is 'timespan', the duration that should be applied
         #[arg(long, required_if_eq("lifespan", "timespan"))]
         duration: Option<String>,
+        /// A custom path to reply with
+        #[clap(long)]
+        path: Option<String>,
     },
 }
 
@@ -52,7 +67,7 @@ async fn main() -> Result<()> {
         let level = if verbose == 1 { "info" } else { "debug" };
         let subscriber = FmtSubscriber::builder()
             .with_env_filter(level)
-            .with_writer(stdout)
+            .with_writer(stderr)
             .finish();
         set_global_default(subscriber).expect("unable to set a global tracing subscriber");
     }
@@ -70,19 +85,23 @@ async fn main() -> Result<()> {
             action,
             lifespan,
             duration,
-        } => handle_target(c, snap, requested, action, lifespan, duration).await,
+            path,
+        } => listen_for_target(c, snap, requested, action, lifespan, duration, path).await,
+
+        Command::Echo { record } => run_echo_loop(c, record).await,
 
         Command::Loop => run_simple_client_loop(c).await,
     }
 }
 
-async fn handle_target(
+async fn listen_for_target(
     mut c: SnapdSocketClient,
     snap: String,
     requested: Option<String>,
     action: Action,
     lifespan: Lifespan,
     duration: Option<String>,
+    path: Option<String>,
 ) -> Result<()> {
     info!("beginning polling for prompts");
     loop {
@@ -112,10 +131,50 @@ async fn handle_target(
                 Lifespan::Timespan => reply.for_timespan(duration.unwrap()),
             };
 
+            if let Some(path) = path {
+                reply = reply.with_custom_path_pattern(path);
+            }
+
             info!(?id, ?reply, "replying to prompt");
             c.reply_to_prompt(id, reply).await?;
 
             return Ok(());
+        }
+    }
+}
+
+async fn run_echo_loop(mut c: SnapdSocketClient, path: Option<String>) -> Result<()> {
+    let recording = path.is_some();
+    let mut prompts = Vec::new();
+
+    loop {
+        debug!("waiting for notices");
+        let pending = select! {
+            res = c.pending_prompts() => res?,
+            _ = ctrl_c() => {
+                if recording {
+                    fs::write(path.unwrap(), serde_json::to_string(&prompts)?)?;
+                }
+
+                return Ok(());
+            }
+        };
+
+        info!(?pending, "processing notices");
+        for id in pending {
+            debug!(?id, "pulling prompt details from snapd");
+            let p = match c.prompt_details(&id).await {
+                Ok(p) => p,
+                Err(e) => {
+                    warn!(%e, "unable to pull prompt");
+                    continue;
+                }
+            };
+
+            println!("{}", serde_json::to_string(&p)?);
+            if recording {
+                prompts.push(p);
+            }
         }
     }
 }
