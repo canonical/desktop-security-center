@@ -18,6 +18,7 @@ const (
   rulesApi = "http://localhost/v2/interfaces/requests/rules"
   confApi = "http://localhost/v2/snaps/system/conf"
   removeBody = `{"action":"remove"}`
+  promptBody = `{"experimental.apparmor-prompting":%s}`
   sep = ":"
 )
 var empty = new(epb.Empty)
@@ -101,9 +102,9 @@ func getSnapPathIdMaps(client HttpClient) (map[string][]string, error) {
 func enableAppPermissions(client HttpClient, enable bool) error {
     var body string
     if enable {
-        body = fmt.Sprintf(`{"experimental.apparmor-prompting":%s}`, "true")
+        body = fmt.Sprintf(promptBody, "true")
     } else {
-        body = fmt.Sprintf(`{"experimental.apparmor-prompting":%s}`, "false")
+        body = fmt.Sprintf(promptBody, "false")
     }
     o, err := makeRestReq(
         client,
