@@ -8,6 +8,7 @@ import (
     "strings"
     "io"
     "reflect"
+    pb "github.com/canonical/desktop-security-center/packages/proto"
 )
 
 const (
@@ -25,11 +26,23 @@ const (
     }
 }
 `
+enablePermissionsJson = `
+{"type":"async","status-code":202,"status":"Accepted","result":null,"change":"92"}
+`
+queryPermissionsEnabledJson = `
+{"type":"sync","status-code":200,"status":"OK","result":{"experimental":{"apparmor-prompting":true},"refresh":{},"seed":{"loaded":true},"system":{"hostname":"prompting","network":{},"timezone":"UTC"}}}
+`
     customRulesJson = `
 {"type":"sync","status-code":200,"status":"OK","result":[{"id":"C7JGESQZTWTSS===","timestamp":"2024-05-24T09:21:18.378444585Z","user":1000,"snap":"simple-notepad","interface":"home","constraints":{"path-pattern":"/home/ubuntu/.config/fobar","permissions":["read","write"]},"outcome":"allow","lifespan":"forever","expiration":"0001-01-01T00:00:00Z"},{"id":"C7JHBW7E7Q7PO===","timestamp":"2024-05-24T13:48:17.723465463Z","user":1000,"snap":"simple-notepad","interface":"home","constraints":{"path-pattern":"/home/ubuntu/Documents/fobar","permissions":["read","write"]},"outcome":"allow","lifespan":"forever","expiration":"0001-01-01T00:00:00Z"}]}
 `
     noCustomRulesJson = `
 {"type":"sync","status-code":200,"status":"OK","result":[]}
+`
+    idNotFoundJson = `
+{"type":"error","status-code":500,"status":"Internal Server Error","result":{"message":"rule ID is not found"}}
+`
+    idRemoved = `
+{"type":"sync","status-code":200,"status":"OK","result":[{"id":"C7JHBW7E7Q7PO===","timestamp":"2024-05-24T13:48:17.723465463Z","user":1000,"snap":"simple-notepad","interface":"home","constraints":{"path-pattern":"/home/ubuntu/Documents/fobar","permissions":["read","write"]},"outcome":"allow","lifespan":"forever","expiration":"0001-01-01T00:00:00Z"}]}
 `
 )
 
@@ -50,6 +63,7 @@ const (
 
 type ClientMock struct {
     wantError bool
+    wantApiError bool
     isEnabled bool
     testedFun Function
 }
@@ -58,9 +72,10 @@ func (c *ClientMock) Do(req *http.Request) (*http.Response, error) {
         return &http.Response{}, fmt.Errorf("Error requested")
     }
 
-    switch req.URL.String() {
-    case confApi:
+    url := req.URL.String()
+    if url == confApi {
         switch req.Method {
+        // DisableAppPermissions, EnableAppPermissions
         case "PUT":
             si, err := io.ReadAll(req.Body)
             s := string(si)
@@ -70,27 +85,31 @@ func (c *ClientMock) Do(req *http.Request) (*http.Response, error) {
             if s == fmt.Sprintf(promptBody, "false") ||
                s == fmt.Sprintf(promptBody, "true") {
                 return &http.Response{
-                   Body: io.NopCloser(strings.NewReader("{}")),
+                   Body: io.NopCloser(strings.NewReader(enablePermissionsJson)),
                }, nil
             } else {
                 return &http.Response{}, fmt.Errorf("Error")
             }
+        // IsAppPermissionsEnabled
         case "GET":
             r := fmt.Sprintf(appPermissionsJson, c.isEnabled)
             return &http.Response{Body: io.NopCloser(strings.NewReader(r))}, nil
         }
-    case rulesApi:
-        switch req.Method {
-        case "PUT":
-            fallthrough
-        case "GET":
-            var r string
-            if c.isEnabled {
-                r = customRulesJson
-            } else {
-                r = noCustomRulesJson
-            }
-            return &http.Response{Body: io.NopCloser(strings.NewReader(r))}, nil
+    // ListPersonalFoldersPermissions, AreCustomRulesApplied
+    } else if url == rulesApi && req.Method == "GET" {
+        var r string
+        if c.isEnabled {
+            r = customRulesJson
+        } else {
+            r = noCustomRulesJson
+        }
+        return &http.Response{Body: io.NopCloser(strings.NewReader(r))}, nil
+    // RemoveAppPermission
+    } else if strings.HasPrefix(url, rulesApi) && req.Method == "POST" {
+        if c.wantApiError {
+            return &http.Response{Body: io.NopCloser(strings.NewReader(idNotFoundJson))}, nil
+        } else {
+            return &http.Response{Body: io.NopCloser(strings.NewReader(idRemoved))}, nil
         }
     }
     panic("Not reached")
@@ -264,6 +283,53 @@ func TestListPersonalFoldersPermissions(t *testing.T) {
                     m[idx] = v.GetE()
                 }
                 require.True(t, reflect.DeepEqual(m, listOfPersonalFoldersPerm))
+            }
+        })
+    }
+}
+func TestRemoveAppPermission(t *testing.T) {
+    tt := []struct {
+        name     string
+        wantError  bool
+        isEnabled  bool
+        wantApiError bool
+    }{
+        {
+            name: "yes",
+            isEnabled: true,
+            wantError: false,
+            wantApiError: false,
+        },
+        {
+            name: "no",
+            isEnabled: true,
+            wantError: false,
+            wantApiError: true,
+        },
+        {
+            name: "error",
+            wantError: true,
+        },
+    }
+    for i := range tt {
+        tc := tt[i]
+        t.Run(tc.name, func(t *testing.T) {
+            t.Parallel()
+            client := &ClientMock{
+                wantError: tc.wantError,
+                wantApiError: tc.wantApiError,
+                testedFun: RemoveAppPermission,
+                isEnabled: tc.isEnabled,
+            }
+            req := &pb.RemoveAppPermissionRequest{
+                Removepath: "/home/ubuntu/.foo",
+                Removesnap: "hello",
+            }
+            _, err := NewPermissionServer(client).RemoveAppPermission(ctx, req)
+            if tc.wantError || tc.wantApiError {
+                require.Error(t, err)
+            } else {
+                require.NoError(t, err)
             }
         })
     }
