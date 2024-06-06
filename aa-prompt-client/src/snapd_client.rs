@@ -6,6 +6,7 @@ use chrono::{DateTime, SecondsFormat, Utc};
 use hyper::Uri;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use std::{collections::BTreeMap, str::FromStr};
+use strum::{Display, EnumString};
 use tracing::debug;
 
 const FEATURE_NAME: &str = "apparmor-prompting";
@@ -283,7 +284,7 @@ permissions: {:?}
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct PromptReply {
     action: Action,
@@ -347,23 +348,31 @@ impl PromptReply {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(
+    Debug, Default, Clone, Copy, PartialEq, Eq, Deserialize, Serialize, Display, EnumString,
+)]
 #[serde(rename_all = "lowercase")]
+#[strum(serialize_all = "lowercase")]
 pub enum Action {
     Allow,
+    #[default]
     Deny,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(
+    Debug, Default, Clone, Copy, PartialEq, Eq, Deserialize, Serialize, Display, EnumString,
+)]
 #[serde(rename_all = "lowercase")]
+#[strum(serialize_all = "lowercase")]
 pub enum Lifespan {
+    #[default]
     Single,
     Session,
     Forever,
     Timespan,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 struct ReplyConstraints {
     path_pattern: String,
@@ -415,6 +424,23 @@ mod tests {
         match s.prompting_enabled() {
             Err(Error::NotAvailable) => (),
             res => panic!("expected NotAvailable, got {res:?}"),
+        }
+    }
+
+    #[test_case(&["read"], &["read", "write"]; "some not in available")]
+    #[test_case(&["read"], &["write"]; "none in available")]
+    #[test]
+    fn invalid_reply_permissions_error(available: &[&str], requested: &[&str]) {
+        let reply = PromptReply {
+            available_permissions: available.iter().map(|&s| s.into()).collect(),
+            ..Default::default()
+        };
+
+        let res = reply.try_with_custom_permissions(requested.iter().map(|&s| s.into()).collect());
+        match res {
+            Err(Error::InvalidCustomPermissions { .. }) => (),
+            Err(e) => panic!("expected InvalidCustomPermissions, got {e}"),
+            Ok(_) => panic!("should have errored"),
         }
     }
 }
