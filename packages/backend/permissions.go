@@ -57,17 +57,24 @@ func makeRestReq(client HttpClient, kind string, headers map[string]string, wher
         return "", err
     }
     defer res.Body.Close()
-    /* Do we need this? The JSON should have the status code
-    if res.StatusCode != http.StatusOK {
-        return "", fmt.Errorf("Rest request to %s gave code %d.", where, res.StatusCode)
-    }
-    */
     resBody, err := io.ReadAll(res.Body)
     if err != nil {
         log.Printf("Couldn't read response from %s request to %s.", kind, where)
         return "", err
     }
     return string(resBody), nil
+}
+
+func validateApiResponse(res string) error {
+    if !gjson.Valid(res) {
+        log.Printf("Invalid Json: >%s<", res)
+        return status.Errorf(codes.Internal, "Invalid Json")
+    }
+    statusCode := gjson.Get(res, "status-code").Int()
+    if statusCode != 200 {
+        return fmt.Errorf("API response gave code %d.", statusCode)
+    }
+    return nil
 }
 
 /* The front-end wants paths mapped to the snaps that have permission to write
@@ -81,9 +88,9 @@ func getSnapPathIdMaps(client HttpClient) (map[string][]string, error) {
     if err != nil {
         return nil, err
     }
-    if !gjson.Valid(o) {
-        log.Printf("Invalid Json: >%s<", o)
-        return nil, status.Errorf(codes.Internal, "Invalid Json")
+    err = validateApiResponse(o)
+    if err != nil {
+        return nil, err
     }
     pathSnaps := make(map[string][]string)
     snapAr := gjson.Get(o, "result.#(interface=\"home\")#.snap").Array()
@@ -116,11 +123,7 @@ func enableAppPermissions(client HttpClient, enable bool) error {
     if err != nil {
         return err
     }
-    if !gjson.Valid(o) {
-        log.Printf("Invalid Json: >%s<", o)
-        return status.Errorf(codes.Internal, "Invalid Json")
-    }
-    return nil
+    return validateApiResponse(o)
 }
 
 /* This returns 'snap get system experimental.apparmor-prompting' */
@@ -129,9 +132,9 @@ func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.E
     if err != nil {
         return nil, err
     }
-    if !gjson.Valid(o) {
-        log.Printf("Invalid Json: >%s<", o)
-        return nil, status.Errorf(codes.Internal, "Invalid Json")
+    err = validateApiResponse(o)
+    if err != nil {
+        return nil, err
     }
     enabled := gjson.Get(o, "result.experimental.apparmor-prompting").Bool()
     return wpb.Bool(enabled), nil
@@ -161,9 +164,9 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
     if err != nil {
         return nil, err
     }
-    if !gjson.Valid(o) {
-        log.Printf("Invalid Json: >%s<", o)
-        return nil, status.Errorf(codes.Internal, "Invalid Json")
+    err = validateApiResponse(o)
+    if err != nil {
+        return nil, err
     }
     return wpb.Bool(gjson.Get(o, "result.#").Uint() > 0), nil
 }
@@ -180,14 +183,17 @@ func (s *PermissionServer) RemoveAppPermission(ctx context.Context, req *pb.Remo
         }
     }
     id := snapPathId[snap + sep + path]
-    _, err := makeRestReq(
+    o, err := makeRestReq(
         s.client,
         "POST",
         authHeader,
         rulesApi + "/" + id,
         bytes.NewReader([]byte(removeBody)),
     )
-    return empty, err
+    if err != nil {
+        return empty, err
+    }
+    return empty, validateApiResponse(o)
 }
 
 /* List all permissions to personal directories */
