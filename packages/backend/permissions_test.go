@@ -13,18 +13,19 @@ import (
 
 
 var listOfPersonalFoldersPerm = map[string][]string {
-    "/home/ubuntu/.config/fobar": []string{"simple-notepad"},
-    "/home/ubuntu/Documents/fobar": []string{"simple-notepad"},
+    "/home/ubuntu/.config/fobar": []string{"hello"},
+    "/home/ubuntu/Documents/fobar": []string{"hello"},
 }
+const doError = "Do error requested"
 
 type ClientMock struct {
-    wantError bool
+    wantDoError bool
     wantApiError bool
     isEnabled bool
 }
 func (c *ClientMock) Do(req *http.Request) (*http.Response, error) {
-    if c.wantError {
-        return &http.Response{}, fmt.Errorf("Error requested")
+    if c.wantDoError {
+        return &http.Response{}, fmt.Errorf(doError)
     }
 
     url := req.URL.String()
@@ -73,15 +74,15 @@ func (c *ClientMock) Do(req *http.Request) (*http.Response, error) {
 func testToggleAppPermissions(t *testing.T, toggleTo bool) {
     tt := []struct {
         name     string
-        wantError  bool
+        wantDoError  bool
     }{
         {
             name: "valid response",
-            wantError: false,
+            wantDoError: false,
         },
         {
             name: "invalid response",
-            wantError: true,
+            wantDoError: true,
         },
     }
     for i := range tt {
@@ -89,7 +90,7 @@ func testToggleAppPermissions(t *testing.T, toggleTo bool) {
         t.Run(tc.name, func(t *testing.T) {
             t.Parallel()
             client := &ClientMock{
-                wantError: tc.wantError,
+                wantDoError: tc.wantDoError,
             }
             var err error
             switch toggleTo {
@@ -98,8 +99,8 @@ func testToggleAppPermissions(t *testing.T, toggleTo bool) {
             case false:
                 _, err = NewPermissionServer(client).DisableAppPermissions(ctx, nil)
             }
-            if tc.wantError {
-                require.Error(t, err)
+            if tc.wantDoError {
+                require.ErrorContains(t, err, doError)
             } else {
                 require.NoError(t, err)
             }
@@ -116,22 +117,22 @@ func TestDisableAppPermissions(t *testing.T) {
 func TestIsAppPermissionsEnabled(t *testing.T) {
     tt := []struct {
         name     string
-        wantError  bool
+        wantDoError  bool
         isEnabled  bool
     }{
         {
             name: "yes",
             isEnabled: true,
-            wantError: false,
+            wantDoError: false,
         },
         {
             name: "no",
             isEnabled: false,
-            wantError: false,
+            wantDoError: false,
         },
         {
             name: "error",
-            wantError: true,
+            wantDoError: true,
         },
     }
     for i := range tt {
@@ -139,11 +140,11 @@ func TestIsAppPermissionsEnabled(t *testing.T) {
         t.Run(tc.name, func(t *testing.T) {
             t.Parallel()
             client := &ClientMock{
-                wantError: tc.wantError,
+                wantDoError: tc.wantDoError,
                 isEnabled: tc.isEnabled,
             }
             r, err := NewPermissionServer(client).IsAppPermissionsEnabled(ctx, nil)
-            if tc.wantError {
+            if tc.wantDoError {
                 require.Error(t, err)
             } else {
                 require.NoError(t, err)
@@ -155,22 +156,22 @@ func TestIsAppPermissionsEnabled(t *testing.T) {
 func TestAreCustomRulesApplied(t *testing.T) {
     tt := []struct {
         name     string
-        wantError  bool
+        wantDoError  bool
         isEnabled  bool
     }{
         {
             name: "yes",
             isEnabled: true,
-            wantError: false,
+            wantDoError: false,
         },
         {
             name: "no",
             isEnabled: false,
-            wantError: false,
+            wantDoError: false,
         },
         {
             name: "error",
-            wantError: true,
+            wantDoError: true,
         },
     }
     for i := range tt {
@@ -178,12 +179,12 @@ func TestAreCustomRulesApplied(t *testing.T) {
         t.Run(tc.name, func(t *testing.T) {
             t.Parallel()
             client := &ClientMock{
-                wantError: tc.wantError,
+                wantDoError: tc.wantDoError,
                 isEnabled: tc.isEnabled,
             }
             var err error
             r, err := NewPermissionServer(client).AreCustomRulesApplied(ctx, nil)
-            if tc.wantError {
+            if tc.wantDoError {
                 require.Error(t, err)
             } else {
                 require.NoError(t, err)
@@ -195,17 +196,17 @@ func TestAreCustomRulesApplied(t *testing.T) {
 func TestListPersonalFoldersPermissions(t *testing.T) {
     tt := []struct {
         name     string
-        wantError  bool
+        wantDoError  bool
         isEnabled  bool
     }{
         {
             name: "yes",
             isEnabled: true,
-            wantError: false,
+            wantDoError: false,
         },
         {
             name: "error",
-            wantError: true,
+            wantDoError: true,
         },
     }
     for i := range tt {
@@ -213,12 +214,13 @@ func TestListPersonalFoldersPermissions(t *testing.T) {
         t.Run(tc.name, func(t *testing.T) {
             t.Parallel()
             client := &ClientMock{
-                wantError: tc.wantError,
+                wantDoError: tc.wantDoError,
                 isEnabled: tc.isEnabled,
             }
             var err error
             r, err := NewPermissionServer(client).ListPersonalFoldersPermissions(ctx, nil)
-            if tc.wantError {
+            if tc.wantDoError {
+                fmt.Println(">>>", err)
                 require.Error(t, err)
             } else {
                 require.NoError(t, err)
@@ -238,25 +240,25 @@ func TestListPersonalFoldersPermissions(t *testing.T) {
 func TestRemoveAppPermission(t *testing.T) {
     tt := []struct {
         name     string
-        wantError  bool
+        wantDoError  bool
         isEnabled  bool
         wantApiError bool
     }{
         {
-            name: "yes",
+            name: "Good",
             isEnabled: true,
-            wantError: false,
+            wantDoError: false,
             wantApiError: false,
         },
         {
-            name: "no",
+            name: "Not found",
             isEnabled: true,
-            wantError: false,
+            wantDoError: false,
             wantApiError: true,
         },
         {
-            name: "error",
-            wantError: true,
+            name: "Unknown error",
+            wantDoError: true,
         },
     }
     for i := range tt {
@@ -264,7 +266,7 @@ func TestRemoveAppPermission(t *testing.T) {
         t.Run(tc.name, func(t *testing.T) {
             t.Parallel()
             client := &ClientMock{
-                wantError: tc.wantError,
+                wantDoError: tc.wantDoError,
                 wantApiError: tc.wantApiError,
                 isEnabled: tc.isEnabled,
             }
@@ -273,8 +275,10 @@ func TestRemoveAppPermission(t *testing.T) {
                 Removesnap: "hello",
             }
             _, err := NewPermissionServer(client).RemoveAppPermission(ctx, req)
-            if tc.wantError || tc.wantApiError {
+            if tc.wantDoError {
                 require.Error(t, err)
+            else if tc.wantApiError {
+                require.ErrorContains(t, err, "gave code")
             } else {
                 require.NoError(t, err)
             }

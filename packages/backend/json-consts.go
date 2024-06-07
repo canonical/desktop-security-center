@@ -51,7 +51,7 @@ customRulesJson = `{
       "id": "C7JGESQZTWTSS===",
       "timestamp": "2024-05-24T09:21:18.378444585Z",
       "user": 1000,
-      "snap": "simple-notepad",
+      "snap": "hello",
       "interface": "home",
       "constraints": {
         "path-pattern": "/home/ubuntu/.config/fobar",
@@ -68,7 +68,7 @@ customRulesJson = `{
       "id": "C7JHBW7E7Q7PO===",
       "timestamp": "2024-05-24T13:48:17.723465463Z",
       "user": 1000,
-      "snap": "simple-notepad",
+      "snap": "hello",
       "interface": "home",
       "constraints": {
         "path-pattern": "/home/ubuntu/Documents/fobar",

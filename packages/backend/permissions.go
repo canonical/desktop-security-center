@@ -68,11 +68,11 @@ func makeRestReq(client HttpClient, kind string, headers map[string]string, wher
 func validateApiResponse(res string) error {
     if !gjson.Valid(res) {
         log.Printf("Invalid Json: >%s<", res)
-        return status.Errorf(codes.Internal, "Invalid Json")
+        return status.Errorf(codes.Unknown, "Invalid Json")
     }
     statusCode := gjson.Get(res, "status-code").Int()
     if statusCode < 200 || statusCode >= 300 {
-        return fmt.Errorf("API response %s gave code %d.", res, statusCode)
+        return status.Errorf(codes.Unknown, "API response %s gave code %d.", res, statusCode)
     }
     return nil
 }
