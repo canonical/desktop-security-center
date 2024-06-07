@@ -18,14 +18,14 @@ jobs:
         run: |
           set -exu
           sudo apt update
-          sudo apt install -y protobuf-compiler golang-google-protobuf-dev
-          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+          sudo apt install -y protobuf-compiler golang-google-protobuf-dev \
+            protoc-gen-go protoc-gen-go-grpc
           export GOPATH=$HOME/go
           export PATH=$PATH:$GOPATH/bin
           basedir="$(pwd)/packages"
           cd "$basedir/proto"
-          protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative     ./dsc.proto
+          protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. \
+            --go-grpc_opt=paths=source_relative ./dsc.proto
           cd "$basedir/backend"
           go build .
           go test
