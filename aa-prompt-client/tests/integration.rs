@@ -7,7 +7,7 @@
 //! Creation of the SnapdSocketClient needs to be handled before spawning the test snap so that
 //! polling `after` is correct to pick up the prompt.
 use aa_prompt_client::{
-    snapd_client::{Action, Prompt, PromptId, SnapdSocketClient},
+    snapd_client::{Action, Lifespan, Prompt, PromptId, SnapdSocketClient},
     Error, Result,
 };
 use serial_test::serial;
@@ -127,20 +127,32 @@ async fn happy_path_read_single(
     Ok(())
 }
 
-#[test_case(Action::Allow; "allow")]
-#[test_case(Action::Deny; "deny")]
+#[test_case(Action::Allow, Lifespan::Timespan; "allow timespan")]
+#[test_case(Action::Allow, Lifespan::Session; "allow session")]
+#[test_case(Action::Allow, Lifespan::Forever; "allow forever")]
+#[test_case(Action::Deny, Lifespan::Timespan; "deny timespan")]
+#[test_case(Action::Deny, Lifespan::Session; "deny session")]
+#[test_case(Action::Deny, Lifespan::Forever; "deny forever")]
 #[tokio::test]
 #[serial]
-async fn happy_path_create_multiple(action: Action) -> Result<()> {
+async fn happy_path_create_multiple(action: Action, lifespan: Lifespan) -> Result<()> {
     let mut c = SnapdSocketClient::default();
     let (prefix, dir_path) = setup_test_dir(None, &[])?;
 
     let _rx = spawn_for_output("aa-prompting-test.create", vec![prefix]);
     let (id, p) = expect_single_prompt(&mut c, &format!("{dir_path}/test-1.txt"), &["write"]).await;
-    let reply = p
+    let mut reply = p
         .into_reply(action)
-        .for_timespan("1s")
         .with_custom_path_pattern(format!("{dir_path}/*"));
+
+    reply = match lifespan {
+        Lifespan::Timespan => reply.for_timespan("1s"),
+        Lifespan::Session => reply.for_session(),
+        Lifespan::Forever => reply.for_forever(),
+        Lifespan::Single => {
+            panic!("SETUP ERROR: this test requires actioning multiple prompts with a single reply")
+        }
+    };
 
     c.reply_to_prompt(&id, reply).await?;
 
@@ -165,6 +177,23 @@ async fn happy_path_create_multiple(action: Action) -> Result<()> {
                 ErrorKind::NotFound
             ),
         }
+    }
+
+    Ok(())
+}
+
+#[tokio::test]
+#[serial]
+async fn requesting_an_unknown_prompt_id_is_an_error() -> Result<()> {
+    let c = SnapdSocketClient::default();
+    let res = c.prompt_details(&PromptId("invalid".to_string())).await;
+
+    let expected = "no prompt with the given ID found for the given user";
+
+    match res {
+        Err(Error::SnapdError { message }) => assert_eq!(message, expected, "unexpected message"),
+        Err(e) => panic!("expected a snapd error, got: {e}"),
+        Ok(p) => panic!("expected an error, got {p:?}"),
     }
 
     Ok(())
