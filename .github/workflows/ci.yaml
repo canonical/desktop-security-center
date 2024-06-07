@@ -10,8 +10,8 @@ on:
       - main
 
 jobs:
-  go-sanity:
-    name: "Build Go"
+  backend:
+    name: "Build and test backend"
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
