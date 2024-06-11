@@ -39,7 +39,6 @@ create-vm:
 	echo -e "\n:: enabling prompting for snapd..."
 	lxc exec $(VM_NAME) -- snap set system experimental.apparmor-prompting=true
 	lxc file push prompt-loop.sh $(VM_NAME)/home/ubuntu/
-	lxc exec $(VM_NAME) -- mkdir -p /home/ubuntu/test/nested
 
 .PHONY: attach-vm
 attach-vm:
