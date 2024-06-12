@@ -86,7 +86,7 @@ run-prompt-client: prepare-vm
 	lxc exec --user=1000 $(VM_NAME) -- /home/ubuntu/aa-prompt-client
 
 .PHONY: integration-tests
-integration-tests: prepare-vm
+integration-tests: create-vm ensure-test-snap
 	cd aa-prompt-client && cargo test --no-run
 	FNAME=$$(ls -ht aa-prompt-client/target/debug/deps/integration* | grep -Ev '\.d' | head -n1); \
 	cp $$FNAME integration-tests; \
