@@ -48,19 +48,37 @@ attach-vm:
 attach-vm-bash:
 	lxc exec --cwd=/home/ubuntu $(VM_NAME) -- su ubuntu
 
+.PHONY: clean-test-snap
+clean-test-snap:
+	lxc exec $(VM_NAME) -- snap remove $(SNAP_NAME)
+
+.PHONY: ensure-test-snap
+ensure-test-snap:
+	if ! lxc exec $(VM_NAME) -- snap info $(SNAP_NAME) i> /dev/null ; then \
+		snapcraft ; \
+		lxc file push $(SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
+		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(SNAP_NAME)_0.1_amd64.snap ; \
+	fi
+
 .PHONY: update-test-snap
-update-test-snap:
-	snapcraft
-	lxc file push $(SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/
-	lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(SNAP_NAME)_0.1_amd64.snap
+update-test-snap: clean-test-snap ensure-test-snap
+
+.PHONY: clean-client-in-vm
+clean-client-in-vm:
+	lxc exec $(VM_NAME) -- rm -f /home/ubuntu/aa-prompt-client
+
+.PHONY: ensure-client-in-vm
+ensure-client-in-vm:
+	if ! lxc exec $(VM_NAME) -- test -f /home/ubuntu/aa-prompt-client ; then \
+		cd aa-prompt-client && cargo build ; \
+		lxc file push aa-prompt-client/target/debug/aa-prompt-client $(VM_NAME)/home/ubuntu/ ; \
+	fi
 
 .PHONY: update-client-in-vm
-update-client-in-vm:
-	cd aa-prompt-client && cargo build
-	lxc file push aa-prompt-client/target/debug/aa-prompt-client $(VM_NAME)/home/ubuntu/
+update-client-in-vm: clean-client-in-vm ensure-client-in-vm
 
 .PHONY: prepare-vm
-prepare-vm: create-vm update-test-snap update-client-in-vm
+prepare-vm: create-vm ensure-test-snap ensure-client-in-vm
 
 .PHONY: run-prompt-client
 run-prompt-client: prepare-vm
