@@ -54,7 +54,7 @@ clean-test-snap:
 
 .PHONY: ensure-test-snap
 ensure-test-snap:
-	if ! lxc exec $(VM_NAME) -- snap info $(SNAP_NAME) i> /dev/null ; then \
+	if ! lxc exec $(VM_NAME) -- snap info $(SNAP_NAME) > /dev/null ; then \
 		snapcraft ; \
 		lxc file push $(SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
 		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(SNAP_NAME)_0.1_amd64.snap ; \
@@ -70,8 +70,9 @@ clean-client-in-vm:
 .PHONY: ensure-client-in-vm
 ensure-client-in-vm:
 	if ! lxc exec $(VM_NAME) -- test -f /home/ubuntu/aa-prompt-client ; then \
-		cd aa-prompt-client && cargo build ; \
-		lxc file push aa-prompt-client/target/debug/aa-prompt-client $(VM_NAME)/home/ubuntu/ ; \
+		cd aa-prompt-client ; \
+		cargo build ; \
+		lxc file push target/debug/aa-prompt-client $(VM_NAME)/home/ubuntu/ ; \
 	fi
 
 .PHONY: update-client-in-vm
