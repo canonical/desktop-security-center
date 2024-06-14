@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaru/yaru.dart';
 
-void main() {
+void main() async {
+  await YaruWindowTitleBar.ensureInitialized();
+
   runApp(const ProviderScope(child: App()));
 }
 

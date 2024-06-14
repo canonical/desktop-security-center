@@ -12,6 +12,15 @@ TextSpan boldText(String text) {
   );
 }
 
+extension WidgetIterableExtension on Iterable<Widget> {
+  List<Widget> withSpacing(double spacing) {
+    return expand((item) sync* {
+      yield SizedBox(width: spacing, height: spacing);
+      yield item;
+    }).skip(1).toList();
+  }
+}
+
 class PromptPage extends ConsumerWidget {
   const PromptPage({super.key});
 
@@ -41,7 +50,10 @@ class PromptPage extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const InitialOptions(),
-                    if (model.withMoreOptions) const MoreOptions(),
+                    if (model.withMoreOptions) ...[
+                      const SizedBox(height: 20),
+                      const MoreOptions(),
+                    ]
                   ],
                 ),
               ),
@@ -139,22 +151,16 @@ class MoreOptions extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 20),
         const Divider(),
-        const SizedBox(height: 20),
         const AccessToggle(),
-        const SizedBox(height: 20),
-        const Row(
+        Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AccessPolicyToggle(),
-            SizedBox(width: 20),
-            DurationToggle(),
-            SizedBox(width: 20),
-            Permissions(),
-          ],
+            const AccessPolicyToggle(),
+            const DurationToggle(),
+            const Permissions(),
+          ].withSpacing(20),
         ),
-        const SizedBox(height: 20),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -171,7 +177,7 @@ class MoreOptions extends ConsumerWidget {
             ),
           ],
         ),
-      ],
+      ].withSpacing(20),
     );
   }
 }
