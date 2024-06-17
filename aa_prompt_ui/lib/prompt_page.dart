@@ -81,11 +81,11 @@ class InitialOptions extends ConsumerWidget {
           TextSpan(
             text: 'Allow ',
             children: [
-              boldText(model.snapName),
+              boldText(model.details.snapName),
               const TextSpan(text: ' to have '),
               boldText(model.stringPerms),
               const TextSpan(text: ' access to '),
-              boldText(model.requestedPath),
+              boldText(model.details.requestedPath),
               const TextSpan(text: '?'),
             ],
           ),
@@ -117,24 +117,21 @@ class InitialOptions extends ConsumerWidget {
         ),
         Row(
           children: [
-            const SizedBox(width: 10),
             OutlinedButton(
               onPressed: model.withMoreOptions ? null : notifier.allowAlways,
               child: const Text('Allow always'),
             ),
-            const SizedBox(width: 10),
             OutlinedButton(
               onPressed: model.withMoreOptions ? null : notifier.denyOnce,
               child: const Text('Deny once'),
             ),
-            const SizedBox(width: 10),
             OutlinedButton(
               onPressed: notifier.toggleMoreOptions,
               child: Text(
                 model.withMoreOptions ? 'Less options...' : 'More options...',
               ),
             ),
-          ],
+          ].withSpacing(10),
         ),
       ],
     );
@@ -192,7 +189,7 @@ class AccessToggle extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text.rich(boldText('Set access for ${model.snapName} to:')),
+        Text.rich(boldText('Set access for ${model.details.snapName} to:')),
         const SizedBox(height: 10),
         const PermissionChoiceRadio(
           title: 'Everthing in the Home folder',
@@ -386,8 +383,8 @@ class PermissionCheckButton extends ConsumerWidget {
       title: Text(title),
       value: model.permissions.contains(permission),
       tristate: true,
-      onChanged: model.availablePermissions.contains(permission)
-          ? (v) => notifier.togglePerm(permission)
+      onChanged: model.details.availablePermissions.contains(permission)
+          ? (_) => notifier.togglePerm(permission)
           : null,
     );
   }

@@ -6,11 +6,11 @@ import 'package:yaru/yaru.dart';
 void main() async {
   await YaruWindowTitleBar.ensureInitialized();
 
-  runApp(const ProviderScope(child: App()));
+  runApp(const ProviderScope(child: PromptDialog()));
 }
 
-class App extends ConsumerWidget {
-  const App({super.key});
+class PromptDialog extends ConsumerWidget {
+  const PromptDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

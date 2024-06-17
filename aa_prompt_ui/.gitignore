@@ -31,7 +31,6 @@ migrate_working_dir/
 .pub/
 /build/
 
-/linux/
 *.g.dart
 *.freezed.dart
 

@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,12 +15,22 @@ enum Permission { read, write, execute }
 enum Duration { once, untilLogout, always } // timespan?
 
 @freezed
-class PromptData with _$PromptData {
-  factory PromptData({
+class PromptDetails with _$PromptDetails {
+  factory PromptDetails({
     required String snapName,
     required String requestedPath,
     required List<Permission> requestedPermissions,
     required List<Permission> availablePermissions,
+  }) = _PromptDetails;
+
+  factory PromptDetails.fromJson(Map<String, dynamic> json) =>
+      _$PromptDetailsFromJson(json);
+}
+
+@freezed
+class PromptData with _$PromptData {
+  factory PromptData({
+    required PromptDetails details,
     required bool withMoreOptions,
     required List<Permission> permissions,
     PermissionChoice? permissionChoice,
@@ -29,37 +41,64 @@ class PromptData with _$PromptData {
 
   PromptData._();
 
-  String get stringPerms => requestedPermissions.map((p) => p.name).join('/');
+  String get stringPerms =>
+      details.requestedPermissions.map((p) => p.name).join('/');
+}
+
+@freezed
+class PromptReply with _$PromptReply {
+  factory PromptReply({
+    required AccessPolicy action,
+    required Duration lifespan,
+    required String pathPattern,
+    required List<Permission> permissions,
+  }) = _PromptReply;
+
+  factory PromptReply.fromJson(Map<String, dynamic> json) =>
+      _$PromptReplyFromJson(json);
 }
 
 @riverpod
 class PromptDataModel extends _$PromptDataModel {
   @override
   PromptData build() {
-    // FIXME: should come from stdin
-    const snapName = 'test-snap';
-    const requestedPath = '/home/foo/bar.txt';
-    final requestedPermissions = [
-      Permission.read,
-      Permission.write,
-    ];
-    final availablePermissions = [
-      Permission.read,
-      Permission.write,
-      // Permission.execute,
-    ];
+    final details = PromptDetails(
+      snapName: 'test-snap',
+      requestedPath: '/home/foo/bar.txt',
+      requestedPermissions: [
+        Permission.read,
+        Permission.write,
+      ],
+      availablePermissions: [
+        Permission.read,
+        Permission.write,
+        // Permission.execute,
+      ],
+    );
 
     return PromptData(
-      snapName: snapName,
-      requestedPath: requestedPath,
-      requestedPermissions: requestedPermissions,
-      availablePermissions: availablePermissions,
-      // Defaults for the ui state
+      details: details,
       withMoreOptions: false,
       permissionChoice: PermissionChoice.parentDir,
       accessPolicy: AccessPolicy.allow,
       duration: Duration.always,
-      permissions: requestedPermissions,
+      permissions: details.requestedPermissions,
+    );
+  }
+
+  PromptReply buildReply() {
+    final pathPattern = state.details.requestedPath;
+
+    if (state.withMoreOptions &&
+        state.permissionChoice == PermissionChoice.customPath) {
+      throw StateError('Custom paths not implemented yet');
+    }
+
+    return PromptReply(
+      action: state.accessPolicy!,
+      lifespan: state.duration!,
+      pathPattern: pathPattern,
+      permissions: state.permissions,
     );
   }
 
@@ -75,7 +114,7 @@ class PromptDataModel extends _$PromptDataModel {
   void setDuration(Duration? d) => state = state.copyWith(duration: d);
 
   void togglePerm(Permission p) {
-    if (!state.availablePermissions.contains(p)) {
+    if (!state.details.availablePermissions.contains(p)) {
       throw ArgumentError('$p is not an available permission');
     }
 
@@ -90,9 +129,29 @@ class PromptDataModel extends _$PromptDataModel {
     state = state.copyWith(permissions: permissions);
   }
 
-  void saveAndContinue() {}
+  void _writeReplyAndExit(PromptReply reply) {
+    final s = jsonEncode(reply);
+    stdout.writeln(s);
+    exit(0);
+  }
 
-  void allowAlways() {}
+  void saveAndContinue() => _writeReplyAndExit(buildReply());
 
-  void denyOnce() {}
+  void allowAlways() => _writeReplyAndExit(
+        PromptReply(
+          action: AccessPolicy.allow,
+          lifespan: Duration.always,
+          pathPattern: state.details.requestedPath,
+          permissions: state.details.requestedPermissions,
+        ),
+      );
+
+  void denyOnce() => _writeReplyAndExit(
+        PromptReply(
+          action: AccessPolicy.deny,
+          lifespan: Duration.once,
+          pathPattern: state.details.requestedPath,
+          permissions: state.details.requestedPermissions,
+        ),
+      );
 }
