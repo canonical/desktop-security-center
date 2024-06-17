@@ -1,4 +1,4 @@
-import 'package:aa_prompt_ui/prompt_data_model.dart';
+import 'package:apparmor_prompt/prompt_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaru/yaru.dart';
@@ -83,7 +83,7 @@ class InitialOptions extends ConsumerWidget {
             children: [
               boldText(model.details.snapName),
               const TextSpan(text: ' to have '),
-              boldText(model.stringPerms),
+              boldText(model.permissionsAsString),
               const TextSpan(text: ' access to '),
               boldText(model.details.requestedPath),
               const TextSpan(text: '?'),

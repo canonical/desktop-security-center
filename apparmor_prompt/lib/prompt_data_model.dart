@@ -41,7 +41,7 @@ class PromptData with _$PromptData {
 
   PromptData._();
 
-  String get stringPerms =>
+  String get permissionsAsString =>
       details.requestedPermissions.map((p) => p.name).join('/');
 }
 
@@ -130,8 +130,7 @@ class PromptDataModel extends _$PromptDataModel {
   }
 
   void _writeReplyAndExit(PromptReply reply) {
-    final s = jsonEncode(reply);
-    stdout.writeln(s);
+    stdout.writeln(jsonEncode(reply));
     exit(0);
   }
 

@@ -1,4 +1,4 @@
-name: aa_prompt_ui
+name: apparmor_prompt
 description: "A Flutter UI for apparmor prompting."
 publish_to: 'none'
 
@@ -6,6 +6,7 @@ version: 1.0.0+1
 
 environment:
   sdk: '>=3.4.3 <4.0.0'
+  flutter: ">=3.22.2"
 
 dependencies:
   flutter:
