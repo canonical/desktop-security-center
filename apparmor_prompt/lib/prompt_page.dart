@@ -154,7 +154,7 @@ class MoreOptions extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const AccessPolicyToggle(),
-            const DurationToggle(),
+            const LifespanToggle(),
             const Permissions(),
           ].withSpacing(20),
         ),
@@ -285,8 +285,8 @@ class PolicyRadio extends ConsumerWidget {
   }
 }
 
-class DurationToggle extends ConsumerWidget {
-  const DurationToggle({super.key});
+class LifespanToggle extends ConsumerWidget {
+  const LifespanToggle({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -295,43 +295,43 @@ class DurationToggle extends ConsumerWidget {
       children: [
         Text.rich(boldText('Duration')),
         const SizedBox(height: 10),
-        const DurationRadio(
+        const LifespanRadio(
           title: 'Always',
-          duration: Duration.always,
+          lifespan: Lifespan.always,
         ),
-        const DurationRadio(
+        const LifespanRadio(
           title: 'Until logout',
-          duration: Duration.untilLogout,
+          lifespan: Lifespan.untilLogout,
         ),
-        const DurationRadio(
+        const LifespanRadio(
           title: 'Once',
-          duration: Duration.once,
+          lifespan: Lifespan.once,
         ),
       ],
     );
   }
 }
 
-class DurationRadio extends ConsumerWidget {
-  const DurationRadio({
+class LifespanRadio extends ConsumerWidget {
+  const LifespanRadio({
     required this.title,
-    required this.duration,
+    required this.lifespan,
     super.key,
   });
 
   final String title;
-  final Duration duration;
+  final Lifespan lifespan;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(promptDataModelProvider);
     final notifier = ref.read(promptDataModelProvider.notifier);
 
-    return YaruRadioButton<Duration>(
+    return YaruRadioButton<Lifespan>(
       title: Text(title),
-      value: duration,
-      groupValue: model.duration,
-      onChanged: notifier.setDuration,
+      value: lifespan,
+      groupValue: model.lifespan,
+      onChanged: notifier.setLifespan,
       toggleable: true,
     );
   }

@@ -12,7 +12,7 @@ enum AccessPolicy { allow, deny }
 
 enum Permission { read, write, execute }
 
-enum Duration { once, untilLogout, always } // timespan?
+enum Lifespan { once, untilLogout, always } // timespan?
 
 @freezed
 class PromptDetails with _$PromptDetails {
@@ -35,7 +35,7 @@ class PromptData with _$PromptData {
     required List<Permission> permissions,
     PermissionChoice? permissionChoice,
     AccessPolicy? accessPolicy,
-    Duration? duration,
+    Lifespan? lifespan,
     String? previousErrorMessage,
   }) = _PromptData;
 
@@ -49,7 +49,7 @@ class PromptData with _$PromptData {
 class PromptReply with _$PromptReply {
   factory PromptReply({
     required AccessPolicy action,
-    required Duration lifespan,
+    required Lifespan lifespan,
     required String pathPattern,
     required List<Permission> permissions,
   }) = _PromptReply;
@@ -81,7 +81,7 @@ class PromptDataModel extends _$PromptDataModel {
       withMoreOptions: false,
       permissionChoice: PermissionChoice.parentDir,
       accessPolicy: AccessPolicy.allow,
-      duration: Duration.always,
+      lifespan: Lifespan.always,
       permissions: details.requestedPermissions,
     );
   }
@@ -96,7 +96,7 @@ class PromptDataModel extends _$PromptDataModel {
 
     return PromptReply(
       action: state.accessPolicy!,
-      lifespan: state.duration!,
+      lifespan: state.lifespan!,
       pathPattern: pathPattern,
       permissions: state.permissions,
     );
@@ -111,7 +111,7 @@ class PromptDataModel extends _$PromptDataModel {
   void setAccessPolicy(AccessPolicy? a) =>
       state = state.copyWith(accessPolicy: a);
 
-  void setDuration(Duration? d) => state = state.copyWith(duration: d);
+  void setLifespan(Lifespan? l) => state = state.copyWith(lifespan: l);
 
   void togglePerm(Permission p) {
     if (!state.details.availablePermissions.contains(p)) {
@@ -139,7 +139,7 @@ class PromptDataModel extends _$PromptDataModel {
   void allowAlways() => _writeReplyAndExit(
         PromptReply(
           action: AccessPolicy.allow,
-          lifespan: Duration.always,
+          lifespan: Lifespan.always,
           pathPattern: state.details.requestedPath,
           permissions: state.details.requestedPermissions,
         ),
@@ -148,7 +148,7 @@ class PromptDataModel extends _$PromptDataModel {
   void denyOnce() => _writeReplyAndExit(
         PromptReply(
           action: AccessPolicy.deny,
-          lifespan: Duration.once,
+          lifespan: Lifespan.once,
           pathPattern: state.details.requestedPath,
           permissions: state.details.requestedPermissions,
         ),
