@@ -1,5 +1,6 @@
 VM_NAME = aa-testing
-SNAP_NAME = aa-prompting-test
+SNAP_NAME = apparmor-prompting
+TEST_SNAP_NAME = aa-prompting-test
 
 .PHONY: require-rust
 require-rust:
@@ -65,19 +66,34 @@ attach-vm-bash:
 
 .PHONY: clean-test-snap
 clean-test-snap:
-	lxc exec $(VM_NAME) -- snap remove $(SNAP_NAME)
+	lxc exec $(VM_NAME) -- snap remove $(TEST_SNAP_NAME)
 
 .PHONY: ensure-test-snap
 ensure-test-snap:
-	if ! lxc exec $(VM_NAME) -- snap info $(SNAP_NAME) > /dev/null ; then \
+	if ! lxc exec $(VM_NAME) -- snap info $(TEST_SNAP_NAME) > /dev/null ; then \
 		cd testing-snap ; \
+		snapcraft ; \
+		lxc file push $(TEST_SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
+		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(TEST_SNAP_NAME)_0.1_amd64.snap ; \
+	fi
+
+.PHONY: update-test-snap
+update-test-snap: clean-test-snap ensure-test-snap
+
+.PHONY: clean-snap-client
+clean-snap-client:
+	lxc exec $(VM_NAME) -- snap remove $(SNAP_NAME)
+
+.PHONY: ensure-snap-client
+ensure-snap-client:
+	if ! lxc exec $(VM_NAME) -- snap info $(SNAP_NAME) > /dev/null ; then \
 		snapcraft ; \
 		lxc file push $(SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
 		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(SNAP_NAME)_0.1_amd64.snap ; \
 	fi
 
-.PHONY: update-test-snap
-update-test-snap: clean-test-snap ensure-test-snap
+.PHONY: update-snap-client
+update-snap-client: clean-snap-client ensure-snap-client
 
 .PHONY: clean-client-in-vm
 clean-client-in-vm:
