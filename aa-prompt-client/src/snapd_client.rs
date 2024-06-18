@@ -5,7 +5,7 @@ use crate::{
 use chrono::{DateTime, SecondsFormat, Utc};
 use hyper::Uri;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
-use std::{collections::BTreeMap, path::PathBuf, str::FromStr};
+use std::{collections::BTreeMap, env, path::PathBuf, str::FromStr};
 use strum::{Display, EnumString};
 use tracing::debug;
 
@@ -14,6 +14,7 @@ const LONG_POLL_TIMEOUT: &str = "1h";
 const NOTICE_TYPES: &str = "interfaces-requests-prompt";
 const SNAPD_BASE_URI: &str = "http://localhost/v2";
 const SNAPD_SOCKET: &str = "/run/snapd.socket";
+const SNAPD_SNAP_SOCKET: &str = "/run/snapd-snap.socket";
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
@@ -112,8 +113,14 @@ impl SnapdSocketClient {
     }
 
     pub fn new_with_notices_after(dt: DateTime<Utc>) -> Self {
+        let socket = if env::var("SNAP_NAME").is_ok() {
+            SNAPD_SNAP_SOCKET
+        } else {
+            SNAPD_SOCKET
+        };
+
         Self {
-            client: UnixSocketClient::new(SNAPD_SOCKET),
+            client: UnixSocketClient::new(socket),
             notices_after: dt.to_rfc3339_opts(SecondsFormat::Nanos, true),
         }
     }
