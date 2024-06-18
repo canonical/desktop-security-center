@@ -5,7 +5,7 @@ use crate::{
 use chrono::{DateTime, SecondsFormat, Utc};
 use hyper::Uri;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
-use std::{collections::BTreeMap, str::FromStr};
+use std::{collections::BTreeMap, path::PathBuf, str::FromStr};
 use strum::{Display, EnumString};
 use tracing::debug;
 
@@ -233,8 +233,16 @@ struct Constraints {
 }
 
 impl Prompt {
+    pub fn id(&self) -> &str {
+        &self.id.0
+    }
+
     pub fn snap(&self) -> &str {
         &self.snap
+    }
+
+    pub fn timestamp(&self) -> &str {
+        &self.timestamp
     }
 
     pub fn interface(&self) -> &str {
@@ -247,23 +255,6 @@ impl Prompt {
 
     pub fn requested_permissions(&self) -> &[String] {
         &self.constraints.permissions
-    }
-
-    pub fn summary(&self) -> String {
-        format!(
-            "\
-id:          {}
-snap:        {}
-timestamp:   {}
-path:        {}
-permissions: {:?}
-",
-            self.id.0,
-            self.snap,
-            self.timestamp,
-            self.constraints.path,
-            self.constraints.permissions
-        )
     }
 
     /// Convert this [Prompt] into a [PromptReply] with a default lifespan of [Lifespan::Single]
@@ -282,6 +273,54 @@ permissions: {:?}
             available_permissions: self.constraints.available_permissions,
         }
     }
+
+    pub fn into_reply_from_ui(self, p: UiPromptReply) -> PromptReply {
+        PromptReply {
+            action: p.action,
+            lifespan: p.lifespan,
+            duration: None,
+            constraints: ReplyConstraints {
+                path_pattern: p.path_pattern,
+                permissions: p.permissions,
+            },
+            available_permissions: self.constraints.available_permissions,
+        }
+    }
+
+    pub fn as_ui_prompt_input(&self) -> UiPromptInput {
+        let requested_path = self.constraints.path.clone();
+        let parent_directory = PathBuf::from(&requested_path)
+            .parent()
+            .map(|pb| format!("{}/*", pb.to_string_lossy()))
+            .expect("requested path to have a parent");
+
+        UiPromptInput {
+            snap_name: self.snap.clone(),
+            requested_path,
+            parent_directory,
+            requested_permissions: self.constraints.permissions.clone(),
+            available_permissions: self.constraints.available_permissions.clone(),
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct UiPromptInput {
+    snap_name: String,
+    requested_path: String,
+    parent_directory: String,
+    requested_permissions: Vec<String>,
+    available_permissions: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct UiPromptReply {
+    action: Action,
+    lifespan: Lifespan,
+    path_pattern: String,
+    permissions: Vec<String>,
 }
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]

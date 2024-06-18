@@ -85,6 +85,13 @@ prepare-vm: create-vm ensure-test-snap ensure-client-in-vm
 run-prompt-client: prepare-vm
 	lxc exec --user=1000 $(VM_NAME) -- /home/ubuntu/aa-prompt-client
 
+# update-client-in-vm:
+# 	cd aa-prompt-client && cargo build
+# 	lxc file push aa-prompt-client/target/debug/aa-prompt-client aa-testing/home/ubuntu/
+# 	cd apparmor_prompt && flutter build linux
+# 	lxc file push -r apparmor_prompt/build/linux/x64/release/bundle aa-testing/home/ubuntu/
+# 	lxc exec aa-testing -- rm /var/lib/snapd/request-rules.json
+
 .PHONY: integration-tests
 integration-tests: create-vm ensure-test-snap
 	cd aa-prompt-client && cargo test --no-run

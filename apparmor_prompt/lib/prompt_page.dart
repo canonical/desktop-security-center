@@ -297,15 +297,15 @@ class LifespanToggle extends ConsumerWidget {
         const SizedBox(height: 10),
         const LifespanRadio(
           title: 'Always',
-          lifespan: Lifespan.always,
+          lifespan: Lifespan.forever,
         ),
         const LifespanRadio(
           title: 'Until logout',
-          lifespan: Lifespan.untilLogout,
+          lifespan: Lifespan.session,
         ),
         const LifespanRadio(
           title: 'Once',
-          lifespan: Lifespan.once,
+          lifespan: Lifespan.single,
         ),
       ],
     );

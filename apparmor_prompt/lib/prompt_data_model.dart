@@ -12,7 +12,7 @@ enum AccessPolicy { allow, deny }
 
 enum Permission { read, write, execute }
 
-enum Lifespan { once, untilLogout, always } // timespan?
+enum Lifespan { single, session, forever } // timespan?
 
 @freezed
 class PromptDetails with _$PromptDetails {
@@ -81,7 +81,7 @@ class PromptDataModel extends _$PromptDataModel {
       withMoreOptions: false,
       permissionChoice: PermissionChoice.parentDir,
       accessPolicy: AccessPolicy.allow,
-      lifespan: Lifespan.always,
+      lifespan: Lifespan.forever,
       permissions: details.requestedPermissions,
     );
   }
@@ -139,7 +139,7 @@ class PromptDataModel extends _$PromptDataModel {
   void allowAlways() => _writeReplyAndExit(
         PromptReply(
           action: AccessPolicy.allow,
-          lifespan: Lifespan.always,
+          lifespan: Lifespan.forever,
           pathPattern: state.details.requestedPath,
           permissions: state.details.requestedPermissions,
         ),
@@ -148,7 +148,7 @@ class PromptDataModel extends _$PromptDataModel {
   void denyOnce() => _writeReplyAndExit(
         PromptReply(
           action: AccessPolicy.deny,
-          lifespan: Lifespan.once,
+          lifespan: Lifespan.single,
           pathPattern: state.details.requestedPath,
           permissions: state.details.requestedPermissions,
         ),
