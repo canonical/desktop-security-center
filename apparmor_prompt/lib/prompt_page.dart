@@ -192,11 +192,11 @@ class AccessToggle extends ConsumerWidget {
         Text.rich(boldText('Set access for ${model.details.snapName} to:')),
         const SizedBox(height: 10),
         const PermissionChoiceRadio(
-          title: 'Everthing in the Home folder',
-          permissionChoice: PermissionChoice.home,
+          title: 'The requested path',
+          permissionChoice: PermissionChoice.requested,
         ),
-        const PermissionChoiceRadio(
-          title: 'Everthing in <PARENT_DIR>',
+        PermissionChoiceRadio(
+          title: 'Everthing in ${model.details.parentDirectory}',
           permissionChoice: PermissionChoice.parentDir,
         ),
         const PermissionChoiceRadio(

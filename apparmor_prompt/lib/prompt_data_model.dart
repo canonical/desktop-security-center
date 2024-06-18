@@ -2,11 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:ubuntu_service/ubuntu_service.dart';
 
 part 'prompt_data_model.freezed.dart';
 part 'prompt_data_model.g.dart';
 
-enum PermissionChoice { home, parentDir, customPath }
+enum PermissionChoice { requested, parentDir, customPath }
 
 enum AccessPolicy { allow, deny }
 
@@ -19,6 +20,7 @@ class PromptDetails with _$PromptDetails {
   factory PromptDetails({
     required String snapName,
     required String requestedPath,
+    required String parentDirectory,
     required List<Permission> requestedPermissions,
     required List<Permission> availablePermissions,
   }) = _PromptDetails;
@@ -62,24 +64,12 @@ class PromptReply with _$PromptReply {
 class PromptDataModel extends _$PromptDataModel {
   @override
   PromptData build() {
-    final details = PromptDetails(
-      snapName: 'test-snap',
-      requestedPath: '/home/foo/bar.txt',
-      requestedPermissions: [
-        Permission.read,
-        Permission.write,
-      ],
-      availablePermissions: [
-        Permission.read,
-        Permission.write,
-        // Permission.execute,
-      ],
-    );
+    final details = getService<PromptDetails>();
 
     return PromptData(
       details: details,
       withMoreOptions: false,
-      permissionChoice: PermissionChoice.parentDir,
+      permissionChoice: PermissionChoice.requested,
       accessPolicy: AccessPolicy.allow,
       lifespan: Lifespan.forever,
       permissions: details.requestedPermissions,
@@ -87,7 +77,11 @@ class PromptDataModel extends _$PromptDataModel {
   }
 
   PromptReply buildReply() {
-    final pathPattern = state.details.requestedPath;
+    final pathPattern = switch (state.permissionChoice!) {
+      PermissionChoice.requested => state.details.requestedPath,
+      PermissionChoice.parentDir => state.details.parentDirectory,
+      PermissionChoice.customPath => '',
+    };
 
     if (state.withMoreOptions &&
         state.permissionChoice == PermissionChoice.customPath) {

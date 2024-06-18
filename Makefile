@@ -10,14 +10,6 @@ require-rust:
 		exit 1; \
 	fi
 
-.PHONY: require-flutter
-require-flutter:
-	@echo ":: Checking flutter is available..."
-	@if ! which flutter; then \
-		echo "A local flutter toolchain is required to run this target"; \
-		exit 1; \
-	fi
-
 .PHONY: snapd-prompting
 snapd-prompting:
 	lxc exec $(VM_NAME) -- snap refresh snapd --channel=latest/edge/prompting; \
@@ -101,7 +93,7 @@ clean-client-in-vm:
 	lxc exec $(VM_NAME) -- rm -rf /home/ubuntu/bundle
 
 .PHONY: ensure-client-in-vm
-ensure-client-in-vm: require-rust require-flutter
+ensure-client-in-vm: require-rust
 	if ! lxc exec $(VM_NAME) -- test -f /home/ubuntu/aa-prompt-client ; then \
 		cd aa-prompt-client ; \
 		cargo build ; \
@@ -109,6 +101,7 @@ ensure-client-in-vm: require-rust require-flutter
 	fi
 	if ! lxc exec $(VM_NAME) -- test -f /home/ubuntu/bundle ; then \
 		cd apparmor_prompt ; \
+		rm -rf build ; \
 		dart run build_runner build ; \
 		flutter build linux ; \
 		lxc file push -r build/linux/x64/release/bundle $(VM_NAME)/home/ubuntu/ ; \
@@ -118,7 +111,7 @@ ensure-client-in-vm: require-rust require-flutter
 update-client-in-vm: clean-client-in-vm ensure-client-in-vm
 
 .PHONY: prepare-vm
-prepare-vm: require-rust require-flutter create-or-start-vm snapd-prompting ensure-test-snap ensure-client-in-vm
+prepare-vm: require-rust create-or-start-vm snapd-prompting ensure-test-snap ensure-snap-client
 
 .PHONY: integration-tests
 integration-tests: require-rust

@@ -135,7 +135,7 @@ pub async fn run_flutter_client_loop(c: SnapdSocketClient) -> Result<()> {
 
 async fn get_reply_from_flutter_ui(p: Prompt) -> Result<PromptReply> {
     let input = serde_json::to_string(&p.as_ui_prompt_input())?;
-    let output = Command::new("./bundle/apparmor_prompt")
+    let output = Command::new("apparmor-prompting.ui")
         .arg(input)
         .output()
         .await?;

@@ -13,10 +13,17 @@ apps:
     command: bin/aa-prompt-client
     plugs:
       - snap-prompting-control
+      - snap
 
   ui:
     command: bin/apparmor_prompt
     extensions: [gnome]
+
+plugs:
+  snap:
+    interface: system-files
+    read:
+      - /snap
 
 parts:
   flutter-git:
@@ -52,6 +59,7 @@ parts:
     plugin: nil
     override-build: |
       set -e
+      [[ -d build ]] && rm -r build
       dart run build_runner build
       flutter build linux --release -v
       mkdir -p $CRAFT_PART_INSTALL/bin/
