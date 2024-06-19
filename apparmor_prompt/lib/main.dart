@@ -9,7 +9,9 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
 void main(List<String> args) async {
-  Logger.setup(level: LogLevel.info);
+  // We specify path as an empty string in order to get ubuntu_logger to skip
+  // setting up a file for logging
+  Logger.setup(path: '', level: LogLevel.info);
   final log = Logger('prompt_ui');
 
   if (args.length != 1) {

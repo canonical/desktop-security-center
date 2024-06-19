@@ -82,6 +82,7 @@ ensure-client-in-vm:
 	@echo ":: Checking for $(SNAP_NAME) in $(VM_NAME)..."
 	@if ! lxc exec $(VM_NAME) -- snap info $(SNAP_NAME) > /dev/null ; then \
 		echo ":: Building $(SNAP_NAME) via snapcraft..." ; \
+		rm -rf apparmor_prompt/build ; \
 		snapcraft ; \
 		echo ":: Installing $(SNAP_NAME) in $(VM_NAME)..." ; \
 		lxc file push $(SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \

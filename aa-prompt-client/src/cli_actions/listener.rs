@@ -62,8 +62,16 @@ impl FlutterClient {
 impl ReplyClient for FlutterClient {
     async fn get_reply(&self, p: Prompt) -> Result<PromptReply> {
         let input = serde_json::to_string(&p.as_ui_prompt_input())?;
+        debug!(input, "prompt details for the flutter ui");
+
         let output = Command::new(&self.cmd).arg(input).output().await?;
+        debug!(
+            raw_stdout = %String::from_utf8(output.stdout.clone()).unwrap(),
+            "raw output from the flutter ui"
+        );
+
         let ui_reply: UiPromptReply = serde_json::from_slice(&output.stdout)?;
+        debug!(?ui_reply, "parsed reply from the flutter ui");
 
         Ok(p.into_reply_from_ui(ui_reply))
     }
