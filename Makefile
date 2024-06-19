@@ -2,12 +2,25 @@ VM_NAME = aa-testing
 SNAP_NAME = apparmor-prompting
 TEST_SNAP_NAME = aa-prompting-test
 
-.PHONY: require-rust
-require-rust:
-	@echo ":: Checking cargo is available..."
-	@if ! which cargo; then \
-		echo "A local rust toolchain is required to run this target"; \
-		exit 1; \
+.PHONY: install-local-tooling
+install-local-tooling:
+	@echo ":: Checking for lxd..."
+	@if ! which lxd ; then \
+		@echo ":: Installing lxd..." ; \
+		snap install lxd ; \
+		@echo ":: Adding user to the lxd group..." ; \
+		getent group lxd | grep -qwF "$$USER" || usermod -aG lxd "$$USER" ; \
+		@echo ":: Please log out and back in, or run 'newgrp lxd' for the change to take effect" ; \
+	fi
+	@echo ":: Checking for snapcraft..."
+	@if ! which snapcraft ; then \
+		@echo ":: Installing snapcraft..." ; \
+		snap install snapcraft --classic ; \
+	fi
+	@echo ":: Checking for virt-viewer..."
+	@if ! which virt-viewer ; then \
+		@echo ":: Installing virt-viewer..." ; \
+		apt install virt-viewer ; \
 	fi
 
 .PHONY: snapd-prompting
@@ -34,19 +47,23 @@ bounce-snapd: clean-request-rules snapd-stable snapd-prompting
 
 .PHONY: create-or-start-vm
 create-or-start-vm:
-	if ! lxc info $(VM_NAME) 2>/dev/null ; then \
+	@if ! lxc info $(VM_NAME) 2>/dev/null ; then \
+		echo ":: Creating VM ($(VM_NAME))..."; \
 		lxc launch images:ubuntu/24.04/desktop $(VM_NAME) \
 			--vm \
 			-c limits.cpu=4 \
 			-c limits.memory=4GiB; \
 	elif ! lxc info $(VM_NAME) | grep "Status: RUNNING" ; then \
+		echo ":: Starting VM ($(VM_NAME))..."; \
 		lxc stop --force $(VM_NAME) 2>/dev/null; \
 		lxc start $(VM_NAME); \
 	fi
-	while ! lxc exec $(VM_NAME) echo 2>/dev/null; do \
-		echo "Waiting for $(VM_NAME) to be ready..."; \
+	@while ! lxc exec $(VM_NAME) echo 2>/dev/null; do \
+		echo ":: Waiting for VM ($(VM_NAME)) to be ready..."; \
 		sleep 1; \
 	done
+	@sleep 2
+	@echo ":: VM ($(VM_NAME)) now ready"
 
 .PHONY: attach-vm
 attach-vm:
@@ -56,15 +73,36 @@ attach-vm:
 attach-vm-bash:
 	lxc exec --cwd=/home/ubuntu $(VM_NAME) -- su ubuntu
 
+.PHONY: clean-client-in-vm
+clean-client-in-vm:
+	lxc exec $(VM_NAME) -- snap remove $(SNAP_NAME)
+
+.PHONY: ensure-client-in-vm
+ensure-client-in-vm:
+	@echo ":: Checking for $(SNAP_NAME) in $(VM_NAME)..."
+	@if ! lxc exec $(VM_NAME) -- snap info $(SNAP_NAME) > /dev/null ; then \
+		echo ":: Building $(SNAP_NAME) via snapcraft..." ; \
+		snapcraft ; \
+		echo ":: Installing $(SNAP_NAME) in $(VM_NAME)..." ; \
+		lxc file push $(SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
+		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(SNAP_NAME)_0.1_amd64.snap ; \
+	fi
+
+.PHONY: update-client-in-vm
+update-client-in-vm: clean-client-in-vm ensure-client-in-vm
+
 .PHONY: clean-test-snap
 clean-test-snap:
 	lxc exec $(VM_NAME) -- snap remove $(TEST_SNAP_NAME)
 
 .PHONY: ensure-test-snap
 ensure-test-snap:
-	if ! lxc exec $(VM_NAME) -- snap info $(TEST_SNAP_NAME) > /dev/null ; then \
+	@echo ":: Checking for $(TEST_SNAP_NAME) in $(VM_NAME)..."
+	@if ! lxc exec $(VM_NAME) -- snap info $(TEST_SNAP_NAME) > /dev/null ; then \
+		echo ":: Building $(TEST_SNAP_NAME) via snapcraft..." ; \
 		cd testing-snap ; \
 		snapcraft ; \
+		echo ":: Installing $(TEST_SNAP_NAME) in $(VM_NAME)..." ; \
 		lxc file push $(TEST_SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
 		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(TEST_SNAP_NAME)_0.1_amd64.snap ; \
 	fi
@@ -72,49 +110,16 @@ ensure-test-snap:
 .PHONY: update-test-snap
 update-test-snap: clean-test-snap ensure-test-snap
 
-.PHONY: clean-snap-client
-clean-snap-client:
-	lxc exec $(VM_NAME) -- snap remove $(SNAP_NAME)
-
-.PHONY: ensure-snap-client
-ensure-snap-client:
-	if ! lxc exec $(VM_NAME) -- snap info $(SNAP_NAME) > /dev/null ; then \
-		snapcraft ; \
-		lxc file push $(SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
-		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(SNAP_NAME)_0.1_amd64.snap ; \
-	fi
-
-.PHONY: update-snap-client
-update-snap-client: clean-snap-client ensure-snap-client
-
-.PHONY: clean-client-in-vm
-clean-client-in-vm:
-	lxc exec $(VM_NAME) -- rm -f /home/ubuntu/aa-prompt-client
-	lxc exec $(VM_NAME) -- rm -rf /home/ubuntu/bundle
-
-.PHONY: ensure-client-in-vm
-ensure-client-in-vm: require-rust
-	if ! lxc exec $(VM_NAME) -- test -f /home/ubuntu/aa-prompt-client ; then \
-		cd aa-prompt-client ; \
-		cargo build ; \
-		lxc file push target/debug/aa-prompt-client $(VM_NAME)/home/ubuntu/ ; \
-	fi
-	if ! lxc exec $(VM_NAME) -- test -f /home/ubuntu/bundle ; then \
-		cd apparmor_prompt ; \
-		rm -rf build ; \
-		dart run build_runner build ; \
-		flutter build linux ; \
-		lxc file push -r build/linux/x64/release/bundle $(VM_NAME)/home/ubuntu/ ; \
-	fi
-
-.PHONY: update-client-in-vm
-update-client-in-vm: clean-client-in-vm ensure-client-in-vm
-
 .PHONY: prepare-vm
-prepare-vm: require-rust create-or-start-vm snapd-prompting ensure-test-snap ensure-snap-client
+prepare-vm: create-or-start-vm snapd-prompting ensure-test-snap ensure-client-in-vm
 
 .PHONY: integration-tests
-integration-tests: require-rust
+integration-tests:
+	@echo ":: Checking cargo is available..."
+	@if ! which cargo; then \
+		echo ":: A local rust toolchain is required to run this target"; \
+		exit 1; \
+	fi
 	@echo ":: Remember to run 'make prepare-vm' before running the integration tests"
 	cd aa-prompt-client && cargo test --no-run
 	FNAME=$$(ls -ht aa-prompt-client/target/debug/deps/integration* | grep -Ev '\.d' | head -n1); \
