@@ -1,7 +1,7 @@
 //! A simple command line prompting client
 use aa_prompt_client::{
     cli_actions::{
-        listen_for_target, run_echo_loop, run_flutter_client_loop, run_simple_client_loop,
+        listen_for_target, run_echo_loop, run_flutter_client_loop, run_terminal_client_loop,
     },
     snapd_client::{Action, Lifespan, SnapdSocketClient},
     Result,
@@ -95,6 +95,6 @@ async fn main() -> Result<()> {
 
         Command::Flutter => run_flutter_client_loop(c).await,
 
-        Command::Loop => run_simple_client_loop(c).await,
+        Command::Loop => run_terminal_client_loop(c).await,
     }
 }
