@@ -13,7 +13,10 @@ enum AccessPolicy { allow, deny }
 
 enum Permission { read, write, execute }
 
-enum Lifespan { single, session, forever } // timespan?
+// Technically there is also a 'timespan' variant of this enum (on the
+// snapd side) but it isn't something that we are currently supporting
+// through the prompt UI.
+enum Lifespan { single, session, forever }
 
 @freezed
 class PromptDetails with _$PromptDetails {
