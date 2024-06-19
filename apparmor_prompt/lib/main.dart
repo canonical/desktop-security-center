@@ -4,12 +4,16 @@ import 'package:apparmor_prompt/prompt_data_model.dart';
 import 'package:apparmor_prompt/prompt_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
 void main(List<String> args) async {
+  Logger.setup(level: LogLevel.info);
+  final log = Logger('prompt_ui');
+
   if (args.length != 1) {
-    stdout.writeln('expected prompt details on stdin');
+    log.error('expected prompt details as first command line argument');
     exit(1);
   }
 
@@ -19,15 +23,15 @@ void main(List<String> args) async {
     final json = jsonDecode(args[0]) as Map<String, dynamic>;
     details = PromptDetails.fromJson(json);
   } on TypeError catch (e) {
-    stdout.writeln('malformed JSON input: $e');
+    log.error('malformed JSON input: $e');
     exit(1);
   } on Exception catch (e) {
-    stdout.writeln('unable to parse command line args: $e');
+    log.error('unable to parse command line args: $e');
     exit(1);
   }
 
   await YaruWindowTitleBar.ensureInitialized();
-  registerService<PromptDetails>(() => details);
+  registerServiceInstance<PromptDetails>(details);
 
   runApp(const ProviderScope(child: PromptDialog()));
 }

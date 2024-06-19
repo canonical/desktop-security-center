@@ -11,18 +11,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  yaru:
-    git:
-      url: https://github.com/ubuntu/yaru.dart.git
-      ref: main
-
   flutter_riverpod: ^2.5.1
   freezed_annotation: ^2.4.1
   json_serializable: ^6.8.0
   riverpod_annotation: ^2.3.5
   ubuntu_lints: ^0.3.0
+  ubuntu_logger: ^0.1.1
   ubuntu_service: ^0.3.2
+  yaru:
+    git:
+      url: https://github.com/ubuntu/yaru.dart.git
+      ref: main
   yaru_widgets: ^1.1.2
 
 dev_dependencies:
