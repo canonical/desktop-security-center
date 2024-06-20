@@ -62,12 +62,12 @@ create-or-start-vm:
 		echo ":: Waiting for VM ($(VM_NAME)) to be ready..."; \
 		sleep 1; \
 	done
-	@sleep 2
+	@sleep 5
 	@echo ":: VM ($(VM_NAME)) now ready"
-	@if ! lxc exec $(VM_NAME) -- snap info snapd > /dev/null ; then \
-		@echo ":: Installing snapd..." ; \
-		@lxc exec $(VM_NAME) -- snap install snapd ; \
-	fi
+	@echo ":: Installing snapd..."
+	@lxc exec $(VM_NAME) -- snap install snapd
+	@echo ":: Installing the app center..."
+	@lxc exec $(VM_NAME) -- snap install snap-store --channel=latest/stable/ubuntu-24.04
 
 .PHONY: attach-vm
 attach-vm:
@@ -116,7 +116,7 @@ ensure-test-snap:
 update-test-snap: clean-test-snap ensure-test-snap
 
 .PHONY: prepare-vm
-prepare-vm: create-or-start-vm snapd-prompting ensure-test-snap ensure-client-in-vm
+prepare-vm: create-or-start-vm snapd-prompting ensure-test-snap ensure-client-in-vm bounce-snapd
 
 .PHONY: integration-tests
 integration-tests:

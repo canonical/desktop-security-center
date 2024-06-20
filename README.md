@@ -30,6 +30,14 @@ part of the integration test suite (see below). If you did not already have
 to be able to interact with lxd. Alternatively you can run `newgrp lxd` as
 described in [the lxd installation docs][2].
 
+Once the VM is up and running you then need to run `make attach-vm` to open a
+VGA console and close gnome-initial-setup. Once that is done you need to run
+`make bounce-snapd` from your host and then you should be able to run the client
+in a terminal in the VM to start listening for prompts:
+```bash
+$ apparmor-prompting -vv flutter
+```
+
 
 ## Running the integration tests
 
