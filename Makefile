@@ -64,6 +64,10 @@ create-or-start-vm:
 	done
 	@sleep 2
 	@echo ":: VM ($(VM_NAME)) now ready"
+	@if ! lxc exec $(VM_NAME) -- snap info snapd > /dev/null ; then \
+		@echo ":: Installing snapd..." ; \
+		@lxc exec $(VM_NAME) -- snap install snapd ; \
+	fi
 
 .PHONY: attach-vm
 attach-vm:
