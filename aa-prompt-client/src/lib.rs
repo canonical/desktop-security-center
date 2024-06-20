@@ -1,3 +1,4 @@
+pub mod cli_actions;
 pub mod snapd_client;
 
 mod socket_client;

@@ -30,6 +30,8 @@ jobs:
       - name: Build testing snap
         id: snapcraft
         uses: snapcore/action-build@v1
+        with:
+          path: testing-snap
 
       - name: Setup snapd and test snap
         run: |
