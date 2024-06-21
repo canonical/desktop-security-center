@@ -1,6 +1,7 @@
 use crate::snapd_client::{Constraints, Prompt, PromptReply};
 use serde::{Deserialize, Serialize};
 
+#[allow(dead_code)]
 #[derive(Debug, Default, Clone, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct PromptSequence {
