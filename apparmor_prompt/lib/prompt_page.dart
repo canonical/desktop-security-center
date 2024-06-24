@@ -179,26 +179,11 @@ class MoreOptions extends ConsumerWidget {
   }
 }
 
-class AccessToggle extends ConsumerStatefulWidget {
+class AccessToggle extends ConsumerWidget {
   const AccessToggle({super.key});
 
   @override
-  ConsumerState<AccessToggle> createState() => _AccessToggleState();
-}
-
-class _AccessToggleState extends ConsumerState<AccessToggle> {
-  final _customPathController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    final model = ref.watch(promptDataModelProvider);
-    _customPathController.text = model.details.parentDirectory;
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(promptDataModelProvider);
     final notifier = ref.read(promptDataModelProvider.notifier);
 
@@ -220,9 +205,12 @@ class _AccessToggleState extends ConsumerState<AccessToggle> {
           permissionChoice: PermissionChoice.customPath,
         ),
         if (model.permissionChoice == PermissionChoice.customPath) ...[
-          TextField(
-            controller: _customPathController,
+          TextFormField(
+            initialValue: model.details.parentDirectory,
             onChanged: notifier.setCustomPath,
+            decoration: InputDecoration(
+              errorText: model.previousErrorMessage,
+            ),
           ),
           const Text('<Learn about path patterns>'),
         ],

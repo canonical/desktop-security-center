@@ -29,6 +29,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.5.2
+  json_annotation: ^4.9.0
   riverpod_generator: ^2.4.0
 
 flutter:
