@@ -209,7 +209,7 @@ class AccessToggle extends ConsumerWidget {
             initialValue: model.details.parentDirectory,
             onChanged: notifier.setCustomPath,
             decoration: InputDecoration(
-              errorText: model.previousErrorMessage,
+              errorText: model.details.previousErrorMessage,
             ),
           ),
           const Text('<Learn about path patterns>'),

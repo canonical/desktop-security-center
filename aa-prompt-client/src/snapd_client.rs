@@ -294,7 +294,7 @@ impl Prompt {
         }
     }
 
-    pub fn as_ui_prompt_input(&self) -> UiPromptInput {
+    pub fn as_ui_prompt_input(&self, previous_error_message: Option<String>) -> UiPromptInput {
         let requested_path = self.constraints.path.clone();
         let parent_directory = PathBuf::from(&requested_path)
             .parent()
@@ -307,6 +307,7 @@ impl Prompt {
             parent_directory,
             requested_permissions: self.constraints.permissions.clone(),
             available_permissions: self.constraints.available_permissions.clone(),
+            previous_error_message,
         }
     }
 }
@@ -319,6 +320,7 @@ pub struct UiPromptInput {
     parent_directory: String,
     requested_permissions: Vec<String>,
     available_permissions: Vec<String>,
+    previous_error_message: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
