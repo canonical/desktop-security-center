@@ -185,6 +185,7 @@ class AccessToggle extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(promptDataModelProvider);
+    final notifier = ref.read(promptDataModelProvider.notifier);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -204,7 +205,13 @@ class AccessToggle extends ConsumerWidget {
           permissionChoice: PermissionChoice.customPath,
         ),
         if (model.permissionChoice == PermissionChoice.customPath) ...[
-          const TextField(),
+          TextFormField(
+            initialValue: model.details.parentDirectory,
+            onChanged: notifier.setCustomPath,
+            decoration: InputDecoration(
+              errorText: model.previousErrorMessage,
+            ),
+          ),
           const Text('<Learn about path patterns>'),
         ],
       ],
