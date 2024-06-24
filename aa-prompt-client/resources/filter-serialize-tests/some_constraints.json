@@ -1,0 +1,7 @@
+{
+  "snap": "snapName",
+  "interface": "home",
+  "constraints": {
+    "permissions": [ "read" ]
+  }
+}

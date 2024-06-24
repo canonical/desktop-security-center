@@ -224,19 +224,19 @@ pub struct PromptId(pub String);
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct Prompt {
-    id: PromptId,
-    timestamp: String,
-    snap: String,
-    interface: String,
-    constraints: Constraints,
+    pub(crate) id: PromptId,
+    pub(crate) timestamp: String,
+    pub(crate) snap: String,
+    pub(crate) interface: String,
+    pub(crate) constraints: Constraints,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
-struct Constraints {
-    path: String,
-    permissions: Vec<String>,
-    available_permissions: Vec<String>,
+pub(crate) struct Constraints {
+    pub(crate) path: String,
+    pub(crate) permissions: Vec<String>,
+    pub(crate) available_permissions: Vec<String>,
 }
 
 impl Prompt {

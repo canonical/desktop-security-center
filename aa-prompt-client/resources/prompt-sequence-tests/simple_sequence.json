@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "prompts": [
+    {
+        "prompt-filter": {
+          "snap": "testSnap",
+          "interface": "home",
+          "constraints": {
+            "path": "/home/foo/bar",
+            "permissions": [ "read" ],
+            "available-permissions": [ "read", "write", "execute" ]
+          }
+        },
+        "reply": {
+            "action": "allow",
+            "lifespan": "single",
+            "constraints": {
+                "path-pattern": "/home/foo/bar",
+                "permissions": [ "read", "write" ]
+            }
+        }
+    }
+  ]
+}
