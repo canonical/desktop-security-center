@@ -38,6 +38,7 @@ class PromptData with _$PromptData {
     required PromptDetails details,
     required bool withMoreOptions,
     required List<Permission> permissions,
+    required String customPath,
     PermissionChoice? permissionChoice,
     AccessPolicy? accessPolicy,
     Lifespan? lifespan,
@@ -76,6 +77,7 @@ class PromptDataModel extends _$PromptDataModel {
       accessPolicy: AccessPolicy.allow,
       lifespan: Lifespan.forever,
       permissions: details.requestedPermissions,
+      customPath: details.parentDirectory,
     );
   }
 
@@ -83,13 +85,8 @@ class PromptDataModel extends _$PromptDataModel {
     final pathPattern = switch (state.permissionChoice!) {
       PermissionChoice.requested => state.details.requestedPath,
       PermissionChoice.parentDir => state.details.parentDirectory,
-      PermissionChoice.customPath => '',
+      PermissionChoice.customPath => state.customPath,
     };
-
-    if (state.withMoreOptions &&
-        state.permissionChoice == PermissionChoice.customPath) {
-      throw StateError('Custom paths not implemented yet');
-    }
 
     return PromptReply(
       action: state.accessPolicy!,
@@ -104,6 +101,8 @@ class PromptDataModel extends _$PromptDataModel {
 
   void setPermissionChoice(PermissionChoice? p) =>
       state = state.copyWith(permissionChoice: p);
+
+  void setCustomPath(String path) => state = state.copyWith(customPath: path);
 
   void setAccessPolicy(AccessPolicy? a) =>
       state = state.copyWith(accessPolicy: a);
