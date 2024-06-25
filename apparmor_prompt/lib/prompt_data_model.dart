@@ -26,6 +26,7 @@ class PromptDetails with _$PromptDetails {
     required String parentDirectory,
     required List<Permission> requestedPermissions,
     required List<Permission> availablePermissions,
+    String? previousErrorMessage,
   }) = _PromptDetails;
 
   factory PromptDetails.fromJson(Map<String, dynamic> json) =>
@@ -42,7 +43,6 @@ class PromptData with _$PromptData {
     PermissionChoice? permissionChoice,
     AccessPolicy? accessPolicy,
     Lifespan? lifespan,
-    String? previousErrorMessage,
   }) = _PromptData;
 
   PromptData._();
@@ -69,11 +69,14 @@ class PromptDataModel extends _$PromptDataModel {
   @override
   PromptData build() {
     final details = getService<PromptDetails>();
+    final inErrorState = details.previousErrorMessage != null;
 
     return PromptData(
       details: details,
-      withMoreOptions: false,
-      permissionChoice: PermissionChoice.requested,
+      withMoreOptions: inErrorState,
+      permissionChoice: inErrorState
+          ? PermissionChoice.customPath
+          : PermissionChoice.requested,
       accessPolicy: AccessPolicy.allow,
       lifespan: Lifespan.forever,
       permissions: details.requestedPermissions,
