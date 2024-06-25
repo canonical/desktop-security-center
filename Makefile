@@ -138,3 +138,32 @@ integration-tests:
 clean:
 	lxc stop --force $(VM_NAME) 2>/dev/null || true
 	lxc delete $(VM_NAME) 2>/dev/null || true
+
+# Targets for local use rather than against the VM
+
+.PHONY: local-snapd-prompting
+local-snapd-prompting:
+	snap refresh snapd --channel=latest/edge/prompting; \
+	snap set system experimental.apparmor-prompting=true
+
+.PHONY: local-snapd-stable
+local-snapd-stable:
+	snap refresh snapd --channel=latest/stable; \
+	snap set system experimental.apparmor-prompting=false
+
+.PHONY: local-clean-request-rules
+local-clean-request-rules:
+	if test -f /var/lib/snapd/request-rules.json ; then \
+		rm /var/lib/snapd/request-rules.json ; \
+	fi
+
+.PHONY: local-bounce-snapd
+local-bounce-snapd: local-clean-request-rules local-snapd-stable local-snapd-prompting
+
+.PHONY: local-install-client
+local-install-client:
+	echo ":: Building $(SNAP_NAME) via snapcraft..." ; \
+	rm -rf apparmor_prompt/build ; \
+	snapcraft ; \
+	echo ":: Installing $(SNAP_NAME)..." ; \
+	snap install --dangerous $(SNAP_NAME)_0.1_amd64.snap ; \

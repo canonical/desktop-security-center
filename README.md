@@ -6,7 +6,19 @@
 ![screenshot](./screenshot.png)
 
 
+## Providing feedback
+
+The current primary use case of this repository is to gather feedback on what
+using apparmor prompting looks like with "real" desktop workloads.
+
+Please provide feedback of any issues or otherwise "interesting" behaviour
+observed from snaps when running under apparmor prompting
+[here](https://docs.google.com/document/d/104pOAS-vZB48zq2ZpJbBLI23WlfHrYJd_UrgCZwwBpY/edit).
+
+
 ## Getting set up
+
+### Running in a lxd VM (Recommended)
 
 So long as you have `lxd` installed you will be able to quickly spin up and
 bootstrap a VM for local testing against the `latest/edge/prompting` channel
@@ -38,6 +50,36 @@ in a terminal in the VM to start listening for prompts:
 $ apparmor-prompting -vv flutter
 ```
 
+### Running locally
+
+If you are already inside of an Ubuntu VM or want to try running apparmor
+prompting on your host, you can use the `local-*` Makefile targets to build and
+install the client locally and move over to the prompting branch of `snapd`.
+
+> **WARNING**: When testing things out inside of a VM we have seen that it is
+> entirely possible to get your system into a bad state if prompts aren't
+> handled correctly. If you are planning on running this on your host then
+> please be aware that you may end up with unexpected behaviour and snaps
+> hanging on syscalls if there are any issues with the current state of the
+> prompting client.
+
+```bash
+$ make local-snapd-prompting
+$ make local-install-client
+$ make local-bounce-snapd
+
+# To move back to the stable channel of snapd
+$ make local-snapd-stable
+```
+
+Running the client is then the same as when inside of a VM:
+```bash
+$ apparmor-prompting -vv flutter
+```
+
+Note that any prompts generated between enabling prompting and starting the
+client will be unactioned and may result in unexpected behaviour from installed
+snaps.
 
 ## Running the integration tests
 
