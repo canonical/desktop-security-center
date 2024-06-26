@@ -21,6 +21,7 @@ use tokio::{process::Command, spawn};
 use uuid::Uuid;
 
 const TEST_SNAP: &str = "aa-prompting-test";
+const PROMPT_NOT_FOUND: &str = "no prompt with the given ID found for the given user";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 struct Output {
@@ -160,7 +161,7 @@ async fn happy_path_create_multiple(action: Action, lifespan: Lifespan) -> Resul
     // so we don't care about the output
     // FIXME: work out why this hangs even when the test snap has output
     // _ = rx.recv().expect("to be able recv");
-    tokio::time::sleep(std::time::Duration::from_millis(200)).await;
+    tokio::time::sleep(std::time::Duration::from_millis(50)).await;
 
     let files = &[
         ("test-1.txt", "test\n"),
@@ -188,10 +189,10 @@ async fn requesting_an_unknown_prompt_id_is_an_error() -> Result<()> {
     let c = SnapdSocketClient::default();
     let res = c.prompt_details(&PromptId("invalid".to_string())).await;
 
-    let expected = "no prompt with the given ID found for the given user";
-
     match res {
-        Err(Error::SnapdError { message }) => assert_eq!(message, expected, "unexpected message"),
+        Err(Error::SnapdError { message }) => {
+            assert_eq!(message, PROMPT_NOT_FOUND, "unexpected message")
+        }
         Err(e) => panic!("expected a snapd error, got: {e}"),
         Ok(p) => panic!("expected an error, got {p:?}"),
     }
@@ -244,6 +245,47 @@ async fn invalid_timeperiod_duration_errors() -> Result<()> {
         ),
         Err(e) => panic!("expected a snapd error, got: {e}"),
         Ok(_) => panic!("should have errored but got an OK response"),
+    }
+
+    Ok(())
+}
+
+#[test_case(Action::Allow, "testing testing 1 2 3\n", ""; "allow")]
+#[test_case(Action::Deny, "", "cat: <HOME>/test/<PATH>/test.txt: Permission denied\n"; "deny")]
+#[tokio::test]
+#[serial]
+async fn replying_multiple_times_errors(
+    action: Action,
+    expected_stdout: &str,
+    expected_stderr: &str,
+) -> Result<()> {
+    let mut c = SnapdSocketClient::default();
+    let (prefix, dir_path) = setup_test_dir(None, &[("test.txt", expected_stdout)])?;
+
+    let rx = spawn_for_output("aa-prompting-test.read", vec![prefix.clone()]);
+    let (id, p) = expect_single_prompt(&mut c, &format!("{dir_path}/test.txt"), &["read"]).await;
+
+    // first reply should work fine
+    c.reply_to_prompt(&id, p.clone().into_reply(action)).await?;
+    let output = rx.recv().expect("to be able recv");
+
+    assert_eq!(output.stdout, expected_stdout, "stdout");
+    assert_eq!(
+        output.stderr,
+        expected_stderr
+            .replace("<HOME>", &get_home())
+            .replace("<PATH>", &prefix),
+        "stderr"
+    );
+
+    // second reply should error because the prompt no longer exists in snapd
+    let res = c.reply_to_prompt(&id, p.clone().into_reply(action)).await;
+    match res {
+        Err(Error::SnapdError { message }) => {
+            assert_eq!(message, PROMPT_NOT_FOUND, "unexpected message")
+        }
+        Err(e) => panic!("expected a snapd error, got: {e}"),
+        Ok(p) => panic!("expected an error, got {p:?}"),
     }
 
     Ok(())
