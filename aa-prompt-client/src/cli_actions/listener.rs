@@ -9,6 +9,10 @@ use std::{
 use tokio::process::Command;
 use tracing::{debug, error, info, warn};
 
+// FIXME: having to hard code this is a problem.
+// We need snapd to provide structured errors we can work with programatically.
+const PROMPT_NOT_FOUND: &str = "no prompt with the given ID found for the given user";
+
 trait ReplyClient {
     async fn get_reply(&self, p: Prompt, prev_error: Option<String>) -> Result<PromptReply>;
 
@@ -23,7 +27,13 @@ trait ReplyClient {
         debug!(?id, ?reply, "replying to prompt");
         while let Err(e) = c.reply_to_prompt(&id, reply).await {
             let prev_error = match e {
+                Error::SnapdError { message } if message == PROMPT_NOT_FOUND => {
+                    warn!(?id, "prompt has already been actioned");
+                    return Ok(());
+                }
+
                 Error::SnapdError { message } => message,
+
                 _ => {
                     error!(%e, "unexpected error in replying to prompt");
                     return Err(e);
