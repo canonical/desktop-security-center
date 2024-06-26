@@ -84,20 +84,19 @@ impl ReplyClient for FlutterClient {
         let input = serde_json::to_string(&p.as_ui_prompt_input(prev_error))?;
         debug!(input, "prompt details for the flutter ui");
 
+        let output = Command::new(&self.cmd).arg(&input).output().await?;
+        debug!(
+            raw_stdout = %String::from_utf8(output.stdout.clone()).unwrap(),
+            "raw output from the flutter ui"
+        );
+
         // If the user closes out the prompt without submitting a reply we will get nothing on
-        // stdout so we retry until they action the prompt in order to not leave the snap that
-        // generated the prompt in a hung state.
-        let mut stdout = Vec::new();
-        while stdout.is_empty() {
-            let output = Command::new(&self.cmd).arg(&input).output().await?;
-            debug!(
-                raw_stdout = %String::from_utf8(output.stdout.clone()).unwrap(),
-                "raw output from the flutter ui"
-            );
-            stdout = output.stdout
+        // stdout so we treat that as "deny once".
+        if output.stdout.is_empty() {
+            return Ok(p.into_reply(Action::Deny));
         }
 
-        let ui_reply: UiPromptReply = serde_json::from_slice(&stdout)?;
+        let ui_reply: UiPromptReply = serde_json::from_slice(&output.stdout)?;
         debug!(?ui_reply, "parsed reply from the flutter ui");
 
         Ok(p.into_reply_from_ui(ui_reply))
