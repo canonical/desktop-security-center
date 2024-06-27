@@ -12,6 +12,7 @@ use tracing::{debug, error, info, warn};
 // FIXME: having to hard code this is a problem.
 // We need snapd to provide structured errors we can work with programatically.
 const PROMPT_NOT_FOUND: &str = "no prompt with the given ID found for the given user";
+const NO_PROMPTS_FOR_USER: &str = "no prompts found for the given user";
 
 trait ReplyClient {
     async fn get_reply(&self, p: Prompt, prev_error: Option<String>) -> Result<PromptReply>;
@@ -27,6 +28,11 @@ trait ReplyClient {
         debug!(?id, ?reply, "replying to prompt");
         while let Err(e) = c.reply_to_prompt(&id, reply).await {
             let prev_error = match e {
+                Error::SnapdError { message } if message == NO_PROMPTS_FOR_USER => {
+                    warn!(?id, "no prompts found for user");
+                    return Ok(());
+                }
+
                 Error::SnapdError { message } if message == PROMPT_NOT_FOUND => {
                     warn!(?id, "prompt has already been actioned");
                     return Ok(());
