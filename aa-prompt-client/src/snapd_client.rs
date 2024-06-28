@@ -295,32 +295,114 @@ impl Prompt {
     }
 
     pub fn as_ui_prompt_input(&self, previous_error_message: Option<String>) -> UiPromptInput {
-        let requested_path = self.constraints.path.clone();
-        let parent_directory = PathBuf::from(&requested_path)
-            .parent()
-            .map(|pb| format!("{}/*", pb.to_string_lossy()))
-            .expect("requested path to have a parent");
+        let (initial_options, more_options) = self.ui_options();
 
         UiPromptInput {
             snap_name: self.snap.clone(),
-            requested_path,
-            parent_directory,
+            requested_path: self.path().to_string(),
             requested_permissions: self.constraints.permissions.clone(),
             available_permissions: self.constraints.available_permissions.clone(),
             previous_error_message,
+            initial_options,
+            more_options,
+        }
+    }
+
+    fn ui_options(&self) -> (Vec<InitialOption>, Vec<PathAndDescription>) {
+        let home_dir = env::var("SNAP_REAL_HOME")
+            .map(|p| format!("{p}/**"))
+            .expect("to be running inside of a snap");
+
+        let parent_dir = PathBuf::from(self.path())
+            .parent()
+            .map(|pb| format!("{}/**", pb.to_string_lossy()))
+            .expect("requested path to have a parent");
+
+        let initial_options = vec![
+            InitialOption::new("Allow Always", UiPromptReply::as_requested(self)),
+            InitialOption::new_with_path(self, "Allow Directory", &parent_dir),
+            InitialOption::new_with_path(self, "Allow Home", &home_dir),
+            InitialOption::new(
+                "Deny Once",
+                UiPromptReply {
+                    action: Action::Deny,
+                    lifespan: Lifespan::Single,
+                    ..UiPromptReply::as_requested(self)
+                },
+            ),
+        ];
+
+        let mut more_options = vec![PathAndDescription::new("Requested Path", self.path())];
+
+        if self.path().ends_with('/') {
+            more_options.push(PathAndDescription::new(
+                "Directory Contents",
+                format!("{}**", self.path()),
+            ));
+        }
+
+        if parent_dir != home_dir {
+            more_options.push(PathAndDescription::new("Parent Directory", parent_dir));
+        }
+
+        more_options.push(PathAndDescription::new("Home Directory", home_dir));
+
+        (initial_options, more_options)
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct UiPromptInput {
+    snap_name: String,
+    requested_path: String,
+    requested_permissions: Vec<String>,
+    available_permissions: Vec<String>,
+    previous_error_message: Option<String>,
+    initial_options: Vec<InitialOption>,
+    more_options: Vec<PathAndDescription>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PathAndDescription {
+    description: &'static str,
+    path_pattern: String,
+}
+
+impl PathAndDescription {
+    fn new(description: &'static str, path_pattern: impl Into<String>) -> Self {
+        Self {
+            description,
+            path_pattern: path_pattern.into(),
         }
     }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-pub struct UiPromptInput {
-    snap_name: String,
-    requested_path: String,
-    parent_directory: String,
-    requested_permissions: Vec<String>,
-    available_permissions: Vec<String>,
-    previous_error_message: Option<String>,
+pub struct InitialOption {
+    button_text: String,
+    reply: UiPromptReply,
+}
+
+impl InitialOption {
+    fn new(button_text: &str, reply: UiPromptReply) -> Self {
+        Self {
+            button_text: button_text.to_string(),
+            reply,
+        }
+    }
+
+    fn new_with_path(p: &Prompt, button_text: &str, path_pattern: impl Into<String>) -> Self {
+        InitialOption::new(
+            button_text,
+            UiPromptReply {
+                path_pattern: path_pattern.into(),
+                ..UiPromptReply::as_requested(p)
+            },
+        )
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
@@ -330,6 +412,17 @@ pub struct UiPromptReply {
     lifespan: Lifespan,
     path_pattern: String,
     permissions: Vec<String>,
+}
+
+impl UiPromptReply {
+    fn as_requested(p: &Prompt) -> Self {
+        Self {
+            action: Action::Allow,
+            lifespan: Lifespan::Forever,
+            path_pattern: p.path().to_string(),
+            permissions: p.requested_permissions().to_vec(),
+        }
+    }
 }
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]

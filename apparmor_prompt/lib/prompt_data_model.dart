@@ -7,8 +7,6 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 part 'prompt_data_model.freezed.dart';
 part 'prompt_data_model.g.dart';
 
-enum PermissionChoice { requested, parentDir, customPath }
-
 enum AccessPolicy { allow, deny }
 
 enum Permission { read, write, execute }
@@ -23,14 +21,37 @@ class PromptDetails with _$PromptDetails {
   factory PromptDetails({
     required String snapName,
     required String requestedPath,
-    required String parentDirectory,
     required List<Permission> requestedPermissions,
     required List<Permission> availablePermissions,
+    required List<InitialOption> initialOptions,
+    required List<MoreOption> moreOptions,
     String? previousErrorMessage,
   }) = _PromptDetails;
 
   factory PromptDetails.fromJson(Map<String, dynamic> json) =>
       _$PromptDetailsFromJson(json);
+}
+
+@freezed
+class InitialOption with _$InitialOption {
+  factory InitialOption({
+    required String buttonText,
+    required PromptReply reply,
+  }) = _InitialOption;
+
+  factory InitialOption.fromJson(Map<String, dynamic> json) =>
+      _$InitialOptionFromJson(json);
+}
+
+@freezed
+class MoreOption with _$MoreOption {
+  factory MoreOption({
+    required String description,
+    required String pathPattern,
+  }) = _MoreOption;
+
+  factory MoreOption.fromJson(Map<String, dynamic> json) =>
+      _$MoreOptionFromJson(json);
 }
 
 @freezed
@@ -40,7 +61,7 @@ class PromptData with _$PromptData {
     required bool withMoreOptions,
     required List<Permission> permissions,
     required String customPath,
-    PermissionChoice? permissionChoice,
+    int? selectedPath,
     AccessPolicy? accessPolicy,
     Lifespan? lifespan,
   }) = _PromptData;
@@ -73,24 +94,18 @@ class PromptDataModel extends _$PromptDataModel {
 
     return PromptData(
       details: details,
-      withMoreOptions: inErrorState,
-      permissionChoice: inErrorState
-          ? PermissionChoice.customPath
-          : PermissionChoice.requested,
+      // forcing for now while we are iterating on what options we provice
+      // withMoreOptions: inErrorState,
+      withMoreOptions: true,
+      selectedPath: inErrorState ? details.initialOptions.length : 0,
       accessPolicy: AccessPolicy.allow,
       lifespan: Lifespan.forever,
       permissions: details.requestedPermissions,
-      customPath: details.parentDirectory,
+      customPath: details.requestedPath,
     );
   }
 
   PromptReply buildReply() {
-    final pathPattern = switch (state.permissionChoice!) {
-      PermissionChoice.requested => state.details.requestedPath,
-      PermissionChoice.parentDir => state.details.parentDirectory,
-      PermissionChoice.customPath => state.customPath,
-    };
-
     return PromptReply(
       action: state.accessPolicy!,
       lifespan: state.lifespan!,
@@ -99,11 +114,26 @@ class PromptDataModel extends _$PromptDataModel {
     );
   }
 
+  String get pathPattern {
+    if (state.selectedPath! == numMoreOptions) {
+      return state.customPath;
+    } else {
+      return state.details.moreOptions[state.selectedPath!].pathPattern;
+    }
+  }
+
+  int get numInitialOptions => state.details.initialOptions.length;
+  int get numMoreOptions => state.details.moreOptions.length;
+
+  String moreOptionPath(int index) {
+    final opt = state.details.moreOptions[index];
+    return '${opt.description} (${opt.pathPattern})';
+  }
+
   void toggleMoreOptions() =>
       state = state.copyWith(withMoreOptions: !state.withMoreOptions);
 
-  void setPermissionChoice(PermissionChoice? p) =>
-      state = state.copyWith(permissionChoice: p);
+  void setSelectedPath(int? i) => state = state.copyWith(selectedPath: i);
 
   void setCustomPath(String path) => state = state.copyWith(customPath: path);
 
@@ -135,21 +165,6 @@ class PromptDataModel extends _$PromptDataModel {
 
   void saveAndContinue() => _writeReplyAndExit(buildReply());
 
-  void allowAlways() => _writeReplyAndExit(
-        PromptReply(
-          action: AccessPolicy.allow,
-          lifespan: Lifespan.forever,
-          pathPattern: state.details.requestedPath,
-          permissions: state.details.requestedPermissions,
-        ),
-      );
-
-  void denyOnce() => _writeReplyAndExit(
-        PromptReply(
-          action: AccessPolicy.deny,
-          lifespan: Lifespan.single,
-          pathPattern: state.details.requestedPath,
-          permissions: state.details.requestedPermissions,
-        ),
-      );
+  void replyWithInitialOption(int i) =>
+      _writeReplyAndExit(state.details.initialOptions[i].reply);
 }

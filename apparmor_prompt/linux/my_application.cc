@@ -48,8 +48,8 @@ static void my_application_activate(GApplication* application) {
   }
 
   /* gtk_window_set_default_size(window, 1280, 720); */
-  /* gtk_window_set_default_size(window, 640, 480); */
-  gtk_window_set_default_size(window, 560, 680);
+  /* gtk_window_set_default_size(window, 560, 680); */
+  gtk_window_set_default_size(window, 760, 680);
   gtk_widget_show(GTK_WIDGET(window));
 
   g_autoptr(FlDartProject) project = fl_dart_project_new();
