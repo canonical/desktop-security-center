@@ -2,7 +2,10 @@ pub mod cli_actions;
 pub mod prompt_sequence;
 pub mod snapd_client;
 
+mod recording;
 mod socket_client;
+
+pub(crate) const SNAP_NAME: &str = "apparmor-prompting";
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
@@ -23,6 +26,9 @@ pub enum Error {
         requested: Vec<String>,
         available: Vec<String>,
     },
+
+    #[error("{version} is not supported recording version.")]
+    InvalidRecordingVersion { version: u8 },
 
     #[error("{uri} is not valid: {reason}")]
     InvalidUri { reason: &'static str, uri: String },
