@@ -117,14 +117,13 @@ class InitialOptions extends ConsumerWidget {
         ),
         Row(
           children: [
-            OutlinedButton(
-              onPressed: model.withMoreOptions ? null : notifier.allowAlways,
-              child: const Text('Allow always'),
-            ),
-            OutlinedButton(
-              onPressed: model.withMoreOptions ? null : notifier.denyOnce,
-              child: const Text('Deny once'),
-            ),
+            for (var i = 0; i < notifier.numInitialOptions; i++)
+              OutlinedButton(
+                onPressed: model.withMoreOptions
+                    ? null
+                    : () => notifier.replyWithInitialOption(i),
+                child: Text(model.details.initialOptions[i].buttonText),
+              ),
             OutlinedButton(
               onPressed: notifier.toggleMoreOptions,
               child: Text(
@@ -192,21 +191,11 @@ class AccessToggle extends ConsumerWidget {
       children: [
         Text.rich(boldText('Set access for ${model.details.snapName} to:')),
         const SizedBox(height: 10),
-        const PermissionChoiceRadio(
-          title: 'The requested path',
-          permissionChoice: PermissionChoice.requested,
-        ),
-        PermissionChoiceRadio(
-          title: 'Everthing in ${model.details.parentDirectory}',
-          permissionChoice: PermissionChoice.parentDir,
-        ),
-        const PermissionChoiceRadio(
-          title: 'Custom path pattern',
-          permissionChoice: PermissionChoice.customPath,
-        ),
-        if (model.permissionChoice == PermissionChoice.customPath) ...[
+        for (var i = 0; i <= notifier.numMoreOptions; i++)
+          PathChoiceRadio(index: i),
+        if (model.selectedPath == notifier.numMoreOptions) ...[
           TextFormField(
-            initialValue: model.details.parentDirectory,
+            initialValue: model.customPath,
             onChanged: notifier.setCustomPath,
             decoration: InputDecoration(
               errorText: model.details.previousErrorMessage,
@@ -219,26 +208,27 @@ class AccessToggle extends ConsumerWidget {
   }
 }
 
-class PermissionChoiceRadio extends ConsumerWidget {
-  const PermissionChoiceRadio({
-    required this.title,
-    required this.permissionChoice,
+class PathChoiceRadio extends ConsumerWidget {
+  const PathChoiceRadio({
+    required this.index,
     super.key,
   });
 
-  final String title;
-  final PermissionChoice permissionChoice;
+  final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(promptDataModelProvider);
     final notifier = ref.read(promptDataModelProvider.notifier);
+    final title = index < notifier.numMoreOptions
+        ? notifier.moreOptionPath(index)
+        : 'Custom path pattern';
 
-    return YaruRadioButton<PermissionChoice>(
+    return YaruRadioButton<int>(
       title: Text(title),
-      value: permissionChoice,
-      groupValue: model.permissionChoice,
-      onChanged: notifier.setPermissionChoice,
+      value: index,
+      groupValue: model.selectedPath,
+      onChanged: notifier.setSelectedPath,
       toggleable: true,
     );
   }
