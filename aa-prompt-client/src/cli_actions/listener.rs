@@ -19,14 +19,18 @@ const PROMPT_NOT_FOUND: &str = "no prompt with the given ID found for the given 
 const NO_PROMPTS_FOR_USER: &str = "no prompts found for the given user";
 
 trait ReplyClient {
-    async fn get_reply(&self, p: Prompt, prev_error: Option<String>) -> Result<PromptReply>;
+    async fn get_reply(
+        &self,
+        p: TypedPrompt,
+        prev_error: Option<String>,
+    ) -> Result<TypedPromptReply>;
 
     async fn reply_retrying_errors(
         &self,
         c: &mut SnapdSocketClient,
         rec: &mut PromptRecording,
         id: PromptId,
-        p: Prompt,
+        p: TypedPrompt,
     ) -> Result<()> {
         rec.push_prompt(&p);
         let mut reply = self.get_reply(p.clone(), None).await?;
@@ -83,7 +87,7 @@ async fn run_client_loop<C: ReplyClient>(
         for id in pending {
             debug!(?id, "pulling prompt details from snapd");
             let p = match c.prompt_details(&id).await {
-                Ok(p) if rec.is_prompt_for_writing_output(&p) => {
+                Ok(TypedPrompt::Home(p)) if rec.is_prompt_for_writing_output(&p) => {
                     return rec.allow_write(p, &c).await;
                 }
 
@@ -121,11 +125,20 @@ impl FlutterClient {
 }
 
 impl ReplyClient for FlutterClient {
-    async fn get_reply(&self, p: Prompt, prev_error: Option<String>) -> Result<PromptReply> {
-        let input = serde_json::to_string(&p.as_ui_prompt_input(prev_error))?;
-        debug!(input, "prompt details for the flutter ui");
+    async fn get_reply(
+        &self,
+        prompt: TypedPrompt,
+        prev_error: Option<String>,
+    ) -> Result<TypedPromptReply> {
+        let p = match prompt {
+            TypedPrompt::Home(p) => p,
+        };
 
-        let output = Command::new(&self.cmd).arg(&input).output().await?;
+        let input = HomeInterface.prompt_to_ui_input(p.clone(), prev_error);
+        let json_input = serde_json::to_string(&input)?;
+        debug!(json_input, "prompt details for the flutter ui");
+
+        let output = Command::new(&self.cmd).arg(&json_input).output().await?;
         debug!(
             raw_stdout = %String::from_utf8(output.stdout.clone()).unwrap(),
             "raw output from the flutter ui"

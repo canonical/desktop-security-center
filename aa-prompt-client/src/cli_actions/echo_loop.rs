@@ -1,4 +1,8 @@
-use crate::{recording::PromptRecording, snapd_client::SnapdSocketClient, Result};
+use crate::{
+    recording::PromptRecording,
+    snapd_client::{SnapdSocketClient, TypedPrompt},
+    Result,
+};
 use tracing::{debug, info, warn};
 
 pub async fn run_echo_loop(mut c: SnapdSocketClient, path: Option<String>) -> Result<()> {
@@ -12,7 +16,7 @@ pub async fn run_echo_loop(mut c: SnapdSocketClient, path: Option<String>) -> Re
         for id in pending {
             debug!(?id, "pulling prompt details from snapd");
             match c.prompt_details(&id).await {
-                Ok(p) if rec.is_prompt_for_writing_output(&p) => {
+                Ok(TypedPrompt::Home(p)) if rec.is_prompt_for_writing_output(&p) => {
                     return rec.allow_write(p, &c).await;
                 }
 

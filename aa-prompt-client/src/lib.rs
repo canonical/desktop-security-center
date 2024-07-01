@@ -27,6 +27,9 @@ pub enum Error {
         available: Vec<String>,
     },
 
+    #[error("invalid prompt data received from snapd: {json}")]
+    InvalidPrompt { json: serde_json::Value },
+
     #[error("{version} is not supported recording version.")]
     InvalidRecordingVersion { version: u8 },
 
@@ -41,6 +44,9 @@ pub enum Error {
 
     #[error("error message returned from snapd: {message}")]
     SnapdError { message: String },
+
+    #[error("{interface} is not currently supported for apparmor prompting")]
+    UnsupportedInterface { interface: String },
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
