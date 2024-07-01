@@ -14,7 +14,7 @@ void main(List<String> args) async {
   final argResult = (ArgParser()..addFlag('dry-run')).parse(args);
 
   if (kDebugMode || argResult.flag('dry-run')) {
-    registerService<RulesService>(MockRulesService.new);
+    registerService<RulesService>(FakeRulesService.defaultRules);
   } else {
     registerService<RulesService>(() => SnapdRulesService(SnapdClient()));
   }
