@@ -53,7 +53,7 @@ class PromptPage extends ConsumerWidget {
                     if (model.withMoreOptions) ...[
                       const SizedBox(height: 20),
                       const MoreOptions(),
-                    ]
+                    ],
                   ],
                 ),
               ),
