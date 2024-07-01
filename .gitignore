@@ -1,2 +1,15 @@
 target
 *.snap
+
+# Flutter/Dart/Pub related
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+pubspec.lock
+
+# IntelliJ related
+*.iml
+*.idea
