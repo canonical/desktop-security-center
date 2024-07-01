@@ -50,6 +50,11 @@ scripts:
     melos exec -c 1 --fail-fast --depends-on=build_runner -- \
       dart run build_runner build --delete-conflicting-outputs
 
+  # run build_runner in the background to watch for changes in all packages
+  generate-watch: >
+    melos exec -c 1 --depends-on=build_runner -- \
+      dart run build_runner watch -d &
+
   # run gen-l10n to generate localizations in all packages
   gen-l10n: >
     melos exec -c 1 --fail-fast --depends-on=flutter_localizations -- \
