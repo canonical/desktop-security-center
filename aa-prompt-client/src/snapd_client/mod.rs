@@ -30,11 +30,14 @@ struct SnapdResponse<T> {
     result: ResOrErr<T>,
 }
 
+// NOTE: The ordering of the enum variants matters here as it is used by serde when deserializing
+// data to work out which variant we have. If we ever have a valid snapd response that also
+// contains the `message` key then it will not deserialize correctly.
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(untagged)]
 enum ResOrErr<T> {
-    Res(T),
     Err { message: String },
+    Res(T),
 }
 
 /// Abstraction layer to make swapping out the underlying client possible for

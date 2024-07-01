@@ -9,6 +9,16 @@ use crate::{
 use serde::{Deserialize, Serialize};
 use std::{env, path::PathBuf};
 
+impl Prompt<HomeInterface> {
+    pub fn path(&self) -> &str {
+        &self.constraints.path
+    }
+
+    pub fn requested_permissions(&self) -> &[String] {
+        &self.constraints.permissions
+    }
+}
+
 impl PromptReply<HomeInterface> {
     /// Specify a custom path pattern to replace the one originally requested in the parent [Prompt].
     ///
