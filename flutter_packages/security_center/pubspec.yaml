@@ -31,6 +31,7 @@ dev_dependencies:
     sdk: flutter
 
   freezed: ^2.5.2
+  mockito: ^5.4.4
   riverpod_generator: ^2.4.0
   ubuntu_lints: ^0.4.0
 
