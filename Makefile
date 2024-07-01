@@ -86,7 +86,7 @@ ensure-client-in-vm:
 	@echo ":: Checking for $(SNAP_NAME) in $(VM_NAME)..."
 	@if ! lxc exec $(VM_NAME) -- snap info $(SNAP_NAME) > /dev/null ; then \
 		echo ":: Building $(SNAP_NAME) via snapcraft..." ; \
-		rm -rf apparmor_prompt/build ; \
+		rm -rf flutter_packages/apparmor_prompt/build ; \
 		snapcraft ; \
 		echo ":: Installing $(SNAP_NAME) in $(VM_NAME)..." ; \
 		lxc file push $(SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
@@ -163,7 +163,7 @@ local-bounce-snapd: local-clean-request-rules local-snapd-stable local-snapd-pro
 .PHONY: local-install-client
 local-install-client:
 	echo ":: Building $(SNAP_NAME) via snapcraft..." ; \
-	rm -rf apparmor_prompt/build ; \
+	rm -rf flutter_packages/apparmor_prompt/build ; \
 	snapcraft ; \
 	echo ":: Installing $(SNAP_NAME)..." ; \
 	snap install --dangerous $(SNAP_NAME)_0.1_amd64.snap ; \
