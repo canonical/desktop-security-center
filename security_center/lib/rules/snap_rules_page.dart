@@ -46,15 +46,18 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(
-        snapRulesModelProvider(snap: snap, interface: interface).notifier);
+      snapRulesModelProvider(snap: snap, interface: interface).notifier,
+    );
     return Padding(
       padding: const EdgeInsets.all(30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const YaruBackButton(),
-          Text('Rules for $snap',
-              style: Theme.of(context).textTheme.headlineSmall),
+          Text(
+            'Rules for $snap',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
           Flexible(
             child: ListView.builder(
               shrinkWrap: true,
@@ -72,7 +75,7 @@ class _Body extends ConsumerWidget {
           ElevatedButton(
             onPressed: notifier.removeAll,
             child: const Text('Remove all'),
-          )
+          ),
         ],
       ),
     );
@@ -80,7 +83,7 @@ class _Body extends ConsumerWidget {
 }
 
 class _Rule extends StatelessWidget {
-  const _Rule({required this.rule, super.key});
+  const _Rule({required this.rule});
 
   final SnapdRule rule;
 
