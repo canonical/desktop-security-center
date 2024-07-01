@@ -1,9 +1,7 @@
 //! A simple command line prompting client
 use aa_prompt_client::{
-    cli_actions::{
-        listen_for_target, run_echo_loop, run_flutter_client_loop, run_terminal_client_loop,
-    },
-    snapd_client::{Action, Lifespan, SnapdSocketClient},
+    cli_actions::{run_echo_loop, run_flutter_client_loop},
+    snapd_client::SnapdSocketClient,
     Result,
 };
 use clap::{Parser, Subcommand};
@@ -13,13 +11,6 @@ use tracing_subscriber::FmtSubscriber;
 
 #[derive(Debug, Subcommand)]
 enum Command {
-    /// Run a simple allow/deny once listener
-    Loop {
-        /// Optionally record events to a specified file on Ctrl-C
-        #[clap(short, long, value_name = "FILE")]
-        record: Option<String>,
-    },
-
     /// Run the testing flutter UI as a persistent client.
     Flutter {
         /// Optionally record events to a specified file on Ctrl-C
@@ -32,29 +23,6 @@ enum Command {
         /// Optionally record events to a specified file on Ctrl-C
         #[clap(short, long, value_name = "FILE")]
         record: Option<String>,
-    },
-
-    /// Listen for and handle a single targetted prompt
-    Target {
-        /// The name of the snap triggering the expected prompt
-        #[clap(long)]
-        snap: String,
-        /// Optionally restrict to prompts requesting a specific path
-        #[clap(long)]
-        requested: Option<String>,
-
-        /// The action to reply with (allow/deny)
-        #[clap(long)]
-        action: Action,
-        /// The lifespan the reply should apply for (single/session/forever/timespan)
-        #[clap(long)]
-        lifespan: Lifespan,
-        /// When lifespan is 'timespan', the duration that should be applied
-        #[arg(long, required_if_eq("lifespan", "timespan"))]
-        duration: Option<String>,
-        /// A custom path to reply with
-        #[clap(long)]
-        path: Option<String>,
     },
 }
 
@@ -88,19 +56,7 @@ async fn main() -> Result<()> {
     }
 
     match command {
-        Command::Target {
-            snap,
-            requested,
-            action,
-            lifespan,
-            duration,
-            path,
-        } => listen_for_target(c, snap, requested, action, lifespan, duration, path).await,
-
         Command::Echo { record } => run_echo_loop(c, record).await,
-
         Command::Flutter { record } => run_flutter_client_loop(c, record).await,
-
-        Command::Loop { record } => run_terminal_client_loop(c, record).await,
     }
 }

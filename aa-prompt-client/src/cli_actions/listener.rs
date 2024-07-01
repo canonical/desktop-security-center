@@ -1,12 +1,15 @@
 use crate::{
     recording::PromptRecording,
-    snapd_client::{Action, Prompt, PromptId, PromptReply, SnapdSocketClient, UiPromptReply},
+    snapd_client::{
+        interfaces::{
+            home::{HomeInterface, HomeUiReply},
+            SnapdInterface, TypedPrompt, TypedPromptReply,
+        },
+        Action, PromptId, SnapdSocketClient,
+    },
     Error, Result,
 };
-use std::{
-    env,
-    io::{stdin, stdout, Write},
-};
+use std::env;
 use tokio::process::Command;
 use tracing::{debug, error, info, warn};
 
@@ -131,56 +134,12 @@ impl ReplyClient for FlutterClient {
         // If the user closes out the prompt without submitting a reply we will get nothing on
         // stdout so we treat that as "deny once".
         if output.stdout.is_empty() {
-            return Ok(p.into_reply(Action::Deny));
+            return Ok(HomeInterface.prompt_to_reply(p, Action::Deny).into());
         }
 
-        let ui_reply: UiPromptReply = serde_json::from_slice(&output.stdout)?;
+        let ui_reply: HomeUiReply = serde_json::from_slice(&output.stdout)?;
         debug!(?ui_reply, "parsed reply from the flutter ui");
 
-        Ok(p.into_reply_from_ui(ui_reply))
-    }
-}
-
-/// This is a bare bones client implementation that only supports responding to prompts
-/// with "allow single" or "deny single".
-pub async fn run_terminal_client_loop(c: SnapdSocketClient, path: Option<String>) -> Result<()> {
-    run_client_loop(c, TerminalClient, path).await
-}
-
-struct TerminalClient;
-
-impl ReplyClient for TerminalClient {
-    async fn get_reply(&self, p: Prompt, _: Option<String>) -> Result<PromptReply> {
-        let summary = format!(
-            "\
-id:          {}
-snap:        {}
-timestamp:   {}
-path:        {}
-permissions: {:?}
-",
-            p.id(),
-            p.snap(),
-            p.timestamp(),
-            p.path(),
-            p.requested_permissions()
-        );
-
-        println!("{}", summary);
-        print!("> allow this prompt request? (y/n): ");
-        stdout().flush()?;
-
-        let mut user_input = String::new();
-        stdin().read_line(&mut user_input)?;
-        let user_input = user_input.trim();
-        let should_allow = matches!(user_input, "y" | "Y");
-
-        let reply = if should_allow {
-            p.into_reply(Action::Allow)
-        } else {
-            p.into_reply(Action::Deny)
-        };
-
-        Ok(reply)
+        Ok(HomeInterface.map_ui_reply(ui_reply).into())
     }
 }
