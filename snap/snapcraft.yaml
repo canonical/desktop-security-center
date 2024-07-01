@@ -46,7 +46,7 @@ parts:
 
   ui:
     after: [flutter-git]
-    source: apparmor_prompt
+    source: flutter_packages/apparmor_prompt
     plugin: nil
     override-build: |
       set -e
