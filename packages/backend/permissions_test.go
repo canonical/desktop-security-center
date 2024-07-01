@@ -277,7 +277,7 @@ func TestRemoveAppPermission(t *testing.T) {
             _, err := NewPermissionServer(client).RemoveAppPermission(ctx, req)
             if tc.wantDoError {
                 require.Error(t, err)
-            else if tc.wantApiError {
+            } else if tc.wantApiError {
                 require.ErrorContains(t, err, "gave code")
             } else {
                 require.NoError(t, err)

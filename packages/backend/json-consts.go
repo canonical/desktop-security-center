@@ -1,5 +1,48 @@
 package main
 
+type confAPIResponse struct {
+    Result struct {
+        Experimental struct {
+          ApparmorPrompting bool `json:"apparmor-prompting"`
+        } `json:"experimental,omitempty"`
+    } `json:"result,omitempty"`
+    Type       string `json:"type"`
+    Status     string `json:"status"`
+    Change     string `json:"change,omitempty"`
+    StatusCode int    `json:"status-code"`
+}
+
+type snapdAPIResponse struct {
+    Result []struct {
+        Id string `json:"id"`
+        Timestamp string `json:"timestamp"`
+        User int `json:"user"`
+        Snap string `json:"snap"`
+        Interface string `json:"interface"`
+        Outcome string `json:"outcome"`
+        Lifespan string `json:"lifespan"`
+        Expiration string `json:"expiration"`
+        Constraints struct {
+            PathPattern string `json:"path-pattern"`
+            Permissions []interface{} `json:"permissions"`
+        } `json:"constraints"`
+    } `json:"result"`
+        /*
+        Experimental struct {
+            prompting     bool    `json:"apparmor-prompting,omitempty"`
+            ExpiresIn     int     `json:"expires_in,omitempty"`
+            Token         string  `json:"token,omitempty"`
+            UserCode      string  `json:"user_code,omitempty"`
+            ContractID    *string `json:"contract_id,omitempty"`
+            ContractToken *string `json:"contract_token,omitempty"`
+        } `json:"experimental"`
+        */
+    Type       string `json:"type"`
+    Status     string `json:"status"`
+    Change     string `json:"change,omitempty"`
+    StatusCode int    `json:"status-code"`
+}
+
 const (
 appPermissionsJson = `{
   "type": "sync",

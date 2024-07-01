@@ -4,12 +4,12 @@ import (
     epb "google.golang.org/protobuf/types/known/emptypb"
     wpb "google.golang.org/protobuf/types/known/wrapperspb"
     "context"
-    "github.com/tidwall/gjson"
     "io"
     "bytes"
     "log"
     "net/http"
     "fmt"
+    "encoding/json"
     "google.golang.org/grpc/codes"
     "google.golang.org/grpc/status"
 )
@@ -42,11 +42,12 @@ func NewPermissionServer(c HttpClient) (*PermissionServer) {
     return s
 }
 
-func makeRestReq(client HttpClient, kind string, headers map[string]string, where string, reqBody io.Reader) (string, error) {
+func makeRestReq(client HttpClient, kind string, headers map[string]string, where string, reqBody io.Reader) ([]byte, error) {
+    var resBody []byte
     req, err := http.NewRequest(kind, where, reqBody)
     if err != nil {
         log.Printf("Couldn't create %s request to %s.", kind, where)
-        return "", err
+        return resBody, err
     }
     for k, val := range headers {
         req.Header.Add(k, val)
@@ -54,25 +55,20 @@ func makeRestReq(client HttpClient, kind string, headers map[string]string, wher
     res, err := client.Do(req)
     if err != nil {
         log.Printf("Couldn't send %s request to %s.", kind, where)
-        return "", err
+        return resBody, err
     }
     defer res.Body.Close()
-    resBody, err := io.ReadAll(res.Body)
+    resBody, err = io.ReadAll(res.Body)
     if err != nil {
         log.Printf("Couldn't read response from %s request to %s.", kind, where)
-        return "", err
+        return resBody, err
     }
-    return string(resBody), nil
+    return resBody, nil
 }
 
-func validateApiResponse(res string) error {
-    if !gjson.Valid(res) {
-        log.Printf("Invalid Json: >%s<", res)
-        return status.Errorf(codes.Unknown, "Invalid Json")
-    }
-    statusCode := gjson.Get(res, "status-code").Int()
-    if statusCode < 200 || statusCode >= 300 {
-        return status.Errorf(codes.Unknown, "API response %s gave code %d.", res, statusCode)
+func badStatusCode(sc int) error {
+    if sc < 200 || sc >= 300 {
+        return status.Errorf(codes.Unknown, "API response gave code %d.", sc)
     }
     return nil
 }
@@ -88,20 +84,20 @@ func getSnapPathIdMaps(client HttpClient) (map[string][]string, error) {
     if err != nil {
         return nil, err
     }
-    err = validateApiResponse(o)
-    if err != nil {
+    var res snapdAPIResponse
+    if err = json.Unmarshal(o, &res); err != nil {
+        return nil, err
+    }
+    if err = badStatusCode(res.StatusCode); err != nil {
         return nil, err
     }
     pathSnaps := make(map[string][]string)
-    snapAr := gjson.Get(o, "result.#(interface=\"home\")#.snap").Array()
-    pathAr := gjson.Get(o, "result.#(interface=\"home\")#.constraints.path-pattern").Array()
-    idAr := gjson.Get(o, "result.#(interface=\"home\")#.id").Array()
-    for idx, path := range pathAr {
-        snap := snapAr[idx].String()
-        path := path.String()
-        id := idAr[idx].String()
-        pathSnaps[path] = append(pathSnaps[path], snap)
-        snapPathId[snap + sep + path] = id
+    for _, v := range(res.Result) {
+        if v.Interface == "home" {
+            path := v.Constraints.PathPattern
+            pathSnaps[path] = append(pathSnaps[path], v.Snap)
+            snapPathId[v.Snap + sep + path] = v.Id
+        }
     }
     return pathSnaps, nil
 }
@@ -123,7 +119,14 @@ func enableAppPermissions(client HttpClient, enable bool) error {
     if err != nil {
         return err
     }
-    return validateApiResponse(o)
+    var res confAPIResponse
+    if err = json.Unmarshal(o, &res); err != nil {
+        return err
+    }
+    if err = badStatusCode(res.StatusCode); err != nil {
+        return err
+    }
+    return nil
 }
 
 /* This returns 'snap get system experimental.apparmor-prompting' */
@@ -132,11 +135,14 @@ func (s *PermissionServer) IsAppPermissionsEnabled(ctx context.Context, _ *epb.E
     if err != nil {
         return nil, err
     }
-    err = validateApiResponse(o)
-    if err != nil {
+    var res confAPIResponse
+    if err = json.Unmarshal(o, &res); err != nil {
         return nil, err
     }
-    enabled := gjson.Get(o, "result.experimental.apparmor-prompting").Bool()
+    if err = badStatusCode(res.StatusCode); err != nil {
+        return nil, err
+    }
+    enabled := res.Result.Experimental.ApparmorPrompting
     return wpb.Bool(enabled), nil
 }
 
@@ -164,11 +170,15 @@ func (s *PermissionServer) AreCustomRulesApplied(ctx context.Context, _ *epb.Emp
     if err != nil {
         return nil, err
     }
-    err = validateApiResponse(o)
-    if err != nil {
+    var res snapdAPIResponse
+    if err = json.Unmarshal(o, &res); err != nil {
         return nil, err
     }
-    return wpb.Bool(gjson.Get(o, "result.#").Uint() > 0), nil
+    if err = badStatusCode(res.StatusCode); err != nil {
+        return nil, err
+    }
+    fmt.Println(res.Result)
+    return wpb.Bool(len(res.Result) > 0), nil
 }
 
 /* Remove access to the path for a given application */
@@ -193,7 +203,14 @@ func (s *PermissionServer) RemoveAppPermission(ctx context.Context, req *pb.Remo
     if err != nil {
         return empty, err
     }
-    return empty, validateApiResponse(o)
+    var res snapdAPIResponse
+    if err = json.Unmarshal(o, &res); err != nil {
+        return nil, err
+    }
+    if err = badStatusCode(res.StatusCode); err != nil {
+        return nil, err
+    }
+    return empty, nil
 }
 
 /* List all permissions to personal directories */
