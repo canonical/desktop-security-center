@@ -49,7 +49,7 @@ class MockRulesService implements RulesService {
       snap: 'firefox',
       interface: 'home',
       constraints: const SnapdConstraints(
-        pathPattern: '/home/.*',
+        pathPattern: '/home/**',
         permissions: ['read', 'write'],
       ),
       outcome: SnapdRequestOutcome.allow,
