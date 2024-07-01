@@ -13,7 +13,6 @@ use home::HomeInterface;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-#[non_exhaustive]
 pub enum TypedPrompt {
     Home(Prompt<HomeInterface>),
 }
@@ -26,7 +25,6 @@ impl From<Prompt<HomeInterface>> for TypedPrompt {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-#[non_exhaustive]
 pub enum TypedPromptReply {
     Home(PromptReply<HomeInterface>),
 }

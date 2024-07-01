@@ -130,9 +130,7 @@ impl ReplyClient for FlutterClient {
         prompt: TypedPrompt,
         prev_error: Option<String>,
     ) -> Result<TypedPromptReply> {
-        let p = match prompt {
-            TypedPrompt::Home(p) => p,
-        };
+        let TypedPrompt::Home(p) = prompt;
 
         let input = HomeInterface.prompt_to_ui_input(p.clone(), prev_error);
         let json_input = serde_json::to_string(&input)?;
