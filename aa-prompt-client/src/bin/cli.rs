@@ -14,12 +14,18 @@ use tracing_subscriber::FmtSubscriber;
 #[derive(Debug, Subcommand)]
 enum Command {
     /// Run a simple allow/deny once listener
-    Loop,
+    Loop {
+        /// Optionally record events to a specified file on Ctrl-C
+        #[clap(short, long, value_name = "FILE")]
+        record: Option<String>,
+    },
 
     /// Run the testing flutter UI as a persistent client.
-    ///
-    /// Assumes that the `apparmor_prompt` binary is in the working directory.
-    Flutter,
+    Flutter {
+        /// Optionally record events to a specified file on Ctrl-C
+        #[clap(short, long, value_name = "FILE")]
+        record: Option<String>,
+    },
 
     /// Echo all prompts seen on stdout
     Echo {
@@ -93,8 +99,8 @@ async fn main() -> Result<()> {
 
         Command::Echo { record } => run_echo_loop(c, record).await,
 
-        Command::Flutter => run_flutter_client_loop(c).await,
+        Command::Flutter { record } => run_flutter_client_loop(c, record).await,
 
-        Command::Loop => run_terminal_client_loop(c).await,
+        Command::Loop { record } => run_terminal_client_loop(c, record).await,
     }
 }

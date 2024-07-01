@@ -290,3 +290,40 @@ async fn replying_multiple_times_errors(
 
     Ok(())
 }
+
+#[tokio::test]
+#[serial]
+async fn overwriting_a_file_works() -> Result<()> {
+    let mut c = SnapdSocketClient::default();
+    let (prefix, dir_path) = setup_test_dir(None, &[])?;
+
+    let rx = spawn_for_output(
+        "aa-prompting-test.create-single",
+        vec![prefix.clone(), "before".to_string()],
+    );
+    let (id, p) = expect_single_prompt(&mut c, &format!("{dir_path}/test.txt"), &["write"]).await;
+
+    let reply = p.into_reply(Action::Allow).for_forever();
+    c.reply_to_prompt(&id, reply).await?;
+    tokio::time::sleep(std::time::Duration::from_millis(50)).await;
+
+    // The file should have been created and contain the correct content
+    let res = fs::read_to_string(format!("{dir_path}/test.txt"));
+    assert_eq!(res.expect("file should exist"), "before");
+
+    // Not expecting another prompt due to previous allow always reply
+    let _rx = spawn_for_output(
+        "aa-prompting-test.create-single",
+        vec![prefix, "after".to_string()],
+    );
+    tokio::time::sleep(std::time::Duration::from_millis(300)).await;
+    let output = rx.recv().expect("to be able recv");
+    assert_eq!(output.stdout, "done\n");
+    assert_eq!(output.stderr, "");
+
+    // The file should now contain the updated content
+    let res = fs::read_to_string(format!("{dir_path}/test.txt"));
+    assert_eq!(res.expect("file should exist"), "after");
+
+    Ok(())
+}

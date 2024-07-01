@@ -19,15 +19,11 @@ apps:
     command: ./read.sh
     plugs:
       - home
-  read-nested:
-    command: ./read-nested.sh
-    plugs:
-      - home
   create:
     command: ./create.sh
     plugs:
       - home
-  create-nested:
-    command: ./create-nested.sh
+  create-single:
+    command: ./create-single.sh
     plugs:
       - home

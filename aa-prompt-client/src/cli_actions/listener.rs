@@ -1,4 +1,5 @@
 use crate::{
+    recording::PromptRecording,
     snapd_client::{Action, Prompt, PromptId, PromptReply, SnapdSocketClient, UiPromptReply},
     Error, Result,
 };
@@ -20,13 +21,19 @@ trait ReplyClient {
     async fn reply_retrying_errors(
         &self,
         c: &mut SnapdSocketClient,
+        rec: &mut PromptRecording,
         id: PromptId,
         p: Prompt,
     ) -> Result<()> {
+        rec.push_prompt(&p);
         let mut reply = self.get_reply(p.clone(), None).await?;
 
         debug!(?id, ?reply, "replying to prompt");
+        rec.push_reply(&reply);
+
         while let Err(e) = c.reply_to_prompt(&id, reply).await {
+            rec.push_error(&e);
+
             let prev_error = match e {
                 Error::SnapdError { message } if message == NO_PROMPTS_FOR_USER => {
                     warn!(?id, "no prompts found for user");
@@ -48,7 +55,9 @@ trait ReplyClient {
 
             debug!(%prev_error, "error returned from snapd, retrying");
             reply = self.get_reply(p.clone(), Some(prev_error)).await?;
+
             debug!(?id, ?reply, "replying to prompt");
+            rec.push_reply(&reply);
         }
 
         Ok(())
@@ -56,30 +65,43 @@ trait ReplyClient {
 }
 
 /// Run a simple client listener that processes notices and prompts serially
-async fn run_client_loop<C: ReplyClient>(mut c: SnapdSocketClient, client: C) -> Result<()> {
+async fn run_client_loop<C: ReplyClient>(
+    mut c: SnapdSocketClient,
+    client: C,
+    path: Option<String>,
+) -> Result<()> {
+    let mut rec = PromptRecording::new(path);
+
     loop {
         println!("polling for notices...");
-        let pending = c.pending_prompts().await?;
+        let pending = rec.await_pending_handling_ctrl_c(&mut c).await?;
 
         info!(?pending, "processing notices");
         for id in pending {
             debug!(?id, "pulling prompt details from snapd");
             let p = match c.prompt_details(&id).await {
+                Ok(p) if rec.is_prompt_for_writing_output(&p) => {
+                    return rec.allow_write(p, &c).await;
+                }
+
                 Ok(p) => p,
+
                 Err(e) => {
                     warn!(%e, "unable to pull prompt");
                     continue;
                 }
             };
 
-            client.reply_retrying_errors(&mut c, id, p).await?;
+            client
+                .reply_retrying_errors(&mut c, &mut rec, id, p)
+                .await?;
         }
     }
 }
 
 /// Handle prompts via a spawned flutter UI
-pub async fn run_flutter_client_loop(c: SnapdSocketClient) -> Result<()> {
-    run_client_loop(c, FlutterClient::new()).await
+pub async fn run_flutter_client_loop(c: SnapdSocketClient, path: Option<String>) -> Result<()> {
+    run_client_loop(c, FlutterClient::new(), path).await
 }
 
 struct FlutterClient {
@@ -121,8 +143,8 @@ impl ReplyClient for FlutterClient {
 
 /// This is a bare bones client implementation that only supports responding to prompts
 /// with "allow single" or "deny single".
-pub async fn run_terminal_client_loop(c: SnapdSocketClient) -> Result<()> {
-    run_client_loop(c, TerminalClient).await
+pub async fn run_terminal_client_loop(c: SnapdSocketClient, path: Option<String>) -> Result<()> {
+    run_client_loop(c, TerminalClient, path).await
 }
 
 struct TerminalClient;
