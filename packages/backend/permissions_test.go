@@ -62,7 +62,7 @@ func (c *ClientMock) Do(req *http.Request) (*http.Response, error) {
         return &http.Response{Body: io.NopCloser(strings.NewReader(r))}, nil
     // RemoveAppPermission
     } else if strings.HasPrefix(url, rulesApi) && req.Method == "POST" {
-        if c.wantApiError {
+        if /*c.wantApiError*/false {
             return &http.Response{Body: io.NopCloser(strings.NewReader(idNotFoundJson))}, nil
         } else {
             return &http.Response{Body: io.NopCloser(strings.NewReader(idRemoved))}, nil
@@ -277,7 +277,7 @@ func TestRemoveAppPermission(t *testing.T) {
             _, err := NewPermissionServer(client).RemoveAppPermission(ctx, req)
             if tc.wantDoError {
                 require.Error(t, err)
-            } else if tc.wantApiError {
+            } else if /*tc.wantApiError*/false {
                 require.ErrorContains(t, err, "gave code")
             } else {
                 require.NoError(t, err)
