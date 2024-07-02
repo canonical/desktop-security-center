@@ -1,16 +1,12 @@
 use crate::{
     recording::PromptRecording,
     snapd_client::{
-        interfaces::{
-            home::{HomeInterface, HomeUiReply},
-            SnapdInterface, TypedPrompt, TypedPromptReply,
-        },
-        Action, PromptId, SnapdSocketClient,
+        interfaces::{home::HomeInterface, SnapInterface},
+        PromptId, SnapdSocketClient, TypedPrompt, TypedPromptReply,
     },
     Error, Result,
 };
 use std::env;
-use tokio::process::Command;
 use tracing::{debug, error, info, warn};
 
 // FIXME: having to hard code this is a problem.
@@ -131,26 +127,10 @@ impl ReplyClient for FlutterClient {
         prev_error: Option<String>,
     ) -> Result<TypedPromptReply> {
         let TypedPrompt::Home(p) = prompt;
+        let reply = HomeInterface
+            .try_get_reply_from_ui(&self.cmd, p, prev_error)
+            .await?;
 
-        let input = HomeInterface.prompt_to_ui_input(p.clone(), prev_error);
-        let json_input = serde_json::to_string(&input)?;
-        debug!(json_input, "prompt details for the flutter ui");
-
-        let output = Command::new(&self.cmd).arg(&json_input).output().await?;
-        debug!(
-            raw_stdout = %String::from_utf8(output.stdout.clone()).unwrap(),
-            "raw output from the flutter ui"
-        );
-
-        // If the user closes out the prompt without submitting a reply we will get nothing on
-        // stdout so we treat that as "deny once".
-        if output.stdout.is_empty() {
-            return Ok(HomeInterface.prompt_to_reply(p, Action::Deny).into());
-        }
-
-        let ui_reply: HomeUiReply = serde_json::from_slice(&output.stdout)?;
-        debug!(?ui_reply, "parsed reply from the flutter ui");
-
-        Ok(HomeInterface.map_ui_reply(ui_reply).into())
+        Ok(reply.into())
     }
 }

@@ -4,14 +4,15 @@ use crate::{
 };
 use chrono::{DateTime, SecondsFormat, Utc};
 use hyper::Uri;
+use prompt::RawPrompt;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use std::{collections::BTreeMap, env, str::FromStr};
-use strum::{Display, EnumString};
 use tracing::debug;
 
 pub mod interfaces;
+mod prompt;
 
-pub use interfaces::{ConstraintsFilter, SnapdInterface, TypedPrompt, TypedPromptReply};
+pub use prompt::{Action, Lifespan, Prompt, PromptId, PromptReply, TypedPrompt, TypedPromptReply};
 
 const FEATURE_NAME: &str = "apparmor-prompting";
 const LONG_POLL_TIMEOUT: &str = "1h";
@@ -174,20 +175,14 @@ where
 
     /// Pull details for a specific prompt from snapd
     pub async fn prompt_details(&self, id: &PromptId) -> Result<TypedPrompt> {
-        let prompt: serde_json::Value = self
+        let prompt: RawPrompt = self
             .client
             .get_json(&format!("interfaces/requests/prompts/{}", id.0))
             .await?;
 
-        // TODO: Pull and merge in the additional metadata we need for rendering
-        // the UI (window ID, icon, publisher details etc)
-        match prompt.get("interface").and_then(|v| v.as_str()) {
-            Some("home") => Ok(TypedPrompt::Home(serde_json::from_value(prompt)?)),
-            Some(interface) => Err(Error::UnsupportedInterface {
-                interface: interface.to_string(),
-            }),
-            None => Err(Error::InvalidPrompt { json: prompt }),
-        }
+        debug!(raw=?prompt, "raw response from snapd");
+
+        prompt.try_into()
     }
 
     /// Submit a reply to the given prompt to snapd
@@ -228,94 +223,6 @@ struct Feature {
     enabled: bool,
     supported: bool,
     unsupported_reason: Option<String>,
-}
-
-#[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]
-pub struct PromptId(pub String);
-
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
-#[serde(rename_all = "kebab-case")]
-pub struct Prompt<I: SnapdInterface + ?Sized> {
-    pub(crate) id: PromptId,
-    pub(crate) timestamp: String,
-    pub(crate) snap: String,
-    pub(crate) interface: String,
-    pub(crate) constraints: I::Constraints,
-}
-
-impl<I: SnapdInterface> Prompt<I> {
-    pub fn id(&self) -> &str {
-        &self.id.0
-    }
-
-    pub fn snap(&self) -> &str {
-        &self.snap
-    }
-
-    pub fn timestamp(&self) -> &str {
-        &self.timestamp
-    }
-
-    pub fn interface(&self) -> &str {
-        &self.interface
-    }
-}
-
-#[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]
-#[serde(rename_all = "kebab-case")]
-pub struct PromptReply<I: SnapdInterface + ?Sized> {
-    action: Action,
-    lifespan: Lifespan,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    duration: Option<String>,
-    constraints: I::ReplyConstraints,
-}
-
-impl<I: SnapdInterface> PromptReply<I> {
-    /// Set this reply to apply for the remainder of the user's current session.
-    pub fn for_session(mut self) -> Self {
-        self.lifespan = Lifespan::Session;
-        self
-    }
-
-    /// Set this reply to create a new permanent rule.
-    pub fn for_forever(mut self) -> Self {
-        self.lifespan = Lifespan::Forever;
-        self
-    }
-
-    /// Set this reply to apply for the specified timespan.
-    ///
-    /// Timespans are provided in the format parsable by go's [ParseDuration](https://pkg.go.dev/time#ParseDuration).
-    pub fn for_timespan(mut self, duration: impl Into<String>) -> Self {
-        self.lifespan = Lifespan::Timespan;
-        self.duration = Some(duration.into());
-        self
-    }
-}
-
-#[derive(
-    Debug, Default, Clone, Copy, PartialEq, Eq, Deserialize, Serialize, Display, EnumString,
-)]
-#[serde(rename_all = "lowercase")]
-#[strum(serialize_all = "lowercase")]
-pub enum Action {
-    Allow,
-    #[default]
-    Deny,
-}
-
-#[derive(
-    Debug, Default, Clone, Copy, PartialEq, Eq, Deserialize, Serialize, Display, EnumString,
-)]
-#[serde(rename_all = "lowercase")]
-#[strum(serialize_all = "lowercase")]
-pub enum Lifespan {
-    #[default]
-    Single,
-    Session,
-    Forever,
-    Timespan,
 }
 
 #[cfg(test)]
@@ -365,21 +272,4 @@ mod tests {
             res => panic!("expected NotAvailable, got {res:?}"),
         }
     }
-
-    // #[test_case(&["read"], &["read", "write"]; "some not in available")]
-    // #[test_case(&["read"], &["write"]; "none in available")]
-    // #[test]
-    // fn invalid_reply_permissions_error(available: &[&str], requested: &[&str]) {
-    //     let reply = PromptReply {
-    //         available_permissions: available.iter().map(|&s| s.into()).collect(),
-    //         ..Default::default()
-    //     };
-
-    //     let res = reply.try_with_custom_permissions(requested.iter().map(|&s| s.into()).collect());
-    //     match res {
-    //         Err(Error::InvalidCustomPermissions { .. }) => (),
-    //         Err(e) => panic!("expected InvalidCustomPermissions, got {e}"),
-    //         Ok(_) => panic!("should have errored"),
-    //     }
-    // }
 }

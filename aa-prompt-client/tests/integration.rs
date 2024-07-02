@@ -8,7 +8,7 @@
 //! polling `after` is correct to pick up the prompt.
 use aa_prompt_client::{
     snapd_client::{
-        interfaces::{home::HomeInterface, SnapdInterface},
+        interfaces::{home::HomeInterface, SnapInterface},
         Action, Lifespan, Prompt, PromptId, SnapdSocketClient, TypedPrompt,
     },
     Error, Result,
@@ -116,7 +116,7 @@ async fn happy_path_read_single(
     let rx = spawn_for_output("aa-prompting-test.read", vec![prefix.clone()]);
     let (id, p) = expect_single_prompt(&mut c, &format!("{dir_path}/test.txt"), &["read"]).await;
 
-    c.reply_to_prompt(&id, HomeInterface.prompt_to_reply(p, action).into())
+    c.reply_to_prompt(&id, HomeInterface::prompt_to_reply(p, action).into())
         .await?;
     let output = rx.recv().expect("to be able recv");
 
@@ -146,9 +146,8 @@ async fn happy_path_create_multiple(action: Action, lifespan: Lifespan) -> Resul
 
     let _rx = spawn_for_output("aa-prompting-test.create", vec![prefix]);
     let (id, p) = expect_single_prompt(&mut c, &format!("{dir_path}/test-1.txt"), &["write"]).await;
-    let mut reply = HomeInterface
-        .prompt_to_reply(p, action)
-        .with_custom_path_pattern(format!("{dir_path}/*"));
+    let mut reply =
+        HomeInterface::prompt_to_reply(p, action).with_custom_path_pattern(format!("{dir_path}/*"));
 
     reply = match lifespan {
         Lifespan::Timespan => reply.for_timespan("1s"),
@@ -216,8 +215,7 @@ async fn incorrect_custom_paths_error(reply_path: &str, expected_prefix: &str) -
 
     let _rx = spawn_for_output("aa-prompting-test.read", vec![prefix]);
     let (id, p) = expect_single_prompt(&mut c, &format!("{dir_path}/test.txt"), &["read"]).await;
-    let reply = HomeInterface
-        .prompt_to_reply(p, Action::Allow)
+    let reply = HomeInterface::prompt_to_reply(p, Action::Allow)
         .with_custom_path_pattern(reply_path)
         .into();
 
@@ -241,8 +239,7 @@ async fn invalid_timeperiod_duration_errors() -> Result<()> {
 
     let _rx = spawn_for_output("aa-prompting-test.read", vec![prefix]);
     let (id, p) = expect_single_prompt(&mut c, &format!("{dir_path}/test.txt"), &["read"]).await;
-    let reply = HomeInterface
-        .prompt_to_reply(p, Action::Allow)
+    let reply = HomeInterface::prompt_to_reply(p, Action::Allow)
         .for_timespan("foo")
         .into();
 
@@ -274,8 +271,11 @@ async fn replying_multiple_times_errors(
     let (id, p) = expect_single_prompt(&mut c, &format!("{dir_path}/test.txt"), &["read"]).await;
 
     // first reply should work fine
-    c.reply_to_prompt(&id, HomeInterface.prompt_to_reply(p.clone(), action).into())
-        .await?;
+    c.reply_to_prompt(
+        &id,
+        HomeInterface::prompt_to_reply(p.clone(), action).into(),
+    )
+    .await?;
     let output = rx.recv().expect("to be able recv");
 
     assert_eq!(output.stdout, expected_stdout, "stdout");
@@ -289,7 +289,10 @@ async fn replying_multiple_times_errors(
 
     // second reply should error because the prompt no longer exists in snapd
     let res = c
-        .reply_to_prompt(&id, HomeInterface.prompt_to_reply(p.clone(), action).into())
+        .reply_to_prompt(
+            &id,
+            HomeInterface::prompt_to_reply(p.clone(), action).into(),
+        )
         .await;
 
     match res {
@@ -315,8 +318,7 @@ async fn overwriting_a_file_works() -> Result<()> {
     );
     let (id, p) = expect_single_prompt(&mut c, &format!("{dir_path}/test.txt"), &["write"]).await;
 
-    let reply = HomeInterface
-        .prompt_to_reply(p, Action::Allow)
+    let reply = HomeInterface::prompt_to_reply(p, Action::Allow)
         .for_forever()
         .into();
     c.reply_to_prompt(&id, reply).await?;

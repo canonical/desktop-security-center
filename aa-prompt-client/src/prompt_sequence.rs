@@ -1,5 +1,7 @@
 use crate::snapd_client::{
-    interfaces::home::HomeInterface, ConstraintsFilter, Prompt, PromptReply, SnapdInterface,
+    interfaces::home::HomeInterface,
+    interfaces::{ConstraintsFilter, SnapInterface},
+    Prompt, PromptReply,
 };
 use serde::{Deserialize, Serialize};
 
@@ -19,12 +21,18 @@ enum TypedPromptCase {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
-pub struct PromptCase<I: SnapdInterface> {
+pub struct PromptCase<I>
+where
+    I: SnapInterface,
+{
     prompt_filter: PromptFilter<I>,
     reply: PromptReply<I>,
 }
 
-impl<I: SnapdInterface> PromptCase<I> {
+impl<I> PromptCase<I>
+where
+    I: SnapInterface,
+{
     pub fn into_reply_or_error(self, p: Prompt<I>) -> Result<PromptReply<I>, Vec<MatchFailure>> {
         match self.prompt_filter.matches(&p) {
             MatchAttempt::Success => Ok(self.reply),
@@ -63,13 +71,19 @@ macro_rules! field_matches {
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
-pub struct PromptFilter<I: SnapdInterface> {
+pub struct PromptFilter<I>
+where
+    I: SnapInterface,
+{
     snap: Option<String>,
-    interface: Option<String>, // should this be an enum?
+    interface: Option<String>,
     constraints: Option<I::ConstraintsFilter>,
 }
 
-impl<I: SnapdInterface> PromptFilter<I> {
+impl<I> PromptFilter<I>
+where
+    I: SnapInterface,
+{
     pub fn with_snap(&mut self, snap: impl Into<String>) -> &mut Self {
         self.snap = Some(snap.into());
         self

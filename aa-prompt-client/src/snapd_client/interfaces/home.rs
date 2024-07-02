@@ -2,7 +2,7 @@ use crate::{
     field_matches,
     prompt_sequence::{MatchAttempt, MatchFailure},
     snapd_client::{
-        interfaces::{ConstraintsFilter, Prompt, PromptReply, SnapdInterface},
+        interfaces::{ConstraintsFilter, Prompt, PromptReply, SnapInterface},
         Action, Error, Lifespan, Result,
     },
 };
@@ -98,7 +98,7 @@ impl HomeInterface {
     }
 }
 
-impl SnapdInterface for HomeInterface {
+impl SnapInterface for HomeInterface {
     const NAME: &'static str = "home";
 
     type Constraints = HomeConstraints;
@@ -108,18 +108,20 @@ impl SnapdInterface for HomeInterface {
     type UiInput = HomeUiInput;
     type UiReply = HomeUiReply;
 
-    fn default_constraints_from_prompt(
-        &self,
-        constraints: Self::Constraints,
-    ) -> Self::ReplyConstraints {
-        HomeReplyConstraints {
-            path_pattern: constraints.path,
-            permissions: constraints.permissions,
-            available_permissions: constraints.available_permissions,
+    fn prompt_to_reply(prompt: Prompt<Self>, action: Action) -> PromptReply<Self> {
+        PromptReply {
+            action,
+            lifespan: Lifespan::Single,
+            duration: None,
+            constraints: HomeReplyConstraints {
+                path_pattern: prompt.constraints.path,
+                permissions: prompt.constraints.permissions,
+                available_permissions: prompt.constraints.available_permissions,
+            },
         }
     }
 
-    fn prompt_to_ui_input(
+    fn map_ui_input(
         &self,
         prompt: Prompt<Self>,
         previous_error_message: Option<String>,
@@ -285,6 +287,60 @@ impl ConstraintsFilter for HomeConstraintsFilter {
             MatchAttempt::Success
         } else {
             MatchAttempt::Failure(failures)
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::snapd_client::{RawPrompt, TypedPrompt};
+    use simple_test_case::test_case;
+
+    const HOME_PROMPT: &str = r#"{
+      "id": "C7OUCCDWCE6CC===",
+      "timestamp": "2024-06-28T19:15:37.321782305Z",
+      "snap": "firefox",
+      "interface": "home",
+      "constraints": {
+        "path": "/home/ubuntu/Downloads/",
+        "permissions": [
+          "read"
+        ],
+        "available-permissions": [
+          "read",
+          "write",
+          "execute"
+        ]
+      }
+    }"#;
+
+    #[test]
+    fn deserializing_a_home_prompt_works() {
+        let raw: RawPrompt = serde_json::from_str(HOME_PROMPT).unwrap();
+        assert_eq!(raw.interface, "home");
+
+        let p: TypedPrompt = raw.try_into().unwrap();
+        assert!(matches!(p, TypedPrompt::Home(_)));
+    }
+
+    #[test_case(&["read"], &["read", "write"]; "some not in available")]
+    #[test_case(&["read"], &["write"]; "none in available")]
+    #[test]
+    fn invalid_reply_permissions_error(available: &[&str], requested: &[&str]) {
+        let reply = PromptReply {
+            constraints: HomeReplyConstraints {
+                available_permissions: available.iter().map(|&s| s.into()).collect(),
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+
+        let res = reply.try_with_custom_permissions(requested.iter().map(|&s| s.into()).collect());
+        match res {
+            Err(Error::InvalidCustomPermissions { .. }) => (),
+            Err(e) => panic!("expected InvalidCustomPermissions, got {e}"),
+            Ok(_) => panic!("should have errored"),
         }
     }
 }

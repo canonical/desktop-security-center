@@ -2,76 +2,68 @@
 //! prompts for it and how we generate the UI for the user.
 use crate::{
     prompt_sequence::MatchAttempt,
-    snapd_client::{Action, Lifespan, Prompt, PromptReply},
+    snapd_client::{Action, Prompt, PromptReply},
+    Result,
 };
-use serde::{de::DeserializeOwned, Deserialize, Serialize};
+use serde::{de::DeserializeOwned, Serialize};
 use std::fmt;
+use tokio::process::Command;
+use tracing::debug;
 
 pub mod home;
 
-use home::HomeInterface;
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum TypedPrompt {
-    Home(Prompt<HomeInterface>),
-}
-
-impl From<Prompt<HomeInterface>> for TypedPrompt {
-    fn from(value: Prompt<HomeInterface>) -> Self {
-        Self::Home(value)
-    }
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum TypedPromptReply {
-    Home(PromptReply<HomeInterface>),
-}
-
-impl From<PromptReply<HomeInterface>> for TypedPromptReply {
-    fn from(value: PromptReply<HomeInterface>) -> Self {
-        Self::Home(value)
-    }
-}
-
-pub trait SnapdInterface: fmt::Debug + Clone {
+#[allow(async_fn_in_trait)]
+pub trait SnapInterface: fmt::Debug + Clone {
     const NAME: &'static str;
 
     type Constraints: fmt::Debug + Clone + Serialize + DeserializeOwned;
     type ReplyConstraints: fmt::Debug + Clone + Serialize + DeserializeOwned;
     type ConstraintsFilter: ConstraintsFilter<Constraints = Self::Constraints>;
 
-    type UiInput: Clone + Serialize + DeserializeOwned;
-    type UiReply: Clone + Serialize + DeserializeOwned;
+    type UiInput: fmt::Debug + Clone + Serialize + DeserializeOwned;
+    type UiReply: fmt::Debug + Clone + Serialize + DeserializeOwned;
 
-    fn default_constraints_from_prompt(
-        &self,
-        constraints: Self::Constraints,
-    ) -> Self::ReplyConstraints;
+    fn prompt_to_reply(prompt: Prompt<Self>, action: Action) -> PromptReply<Self>;
 
-    fn prompt_to_reply(&self, prompt: Prompt<Self>, action: Action) -> PromptReply<Self> {
-        PromptReply {
-            action,
-            lifespan: Lifespan::Single,
-            duration: None,
-            constraints: self.default_constraints_from_prompt(prompt.constraints),
-        }
-    }
-
-    fn prompt_to_ui_input(
+    fn map_ui_input(
         &self,
         prompt: Prompt<Self>,
         previous_error_message: Option<String>,
     ) -> Self::UiInput;
 
     fn map_ui_reply(&self, reply: Self::UiReply) -> PromptReply<Self>;
+
+    async fn try_get_reply_from_ui(
+        &self,
+        cmd: &str,
+        prompt: Prompt<Self>,
+        prev_error: Option<String>,
+    ) -> Result<PromptReply<Self>> {
+        let input = self.map_ui_input(prompt.clone(), prev_error);
+        let json_input = serde_json::to_string(&input)?;
+        debug!(json_input, "prompt details for the flutter ui");
+
+        let output = Command::new(cmd).arg(&json_input).output().await?;
+        debug!(
+            raw_stdout = %String::from_utf8(output.stdout.clone()).unwrap(),
+            "raw output from the flutter ui"
+        );
+
+        // If the user closes out the prompt without submitting a reply we will get nothing on
+        // stdout so we treat that as "deny once".
+        if output.stdout.is_empty() {
+            return Ok(Self::prompt_to_reply(prompt, Action::Deny));
+        }
+
+        let ui_reply: Self::UiReply = serde_json::from_slice(&output.stdout)?;
+        debug!(?ui_reply, "parsed reply from the flutter ui");
+
+        Ok(self.map_ui_reply(ui_reply))
+    }
 }
 
 pub trait ConstraintsFilter: Default + fmt::Debug + Clone + Serialize + DeserializeOwned {
     type Constraints: fmt::Debug + Clone + Serialize + DeserializeOwned;
 
-    fn matches(&self, constraints: &Self::Constraints) -> MatchAttempt
-    where
-        Self: Sized;
+    fn matches(&self, constraints: &Self::Constraints) -> MatchAttempt;
 }

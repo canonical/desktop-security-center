@@ -3,9 +3,9 @@ use crate::{
     snapd_client::{
         interfaces::{
             home::{HomeConstraintsFilter, HomeInterface},
-            TypedPrompt, TypedPromptReply,
+            SnapInterface,
         },
-        Action, Prompt, PromptId, SnapdInterface, SnapdSocketClient,
+        Action, Prompt, PromptId, SnapdSocketClient, TypedPrompt, TypedPromptReply,
     },
     Error, Result, SNAP_NAME,
 };
@@ -130,8 +130,7 @@ impl PromptRecording {
 
     pub async fn allow_write(&self, p: Prompt<HomeInterface>, c: &SnapdSocketClient) -> Result<()> {
         let id = p.id.clone();
-        let reply = HomeInterface
-            .prompt_to_reply(p, Action::Allow)
+        let reply = HomeInterface::prompt_to_reply(p, Action::Allow)
             .for_forever()
             .try_with_custom_permissions(vec!["read".to_string(), "write".to_string()])?
             .into();
