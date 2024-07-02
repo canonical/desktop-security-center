@@ -111,7 +111,7 @@ struct FlutterClient {
 impl FlutterClient {
     fn new() -> Self {
         let snap = env::var("SNAP").expect("SNAP env var to be set");
-        let cmd = format!("{snap}/bin/apparmor_prompt");
+        let cmd = format!("{snap}/bin/apparmor-prompt/apparmor_prompt");
 
         Self { cmd }
     }
