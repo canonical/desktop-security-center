@@ -11,7 +11,6 @@ message IsSecureBootEnabledResponse {
     bool enabled = 1;
 }
 
-
 service Pro {
     rpc IsMachineProAttached (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
     rpc IsEsmInfraEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
@@ -57,4 +56,26 @@ message InitiateResponse {
 
 message WaitResponse {
     string token = 1;
+}
+
+service Permission {
+    rpc IsAppPermissionsEnabled (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
+    rpc EnableAppPermissions (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc DisableAppPermissions (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+
+    rpc AreCustomRulesApplied (google.protobuf.Empty) returns (google.protobuf.BoolValue) {}
+
+    rpc RemoveAppPermission (RemoveAppPermissionRequest) returns (google.protobuf.Empty)	 {}
+    rpc ListPersonalFoldersPermissions (google.protobuf.Empty) returns (ListOfPersionalFolderRules) {}
+}
+message RemoveAppPermissionRequest {
+    string removepath = 1;
+    string removesnap = 2;
+}
+
+message Array {
+    repeated string e = 1;
+}
+message ListOfPersionalFolderRules {
+    map<string, Array> pathsnaps = 1;
 }
