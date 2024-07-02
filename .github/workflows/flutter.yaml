@@ -1,0 +1,53 @@
+name: Flutter CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: asdf-vm/actions/install@v2
+      - uses: bluefireteam/melos-action@v2
+      - run: melos generate
+      - uses: actions/cache@v3
+        with:
+          path: |
+            flutter_packages/**/*.freezed.dart
+            flutter_packages/**/*.g.dart
+            flutter_packages/**/*.mocks.dart
+          key: melos-generate-${{ github.sha }}
+      - run: melos analyze --fatal-infos
+
+  format:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: asdf-vm/actions/install@v2
+      - uses: bluefireteam/melos-action@v2
+      - run: melos format:exclude
+
+  test:
+    needs: analyze
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: asdf-vm/actions/install@v2
+      - uses: bluefireteam/melos-action@v2
+      - uses: actions/cache@v3
+        with:
+          path: |
+            flutter_packages/**/*.freezed.dart
+            flutter_packages/**/*.g.dart
+            flutter_packages/**/*.mocks.dart
+          key: melos-generate-${{ github.sha }}
+      - run: sudo apt update && sudo apt install -y lcov
+      - run: melos coverage
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}

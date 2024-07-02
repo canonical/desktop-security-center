@@ -41,45 +41,51 @@ class SnapdRulesService implements RulesService {
   }
 }
 
-class MockRulesService implements RulesService {
-  final rules = [
-    SnapdRule(
-      id: '1',
-      timestamp: DateTime.now(),
-      snap: 'firefox',
-      interface: 'home',
-      constraints: const SnapdConstraints(
-        pathPattern: '/home/**',
-        permissions: ['read', 'write'],
-      ),
-      outcome: SnapdRequestOutcome.allow,
-      lifespan: SnapdRequestLifespan.forever,
-    ),
-    SnapdRule(
-      id: '2',
-      timestamp: DateTime.now(),
-      snap: 'thunderbird',
-      interface: 'home',
-      constraints: const SnapdConstraints(
-        pathPattern: '/home/.*',
-        permissions: ['read', 'write'],
-      ),
-      outcome: SnapdRequestOutcome.allow,
-      lifespan: SnapdRequestLifespan.forever,
-    ),
-    SnapdRule(
-      id: '3',
-      timestamp: DateTime.now(),
-      snap: 'thunderbird',
-      interface: 'home',
-      constraints: const SnapdConstraints(
-        pathPattern: '/foo/bar*',
-        permissions: ['read'],
-      ),
-      outcome: SnapdRequestOutcome.deny,
-      lifespan: SnapdRequestLifespan.session,
-    ),
-  ];
+class FakeRulesService implements RulesService {
+  FakeRulesService({required this.rules});
+
+  factory FakeRulesService.defaultRules() => FakeRulesService(
+        rules: [
+          SnapdRule(
+            id: '1',
+            timestamp: DateTime.now(),
+            snap: 'firefox',
+            interface: 'home',
+            constraints: const SnapdConstraints(
+              pathPattern: '/home/**',
+              permissions: ['read', 'write'],
+            ),
+            outcome: SnapdRequestOutcome.allow,
+            lifespan: SnapdRequestLifespan.forever,
+          ),
+          SnapdRule(
+            id: '2',
+            timestamp: DateTime.now(),
+            snap: 'thunderbird',
+            interface: 'home',
+            constraints: const SnapdConstraints(
+              pathPattern: '/home/.*',
+              permissions: ['read', 'write'],
+            ),
+            outcome: SnapdRequestOutcome.allow,
+            lifespan: SnapdRequestLifespan.forever,
+          ),
+          SnapdRule(
+            id: '3',
+            timestamp: DateTime.now(),
+            snap: 'thunderbird',
+            interface: 'home',
+            constraints: const SnapdConstraints(
+              pathPattern: '/foo/bar*',
+              permissions: ['read'],
+            ),
+            outcome: SnapdRequestOutcome.deny,
+            lifespan: SnapdRequestLifespan.session,
+          ),
+        ],
+      );
+
+  final List<SnapdRule> rules;
 
   @override
   Future<List<SnapdRule>> getRules({
