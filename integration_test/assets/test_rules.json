@@ -1,0 +1,29 @@
+[
+    {
+        "snap": "firefox",
+        "interface": "home",
+        "constraints": {
+            "path-pattern": "/home/ubuntu/Downloads/**",
+            "permissions": [
+                "read",
+                "write"
+            ]
+        },
+        "outcome": "allow",
+        "lifespan": "forever"
+    },
+    {
+        "snap": "firefox",
+        "interface": "home",
+        "constraints": {
+            "path-pattern": "/home/ubuntu/private/**",
+            "permissions": [
+                "read",
+                "write",
+                "execute"
+            ]
+        },
+        "outcome": "deny",
+        "lifespan": "forever"
+    }
+]
