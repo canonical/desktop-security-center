@@ -618,7 +618,7 @@ packages:
     description:
       path: "."
       ref: prompting-rules
-      resolved-ref: f7e7e52da9663e8a263a8fb8e73891055109ee1c
+      resolved-ref: "5d005e7a05c265f26ef31bd3d58089eef77f8e6a"
       url: "https://github.com/d-loose/snapd.dart"
     source: git
     version: "0.5.0"
