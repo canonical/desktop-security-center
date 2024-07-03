@@ -41,6 +41,9 @@ pub enum Error {
 
     #[error("error message returned from snapd: {message}")]
     SnapdError { message: String },
+
+    #[error("{interface} is not currently supported for apparmor prompting")]
+    UnsupportedInterface { interface: String },
 }
 
 pub type Result<T> = std::result::Result<T, Error>;

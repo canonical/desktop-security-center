@@ -1,23 +1,39 @@
-use crate::snapd_client::{Constraints, Prompt, PromptReply};
+use crate::snapd_client::{
+    interfaces::home::HomeInterface,
+    interfaces::{ConstraintsFilter, SnapInterface},
+    Prompt, PromptReply,
+};
 use serde::{Deserialize, Serialize};
 
 #[allow(dead_code)]
-#[derive(Debug, Default, Clone, Deserialize)]
+#[derive(Debug, Default, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct PromptSequence {
     version: u8,
-    prompts: Vec<PromptCase>,
+    prompts: Vec<TypedPromptCase>,
 }
 
-#[derive(Debug, Default, Clone, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(untagged)]
+enum TypedPromptCase {
+    Home(PromptCase<HomeInterface>),
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
-pub struct PromptCase {
-    prompt_filter: PromptFilter,
-    reply: PromptReply,
+pub struct PromptCase<I>
+where
+    I: SnapInterface,
+{
+    prompt_filter: PromptFilter<I>,
+    reply: PromptReply<I>,
 }
 
-impl PromptCase {
-    pub fn into_reply_or_error(self, p: Prompt) -> Result<PromptReply, Vec<MatchFailure>> {
+impl<I> PromptCase<I>
+where
+    I: SnapInterface,
+{
+    pub fn into_reply_or_error(self, p: Prompt<I>) -> Result<PromptReply<I>, Vec<MatchFailure>> {
         match self.prompt_filter.matches(&p) {
             MatchAttempt::Success => Ok(self.reply),
             MatchAttempt::Failure(failures) => Err(failures),
@@ -33,11 +49,12 @@ pub enum MatchAttempt {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct MatchFailure {
-    field: &'static str,
-    expected: String,
-    seen: String,
+    pub(crate) field: &'static str,
+    pub(crate) expected: String,
+    pub(crate) seen: String,
 }
 
+#[macro_export]
 macro_rules! field_matches {
     ($self:ident, $other:ident, $failures:ident, $field:ident) => {
         if let Some(field) = &$self.$field {
@@ -54,83 +71,67 @@ macro_rules! field_matches {
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
-pub struct PromptFilter {
+pub struct PromptFilter<I>
+where
+    I: SnapInterface,
+{
     snap: Option<String>,
-    interface: Option<String>, // should this be an enum?
-    constraints: Option<ConstraintsFilter>,
+    interface: Option<String>,
+    constraints: Option<I::ConstraintsFilter>,
 }
 
-impl PromptFilter {
-    pub fn matches(&self, p: &Prompt) -> MatchAttempt {
+impl<I> PromptFilter<I>
+where
+    I: SnapInterface,
+{
+    pub fn with_snap(&mut self, snap: impl Into<String>) -> &mut Self {
+        self.snap = Some(snap.into());
+        self
+    }
+
+    pub fn with_interface(&mut self, interface: impl Into<String>) -> &mut Self {
+        self.interface = Some(interface.into());
+        self
+    }
+
+    pub fn with_constraints(&mut self, constraints: I::ConstraintsFilter) -> &mut Self {
+        self.constraints = Some(constraints);
+        self
+    }
+
+    pub fn matches(&self, p: &Prompt<I>) -> MatchAttempt {
         let mut failures = Vec::new();
         field_matches!(self, p, failures, snap);
         field_matches!(self, p, failures, interface);
 
         match &self.constraints {
-            Some(c) => c.matches(&p.constraints, failures),
-            None => {
-                if failures.is_empty() {
-                    MatchAttempt::Success
-                } else {
+            None if failures.is_empty() => MatchAttempt::Success,
+            None => MatchAttempt::Failure(failures),
+            Some(c) => match c.matches(&p.constraints) {
+                MatchAttempt::Success if failures.is_empty() => MatchAttempt::Success,
+                MatchAttempt::Success => MatchAttempt::Failure(failures),
+                MatchAttempt::Failure(c_failures) => {
+                    failures.extend(c_failures);
                     MatchAttempt::Failure(failures)
                 }
-            }
+            },
         }
-    }
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-#[serde(untagged)]
-enum ConstraintsFilter {
-    Home(HomeConstraints),
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-#[serde(rename_all = "kebab-case")]
-struct HomeConstraints {
-    path: Option<String>,
-    permissions: Option<Vec<String>>,
-    available_permissions: Option<Vec<String>>,
-}
-
-impl ConstraintsFilter {
-    fn matches(&self, constraints: &Constraints, mut failures: Vec<MatchFailure>) -> MatchAttempt {
-        match self {
-            Self::Home(hc) => {
-                field_matches!(hc, constraints, failures, path);
-                field_matches!(hc, constraints, failures, permissions);
-                field_matches!(hc, constraints, failures, available_permissions);
-            }
-        }
-
-        if failures.is_empty() {
-            MatchAttempt::Success
-        } else {
-            MatchAttempt::Failure(failures)
-        }
-    }
-}
-
-impl Default for ConstraintsFilter {
-    fn default() -> Self {
-        Self::Home(HomeConstraints {
-            path: None,
-            permissions: None,
-            available_permissions: None,
-        })
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::snapd_client::PromptId;
+    use crate::snapd_client::{
+        interfaces::home::{HomeConstraints, HomeConstraintsFilter},
+        PromptId,
+    };
     use simple_test_case::{dir_cases, test_case};
 
     #[dir_cases("resources/filter-serialize-tests")]
     #[test]
     fn simple_serialize_works(path: &str, data: &str) {
-        let res = serde_json::from_str::<'_, PromptFilter>(data);
+        let res = serde_json::from_str::<'_, PromptFilter<HomeInterface>>(data);
 
         assert!(res.is_ok(), "error parsing {path}: {:?}", res);
     }
@@ -138,7 +139,7 @@ mod tests {
     #[test]
     fn all_fields_deserializes_correctly() {
         let data = include_str!("../resources/filter-serialize-tests/all_fields_home.json");
-        let res = serde_json::from_str::<'_, PromptFilter>(data);
+        let res = serde_json::from_str::<'_, PromptFilter<HomeInterface>>(data);
 
         assert!(res.is_ok(), "error {:?}", res);
 
@@ -147,11 +148,11 @@ mod tests {
                 snap,
                 interface,
                 constraints:
-                    Some(ConstraintsFilter::Home(HomeConstraints {
+                    Some(HomeConstraintsFilter {
                         path,
                         permissions,
                         available_permissions,
-                    })),
+                    }),
             } => {
                 assert_eq!(snap.as_deref(), Some("snapName"));
                 assert_eq!(interface.as_deref(), Some("home"));
@@ -205,13 +206,13 @@ mod tests {
     )]
     #[test]
     fn filter_matches(filter_str: &str, expected: MatchAttempt) {
-        let filter: PromptFilter = serde_json::from_str(filter_str).unwrap();
+        let filter: PromptFilter<HomeInterface> = serde_json::from_str(filter_str).unwrap();
         let p = Prompt {
             id: PromptId("id".to_string()),
             interface: "home".to_string(),
             timestamp: "".to_string(),
             snap: "test".to_string(),
-            constraints: Constraints {
+            constraints: HomeConstraints {
                 path: "/home/foo/bar".to_string(),
                 permissions: vec!["read".to_string()],
                 available_permissions: vec!["read".to_string(), "write".to_string()],

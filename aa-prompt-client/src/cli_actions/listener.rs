@@ -1,13 +1,12 @@
 use crate::{
     recording::PromptRecording,
-    snapd_client::{Action, Prompt, PromptId, PromptReply, SnapdSocketClient, UiPromptReply},
+    snapd_client::{
+        interfaces::{home::HomeInterface, SnapInterface},
+        PromptId, SnapdSocketClient, TypedPrompt, TypedPromptReply,
+    },
     Error, Result,
 };
-use std::{
-    env,
-    io::{stdin, stdout, Write},
-};
-use tokio::process::Command;
+use std::env;
 use tracing::{debug, error, info, warn};
 
 // FIXME: having to hard code this is a problem.
@@ -16,14 +15,18 @@ const PROMPT_NOT_FOUND: &str = "no prompt with the given ID found for the given 
 const NO_PROMPTS_FOR_USER: &str = "no prompts found for the given user";
 
 trait ReplyClient {
-    async fn get_reply(&self, p: Prompt, prev_error: Option<String>) -> Result<PromptReply>;
+    async fn get_reply(
+        &self,
+        p: TypedPrompt,
+        prev_error: Option<String>,
+    ) -> Result<TypedPromptReply>;
 
     async fn reply_retrying_errors(
         &self,
         c: &mut SnapdSocketClient,
         rec: &mut PromptRecording,
         id: PromptId,
-        p: Prompt,
+        p: TypedPrompt,
     ) -> Result<()> {
         rec.push_prompt(&p);
         let mut reply = self.get_reply(p.clone(), None).await?;
@@ -80,7 +83,7 @@ async fn run_client_loop<C: ReplyClient>(
         for id in pending {
             debug!(?id, "pulling prompt details from snapd");
             let p = match c.prompt_details(&id).await {
-                Ok(p) if rec.is_prompt_for_writing_output(&p) => {
+                Ok(TypedPrompt::Home(p)) if rec.is_prompt_for_writing_output(&p) => {
                     return rec.allow_write(p, &c).await;
                 }
 
@@ -118,69 +121,16 @@ impl FlutterClient {
 }
 
 impl ReplyClient for FlutterClient {
-    async fn get_reply(&self, p: Prompt, prev_error: Option<String>) -> Result<PromptReply> {
-        let input = serde_json::to_string(&p.as_ui_prompt_input(prev_error))?;
-        debug!(input, "prompt details for the flutter ui");
+    async fn get_reply(
+        &self,
+        prompt: TypedPrompt,
+        prev_error: Option<String>,
+    ) -> Result<TypedPromptReply> {
+        let TypedPrompt::Home(p) = prompt;
+        let reply = HomeInterface
+            .try_get_reply_from_ui(&self.cmd, p, prev_error)
+            .await?;
 
-        let output = Command::new(&self.cmd).arg(&input).output().await?;
-        debug!(
-            raw_stdout = %String::from_utf8(output.stdout.clone()).unwrap(),
-            "raw output from the flutter ui"
-        );
-
-        // If the user closes out the prompt without submitting a reply we will get nothing on
-        // stdout so we treat that as "deny once".
-        if output.stdout.is_empty() {
-            return Ok(p.into_reply(Action::Deny));
-        }
-
-        let ui_reply: UiPromptReply = serde_json::from_slice(&output.stdout)?;
-        debug!(?ui_reply, "parsed reply from the flutter ui");
-
-        Ok(p.into_reply_from_ui(ui_reply))
-    }
-}
-
-/// This is a bare bones client implementation that only supports responding to prompts
-/// with "allow single" or "deny single".
-pub async fn run_terminal_client_loop(c: SnapdSocketClient, path: Option<String>) -> Result<()> {
-    run_client_loop(c, TerminalClient, path).await
-}
-
-struct TerminalClient;
-
-impl ReplyClient for TerminalClient {
-    async fn get_reply(&self, p: Prompt, _: Option<String>) -> Result<PromptReply> {
-        let summary = format!(
-            "\
-id:          {}
-snap:        {}
-timestamp:   {}
-path:        {}
-permissions: {:?}
-",
-            p.id(),
-            p.snap(),
-            p.timestamp(),
-            p.path(),
-            p.requested_permissions()
-        );
-
-        println!("{}", summary);
-        print!("> allow this prompt request? (y/n): ");
-        stdout().flush()?;
-
-        let mut user_input = String::new();
-        stdin().read_line(&mut user_input)?;
-        let user_input = user_input.trim();
-        let should_allow = matches!(user_input, "y" | "Y");
-
-        let reply = if should_allow {
-            p.into_reply(Action::Allow)
-        } else {
-            p.into_reply(Action::Deny)
-        };
-
-        Ok(reply)
+        Ok(reply.into())
     }
 }
