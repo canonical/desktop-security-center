@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:args/args.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,15 @@ void main(List<String> args) async {
   if (kDebugMode || argResult.flag('dry-run')) {
     registerService<RulesService>(FakeRulesService.defaultRules);
   } else {
-    registerService<RulesService>(() => SnapdRulesService(SnapdClient()));
+    registerService<RulesService>(
+      () => SnapdRulesService(
+        SnapdClient(
+          socketPath: Platform.environment.containsKey('SNAP_NAME')
+              ? '/run/snapd-snap.socket'
+              : '/run/snapd.socket',
+        ),
+      ),
+    );
   }
   runApp(const ProviderScope(child: SecurityCenterApp()));
 }
