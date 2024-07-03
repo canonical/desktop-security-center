@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/rules/rules_providers.dart';
-import 'package:security_center/services/snapd_rules_service.dart';
+import 'package:security_center/services/rules_service.dart';
 import 'package:yaru/yaru.dart';
 
 class SnapRulesPage extends ConsumerWidget {

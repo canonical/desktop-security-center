@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:security_center/services/snapd_rules_service.dart';
+import 'package:security_center/services/rules_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 part 'rules_providers.g.dart';
