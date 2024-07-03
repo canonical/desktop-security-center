@@ -19,17 +19,18 @@ trait ReplyClient {
         &self,
         p: TypedPrompt,
         prev_error: Option<String>,
+        rec: &mut PromptRecording,
     ) -> Result<TypedPromptReply>;
 
     async fn reply_retrying_errors(
         &self,
-        c: &mut SnapdSocketClient,
-        rec: &mut PromptRecording,
         id: PromptId,
         p: TypedPrompt,
+        c: &mut SnapdSocketClient,
+        rec: &mut PromptRecording,
     ) -> Result<()> {
         rec.push_prompt(&p);
-        let mut reply = self.get_reply(p.clone(), None).await?;
+        let mut reply = self.get_reply(p.clone(), None, rec).await?;
 
         debug!(?id, ?reply, "replying to prompt");
         rec.push_reply(&reply);
@@ -57,7 +58,7 @@ trait ReplyClient {
             };
 
             debug!(%prev_error, "error returned from snapd, retrying");
-            reply = self.get_reply(p.clone(), Some(prev_error)).await?;
+            reply = self.get_reply(p.clone(), Some(prev_error), rec).await?;
 
             debug!(?id, ?reply, "replying to prompt");
             rec.push_reply(&reply);
@@ -96,7 +97,7 @@ async fn run_client_loop<C: ReplyClient>(
             };
 
             client
-                .reply_retrying_errors(&mut c, &mut rec, id, p)
+                .reply_retrying_errors(id, p, &mut c, &mut rec)
                 .await?;
         }
     }
@@ -125,10 +126,11 @@ impl ReplyClient for FlutterClient {
         &self,
         prompt: TypedPrompt,
         prev_error: Option<String>,
+        rec: &mut PromptRecording,
     ) -> Result<TypedPromptReply> {
         let TypedPrompt::Home(p) = prompt;
         let reply = HomeInterface
-            .try_get_reply_from_ui(&self.cmd, p, prev_error)
+            .try_get_reply_from_ui(&self.cmd, p, prev_error, rec)
             .await?;
 
         Ok(reply.into())

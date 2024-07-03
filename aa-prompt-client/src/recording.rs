@@ -1,10 +1,7 @@
 use crate::{
     prompt_sequence::{MatchAttempt, PromptFilter},
     snapd_client::{
-        interfaces::{
-            home::{HomeConstraintsFilter, HomeInterface},
-            SnapInterface,
-        },
+        interfaces::{home::HomeInterface, SnapInterface},
         Action, Prompt, PromptId, SnapdSocketClient, TypedPrompt, TypedPromptReply,
     },
     Error, Result, SNAP_NAME,
@@ -15,9 +12,10 @@ use tokio::{select, signal::ctrl_c};
 use tracing::info;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(tag = "kind", rename_all = "lowercase")]
+#[serde(tag = "kind", rename_all = "camelCase")]
 pub enum Event {
     Prompt { data: TypedPrompt },
+    UiInput { data: serde_json::Value },
     Reply { data: TypedPromptReply },
     Error { data: String },
 }
@@ -38,12 +36,7 @@ impl PromptRecording {
         let filter = path.clone().map(|output_file| {
             info!(%output_file, "recording enabled");
             let mut filter = PromptFilter::default();
-            let mut constraints = HomeConstraintsFilter::default();
-            constraints.with_path(&output_file);
-            filter
-                .with_snap(SNAP_NAME)
-                .with_interface("home")
-                .with_constraints(constraints);
+            filter.with_snap(SNAP_NAME).with_interface("home");
 
             filter
         });
@@ -81,6 +74,12 @@ impl PromptRecording {
         }
     }
 
+    pub fn push_ui_input(&mut self, data: serde_json::Value) {
+        if self.is_recording() {
+            self.events.push(Event::UiInput { data });
+        }
+    }
+
     pub fn push_reply(&mut self, r: &TypedPromptReply) {
         if self.is_recording() {
             self.events.push(Event::Reply { data: r.clone() })
@@ -110,6 +109,7 @@ impl PromptRecording {
                     info!(n=%rec.events.len(), %path, "writing events to file");
                     tokio::task::spawn(async move {
                         fs::write(path, serde_json::to_string(&rec).unwrap()).unwrap();
+                        exit(0);
                     });
 
                     Ok(Vec::new())
@@ -137,5 +137,36 @@ impl PromptRecording {
 
         info!("auto-replying to our own prompt for creating output file");
         c.reply_to_prompt(&id, reply).await
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const SELF_WRITE_PROMPT: &str = r#"{
+        "id": "C7PLOQW54HGFM===",
+        "timestamp": "2024-07-03T13:33:25.52039535Z",
+        "snap": "apparmor-prompting",
+        "interface": "home",
+        "constraints": {
+          "path": "/home/ubuntu/test.json",
+          "permissions": [
+            "write"
+          ],
+          "available-permissions": [
+            "read",
+            "write",
+            "execute"
+          ]
+        }
+      }"#;
+
+    #[test]
+    fn is_prompt_for_writing_output_works() {
+        let rec = PromptRecording::new(Some("test.json".to_string()));
+        let prompt: Prompt<HomeInterface> = serde_json::from_str(SELF_WRITE_PROMPT).unwrap();
+
+        assert!(rec.is_prompt_for_writing_output(&prompt));
     }
 }
