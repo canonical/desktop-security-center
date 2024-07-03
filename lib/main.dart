@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/security_center_app.dart';
@@ -34,7 +33,7 @@ Future<void> main(List<String> args) async {
     exit(2);
   }
 
-  if (kDebugMode || argResults.flag('dry-run')) {
+  if (argResults.flag('dry-run')) {
     registerService<RulesService>(
       () => FakeRulesService.fromFile(argResults['test-rules'] as String),
     );
