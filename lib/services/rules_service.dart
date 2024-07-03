@@ -1,7 +1,12 @@
 import 'package:snapd/snapd.dart';
 
 export 'package:snapd/snapd.dart'
-    show SnapdRule, SnapdConstraints, SnapdRequestLifespan, SnapdRequestOutcome;
+    show
+        SnapdRule,
+        SnapdRuleMask,
+        SnapdConstraints,
+        SnapdRequestLifespan,
+        SnapdRequestOutcome;
 
 abstract class RulesService {
   Future<List<SnapdRule>> getRules({
