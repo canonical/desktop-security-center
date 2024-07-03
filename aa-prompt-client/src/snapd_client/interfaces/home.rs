@@ -66,17 +66,18 @@ impl HomeInterface {
             .expect("requested path to have a parent");
 
         let initial_options = vec![
-            InitialOption::new("Allow Always", HomeUiReply::as_requested(prompt)),
-            InitialOption::new_with_path(prompt, "Allow Directory", &parent_dir),
-            InitialOption::new_with_path(prompt, "Allow Home", &home_dir),
-            InitialOption::new(
-                "Deny Once",
-                HomeUiReply {
-                    action: Action::Deny,
-                    lifespan: Lifespan::Single,
-                    ..HomeUiReply::as_requested(prompt)
-                },
-            ),
+            // TODO: (sminez) re-enable once we have settled on what the initial options are
+            // InitialOption::new("Allow Always", HomeUiReply::as_requested(prompt)),
+            // InitialOption::new_with_path(prompt, "Allow Directory", &parent_dir),
+            // InitialOption::new_with_path(prompt, "Allow Home", &home_dir),
+            // InitialOption::new(
+            //     "Deny Once",
+            //     HomeUiReply {
+            //         action: Action::Deny,
+            //         lifespan: Lifespan::Single,
+            //         ..HomeUiReply::as_requested(prompt)
+            //     },
+            // ),
         ];
 
         let mut more_options = vec![PathAndDescription::new("Requested Path", path)];
@@ -196,28 +197,29 @@ pub struct InitialOption {
     reply: HomeUiReply,
 }
 
-impl InitialOption {
-    fn new(button_text: &str, reply: HomeUiReply) -> Self {
-        Self {
-            button_text: button_text.to_string(),
-            reply,
-        }
-    }
+// TODO: (sminez) re-enable once we have settled on what the initial options are
+// impl InitialOption {
+//     fn new(button_text: &str, reply: HomeUiReply) -> Self {
+//         Self {
+//             button_text: button_text.to_string(),
+//             reply,
+//         }
+//     }
 
-    fn new_with_path(
-        p: &Prompt<HomeInterface>,
-        button_text: &str,
-        path_pattern: impl Into<String>,
-    ) -> Self {
-        InitialOption::new(
-            button_text,
-            HomeUiReply {
-                path_pattern: path_pattern.into(),
-                ..HomeUiReply::as_requested(p)
-            },
-        )
-    }
-}
+//     fn new_with_path(
+//         p: &Prompt<HomeInterface>,
+//         button_text: &str,
+//         path_pattern: impl Into<String>,
+//     ) -> Self {
+//         InitialOption::new(
+//             button_text,
+//             HomeUiReply {
+//                 path_pattern: path_pattern.into(),
+//                 ..HomeUiReply::as_requested(p)
+//             },
+//         )
+//     }
+// }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -228,16 +230,17 @@ pub struct HomeUiReply {
     permissions: Vec<String>,
 }
 
-impl HomeUiReply {
-    fn as_requested(p: &Prompt<HomeInterface>) -> Self {
-        Self {
-            action: Action::Allow,
-            lifespan: Lifespan::Forever,
-            path_pattern: p.constraints.path.to_string(),
-            permissions: p.constraints.permissions.to_vec(),
-        }
-    }
-}
+// TODO: (sminez) re-enable once we have settled on what the initial options are
+// impl HomeUiReply {
+//     fn as_requested(p: &Prompt<HomeInterface>) -> Self {
+//         Self {
+//             action: Action::Allow,
+//             lifespan: Lifespan::Forever,
+//             path_pattern: p.constraints.path.to_string(),
+//             permissions: p.constraints.permissions.to_vec(),
+//         }
+//     }
+// }
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
