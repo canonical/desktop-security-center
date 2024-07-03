@@ -1,28 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:security_center/services/rules_service.dart';
-import 'package:snapd/snapd.dart';
 
-part 'fake_rules_service.freezed.dart';
-part 'fake_rules_service.g.dart';
-
-@freezed
-class SnapdRuleMask with _$SnapdRuleMask {
-  factory SnapdRuleMask({
-    required String snap,
-    required String interface,
-    required SnapdConstraints constraints,
-    required SnapdRequestOutcome outcome,
-    required SnapdRequestLifespan lifespan,
-  }) = _SnapdRuleMask;
-
-  factory SnapdRuleMask.fromJson(Map<String, dynamic> json) =>
-      _$SnapdRuleMaskFromJson(json);
-
-  SnapdRuleMask._();
-
+extension on SnapdRuleMask {
   SnapdRule toSnapdRule() => SnapdRule(
         id: hashCode.toString(),
         timestamp: DateTime.now(),
