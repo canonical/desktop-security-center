@@ -52,6 +52,8 @@ class PromptPage extends ConsumerWidget {
                     const InitialOptions(),
                     if (model.withMoreOptions) ...[
                       const SizedBox(height: 20),
+                      const Divider(),
+                      const SizedBox(height: 20),
                       const MoreOptions(),
                     ],
                   ],
@@ -71,7 +73,8 @@ class InitialOptions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(promptDataModelProvider);
-    final notifier = ref.read(promptDataModelProvider.notifier);
+    // TODO: (sminez) re-enable once we have settled on what the initial options are
+    // final notifier = ref.read(promptDataModelProvider.notifier);
     final theme = Theme.of(context);
 
     return Column(
@@ -115,23 +118,24 @@ class InitialOptions extends ConsumerWidget {
             ],
           ),
         ),
-        Row(
-          children: [
-            for (var i = 0; i < notifier.numInitialOptions; i++)
-              OutlinedButton(
-                onPressed: model.withMoreOptions
-                    ? null
-                    : () => notifier.replyWithInitialOption(i),
-                child: Text(model.details.initialOptions[i].buttonText),
-              ),
-            OutlinedButton(
-              onPressed: notifier.toggleMoreOptions,
-              child: Text(
-                model.withMoreOptions ? 'Less options...' : 'More options...',
-              ),
-            ),
-          ].withSpacing(10),
-        ),
+        // TODO: (sminez) re-enable once we have settled on what the initial options are
+        // Row(
+        //   children: [
+        //     for (var i = 0; i < notifier.numInitialOptions; i++)
+        //       OutlinedButton(
+        //         onPressed: model.withMoreOptions
+        //             ? null
+        //             : () => notifier.replyWithInitialOption(i),
+        //         child: Text(model.details.initialOptions[i].buttonText),
+        //       ),
+        //     OutlinedButton(
+        //       onPressed: notifier.toggleMoreOptions,
+        //       child: Text(
+        //         model.withMoreOptions ? 'Less options...' : 'More options...',
+        //       ),
+        //     ),
+        //   ].withSpacing(10),
+        // ),
       ],
     );
   }
@@ -147,7 +151,6 @@ class MoreOptions extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Divider(),
         const AccessToggle(),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,

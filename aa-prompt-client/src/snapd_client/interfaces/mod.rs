@@ -2,6 +2,7 @@
 //! prompts for it and how we generate the UI for the user.
 use crate::{
     prompt_sequence::MatchAttempt,
+    recording::PromptRecording,
     snapd_client::{Action, Prompt, PromptReply},
     Result,
 };
@@ -38,16 +39,22 @@ pub trait SnapInterface: fmt::Debug + Clone {
         cmd: &str,
         prompt: Prompt<Self>,
         prev_error: Option<String>,
+        rec: &mut PromptRecording,
     ) -> Result<PromptReply<Self>> {
         let input = self.map_ui_input(prompt.clone(), prev_error);
-        let json_input = serde_json::to_string(&input)?;
-        debug!(json_input, "prompt details for the flutter ui");
+        let json_input = serde_json::to_value(&input)?;
+        debug!(%json_input, "prompt details for the flutter ui");
 
-        let output = Command::new(cmd).arg(&json_input).output().await?;
+        let output = Command::new(cmd)
+            .arg(&json_input.to_string())
+            .output()
+            .await?;
+
         debug!(
             raw_stdout = %String::from_utf8(output.stdout.clone()).unwrap(),
             "raw output from the flutter ui"
         );
+        rec.push_ui_input(json_input);
 
         // If the user closes out the prompt without submitting a reply we will get nothing on
         // stdout so we treat that as "deny once".
