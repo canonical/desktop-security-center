@@ -1,0 +1,32 @@
+{
+    "@@locale": "en",
+    "appTitle": "Security Center",
+    "@appTitle": {},
+    "snapPermissionsPageTitle": "Snap Permissions",
+    "@snapPermissionsPageTitle": {},
+    "snapRulesCount": "{n} rules",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "Manage {interface} permissions for {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesRemoveAll": "Remove all",
+    "@snapRulesRemoveAll": {},
+    "homeInterfacePageTitle": "Home folder",
+    "@homeInterfacePageTitle": {},
+    "homeInterfacePageDescription": "Manage permissions to access files in your Home folder.",
+    "@homeInterfacePageDescription": {}
+}
