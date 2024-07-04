@@ -125,9 +125,9 @@ class PromptDataModel extends _$PromptDataModel {
   int get numInitialOptions => state.details.initialOptions.length;
   int get numMoreOptions => state.details.moreOptions.length;
 
-  String moreOptionPath(int index) {
+  (String, String) moreOptionPath(int index) {
     final opt = state.details.moreOptions[index];
-    return '${opt.description} (${opt.pathPattern})';
+    return (opt.description, opt.pathPattern);
   }
 
   void toggleMoreOptions() =>
