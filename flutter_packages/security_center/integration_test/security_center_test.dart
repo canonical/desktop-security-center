@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:security_center/main.dart' as app;
+import 'package:security_center/rules/interface_x.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
+
+import '../test/test_utils.dart';
 
 const testRulesPath = 'integration_test/assets/test_rules.json';
 
@@ -20,7 +23,8 @@ void main() {
     await app.main([]);
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('home'));
+    await tester
+        .tap(find.text('home'.localizeSnapdInterfaceTitle(tester.l10n)));
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('firefox'));

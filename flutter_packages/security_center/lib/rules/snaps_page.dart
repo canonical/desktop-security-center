@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/l10n.dart';
+import 'package:security_center/rules/interface_x.dart';
 import 'package:security_center/rules/rules_providers.dart';
 import 'package:security_center/rules/snap_rules_page.dart';
+import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
 class SnapsPage extends ConsumerWidget {
@@ -36,33 +40,34 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const YaruBackButton(),
-          Text('Snaps', style: Theme.of(context).textTheme.headlineSmall),
-          Expanded(
-            child: ListView.builder(
-              itemCount: snapRuleCounts.length,
-              itemBuilder: (context, index) {
-                final snapCount = snapRuleCounts.entries.elementAt(index);
-                return ListTile(
-                  title: Text(snapCount.key),
-                  subtitle: Text('${snapCount.value} rules'),
-                  onTap: () => Navigator.of(context).push(
-                    SnapRulesPage.route(
-                      snap: snapCount.key,
-                      interface: interface,
-                    ),
-                  ),
-                );
-              },
+    final l10n = AppLocalizations.of(context);
+    final tiles = snapRuleCounts.entries
+        .map(
+          (e) => ListTile(
+            leading: const Icon(YaruIcons.placeholder_icon),
+            title: Text(e.key),
+            subtitle: Text(l10n.snapRulesCount(e.value)),
+            trailing: const Icon(YaruIcons.pan_end),
+            onTap: () => Navigator.of(context).push(
+              SnapRulesPage.route(
+                snap: e.key,
+                interface: interface,
+              ),
             ),
           ),
-        ],
-      ),
+        )
+        .toList();
+    return ScrollablePage(
+      children: [
+        const YaruBackButton(),
+        Text(
+          interface.localizeSnapdInterfaceTitle(l10n),
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        Text(interface.localizeSnapdInterfaceDescription(l10n)),
+        const SizedBox(height: 24),
+        TileList(children: tiles),
+      ],
     );
   }
 }

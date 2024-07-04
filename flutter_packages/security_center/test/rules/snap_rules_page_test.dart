@@ -36,7 +36,7 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('Rules for firefox'), findsOneWidget);
+    expect(find.text('firefox'), findsOneWidget);
 
     await tester.tap(find.text('ruleId'));
     verify(mockRulesService.removeRule('ruleId')).called(1);

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/l10n.dart';
+import 'package:security_center/rules/interface_x.dart';
 import 'package:security_center/rules/rules_providers.dart';
 import 'package:security_center/services/rules_service.dart';
+import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
 class SnapRulesPage extends ConsumerWidget {
@@ -48,36 +52,35 @@ class _Body extends ConsumerWidget {
     final notifier = ref.read(
       snapRulesModelProvider(snap: snap, interface: interface).notifier,
     );
-    return Padding(
-      padding: const EdgeInsets.all(30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const YaruBackButton(),
-          Text(
-            'Rules for $snap',
-            style: Theme.of(context).textTheme.headlineSmall,
+    final l10n = AppLocalizations.of(context);
+    final tiles = rules
+        .map(
+          (rule) => ListTile(
+            leading: Text(rule.id),
+            title: _Rule(rule: rule),
+            onTap: () => notifier.removeRule(rule.id),
           ),
-          Flexible(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: rules.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: Text(rules[index].id),
-                  title: _Rule(rule: rules[index]),
-                  onTap: () => notifier.removeRule(rules[index].id),
-                );
-              },
-            ),
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: notifier.removeAll,
-            child: const Text('Remove all'),
-          ),
-        ],
-      ),
+        )
+        .toList();
+    return ScrollablePage(
+      children: [
+        const YaruBackButton(),
+        Row(
+          children: [
+            const Icon(YaruIcons.placeholder_icon),
+            const SizedBox(width: 10),
+            Text(snap, style: Theme.of(context).textTheme.titleLarge),
+          ],
+        ),
+        Text(interface.localizeSnapdInterfaceDescription(l10n)),
+        const SizedBox(height: 24),
+        TileList(children: tiles),
+        const SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: notifier.removeAll,
+          child: Text(l10n.snapRulesRemoveAll),
+        ),
+      ],
     );
   }
 }
