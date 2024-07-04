@@ -209,6 +209,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.6"
+  diacritic:
+    dependency: transitive
+    description:
+      name: diacritic
+      sha256: "96db5db6149cbe4aa3cfcbfd170aca9b7648639be7e48025f9d458517f807fe4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.5"
   dio:
     dependency: transitive
     description:
@@ -267,6 +275,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_riverpod:
     dependency: "direct main"
     description:
@@ -746,6 +759,14 @@ packages:
     description:
       name: ubuntu_lints
       sha256: b9945794b7f2a87ab86d5f0f403c01e10eb8cec43ff74cb2251865ca115e7598
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
+  ubuntu_localizations:
+    dependency: "direct main"
+    description:
+      name: ubuntu_localizations
+      sha256: "547fb1b865712347497bbe8c3c0018629693ca435a9a8ec92e37f9499f6235c8"
       url: "https://pub.dev"
     source: hosted
     version: "0.4.0"
