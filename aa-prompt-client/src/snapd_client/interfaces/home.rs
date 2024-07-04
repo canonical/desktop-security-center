@@ -7,7 +7,20 @@ use crate::{
     },
 };
 use serde::{Deserialize, Serialize};
-use std::{env, path::PathBuf};
+use std::{
+    env,
+    path::{Path, PathBuf},
+};
+
+// Common file extensions
+const ARCHIVE_EXTENSIONS: [&str; 8] = ["7z", "bz2", "gz", "rar", "tar", "tar", "xz", "zip"];
+const AUDIO_EXTENSIONS: [&str; 6] = ["aac", "flac", "m4a", "mp3", "ogg", "wav"];
+const DOCUMENT_EXTENSIONS: [&str; 14] = [
+    "doc", "docx", "epub", "md", "odp", "ods", "odt", "pdf", "ppt", "pptx", "rtf", "txt", "xls",
+    "xlsx",
+];
+const IMAGE_EXTENSIONS: [&str; 8] = ["gif", "jpeg", "jpg", "png", "tif", "tiff", "webp", "xcf"];
+const VIDEO_EXTENSIONS: [&str; 4] = ["avi", "mkv", "mov", "mp4"];
 
 impl Prompt<HomeInterface> {
     pub fn path(&self) -> &str {
@@ -56,14 +69,8 @@ pub struct HomeInterface;
 
 impl HomeInterface {
     fn ui_options(&self, prompt: &Prompt<Self>) -> (Vec<InitialOption>, Vec<PathAndDescription>) {
+        let home_dir = env::var("SNAP_REAL_HOME").expect("to be running inside of a snap");
         let path = &prompt.constraints.path;
-        let home_dir = env::var("SNAP_REAL_HOME")
-            .map(|p| format!("{p}/**"))
-            .expect("to be running inside of a snap");
-        let parent_dir = PathBuf::from(path)
-            .parent()
-            .map(|pb| format!("{}/**", pb.to_string_lossy()))
-            .expect("requested path to have a parent");
 
         let initial_options = vec![
             // TODO: (sminez) re-enable once we have settled on what the initial options are
@@ -80,20 +87,7 @@ impl HomeInterface {
             // ),
         ];
 
-        let mut more_options = vec![PathAndDescription::new("Requested Path", path)];
-
-        if path.ends_with('/') {
-            more_options.push(PathAndDescription::new(
-                "Directory Contents",
-                format!("{}**", &prompt.constraints.path),
-            ));
-        }
-
-        if parent_dir != home_dir {
-            more_options.push(PathAndDescription::new("Parent Directory", parent_dir));
-        }
-
-        more_options.push(PathAndDescription::new("Home Directory", home_dir));
+        let more_options = build_more_options(path, &home_dir);
 
         (initial_options, more_options)
     }
@@ -294,6 +288,126 @@ impl ConstraintsFilter for HomeConstraintsFilter {
     }
 }
 
+// Using strings rather than Paths as we can't use filesystem operations
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum PathCategory {
+    Directory,
+    ArchiveFile,
+    AudioFile,
+    DocumentFile,
+    ImageFile,
+    VideoFile,
+    MiscFile,
+}
+
+impl PathCategory {
+    // NOTE: only doing this from "ends in a slash" means some of the UI text will be wrong for
+    // files without an extension
+    fn from_path(p: &str) -> Self {
+        if p.ends_with('/') {
+            Self::Directory
+        } else if ARCHIVE_EXTENSIONS.iter().any(|e| p.ends_with(e)) {
+            Self::ArchiveFile
+        } else if AUDIO_EXTENSIONS.iter().any(|e| p.ends_with(e)) {
+            Self::AudioFile
+        } else if DOCUMENT_EXTENSIONS.iter().any(|e| p.ends_with(e)) {
+            Self::DocumentFile
+        } else if IMAGE_EXTENSIONS.iter().any(|e| p.ends_with(e)) {
+            Self::ImageFile
+        } else if VIDEO_EXTENSIONS.iter().any(|e| p.ends_with(e)) {
+            Self::VideoFile
+        } else {
+            Self::MiscFile
+        }
+    }
+
+    const fn kind(&self) -> &'static str {
+        if matches!(self, PathCategory::Directory) {
+            "folder"
+        } else {
+            "file"
+        }
+    }
+
+    fn ftype_option(&self, home_dir: &str) -> Option<PathAndDescription> {
+        let ftype_path = |exts: &[&str]| format!("{home_dir}/**/*.{{{}}}", exts.join(","));
+
+        match self {
+            PathCategory::ArchiveFile => Some(PathAndDescription::new(
+                "Archive files",
+                ftype_path(&ARCHIVE_EXTENSIONS),
+            )),
+            PathCategory::AudioFile => Some(PathAndDescription::new(
+                "Audio files",
+                ftype_path(&AUDIO_EXTENSIONS),
+            )),
+            PathCategory::DocumentFile => Some(PathAndDescription::new(
+                "Document files",
+                ftype_path(&DOCUMENT_EXTENSIONS),
+            )),
+            PathCategory::ImageFile => Some(PathAndDescription::new(
+                "Image files",
+                ftype_path(&IMAGE_EXTENSIONS),
+            )),
+            PathCategory::VideoFile => Some(PathAndDescription::new(
+                "Video files",
+                ftype_path(&VIDEO_EXTENSIONS),
+            )),
+            _ => None,
+        }
+    }
+}
+
+fn top_level_dir_option(pb: &Path) -> Option<PathAndDescription> {
+    let comps: Vec<_> = pb.iter().take(4).collect();
+    if comps.len() < 4 || comps[3].to_string_lossy().contains('.') {
+        return None;
+    }
+    let top_level: PathBuf = comps.into_iter().collect();
+    let dir = top_level.file_name().unwrap().to_string_lossy();
+
+    Some(PathAndDescription::new(
+        format!("{dir} folder"),
+        format!("{}/**", top_level.to_string_lossy()),
+    ))
+}
+
+fn build_more_options(path: &str, home_dir: &str) -> Vec<PathAndDescription> {
+    let category = PathCategory::from_path(path);
+    let pb = PathBuf::from(path);
+    let kind = category.kind();
+
+    let mut more_options = vec![PathAndDescription::new(
+        format!("The requested {kind} only"),
+        path,
+    )];
+
+    if let Some(opt) = top_level_dir_option(&pb) {
+        more_options.push(opt);
+    }
+
+    more_options.push(PathAndDescription::new(
+        "Home folder",
+        format!("{home_dir}/**"),
+    ));
+
+    if kind == "file" {
+        if let Some(ext) = pb.extension() {
+            let ext = ext.to_string_lossy();
+            more_options.push(PathAndDescription::new(
+                format!("{} files", ext.to_uppercase()),
+                format!("{home_dir}/**/*.{ext}"),
+            ));
+        }
+    }
+
+    if let Some(opt) = category.ftype_option(home_dir) {
+        more_options.push(opt);
+    }
+
+    more_options
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -345,5 +459,59 @@ mod tests {
             Err(e) => panic!("expected InvalidCustomPermissions, got {e}"),
             Ok(_) => panic!("should have errored"),
         }
+    }
+
+    #[test_case("/home/user/Downloads/foo/bar.txt"; "nested file")]
+    #[test_case("/home/user/Downloads/"; "top level dir with trailing slash")]
+    #[test_case("/home/user/Downloads"; "top level dir without trailing slash")]
+    #[test]
+    fn top_level_dir_works_when_dir_exists(path: &str) {
+        let opt = top_level_dir_option(&PathBuf::from(path)).unwrap();
+
+        assert_eq!(opt.description, "Downloads folder");
+        assert_eq!(opt.path_pattern, "/home/user/Downloads/**");
+    }
+
+    #[test_case("/home/user/foo.txt"; "top level file")]
+    #[test_case("/home/user/"; "home dir with trailing slash")]
+    #[test_case("/home/user"; "home dir without trailing slash")]
+    #[test]
+    fn invalid_top_level_dir_is_none(path: &str) {
+        let opt = top_level_dir_option(&PathBuf::from(path));
+        assert!(opt.is_none());
+    }
+
+    #[test]
+    fn ftype_option_creates_a_valid_path_pattern() {
+        let opt = PathCategory::VideoFile.ftype_option("/home/user").unwrap();
+        assert_eq!(opt.path_pattern, "/home/user/**/*.{avi,mkv,mov,mp4}");
+    }
+
+    #[test_case(
+        "/home/user/Downloads/",
+        &["The requested folder only", "Downloads folder", "Home folder"];
+        "top level directory"
+    )]
+    #[test_case(
+        "/home/user/Downloads/foo.jpeg",
+        &["The requested file only", "Downloads folder", "Home folder", "JPEG files", "Image files"];
+        "jpeg in Downloads"
+    )]
+    #[test_case(
+        "/home/user/bar.zip",
+        &["The requested file only", "Home folder", "ZIP files", "Archive files"];
+        "zip in home folder"
+    )]
+    #[test_case(
+        "/home/user/custom/strange.file",
+        &["The requested file only", "custom folder", "Home folder", "FILE files"];
+        "unknown file extension"
+    )]
+    #[test]
+    fn building_more_options_works(path: &str, expected: &[&str]) {
+        let opts = build_more_options(path, "/home/user");
+        let descriptions: Vec<&str> = opts.iter().map(|pd| pd.description.as_str()).collect();
+
+        assert_eq!(descriptions, expected);
     }
 }
