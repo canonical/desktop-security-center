@@ -1,16 +1,47 @@
 use crate::snapd_client::{
-    interfaces::home::HomeInterface,
-    interfaces::{ConstraintsFilter, SnapInterface},
-    Prompt, PromptReply,
+    interfaces::{home::HomeInterface, ConstraintsFilter, SnapInterface},
+    Prompt, PromptReply, TypedPrompt, TypedPromptReply,
 };
 use serde::{Deserialize, Serialize};
+use std::{collections::VecDeque, fs};
 
 #[allow(dead_code)]
 #[derive(Debug, Default, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct PromptSequence {
     version: u8,
-    prompts: Vec<TypedPromptCase>,
+    prompts: VecDeque<TypedPromptCase>,
+    #[serde(skip, default)]
+    index: usize,
+}
+
+impl PromptSequence {
+    pub fn try_new_from_file(path: &str) -> crate::Result<Self> {
+        Self::try_new_from_string(&fs::read_to_string(path)?)
+    }
+
+    pub fn try_new_from_string(content: &str) -> crate::Result<Self> {
+        let seq = serde_json::from_str(content)?;
+
+        Ok(seq)
+    }
+
+    pub fn try_match_next(&mut self, p: TypedPrompt) -> Result<TypedPromptReply, MatchError> {
+        let case = match self.prompts.pop_front() {
+            Some(case) => case,
+            None => return Err(MatchError::NoPromptsRemaining),
+        };
+
+        match (case, p) {
+            (TypedPromptCase::Home(case), TypedPrompt::Home(p)) => {
+                let res = case
+                    .into_reply_or_error(p, self.index)
+                    .map(TypedPromptReply::Home);
+                self.index += 1;
+                res
+            }
+        }
+    }
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -33,12 +64,29 @@ impl<I> PromptCase<I>
 where
     I: SnapInterface,
 {
-    pub fn into_reply_or_error(self, p: Prompt<I>) -> Result<PromptReply<I>, Vec<MatchFailure>> {
+    pub fn into_reply_or_error(
+        self,
+        p: Prompt<I>,
+        index: usize,
+    ) -> Result<PromptReply<I>, MatchError> {
         match self.prompt_filter.matches(&p) {
             MatchAttempt::Success => Ok(self.reply),
-            MatchAttempt::Failure(failures) => Err(failures),
+            MatchAttempt::Failure(failures) => Err(MatchError::MatchFailures { index, failures }),
         }
     }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
+pub enum MatchError {
+    #[error("the provided prompt sequence has no prompts remaining")]
+    NoPromptsRemaining,
+    #[error("expected next prompt to have interface={expected} but got {seen}")]
+    WrongInterface { expected: String, seen: String },
+    #[error("prompt {index} did not match the provided sequence: {failures:?}")]
+    MatchFailures {
+        index: usize,
+        failures: Vec<MatchFailure>,
+    },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -156,7 +204,10 @@ mod tests {
             } => {
                 assert_eq!(snap.as_deref(), Some("snapName"));
                 assert_eq!(interface.as_deref(), Some("home"));
-                assert_eq!(path.as_deref(), Some("/home/foo/bar"));
+                assert_eq!(
+                    path.map(|re| re.to_string()).as_deref(),
+                    Some("/home/foo/bar")
+                );
                 assert_eq!(permissions, Some(vec!["read".to_string()]));
                 assert_eq!(
                     available_permissions,
@@ -225,7 +276,7 @@ mod tests {
     #[dir_cases("resources/prompt-sequence-tests")]
     #[test]
     fn deserialize_prompt_sequence_works(path: &str, data: &str) {
-        let res = serde_json::from_str::<'_, PromptSequence>(data);
+        let res = PromptSequence::try_new_from_string(data);
 
         assert!(res.is_ok(), "error parsing {path}: {:?}", res);
     }

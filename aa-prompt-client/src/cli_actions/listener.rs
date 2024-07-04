@@ -1,4 +1,5 @@
 use crate::{
+    prompt_sequence::PromptSequence,
     recording::PromptRecording,
     snapd_client::{
         interfaces::{home::HomeInterface, SnapInterface},
@@ -6,7 +7,7 @@ use crate::{
     },
     Error, Result,
 };
-use std::env;
+use std::{env, process::exit};
 use tracing::{debug, error, info, warn};
 
 // FIXME: having to hard code this is a problem.
@@ -16,14 +17,14 @@ const NO_PROMPTS_FOR_USER: &str = "no prompts found for the given user";
 
 trait ReplyClient {
     async fn get_reply(
-        &self,
+        &mut self,
         p: TypedPrompt,
         prev_error: Option<String>,
         rec: &mut PromptRecording,
     ) -> Result<TypedPromptReply>;
 
     async fn reply_retrying_errors(
-        &self,
+        &mut self,
         id: PromptId,
         p: TypedPrompt,
         c: &mut SnapdSocketClient,
@@ -71,7 +72,7 @@ trait ReplyClient {
 /// Run a simple client listener that processes notices and prompts serially
 async fn run_client_loop<C: ReplyClient>(
     mut c: SnapdSocketClient,
-    client: C,
+    mut client: C,
     path: Option<String>,
 ) -> Result<()> {
     let mut rec = PromptRecording::new(path);
@@ -123,7 +124,7 @@ impl FlutterClient {
 
 impl ReplyClient for FlutterClient {
     async fn get_reply(
-        &self,
+        &mut self,
         prompt: TypedPrompt,
         prev_error: Option<String>,
         rec: &mut PromptRecording,
@@ -134,5 +135,40 @@ impl ReplyClient for FlutterClient {
             .await?;
 
         Ok(reply.into())
+    }
+}
+
+/// Handle prompts using scripted client interactions
+pub async fn run_scripted_client_loop(c: SnapdSocketClient, path: &str) -> Result<()> {
+    run_client_loop(c, ScriptedClient::try_new(path)?, None).await
+}
+
+struct ScriptedClient {
+    seq: PromptSequence,
+}
+
+impl ScriptedClient {
+    fn try_new(path: &str) -> Result<Self> {
+        let seq = PromptSequence::try_new_from_file(path)?;
+
+        Ok(Self { seq })
+    }
+}
+
+impl ReplyClient for ScriptedClient {
+    async fn get_reply(
+        &mut self,
+        prompt: TypedPrompt,
+        // TODO: (sminez) should having a prev_error be an error here?
+        _prev_error: Option<String>,
+        rec: &mut PromptRecording,
+    ) -> Result<TypedPromptReply> {
+        match self.seq.try_match_next(prompt) {
+            Ok(reply) => Ok(reply),
+            Err(e) => {
+                println!("{e}");
+                exit(1);
+            }
+        }
     }
 }

@@ -5,7 +5,9 @@ use crate::{
         interfaces::{ConstraintsFilter, Prompt, PromptReply, SnapInterface},
         Action, Error, Lifespan, Result,
     },
+    util::serde_option_regex,
 };
+use regex::Regex;
 use serde::{Deserialize, Serialize};
 use std::{
     env,
@@ -248,15 +250,17 @@ pub struct HomeReplyConstraints {
 #[derive(Debug, Default, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "kebab-case")]
 pub struct HomeConstraintsFilter {
-    pub path: Option<String>,
+    #[serde(with = "serde_option_regex", default)]
+    pub path: Option<Regex>,
     pub permissions: Option<Vec<String>>,
     pub available_permissions: Option<Vec<String>>,
 }
 
 impl HomeConstraintsFilter {
-    pub fn with_path(&mut self, path: impl Into<String>) -> &mut Self {
-        self.path = Some(path.into());
-        self
+    pub fn try_with_path(&mut self, path: impl Into<String>) -> Result<&mut Self> {
+        let re = Regex::new(&path.into())?;
+        self.path = Some(re);
+        Ok(self)
     }
 
     pub fn with_permissions(&mut self, permissions: Vec<impl Into<String>>) -> &mut Self {
@@ -276,7 +280,16 @@ impl ConstraintsFilter for HomeConstraintsFilter {
     fn matches(&self, constraints: &Self::Constraints) -> MatchAttempt {
         let mut failures = Vec::new();
 
-        field_matches!(self, constraints, failures, path);
+        if let Some(re) = &self.path {
+            if !re.is_match(&constraints.path) {
+                failures.push(MatchFailure {
+                    field: "path",
+                    expected: format!("{:?}", re.to_string()),
+                    seen: format!("{:?}", constraints.path),
+                });
+            }
+        }
+
         field_matches!(self, constraints, failures, permissions);
         field_matches!(self, constraints, failures, available_permissions);
 
