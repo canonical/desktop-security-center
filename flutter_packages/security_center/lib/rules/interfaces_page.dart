@@ -45,9 +45,27 @@ class _Body extends StatelessWidget {
         .toList();
     return ScrollablePage(
       children: [
-        Text('Interfaces', style: Theme.of(context).textTheme.headlineSmall),
+        YaruBorderContainer(
+          child: YaruSwitchListTile(
+            title: Row(
+              children: [
+                Text(l10n.snapPermissionsEnableTitle),
+                const SizedBox(width: 10),
+                YaruInfoBadge(
+                  title: Text(l10n.snapPermissionsExperimentalLabel),
+                  yaruInfoType: YaruInfoType.information,
+                ),
+              ],
+            ),
+            subtitle: Text(l10n.snapPermissionsEnableWarning),
+            value: true,
+            onChanged: (value) {},
+          ),
+        ),
         const SizedBox(height: 16),
         TileList(children: tiles),
+        const SizedBox(height: 16),
+        Text(l10n.snapPermissionsOtherDescription),
       ],
     );
   }
