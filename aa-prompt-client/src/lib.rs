@@ -1,3 +1,5 @@
+use prompt_sequence::MatchError;
+
 pub mod cli_actions;
 pub mod prompt_sequence;
 pub mod snapd_client;
@@ -24,6 +26,9 @@ pub enum Error {
 
     #[error(transparent)]
     Regex(#[from] regex::Error),
+
+    #[error("failed prompt sequence: {error}")]
+    FailedPromptSequence { error: MatchError },
 
     #[error("invalid custom permissions: requested={requested:?} but available={available:?}")]
     InvalidCustomPermissions {

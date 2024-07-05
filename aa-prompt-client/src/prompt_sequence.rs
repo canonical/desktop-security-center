@@ -1,6 +1,8 @@
 use crate::snapd_client::{
-    interfaces::{home::HomeInterface, ConstraintsFilter, SnapInterface},
-    Prompt, PromptReply, TypedPrompt, TypedPromptReply,
+    interfaces::{
+        home::HomeInterface, ConstraintsFilter, ReplyConstraintsOverrides, SnapInterface,
+    },
+    Action, Lifespan, Prompt, PromptReply, TypedPrompt, TypedPromptReply,
 };
 use serde::{Deserialize, Serialize};
 use std::{collections::VecDeque, fs};
@@ -42,6 +44,10 @@ impl PromptSequence {
             }
         }
     }
+
+    pub fn is_empty(&self) -> bool {
+        self.prompts.is_empty()
+    }
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -57,7 +63,18 @@ where
     I: SnapInterface,
 {
     prompt_filter: PromptFilter<I>,
-    reply: PromptReply<I>,
+    reply: PromptReplyTemplate<I>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub struct PromptReplyTemplate<I>
+where
+    I: SnapInterface,
+{
+    action: Action,
+    lifespan: Lifespan,
+    constraints: I::ReplyConstraintsOverrides,
 }
 
 impl<I> PromptCase<I>
@@ -70,7 +87,14 @@ where
         index: usize,
     ) -> Result<PromptReply<I>, MatchError> {
         match self.prompt_filter.matches(&p) {
-            MatchAttempt::Success => Ok(self.reply),
+            MatchAttempt::Success => {
+                let mut reply = I::prompt_to_reply(p, self.reply.action);
+                reply.lifespan = self.reply.lifespan;
+                reply.constraints = self.reply.constraints.apply(reply.constraints);
+
+                Ok(reply)
+            }
+
             MatchAttempt::Failure(failures) => Err(MatchError::MatchFailures { index, failures }),
         }
     }
@@ -78,15 +102,20 @@ where
 
 #[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
 pub enum MatchError {
-    #[error("the provided prompt sequence has no prompts remaining")]
-    NoPromptsRemaining,
-    #[error("expected next prompt to have interface={expected} but got {seen}")]
-    WrongInterface { expected: String, seen: String },
     #[error("prompt {index} did not match the provided sequence: {failures:?}")]
     MatchFailures {
         index: usize,
         failures: Vec<MatchFailure>,
     },
+
+    #[error("the provided prompt sequence has no prompts remaining")]
+    NoPromptsRemaining,
+
+    #[error("unexpected error received when replying to prompt: {error}")]
+    UnexpectedError { error: String },
+
+    #[error("expected next prompt to have interface={expected} but got {seen}")]
+    WrongInterface { expected: String, seen: String },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -97,9 +126,9 @@ pub enum MatchAttempt {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct MatchFailure {
-    pub(crate) field: &'static str,
-    pub(crate) expected: String,
-    pub(crate) seen: String,
+    pub field: &'static str,
+    pub expected: String,
+    pub seen: String,
 }
 
 #[macro_export]

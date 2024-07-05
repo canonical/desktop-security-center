@@ -1,5 +1,5 @@
 use crate::{
-    prompt_sequence::PromptSequence,
+    prompt_sequence::{MatchError, PromptSequence},
     recording::PromptRecording,
     snapd_client::{
         interfaces::{home::HomeInterface, SnapInterface},
@@ -7,7 +7,7 @@ use crate::{
     },
     Error, Result,
 };
-use std::{env, process::exit};
+use std::env;
 use tracing::{debug, error, info, warn};
 
 // FIXME: having to hard code this is a problem.
@@ -22,6 +22,10 @@ trait ReplyClient {
         prev_error: Option<String>,
         rec: &mut PromptRecording,
     ) -> Result<TypedPromptReply>;
+
+    /// We need to be able to check for when a ScriptedClient has successfully reached the end of
+    /// its expected prompt sequence. Other clients should always return true.
+    fn running(&self) -> bool;
 
     async fn reply_retrying_errors(
         &mut self,
@@ -77,7 +81,7 @@ async fn run_client_loop<C: ReplyClient>(
 ) -> Result<()> {
     let mut rec = PromptRecording::new(path);
 
-    loop {
+    while client.running() {
         println!("polling for notices...");
         let pending = rec.await_pending_handling_ctrl_c(&mut c).await?;
 
@@ -102,6 +106,8 @@ async fn run_client_loop<C: ReplyClient>(
                 .await?;
         }
     }
+
+    Ok(())
 }
 
 /// Handle prompts via a spawned flutter UI
@@ -123,6 +129,10 @@ impl FlutterClient {
 }
 
 impl ReplyClient for FlutterClient {
+    fn running(&self) -> bool {
+        true
+    }
+
     async fn get_reply(
         &mut self,
         prompt: TypedPrompt,
@@ -159,16 +169,22 @@ impl ReplyClient for ScriptedClient {
     async fn get_reply(
         &mut self,
         prompt: TypedPrompt,
-        // TODO: (sminez) should having a prev_error be an error here?
-        _prev_error: Option<String>,
-        rec: &mut PromptRecording,
+        prev_error: Option<String>,
+        _: &mut PromptRecording, // No UI input to record
     ) -> Result<TypedPromptReply> {
+        if let Some(error) = prev_error {
+            return Err(Error::FailedPromptSequence {
+                error: MatchError::UnexpectedError { error },
+            });
+        }
+
         match self.seq.try_match_next(prompt) {
             Ok(reply) => Ok(reply),
-            Err(e) => {
-                println!("{e}");
-                exit(1);
-            }
+            Err(error) => Err(Error::FailedPromptSequence { error }),
         }
+    }
+
+    fn running(&self) -> bool {
+        !self.seq.is_empty()
     }
 }

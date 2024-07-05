@@ -2,7 +2,9 @@ use crate::{
     field_matches,
     prompt_sequence::{MatchAttempt, MatchFailure},
     snapd_client::{
-        interfaces::{ConstraintsFilter, Prompt, PromptReply, SnapInterface},
+        interfaces::{
+            ConstraintsFilter, Prompt, PromptReply, ReplyConstraintsOverrides, SnapInterface,
+        },
         Action, Error, Lifespan, Result,
     },
     util::serde_option_regex,
@@ -100,7 +102,9 @@ impl SnapInterface for HomeInterface {
 
     type Constraints = HomeConstraints;
     type ReplyConstraints = HomeReplyConstraints;
+
     type ConstraintsFilter = HomeConstraintsFilter;
+    type ReplyConstraintsOverrides = HomeReplyConstraintsOverrides;
 
     type UiInput = HomeUiInput;
     type UiReply = HomeUiReply;
@@ -298,6 +302,28 @@ impl ConstraintsFilter for HomeConstraintsFilter {
         } else {
             MatchAttempt::Failure(failures)
         }
+    }
+}
+
+#[derive(Debug, Default, Serialize, Deserialize, Clone)]
+#[serde(rename_all = "kebab-case")]
+pub struct HomeReplyConstraintsOverrides {
+    pub path_pattern: Option<String>,
+    pub permissions: Option<Vec<String>>,
+}
+
+impl ReplyConstraintsOverrides for HomeReplyConstraintsOverrides {
+    type ReplyConstraints = HomeReplyConstraints;
+
+    fn apply(self, mut constraints: Self::ReplyConstraints) -> Self::ReplyConstraints {
+        if let Some(path_pattern) = self.path_pattern {
+            constraints.path_pattern = path_pattern;
+        }
+        if let Some(permissions) = self.permissions {
+            constraints.permissions = permissions;
+        }
+
+        constraints
     }
 }
 
