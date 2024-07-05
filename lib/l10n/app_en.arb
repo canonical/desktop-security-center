@@ -36,5 +36,13 @@
     "homeInterfacePageTitle": "Home folder",
     "@homeInterfacePageTitle": {},
     "homeInterfacePageDescription": "Manage permissions to access files in your Home folder.",
-    "@homeInterfacePageDescription": {}
+    "@homeInterfacePageDescription": {},
+    "interfaceSnapCount": "{n} apps",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    }
 }
