@@ -14,12 +14,6 @@ class SnapRulesPage extends ConsumerWidget {
   final String snap;
   final String interface;
 
-  static Route<void> route({required String snap, required String interface}) {
-    return MaterialPageRoute<void>(
-      builder: (_) => SnapRulesPage(snap: snap, interface: interface),
-    );
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model =
@@ -64,7 +58,6 @@ class _Body extends ConsumerWidget {
         .toList();
     return ScrollablePage(
       children: [
-        const YaruBackButton(),
         Row(
           children: [
             const Icon(YaruIcons.placeholder_icon),

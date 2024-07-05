@@ -1,7 +1,16 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/app_routes.dart';
 import 'package:security_center/l10n.dart';
-import 'package:security_center/pages.dart';
+import 'package:security_center/navigator.dart';
 import 'package:yaru/yaru.dart';
+
+const kPaneWidth = 240.0;
+
+final yaruPageControllerProvider =
+    Provider((ref) => YaruPageController(length: AppRoutes.values.length));
 
 class SecurityCenterApp extends StatelessWidget {
   const SecurityCenterApp({super.key});
@@ -23,21 +32,85 @@ class SecurityCenterApp extends StatelessWidget {
   }
 }
 
-class _Home extends StatelessWidget {
+class _Home extends ConsumerWidget {
   const _Home();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: YaruWindowTitleBar(
-        title: Text(AppLocalizations.of(context).appTitle),
-      ),
+      appBar: const _TitleBar(),
       body: YaruMasterDetailPage(
-        tileBuilder: (context, index, selected, availableWidth) =>
-            pages[index].tileBuilder(context, selected),
-        pageBuilder: (context, index) => pages[index].pageBuilder(context),
-        length: pages.length,
+        tileBuilder: AppRoutes.tileBuilder,
+        pageBuilder: AppRoutes.pageBuilder,
+        controller: ref.watch(yaruPageControllerProvider),
+        layoutDelegate:
+            const YaruMasterFixedPaneDelegate(paneWidth: kPaneWidth),
+        navigatorKey: ref.watch(appNavigatorProvider),
+        navigatorObservers: [AppNavigatorObserver(ref)],
+        onGenerateRoute: AppRoutes.onGenerateRoute,
       ),
     );
   }
+}
+
+class _TitleBar extends ConsumerWidget implements PreferredSizeWidget {
+  const _TitleBar();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final navigator = ref.watch(appNavigatorProvider).currentState;
+    final routeSettings = ref.watch(routeSettingsProvider);
+    final l10n = AppLocalizations.of(context);
+    final String title;
+    if (routeSettings?.name != null) {
+      title = AppRoutes.titleOf(l10n, routeSettings!);
+    } else {
+      title = AppRoutes
+          .values[max(ref.watch(yaruPageControllerProvider).index, 0)]
+          .title(l10n);
+    }
+    return Row(
+      children: [
+        SizedBox(
+          width: kPaneWidth,
+          child: YaruWindowTitleBar(
+            style: YaruTitleBarStyle.undecorated,
+            border: BorderSide.none,
+            backgroundColor: YaruMasterDetailTheme.of(context).sideBarColor,
+            title: Text(AppLocalizations.of(context).appTitle),
+          ),
+        ),
+        const SizedBox(
+          height: kYaruTitleBarHeight,
+          child: VerticalDivider(),
+        ),
+        Expanded(
+          child: YaruWindowTitleBar(
+            border: BorderSide.none,
+            backgroundColor: Colors.transparent,
+            title: Row(
+              children: [
+                Visibility(
+                  maintainSize: true,
+                  maintainAnimation: true,
+                  maintainState: true,
+                  visible: navigator?.canPop() ?? false,
+                  child: YaruBackButton(
+                    style: YaruBackButtonStyle.rounded,
+                    onPressed: navigator?.pop,
+                  ),
+                ),
+                const Spacer(),
+                Text(title),
+                const Spacer(),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size(0, kYaruTitleBarHeight);
 }
