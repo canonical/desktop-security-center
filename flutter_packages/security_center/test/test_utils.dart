@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:security_center/services/snapd_rules_service.dart';
+import 'package:security_center/services/rules_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'test_utils.mocks.dart';
