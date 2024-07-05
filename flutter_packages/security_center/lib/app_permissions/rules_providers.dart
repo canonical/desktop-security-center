@@ -9,9 +9,17 @@ Future<List<SnapdRule>> rules(RulesRef ref) =>
     getService<AppPermissionsService>().getRules();
 
 @riverpod
-Future<List<String>> interfaces(InterfacesRef ref) async {
+Future<Map<String, int>> interfaceSnapCounts(InterfaceSnapCountsRef ref) async {
   final rules = await ref.watch(rulesProvider.future);
-  return rules.map((rule) => rule.interface).toSet().toList();
+  final interfaceSnaps = rules.fold<Map<String, Set<String>>>(
+    {},
+    (snaps, rule) {
+      snaps[rule.interface] = (snaps[rule.interface] ?? {})..add(rule.snap);
+      return snaps;
+    },
+  );
+  return interfaceSnaps
+      .map((interface, snaps) => MapEntry(interface, snaps.length));
 }
 
 @riverpod

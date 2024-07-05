@@ -13,9 +13,10 @@ class InterfacesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(interfacesProvider);
+    final model = ref.watch(interfaceSnapCountsProvider);
     return model.when(
-      data: (interfaces) => _Body(interfaces: interfaces),
+      data: (interfaceSnapCounts) =>
+          _Body(interfaceSnapCounts: interfaceSnapCounts),
       error: (error, _) => ErrorWidget(error),
       loading: () => const Center(child: YaruCircularProgressIndicator()),
     );
@@ -23,22 +24,24 @@ class InterfacesPage extends ConsumerWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({required this.interfaces});
+  const _Body({required this.interfaceSnapCounts});
 
-  final List<String> interfaces;
+  final Map<String, int> interfaceSnapCounts;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final tiles = interfaces
+    final tiles = interfaceSnapCounts.entries
         .map(
-          (interface) => ListTile(
+          (interfaceSnapCount) => ListTile(
             contentPadding: const EdgeInsets.all(16),
-            leading: Icon(interface.snapdInterfaceIcon, size: 48),
-            title: Text(interface.localizeSnapdInterfaceTitle(l10n)),
+            leading: Icon(interfaceSnapCount.key.snapdInterfaceIcon, size: 48),
+            title:
+                Text(interfaceSnapCount.key.localizeSnapdInterfaceTitle(l10n)),
+            subtitle: Text(l10n.interfaceSnapCount(interfaceSnapCount.value)),
             trailing: const Icon(YaruIcons.pan_end),
-            onTap: () =>
-                Navigator.of(context).pushSnapPermissions(interface: interface),
+            onTap: () => Navigator.of(context)
+                .pushSnapPermissions(interface: interfaceSnapCount.key),
           ),
         )
         .toList();
