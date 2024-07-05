@@ -66,17 +66,6 @@ where
     reply: PromptReplyTemplate<I>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "kebab-case")]
-pub struct PromptReplyTemplate<I>
-where
-    I: SnapInterface,
-{
-    action: Action,
-    lifespan: Lifespan,
-    constraints: I::ReplyConstraintsOverrides,
-}
-
 impl<I> PromptCase<I>
 where
     I: SnapInterface,
@@ -90,7 +79,10 @@ where
             MatchAttempt::Success => {
                 let mut reply = I::prompt_to_reply(p, self.reply.action);
                 reply.lifespan = self.reply.lifespan;
-                reply.constraints = self.reply.constraints.apply(reply.constraints);
+                reply.duration = self.reply.duration;
+                if let Some(constraints) = self.reply.constraints {
+                    reply.constraints = constraints.apply(reply.constraints);
+                }
 
                 Ok(reply)
             }
@@ -194,6 +186,18 @@ where
             },
         }
     }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub struct PromptReplyTemplate<I>
+where
+    I: SnapInterface,
+{
+    action: Action,
+    lifespan: Lifespan,
+    duration: Option<String>,
+    constraints: Option<I::ReplyConstraintsOverrides>,
 }
 
 #[cfg(test)]
