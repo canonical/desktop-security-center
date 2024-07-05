@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/l10n.dart';
+import 'package:security_center/navigator.dart';
 import 'package:security_center/rules/interface_x.dart';
 import 'package:security_center/rules/rules_providers.dart';
-import 'package:security_center/rules/snaps_page.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
@@ -37,9 +37,8 @@ class _Body extends StatelessWidget {
             leading: Icon(interface.snapdInterfaceIcon, size: 48),
             title: Text(interface.localizeSnapdInterfaceTitle(l10n)),
             trailing: const Icon(YaruIcons.pan_end),
-            onTap: () => Navigator.of(context).push(
-              SnapsPage.route(interface: interface),
-            ),
+            onTap: () =>
+                Navigator.of(context).pushSnapPermissions(interface: interface),
           ),
         )
         .toList();

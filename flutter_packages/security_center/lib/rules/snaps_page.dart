@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/l10n.dart';
+import 'package:security_center/navigator.dart';
 import 'package:security_center/rules/interface_x.dart';
 import 'package:security_center/rules/rules_providers.dart';
-import 'package:security_center/rules/snap_rules_page.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
@@ -12,12 +12,6 @@ class SnapsPage extends ConsumerWidget {
   const SnapsPage({required this.interface, super.key});
 
   final String interface;
-
-  static Route<void> route({required String interface}) {
-    return MaterialPageRoute<void>(
-      builder: (_) => SnapsPage(interface: interface),
-    );
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -48,18 +42,15 @@ class _Body extends StatelessWidget {
             title: Text(e.key),
             subtitle: Text(l10n.snapRulesCount(e.value)),
             trailing: const Icon(YaruIcons.pan_end),
-            onTap: () => Navigator.of(context).push(
-              SnapRulesPage.route(
-                snap: e.key,
-                interface: interface,
-              ),
+            onTap: () => Navigator.of(context).pushSnapPermissions(
+              interface: interface,
+              snap: e.key,
             ),
           ),
         )
         .toList();
     return ScrollablePage(
       children: [
-        const YaruBackButton(),
         Text(
           interface.localizeSnapdInterfaceTitle(l10n),
           style: Theme.of(context).textTheme.titleLarge,
