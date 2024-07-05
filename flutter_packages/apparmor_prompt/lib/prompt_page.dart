@@ -223,12 +223,31 @@ class PathChoiceRadio extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(promptDataModelProvider);
     final notifier = ref.read(promptDataModelProvider.notifier);
-    final title = index < notifier.numMoreOptions
+    final color = Theme.of(context).hintColor;
+    final (description, pathPattern) = index < notifier.numMoreOptions
         ? notifier.moreOptionPath(index)
-        : 'Custom path pattern';
+        : ('Custom path pattern', null);
 
     return YaruRadioButton<int>(
-      title: Text(title),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 2),
+          Text(description),
+          if (pathPattern != null) ...[
+            Text.rich(
+              TextSpan(
+                text: pathPattern,
+                style: TextStyle(
+                  color: color,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ],
+          const SizedBox(height: 2),
+        ],
+      ),
       value: index,
       groupValue: model.selectedPath,
       onChanged: notifier.setSelectedPath,
