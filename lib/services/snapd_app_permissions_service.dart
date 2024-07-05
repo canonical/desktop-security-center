@@ -1,8 +1,8 @@
-import 'package:security_center/services/rules_service.dart';
+import 'package:security_center/services/app_permissions_service.dart';
 import 'package:snapd/snapd.dart';
 
-class SnapdRulesService implements RulesService {
-  SnapdRulesService(this._client);
+class SnapdAppPermissionsService implements AppPermissionsService {
+  SnapdAppPermissionsService(this._client);
   final SnapdClient _client;
 
   @override

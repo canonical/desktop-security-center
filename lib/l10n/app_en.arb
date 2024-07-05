@@ -10,7 +10,7 @@
     "@snapPermissionsExperimentalLabel": {},
     "snapPermissionsOtherDescription": "You can manage other permissions in Settings › Applications.",
     "@snapPermissionsOtherDescription": {},
-    "snapPermissionsPageTitle": "Snap Permissions",
+    "snapPermissionsPageTitle": "App Permissions",
     "@snapPermissionsPageTitle": {},
     "snapRulesCount": "{n} rules",
     "@snapRulesCount": {

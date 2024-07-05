@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:security_center/app_permissions/app_rules_page.dart';
+import 'package:security_center/app_permissions/interface_x.dart';
+import 'package:security_center/app_permissions/interfaces_page.dart';
+import 'package:security_center/app_permissions/snaps_page.dart';
 import 'package:security_center/l10n.dart';
-import 'package:security_center/rules/interface_x.dart';
-import 'package:security_center/rules/interfaces_page.dart';
-import 'package:security_center/rules/snap_rules_page.dart';
-import 'package:security_center/rules/snaps_page.dart';
 import 'package:yaru/yaru.dart';
 
-enum AppRoutes {
-  snapPermissions(
-    route: '/snap_permissions',
-    builder: _snapPermissionsBuilder,
-    title: _snapPermissionsTitle,
-    icon: _snapPermissionsIcon,
+enum Routes {
+  appPermissions(
+    route: '/app_permissions',
+    builder: _appPermissionsBuilder,
+    title: _appPermissionsTitle,
+    icon: _appPermissionsIcon,
   );
 
-  const AppRoutes({
+  const Routes({
     required this.route,
     required this.builder,
     required this.title,
     this.icon,
   });
 
-  factory AppRoutes.fromRoute(String route) => AppRoutes.values.firstWhere(
+  factory Routes.fromRoute(String route) => Routes.values.firstWhere(
         (e) => e.route == route,
         orElse: () => throw ArgumentError('Unknown route: $route'),
       );
@@ -37,17 +37,17 @@ enum AppRoutes {
   ]) title;
   final IconData Function(bool selected)? icon;
 
-  static Widget _snapPermissionsBuilder(
+  static Widget _appPermissionsBuilder(
     BuildContext context, [
     Map<String, String> queryParameters = const {},
   ]) =>
       switch (queryParameters) {
         {'snap': final snap, 'interface': final interface} =>
-          SnapRulesPage(snap: snap, interface: interface),
+          AppRulesPage(snap: snap, interface: interface),
         {'interface': final interface} => SnapsPage(interface: interface),
         _ => const InterfacesPage(),
       };
-  static String _snapPermissionsTitle(
+  static String _appPermissionsTitle(
     AppLocalizations l10n, [
     Map<String, String> queryParameters = const {},
   ]) =>
@@ -57,7 +57,7 @@ enum AppRoutes {
           interface.localizeSnapdInterfaceTitle(l10n),
         _ => l10n.snapPermissionsPageTitle,
       };
-  static IconData _snapPermissionsIcon(bool selected) =>
+  static IconData _appPermissionsIcon(bool selected) =>
       selected ? YaruIcons.key_filled : YaruIcons.key;
 
   static (
@@ -71,7 +71,7 @@ enum AppRoutes {
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final (route, queryParameters) = _parseName(settings.name!);
     return MaterialPageRoute(
-      builder: (context) => AppRoutes.fromRoute(route).builder(
+      builder: (context) => Routes.fromRoute(route).builder(
         context,
         queryParameters,
       ),
@@ -81,7 +81,7 @@ enum AppRoutes {
 
   static String titleOf(AppLocalizations l10n, RouteSettings settings) {
     final (route, queryParameters) = _parseName(settings.name!);
-    return AppRoutes.fromRoute(route).title(
+    return Routes.fromRoute(route).title(
       l10n,
       queryParameters,
     );

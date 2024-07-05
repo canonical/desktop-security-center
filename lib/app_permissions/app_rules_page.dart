@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/app_permissions/interface_x.dart';
+import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/l10n.dart';
-import 'package:security_center/rules/interface_x.dart';
-import 'package:security_center/rules/rules_providers.dart';
-import 'package:security_center/services/rules_service.dart';
+import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
-class SnapRulesPage extends ConsumerWidget {
-  const SnapRulesPage({required this.snap, required this.interface, super.key});
+class AppRulesPage extends ConsumerWidget {
+  const AppRulesPage({required this.snap, required this.interface, super.key});
 
   final String snap;
   final String interface;
