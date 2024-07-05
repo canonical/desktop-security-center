@@ -1,12 +1,12 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:security_center/services/rules_service.dart';
+import 'package:security_center/services/app_permissions_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 part 'rules_providers.g.dart';
 
 @riverpod
 Future<List<SnapdRule>> rules(RulesRef ref) =>
-    getService<RulesService>().getRules();
+    getService<AppPermissionsService>().getRules();
 
 @riverpod
 Future<List<String>> interfaces(InterfacesRef ref) async {
@@ -45,13 +45,13 @@ class SnapRulesModel extends _$SnapRulesModel {
   }
 
   Future<void> removeRule(String id) async {
-    final service = getService<RulesService>();
+    final service = getService<AppPermissionsService>();
     await service.removeRule(id);
     ref.invalidate(rulesProvider);
   }
 
   Future<void> removeAll() async {
-    final service = getService<RulesService>();
+    final service = getService<AppPermissionsService>();
     await service.removeAllRules(
       snap: snap,
       interface: interface,

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:security_center/services/rules_service.dart';
+import 'package:security_center/services/app_permissions_service.dart';
 
 extension on SnapdRuleMask {
   SnapdRule toSnapdRule() => SnapdRule(
@@ -15,15 +15,15 @@ extension on SnapdRuleMask {
       );
 }
 
-class FakeRulesService implements RulesService {
-  FakeRulesService({required this.rules});
+class FakeAppPermissionsService implements AppPermissionsService {
+  FakeAppPermissionsService({required this.rules});
 
-  factory FakeRulesService.fromFile(String path) {
+  factory FakeAppPermissionsService.fromFile(String path) {
     final rules = (jsonDecode(File(path).readAsStringSync()) as List)
         .map((e) => SnapdRuleMask.fromJson(e as Map<String, dynamic>))
         .map((mask) => mask.toSnapdRule())
         .toList();
-    return FakeRulesService(rules: rules);
+    return FakeAppPermissionsService(rules: rules);
   }
 
   final List<SnapdRule> rules;

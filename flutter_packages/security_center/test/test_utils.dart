@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:security_center/l10n.dart';
-import 'package:security_center/services/rules_service.dart';
+import 'package:security_center/services/app_permissions_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'test_utils.mocks.dart';
@@ -45,12 +45,14 @@ ProviderContainer createContainer({
   return container;
 }
 
-@GenerateMocks([RulesService])
-RulesService registerMockRulesService({List<SnapdRule> rules = const []}) {
-  final service = MockRulesService();
+@GenerateMocks([AppPermissionsService])
+AppPermissionsService registerMockRulesService({
+  List<SnapdRule> rules = const [],
+}) {
+  final service = MockAppPermissionsService();
   when(service.getRules()).thenAnswer((_) async => rules);
 
-  registerMockService<RulesService>(service);
-  addTearDown(unregisterService<RulesService>);
+  registerMockService<AppPermissionsService>(service);
+  addTearDown(unregisterService<AppPermissionsService>);
   return service;
 }

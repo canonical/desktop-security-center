@@ -2,15 +2,15 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:security_center/app_routes.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/navigator.dart';
+import 'package:security_center/routes.dart';
 import 'package:yaru/yaru.dart';
 
 const kPaneWidth = 240.0;
 
 final yaruPageControllerProvider =
-    Provider((ref) => YaruPageController(length: AppRoutes.values.length));
+    Provider((ref) => YaruPageController(length: Routes.values.length));
 
 class SecurityCenterApp extends StatelessWidget {
   const SecurityCenterApp({super.key});
@@ -40,14 +40,14 @@ class _Home extends ConsumerWidget {
     return Scaffold(
       appBar: const _TitleBar(),
       body: YaruMasterDetailPage(
-        tileBuilder: AppRoutes.tileBuilder,
-        pageBuilder: AppRoutes.pageBuilder,
+        tileBuilder: Routes.tileBuilder,
+        pageBuilder: Routes.pageBuilder,
         controller: ref.watch(yaruPageControllerProvider),
         layoutDelegate:
             const YaruMasterFixedPaneDelegate(paneWidth: kPaneWidth),
         navigatorKey: ref.watch(appNavigatorProvider),
         navigatorObservers: [AppNavigatorObserver(ref)],
-        onGenerateRoute: AppRoutes.onGenerateRoute,
+        onGenerateRoute: Routes.onGenerateRoute,
       ),
     );
   }
@@ -63,10 +63,9 @@ class _TitleBar extends ConsumerWidget implements PreferredSizeWidget {
     final l10n = AppLocalizations.of(context);
     final String title;
     if (routeSettings?.name != null) {
-      title = AppRoutes.titleOf(l10n, routeSettings!);
+      title = Routes.titleOf(l10n, routeSettings!);
     } else {
-      title = AppRoutes
-          .values[max(ref.watch(yaruPageControllerProvider).index, 0)]
+      title = Routes.values[max(ref.watch(yaruPageControllerProvider).index, 0)]
           .title(l10n);
     }
     return Row(
