@@ -355,7 +355,7 @@ async fn scripted_client_works_with_simple_matching() -> Result<()> {
     let (prefix, dir_path) = setup_test_dir(None, &[("seq.json", seq)])?;
 
     let _rx = spawn_for_output("aa-prompting-test.create", vec![prefix]);
-    let res = run_scripted_client_loop(c, &format!("{dir_path}/seq.json")).await;
+    let res = run_scripted_client_loop(c, format!("{dir_path}/seq.json")).await;
     tokio::time::sleep(std::time::Duration::from_millis(50)).await;
 
     if let Err(e) = res {
@@ -384,7 +384,7 @@ async fn invalid_prompt_sequence_reply_errors() -> Result<()> {
     let (prefix, dir_path) = setup_test_dir(None, &[("seq.json", seq)])?;
 
     spawn_for_output("aa-prompting-test.create", vec![prefix]);
-    let res = run_scripted_client_loop(c, &format!("{dir_path}/seq.json")).await;
+    let res = run_scripted_client_loop(c, format!("{dir_path}/seq.json")).await;
 
     match res {
         Err(Error::FailedPromptSequence {
@@ -410,7 +410,7 @@ async fn unexpected_prompt_in_sequence_errors() -> Result<()> {
     let (prefix, dir_path) = setup_test_dir(None, &[("seq.json", seq)])?;
 
     spawn_for_output("aa-prompting-test.create", vec![prefix]);
-    let res = run_scripted_client_loop(c, &format!("{dir_path}/seq.json")).await;
+    let res = run_scripted_client_loop(c, format!("{dir_path}/seq.json")).await;
 
     match res {
         Err(Error::FailedPromptSequence {

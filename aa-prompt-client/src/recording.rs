@@ -141,7 +141,7 @@ impl PromptRecording {
     pub async fn allow_write(&self, p: Prompt<HomeInterface>, c: &SnapdSocketClient) -> Result<()> {
         let id = p.id.clone();
         let reply = HomeInterface::prompt_to_reply(p, Action::Allow)
-            .for_forever()
+            .for_timespan("10s") // Using a timespan so our rule auto-removes
             .try_with_custom_permissions(vec!["read".to_string(), "write".to_string()])?
             .into();
 

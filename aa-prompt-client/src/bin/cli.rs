@@ -65,6 +65,6 @@ async fn main() -> Result<()> {
     match command {
         Command::Echo { record } => run_echo_loop(c, record).await,
         Command::Flutter { record } => run_flutter_client_loop(c, record).await,
-        Command::Scripted { script } => run_scripted_client_loop(c, &script).await,
+        Command::Scripted { script } => run_scripted_client_loop(c, script).await,
     }
 }

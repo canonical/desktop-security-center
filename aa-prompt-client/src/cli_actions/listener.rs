@@ -3,7 +3,7 @@ use crate::{
     recording::PromptRecording,
     snapd_client::{
         interfaces::{home::HomeInterface, SnapInterface},
-        PromptId, SnapdSocketClient, TypedPrompt, TypedPromptReply,
+        Action, PromptId, SnapdSocketClient, TypedPrompt, TypedPromptReply,
     },
     Error, Result,
 };
@@ -149,19 +149,20 @@ impl ReplyClient for FlutterClient {
 }
 
 /// Handle prompts using scripted client interactions
-pub async fn run_scripted_client_loop(c: SnapdSocketClient, path: &str) -> Result<()> {
+pub async fn run_scripted_client_loop(c: SnapdSocketClient, path: String) -> Result<()> {
     run_client_loop(c, ScriptedClient::try_new(path)?, None).await
 }
 
 struct ScriptedClient {
     seq: PromptSequence,
+    path: String,
 }
 
 impl ScriptedClient {
-    fn try_new(path: &str) -> Result<Self> {
-        let seq = PromptSequence::try_new_from_file(path)?;
+    fn try_new(path: String) -> Result<Self> {
+        let seq = PromptSequence::try_new_from_file(&path)?;
 
-        Ok(Self { seq })
+        Ok(Self { seq, path })
     }
 }
 
@@ -178,9 +179,18 @@ impl ReplyClient for ScriptedClient {
             });
         }
 
-        match self.seq.try_match_next(prompt) {
-            Ok(reply) => Ok(reply),
-            Err(error) => Err(Error::FailedPromptSequence { error }),
+        match prompt {
+            TypedPrompt::Home(inner) if inner.constraints.path == self.path => {
+                Ok(TypedPromptReply::Home(
+                    // Using a timespan so our rule auto-removes
+                    HomeInterface::prompt_to_reply(inner, Action::Allow).for_timespan("10s"),
+                ))
+            }
+
+            _ => match self.seq.try_match_next(prompt) {
+                Ok(reply) => Ok(reply),
+                Err(error) => Err(Error::FailedPromptSequence { error }),
+            },
         }
     }
 
