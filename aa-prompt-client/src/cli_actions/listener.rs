@@ -1,13 +1,16 @@
 use crate::{
-    prompt_sequence::{MatchError, PromptSequence},
+    prompt_sequence::{MatchError, PromptFilter, PromptSequence},
     recording::PromptRecording,
     snapd_client::{
-        interfaces::{home::HomeInterface, SnapInterface},
+        interfaces::{
+            home::{HomeConstraintsFilter, HomeInterface},
+            SnapInterface,
+        },
         Action, PromptId, SnapdSocketClient, TypedPrompt, TypedPromptReply,
     },
-    Error, Result,
+    Error, Result, SNAP_NAME,
 };
-use std::env;
+use std::{env, time::Duration};
 use tracing::{debug, error, info, warn};
 
 // FIXME: having to hard code this is a problem.
@@ -150,7 +153,43 @@ impl ReplyClient for FlutterClient {
 
 /// Handle prompts using scripted client interactions
 pub async fn run_scripted_client_loop(c: SnapdSocketClient, path: String) -> Result<()> {
-    run_client_loop(c, ScriptedClient::try_new(path)?, None).await
+    // We need to spawn a task to wait for the read prompt we generate when reading in our script
+    // file. We can't handle this in the main poll loop as we need to construct the client up
+    // front.
+    let mut ack_client = c.clone();
+    let mut filter = PromptFilter::default();
+    let mut constraints = HomeConstraintsFilter::default();
+    constraints
+        .try_with_path(format!(".*/{path}"))
+        .expect("valid regex");
+    filter
+        .with_snap(SNAP_NAME)
+        .with_interface("home")
+        .with_constraints(constraints);
+
+    tokio::task::spawn(async move {
+        loop {
+            let pending = ack_client.pending_prompts().await.unwrap();
+            for id in pending {
+                match ack_client.prompt_details(&id).await {
+                    Ok(TypedPrompt::Home(inner)) if filter.matches(&inner).is_success() => {
+                        debug!("allowing read of script file");
+                        let reply = HomeInterface::prompt_to_reply(inner, Action::Allow)
+                            .for_timespan("10s") // Using a timespan so our rule auto-removes
+                            .into();
+                        ack_client.reply_to_prompt(&id, reply).await.unwrap();
+                        return;
+                    }
+
+                    _ => (),
+                };
+            }
+        }
+    });
+    let scripted_client = ScriptedClient::try_new(path)?;
+    tokio::time::sleep(Duration::from_millis(100)).await;
+
+    run_client_loop(c, scripted_client, None).await
 }
 
 struct ScriptedClient {

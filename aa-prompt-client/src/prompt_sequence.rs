@@ -116,6 +116,12 @@ pub enum MatchAttempt {
     Failure(Vec<MatchFailure>),
 }
 
+impl MatchAttempt {
+    pub fn is_success(&self) -> bool {
+        matches!(self, Self::Success)
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct MatchFailure {
     pub field: &'static str,

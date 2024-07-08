@@ -98,7 +98,7 @@ impl Client for UnixSocketClient {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct SnapdClient<C>
 where
     C: Client,

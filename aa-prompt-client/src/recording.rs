@@ -1,5 +1,5 @@
 use crate::{
-    prompt_sequence::{MatchAttempt, PromptFilter},
+    prompt_sequence::PromptFilter,
     snapd_client::{
         interfaces::{
             home::{HomeConstraintsFilter, HomeInterface},
@@ -133,7 +133,7 @@ impl PromptRecording {
 
     pub fn is_prompt_for_writing_output(&self, p: &Prompt<HomeInterface>) -> bool {
         match self.filter.as_ref() {
-            Some(f) => f.matches(p) == MatchAttempt::Success,
+            Some(f) => f.matches(p).is_success(),
             None => false,
         }
     }
