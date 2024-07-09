@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:security_center/app_permissions/interface_x.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/navigator.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
@@ -26,7 +26,7 @@ class InterfacesPage extends ConsumerWidget {
 class _Body extends StatelessWidget {
   const _Body({required this.interfaceSnapCounts});
 
-  final Map<String, int> interfaceSnapCounts;
+  final Map<SnapdInterface, int> interfaceSnapCounts;
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +35,8 @@ class _Body extends StatelessWidget {
         .map(
           (interfaceSnapCount) => ListTile(
             contentPadding: const EdgeInsets.all(16),
-            leading: Icon(interfaceSnapCount.key.snapdInterfaceIcon, size: 48),
-            title:
-                Text(interfaceSnapCount.key.localizeSnapdInterfaceTitle(l10n)),
+            leading: Icon(interfaceSnapCount.key.icon, size: 48),
+            title: Text(interfaceSnapCount.key.localizedTitle(l10n)),
             subtitle: Text(l10n.interfaceSnapCount(interfaceSnapCount.value)),
             trailing: const Icon(YaruIcons.pan_end),
             onTap: () => Navigator.of(context)

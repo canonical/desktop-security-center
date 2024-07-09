@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:security_center/app_permissions/interface_x.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/navigator.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
@@ -11,7 +11,7 @@ import 'package:yaru/yaru.dart';
 class SnapsPage extends ConsumerWidget {
   const SnapsPage({required this.interface, super.key});
 
-  final String interface;
+  final SnapdInterface interface;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,7 +30,7 @@ class _Body extends StatelessWidget {
   const _Body({required this.snapRuleCounts, required this.interface});
 
   final Map<String, int> snapRuleCounts;
-  final String interface;
+  final SnapdInterface interface;
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +52,10 @@ class _Body extends StatelessWidget {
     return ScrollablePage(
       children: [
         Text(
-          interface.localizeSnapdInterfaceTitle(l10n),
+          interface.localizedTitle(l10n),
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        Text(interface.localizeSnapdInterfaceDescription(l10n)),
+        Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
         TileList(children: tiles),
       ],

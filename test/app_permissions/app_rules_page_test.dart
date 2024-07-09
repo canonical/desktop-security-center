@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:security_center/app_permissions/app_rules_page.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 
 import '../test_utils.dart';
@@ -30,7 +31,7 @@ void main() {
         container: container,
         child: const AppRulesPage(
           snap: 'firefox',
-          interface: 'home',
+          interface: SnapdInterface.home,
         ),
       ),
     );

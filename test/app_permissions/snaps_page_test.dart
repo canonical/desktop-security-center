@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/app_permissions/snaps_page.dart';
 import 'package:snapd/snapd.dart';
 
@@ -43,7 +44,7 @@ void main() {
     await tester.pumpApp(
       (_) => UncontrolledProviderScope(
         container: container,
-        child: const SnapsPage(interface: 'home'),
+        child: const SnapsPage(interface: SnapdInterface.home),
       ),
     );
     await tester.pump();
