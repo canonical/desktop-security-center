@@ -36,6 +36,8 @@ void main() {
             pathPattern: '/home/ubuntu/Downloads/**',
           ),
         ],
+        publisher: 'Mozilla',
+        updatedAt: '2024-01-01',
       ),
     );
     addTearDown(unregisterService<PromptDetails>);
