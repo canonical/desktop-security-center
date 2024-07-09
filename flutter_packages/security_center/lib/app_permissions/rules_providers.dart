@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
@@ -9,7 +10,9 @@ Future<List<SnapdRule>> rules(RulesRef ref) =>
     getService<AppPermissionsService>().getRules();
 
 @riverpod
-Future<Map<String, int>> interfaceSnapCounts(InterfaceSnapCountsRef ref) async {
+Future<Map<SnapdInterface, int>> interfaceSnapCounts(
+  InterfaceSnapCountsRef ref,
+) async {
   final rules = await ref.watch(rulesProvider.future);
   final interfaceSnaps = rules.fold<Map<String, Set<String>>>(
     {},
@@ -18,20 +21,22 @@ Future<Map<String, int>> interfaceSnapCounts(InterfaceSnapCountsRef ref) async {
       return snaps;
     },
   );
-  return interfaceSnaps
-      .map((interface, snaps) => MapEntry(interface, snaps.length));
+  return interfaceSnaps.map(
+    (interface, snaps) =>
+        MapEntry(SnapdInterface.fromString(interface), snaps.length),
+  );
 }
 
 @riverpod
 Future<Map<String, int>> snapRuleCounts(
   SnapRuleCountsRef ref, {
-  required String interface,
+  required SnapdInterface interface,
 }) async {
   final rules = await ref.watch(rulesProvider.future);
   return rules.fold<Map<String, int>>(
     {},
     (counts, rule) {
-      if (rule.interface == interface) {
+      if (rule.interface == interface.name) {
         counts[rule.snap] = (counts[rule.snap] ?? 0) + 1;
       }
       return counts;
@@ -44,11 +49,11 @@ class SnapRulesModel extends _$SnapRulesModel {
   @override
   Future<List<SnapdRule>> build({
     required String snap,
-    required String interface,
+    required SnapdInterface interface,
   }) async {
     final rules = await ref.watch(rulesProvider.future);
     return rules
-        .where((rule) => rule.snap == snap && rule.interface == interface)
+        .where((rule) => rule.snap == snap && rule.interface == interface.name)
         .toList();
   }
 
@@ -62,7 +67,7 @@ class SnapRulesModel extends _$SnapRulesModel {
     final service = getService<AppPermissionsService>();
     await service.removeAllRules(
       snap: snap,
-      interface: interface,
+      interface: interface.name,
     );
     ref.invalidate(rulesProvider);
   }

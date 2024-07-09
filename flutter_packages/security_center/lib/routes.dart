@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:security_center/app_permissions/app_rules_page.dart';
-import 'package:security_center/app_permissions/interface_x.dart';
 import 'package:security_center/app_permissions/interfaces_page.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/app_permissions/snaps_page.dart';
 import 'package:security_center/l10n.dart';
 import 'package:yaru/yaru.dart';
@@ -42,9 +42,12 @@ enum Routes {
     Map<String, String> queryParameters = const {},
   ]) =>
       switch (queryParameters) {
-        {'snap': final snap, 'interface': final interface} =>
-          AppRulesPage(snap: snap, interface: interface),
-        {'interface': final interface} => SnapsPage(interface: interface),
+        {'snap': final snap, 'interface': final interface} => AppRulesPage(
+            snap: snap,
+            interface: SnapdInterface.fromString(interface),
+          ),
+        {'interface': final interface} =>
+          SnapsPage(interface: SnapdInterface.fromString(interface)),
         _ => const InterfacesPage(),
       };
   static String _appPermissionsTitle(
@@ -54,7 +57,7 @@ enum Routes {
       switch (queryParameters) {
         {'snap': final snap} => snap,
         {'interface': final interface} =>
-          interface.localizeSnapdInterfaceTitle(l10n),
+          SnapdInterface.fromString(interface).localizedTitle(l10n),
         _ => l10n.snapPermissionsPageTitle,
       };
   static IconData _appPermissionsIcon(bool selected) =>

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:security_center/app_permissions/interface_x.dart';
 import 'package:security_center/app_permissions/interfaces_page.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 
 import '../test_utils.dart';
@@ -32,7 +32,7 @@ void main() {
     await tester.pump();
 
     final homeInterfaceTile = find.ancestor(
-      of: find.text('home'.localizeSnapdInterfaceTitle(tester.l10n)),
+      of: find.text(SnapdInterface.home.localizedTitle(tester.l10n)),
       matching: find.byType(ListTile),
     );
     expect(homeInterfaceTile, findsOneWidget);

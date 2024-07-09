@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:security_center/app_permissions/interface_x.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
@@ -12,7 +12,7 @@ class AppRulesPage extends ConsumerWidget {
   const AppRulesPage({required this.snap, required this.interface, super.key});
 
   final String snap;
-  final String interface;
+  final SnapdInterface interface;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,7 +38,7 @@ class _Body extends ConsumerWidget {
   });
 
   final String snap;
-  final String interface;
+  final SnapdInterface interface;
   final List<SnapdRule> rules;
 
   @override
@@ -65,7 +65,7 @@ class _Body extends ConsumerWidget {
             Text(snap, style: Theme.of(context).textTheme.titleLarge),
           ],
         ),
-        Text(interface.localizeSnapdInterfaceDescription(l10n)),
+        Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
         TileList(children: tiles),
         const SizedBox(height: 16),

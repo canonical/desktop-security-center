@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/routes.dart';
 
 final appNavigatorProvider = Provider((_) => GlobalKey<NavigatorState>());
@@ -40,13 +41,13 @@ class AppNavigatorObserver extends NavigatorObserver {
 
 extension AppNavigatorState on NavigatorState {
   Future<void> pushSnapPermissions({
-    String? interface,
+    SnapdInterface? interface,
     String? snap,
   }) {
     final route = Uri(
       path: Routes.appPermissions.route,
       queryParameters: {
-        if (interface != null) 'interface': interface,
+        if (interface != null) 'interface': interface.name,
         if (snap != null) 'snap': snap,
       },
     ).toString();

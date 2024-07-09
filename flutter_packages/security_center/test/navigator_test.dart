@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/navigator.dart';
 import 'package:security_center/routes.dart';
 
@@ -14,14 +15,14 @@ void main() {
       (
         name: 'interface and snap',
         snap: 'firefox',
-        interface: 'home',
+        interface: SnapdInterface.home,
         expectedRoute: Routes.appPermissions.route,
         expectedParamters: {'interface': 'home', 'snap': 'firefox'},
       ),
       (
         name: 'only interface',
         snap: null,
-        interface: 'home',
+        interface: SnapdInterface.home,
         expectedRoute: Routes.appPermissions.route,
         expectedParamters: {'interface': 'home'},
       ),
