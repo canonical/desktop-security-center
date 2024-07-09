@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:yaru/yaru.dart';
 
 class TileList extends StatelessWidget {
@@ -12,16 +13,12 @@ class TileList extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          for (int index = 0; index < children.length; index++) ...[
-            children[index],
-            if (index < children.length - 1)
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 1),
-                child: Divider(),
-              ),
-          ],
-        ],
+        children: children.separatedBy(
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 1),
+            child: Divider(),
+          ),
+        ),
       ),
     );
   }
