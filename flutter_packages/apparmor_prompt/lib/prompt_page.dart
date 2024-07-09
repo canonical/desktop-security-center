@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:apparmor_prompt/prompt_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaru/yaru.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:yaru/yaru.dart';
 
 const title = 'Security Notification';
 
