@@ -5,7 +5,7 @@ use crate::{
         interfaces::{
             ConstraintsFilter, Prompt, PromptReply, ReplyConstraintsOverrides, SnapInterface,
         },
-        Action, Error, Lifespan, Result,
+        Action, Error, Lifespan, Result, SnapMeta,
     },
     util::serde_option_regex,
 };
@@ -125,9 +125,15 @@ impl SnapInterface for HomeInterface {
     fn map_ui_input(
         &self,
         prompt: Prompt<Self>,
+        meta: Option<SnapMeta>,
         previous_error_message: Option<String>,
     ) -> Self::UiInput {
         let (initial_options, more_options) = self.ui_options(&prompt);
+
+        let (store_url, publisher, updated_at, icon_file) = match meta {
+            Some(m) => (Some(m.store_url), m.publisher, m.updated_at, m.icon_file),
+            None => (None, "unknown".to_string(), "unknown".to_string(), None),
+        };
 
         HomeUiInput {
             snap_name: prompt.snap.clone(),
@@ -137,6 +143,10 @@ impl SnapInterface for HomeInterface {
             previous_error_message,
             initial_options,
             more_options,
+            store_url,
+            publisher,
+            updated_at,
+            icon_file,
         }
     }
 
@@ -172,6 +182,10 @@ pub struct HomeUiInput {
     previous_error_message: Option<String>,
     initial_options: Vec<InitialOption>,
     more_options: Vec<PathAndDescription>,
+    store_url: Option<String>,
+    publisher: String,
+    updated_at: String,
+    icon_file: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

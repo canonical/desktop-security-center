@@ -6,7 +6,7 @@ use crate::{
             home::{HomeConstraintsFilter, HomeInterface},
             SnapInterface,
         },
-        Action, PromptId, SnapdSocketClient, TypedPrompt, TypedPromptReply,
+        Action, PromptId, SnapMeta, SnapdSocketClient, TypedPrompt, TypedPromptReply,
     },
     Error, Result, SNAP_NAME,
 };
@@ -23,6 +23,7 @@ trait ReplyClient {
     async fn get_reply(
         &mut self,
         p: TypedPrompt,
+        meta: Option<SnapMeta>,
         prev_error: Option<String>,
         rec: &mut PromptRecording,
     ) -> Result<TypedPromptReply>;
@@ -39,7 +40,10 @@ trait ReplyClient {
         rec: &mut PromptRecording,
     ) -> Result<()> {
         rec.push_prompt(&prompt);
-        let mut reply = self.get_reply(prompt.clone(), None, rec).await?;
+        let meta = snapd_client.snap_metadata(prompt.snap()).await?;
+        let mut reply = self
+            .get_reply(prompt.clone(), meta.clone(), None, rec)
+            .await?;
 
         debug!(?id, ?reply, "replying to prompt");
         rec.push_reply(&reply);
@@ -68,7 +72,7 @@ trait ReplyClient {
 
             debug!(%prev_error, "error returned from snapd, retrying");
             reply = self
-                .get_reply(prompt.clone(), Some(prev_error), rec)
+                .get_reply(prompt.clone(), meta.clone(), Some(prev_error), rec)
                 .await?;
 
             debug!(?id, ?reply, "replying to prompt");
@@ -145,12 +149,13 @@ impl ReplyClient for FlutterClient {
     async fn get_reply(
         &mut self,
         prompt: TypedPrompt,
+        meta: Option<SnapMeta>,
         prev_error: Option<String>,
         rec: &mut PromptRecording,
     ) -> Result<TypedPromptReply> {
         let TypedPrompt::Home(p) = prompt;
         let reply = HomeInterface
-            .try_get_reply_from_ui(&self.cmd, p, prev_error, rec)
+            .try_get_reply_from_ui(&self.cmd, p, meta, prev_error, rec)
             .await?;
 
         Ok(reply.into())
@@ -267,6 +272,7 @@ impl ReplyClient for ScriptedClient {
     async fn get_reply(
         &mut self,
         prompt: TypedPrompt,
+        _: Option<SnapMeta>,
         prev_error: Option<String>,
         _: &mut PromptRecording, // No UI input to record
     ) -> Result<TypedPromptReply> {

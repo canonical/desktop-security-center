@@ -17,6 +17,11 @@ impl TypedPrompt {
         let Self::Home(p) = self;
         HomeInterface::prompt_to_reply(p, Action::Deny).into()
     }
+
+    pub fn snap(&self) -> &str {
+        let Self::Home(p) = self;
+        &p.snap
+    }
 }
 
 impl TryFrom<RawPrompt> for TypedPrompt {

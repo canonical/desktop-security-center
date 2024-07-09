@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:apparmor_prompt/prompt_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaru/yaru.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 const title = 'Security Notification';
 
@@ -27,6 +29,12 @@ class PromptPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(promptDataModelProvider);
+    final icon = model.details.iconFile != null
+        ? Image.file(
+            File(model.details.iconFile!),
+            width: 60,
+          )
+        : const YaruPlaceholderIcon(size: Size(60, 60));
 
     return Scaffold(
       appBar: const YaruWindowTitleBar(
@@ -41,9 +49,9 @@ class PromptPage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(12.0),
-                child: YaruPlaceholderIcon(size: Size(60, 60)),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: icon,
               ),
               Flexible(
                 child: Column(
@@ -102,14 +110,19 @@ class InitialOptions extends ConsumerWidget {
             children: [
               Container(
                 color: theme.cardColor,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Published by \$PUBLISHER'),
-                      Text('Last updated on \$LAST_UPDATED'),
-                      Text('<Visit App Center page>'),
+                      Text('Published by ${model.details.publisher}'),
+                      Text('Last updated on ${model.details.updatedAt}'),
+                      if (model.details.storeUrl != null) ...[
+                        InkWell(
+                          onTap: () => launchUrlString(model.details.storeUrl!),
+                          child: const Text('Visit App Center page'),
+                        ),
+                      ],
                     ],
                   ),
                 ),

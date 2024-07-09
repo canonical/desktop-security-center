@@ -8,13 +8,21 @@ description: |
 grade: devel
 confinement: strict
 
+plugs:
+  snap:
+    interface: system-files
+    read:
+      - /snap
+
 apps:
   apparmor-prompting:
     command: bin/aa-prompt-client
     extensions: [gnome]
     plugs:
-      - snap-prompting-control
+      - desktop-launch
       - home
+      - snap
+      - snap-prompting-control
 
   security-center:
     command: bin/security-center/security_center

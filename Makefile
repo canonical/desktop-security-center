@@ -91,6 +91,8 @@ ensure-client-in-vm:
 		echo ":: Installing $(SNAP_NAME) in $(VM_NAME)..." ; \
 		lxc file push $(SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
 		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(SNAP_NAME)_0.1_amd64.snap ; \
+		echo ":: Connecting $(SNAP_NAME) system files interface" ; \
+		lxc exec $(VM_NAME) -- snap connect $(SNAP_NAME):snap ; \
 	fi
 
 .PHONY: update-client-in-vm
@@ -167,3 +169,5 @@ local-install-client:
 	snapcraft ; \
 	echo ":: Installing $(SNAP_NAME)..." ; \
 	snap install --dangerous $(SNAP_NAME)_0.1_amd64.snap ; \
+	echo ":: Connecting $(SNAP_NAME) system files interface" ; \
+	snap connect $(SNAP_NAME):snap
