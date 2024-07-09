@@ -12,7 +12,7 @@ use serde::de::DeserializeOwned;
 use std::path::PathBuf;
 use tokio::net::UnixStream;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct UnixSocketClient {
     socket_path: PathBuf,
 }

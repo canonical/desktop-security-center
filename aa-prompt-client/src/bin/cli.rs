@@ -1,6 +1,6 @@
 //! A simple command line prompting client
 use aa_prompt_client::{
-    cli_actions::{run_echo_loop, run_flutter_client_loop},
+    cli_actions::{run_echo_loop, run_flutter_client_loop, run_scripted_client_loop},
     snapd_client::SnapdSocketClient,
     Result,
 };
@@ -23,6 +23,13 @@ enum Command {
         /// Optionally record events to a specified file on Ctrl-C
         #[clap(short, long, value_name = "FILE")]
         record: Option<String>,
+    },
+
+    /// Run the testing flutter UI as a persistent client.
+    Scripted {
+        /// The path to the input JSON file
+        #[clap(short, long, value_name = "FILE")]
+        script: String,
     },
 }
 
@@ -58,5 +65,6 @@ async fn main() -> Result<()> {
     match command {
         Command::Echo { record } => run_echo_loop(c, record).await,
         Command::Flutter { record } => run_flutter_client_loop(c, record).await,
+        Command::Scripted { script } => run_scripted_client_loop(c, script).await,
     }
 }

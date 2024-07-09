@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "prompts": [
+    {
+      "prompt-filter": {
+        "snap": "aa-prompting-test",
+        "interface": "home",
+        "constraints": {
+          "path": "/home/[a-zA-Z0-9]+/test/.+/test-1.txt",
+          "permissions": [ "write" ],
+          "available-permissions": [ "read", "write", "execute" ]
+        }
+      },
+      "reply": {
+        "action": "allow",
+        "lifespan": "forever",
+        "constraints": {
+          "permissions": [ "read", "write" ]
+        }
+      }
+    },
+    {
+      "prompt-filter": {
+        "snap": "aa-prompting-test",
+        "interface": "home",
+        "constraints": {
+          "path": "/home/[a-zA-Z0-9]+/test/.+/test-2.txt",
+          "permissions": [ "write" ],
+          "available-permissions": [ "read", "write", "execute" ]
+        }
+      },
+      "reply": {
+        "action": "allow",
+        "lifespan": "forever",
+        "constraints": {
+          "permissions": [ "read", "write" ]
+        }
+      }
+    },
+    {
+      "prompt-filter": {
+        "snap": "aa-prompting-test",
+        "interface": "home",
+        "constraints": {
+          "path": "/home/[a-zA-Z0-9]+/test/.+/test-3.txt",
+          "permissions": [ "write" ],
+          "available-permissions": [ "read", "write", "execute" ]
+        }
+      },
+      "reply": {
+        "action": "allow",
+        "lifespan": "forever",
+        "constraints": {
+          "permissions": [ "read", "write" ]
+        }
+      }
+    }
+  ]
+}

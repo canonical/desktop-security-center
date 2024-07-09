@@ -7,6 +7,8 @@
 //! Creation of the SnapdSocketClient needs to be handled before spawning the test snap so that
 //! polling `after` is correct to pick up the prompt.
 use aa_prompt_client::{
+    cli_actions::run_scripted_client_loop,
+    prompt_sequence::MatchError,
     snapd_client::{
         interfaces::{home::HomeInterface, SnapInterface},
         Action, Lifespan, Prompt, PromptId, SnapdSocketClient, TypedPrompt,
@@ -341,6 +343,86 @@ async fn overwriting_a_file_works() -> Result<()> {
     // The file should now contain the updated content
     let res = fs::read_to_string(format!("{dir_path}/test.txt"));
     assert_eq!(res.expect("file should exist"), "after");
+
+    Ok(())
+}
+
+#[tokio::test]
+#[serial]
+async fn scripted_client_works_with_simple_matching() -> Result<()> {
+    let c = SnapdSocketClient::default();
+    let seq = include_str!("../resources/prompt-sequence-tests/e2e_write_test.json");
+    let (prefix, dir_path) = setup_test_dir(None, &[("seq.json", seq)])?;
+
+    let _rx = spawn_for_output("aa-prompting-test.create", vec![prefix]);
+    let res = run_scripted_client_loop(c, format!("{dir_path}/seq.json")).await;
+    tokio::time::sleep(std::time::Duration::from_millis(50)).await;
+
+    if let Err(e) = res {
+        panic!("unexpected error running scripted client: {e}");
+    }
+
+    let files = &[
+        ("test-1.txt", "test\n"),
+        ("test-2.txt", "test\n"),
+        ("test-3.txt", "test\n"),
+    ];
+
+    for (p, s) in files {
+        let res = fs::read_to_string(format!("{dir_path}/{p}"));
+        assert_eq!(res.expect("file should exist"), *s);
+    }
+
+    Ok(())
+}
+
+#[tokio::test]
+#[serial]
+async fn invalid_prompt_sequence_reply_errors() -> Result<()> {
+    let c = SnapdSocketClient::default();
+    let seq = include_str!("../resources/prompt-sequence-tests/e2e_erroring_write_test.json");
+    let (prefix, dir_path) = setup_test_dir(None, &[("seq.json", seq)])?;
+
+    spawn_for_output("aa-prompting-test.create", vec![prefix]);
+    let res = run_scripted_client_loop(c, format!("{dir_path}/seq.json")).await;
+
+    match res {
+        Err(Error::FailedPromptSequence {
+            error: MatchError::UnexpectedError { error },
+        }) => {
+            assert!(
+                error.starts_with("constraints in reply do not match original request"),
+                "{error}"
+            );
+        }
+        Err(e) => panic!("unexpected error: {e}"),
+        Ok(()) => panic!("expected client to error but it ran to completion"),
+    }
+
+    Ok(())
+}
+
+#[tokio::test]
+#[serial]
+async fn unexpected_prompt_in_sequence_errors() -> Result<()> {
+    let c = SnapdSocketClient::default();
+    let seq = include_str!("../resources/prompt-sequence-tests/e2e_wrong_path_test.json");
+    let (prefix, dir_path) = setup_test_dir(None, &[("seq.json", seq)])?;
+
+    spawn_for_output("aa-prompting-test.create", vec![prefix]);
+    let res = run_scripted_client_loop(c, format!("{dir_path}/seq.json")).await;
+
+    match res {
+        Err(Error::FailedPromptSequence {
+            error: MatchError::MatchFailures { index, failures },
+        }) => {
+            assert_eq!(index, 1);
+            assert_eq!(failures[0].field, "path");
+            assert_eq!(failures[1].field, "permissions");
+        }
+        Err(e) => panic!("unexpected error: {e}"),
+        Ok(()) => panic!("expected client to error but it ran to completion"),
+    }
 
     Ok(())
 }

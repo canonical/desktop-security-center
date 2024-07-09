@@ -19,7 +19,11 @@ pub trait SnapInterface: fmt::Debug + Clone {
 
     type Constraints: fmt::Debug + Clone + Serialize + DeserializeOwned;
     type ReplyConstraints: fmt::Debug + Clone + Serialize + DeserializeOwned;
+
     type ConstraintsFilter: ConstraintsFilter<Constraints = Self::Constraints>;
+    type ReplyConstraintsOverrides: ReplyConstraintsOverrides<
+        ReplyConstraints = Self::ReplyConstraints,
+    >;
 
     type UiInput: fmt::Debug + Clone + Serialize + DeserializeOwned;
     type UiReply: fmt::Debug + Clone + Serialize + DeserializeOwned;
@@ -73,4 +77,12 @@ pub trait ConstraintsFilter: Default + fmt::Debug + Clone + Serialize + Deserial
     type Constraints: fmt::Debug + Clone + Serialize + DeserializeOwned;
 
     fn matches(&self, constraints: &Self::Constraints) -> MatchAttempt;
+}
+
+pub trait ReplyConstraintsOverrides:
+    Default + fmt::Debug + Clone + Serialize + DeserializeOwned
+{
+    type ReplyConstraints: fmt::Debug + Clone + Serialize + DeserializeOwned;
+
+    fn apply(self, constraints: Self::ReplyConstraints) -> Self::ReplyConstraints;
 }

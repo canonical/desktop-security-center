@@ -1,9 +1,12 @@
+use prompt_sequence::MatchError;
+
 pub mod cli_actions;
 pub mod prompt_sequence;
 pub mod snapd_client;
 
 mod recording;
 mod socket_client;
+mod util;
 
 pub(crate) const SNAP_NAME: &str = "apparmor-prompting";
 
@@ -20,6 +23,12 @@ pub enum Error {
 
     #[error(transparent)]
     Json(#[from] serde_json::Error),
+
+    #[error(transparent)]
+    Regex(#[from] regex::Error),
+
+    #[error("failed prompt sequence: {error}")]
+    FailedPromptSequence { error: MatchError },
 
     #[error("invalid custom permissions: requested={requested:?} but available={available:?}")]
     InvalidCustomPermissions {

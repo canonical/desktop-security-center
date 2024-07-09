@@ -2,10 +2,14 @@ use crate::{
     field_matches,
     prompt_sequence::{MatchAttempt, MatchFailure},
     snapd_client::{
-        interfaces::{ConstraintsFilter, Prompt, PromptReply, SnapInterface},
+        interfaces::{
+            ConstraintsFilter, Prompt, PromptReply, ReplyConstraintsOverrides, SnapInterface,
+        },
         Action, Error, Lifespan, Result,
     },
+    util::serde_option_regex,
 };
+use regex::Regex;
 use serde::{Deserialize, Serialize};
 use std::{
     env,
@@ -98,7 +102,9 @@ impl SnapInterface for HomeInterface {
 
     type Constraints = HomeConstraints;
     type ReplyConstraints = HomeReplyConstraints;
+
     type ConstraintsFilter = HomeConstraintsFilter;
+    type ReplyConstraintsOverrides = HomeReplyConstraintsOverrides;
 
     type UiInput = HomeUiInput;
     type UiReply = HomeUiReply;
@@ -248,15 +254,17 @@ pub struct HomeReplyConstraints {
 #[derive(Debug, Default, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "kebab-case")]
 pub struct HomeConstraintsFilter {
-    pub path: Option<String>,
+    #[serde(with = "serde_option_regex", default)]
+    pub path: Option<Regex>,
     pub permissions: Option<Vec<String>>,
     pub available_permissions: Option<Vec<String>>,
 }
 
 impl HomeConstraintsFilter {
-    pub fn with_path(&mut self, path: impl Into<String>) -> &mut Self {
-        self.path = Some(path.into());
-        self
+    pub fn try_with_path(&mut self, path: impl Into<String>) -> Result<&mut Self> {
+        let re = Regex::new(&path.into())?;
+        self.path = Some(re);
+        Ok(self)
     }
 
     pub fn with_permissions(&mut self, permissions: Vec<impl Into<String>>) -> &mut Self {
@@ -276,7 +284,16 @@ impl ConstraintsFilter for HomeConstraintsFilter {
     fn matches(&self, constraints: &Self::Constraints) -> MatchAttempt {
         let mut failures = Vec::new();
 
-        field_matches!(self, constraints, failures, path);
+        if let Some(re) = &self.path {
+            if !re.is_match(&constraints.path) {
+                failures.push(MatchFailure {
+                    field: "path",
+                    expected: format!("{:?}", re.to_string()),
+                    seen: format!("{:?}", constraints.path),
+                });
+            }
+        }
+
         field_matches!(self, constraints, failures, permissions);
         field_matches!(self, constraints, failures, available_permissions);
 
@@ -285,6 +302,28 @@ impl ConstraintsFilter for HomeConstraintsFilter {
         } else {
             MatchAttempt::Failure(failures)
         }
+    }
+}
+
+#[derive(Debug, Default, Serialize, Deserialize, Clone)]
+#[serde(rename_all = "kebab-case")]
+pub struct HomeReplyConstraintsOverrides {
+    pub path_pattern: Option<String>,
+    pub permissions: Option<Vec<String>>,
+}
+
+impl ReplyConstraintsOverrides for HomeReplyConstraintsOverrides {
+    type ReplyConstraints = HomeReplyConstraints;
+
+    fn apply(self, mut constraints: Self::ReplyConstraints) -> Self::ReplyConstraints {
+        if let Some(path_pattern) = self.path_pattern {
+            constraints.path_pattern = path_pattern;
+        }
+        if let Some(permissions) = self.permissions {
+            constraints.permissions = permissions;
+        }
+
+        constraints
     }
 }
 

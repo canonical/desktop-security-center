@@ -1,7 +1,10 @@
 use crate::{
-    prompt_sequence::{MatchAttempt, PromptFilter},
+    prompt_sequence::PromptFilter,
     snapd_client::{
-        interfaces::{home::HomeInterface, SnapInterface},
+        interfaces::{
+            home::{HomeConstraintsFilter, HomeInterface},
+            SnapInterface,
+        },
         Action, Prompt, PromptId, SnapdSocketClient, TypedPrompt, TypedPromptReply,
     },
     Error, Result, SNAP_NAME,
@@ -36,7 +39,14 @@ impl PromptRecording {
         let filter = path.clone().map(|output_file| {
             info!(%output_file, "recording enabled");
             let mut filter = PromptFilter::default();
-            filter.with_snap(SNAP_NAME).with_interface("home");
+            let mut constraints = HomeConstraintsFilter::default();
+            constraints
+                .try_with_path(format!(".*/{output_file}"))
+                .expect("valid regex");
+            filter
+                .with_snap(SNAP_NAME)
+                .with_interface("home")
+                .with_constraints(constraints);
 
             filter
         });
@@ -123,7 +133,7 @@ impl PromptRecording {
 
     pub fn is_prompt_for_writing_output(&self, p: &Prompt<HomeInterface>) -> bool {
         match self.filter.as_ref() {
-            Some(f) => f.matches(p) == MatchAttempt::Success,
+            Some(f) => f.matches(p).is_success(),
             None => false,
         }
     }
@@ -131,7 +141,7 @@ impl PromptRecording {
     pub async fn allow_write(&self, p: Prompt<HomeInterface>, c: &SnapdSocketClient) -> Result<()> {
         let id = p.id.clone();
         let reply = HomeInterface::prompt_to_reply(p, Action::Allow)
-            .for_forever()
+            .for_timespan("10s") // Using a timespan so our rule auto-removes
             .try_with_custom_permissions(vec!["read".to_string(), "write".to_string()])?
             .into();
 

@@ -1,12 +1,16 @@
 use crate::{
+    prompt_sequence::{MatchError, PromptFilter, PromptSequence},
     recording::PromptRecording,
     snapd_client::{
-        interfaces::{home::HomeInterface, SnapInterface},
-        PromptId, SnapdSocketClient, TypedPrompt, TypedPromptReply,
+        interfaces::{
+            home::{HomeConstraintsFilter, HomeInterface},
+            SnapInterface,
+        },
+        Action, PromptId, SnapdSocketClient, TypedPrompt, TypedPromptReply,
     },
-    Error, Result,
+    Error, Result, SNAP_NAME,
 };
-use std::env;
+use std::{env, time::Duration};
 use tracing::{debug, error, info, warn};
 
 // FIXME: having to hard code this is a problem.
@@ -16,14 +20,18 @@ const NO_PROMPTS_FOR_USER: &str = "no prompts found for the given user";
 
 trait ReplyClient {
     async fn get_reply(
-        &self,
+        &mut self,
         p: TypedPrompt,
         prev_error: Option<String>,
         rec: &mut PromptRecording,
     ) -> Result<TypedPromptReply>;
 
+    /// We need to be able to check for when a ScriptedClient has successfully reached the end of
+    /// its expected prompt sequence. Other clients should always return true.
+    fn running(&self) -> bool;
+
     async fn reply_retrying_errors(
-        &self,
+        &mut self,
         id: PromptId,
         p: TypedPrompt,
         c: &mut SnapdSocketClient,
@@ -71,12 +79,12 @@ trait ReplyClient {
 /// Run a simple client listener that processes notices and prompts serially
 async fn run_client_loop<C: ReplyClient>(
     mut c: SnapdSocketClient,
-    client: C,
+    mut client: C,
     path: Option<String>,
 ) -> Result<()> {
     let mut rec = PromptRecording::new(path);
 
-    loop {
+    while client.running() {
         println!("polling for notices...");
         let pending = rec.await_pending_handling_ctrl_c(&mut c).await?;
 
@@ -101,6 +109,8 @@ async fn run_client_loop<C: ReplyClient>(
                 .await?;
         }
     }
+
+    Ok(())
 }
 
 /// Handle prompts via a spawned flutter UI
@@ -122,8 +132,12 @@ impl FlutterClient {
 }
 
 impl ReplyClient for FlutterClient {
+    fn running(&self) -> bool {
+        true
+    }
+
     async fn get_reply(
-        &self,
+        &mut self,
         prompt: TypedPrompt,
         prev_error: Option<String>,
         rec: &mut PromptRecording,
@@ -134,5 +148,92 @@ impl ReplyClient for FlutterClient {
             .await?;
 
         Ok(reply.into())
+    }
+}
+
+/// Handle prompts using scripted client interactions
+pub async fn run_scripted_client_loop(c: SnapdSocketClient, path: String) -> Result<()> {
+    // We need to spawn a task to wait for the read prompt we generate when reading in our script
+    // file. We can't handle this in the main poll loop as we need to construct the client up
+    // front.
+    let mut ack_client = c.clone();
+    let mut filter = PromptFilter::default();
+    let mut constraints = HomeConstraintsFilter::default();
+    constraints
+        .try_with_path(format!(".*/{path}"))
+        .expect("valid regex");
+    filter
+        .with_snap(SNAP_NAME)
+        .with_interface("home")
+        .with_constraints(constraints);
+
+    tokio::task::spawn(async move {
+        loop {
+            let pending = ack_client.pending_prompts().await.unwrap();
+            for id in pending {
+                match ack_client.prompt_details(&id).await {
+                    Ok(TypedPrompt::Home(inner)) if filter.matches(&inner).is_success() => {
+                        debug!("allowing read of script file");
+                        let reply = HomeInterface::prompt_to_reply(inner, Action::Allow)
+                            .for_timespan("10s") // Using a timespan so our rule auto-removes
+                            .into();
+                        ack_client.reply_to_prompt(&id, reply).await.unwrap();
+                        return;
+                    }
+
+                    _ => (),
+                };
+            }
+        }
+    });
+    let scripted_client = ScriptedClient::try_new(path)?;
+    tokio::time::sleep(Duration::from_millis(100)).await;
+
+    run_client_loop(c, scripted_client, None).await
+}
+
+struct ScriptedClient {
+    seq: PromptSequence,
+    path: String,
+}
+
+impl ScriptedClient {
+    fn try_new(path: String) -> Result<Self> {
+        let seq = PromptSequence::try_new_from_file(&path)?;
+
+        Ok(Self { seq, path })
+    }
+}
+
+impl ReplyClient for ScriptedClient {
+    async fn get_reply(
+        &mut self,
+        prompt: TypedPrompt,
+        prev_error: Option<String>,
+        _: &mut PromptRecording, // No UI input to record
+    ) -> Result<TypedPromptReply> {
+        if let Some(error) = prev_error {
+            return Err(Error::FailedPromptSequence {
+                error: MatchError::UnexpectedError { error },
+            });
+        }
+
+        match prompt {
+            TypedPrompt::Home(inner) if inner.constraints.path == self.path => {
+                Ok(TypedPromptReply::Home(
+                    // Using a timespan so our rule auto-removes
+                    HomeInterface::prompt_to_reply(inner, Action::Allow).for_timespan("10s"),
+                ))
+            }
+
+            _ => match self.seq.try_match_next(prompt) {
+                Ok(reply) => Ok(reply),
+                Err(error) => Err(Error::FailedPromptSequence { error }),
+            },
+        }
+    }
+
+    fn running(&self) -> bool {
+        !self.seq.is_empty()
     }
 }
