@@ -24,7 +24,7 @@ void main() {
     await tester.pumpAndSettle();
 
     await tester
-        .tap(find.text(SnapdInterface.home.localizedDescription(tester.l10n)));
+        .tap(find.text(SnapdInterface.home.localizedTitle(tester.l10n)));
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('firefox'));
