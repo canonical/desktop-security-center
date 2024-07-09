@@ -12,7 +12,7 @@
     "@snapPermissionsOtherDescription": {},
     "snapPermissionsPageTitle": "App Permissions",
     "@snapPermissionsPageTitle": {},
-    "snapRulesCount": "{n} rules",
+    "snapRulesCount": "{n, plural, =0{no rules} =1{1 rule} other{{n} rules}}",
     "@snapRulesCount": {
         "placeholders": {
             "n": {
@@ -37,7 +37,7 @@
     "@homeInterfacePageTitle": {},
     "homeInterfacePageDescription": "Manage permissions to access files in your Home folder.",
     "@homeInterfacePageDescription": {},
-    "interfaceSnapCount": "{n} apps",
+    "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 app} other {{n} apps}}",
     "@interfaceSnapCount": {
         "placeholders": {
             "n": {
