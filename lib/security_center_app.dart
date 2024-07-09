@@ -111,5 +111,5 @@ class _TitleBar extends ConsumerWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size(0, kYaruTitleBarHeight);
+  final Size preferredSize = const Size(0, kYaruTitleBarHeight);
 }
