@@ -51,7 +51,7 @@ class _Body extends StatelessWidget {
           child: YaruSwitchListTile(
             title: Row(
               children: [
-                Text(l10n.snapPermissionsEnableTitle),
+                Flexible(child: Text(l10n.snapPermissionsEnableTitle)),
                 const SizedBox(width: 10),
                 YaruInfoBadge(
                   title: Text(l10n.snapPermissionsExperimentalLabel),
