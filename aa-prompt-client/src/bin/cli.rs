@@ -31,6 +31,8 @@ enum Command {
         #[clap(short, long, value_name = "FILE")]
         script: String,
 
+        /// The number of seconds to wait following completion of the script to check for any
+        /// unexpected additional prompts.
         #[clap(short, long, value_name = "SECONDS")]
         grace_period: Option<u64>,
     },

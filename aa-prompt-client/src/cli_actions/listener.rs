@@ -172,7 +172,7 @@ pub async fn run_scripted_client_loop(
         None => return Ok(()),
     };
 
-    info!(seconds=%grace_period, "entering grace period");
+    info!(seconds=%grace_period, "sequence complete, entering grace period");
     select! {
         _ = tokio::time::sleep(Duration::from_secs(grace_period)) => Ok(()),
 
