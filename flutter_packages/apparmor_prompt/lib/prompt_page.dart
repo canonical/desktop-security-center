@@ -115,12 +115,47 @@ class InitialOptions extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Published by ${model.details.publisher}'),
-                      Text('Last updated on ${model.details.updatedAt}'),
+                      Text.rich(
+                        TextSpan(
+                          text: 'Published by ',
+                          children: [
+                            TextSpan(
+                              text: model.details.publisher,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                                color: theme.colorScheme.primary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          text: 'Last updated on ',
+                          children: [
+                            TextSpan(
+                              text: model.details.updatedAt,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       if (model.details.storeUrl != null) ...[
                         InkWell(
                           onTap: () => launchUrlString(model.details.storeUrl!),
-                          child: const Text('Visit App Center page'),
+                          child: Text.rich(
+                            TextSpan(
+                              text: 'Visit App Center page',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                                color: theme.colorScheme.primary,
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ],

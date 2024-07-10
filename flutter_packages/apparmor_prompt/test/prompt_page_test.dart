@@ -54,5 +54,7 @@ void main() {
       ),
       findsOneWidget,
     );
+
+    expect(find.text('Published by Mozilla'), findsOneWidget);
   });
 }
