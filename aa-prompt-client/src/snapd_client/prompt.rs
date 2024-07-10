@@ -12,6 +12,13 @@ pub enum TypedPrompt {
     Home(Prompt<HomeInterface>),
 }
 
+impl TypedPrompt {
+    pub fn into_deny_once(self) -> TypedPromptReply {
+        let Self::Home(p) = self;
+        HomeInterface::prompt_to_reply(p, Action::Deny).into()
+    }
+}
+
 impl TryFrom<RawPrompt> for TypedPrompt {
     type Error = Error;
 

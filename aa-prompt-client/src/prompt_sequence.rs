@@ -48,6 +48,10 @@ impl PromptSequence {
     pub fn is_empty(&self) -> bool {
         self.prompts.is_empty()
     }
+
+    pub fn len(&self) -> usize {
+        self.prompts.len()
+    }
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -92,7 +96,7 @@ where
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
+#[derive(Debug, Clone, thiserror::Error)]
 pub enum MatchError {
     #[error("prompt {index} did not match the provided sequence: {failures:?}")]
     MatchFailures {
@@ -105,6 +109,9 @@ pub enum MatchError {
 
     #[error("unexpected error received when replying to prompt: {error}")]
     UnexpectedError { error: String },
+
+    #[error("no more prompts were expected for the provided sequence but saw {prompts:?}")]
+    UnexpectedPrompts { prompts: Vec<TypedPrompt> },
 
     #[error("expected next prompt to have interface={expected} but got {seen}")]
     WrongInterface { expected: String, seen: String },

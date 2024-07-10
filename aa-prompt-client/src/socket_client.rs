@@ -11,6 +11,7 @@ use hyper_util::rt::TokioIo;
 use serde::de::DeserializeOwned;
 use std::path::PathBuf;
 use tokio::net::UnixStream;
+use tracing::error;
 
 #[derive(Debug, Clone)]
 pub struct UnixSocketClient {
@@ -36,8 +37,8 @@ impl UnixSocketClient {
         let stream = UnixStream::connect(&self.socket_path).await?;
         let (mut sender, conn) = http1::handshake(TokioIo::new(stream)).await?;
         tokio::task::spawn(async move {
-            if let Err(err) = conn.await {
-                println!("Connection failed: {:?}", err);
+            if let Err(error) = conn.await {
+                error!(%error, "connection failed");
             }
         });
 
