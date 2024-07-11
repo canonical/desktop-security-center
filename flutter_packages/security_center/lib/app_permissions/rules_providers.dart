@@ -6,6 +6,30 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 part 'rules_providers.g.dart';
 
 @riverpod
+class PromptingEnabled extends _$PromptingEnabled {
+  @override
+  Future<bool> build() {
+    return getService<AppPermissionsService>().isEnabled();
+  }
+
+  Future<void> enable() async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      await getService<AppPermissionsService>().enable();
+      return build();
+    });
+  }
+
+  Future<void> disable() async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      await getService<AppPermissionsService>().disable();
+      return build();
+    });
+  }
+}
+
+@riverpod
 Future<List<SnapdRule>> rules(RulesRef ref) =>
     getService<AppPermissionsService>().getRules();
 
