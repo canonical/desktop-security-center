@@ -21,6 +21,7 @@ apps:
     extensions: [gnome]
     plugs:
       - snap-prompting-control
+      - snapd-control
 
 parts:
   flutter-git:
