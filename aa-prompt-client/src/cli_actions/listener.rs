@@ -179,27 +179,38 @@ pub async fn run_scripted_client_loop(
     info!(seconds=%grace_period, "sequence complete, entering grace period");
     select! {
         _ = tokio::time::sleep(Duration::from_secs(grace_period)) => Ok(()),
+        res = grace_period_deny_and_error(snapd_client) => res,
+    }
+}
 
-        res = snapd_client.pending_prompts() => {
-            let ids = res?;
-            let mut prompts = Vec::with_capacity(ids.len());
-            for id in ids {
-                let prompt = match snapd_client.prompt_details(&id).await {
-                    Ok(p) => p,
-                    Err(_) => continue,
-                };
+/// Poll for outstanding prompts and auto-deny them before returning an error. This function will
+/// loop until at least one un-actioned prompt is encountered.
+async fn grace_period_deny_and_error(snapd_client: &mut SnapdSocketClient) -> Result<()> {
+    loop {
+        let ids = snapd_client.pending_prompts().await?;
+        let mut prompts = Vec::with_capacity(ids.len());
 
-                snapd_client.reply_to_prompt(&id, prompt.clone().into_deny_once()).await?;
-                prompts.push(prompt);
+        for id in ids {
+            let prompt = match snapd_client.prompt_details(&id).await {
+                Ok(p) => p,
+                Err(_) => continue,
+            };
 
-            }
+            snapd_client
+                .reply_to_prompt(&id, prompt.clone().into_deny_once())
+                .await?;
 
-            Err(Error::FailedPromptSequence {
-                error: MatchError::UnexpectedPrompts {
-                    prompts
-                },
-            })
-        },
+            prompts.push(prompt);
+        }
+
+        // It is possible that all of the prompts we saw a notice for were already actioned or
+        // otherwise no longer available when we attempt to pull the details from snapd. We only
+        // error if there was a non-zero number of unaction prompts.
+        if !prompts.is_empty() {
+            return Err(Error::FailedPromptSequence {
+                error: MatchError::UnexpectedPrompts { prompts },
+            });
+        }
     }
 }
 
