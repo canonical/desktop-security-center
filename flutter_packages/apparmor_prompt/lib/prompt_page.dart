@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:apparmor_prompt/prompt_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,12 +28,6 @@ class PromptPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(promptDataModelProvider);
-    final icon = model.details.iconFile != null
-        ? Image.file(
-            File(model.details.iconFile!),
-            width: 60,
-          )
-        : const YaruPlaceholderIcon(size: Size(60, 60));
 
     return Scaffold(
       appBar: const YaruWindowTitleBar(
@@ -45,28 +38,16 @@ class PromptPage extends ConsumerWidget {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: icon,
-              ),
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const InitialOptions(),
-                    if (model.withMoreOptions) ...[
-                      const SizedBox(height: 20),
-                      const Divider(),
-                      const SizedBox(height: 20),
-                      const MoreOptions(),
-                    ],
-                  ],
-                ),
-              ),
+              const InitialOptions(),
+              if (model.withMoreOptions) ...[
+                const SizedBox(height: 20),
+                const Divider(),
+                const SizedBox(height: 20),
+                const MoreOptions(),
+              ],
             ],
           ),
         ),

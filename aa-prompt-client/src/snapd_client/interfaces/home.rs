@@ -130,9 +130,9 @@ impl SnapInterface for HomeInterface {
     ) -> Self::UiInput {
         let (initial_options, more_options) = self.ui_options(&prompt);
 
-        let (store_url, publisher, updated_at, icon_file) = match meta {
-            Some(m) => (Some(m.store_url), m.publisher, m.updated_at, m.icon_file),
-            None => (None, "unknown".to_string(), "unknown".to_string(), None),
+        let (store_url, publisher, updated_at) = match meta {
+            Some(m) => (Some(m.store_url), m.publisher, m.updated_at),
+            None => (None, "unknown".to_string(), "unknown".to_string()),
         };
 
         HomeUiInput {
@@ -146,7 +146,6 @@ impl SnapInterface for HomeInterface {
             store_url,
             publisher,
             updated_at,
-            icon_file,
         }
     }
 
@@ -185,7 +184,6 @@ pub struct HomeUiInput {
     store_url: Option<String>,
     publisher: String,
     updated_at: String,
-    icon_file: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

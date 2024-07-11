@@ -7,7 +7,7 @@ use hyper::Uri;
 use prompt::RawPrompt;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use std::{collections::HashMap, env, str::FromStr};
-use tracing::{debug, error};
+use tracing::debug;
 
 pub mod interfaces;
 mod prompt;
@@ -202,7 +202,7 @@ where
             meta_from_find_details(name, &self.client),
         );
 
-        let ((channel, icon_file), (store_url, publisher, mut channels)) = match res {
+        let (channel, (publisher, mut channels)) = match res {
             Ok(data) => data,
             Err(_) => return Ok(None),
         };
@@ -211,11 +211,12 @@ where
             .remove(&channel)
             .unwrap_or_else(|| "unknown".to_string());
 
+        let store_url = format!("snap://{name}");
+
         Ok(Some(SnapMeta {
             updated_at,
             store_url,
             publisher,
-            icon_file,
         }))
     }
 }
@@ -226,41 +227,15 @@ pub struct SnapMeta {
     pub updated_at: String,
     pub store_url: String,
     pub publisher: String,
-    pub icon_file: Option<String>,
 }
 
-async fn meta_from_snap_details<C>(name: &str, client: &C) -> Result<(String, Option<String>)>
+async fn meta_from_snap_details<C>(name: &str, client: &C) -> Result<String>
 where
     C: Client,
 {
-    debug!(%name, "fetching snap metadata");
-    let SnapDetails { channel, apps } = client.get_json(&format!("snaps/{name}")).await?;
-    let desktop_file = desktop_file_path_from_details(apps, name);
-    let icon_file = match desktop_file.as_ref() {
-        Some(f) => {
-            debug!(path=%f, "reading desktop file");
-            match tokio::fs::read_to_string(f).await {
-                Ok(content) => {
-                    debug!(path=%f, "extracting icon path");
-                    match content.lines().find(|l| l.starts_with("Icon=")) {
-                        Some(line) => line.split_once('=').map(|(_, path)| path.to_string()),
-                        None => None,
-                    }
-                }
-                Err(e) => {
-                    error!(path=%f, "unable to read desktop file: {e}");
-                    None
-                }
-            }
-        }
+    let SnapDetails { channel } = client.get_json(&format!("snaps/{name}")).await?;
 
-        None => {
-            debug!(%name, "no desktop file found");
-            None
-        }
-    };
-
-    return Ok((channel, icon_file));
+    return Ok(channel);
 
     // Serde structs
 
@@ -268,22 +243,18 @@ where
     #[serde(rename_all = "kebab-case")]
     struct SnapDetails {
         channel: String,
-        #[serde(default)]
-        apps: Vec<AppDetails>,
     }
 }
 
 async fn meta_from_find_details<C>(
     name: &str,
     client: &C,
-) -> Result<(String, String, HashMap<String, String>)>
+) -> Result<(String, HashMap<String, String>)>
 where
     C: Client,
 {
-    debug!(%name, "fetching find metadata");
     let mut find_details: Vec<FindDetails> = client.get_json(&format!("find?name={name}")).await?;
     let FindDetails {
-        store_url,
         publisher,
         channels,
     } = find_details.remove(0);
@@ -301,7 +272,7 @@ where
         })
         .collect();
 
-    return Ok((store_url, publisher.display_name, channels));
+    return Ok((publisher.display_name, channels));
 
     // Serde structs
 
@@ -309,7 +280,6 @@ where
     #[derive(Debug, Default, Deserialize)]
     #[serde(rename_all = "kebab-case")]
     struct FindDetails {
-        store_url: String,
         publisher: Publisher,
         channels: HashMap<String, Channel>,
     }
@@ -325,39 +295,6 @@ where
     struct Channel {
         released_at: String,
     }
-}
-
-#[derive(Debug, Default, Deserialize)]
-#[serde(rename_all = "kebab-case")]
-struct AppDetails {
-    name: String,
-    desktop_file: Option<String>,
-}
-
-/// Following the same approach as used in https://github.com/snapcore/snapd-desktop-integration/blob/main/src/sdi-helpers.c
-///   - If there is only one desktop file returned we use that
-///   - If there are multiple we prefer the one assigned to the app matching the snap name
-///   - Otherwise we take the first available or None if the list is empty
-fn desktop_file_path_from_details(mut details: Vec<AppDetails>, app_name: &str) -> Option<String> {
-    details.retain(|d| d.desktop_file.is_some());
-
-    match details.len() {
-        0 => return None,
-        1 => return details[0].desktop_file.take(),
-        _ => (),
-    }
-
-    let mut first = None;
-
-    for d in details.into_iter() {
-        if d.name == app_name {
-            return d.desktop_file;
-        } else if first.is_none() {
-            first = d.desktop_file;
-        }
-    }
-
-    first
 }
 
 #[derive(Debug, Default, Deserialize)]
@@ -433,46 +370,5 @@ mod tests {
             Err(Error::NotAvailable) => (),
             res => panic!("expected NotAvailable, got {res:?}"),
         }
-    }
-
-    fn ad(name: &str, desktop_file: Option<&str>) -> AppDetails {
-        AppDetails {
-            name: name.into(),
-            desktop_file: desktop_file.map(Into::into),
-        }
-    }
-    #[test_case(vec![], None; "no details")]
-    #[test_case(vec![ad("foo", None)], None; "single result with no desktop file")]
-    #[test_case(
-        vec![ad("foo", Some("foo.desktop"))],
-        Some("foo.desktop"); "single result matching name"
-    )]
-    #[test_case(
-        vec![ad("bar", Some("bar.desktop"))],
-        Some("bar.desktop"); "single result no matching name"
-    )]
-    #[test_case(
-        vec![ad("foo", Some("foo.desktop")), ad("bar", Some("bar.desktop"))],
-        Some("foo.desktop"); "two results matching name first"
-    )]
-    #[test_case(
-        vec![ad("bar", Some("bar.desktop")), ad("foo", Some("foo.desktop"))],
-        Some("foo.desktop"); "two results matching name second"
-    )]
-    #[test_case(
-        vec![ad("foo", None), ad("bar", Some("bar.desktop"))],
-        Some("bar.desktop"); "matching name has no desktop file"
-    )]
-    #[test_case(
-        vec![ad("foo", None), ad("bar", None)],
-        None; "multiple with no desktop files"
-    )]
-    #[test]
-    fn dektop_file_path_from_details_selects_correct_path(
-        details: Vec<AppDetails>,
-        expected: Option<&str>,
-    ) {
-        let res = desktop_file_path_from_details(details, "foo");
-        assert_eq!(res.as_deref(), expected);
     }
 }

@@ -28,7 +28,6 @@ class PromptDetails with _$PromptDetails {
     required String publisher,
     required String updatedAt,
     String? storeUrl,
-    String? iconFile,
     String? previousErrorMessage,
   }) = _PromptDetails;
 
