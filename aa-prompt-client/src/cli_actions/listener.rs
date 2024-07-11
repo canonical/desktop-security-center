@@ -11,9 +11,10 @@ use crate::{
     Error, Result, SNAP_NAME,
 };
 use std::{env, time::Duration};
+use tokio::select;
 use tracing::{debug, error, info, warn};
 
-// FIXME: having to hard code this is a problem.
+// FIXME: having to hard code these is a problem.
 // We need snapd to provide structured errors we can work with programatically.
 const PROMPT_NOT_FOUND: &str = "no prompt with the given ID found for the given user";
 const NO_PROMPTS_FOR_USER: &str = "no prompts found for the given user";
@@ -26,24 +27,24 @@ trait ReplyClient {
         rec: &mut PromptRecording,
     ) -> Result<TypedPromptReply>;
 
-    /// We need to be able to check for when a ScriptedClient has successfully reached the end of
+    /// We need to be able to check for when a [ScriptedClient] has successfully reached the end of
     /// its expected prompt sequence. Other clients should always return true.
-    fn running(&self) -> bool;
+    fn is_running(&self) -> bool;
 
     async fn reply_retrying_errors(
         &mut self,
         id: PromptId,
-        p: TypedPrompt,
-        c: &mut SnapdSocketClient,
+        prompt: TypedPrompt,
+        snapd_client: &mut SnapdSocketClient,
         rec: &mut PromptRecording,
     ) -> Result<()> {
-        rec.push_prompt(&p);
-        let mut reply = self.get_reply(p.clone(), None, rec).await?;
+        rec.push_prompt(&prompt);
+        let mut reply = self.get_reply(prompt.clone(), None, rec).await?;
 
         debug!(?id, ?reply, "replying to prompt");
         rec.push_reply(&reply);
 
-        while let Err(e) = c.reply_to_prompt(&id, reply).await {
+        while let Err(e) = snapd_client.reply_to_prompt(&id, reply).await {
             rec.push_error(&e);
 
             let prev_error = match e {
@@ -66,7 +67,9 @@ trait ReplyClient {
             };
 
             debug!(%prev_error, "error returned from snapd, retrying");
-            reply = self.get_reply(p.clone(), Some(prev_error), rec).await?;
+            reply = self
+                .get_reply(prompt.clone(), Some(prev_error), rec)
+                .await?;
 
             debug!(?id, ?reply, "replying to prompt");
             rec.push_reply(&reply);
@@ -78,22 +81,22 @@ trait ReplyClient {
 
 /// Run a simple client listener that processes notices and prompts serially
 async fn run_client_loop<C: ReplyClient>(
-    mut c: SnapdSocketClient,
-    mut client: C,
+    snapd_client: &mut SnapdSocketClient,
+    mut reply_client: C,
     path: Option<String>,
 ) -> Result<()> {
     let mut rec = PromptRecording::new(path);
 
-    while client.running() {
-        println!("polling for notices...");
-        let pending = rec.await_pending_handling_ctrl_c(&mut c).await?;
+    while reply_client.is_running() {
+        info!("polling for notices...");
+        let pending = rec.await_pending_handling_ctrl_c(snapd_client).await?;
 
-        info!(?pending, "processing notices");
+        debug!(?pending, "processing notices");
         for id in pending {
             debug!(?id, "pulling prompt details from snapd");
-            let p = match c.prompt_details(&id).await {
+            let prompt = match snapd_client.prompt_details(&id).await {
                 Ok(TypedPrompt::Home(p)) if rec.is_prompt_for_writing_output(&p) => {
-                    return rec.allow_write(p, &c).await;
+                    return rec.allow_write(p, snapd_client).await;
                 }
 
                 Ok(p) => p,
@@ -104,8 +107,8 @@ async fn run_client_loop<C: ReplyClient>(
                 }
             };
 
-            client
-                .reply_retrying_errors(id, p, &mut c, &mut rec)
+            reply_client
+                .reply_retrying_errors(id, prompt, snapd_client, &mut rec)
                 .await?;
         }
     }
@@ -114,8 +117,11 @@ async fn run_client_loop<C: ReplyClient>(
 }
 
 /// Handle prompts via a spawned flutter UI
-pub async fn run_flutter_client_loop(c: SnapdSocketClient, path: Option<String>) -> Result<()> {
-    run_client_loop(c, FlutterClient::new(), path).await
+pub async fn run_flutter_client_loop(
+    snapd_client: &mut SnapdSocketClient,
+    path: Option<String>,
+) -> Result<()> {
+    run_client_loop(snapd_client, FlutterClient::new(), path).await
 }
 
 struct FlutterClient {
@@ -132,7 +138,7 @@ impl FlutterClient {
 }
 
 impl ReplyClient for FlutterClient {
-    fn running(&self) -> bool {
+    fn is_running(&self) -> bool {
         true
     }
 
@@ -152,44 +158,60 @@ impl ReplyClient for FlutterClient {
 }
 
 /// Handle prompts using scripted client interactions
-pub async fn run_scripted_client_loop(c: SnapdSocketClient, path: String) -> Result<()> {
-    // We need to spawn a task to wait for the read prompt we generate when reading in our script
-    // file. We can't handle this in the main poll loop as we need to construct the client up
-    // front.
-    let mut ack_client = c.clone();
-    let mut filter = PromptFilter::default();
-    let mut constraints = HomeConstraintsFilter::default();
-    constraints
-        .try_with_path(format!(".*/{path}"))
-        .expect("valid regex");
-    filter
-        .with_snap(SNAP_NAME)
-        .with_interface("home")
-        .with_constraints(constraints);
+pub async fn run_scripted_client_loop(
+    snapd_client: &mut SnapdSocketClient,
+    path: String,
+    grace_period: Option<u64>,
+) -> Result<()> {
+    let scripted_client = ScriptedClient::try_new_allowing_script_read(path, snapd_client.clone())?;
+    info!(
+        script=%scripted_client.path,
+        n_prompts=%scripted_client.seq.len(),
+        "running provided script"
+    );
+    run_client_loop(snapd_client, scripted_client, None).await?;
 
-    tokio::task::spawn(async move {
-        loop {
-            let pending = ack_client.pending_prompts().await.unwrap();
-            for id in pending {
-                match ack_client.prompt_details(&id).await {
-                    Ok(TypedPrompt::Home(inner)) if filter.matches(&inner).is_success() => {
-                        debug!("allowing read of script file");
-                        let reply = HomeInterface::prompt_to_reply(inner, Action::Allow)
-                            .for_timespan("10s") // Using a timespan so our rule auto-removes
-                            .into();
-                        ack_client.reply_to_prompt(&id, reply).await.unwrap();
-                        return;
-                    }
+    let grace_period = match grace_period {
+        Some(n) => n,
+        None => return Ok(()),
+    };
 
-                    _ => (),
-                };
-            }
+    info!(seconds=%grace_period, "sequence complete, entering grace period");
+    select! {
+        _ = tokio::time::sleep(Duration::from_secs(grace_period)) => Ok(()),
+        res = grace_period_deny_and_error(snapd_client) => res,
+    }
+}
+
+/// Poll for outstanding prompts and auto-deny them before returning an error. This function will
+/// loop until at least one un-actioned prompt is encountered.
+async fn grace_period_deny_and_error(snapd_client: &mut SnapdSocketClient) -> Result<()> {
+    loop {
+        let ids = snapd_client.pending_prompts().await?;
+        let mut prompts = Vec::with_capacity(ids.len());
+
+        for id in ids {
+            let prompt = match snapd_client.prompt_details(&id).await {
+                Ok(p) => p,
+                Err(_) => continue,
+            };
+
+            snapd_client
+                .reply_to_prompt(&id, prompt.clone().into_deny_once())
+                .await?;
+
+            prompts.push(prompt);
         }
-    });
-    let scripted_client = ScriptedClient::try_new(path)?;
-    tokio::time::sleep(Duration::from_millis(100)).await;
 
-    run_client_loop(c, scripted_client, None).await
+        // It is possible that all of the prompts we saw a notice for were already actioned or
+        // otherwise no longer available when we attempt to pull the details from snapd. We only
+        // error if there was a non-zero number of unaction prompts.
+        if !prompts.is_empty() {
+            return Err(Error::FailedPromptSequence {
+                error: MatchError::UnexpectedPrompts { prompts },
+            });
+        }
+    }
 }
 
 struct ScriptedClient {
@@ -198,7 +220,43 @@ struct ScriptedClient {
 }
 
 impl ScriptedClient {
-    fn try_new(path: String) -> Result<Self> {
+    fn try_new_allowing_script_read(
+        path: String,
+        mut snapd_client: SnapdSocketClient,
+    ) -> Result<Self> {
+        // We need to spawn a task to wait for the read prompt we generate when reading in our
+        // script file. We can't handle this in the main poll loop as we need to construct the
+        // client up front.
+        let mut filter = PromptFilter::default();
+        let mut constraints = HomeConstraintsFilter::default();
+        constraints
+            .try_with_path(format!(".*/{path}"))
+            .expect("valid regex");
+        filter
+            .with_snap(SNAP_NAME)
+            .with_interface("home")
+            .with_constraints(constraints);
+
+        tokio::task::spawn(async move {
+            loop {
+                let pending = snapd_client.pending_prompts().await.unwrap();
+                for id in pending {
+                    match snapd_client.prompt_details(&id).await {
+                        Ok(TypedPrompt::Home(inner)) if filter.matches(&inner).is_success() => {
+                            debug!("allowing read of script file");
+                            let reply = HomeInterface::prompt_to_reply(inner, Action::Allow)
+                                .for_timespan("10s") // Using a timespan so our rule auto-removes
+                                .into();
+                            snapd_client.reply_to_prompt(&id, reply).await.unwrap();
+                            return;
+                        }
+
+                        _ => (),
+                    };
+                }
+            }
+        });
+
         let seq = PromptSequence::try_new_from_file(&path)?;
 
         Ok(Self { seq, path })
@@ -233,7 +291,7 @@ impl ReplyClient for ScriptedClient {
         }
     }
 
-    fn running(&self) -> bool {
+    fn is_running(&self) -> bool {
         !self.seq.is_empty()
     }
 }

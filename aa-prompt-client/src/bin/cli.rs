@@ -25,11 +25,16 @@ enum Command {
         record: Option<String>,
     },
 
-    /// Run the testing flutter UI as a persistent client.
+    /// Run a scripted client expecting a given sequence of prompts
     Scripted {
         /// The path to the input JSON file
         #[clap(short, long, value_name = "FILE")]
         script: String,
+
+        /// The number of seconds to wait following completion of the script to check for any
+        /// unexpected additional prompts.
+        #[clap(short, long, value_name = "SECONDS")]
+        grace_period: Option<u64>,
     },
 }
 
@@ -56,15 +61,18 @@ async fn main() -> Result<()> {
         set_global_default(subscriber).expect("unable to set a global tracing subscriber");
     }
 
-    let c = SnapdSocketClient::default();
+    let mut c = SnapdSocketClient::default();
     if !c.is_prompting_enabled().await? {
         println!("error: prompting is not enabled");
         return Ok(());
     }
 
     match command {
-        Command::Echo { record } => run_echo_loop(c, record).await,
-        Command::Flutter { record } => run_flutter_client_loop(c, record).await,
-        Command::Scripted { script } => run_scripted_client_loop(c, script).await,
+        Command::Echo { record } => run_echo_loop(&mut c, record).await,
+        Command::Flutter { record } => run_flutter_client_loop(&mut c, record).await,
+        Command::Scripted {
+            script,
+            grace_period,
+        } => run_scripted_client_loop(&mut c, script, grace_period).await,
     }
 }
