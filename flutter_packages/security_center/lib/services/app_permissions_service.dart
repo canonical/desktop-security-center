@@ -8,7 +8,7 @@ export 'package:snapd/snapd.dart'
         SnapdRequestLifespan,
         SnapdRequestOutcome;
 
-abstract class RulesService {
+abstract class AppPermissionsService {
   Future<List<SnapdRule>> getRules({
     String? snap,
     String? interface,

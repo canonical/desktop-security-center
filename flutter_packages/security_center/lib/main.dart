@@ -4,9 +4,9 @@ import 'package:args/args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/security_center_app.dart';
-import 'package:security_center/services/fake_rules_service.dart';
-import 'package:security_center/services/rules_service.dart';
-import 'package:security_center/services/snapd_rules_service.dart';
+import 'package:security_center/services/app_permissions_service.dart';
+import 'package:security_center/services/fake_app_permissions_service.dart';
+import 'package:security_center/services/snapd_app_permissions_service.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
@@ -34,12 +34,14 @@ Future<void> main(List<String> args) async {
   }
 
   if (argResults.flag('dry-run')) {
-    registerService<RulesService>(
-      () => FakeRulesService.fromFile(argResults['test-rules'] as String),
+    registerService<AppPermissionsService>(
+      () => FakeAppPermissionsService.fromFile(
+        argResults['test-rules'] as String,
+      ),
     );
   } else {
-    registerService<RulesService>(
-      () => SnapdRulesService(
+    registerService<AppPermissionsService>(
+      () => SnapdAppPermissionsService(
         SnapdClient(
           socketPath: Platform.environment.containsKey('SNAP_NAME')
               ? '/run/snapd-snap.socket'

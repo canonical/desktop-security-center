@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:security_center/rules/snap_rules_page.dart';
-import 'package:security_center/services/rules_service.dart';
+import 'package:security_center/app_permissions/app_rules_page.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
+import 'package:security_center/services/app_permissions_service.dart';
 
 import '../test_utils.dart';
 
@@ -28,15 +29,15 @@ void main() {
     await tester.pumpApp(
       (_) => UncontrolledProviderScope(
         container: container,
-        child: const SnapRulesPage(
+        child: const AppRulesPage(
           snap: 'firefox',
-          interface: 'home',
+          interface: SnapdInterface.home,
         ),
       ),
     );
     await tester.pump();
 
-    expect(find.text('Rules for firefox'), findsOneWidget);
+    expect(find.text('firefox'), findsOneWidget);
 
     await tester.tap(find.text('ruleId'));
     verify(mockRulesService.removeRule('ruleId')).called(1);

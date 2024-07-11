@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:security_center/rules/rules_providers.dart';
-import 'package:security_center/services/rules_service.dart';
+import 'package:security_center/app_permissions/rules_providers.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
+import 'package:security_center/l10n.dart';
+import 'package:security_center/services/app_permissions_service.dart';
+import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
-class SnapRulesPage extends ConsumerWidget {
-  const SnapRulesPage({required this.snap, required this.interface, super.key});
+class AppRulesPage extends ConsumerWidget {
+  const AppRulesPage({required this.snap, required this.interface, super.key});
 
   final String snap;
-  final String interface;
-
-  static Route<void> route({required String snap, required String interface}) {
-    return MaterialPageRoute<void>(
-      builder: (_) => SnapRulesPage(snap: snap, interface: interface),
-    );
-  }
+  final SnapdInterface interface;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,7 +38,7 @@ class _Body extends ConsumerWidget {
   });
 
   final String snap;
-  final String interface;
+  final SnapdInterface interface;
   final List<SnapdRule> rules;
 
   @override
@@ -48,36 +46,34 @@ class _Body extends ConsumerWidget {
     final notifier = ref.read(
       snapRulesModelProvider(snap: snap, interface: interface).notifier,
     );
-    return Padding(
-      padding: const EdgeInsets.all(30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const YaruBackButton(),
-          Text(
-            'Rules for $snap',
-            style: Theme.of(context).textTheme.headlineSmall,
+    final l10n = AppLocalizations.of(context);
+    final tiles = rules
+        .map(
+          (rule) => ListTile(
+            leading: Text(rule.id),
+            title: _Rule(rule: rule),
+            onTap: () => notifier.removeRule(rule.id),
           ),
-          Flexible(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: rules.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: Text(rules[index].id),
-                  title: _Rule(rule: rules[index]),
-                  onTap: () => notifier.removeRule(rules[index].id),
-                );
-              },
-            ),
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: notifier.removeAll,
-            child: const Text('Remove all'),
-          ),
-        ],
-      ),
+        )
+        .toList();
+    return ScrollablePage(
+      children: [
+        Row(
+          children: [
+            const Icon(YaruIcons.placeholder_icon),
+            const SizedBox(width: 10),
+            Text(snap, style: Theme.of(context).textTheme.titleLarge),
+          ],
+        ),
+        Text(interface.localizedDescription(l10n)),
+        const SizedBox(height: 24),
+        TileList(children: tiles),
+        const SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: notifier.removeAll,
+          child: Text(l10n.snapRulesRemoveAll),
+        ),
+      ],
     );
   }
 }

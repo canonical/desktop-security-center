@@ -1,0 +1,48 @@
+{
+    "@@locale": "en",
+    "appTitle": "Security Center",
+    "@appTitle": {},
+    "snapPermissionsEnableTitle": "Require snaps to ask for system permissions",
+    "@snapPermissionsEnableTitle": {},
+    "snapPermissionsEnableWarning": "This is an experimental feature for controlling access to your system’s resources.",
+    "@snapPermissionsEnableWarning": {},
+    "snapPermissionsExperimentalLabel": "Experimental",
+    "@snapPermissionsExperimentalLabel": {},
+    "snapPermissionsOtherDescription": "You can manage other permissions in Settings › Applications.",
+    "@snapPermissionsOtherDescription": {},
+    "snapPermissionsPageTitle": "App Permissions",
+    "@snapPermissionsPageTitle": {},
+    "snapRulesCount": "{n, plural, =0{no rules} =1{1 rule} other{{n} rules}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "Manage {interface} permissions for {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesRemoveAll": "Remove all",
+    "@snapRulesRemoveAll": {},
+    "homeInterfacePageTitle": "Home folder",
+    "@homeInterfacePageTitle": {},
+    "homeInterfacePageDescription": "Manage permissions to access files in your Home folder.",
+    "@homeInterfacePageDescription": {},
+    "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 app} other {{n} apps}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    }
+}

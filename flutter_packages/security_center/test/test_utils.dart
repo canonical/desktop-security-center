@@ -3,18 +3,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:security_center/services/rules_service.dart';
+import 'package:security_center/l10n.dart';
+import 'package:security_center/services/app_permissions_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'test_utils.mocks.dart';
 
 extension WidgetTesterX on WidgetTester {
   BuildContext get context => element(find.byType(Scaffold).first);
+  AppLocalizations get l10n => AppLocalizations.of(context);
 
   Future<void> pumpApp(WidgetBuilder builder) async {
     return pumpWidget(
       MaterialApp(
         home: Scaffold(body: Builder(builder: builder)),
+        localizationsDelegates: localizationsDelegates,
       ),
     );
   }
@@ -42,12 +45,14 @@ ProviderContainer createContainer({
   return container;
 }
 
-@GenerateMocks([RulesService])
-RulesService registerMockRulesService({List<SnapdRule> rules = const []}) {
-  final service = MockRulesService();
+@GenerateMocks([AppPermissionsService])
+AppPermissionsService registerMockRulesService({
+  List<SnapdRule> rules = const [],
+}) {
+  final service = MockAppPermissionsService();
   when(service.getRules()).thenAnswer((_) async => rules);
 
-  registerMockService<RulesService>(service);
-  addTearDown(unregisterService<RulesService>);
+  registerMockService<AppPermissionsService>(service);
+  addTearDown(unregisterService<AppPermissionsService>);
   return service;
 }
