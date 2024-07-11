@@ -40,7 +40,7 @@ trait ReplyClient {
         rec: &mut PromptRecording,
     ) -> Result<()> {
         rec.push_prompt(&prompt);
-        let meta = snapd_client.snap_metadata(prompt.snap()).await?;
+        let meta = snapd_client.snap_metadata(prompt.snap()).await;
         let mut reply = self
             .get_reply(prompt.clone(), meta.clone(), None, rec)
             .await?;

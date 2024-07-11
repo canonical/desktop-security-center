@@ -196,28 +196,38 @@ where
     }
 
     /// Pull metadata for rendering apparmor prompts using the `snap` and `find` snapd endpoints.
-    pub async fn snap_metadata(&self, name: &str) -> Result<Option<SnapMeta>> {
-        let res = tokio::try_join!(
-            meta_from_snap_details(name, &self.client),
-            meta_from_find_details(name, &self.client),
-        );
+    pub async fn snap_metadata(&self, name: &str) -> Option<SnapMeta> {
+        let res = self.client.get_json(&format!("snaps/{name}")).await;
+        return match res {
+            Ok(SnapDetails {
+                install_date,
+                publisher,
+            }) => Some(SnapMeta {
+                updated_at: install_date
+                    .split_once('T')
+                    .map(|(s, _)| s.to_owned())
+                    .unwrap_or(install_date),
+                store_url: format!("snap://{name}"),
+                publisher: publisher.display_name,
+            }),
 
-        let (channel, (publisher, mut channels)) = match res {
-            Ok(data) => data,
-            Err(_) => return Ok(None),
+            Err(_) => None,
         };
 
-        let updated_at = channels
-            .remove(&channel)
-            .unwrap_or_else(|| "unknown".to_string());
+        // Serde structs
 
-        let store_url = format!("snap://{name}");
+        #[derive(Debug, Default, Deserialize)]
+        #[serde(rename_all = "kebab-case")]
+        struct SnapDetails {
+            install_date: String,
+            publisher: Publisher,
+        }
 
-        Ok(Some(SnapMeta {
-            updated_at,
-            store_url,
-            publisher,
-        }))
+        #[derive(Debug, Default, Deserialize)]
+        #[serde(rename_all = "kebab-case")]
+        struct Publisher {
+            display_name: String,
+        }
     }
 }
 
@@ -227,74 +237,6 @@ pub struct SnapMeta {
     pub updated_at: String,
     pub store_url: String,
     pub publisher: String,
-}
-
-async fn meta_from_snap_details<C>(name: &str, client: &C) -> Result<String>
-where
-    C: Client,
-{
-    let SnapDetails { channel } = client.get_json(&format!("snaps/{name}")).await?;
-
-    return Ok(channel);
-
-    // Serde structs
-
-    #[derive(Debug, Default, Deserialize)]
-    #[serde(rename_all = "kebab-case")]
-    struct SnapDetails {
-        channel: String,
-    }
-}
-
-async fn meta_from_find_details<C>(
-    name: &str,
-    client: &C,
-) -> Result<(String, HashMap<String, String>)>
-where
-    C: Client,
-{
-    let mut find_details: Vec<FindDetails> = client.get_json(&format!("find?name={name}")).await?;
-    let FindDetails {
-        publisher,
-        channels,
-    } = find_details.remove(0);
-
-    let channels = channels
-        .into_iter()
-        .map(|(channel, data)| {
-            let released_at = data
-                .released_at
-                .split_once('T')
-                .map(|(s, _)| s.to_owned())
-                .unwrap_or(data.released_at);
-
-            (channel, released_at)
-        })
-        .collect();
-
-    return Ok((publisher.display_name, channels));
-
-    // Serde structs
-
-    // See https://snapcraft.io/docs/snapd-api#heading--find for other available fields
-    #[derive(Debug, Default, Deserialize)]
-    #[serde(rename_all = "kebab-case")]
-    struct FindDetails {
-        publisher: Publisher,
-        channels: HashMap<String, Channel>,
-    }
-
-    #[derive(Debug, Default, Deserialize)]
-    #[serde(rename_all = "kebab-case")]
-    struct Publisher {
-        display_name: String,
-    }
-
-    #[derive(Debug, Default, Deserialize)]
-    #[serde(rename_all = "kebab-case")]
-    struct Channel {
-        released_at: String,
-    }
 }
 
 #[derive(Debug, Default, Deserialize)]
