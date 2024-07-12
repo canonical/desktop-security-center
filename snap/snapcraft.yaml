@@ -13,8 +13,8 @@ apps:
     command: bin/aa-prompt-client
     extensions: [gnome]
     plugs:
-      - snap-prompting-control
       - home
+      - snap-prompting-control
 
   security-center:
     command: bin/security-center/security_center

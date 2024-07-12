@@ -19,6 +19,7 @@ dependencies:
   ubuntu_lints: ^0.4.0
   ubuntu_logger: ^0.1.1
   ubuntu_service: ^0.3.2
+  url_launcher: ^6.3.0
   yaru:
     git:
       url: https://github.com/ubuntu/yaru.dart.git

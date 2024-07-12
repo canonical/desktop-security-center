@@ -6,7 +6,7 @@ use chrono::{DateTime, SecondsFormat, Utc};
 use hyper::Uri;
 use prompt::RawPrompt;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
-use std::{collections::BTreeMap, env, str::FromStr};
+use std::{collections::HashMap, env, str::FromStr};
 use tracing::debug;
 
 pub mod interfaces;
@@ -180,8 +180,6 @@ where
             .get_json(&format!("interfaces/requests/prompts/{}", id.0))
             .await?;
 
-        debug!(raw=?prompt, "raw response from snapd");
-
         prompt.try_into()
     }
 
@@ -196,11 +194,54 @@ where
 
         Ok(())
     }
+
+    /// Pull metadata for rendering apparmor prompts using the `snap` and `find` snapd endpoints.
+    pub async fn snap_metadata(&self, name: &str) -> Option<SnapMeta> {
+        let res = self.client.get_json(&format!("snaps/{name}")).await;
+        return match res {
+            Ok(SnapDetails {
+                install_date,
+                publisher,
+            }) => Some(SnapMeta {
+                updated_at: install_date
+                    .split_once('T')
+                    .map(|(s, _)| s.to_owned())
+                    .unwrap_or(install_date),
+                store_url: format!("snap://{name}"),
+                publisher: publisher.display_name,
+            }),
+
+            Err(_) => None,
+        };
+
+        // Serde structs
+
+        #[derive(Debug, Default, Deserialize)]
+        #[serde(rename_all = "kebab-case")]
+        struct SnapDetails {
+            install_date: String,
+            publisher: Publisher,
+        }
+
+        #[derive(Debug, Default, Deserialize)]
+        #[serde(rename_all = "kebab-case")]
+        struct Publisher {
+            display_name: String,
+        }
+    }
+}
+
+#[derive(Debug, Default, Clone, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub struct SnapMeta {
+    pub updated_at: String,
+    pub store_url: String,
+    pub publisher: String,
 }
 
 #[derive(Debug, Default, Deserialize)]
 struct SysInfo {
-    features: BTreeMap<String, Feature>,
+    features: HashMap<String, Feature>,
 }
 
 impl SysInfo {
@@ -242,7 +283,7 @@ mod tests {
     #[test_case(true, Some("foo"), Enabled::NotSupported("foo"); "unsupported but enabled")]
     #[test]
     fn prompting_enabled_works(enabled: bool, unsupported_reason: Option<&str>, expected: Enabled) {
-        let mut features = BTreeMap::default();
+        let mut features = HashMap::default();
         features.insert(
             FEATURE_NAME.to_string(),
             Feature {

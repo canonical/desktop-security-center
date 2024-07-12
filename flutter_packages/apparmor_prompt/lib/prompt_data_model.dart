@@ -25,6 +25,9 @@ class PromptDetails with _$PromptDetails {
     required List<Permission> availablePermissions,
     required List<InitialOption> initialOptions,
     required List<MoreOption> moreOptions,
+    required String publisher,
+    required String updatedAt,
+    String? storeUrl,
     String? previousErrorMessage,
   }) = _PromptDetails;
 
@@ -97,7 +100,7 @@ class PromptDataModel extends _$PromptDataModel {
       // forcing for now while we are iterating on what options we provice
       // withMoreOptions: inErrorState,
       withMoreOptions: true,
-      selectedPath: inErrorState ? details.initialOptions.length : 0,
+      selectedPath: inErrorState ? details.initialOptions.length : null,
       accessPolicy: AccessPolicy.allow,
       lifespan: Lifespan.forever,
       permissions: details.requestedPermissions,

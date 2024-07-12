@@ -11,6 +11,8 @@ use std::fmt;
 use tokio::process::Command;
 use tracing::debug;
 
+use super::SnapMeta;
+
 pub mod home;
 
 #[allow(async_fn_in_trait)]
@@ -33,6 +35,7 @@ pub trait SnapInterface: fmt::Debug + Clone {
     fn map_ui_input(
         &self,
         prompt: Prompt<Self>,
+        meta: Option<SnapMeta>,
         previous_error_message: Option<String>,
     ) -> Self::UiInput;
 
@@ -42,10 +45,11 @@ pub trait SnapInterface: fmt::Debug + Clone {
         &self,
         cmd: &str,
         prompt: Prompt<Self>,
+        meta: Option<SnapMeta>,
         prev_error: Option<String>,
         rec: &mut PromptRecording,
     ) -> Result<PromptReply<Self>> {
-        let input = self.map_ui_input(prompt.clone(), prev_error);
+        let input = self.map_ui_input(prompt.clone(), meta, prev_error);
         let json_input = serde_json::to_value(&input)?;
         debug!(%json_input, "prompt details for the flutter ui");
 

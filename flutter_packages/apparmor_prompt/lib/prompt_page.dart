@@ -1,6 +1,7 @@
 import 'package:apparmor_prompt/prompt_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:yaru/yaru.dart';
 
 const title = 'Security Notification';
@@ -37,28 +38,16 @@ class PromptPage extends ConsumerWidget {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(12.0),
-                child: YaruPlaceholderIcon(size: Size(60, 60)),
-              ),
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const InitialOptions(),
-                    if (model.withMoreOptions) ...[
-                      const SizedBox(height: 20),
-                      const Divider(),
-                      const SizedBox(height: 20),
-                      const MoreOptions(),
-                    ],
-                  ],
-                ),
-              ),
+              const InitialOptions(),
+              if (model.withMoreOptions) ...[
+                const SizedBox(height: 20),
+                const Divider(),
+                const SizedBox(height: 20),
+                const MoreOptions(),
+              ],
             ],
           ),
         ),
@@ -102,14 +91,54 @@ class InitialOptions extends ConsumerWidget {
             children: [
               Container(
                 color: theme.cardColor,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Published by \$PUBLISHER'),
-                      Text('Last updated on \$LAST_UPDATED'),
-                      Text('<Visit App Center page>'),
+                      Text.rich(
+                        TextSpan(
+                          text: 'Published by ',
+                          children: [
+                            TextSpan(
+                              text: model.details.publisher,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                                color: theme.colorScheme.primary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          text: 'Last updated on ',
+                          children: [
+                            TextSpan(
+                              text: model.details.updatedAt,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (model.details.storeUrl != null) ...[
+                        InkWell(
+                          onTap: () => launchUrlString(model.details.storeUrl!),
+                          child: Text.rich(
+                            TextSpan(
+                              text: 'Visit App Center page',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                                color: theme.colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -238,10 +267,10 @@ class PathChoiceRadio extends ConsumerWidget {
             Text.rich(
               TextSpan(
                 text: pathPattern,
-                style: TextStyle(
-                  color: color,
-                  fontSize: 14,
-                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall!
+                    .copyWith(color: color),
               ),
             ),
           ],
