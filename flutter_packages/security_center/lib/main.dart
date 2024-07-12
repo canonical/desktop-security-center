@@ -42,11 +42,7 @@ Future<void> main(List<String> args) async {
   } else {
     registerService<AppPermissionsService>(
       () => SnapdAppPermissionsService(
-        SnapdClient(
-          socketPath: Platform.environment.containsKey('SNAP_NAME')
-              ? '/run/snapd-snap.socket'
-              : '/run/snapd.socket',
-        ),
+        SnapdClient(),
       ),
     );
   }

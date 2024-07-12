@@ -48,9 +48,11 @@ ProviderContainer createContainer({
 @GenerateMocks([AppPermissionsService])
 AppPermissionsService registerMockRulesService({
   List<SnapdRule> rules = const [],
+  bool enabled = true,
 }) {
   final service = MockAppPermissionsService();
   when(service.getRules()).thenAnswer((_) async => rules);
+  when(service.isEnabled()).thenAnswer((_) async => enabled);
 
   registerMockService<AppPermissionsService>(service);
   addTearDown(unregisterService<AppPermissionsService>);

@@ -16,4 +16,8 @@ abstract class AppPermissionsService {
 
   Future<void> removeRule(String id);
   Future<void> removeAllRules({required String snap, String? interface});
+
+  Future<bool> isEnabled();
+  Future<void> enable();
+  Future<void> disable();
 }

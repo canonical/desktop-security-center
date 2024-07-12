@@ -27,6 +27,7 @@ class FakeAppPermissionsService implements AppPermissionsService {
   }
 
   final List<SnapdRule> rules;
+  bool _enabled = true;
 
   @override
   Future<List<SnapdRule>> getRules({
@@ -51,4 +52,13 @@ class FakeAppPermissionsService implements AppPermissionsService {
           (interface == null || rule.interface == interface),
     );
   }
+
+  @override
+  Future<bool> isEnabled() async => _enabled;
+
+  @override
+  Future<void> enable() async => _enabled = true;
+
+  @override
+  Future<void> disable() async => _enabled = false;
 }
