@@ -267,10 +267,10 @@ class PathChoiceRadio extends ConsumerWidget {
             Text.rich(
               TextSpan(
                 text: pathPattern,
-                style: TextStyle(
-                  color: color,
-                  fontSize: 14,
-                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall!
+                    .copyWith(color: color),
               ),
             ),
           ],
