@@ -42,6 +42,7 @@ jobs:
       - name: Run tests
         working-directory: ./aa-prompt-client
         run: |
+          sudo apt-get install protobuf-compiler
           cargo fmt -- --check
           cargo clippy -- -D warnings
           cargo test
