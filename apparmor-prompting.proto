@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package apparmor_prompting;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+service AppArmorPrompting {
+    rpc GetCurrentPrompt (google.protobuf.Empty) returns (GetCurrentPromptResponse);
+    rpc ReplyToPrompt (PromptReply) returns (PromptReplyResponse);
+    rpc ResolveHomePatternType (google.protobuf.StringValue) returns (ResolveHomePatternTypeResponse);
+}
+
+message PromptReply {
+    string prompt_id = 1;
+    Action action = 2;
+    Lifespan lifespan = 3;
+    oneof prompt_reply {
+        HomePromptReply home_prompt_reply = 4;
+    }
+}
+
+message PromptReplyResponse {
+    PromptReplyType prompt_reply_type = 1;
+    string message = 2;
+    enum PromptReplyType {
+        SUCCESS = 0;
+        UNKNOWN = 1;
+    }
+}
+
+enum Action {
+    ALLOW = 0;
+    DENY = 1;
+} 
+
+enum Lifespan {
+    SINGLE = 0;
+    SESSION = 1;
+    FOREVER = 2;
+}
+
+message GetCurrentPromptResponse {
+    oneof prompt {
+        HomePrompt home_prompt = 1;
+    }
+
+}
+
+message HomePromptReply {
+   string path_pattern = 1;
+   repeated string permissions = 2;
+}
+
+message HomePrompt {
+    MetaData snap_meta_data = 1;
+    string requested_path = 2;
+    repeated string requested_permissions = 3;
+    repeated string available_permissions = 4;
+    repeated MoreOption more_options = 5;
+    message MoreOption {
+        HomePatternType home_pattern_type = 1;
+        string path_pattern = 2;
+    }
+}
+
+enum HomePatternType {
+    REQUESTED_DIRECTORY = 0;
+    REQUESTED_FILE = 1;
+    TOP_LEVEL_DIRECTORY = 2;
+    HOME_DIRECTORY = 3;
+    MATCHING_FILE_EXTENSION = 4;
+    ARCHIVE_FILES = 5;
+    AUDIO_FILES = 6;
+    DOCUMENT_FILES = 7;
+    IMAGE_FILES = 8;
+    VIDEO_FILES = 9;
+}
+
+message MetaData {
+    string prompt_id = 1;
+    string snap_name = 2;
+    string store_url = 3;
+    string publisher = 4;
+    string updated_at = 5;
+}
+
+message ResolveHomePatternTypeResponse {
+   HomePatternType home_pattern_type = 1; 
+}
