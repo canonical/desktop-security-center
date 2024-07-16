@@ -2,8 +2,8 @@ use prompt_sequence::MatchError;
 
 pub mod cli_actions;
 pub mod prompt_sequence;
-pub mod snapd_client;
 pub mod protos;
+pub mod snapd_client;
 
 mod recording;
 mod socket_client;
