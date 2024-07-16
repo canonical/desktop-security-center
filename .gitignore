@@ -9,6 +9,11 @@ target
 .pub-cache/
 .pub/
 pubspec.lock
+build/
+coverage/
+*.g.dart
+*.freezed.dart
+*.mocks.dart
 
 # IntelliJ related
 *.iml
