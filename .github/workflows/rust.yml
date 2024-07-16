@@ -39,10 +39,26 @@ jobs:
           sudo snap refresh snapd --channel=latest/edge/prompting
           sudo snap set system experimental.apparmor-prompting=true
 
+      - name: Install dependencies
+        run: | 
+          sudo apt-get install protobuf-compiler
+
+      - name: Check generated files are up to date
+        working-directory: ./aa-prompt-client
+        run: |
+          cargo clean
+          cargo build
+
+          # Compare generated files with committed files
+          if ! diff -r ./src/protos ./src/protos; then
+            echo "Protobuf files are not up-to-date. Please regenerate and commit them."
+            exit 1
+          fi
+          echo "Protobuf files are up-to-date."
+
       - name: Run tests
         working-directory: ./aa-prompt-client
         run: |
-          sudo apt-get install protobuf-compiler
           cargo fmt -- --check
           cargo clippy -- -D warnings
           cargo test
