@@ -57,6 +57,16 @@ parts:
   client:
     plugin: rust
     source: aa-prompt-client
+    override-build: |
+      set -e
+      mkdir -p $(dirname $CRAFT_PART_SRC)/protos
+      cp $CRAFT_PROJECT_DIR/protos/* $(dirname $CRAFT_PART_SRC)/protos/
+      cargo build --release
+    build-packages:
+      - libssl-dev
+      - pkg-config
+    build-snaps:
+      - protobuf
 
   apparmor-prompt:
     after: [flutter-git]
