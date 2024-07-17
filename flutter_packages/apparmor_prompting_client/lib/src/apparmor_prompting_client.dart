@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:apparmor_prompting_client/src/apparmor_prompting_models.dart';
 import 'package:apparmor_prompting_client/src/generated/apparmor-prompting.pbgrpc.dart'
     as pb;
@@ -7,7 +9,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grpc/grpc.dart';
 
 class AppArmorPromptingClient {
-  AppArmorPromptingClient(Object host, int port)
+  AppArmorPromptingClient(InternetAddress host, int port)
       : _client = pb.AppArmorPromptingClient(
           ClientChannel(
             host,
