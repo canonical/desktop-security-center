@@ -44,6 +44,7 @@ void main() {
           metaData: MetaData(
             promptId: 'promptId',
             snapName: 'snapName',
+            storeUrl: 'storeUrl',
             publisher: 'publisher',
             updatedAt: 'updatedAt',
           ),

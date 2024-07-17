@@ -76,6 +76,7 @@ extension MetaDataConversion on MetaData {
   static MetaData fromProto(pb.MetaData metaData) => MetaData(
         promptId: metaData.promptId,
         snapName: metaData.snapName,
+        storeUrl: metaData.storeUrl,
         publisher: metaData.publisher,
         updatedAt: metaData.updatedAt,
       );
