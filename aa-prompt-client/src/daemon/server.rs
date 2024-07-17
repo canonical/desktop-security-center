@@ -84,7 +84,7 @@ fn map_prompt_reply(reply: PromptReply) -> TypedPromptReply {
 
 fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {
     Prompt::HomePrompt(HomePrompt {
-        snap_meta_data: Some(MetaData {
+        meta_data: Some(MetaData {
             prompt_id: input.id.0,
             snap_name: input.meta.name,
             store_url: input.meta.store_url.unwrap_or_default(),
