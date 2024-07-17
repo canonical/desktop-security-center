@@ -9,35 +9,37 @@ import 'package:apparmor_prompting_client/src/generated/google/protobuf/wrappers
 import 'package:grpc/grpc.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:protobuf/protobuf.dart';
 import 'package:test/test.dart';
 
 import 'apparmor_prompting_client_test.mocks.dart';
 
 void main() {
   group('get current prompt', () {
+    final mockResponse = pb.GetCurrentPromptResponse(
+      homePrompt: pb.HomePrompt(
+        metaData: pb.MetaData(
+          promptId: 'promptId',
+          snapName: 'snapName',
+          storeUrl: 'storeUrl',
+          publisher: 'publisher',
+          updatedAt: 'updatedAt',
+        ),
+        requestedPath: '/home/user/Downloads/example.txt',
+        requestedPermissions: ['read', 'write'],
+        availablePermissions: ['read', 'write', 'execute'],
+        moreOptions: [
+          pb.HomePrompt_MoreOption(
+            homePatternType: pb.HomePatternType.REQUESTED_DIRECTORY,
+            pathPattern: '/home/user/Downloads/**',
+          ),
+        ],
+      ),
+    )..freeze();
     final testCases = [
       (
         name: 'valid home prompt',
-        mockResponse: pb.GetCurrentPromptResponse(
-          homePrompt: pb.HomePrompt(
-            metaData: pb.MetaData(
-              promptId: 'promptId',
-              snapName: 'snapName',
-              storeUrl: 'storeUrl',
-              publisher: 'publisher',
-              updatedAt: 'updatedAt',
-            ),
-            requestedPath: '/home/user/Downloads/example.txt',
-            requestedPermissions: ['read', 'write'],
-            availablePermissions: ['read', 'write', 'execute'],
-            moreOptions: [
-              pb.HomePrompt_MoreOption(
-                homePatternType: pb.HomePatternType.REQUESTED_DIRECTORY,
-                pathPattern: '/home/user/Downloads/**',
-              ),
-            ],
-          ),
-        ),
+        mockResponse: mockResponse,
         expectedDetails: PromptDetails.home(
           metaData: MetaData(
             promptId: 'promptId',
@@ -63,24 +65,11 @@ void main() {
       ),
       (
         name: 'invalid requested permission',
-        mockResponse: pb.GetCurrentPromptResponse(
-          homePrompt: pb.HomePrompt(
-            metaData: pb.MetaData(
-              promptId: 'promptId',
-              snapName: 'snapName',
-              storeUrl: 'storeUrl',
-              publisher: 'publisher',
-              updatedAt: 'updatedAt',
-            ),
-            requestedPath: '/home/user/Downloads/example.txt',
-            requestedPermissions: ['invalid'],
-            availablePermissions: ['read', 'write', 'execute'],
-            moreOptions: [
-              pb.HomePrompt_MoreOption(
-                homePatternType: pb.HomePatternType.REQUESTED_DIRECTORY,
-                pathPattern: '/home/user/Downloads/**',
-              ),
-            ],
+        mockResponse: mockResponse.rebuild(
+          (r) => r.homePrompt = r.homePrompt.rebuild(
+            (p) => p.requestedPermissions
+              ..clear()
+              ..add('invalid'),
           ),
         ),
         expectedDetails: null,
