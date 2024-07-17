@@ -53,7 +53,7 @@ message HomePromptReply {
 }
 
 message HomePrompt {
-    MetaData snap_meta_data = 1;
+    MetaData meta_data = 1;
     string requested_path = 2;
     repeated string requested_permissions = 3;
     repeated string available_permissions = 4;

@@ -72,3 +72,10 @@ scripts:
   test: >
     melos exec -c 1 --fail-fast --dir-exists=test -- \
       flutter test
+
+  # generate protobuf files in apparmor_prompting_client
+  protoc:
+    run: |
+      rm -rf ./flutter_packages/apparmor_prompting_client/lib/src/generated/* &&
+      protoc --dart_out=grpc:./flutter_packages/apparmor_prompting_client/lib/src/generated \
+        -I. ./*.proto google/protobuf/empty.proto google/protobuf/wrappers.proto
