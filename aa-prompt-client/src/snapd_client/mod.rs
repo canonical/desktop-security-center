@@ -12,7 +12,10 @@ use tracing::debug;
 pub mod interfaces;
 mod prompt;
 
-pub use prompt::{Action, Lifespan, Prompt, PromptId, PromptReply, TypedPrompt, TypedPromptReply};
+pub use prompt::{
+    Action, Lifespan, Prompt, PromptId, PromptReply, TypedPrompt, TypedPromptReply, TypedUiInput,
+    UiInput,
+};
 
 const FEATURE_NAME: &str = "apparmor-prompting";
 const LONG_POLL_TIMEOUT: &str = "1h";
@@ -184,18 +187,22 @@ where
     }
 
     /// Submit a reply to the given prompt to snapd
-    pub async fn reply_to_prompt(&self, id: &PromptId, reply: TypedPromptReply) -> Result<()> {
-        let resp: Vec<String> = self
+    pub async fn reply_to_prompt(
+        &self,
+        id: &PromptId,
+        reply: TypedPromptReply,
+    ) -> Result<Vec<PromptId>> {
+        let resp: Vec<PromptId> = self
             .client
             .post_json(&format!("interfaces/requests/prompts/{}", id.0), reply)
             .await?;
 
         debug!(prompt = id.0, ?resp, "response from snapd");
 
-        Ok(())
+        Ok(resp)
     }
 
-    /// Pull metadata for rendering apparmor prompts using the `snap` and `find` snapd endpoints.
+    /// Pull metadata for rendering apparmor prompts using the `snaps` snapd endpoint.
     pub async fn snap_metadata(&self, name: &str) -> Option<SnapMeta> {
         let res = self.client.get_json(&format!("snaps/{name}")).await;
         return match res {
@@ -203,11 +210,12 @@ where
                 install_date,
                 publisher,
             }) => Some(SnapMeta {
+                name: name.to_owned(),
                 updated_at: install_date
                     .split_once('T')
                     .map(|(s, _)| s.to_owned())
                     .unwrap_or(install_date),
-                store_url: format!("snap://{name}"),
+                store_url: Some(format!("snap://{name}")),
                 publisher: publisher.display_name,
             }),
 
@@ -231,11 +239,12 @@ where
     }
 }
 
-#[derive(Debug, Default, Clone, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct SnapMeta {
+    pub name: String,
     pub updated_at: String,
-    pub store_url: String,
+    pub store_url: Option<String>,
     pub publisher: String,
 }
 

@@ -146,7 +146,9 @@ impl PromptRecording {
             .into();
 
         info!("auto-replying to our own prompt for creating output file");
-        c.reply_to_prompt(&id, reply).await
+        c.reply_to_prompt(&id, reply).await?;
+
+        Ok(())
     }
 }
 
