@@ -1,0 +1,26 @@
+{
+    "runtimeType": "home",
+    "metaData": {
+        "promptId": "promptId",
+        "snapName": "firefox",
+        "updatedAt": "updatedAt",
+        "storeUrl": "storeUrl",
+        "publisher": "Mozilla"
+    },
+    "requestedPath": "/home/ubuntu/Downloads/file.txt",
+    "requestedPermissions": [
+        "read",
+        "write"
+    ],
+    "availablePermissions": [
+        "read",
+        "write",
+        "execute"
+    ],
+    "moreOptions": [
+        {
+            "homePatternType": "documentFiles",
+            "pathPattern": "/home/ubuntu/**/{*.txt,*.doc}"
+        }
+    ]
+}

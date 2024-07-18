@@ -9,6 +9,7 @@ environment:
   flutter: ">=3.22.2"
 
 dependencies:
+  apparmor_prompting_client: ^1.0.0
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.5.1
