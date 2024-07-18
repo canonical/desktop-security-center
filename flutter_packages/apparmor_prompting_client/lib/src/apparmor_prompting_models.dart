@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'apparmor_prompting_models.freezed.dart';
+part 'apparmor_prompting_models.g.dart';
 
 enum Action { allow, deny }
 
@@ -32,6 +33,9 @@ class MetaData with _$MetaData {
     required String publisher,
     required String updatedAt,
   }) = _MetaData;
+
+  factory MetaData.fromJson(Map<String, dynamic> json) =>
+      _$MetaDataFromJson(json);
 }
 
 @freezed
@@ -40,6 +44,9 @@ class MoreOption with _$MoreOption {
     required HomePatternType homePatternType,
     required String pathPattern,
   }) = _MoreOption;
+
+  factory MoreOption.fromJson(Map<String, dynamic> json) =>
+      _$MoreOptionFromJson(json);
 }
 
 @freezed
@@ -51,6 +58,9 @@ sealed class PromptDetails with _$PromptDetails {
     required List<Permission> availablePermissions,
     required List<MoreOption> moreOptions,
   }) = PromptDetailsHome;
+
+  factory PromptDetails.fromJson(Map<String, dynamic> json) =>
+      _$PromptDetailsFromJson(json);
 }
 
 @freezed
@@ -62,6 +72,9 @@ sealed class PromptReply with _$PromptReply {
     required String pathPattern,
     required List<Permission> permissions,
   }) = PromptReplyHome;
+
+  factory PromptReply.fromJson(Map<String, dynamic> json) =>
+      _$PromptReplyFromJson(json);
 }
 
 @freezed
