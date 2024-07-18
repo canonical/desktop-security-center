@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:apparmor_prompt/prompt_model.dart';
 import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -95,15 +93,12 @@ class HomePromptDataModel extends _$HomePromptDataModel {
     state = state.copyWith(permissions: permissions);
   }
 
-  Future<void> saveAndContinue() async {
+  Future<PromptReplyResponse> saveAndContinue() async {
     final response =
         await getService<AppArmorPromptingClient>().replyToPrompt(buildReply());
-    switch (response) {
-      case PromptReplyResponseSuccess():
-        exit(0);
-      case PromptReplyResponseUnknown(message: final message):
-        state = state.copyWith(errorMessage: message);
-        return;
+    if (response is PromptReplyResponseUnknown) {
+      state = state.copyWith(errorMessage: response.message);
     }
+    return response;
   }
 }

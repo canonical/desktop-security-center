@@ -202,7 +202,16 @@ class MoreOptions extends ConsumerWidget {
             Align(
               alignment: Alignment.centerRight,
               child: OutlinedButton(
-                onPressed: model.isValid ? notifier.saveAndContinue : null,
+                onPressed: model.isValid
+                    ? () async {
+                        final response = await notifier.saveAndContinue();
+                        if (response is PromptReplyResponseSuccess) {
+                          if (context.mounted) {
+                            await YaruWindow.of(context).close();
+                          }
+                        }
+                      }
+                    : null,
                 child: const Text('Save and continue'),
               ),
             ),

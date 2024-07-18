@@ -527,6 +527,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  mockito:
+    dependency: "direct dev"
+    description:
+      name: mockito
+      sha256: "6841eed20a7befac0ce07df8116c8b8233ed1f4486a7647c7fc5a02ae6163917"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.4.4"
   package_config:
     dependency: transitive
     description:
@@ -927,20 +935,19 @@ packages:
   yaru:
     dependency: "direct main"
     description:
-      path: "."
-      ref: main
-      resolved-ref: cdaec73a472a3ed3de3697ff5022072af9b2c39e
-      url: "https://github.com/ubuntu/yaru.dart.git"
-    source: git
-    version: "4.1.0"
-  yaru_widgets:
-    dependency: "direct main"
-    description:
-      name: yaru_widgets
-      sha256: a5897eb618f1e62d3f35dfed7dc4c69f79fa6e3cab7ae9a7bafb2bc88aae9115
+      name: yaru
+      sha256: e868965bcfbca568f54916e3f59a636a8a6ee39f2e102df8844061cd78a8d20e
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.2"
+    version: "4.1.0"
+  yaru_test:
+    dependency: "direct dev"
+    description:
+      name: yaru_test
+      sha256: f6a4cb60706950fa09e6d86d4db0770432124ad7924f6220cc01c66bf6e45caa
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   yaru_window:
     dependency: transitive
     description:
