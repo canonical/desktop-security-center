@@ -10,7 +10,7 @@ use crate::{
     Result,
 };
 use std::collections::HashMap;
-use tokio::sync::mpsc::Sender;
+use tokio::sync::mpsc::UnboundedSender;
 use tracing::{debug, trace, warn};
 
 struct MetaCache {
@@ -36,7 +36,7 @@ impl MetaCache {
 
 pub async fn poll_for_prompts(
     mut client: SnapdSocketClient,
-    tx: Sender<EnrichedPrompt>,
+    tx: UnboundedSender<EnrichedPrompt>,
 ) -> Result<()> {
     let mut meta_cache = MetaCache {
         inner: HashMap::new(),
@@ -61,7 +61,7 @@ pub async fn poll_for_prompts(
 
             let meta = meta_cache.get(prompt.snap(), &client).await;
 
-            if let Err(error) = tx.send(EnrichedPrompt { prompt, meta }).await {
+            if let Err(error) = tx.send(EnrichedPrompt { prompt, meta }) {
                 warn!(%error, "receiver channel for enriched prompts has been dropped. Exiting.");
                 return Ok(());
             }

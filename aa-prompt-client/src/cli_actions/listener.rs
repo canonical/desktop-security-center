@@ -19,6 +19,7 @@ use tracing::{debug, error, info, warn};
 const PROMPT_NOT_FOUND: &str = "no prompt with the given ID found for the given user";
 const NO_PROMPTS_FOR_USER: &str = "no prompts found for the given user";
 
+#[allow(async_fn_in_trait)]
 pub trait ReplyClient {
     async fn get_reply(
         &mut self,

@@ -6,33 +6,62 @@ use crate::{
             get_current_prompt_response::Prompt, home_prompt::MoreOption,
             prompt_reply_response::PromptReplyType, HomePatternType, MetaData, PromptReply,
         },
-        AppArmorPrompting, GetCurrentPromptResponse, HomePrompt, PromptReplyResponse,
-        ResolveHomePatternTypeResponse,
+        AppArmorPrompting, AppArmorPromptingServer, GetCurrentPromptResponse, HomePrompt,
+        PromptReplyResponse, ResolveHomePatternTypeResponse,
     },
     snapd_client::{
         interfaces::home::{HomeInterface, PatternType, TypedPathPattern},
         PromptId, SnapdSocketClient, TypedPromptReply, TypedUiInput, UiInput,
     },
 };
-use tokio::sync::mpsc::Sender;
+use std::{env, fs};
+use tokio::{net::UnixListener, sync::mpsc::UnboundedSender};
 use tonic::{async_trait, Request, Response, Status};
 
-pub struct Server {
+pub fn new_server_and_listener(
     client: SnapdSocketClient,
     active_prompt: ReadOnlyActivePrompt,
-    ch_actioned_prompts: Sender<ActionedPrompt>,
+    tx_actioned_prompts: UnboundedSender<ActionedPrompt>,
+) -> (AppArmorPromptingServer<Service>, UnixListener) {
+    let service = Service::new(client.clone(), active_prompt, tx_actioned_prompts);
+    let snap_dir = env::var("SNAP").expect("SNAP env var to be set");
+    let path = format!("{}/apparmor-prompting.sock", snap_dir);
+    let _ = fs::remove_file(&path); // Remove the old socket file if it exists
+    let listener = UnixListener::bind(&path).expect("to be able to bind to our socket");
+
+    (AppArmorPromptingServer::new(service), listener)
+}
+
+pub struct Service {
+    client: SnapdSocketClient,
+    active_prompt: ReadOnlyActivePrompt,
+    tx_actioned_prompts: UnboundedSender<ActionedPrompt>,
+}
+
+impl Service {
+    pub fn new(
+        client: SnapdSocketClient,
+        active_prompt: ReadOnlyActivePrompt,
+        tx_actioned_prompts: UnboundedSender<ActionedPrompt>,
+    ) -> Self {
+        Self {
+            client,
+            active_prompt,
+            tx_actioned_prompts,
+        }
+    }
 }
 
 #[async_trait]
-impl AppArmorPrompting for Server {
+impl AppArmorPrompting for Service {
     async fn get_current_prompt(
         &self,
         _request: Request<()>,
     ) -> Result<Response<GetCurrentPromptResponse>, Status> {
-        let prompt = match self.active_prompt.get() {
-            Some(TypedUiInput::Home(p)) => Some(map_home_response(p)),
-            None => None,
-        };
+        let prompt = self
+            .active_prompt
+            .get()
+            .map(|TypedUiInput::Home(p)| map_home_response(p));
 
         Ok(Response::new(GetCurrentPromptResponse { prompt }))
     }
@@ -56,11 +85,7 @@ impl AppArmorPrompting for Server {
             }
         };
 
-        if let Err(e) = self
-            .ch_actioned_prompts
-            .send(ActionedPrompt { id, others })
-            .await
-        {
+        if let Err(e) = self.tx_actioned_prompts.send(ActionedPrompt { id, others }) {
             panic!("send on closed channel: {e}");
         }
 
