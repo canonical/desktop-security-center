@@ -29,9 +29,9 @@ class MetaData with _$MetaData {
   factory MetaData({
     required String promptId,
     required String snapName,
-    required String storeUrl,
-    required String publisher,
     required String updatedAt,
+    String? storeUrl,
+    String? publisher,
   }) = _MetaData;
 
   factory MetaData.fromJson(Map<String, dynamic> json) =>
