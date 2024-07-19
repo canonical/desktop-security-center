@@ -4,19 +4,32 @@ use crate::{
     protos::{
         apparmor_prompting::{
             get_current_prompt_response::Prompt, home_prompt::MoreOption,
-            prompt_reply_response::PromptReplyType, HomePatternType, MetaData, PromptReply,
+            prompt_reply::PromptReply::HomePromptReply, prompt_reply_response::PromptReplyType,
+            HomePatternType, MetaData, PromptReply,
         },
         AppArmorPrompting, AppArmorPromptingServer, GetCurrentPromptResponse, HomePrompt,
         PromptReplyResponse, ResolveHomePatternTypeResponse,
     },
     snapd_client::{
-        interfaces::home::{HomeInterface, PatternType, TypedPathPattern},
-        PromptId, SnapdSocketClient, TypedPromptReply, TypedUiInput, UiInput,
+        interfaces::home::{HomeInterface, HomeReplyConstraints, PatternType, TypedPathPattern},
+        PromptId, PromptReply as SnapPromptReply, SnapdSocketClient, TypedPromptReply,
+        TypedUiInput, UiInput,
     },
 };
 use std::{env, fs};
 use tokio::{net::UnixListener, sync::mpsc::UnboundedSender};
-use tonic::{async_trait, Request, Response, Status};
+use tonic::{async_trait, Code, Request, Response, Status};
+
+macro_rules! map_enum {
+    ($val:expr => $name:ident; [$($variant:ident),+]) => {
+        match $val {
+            $(
+                $crate::protos::apparmor_prompting::$name::$variant =>
+                    $crate::snapd_client::$name::$variant,
+            )+
+        }
+    }
+}
 
 pub fn new_server_and_listener(
     client: SnapdSocketClient,
@@ -71,8 +84,10 @@ impl AppArmorPrompting for Service {
         request: Request<PromptReply>,
     ) -> Result<Response<PromptReplyResponse>, Status> {
         let req = request.into_inner();
+
+        let reply = map_prompt_reply(req.clone())?;
+
         let id = PromptId(req.prompt_id.clone());
-        let reply = map_prompt_reply(req);
         let others = match self.client.reply_to_prompt(&id, reply).await {
             Ok(res) => res,
             // FIXME: We need to check for snapd errors vs other errors rather than just
@@ -97,14 +112,34 @@ impl AppArmorPrompting for Service {
 
     async fn resolve_home_pattern_type(
         &self,
-        request: Request<String>,
+        _: Request<String>,
     ) -> Result<Response<ResolveHomePatternTypeResponse>, Status> {
-        todo!()
+        // FIXME: finish this endpoint
+        Err(Status::new(
+            Code::Unimplemented,
+            "this endpoint is not yet implemented",
+        ))
     }
 }
 
-fn map_prompt_reply(reply: PromptReply) -> TypedPromptReply {
-    todo!("prompt all the replies");
+fn map_prompt_reply(mut reply: PromptReply) -> Result<TypedPromptReply, Status> {
+    let prompt_type = reply.prompt_reply.take().ok_or(Status::new(
+        Code::InvalidArgument,
+        "recieved empty prompt_reply",
+    ))?;
+
+    Ok(TypedPromptReply::Home(SnapPromptReply::<HomeInterface> {
+        action: map_enum!(reply.action() => Action; [Allow, Deny]),
+        lifespan: map_enum!(reply.lifespan() => Lifespan; [Single, Session, Forever]),
+        duration: None, // we never use the Timespan variant
+        constraints: match prompt_type {
+            HomePromptReply(home_prompt_reply) => HomeReplyConstraints {
+                path_pattern: home_prompt_reply.path_pattern,
+                permissions: home_prompt_reply.permissions,
+                available_permissions: Vec::new(), //????
+            },
+        },
+    }))
 }
 
 fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {

@@ -248,10 +248,10 @@ pub struct HomeUiReply {
 #[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct HomeReplyConstraints {
-    path_pattern: String,
-    permissions: Vec<String>,
+    pub(crate) path_pattern: String,
+    pub(crate) permissions: Vec<String>,
     #[serde(skip)]
-    available_permissions: Vec<String>,
+    pub(crate) available_permissions: Vec<String>,
 }
 
 #[derive(Debug, Default, Serialize, Deserialize, Clone)]
