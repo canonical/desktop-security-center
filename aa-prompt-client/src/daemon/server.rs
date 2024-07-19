@@ -37,8 +37,8 @@ pub fn new_server_and_listener(
     tx_actioned_prompts: UnboundedSender<ActionedPrompt>,
 ) -> (AppArmorPromptingServer<Service>, UnixListener) {
     let service = Service::new(client.clone(), active_prompt, tx_actioned_prompts);
-    let snap_dir = env::var("SNAP").expect("SNAP env var to be set");
-    let path = format!("{}/apparmor-prompting.sock", snap_dir);
+    let path = env::var("AA_PROMPTING_CLIENT_SOCKET")
+        .expect("AA_PROMPTING_CLIENT_SOCKET env var to be set");
     let _ = fs::remove_file(&path); // Remove the old socket file if it exists
     let listener = UnixListener::bind(&path).expect("to be able to bind to our socket");
 

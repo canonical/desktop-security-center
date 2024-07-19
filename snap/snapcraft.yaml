@@ -12,6 +12,8 @@ apps:
   apparmor-prompting:
     command: bin/aa-prompt-client
     extensions: [gnome]
+    environment: &env
+      AA_PROMPTING_CLIENT_SOCKET: "${XDG_RUNTIME_DIR}/apparmor-prompting.sock"
     plugs:
       - home
       - snap-prompting-control
@@ -19,6 +21,7 @@ apps:
   security-center:
     command: bin/security-center/security_center
     extensions: [gnome]
+    environment: *env
     plugs:
       - snap-prompting-control
       - snapd-control
@@ -61,7 +64,7 @@ parts:
       set -e
       mkdir -p $(dirname $CRAFT_PART_SRC)/protos
       cp $CRAFT_PROJECT_DIR/protos/* $(dirname $CRAFT_PART_SRC)/protos/
-      cargo build --release
+      craftctl default
     build-packages:
       - libssl-dev
       - pkg-config
@@ -90,6 +93,7 @@ parts:
     plugin: nil
     override-build: |
       set -e
+      flutter pub get
       dart run build_runner build
       flutter build linux --release -v
       mkdir -p $CRAFT_PART_INSTALL/bin/security-center/

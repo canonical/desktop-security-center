@@ -1,6 +1,7 @@
 //! A simple command line prompting client
 use aa_prompt_client::{
     cli_actions::{run_echo_loop, run_flutter_client_loop, run_scripted_client_loop},
+    daemon::run_daemon,
     snapd_client::SnapdSocketClient,
     Result,
 };
@@ -36,6 +37,8 @@ enum Command {
         #[clap(short, long, value_name = "SECONDS")]
         grace_period: Option<u64>,
     },
+
+    Daemon,
 }
 
 /// A simple command line prompting client
@@ -74,5 +77,6 @@ async fn main() -> Result<()> {
             script,
             grace_period,
         } => run_scripted_client_loop(&mut c, script, grace_period).await,
+        Command::Daemon => run_daemon(c).await,
     }
 }

@@ -9,7 +9,7 @@ use std::{
     time::Duration,
 };
 use tokio::{process::Command, sync::mpsc::UnboundedReceiver, time::timeout};
-use tracing::{debug, error};
+use tracing::{debug, error, span, Level};
 
 const RECV_TIMEOUT: Duration = Duration::from_millis(200);
 
@@ -74,7 +74,13 @@ impl Worker {
                 None => return Ok(()), // channel now closed
             };
 
+            let span = span!(target: "worker", Level::INFO, "Prompt", id=%ep.prompt.id().0);
+            let _enter = span.enter();
+
+            debug!("got prompt");
+
             if self.prompts_to_drop.contains(ep.prompt.id()) {
+                debug!("dropping prompt");
                 self.prompts_to_drop.retain(|id| id != ep.prompt.id());
                 continue;
             }
@@ -83,6 +89,7 @@ impl Worker {
             self.update_active_prompt(ep);
 
             // FIXME: the UI closing without replying or actioning multiple prompts gets tricky (when can we spawn the next UI?)
+            debug!("spawning UI");
             Command::new(&cmd).spawn()?.wait().await?;
 
             loop {
@@ -112,7 +119,7 @@ impl Worker {
     async fn wait_for_expected_prompt(&mut self, expected_id: &PromptId) -> Recv {
         match timeout(RECV_TIMEOUT, self.rx_actioned_prompts.recv()).await {
             Ok(Some(ActionedPrompt { id, others })) => {
-                debug!(id=%id.0, "reply sent for prompt");
+                debug!(recv_id=%id.0, "reply sent for prompt");
                 self.prompts_to_drop.extend(others);
 
                 if !self.dead_prompts.contains(&id) {
