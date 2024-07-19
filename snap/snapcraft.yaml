@@ -70,15 +70,16 @@ parts:
 
   apparmor-prompt:
     after: [flutter-git]
-    source: flutter_packages/apparmor_prompt
+    source: .
     plugin: nil
     override-build: |
       set -e
       dart pub global activate melos
       dart pub global run melos clean
       dart pub global run melos bootstrap
+      dart pub global run melos generate
 
-      dart run build_runner build
+      cd flutter_packages/apparmor_prompt
       flutter build linux --release -v
       mkdir -p $CRAFT_PART_INSTALL/bin/apparmor-prompt/
       cp -r build/linux/*/release/bundle/* $CRAFT_PART_INSTALL/bin/apparmor-prompt/
