@@ -50,9 +50,9 @@ extension ActionConversion on Action {
 extension HomePatternTypeConversion on HomePatternType {
   static HomePatternType fromProto(pb.HomePatternType homePatternType) =>
       switch (homePatternType) {
-        pb.HomePatternType.REQUESTED_DIRECTORY ||
-        pb.HomePatternType.REQUESTED_FILE =>
-          HomePatternType.customPath,
+        pb.HomePatternType.REQUESTED_DIRECTORY =>
+          HomePatternType.requestedDirectory,
+        pb.HomePatternType.REQUESTED_FILE => HomePatternType.requestedFile,
         pb.HomePatternType.TOP_LEVEL_DIRECTORY =>
           HomePatternType.topLevelDirectory,
         pb.HomePatternType.HOME_DIRECTORY => HomePatternType.homeDirectory,

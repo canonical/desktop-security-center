@@ -57,7 +57,7 @@ void main() {
           ],
           moreOptions: [
             MoreOption(
-              homePatternType: HomePatternType.customPath,
+              homePatternType: HomePatternType.requestedDirectory,
               pathPattern: '/home/user/Downloads/**',
             ),
           ],
@@ -178,7 +178,7 @@ void main() {
         mockResponse: pb.ResolveHomePatternTypeResponse(
           homePatternType: pb.HomePatternType.REQUESTED_DIRECTORY,
         ),
-        expectedType: HomePatternType.customPath,
+        expectedType: HomePatternType.requestedDirectory,
       ),
       (
         name: 'requested file',
@@ -186,7 +186,7 @@ void main() {
         mockResponse: pb.ResolveHomePatternTypeResponse(
           homePatternType: pb.HomePatternType.REQUESTED_FILE,
         ),
-        expectedType: HomePatternType.customPath,
+        expectedType: HomePatternType.requestedFile,
       ),
     ];
 

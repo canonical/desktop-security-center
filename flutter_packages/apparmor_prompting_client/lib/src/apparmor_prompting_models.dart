@@ -7,6 +7,8 @@ enum Action { allow, deny }
 
 enum HomePatternType {
   customPath,
+  requestedDirectory,
+  requestedFile,
   topLevelDirectory,
   homeDirectory,
   matchingFileExtension,
