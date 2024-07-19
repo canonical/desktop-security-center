@@ -14,6 +14,9 @@ class AppArmorPromptingClient {
           ClientChannel(
             host,
             port: port,
+            options: const ChannelOptions(
+              credentials: ChannelCredentials.insecure(),
+            ),
           ),
         );
 
