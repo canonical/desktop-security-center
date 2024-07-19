@@ -74,6 +74,10 @@ parts:
     plugin: nil
     override-build: |
       set -e
+      dart pub global activate melos
+      dart pub global run melos clean
+      dart pub global run melos bootstrap
+
       dart run build_runner build
       flutter build linux --release -v
       mkdir -p $CRAFT_PART_INSTALL/bin/apparmor-prompt/
