@@ -76,7 +76,11 @@ class InitialOptions extends ConsumerWidget {
             children: [
               boldText(model.details.metaData.snapName),
               const TextSpan(text: ' to have '),
-              boldText(model.permissions.map((p) => p.name).join(', ')),
+              boldText(
+                model.details.requestedPermissions
+                    .map((p) => p.name)
+                    .join(', '),
+              ),
               const TextSpan(text: ' access to '),
               boldText(model.details.requestedPath),
               const TextSpan(text: '?'),
