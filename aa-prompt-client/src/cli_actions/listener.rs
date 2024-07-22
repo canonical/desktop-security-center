@@ -8,18 +8,14 @@ use crate::{
         },
         Action, PromptId, SnapMeta, SnapdSocketClient, TypedPrompt, TypedPromptReply,
     },
-    Error, Result, SNAP_NAME,
+    Error, Result, NO_PROMPTS_FOR_USER, PROMPT_NOT_FOUND, SNAP_NAME,
 };
-use std::{env, time::Duration};
+use std::time::Duration;
 use tokio::select;
 use tracing::{debug, error, info, warn};
 
-// FIXME: having to hard code these is a problem.
-// We need snapd to provide structured errors we can work with programatically.
-const PROMPT_NOT_FOUND: &str = "no prompt with the given ID found for the given user";
-const NO_PROMPTS_FOR_USER: &str = "no prompts found for the given user";
-
-trait ReplyClient {
+#[allow(async_fn_in_trait)]
+pub trait ReplyClient {
     async fn get_reply(
         &mut self,
         p: TypedPrompt,
@@ -120,48 +116,6 @@ async fn run_client_loop<C: ReplyClient>(
     Ok(())
 }
 
-/// Handle prompts via a spawned flutter UI
-pub async fn run_flutter_client_loop(
-    snapd_client: &mut SnapdSocketClient,
-    path: Option<String>,
-) -> Result<()> {
-    run_client_loop(snapd_client, FlutterClient::new(), path).await
-}
-
-struct FlutterClient {
-    cmd: String,
-}
-
-impl FlutterClient {
-    fn new() -> Self {
-        let snap = env::var("SNAP").expect("SNAP env var to be set");
-        let cmd = format!("{snap}/bin/apparmor-prompt/apparmor_prompt");
-
-        Self { cmd }
-    }
-}
-
-impl ReplyClient for FlutterClient {
-    fn is_running(&self) -> bool {
-        true
-    }
-
-    async fn get_reply(
-        &mut self,
-        prompt: TypedPrompt,
-        meta: Option<SnapMeta>,
-        prev_error: Option<String>,
-        rec: &mut PromptRecording,
-    ) -> Result<TypedPromptReply> {
-        let TypedPrompt::Home(p) = prompt;
-        let reply = HomeInterface
-            .try_get_reply_from_ui(&self.cmd, p, meta, prev_error, rec)
-            .await?;
-
-        Ok(reply.into())
-    }
-}
-
 /// Handle prompts using scripted client interactions
 pub async fn run_scripted_client_loop(
     snapd_client: &mut SnapdSocketClient,
@@ -192,7 +146,7 @@ pub async fn run_scripted_client_loop(
 /// loop until at least one un-actioned prompt is encountered.
 async fn grace_period_deny_and_error(snapd_client: &mut SnapdSocketClient) -> Result<()> {
     loop {
-        let ids = snapd_client.pending_prompts().await?;
+        let ids = snapd_client.pending_prompt_ids().await?;
         let mut prompts = Vec::with_capacity(ids.len());
 
         for id in ids {
@@ -244,7 +198,7 @@ impl ScriptedClient {
 
         tokio::task::spawn(async move {
             loop {
-                let pending = snapd_client.pending_prompts().await.unwrap();
+                let pending = snapd_client.pending_prompt_ids().await.unwrap();
                 for id in pending {
                     match snapd_client.prompt_details(&id).await {
                         Ok(TypedPrompt::Home(inner)) if filter.matches(&inner).is_success() => {

@@ -94,7 +94,7 @@ pub struct HomePromptReply {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HomePrompt {
     #[prost(message, optional, tag = "1")]
-    pub snap_meta_data: ::core::option::Option<MetaData>,
+    pub meta_data: ::core::option::Option<MetaData>,
     #[prost(string, tag = "2")]
     pub requested_path: ::prost::alloc::string::String,
     #[prost(string, repeated, tag = "3")]

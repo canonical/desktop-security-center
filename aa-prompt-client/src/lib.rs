@@ -1,6 +1,7 @@
 use prompt_sequence::MatchError;
 
 pub mod cli_actions;
+pub mod daemon;
 pub mod prompt_sequence;
 pub mod protos;
 pub mod snapd_client;
@@ -10,6 +11,11 @@ mod socket_client;
 mod util;
 
 pub(crate) const SNAP_NAME: &str = "apparmor-prompting";
+
+// FIXME: having to hard code these is a problem.
+// We need snapd to provide structured errors we can work with programatically.
+pub(crate) const PROMPT_NOT_FOUND: &str = "no prompt with the given ID found for the given user";
+pub(crate) const NO_PROMPTS_FOR_USER: &str = "no prompts found for the given user";
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {

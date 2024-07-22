@@ -1,39 +1,70 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:apparmor_prompt/prompt_data_model.dart';
+
+import 'package:apparmor_prompt/fake_apparmor_prompting_client.dart';
+import 'package:apparmor_prompt/home/home_prompt_page.dart';
 import 'package:apparmor_prompt/prompt_page.dart';
+import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
+import 'package:args/args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
+const envVarSocketPath = 'AA_PROMPTING_CLIENT_SOCKET';
+
 void main(List<String> args) async {
   // We specify path as an empty string in order to get ubuntu_logger to skip
   // setting up a file for logging
   Logger.setup(path: '', level: LogLevel.info);
-  final log = Logger('prompt_ui');
-
-  if (args.length != 1) {
-    log.error('expected prompt details as first command line argument');
-    exit(1);
-  }
-
-  PromptDetails details;
-
-  try {
-    final json = jsonDecode(args[0]) as Map<String, dynamic>;
-    details = PromptDetails.fromJson(json);
-  } on TypeError catch (e) {
-    log.error('malformed JSON input: $e');
-    exit(1);
-  } on Exception catch (e) {
-    log.error('unable to parse command line args: $e');
-    exit(1);
-  }
+  final log = Logger('apparmor_prompt');
 
   await YaruWindowTitleBar.ensureInitialized();
-  registerServiceInstance<PromptDetails>(details);
+
+  final parser = ArgParser()
+    ..addFlag(
+      'dry-run',
+      help: 'Use a fake apparmor prompting client',
+    )
+    ..addOption(
+      'test-prompt',
+      help: 'Path to a JSON file containing the test prompt',
+      defaultsTo: 'lib/test_prompt_details.json',
+    );
+
+  final ArgResults argResults;
+  try {
+    argResults = parser.parse(args);
+  } on FormatException catch (_) {
+    stdout.writeln(parser.usage);
+    exit(2);
+  }
+
+  if (argResults.flag('dry-run')) {
+    final fileName = argResults['test-prompt'] as String;
+    if (!File(fileName).existsSync()) {
+      log.error('Test prompt file $fileName does not exist');
+      exit(1);
+    }
+    registerService<AppArmorPromptingClient>(
+      () => FakeApparmorPromptingClient.fromFile(fileName),
+    );
+  } else {
+    final socketPath = Platform.environment[envVarSocketPath];
+    if (socketPath == null) {
+      log.error('$envVarSocketPath not set');
+      exit(1);
+    }
+    registerService<AppArmorPromptingClient>(
+      () => AppArmorPromptingClient(
+        InternetAddress(socketPath, type: InternetAddressType.unix),
+      ),
+    );
+  }
+
+  final currentPrompt =
+      await getService<AppArmorPromptingClient>().getCurrentPrompt();
+  registerServiceInstance<PromptDetails>(currentPrompt);
 
   runApp(const ProviderScope(child: PromptDialog()));
 }

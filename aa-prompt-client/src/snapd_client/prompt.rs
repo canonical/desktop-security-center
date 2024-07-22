@@ -1,6 +1,9 @@
 //! Types for working with apparmor prompts
 use crate::{
-    snapd_client::interfaces::{home::HomeInterface, SnapInterface},
+    snapd_client::{
+        interfaces::{home::HomeInterface, SnapInterface},
+        SnapMeta,
+    },
     Error, Result,
 };
 use serde::{Deserialize, Serialize};
@@ -16,6 +19,11 @@ impl TypedPrompt {
     pub fn into_deny_once(self) -> TypedPromptReply {
         let Self::Home(p) = self;
         HomeInterface::prompt_to_reply(p, Action::Deny).into()
+    }
+
+    pub fn id(&self) -> &PromptId {
+        let Self::Home(p) = self;
+        &p.id
     }
 
     pub fn snap(&self) -> &str {
@@ -161,6 +169,35 @@ where
         self.lifespan = Lifespan::Timespan;
         self.duration = Some(duration.into());
         self
+    }
+}
+
+#[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "kebab-case")]
+pub struct UiInput<I>
+where
+    I: SnapInterface,
+{
+    pub(crate) id: PromptId,
+    pub(crate) meta: SnapMeta,
+    pub(crate) data: I::UiInputData,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum TypedUiInput {
+    Home(UiInput<HomeInterface>),
+}
+
+impl TypedUiInput {
+    pub fn id(&self) -> &PromptId {
+        let Self::Home(input) = self;
+        &input.id
+    }
+
+    pub fn from_prompt(prompt: TypedPrompt, meta: Option<SnapMeta>) -> Self {
+        let TypedPrompt::Home(p) = prompt;
+        Self::Home(HomeInterface.map_ui_input(p, meta))
     }
 }
 

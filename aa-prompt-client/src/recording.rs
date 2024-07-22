@@ -109,7 +109,7 @@ impl PromptRecording {
         c: &mut SnapdSocketClient,
     ) -> Result<Vec<PromptId>> {
         select! {
-            res = c.pending_prompts() => res,
+            res = c.pending_prompt_ids() => res,
             _ = ctrl_c() => {
                 info!("got ctrl-c");
                 if self.is_recording() && !self.is_empty() {
@@ -146,7 +146,9 @@ impl PromptRecording {
             .into();
 
         info!("auto-replying to our own prompt for creating output file");
-        c.reply_to_prompt(&id, reply).await
+        c.reply_to_prompt(&id, reply).await?;
+
+        Ok(())
     }
 }
 

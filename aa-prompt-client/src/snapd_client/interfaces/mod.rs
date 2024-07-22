@@ -11,7 +11,7 @@ use std::fmt;
 use tokio::process::Command;
 use tracing::debug;
 
-use super::SnapMeta;
+use super::{prompt::UiInput, SnapMeta};
 
 pub mod home;
 
@@ -27,17 +27,12 @@ pub trait SnapInterface: fmt::Debug + Clone {
         ReplyConstraints = Self::ReplyConstraints,
     >;
 
-    type UiInput: fmt::Debug + Clone + Serialize + DeserializeOwned;
+    type UiInputData: fmt::Debug + Clone + Serialize + DeserializeOwned;
     type UiReply: fmt::Debug + Clone + Serialize + DeserializeOwned;
 
     fn prompt_to_reply(prompt: Prompt<Self>, action: Action) -> PromptReply<Self>;
 
-    fn map_ui_input(
-        &self,
-        prompt: Prompt<Self>,
-        meta: Option<SnapMeta>,
-        previous_error_message: Option<String>,
-    ) -> Self::UiInput;
+    fn map_ui_input(&self, prompt: Prompt<Self>, meta: Option<SnapMeta>) -> UiInput<Self>;
 
     fn map_ui_reply(&self, reply: Self::UiReply) -> PromptReply<Self>;
 
@@ -46,10 +41,9 @@ pub trait SnapInterface: fmt::Debug + Clone {
         cmd: &str,
         prompt: Prompt<Self>,
         meta: Option<SnapMeta>,
-        prev_error: Option<String>,
         rec: &mut PromptRecording,
     ) -> Result<PromptReply<Self>> {
-        let input = self.map_ui_input(prompt.clone(), meta, prev_error);
+        let input = self.map_ui_input(prompt.clone(), meta);
         let json_input = serde_json::to_value(&input)?;
         debug!(%json_input, "prompt details for the flutter ui");
 

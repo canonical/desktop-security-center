@@ -12,7 +12,10 @@ use tracing::debug;
 pub mod interfaces;
 mod prompt;
 
-pub use prompt::{Action, Lifespan, Prompt, PromptId, PromptReply, TypedPrompt, TypedPromptReply};
+pub use prompt::{
+    Action, Lifespan, Prompt, PromptId, PromptReply, TypedPrompt, TypedPromptReply, TypedUiInput,
+    UiInput,
+};
 
 const FEATURE_NAME: &str = "apparmor-prompting";
 const LONG_POLL_TIMEOUT: &str = "1h";
@@ -150,7 +153,7 @@ where
     ///
     /// Calling this method will update our [Self::notices_after] field when we successfully obtain
     /// new notices from snapd.
-    pub async fn pending_prompts(&mut self) -> Result<Vec<PromptId>> {
+    pub async fn pending_prompt_ids(&mut self) -> Result<Vec<PromptId>> {
         let path = format!(
             "notices?types={NOTICE_TYPES}&timeout={LONG_POLL_TIMEOUT}&after={}",
             self.notices_after
@@ -173,6 +176,14 @@ where
         }
     }
 
+    /// Pull details for all pending prompts from snapd
+    pub async fn all_pending_prompt_details(&self) -> Result<Vec<TypedPrompt>> {
+        let raw_prompts: Vec<RawPrompt> =
+            self.client.get_json("interfaces/requests/prompts").await?;
+
+        raw_prompts.into_iter().map(|p| p.try_into()).collect()
+    }
+
     /// Pull details for a specific prompt from snapd
     pub async fn prompt_details(&self, id: &PromptId) -> Result<TypedPrompt> {
         let prompt: RawPrompt = self
@@ -184,18 +195,22 @@ where
     }
 
     /// Submit a reply to the given prompt to snapd
-    pub async fn reply_to_prompt(&self, id: &PromptId, reply: TypedPromptReply) -> Result<()> {
-        let resp: Vec<String> = self
+    pub async fn reply_to_prompt(
+        &self,
+        id: &PromptId,
+        reply: TypedPromptReply,
+    ) -> Result<Vec<PromptId>> {
+        let resp: Vec<PromptId> = self
             .client
             .post_json(&format!("interfaces/requests/prompts/{}", id.0), reply)
             .await?;
 
         debug!(prompt = id.0, ?resp, "response from snapd");
 
-        Ok(())
+        Ok(resp)
     }
 
-    /// Pull metadata for rendering apparmor prompts using the `snap` and `find` snapd endpoints.
+    /// Pull metadata for rendering apparmor prompts using the `snaps` snapd endpoint.
     pub async fn snap_metadata(&self, name: &str) -> Option<SnapMeta> {
         let res = self.client.get_json(&format!("snaps/{name}")).await;
         return match res {
@@ -203,6 +218,7 @@ where
                 install_date,
                 publisher,
             }) => Some(SnapMeta {
+                name: name.to_owned(),
                 updated_at: install_date
                     .split_once('T')
                     .map(|(s, _)| s.to_owned())
@@ -231,9 +247,10 @@ where
     }
 }
 
-#[derive(Debug, Default, Clone, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct SnapMeta {
+    pub name: String,
     pub updated_at: String,
     pub store_url: String,
     pub publisher: String,
