@@ -9,7 +9,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grpc/grpc.dart';
 
 class AppArmorPromptingClient {
-  AppArmorPromptingClient(InternetAddress host, int port)
+  AppArmorPromptingClient(InternetAddress host, [int port = 443])
       : _client = pb.AppArmorPromptingClient(
           ClientChannel(
             host,

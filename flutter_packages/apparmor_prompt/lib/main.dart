@@ -12,7 +12,6 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
 const envVarSocketPath = 'AA_PROMPTING_CLIENT_SOCKET';
-const envVarPort = 'AA_PROMPTING_CLIENT_PORT';
 
 void main(List<String> args) async {
   // We specify path as an empty string in order to get ubuntu_logger to skip
@@ -56,11 +55,9 @@ void main(List<String> args) async {
       log.error('$envVarSocketPath not set');
       exit(1);
     }
-    final port = int.tryParse(Platform.environment[envVarPort] ?? '') ?? 443;
     registerService<AppArmorPromptingClient>(
       () => AppArmorPromptingClient(
         InternetAddress(socketPath, type: InternetAddressType.unix),
-        port,
       ),
     );
   }
