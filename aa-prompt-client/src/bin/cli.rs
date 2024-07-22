@@ -1,6 +1,6 @@
 //! A simple command line prompting client
 use aa_prompt_client::{
-    cli_actions::{run_echo_loop, run_flutter_client_loop, run_scripted_client_loop},
+    cli_actions::{run_echo_loop, run_scripted_client_loop},
     daemon::run_daemon,
     snapd_client::SnapdSocketClient,
     Result,
@@ -73,7 +73,7 @@ async fn main() -> Result<()> {
 
     match command {
         Command::Echo { record } => run_echo_loop(&mut c, record).await,
-        Command::Flutter { record } => run_flutter_client_loop(&mut c, record).await,
+        Command::Flutter { .. } => run_daemon(c).await,
         Command::Scripted {
             script,
             grace_period,

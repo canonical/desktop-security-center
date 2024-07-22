@@ -10,7 +10,7 @@ use crate::{
     },
     Error, Result, NO_PROMPTS_FOR_USER, PROMPT_NOT_FOUND, SNAP_NAME,
 };
-use std::{env, time::Duration};
+use std::time::Duration;
 use tokio::select;
 use tracing::{debug, error, info, warn};
 
@@ -20,6 +20,7 @@ pub trait ReplyClient {
         &mut self,
         p: TypedPrompt,
         meta: Option<SnapMeta>,
+        prev_error: Option<String>,
         rec: &mut PromptRecording,
     ) -> Result<TypedPromptReply>;
 
@@ -36,7 +37,9 @@ pub trait ReplyClient {
     ) -> Result<()> {
         rec.push_prompt(&prompt);
         let meta = snapd_client.snap_metadata(prompt.snap()).await;
-        let mut reply = self.get_reply(prompt.clone(), meta.clone(), rec).await?;
+        let mut reply = self
+            .get_reply(prompt.clone(), meta.clone(), None, rec)
+            .await?;
 
         debug!(?id, ?reply, "replying to prompt");
         rec.push_reply(&reply);
@@ -64,7 +67,9 @@ pub trait ReplyClient {
             };
 
             debug!(%prev_error, "error returned from snapd, retrying");
-            reply = self.get_reply(prompt.clone(), meta.clone(), rec).await?;
+            reply = self
+                .get_reply(prompt.clone(), meta.clone(), Some(prev_error), rec)
+                .await?;
 
             debug!(?id, ?reply, "replying to prompt");
             rec.push_reply(&reply);
@@ -109,47 +114,6 @@ async fn run_client_loop<C: ReplyClient>(
     }
 
     Ok(())
-}
-
-/// Handle prompts via a spawned flutter UI
-pub async fn run_flutter_client_loop(
-    snapd_client: &mut SnapdSocketClient,
-    path: Option<String>,
-) -> Result<()> {
-    run_client_loop(snapd_client, FlutterStdinClient::new(), path).await
-}
-
-struct FlutterStdinClient {
-    cmd: String,
-}
-
-impl FlutterStdinClient {
-    fn new() -> Self {
-        let snap = env::var("SNAP").expect("SNAP env var to be set");
-        let cmd = format!("{snap}/bin/apparmor-prompt/apparmor_prompt");
-
-        Self { cmd }
-    }
-}
-
-impl ReplyClient for FlutterStdinClient {
-    fn is_running(&self) -> bool {
-        true
-    }
-
-    async fn get_reply(
-        &mut self,
-        prompt: TypedPrompt,
-        meta: Option<SnapMeta>,
-        rec: &mut PromptRecording,
-    ) -> Result<TypedPromptReply> {
-        let TypedPrompt::Home(p) = prompt;
-        let reply = HomeInterface
-            .try_get_reply_from_ui(&self.cmd, p, meta, rec)
-            .await?;
-
-        Ok(reply.into())
-    }
 }
 
 /// Handle prompts using scripted client interactions
@@ -263,8 +227,15 @@ impl ReplyClient for ScriptedClient {
         &mut self,
         prompt: TypedPrompt,
         _: Option<SnapMeta>,
+        prev_error: Option<String>,
         _: &mut PromptRecording, // No UI input to record
     ) -> Result<TypedPromptReply> {
+        if let Some(error) = prev_error {
+            return Err(Error::FailedPromptSequence {
+                error: MatchError::UnexpectedError { error },
+            });
+        }
+
         match prompt {
             TypedPrompt::Home(inner) if inner.constraints.path == self.path => {
                 Ok(TypedPromptReply::Home(
