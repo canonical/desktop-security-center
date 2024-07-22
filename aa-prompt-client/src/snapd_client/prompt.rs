@@ -1,12 +1,13 @@
 //! Types for working with apparmor prompts
 use crate::{
-    snapd_client::interfaces::{home::HomeInterface, SnapInterface},
+    snapd_client::{
+        interfaces::{home::HomeInterface, SnapInterface},
+        SnapMeta,
+    },
     Error, Result,
 };
 use serde::{Deserialize, Serialize};
 use strum::{Display, EnumString};
-
-use super::SnapMeta;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
