@@ -22,6 +22,9 @@ class FakeApparmorPromptingClient implements AppArmorPromptingClient {
   @override
   Future<PromptReplyResponse> replyToPrompt(PromptReply reply) async {
     _log.info('replyToPrompt: $reply');
+    // This regex checks whether the provided path starts with a `/` and does
+    // not contain any `[` or `]` characters. (Same check that snapd does
+    // internally)
     final validPattern = RegExp(r'^/([^\[\]]|\\[\[\]])*$');
     if (!validPattern.hasMatch(reply.pathPattern)) {
       _log.info('invalid pattern');
