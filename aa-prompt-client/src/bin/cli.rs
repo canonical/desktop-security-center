@@ -38,6 +38,7 @@ enum Command {
         grace_period: Option<u64>,
     },
 
+    /// Run the daemon mode GRPC client
     Daemon,
 }
 

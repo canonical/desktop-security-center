@@ -6,7 +6,7 @@ use crate::{
 use tokio::sync::mpsc::unbounded_channel;
 use tokio_stream::wrappers::UnixListenerStream;
 use tonic::transport::Server;
-use tracing::error;
+use tracing::{debug, error};
 
 mod poll;
 mod server;
@@ -36,9 +36,13 @@ pub async fn run_daemon(c: SnapdSocketClient) -> Result<()> {
     let active_prompt = worker.read_only_active_prompt();
     let (server, listener) = new_server_and_listener(c.clone(), active_prompt, tx_actioned);
 
+    debug!("spawning poll loop");
     tokio::spawn(poll_for_prompts(c, tx_prompts));
+
+    debug!("spawning worker thread");
     tokio::spawn(worker.run());
 
+    debug!("spawning grpc server");
     let res = Server::builder()
         .add_service(server)
         .serve_with_incoming(UnixListenerStream::new(listener))

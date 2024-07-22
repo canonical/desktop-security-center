@@ -153,7 +153,7 @@ where
     ///
     /// Calling this method will update our [Self::notices_after] field when we successfully obtain
     /// new notices from snapd.
-    pub async fn pending_prompts(&mut self) -> Result<Vec<PromptId>> {
+    pub async fn pending_prompt_ids(&mut self) -> Result<Vec<PromptId>> {
         let path = format!(
             "notices?types={NOTICE_TYPES}&timeout={LONG_POLL_TIMEOUT}&after={}",
             self.notices_after
@@ -174,6 +174,14 @@ where
             key: PromptId,
             last_occurred: String,
         }
+    }
+
+    /// Pull details for all pending prompts from snapd
+    pub async fn all_pending_prompt_details(&self) -> Result<Vec<TypedPrompt>> {
+        let raw_prompts: Vec<RawPrompt> =
+            self.client.get_json("interfaces/requests/prompts").await?;
+
+        raw_prompts.into_iter().map(|p| p.try_into()).collect()
     }
 
     /// Pull details for a specific prompt from snapd

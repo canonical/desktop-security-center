@@ -3,7 +3,7 @@ use crate::{
     daemon::{worker::ReadOnlyActivePrompt, ActionedPrompt},
     protos::{
         apparmor_prompting::{
-            get_current_prompt_response::Prompt, home_prompt::MoreOption,
+            self, get_current_prompt_response::Prompt, home_prompt::MoreOption,
             prompt_reply::PromptReply::HomePromptReply, prompt_reply_response::PromptReplyType,
             HomePatternType, MetaData, PromptReply,
         },
@@ -11,6 +11,7 @@ use crate::{
         PromptReplyResponse, ResolveHomePatternTypeResponse,
     },
     snapd_client::{
+        self,
         interfaces::home::{HomeInterface, HomeReplyConstraints, PatternType, TypedPathPattern},
         PromptId, PromptReply as SnapPromptReply, SnapdSocketClient, TypedPromptReply,
         TypedUiInput, UiInput,
@@ -21,14 +22,21 @@ use tokio::{net::UnixListener, sync::mpsc::UnboundedSender};
 use tonic::{async_trait, Code, Request, Response, Status};
 
 macro_rules! map_enum {
-    ($val:expr => $name:ident; [$($variant:ident),+]) => {
+    ($from:ident => $to:ident; [$($variant:ident),+]; $val:expr;) => {
         match $val {
             $(
-                $crate::protos::apparmor_prompting::$name::$variant =>
-                    $crate::snapd_client::$name::$variant,
+                $from::$variant => $to::$variant,
             )+
         }
-    }
+    };
+
+    ($fmod:ident::$from:ident => $tmod:ident::$to:ident; [$($variant:ident),+]; $val:expr;) => {
+        match $val {
+            $(
+                $fmod::$from::$variant => $tmod::$to::$variant,
+            )+
+        }
+    };
 }
 
 pub fn new_server_and_listener(
@@ -90,6 +98,7 @@ impl AppArmorPrompting for Service {
         let id = PromptId(req.prompt_id.clone());
         let others = match self.client.reply_to_prompt(&id, reply).await {
             Ok(res) => res,
+
             // FIXME: We need to check for snapd errors vs other errors rather than just
             // stringifying the error itself here.
             Err(e) => {
@@ -129,8 +138,16 @@ fn map_prompt_reply(mut reply: PromptReply) -> Result<TypedPromptReply, Status> 
     ))?;
 
     Ok(TypedPromptReply::Home(SnapPromptReply::<HomeInterface> {
-        action: map_enum!(reply.action() => Action; [Allow, Deny]),
-        lifespan: map_enum!(reply.lifespan() => Lifespan; [Single, Session, Forever]),
+        action: map_enum!(
+            apparmor_prompting::Action => snapd_client::Action;
+            [Allow, Deny];
+            reply.action();
+        ),
+        lifespan: map_enum!(
+            apparmor_prompting::Lifespan => snapd_client::Lifespan;
+            [Single, Session, Forever];
+            reply.lifespan();
+        ),
         duration: None, // we never use the Timespan variant
         constraints: match prompt_type {
             HomePromptReply(home_prompt_reply) => HomeReplyConstraints {
@@ -163,20 +180,16 @@ fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {
                      pattern_type,
                      path_pattern,
                  }| {
-                    let home_pattern_type = match pattern_type {
-                        PatternType::RequestedDirectory => HomePatternType::RequestedDirectory,
-                        PatternType::RequestedFile => HomePatternType::RequestedFile,
-                        PatternType::TopLevelDirectory => HomePatternType::TopLevelDirectory,
-                        PatternType::HomeDirectory => HomePatternType::HomeDirectory,
-                        PatternType::MatchingFileExtension => {
-                            HomePatternType::MatchingFileExtension
-                        }
-                        PatternType::ArchiveFiles => HomePatternType::ArchiveFiles,
-                        PatternType::AudioFiles => HomePatternType::AudioFiles,
-                        PatternType::DocumentFiles => HomePatternType::DocumentFiles,
-                        PatternType::ImageFiles => HomePatternType::ImageFiles,
-                        PatternType::VideoFiles => HomePatternType::VideoFiles,
-                    };
+                    let home_pattern_type = map_enum!(
+                        PatternType => HomePatternType;
+                        [
+                            RequestedDirectory, RequestedFile, TopLevelDirectory, HomeDirectory,
+                            MatchingFileExtension, ArchiveFiles, AudioFiles, DocumentFiles,
+                            ImageFiles, VideoFiles
+                        ];
+                        pattern_type;
+                    );
+
                     MoreOption {
                         home_pattern_type: home_pattern_type as i32,
                         path_pattern,
