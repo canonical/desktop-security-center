@@ -75,7 +75,7 @@ fn setup_test_dir(subdir: Option<&str>, files: &[(&str, &str)]) -> io::Result<(S
 macro_rules! expect_single_prompt {
     ($c:expr, $expected_path:expr, $expected_permissions:expr) => {
         async {
-            let mut pending = match $c.pending_prompts().await {
+            let mut pending = match $c.pending_prompt_ids().await {
                 Ok(pending) => pending,
                 Err(e) => panic!("error pulling pending prompts: {e}"),
             };
