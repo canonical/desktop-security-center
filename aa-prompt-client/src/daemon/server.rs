@@ -164,7 +164,7 @@ fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {
         meta_data: Some(MetaData {
             prompt_id: input.id.0,
             snap_name: input.meta.name,
-            store_url: input.meta.store_url.unwrap_or_default(),
+            store_url: input.meta.store_url,
             publisher: input.meta.publisher,
             updated_at: input.meta.updated_at,
         }),

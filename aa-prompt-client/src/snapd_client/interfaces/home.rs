@@ -127,9 +127,9 @@ impl SnapInterface for HomeInterface {
         let (initial_options, more_options) = self.ui_options(&prompt);
         let meta = meta.unwrap_or_else(|| SnapMeta {
             name: prompt.snap,
-            updated_at: "unknown".to_string(),
-            store_url: None,
-            publisher: "unknown".to_string(),
+            updated_at: String::default(),
+            store_url: String::default(),
+            publisher: String::default(),
         });
 
         UiInput {

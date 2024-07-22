@@ -223,7 +223,7 @@ where
                     .split_once('T')
                     .map(|(s, _)| s.to_owned())
                     .unwrap_or(install_date),
-                store_url: Some(format!("snap://{name}")),
+                store_url: format!("snap://{name}"),
                 publisher: publisher.display_name,
             }),
 
@@ -252,7 +252,7 @@ where
 pub struct SnapMeta {
     pub name: String,
     pub updated_at: String,
-    pub store_url: Option<String>,
+    pub store_url: String,
     pub publisher: String,
 }
 
