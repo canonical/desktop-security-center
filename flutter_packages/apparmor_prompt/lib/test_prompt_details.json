@@ -4,7 +4,7 @@
         "promptId": "promptId",
         "snapName": "firefox",
         "updatedAt": "2024-07-13T10:57:28.34963269+02:00",
-        "storeUrl": "storeUrl",
+        "storeUrl": "snap://firefox",
         "publisher": "Mozilla"
     },
     "requestedPath": "/home/ubuntu/Downloads/file.txt",

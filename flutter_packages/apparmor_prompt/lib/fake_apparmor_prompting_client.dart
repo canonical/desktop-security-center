@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
+import 'package:flutter/foundation.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 
 final _log = Logger('fake_apparmor_prompting_client');
@@ -16,12 +17,16 @@ class FakeApparmorPromptingClient implements AppArmorPromptingClient {
   }
   final PromptDetails currentPrompt;
 
+  @visibleForTesting
+  void Function(PromptReply reply)? onReply;
+
   @override
   Future<PromptDetails> getCurrentPrompt() async => currentPrompt;
 
   @override
   Future<PromptReplyResponse> replyToPrompt(PromptReply reply) async {
     _log.info('replyToPrompt: $reply');
+    onReply?.call(reply);
     // This regex checks whether the provided path starts with a `/` and does
     // not contain any `[` or `]` characters. (Same check that snapd does
     // internally)

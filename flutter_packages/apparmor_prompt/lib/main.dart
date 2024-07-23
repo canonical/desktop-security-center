@@ -13,7 +13,7 @@ import 'package:yaru/yaru.dart';
 
 const envVarSocketPath = 'AA_PROMPTING_CLIENT_SOCKET';
 
-void main(List<String> args) async {
+Future<void> main(List<String> args) async {
   // We specify path as an empty string in order to get ubuntu_logger to skip
   // setting up a file for logging
   Logger.setup(path: '', level: LogLevel.info);
