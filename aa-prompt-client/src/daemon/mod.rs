@@ -32,7 +32,7 @@ pub async fn run_daemon(c: SnapdSocketClient) -> Result<()> {
     let (tx_prompts, rx_prompts) = unbounded_channel();
     let (tx_actioned, rx_actioned) = unbounded_channel();
 
-    let worker = Worker::new(rx_prompts, rx_actioned);
+    let mut worker = Worker::new(rx_prompts, rx_actioned);
     let active_prompt = worker.read_only_active_prompt();
     let (server, listener) = new_server_and_listener(c.clone(), active_prompt, tx_actioned);
 
@@ -40,7 +40,7 @@ pub async fn run_daemon(c: SnapdSocketClient) -> Result<()> {
     tokio::spawn(poll_for_prompts(c, tx_prompts));
 
     debug!("spawning worker thread");
-    tokio::spawn(worker.run());
+    tokio::spawn(async move { worker.run().await });
 
     debug!("spawning grpc server");
     let res = Server::builder()
