@@ -1,3 +1,4 @@
+import 'package:apparmor_prompt/l10n.dart';
 import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
 import 'package:flutter/material.dart' hide MetaData;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,13 +11,16 @@ import 'test_utils.mocks.dart';
 
 extension WidgetTesterX on WidgetTester {
   BuildContext get context => element(find.byType(Scaffold).first);
+  AppLocalizations get l10n => AppLocalizations.of(context);
 
   Future<void> pumpApp(WidgetBuilder builder) async {
     // The intended minimum size of the window.
-    view.physicalSize = (const Size(760, 690)) * view.devicePixelRatio;
+    // TODO: (dloose) Revert to actual window size after fixing overflow issues
+    view.physicalSize = (const Size(760, 790)) * view.devicePixelRatio;
     return pumpWidget(
       MaterialApp(
         home: Scaffold(body: Builder(builder: builder)),
+        localizationsDelegates: localizationsDelegates,
       ),
     );
   }
@@ -48,7 +52,8 @@ PromptDetails mockPromptDetailsHome({
   String? promptId,
   String? snapName,
   String? publisher,
-  String? updatedAt,
+  DateTime? updatedAt,
+  String? storeUrl,
   String? requestedPath,
   List<Permission>? requestedPermissions,
   List<Permission>? availablePermissions,
@@ -58,8 +63,9 @@ PromptDetails mockPromptDetailsHome({
       metaData: MetaData(
         promptId: promptId ?? '',
         snapName: snapName ?? '',
-        publisher: publisher ?? '',
-        updatedAt: updatedAt ?? '',
+        publisher: publisher,
+        updatedAt: updatedAt,
+        storeUrl: storeUrl,
       ),
       requestedPath: requestedPath ?? '',
       requestedPermissions: requestedPermissions ?? [],

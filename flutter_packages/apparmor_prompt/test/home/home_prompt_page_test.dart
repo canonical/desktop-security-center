@@ -1,3 +1,4 @@
+import 'package:apparmor_prompt/l10n_x.dart';
 import 'package:apparmor_prompt/prompt_page.dart';
 import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
 import 'package:flutter/material.dart' hide Action;
@@ -13,7 +14,7 @@ void main() {
     promptId: 'promptId',
     snapName: 'firefox',
     publisher: 'Mozilla',
-    updatedAt: '2024-01-01',
+    updatedAt: DateTime(2024),
     requestedPath: '/home/ubuntu/Downloads/file.txt',
     requestedPermissions: [Permission.read],
     availablePermissions: [
@@ -44,12 +45,19 @@ void main() {
 
     expect(
       find.text(
-        'Allow firefox to have read access to /home/ubuntu/Downloads/file.txt?',
+        tester.l10n.homePromptBody(
+          'firefox',
+          Permission.read.localize(tester.l10n),
+          '/home/ubuntu/Downloads/file.txt',
+        ),
       ),
       findsOneWidget,
     );
 
-    expect(find.text('Published by Mozilla'), findsOneWidget);
+    expect(
+      find.text(tester.l10n.homePromptMetaDataPublishedBy('Mozilla')),
+      findsOneWidget,
+    );
   });
 
   testWidgets('submit prompt reply', (tester) async {
@@ -68,14 +76,15 @@ void main() {
       ),
     );
 
-    await tester.tap(find.text(HomePatternType.customPath.name));
-    await tester.tap(find.text('Deny'));
-    await tester.tap(find.text('Until logout'));
-    await tester.tap(find.text('Write'));
+    await tester
+        .tap(find.text(HomePatternType.customPath.localize(tester.l10n)));
+    await tester.tap(find.text(Action.deny.localize(tester.l10n)));
+    await tester.tap(find.text(Lifespan.session.localize(tester.l10n)));
+    await tester.tap(find.text(Permission.write.localize(tester.l10n)));
 
     final windowClosed = YaruTestWindow.waitForClosed();
 
-    await tester.tap(find.text('Save and continue'));
+    await tester.tap(find.text(tester.l10n.promptSaveAndContinue));
     await tester.pumpAndSettle();
 
     verify(
@@ -109,10 +118,11 @@ void main() {
       ),
     );
 
-    await tester.tap(find.text(HomePatternType.customPath.name));
+    await tester
+        .tap(find.text(HomePatternType.customPath.localize(tester.l10n)));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextFormField), 'invalid path');
-    await tester.tap(find.text('Save and continue'));
+    await tester.tap(find.text(tester.l10n.promptSaveAndContinue));
     await tester.pumpAndSettle();
 
     expect(find.text('error message'), findsOneWidget);
