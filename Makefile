@@ -90,6 +90,7 @@ ensure-client-in-vm:
 		snapcraft ; \
 		echo ":: Installing $(SNAP_NAME) in $(VM_NAME)..." ; \
 		lxc file push $(SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
+		lxc exec $(VM_NAME) -- snap set system experimental.user-daemons=true ; \
 		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(SNAP_NAME)_0.1_amd64.snap ; \
 	fi
 

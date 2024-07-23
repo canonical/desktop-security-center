@@ -1,35 +1,28 @@
 //! The daemon prompting client for apparmor prompting
-use aa_prompt_client::{daemon::run_daemon, snapd_client::SnapdSocketClient, Result};
-use clap::Parser;
-use std::io::stderr;
+use aa_prompt_client::{daemon::run_daemon, snapd_client::SnapdSocketClient, Error, Result};
+use std::io::stdout;
 use tracing::subscriber::set_global_default;
-use tracing_subscriber::FmtSubscriber;
-
-/// The apparmor prompting client daemon
-#[derive(Debug, Parser)]
-#[clap(about, long_about = None)]
-struct Args {
-    #[clap(short, long, action = clap::ArgAction::Count)]
-    verbose: u8,
-}
+use tracing::warn;
+use tracing_subscriber::{layer::SubscriberExt, FmtSubscriber};
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let Args { verbose } = Args::parse();
+    let builder = FmtSubscriber::builder()
+        .with_env_filter("info")
+        .with_writer(stdout)
+        .with_filter_reloading();
 
-    if verbose > 0 {
-        let level = if verbose == 1 { "info" } else { "debug" };
-        let subscriber = FmtSubscriber::builder()
-            .with_env_filter(level)
-            .with_writer(stderr)
-            .finish();
-        set_global_default(subscriber).expect("unable to set a global tracing subscriber");
-    }
+    // TODO: (sminez) support modifying the logging level at runtime via dbus
+    // let reload_handle = builder.reload_handle();
+    let journald_layer = tracing_journald::layer().expect("unable to open journald socket");
+    let subscriber = builder.finish().with(journald_layer);
+
+    set_global_default(subscriber).expect("unable to set a global tracing subscriber");
 
     let c = SnapdSocketClient::default();
     if !c.is_prompting_enabled().await? {
-        println!("error: prompting is not enabled");
-        return Ok(());
+        warn!("the prompting feature is not enabled: exiting");
+        return Err(Error::NotEnabled);
     }
 
     run_daemon(c).await

@@ -11,7 +11,7 @@ use crate::{
 };
 use std::collections::HashMap;
 use tokio::sync::mpsc::UnboundedSender;
-use tracing::{debug, trace, warn};
+use tracing::{debug, error, info, warn};
 
 #[derive(Debug, Clone)]
 struct PollLoopState {
@@ -74,6 +74,47 @@ impl PollLoopState {
             self.running = false;
         }
     }
+
+    /// Catch up on all pending prompts before dropping into polling the notices API
+    async fn handle_initial_prompts(&mut self) {
+        info!("checking for pending prompts");
+        let pending = match self.client.all_pending_prompt_details().await {
+            Err(error) => {
+                error!(%error, "unable to pull pending prompts");
+                return;
+            }
+            Ok(pending) if pending.is_empty() => {
+                info!("no currently pending prompts");
+                return;
+            }
+            Ok(pending) => pending,
+        };
+
+        info!(n_prompts=%pending.len(), "processing pending prompts");
+        let mut seen = Vec::with_capacity(pending.len());
+        for prompt in pending {
+            seen.push(prompt.id().clone());
+            self.process_prompt(prompt).await;
+        }
+
+        // The timestamps we get back from the prompts API are not semantically compatible with
+        // the ones that we need to provide for the notices API, so we deliberately set up an
+        // overlap between pulling all pending prompts first before pulling pending prompt IDs
+        // and updating our internal `after` timestamp.
+        let pending = match self.client.pending_prompt_ids().await {
+            Ok(pending) => pending,
+            Err(error) => {
+                error!(%error, "unable to pull pending prompt ids");
+                return;
+            }
+        };
+
+        for id in pending {
+            if !seen.contains(&id) {
+                self.pull_and_process_prompt(id).await;
+            }
+        }
+    }
 }
 
 pub async fn poll_for_prompts(
@@ -81,31 +122,17 @@ pub async fn poll_for_prompts(
     tx: UnboundedSender<EnrichedPrompt>,
 ) -> Result<()> {
     let mut state = PollLoopState::new(client, tx);
-
-    // Catch up on all pending prompts before dropping into polling the notices API
-    if let Ok(pending) = state.client.all_pending_prompt_details().await {
-        let mut seen = Vec::with_capacity(pending.len());
-
-        for prompt in pending {
-            seen.push(prompt.id().clone());
-            state.process_prompt(prompt).await;
-        }
-
-        // The timestamps we get back from the prompts API are not semantically compatible with
-        // the ones that we need to provide for the notices API, so we deliberately set up an
-        // overlap between pulling all pending prompts first before pulling pending prompt IDs
-        // and updating our internal `after` timestamp.
-        let pending = state.client.pending_prompt_ids().await?;
-        for id in pending {
-            if !seen.contains(&id) {
-                state.pull_and_process_prompt(id).await;
-            }
-        }
-    }
+    state.handle_initial_prompts().await;
 
     while state.running {
-        trace!("polling for notices");
-        let pending = state.client.pending_prompt_ids().await?;
+        info!("polling for notices");
+        let pending = match state.client.pending_prompt_ids().await {
+            Ok(pending) => pending,
+            Err(error) => {
+                error!(%error, "unable to pull prompt ids. retrying");
+                continue;
+            }
+        };
 
         debug!(?pending, "processing notices");
         for id in pending {
