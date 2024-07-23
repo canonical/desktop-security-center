@@ -31,7 +31,7 @@ class MetaData with _$MetaData {
   factory MetaData({
     required String promptId,
     required String snapName,
-    required String updatedAt,
+    DateTime? updatedAt,
     String? storeUrl,
     String? publisher,
   }) = _MetaData;
