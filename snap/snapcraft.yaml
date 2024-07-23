@@ -1,0 +1,60 @@
+name: desktop-security-center
+base: core24
+version: git
+summary: Desktop Security Center
+description: Security Center UI for the desktop
+grade: devel
+confinement: strict
+compression: lzo
+
+apps:
+  security-center:
+    command: bin/security_center
+    extensions: [gnome]
+    plugs:
+      - snapd-control
+
+parts:
+  flutter-git:
+    plugin: nil
+    source: .
+    source-type: git
+    override-pull: |
+      # necessary when reruns using the same container
+      if [ -d "flutter" ]; then
+        rm -rf "flutter"
+      fi
+
+      craftctl default
+      FLUTTER_VERSION=$(sed -n "s/^flutter \([0-9.]\+\).*/\1/p" .tool-versions)
+      git clone -b $FLUTTER_VERSION --depth 1 https://github.com/flutter/flutter.git
+    override-build: |
+      mkdir -p $CRAFT_PART_INSTALL/usr/bin
+      mkdir -p $CRAFT_PART_INSTALL/usr/libexec
+      cp -r $CRAFT_PART_SRC/flutter $CRAFT_PART_INSTALL/usr/libexec/flutter
+      ln -s $CRAFT_PART_INSTALL/usr/libexec/flutter/bin/flutter $CRAFT_PART_INSTALL/usr/bin/flutter
+      ln -s $CRAFT_PART_INSTALL/usr/libexec/flutter/bin/dart $CRAFT_PART_INSTALL/usr/bin/dart
+      $CRAFT_PART_INSTALL/usr/bin/flutter doctor
+    build-packages:
+      - clang
+      - cmake
+      - curl
+      - libgtk-3-dev
+      - ninja-build
+      - unzip
+      - xz-utils
+      - zip
+    override-prime: ''
+
+  security-center:
+    after: [flutter-git]
+    source: .
+    source-type: git
+    plugin: nil
+    override-build: |
+      set -e
+      flutter pub get
+      dart run build_runner build -d
+      flutter build linux --release -v
+      mkdir -p $CRAFT_PART_INSTALL/bin/
+      cp -r build/linux/*/release/bundle/* $CRAFT_PART_INSTALL/bin/
