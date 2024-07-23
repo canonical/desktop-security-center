@@ -32,6 +32,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.5.2
+  integration_test:
+    sdk: flutter
   mockito: ^5.4.4
   riverpod_generator: ^2.4.0
   yaru_test: ^0.1.6
