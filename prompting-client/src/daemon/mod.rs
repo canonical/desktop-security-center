@@ -1,5 +1,9 @@
 use crate::{
-    daemon::{poll::poll_for_prompts, server::new_server_and_listener, worker::Worker},
+    daemon::{
+        poll::poll_for_prompts,
+        server::{new_server_and_listener, Client},
+        worker::Worker,
+    },
     snapd_client::{PromptId, SnapMeta, SnapdSocketClient, TypedPrompt},
     Result,
 };
@@ -34,7 +38,8 @@ pub async fn run_daemon(c: SnapdSocketClient) -> Result<()> {
 
     let mut worker = Worker::new(rx_prompts, rx_actioned);
     let active_prompt = worker.read_only_active_prompt();
-    let (server, listener) = new_server_and_listener(c.clone(), active_prompt, tx_actioned);
+    let client = Client { client: c.clone() };
+    let (server, listener) = new_server_and_listener(client, active_prompt, tx_actioned);
 
     info!("spawning poll loop");
     tokio::spawn(poll_for_prompts(c, tx_prompts));

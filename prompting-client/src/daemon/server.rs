@@ -17,7 +17,7 @@ use crate::{
         TypedUiInput, UiInput,
     },
 };
-use std::{env, fs};
+use std::{env, error::Error, fs};
 use tokio::{net::UnixListener, sync::mpsc::UnboundedSender};
 use tonic::{async_trait, Code, Request, Response, Status};
 
@@ -39,11 +39,40 @@ macro_rules! map_enum {
     };
 }
 
-pub fn new_server_and_listener(
-    client: SnapdSocketClient,
+#[async_trait]
+pub trait ReplyToPrompt: Send + Sync + 'static {
+    async fn reply(
+        &self,
+        id: &PromptId,
+        reply: TypedPromptReply,
+    ) -> Result<Vec<PromptId>, Box<(dyn Error + Send + Sync + 'static)>>;
+}
+
+#[derive(Clone)]
+pub struct Client {
+    pub client: SnapdSocketClient,
+}
+
+#[async_trait]
+impl ReplyToPrompt for Client {
+    async fn reply(
+        &self,
+        id: &PromptId,
+        reply: TypedPromptReply,
+    ) -> Result<Vec<PromptId>, Box<dyn Error + Send + Sync + 'static>> {
+        let prompts = self.client.reply_to_prompt(id, reply).await?;
+        Ok(prompts)
+    }
+}
+
+pub fn new_server_and_listener<T: ReplyToPrompt>(
+    client: T,
     active_prompt: ReadOnlyActivePrompt,
     tx_actioned_prompts: UnboundedSender<ActionedPrompt>,
-) -> (AppArmorPromptingServer<Service>, UnixListener) {
+) -> (AppArmorPromptingServer<Service<T>>, UnixListener)
+where
+    T: ReplyToPrompt + Clone,
+{
     let service = Service::new(client.clone(), active_prompt, tx_actioned_prompts);
     let path =
         env::var("PROMPTING_CLIENT_SOCKET").expect("PROMPTING_CLIENT_SOCKET env var to be set");
@@ -53,15 +82,15 @@ pub fn new_server_and_listener(
     (AppArmorPromptingServer::new(service), listener)
 }
 
-pub struct Service {
-    client: SnapdSocketClient,
+pub struct Service<T: ReplyToPrompt + Send + Sync> {
+    client: T,
     active_prompt: ReadOnlyActivePrompt,
     tx_actioned_prompts: UnboundedSender<ActionedPrompt>,
 }
 
-impl Service {
+impl<T: ReplyToPrompt + Send + Sync> Service<T> {
     pub fn new(
-        client: SnapdSocketClient,
+        client: T,
         active_prompt: ReadOnlyActivePrompt,
         tx_actioned_prompts: UnboundedSender<ActionedPrompt>,
     ) -> Self {
@@ -74,7 +103,7 @@ impl Service {
 }
 
 #[async_trait]
-impl AppArmorPrompting for Service {
+impl<T: ReplyToPrompt + Send + Sync + 'static> AppArmorPrompting for Service<T> {
     async fn get_current_prompt(
         &self,
         _request: Request<()>,
@@ -96,7 +125,7 @@ impl AppArmorPrompting for Service {
         let reply = map_prompt_reply(req.clone())?;
 
         let id = PromptId(req.prompt_id.clone());
-        let others = match self.client.reply_to_prompt(&id, reply).await {
+        let others = match self.client.reply(&id, reply).await {
             Ok(res) => res,
 
             // FIXME: We need to check for snapd errors vs other errors rather than just
