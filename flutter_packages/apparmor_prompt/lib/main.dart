@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:apparmor_prompt/fake_apparmor_prompting_client.dart';
-import 'package:apparmor_prompt/home/home_prompt_page.dart';
+import 'package:apparmor_prompt/l10n.dart';
 import 'package:apparmor_prompt/prompt_page.dart';
 import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
 import 'package:args/args.dart';
@@ -66,6 +66,8 @@ void main(List<String> args) async {
       await getService<AppArmorPromptingClient>().getCurrentPrompt();
   registerServiceInstance<PromptDetails>(currentPrompt);
 
+  await initDefaultLocale();
+
   runApp(const ProviderScope(child: PromptDialog()));
 }
 
@@ -76,10 +78,11 @@ class PromptDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return YaruTheme(
       builder: (context, yaru, child) => MaterialApp(
-        title: title,
         theme: yaru.theme,
         darkTheme: yaru.darkTheme,
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: localizationsDelegates,
+        supportedLocales: supportedLocales,
         home: const PromptPage(),
       ),
     );

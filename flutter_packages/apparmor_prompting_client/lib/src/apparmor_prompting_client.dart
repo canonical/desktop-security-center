@@ -81,7 +81,7 @@ extension MetaDataConversion on MetaData {
         snapName: metaData.snapName,
         storeUrl: metaData.storeUrl,
         publisher: metaData.publisher,
-        updatedAt: metaData.updatedAt,
+        updatedAt: DateTime.tryParse(metaData.updatedAt),
       );
 }
 

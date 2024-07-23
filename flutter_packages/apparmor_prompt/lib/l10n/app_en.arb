@@ -1,0 +1,97 @@
+{
+    "@@locale": "en",
+    "securityCenterInfo": "You can always change these permissions in the <Security Center>",
+    "@securityCenterInfo": {},
+    "promptAccessTitle": "Set access for {snap} to:",
+    "@promptAccessTitle": {
+        "placeholders": {
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "promptActionOptionAllow": "Allow",
+    "@promptActionOptionAllow": {},
+    "promptActionOptionDeny": "Deny",
+    "@promptActionOptionDeny": {},
+    "promptActionTitle": "Action",
+    "@promptActionTitle": {},
+    "promptLifespanOptionForever": "Always",
+    "@promptLifespanOptionForever": {},
+    "promptLifespanOptionSession": "Until logout",
+    "@promptLifespanOptionSession": {},
+    "promptLifespanOptionSingle": "Once",
+    "@promptLifespanOptionSingle": {},
+    "promptLifespanTitle": "Duration",
+    "@promptLifespanTitle": {},
+    "promptSaveAndContinue": "Save and continue",
+    "@promptSaveAndContinue": {},
+    "promptTitle": "Security notification",
+    "@promptTitle": {},
+    "homePatternInfo": "<Learn about path patterns>",
+    "@homePatternInfo": {},
+    "homePatternTypeCustomPath": "Custom path",
+    "@homePatternTypeCustomPath": {},
+    "homePatternTypeRequestedDirectory": "Requested directory",
+    "@homePatternTypeRequestedDirectory": {},
+    "homePatternTypeRequestedFile": "Requested file",
+    "@homePatternTypeRequestedFile": {},
+    "homePatternTypeTopLevelDirectory": "Top-level directory",
+    "@homePatternTypeTopLevelDirectory": {},
+    "homePatternTypeHomeDirectory": "Home directory",
+    "@homePatternTypeHomeDirectory": {},
+    "homePatternTypeMatchingFileExtension": "Matching file extension",
+    "@homePatternTypeMatchingFileExtension": {},
+    "homePatternTypeArchiveFiles": "Archive files",
+    "@homePatternTypeArchiveFiles": {},
+    "homePatternTypeAudioFiles": "Audio files",
+    "@homePatternTypeAudioFiles": {},
+    "homePatternTypeDocumentFiles": "Document files",
+    "@homePatternTypeDocumentFiles": {},
+    "homePatternTypeImageFiles": "Image files",
+    "@homePatternTypeImageFiles": {},
+    "homePatternTypeVideoFiles": "Video files",
+    "@homePatternTypeVideoFiles": {},
+    "homePromptBody": "Allow {snap} to have {permissions} access to {path}?",
+    "@homePromptBody": {
+        "placeholders": {
+            "snap": {
+                "type": "String"
+            },
+            "permissions": {
+                "type": "String"
+            },
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "homePromptMetaDataTitle": "About this app",
+    "@homePromptMetaDataTitle": {},
+    "homePromptMetaDataPublishedBy": "Published by {publisher}",
+    "@homePromptMetaDataPublishedBy": {
+        "placeholders": {
+            "publisher": {
+                "type": "String"
+            }
+        }
+    },
+    "homePromptMetaDataLastUpdated": "Last updated on {date}",
+    "@homePromptMetaDataLastUpdated": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "homePromptMetaDataAppCenterLink": "Visit App Center page",
+    "@homePromptMetaDataAppCenterLink": {},
+    "homePromptPermissionsTitle": "Permissions",
+    "@homePromptPermissionsTitle": {},
+    "homePromptPermissionsRead": "Read",
+    "@homePromptPermissionsRead": {},
+    "homePromptPermissionsWrite": "Write",
+    "@homePromptPermissionsWrite": {},
+    "homePromptPermissionsExecute": "Execute",
+    "@homePromptPermissionsExecute": {}
+}

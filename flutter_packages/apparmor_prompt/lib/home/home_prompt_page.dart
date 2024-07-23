@@ -1,18 +1,13 @@
 import 'package:apparmor_prompt/home/home_prompt_data_model.dart';
+import 'package:apparmor_prompt/l10n.dart';
+import 'package:apparmor_prompt/l10n_x.dart';
+import 'package:apparmor_prompt/widgets/form_widgets.dart';
+import 'package:apparmor_prompt/widgets/markdown_text.dart';
 import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:intl/intl.dart';
 import 'package:yaru/yaru.dart';
-
-const title = 'Security Notification';
-
-TextSpan boldText(String text) {
-  return TextSpan(
-    text: text,
-    style: const TextStyle(fontWeight: FontWeight.bold),
-  );
-}
 
 extension WidgetIterableExtension on Iterable<Widget> {
   List<Widget> withSpacing(double spacing) {
@@ -30,29 +25,17 @@ class HomePromptPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(homePromptDataModelProvider);
 
-    return Scaffold(
-      appBar: const YaruWindowTitleBar(
-        title: Text(title),
-        isMaximizable: false,
-        isMinimizable: false,
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const InitialOptions(),
-              if (model.withMoreOptions) ...[
-                const SizedBox(height: 20),
-                const Divider(),
-                const SizedBox(height: 20),
-                const MoreOptions(),
-              ],
-            ],
-          ),
-        ),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const InitialOptions(),
+        if (model.withMoreOptions) ...[
+          const SizedBox(height: 20),
+          const Divider(),
+          const SizedBox(height: 20),
+          const MoreOptions(),
+        ],
+      ],
     );
   }
 }
@@ -62,97 +45,26 @@ class InitialOptions extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(homePromptDataModelProvider);
+    final details =
+        ref.watch(homePromptDataModelProvider.select((m) => m.details));
     // TODO: (sminez) re-enable once we have settled on what the initial options are
     // final notifier = ref.read(promptDataModelProvider.notifier);
-    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text.rich(
-          TextSpan(
-            text: 'Allow ',
-            children: [
-              boldText(model.details.metaData.snapName),
-              const TextSpan(text: ' to have '),
-              boldText(
-                model.details.requestedPermissions
-                    .map((p) => p.name)
-                    .join(', '),
-              ),
-              const TextSpan(text: ' access to '),
-              boldText(model.details.requestedPath),
-              const TextSpan(text: '?'),
-            ],
+        MarkdownText(
+          l10n.homePromptBody(
+            details.metaData.snapName.bold(),
+            details.requestedPermissions
+                .map((p) => p.localize(l10n))
+                .join(', ')
+                .bold(),
+            details.requestedPath.bold(),
           ),
         ),
-        YaruExpandable(
-          expandButtonPosition: YaruExpandableButtonPosition.start,
-          header: const Text('About this app'),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                color: theme.cardColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text.rich(
-                        TextSpan(
-                          text: 'Published by ',
-                          children: [
-                            TextSpan(
-                              text: model.details.metaData.publisher,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline,
-                                color: theme.colorScheme.primary,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Text.rich(
-                        TextSpan(
-                          text: 'Last updated on ',
-                          children: [
-                            TextSpan(
-                              text: model.details.metaData.updatedAt,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (model.details.metaData.storeUrl != null) ...[
-                        InkWell(
-                          onTap: () =>
-                              launchUrlString(model.details.metaData.storeUrl!),
-                          child: Text.rich(
-                            TextSpan(
-                              text: 'Visit App Center page',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline,
-                                color: theme.colorScheme.primary,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-            ],
-          ),
-        ),
+        const MetaDataDropdown(),
         // TODO: (sminez) re-enable once we have settled on what the initial options are
         // Row(
         //   children: [
@@ -176,13 +88,72 @@ class InitialOptions extends ConsumerWidget {
   }
 }
 
+class MetaDataDropdown extends ConsumerWidget {
+  const MetaDataDropdown({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
+    final metaData = ref
+        .watch(homePromptDataModelProvider.select((m) => m.details.metaData));
+
+    String? updatedAt;
+    if (metaData.updatedAt != null) {
+      try {
+        updatedAt = DateFormat.yMMMd().format(metaData.updatedAt!);
+      } on ArgumentError catch (_) {
+        // Fall back to English if the locale isn't valid
+        updatedAt = DateFormat.yMMMd('en').format(metaData.updatedAt!);
+      }
+    }
+
+    return YaruExpandable(
+      expandButtonPosition: YaruExpandableButtonPosition.start,
+      header: Text(l10n.homePromptMetaDataTitle),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            color: theme.cardColor,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (metaData.publisher != null)
+                    MarkdownText(
+                      l10n.homePromptMetaDataPublishedBy(
+                        metaData.publisher!.link(''),
+                      ),
+                    ),
+                  if (updatedAt != null)
+                    MarkdownText(
+                      l10n.homePromptMetaDataLastUpdated(updatedAt).bold(),
+                    ),
+                  if (metaData.storeUrl != null)
+                    MarkdownText(
+                      l10n.homePromptMetaDataAppCenterLink
+                          .link(metaData.storeUrl!),
+                    ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+        ],
+      ),
+    );
+  }
+}
+
 class MoreOptions extends ConsumerWidget {
   const MoreOptions({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.read(homePromptDataModelProvider.notifier);
-    final model = ref.watch(homePromptDataModelProvider);
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,16 +170,18 @@ class MoreOptions extends ConsumerWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'You can always change these permissions in the <Security Center>.',
-            ),
+            Text(l10n.securityCenterInfo),
             const SizedBox(height: 10),
             Align(
               alignment: Alignment.centerRight,
               child: OutlinedButton(
-                onPressed: model.isValid
+                onPressed: ref.watch(
+                  homePromptDataModelProvider.select((m) => m.isValid),
+                )
                     ? () async {
-                        final response = await notifier.saveAndContinue();
+                        final response = await ref
+                            .read(homePromptDataModelProvider.notifier)
+                            .saveAndContinue();
                         if (response is PromptReplyResponseSuccess) {
                           if (context.mounted) {
                             await YaruWindow.of(context).close();
@@ -216,12 +189,54 @@ class MoreOptions extends ConsumerWidget {
                         }
                       }
                     : null,
-                child: const Text('Save and continue'),
+                child: Text(l10n.promptSaveAndContinue),
               ),
             ),
           ],
         ),
       ].withSpacing(20),
+    );
+  }
+}
+
+class LifespanToggle extends ConsumerWidget {
+  const LifespanToggle({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+
+    return RadioButtonList<Lifespan>(
+      title: l10n.promptLifespanTitle,
+      options: const [
+        Lifespan.forever,
+        Lifespan.session,
+        Lifespan.single,
+      ],
+      optionTitle: (lifespan) => lifespan.localize(l10n),
+      groupValue:
+          ref.watch(homePromptDataModelProvider.select((m) => m.lifespan)),
+      onChanged: ref.read(homePromptDataModelProvider.notifier).setLifespan,
+      toggleable: true,
+    );
+  }
+}
+
+class ActionToggle extends ConsumerWidget {
+  const ActionToggle({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+
+    return RadioButtonList<Action>(
+      title: l10n.promptActionTitle,
+      options: Action.values,
+      optionTitle: (action) => action.localize(l10n),
+      groupValue:
+          ref.watch(homePromptDataModelProvider.select((m) => m.action)),
+      onChanged: ref.read(homePromptDataModelProvider.notifier).setAction,
+      toggleable: true,
     );
   }
 }
@@ -233,16 +248,26 @@ class AccessToggle extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(homePromptDataModelProvider);
     final notifier = ref.read(homePromptDataModelProvider.notifier);
+    final l10n = AppLocalizations.of(context);
+
+    final pathOptions = [
+      ...model.details.moreOptions,
+      MoreOption(homePatternType: HomePatternType.customPath, pathPattern: ''),
+    ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text.rich(
-          boldText('Set access for ${model.details.metaData.snapName} to:'),
+        RadioButtonList<int>(
+          title: l10n.promptAccessTitle(model.details.metaData.snapName),
+          options: Iterable.generate(pathOptions.length),
+          optionTitle: (index) =>
+              pathOptions[index].homePatternType.localize(l10n),
+          optionSubtitle: (index) => pathOptions[index].pathPattern,
+          groupValue: model.selectedPath,
+          onChanged: notifier.setSelectedPath,
+          toggleable: true,
         ),
-        const SizedBox(height: 10),
-        for (var i = 0; i <= model.numMoreOptions; i++)
-          PathChoiceRadio(index: i),
         if (model.selectedPath == model.numMoreOptions) ...[
           TextFormField(
             initialValue: model.customPath,
@@ -251,154 +276,9 @@ class AccessToggle extends ConsumerWidget {
               errorText: model.errorMessage,
             ),
           ),
-          const Text('<Learn about path patterns>'),
+          Text(l10n.homePatternInfo),
         ],
       ],
-    );
-  }
-}
-
-class PathChoiceRadio extends ConsumerWidget {
-  const PathChoiceRadio({
-    required this.index,
-    super.key,
-  });
-
-  final int index;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(homePromptDataModelProvider);
-    final notifier = ref.read(homePromptDataModelProvider.notifier);
-    final color = Theme.of(context).hintColor;
-    final (patternType, pathPattern) = index < model.numMoreOptions
-        ? model.moreOptionPath(index)
-        : (HomePatternType.customPath, null);
-
-    return YaruRadioButton<int>(
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 2),
-          Text(patternType.name),
-          if (pathPattern != null) ...[
-            Text.rich(
-              TextSpan(
-                text: pathPattern,
-                style: Theme.of(context)
-                    .textTheme
-                    .labelSmall!
-                    .copyWith(color: color),
-              ),
-            ),
-          ],
-          const SizedBox(height: 2),
-        ],
-      ),
-      value: index,
-      groupValue: model.selectedPath,
-      onChanged: notifier.setSelectedPath,
-      toggleable: true,
-    );
-  }
-}
-
-class ActionToggle extends ConsumerWidget {
-  const ActionToggle({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text.rich(boldText('Access Policy')),
-        const SizedBox(height: 10),
-        const PolicyRadio(
-          title: 'Allow',
-          policy: Action.allow,
-        ),
-        const PolicyRadio(
-          title: 'Deny',
-          policy: Action.deny,
-        ),
-      ],
-    );
-  }
-}
-
-class PolicyRadio extends ConsumerWidget {
-  const PolicyRadio({
-    required this.title,
-    required this.policy,
-    super.key,
-  });
-
-  final String title;
-  final Action policy;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(homePromptDataModelProvider);
-    final notifier = ref.read(homePromptDataModelProvider.notifier);
-
-    return YaruRadioButton<Action>(
-      title: Text(title),
-      value: policy,
-      groupValue: model.action,
-      onChanged: notifier.setAction,
-      toggleable: true,
-    );
-  }
-}
-
-class LifespanToggle extends ConsumerWidget {
-  const LifespanToggle({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text.rich(boldText('Duration')),
-        const SizedBox(height: 10),
-        const LifespanRadio(
-          title: 'Always',
-          lifespan: Lifespan.forever,
-        ),
-        const LifespanRadio(
-          title: 'Until logout',
-          lifespan: Lifespan.session,
-        ),
-        const LifespanRadio(
-          title: 'Once',
-          lifespan: Lifespan.single,
-        ),
-      ],
-    );
-  }
-}
-
-class LifespanRadio extends ConsumerWidget {
-  const LifespanRadio({
-    required this.title,
-    required this.lifespan,
-    super.key,
-  });
-
-  final String title;
-  final Lifespan lifespan;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(homePromptDataModelProvider);
-    final notifier = ref.read(homePromptDataModelProvider.notifier);
-
-    return YaruRadioButton<Lifespan>(
-      title: Text(title),
-      value: lifespan,
-      groupValue: model.lifespan,
-      onChanged: notifier.setLifespan,
-      toggleable: true,
     );
   }
 }
@@ -408,50 +288,20 @@ class Permissions extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text.rich(boldText('Permissions')),
-        const SizedBox(height: 10),
-        const PermissionCheckButton(
-          title: 'Read',
-          permission: Permission.read,
-        ),
-        const PermissionCheckButton(
-          title: 'Write',
-          permission: Permission.write,
-        ),
-        const PermissionCheckButton(
-          title: 'Execute',
-          permission: Permission.execute,
-        ),
-      ],
+    final selectedPermissions =
+        ref.watch(homePromptDataModelProvider.select((m) => m.permissions));
+    final availablePermissions = ref.watch(
+      homePromptDataModelProvider.select((m) => m.details.availablePermissions),
     );
-  }
-}
+    final l10n = AppLocalizations.of(context);
 
-class PermissionCheckButton extends ConsumerWidget {
-  const PermissionCheckButton({
-    required this.title,
-    required this.permission,
-    super.key,
-  });
-
-  final String title;
-  final Permission permission;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(homePromptDataModelProvider);
-    final notifier = ref.read(homePromptDataModelProvider.notifier);
-
-    return YaruCheckButton(
-      title: Text(title),
-      value: model.permissions.contains(permission),
-      tristate: true,
-      onChanged: model.details.availablePermissions.contains(permission)
-          ? (_) => notifier.togglePerm(permission)
-          : null,
+    return CheckButtonList<Permission>(
+      title: l10n.homePromptPermissionsTitle,
+      options: Permission.values,
+      optionTitle: (option) => option.localize(l10n),
+      hasOption: selectedPermissions.contains,
+      isEnabled: availablePermissions.contains,
+      toggleOption: ref.read(homePromptDataModelProvider.notifier).togglePerm,
     );
   }
 }
