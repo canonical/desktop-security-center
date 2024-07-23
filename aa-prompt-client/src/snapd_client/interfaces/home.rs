@@ -159,7 +159,7 @@ impl SnapInterface for HomeInterface {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct HomeConstraints {
     pub(crate) path: String,
