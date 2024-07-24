@@ -1,8 +1,8 @@
 [package]
-name = "aa-prompt-client"
+name = "apparmor-prompting-client"
 version = "0.1.0"
 edition = "2021"
-default-run = "aa-prompt-client"
+default-run = "apparmor-prompting-client"
 
 [profile.release]
 strip = true
