@@ -18,14 +18,6 @@ apps:
       - home
       - snap-prompting-control
 
-  security-center:
-    command: bin/security-center/security_center
-    extensions: [gnome]
-    environment: *env
-    plugs:
-      - snap-prompting-control
-      - snapd-control
-
 parts:
   flutter-git:
     plugin: nil
@@ -86,15 +78,3 @@ parts:
       flutter build linux --release -v
       mkdir -p $CRAFT_PART_INSTALL/bin/apparmor-prompt/
       cp -r build/linux/*/release/bundle/* $CRAFT_PART_INSTALL/bin/apparmor-prompt/
-
-  security-center:
-    after: [flutter-git]
-    source: flutter_packages/security_center
-    plugin: nil
-    override-build: |
-      set -e
-      flutter pub get
-      dart run build_runner build
-      flutter build linux --release -v
-      mkdir -p $CRAFT_PART_INSTALL/bin/security-center/
-      cp -r build/linux/*/release/bundle/* $CRAFT_PART_INSTALL/bin/security-center/
