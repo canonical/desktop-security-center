@@ -17,7 +17,7 @@ use crate::{
         TypedUiInput, UiInput,
     },
 };
-use std::{env, error::Error, fs};
+use std::error::Error;
 use tokio::{net::UnixListener, sync::mpsc::UnboundedSender};
 use tonic::{async_trait, Code, Request, Response, Status};
 
@@ -45,7 +45,7 @@ pub trait ReplyToPrompt: Send + Sync + 'static {
         &self,
         id: &PromptId,
         reply: TypedPromptReply,
-    ) -> Result<Vec<PromptId>, Box<(dyn Error + Send + Sync + 'static)>>;
+    ) -> Result<Vec<PromptId>, Box<(dyn Error + Send + Sync)>>;
 }
 
 #[derive(Clone)]
@@ -59,7 +59,7 @@ impl ReplyToPrompt for Client {
         &self,
         id: &PromptId,
         reply: TypedPromptReply,
-    ) -> Result<Vec<PromptId>, Box<dyn Error + Send + Sync + 'static>> {
+    ) -> Result<Vec<PromptId>, Box<dyn Error + Send + Sync>> {
         let prompts = self.client.reply_to_prompt(id, reply).await?;
         Ok(prompts)
     }
@@ -69,15 +69,13 @@ pub fn new_server_and_listener<T: ReplyToPrompt>(
     client: T,
     active_prompt: ReadOnlyActivePrompt,
     tx_actioned_prompts: UnboundedSender<ActionedPrompt>,
+    socket_path: String,
 ) -> (AppArmorPromptingServer<Service<T>>, UnixListener)
 where
     T: ReplyToPrompt + Clone,
 {
     let service = Service::new(client.clone(), active_prompt, tx_actioned_prompts);
-    let path =
-        env::var("PROMPTING_CLIENT_SOCKET").expect("PROMPTING_CLIENT_SOCKET env var to be set");
-    let _ = fs::remove_file(&path); // Remove the old socket file if it exists
-    let listener = UnixListener::bind(&path).expect("to be able to bind to our socket");
+    let listener = UnixListener::bind(&socket_path).expect("to be able to bind to our socket");
 
     (AppArmorPromptingServer::new(service), listener)
 }
@@ -103,7 +101,7 @@ impl<T: ReplyToPrompt + Send + Sync> Service<T> {
 }
 
 #[async_trait]
-impl<T: ReplyToPrompt + Send + Sync + 'static> AppArmorPrompting for Service<T> {
+impl<T: ReplyToPrompt + Send + Sync> AppArmorPrompting for Service<T> {
     async fn get_current_prompt(
         &self,
         _request: Request<()>,
@@ -227,4 +225,131 @@ fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {
             )
             .collect(),
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::{
+        error::Error,
+        fs,
+        sync::{Arc, Mutex},
+    };
+
+ 
+    use tower::service_fn;
+    use hyper_util::rt::TokioIo;
+    use tokio::{self, net::UnixStream, sync::mpsc::unbounded_channel};
+    use tokio_stream::wrappers::UnixListenerStream;
+    use tonic::transport::{Endpoint, Uri};
+    use tonic::{async_trait, transport::{Server}, Request};   
+
+
+    use crate::{
+        daemon::worker::ReadOnlyActivePrompt,
+        protos::apparmor_prompting::app_armor_prompting_client::AppArmorPromptingClient,
+        snapd_client::{interfaces::home::HomeUiInputData, PromptId, SnapMeta, TypedPromptReply},
+    };
+
+    // build a test client
+    // test get_current_prompt
+    // test reply_to_prompt
+    #[derive(Clone)]
+    struct MockClient {}
+
+    #[async_trait]
+    impl ReplyToPrompt for MockClient {
+        async fn reply(
+            &self,
+            _id: &PromptId,
+            _reply: TypedPromptReply,
+        ) -> Result<Vec<PromptId>, Box<dyn Error + Send + Sync>> {
+            Ok(Vec::new())
+        }
+    }
+
+    #[tokio::test]
+async fn test_get_current_prompt() {
+    let mock_client = MockClient {};
+    let (tx_actioned_prompts, _rx_actioned_prompts) = unbounded_channel();
+
+    let active_prompt = ReadOnlyActivePrompt {
+        active_prompt: Arc::new(Mutex::new(Some(TypedUiInput::Home(UiInput::<
+            HomeInterface,
+        > {
+            id: PromptId("".to_string()),
+            meta: SnapMeta {
+                name: "".to_string(),
+                updated_at: "".to_string(),
+                store_url: "".to_string(),
+                publisher: "".to_string(),
+            },
+            data: HomeUiInputData {
+                requested_path: "".to_string(),
+                requested_permissions: Vec::new(),
+                available_permissions: Vec::new(),
+                initial_options: Vec::new(),
+                more_options: Vec::new(),
+            },
+        })))),
+    };
+
+    let path: String = "/tmp/test_socket".to_string(); // Ensure this path is correct
+    let _ = fs::remove_file(&path); // Remove the old socket file if it exists
+
+    let (server, listener) = new_server_and_listener(
+        mock_client,
+        active_prompt,
+        tx_actioned_prompts,
+        path.clone(),       
+    );
+
+    let incoming = UnixListenerStream::new(listener);
+
+    // No choice but to do this https://github.com/hyperium/tonic/blob/master/examples/src/uds/client.rs
+    let channel = Endpoint::try_from("http://[::]:50051").unwrap()
+        .connect_with_connector(service_fn(|_: Uri| async {
+            let path = "/tmp/test_socket";
+            // Connect to a Uds socket
+            Ok::<_, std::io::Error>(TokioIo::new(UnixStream::connect(path).await?))
+        }))
+        .await.unwrap();
+
+
+    let mut client = AppArmorPromptingClient::new(channel);
+    
+
+    tokio::spawn(async move {
+        Server::builder()
+            .add_service(server)
+            .serve_with_incoming(incoming)
+            .await
+            .unwrap();
+    });
+    
+    let resp = client
+        .get_current_prompt(Request::new(()))
+        .await
+        .unwrap()
+        .into_inner()
+        .prompt
+        .unwrap();
+
+    assert_eq!(resp, Prompt::HomePrompt(HomePrompt {
+        meta_data: Some(MetaData {
+            prompt_id: "".to_string(),
+            snap_name: "".to_string(),
+            store_url: "".to_string(),
+            publisher: "".to_string(),
+            updated_at: "".to_string(),
+        }),
+        requested_path: "".to_string(),
+        requested_permissions: Vec::new(),
+        available_permissions: Vec::new(),
+        more_options: Vec::new(),
+    }));
+
+    // Clean up by removing the socket file
+    let _ = fs::remove_file(&path);
+}
 }

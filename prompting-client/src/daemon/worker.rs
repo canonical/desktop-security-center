@@ -22,8 +22,9 @@ enum Recv {
     ChannelClosed,
 }
 
+#[derive(Debug)]
 pub struct ReadOnlyActivePrompt {
-    active_prompt: Arc<Mutex<Option<TypedUiInput>>>,
+    pub active_prompt: Arc<Mutex<Option<TypedUiInput>>>,
 }
 
 impl ReadOnlyActivePrompt {
