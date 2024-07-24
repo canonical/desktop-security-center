@@ -57,8 +57,16 @@ class FakeAppPermissionsService implements AppPermissionsService {
   Future<bool> isEnabled() async => _enabled;
 
   @override
-  Future<void> enable() async => _enabled = true;
+  Stream<AppPermissionsServiceStatus> enable() async* {
+    yield AppPermissionsServiceStatusEnabling(0.0);
+    await Future.delayed(const Duration(seconds: 3));
+    _enabled = true;
+  }
 
   @override
-  Future<void> disable() async => _enabled = false;
+  Stream<AppPermissionsServiceStatus> disable() async* {
+    yield AppPermissionsServiceStatusDisabling(0.0);
+    await Future.delayed(const Duration(seconds: 3));
+    _enabled = false;
+  }
 }

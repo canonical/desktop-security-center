@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
-import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';

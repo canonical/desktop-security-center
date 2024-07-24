@@ -8,11 +8,13 @@ import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/services/fake_app_permissions_service.dart';
 import 'package:security_center/services/snapd_app_permissions_service.dart';
 import 'package:snapd/snapd.dart';
+import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
 Future<void> main(List<String> args) async {
   await YaruWindowTitleBar.ensureInitialized();
+  Logger.setup(path: '', level: LogLevel.info);
 
   final parser = ArgParser()
     ..addFlag(
