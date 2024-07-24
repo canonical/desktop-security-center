@@ -52,6 +52,9 @@ pub enum Error {
     #[error("the apparmor-prompting feature is not available")]
     NotAvailable,
 
+    #[error("the apparmor-prompting feature is not enabled")]
+    NotEnabled,
+
     #[error("the apparmor-prompting feature is not supported: {reason}")]
     NotSupported { reason: String },
 

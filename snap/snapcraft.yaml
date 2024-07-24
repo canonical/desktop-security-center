@@ -10,13 +10,24 @@ confinement: strict
 
 apps:
   apparmor-prompting:
-    command: bin/aa-prompt-client
+    command: bin/apparmor-prompting-client
     extensions: [gnome]
     environment: &env
       AA_PROMPTING_CLIENT_SOCKET: "${XDG_RUNTIME_DIR}/apparmor-prompting.sock"
-    plugs:
+    plugs: &plugs
       - home
       - snap-prompting-control
+
+  daemon:
+    command: bin/apparmor-prompting-daemon
+    extensions: [gnome]
+    environment: *env
+    plugs: *plugs
+    daemon: simple
+    passthrough: # TODO: Remove once daemon-scope lands in snapcraft
+      daemon-scope: user
+    restart-condition: on-success
+    restart-delay: 2s
 
 parts:
   flutter-git:

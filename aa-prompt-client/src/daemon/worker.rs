@@ -9,7 +9,7 @@ use std::{
     time::Duration,
 };
 use tokio::{process::Command, sync::mpsc::UnboundedReceiver, time::timeout};
-use tracing::{debug, error, span, warn, Level};
+use tracing::{debug, error, info, span, warn, Level};
 
 const RECV_TIMEOUT: Duration = Duration::from_millis(200);
 
@@ -123,7 +123,7 @@ where
         debug!("got prompt");
 
         if self.prompts_to_drop.contains(ep.prompt.id()) {
-            debug!("dropping prompt");
+            info!("dropping prompt as it has already been actioned");
             self.prompts_to_drop.retain(|id| id != ep.prompt.id());
             return Ok(());
         }

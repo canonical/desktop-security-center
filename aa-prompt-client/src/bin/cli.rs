@@ -1,5 +1,5 @@
 //! A simple command line prompting client
-use aa_prompt_client::{
+use apparmor_prompting_client::{
     cli_actions::{run_echo_loop, run_scripted_client_loop},
     daemon::run_daemon,
     snapd_client::SnapdSocketClient,

@@ -1,19 +1,19 @@
 [package]
-name = "aa-prompt-client"
+name = "apparmor-prompting-client"
 version = "0.1.0"
 edition = "2021"
-default-run = "aa-prompt-client"
+default-run = "apparmor-prompting-client"
 
 [profile.release]
 strip = true
 lto = true
 
 [[bin]]
-name = "aa-prompt-client"
+name = "apparmor-prompting-client"
 path = "src/bin/cli.rs"
 
 [[bin]]
-name = "aa-prompt-daemon"
+name = "apparmor-prompting-daemon"
 path = "src/bin/daemon.rs"
 
 [dependencies]
@@ -35,6 +35,7 @@ tonic = "0.12.0"
 tonic-reflection = "0.12.0"
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+tracing-journald = "0.3.0"
 
 [dev-dependencies]
 serial_test = "3.1.1"
