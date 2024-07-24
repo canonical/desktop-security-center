@@ -236,14 +236,13 @@ mod tests {
         sync::{Arc, Mutex},
     };
 
- 
-    use tower::service_fn;
     use hyper_util::rt::TokioIo;
+    use simple_test_case::test_case;
     use tokio::{self, net::UnixStream, sync::mpsc::unbounded_channel};
     use tokio_stream::wrappers::UnixListenerStream;
     use tonic::transport::{Endpoint, Uri};
-    use tonic::{async_trait, transport::{Server}, Request};   
-
+    use tonic::{async_trait, transport::Server, Request};
+    use tower::service_fn;
 
     use crate::{
         daemon::worker::ReadOnlyActivePrompt,
@@ -251,9 +250,6 @@ mod tests {
         snapd_client::{interfaces::home::HomeUiInputData, PromptId, SnapMeta, TypedPromptReply},
     };
 
-    // build a test client
-    // test get_current_prompt
-    // test reply_to_prompt
     #[derive(Clone)]
     struct MockClient {}
 
@@ -268,88 +264,100 @@ mod tests {
         }
     }
 
+    #[test_case("empty_prompt", true; "empty prompt")]
+    #[test_case("non_empty_prompt", false; "non-empty prompt")]
     #[tokio::test]
-async fn test_get_current_prompt() {
-    let mock_client = MockClient {};
-    let (tx_actioned_prompts, _rx_actioned_prompts) = unbounded_channel();
+    async fn test_get_current_prompt(test_name: &str, empty_active_prompt: bool) {
+        let mock_client = MockClient {};
+        let (tx_actioned_prompts, _rx_actioned_prompts) = unbounded_channel();
 
-    let active_prompt = ReadOnlyActivePrompt {
-        active_prompt: Arc::new(Mutex::new(Some(TypedUiInput::Home(UiInput::<
-            HomeInterface,
-        > {
-            id: PromptId("".to_string()),
-            meta: SnapMeta {
-                name: "".to_string(),
-                updated_at: "".to_string(),
-                store_url: "".to_string(),
-                publisher: "".to_string(),
-            },
-            data: HomeUiInputData {
-                requested_path: "".to_string(),
+        let active_prompt = if empty_active_prompt {
+            ReadOnlyActivePrompt {
+                active_prompt: Arc::new(Mutex::new(None)),
+            }
+        } else {
+            ReadOnlyActivePrompt {
+                active_prompt: Arc::new(Mutex::new(Some(TypedUiInput::Home(UiInput::<
+                    HomeInterface,
+                > {
+                    id: PromptId("foo".to_string()),
+                    meta: SnapMeta {
+                        name: "foo".to_string(),
+                        updated_at: "foo".to_string(),
+                        store_url: "foo".to_string(),
+                        publisher: "foo".to_string(),
+                    },
+                    data: HomeUiInputData {
+                        requested_path: "foo".to_string(),
+                        requested_permissions: Vec::new(),
+                        available_permissions: Vec::new(),
+                        initial_options: Vec::new(),
+                        more_options: Vec::new(),
+                    },
+                })))),
+            }
+        };
+
+        let want = if empty_active_prompt {
+            None
+        } else {
+            Some(Prompt::HomePrompt(HomePrompt {
+                meta_data: Some(MetaData {
+                    prompt_id: "foo".to_string(),
+                    snap_name: "foo".to_string(),
+                    store_url: "foo".to_string(),
+                    publisher: "foo".to_string(),
+                    updated_at: "foo".to_string(),
+                }),
+                requested_path: "foo".to_string(),
                 requested_permissions: Vec::new(),
                 available_permissions: Vec::new(),
-                initial_options: Vec::new(),
                 more_options: Vec::new(),
-            },
-        })))),
-    };
+            }))
+        };
+        let test_name = Arc::new(test_name.to_string());
+        let path = format!("/tmp/{}_socket", test_name);
+        let _ = fs::remove_file(&path); // Remove the old socket file if it exists
 
-    let path: String = "/tmp/test_socket".to_string(); // Ensure this path is correct
-    let _ = fs::remove_file(&path); // Remove the old socket file if it exists
+        let (server, listener) = new_server_and_listener(
+            mock_client,
+            active_prompt,
+            tx_actioned_prompts,
+            path.clone(),
+        );
 
-    let (server, listener) = new_server_and_listener(
-        mock_client,
-        active_prompt,
-        tx_actioned_prompts,
-        path.clone(),       
-    );
+        let incoming = UnixListenerStream::new(listener);
 
-    let incoming = UnixListenerStream::new(listener);
-
-    // No choice but to do this https://github.com/hyperium/tonic/blob/master/examples/src/uds/client.rs
-    let channel = Endpoint::try_from("http://[::]:50051").unwrap()
-        .connect_with_connector(service_fn(|_: Uri| async {
-            let path = "/tmp/test_socket";
-            // Connect to a Uds socket
-            Ok::<_, std::io::Error>(TokioIo::new(UnixStream::connect(path).await?))
-        }))
-        .await.unwrap();
-
-
-    let mut client = AppArmorPromptingClient::new(channel);
-    
-
-    tokio::spawn(async move {
-        Server::builder()
-            .add_service(server)
-            .serve_with_incoming(incoming)
+        // No choice but to do this https://github.com/hyperium/tonic/blob/master/examples/src/uds/client.rs
+        let channel = Endpoint::try_from("http://[::]:50051")
+            .unwrap()
+            .connect_with_connector(service_fn(move |_: Uri| {
+                let path = Arc::clone(&test_name);
+                async move {
+                    let path = format!("/tmp/{}_socket", path);
+                    // Connect to a Uds socket
+                    Ok::<_, std::io::Error>(TokioIo::new(UnixStream::connect(path).await?))
+                }
+            }))
             .await
             .unwrap();
-    });
-    
-    let resp = client
-        .get_current_prompt(Request::new(()))
-        .await
-        .unwrap()
-        .into_inner()
-        .prompt
-        .unwrap();
+        let mut client = AppArmorPromptingClient::new(channel);
 
-    assert_eq!(resp, Prompt::HomePrompt(HomePrompt {
-        meta_data: Some(MetaData {
-            prompt_id: "".to_string(),
-            snap_name: "".to_string(),
-            store_url: "".to_string(),
-            publisher: "".to_string(),
-            updated_at: "".to_string(),
-        }),
-        requested_path: "".to_string(),
-        requested_permissions: Vec::new(),
-        available_permissions: Vec::new(),
-        more_options: Vec::new(),
-    }));
+        tokio::spawn(async move {
+            Server::builder()
+                .add_service(server)
+                .serve_with_incoming(incoming)
+                .await
+                .unwrap();
+        });
 
-    // Clean up by removing the socket file
-    let _ = fs::remove_file(&path);
-}
+        let resp = client
+            .get_current_prompt(Request::new(()))
+            .await
+            .unwrap()
+            .into_inner()
+            .prompt;
+
+        assert_eq!(resp, want);
+    }
 }
