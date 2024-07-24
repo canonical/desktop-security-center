@@ -95,17 +95,26 @@ void main() {
       for (final testCase in <({
         String name,
         AppPermissionsServiceStatus status,
-        String Function(AppLocalizations) expectedLabel,
+        String Function(AppLocalizations)? expectedLabel,
+        bool expectProgressIndicator,
       })>[
         (
           name: 'enabling',
           status: AppPermissionsServiceStatusEnabling(0.0),
           expectedLabel: (l10n) => l10n.snapPermissionsEnablingLabel,
+          expectProgressIndicator: true,
         ),
         (
           name: 'disabling',
           status: AppPermissionsServiceStatusDisabling(0.0),
           expectedLabel: (l10n) => l10n.snapPermissionsDisablingLabel,
+          expectProgressIndicator: true,
+        ),
+        (
+          name: 'waiting for auth',
+          status: AppPermissionsServiceStatusWaitingForAuth(),
+          expectedLabel: null,
+          expectProgressIndicator: false,
         ),
       ]) {
         testWidgets(testCase.name, (tester) async {
@@ -121,11 +130,16 @@ void main() {
               AsyncData(testCase.status);
           await tester.pump();
 
+          if (testCase.expectedLabel != null) {
+            expect(
+              find.text(testCase.expectedLabel!(tester.l10n)),
+              findsOneWidget,
+            );
+          }
           expect(
-            find.text(testCase.expectedLabel(tester.l10n)),
-            findsOneWidget,
+            find.byType(YaruLinearProgressIndicator),
+            testCase.expectProgressIndicator ? findsOneWidget : findsNothing,
           );
-          expect(find.byType(YaruLinearProgressIndicator), findsOneWidget);
         });
       }
     });

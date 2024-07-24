@@ -23,6 +23,8 @@ sealed class AppPermissionsServiceStatus with _$AppPermissionsServiceStatus {
       AppPermissionsServiceStatusEnabling;
   factory AppPermissionsServiceStatus.disabling(double progress) =
       AppPermissionsServiceStatusDisabling;
+  factory AppPermissionsServiceStatus.waitingForAuth() =
+      AppPermissionsServiceStatusWaitingForAuth;
 
   AppPermissionsServiceStatus._();
 

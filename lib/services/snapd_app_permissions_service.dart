@@ -43,9 +43,10 @@ class SnapdAppPermissionsService implements AppPermissionsService {
     Future<String> Function() action,
     AppPermissionsServiceStatus Function(double progress) progressState,
   ) async* {
-    yield progressState(0.0);
+    yield AppPermissionsServiceStatusWaitingForAuth();
     try {
       final changeId = await action();
+      yield progressState(0.0);
       _log.debug('Change ID: $changeId');
       await for (final change in _client.watchChange(changeId)) {
         _log.debug('Change: $change');
