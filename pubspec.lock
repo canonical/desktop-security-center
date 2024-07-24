@@ -660,12 +660,11 @@ packages:
   snapd:
     dependency: "direct main"
     description:
-      path: "."
-      ref: prompting-rules
-      resolved-ref: "11fade14e8b2cb4283f6f9cc188fe53986765b05"
-      url: "https://github.com/d-loose/snapd.dart"
-    source: git
-    version: "0.5.0"
+      name: snapd
+      sha256: e4e06d3726b2de77c6693c5de63371abeccbbe638cedeb32a5e3c8d640292ef9
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.2"
   source_gen:
     dependency: transitive
     description:
