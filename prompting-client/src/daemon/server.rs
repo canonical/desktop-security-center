@@ -236,6 +236,7 @@ mod tests {
         sync::{Arc, Mutex},
     };
 
+    use apparmor_prompting::{Action, Lifespan};
     use hyper_util::rt::TokioIo;
     use simple_test_case::test_case;
     use tokio::{self, net::UnixStream, sync::mpsc::unbounded_channel};
@@ -251,7 +252,9 @@ mod tests {
     };
 
     #[derive(Clone)]
-    struct MockClient {}
+    struct MockClient {
+        want_err: bool,
+    }
 
     #[async_trait]
     impl ReplyToPrompt for MockClient {
@@ -260,7 +263,14 @@ mod tests {
             _id: &PromptId,
             _reply: TypedPromptReply,
         ) -> Result<Vec<PromptId>, Box<dyn Error + Send + Sync>> {
-            Ok(Vec::new())
+            if self.want_err {
+                Err(Box::new(std::io::Error::new(
+                    std::io::ErrorKind::Other,
+                    "error requested of mock snapd client",
+                )))
+            } else {
+                Ok(Vec::new())
+            }
         }
     }
 
@@ -268,7 +278,7 @@ mod tests {
     #[test_case("non_empty_prompt", false; "non-empty prompt")]
     #[tokio::test]
     async fn test_get_current_prompt(test_name: &str, empty_active_prompt: bool) {
-        let mock_client = MockClient {};
+        let mock_client = MockClient { want_err: false };
         let (tx_actioned_prompts, _rx_actioned_prompts) = unbounded_channel();
 
         let active_prompt = if empty_active_prompt {
@@ -359,5 +369,95 @@ mod tests {
             .prompt;
 
         assert_eq!(resp, want);
+    }
+
+    #[test_case("error_when_map_prompt_reply_fails", true, false, false, true; "Error when map_prompt_reply fails")]
+    #[test_case("returns_unknown_error_code_when_snapd_returns_an_error", false, true, false, false; "Returns unknown error code when snapd returns an error")]
+    #[test_case("error_when_returning_actioned_prompts_returns_an_error", false, false, true, true; "Error when returning actioned prompts returns an error")]
+    #[test_case("succesfully_reply_to_a_prompt", false, false, false, false; "Succesfully reply to a prompt")]
+    #[tokio::test]
+    async fn test_reply_to_prompt(
+        test_name: &str,
+        map_prompt_reply_err: bool,
+        snapd_err: bool,
+        tx_err: bool,
+        want_err: bool,
+    ) {
+        let mock_client = MockClient {
+            want_err: snapd_err,
+        };
+        let (tx_actioned_prompts, rx_actioned_prompts) = unbounded_channel();
+
+        if tx_err {
+            drop(rx_actioned_prompts);
+        }
+
+        let active_prompt = ReadOnlyActivePrompt {
+            active_prompt: Arc::new(Mutex::new(None)),
+        };
+
+        let test_name = Arc::new(test_name.to_string());
+        let path = format!("/tmp/{}_socket", test_name);
+        let _ = fs::remove_file(&path); // Remove the old socket file if it exists
+
+        let (server, listener) = new_server_and_listener(
+            mock_client,
+            active_prompt,
+            tx_actioned_prompts,
+            path.clone(),
+        );
+
+        let incoming = UnixListenerStream::new(listener);
+
+        // No choice but to do this https://github.com/hyperium/tonic/blob/master/examples/src/uds/client.rs
+        let channel = Endpoint::try_from("http://[::]:50051")
+            .unwrap()
+            .connect_with_connector(service_fn(move |_: Uri| {
+                let path = Arc::clone(&test_name);
+                async move {
+                    let path = format!("/tmp/{}_socket", path);
+                    // Connect to a Uds socket
+                    Ok::<_, std::io::Error>(TokioIo::new(UnixStream::connect(path).await?))
+                }
+            }))
+            .await
+            .unwrap();
+        let mut client = AppArmorPromptingClient::new(channel);
+
+        tokio::spawn(async move {
+            Server::builder()
+                .add_service(server)
+                .serve_with_incoming(incoming)
+                .await
+                .unwrap();
+        });
+
+        let resp = client
+            .reply_to_prompt(Request::new(PromptReply {
+                prompt_id: "foo".to_string(),
+                action: Action::Allow as i32,
+                lifespan: Lifespan::Single as i32,
+                prompt_reply: if map_prompt_reply_err {
+                    None
+                } else {
+                    Some(HomePromptReply(apparmor_prompting::HomePromptReply {
+                        path_pattern: "foo".to_string(),
+                        permissions: Vec::new(),
+                    }))
+                },
+            }))
+            .await;
+
+        if want_err {
+            assert!(matches!(resp, Err(_)));
+            return;
+        }
+
+        if snapd_err {
+            assert_eq!(
+                resp.unwrap().into_inner().prompt_reply_type,
+                PromptReplyType::Unknown as i32
+            )
+        }
     }
 }
