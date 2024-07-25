@@ -1,5 +1,5 @@
 VM_NAME = aa-testing
-SNAP_NAME = apparmor-prompting
+SNAP_NAME = prompting-client
 TEST_SNAP_NAME = aa-prompting-test
 
 .PHONY: install-local-tooling
@@ -127,8 +127,8 @@ integration-tests:
 		exit 1; \
 	fi
 	@echo ":: Remember to run 'make prepare-vm' before running the integration tests"
-	cd aa-prompt-client && cargo test --no-run
-	FNAME=$$(ls -ht aa-prompt-client/target/debug/deps/integration* | grep -Ev '\.d' | head -n1); \
+	cd prompting-client && cargo test --no-run
+	FNAME=$$(ls -ht prompting-client/target/debug/deps/integration* | grep -Ev '\.d' | head -n1); \
 	cp $$FNAME integration-tests; \
 	lxc file push integration-tests $(VM_NAME)/home/ubuntu/; \
 	rm integration-tests; \
