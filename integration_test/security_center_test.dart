@@ -49,10 +49,8 @@ void expectRule(SnapdRuleMask rule) {
   // This verifies that the specified rule is displayed in the UI by checking
   // that the widgets in the following list share a unique common ancestor.
   final tile = [
-    find.text('Path pattern: ${rule.constraints.pathPattern}'),
-    find.text('Permissions: ${rule.constraints.permissions?.join(', ')}'),
-    find.text('Outcome: ${rule.outcome.name}'),
-    find.text('Lifespan: ${rule.lifespan.name}'),
+    find.text(rule.constraints.pathPattern!),
+    find.text(rule.constraints.permissions!.join(', ')),
   ]
       // List of sets of ancestors for each text widget.
       .map(

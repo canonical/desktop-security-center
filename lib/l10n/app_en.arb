@@ -2,6 +2,14 @@
     "@@locale": "en",
     "appTitle": "Security Center",
     "@appTitle": {},
+    "snapdRuleCategorySessionAllowed": "Allowed until logout",
+    "@snapdRuleCategorySessionAllowed": {},
+    "snapdRuleCategorySessionDenied": "Denied until logout",
+    "@snapdRuleCategorySessionDenied": {},
+    "snapdRuleCategoryForeverAllowed": "Always allowed",
+    "@snapdRuleCategoryForeverAllowed": {},
+    "snapdRuleCategoryForeverDenied": "Never allowed",
+    "@snapdRuleCategoryForeverDenied": {},
     "snapPermissionsEnableTitle": "Require snaps to ask for system permissions",
     "@snapPermissionsEnableTitle": {},
     "snapPermissionsEnableWarning": "This is an experimental feature for controlling access to your system’s resources.",
@@ -35,6 +43,8 @@
             }
         }
     },
+    "snapRulesPageEmptyTileLabel": "No rules yet",
+    "@snapRulesPageEmptyTileLabel": {},
     "snapRulesRemoveAll": "Remove all",
     "@snapRulesRemoveAll": {},
     "homeInterfacePageTitle": "Home folder",

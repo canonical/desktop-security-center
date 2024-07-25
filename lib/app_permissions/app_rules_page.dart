@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/app_permissions/rules_category.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
@@ -46,28 +47,34 @@ class _Body extends ConsumerWidget {
       snapRulesModelProvider(snap: snap, interface: interface).notifier,
     );
     final l10n = AppLocalizations.of(context);
-    final tiles = rules
-        .map(
-          (rule) => ListTile(
-            leading: Text(rule.id),
-            title: _Rule(rule: rule),
-            onTap: () => notifier.removeRule(rule.id),
-          ),
-        )
-        .toList();
+    final textTheme = Theme.of(context).textTheme;
     return ScrollablePage(
       children: [
         Row(
           children: [
             const Icon(YaruIcons.placeholder_icon),
             const SizedBox(width: 10),
-            Text(snap, style: Theme.of(context).textTheme.titleLarge),
+            Text(snap, style: textTheme.titleLarge),
           ],
         ),
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
-        TileList(children: tiles),
-        const SizedBox(height: 16),
+        for (final category in SnapdRuleCategory.values)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                category.localizedTitle(l10n),
+                style: textTheme.titleMedium,
+              ),
+              const SizedBox(height: 16),
+              _RuleList(
+                rules: rules.filterByCategory(category).toList(),
+                onRemove: notifier.removeRule,
+              ),
+              const SizedBox(height: 24),
+            ],
+          ),
         ElevatedButton(
           onPressed: notifier.removeAll,
           child: Text(l10n.snapRulesRemoveAll),
@@ -77,21 +84,50 @@ class _Body extends ConsumerWidget {
   }
 }
 
-class _Rule extends StatelessWidget {
-  const _Rule({required this.rule});
+class _RuleList extends TileList {
+  _RuleList({
+    required List<SnapdRule> rules,
+    required void Function(String id) onRemove,
+  }) : super(
+          children: rules.isEmpty
+              ? [const _EmptyRuleTile()]
+              : rules
+                  .map(
+                    (rule) => RuleTile(
+                      rule: rule,
+                      onRemove: () => onRemove(rule.id),
+                    ),
+                  )
+                  .toList(),
+        );
+}
 
+class RuleTile extends StatelessWidget {
+  const RuleTile({required this.rule, required this.onRemove, super.key});
   final SnapdRule rule;
+  final VoidCallback onRemove;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Path pattern: ${rule.constraints.pathPattern}'),
-        Text('Permissions: ${rule.constraints.permissions?.join(', ')}'),
-        Text('Outcome: ${rule.outcome.name}'),
-        Text('Lifespan: ${rule.lifespan.name}'),
-      ],
+    return ListTile(
+      title: Text(rule.constraints.pathPattern ?? ''),
+      subtitle: Text(rule.constraints.permissions?.join(', ') ?? ''),
+      trailing: YaruIconButton(
+        icon: const Icon(YaruIcons.window_close),
+        onPressed: onRemove,
+      ),
+    );
+  }
+}
+
+class _EmptyRuleTile extends StatelessWidget {
+  const _EmptyRuleTile();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(AppLocalizations.of(context).snapRulesPageEmptyTileLabel),
+      enabled: false,
     );
   }
 }
