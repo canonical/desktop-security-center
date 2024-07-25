@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:prompting_client/apparmor_prompting_client.dart';
+import 'package:prompting_client/prompting_client.dart';
 import 'package:prompting_client_ui/l10n.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
@@ -81,20 +81,20 @@ PromptDetails registerMockPromptDetails({
   return promptDetails;
 }
 
-@GenerateMocks([AppArmorPromptingClient])
-AppArmorPromptingClient registerMockAppArmorPromptingClient({
+@GenerateMocks([PromptingClient])
+PromptingClient registerMockAppArmorPromptingClient({
   required PromptDetails promptDetails,
   PromptReplyResponse? replyResponse,
 }) {
   provideDummy<PromptDetails>(mockPromptDetailsHome());
   provideDummy<PromptReplyResponse>(PromptReplyResponse.unknown(message: ''));
-  final client = MockAppArmorPromptingClient();
+  final client = MockPromptingClient();
   when(client.getCurrentPrompt()).thenAnswer((_) async => promptDetails);
   when(client.replyToPrompt(any)).thenAnswer(
     (_) async => replyResponse ?? PromptReplyResponse.unknown(message: ''),
   );
 
-  registerMockService<AppArmorPromptingClient>(client);
-  addTearDown(() => unregisterService<AppArmorPromptingClient>());
+  registerMockService<PromptingClient>(client);
+  addTearDown(() => unregisterService<PromptingClient>());
   return client;
 }

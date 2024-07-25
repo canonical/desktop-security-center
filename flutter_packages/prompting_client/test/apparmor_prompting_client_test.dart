@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:grpc/grpc.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:prompting_client/src/apparmor_prompting_client.dart';
-import 'package:prompting_client/src/apparmor_prompting_models.dart';
 import 'package:prompting_client/src/generated/apparmor-prompting.pbgrpc.dart'
     as pb;
 import 'package:prompting_client/src/generated/google/protobuf/empty.pb.dart';
 import 'package:prompting_client/src/generated/google/protobuf/wrappers.pb.dart';
+import 'package:prompting_client/src/prompting_client.dart';
+import 'package:prompting_client/src/prompting_models.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:test/test.dart';
 
@@ -80,7 +80,7 @@ void main() {
 
     for (final testCase in testCases) {
       test(testCase.name, () async {
-        final client = AppArmorPromptingClient.withClient(
+        final client = PromptingClient.withClient(
           createMockClient(
             currentPromptResponse: testCase.mockResponse,
           ),
@@ -151,7 +151,7 @@ void main() {
       test(testCase.name, () async {
         final mockClient =
             createMockClient(promptReplyResponse: testCase.mockResponse);
-        final client = AppArmorPromptingClient.withClient(mockClient);
+        final client = PromptingClient.withClient(mockClient);
 
         final response = await client.replyToPrompt(testCase.promptReply);
         verify(
@@ -197,7 +197,7 @@ void main() {
           mockClient
               .resolveHomePatternType(StringValue(value: testCase.pattern)),
         ).thenAnswer((_) => MockResponseFuture(testCase.mockResponse));
-        final client = AppArmorPromptingClient.withClient(mockClient);
+        final client = PromptingClient.withClient(mockClient);
 
         final type = await client.resolveHomePatternType(testCase.pattern);
         expect(type, equals(testCase.expectedType));

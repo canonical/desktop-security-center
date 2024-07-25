@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:prompting_client/apparmor_prompting_client.dart';
+import 'package:prompting_client/prompting_client.dart';
 import 'package:prompting_client_ui/home/home_prompt_data_model.dart';
 import 'package:prompting_client_ui/l10n.dart';
 import 'package:prompting_client_ui/l10n_x.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:prompting_client/apparmor_prompting_client.dart';
+import 'package:prompting_client/prompting_client.dart';
 import 'package:prompting_client_ui/home/home_prompt_page.dart';
 import 'package:prompting_client_ui/l10n.dart';
 import 'package:prompting_client_ui/prompt_model.dart';

@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:prompting_client/apparmor_prompting_client.dart';
-import 'package:prompting_client_ui/fake_apparmor_prompting_client.dart';
+import 'package:prompting_client/prompting_client.dart';
+import 'package:prompting_client_ui/fake_prompting_client.dart';
 import 'package:prompting_client_ui/l10n.dart';
 import 'package:prompting_client_ui/prompt_page.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
@@ -46,7 +46,7 @@ Future<void> main(List<String> args) async {
       log.error('Test prompt file $fileName does not exist');
       exit(1);
     }
-    registerService<AppArmorPromptingClient>(
+    registerService<PromptingClient>(
       () => FakeApparmorPromptingClient.fromFile(fileName),
     );
   } else {
@@ -55,15 +55,14 @@ Future<void> main(List<String> args) async {
       log.error('$envVarSocketPath not set');
       exit(1);
     }
-    registerService<AppArmorPromptingClient>(
-      () => AppArmorPromptingClient(
+    registerService<PromptingClient>(
+      () => PromptingClient(
         InternetAddress(socketPath, type: InternetAddressType.unix),
       ),
     );
   }
 
-  final currentPrompt =
-      await getService<AppArmorPromptingClient>().getCurrentPrompt();
+  final currentPrompt = await getService<PromptingClient>().getCurrentPrompt();
   registerServiceInstance<PromptDetails>(currentPrompt);
 
   await initDefaultLocale();

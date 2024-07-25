@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:prompting_client/apparmor_prompting_client.dart';
+import 'package:prompting_client/prompting_client.dart';
 import 'package:prompting_client_ui/prompt_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -95,7 +95,7 @@ class HomePromptDataModel extends _$HomePromptDataModel {
 
   Future<PromptReplyResponse> saveAndContinue() async {
     final response =
-        await getService<AppArmorPromptingClient>().replyToPrompt(buildReply());
+        await getService<PromptingClient>().replyToPrompt(buildReply());
     if (response is PromptReplyResponseUnknown) {
       state = state.copyWith(errorMessage: response.message);
     }

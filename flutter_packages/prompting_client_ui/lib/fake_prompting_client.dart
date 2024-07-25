@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:prompting_client/apparmor_prompting_client.dart';
+import 'package:prompting_client/prompting_client.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 
 final _log = Logger('fake_apparmor_prompting_client');
 
-class FakeApparmorPromptingClient implements AppArmorPromptingClient {
+class FakeApparmorPromptingClient implements PromptingClient {
   FakeApparmorPromptingClient({required this.currentPrompt});
   factory FakeApparmorPromptingClient.fromFile(String path) {
     final currentPrompt = PromptDetails.fromJson(

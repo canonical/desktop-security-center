@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:prompting_client/apparmor_prompting_client.dart';
-import 'package:prompting_client_ui/fake_apparmor_prompting_client.dart';
+import 'package:prompting_client/prompting_client.dart';
+import 'package:prompting_client_ui/fake_prompting_client.dart';
 import 'package:prompting_client_ui/l10n_x.dart';
 import 'package:prompting_client_ui/main.dart' as app;
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -20,7 +20,7 @@ void main() {
     await tester.pumpAndSettle();
 
     final fakeApparmorPromptingClient =
-        getService<AppArmorPromptingClient>() as FakeApparmorPromptingClient;
+        getService<PromptingClient>() as FakeApparmorPromptingClient;
     fakeApparmorPromptingClient.onReply = (reply) => expect(
           reply,
           PromptReply.home(

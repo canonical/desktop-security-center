@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'apparmor_prompting_models.freezed.dart';
-part 'apparmor_prompting_models.g.dart';
+part 'prompting_models.freezed.dart';
+part 'prompting_models.g.dart';
 
 enum Action { allow, deny }
 

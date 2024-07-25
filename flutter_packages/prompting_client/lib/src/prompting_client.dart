@@ -2,14 +2,14 @@ import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grpc/grpc.dart';
-import 'package:prompting_client/src/apparmor_prompting_models.dart';
 import 'package:prompting_client/src/generated/apparmor-prompting.pbgrpc.dart'
     as pb;
 import 'package:prompting_client/src/generated/google/protobuf/empty.pb.dart';
 import 'package:prompting_client/src/generated/google/protobuf/wrappers.pb.dart';
+import 'package:prompting_client/src/prompting_models.dart';
 
-class AppArmorPromptingClient {
-  AppArmorPromptingClient(InternetAddress host, [int port = 443])
+class PromptingClient {
+  PromptingClient(InternetAddress host, [int port = 443])
       : _client = pb.AppArmorPromptingClient(
           ClientChannel(
             host,
@@ -21,7 +21,7 @@ class AppArmorPromptingClient {
         );
 
   @visibleForTesting
-  AppArmorPromptingClient.withClient(this._client);
+  PromptingClient.withClient(this._client);
 
   final pb.AppArmorPromptingClient _client;
 
