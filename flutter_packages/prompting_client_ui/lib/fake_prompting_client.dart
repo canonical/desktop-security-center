@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:prompting_client/prompting_client.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 
-final _log = Logger('fake_apparmor_prompting_client');
+final _log = Logger('fake_prompting_client');
 
 class FakeApparmorPromptingClient implements PromptingClient {
   FakeApparmorPromptingClient({required this.currentPrompt});
