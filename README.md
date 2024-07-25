@@ -1,4 +1,4 @@
-# Apparmor prompting local testing
+# Apparmor prompting client
 
 > See [SD121][0] and [UD062][1] for specs covering the snapd and client
 > implementations respectively.
@@ -47,7 +47,7 @@ VGA console and close gnome-initial-setup. Once that is done you need to run
 `make bounce-snapd` from your host and then you should be able to run the client
 in a terminal in the VM to start listening for prompts:
 ```bash
-$ apparmor-prompting -vv flutter
+$ prompting-client -vv flutter
 ```
 
 ### Running locally
@@ -74,7 +74,7 @@ $ make local-snapd-stable
 
 Running the client is then the same as when inside of a VM:
 ```bash
-$ apparmor-prompting -vv flutter
+$ prompting-client -vv flutter
 ```
 
 Note that any prompts generated between enabling prompting and starting the
@@ -103,13 +103,13 @@ Once you have a working VM setup you should be able to open a VGA console by
 running `make attach-vm` on your host. From there, the client can be started in
 a terminal:
 ```bash
-$ apparmor-prompting flutter # optionally 'apparmor-prompting -vv flutter' for verbose logging
+$ prompting-client flutter # optionally 'prompting-client -vv flutter' for verbose logging
 ```
 
 With the client running you should then be able to interact with snaps and
 generate prompts.
 
-> **Note**: Running `apparmor-prompting` will show the other commands available
+> **Note**: Running `prompting-client` will show the other commands available
 > from the client.
 
 
