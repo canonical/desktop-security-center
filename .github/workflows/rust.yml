@@ -40,11 +40,11 @@ jobs:
           sudo snap set system experimental.apparmor-prompting=true
 
       - name: Install dependencies
-        run: | 
+        run: |
           sudo apt-get install protobuf-compiler
 
       - name: Check generated files are up to date
-        working-directory: ./aa-prompt-client
+        working-directory: ./prompting-client
         run: |
           cargo clean
           cargo build
@@ -57,7 +57,7 @@ jobs:
           echo "Protobuf files are up-to-date."
 
       - name: Run tests
-        working-directory: ./aa-prompt-client
+        working-directory: ./prompting-client
         run: |
           cargo fmt -- --check
           cargo clippy -- -D warnings
