@@ -6,7 +6,7 @@
 //!
 //! Creation of the SnapdSocketClient needs to be handled before spawning the test snap so that
 //! polling `after` is correct to pick up the prompt.
-use apparmor_prompting_client::{
+use prompting_client::{
     cli_actions::run_scripted_client_loop,
     prompt_sequence::MatchError,
     snapd_client::{

@@ -97,35 +97,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b3d1d046238990b9cf5bcde22a3fb3584ee5cf65fb2765f454ed428c7a0063da"
 
 [[package]]
-name = "apparmor-prompting-client"
-version = "0.1.0"
-dependencies = [
- "chrono",
- "clap",
- "http-body-util",
- "hyper",
- "hyper-util",
- "prost",
- "prost-types",
- "regex",
- "serde",
- "serde_json",
- "serial_test",
- "simple_test_case",
- "strum",
- "thiserror",
- "tokio",
- "tokio-stream",
- "tonic",
- "tonic-build",
- "tonic-reflection",
- "tracing",
- "tracing-journald",
- "tracing-subscriber",
- "uuid",
-]
-
-[[package]]
 name = "async-stream"
 version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -915,6 +886,35 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b33eb56c327dec362a9e55b3ad14f9d2f0904fb5a5b03b513ab5465399e9f43"
 dependencies = [
  "unicode-ident",
+]
+
+[[package]]
+name = "prompting-client"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "clap",
+ "http-body-util",
+ "hyper",
+ "hyper-util",
+ "prost",
+ "prost-types",
+ "regex",
+ "serde",
+ "serde_json",
+ "serial_test",
+ "simple_test_case",
+ "strum",
+ "thiserror",
+ "tokio",
+ "tokio-stream",
+ "tonic",
+ "tonic-build",
+ "tonic-reflection",
+ "tracing",
+ "tracing-journald",
+ "tracing-subscriber",
+ "uuid",
 ]
 
 [[package]]

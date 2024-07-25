@@ -11,7 +11,7 @@ import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
-const envVarSocketPath = 'AA_PROMPTING_CLIENT_SOCKET';
+const envVarSocketPath = 'PROMPTING_CLIENT_SOCKET';
 
 Future<void> main(List<String> args) async {
   // We specify path as an empty string in order to get ubuntu_logger to skip

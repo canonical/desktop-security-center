@@ -1,5 +1,5 @@
 //! The daemon prompting client for apparmor prompting
-use apparmor_prompting_client::{
+use prompting_client::{
     daemon::run_daemon, snapd_client::SnapdSocketClient, Error, Result,
 };
 use std::io::stdout;

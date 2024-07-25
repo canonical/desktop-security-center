@@ -1,19 +1,19 @@
 [package]
-name = "apparmor-prompting-client"
+name = "prompting-client"
 version = "0.1.0"
 edition = "2021"
-default-run = "apparmor-prompting-client"
+default-run = "prompting-client-cli"
 
 [profile.release]
 strip = true
 lto = true
 
 [[bin]]
-name = "apparmor-prompting-client"
+name = "prompting-client-cli"
 path = "src/bin/cli.rs"
 
 [[bin]]
-name = "apparmor-prompting-daemon"
+name = "prompting-client-daemon"
 path = "src/bin/daemon.rs"
 
 [dependencies]

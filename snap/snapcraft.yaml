@@ -1,25 +1,24 @@
-name: apparmor-prompting
+name: prompting-client
 base: core22
 version: '0.1'
-summary: A simple apparmor prompting client
+summary: A client for snapd apparmor prompting
 description: |
-  An initial apparmor prompting client to support internal user testing
-  and iteration on the UI.
+  The official client for snap apparmor prompting.
 grade: devel
 confinement: strict
 
 apps:
-  apparmor-prompting:
-    command: bin/apparmor-prompting-client
+  prompting-client:
+    command: bin/prompting-client-cli
     extensions: [gnome]
     environment: &env
-      AA_PROMPTING_CLIENT_SOCKET: "${XDG_RUNTIME_DIR}/apparmor-prompting.sock"
+      PROMPTING_CLIENT_SOCKET: "${XDG_RUNTIME_DIR}/prompting.sock"
     plugs: &plugs
       - home
       - snap-prompting-control
 
   daemon:
-    command: bin/apparmor-prompting-daemon
+    command: bin/prompting-client-daemon
     extensions: [gnome]
     environment: *env
     plugs: *plugs
@@ -60,9 +59,9 @@ parts:
       - zip
     override-prime: ''
 
-  client:
+  prompting-client:
     plugin: rust
-    source: aa-prompt-client
+    source: prompting-client
     override-build: |
       set -e
       mkdir -p $(dirname $CRAFT_PART_SRC)/protos
@@ -74,7 +73,7 @@ parts:
     build-snaps:
       - protobuf
 
-  apparmor-prompt:
+  prompting-client-ui:
     after: [flutter-git]
     source: .
     plugin: nil
@@ -85,7 +84,7 @@ parts:
       dart pub global run melos bootstrap
       dart pub global run melos generate
 
-      cd flutter_packages/apparmor_prompt
+      cd flutter_packages/prompting_client_ui
       flutter build linux --release -v
-      mkdir -p $CRAFT_PART_INSTALL/bin/apparmor-prompt/
-      cp -r build/linux/*/release/bundle/* $CRAFT_PART_INSTALL/bin/apparmor-prompt/
+      mkdir -p $CRAFT_PART_INSTALL/bin/prompting-client-ui/
+      cp -r build/linux/*/release/bundle/* $CRAFT_PART_INSTALL/bin/prompting-client-ui/
