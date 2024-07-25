@@ -1,9 +1,9 @@
-import 'package:apparmor_prompt/home/home_prompt_page.dart';
-import 'package:apparmor_prompt/l10n.dart';
-import 'package:apparmor_prompt/prompt_model.dart';
-import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:prompting_client/apparmor_prompting_client.dart';
+import 'package:prompting_client_ui/home/home_prompt_page.dart';
+import 'package:prompting_client_ui/l10n.dart';
+import 'package:prompting_client_ui/prompt_model.dart';
 import 'package:yaru/yaru.dart';
 
 class PromptPage extends ConsumerWidget {

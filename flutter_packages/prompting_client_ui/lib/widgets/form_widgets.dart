@@ -1,5 +1,5 @@
-import 'package:apparmor_prompt/widgets/markdown_text.dart';
 import 'package:flutter/material.dart';
+import 'package:prompting_client_ui/widgets/markdown_text.dart';
 import 'package:yaru/yaru.dart';
 
 class RadioButtonList<T> extends StatelessWidget {

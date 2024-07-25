@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:apparmor_prompting_client/src/apparmor_prompting_models.dart';
-import 'package:apparmor_prompting_client/src/generated/apparmor-prompting.pbgrpc.dart'
-    as pb;
-import 'package:apparmor_prompting_client/src/generated/google/protobuf/empty.pb.dart';
-import 'package:apparmor_prompting_client/src/generated/google/protobuf/wrappers.pb.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grpc/grpc.dart';
+import 'package:prompting_client/src/apparmor_prompting_models.dart';
+import 'package:prompting_client/src/generated/apparmor-prompting.pbgrpc.dart'
+    as pb;
+import 'package:prompting_client/src/generated/google/protobuf/empty.pb.dart';
+import 'package:prompting_client/src/generated/google/protobuf/wrappers.pb.dart';
 
 class AppArmorPromptingClient {
   AppArmorPromptingClient(InternetAddress host, [int port = 443])

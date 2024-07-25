@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
 import 'package:flutter/foundation.dart';
+import 'package:prompting_client/apparmor_prompting_client.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 
 final _log = Logger('fake_apparmor_prompting_client');

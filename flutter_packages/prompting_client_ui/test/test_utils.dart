@@ -1,10 +1,10 @@
-import 'package:apparmor_prompt/l10n.dart';
-import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
 import 'package:flutter/material.dart' hide MetaData;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:prompting_client/apparmor_prompting_client.dart';
+import 'package:prompting_client_ui/l10n.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'test_utils.mocks.dart';

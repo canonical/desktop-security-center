@@ -1,10 +1,10 @@
-import 'package:apparmor_prompt/l10n_x.dart';
-import 'package:apparmor_prompt/prompt_page.dart';
-import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:prompting_client/apparmor_prompting_client.dart';
+import 'package:prompting_client_ui/l10n_x.dart';
+import 'package:prompting_client_ui/prompt_page.dart';
 import 'package:yaru_test/yaru_test.dart';
 
 import '../test_utils.dart';

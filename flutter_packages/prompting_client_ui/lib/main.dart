@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:apparmor_prompt/fake_apparmor_prompting_client.dart';
-import 'package:apparmor_prompt/l10n.dart';
-import 'package:apparmor_prompt/prompt_page.dart';
-import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
 import 'package:args/args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:prompting_client/apparmor_prompting_client.dart';
+import 'package:prompting_client_ui/fake_apparmor_prompting_client.dart';
+import 'package:prompting_client_ui/l10n.dart';
+import 'package:prompting_client_ui/prompt_page.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';

@@ -1,5 +1,5 @@
-import 'package:apparmor_prompt/l10n.dart';
-import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
+import 'package:prompting_client/apparmor_prompting_client.dart';
+import 'package:prompting_client_ui/l10n.dart';
 
 extension ActionL10n on Action {
   String localize(AppLocalizations l10n) => switch (this) {

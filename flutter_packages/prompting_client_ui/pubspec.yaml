@@ -1,4 +1,4 @@
-name: apparmor_prompt
+name: prompting_client_ui
 description: 'A Flutter UI for apparmor prompting.'
 publish_to: 'none'
 
@@ -9,7 +9,6 @@ environment:
   flutter: '>=3.22.2'
 
 dependencies:
-  apparmor_prompting_client: ^1.0.0
   args: ^2.5.0
   flutter:
     sdk: flutter
@@ -19,6 +18,7 @@ dependencies:
   intl: ^0.19.0
   json_annotation: ^4.9.0
   json_serializable: ^6.8.0
+  prompting_client: ^1.0.0
   riverpod_annotation: ^2.3.5
   ubuntu_lints: ^0.4.0
   ubuntu_localizations: ^0.4.0

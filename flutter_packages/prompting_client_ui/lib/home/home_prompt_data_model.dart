@@ -1,6 +1,6 @@
-import 'package:apparmor_prompt/prompt_model.dart';
-import 'package:apparmor_prompting_client/apparmor_prompting_client.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:prompting_client/apparmor_prompting_client.dart';
+import 'package:prompting_client_ui/prompt_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 

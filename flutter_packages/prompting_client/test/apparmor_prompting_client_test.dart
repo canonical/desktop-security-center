@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:apparmor_prompting_client/src/apparmor_prompting_client.dart';
-import 'package:apparmor_prompting_client/src/apparmor_prompting_models.dart';
-import 'package:apparmor_prompting_client/src/generated/apparmor-prompting.pbgrpc.dart'
-    as pb;
-import 'package:apparmor_prompting_client/src/generated/google/protobuf/empty.pb.dart';
-import 'package:apparmor_prompting_client/src/generated/google/protobuf/wrappers.pb.dart';
 import 'package:grpc/grpc.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:prompting_client/src/apparmor_prompting_client.dart';
+import 'package:prompting_client/src/apparmor_prompting_models.dart';
+import 'package:prompting_client/src/generated/apparmor-prompting.pbgrpc.dart'
+    as pb;
+import 'package:prompting_client/src/generated/google/protobuf/empty.pb.dart';
+import 'package:prompting_client/src/generated/google/protobuf/wrappers.pb.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:test/test.dart';
 

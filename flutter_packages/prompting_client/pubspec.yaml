@@ -1,4 +1,4 @@
-name: apparmor_prompting_client
+name: prompting_client
 description: Dart client for the AppArmor prompting gRPC service.
 publish_to: 'none'
 version: 1.0.0
