@@ -12,7 +12,7 @@ import 'package:prompting_client/src/prompting_models.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:test/test.dart';
 
-import 'apparmor_prompting_client_test.mocks.dart';
+import 'prompting_client_test.mocks.dart';
 
 void main() {
   group('get current prompt', () {
