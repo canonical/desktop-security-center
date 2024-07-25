@@ -270,29 +270,71 @@ mod tests {
                     "error requested of mock snapd client",
                 )));
             }
-                if let Some(expected_reply) = self.expected_reply.clone() {
-                    match (reply, expected_reply) {
-                        (TypedPromptReply::Home(reply), TypedPromptReply::Home(expected_reply)) => {
-                            assert_eq!(reply, expected_reply, "Replies did not match");
-                        },
-                        _ => {
-                            panic!("Expected a Home reply but got a different type");
-                        }
+            if let Some(expected_reply) = self.expected_reply.clone() {
+                match (reply, expected_reply) {
+                    (TypedPromptReply::Home(reply), TypedPromptReply::Home(expected_reply)) => {
+                        assert_eq!(reply, expected_reply, "Replies did not match");
+                    }
+                    _ => {
+                        panic!("Expected a Home reply but got a different type");
                     }
                 }
-                Ok(Vec::new())
             }
+            Ok(Vec::new())
         }
-    
+    }
 
-    #[test_case("empty_prompt", true; "empty prompt")]
-    #[test_case("non_empty_prompt", false; "non-empty prompt")]
-    #[tokio::test]
-    async fn test_get_current_prompt(test_name: &str, empty_active_prompt: bool) {
-        let mock_client = MockClient { want_err: false, expected_reply: None};
-        let (tx_actioned_prompts, _rx_actioned_prompts) = unbounded_channel();
+    async fn setup_server_and_client(
+        test_name: &str,
+        mock_client: MockClient,
+        active_prompt: ReadOnlyActivePrompt,
+        tx_actioned_prompts: tokio::sync::mpsc::UnboundedSender<ActionedPrompt>,
+    ) -> (
+        AppArmorPromptingClient<tonic::transport::Channel>,
+        Arc<String>,
+    ) {
+        let test_name = Arc::new(test_name.to_string());
+        let path = format!("/tmp/{}_socket", test_name);
+        let _ = fs::remove_file(&path); // Remove the old socket file if it exists
 
-        let active_prompt = if empty_active_prompt {
+        let (server, listener) = new_server_and_listener(
+            mock_client,
+            active_prompt,
+            tx_actioned_prompts,
+            path.clone(),
+        );
+
+        let incoming = UnixListenerStream::new(listener);
+
+        // No choice but to do this https://github.com/hyperium/tonic/blob/master/examples/src/uds/client.rs
+        let test_name_clone = Arc::clone(&test_name);
+        let channel = Endpoint::try_from("http://[::]:50051")
+            .unwrap()
+            .connect_with_connector(service_fn(move |_: Uri| {
+                let path = Arc::clone(&test_name_clone);
+                async move {
+                    let path = format!("/tmp/{}_socket", path);
+                    // Connect to a Uds socket
+                    Ok::<_, std::io::Error>(TokioIo::new(UnixStream::connect(path).await?))
+                }
+            }))
+            .await
+            .unwrap();
+
+        tokio::spawn(async move {
+            Server::builder()
+                .add_service(server)
+                .serve_with_incoming(incoming)
+                .await
+                .unwrap();
+        });
+
+        let client = AppArmorPromptingClient::new(channel);
+        (client, test_name)
+    }
+
+    fn create_readonly_active_prompt(empty_active_prompt: bool) -> ReadOnlyActivePrompt {
+        if empty_active_prompt {
             ReadOnlyActivePrompt {
                 active_prompt: Arc::new(Mutex::new(None)),
             }
@@ -317,7 +359,20 @@ mod tests {
                     },
                 })))),
             }
+        }
+    }
+
+    #[test_case("empty_prompt", true; "empty prompt")]
+    #[test_case("non_empty_prompt", false; "non-empty prompt")]
+    #[tokio::test]
+    async fn test_get_current_prompt(test_name: &str, empty_active_prompt: bool) {
+        let mock_client = MockClient {
+            want_err: false,
+            expected_reply: None,
         };
+        let (tx_actioned_prompts, _rx_actioned_prompts) = unbounded_channel();
+
+        let active_prompt = create_readonly_active_prompt(empty_active_prompt);
 
         let want = if empty_active_prompt {
             None
@@ -336,41 +391,10 @@ mod tests {
                 more_options: Vec::new(),
             }))
         };
-        let test_name = Arc::new(test_name.to_string());
-        let path = format!("/tmp/{}_socket", test_name);
-        let _ = fs::remove_file(&path); // Remove the old socket file if it exists
 
-        let (server, listener) = new_server_and_listener(
-            mock_client,
-            active_prompt,
-            tx_actioned_prompts,
-            path.clone(),
-        );
-
-        let incoming = UnixListenerStream::new(listener);
-
-        // No choice but to do this https://github.com/hyperium/tonic/blob/master/examples/src/uds/client.rs
-        let channel = Endpoint::try_from("http://[::]:50051")
-            .unwrap()
-            .connect_with_connector(service_fn(move |_: Uri| {
-                let path = Arc::clone(&test_name);
-                async move {
-                    let path = format!("/tmp/{}_socket", path);
-                    // Connect to a Uds socket
-                    Ok::<_, std::io::Error>(TokioIo::new(UnixStream::connect(path).await?))
-                }
-            }))
-            .await
-            .unwrap();
-        let mut client = AppArmorPromptingClient::new(channel);
-
-        tokio::spawn(async move {
-            Server::builder()
-                .add_service(server)
-                .serve_with_incoming(incoming)
-                .await
-                .unwrap();
-        });
+        let (mut client, _test_name) =
+            setup_server_and_client(test_name, mock_client, active_prompt, tx_actioned_prompts)
+                .await;
 
         let resp = client
             .get_current_prompt(Request::new(()))
@@ -394,7 +418,6 @@ mod tests {
         tx_err: bool,
         want_err: bool,
     ) {
-        
         let prompt_reply = PromptReply {
             prompt_id: "foo".to_string(),
             action: Action::Allow as i32,
@@ -421,7 +444,8 @@ mod tests {
         });
 
         let mock_client = MockClient {
-            want_err: snapd_err, expected_reply: Some(expected_reply),
+            want_err: snapd_err,
+            expected_reply: Some(expected_reply),
         };
         let (tx_actioned_prompts, rx_actioned_prompts) = unbounded_channel();
         let mut rx_actioned_prompts = Some(rx_actioned_prompts);
@@ -429,51 +453,16 @@ mod tests {
         if tx_err {
             rx_actioned_prompts = None;
         }
-    
 
         let active_prompt = ReadOnlyActivePrompt {
             active_prompt: Arc::new(Mutex::new(None)),
         };
 
-        let test_name = Arc::new(test_name.to_string());
-        let path = format!("/tmp/{}_socket", test_name);
-        let _ = fs::remove_file(&path); // Remove the old socket file if it exists
+        let (mut client, _test_name) =
+            setup_server_and_client(test_name, mock_client, active_prompt, tx_actioned_prompts)
+                .await;
 
-        let (server, listener) = new_server_and_listener(
-            mock_client,
-            active_prompt,
-            tx_actioned_prompts,
-            path.clone(),
-        );
-
-        let incoming = UnixListenerStream::new(listener);
-
-        // No choice but to do this https://github.com/hyperium/tonic/blob/master/examples/src/uds/client.rs
-        let channel = Endpoint::try_from("http://[::]:50051")
-            .unwrap()
-            .connect_with_connector(service_fn(move |_: Uri| {
-                let path = Arc::clone(&test_name);
-                async move {
-                    let path = format!("/tmp/{}_socket", path);
-                    // Connect to a Uds socket
-                    Ok::<_, std::io::Error>(TokioIo::new(UnixStream::connect(path).await?))
-                }
-            }))
-            .await
-            .unwrap();
-        let mut client = AppArmorPromptingClient::new(channel);
-
-        tokio::spawn(async move {
-            Server::builder()
-                .add_service(server)
-                .serve_with_incoming(incoming)
-                .await
-                .unwrap();
-        });
-
-        let resp = client
-            .reply_to_prompt(Request::new(prompt_reply))
-            .await;
+        let resp = client.reply_to_prompt(Request::new(prompt_reply)).await;
 
         if want_err {
             assert!(matches!(resp, Err(_)));
