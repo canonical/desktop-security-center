@@ -1,11 +1,11 @@
 //! A simple command line prompting client
+use clap::{Parser, Subcommand};
 use prompting_client::{
     cli_actions::{run_echo_loop, run_scripted_client_loop},
     daemon::run_daemon,
     snapd_client::SnapdSocketClient,
     Result,
 };
-use clap::{Parser, Subcommand};
 use std::io::stderr;
 use tracing::subscriber::set_global_default;
 use tracing_subscriber::FmtSubscriber;

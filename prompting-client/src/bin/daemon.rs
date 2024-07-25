@@ -1,7 +1,5 @@
 //! The daemon prompting client for apparmor prompting
-use prompting_client::{
-    daemon::run_daemon, snapd_client::SnapdSocketClient, Error, Result,
-};
+use prompting_client::{daemon::run_daemon, snapd_client::SnapdSocketClient, Error, Result};
 use std::io::stdout;
 use tracing::subscriber::set_global_default;
 use tracing::warn;
