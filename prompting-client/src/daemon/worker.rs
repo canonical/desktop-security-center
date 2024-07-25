@@ -73,7 +73,7 @@ impl Worker<FlutterUi> {
         rx_actioned_prompts: UnboundedReceiver<ActionedPrompt>,
     ) -> Self {
         let snap = env::var("SNAP").expect("SNAP env var to be set");
-        let cmd = format!("{snap}/bin/apparmor-prompt/apparmor_prompt");
+        let cmd = format!("{snap}/bin/prompting_client_ui");
 
         Self {
             rx_prompts,

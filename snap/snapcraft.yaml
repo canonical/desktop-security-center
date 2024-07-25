@@ -86,5 +86,5 @@ parts:
 
       cd flutter_packages/prompting_client_ui
       flutter build linux --release -v
-      mkdir -p $CRAFT_PART_INSTALL/bin/prompting-client-ui/
-      cp -r build/linux/*/release/bundle/* $CRAFT_PART_INSTALL/bin/prompting-client-ui/
+      mkdir -p $CRAFT_PART_INSTALL/bin/
+      cp -r build/linux/*/release/bundle/* $CRAFT_PART_INSTALL/bin/
