@@ -48,7 +48,7 @@ pub trait SnapInterface: fmt::Debug + Clone {
         debug!(%json_input, "prompt details for the flutter ui");
 
         let output = Command::new(cmd)
-            .arg(&json_input.to_string())
+            .arg(json_input.to_string())
             .output()
             .await?;
 
