@@ -254,6 +254,7 @@ mod tests {
     #[derive(Clone)]
     struct MockClient {
         want_err: bool,
+        expected_reply: Option<TypedPromptReply>,
     }
 
     #[async_trait]
@@ -261,24 +262,34 @@ mod tests {
         async fn reply(
             &self,
             _id: &PromptId,
-            _reply: TypedPromptReply,
+            reply: TypedPromptReply,
         ) -> Result<Vec<PromptId>, Box<dyn Error + Send + Sync>> {
             if self.want_err {
-                Err(Box::new(std::io::Error::new(
+                return Err(Box::new(std::io::Error::new(
                     std::io::ErrorKind::Other,
                     "error requested of mock snapd client",
-                )))
-            } else {
+                )));
+            }
+                if let Some(expected_reply) = self.expected_reply.clone() {
+                    match (reply, expected_reply) {
+                        (TypedPromptReply::Home(reply), TypedPromptReply::Home(expected_reply)) => {
+                            assert_eq!(reply, expected_reply, "Replies did not match");
+                        },
+                        _ => {
+                            panic!("Expected a Home reply but got a different type");
+                        }
+                    }
+                }
                 Ok(Vec::new())
             }
         }
-    }
+    
 
     #[test_case("empty_prompt", true; "empty prompt")]
     #[test_case("non_empty_prompt", false; "non-empty prompt")]
     #[tokio::test]
     async fn test_get_current_prompt(test_name: &str, empty_active_prompt: bool) {
-        let mock_client = MockClient { want_err: false };
+        let mock_client = MockClient { want_err: false, expected_reply: None};
         let (tx_actioned_prompts, _rx_actioned_prompts) = unbounded_channel();
 
         let active_prompt = if empty_active_prompt {
@@ -383,14 +394,42 @@ mod tests {
         tx_err: bool,
         want_err: bool,
     ) {
+        
+        let prompt_reply = PromptReply {
+            prompt_id: "foo".to_string(),
+            action: Action::Allow as i32,
+            lifespan: Lifespan::Single as i32,
+            prompt_reply: if map_prompt_reply_err {
+                None
+            } else {
+                Some(HomePromptReply(apparmor_prompting::HomePromptReply {
+                    path_pattern: "foo".to_string(),
+                    permissions: Vec::new(),
+                }))
+            },
+        };
+
+        let expected_reply = TypedPromptReply::Home(SnapPromptReply::<HomeInterface> {
+            action: snapd_client::Action::Allow,
+            lifespan: snapd_client::Lifespan::Single,
+            duration: None,
+            constraints: HomeReplyConstraints {
+                path_pattern: "foo".to_string(),
+                permissions: Vec::new(),
+                available_permissions: Vec::new(),
+            },
+        });
+
         let mock_client = MockClient {
-            want_err: snapd_err,
+            want_err: snapd_err, expected_reply: Some(expected_reply),
         };
         let (tx_actioned_prompts, rx_actioned_prompts) = unbounded_channel();
+        let mut rx_actioned_prompts = Some(rx_actioned_prompts);
 
         if tx_err {
-            drop(rx_actioned_prompts);
+            rx_actioned_prompts = None;
         }
+    
 
         let active_prompt = ReadOnlyActivePrompt {
             active_prompt: Arc::new(Mutex::new(None)),
@@ -433,19 +472,7 @@ mod tests {
         });
 
         let resp = client
-            .reply_to_prompt(Request::new(PromptReply {
-                prompt_id: "foo".to_string(),
-                action: Action::Allow as i32,
-                lifespan: Lifespan::Single as i32,
-                prompt_reply: if map_prompt_reply_err {
-                    None
-                } else {
-                    Some(HomePromptReply(apparmor_prompting::HomePromptReply {
-                        path_pattern: "foo".to_string(),
-                        permissions: Vec::new(),
-                    }))
-                },
-            }))
+            .reply_to_prompt(Request::new(prompt_reply))
             .await;
 
         if want_err {
@@ -458,6 +485,15 @@ mod tests {
                 resp.unwrap().into_inner().prompt_reply_type,
                 PromptReplyType::Unknown as i32
             )
+        } else {
+            assert_eq!(
+                resp.unwrap().into_inner().prompt_reply_type,
+                PromptReplyType::Success as i32
+            );
+            if let Some(mut rx) = rx_actioned_prompts {
+                let received_prompt_id = rx.recv().await.unwrap();
+                assert_eq!(received_prompt_id.id.0, "foo");
+            }
         }
     }
 }

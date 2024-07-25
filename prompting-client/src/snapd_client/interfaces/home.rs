@@ -69,7 +69,7 @@ impl PromptReply<HomeInterface> {
 }
 
 /// The interface for allowing access to the user's home directory.
-#[derive(Debug, Default, Clone, Deserialize, Serialize)]
+#[derive(Debug, Default, Clone, Deserialize, Serialize, PartialEq, Eq)]
 pub struct HomeInterface;
 
 impl HomeInterface {
