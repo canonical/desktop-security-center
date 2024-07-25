@@ -53,6 +53,8 @@ AppPermissionsService registerMockRulesService({
   final service = MockAppPermissionsService();
   when(service.getRules()).thenAnswer((_) async => rules);
   when(service.isEnabled()).thenAnswer((_) async => enabled);
+  when(service.enable()).thenAnswer((_) => const Stream.empty());
+  when(service.disable()).thenAnswer((_) => const Stream.empty());
 
   registerMockService<AppPermissionsService>(service);
   addTearDown(unregisterService<AppPermissionsService>);

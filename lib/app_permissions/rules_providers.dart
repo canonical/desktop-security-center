@@ -1,32 +1,38 @@
+import 'dart:async';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
+export 'package:security_center/services/app_permissions_service.dart';
+
 part 'rules_providers.g.dart';
 
 @riverpod
-class PromptingEnabled extends _$PromptingEnabled {
+class PromptingStatusModel extends _$PromptingStatusModel {
+  late final _service = getService<AppPermissionsService>();
+
   @override
-  Future<bool> build() {
-    return getService<AppPermissionsService>().isEnabled();
+  Future<AppPermissionsServiceStatus> build() async {
+    if (await _service.isEnabled()) {
+      return AppPermissionsServiceStatus.enabled();
+    } else {
+      return AppPermissionsServiceStatus.disabled();
+    }
   }
 
-  Future<void> enable() async {
-    state = const AsyncLoading();
-    state = await AsyncValue.guard(() async {
-      await getService<AppPermissionsService>().enable();
-      return build();
-    });
+  Future<void> _guard(
+    Stream<AppPermissionsServiceStatus> Function() action,
+  ) async {
+    await for (final status in action()) {
+      state = AsyncData(status);
+    }
+    state = await AsyncValue.guard(build);
   }
 
-  Future<void> disable() async {
-    state = const AsyncLoading();
-    state = await AsyncValue.guard(() async {
-      await getService<AppPermissionsService>().disable();
-      return build();
-    });
-  }
+  Future<void> enable() => _guard(_service.enable);
+  Future<void> disable() => _guard(_service.disable);
 }
 
 @riverpod

@@ -12,9 +12,9 @@ class InterfacesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(promptingEnabledProvider);
+    final model = ref.watch(promptingStatusModelProvider);
     return model.when(
-      data: (promptingEnabled) => _Body(promptingEnabled: promptingEnabled),
+      data: (promptingStatus) => _Body(promptingStatus: promptingStatus),
       error: (error, _) => ErrorWidget(error),
       loading: () => const Center(child: YaruCircularProgressIndicator()),
     );
@@ -22,18 +22,18 @@ class InterfacesPage extends ConsumerWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({required this.promptingEnabled});
+  const _Body({required this.promptingStatus});
 
-  final bool promptingEnabled;
+  final AppPermissionsServiceStatus promptingStatus;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return ScrollablePage(
       children: [
-        _PromptingSwitch(promptingEnabled: promptingEnabled),
+        _PromptingSwitch(promptingStatus: promptingStatus),
         const SizedBox(height: 16),
-        if (promptingEnabled) ...[
+        if (promptingStatus.isEnabled) ...[
           const _InterfaceList(),
           const SizedBox(height: 16),
         ],
@@ -45,30 +45,57 @@ class _Body extends StatelessWidget {
 
 class _PromptingSwitch extends ConsumerWidget {
   const _PromptingSwitch({
-    required this.promptingEnabled,
+    required this.promptingStatus,
   });
 
-  final bool promptingEnabled;
+  final AppPermissionsServiceStatus promptingStatus;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.read(promptingEnabledProvider.notifier);
+    final notifier = ref.read(promptingStatusModelProvider.notifier);
     final l10n = AppLocalizations.of(context);
     return YaruBorderContainer(
-      child: YaruSwitchListTile(
-        title: Row(
-          children: [
-            Flexible(child: Text(l10n.snapPermissionsEnableTitle)),
-            const SizedBox(width: 10),
-            YaruInfoBadge(
-              title: Text(l10n.snapPermissionsExperimentalLabel),
-              yaruInfoType: YaruInfoType.information,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          YaruSwitchListTile(
+            title: Row(
+              children: [
+                Flexible(child: Text(l10n.snapPermissionsEnableTitle)),
+                const SizedBox(width: 10),
+                YaruInfoBadge(
+                  title: Text(l10n.snapPermissionsExperimentalLabel),
+                  yaruInfoType: YaruInfoType.information,
+                ),
+              ],
+            ),
+            subtitle: Text(l10n.snapPermissionsEnableWarning),
+            value: promptingStatus.isEnabled,
+            onChanged: switch (promptingStatus) {
+              AppPermissionsServiceStatusDisabled() ||
+              AppPermissionsServiceStatusEnabled() =>
+                (value) => value ? notifier.enable() : notifier.disable(),
+              _ => null,
+            },
+          ),
+          if (promptingStatus is AppPermissionsServiceStatusEnabling ||
+              promptingStatus is AppPermissionsServiceStatusDisabling) ...[
+            const Divider(),
+            ListTile(
+              title: Text(
+                switch (promptingStatus) {
+                  AppPermissionsServiceStatusDisabling() =>
+                    l10n.snapPermissionsDisablingLabel,
+                  AppPermissionsServiceStatusEnabling() =>
+                    l10n.snapPermissionsEnablingLabel,
+                  _ => '',
+                },
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              subtitle: const YaruLinearProgressIndicator(),
             ),
           ],
-        ),
-        subtitle: Text(l10n.snapPermissionsEnableWarning),
-        value: promptingEnabled,
-        onChanged: (value) => value ? notifier.enable() : notifier.disable(),
+        ],
       ),
     );
   }
