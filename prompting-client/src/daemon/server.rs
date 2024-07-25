@@ -251,6 +251,8 @@ mod tests {
         snapd_client::{interfaces::home::HomeUiInputData, PromptId, SnapMeta, TypedPromptReply},
     };
 
+    const PLACEHOLDER_STR: &str = "foo";
+
     #[derive(Clone)]
     struct MockClient {
         want_err: bool,
@@ -274,9 +276,6 @@ mod tests {
                 match (reply, expected_reply) {
                     (TypedPromptReply::Home(reply), TypedPromptReply::Home(expected_reply)) => {
                         assert_eq!(reply, expected_reply, "Replies did not match");
-                    }
-                    _ => {
-                        panic!("Expected a Home reply but got a different type");
                     }
                 }
             }
@@ -343,15 +342,15 @@ mod tests {
                 active_prompt: Arc::new(Mutex::new(Some(TypedUiInput::Home(UiInput::<
                     HomeInterface,
                 > {
-                    id: PromptId("foo".to_string()),
+                    id: PromptId(PLACEHOLDER_STR.to_string()),
                     meta: SnapMeta {
-                        name: "foo".to_string(),
-                        updated_at: "foo".to_string(),
-                        store_url: "foo".to_string(),
-                        publisher: "foo".to_string(),
+                        name: PLACEHOLDER_STR.to_string(),
+                        updated_at: PLACEHOLDER_STR.to_string(),
+                        store_url: PLACEHOLDER_STR.to_string(),
+                        publisher: PLACEHOLDER_STR.to_string(),
                     },
                     data: HomeUiInputData {
-                        requested_path: "foo".to_string(),
+                        requested_path: PLACEHOLDER_STR.to_string(),
                         requested_permissions: Vec::new(),
                         available_permissions: Vec::new(),
                         initial_options: Vec::new(),
@@ -379,13 +378,13 @@ mod tests {
         } else {
             Some(Prompt::HomePrompt(HomePrompt {
                 meta_data: Some(MetaData {
-                    prompt_id: "foo".to_string(),
-                    snap_name: "foo".to_string(),
-                    store_url: "foo".to_string(),
-                    publisher: "foo".to_string(),
-                    updated_at: "foo".to_string(),
+                    prompt_id: PLACEHOLDER_STR.to_string(),
+                    snap_name: PLACEHOLDER_STR.to_string(),
+                    store_url: PLACEHOLDER_STR.to_string(),
+                    publisher: PLACEHOLDER_STR.to_string(),
+                    updated_at: PLACEHOLDER_STR.to_string(),
                 }),
-                requested_path: "foo".to_string(),
+                requested_path: PLACEHOLDER_STR.to_string(),
                 requested_permissions: Vec::new(),
                 available_permissions: Vec::new(),
                 more_options: Vec::new(),
@@ -419,14 +418,14 @@ mod tests {
         want_err: bool,
     ) {
         let prompt_reply = PromptReply {
-            prompt_id: "foo".to_string(),
+            prompt_id: PLACEHOLDER_STR.to_string(),
             action: Action::Allow as i32,
             lifespan: Lifespan::Single as i32,
             prompt_reply: if map_prompt_reply_err {
                 None
             } else {
                 Some(HomePromptReply(apparmor_prompting::HomePromptReply {
-                    path_pattern: "foo".to_string(),
+                    path_pattern: PLACEHOLDER_STR.to_string(),
                     permissions: Vec::new(),
                 }))
             },
@@ -437,7 +436,7 @@ mod tests {
             lifespan: snapd_client::Lifespan::Single,
             duration: None,
             constraints: HomeReplyConstraints {
-                path_pattern: "foo".to_string(),
+                path_pattern: PLACEHOLDER_STR.to_string(),
                 permissions: Vec::new(),
                 available_permissions: Vec::new(),
             },
@@ -473,16 +472,17 @@ mod tests {
             assert_eq!(
                 resp.unwrap().into_inner().prompt_reply_type,
                 PromptReplyType::Unknown as i32
-            )
-        } else {
-            assert_eq!(
-                resp.unwrap().into_inner().prompt_reply_type,
-                PromptReplyType::Success as i32
             );
-            if let Some(mut rx) = rx_actioned_prompts {
-                let received_prompt_id = rx.recv().await.unwrap();
-                assert_eq!(received_prompt_id.id.0, "foo");
-            }
+            return;
+        }
+
+        assert_eq!(
+            resp.unwrap().into_inner().prompt_reply_type,
+            PromptReplyType::Success as i32
+        );
+        if let Some(mut rx) = rx_actioned_prompts {
+            let received_prompt_id = rx.recv().await.unwrap();
+            assert_eq!(received_prompt_id.id.0, PLACEHOLDER_STR);
         }
     }
 }
