@@ -45,6 +45,7 @@ pub mod prompt_reply_response {
     pub enum PromptReplyType {
         Success = 0,
         Unknown = 1,
+        PromptNotFound = 2,
     }
     impl PromptReplyType {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -55,6 +56,7 @@ pub mod prompt_reply_response {
             match self {
                 PromptReplyType::Success => "SUCCESS",
                 PromptReplyType::Unknown => "UNKNOWN",
+                PromptReplyType::PromptNotFound => "PROMPT_NOT_FOUND",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -62,6 +64,7 @@ pub mod prompt_reply_response {
             match value {
                 "SUCCESS" => Some(Self::Success),
                 "UNKNOWN" => Some(Self::Unknown),
+                "PROMPT_NOT_FOUND" => Some(Self::PromptNotFound),
                 _ => None,
             }
         }

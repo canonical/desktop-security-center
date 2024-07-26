@@ -1,3 +1,4 @@
+//! This is our main worker task for processing prompts from snapd and driving the UI.
 use crate::{
     daemon::{ActionedPrompt, EnrichedPrompt},
     snapd_client::{PromptId, TypedUiInput},
@@ -126,7 +127,7 @@ where
         let span = span!(target: "worker", Level::INFO, "Prompt", id=%ep.prompt.id().0);
         let _enter = span.enter();
 
-        debug!("got prompt");
+        debug!("got prompt: {ep:?}");
 
         if self.prompts_to_drop.contains(ep.prompt.id()) {
             info!("dropping prompt as it has already been actioned");
@@ -135,6 +136,7 @@ where
         }
 
         let expected_id = ep.prompt.id().clone();
+        debug!("updating active prompt");
         self.update_active_prompt(ep);
 
         // FIXME: the UI closing without replying or actioning multiple prompts gets tricky (when can we spawn the next UI?)
@@ -152,6 +154,7 @@ where
             }
         }
 
+        debug!("clearing active prompt");
         self.active_prompt
             .lock()
             .expect("grpc server panicked")
@@ -173,22 +176,27 @@ where
         match timeout(self.recv_timeout, self.rx_actioned_prompts.recv()).await {
             Ok(Some(ActionedPrompt { id, others })) => {
                 debug!(recv_id=%id.0, "reply sent for prompt");
+                debug!(to_drop=?others, "updating prompts to drop");
                 self.prompts_to_drop.extend(others);
 
-                if !self.dead_prompts.contains(&id) {
-                    if &id == expected_id {
-                        return Recv::Success;
-                    } else {
-                        warn!(expected=%expected_id.0, seen=%id.0, "unexpected prompt reply");
-                        return Recv::Unexpected;
-                    }
+                if self.dead_prompts.contains(&id) {
+                    warn!(id=%id.0, "reply was for a dead prompt");
+                    self.dead_prompts.retain(|i| i != &id);
+                    return Recv::DeadPrompt;
                 }
 
-                self.dead_prompts.retain(|i| i != &id);
-                Recv::DeadPrompt
+                if &id == expected_id {
+                    Recv::Success
+                } else {
+                    warn!(expected=%expected_id.0, seen=%id.0, "unexpected prompt reply");
+                    Recv::Unexpected
+                }
             }
 
-            Ok(None) => Recv::ChannelClosed,
+            Ok(None) => {
+                warn!("actioned prompts channel is now closed, exiting");
+                Recv::ChannelClosed
+            }
 
             Err(_) => {
                 error!(id=%expected_id.0, "timeout waiting for ack from grpc server");

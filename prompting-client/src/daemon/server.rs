@@ -16,10 +16,11 @@ use crate::{
         PromptId, PromptReply as SnapPromptReply, SnapdSocketClient, TypedPromptReply,
         TypedUiInput, UiInput,
     },
-    Result,
+    Error, NO_PROMPTS_FOR_USER, PROMPT_NOT_FOUND,
 };
 use tokio::{net::UnixListener, sync::mpsc::UnboundedSender};
 use tonic::{async_trait, Code, Request, Response, Status};
+use tracing::{info, warn};
 
 macro_rules! map_enum {
     ($from:ident => $to:ident; [$($variant:ident),+]; $val:expr;) => {
@@ -41,12 +42,12 @@ macro_rules! map_enum {
 
 #[async_trait]
 pub trait ReplyToPrompt: Send + Sync + 'static {
-    async fn reply(&self, id: &PromptId, reply: TypedPromptReply) -> Result<Vec<PromptId>>;
+    async fn reply(&self, id: &PromptId, reply: TypedPromptReply) -> crate::Result<Vec<PromptId>>;
 }
 
 #[async_trait]
 impl ReplyToPrompt for SnapdSocketClient {
-    async fn reply(&self, id: &PromptId, reply: TypedPromptReply) -> Result<Vec<PromptId>> {
+    async fn reply(&self, id: &PromptId, reply: TypedPromptReply) -> crate::Result<Vec<PromptId>> {
         self.reply_to_prompt(id, reply).await
     }
 }
@@ -88,11 +89,19 @@ impl<T: ReplyToPrompt> AppArmorPrompting for Service<T> {
     async fn get_current_prompt(
         &self,
         _request: Request<()>,
-    ) -> std::result::Result<Response<GetCurrentPromptResponse>, Status> {
-        let prompt = self
-            .active_prompt
-            .get()
-            .map(|TypedUiInput::Home(p)| map_home_response(p));
+    ) -> Result<Response<GetCurrentPromptResponse>, Status> {
+        let prompt = match self.active_prompt.get() {
+            Some(TypedUiInput::Home(input)) => {
+                let id = &input.id.0;
+                info!(%id, "serving request for active prompt (id={id})");
+                Some(map_home_response(input))
+            }
+
+            None => {
+                warn!("got request for current prompt but there is no active prompt");
+                None
+            }
+        };
 
         Ok(Response::new(GetCurrentPromptResponse { prompt }))
     }
@@ -100,39 +109,50 @@ impl<T: ReplyToPrompt> AppArmorPrompting for Service<T> {
     async fn reply_to_prompt(
         &self,
         request: Request<PromptReply>,
-    ) -> std::result::Result<Response<PromptReplyResponse>, Status> {
+    ) -> Result<Response<PromptReplyResponse>, Status> {
         let req = request.into_inner();
-
         let reply = map_prompt_reply(req.clone())?;
-
         let id = PromptId(req.prompt_id.clone());
-        let others = match self.client.reply(&id, reply).await {
-            Ok(res) => res,
 
-            // FIXME: We need to check for snapd errors vs other errors rather than just
-            // stringifying the error itself here.
+        info!(id=%id.0, "replying to prompt id={}", id.0);
+        let resp = match self.client.reply(&id, reply).await {
+            Ok(others) => {
+                if let Err(e) = self.tx_actioned_prompts.send(ActionedPrompt { id, others }) {
+                    panic!("send on closed tx_actioned_prompts channel: {e}");
+                }
+
+                PromptReplyResponse {
+                    prompt_reply_type: PromptReplyType::Success as i32,
+                    message: "success".to_string(),
+                }
+            }
+
+            Err(Error::SnapdError { message })
+                if [NO_PROMPTS_FOR_USER, PROMPT_NOT_FOUND].contains(&message.as_ref()) =>
+            {
+                warn!(id=%id.0, "prompt not found (id={})", id.0);
+                PromptReplyResponse {
+                    prompt_reply_type: PromptReplyType::PromptNotFound as i32,
+                    message: "prompt not found".to_string(),
+                }
+            }
+
             Err(e) => {
-                return Ok(Response::new(PromptReplyResponse {
+                warn!(id=%id.0, "got error from snapd when replying to prompt (id={}): {e}", id.0);
+                PromptReplyResponse {
                     prompt_reply_type: PromptReplyType::Unknown as i32,
                     message: e.to_string(),
-                }))
+                }
             }
         };
 
-        if let Err(e) = self.tx_actioned_prompts.send(ActionedPrompt { id, others }) {
-            panic!("send on closed channel: {e}");
-        }
-
-        Ok(Response::new(PromptReplyResponse {
-            prompt_reply_type: PromptReplyType::Success as i32,
-            message: "success".to_string(),
-        }))
+        Ok(Response::new(resp))
     }
 
     async fn resolve_home_pattern_type(
         &self,
         _: Request<String>,
-    ) -> std::result::Result<Response<ResolveHomePatternTypeResponse>, Status> {
+    ) -> Result<Response<ResolveHomePatternTypeResponse>, Status> {
         // FIXME: finish this endpoint
         Err(Status::new(
             Code::Unimplemented,
@@ -141,7 +161,7 @@ impl<T: ReplyToPrompt> AppArmorPrompting for Service<T> {
     }
 }
 
-fn map_prompt_reply(mut reply: PromptReply) -> std::result::Result<TypedPromptReply, Status> {
+fn map_prompt_reply(mut reply: PromptReply) -> Result<TypedPromptReply, Status> {
     let prompt_type = reply.prompt_reply.take().ok_or(Status::new(
         Code::InvalidArgument,
         "recieved empty prompt_reply",
@@ -163,7 +183,7 @@ fn map_prompt_reply(mut reply: PromptReply) -> std::result::Result<TypedPromptRe
             HomePromptReply(home_prompt_reply) => HomeReplyConstraints {
                 path_pattern: home_prompt_reply.path_pattern,
                 permissions: home_prompt_reply.permissions,
-                available_permissions: Vec::new(), //????
+                available_permissions: Vec::new(),
             },
         },
     }))
@@ -212,22 +232,31 @@ fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {
 
 #[cfg(test)]
 mod tests {
-    use self::apparmor_prompting::prompt_reply;
     use super::*;
-    use crate::Error;
     use crate::{
         daemon::worker::ReadOnlyActivePrompt,
-        protos::apparmor_prompting::app_armor_prompting_client::AppArmorPromptingClient,
+        protos::apparmor_prompting::{
+            app_armor_prompting_client::AppArmorPromptingClient, prompt_reply, Action, Lifespan,
+        },
         snapd_client::{interfaces::home::HomeUiInputData, PromptId, SnapMeta, TypedPromptReply},
+        Error,
     };
-    use apparmor_prompting::{Action, Lifespan};
     use hyper_util::rt::TokioIo;
     use simple_test_case::test_case;
-    use std::{fs, io};
-    use tokio::{self, net::UnixStream, sync::mpsc::unbounded_channel};
+    use std::{
+        fs, io,
+        ops::{Deref, DerefMut},
+    };
+    use tokio::{
+        net::UnixStream,
+        sync::mpsc::{unbounded_channel, UnboundedSender},
+    };
     use tokio_stream::wrappers::UnixListenerStream;
-    use tonic::transport::{Endpoint, Uri};
-    use tonic::{async_trait, transport::Server, Request};
+    use tonic::{
+        async_trait,
+        transport::{Channel, Endpoint, Server, Uri},
+        Request,
+    };
     use tower::service_fn;
     use uuid::Uuid;
 
@@ -239,7 +268,11 @@ mod tests {
 
     #[async_trait]
     impl ReplyToPrompt for MockClient {
-        async fn reply(&self, _id: &PromptId, reply: TypedPromptReply) -> Result<Vec<PromptId>> {
+        async fn reply(
+            &self,
+            _id: &PromptId,
+            reply: TypedPromptReply,
+        ) -> crate::Result<Vec<PromptId>> {
             if self.want_err {
                 return Err(Error::Io(io::Error::new(
                     io::ErrorKind::Other,
@@ -258,46 +291,71 @@ mod tests {
         }
     }
 
+    // Ensure that our test sockets get cleaned up when the client is dropped
+    #[derive(Debug)]
+    struct SelfCleaningClient {
+        inner: AppArmorPromptingClient<Channel>,
+        socket_path: String,
+    }
+
+    impl Drop for SelfCleaningClient {
+        fn drop(&mut self) {
+            let _ = fs::remove_file(&self.socket_path);
+        }
+    }
+
+    impl Deref for SelfCleaningClient {
+        type Target = AppArmorPromptingClient<Channel>;
+
+        fn deref(&self) -> &Self::Target {
+            &self.inner
+        }
+    }
+
+    impl DerefMut for SelfCleaningClient {
+        fn deref_mut(&mut self) -> &mut Self::Target {
+            &mut self.inner
+        }
+    }
+
     async fn setup_server_and_client(
         mock_client: MockClient,
         active_prompt: ReadOnlyActivePrompt,
-        tx_actioned_prompts: tokio::sync::mpsc::UnboundedSender<ActionedPrompt>,
-    ) -> AppArmorPromptingClient<tonic::transport::Channel> {
+        tx_actioned_prompts: UnboundedSender<ActionedPrompt>,
+    ) -> SelfCleaningClient {
         let test_name = Uuid::new_v4().to_string();
-        let path = format!("/tmp/{test_name}_socket");
-        let _ = fs::remove_file(&path); // Remove the old socket file if it exists
+        let socket_path = format!("/tmp/{test_name}_socket");
+        let _ = fs::remove_file(&socket_path); // Remove the old socket file if it exists
 
         let (server, listener) = new_server_and_listener(
             mock_client,
             active_prompt,
             tx_actioned_prompts,
-            path.clone(),
+            socket_path.clone(),
         );
-
-        let incoming = UnixListenerStream::new(listener);
-
-        // No choice but to do this https://github.com/hyperium/tonic/blob/master/examples/src/uds/client.rs
-        let channel = Endpoint::try_from("http://[::]:50051")
-            .unwrap()
-            .connect_with_connector(service_fn(move |_: Uri| {
-                let path = format!("/tmp/{test_name}_socket");
-                async {
-                    // Connect to a Uds socket
-                    Ok::<_, std::io::Error>(TokioIo::new(UnixStream::connect(path).await?))
-                }
-            }))
-            .await
-            .unwrap();
 
         tokio::spawn(async move {
             Server::builder()
                 .add_service(server)
-                .serve_with_incoming(incoming)
+                .serve_with_incoming(UnixListenerStream::new(listener))
                 .await
                 .unwrap();
         });
 
-        AppArmorPromptingClient::new(channel)
+        let path = socket_path.clone();
+        // No choice but to do this https://github.com/hyperium/tonic/blob/master/examples/src/uds/client.rs
+        let channel = Endpoint::from_static("https://not-used.com")
+            .connect_with_connector(service_fn(move |_: Uri| {
+                let path = path.clone();
+                async { Ok::<_, io::Error>(TokioIo::new(UnixStream::connect(path).await?)) }
+            }))
+            .await
+            .unwrap();
+
+        SelfCleaningClient {
+            inner: AppArmorPromptingClient::new(channel),
+            socket_path,
+        }
     }
 
     fn ui_input() -> TypedUiInput {
@@ -422,7 +480,7 @@ mod tests {
 
         // Check test output
         if expected_errors.want_err {
-            assert!(matches!(resp, Err(_)));
+            assert!(resp.is_err());
             return;
         }
         if expected_errors.snapd_err {

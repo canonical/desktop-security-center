@@ -79,10 +79,12 @@ class HomePatternType extends $pb.ProtobufEnum {
 class PromptReplyResponse_PromptReplyType extends $pb.ProtobufEnum {
   static const PromptReplyResponse_PromptReplyType SUCCESS = PromptReplyResponse_PromptReplyType._(0, _omitEnumNames ? '' : 'SUCCESS');
   static const PromptReplyResponse_PromptReplyType UNKNOWN = PromptReplyResponse_PromptReplyType._(1, _omitEnumNames ? '' : 'UNKNOWN');
+  static const PromptReplyResponse_PromptReplyType PROMPT_NOT_FOUND = PromptReplyResponse_PromptReplyType._(2, _omitEnumNames ? '' : 'PROMPT_NOT_FOUND');
 
   static const $core.List<PromptReplyResponse_PromptReplyType> values = <PromptReplyResponse_PromptReplyType> [
     SUCCESS,
     UNKNOWN,
+    PROMPT_NOT_FOUND,
   ];
 
   static final $core.Map<$core.int, PromptReplyResponse_PromptReplyType> _byValue = $pb.ProtobufEnum.initByValue(values);

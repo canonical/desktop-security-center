@@ -8,7 +8,7 @@ use tracing_subscriber::{layer::SubscriberExt, FmtSubscriber};
 #[tokio::main]
 async fn main() -> Result<()> {
     let builder = FmtSubscriber::builder()
-        .with_env_filter("info")
+        .with_env_filter("debug,hyper=error,h2=error")
         .with_writer(stdout)
         .with_filter_reloading();
 
