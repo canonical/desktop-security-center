@@ -51,15 +51,12 @@ impl ReplyToPrompt for SnapdSocketClient {
     }
 }
 
-pub fn new_server_and_listener<T: ReplyToPrompt>(
+pub fn new_server_and_listener<T: ReplyToPrompt + Clone>(
     client: T,
     active_prompt: ReadOnlyActivePrompt,
     tx_actioned_prompts: UnboundedSender<ActionedPrompt>,
     socket_path: String,
-) -> (AppArmorPromptingServer<Service<T>>, UnixListener)
-where
-    T: ReplyToPrompt + Clone,
-{
+) -> (AppArmorPromptingServer<Service<T>>, UnixListener) {
     let service = Service::new(client.clone(), active_prompt, tx_actioned_prompts);
     let listener = UnixListener::bind(&socket_path).expect("to be able to bind to our socket");
 
