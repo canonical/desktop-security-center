@@ -16,8 +16,8 @@ use crate::{
         PromptId, PromptReply as SnapPromptReply, SnapdSocketClient, TypedPromptReply,
         TypedUiInput, UiInput,
     },
+    Result,
 };
-use std::error::Error;
 use tokio::{net::UnixListener, sync::mpsc::UnboundedSender};
 use tonic::{async_trait, Code, Request, Response, Status};
 
@@ -41,27 +41,13 @@ macro_rules! map_enum {
 
 #[async_trait]
 pub trait ReplyToPrompt: Send + Sync + 'static {
-    async fn reply(
-        &self,
-        id: &PromptId,
-        reply: TypedPromptReply,
-    ) -> Result<Vec<PromptId>, Box<(dyn Error + Send + Sync)>>;
-}
-
-#[derive(Clone)]
-pub struct Client {
-    pub client: SnapdSocketClient,
+    async fn reply(&self, id: &PromptId, reply: TypedPromptReply) -> Result<Vec<PromptId>>;
 }
 
 #[async_trait]
-impl ReplyToPrompt for Client {
-    async fn reply(
-        &self,
-        id: &PromptId,
-        reply: TypedPromptReply,
-    ) -> Result<Vec<PromptId>, Box<dyn Error + Send + Sync>> {
-        let prompts = self.client.reply_to_prompt(id, reply).await?;
-        Ok(prompts)
+impl ReplyToPrompt for SnapdSocketClient {
+    async fn reply(&self, id: &PromptId, reply: TypedPromptReply) -> Result<Vec<PromptId>> {
+        self.reply_to_prompt(id, reply).await
     }
 }
 
@@ -105,7 +91,7 @@ impl<T: ReplyToPrompt + Send + Sync> AppArmorPrompting for Service<T> {
     async fn get_current_prompt(
         &self,
         _request: Request<()>,
-    ) -> Result<Response<GetCurrentPromptResponse>, Status> {
+    ) -> std::result::Result<Response<GetCurrentPromptResponse>, Status> {
         let prompt = self
             .active_prompt
             .get()
@@ -117,7 +103,7 @@ impl<T: ReplyToPrompt + Send + Sync> AppArmorPrompting for Service<T> {
     async fn reply_to_prompt(
         &self,
         request: Request<PromptReply>,
-    ) -> Result<Response<PromptReplyResponse>, Status> {
+    ) -> std::result::Result<Response<PromptReplyResponse>, Status> {
         let req = request.into_inner();
 
         let reply = map_prompt_reply(req.clone())?;
@@ -149,7 +135,7 @@ impl<T: ReplyToPrompt + Send + Sync> AppArmorPrompting for Service<T> {
     async fn resolve_home_pattern_type(
         &self,
         _: Request<String>,
-    ) -> Result<Response<ResolveHomePatternTypeResponse>, Status> {
+    ) -> std::result::Result<Response<ResolveHomePatternTypeResponse>, Status> {
         // FIXME: finish this endpoint
         Err(Status::new(
             Code::Unimplemented,
@@ -158,7 +144,7 @@ impl<T: ReplyToPrompt + Send + Sync> AppArmorPrompting for Service<T> {
     }
 }
 
-fn map_prompt_reply(mut reply: PromptReply) -> Result<TypedPromptReply, Status> {
+fn map_prompt_reply(mut reply: PromptReply) -> std::result::Result<TypedPromptReply, Status> {
     let prompt_type = reply.prompt_reply.take().ok_or(Status::new(
         Code::InvalidArgument,
         "recieved empty prompt_reply",
@@ -230,9 +216,9 @@ fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::Error;
     use std::{
-        error::Error,
-        fs,
+        fs, io,
         sync::{Arc, Mutex},
     };
 
@@ -244,6 +230,7 @@ mod tests {
     use tonic::transport::{Endpoint, Uri};
     use tonic::{async_trait, transport::Server, Request};
     use tower::service_fn;
+    use uuid::Uuid;
 
     use crate::{
         daemon::worker::ReadOnlyActivePrompt,
@@ -261,14 +248,10 @@ mod tests {
 
     #[async_trait]
     impl ReplyToPrompt for MockClient {
-        async fn reply(
-            &self,
-            _id: &PromptId,
-            reply: TypedPromptReply,
-        ) -> Result<Vec<PromptId>, Box<dyn Error + Send + Sync>> {
+        async fn reply(&self, _id: &PromptId, reply: TypedPromptReply) -> Result<Vec<PromptId>> {
             if self.want_err {
-                return Err(Box::new(std::io::Error::new(
-                    std::io::ErrorKind::Other,
+                return Err(Error::Io(io::Error::new(
+                    io::ErrorKind::Other,
                     "error requested of mock snapd client",
                 )));
             }
@@ -284,7 +267,6 @@ mod tests {
     }
 
     async fn setup_server_and_client(
-        test_name: &str,
         mock_client: MockClient,
         active_prompt: ReadOnlyActivePrompt,
         tx_actioned_prompts: tokio::sync::mpsc::UnboundedSender<ActionedPrompt>,
@@ -292,7 +274,7 @@ mod tests {
         AppArmorPromptingClient<tonic::transport::Channel>,
         Arc<String>,
     ) {
-        let test_name = Arc::new(test_name.to_string());
+        let test_name = Arc::new(Uuid::new_v4().to_string());
         let path = format!("/tmp/{}_socket", test_name);
         let _ = fs::remove_file(&path); // Remove the old socket file if it exists
 
@@ -306,13 +288,11 @@ mod tests {
         let incoming = UnixListenerStream::new(listener);
 
         // No choice but to do this https://github.com/hyperium/tonic/blob/master/examples/src/uds/client.rs
-        let test_name_clone = Arc::clone(&test_name);
         let channel = Endpoint::try_from("http://[::]:50051")
             .unwrap()
             .connect_with_connector(service_fn(move |_: Uri| {
-                let path = Arc::clone(&test_name_clone);
-                async move {
-                    let path = format!("/tmp/{}_socket", path);
+                let path = format!("/tmp/{}_socket", path.clone());
+                async {
                     // Connect to a Uds socket
                     Ok::<_, std::io::Error>(TokioIo::new(UnixStream::connect(path).await?))
                 }
@@ -361,10 +341,12 @@ mod tests {
         }
     }
 
-    #[test_case("empty_prompt", true; "empty prompt")]
-    #[test_case("non_empty_prompt", false; "non-empty prompt")]
+    // FIXME: swap test_names out for uuid https://github.com/canonical/prompting-client/blob/main/prompting-client/tests/integration.rs#L58
+    #[test_case(true; "empty prompt")]
+    // TODO: #[test_case(Some(stub_prompt()); "empty prompt")] see https://github.com/canonical/prompting-client/blob/main/prompting-client/src/daemon/worker.rs#L346-L364
+    #[test_case(false; "non-empty prompt")]
     #[tokio::test]
-    async fn test_get_current_prompt(test_name: &str, empty_active_prompt: bool) {
+    async fn test_get_current_prompt(empty_active_prompt: bool) {
         let mock_client = MockClient {
             want_err: false,
             expected_reply: None,
@@ -373,11 +355,13 @@ mod tests {
 
         let active_prompt = create_readonly_active_prompt(empty_active_prompt);
 
+        // TODO: move to fn outside of test
         let want = if empty_active_prompt {
             None
         } else {
             Some(Prompt::HomePrompt(HomePrompt {
                 meta_data: Some(MetaData {
+                    // TODO: 1, 2, 3, 4, 5
                     prompt_id: PLACEHOLDER_STR.to_string(),
                     snap_name: PLACEHOLDER_STR.to_string(),
                     store_url: PLACEHOLDER_STR.to_string(),
@@ -392,8 +376,7 @@ mod tests {
         };
 
         let (mut client, _test_name) =
-            setup_server_and_client(test_name, mock_client, active_prompt, tx_actioned_prompts)
-                .await;
+            setup_server_and_client(mock_client, active_prompt, tx_actioned_prompts).await;
 
         let resp = client
             .get_current_prompt(Request::new(()))
@@ -402,16 +385,17 @@ mod tests {
             .into_inner()
             .prompt;
 
-        assert_eq!(resp, want);
+        assert_eq!(resp, want); // TODO: expected > want
     }
 
-    #[test_case("error_when_map_prompt_reply_fails", true, false, false, true; "Error when map_prompt_reply fails")]
-    #[test_case("returns_unknown_error_code_when_snapd_returns_an_error", false, true, false, false; "Returns unknown error code when snapd returns an error")]
-    #[test_case("error_when_returning_actioned_prompts_returns_an_error", false, false, true, true; "Error when returning actioned prompts returns an error")]
-    #[test_case("succesfully_reply_to_a_prompt", false, false, false, false; "Succesfully reply to a prompt")]
+    // TODO: include diff and add to logic / tests
+
+    #[test_case(true, false, false, true; "Error when map_prompt_reply fails")]
+    #[test_case(false, true, false, false; "Returns unknown error code when snapd returns an error")]
+    #[test_case(false, false, true, true; "Error when returning actioned prompts returns an error")]
+    #[test_case( false, false, false, false; "Succesfully reply to a prompt")]
     #[tokio::test]
     async fn test_reply_to_prompt(
-        test_name: &str,
         map_prompt_reply_err: bool,
         snapd_err: bool,
         tx_err: bool,
@@ -458,8 +442,7 @@ mod tests {
         };
 
         let (mut client, _test_name) =
-            setup_server_and_client(test_name, mock_client, active_prompt, tx_actioned_prompts)
-                .await;
+            setup_server_and_client(mock_client, active_prompt, tx_actioned_prompts).await;
 
         let resp = client.reply_to_prompt(Request::new(prompt_reply)).await;
 
