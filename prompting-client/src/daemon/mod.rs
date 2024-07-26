@@ -1,11 +1,7 @@
 use std::{env, fs};
 
 use crate::{
-    daemon::{
-        poll::poll_for_prompts,
-        server::new_server_and_listener,
-        worker::Worker,
-    },
+    daemon::{poll::poll_for_prompts, server::new_server_and_listener, worker::Worker},
     snapd_client::{PromptId, SnapMeta, SnapdSocketClient, TypedPrompt},
     Result,
 };

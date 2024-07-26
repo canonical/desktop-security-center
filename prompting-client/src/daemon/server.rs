@@ -215,6 +215,8 @@ fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {
 
 #[cfg(test)]
 mod tests {
+    use self::apparmor_prompting::prompt_reply;
+
     use super::*;
     use crate::Error;
     use std::{
@@ -237,8 +239,6 @@ mod tests {
         protos::apparmor_prompting::app_armor_prompting_client::AppArmorPromptingClient,
         snapd_client::{interfaces::home::HomeUiInputData, PromptId, SnapMeta, TypedPromptReply},
     };
-
-    const PLACEHOLDER_STR: &str = "foo";
 
     #[derive(Clone)]
     struct MockClient {
@@ -270,12 +270,9 @@ mod tests {
         mock_client: MockClient,
         active_prompt: ReadOnlyActivePrompt,
         tx_actioned_prompts: tokio::sync::mpsc::UnboundedSender<ActionedPrompt>,
-    ) -> (
-        AppArmorPromptingClient<tonic::transport::Channel>,
-        Arc<String>,
-    ) {
+    ) -> AppArmorPromptingClient<tonic::transport::Channel> {
         let test_name = Arc::new(Uuid::new_v4().to_string());
-        let path = format!("/tmp/{}_socket", test_name);
+        let path = format!("/tmp/{}_socket", test_name.clone());
         let _ = fs::remove_file(&path); // Remove the old socket file if it exists
 
         let (server, listener) = new_server_and_listener(
@@ -291,7 +288,7 @@ mod tests {
         let channel = Endpoint::try_from("http://[::]:50051")
             .unwrap()
             .connect_with_connector(service_fn(move |_: Uri| {
-                let path = format!("/tmp/{}_socket", path.clone());
+                let path = format!("/tmp/{}_socket", test_name.clone());
                 async {
                     // Connect to a Uds socket
                     Ok::<_, std::io::Error>(TokioIo::new(UnixStream::connect(path).await?))
@@ -309,75 +306,98 @@ mod tests {
         });
 
         let client = AppArmorPromptingClient::new(channel);
-        (client, test_name)
+        return client;
     }
 
-    fn create_readonly_active_prompt(empty_active_prompt: bool) -> ReadOnlyActivePrompt {
-        if empty_active_prompt {
-            ReadOnlyActivePrompt {
-                active_prompt: Arc::new(Mutex::new(None)),
-            }
-        } else {
-            ReadOnlyActivePrompt {
-                active_prompt: Arc::new(Mutex::new(Some(TypedUiInput::Home(UiInput::<
-                    HomeInterface,
-                > {
-                    id: PromptId(PLACEHOLDER_STR.to_string()),
-                    meta: SnapMeta {
-                        name: PLACEHOLDER_STR.to_string(),
-                        updated_at: PLACEHOLDER_STR.to_string(),
-                        store_url: PLACEHOLDER_STR.to_string(),
-                        publisher: PLACEHOLDER_STR.to_string(),
-                    },
-                    data: HomeUiInputData {
-                        requested_path: PLACEHOLDER_STR.to_string(),
-                        requested_permissions: Vec::new(),
-                        available_permissions: Vec::new(),
-                        initial_options: Vec::new(),
-                        more_options: Vec::new(),
-                    },
-                })))),
-            }
+    fn ui_input() -> TypedUiInput {
+        TypedUiInput::Home(UiInput::<HomeInterface> {
+            id: PromptId("1".to_string()),
+            meta: SnapMeta {
+                name: "2".to_string(),
+                updated_at: "3".to_string(),
+                store_url: "4".to_string(),
+                publisher: "5".to_string(),
+            },
+            data: HomeUiInputData {
+                requested_path: "6".to_string(),
+                requested_permissions: Vec::new(),
+                available_permissions: Vec::new(),
+                initial_options: Vec::new(),
+                more_options: Vec::new(),
+            },
+        })
+    }
+
+    fn prompt() -> Prompt {
+        Prompt::HomePrompt(HomePrompt {
+            meta_data: Some(MetaData {
+                prompt_id: "1".to_string(),
+                snap_name: "2".to_string(),
+                store_url: "4".to_string(),
+                publisher: "5".to_string(),
+                updated_at: "3".to_string(),
+            }),
+            requested_path: "6".to_string(),
+            requested_permissions: Vec::new(),
+            available_permissions: Vec::new(),
+            more_options: Vec::new(),
+        })
+    }
+
+    fn prompt_reply(prompt_reply_inner: Option<prompt_reply::PromptReply>) -> PromptReply {
+        PromptReply {
+            prompt_id: "1".to_string(),
+            action: Action::Allow as i32,
+            lifespan: Lifespan::Single as i32,
+            prompt_reply: prompt_reply_inner,
         }
     }
 
+    fn prompt_reply_inner() -> Option<prompt_reply::PromptReply> {
+        Some(HomePromptReply(apparmor_prompting::HomePromptReply {
+            path_pattern: "6".to_string(),
+            permissions: Vec::new(),
+        }))
+    }
+
+    fn typed_prompt_reply() -> TypedPromptReply {
+        TypedPromptReply::Home(SnapPromptReply::<HomeInterface> {
+            action: snapd_client::Action::Allow,
+            lifespan: snapd_client::Lifespan::Single,
+            duration: None,
+            constraints: HomeReplyConstraints {
+                path_pattern: "6".to_string(),
+                permissions: Vec::new(),
+                available_permissions: Vec::new(),
+            },
+        })
+    }
+
+    struct ExpectedErrors {
+        snapd_err: bool,
+        tx_err: bool,
+        want_err: bool,
+    }
+
     // FIXME: swap test_names out for uuid https://github.com/canonical/prompting-client/blob/main/prompting-client/tests/integration.rs#L58
-    #[test_case(true; "empty prompt")]
+    #[test_case(None, None; "empty prompt")]
     // TODO: #[test_case(Some(stub_prompt()); "empty prompt")] see https://github.com/canonical/prompting-client/blob/main/prompting-client/src/daemon/worker.rs#L346-L364
-    #[test_case(false; "non-empty prompt")]
+    #[test_case(Some(ui_input()), Some(prompt()); "non-empty prompt")]
     #[tokio::test]
-    async fn test_get_current_prompt(empty_active_prompt: bool) {
+    async fn test_get_current_prompt(ui_input: Option<TypedUiInput>, expected: Option<Prompt>) {
+        // Test setup
         let mock_client = MockClient {
             want_err: false,
             expected_reply: None,
         };
         let (tx_actioned_prompts, _rx_actioned_prompts) = unbounded_channel();
-
-        let active_prompt = create_readonly_active_prompt(empty_active_prompt);
-
-        // TODO: move to fn outside of test
-        let want = if empty_active_prompt {
-            None
-        } else {
-            Some(Prompt::HomePrompt(HomePrompt {
-                meta_data: Some(MetaData {
-                    // TODO: 1, 2, 3, 4, 5
-                    prompt_id: PLACEHOLDER_STR.to_string(),
-                    snap_name: PLACEHOLDER_STR.to_string(),
-                    store_url: PLACEHOLDER_STR.to_string(),
-                    publisher: PLACEHOLDER_STR.to_string(),
-                    updated_at: PLACEHOLDER_STR.to_string(),
-                }),
-                requested_path: PLACEHOLDER_STR.to_string(),
-                requested_permissions: Vec::new(),
-                available_permissions: Vec::new(),
-                more_options: Vec::new(),
-            }))
+        let active_prompt = ReadOnlyActivePrompt {
+            active_prompt: Arc::new(Mutex::new(ui_input)),
         };
-
-        let (mut client, _test_name) =
+        let mut client =
             setup_server_and_client(mock_client, active_prompt, tx_actioned_prompts).await;
 
+        // Run test
         let resp = client
             .get_current_prompt(Request::new(()))
             .await
@@ -385,87 +405,55 @@ mod tests {
             .into_inner()
             .prompt;
 
-        assert_eq!(resp, want); // TODO: expected > want
+        // Check output
+        assert_eq!(resp, expected);
     }
 
-    // TODO: include diff and add to logic / tests
-
-    #[test_case(true, false, false, true; "Error when map_prompt_reply fails")]
-    #[test_case(false, true, false, false; "Returns unknown error code when snapd returns an error")]
-    #[test_case(false, false, true, true; "Error when returning actioned prompts returns an error")]
-    #[test_case( false, false, false, false; "Succesfully reply to a prompt")]
+    // TODO(matt): include diff (see notes) and add to logic / tests
+    #[test_case(prompt_reply(None), ExpectedErrors{snapd_err: false, tx_err: false, want_err: true}; "Error when map_prompt_reply fails")]
+    #[test_case(prompt_reply(prompt_reply_inner()), ExpectedErrors{snapd_err: true, tx_err: false, want_err: false}; "Returns unknown error code when snapd returns an error")]
+    #[test_case(prompt_reply(prompt_reply_inner()), ExpectedErrors{snapd_err: false, tx_err: true, want_err: true}; "Error when returning actioned prompts returns an error")]
+    #[test_case(prompt_reply(prompt_reply_inner()), ExpectedErrors{snapd_err: false, tx_err: false, want_err: false}; "Succesfully reply to a prompt")]
     #[tokio::test]
-    async fn test_reply_to_prompt(
-        map_prompt_reply_err: bool,
-        snapd_err: bool,
-        tx_err: bool,
-        want_err: bool,
-    ) {
-        let prompt_reply = PromptReply {
-            prompt_id: PLACEHOLDER_STR.to_string(),
-            action: Action::Allow as i32,
-            lifespan: Lifespan::Single as i32,
-            prompt_reply: if map_prompt_reply_err {
-                None
-            } else {
-                Some(HomePromptReply(apparmor_prompting::HomePromptReply {
-                    path_pattern: PLACEHOLDER_STR.to_string(),
-                    permissions: Vec::new(),
-                }))
-            },
-        };
-
-        let expected_reply = TypedPromptReply::Home(SnapPromptReply::<HomeInterface> {
-            action: snapd_client::Action::Allow,
-            lifespan: snapd_client::Lifespan::Single,
-            duration: None,
-            constraints: HomeReplyConstraints {
-                path_pattern: PLACEHOLDER_STR.to_string(),
-                permissions: Vec::new(),
-                available_permissions: Vec::new(),
-            },
-        });
-
+    async fn test_reply_to_prompt(prompt_reply: PromptReply, expected_errors: ExpectedErrors) {
+        // Test setup
         let mock_client = MockClient {
-            want_err: snapd_err,
-            expected_reply: Some(expected_reply),
+            want_err: expected_errors.snapd_err,
+            expected_reply: Some(typed_prompt_reply()),
         };
         let (tx_actioned_prompts, rx_actioned_prompts) = unbounded_channel();
         let mut rx_actioned_prompts = Some(rx_actioned_prompts);
-
-        if tx_err {
+        if expected_errors.tx_err {
             rx_actioned_prompts = None;
         }
-
         let active_prompt = ReadOnlyActivePrompt {
             active_prompt: Arc::new(Mutex::new(None)),
         };
-
-        let (mut client, _test_name) =
+        let mut client =
             setup_server_and_client(mock_client, active_prompt, tx_actioned_prompts).await;
 
+        // Run the test
         let resp = client.reply_to_prompt(Request::new(prompt_reply)).await;
 
-        if want_err {
+        // Check test output
+        if expected_errors.want_err {
             assert!(matches!(resp, Err(_)));
             return;
         }
-
-        if snapd_err {
+        if expected_errors.snapd_err {
             assert_eq!(
                 resp.unwrap().into_inner().prompt_reply_type,
                 PromptReplyType::Unknown as i32
             );
             return;
         }
-
         assert_eq!(
             resp.unwrap().into_inner().prompt_reply_type,
             PromptReplyType::Success as i32
         );
         if let Some(mut rx) = rx_actioned_prompts {
             let received_prompt_id = rx.recv().await.unwrap();
-            assert_eq!(received_prompt_id.id.0, PLACEHOLDER_STR);
+            assert_eq!(received_prompt_id.id.0, "1".to_string());
         }
     }
 }
