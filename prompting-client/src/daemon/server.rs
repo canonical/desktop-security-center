@@ -63,13 +63,13 @@ pub fn new_server_and_listener<T: ReplyToPrompt + Clone>(
     (AppArmorPromptingServer::new(service), listener)
 }
 
-pub struct Service<T: ReplyToPrompt + Send + Sync> {
+pub struct Service<T: ReplyToPrompt> {
     client: T,
     active_prompt: ReadOnlyActivePrompt,
     tx_actioned_prompts: UnboundedSender<ActionedPrompt>,
 }
 
-impl<T: ReplyToPrompt + Send + Sync> Service<T> {
+impl<T: ReplyToPrompt> Service<T> {
     pub fn new(
         client: T,
         active_prompt: ReadOnlyActivePrompt,
@@ -84,7 +84,7 @@ impl<T: ReplyToPrompt + Send + Sync> Service<T> {
 }
 
 #[async_trait]
-impl<T: ReplyToPrompt + Send + Sync> AppArmorPrompting for Service<T> {
+impl<T: ReplyToPrompt> AppArmorPrompting for Service<T> {
     async fn get_current_prompt(
         &self,
         _request: Request<()>,
@@ -213,29 +213,23 @@ fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {
 #[cfg(test)]
 mod tests {
     use self::apparmor_prompting::prompt_reply;
-
     use super::*;
     use crate::Error;
-    use std::{
-        fs, io,
-        sync::{Arc, Mutex},
+    use crate::{
+        daemon::worker::ReadOnlyActivePrompt,
+        protos::apparmor_prompting::app_armor_prompting_client::AppArmorPromptingClient,
+        snapd_client::{interfaces::home::HomeUiInputData, PromptId, SnapMeta, TypedPromptReply},
     };
-
     use apparmor_prompting::{Action, Lifespan};
     use hyper_util::rt::TokioIo;
     use simple_test_case::test_case;
+    use std::{fs, io};
     use tokio::{self, net::UnixStream, sync::mpsc::unbounded_channel};
     use tokio_stream::wrappers::UnixListenerStream;
     use tonic::transport::{Endpoint, Uri};
     use tonic::{async_trait, transport::Server, Request};
     use tower::service_fn;
     use uuid::Uuid;
-
-    use crate::{
-        daemon::worker::ReadOnlyActivePrompt,
-        protos::apparmor_prompting::app_armor_prompting_client::AppArmorPromptingClient,
-        snapd_client::{interfaces::home::HomeUiInputData, PromptId, SnapMeta, TypedPromptReply},
-    };
 
     #[derive(Clone)]
     struct MockClient {
@@ -259,6 +253,7 @@ mod tests {
                     }
                 }
             }
+
             Ok(Vec::new())
         }
     }
@@ -268,8 +263,8 @@ mod tests {
         active_prompt: ReadOnlyActivePrompt,
         tx_actioned_prompts: tokio::sync::mpsc::UnboundedSender<ActionedPrompt>,
     ) -> AppArmorPromptingClient<tonic::transport::Channel> {
-        let test_name = Arc::new(Uuid::new_v4().to_string());
-        let path = format!("/tmp/{}_socket", test_name.clone());
+        let test_name = Uuid::new_v4().to_string();
+        let path = format!("/tmp/{test_name}_socket");
         let _ = fs::remove_file(&path); // Remove the old socket file if it exists
 
         let (server, listener) = new_server_and_listener(
@@ -285,7 +280,7 @@ mod tests {
         let channel = Endpoint::try_from("http://[::]:50051")
             .unwrap()
             .connect_with_connector(service_fn(move |_: Uri| {
-                let path = format!("/tmp/{}_socket", test_name.clone());
+                let path = format!("/tmp/{test_name}_socket");
                 async {
                     // Connect to a Uds socket
                     Ok::<_, std::io::Error>(TokioIo::new(UnixStream::connect(path).await?))
@@ -302,8 +297,7 @@ mod tests {
                 .unwrap();
         });
 
-        let client = AppArmorPromptingClient::new(channel);
-        return client;
+        AppArmorPromptingClient::new(channel)
     }
 
     fn ui_input() -> TypedUiInput {
@@ -376,9 +370,7 @@ mod tests {
         want_err: bool,
     }
 
-    // FIXME: swap test_names out for uuid https://github.com/canonical/prompting-client/blob/main/prompting-client/tests/integration.rs#L58
     #[test_case(None, None; "empty prompt")]
-    // TODO: #[test_case(Some(stub_prompt()); "empty prompt")] see https://github.com/canonical/prompting-client/blob/main/prompting-client/src/daemon/worker.rs#L346-L364
     #[test_case(Some(ui_input()), Some(prompt()); "non-empty prompt")]
     #[tokio::test]
     async fn test_get_current_prompt(ui_input: Option<TypedUiInput>, expected: Option<Prompt>) {
@@ -388,9 +380,7 @@ mod tests {
             expected_reply: None,
         };
         let (tx_actioned_prompts, _rx_actioned_prompts) = unbounded_channel();
-        let active_prompt = ReadOnlyActivePrompt {
-            active_prompt: Arc::new(Mutex::new(ui_input)),
-        };
+        let active_prompt = ReadOnlyActivePrompt::new(ui_input);
         let mut client =
             setup_server_and_client(mock_client, active_prompt, tx_actioned_prompts).await;
 
@@ -423,9 +413,7 @@ mod tests {
         if expected_errors.tx_err {
             rx_actioned_prompts = None;
         }
-        let active_prompt = ReadOnlyActivePrompt {
-            active_prompt: Arc::new(Mutex::new(None)),
-        };
+        let active_prompt = ReadOnlyActivePrompt::new(None);
         let mut client =
             setup_server_and_client(mock_client, active_prompt, tx_actioned_prompts).await;
 
