@@ -3,6 +3,7 @@ use crate::{
     snapd_client::{PromptId, SnapMeta, SnapdSocketClient, TypedPrompt},
     Result,
 };
+use std::{env, fs};
 use tokio::sync::mpsc::unbounded_channel;
 use tokio_stream::wrappers::UnixListenerStream;
 use tonic::transport::Server;
@@ -34,7 +35,13 @@ pub async fn run_daemon(c: SnapdSocketClient) -> Result<()> {
 
     let mut worker = Worker::new(rx_prompts, rx_actioned);
     let active_prompt = worker.read_only_active_prompt();
-    let (server, listener) = new_server_and_listener(c.clone(), active_prompt, tx_actioned);
+
+    let path =
+        env::var("PROMPTING_CLIENT_SOCKET").expect("PROMPTING_CLIENT_SOCKET env var to be set");
+    if let Err(e) = fs::remove_file(&path) {
+        error!("Failed to remove old socket file: {}. Error: {}", path, e);
+    }
+    let (server, listener) = new_server_and_listener(c.clone(), active_prompt, tx_actioned, path);
 
     info!("spawning poll loop");
     tokio::spawn(poll_for_prompts(c, tx_prompts));

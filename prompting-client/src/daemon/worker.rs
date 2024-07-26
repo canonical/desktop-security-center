@@ -22,6 +22,7 @@ enum Recv {
     ChannelClosed,
 }
 
+#[derive(Debug)]
 pub struct ReadOnlyActivePrompt {
     active_prompt: Arc<Mutex<Option<TypedUiInput>>>,
 }
@@ -33,6 +34,11 @@ impl ReadOnlyActivePrompt {
             Err(err) => err.into_inner(),
         };
         guard.clone()
+    }
+    pub fn new(ui_intput: Option<TypedUiInput>) -> Self {
+        Self {
+            active_prompt: Arc::new(Mutex::new(ui_intput)),
+        }
     }
 }
 
