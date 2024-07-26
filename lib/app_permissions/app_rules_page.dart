@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/app_permissions/rules_category.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
+import 'package:security_center/app_permissions/snap_metadata_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
+import 'package:security_center/widgets/app_icon.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
@@ -52,7 +54,7 @@ class _Body extends ConsumerWidget {
       children: [
         Row(
           children: [
-            const Icon(YaruIcons.placeholder_icon),
+            AppIcon(iconUrl: ref.watch(snapIconUrlProvider(snap)).valueOrNull),
             const SizedBox(width: 10),
             Text(snap, style: textTheme.titleLarge),
           ],

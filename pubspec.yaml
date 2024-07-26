@@ -9,18 +9,24 @@ environment:
 
 dependencies:
   args: ^2.5.0
+  cached_network_image: ^3.3.1
+  collection: ^1.18.0
+  file: ^7.0.0
   flutter:
     sdk: flutter
+  flutter_cache_manager: ^3.3.3
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.5.1
   freezed_annotation: ^2.4.1
+  path: ^1.9.0
   riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5
   snapd: ^0.6.2
   ubuntu_localizations: ^0.4.0
   ubuntu_logger: ^0.1.1
   ubuntu_service: ^0.3.2
+  xdg_directories: ^1.0.4
   yaru: ^4.1.0
 
 dev_dependencies:

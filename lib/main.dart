@@ -35,6 +35,8 @@ Future<void> main(List<String> args) async {
     exit(2);
   }
 
+  registerService<SnapdClient>(SnapdClient.new);
+
   if (argResults.flag('dry-run')) {
     registerService<AppPermissionsService>(
       () => FakeAppPermissionsService.fromFile(
@@ -44,7 +46,7 @@ Future<void> main(List<String> args) async {
   } else {
     registerService<AppPermissionsService>(
       () => SnapdAppPermissionsService(
-        SnapdClient(),
+        getService<SnapdClient>(),
       ),
     );
   }
