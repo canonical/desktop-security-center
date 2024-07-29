@@ -1,6 +1,6 @@
 name: prompting-client
 base: core22
-version: '0.1'
+version: git
 title: Prompting Client
 summary: A client for snapd apparmor prompting
 description: |
