@@ -56,4 +56,22 @@ void main() {
     verify(mockRulesService.removeAllRules(snap: 'firefox', interface: 'home'))
         .called(1);
   });
+
+  testWidgets('no rules', (tester) async {
+    final container = createContainer();
+    registerMockRulesService();
+    await tester.pumpApp(
+      (_) => UncontrolledProviderScope(
+        container: container,
+        child: const AppRulesPage(
+          snap: 'firefox',
+          interface: SnapdInterface.home,
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('firefox'), findsOneWidget);
+    expect(find.text(tester.l10n.snapRulesPageEmptyTileLabel), findsOneWidget);
+  });
 }

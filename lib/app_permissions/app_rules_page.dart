@@ -61,21 +61,19 @@ class _Body extends ConsumerWidget {
         ),
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
-        for (final category in SnapdRuleCategory.values)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        if (rules.isEmpty) ...[
+          const TileList(
             children: [
-              Text(
-                category.localizedTitle(l10n),
-                style: textTheme.titleMedium,
-              ),
-              const SizedBox(height: 16),
-              _RuleList(
-                rules: rules.filterByCategory(category).toList(),
-                onRemove: notifier.removeRule,
-              ),
-              const SizedBox(height: 24),
+              _EmptyRuleTile(),
             ],
+          ),
+          const SizedBox(height: 24),
+        ],
+        for (final category in SnapdRuleCategory.values)
+          _RuleSection(
+            title: category.localizedTitle(l10n),
+            rules: rules.filterByCategory(category).toList(),
+            onRemove: notifier.removeRule,
           ),
         ElevatedButton(
           onPressed: notifier.removeAll,
@@ -86,21 +84,53 @@ class _Body extends ConsumerWidget {
   }
 }
 
+class _RuleSection extends ConsumerWidget {
+  const _RuleSection({
+    required this.title,
+    required this.rules,
+    required this.onRemove,
+  });
+
+  final String title;
+  final List<SnapdRule> rules;
+  final void Function(String id) onRemove;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (rules.isEmpty) {
+      return const SizedBox();
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: 16),
+        _RuleList(
+          rules: rules,
+          onRemove: onRemove,
+        ),
+        const SizedBox(height: 24),
+      ],
+    );
+  }
+}
+
 class _RuleList extends TileList {
   _RuleList({
     required List<SnapdRule> rules,
     required void Function(String id) onRemove,
   }) : super(
-          children: rules.isEmpty
-              ? [const _EmptyRuleTile()]
-              : rules
-                  .map(
-                    (rule) => RuleTile(
-                      rule: rule,
-                      onRemove: () => onRemove(rule.id),
-                    ),
-                  )
-                  .toList(),
+          children: rules
+              .map(
+                (rule) => RuleTile(
+                  rule: rule,
+                  onRemove: () => onRemove(rule.id),
+                ),
+              )
+              .toList(),
         );
 }
 
