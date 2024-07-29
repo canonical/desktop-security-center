@@ -10,13 +10,9 @@ enum HomePatternType {
   requestedDirectory,
   requestedFile,
   topLevelDirectory,
+  containingDirectory,
   homeDirectory,
   matchingFileExtension,
-  archiveFiles,
-  audioFiles,
-  documentFiles,
-  imageFiles,
-  videoFiles,
 }
 
 // Technically there is also a 'timespan' variant of this enum (on the
@@ -82,6 +78,8 @@ sealed class PromptReply with _$PromptReply {
 @freezed
 sealed class PromptReplyResponse with _$PromptReplyResponse {
   factory PromptReplyResponse.success() = PromptReplyResponseSuccess;
+  factory PromptReplyResponse.promptNotFound({required String message}) =
+      PromptReplyResponsePromptNotFound;
   factory PromptReplyResponse.unknown({required String message}) =
       PromptReplyResponseUnknown;
 }

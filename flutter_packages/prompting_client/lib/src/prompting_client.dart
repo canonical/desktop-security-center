@@ -55,14 +55,11 @@ extension HomePatternTypeConversion on HomePatternType {
         pb.HomePatternType.REQUESTED_FILE => HomePatternType.requestedFile,
         pb.HomePatternType.TOP_LEVEL_DIRECTORY =>
           HomePatternType.topLevelDirectory,
+        pb.HomePatternType.CONTAINING_DIRECTORY =>
+          HomePatternType.containingDirectory,
         pb.HomePatternType.HOME_DIRECTORY => HomePatternType.homeDirectory,
         pb.HomePatternType.MATCHING_FILE_EXTENSION =>
           HomePatternType.matchingFileExtension,
-        pb.HomePatternType.ARCHIVE_FILES => HomePatternType.archiveFiles,
-        pb.HomePatternType.AUDIO_FILES => HomePatternType.audioFiles,
-        pb.HomePatternType.DOCUMENT_FILES => HomePatternType.documentFiles,
-        pb.HomePatternType.IMAGE_FILES => HomePatternType.imageFiles,
-        pb.HomePatternType.VIDEO_FILES => HomePatternType.videoFiles,
         _ => throw ArgumentError('Unknown home pattern type: $homePatternType'),
       };
 }
