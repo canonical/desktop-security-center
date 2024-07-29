@@ -58,10 +58,13 @@ message HomePrompt {
     string requested_path = 2;
     repeated string requested_permissions = 3;
     repeated string available_permissions = 4;
-    repeated MoreOption more_options = 5;
-    message MoreOption {
+    repeated string initial_permissions = 5;
+    repeated PatternOption pattern_options = 6;
+    int32 initial_pattern_option = 7;
+    message PatternOption {
         HomePatternType home_pattern_type = 1;
         string path_pattern = 2;
+        bool show_initially = 3;
     }
 }
 
