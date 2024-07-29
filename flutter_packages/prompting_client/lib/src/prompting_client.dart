@@ -82,12 +82,13 @@ extension MetaDataConversion on MetaData {
       );
 }
 
-extension MoreOptionConversion on MoreOption {
-  static MoreOption fromProto(pb.HomePrompt_MoreOption moreOption) =>
-      MoreOption(
+extension MoreOptionConversion on PatternOption {
+  static PatternOption fromProto(pb.HomePrompt_PatternOption patternOption) =>
+      PatternOption(
         homePatternType:
-            HomePatternTypeConversion.fromProto(moreOption.homePatternType),
-        pathPattern: moreOption.pathPattern,
+            HomePatternTypeConversion.fromProto(patternOption.homePatternType),
+        pathPattern: patternOption.pathPattern,
+        showInitially: patternOption.showInitially,
       );
 }
 
@@ -112,9 +113,13 @@ extension PrompteDetailsConversion on PromptDetails {
             availablePermissions: response.homePrompt.availablePermissions
                 .map(PermissionConversion.fromString)
                 .toList(),
-            moreOptions: response.homePrompt.moreOptions
+            initialPermissions: response.homePrompt.initialPermissions
+                .map(PermissionConversion.fromString)
+                .toList(),
+            patternOptions: response.homePrompt.patternOptions
                 .map(MoreOptionConversion.fromProto)
                 .toList(),
+            initialPatternOption: response.homePrompt.initialPatternOption,
           ),
         _ =>
           throw ArgumentError('Unknown prompt type: ${response.whichPrompt()}'),

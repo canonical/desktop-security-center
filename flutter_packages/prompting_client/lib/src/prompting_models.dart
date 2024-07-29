@@ -37,14 +37,15 @@ class MetaData with _$MetaData {
 }
 
 @freezed
-class MoreOption with _$MoreOption {
-  factory MoreOption({
+class PatternOption with _$PatternOption {
+  factory PatternOption({
     required HomePatternType homePatternType,
     required String pathPattern,
-  }) = _MoreOption;
+    @Default(false) bool showInitially,
+  }) = _PatternOption;
 
-  factory MoreOption.fromJson(Map<String, dynamic> json) =>
-      _$MoreOptionFromJson(json);
+  factory PatternOption.fromJson(Map<String, dynamic> json) =>
+      _$PatternOptionFromJson(json);
 }
 
 @freezed
@@ -54,7 +55,9 @@ sealed class PromptDetails with _$PromptDetails {
     required String requestedPath,
     required List<Permission> requestedPermissions,
     required List<Permission> availablePermissions,
-    required List<MoreOption> moreOptions,
+    required List<Permission> initialPermissions,
+    required List<PatternOption> patternOptions,
+    @Default(0) int initialPatternOption,
   }) = PromptDetailsHome;
 
   factory PromptDetails.fromJson(Map<String, dynamic> json) =>

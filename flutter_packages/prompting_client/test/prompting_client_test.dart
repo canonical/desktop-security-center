@@ -26,14 +26,16 @@ void main() {
           updatedAt: '2024-07-13T10:57:28.34963269+02:00',
         ),
         requestedPath: '/home/user/Downloads/example.txt',
-        requestedPermissions: ['read', 'write'],
+        requestedPermissions: ['write'],
         availablePermissions: ['read', 'write', 'execute'],
-        moreOptions: [
-          pb.HomePrompt_MoreOption(
+        initialPermissions: ['read', 'write'],
+        patternOptions: [
+          pb.HomePrompt_PatternOption(
             homePatternType: pb.HomePatternType.REQUESTED_DIRECTORY,
             pathPattern: '/home/user/Downloads/**',
           ),
         ],
+        initialPatternOption: 0,
       ),
     )..freeze();
     final testCases = [
@@ -49,18 +51,21 @@ void main() {
             updatedAt: DateTime.utc(2024, 7, 13, 8, 57, 28, 349, 632),
           ),
           requestedPath: '/home/user/Downloads/example.txt',
-          requestedPermissions: [Permission.read, Permission.write],
+          requestedPermissions: [Permission.write],
           availablePermissions: [
             Permission.read,
             Permission.write,
             Permission.execute,
           ],
-          moreOptions: [
-            MoreOption(
+          initialPermissions: [Permission.read, Permission.write],
+          patternOptions: [
+            PatternOption(
               homePatternType: HomePatternType.requestedDirectory,
               pathPattern: '/home/user/Downloads/**',
+              showInitially: false,
             ),
           ],
+          initialPatternOption: 0,
         ),
         expectError: false,
       ),
