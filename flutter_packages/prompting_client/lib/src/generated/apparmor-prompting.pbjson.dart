@@ -103,6 +103,7 @@ const PromptReplyResponse_PromptReplyType$json = {
   '2': [
     {'1': 'SUCCESS', '2': 0},
     {'1': 'UNKNOWN', '2': 1},
+    {'1': 'PROMPT_NOT_FOUND', '2': 2},
   ],
 };
 
@@ -110,8 +111,8 @@ const PromptReplyResponse_PromptReplyType$json = {
 final $typed_data.Uint8List promptReplyResponseDescriptor = $convert.base64Decode(
     'ChNQcm9tcHRSZXBseVJlc3BvbnNlEmMKEXByb21wdF9yZXBseV90eXBlGAEgASgOMjcuYXBwYX'
     'Jtb3JfcHJvbXB0aW5nLlByb21wdFJlcGx5UmVzcG9uc2UuUHJvbXB0UmVwbHlUeXBlUg9wcm9t'
-    'cHRSZXBseVR5cGUSGAoHbWVzc2FnZRgCIAEoCVIHbWVzc2FnZSIrCg9Qcm9tcHRSZXBseVR5cG'
-    'USCwoHU1VDQ0VTUxAAEgsKB1VOS05PV04QAQ==');
+    'cHRSZXBseVR5cGUSGAoHbWVzc2FnZRgCIAEoCVIHbWVzc2FnZSJBCg9Qcm9tcHRSZXBseVR5cG'
+    'USCwoHU1VDQ0VTUxAAEgsKB1VOS05PV04QARIUChBQUk9NUFRfTk9UX0ZPVU5EEAI=');
 
 @$core.Deprecated('Use getCurrentPromptResponseDescriptor instead')
 const GetCurrentPromptResponse$json = {

@@ -63,6 +63,8 @@ impl PollLoopState {
             }
         };
 
+        debug!("prompt details: {prompt:?}");
+
         self.process_prompt(prompt).await;
     }
 
@@ -90,7 +92,8 @@ impl PollLoopState {
             Ok(pending) => pending,
         };
 
-        info!(n_prompts=%pending.len(), "processing pending prompts");
+        let n_prompts = pending.len();
+        info!(%n_prompts, "processing {n_prompts} pending prompts");
         let mut seen = Vec::with_capacity(pending.len());
         for prompt in pending {
             seen.push(prompt.id().clone());
@@ -117,6 +120,12 @@ impl PollLoopState {
     }
 }
 
+/// Run our poll loop for prompting notices from snapd (runs as a top level task).
+///
+/// This first checks for any outstanding (unactioned) prompts on the system for the user
+/// we are running under and processes them before dropping into long-polling for notices.
+/// This task is responsible for pulling prompt details and snap meta-data from snapd but
+/// does not directly process the prompts themselves.
 pub async fn poll_for_prompts(
     client: SnapdSocketClient,
     tx: UnboundedSender<EnrichedPrompt>,

@@ -26,6 +26,7 @@ message PromptReplyResponse {
     enum PromptReplyType {
         SUCCESS = 0;
         UNKNOWN = 1;
+        PROMPT_NOT_FOUND = 2;
     }
 }
 

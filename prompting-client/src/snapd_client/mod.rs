@@ -164,6 +164,8 @@ where
             n.last_occurred.clone_into(&mut self.notices_after);
         }
 
+        debug!("received notices: {notices:?}");
+
         return Ok(notices.into_iter().map(|n| n.key).collect());
 
         // serde structs
@@ -173,6 +175,9 @@ where
         struct Notice {
             key: PromptId,
             last_occurred: String,
+            #[allow(dead_code)]
+            #[serde(flatten)]
+            extra: HashMap<String, serde_json::Value>,
         }
     }
 
