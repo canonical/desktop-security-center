@@ -22,6 +22,7 @@ void main() {
       Permission.write,
       Permission.execute,
     ],
+    initialPermissions: [Permission.read],
     patternOptions: [
       PatternOption(
         homePatternType: HomePatternType.topLevelDirectory,

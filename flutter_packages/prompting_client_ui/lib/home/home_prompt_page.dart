@@ -15,32 +15,29 @@ class HomePromptPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(homePromptDataModelProvider);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const InitialOptions(),
-        if (model.withMoreOptions) ...[
-          const SizedBox(height: 20),
-          const Divider(),
-          const SizedBox(height: 20),
-          const MoreOptions(),
-        ],
-      ],
+        const Header(),
+        const Divider(),
+        const PatternOptions(),
+        const Permissions(),
+        const LifespanToggle(),
+        const ActionToggle(),
+        const ActionButtons(),
+        const Footer(),
+      ].withSpacing(20),
     );
   }
 }
 
-class InitialOptions extends ConsumerWidget {
-  const InitialOptions({super.key});
+class Header extends ConsumerWidget {
+  const Header({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final details =
         ref.watch(homePromptDataModelProvider.select((m) => m.details));
-    // TODO: (sminez) re-enable once we have settled on what the initial options are
-    // final notifier = ref.read(promptDataModelProvider.notifier);
     final l10n = AppLocalizations.of(context);
 
     return Column(
@@ -57,26 +54,17 @@ class InitialOptions extends ConsumerWidget {
           ),
         ),
         const MetaDataDropdown(),
-        // TODO: (sminez) re-enable once we have settled on what the initial options are
-        // Row(
-        //   children: [
-        //     for (var i = 0; i < notifier.numInitialOptions; i++)
-        //       OutlinedButton(
-        //         onPressed: model.withMoreOptions
-        //             ? null
-        //             : () => notifier.replyWithInitialOption(i),
-        //         child: Text(model.details.initialOptions[i].buttonText),
-        //       ),
-        //     OutlinedButton(
-        //       onPressed: notifier.toggleMoreOptions,
-        //       child: Text(
-        //         model.withMoreOptions ? 'Less options...' : 'More options...',
-        //       ),
-        //     ),
-        //   ].withSpacing(10),
-        // ),
       ],
     );
+  }
+}
+
+class Footer extends StatelessWidget {
+  const Footer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(AppLocalizations.of(context).securityCenterInfo);
   }
 }
 
@@ -140,53 +128,29 @@ class MetaDataDropdown extends ConsumerWidget {
   }
 }
 
-class MoreOptions extends ConsumerWidget {
-  const MoreOptions({super.key});
+class ActionButtons extends ConsumerWidget {
+  const ActionButtons({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const AccessToggle(),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Permissions(),
-            const LifespanToggle(),
-            const ActionToggle(),
-          ].withSpacing(20),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(l10n.securityCenterInfo),
-            const SizedBox(height: 10),
-            Align(
-              alignment: Alignment.centerRight,
-              child: OutlinedButton(
-                onPressed: ref.watch(
-                  homePromptDataModelProvider.select((m) => m.isValid),
-                )
-                    ? () async {
-                        final response = await ref
-                            .read(homePromptDataModelProvider.notifier)
-                            .saveAndContinue();
-                        if (response is PromptReplyResponseSuccess) {
-                          if (context.mounted) {
-                            await YaruWindow.of(context).close();
-                          }
-                        }
-                      }
-                    : null,
-                child: Text(l10n.promptSaveAndContinue),
-              ),
-            ),
-          ],
-        ),
-      ].withSpacing(20),
+    return OutlinedButton(
+      onPressed: ref.watch(
+        homePromptDataModelProvider.select((m) => m.isValid),
+      )
+          ? () async {
+              final response = await ref
+                  .read(homePromptDataModelProvider.notifier)
+                  .saveAndContinue();
+              if (response is PromptReplyResponseSuccess) {
+                if (context.mounted) {
+                  await YaruWindow.of(context).close();
+                }
+              }
+            }
+          : null,
+      child: Text(l10n.promptSaveAndContinue),
     );
   }
 }
@@ -235,8 +199,8 @@ class ActionToggle extends ConsumerWidget {
   }
 }
 
-class AccessToggle extends ConsumerWidget {
-  const AccessToggle({super.key});
+class PatternOptions extends ConsumerWidget {
+  const PatternOptions({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

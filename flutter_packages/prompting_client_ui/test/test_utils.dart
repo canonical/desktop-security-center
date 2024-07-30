@@ -16,7 +16,7 @@ extension WidgetTesterX on WidgetTester {
   Future<void> pumpApp(WidgetBuilder builder) async {
     // The intended minimum size of the window.
     // TODO: (dloose) Revert to actual window size after fixing overflow issues
-    view.physicalSize = (const Size(760, 790)) * view.devicePixelRatio;
+    view.physicalSize = (const Size(760, 990)) * view.devicePixelRatio;
     return pumpWidget(
       MaterialApp(
         home: Scaffold(body: Builder(builder: builder)),
