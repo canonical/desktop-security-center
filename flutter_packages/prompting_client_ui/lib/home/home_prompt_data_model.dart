@@ -50,7 +50,7 @@ class HomePromptDataModel extends _$HomePromptDataModel {
       details: details,
       // forcing for now while we are iterating on what options we provide
       withMoreOptions: true,
-      permissions: details.requestedPermissions,
+      permissions: details.initialPermissions,
       customPath: details.requestedPath,
     );
   }
