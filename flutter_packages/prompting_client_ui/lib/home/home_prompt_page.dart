@@ -6,17 +6,9 @@ import 'package:prompting_client_ui/home/home_prompt_data_model.dart';
 import 'package:prompting_client_ui/l10n.dart';
 import 'package:prompting_client_ui/l10n_x.dart';
 import 'package:prompting_client_ui/widgets/form_widgets.dart';
+import 'package:prompting_client_ui/widgets/iterable_extensions.dart';
 import 'package:prompting_client_ui/widgets/markdown_text.dart';
 import 'package:yaru/yaru.dart';
-
-extension WidgetIterableExtension on Iterable<Widget> {
-  List<Widget> withSpacing(double spacing) {
-    return expand((item) sync* {
-      yield SizedBox(width: spacing, height: spacing);
-      yield item;
-    }).skip(1).toList();
-  }
-}
 
 class HomePromptPage extends ConsumerWidget {
   const HomePromptPage({super.key});
@@ -159,12 +151,12 @@ class MoreOptions extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const AccessToggle(),
-        Row(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ActionToggle(),
-            const LifespanToggle(),
             const Permissions(),
+            const LifespanToggle(),
+            const ActionToggle(),
           ].withSpacing(20),
         ),
         Column(
@@ -218,6 +210,7 @@ class LifespanToggle extends ConsumerWidget {
           ref.watch(homePromptDataModelProvider.select((m) => m.lifespan)),
       onChanged: ref.read(homePromptDataModelProvider.notifier).setLifespan,
       toggleable: true,
+      direction: Axis.horizontal,
     );
   }
 }
@@ -237,6 +230,7 @@ class ActionToggle extends ConsumerWidget {
           ref.watch(homePromptDataModelProvider.select((m) => m.action)),
       onChanged: ref.read(homePromptDataModelProvider.notifier).setAction,
       toggleable: true,
+      direction: Axis.horizontal,
     );
   }
 }

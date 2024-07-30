@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prompting_client_ui/widgets/iterable_extensions.dart';
 import 'package:prompting_client_ui/widgets/markdown_text.dart';
 import 'package:yaru/yaru.dart';
 
@@ -11,6 +12,7 @@ class RadioButtonList<T> extends StatelessWidget {
     this.onChanged,
     this.optionSubtitle,
     this.toggleable = false,
+    this.direction = Axis.vertical,
     super.key,
   });
 
@@ -21,6 +23,7 @@ class RadioButtonList<T> extends StatelessWidget {
   final T? groupValue;
   final void Function(T?)? onChanged;
   final bool toggleable;
+  final Axis direction;
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +32,28 @@ class RadioButtonList<T> extends StatelessWidget {
       children: [
         MarkdownText(title.bold()),
         const SizedBox(height: 10),
-        for (final option in options) ...[
-          YaruRadioButton<T>(
-            value: option,
-            groupValue: groupValue,
-            onChanged: onChanged,
-            title: Text(optionTitle(option)),
-            subtitle: optionSubtitle != null
-                ? Text(
-                    optionSubtitle!(option),
-                    style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                          color: Theme.of(context).hintColor,
-                        ),
-                  )
-                : null,
-            toggleable: toggleable,
-          ),
-        ],
+        Flex(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          direction: direction,
+          children: [
+            for (final option in options)
+              YaruRadioButton<T>(
+                value: option,
+                groupValue: groupValue,
+                onChanged: onChanged,
+                title: Text(optionTitle(option)),
+                subtitle: optionSubtitle != null
+                    ? Text(
+                        optionSubtitle!(option),
+                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                              color: Theme.of(context).hintColor,
+                            ),
+                      )
+                    : null,
+                toggleable: toggleable,
+              ),
+          ].withSpacing(direction == Axis.horizontal ? 16 : 0),
+        ),
       ],
     );
   }
@@ -76,13 +84,17 @@ class CheckButtonList<T> extends StatelessWidget {
       children: [
         MarkdownText(title.bold()),
         const SizedBox(height: 10),
-        for (final option in options) ...[
-          YaruCheckButton(
-            value: hasOption(option),
-            onChanged: isEnabled(option) ? (_) => toggleOption(option) : null,
-            title: Text(optionTitle(option)),
-          ),
-        ],
+        Row(
+          children: [
+            for (final option in options)
+              YaruCheckButton(
+                value: hasOption(option),
+                onChanged:
+                    isEnabled(option) ? (_) => toggleOption(option) : null,
+                title: Text(optionTitle(option)),
+              ),
+          ].withSpacing(16),
+        ),
       ],
     );
   }
