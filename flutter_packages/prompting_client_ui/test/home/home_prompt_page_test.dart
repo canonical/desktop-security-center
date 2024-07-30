@@ -22,8 +22,8 @@ void main() {
       Permission.write,
       Permission.execute,
     ],
-    moreOptions: [
-      MoreOption(
+    patternOptions: [
+      PatternOption(
         homePatternType: HomePatternType.topLevelDirectory,
         pathPattern: '/home/ubuntu/Downloads/**',
       ),

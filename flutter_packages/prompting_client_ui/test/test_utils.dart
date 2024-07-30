@@ -57,7 +57,8 @@ PromptDetails mockPromptDetailsHome({
   String? requestedPath,
   List<Permission>? requestedPermissions,
   List<Permission>? availablePermissions,
-  List<MoreOption>? moreOptions,
+  List<Permission>? initialPermissions,
+  List<PatternOption>? patternOptions,
 }) =>
     PromptDetails.home(
       metaData: MetaData(
@@ -70,7 +71,8 @@ PromptDetails mockPromptDetailsHome({
       requestedPath: requestedPath ?? '',
       requestedPermissions: requestedPermissions ?? [],
       availablePermissions: availablePermissions ?? [],
-      moreOptions: moreOptions ?? [],
+      initialPermissions: initialPermissions ?? [],
+      patternOptions: patternOptions ?? [],
     );
 
 PromptDetails registerMockPromptDetails({

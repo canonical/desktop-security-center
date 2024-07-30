@@ -23,17 +23,17 @@ class HomePromptData with _$HomePromptData {
   HomePromptData._();
 
   String get pathPattern {
-    if (selectedPath! == numMoreOptions) {
+    if (selectedPath! == numPatternOptions) {
       return customPath;
     } else {
-      return details.moreOptions[selectedPath!].pathPattern;
+      return details.patternOptions[selectedPath!].pathPattern;
     }
   }
 
-  int get numMoreOptions => details.moreOptions.length;
+  int get numPatternOptions => details.patternOptions.length;
 
   (HomePatternType, String) moreOptionPath(int index) {
-    final opt = details.moreOptions[index];
+    final opt = details.patternOptions[index];
     return (opt.homePatternType, opt.pathPattern);
   }
 

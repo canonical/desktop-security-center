@@ -251,8 +251,11 @@ class AccessToggle extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
 
     final pathOptions = [
-      ...model.details.moreOptions,
-      MoreOption(homePatternType: HomePatternType.customPath, pathPattern: ''),
+      ...model.details.patternOptions,
+      PatternOption(
+        homePatternType: HomePatternType.customPath,
+        pathPattern: '',
+      ),
     ];
 
     return Column(
@@ -268,7 +271,7 @@ class AccessToggle extends ConsumerWidget {
           onChanged: notifier.setSelectedPath,
           toggleable: true,
         ),
-        if (model.selectedPath == model.numMoreOptions) ...[
+        if (model.selectedPath == model.numPatternOptions) ...[
           TextFormField(
             initialValue: model.customPath,
             onChanged: notifier.setCustomPath,
