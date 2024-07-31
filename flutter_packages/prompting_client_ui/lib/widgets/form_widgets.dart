@@ -11,7 +11,6 @@ class RadioButtonList<T> extends StatelessWidget {
     required this.groupValue,
     this.onChanged,
     this.optionSubtitle,
-    this.toggleable = false,
     this.direction = Axis.vertical,
     super.key,
   });
@@ -22,7 +21,6 @@ class RadioButtonList<T> extends StatelessWidget {
   final String Function(T option)? optionSubtitle;
   final T? groupValue;
   final void Function(T?)? onChanged;
-  final bool toggleable;
   final Axis direction;
 
   @override
@@ -50,7 +48,6 @@ class RadioButtonList<T> extends StatelessWidget {
                             ),
                       )
                     : null,
-                toggleable: toggleable,
               ),
           ].withSpacing(direction == Axis.horizontal ? 16 : 0),
         ),

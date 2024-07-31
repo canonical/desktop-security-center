@@ -173,7 +173,6 @@ class LifespanToggle extends ConsumerWidget {
       groupValue:
           ref.watch(homePromptDataModelProvider.select((m) => m.lifespan)),
       onChanged: ref.read(homePromptDataModelProvider.notifier).setLifespan,
-      toggleable: true,
       direction: Axis.horizontal,
     );
   }
@@ -193,7 +192,6 @@ class ActionToggle extends ConsumerWidget {
       groupValue:
           ref.watch(homePromptDataModelProvider.select((m) => m.action)),
       onChanged: ref.read(homePromptDataModelProvider.notifier).setAction,
-      toggleable: true,
       direction: Axis.horizontal,
     );
   }
@@ -224,9 +222,8 @@ class PatternOptions extends ConsumerWidget {
           optionSubtitle: (option) => option.pathPattern,
           groupValue: model.patternOption,
           onChanged: notifier.setPatternOption,
-          toggleable: true,
         ),
-        if (model.patternOption?.homePatternType ==
+        if (model.patternOption.homePatternType ==
             HomePatternType.customPath) ...[
           TextFormField(
             initialValue: model.customPath,

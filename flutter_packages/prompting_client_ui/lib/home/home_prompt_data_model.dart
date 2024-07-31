@@ -13,17 +13,17 @@ class HomePromptData with _$HomePromptData {
     required PromptDetailsHome details,
     required List<Permission> permissions,
     required String customPath,
-    PatternOption? patternOption,
-    @Default(Action.allow) Action? action,
-    @Default(Lifespan.forever) Lifespan? lifespan,
+    required PatternOption patternOption,
+    @Default(Action.allow) Action action,
+    @Default(Lifespan.forever) Lifespan lifespan,
     String? errorMessage,
   }) = _HomePromptData;
 
   HomePromptData._();
 
-  String? get pathPattern => switch (patternOption?.homePatternType) {
+  String get pathPattern => switch (patternOption.homePatternType) {
         HomePatternType.customPath => customPath,
-        _ => patternOption?.pathPattern,
+        _ => patternOption.pathPattern,
       };
 
   int get numPatternOptions => details.patternOptions.length;
@@ -33,11 +33,7 @@ class HomePromptData with _$HomePromptData {
     return (opt.homePatternType, opt.pathPattern);
   }
 
-  bool get isValid =>
-      pathPattern != null &&
-      action != null &&
-      lifespan != null &&
-      permissions.isNotEmpty;
+  bool get isValid => permissions.isNotEmpty;
 }
 
 @riverpod
@@ -62,34 +58,42 @@ class HomePromptDataModel extends _$HomePromptDataModel {
   PromptReply buildReply() {
     return PromptReply.home(
       promptId: state.details.metaData.promptId,
-      action: state.action!,
-      lifespan: state.lifespan!,
-      pathPattern: state.pathPattern!,
+      action: state.action,
+      lifespan: state.lifespan,
+      pathPattern: state.pathPattern,
       permissions: state.permissions,
     );
   }
 
-  void setPatternOption(PatternOption? patternOption) =>
-      state = state.copyWith(patternOption: patternOption);
+  void setPatternOption(PatternOption? patternOption) {
+    if (patternOption == null || patternOption == state.patternOption) return;
+    state = state.copyWith(patternOption: patternOption);
+  }
 
   void setCustomPath(String path) =>
       state = state.copyWith(customPath: path, errorMessage: null);
 
-  void setAction(Action? a) => state = state.copyWith(action: a);
+  void setAction(Action? action) {
+    if (action == null || action == state.action) return;
+    state = state.copyWith(action: action);
+  }
 
-  void setLifespan(Lifespan? l) => state = state.copyWith(lifespan: l);
+  void setLifespan(Lifespan? lifespan) {
+    if (lifespan == null || lifespan == state.lifespan) return;
+    state = state.copyWith(lifespan: lifespan);
+  }
 
-  void togglePerm(Permission p) {
-    if (!state.details.availablePermissions.contains(p)) {
-      throw ArgumentError('$p is not an available permission');
+  void togglePerm(Permission permission) {
+    if (!state.details.availablePermissions.contains(permission)) {
+      throw ArgumentError('$permission is not an available permission');
     }
 
     final permissions = [...state.permissions];
 
-    if (permissions.contains(p)) {
-      permissions.remove(p);
+    if (permissions.contains(permission)) {
+      permissions.remove(permission);
     } else {
-      permissions.add(p);
+      permissions.add(permission);
     }
 
     state = state.copyWith(permissions: permissions);
