@@ -53,10 +53,10 @@ sealed class PromptDetails with _$PromptDetails {
   factory PromptDetails.home({
     required MetaData metaData,
     required String requestedPath,
-    required List<Permission> requestedPermissions,
-    required List<Permission> availablePermissions,
-    required List<Permission> initialPermissions,
-    required List<PatternOption> patternOptions,
+    required Set<Permission> requestedPermissions,
+    required Set<Permission> availablePermissions,
+    required Set<Permission> initialPermissions,
+    required Set<PatternOption> patternOptions,
     @Default(0) int initialPatternOption,
   }) = PromptDetailsHome;
 
@@ -71,7 +71,7 @@ sealed class PromptReply with _$PromptReply {
     required Action action,
     required Lifespan lifespan,
     required String pathPattern,
-    required List<Permission> permissions,
+    required Set<Permission> permissions,
   }) = PromptReplyHome;
 
   factory PromptReply.fromJson(Map<String, dynamic> json) =>

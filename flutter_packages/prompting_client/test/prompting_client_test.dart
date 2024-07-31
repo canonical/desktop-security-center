@@ -51,21 +51,19 @@ void main() {
             updatedAt: DateTime.utc(2024, 7, 13, 8, 57, 28, 349, 632),
           ),
           requestedPath: '/home/user/Downloads/example.txt',
-          requestedPermissions: [Permission.write],
-          availablePermissions: [
+          requestedPermissions: {Permission.write},
+          availablePermissions: {
             Permission.read,
             Permission.write,
             Permission.execute,
-          ],
-          initialPermissions: [Permission.read, Permission.write],
-          patternOptions: [
+          },
+          initialPermissions: {Permission.read, Permission.write},
+          patternOptions: {
             PatternOption(
               homePatternType: HomePatternType.requestedDirectory,
               pathPattern: '/home/user/Downloads/**',
-              showInitially: false,
             ),
-          ],
-          initialPatternOption: 0,
+          },
         ),
         expectError: false,
       ),
@@ -110,7 +108,7 @@ void main() {
           action: Action.allow,
           lifespan: Lifespan.session,
           pathPattern: '/home/user/Downloads/**',
-          permissions: [Permission.read, Permission.write],
+          permissions: {Permission.read, Permission.write},
         ),
         mockResponse: pb.PromptReplyResponse(
           promptReplyType: pb.PromptReplyResponse_PromptReplyType.SUCCESS,
@@ -133,7 +131,7 @@ void main() {
           action: Action.deny,
           lifespan: Lifespan.forever,
           pathPattern: '/home/user/Downloads/**',
-          permissions: [Permission.read, Permission.write],
+          permissions: {Permission.read, Permission.write},
         ),
         mockResponse: pb.PromptReplyResponse(
           promptReplyType: pb.PromptReplyResponse_PromptReplyType.UNKNOWN,

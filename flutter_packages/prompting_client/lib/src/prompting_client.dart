@@ -109,16 +109,16 @@ extension PrompteDetailsConversion on PromptDetails {
             requestedPath: response.homePrompt.requestedPath,
             requestedPermissions: response.homePrompt.requestedPermissions
                 .map(PermissionConversion.fromString)
-                .toList(),
+                .toSet(),
             availablePermissions: response.homePrompt.availablePermissions
                 .map(PermissionConversion.fromString)
-                .toList(),
+                .toSet(),
             initialPermissions: response.homePrompt.initialPermissions
                 .map(PermissionConversion.fromString)
-                .toList(),
+                .toSet(),
             patternOptions: response.homePrompt.patternOptions
                 .map(MoreOptionConversion.fromProto)
-                .toList(),
+                .toSet(),
             initialPatternOption: response.homePrompt.initialPatternOption,
           ),
         _ =>
@@ -134,7 +134,7 @@ extension PromptReplyConversion on PromptReply {
             lifespan: lifespan.toProto(),
             homePromptReply: pb.HomePromptReply(
               pathPattern: pathPattern,
-              permissions: permissions.map((e) => e.name).toList(),
+              permissions: permissions.map((e) => e.name),
             ),
           ),
       };
