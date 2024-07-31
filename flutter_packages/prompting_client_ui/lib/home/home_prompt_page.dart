@@ -23,8 +23,7 @@ class HomePromptPage extends ConsumerWidget {
         const PatternOptions(),
         const Permissions(),
         const LifespanToggle(),
-        const ActionToggle(),
-        const ActionButtons(),
+        const ActionButtonRow(),
         const Footer(),
       ].withSpacing(20),
     );
@@ -128,13 +127,28 @@ class MetaDataDropdown extends ConsumerWidget {
   }
 }
 
-class ActionButtons extends ConsumerWidget {
-  const ActionButtons({super.key});
+class ActionButtonRow extends StatelessWidget {
+  const ActionButtonRow({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const ActionButton(action: Action.allow),
+        const ActionButton(action: Action.deny),
+      ].withSpacing(16),
+    );
+  }
+}
+
+class ActionButton extends ConsumerWidget {
+  const ActionButton({required this.action, super.key});
+
+  final Action action;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-
     return OutlinedButton(
       onPressed: ref.watch(
         homePromptDataModelProvider.select((m) => m.isValid),
@@ -142,7 +156,7 @@ class ActionButtons extends ConsumerWidget {
           ? () async {
               final response = await ref
                   .read(homePromptDataModelProvider.notifier)
-                  .saveAndContinue();
+                  .saveAndContinue(action: action);
               if (response is PromptReplyResponseSuccess) {
                 if (context.mounted) {
                   await YaruWindow.of(context).close();
@@ -150,7 +164,7 @@ class ActionButtons extends ConsumerWidget {
               }
             }
           : null,
-      child: Text(l10n.promptSaveAndContinue),
+      child: Text(action.localize(l10n)),
     );
   }
 }
@@ -173,25 +187,6 @@ class LifespanToggle extends ConsumerWidget {
       groupValue:
           ref.watch(homePromptDataModelProvider.select((m) => m.lifespan)),
       onChanged: ref.read(homePromptDataModelProvider.notifier).setLifespan,
-      direction: Axis.horizontal,
-    );
-  }
-}
-
-class ActionToggle extends ConsumerWidget {
-  const ActionToggle({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-
-    return RadioButtonList<Action>(
-      title: l10n.promptActionTitle,
-      options: Action.values,
-      optionTitle: (action) => action.localize(l10n),
-      groupValue:
-          ref.watch(homePromptDataModelProvider.select((m) => m.action)),
-      onChanged: ref.read(homePromptDataModelProvider.notifier).setAction,
       direction: Axis.horizontal,
     );
   }

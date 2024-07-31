@@ -14,7 +14,6 @@ class HomePromptData with _$HomePromptData {
     required List<Permission> permissions,
     required String customPath,
     required PatternOption patternOption,
-    @Default(Action.allow) Action action,
     @Default(Lifespan.forever) Lifespan lifespan,
     String? errorMessage,
   }) = _HomePromptData;
@@ -55,10 +54,10 @@ class HomePromptDataModel extends _$HomePromptDataModel {
     );
   }
 
-  PromptReply buildReply() {
+  PromptReply buildReply({required Action action}) {
     return PromptReply.home(
       promptId: state.details.metaData.promptId,
-      action: state.action,
+      action: action,
       lifespan: state.lifespan,
       pathPattern: state.pathPattern,
       permissions: state.permissions,
@@ -72,11 +71,6 @@ class HomePromptDataModel extends _$HomePromptDataModel {
 
   void setCustomPath(String path) =>
       state = state.copyWith(customPath: path, errorMessage: null);
-
-  void setAction(Action? action) {
-    if (action == null || action == state.action) return;
-    state = state.copyWith(action: action);
-  }
 
   void setLifespan(Lifespan? lifespan) {
     if (lifespan == null || lifespan == state.lifespan) return;
@@ -99,9 +93,9 @@ class HomePromptDataModel extends _$HomePromptDataModel {
     state = state.copyWith(permissions: permissions);
   }
 
-  Future<PromptReplyResponse> saveAndContinue() async {
-    final response =
-        await getService<PromptingClient>().replyToPrompt(buildReply());
+  Future<PromptReplyResponse> saveAndContinue({required Action action}) async {
+    final response = await getService<PromptingClient>()
+        .replyToPrompt(buildReply(action: action));
     if (response is PromptReplyResponseUnknown) {
       state = state.copyWith(errorMessage: response.message);
     }
