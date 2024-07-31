@@ -24,14 +24,6 @@ class HomePromptData with _$HomePromptData {
         HomePatternType.customPath => customPath,
         _ => patternOption.pathPattern,
       };
-
-  int get numPatternOptions => details.patternOptions.length;
-
-  (HomePatternType, String) moreOptionPath(int index) {
-    final opt = details.patternOptions[index];
-    return (opt.homePatternType, opt.pathPattern);
-  }
-
   bool get isValid => permissions.isNotEmpty;
 }
 
