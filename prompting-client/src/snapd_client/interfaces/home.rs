@@ -473,17 +473,6 @@ mod tests {
         }
     }
 
-    // #[test_case("/home/user/Downloads/foo/bar.txt"; "nested file")]
-    // #[test_case("/home/user/Downloads/"; "top level dir with trailing slash")]
-    // #[test_case("/home/user/Downloads"; "top level dir without trailing slash")]
-    // #[test]
-    // fn top_level_dir_works_when_dir_exists(path: &str) {
-    //     let opt = top_level_dir_option(&PathBuf::from(path)).unwrap();
-
-    //     assert_eq!(opt.pattern_type, PatternType::TopLevelDirectory);
-    //     assert_eq!(opt.path_pattern, "/home/user/Downloads/**");
-    // }
-
     #[test_case("/home/user/", false; "home dir")]
     #[test_case("/home/user/foo.txt", true; "top level file")]
     #[test_case("/home/user/Documents", true; "top level dir")]
