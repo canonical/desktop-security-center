@@ -11,10 +11,9 @@ part 'home_prompt_data_model.g.dart';
 class HomePromptData with _$HomePromptData {
   factory HomePromptData({
     required PromptDetailsHome details,
-    required bool withMoreOptions,
     required List<Permission> permissions,
     required String customPath,
-    @Default(0) int? selectedPath,
+    PatternOption? patternOption,
     @Default(Action.allow) Action? action,
     @Default(Lifespan.forever) Lifespan? lifespan,
     String? errorMessage,
@@ -22,13 +21,10 @@ class HomePromptData with _$HomePromptData {
 
   HomePromptData._();
 
-  String get pathPattern {
-    if (selectedPath! == numPatternOptions) {
-      return customPath;
-    } else {
-      return details.patternOptions[selectedPath!].pathPattern;
-    }
-  }
+  String? get pathPattern => switch (patternOption?.homePatternType) {
+        HomePatternType.customPath => customPath,
+        _ => patternOption?.pathPattern,
+      };
 
   int get numPatternOptions => details.patternOptions.length;
 
@@ -38,7 +34,10 @@ class HomePromptData with _$HomePromptData {
   }
 
   bool get isValid =>
-      selectedPath != null && action != null && lifespan != null;
+      pathPattern != null &&
+      action != null &&
+      lifespan != null &&
+      permissions.isNotEmpty;
 }
 
 @riverpod
@@ -48,8 +47,13 @@ class HomePromptDataModel extends _$HomePromptDataModel {
     final details = ref.watch(currentPromptProvider) as PromptDetailsHome;
     return HomePromptData(
       details: details,
-      // forcing for now while we are iterating on what options we provide
-      withMoreOptions: true,
+      patternOption: details.patternOptions.isEmpty
+          ? PatternOption(
+              homePatternType: HomePatternType.customPath,
+              pathPattern: '',
+            )
+          : details.patternOptions[details.initialPatternOption
+              .clamp(0, details.patternOptions.length - 1)],
       permissions: details.initialPermissions,
       customPath: details.requestedPath,
     );
@@ -60,15 +64,13 @@ class HomePromptDataModel extends _$HomePromptDataModel {
       promptId: state.details.metaData.promptId,
       action: state.action!,
       lifespan: state.lifespan!,
-      pathPattern: state.pathPattern,
+      pathPattern: state.pathPattern!,
       permissions: state.permissions,
     );
   }
 
-  void toggleMoreOptions() =>
-      state = state.copyWith(withMoreOptions: !state.withMoreOptions);
-
-  void setSelectedPath(int? i) => state = state.copyWith(selectedPath: i);
+  void setPatternOption(PatternOption? patternOption) =>
+      state = state.copyWith(patternOption: patternOption);
 
   void setCustomPath(String path) =>
       state = state.copyWith(customPath: path, errorMessage: null);

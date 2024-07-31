@@ -208,28 +208,26 @@ class PatternOptions extends ConsumerWidget {
     final notifier = ref.read(homePromptDataModelProvider.notifier);
     final l10n = AppLocalizations.of(context);
 
-    final pathOptions = [
-      ...model.details.patternOptions,
-      PatternOption(
-        homePatternType: HomePatternType.customPath,
-        pathPattern: '',
-      ),
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RadioButtonList<int>(
+        RadioButtonList<PatternOption>(
           title: l10n.promptAccessTitle(model.details.metaData.snapName),
-          options: Iterable.generate(pathOptions.length),
-          optionTitle: (index) =>
-              pathOptions[index].homePatternType.localize(l10n),
-          optionSubtitle: (index) => pathOptions[index].pathPattern,
-          groupValue: model.selectedPath,
-          onChanged: notifier.setSelectedPath,
+          options: [
+            ...model.details.patternOptions,
+            PatternOption(
+              homePatternType: HomePatternType.customPath,
+              pathPattern: '',
+            ),
+          ],
+          optionTitle: (option) => option.homePatternType.localize(l10n),
+          optionSubtitle: (option) => option.pathPattern,
+          groupValue: model.patternOption,
+          onChanged: notifier.setPatternOption,
           toggleable: true,
         ),
-        if (model.selectedPath == model.numPatternOptions) ...[
+        if (model.patternOption?.homePatternType ==
+            HomePatternType.customPath) ...[
           TextFormField(
             initialValue: model.customPath,
             onChanged: notifier.setCustomPath,
