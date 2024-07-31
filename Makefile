@@ -87,11 +87,13 @@ ensure-client-in-vm:
 	@if ! lxc exec $(VM_NAME) -- snap info $(SNAP_NAME) > /dev/null ; then \
 		echo ":: Building $(SNAP_NAME) via snapcraft..." ; \
 		rm -rf flutter_packages/prompting_client_ui/build ; \
+		rm $(wildcard $(SNAP_NAME)_*_amd64.snap) ; \
 		snapcraft ; \
 		echo ":: Installing $(SNAP_NAME) in $(VM_NAME)..." ; \
-		lxc file push $(SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
+		lxc exec $(VM_NAME) -- rm /home/ubuntu/$(wildcard $(SNAP_NAME)_*_amd64.snap) ; \
+		lxc file push $(wildcard $(SNAP_NAME)_*_amd64.snap) $(VM_NAME)/home/ubuntu/ ; \
 		lxc exec $(VM_NAME) -- snap set system experimental.user-daemons=true ; \
-		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(SNAP_NAME)_0.1_amd64.snap ; \
+		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(wildcard $(SNAP_NAME)_*_amd64.snap) ; \
 	fi
 
 .PHONY: update-client-in-vm
@@ -109,8 +111,8 @@ ensure-test-snap:
 		cd testing-snap ; \
 		snapcraft ; \
 		echo ":: Installing $(TEST_SNAP_NAME) in $(VM_NAME)..." ; \
-		lxc file push $(TEST_SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
-		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(TEST_SNAP_NAME)_0.1_amd64.snap ; \
+		lxc file push $(wildcard $(TEST_SNAP_NAME)_*_amd64.snap) $(VM_NAME)/home/ubuntu/ ; \
+		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(wildcard $(TEST_SNAP_NAME)_*_amd64.snap) ; \
 	fi
 
 .PHONY: update-test-snap
@@ -165,6 +167,7 @@ local-bounce-snapd: local-clean-request-rules local-snapd-stable local-snapd-pro
 local-install-client:
 	echo ":: Building $(SNAP_NAME) via snapcraft..." ; \
 	rm -rf flutter_packages/prompting_client_ui/build ; \
+	rm $(wildcard $(SNAP_NAME)_*_amd64.snap) ; \
 	snapcraft ; \
 	echo ":: Installing $(SNAP_NAME)..." ; \
-	snap install --dangerous $(SNAP_NAME)_0.1_amd64.snap ; \
+	snap install --dangerous $(wildcard $(SNAP_NAME)_*_amd64.snap) ; \
