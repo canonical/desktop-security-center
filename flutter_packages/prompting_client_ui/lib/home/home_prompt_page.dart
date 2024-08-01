@@ -28,7 +28,6 @@ class HomePromptPage extends ConsumerWidget {
         const Permissions(),
         if (showMoreOptions) const LifespanToggle(),
         const ActionButtonRow(),
-        const Footer(),
       ].withSpacing(20),
     );
   }
@@ -59,15 +58,6 @@ class Header extends ConsumerWidget {
         const MetaDataDropdown(),
       ],
     );
-  }
-}
-
-class Footer extends StatelessWidget {
-  const Footer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(AppLocalizations.of(context).securityCenterInfo);
   }
 }
 
