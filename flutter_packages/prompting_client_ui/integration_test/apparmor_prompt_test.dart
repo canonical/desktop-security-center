@@ -28,10 +28,10 @@ void main() {
             action: Action.deny,
             lifespan: Lifespan.session,
             pathPattern: '/home/ubuntu/**/',
-            permissions: [
+            permissions: {
               Permission.write,
               Permission.execute,
-            ],
+            },
           ),
         );
 

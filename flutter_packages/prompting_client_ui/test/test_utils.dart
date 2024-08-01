@@ -55,10 +55,10 @@ PromptDetails mockPromptDetailsHome({
   DateTime? updatedAt,
   String? storeUrl,
   String? requestedPath,
-  List<Permission>? requestedPermissions,
-  List<Permission>? availablePermissions,
-  List<Permission>? initialPermissions,
-  List<PatternOption>? patternOptions,
+  Set<Permission>? requestedPermissions,
+  Set<Permission>? availablePermissions,
+  Set<Permission>? initialPermissions,
+  Set<PatternOption>? patternOptions,
 }) =>
     PromptDetails.home(
       metaData: MetaData(
@@ -69,10 +69,10 @@ PromptDetails mockPromptDetailsHome({
         storeUrl: storeUrl,
       ),
       requestedPath: requestedPath ?? '',
-      requestedPermissions: requestedPermissions ?? [],
-      availablePermissions: availablePermissions ?? [],
-      initialPermissions: initialPermissions ?? [],
-      patternOptions: patternOptions ?? [],
+      requestedPermissions: requestedPermissions ?? {},
+      availablePermissions: availablePermissions ?? {},
+      initialPermissions: initialPermissions ?? {},
+      patternOptions: patternOptions ?? {},
     );
 
 PromptDetails registerMockPromptDetails({

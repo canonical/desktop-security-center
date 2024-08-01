@@ -11,7 +11,7 @@ part 'home_prompt_data_model.g.dart';
 class HomePromptData with _$HomePromptData {
   factory HomePromptData({
     required PromptDetailsHome details,
-    required List<Permission> permissions,
+    required Set<Permission> permissions,
     required String customPath,
     required PatternOption patternOption,
     @Default(Lifespan.forever) Lifespan lifespan,
@@ -39,7 +39,7 @@ class HomePromptDataModel extends _$HomePromptDataModel {
               homePatternType: HomePatternType.customPath,
               pathPattern: '',
             )
-          : details.patternOptions[details.initialPatternOption
+          : details.patternOptions.toList()[details.initialPatternOption
               .clamp(0, details.patternOptions.length - 1)],
       permissions: details.initialPermissions,
       customPath: details.requestedPath,
@@ -74,7 +74,7 @@ class HomePromptDataModel extends _$HomePromptDataModel {
       throw ArgumentError('$permission is not an available permission');
     }
 
-    final permissions = [...state.permissions];
+    final permissions = state.permissions.toSet();
 
     if (permissions.contains(permission)) {
       permissions.remove(permission);

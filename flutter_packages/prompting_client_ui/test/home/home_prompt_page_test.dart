@@ -16,19 +16,19 @@ void main() {
     publisher: 'Mozilla',
     updatedAt: DateTime(2024),
     requestedPath: '/home/ubuntu/Downloads/file.txt',
-    requestedPermissions: [Permission.read],
-    availablePermissions: [
+    requestedPermissions: {Permission.read},
+    availablePermissions: {
       Permission.read,
       Permission.write,
       Permission.execute,
-    ],
-    initialPermissions: [Permission.read],
-    patternOptions: [
+    },
+    initialPermissions: {Permission.read},
+    patternOptions: {
       PatternOption(
         homePatternType: HomePatternType.topLevelDirectory,
         pathPattern: '/home/ubuntu/Downloads/**',
       ),
-    ],
+    },
   );
   setUpAll(YaruTestWindow.ensureInitialized);
 
@@ -94,7 +94,7 @@ void main() {
           action: Action.deny,
           lifespan: Lifespan.session,
           pathPattern: '/home/ubuntu/Downloads/file.txt',
-          permissions: [Permission.read, Permission.write],
+          permissions: {Permission.read},
         ),
       ),
     ).called(1);
