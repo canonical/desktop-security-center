@@ -12,8 +12,12 @@
     },
     "promptActionOptionAllow": "Allow",
     "@promptActionOptionAllow": {},
+    "promptActionOptionAllowAlways": "Allow always",
+    "@promptActionOptionAllowAlways": {},
     "promptActionOptionDeny": "Deny",
     "@promptActionOptionDeny": {},
+    "promptActionOptionDenyOnce": "Deny once",
+    "@promptActionOptionDenyOnce": {},
     "promptActionTitle": "Action",
     "@promptActionTitle": {},
     "promptLifespanOptionForever": "Always",
@@ -76,6 +80,8 @@
             }
         }
     },
+    "homePromptMoreOptionsLabel": "More options...",
+    "@homePromptMoreOptionsLabel": {},
     "homePromptMetaDataAppCenterLink": "Visit App Center page",
     "@homePromptMetaDataAppCenterLink": {},
     "homePromptPermissionsTitle": "Permissions",

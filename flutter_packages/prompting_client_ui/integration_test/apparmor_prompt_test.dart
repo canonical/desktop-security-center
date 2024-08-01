@@ -51,10 +51,14 @@ void main() {
     // Enter custom path
     await tester.enterText(find.byType(TextField), '/home/ubuntu/**/');
 
+    // Show more options
+    await tester.tap(find.text(tester.l10n.homePromptMoreOptionsLabel));
+    await tester.pumpAndSettle();
+
     // Select lifespan
     await tester.tap(find.text(Lifespan.session.localize(tester.l10n)));
 
-    // De-select 'read' permission, select 'write' permission
+    // De-select 'read' permission, select 'execute' permission
     await tester.tap(find.text(Permission.read.localize(tester.l10n)));
     await tester.tap(find.text(Permission.execute.localize(tester.l10n)));
 

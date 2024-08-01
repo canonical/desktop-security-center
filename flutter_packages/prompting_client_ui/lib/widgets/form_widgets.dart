@@ -58,39 +58,46 @@ class RadioButtonList<T> extends StatelessWidget {
 
 class CheckButtonList<T> extends StatelessWidget {
   const CheckButtonList({
-    required this.title,
     required this.options,
     required this.optionTitle,
     required this.hasOption,
-    required this.isEnabled,
     required this.toggleOption,
+    this.isEnabled,
+    this.title,
+    this.direction = Axis.vertical,
     super.key,
   });
 
-  final String title;
+  final String? title;
   final Iterable<T> options;
   final String Function(T option) optionTitle;
   final bool Function(T option) hasOption;
-  final bool Function(T option) isEnabled;
   final void Function(T option) toggleOption;
+  final bool Function(T option)? isEnabled;
+  final Axis direction;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        MarkdownText(title.bold()),
-        const SizedBox(height: 10),
-        Row(
+        if (title != null) ...[
+          MarkdownText(title!.bold()),
+          const SizedBox(height: 10),
+        ],
+        Flex(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          direction: direction,
           children: [
             for (final option in options)
               YaruCheckButton(
                 value: hasOption(option),
-                onChanged:
-                    isEnabled(option) ? (_) => toggleOption(option) : null,
+                onChanged: isEnabled?.call(option) ?? true
+                    ? (_) => toggleOption(option)
+                    : null,
                 title: Text(optionTitle(option)),
               ),
-          ].withSpacing(16),
+          ].withSpacing(direction == Axis.horizontal ? 16 : 0),
         ),
       ],
     );

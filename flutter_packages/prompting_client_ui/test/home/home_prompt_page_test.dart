@@ -79,12 +79,10 @@ void main() {
 
     await tester
         .tap(find.text(HomePatternType.customPath.localize(tester.l10n)));
-    await tester.tap(find.text(Lifespan.session.localize(tester.l10n)));
-    await tester.tap(find.text(Permission.write.localize(tester.l10n)));
 
     final windowClosed = YaruTestWindow.waitForClosed();
 
-    await tester.tap(find.text(Action.deny.localize(tester.l10n)));
+    await tester.tap(find.text(tester.l10n.promptActionOptionDenyOnce));
     await tester.pumpAndSettle();
 
     verify(
@@ -92,7 +90,7 @@ void main() {
         PromptReply.home(
           promptId: 'promptId',
           action: Action.deny,
-          lifespan: Lifespan.session,
+          lifespan: Lifespan.single,
           pathPattern: '/home/ubuntu/Downloads/file.txt',
           permissions: {Permission.read},
         ),
@@ -122,7 +120,7 @@ void main() {
         .tap(find.text(HomePatternType.customPath.localize(tester.l10n)));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextFormField), 'invalid path');
-    await tester.tap(find.text(Action.allow.localize(tester.l10n)));
+    await tester.tap(find.text(tester.l10n.promptActionOptionAllowAlways));
     await tester.pumpAndSettle();
 
     expect(find.text('error message'), findsOneWidget);

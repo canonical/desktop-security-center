@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -15,6 +16,9 @@ class HomePromptPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final showMoreOptions = ref.watch(
+      homePromptDataModelProvider.select((m) => m.showMoreOptions),
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -22,7 +26,7 @@ class HomePromptPage extends ConsumerWidget {
         const Divider(),
         const PatternOptions(),
         const Permissions(),
-        const LifespanToggle(),
+        if (showMoreOptions) const LifespanToggle(),
         const ActionButtonRow(),
         const Footer(),
       ].withSpacing(20),
@@ -127,24 +131,33 @@ class MetaDataDropdown extends ConsumerWidget {
   }
 }
 
-class ActionButtonRow extends StatelessWidget {
+class ActionButtonRow extends ConsumerWidget {
   const ActionButtonRow({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const ActionButton(action: Action.allow),
-        const ActionButton(action: Action.deny),
-      ].withSpacing(16),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final showMoreOptions = ref.watch(
+      homePromptDataModelProvider.select((m) => m.showMoreOptions),
     );
+    final buttons = showMoreOptions
+        ? const [
+            ActionButton(action: Action.allow),
+            ActionButton(action: Action.deny),
+          ]
+        : const [
+            ActionButton(action: Action.allow, lifespan: Lifespan.forever),
+            ActionButton(action: Action.deny, lifespan: Lifespan.single),
+            MoreOptionsButton(),
+          ];
+    return Row(children: buttons.withSpacing(16));
   }
 }
 
 class ActionButton extends ConsumerWidget {
-  const ActionButton({required this.action, super.key});
+  const ActionButton({required this.action, this.lifespan, super.key});
 
   final Action action;
+  final Lifespan? lifespan;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -156,7 +169,7 @@ class ActionButton extends ConsumerWidget {
           ? () async {
               final response = await ref
                   .read(homePromptDataModelProvider.notifier)
-                  .saveAndContinue(action: action);
+                  .saveAndContinue(action: action, lifespan: lifespan);
               if (response is PromptReplyResponseSuccess) {
                 if (context.mounted) {
                   await YaruWindow.of(context).close();
@@ -164,7 +177,29 @@ class ActionButton extends ConsumerWidget {
               }
             }
           : null,
-      child: Text(action.localize(l10n)),
+      child: Text(
+        switch ((action, lifespan)) {
+          (final action, null) => action.localize(l10n),
+          (Action.allow, Lifespan.forever) =>
+            l10n.promptActionOptionAllowAlways,
+          (Action.deny, Lifespan.single) => l10n.promptActionOptionDenyOnce,
+          (final action, final Lifespan lifespan) =>
+            '${action.localize(l10n)} (${lifespan.name})',
+        },
+      ),
+    );
+  }
+}
+
+class MoreOptionsButton extends ConsumerWidget {
+  const MoreOptionsButton({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return OutlinedButton(
+      onPressed:
+          ref.read(homePromptDataModelProvider.notifier).toggleMoreOptions,
+      child: Text(AppLocalizations.of(context).homePromptMoreOptionsLabel),
     );
   }
 }
@@ -201,13 +236,16 @@ class PatternOptions extends ConsumerWidget {
     final notifier = ref.read(homePromptDataModelProvider.notifier);
     final l10n = AppLocalizations.of(context);
 
+    final patternOptions = model.showMoreOptions
+        ? model.details.patternOptions
+        : model.details.patternOptions.where((option) => option.showInitially);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         RadioButtonList<PatternOption>(
           title: l10n.promptAccessTitle(model.details.metaData.snapName),
           options: [
-            ...model.details.patternOptions,
+            ...patternOptions,
             PatternOption(
               homePatternType: HomePatternType.customPath,
               pathPattern: '',
@@ -239,20 +277,34 @@ class Permissions extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final showMoreOptions = ref.watch(
+      homePromptDataModelProvider.select((m) => m.showMoreOptions),
+    );
     final selectedPermissions =
         ref.watch(homePromptDataModelProvider.select((m) => m.permissions));
-    final availablePermissions = ref.watch(
-      homePromptDataModelProvider.select((m) => m.details.availablePermissions),
+    final details = ref.watch(
+      homePromptDataModelProvider.select((m) => m.details),
     );
+    final notifier = ref.read(homePromptDataModelProvider.notifier);
     final l10n = AppLocalizations.of(context);
 
-    return CheckButtonList<Permission>(
-      title: l10n.homePromptPermissionsTitle,
-      options: Permission.values,
-      optionTitle: (option) => option.localize(l10n),
-      hasOption: selectedPermissions.contains,
-      isEnabled: availablePermissions.contains,
-      toggleOption: ref.read(homePromptDataModelProvider.notifier).togglePerm,
-    );
+    if (showMoreOptions) {
+      return CheckButtonList<Permission>(
+        title: l10n.homePromptPermissionsTitle,
+        options: details.availablePermissions,
+        optionTitle: (option) => option.localize(l10n),
+        hasOption: selectedPermissions.contains,
+        isEnabled: (option) => !details.requestedPermissions.contains(option),
+        toggleOption: notifier.togglePermission,
+      );
+    } else {
+      return CheckButtonList<Permission>(
+        options: details.initialPermissions
+            .whereNot(details.requestedPermissions.contains),
+        optionTitle: (option) => 'Also give ${option.localize(l10n)} access',
+        hasOption: selectedPermissions.contains,
+        toggleOption: notifier.togglePermission,
+      );
+    }
   }
 }

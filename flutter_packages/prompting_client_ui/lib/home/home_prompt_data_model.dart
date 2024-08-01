@@ -16,6 +16,7 @@ class HomePromptData with _$HomePromptData {
     required PatternOption patternOption,
     @Default(Lifespan.forever) Lifespan lifespan,
     String? errorMessage,
+    @Default(false) bool showMoreOptions,
   }) = _HomePromptData;
 
   HomePromptData._();
@@ -46,11 +47,11 @@ class HomePromptDataModel extends _$HomePromptDataModel {
     );
   }
 
-  PromptReply buildReply({required Action action}) {
+  PromptReply buildReply({required Action action, Lifespan? lifespan}) {
     return PromptReply.home(
       promptId: state.details.metaData.promptId,
       action: action,
-      lifespan: state.lifespan,
+      lifespan: lifespan ?? state.lifespan,
       pathPattern: state.pathPattern,
       permissions: state.permissions,
     );
@@ -69,7 +70,7 @@ class HomePromptDataModel extends _$HomePromptDataModel {
     state = state.copyWith(lifespan: lifespan);
   }
 
-  void togglePerm(Permission permission) {
+  void togglePermission(Permission permission) {
     if (!state.details.availablePermissions.contains(permission)) {
       throw ArgumentError('$permission is not an available permission');
     }
@@ -85,9 +86,26 @@ class HomePromptDataModel extends _$HomePromptDataModel {
     state = state.copyWith(permissions: permissions);
   }
 
-  Future<PromptReplyResponse> saveAndContinue({required Action action}) async {
+  void toggleMoreOptions() {
+    if (state.showMoreOptions) {
+      state = state.copyWith(
+        showMoreOptions: false,
+        // Remove permissions that were not initially requested when hiding more options
+        permissions: state.details.requestedPermissions.union(
+          state.permissions.intersection(state.details.initialPermissions),
+        ),
+      );
+    } else {
+      state = state.copyWith(showMoreOptions: true);
+    }
+  }
+
+  Future<PromptReplyResponse> saveAndContinue({
+    required Action action,
+    Lifespan? lifespan,
+  }) async {
     final response = await getService<PromptingClient>()
-        .replyToPrompt(buildReply(action: action));
+        .replyToPrompt(buildReply(action: action, lifespan: lifespan));
     if (response is PromptReplyResponseUnknown) {
       state = state.copyWith(errorMessage: response.message);
     }

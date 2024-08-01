@@ -27,15 +27,18 @@
         },
         {
             "homePatternType": "topLevelDirectory",
-            "pathPattern": "/home/user/Downloads/**/*"
+            "pathPattern": "/home/user/Downloads/**/*",
+            "showInitially": true
         },
         {
             "homePatternType": "requestedDirectory",
-            "pathPattern": "/home/user/Downloads/Minotaur/**/*"
+            "pathPattern": "/home/user/Downloads/Minotaur/**/*",
+            "showInitially": true
         },
         {
             "homePatternType": "requestedFile",
             "pathPattern": "/home/user/Downloads/Minotaur/minotaur-13293232.jpeg"
         }
-    ]
+    ],
+    "initialPatternOption": 1
 }
