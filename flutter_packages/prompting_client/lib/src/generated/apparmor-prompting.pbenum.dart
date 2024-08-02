@@ -49,25 +49,17 @@ class HomePatternType extends $pb.ProtobufEnum {
   static const HomePatternType REQUESTED_DIRECTORY = HomePatternType._(0, _omitEnumNames ? '' : 'REQUESTED_DIRECTORY');
   static const HomePatternType REQUESTED_FILE = HomePatternType._(1, _omitEnumNames ? '' : 'REQUESTED_FILE');
   static const HomePatternType TOP_LEVEL_DIRECTORY = HomePatternType._(2, _omitEnumNames ? '' : 'TOP_LEVEL_DIRECTORY');
-  static const HomePatternType HOME_DIRECTORY = HomePatternType._(3, _omitEnumNames ? '' : 'HOME_DIRECTORY');
-  static const HomePatternType MATCHING_FILE_EXTENSION = HomePatternType._(4, _omitEnumNames ? '' : 'MATCHING_FILE_EXTENSION');
-  static const HomePatternType ARCHIVE_FILES = HomePatternType._(5, _omitEnumNames ? '' : 'ARCHIVE_FILES');
-  static const HomePatternType AUDIO_FILES = HomePatternType._(6, _omitEnumNames ? '' : 'AUDIO_FILES');
-  static const HomePatternType DOCUMENT_FILES = HomePatternType._(7, _omitEnumNames ? '' : 'DOCUMENT_FILES');
-  static const HomePatternType IMAGE_FILES = HomePatternType._(8, _omitEnumNames ? '' : 'IMAGE_FILES');
-  static const HomePatternType VIDEO_FILES = HomePatternType._(9, _omitEnumNames ? '' : 'VIDEO_FILES');
+  static const HomePatternType CONTAINING_DIRECTORY = HomePatternType._(3, _omitEnumNames ? '' : 'CONTAINING_DIRECTORY');
+  static const HomePatternType HOME_DIRECTORY = HomePatternType._(4, _omitEnumNames ? '' : 'HOME_DIRECTORY');
+  static const HomePatternType MATCHING_FILE_EXTENSION = HomePatternType._(5, _omitEnumNames ? '' : 'MATCHING_FILE_EXTENSION');
 
   static const $core.List<HomePatternType> values = <HomePatternType> [
     REQUESTED_DIRECTORY,
     REQUESTED_FILE,
     TOP_LEVEL_DIRECTORY,
+    CONTAINING_DIRECTORY,
     HOME_DIRECTORY,
     MATCHING_FILE_EXTENSION,
-    ARCHIVE_FILES,
-    AUDIO_FILES,
-    DOCUMENT_FILES,
-    IMAGE_FILES,
-    VIDEO_FILES,
   ];
 
   static final $core.Map<$core.int, HomePatternType> _byValue = $pb.ProtobufEnum.initByValue(values);

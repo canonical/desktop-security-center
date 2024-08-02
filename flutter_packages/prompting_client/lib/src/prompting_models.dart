@@ -10,13 +10,9 @@ enum HomePatternType {
   requestedDirectory,
   requestedFile,
   topLevelDirectory,
+  containingDirectory,
   homeDirectory,
   matchingFileExtension,
-  archiveFiles,
-  audioFiles,
-  documentFiles,
-  imageFiles,
-  videoFiles,
 }
 
 // Technically there is also a 'timespan' variant of this enum (on the
@@ -41,14 +37,15 @@ class MetaData with _$MetaData {
 }
 
 @freezed
-class MoreOption with _$MoreOption {
-  factory MoreOption({
+class PatternOption with _$PatternOption {
+  factory PatternOption({
     required HomePatternType homePatternType,
     required String pathPattern,
-  }) = _MoreOption;
+    @Default(false) bool showInitially,
+  }) = _PatternOption;
 
-  factory MoreOption.fromJson(Map<String, dynamic> json) =>
-      _$MoreOptionFromJson(json);
+  factory PatternOption.fromJson(Map<String, dynamic> json) =>
+      _$PatternOptionFromJson(json);
 }
 
 @freezed
@@ -56,9 +53,11 @@ sealed class PromptDetails with _$PromptDetails {
   factory PromptDetails.home({
     required MetaData metaData,
     required String requestedPath,
-    required List<Permission> requestedPermissions,
-    required List<Permission> availablePermissions,
-    required List<MoreOption> moreOptions,
+    required Set<Permission> requestedPermissions,
+    required Set<Permission> availablePermissions,
+    required Set<Permission> initialPermissions,
+    required Set<PatternOption> patternOptions,
+    @Default(0) int initialPatternOption,
   }) = PromptDetailsHome;
 
   factory PromptDetails.fromJson(Map<String, dynamic> json) =>
@@ -72,7 +71,7 @@ sealed class PromptReply with _$PromptReply {
     required Action action,
     required Lifespan lifespan,
     required String pathPattern,
-    required List<Permission> permissions,
+    required Set<Permission> permissions,
   }) = PromptReplyHome;
 
   factory PromptReply.fromJson(Map<String, dynamic> json) =>
@@ -82,6 +81,8 @@ sealed class PromptReply with _$PromptReply {
 @freezed
 sealed class PromptReplyResponse with _$PromptReplyResponse {
   factory PromptReplyResponse.success() = PromptReplyResponseSuccess;
+  factory PromptReplyResponse.promptNotFound({required String message}) =
+      PromptReplyResponsePromptNotFound;
   factory PromptReplyResponse.unknown({required String message}) =
       PromptReplyResponseUnknown;
 }

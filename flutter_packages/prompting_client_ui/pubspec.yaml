@@ -10,6 +10,7 @@ environment:
 
 dependencies:
   args: ^2.5.0
+  collection: ^1.18.0
   flutter:
     sdk: flutter
   flutter_markdown: ^0.7.3

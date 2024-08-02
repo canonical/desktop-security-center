@@ -24,14 +24,11 @@ extension HomePatternTypeL10n on HomePatternType {
         HomePatternType.requestedFile => l10n.homePatternTypeRequestedFile,
         HomePatternType.topLevelDirectory =>
           l10n.homePatternTypeTopLevelDirectory,
+        HomePatternType.containingDirectory =>
+          l10n.homePatternTypeContainingDirectory,
         HomePatternType.homeDirectory => l10n.homePatternTypeHomeDirectory,
         HomePatternType.matchingFileExtension =>
           l10n.homePatternTypeMatchingFileExtension,
-        HomePatternType.archiveFiles => l10n.homePatternTypeArchiveFiles,
-        HomePatternType.audioFiles => l10n.homePatternTypeAudioFiles,
-        HomePatternType.documentFiles => l10n.homePatternTypeDocumentFiles,
-        HomePatternType.imageFiles => l10n.homePatternTypeImageFiles,
-        HomePatternType.videoFiles => l10n.homePatternTypeVideoFiles,
       };
 }
 

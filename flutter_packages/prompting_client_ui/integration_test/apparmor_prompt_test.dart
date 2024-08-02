@@ -28,10 +28,10 @@ void main() {
             action: Action.deny,
             lifespan: Lifespan.session,
             pathPattern: '/home/ubuntu/**/',
-            permissions: [
+            permissions: {
               Permission.write,
               Permission.execute,
-            ],
+            },
           ),
         );
 
@@ -51,16 +51,19 @@ void main() {
     // Enter custom path
     await tester.enterText(find.byType(TextField), '/home/ubuntu/**/');
 
-    // Select action and lifespan
-    await tester.tap(find.text(Action.deny.localize(tester.l10n)));
+    // Show more options
+    await tester.tap(find.text(tester.l10n.homePromptMoreOptionsLabel));
+    await tester.pumpAndSettle();
+
+    // Select lifespan
     await tester.tap(find.text(Lifespan.session.localize(tester.l10n)));
 
-    // De-select 'read' permission, select 'write' permission
+    // De-select 'read' permission, select 'execute' permission
     await tester.tap(find.text(Permission.read.localize(tester.l10n)));
     await tester.tap(find.text(Permission.execute.localize(tester.l10n)));
 
-    // Save and continue
-    await tester.tap(find.text(tester.l10n.promptSaveAndContinue));
+    // Deny the request
+    await tester.tap(find.text(Action.deny.localize(tester.l10n)));
     await tester.pumpAndSettle();
   });
 }

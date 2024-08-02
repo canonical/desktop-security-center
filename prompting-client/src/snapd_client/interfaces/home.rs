@@ -12,20 +12,7 @@ use crate::{
 };
 use regex::Regex;
 use serde::{Deserialize, Serialize};
-use std::{
-    env,
-    path::{Path, PathBuf},
-};
-
-// Common file extensions
-const ARCHIVE_EXTENSIONS: [&str; 8] = ["7z", "bz2", "gz", "rar", "tar", "tar", "xz", "zip"];
-const AUDIO_EXTENSIONS: [&str; 6] = ["aac", "flac", "m4a", "mp3", "ogg", "wav"];
-const DOCUMENT_EXTENSIONS: [&str; 14] = [
-    "doc", "docx", "epub", "md", "odp", "ods", "odt", "pdf", "ppt", "pptx", "rtf", "txt", "xls",
-    "xlsx",
-];
-const IMAGE_EXTENSIONS: [&str; 8] = ["gif", "jpeg", "jpg", "png", "tif", "tiff", "webp", "xcf"];
-const VIDEO_EXTENSIONS: [&str; 4] = ["avi", "mkv", "mov", "mp4"];
+use std::{env, path::PathBuf};
 
 impl Prompt<HomeInterface> {
     pub fn path(&self) -> &str {
@@ -72,29 +59,55 @@ impl PromptReply<HomeInterface> {
 #[derive(Debug, Default, Clone, Deserialize, Serialize, PartialEq, Eq)]
 pub struct HomeInterface;
 
+struct PatternOptions {
+    initial_pattern_option: usize,
+    pattern_options: Vec<TypedPathPattern>,
+}
+
+impl PatternOptions {
+    /// Build out the UI Pattern options based on how we categorise the path that was requested in
+    /// the prompt.
+    ///
+    /// Details of the cases and rationale behind how we handle this can be found here:
+    ///   https://www.figma.com/board/1DIGbaCf4ZjTcShYjLiAIi/24.10-AppArmor-prompting---MVP-logic?node-id=0-1&t=4kUtDaqmQEvLA8v7-0
+    fn new(path: &str, home_dir: &str) -> Self {
+        let cpath = CategorisedPath::from_path(path);
+
+        let mut options = vec![TypedPathPattern::after_more_options(
+            PatternType::HomeDirectory,
+            format!("{home_dir}/**"),
+        )];
+
+        if !(cpath.is_home_dir() || cpath.is_top_level()) {
+            options.push(cpath.top_level_dir_pattern());
+        }
+
+        if cpath.is_nested_file() {
+            options.push(cpath.containing_dir_pattern());
+        }
+
+        if !cpath.is_home_dir() {
+            options.push(cpath.requested_path_pattern());
+        }
+
+        if !cpath.is_dir {
+            if let Some(opt) = cpath.matching_extension_pattern(home_dir) {
+                options.push(opt);
+            }
+        }
+
+        Self {
+            initial_pattern_option: 1,
+            pattern_options: options,
+        }
+    }
+}
+
 impl HomeInterface {
-    fn ui_options(&self, prompt: &Prompt<Self>) -> (Vec<InitialOption>, Vec<TypedPathPattern>) {
+    fn ui_options(&self, prompt: &Prompt<Self>) -> PatternOptions {
         let home_dir = env::var("SNAP_REAL_HOME").expect("to be running inside of a snap");
         let path = &prompt.constraints.path;
-
-        let initial_options = vec![
-            // TODO: (sminez) re-enable once we have settled on what the initial options are
-            // InitialOption::new("Allow Always", HomeUiReply::as_requested(prompt)),
-            // InitialOption::new_with_path(prompt, "Allow Directory", &parent_dir),
-            // InitialOption::new_with_path(prompt, "Allow Home", &home_dir),
-            // InitialOption::new(
-            //     "Deny Once",
-            //     HomeUiReply {
-            //         action: Action::Deny,
-            //         lifespan: Lifespan::Single,
-            //         ..HomeUiReply::as_requested(prompt)
-            //     },
-            // ),
-        ];
-
-        let more_options = build_more_options(path, &home_dir);
-
-        (initial_options, more_options)
+        PatternOptions::new(path, &home_dir)
     }
 }
 
@@ -124,7 +137,10 @@ impl SnapInterface for HomeInterface {
     }
 
     fn map_ui_input(&self, prompt: Prompt<Self>, meta: Option<SnapMeta>) -> UiInput<Self> {
-        let (initial_options, more_options) = self.ui_options(&prompt);
+        let PatternOptions {
+            initial_pattern_option,
+            pattern_options,
+        } = self.ui_options(&prompt);
         let meta = meta.unwrap_or_else(|| SnapMeta {
             name: prompt.snap,
             updated_at: String::default(),
@@ -132,15 +148,24 @@ impl SnapInterface for HomeInterface {
             publisher: String::default(),
         });
 
+        // We elevate the initially selected permissions in the ui from write -> read/write
+        // in order to minimise the number of prompts users encounter in the common case that
+        // an app wants to interact with a file after writing it.
+        let mut initial_permissions = prompt.constraints.permissions.clone();
+        if prompt.constraints.is_only_write() {
+            initial_permissions.push("read".to_string());
+        }
+
         UiInput {
             id: prompt.id,
             meta,
             data: HomeUiInputData {
                 requested_path: prompt.constraints.path,
-                requested_permissions: prompt.constraints.permissions,
+                requested_permissions: prompt.constraints.permissions.clone(),
                 available_permissions: prompt.constraints.available_permissions,
-                initial_options,
-                more_options,
+                initial_permissions,
+                pattern_options,
+                initial_pattern_option,
             },
         }
     }
@@ -167,14 +192,21 @@ pub struct HomeConstraints {
     pub(crate) available_permissions: Vec<String>,
 }
 
+impl HomeConstraints {
+    fn is_only_write(&self) -> bool {
+        self.permissions.len() == 1 && self.permissions[0] == "write"
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HomeUiInputData {
     pub(crate) requested_path: String,
     pub(crate) requested_permissions: Vec<String>,
     pub(crate) available_permissions: Vec<String>,
-    pub(crate) initial_options: Vec<InitialOption>,
-    pub(crate) more_options: Vec<TypedPathPattern>,
+    pub(crate) initial_permissions: Vec<String>,
+    pub(crate) initial_pattern_option: usize,
+    pub(crate) pattern_options: Vec<TypedPathPattern>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -182,47 +214,30 @@ pub struct HomeUiInputData {
 pub struct TypedPathPattern {
     pub(crate) pattern_type: PatternType,
     pub(crate) path_pattern: String,
+    pub(crate) show_initially: bool,
 }
 
 impl TypedPathPattern {
-    fn new(pattern_type: PatternType, path_pattern: impl Into<String>) -> Self {
+    fn new(
+        pattern_type: PatternType,
+        path_pattern: impl Into<String>,
+        show_initially: bool,
+    ) -> Self {
         Self {
             pattern_type,
             path_pattern: path_pattern.into(),
+            show_initially,
         }
     }
+
+    fn initial(pattern_type: PatternType, path_pattern: impl Into<String>) -> Self {
+        Self::new(pattern_type, path_pattern, true)
+    }
+
+    fn after_more_options(pattern_type: PatternType, path_pattern: impl Into<String>) -> Self {
+        Self::new(pattern_type, path_pattern, false)
+    }
 }
-
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct InitialOption {
-    button_text: String,
-    reply: HomeUiReply,
-}
-
-// TODO: (sminez) re-enable once we have settled on what the initial options are
-// impl InitialOption {
-//     fn new(button_text: &str, reply: HomeUiReply) -> Self {
-//         Self {
-//             button_text: button_text.to_string(),
-//             reply,
-//         }
-//     }
-
-//     fn new_with_path(
-//         p: &Prompt<HomeInterface>,
-//         button_text: &str,
-//         path_pattern: impl Into<String>,
-//     ) -> Self {
-//         InitialOption::new(
-//             button_text,
-//             HomeUiReply {
-//                 path_pattern: path_pattern.into(),
-//                 ..HomeUiReply::as_requested(p)
-//             },
-//         )
-//     }
-// }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -232,18 +247,6 @@ pub struct HomeUiReply {
     path_pattern: String,
     permissions: Vec<String>,
 }
-
-// TODO: (sminez) re-enable once we have settled on what the initial options are
-// impl HomeUiReply {
-//     fn as_requested(p: &Prompt<HomeInterface>) -> Self {
-//         Self {
-//             action: Action::Allow,
-//             lifespan: Lifespan::Forever,
-//             path_pattern: p.constraints.path.to_string(),
-//             permissions: p.constraints.permissions.to_vec(),
-//         }
-//     }
-// }
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
@@ -330,120 +333,81 @@ impl ReplyConstraintsOverrides for HomeReplyConstraintsOverrides {
     }
 }
 
-// Using strings rather than Paths as we can't use filesystem operations
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-enum PathCategory {
-    Directory,
-    ArchiveFile,
-    AudioFile,
-    DocumentFile,
-    ImageFile,
-    VideoFile,
-    MiscFile,
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct CategorisedPath<'a> {
+    raw_path: &'a str,
+    path: PathBuf,
+    is_dir: bool,
 }
 
-impl PathCategory {
-    // NOTE: only doing this from "ends in a slash" means some of the UI text will be wrong for
-    // files without an extension
-    fn from_path(p: &str) -> Self {
-        if p.ends_with('/') {
-            Self::Directory
-        } else if ARCHIVE_EXTENSIONS.iter().any(|e| p.ends_with(e)) {
-            Self::ArchiveFile
-        } else if AUDIO_EXTENSIONS.iter().any(|e| p.ends_with(e)) {
-            Self::AudioFile
-        } else if DOCUMENT_EXTENSIONS.iter().any(|e| p.ends_with(e)) {
-            Self::DocumentFile
-        } else if IMAGE_EXTENSIONS.iter().any(|e| p.ends_with(e)) {
-            Self::ImageFile
-        } else if VIDEO_EXTENSIONS.iter().any(|e| p.ends_with(e)) {
-            Self::VideoFile
-        } else {
-            Self::MiscFile
+impl<'a> CategorisedPath<'a> {
+    fn from_path(path: &'a str) -> Self {
+        let is_dir = path.ends_with('/');
+
+        Self {
+            raw_path: path,
+            path: PathBuf::from(path),
+            is_dir,
         }
     }
 
-    const fn pattern_type(&self) -> PatternType {
-        if matches!(self, PathCategory::Directory) {
+    fn is_home_dir(&self) -> bool {
+        self.path.iter().count() == 3
+    }
+
+    fn is_top_level(&self) -> bool {
+        self.path.iter().count() == 4
+    }
+
+    fn is_nested_file(&self) -> bool {
+        self.path.iter().count() > 5 && !self.is_dir
+    }
+
+    fn requested_path_pattern(&self) -> TypedPathPattern {
+        let pattern_type = if self.is_dir {
             PatternType::RequestedDirectory
         } else {
             PatternType::RequestedFile
-        }
+        };
+
+        TypedPathPattern::initial(pattern_type, self.raw_path)
     }
 
-    fn ftype_option(&self, home_dir: &str) -> Option<TypedPathPattern> {
-        let ftype_path = |exts: &[&str]| format!("{home_dir}/**/*.{{{}}}", exts.join(","));
+    fn top_level_dir_pattern(&self) -> TypedPathPattern {
+        debug_assert!(!(self.is_home_dir() || self.is_top_level()));
+        let top_level: PathBuf = self.path.iter().take(4).collect();
 
-        match self {
-            PathCategory::ArchiveFile => Some(TypedPathPattern::new(
-                PatternType::ArchiveFiles,
-                ftype_path(&ARCHIVE_EXTENSIONS),
-            )),
-            PathCategory::AudioFile => Some(TypedPathPattern::new(
-                PatternType::AudioFiles,
-                ftype_path(&AUDIO_EXTENSIONS),
-            )),
-            PathCategory::DocumentFile => Some(TypedPathPattern::new(
-                PatternType::DocumentFiles,
-                ftype_path(&DOCUMENT_EXTENSIONS),
-            )),
-            PathCategory::ImageFile => Some(TypedPathPattern::new(
-                PatternType::ImageFiles,
-                ftype_path(&IMAGE_EXTENSIONS),
-            )),
-            PathCategory::VideoFile => Some(TypedPathPattern::new(
-                PatternType::VideoFiles,
-                ftype_path(&VIDEO_EXTENSIONS),
-            )),
+        TypedPathPattern::initial(
+            PatternType::TopLevelDirectory,
+            format!("{}/**", top_level.to_string_lossy()),
+        )
+    }
+
+    fn containing_dir_pattern(&self) -> TypedPathPattern {
+        debug_assert!(self.is_nested_file());
+        let mut segments: Vec<_> = self.path.iter().collect();
+        segments.pop();
+        let pb: PathBuf = segments.into_iter().collect();
+
+        TypedPathPattern::initial(
+            PatternType::ContainingDirectory,
+            format!("{}/**", pb.to_string_lossy()),
+        )
+    }
+
+    fn matching_extension_pattern(&self, home_dir: &str) -> Option<TypedPathPattern> {
+        debug_assert!(!self.is_dir);
+        match self.path.extension() {
+            Some(ext) => {
+                let ext = ext.to_string_lossy();
+                Some(TypedPathPattern::after_more_options(
+                    PatternType::MatchingFileExtension,
+                    format!("{home_dir}/**/*.{ext}"),
+                ))
+            }
             _ => None,
         }
     }
-}
-
-fn top_level_dir_option(pb: &Path) -> Option<TypedPathPattern> {
-    let comps: Vec<_> = pb.iter().take(4).collect();
-    if comps.len() < 4 || comps[3].to_string_lossy().contains('.') {
-        return None;
-    }
-    let top_level: PathBuf = comps.into_iter().collect();
-
-    Some(TypedPathPattern::new(
-        PatternType::TopLevelDirectory,
-        format!("{}/**", top_level.to_string_lossy()),
-    ))
-}
-
-fn build_more_options(path: &str, home_dir: &str) -> Vec<TypedPathPattern> {
-    let category = PathCategory::from_path(path);
-    let pb = PathBuf::from(path);
-    let pattern_type = category.pattern_type();
-
-    let mut more_options = vec![TypedPathPattern::new(pattern_type, path)];
-
-    if let Some(opt) = top_level_dir_option(&pb) {
-        more_options.push(opt);
-    }
-
-    more_options.push(TypedPathPattern::new(
-        PatternType::HomeDirectory,
-        format!("{home_dir}/**"),
-    ));
-
-    if pattern_type == PatternType::RequestedFile {
-        if let Some(ext) = pb.extension() {
-            let ext = ext.to_string_lossy();
-            more_options.push(TypedPathPattern::new(
-                PatternType::MatchingFileExtension,
-                format!("{home_dir}/**/*.{ext}"),
-            ));
-        }
-    }
-
-    if let Some(opt) = category.ftype_option(home_dir) {
-        more_options.push(opt);
-    }
-
-    more_options
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -451,13 +415,9 @@ pub enum PatternType {
     RequestedDirectory,
     RequestedFile,
     TopLevelDirectory,
+    ContainingDirectory,
     HomeDirectory,
     MatchingFileExtension,
-    ArchiveFiles,
-    AudioFiles,
-    DocumentFiles,
-    ImageFiles,
-    VideoFiles,
 }
 
 #[cfg(test)]
@@ -513,72 +473,116 @@ mod tests {
         }
     }
 
-    #[test_case("/home/user/Downloads/foo/bar.txt"; "nested file")]
-    #[test_case("/home/user/Downloads/"; "top level dir with trailing slash")]
-    #[test_case("/home/user/Downloads"; "top level dir without trailing slash")]
+    #[test_case("/home/user/", false; "home dir")]
+    #[test_case("/home/user/foo.txt", true; "top level file")]
+    #[test_case("/home/user/Documents", true; "top level dir")]
+    #[test_case("/home/user/Documents/foo.txt", false; "nested file")]
+    #[test_case("/home/user/Documents/banking", false; "nested dir")]
+    #[test_case("/home/user/Documents/foo.txt", false; "file in top level dir")]
     #[test]
-    fn top_level_dir_works_when_dir_exists(path: &str) {
-        let opt = top_level_dir_option(&PathBuf::from(path)).unwrap();
-
-        assert_eq!(opt.pattern_type, PatternType::TopLevelDirectory);
-        assert_eq!(opt.path_pattern, "/home/user/Downloads/**");
+    fn is_top_level(path: &str, is_top_level: bool) {
+        let cpath = CategorisedPath::from_path(path);
+        assert_eq!(cpath.is_top_level(), is_top_level);
     }
 
-    #[test_case("/home/user/foo.txt"; "top level file")]
-    #[test_case("/home/user/"; "home dir with trailing slash")]
-    #[test_case("/home/user"; "home dir without trailing slash")]
+    #[test_case("/home/user/", false; "home dir")]
+    #[test_case("/home/user/foo.txt", false; "top level file")]
+    #[test_case("/home/user/Documents", false; "top level dir")]
+    #[test_case("/home/user/Documents/foo/bar.txt", true; "nested file")]
+    #[test_case("/home/user/Documents/banking", false; "nested dir")]
+    #[test_case("/home/user/Documents/foo.txt", false; "file in top level dir")]
     #[test]
-    fn invalid_top_level_dir_is_none(path: &str) {
-        let opt = top_level_dir_option(&PathBuf::from(path));
-        assert!(opt.is_none());
-    }
-
-    #[test]
-    fn ftype_option_creates_a_valid_path_pattern() {
-        let opt = PathCategory::VideoFile.ftype_option("/home/user").unwrap();
-        assert_eq!(opt.path_pattern, "/home/user/**/*.{avi,mkv,mov,mp4}");
+    fn is_nested_file(path: &str, is_nested_file: bool) {
+        let cpath = CategorisedPath::from_path(path);
+        assert_eq!(cpath.is_nested_file(), is_nested_file);
     }
 
     #[test_case(
-        "/home/user/Downloads/",
-        &[PatternType::RequestedDirectory, PatternType::TopLevelDirectory, PatternType::HomeDirectory];
-        "top level directory"
+        "/home/user/bar.zip",
+        &[
+            PatternType::HomeDirectory,
+            PatternType::RequestedFile,
+            PatternType::MatchingFileExtension,
+        ];
+        "file in home folder"
+    )]
+    #[test_case(
+        "/home/user/bar",
+        &[
+            PatternType::HomeDirectory,
+            PatternType::RequestedFile,
+        ];
+        "file in home folder without extension"
+    )]
+    #[test_case(
+        "/home/user/Pictures/nested/foo.jpeg",
+        &[
+            PatternType::HomeDirectory,
+            PatternType::TopLevelDirectory,
+            PatternType::ContainingDirectory,
+            PatternType::RequestedFile,
+            PatternType::MatchingFileExtension,
+        ];
+        "file in sub-folder"
+    )]
+    #[test_case(
+        "/home/user/Pictures/nested/foo",
+        &[
+            PatternType::HomeDirectory,
+            PatternType::TopLevelDirectory,
+            PatternType::ContainingDirectory,
+            PatternType::RequestedFile,
+        ];
+        "file in sub-folder without extension"
     )]
     #[test_case(
         "/home/user/Downloads/foo.jpeg",
         &[
-            PatternType::RequestedFile,
-            PatternType::TopLevelDirectory,
             PatternType::HomeDirectory,
+            PatternType::TopLevelDirectory,
+            PatternType::RequestedFile,
             PatternType::MatchingFileExtension,
-            PatternType::ImageFiles,
         ];
-        "jpeg in Downloads"
+        "file in top level folder"
     )]
     #[test_case(
-        "/home/user/bar.zip",
+        "/home/user/Downloads/foo",
         &[
-            PatternType::RequestedFile,
             PatternType::HomeDirectory,
-            PatternType::MatchingFileExtension,
-            PatternType::ArchiveFiles,
+            PatternType::TopLevelDirectory,
+            PatternType::RequestedFile,
         ];
-        "zip in home folder"
+        "file in top level folder without extension"
     )]
     #[test_case(
-        "/home/user/custom/strange.file",
+        "/home/user/Downloads/stuff/",
         &[
-            PatternType::RequestedFile,
-            PatternType::TopLevelDirectory,
             PatternType::HomeDirectory,
-            PatternType::MatchingFileExtension,
+            PatternType::TopLevelDirectory,
+            PatternType::RequestedDirectory,
         ];
-        "unknown file extension"
+        "sub-folder"
+    )]
+    #[test_case(
+        "/home/user/Downloads/",
+        &[
+            PatternType::HomeDirectory,
+            PatternType::RequestedDirectory,
+        ];
+        "top level folder"
+    )]
+    #[test_case(
+        "/home/user/",
+        &[
+            PatternType::HomeDirectory,
+        ];
+        "home folder"
     )]
     #[test]
-    fn building_more_options_works(path: &str, expected: &[PatternType]) {
-        let opts = build_more_options(path, "/home/user");
-        let descriptions: Vec<PatternType> = opts.iter().map(|pd| pd.pattern_type).collect();
+    fn building_options_works(path: &str, expected: &[PatternType]) {
+        let p = PatternOptions::new(path, "/home/user");
+        let descriptions: Vec<PatternType> =
+            p.pattern_options.iter().map(|pd| pd.pattern_type).collect();
 
         assert_eq!(descriptions, expected);
     }

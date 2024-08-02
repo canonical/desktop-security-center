@@ -58,10 +58,13 @@ message HomePrompt {
     string requested_path = 2;
     repeated string requested_permissions = 3;
     repeated string available_permissions = 4;
-    repeated MoreOption more_options = 5;
-    message MoreOption {
+    repeated string initial_permissions = 5;
+    repeated PatternOption pattern_options = 6;
+    int32 initial_pattern_option = 7;
+    message PatternOption {
         HomePatternType home_pattern_type = 1;
         string path_pattern = 2;
+        bool show_initially = 3;
     }
 }
 
@@ -69,13 +72,9 @@ enum HomePatternType {
     REQUESTED_DIRECTORY = 0;
     REQUESTED_FILE = 1;
     TOP_LEVEL_DIRECTORY = 2;
-    HOME_DIRECTORY = 3;
-    MATCHING_FILE_EXTENSION = 4;
-    ARCHIVE_FILES = 5;
-    AUDIO_FILES = 6;
-    DOCUMENT_FILES = 7;
-    IMAGE_FILES = 8;
-    VIDEO_FILES = 9;
+    CONTAINING_DIRECTORY = 3;
+    HOME_DIRECTORY = 4;
+    MATCHING_FILE_EXTENSION = 5;
 }
 
 message MetaData {

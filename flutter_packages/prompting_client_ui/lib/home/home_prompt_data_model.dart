@@ -11,34 +11,21 @@ part 'home_prompt_data_model.g.dart';
 class HomePromptData with _$HomePromptData {
   factory HomePromptData({
     required PromptDetailsHome details,
-    required bool withMoreOptions,
-    required List<Permission> permissions,
+    required Set<Permission> permissions,
     required String customPath,
-    @Default(0) int? selectedPath,
-    @Default(Action.allow) Action? action,
-    @Default(Lifespan.forever) Lifespan? lifespan,
+    required PatternOption patternOption,
+    @Default(Lifespan.forever) Lifespan lifespan,
     String? errorMessage,
+    @Default(false) bool showMoreOptions,
   }) = _HomePromptData;
 
   HomePromptData._();
 
-  String get pathPattern {
-    if (selectedPath! == numMoreOptions) {
-      return customPath;
-    } else {
-      return details.moreOptions[selectedPath!].pathPattern;
-    }
-  }
-
-  int get numMoreOptions => details.moreOptions.length;
-
-  (HomePatternType, String) moreOptionPath(int index) {
-    final opt = details.moreOptions[index];
-    return (opt.homePatternType, opt.pathPattern);
-  }
-
-  bool get isValid =>
-      selectedPath != null && action != null && lifespan != null;
+  String get pathPattern => switch (patternOption.homePatternType) {
+        HomePatternType.customPath => customPath,
+        _ => patternOption.pathPattern,
+      };
+  bool get isValid => permissions.isNotEmpty;
 }
 
 @riverpod
@@ -48,54 +35,77 @@ class HomePromptDataModel extends _$HomePromptDataModel {
     final details = ref.watch(currentPromptProvider) as PromptDetailsHome;
     return HomePromptData(
       details: details,
-      // forcing for now while we are iterating on what options we provide
-      withMoreOptions: true,
-      permissions: details.requestedPermissions,
+      patternOption: details.patternOptions.isEmpty
+          ? PatternOption(
+              homePatternType: HomePatternType.customPath,
+              pathPattern: '',
+            )
+          : details.patternOptions.toList()[details.initialPatternOption
+              .clamp(0, details.patternOptions.length - 1)],
+      permissions: details.initialPermissions,
       customPath: details.requestedPath,
     );
   }
 
-  PromptReply buildReply() {
+  PromptReply buildReply({required Action action, Lifespan? lifespan}) {
     return PromptReply.home(
       promptId: state.details.metaData.promptId,
-      action: state.action!,
-      lifespan: state.lifespan!,
+      action: action,
+      lifespan: lifespan ?? state.lifespan,
       pathPattern: state.pathPattern,
       permissions: state.permissions,
     );
   }
 
-  void toggleMoreOptions() =>
-      state = state.copyWith(withMoreOptions: !state.withMoreOptions);
-
-  void setSelectedPath(int? i) => state = state.copyWith(selectedPath: i);
+  void setPatternOption(PatternOption? patternOption) {
+    if (patternOption == null || patternOption == state.patternOption) return;
+    state = state.copyWith(patternOption: patternOption);
+  }
 
   void setCustomPath(String path) =>
       state = state.copyWith(customPath: path, errorMessage: null);
 
-  void setAction(Action? a) => state = state.copyWith(action: a);
+  void setLifespan(Lifespan? lifespan) {
+    if (lifespan == null || lifespan == state.lifespan) return;
+    state = state.copyWith(lifespan: lifespan);
+  }
 
-  void setLifespan(Lifespan? l) => state = state.copyWith(lifespan: l);
-
-  void togglePerm(Permission p) {
-    if (!state.details.availablePermissions.contains(p)) {
-      throw ArgumentError('$p is not an available permission');
+  void togglePermission(Permission permission) {
+    if (!state.details.availablePermissions.contains(permission)) {
+      throw ArgumentError('$permission is not an available permission');
     }
 
-    final permissions = [...state.permissions];
+    final permissions = state.permissions.toSet();
 
-    if (permissions.contains(p)) {
-      permissions.remove(p);
+    if (permissions.contains(permission)) {
+      permissions.remove(permission);
     } else {
-      permissions.add(p);
+      permissions.add(permission);
     }
 
     state = state.copyWith(permissions: permissions);
   }
 
-  Future<PromptReplyResponse> saveAndContinue() async {
-    final response =
-        await getService<PromptingClient>().replyToPrompt(buildReply());
+  void toggleMoreOptions() {
+    if (state.showMoreOptions) {
+      state = state.copyWith(
+        showMoreOptions: false,
+        // Remove permissions that were not initially requested when hiding more options
+        permissions: state.details.requestedPermissions.union(
+          state.permissions.intersection(state.details.initialPermissions),
+        ),
+      );
+    } else {
+      state = state.copyWith(showMoreOptions: true);
+    }
+  }
+
+  Future<PromptReplyResponse> saveAndContinue({
+    required Action action,
+    Lifespan? lifespan,
+  }) async {
+    final response = await getService<PromptingClient>()
+        .replyToPrompt(buildReply(action: action, lifespan: lifespan));
     if (response is PromptReplyResponseUnknown) {
       state = state.copyWith(errorMessage: response.message);
     }

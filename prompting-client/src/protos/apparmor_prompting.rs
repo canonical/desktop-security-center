@@ -104,18 +104,24 @@ pub struct HomePrompt {
     pub requested_permissions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(string, repeated, tag = "4")]
     pub available_permissions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(message, repeated, tag = "5")]
-    pub more_options: ::prost::alloc::vec::Vec<home_prompt::MoreOption>,
+    #[prost(string, repeated, tag = "5")]
+    pub initial_permissions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(message, repeated, tag = "6")]
+    pub pattern_options: ::prost::alloc::vec::Vec<home_prompt::PatternOption>,
+    #[prost(int32, tag = "7")]
+    pub initial_pattern_option: i32,
 }
 /// Nested message and enum types in `HomePrompt`.
 pub mod home_prompt {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
-    pub struct MoreOption {
+    pub struct PatternOption {
         #[prost(enumeration = "super::HomePatternType", tag = "1")]
         pub home_pattern_type: i32,
         #[prost(string, tag = "2")]
         pub path_pattern: ::prost::alloc::string::String,
+        #[prost(bool, tag = "3")]
+        pub show_initially: bool,
     }
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -199,13 +205,9 @@ pub enum HomePatternType {
     RequestedDirectory = 0,
     RequestedFile = 1,
     TopLevelDirectory = 2,
-    HomeDirectory = 3,
-    MatchingFileExtension = 4,
-    ArchiveFiles = 5,
-    AudioFiles = 6,
-    DocumentFiles = 7,
-    ImageFiles = 8,
-    VideoFiles = 9,
+    ContainingDirectory = 3,
+    HomeDirectory = 4,
+    MatchingFileExtension = 5,
 }
 impl HomePatternType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -217,13 +219,9 @@ impl HomePatternType {
             HomePatternType::RequestedDirectory => "REQUESTED_DIRECTORY",
             HomePatternType::RequestedFile => "REQUESTED_FILE",
             HomePatternType::TopLevelDirectory => "TOP_LEVEL_DIRECTORY",
+            HomePatternType::ContainingDirectory => "CONTAINING_DIRECTORY",
             HomePatternType::HomeDirectory => "HOME_DIRECTORY",
             HomePatternType::MatchingFileExtension => "MATCHING_FILE_EXTENSION",
-            HomePatternType::ArchiveFiles => "ARCHIVE_FILES",
-            HomePatternType::AudioFiles => "AUDIO_FILES",
-            HomePatternType::DocumentFiles => "DOCUMENT_FILES",
-            HomePatternType::ImageFiles => "IMAGE_FILES",
-            HomePatternType::VideoFiles => "VIDEO_FILES",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -232,13 +230,9 @@ impl HomePatternType {
             "REQUESTED_DIRECTORY" => Some(Self::RequestedDirectory),
             "REQUESTED_FILE" => Some(Self::RequestedFile),
             "TOP_LEVEL_DIRECTORY" => Some(Self::TopLevelDirectory),
+            "CONTAINING_DIRECTORY" => Some(Self::ContainingDirectory),
             "HOME_DIRECTORY" => Some(Self::HomeDirectory),
             "MATCHING_FILE_EXTENSION" => Some(Self::MatchingFileExtension),
-            "ARCHIVE_FILES" => Some(Self::ArchiveFiles),
-            "AUDIO_FILES" => Some(Self::AudioFiles),
-            "DOCUMENT_FILES" => Some(Self::DocumentFiles),
-            "IMAGE_FILES" => Some(Self::ImageFiles),
-            "VIDEO_FILES" => Some(Self::VideoFiles),
             _ => None,
         }
     }

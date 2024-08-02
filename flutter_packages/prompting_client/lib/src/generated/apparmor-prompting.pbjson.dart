@@ -47,23 +47,17 @@ const HomePatternType$json = {
     {'1': 'REQUESTED_DIRECTORY', '2': 0},
     {'1': 'REQUESTED_FILE', '2': 1},
     {'1': 'TOP_LEVEL_DIRECTORY', '2': 2},
-    {'1': 'HOME_DIRECTORY', '2': 3},
-    {'1': 'MATCHING_FILE_EXTENSION', '2': 4},
-    {'1': 'ARCHIVE_FILES', '2': 5},
-    {'1': 'AUDIO_FILES', '2': 6},
-    {'1': 'DOCUMENT_FILES', '2': 7},
-    {'1': 'IMAGE_FILES', '2': 8},
-    {'1': 'VIDEO_FILES', '2': 9},
+    {'1': 'CONTAINING_DIRECTORY', '2': 3},
+    {'1': 'HOME_DIRECTORY', '2': 4},
+    {'1': 'MATCHING_FILE_EXTENSION', '2': 5},
   ],
 };
 
 /// Descriptor for `HomePatternType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List homePatternTypeDescriptor = $convert.base64Decode(
     'Cg9Ib21lUGF0dGVyblR5cGUSFwoTUkVRVUVTVEVEX0RJUkVDVE9SWRAAEhIKDlJFUVVFU1RFRF'
-    '9GSUxFEAESFwoTVE9QX0xFVkVMX0RJUkVDVE9SWRACEhIKDkhPTUVfRElSRUNUT1JZEAMSGwoX'
-    'TUFUQ0hJTkdfRklMRV9FWFRFTlNJT04QBBIRCg1BUkNISVZFX0ZJTEVTEAUSDwoLQVVESU9fRk'
-    'lMRVMQBhISCg5ET0NVTUVOVF9GSUxFUxAHEg8KC0lNQUdFX0ZJTEVTEAgSDwoLVklERU9fRklM'
-    'RVMQCQ==');
+    '9GSUxFEAESFwoTVE9QX0xFVkVMX0RJUkVDVE9SWRACEhgKFENPTlRBSU5JTkdfRElSRUNUT1JZ'
+    'EAMSEgoOSE9NRV9ESVJFQ1RPUlkQBBIbChdNQVRDSElOR19GSUxFX0VYVEVOU0lPThAF');
 
 @$core.Deprecated('Use promptReplyDescriptor instead')
 const PromptReply$json = {
@@ -152,17 +146,20 @@ const HomePrompt$json = {
     {'1': 'requested_path', '3': 2, '4': 1, '5': 9, '10': 'requestedPath'},
     {'1': 'requested_permissions', '3': 3, '4': 3, '5': 9, '10': 'requestedPermissions'},
     {'1': 'available_permissions', '3': 4, '4': 3, '5': 9, '10': 'availablePermissions'},
-    {'1': 'more_options', '3': 5, '4': 3, '5': 11, '6': '.apparmor_prompting.HomePrompt.MoreOption', '10': 'moreOptions'},
+    {'1': 'initial_permissions', '3': 5, '4': 3, '5': 9, '10': 'initialPermissions'},
+    {'1': 'pattern_options', '3': 6, '4': 3, '5': 11, '6': '.apparmor_prompting.HomePrompt.PatternOption', '10': 'patternOptions'},
+    {'1': 'initial_pattern_option', '3': 7, '4': 1, '5': 5, '10': 'initialPatternOption'},
   ],
-  '3': [HomePrompt_MoreOption$json],
+  '3': [HomePrompt_PatternOption$json],
 };
 
 @$core.Deprecated('Use homePromptDescriptor instead')
-const HomePrompt_MoreOption$json = {
-  '1': 'MoreOption',
+const HomePrompt_PatternOption$json = {
+  '1': 'PatternOption',
   '2': [
     {'1': 'home_pattern_type', '3': 1, '4': 1, '5': 14, '6': '.apparmor_prompting.HomePatternType', '10': 'homePatternType'},
     {'1': 'path_pattern', '3': 2, '4': 1, '5': 9, '10': 'pathPattern'},
+    {'1': 'show_initially', '3': 3, '4': 1, '5': 8, '10': 'showInitially'},
   ],
 };
 
@@ -171,11 +168,14 @@ final $typed_data.Uint8List homePromptDescriptor = $convert.base64Decode(
     'CgpIb21lUHJvbXB0EjkKCW1ldGFfZGF0YRgBIAEoCzIcLmFwcGFybW9yX3Byb21wdGluZy5NZX'
     'RhRGF0YVIIbWV0YURhdGESJQoOcmVxdWVzdGVkX3BhdGgYAiABKAlSDXJlcXVlc3RlZFBhdGgS'
     'MwoVcmVxdWVzdGVkX3Blcm1pc3Npb25zGAMgAygJUhRyZXF1ZXN0ZWRQZXJtaXNzaW9ucxIzCh'
-    'VhdmFpbGFibGVfcGVybWlzc2lvbnMYBCADKAlSFGF2YWlsYWJsZVBlcm1pc3Npb25zEkwKDG1v'
-    'cmVfb3B0aW9ucxgFIAMoCzIpLmFwcGFybW9yX3Byb21wdGluZy5Ib21lUHJvbXB0Lk1vcmVPcH'
-    'Rpb25SC21vcmVPcHRpb25zGoABCgpNb3JlT3B0aW9uEk8KEWhvbWVfcGF0dGVybl90eXBlGAEg'
-    'ASgOMiMuYXBwYXJtb3JfcHJvbXB0aW5nLkhvbWVQYXR0ZXJuVHlwZVIPaG9tZVBhdHRlcm5UeX'
-    'BlEiEKDHBhdGhfcGF0dGVybhgCIAEoCVILcGF0aFBhdHRlcm4=');
+    'VhdmFpbGFibGVfcGVybWlzc2lvbnMYBCADKAlSFGF2YWlsYWJsZVBlcm1pc3Npb25zEi8KE2lu'
+    'aXRpYWxfcGVybWlzc2lvbnMYBSADKAlSEmluaXRpYWxQZXJtaXNzaW9ucxJVCg9wYXR0ZXJuX2'
+    '9wdGlvbnMYBiADKAsyLC5hcHBhcm1vcl9wcm9tcHRpbmcuSG9tZVByb21wdC5QYXR0ZXJuT3B0'
+    'aW9uUg5wYXR0ZXJuT3B0aW9ucxI0ChZpbml0aWFsX3BhdHRlcm5fb3B0aW9uGAcgASgFUhRpbm'
+    'l0aWFsUGF0dGVybk9wdGlvbhqqAQoNUGF0dGVybk9wdGlvbhJPChFob21lX3BhdHRlcm5fdHlw'
+    'ZRgBIAEoDjIjLmFwcGFybW9yX3Byb21wdGluZy5Ib21lUGF0dGVyblR5cGVSD2hvbWVQYXR0ZX'
+    'JuVHlwZRIhCgxwYXRoX3BhdHRlcm4YAiABKAlSC3BhdGhQYXR0ZXJuEiUKDnNob3dfaW5pdGlh'
+    'bGx5GAMgASgIUg1zaG93SW5pdGlhbGx5');
 
 @$core.Deprecated('Use metaDataDescriptor instead')
 const MetaData$json = {

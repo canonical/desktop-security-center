@@ -7,9 +7,8 @@
         "storeUrl": "snap://firefox",
         "publisher": "Mozilla"
     },
-    "requestedPath": "/home/ubuntu/Downloads/file.txt",
+    "requestedPath": "/home/user/Downloads/Minotaur/minotaur-13293232.jpeg",
     "requestedPermissions": [
-        "read",
         "write"
     ],
     "availablePermissions": [
@@ -17,10 +16,29 @@
         "write",
         "execute"
     ],
-    "moreOptions": [
+    "initialPermissions": [
+        "read",
+        "write"
+    ],
+    "patternOptions": [
         {
-            "homePatternType": "documentFiles",
-            "pathPattern": "/home/ubuntu/**/{*.txt,*.doc}"
+            "homePatternType": "homeDirectory",
+            "pathPattern": "/home/user/**/*"
+        },
+        {
+            "homePatternType": "topLevelDirectory",
+            "pathPattern": "/home/user/Downloads/**/*",
+            "showInitially": true
+        },
+        {
+            "homePatternType": "requestedDirectory",
+            "pathPattern": "/home/user/Downloads/Minotaur/**/*",
+            "showInitially": true
+        },
+        {
+            "homePatternType": "requestedFile",
+            "pathPattern": "/home/user/Downloads/Minotaur/minotaur-13293232.jpeg"
         }
-    ]
+    ],
+    "initialPatternOption": 1
 }

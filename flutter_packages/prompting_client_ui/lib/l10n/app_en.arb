@@ -2,18 +2,33 @@
     "@@locale": "en",
     "securityCenterInfo": "You can always change these permissions in the <Security Center>",
     "@securityCenterInfo": {},
-    "promptAccessTitle": "Set access for {snap} to:",
-    "@promptAccessTitle": {
+    "promptAccessMoreOptionsTitle": "Set access for {snap} to:",
+    "@promptAccessMoreOptionsTitle": {
         "placeholders": {
             "snap": {
                 "type": "String"
             }
         }
     },
+    "promptAccessTitle": "Give {snap} {permission} access to:",
+    "@promptAccessTitle": {
+        "placeholders": {
+            "snap": {
+                "type": "String"
+            },
+            "permission": {
+                "type": "String"
+            }
+        }
+    },
     "promptActionOptionAllow": "Allow",
     "@promptActionOptionAllow": {},
+    "promptActionOptionAllowAlways": "Allow always",
+    "@promptActionOptionAllowAlways": {},
     "promptActionOptionDeny": "Deny",
     "@promptActionOptionDeny": {},
+    "promptActionOptionDenyOnce": "Deny once",
+    "@promptActionOptionDenyOnce": {},
     "promptActionTitle": "Action",
     "@promptActionTitle": {},
     "promptLifespanOptionForever": "Always",
@@ -30,28 +45,20 @@
     "@promptTitle": {},
     "homePatternInfo": "<Learn about path patterns>",
     "@homePatternInfo": {},
-    "homePatternTypeCustomPath": "Custom path",
+    "homePatternTypeCustomPath": "Custom path pattern",
     "@homePatternTypeCustomPath": {},
-    "homePatternTypeRequestedDirectory": "Requested directory",
+    "homePatternTypeRequestedDirectory": "The requested folder only",
     "@homePatternTypeRequestedDirectory": {},
-    "homePatternTypeRequestedFile": "Requested file",
+    "homePatternTypeRequestedFile": "The requested file only",
     "@homePatternTypeRequestedFile": {},
     "homePatternTypeTopLevelDirectory": "Top-level directory",
     "@homePatternTypeTopLevelDirectory": {},
-    "homePatternTypeHomeDirectory": "Home directory",
+    "homePatternTypeContainingDirectory": "Everything in the folder",
+    "@homePatternTypeContainingDirectory": {},
+    "homePatternTypeHomeDirectory": "Everything in the Home folder",
     "@homePatternTypeHomeDirectory": {},
     "homePatternTypeMatchingFileExtension": "Matching file extension",
     "@homePatternTypeMatchingFileExtension": {},
-    "homePatternTypeArchiveFiles": "Archive files",
-    "@homePatternTypeArchiveFiles": {},
-    "homePatternTypeAudioFiles": "Audio files",
-    "@homePatternTypeAudioFiles": {},
-    "homePatternTypeDocumentFiles": "Document files",
-    "@homePatternTypeDocumentFiles": {},
-    "homePatternTypeImageFiles": "Image files",
-    "@homePatternTypeImageFiles": {},
-    "homePatternTypeVideoFiles": "Video files",
-    "@homePatternTypeVideoFiles": {},
     "homePromptBody": "Allow {snap} to have {permissions} access to {path}?",
     "@homePromptBody": {
         "placeholders": {
@@ -84,6 +91,8 @@
             }
         }
     },
+    "homePromptMoreOptionsLabel": "More options...",
+    "@homePromptMoreOptionsLabel": {},
     "homePromptMetaDataAppCenterLink": "Visit App Center page",
     "@homePromptMetaDataAppCenterLink": {},
     "homePromptPermissionsTitle": "Permissions",

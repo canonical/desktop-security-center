@@ -311,10 +311,11 @@ class HomePromptReply extends $pb.GeneratedMessage {
   $core.List<$core.String> get permissions => $_getList(1);
 }
 
-class HomePrompt_MoreOption extends $pb.GeneratedMessage {
-  factory HomePrompt_MoreOption({
+class HomePrompt_PatternOption extends $pb.GeneratedMessage {
+  factory HomePrompt_PatternOption({
     HomePatternType? homePatternType,
     $core.String? pathPattern,
+    $core.bool? showInitially,
   }) {
     final $result = create();
     if (homePatternType != null) {
@@ -323,15 +324,19 @@ class HomePrompt_MoreOption extends $pb.GeneratedMessage {
     if (pathPattern != null) {
       $result.pathPattern = pathPattern;
     }
+    if (showInitially != null) {
+      $result.showInitially = showInitially;
+    }
     return $result;
   }
-  HomePrompt_MoreOption._() : super();
-  factory HomePrompt_MoreOption.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory HomePrompt_MoreOption.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  HomePrompt_PatternOption._() : super();
+  factory HomePrompt_PatternOption.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory HomePrompt_PatternOption.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'HomePrompt.MoreOption', package: const $pb.PackageName(_omitMessageNames ? '' : 'apparmor_prompting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'HomePrompt.PatternOption', package: const $pb.PackageName(_omitMessageNames ? '' : 'apparmor_prompting'), createEmptyInstance: create)
     ..e<HomePatternType>(1, _omitFieldNames ? '' : 'homePatternType', $pb.PbFieldType.OE, defaultOrMaker: HomePatternType.REQUESTED_DIRECTORY, valueOf: HomePatternType.valueOf, enumValues: HomePatternType.values)
     ..aOS(2, _omitFieldNames ? '' : 'pathPattern')
+    ..aOB(3, _omitFieldNames ? '' : 'showInitially')
     ..hasRequiredFields = false
   ;
 
@@ -339,22 +344,22 @@ class HomePrompt_MoreOption extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  HomePrompt_MoreOption clone() => HomePrompt_MoreOption()..mergeFromMessage(this);
+  HomePrompt_PatternOption clone() => HomePrompt_PatternOption()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  HomePrompt_MoreOption copyWith(void Function(HomePrompt_MoreOption) updates) => super.copyWith((message) => updates(message as HomePrompt_MoreOption)) as HomePrompt_MoreOption;
+  HomePrompt_PatternOption copyWith(void Function(HomePrompt_PatternOption) updates) => super.copyWith((message) => updates(message as HomePrompt_PatternOption)) as HomePrompt_PatternOption;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static HomePrompt_MoreOption create() => HomePrompt_MoreOption._();
-  HomePrompt_MoreOption createEmptyInstance() => create();
-  static $pb.PbList<HomePrompt_MoreOption> createRepeated() => $pb.PbList<HomePrompt_MoreOption>();
+  static HomePrompt_PatternOption create() => HomePrompt_PatternOption._();
+  HomePrompt_PatternOption createEmptyInstance() => create();
+  static $pb.PbList<HomePrompt_PatternOption> createRepeated() => $pb.PbList<HomePrompt_PatternOption>();
   @$core.pragma('dart2js:noInline')
-  static HomePrompt_MoreOption getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<HomePrompt_MoreOption>(create);
-  static HomePrompt_MoreOption? _defaultInstance;
+  static HomePrompt_PatternOption getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<HomePrompt_PatternOption>(create);
+  static HomePrompt_PatternOption? _defaultInstance;
 
   @$pb.TagNumber(1)
   HomePatternType get homePatternType => $_getN(0);
@@ -373,6 +378,15 @@ class HomePrompt_MoreOption extends $pb.GeneratedMessage {
   $core.bool hasPathPattern() => $_has(1);
   @$pb.TagNumber(2)
   void clearPathPattern() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.bool get showInitially => $_getBF(2);
+  @$pb.TagNumber(3)
+  set showInitially($core.bool v) { $_setBool(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasShowInitially() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearShowInitially() => clearField(3);
 }
 
 class HomePrompt extends $pb.GeneratedMessage {
@@ -381,7 +395,9 @@ class HomePrompt extends $pb.GeneratedMessage {
     $core.String? requestedPath,
     $core.Iterable<$core.String>? requestedPermissions,
     $core.Iterable<$core.String>? availablePermissions,
-    $core.Iterable<HomePrompt_MoreOption>? moreOptions,
+    $core.Iterable<$core.String>? initialPermissions,
+    $core.Iterable<HomePrompt_PatternOption>? patternOptions,
+    $core.int? initialPatternOption,
   }) {
     final $result = create();
     if (metaData != null) {
@@ -396,8 +412,14 @@ class HomePrompt extends $pb.GeneratedMessage {
     if (availablePermissions != null) {
       $result.availablePermissions.addAll(availablePermissions);
     }
-    if (moreOptions != null) {
-      $result.moreOptions.addAll(moreOptions);
+    if (initialPermissions != null) {
+      $result.initialPermissions.addAll(initialPermissions);
+    }
+    if (patternOptions != null) {
+      $result.patternOptions.addAll(patternOptions);
+    }
+    if (initialPatternOption != null) {
+      $result.initialPatternOption = initialPatternOption;
     }
     return $result;
   }
@@ -410,7 +432,9 @@ class HomePrompt extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'requestedPath')
     ..pPS(3, _omitFieldNames ? '' : 'requestedPermissions')
     ..pPS(4, _omitFieldNames ? '' : 'availablePermissions')
-    ..pc<HomePrompt_MoreOption>(5, _omitFieldNames ? '' : 'moreOptions', $pb.PbFieldType.PM, subBuilder: HomePrompt_MoreOption.create)
+    ..pPS(5, _omitFieldNames ? '' : 'initialPermissions')
+    ..pc<HomePrompt_PatternOption>(6, _omitFieldNames ? '' : 'patternOptions', $pb.PbFieldType.PM, subBuilder: HomePrompt_PatternOption.create)
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'initialPatternOption', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -462,7 +486,19 @@ class HomePrompt extends $pb.GeneratedMessage {
   $core.List<$core.String> get availablePermissions => $_getList(3);
 
   @$pb.TagNumber(5)
-  $core.List<HomePrompt_MoreOption> get moreOptions => $_getList(4);
+  $core.List<$core.String> get initialPermissions => $_getList(4);
+
+  @$pb.TagNumber(6)
+  $core.List<HomePrompt_PatternOption> get patternOptions => $_getList(5);
+
+  @$pb.TagNumber(7)
+  $core.int get initialPatternOption => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set initialPatternOption($core.int v) { $_setSignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasInitialPatternOption() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearInitialPatternOption() => clearField(7);
 }
 
 class MetaData extends $pb.GeneratedMessage {

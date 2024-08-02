@@ -55,14 +55,11 @@ extension HomePatternTypeConversion on HomePatternType {
         pb.HomePatternType.REQUESTED_FILE => HomePatternType.requestedFile,
         pb.HomePatternType.TOP_LEVEL_DIRECTORY =>
           HomePatternType.topLevelDirectory,
+        pb.HomePatternType.CONTAINING_DIRECTORY =>
+          HomePatternType.containingDirectory,
         pb.HomePatternType.HOME_DIRECTORY => HomePatternType.homeDirectory,
         pb.HomePatternType.MATCHING_FILE_EXTENSION =>
           HomePatternType.matchingFileExtension,
-        pb.HomePatternType.ARCHIVE_FILES => HomePatternType.archiveFiles,
-        pb.HomePatternType.AUDIO_FILES => HomePatternType.audioFiles,
-        pb.HomePatternType.DOCUMENT_FILES => HomePatternType.documentFiles,
-        pb.HomePatternType.IMAGE_FILES => HomePatternType.imageFiles,
-        pb.HomePatternType.VIDEO_FILES => HomePatternType.videoFiles,
         _ => throw ArgumentError('Unknown home pattern type: $homePatternType'),
       };
 }
@@ -85,12 +82,13 @@ extension MetaDataConversion on MetaData {
       );
 }
 
-extension MoreOptionConversion on MoreOption {
-  static MoreOption fromProto(pb.HomePrompt_MoreOption moreOption) =>
-      MoreOption(
+extension MoreOptionConversion on PatternOption {
+  static PatternOption fromProto(pb.HomePrompt_PatternOption patternOption) =>
+      PatternOption(
         homePatternType:
-            HomePatternTypeConversion.fromProto(moreOption.homePatternType),
-        pathPattern: moreOption.pathPattern,
+            HomePatternTypeConversion.fromProto(patternOption.homePatternType),
+        pathPattern: patternOption.pathPattern,
+        showInitially: patternOption.showInitially,
       );
 }
 
@@ -111,13 +109,17 @@ extension PrompteDetailsConversion on PromptDetails {
             requestedPath: response.homePrompt.requestedPath,
             requestedPermissions: response.homePrompt.requestedPermissions
                 .map(PermissionConversion.fromString)
-                .toList(),
+                .toSet(),
             availablePermissions: response.homePrompt.availablePermissions
                 .map(PermissionConversion.fromString)
-                .toList(),
-            moreOptions: response.homePrompt.moreOptions
+                .toSet(),
+            initialPermissions: response.homePrompt.initialPermissions
+                .map(PermissionConversion.fromString)
+                .toSet(),
+            patternOptions: response.homePrompt.patternOptions
                 .map(MoreOptionConversion.fromProto)
-                .toList(),
+                .toSet(),
+            initialPatternOption: response.homePrompt.initialPatternOption,
           ),
         _ =>
           throw ArgumentError('Unknown prompt type: ${response.whichPrompt()}'),
@@ -132,7 +134,7 @@ extension PromptReplyConversion on PromptReply {
             lifespan: lifespan.toProto(),
             homePromptReply: pb.HomePromptReply(
               pathPattern: pathPattern,
-              permissions: permissions.map((e) => e.name).toList(),
+              permissions: permissions.map((e) => e.name),
             ),
           ),
       };

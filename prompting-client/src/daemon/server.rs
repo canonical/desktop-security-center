@@ -3,7 +3,7 @@ use crate::{
     daemon::{worker::ReadOnlyActivePrompt, ActionedPrompt},
     protos::{
         apparmor_prompting::{
-            self, get_current_prompt_response::Prompt, home_prompt::MoreOption,
+            self, get_current_prompt_response::Prompt, home_prompt::PatternOption,
             prompt_reply::PromptReply::HomePromptReply, prompt_reply_response::PromptReplyType,
             HomePatternType, MetaData, PromptReply,
         },
@@ -200,29 +200,32 @@ fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {
         }),
         requested_path: input.data.requested_path,
         requested_permissions: input.data.requested_permissions,
+        initial_permissions: input.data.initial_permissions,
         available_permissions: input.data.available_permissions,
-        more_options: input
+        initial_pattern_option: input.data.initial_pattern_option as i32,
+        pattern_options: input
             .data
-            .more_options
+            .pattern_options
             .into_iter()
             .map(
                 |TypedPathPattern {
                      pattern_type,
                      path_pattern,
+                     show_initially,
                  }| {
                     let home_pattern_type = map_enum!(
                         PatternType => HomePatternType;
                         [
-                            RequestedDirectory, RequestedFile, TopLevelDirectory, HomeDirectory,
-                            MatchingFileExtension, ArchiveFiles, AudioFiles, DocumentFiles,
-                            ImageFiles, VideoFiles
+                            RequestedDirectory, RequestedFile, TopLevelDirectory,
+                            HomeDirectory, MatchingFileExtension, ContainingDirectory
                         ];
                         pattern_type;
                     );
 
-                    MoreOption {
+                    PatternOption {
                         home_pattern_type: home_pattern_type as i32,
                         path_pattern,
+                        show_initially,
                     }
                 },
             )
@@ -371,8 +374,9 @@ mod tests {
                 requested_path: "6".to_string(),
                 requested_permissions: Vec::new(),
                 available_permissions: Vec::new(),
-                initial_options: Vec::new(),
-                more_options: Vec::new(),
+                initial_permissions: Vec::new(),
+                pattern_options: Vec::new(),
+                initial_pattern_option: 0,
             },
         })
     }
@@ -389,7 +393,9 @@ mod tests {
             requested_path: "6".to_string(),
             requested_permissions: Vec::new(),
             available_permissions: Vec::new(),
-            more_options: Vec::new(),
+            initial_permissions: Vec::new(),
+            pattern_options: Vec::new(),
+            initial_pattern_option: 0,
         })
     }
 
