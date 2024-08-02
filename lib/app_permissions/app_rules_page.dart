@@ -54,11 +54,15 @@ class _Body extends ConsumerWidget {
       children: [
         Row(
           children: [
-            AppIcon(iconUrl: ref.watch(snapIconUrlProvider(snap)).valueOrNull),
+            AppIcon(iconUrl: ref.watch(snapIconUrlProvider(snap))),
             const SizedBox(width: 10),
-            Text(snap, style: textTheme.titleLarge),
+            Text(
+              ref.watch(snapTitleOrNameProvider(snap)),
+              style: textTheme.titleLarge,
+            ),
           ],
         ),
+        const SizedBox(height: 10),
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
         if (rules.isEmpty) ...[
@@ -158,7 +162,9 @@ class _EmptyRuleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(AppLocalizations.of(context).snapRulesPageEmptyTileLabel),
+      title: Center(
+        child: Text(AppLocalizations.of(context).snapRulesPageEmptyTileLabel),
+      ),
       enabled: false,
     );
   }

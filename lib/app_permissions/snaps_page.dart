@@ -28,14 +28,14 @@ class SnapsPage extends ConsumerWidget {
   }
 }
 
-class _Body extends StatelessWidget {
+class _Body extends ConsumerWidget {
   const _Body({required this.snapRuleCounts, required this.interface});
 
   final Map<String, int> snapRuleCounts;
   final SnapdInterface interface;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final tiles = snapRuleCounts.entries
         .map(
@@ -79,9 +79,9 @@ class _AppTile extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     return ListTile(
       leading: AppIcon(
-        iconUrl: ref.watch(snapIconUrlProvider(snapName)).valueOrNull,
+        iconUrl: ref.watch(snapIconUrlProvider(snapName)),
       ),
-      title: Text(snapName),
+      title: Text(ref.watch(snapTitleOrNameProvider(snapName))),
       subtitle: Text(l10n.snapRulesCount(ruleCount)),
       trailing: const Icon(YaruIcons.pan_end),
       onTap: onTap,

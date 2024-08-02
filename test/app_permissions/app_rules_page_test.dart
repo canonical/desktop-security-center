@@ -27,6 +27,7 @@ void main() {
         ),
       ],
     );
+    registerMockLocalSnapData();
     await tester.pumpApp(
       (_) => UncontrolledProviderScope(
         container: container,
@@ -60,6 +61,7 @@ void main() {
   testWidgets('no rules', (tester) async {
     final container = createContainer();
     registerMockRulesService();
+    registerMockLocalSnapData();
     await tester.pumpApp(
       (_) => UncontrolledProviderScope(
         container: container,

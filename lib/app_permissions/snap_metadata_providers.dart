@@ -5,16 +5,20 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 
 part 'snap_metadata_providers.g.dart';
 
-@Riverpod(keepAlive: true)
-Future<List<Snap>> snaps(SnapsRef ref) => getService<SnapdClient>().getSnaps();
+typedef LocalSnapData = List<Snap>;
 
 @Riverpod(keepAlive: true)
-Future<String?> snapIconUrl(SnapIconUrlRef ref, String snapName) =>
-    ref.watch(snapsProvider.future).then(
-          (snaps) => snaps
-              .firstWhereOrNull((snap) => snap.name == snapName)
-              ?.media
-              .where((m) => m.type == 'icon')
-              .firstOrNull
-              ?.url,
-        );
+String? snapIconUrl(SnapIconUrlRef ref, String snapName) =>
+    getService<LocalSnapData>()
+        .firstWhereOrNull((snap) => snap.name == snapName)
+        ?.media
+        .where((m) => m.type == 'icon')
+        .firstOrNull
+        ?.url;
+
+@Riverpod(keepAlive: true)
+String snapTitleOrName(SnapTitleOrNameRef ref, String snapName) =>
+    getService<LocalSnapData>()
+        .firstWhereOrNull((snap) => snap.name == snapName)
+        ?.title ??
+    snapName;

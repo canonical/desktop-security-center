@@ -41,6 +41,7 @@ void main() {
         ),
       ],
     );
+    registerMockLocalSnapData();
     await tester.pumpApp(
       (_) => UncontrolledProviderScope(
         container: container,
