@@ -111,8 +111,8 @@ ensure-test-snap:
 		cd testing-snap ; \
 		snapcraft ; \
 		echo ":: Installing $(TEST_SNAP_NAME) in $(VM_NAME)..." ; \
-		lxc file push $(wildcard $(TEST_SNAP_NAME)_*_amd64.snap) $(VM_NAME)/home/ubuntu/ ; \
-		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(wildcard $(TEST_SNAP_NAME)_*_amd64.snap) ; \
+		lxc file push $(TEST_SNAP_NAME)_0.1_amd64.snap $(VM_NAME)/home/ubuntu/ ; \
+		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(TEST_SNAP_NAME)_0.1_amd64.snap ; \
 	fi
 
 .PHONY: update-test-snap
