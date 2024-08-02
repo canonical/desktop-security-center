@@ -69,8 +69,7 @@ class _PromptingSwitch extends ConsumerWidget {
                 ),
               ],
             ),
-            subtitle: Text(l10n.snapPermissionsEnableWarning),
-            value: promptingStatus.isEnabled,
+            value: promptingStatus.isEnabled || promptingStatus.isEnabling,
             onChanged: switch (promptingStatus) {
               AppPermissionsServiceStatusDisabled() ||
               AppPermissionsServiceStatusEnabled() =>

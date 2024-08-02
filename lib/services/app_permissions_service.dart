@@ -29,6 +29,7 @@ sealed class AppPermissionsServiceStatus with _$AppPermissionsServiceStatus {
   AppPermissionsServiceStatus._();
 
   bool get isEnabled => this is AppPermissionsServiceStatusEnabled;
+  bool get isEnabling => this is AppPermissionsServiceStatusEnabling;
 }
 
 abstract class AppPermissionsService {
