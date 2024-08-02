@@ -63,7 +63,9 @@ class _Body extends ConsumerWidget {
           ],
         ),
         const SizedBox(height: 10),
-        Text(interface.localizedDescription(l10n)),
+        Text(
+          l10n.snapRulesPageDescription(interface.localizedTitle(l10n), snap),
+        ),
         const SizedBox(height: 24),
         if (rules.isEmpty) ...[
           const TileList(
@@ -149,9 +151,17 @@ class RuleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final permissions =
+        rule.constraints.permissions?.map(Permission.fromString);
+    final l10n = AppLocalizations.of(context);
     return ListTile(
       title: Text(rule.constraints.pathPattern ?? ''),
-      subtitle: Text(rule.constraints.permissions?.join(', ') ?? ''),
+      subtitle: Text(
+        permissions
+                ?.map((permission) => permission.localize(l10n))
+                .join(', ') ??
+            '',
+      ),
       trailing: YaruIconButton(
         icon: const Icon(YaruIcons.window_close),
         onPressed: onRemove,
@@ -172,4 +182,22 @@ class _EmptyRuleTile extends StatelessWidget {
       enabled: false,
     );
   }
+}
+
+enum Permission {
+  read,
+  write,
+  execute;
+
+  static Permission fromString(String permission) =>
+      Permission.values.firstWhere(
+        (e) => e.name == permission,
+        orElse: () => throw ArgumentError('Unknown permission: $permission'),
+      );
+
+  String localize(AppLocalizations l10n) => switch (this) {
+        Permission.read => l10n.snapPermissionReadLabel,
+        Permission.write => l10n.snapPermissionWriteLabel,
+        Permission.execute => l10n.snapPermissionExecuteLabel,
+      };
 }
