@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/app_permissions/rules_category.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
+import 'package:security_center/app_permissions/snap_metadata_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
+import 'package:security_center/widgets/app_icon.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
@@ -46,52 +49,155 @@ class _Body extends ConsumerWidget {
       snapRulesModelProvider(snap: snap, interface: interface).notifier,
     );
     final l10n = AppLocalizations.of(context);
-    final tiles = rules
-        .map(
-          (rule) => ListTile(
-            leading: Text(rule.id),
-            title: _Rule(rule: rule),
-            onTap: () => notifier.removeRule(rule.id),
-          ),
-        )
-        .toList();
+    final textTheme = Theme.of(context).textTheme;
     return ScrollablePage(
       children: [
         Row(
           children: [
-            const Icon(YaruIcons.placeholder_icon),
+            AppIcon(iconUrl: ref.watch(snapIconUrlProvider(snap))),
             const SizedBox(width: 10),
-            Text(snap, style: Theme.of(context).textTheme.titleLarge),
+            Text(
+              ref.watch(snapTitleOrNameProvider(snap)),
+              style: textTheme.titleLarge,
+            ),
           ],
         ),
-        Text(interface.localizedDescription(l10n)),
-        const SizedBox(height: 24),
-        TileList(children: tiles),
-        const SizedBox(height: 16),
-        ElevatedButton(
-          onPressed: notifier.removeAll,
-          child: Text(l10n.snapRulesRemoveAll),
+        const SizedBox(height: 10),
+        Text(
+          l10n.snapRulesPageDescription(interface.localizedTitle(l10n), snap),
         ),
+        const SizedBox(height: 24),
+        if (rules.isEmpty) ...[
+          const TileList(
+            children: [
+              _EmptyRuleTile(),
+            ],
+          ),
+          const SizedBox(height: 24),
+        ],
+        for (final category in SnapdRuleCategory.values)
+          _RuleSection(
+            title: category.localizedTitle(l10n),
+            rules: rules.filterByCategory(category).toList(),
+            onRemove: notifier.removeRule,
+          ),
+        if (rules.isNotEmpty)
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.error,
+            ),
+            onPressed: notifier.removeAll,
+            child: Text(l10n.snapRulesRemoveAll),
+          ),
       ],
     );
   }
 }
 
-class _Rule extends StatelessWidget {
-  const _Rule({required this.rule});
+class _RuleSection extends ConsumerWidget {
+  const _RuleSection({
+    required this.title,
+    required this.rules,
+    required this.onRemove,
+  });
 
-  final SnapdRule rule;
+  final String title;
+  final List<SnapdRule> rules;
+  final void Function(String id) onRemove;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (rules.isEmpty) {
+      return const SizedBox();
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Path pattern: ${rule.constraints.pathPattern}'),
-        Text('Permissions: ${rule.constraints.permissions?.join(', ')}'),
-        Text('Outcome: ${rule.outcome.name}'),
-        Text('Lifespan: ${rule.lifespan.name}'),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: 16),
+        _RuleList(
+          rules: rules,
+          onRemove: onRemove,
+        ),
+        const SizedBox(height: 24),
       ],
     );
   }
+}
+
+class _RuleList extends TileList {
+  _RuleList({
+    required List<SnapdRule> rules,
+    required void Function(String id) onRemove,
+  }) : super(
+          children: rules
+              .map(
+                (rule) => RuleTile(
+                  rule: rule,
+                  onRemove: () => onRemove(rule.id),
+                ),
+              )
+              .toList(),
+        );
+}
+
+class RuleTile extends StatelessWidget {
+  const RuleTile({required this.rule, required this.onRemove, super.key});
+  final SnapdRule rule;
+  final VoidCallback onRemove;
+
+  @override
+  Widget build(BuildContext context) {
+    final permissions =
+        rule.constraints.permissions?.map(Permission.fromString);
+    final l10n = AppLocalizations.of(context);
+    return ListTile(
+      title: Text(rule.constraints.pathPattern ?? ''),
+      subtitle: Text(
+        permissions
+                ?.map((permission) => permission.localize(l10n))
+                .join(', ') ??
+            '',
+      ),
+      trailing: YaruIconButton(
+        icon: const Icon(YaruIcons.window_close),
+        onPressed: onRemove,
+      ),
+    );
+  }
+}
+
+class _EmptyRuleTile extends StatelessWidget {
+  const _EmptyRuleTile();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Center(
+        child: Text(AppLocalizations.of(context).snapRulesPageEmptyTileLabel),
+      ),
+      enabled: false,
+    );
+  }
+}
+
+enum Permission {
+  read,
+  write,
+  execute;
+
+  static Permission fromString(String permission) =>
+      Permission.values.firstWhere(
+        (e) => e.name == permission,
+        orElse: () => throw ArgumentError('Unknown permission: $permission'),
+      );
+
+  String localize(AppLocalizations l10n) => switch (this) {
+        Permission.read => l10n.snapPermissionReadLabel,
+        Permission.write => l10n.snapPermissionWriteLabel,
+        Permission.execute => l10n.snapPermissionExecuteLabel,
+      };
 }

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/app_permissions/snap_metadata_providers.dart';
 import 'package:security_center/security_center_app.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/services/fake_app_permissions_service.dart';
@@ -35,6 +36,11 @@ Future<void> main(List<String> args) async {
     exit(2);
   }
 
+  registerService<SnapdClient>(SnapdClient.new);
+
+  final snapMetadata = await getService<SnapdClient>().getSnaps();
+  registerServiceInstance<LocalSnapData>(snapMetadata);
+
   if (argResults.flag('dry-run')) {
     registerService<AppPermissionsService>(
       () => FakeAppPermissionsService.fromFile(
@@ -44,7 +50,7 @@ Future<void> main(List<String> args) async {
   } else {
     registerService<AppPermissionsService>(
       () => SnapdAppPermissionsService(
-        SnapdClient(),
+        getService<SnapdClient>(),
       ),
     );
   }

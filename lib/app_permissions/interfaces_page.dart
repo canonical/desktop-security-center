@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/navigator.dart';
+import 'package:security_center/widgets/iterable_extensions.dart';
+import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
@@ -32,13 +34,48 @@ class _Body extends StatelessWidget {
     return ScrollablePage(
       children: [
         _PromptingSwitch(promptingStatus: promptingStatus),
-        const SizedBox(height: 16),
+        Text(l10n.interfacePageDescription),
+        const _Links(),
         if (promptingStatus.isEnabled) ...[
+          Text(
+            l10n.interfacePageTitle,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const _InterfaceList(),
-          const SizedBox(height: 16),
         ],
         Text(l10n.snapPermissionsOtherDescription),
-      ],
+      ].separatedBy(const SizedBox(height: 24)),
+    );
+  }
+}
+
+enum _Link {
+  learnMore,
+  giveFeedback,
+  reportIssues;
+
+  String get url => switch (this) { _ => '' };
+  String localize(AppLocalizations l10n) => switch (this) {
+        learnMore => l10n.interfacePageLinkLearnMore,
+        giveFeedback => l10n.interfacePageLinkGiveFeedback,
+        reportIssues => l10n.interfacePageLinkReportIssues,
+      };
+}
+
+class _Links extends StatelessWidget {
+  const _Links();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: _Link.values
+          .map(
+            (link) => MarkdownText(
+              link.localize(AppLocalizations.of(context)).link(link.url),
+            ),
+          )
+          .toList()
+          .separatedBy(const SizedBox(width: 16)),
     );
   }
 }
@@ -55,6 +92,7 @@ class _PromptingSwitch extends ConsumerWidget {
     final notifier = ref.read(promptingStatusModelProvider.notifier);
     final l10n = AppLocalizations.of(context);
     return YaruBorderContainer(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -69,8 +107,7 @@ class _PromptingSwitch extends ConsumerWidget {
                 ),
               ],
             ),
-            subtitle: Text(l10n.snapPermissionsEnableWarning),
-            value: promptingStatus.isEnabled,
+            value: promptingStatus.isEnabled || promptingStatus.isEnabling,
             onChanged: switch (promptingStatus) {
               AppPermissionsServiceStatusDisabled() ||
               AppPermissionsServiceStatusEnabled() =>

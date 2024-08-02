@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:security_center/app_permissions/snap_metadata_providers.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/app_permissions_service.dart';
+import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'test_utils.mocks.dart';
@@ -59,4 +61,12 @@ AppPermissionsService registerMockRulesService({
   registerMockService<AppPermissionsService>(service);
   addTearDown(unregisterService<AppPermissionsService>);
   return service;
+}
+
+LocalSnapData registerMockLocalSnapData({
+  List<Snap> snaps = const [],
+}) {
+  registerServiceInstance<LocalSnapData>(snaps);
+  addTearDown(unregisterService<LocalSnapData>);
+  return snaps;
 }
