@@ -286,6 +286,7 @@ class Permissions extends ConsumerWidget {
         hasOption: selectedPermissions.contains,
         isEnabled: (option) => !details.requestedPermissions.contains(option),
         toggleOption: notifier.togglePermission,
+        direction: Axis.horizontal,
       );
     } else {
       return CheckButtonList<Permission>(
