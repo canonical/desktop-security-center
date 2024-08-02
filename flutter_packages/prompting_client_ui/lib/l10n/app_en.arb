@@ -2,10 +2,21 @@
     "@@locale": "en",
     "securityCenterInfo": "You can always change these permissions in the <Security Center>",
     "@securityCenterInfo": {},
-    "promptAccessTitle": "Set access for {snap} to:",
+    "promptAccessMoreOptionsTitle": "Set access for {snap} to:",
+    "@promptAccessMoreOptionsTitle": {
+        "placeholders": {
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "promptAccessTitle": "Give {snap} {permission} access to:",
     "@promptAccessTitle": {
         "placeholders": {
             "snap": {
+                "type": "String"
+            },
+            "permission": {
                 "type": "String"
             }
         }
@@ -34,17 +45,17 @@
     "@promptTitle": {},
     "homePatternInfo": "<Learn about path patterns>",
     "@homePatternInfo": {},
-    "homePatternTypeCustomPath": "Custom path",
+    "homePatternTypeCustomPath": "Custom path pattern",
     "@homePatternTypeCustomPath": {},
-    "homePatternTypeRequestedDirectory": "Requested directory",
+    "homePatternTypeRequestedDirectory": "The requested folder only",
     "@homePatternTypeRequestedDirectory": {},
-    "homePatternTypeRequestedFile": "Requested file",
+    "homePatternTypeRequestedFile": "The requested file only",
     "@homePatternTypeRequestedFile": {},
     "homePatternTypeTopLevelDirectory": "Top-level directory",
     "@homePatternTypeTopLevelDirectory": {},
-    "homePatternTypeContainingDirectory": "Containing directory",
+    "homePatternTypeContainingDirectory": "Everything in the folder",
     "@homePatternTypeContainingDirectory": {},
-    "homePatternTypeHomeDirectory": "Home directory",
+    "homePatternTypeHomeDirectory": "Everything in the Home folder",
     "@homePatternTypeHomeDirectory": {},
     "homePatternTypeMatchingFileExtension": "Matching file extension",
     "@homePatternTypeMatchingFileExtension": {},

@@ -48,7 +48,7 @@ void main() {
       find.text(
         tester.l10n.homePromptBody(
           'firefox',
-          Permission.read.localize(tester.l10n),
+          Permission.read.localize(tester.l10n).toLowerCase(),
           '/home/ubuntu/Downloads/file.txt',
         ),
       ),

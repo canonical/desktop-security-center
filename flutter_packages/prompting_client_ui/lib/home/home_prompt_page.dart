@@ -49,7 +49,7 @@ class Header extends ConsumerWidget {
           l10n.homePromptBody(
             details.metaData.snapName.bold(),
             details.requestedPermissions
-                .map((p) => p.localize(l10n))
+                .map((p) => p.localize(l10n).toLowerCase())
                 .join(', ')
                 .bold(),
             details.requestedPath.bold(),
@@ -233,7 +233,15 @@ class PatternOptions extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         RadioButtonList<PatternOption>(
-          title: l10n.promptAccessTitle(model.details.metaData.snapName),
+          title: model.showMoreOptions
+              ? l10n
+                  .promptAccessMoreOptionsTitle(model.details.metaData.snapName)
+              : l10n.promptAccessTitle(
+                  model.details.metaData.snapName,
+                  model.details.requestedPermissions
+                      .map((p) => p.localize(l10n).toLowerCase())
+                      .join(', '),
+                ),
           options: [
             ...patternOptions,
             PatternOption(
