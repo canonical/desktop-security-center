@@ -79,10 +79,14 @@ class _Body extends ConsumerWidget {
             rules: rules.filterByCategory(category).toList(),
             onRemove: notifier.removeRule,
           ),
-        ElevatedButton(
-          onPressed: notifier.removeAll,
-          child: Text(l10n.snapRulesRemoveAll),
-        ),
+        if (rules.isNotEmpty)
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.error,
+            ),
+            onPressed: notifier.removeAll,
+            child: Text(l10n.snapRulesRemoveAll),
+          ),
       ],
     );
   }
