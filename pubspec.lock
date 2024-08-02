@@ -781,10 +781,10 @@ packages:
     dependency: "direct main"
     description:
       name: snapd
-      sha256: "44adefb84edc957b70006cb893caf0cf442268a64279b9b15b35184ead6628f4"
+      sha256: da7575a196f84a6e653adb2949ad8d11ebf6ef77cd4f5a7fd21ffd435aeca6ec
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.3"
+    version: "0.6.4"
   source_gen:
     dependency: transitive
     description:
