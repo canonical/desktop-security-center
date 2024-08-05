@@ -1,5 +1,7 @@
 VM_NAME = aa-testing
 SNAP_NAME = prompting-client
+SHORT_HASH = $(shell git rev-parse --short HEAD)
+SNAP_FILE_NAME = $(SNAP_NAME)_0+git.$(SHORT_HASH)_amd64.snap
 TEST_SNAP_NAME = aa-prompting-test
 
 .PHONY: install-local-tooling
@@ -87,13 +89,15 @@ ensure-client-in-vm:
 	@if ! lxc exec $(VM_NAME) -- snap info $(SNAP_NAME) > /dev/null ; then \
 		echo ":: Building $(SNAP_NAME) via snapcraft..." ; \
 		rm -rf flutter_packages/prompting_client_ui/build ; \
-		rm $(wildcard $(SNAP_NAME)_*_amd64.snap) ; \
+		OLD=$(wildcard $(SNAP_NAME)_*) ; \
+		rm $$OLD ; \
 		snapcraft ; \
+		FILE_NAME=$$(ls | grep -E '$(SNAP_NAME)_' | head -n1) ; \
 		echo ":: Installing $(SNAP_NAME) in $(VM_NAME)..." ; \
-		lxc exec $(VM_NAME) -- rm /home/ubuntu/$(wildcard $(SNAP_NAME)_*_amd64.snap) ; \
-		lxc file push $(wildcard $(SNAP_NAME)_*_amd64.snap) $(VM_NAME)/home/ubuntu/ ; \
+		lxc exec $(VM_NAME) -- rm /home/ubuntu/$$OLD ; \
+		lxc file push $$FILE_NAME $(VM_NAME)/home/ubuntu/ ; \
 		lxc exec $(VM_NAME) -- snap set system experimental.user-daemons=true ; \
-		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$(wildcard $(SNAP_NAME)_*_amd64.snap) ; \
+		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$$FILE_NAME ; \
 	fi
 
 .PHONY: update-client-in-vm
@@ -167,7 +171,9 @@ local-bounce-snapd: local-clean-request-rules local-snapd-stable local-snapd-pro
 local-install-client:
 	echo ":: Building $(SNAP_NAME) via snapcraft..." ; \
 	rm -rf flutter_packages/prompting_client_ui/build ; \
-	rm $(wildcard $(SNAP_NAME)_*_amd64.snap) ; \
+	OLD=$(wildcard $(SNAP_NAME)_*) ; \
+	rm $$OLD ; \
 	snapcraft ; \
+	FILE_NAME=$$(ls | grep -E '$(SNAP_NAME)_' | head -n1) ; \
 	echo ":: Installing $(SNAP_NAME)..." ; \
-	snap install --dangerous $(wildcard $(SNAP_NAME)_*_amd64.snap) ; \
+	snap install --dangerous $$FILE_NAME ;
