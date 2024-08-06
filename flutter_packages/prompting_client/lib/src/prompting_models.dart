@@ -53,6 +53,7 @@ sealed class PromptDetails with _$PromptDetails {
   factory PromptDetails.home({
     required MetaData metaData,
     required String requestedPath,
+    required String homeDir,
     required Set<Permission> requestedPermissions,
     required Set<Permission> availablePermissions,
     required Set<Permission> initialPermissions,

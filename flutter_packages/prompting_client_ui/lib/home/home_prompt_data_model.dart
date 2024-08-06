@@ -28,7 +28,11 @@ class HomePromptData with _$HomePromptData {
 
   bool get isValid => permissions.isNotEmpty;
 
-  String get topLevelDir => details.requestedPath.split('/')[3];
+  String get topLevelDir {
+    return details.requestedPath
+        .replaceFirst(details.homeDir, '')
+        .split('/')[1];
+  }
 }
 
 @riverpod

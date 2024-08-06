@@ -393,6 +393,7 @@ class HomePrompt extends $pb.GeneratedMessage {
   factory HomePrompt({
     MetaData? metaData,
     $core.String? requestedPath,
+    $core.String? homeDir,
     $core.Iterable<$core.String>? requestedPermissions,
     $core.Iterable<$core.String>? availablePermissions,
     $core.Iterable<$core.String>? initialPermissions,
@@ -405,6 +406,9 @@ class HomePrompt extends $pb.GeneratedMessage {
     }
     if (requestedPath != null) {
       $result.requestedPath = requestedPath;
+    }
+    if (homeDir != null) {
+      $result.homeDir = homeDir;
     }
     if (requestedPermissions != null) {
       $result.requestedPermissions.addAll(requestedPermissions);
@@ -430,11 +434,12 @@ class HomePrompt extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'HomePrompt', package: const $pb.PackageName(_omitMessageNames ? '' : 'apparmor_prompting'), createEmptyInstance: create)
     ..aOM<MetaData>(1, _omitFieldNames ? '' : 'metaData', subBuilder: MetaData.create)
     ..aOS(2, _omitFieldNames ? '' : 'requestedPath')
-    ..pPS(3, _omitFieldNames ? '' : 'requestedPermissions')
-    ..pPS(4, _omitFieldNames ? '' : 'availablePermissions')
-    ..pPS(5, _omitFieldNames ? '' : 'initialPermissions')
-    ..pc<HomePrompt_PatternOption>(6, _omitFieldNames ? '' : 'patternOptions', $pb.PbFieldType.PM, subBuilder: HomePrompt_PatternOption.create)
-    ..a<$core.int>(7, _omitFieldNames ? '' : 'initialPatternOption', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'homeDir')
+    ..pPS(4, _omitFieldNames ? '' : 'requestedPermissions')
+    ..pPS(5, _omitFieldNames ? '' : 'availablePermissions')
+    ..pPS(6, _omitFieldNames ? '' : 'initialPermissions')
+    ..pc<HomePrompt_PatternOption>(7, _omitFieldNames ? '' : 'patternOptions', $pb.PbFieldType.PM, subBuilder: HomePrompt_PatternOption.create)
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'initialPatternOption', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -480,25 +485,34 @@ class HomePrompt extends $pb.GeneratedMessage {
   void clearRequestedPath() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<$core.String> get requestedPermissions => $_getList(2);
+  $core.String get homeDir => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set homeDir($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasHomeDir() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearHomeDir() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.List<$core.String> get availablePermissions => $_getList(3);
+  $core.List<$core.String> get requestedPermissions => $_getList(3);
 
   @$pb.TagNumber(5)
-  $core.List<$core.String> get initialPermissions => $_getList(4);
+  $core.List<$core.String> get availablePermissions => $_getList(4);
 
   @$pb.TagNumber(6)
-  $core.List<HomePrompt_PatternOption> get patternOptions => $_getList(5);
+  $core.List<$core.String> get initialPermissions => $_getList(5);
 
   @$pb.TagNumber(7)
-  $core.int get initialPatternOption => $_getIZ(6);
-  @$pb.TagNumber(7)
-  set initialPatternOption($core.int v) { $_setSignedInt32(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasInitialPatternOption() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearInitialPatternOption() => clearField(7);
+  $core.List<HomePrompt_PatternOption> get patternOptions => $_getList(6);
+
+  @$pb.TagNumber(8)
+  $core.int get initialPatternOption => $_getIZ(7);
+  @$pb.TagNumber(8)
+  set initialPatternOption($core.int v) { $_setSignedInt32(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasInitialPatternOption() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearInitialPatternOption() => clearField(8);
 }
 
 class MetaData extends $pb.GeneratedMessage {

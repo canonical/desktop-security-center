@@ -144,11 +144,12 @@ const HomePrompt$json = {
   '2': [
     {'1': 'meta_data', '3': 1, '4': 1, '5': 11, '6': '.apparmor_prompting.MetaData', '10': 'metaData'},
     {'1': 'requested_path', '3': 2, '4': 1, '5': 9, '10': 'requestedPath'},
-    {'1': 'requested_permissions', '3': 3, '4': 3, '5': 9, '10': 'requestedPermissions'},
-    {'1': 'available_permissions', '3': 4, '4': 3, '5': 9, '10': 'availablePermissions'},
-    {'1': 'initial_permissions', '3': 5, '4': 3, '5': 9, '10': 'initialPermissions'},
-    {'1': 'pattern_options', '3': 6, '4': 3, '5': 11, '6': '.apparmor_prompting.HomePrompt.PatternOption', '10': 'patternOptions'},
-    {'1': 'initial_pattern_option', '3': 7, '4': 1, '5': 5, '10': 'initialPatternOption'},
+    {'1': 'home_dir', '3': 3, '4': 1, '5': 9, '10': 'homeDir'},
+    {'1': 'requested_permissions', '3': 4, '4': 3, '5': 9, '10': 'requestedPermissions'},
+    {'1': 'available_permissions', '3': 5, '4': 3, '5': 9, '10': 'availablePermissions'},
+    {'1': 'initial_permissions', '3': 6, '4': 3, '5': 9, '10': 'initialPermissions'},
+    {'1': 'pattern_options', '3': 7, '4': 3, '5': 11, '6': '.apparmor_prompting.HomePrompt.PatternOption', '10': 'patternOptions'},
+    {'1': 'initial_pattern_option', '3': 8, '4': 1, '5': 5, '10': 'initialPatternOption'},
   ],
   '3': [HomePrompt_PatternOption$json],
 };
@@ -167,15 +168,15 @@ const HomePrompt_PatternOption$json = {
 final $typed_data.Uint8List homePromptDescriptor = $convert.base64Decode(
     'CgpIb21lUHJvbXB0EjkKCW1ldGFfZGF0YRgBIAEoCzIcLmFwcGFybW9yX3Byb21wdGluZy5NZX'
     'RhRGF0YVIIbWV0YURhdGESJQoOcmVxdWVzdGVkX3BhdGgYAiABKAlSDXJlcXVlc3RlZFBhdGgS'
-    'MwoVcmVxdWVzdGVkX3Blcm1pc3Npb25zGAMgAygJUhRyZXF1ZXN0ZWRQZXJtaXNzaW9ucxIzCh'
-    'VhdmFpbGFibGVfcGVybWlzc2lvbnMYBCADKAlSFGF2YWlsYWJsZVBlcm1pc3Npb25zEi8KE2lu'
-    'aXRpYWxfcGVybWlzc2lvbnMYBSADKAlSEmluaXRpYWxQZXJtaXNzaW9ucxJVCg9wYXR0ZXJuX2'
-    '9wdGlvbnMYBiADKAsyLC5hcHBhcm1vcl9wcm9tcHRpbmcuSG9tZVByb21wdC5QYXR0ZXJuT3B0'
-    'aW9uUg5wYXR0ZXJuT3B0aW9ucxI0ChZpbml0aWFsX3BhdHRlcm5fb3B0aW9uGAcgASgFUhRpbm'
-    'l0aWFsUGF0dGVybk9wdGlvbhqqAQoNUGF0dGVybk9wdGlvbhJPChFob21lX3BhdHRlcm5fdHlw'
-    'ZRgBIAEoDjIjLmFwcGFybW9yX3Byb21wdGluZy5Ib21lUGF0dGVyblR5cGVSD2hvbWVQYXR0ZX'
-    'JuVHlwZRIhCgxwYXRoX3BhdHRlcm4YAiABKAlSC3BhdGhQYXR0ZXJuEiUKDnNob3dfaW5pdGlh'
-    'bGx5GAMgASgIUg1zaG93SW5pdGlhbGx5');
+    'GQoIaG9tZV9kaXIYAyABKAlSB2hvbWVEaXISMwoVcmVxdWVzdGVkX3Blcm1pc3Npb25zGAQgAy'
+    'gJUhRyZXF1ZXN0ZWRQZXJtaXNzaW9ucxIzChVhdmFpbGFibGVfcGVybWlzc2lvbnMYBSADKAlS'
+    'FGF2YWlsYWJsZVBlcm1pc3Npb25zEi8KE2luaXRpYWxfcGVybWlzc2lvbnMYBiADKAlSEmluaX'
+    'RpYWxQZXJtaXNzaW9ucxJVCg9wYXR0ZXJuX29wdGlvbnMYByADKAsyLC5hcHBhcm1vcl9wcm9t'
+    'cHRpbmcuSG9tZVByb21wdC5QYXR0ZXJuT3B0aW9uUg5wYXR0ZXJuT3B0aW9ucxI0ChZpbml0aW'
+    'FsX3BhdHRlcm5fb3B0aW9uGAggASgFUhRpbml0aWFsUGF0dGVybk9wdGlvbhqqAQoNUGF0dGVy'
+    'bk9wdGlvbhJPChFob21lX3BhdHRlcm5fdHlwZRgBIAEoDjIjLmFwcGFybW9yX3Byb21wdGluZy'
+    '5Ib21lUGF0dGVyblR5cGVSD2hvbWVQYXR0ZXJuVHlwZRIhCgxwYXRoX3BhdHRlcm4YAiABKAlS'
+    'C3BhdGhQYXR0ZXJuEiUKDnNob3dfaW5pdGlhbGx5GAMgASgIUg1zaG93SW5pdGlhbGx5');
 
 @$core.Deprecated('Use metaDataDescriptor instead')
 const MetaData$json = {

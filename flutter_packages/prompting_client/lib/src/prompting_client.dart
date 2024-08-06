@@ -107,6 +107,7 @@ extension PrompteDetailsConversion on PromptDetails {
             metaData:
                 MetaDataConversion.fromProto(response.homePrompt.metaData),
             requestedPath: response.homePrompt.requestedPath,
+            homeDir: response.homePrompt.homeDir,
             requestedPermissions: response.homePrompt.requestedPermissions
                 .map(PermissionConversion.fromString)
                 .toSet(),
