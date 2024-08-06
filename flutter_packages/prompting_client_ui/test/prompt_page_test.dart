@@ -8,7 +8,11 @@ import 'test_utils.dart';
 void main() {
   testWidgets('display home prompt', (tester) async {
     final container = createContainer();
-    registerMockPromptDetails(promptDetails: mockPromptDetailsHome());
+    registerMockPromptDetails(
+      promptDetails: mockPromptDetailsHome(
+        requestedPath: '/home/ubuntu/Documents/foo.txt',
+      ),
+    );
     await tester.pumpApp(
       (_) => UncontrolledProviderScope(
         container: container,

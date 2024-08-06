@@ -26,6 +26,7 @@ void main() {
           updatedAt: '2024-07-13T10:57:28.34963269+02:00',
         ),
         requestedPath: '/home/user/Downloads/example.txt',
+        homeDir: '/home/user',
         requestedPermissions: ['write'],
         availablePermissions: ['read', 'write', 'execute'],
         initialPermissions: ['read', 'write'],
@@ -51,6 +52,7 @@ void main() {
             updatedAt: DateTime.utc(2024, 7, 13, 8, 57, 28, 349, 632),
           ),
           requestedPath: '/home/user/Downloads/example.txt',
+          homeDir: '/home/user',
           requestedPermissions: {Permission.write},
           availablePermissions: {
             Permission.read,

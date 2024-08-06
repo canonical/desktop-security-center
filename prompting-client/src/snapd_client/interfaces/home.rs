@@ -103,11 +103,14 @@ impl PatternOptions {
     }
 }
 
+fn home_dir_from_env() -> String {
+    env::var("SNAP_REAL_HOME").expect("to be running inside of a snap")
+}
+
 impl HomeInterface {
     fn ui_options(&self, prompt: &Prompt<Self>) -> PatternOptions {
-        let home_dir = env::var("SNAP_REAL_HOME").expect("to be running inside of a snap");
         let path = &prompt.constraints.path;
-        PatternOptions::new(path, &home_dir)
+        PatternOptions::new(path, &home_dir_from_env())
     }
 }
 
@@ -161,6 +164,7 @@ impl SnapInterface for HomeInterface {
             meta,
             data: HomeUiInputData {
                 requested_path: prompt.constraints.path,
+                home_dir: home_dir_from_env(),
                 requested_permissions: prompt.constraints.permissions.clone(),
                 available_permissions: prompt.constraints.available_permissions,
                 initial_permissions,
@@ -202,6 +206,7 @@ impl HomeConstraints {
 #[serde(rename_all = "camelCase")]
 pub struct HomeUiInputData {
     pub(crate) requested_path: String,
+    pub(crate) home_dir: String,
     pub(crate) requested_permissions: Vec<String>,
     pub(crate) available_permissions: Vec<String>,
     pub(crate) initial_permissions: Vec<String>,

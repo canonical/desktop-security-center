@@ -45,7 +45,6 @@ message GetCurrentPromptResponse {
     oneof prompt {
         HomePrompt home_prompt = 1;
     }
-
 }
 
 message HomePromptReply {
@@ -56,11 +55,12 @@ message HomePromptReply {
 message HomePrompt {
     MetaData meta_data = 1;
     string requested_path = 2;
-    repeated string requested_permissions = 3;
-    repeated string available_permissions = 4;
-    repeated string initial_permissions = 5;
-    repeated PatternOption pattern_options = 6;
-    int32 initial_pattern_option = 7;
+    string home_dir = 3;
+    repeated string requested_permissions = 4;
+    repeated string available_permissions = 5;
+    repeated string initial_permissions = 6;
+    repeated PatternOption pattern_options = 7;
+    int32 initial_pattern_option = 8;
     message PatternOption {
         HomePatternType home_pattern_type = 1;
         string path_pattern = 2;

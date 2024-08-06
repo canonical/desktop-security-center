@@ -47,15 +47,21 @@
     "@homePatternInfo": {},
     "homePatternTypeCustomPath": "Custom path pattern",
     "@homePatternTypeCustomPath": {},
-    "homePatternTypeRequestedDirectory": "The requested folder only",
+    "homePatternTypeRequestedDirectory": "The requested directory only",
     "@homePatternTypeRequestedDirectory": {},
     "homePatternTypeRequestedFile": "The requested file only",
     "@homePatternTypeRequestedFile": {},
-    "homePatternTypeTopLevelDirectory": "Top-level directory",
-    "@homePatternTypeTopLevelDirectory": {},
-    "homePatternTypeContainingDirectory": "Everything in the folder",
+    "homePatternTypeTopLevelDirectory": "Everything in the {topLevelDir} directory",
+    "@homePatternTypeTopLevelDirectory": {
+        "placeholders": {
+            "topLevelDir": {
+                "type": "String"
+            }
+        }
+    },
+    "homePatternTypeContainingDirectory": "Everything in the directory",
     "@homePatternTypeContainingDirectory": {},
-    "homePatternTypeHomeDirectory": "Everything in the Home folder",
+    "homePatternTypeHomeDirectory": "Everything in the Home directory",
     "@homePatternTypeHomeDirectory": {},
     "homePatternTypeMatchingFileExtension": "Matching file extension",
     "@homePatternTypeMatchingFileExtension": {},

@@ -100,15 +100,17 @@ pub struct HomePrompt {
     pub meta_data: ::core::option::Option<MetaData>,
     #[prost(string, tag = "2")]
     pub requested_path: ::prost::alloc::string::String,
-    #[prost(string, repeated, tag = "3")]
-    pub requested_permissions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, tag = "3")]
+    pub home_dir: ::prost::alloc::string::String,
     #[prost(string, repeated, tag = "4")]
-    pub available_permissions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub requested_permissions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(string, repeated, tag = "5")]
+    pub available_permissions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "6")]
     pub initial_permissions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(message, repeated, tag = "6")]
+    #[prost(message, repeated, tag = "7")]
     pub pattern_options: ::prost::alloc::vec::Vec<home_prompt::PatternOption>,
-    #[prost(int32, tag = "7")]
+    #[prost(int32, tag = "8")]
     pub initial_pattern_option: i32,
 }
 /// Nested message and enum types in `HomePrompt`.

@@ -25,7 +25,14 @@ class HomePromptData with _$HomePromptData {
         HomePatternType.customPath => customPath,
         _ => patternOption.pathPattern,
       };
+
   bool get isValid => permissions.isNotEmpty;
+
+  String get topLevelDir {
+    return details.requestedPath
+        .replaceFirst(details.homeDir, '')
+        .split('/')[1];
+  }
 }
 
 @riverpod

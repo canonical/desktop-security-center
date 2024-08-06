@@ -199,6 +199,7 @@ fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {
             updated_at: input.meta.updated_at,
         }),
         requested_path: input.data.requested_path,
+        home_dir: input.data.home_dir,
         requested_permissions: input.data.requested_permissions,
         initial_permissions: input.data.initial_permissions,
         available_permissions: input.data.available_permissions,
@@ -372,6 +373,7 @@ mod tests {
             },
             data: HomeUiInputData {
                 requested_path: "6".to_string(),
+                home_dir: "7".to_string(),
                 requested_permissions: Vec::new(),
                 available_permissions: Vec::new(),
                 initial_permissions: Vec::new(),
@@ -391,6 +393,7 @@ mod tests {
                 updated_at: "3".to_string(),
             }),
             requested_path: "6".to_string(),
+            home_dir: "7".to_string(),
             requested_permissions: Vec::new(),
             available_permissions: Vec::new(),
             initial_permissions: Vec::new(),

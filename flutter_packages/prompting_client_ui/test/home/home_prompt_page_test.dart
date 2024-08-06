@@ -16,6 +16,7 @@ void main() {
     publisher: 'Mozilla',
     updatedAt: DateTime(2024),
     requestedPath: '/home/ubuntu/Downloads/file.txt',
+    homeDir: '/home/ubuntu',
     requestedPermissions: {Permission.read},
     availablePermissions: {
       Permission.read,
@@ -27,6 +28,7 @@ void main() {
       PatternOption(
         homePatternType: HomePatternType.topLevelDirectory,
         pathPattern: '/home/ubuntu/Downloads/**',
+        showInitially: true,
       ),
     },
   );
@@ -56,6 +58,11 @@ void main() {
     );
 
     expect(
+      find.text(tester.l10n.homePatternTypeTopLevelDirectory('Downloads')),
+      findsOneWidget,
+    );
+
+    expect(
       find.text(tester.l10n.homePromptMetaDataPublishedBy('Mozilla')),
       findsOneWidget,
     );
@@ -77,8 +84,9 @@ void main() {
       ),
     );
 
-    await tester
-        .tap(find.text(HomePatternType.customPath.localize(tester.l10n)));
+    await tester.tap(
+      find.text(HomePatternType.customPath.localize(tester.l10n, 'Downloads')),
+    );
 
     final windowClosed = YaruTestWindow.waitForClosed();
 
@@ -116,8 +124,9 @@ void main() {
       ),
     );
 
-    await tester
-        .tap(find.text(HomePatternType.customPath.localize(tester.l10n)));
+    await tester.tap(
+      find.text(HomePatternType.customPath.localize(tester.l10n, 'Downloads')),
+    );
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextFormField), 'invalid path');
     await tester.tap(find.text(tester.l10n.promptActionOptionAllowAlways));

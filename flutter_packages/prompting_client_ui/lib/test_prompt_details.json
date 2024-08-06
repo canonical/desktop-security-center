@@ -8,6 +8,7 @@
         "publisher": "Mozilla"
     },
     "requestedPath": "/home/user/Downloads/Minotaur/minotaur-13293232.jpeg",
+    "homeDir": "/home/user",
     "requestedPermissions": [
         "write"
     ],

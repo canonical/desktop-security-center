@@ -44,8 +44,9 @@ void main() {
     );
 
     // Select 'custom prompt' to reveal text field
-    await tester
-        .tap(find.text(HomePatternType.customPath.localize(tester.l10n)));
+    await tester.tap(
+      find.text(HomePatternType.customPath.localize(tester.l10n, 'Documents')),
+    );
     await tester.pumpAndSettle();
 
     // Enter custom path
