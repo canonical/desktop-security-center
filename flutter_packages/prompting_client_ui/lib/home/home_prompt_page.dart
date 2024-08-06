@@ -249,7 +249,10 @@ class PatternOptions extends ConsumerWidget {
               pathPattern: '',
             ),
           ],
-          optionTitle: (option) => option.homePatternType.localize(l10n),
+          optionTitle: (option) => option.homePatternType.localize(
+            l10n,
+            model.topLevelDir,
+          ),
           optionSubtitle: (option) => option.pathPattern,
           groupValue: model.patternOption,
           onChanged: notifier.setPatternOption,

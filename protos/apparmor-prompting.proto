@@ -45,7 +45,6 @@ message GetCurrentPromptResponse {
     oneof prompt {
         HomePrompt home_prompt = 1;
     }
-
 }
 
 message HomePromptReply {

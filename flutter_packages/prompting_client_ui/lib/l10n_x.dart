@@ -17,13 +17,13 @@ extension LifespanL10n on Lifespan {
 }
 
 extension HomePatternTypeL10n on HomePatternType {
-  String localize(AppLocalizations l10n) => switch (this) {
+  String localize(AppLocalizations l10n, String topLevelDir) => switch (this) {
         HomePatternType.customPath => l10n.homePatternTypeCustomPath,
         HomePatternType.requestedDirectory =>
           l10n.homePatternTypeRequestedDirectory,
         HomePatternType.requestedFile => l10n.homePatternTypeRequestedFile,
         HomePatternType.topLevelDirectory =>
-          l10n.homePatternTypeTopLevelDirectory,
+          l10n.homePatternTypeTopLevelDirectory(topLevelDir),
         HomePatternType.containingDirectory =>
           l10n.homePatternTypeContainingDirectory,
         HomePatternType.homeDirectory => l10n.homePatternTypeHomeDirectory,
