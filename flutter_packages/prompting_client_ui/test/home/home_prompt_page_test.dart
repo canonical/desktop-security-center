@@ -77,8 +77,9 @@ void main() {
       ),
     );
 
-    await tester
-        .tap(find.text(HomePatternType.customPath.localize(tester.l10n)));
+    await tester.tap(
+      find.text(HomePatternType.customPath.localize(tester.l10n, 'Documents')),
+    );
 
     final windowClosed = YaruTestWindow.waitForClosed();
 
@@ -116,8 +117,9 @@ void main() {
       ),
     );
 
-    await tester
-        .tap(find.text(HomePatternType.customPath.localize(tester.l10n)));
+    await tester.tap(
+      find.text(HomePatternType.customPath.localize(tester.l10n, 'Documents')),
+    );
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextFormField), 'invalid path');
     await tester.tap(find.text(tester.l10n.promptActionOptionAllowAlways));
