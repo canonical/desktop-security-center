@@ -1,15 +1,20 @@
 //! This is our main worker task for processing prompts from snapd and driving the UI.
 use crate::{
-    daemon::{ActionedPrompt, EnrichedPrompt},
+    daemon::{ActionedPrompt, EnrichedPrompt, PromptUpdate},
     snapd_client::{PromptId, TypedUiInput},
     Result,
 };
 use std::{
+    collections::VecDeque,
     env,
     sync::{Arc, Mutex},
     time::Duration,
 };
-use tokio::{process::Command, sync::mpsc::UnboundedReceiver, time::timeout};
+use tokio::{
+    process::Command,
+    sync::mpsc::{error::TryRecvError, UnboundedReceiver},
+    time::timeout,
+};
 use tracing::{debug, error, info, span, warn, Level};
 
 const RECV_TIMEOUT: Duration = Duration::from_millis(200);
@@ -64,9 +69,10 @@ pub struct Worker<S>
 where
     S: SpawnUi,
 {
-    rx_prompts: UnboundedReceiver<EnrichedPrompt>,
-    active_prompt: Arc<Mutex<Option<TypedUiInput>>>,
+    rx_prompts: UnboundedReceiver<PromptUpdate>,
     rx_actioned_prompts: UnboundedReceiver<ActionedPrompt>,
+    active_prompt: Arc<Mutex<Option<TypedUiInput>>>,
+    pending_prompts: VecDeque<EnrichedPrompt>,
     prompts_to_drop: Vec<PromptId>,
     dead_prompts: Vec<PromptId>,
     recv_timeout: Duration,
@@ -76,7 +82,7 @@ where
 
 impl Worker<FlutterUi> {
     pub fn new(
-        rx_prompts: UnboundedReceiver<EnrichedPrompt>,
+        rx_prompts: UnboundedReceiver<PromptUpdate>,
         rx_actioned_prompts: UnboundedReceiver<ActionedPrompt>,
     ) -> Self {
         let snap = env::var("SNAP").expect("SNAP env var to be set");
@@ -84,8 +90,9 @@ impl Worker<FlutterUi> {
 
         Self {
             rx_prompts,
-            active_prompt: Arc::new(Mutex::new(None)),
             rx_actioned_prompts,
+            active_prompt: Arc::new(Mutex::new(None)),
+            pending_prompts: VecDeque::new(),
             prompts_to_drop: Vec::new(),
             dead_prompts: Vec::new(),
             recv_timeout: RECV_TIMEOUT,
@@ -115,25 +122,70 @@ where
         Ok(())
     }
 
-    pub async fn step(&mut self) -> Result<()> {
-        let ep = match self.rx_prompts.recv().await {
-            Some(ep) => ep,
-            None => {
-                self.running = false;
-                return Ok(()); // channel now closed
+    async fn pull_updates(&mut self) {
+        // If there are currently no prompts pending in the channel we block until one arrives
+        // rather than busy looping with try_recv below.
+        if self.rx_prompts.is_empty() {
+            match self.rx_prompts.recv().await {
+                Some(update) => self.process_update(update),
+                None => {
+                    self.running = false; // channel now closed
+                    return;
+                }
             }
+        }
+
+        // Eagerly drain the channel of all prompts that are currently available rather than
+        // pulling in lockstep with serving the prompts to the UI.
+        loop {
+            match self.rx_prompts.try_recv() {
+                Ok(update) => self.process_update(update),
+                Err(TryRecvError::Empty) => return,
+                Err(TryRecvError::Disconnected) => {
+                    self.running = false;
+                    return;
+                }
+            }
+        }
+    }
+
+    fn process_update(&mut self, update: PromptUpdate) {
+        match update {
+            PromptUpdate::Add(ep) if self.prompts_to_drop.contains(ep.prompt.id()) => {
+                info!(id=%ep.prompt.id().0, "dropping prompt as it has already been actioned");
+                self.prompts_to_drop.retain(|id| id != ep.prompt.id());
+            }
+
+            PromptUpdate::Add(ep) => self.pending_prompts.push_back(ep),
+
+            PromptUpdate::Drop(id) => {
+                // If this prompt was already pending then remove it now, otherwise keep track of
+                // it as one to drop as and when it comes in
+                let len = self.pending_prompts.len();
+                self.pending_prompts.retain(|ep| ep.prompt.id() != &id);
+                if self.pending_prompts.len() < len {
+                    info!(id=%id.0, "dropping prompt as it has already been actioned");
+                } else {
+                    // TODO: do we need to worry about this growing unchecked if we get bogus
+                    // prompt IDs through that are never going to be cleared out?
+                    self.prompts_to_drop.push(id);
+                }
+            }
+        }
+    }
+
+    async fn step(&mut self) -> Result<()> {
+        self.pull_updates().await;
+
+        let ep = match self.pending_prompts.pop_front() {
+            Some(ep) if self.running => ep,
+            _ => return Ok(()),
         };
 
         let span = span!(target: "worker", Level::INFO, "Prompt", id=%ep.prompt.id().0);
         let _enter = span.enter();
 
         debug!("got prompt: {ep:?}");
-
-        if self.prompts_to_drop.contains(ep.prompt.id()) {
-            info!("dropping prompt as it has already been actioned");
-            self.prompts_to_drop.retain(|id| id != ep.prompt.id());
-            return Ok(());
-        }
 
         let expected_id = ep.prompt.id().clone();
         debug!("updating active prompt");
@@ -218,6 +270,74 @@ mod tests {
         time::sleep,
     };
 
+    fn ep(id: &str) -> EnrichedPrompt {
+        EnrichedPrompt {
+            prompt: TypedPrompt::Home(Prompt {
+                id: PromptId(id.to_string()),
+                timestamp: String::new(),
+                snap: "test".to_string(),
+                interface: "home".to_string(),
+                constraints: HomeConstraints::default(),
+            }),
+            meta: None,
+        }
+    }
+
+    fn add(id: &str) -> PromptUpdate {
+        PromptUpdate::Add(ep(id))
+    }
+
+    fn drop_id(id: &str) -> PromptUpdate {
+        PromptUpdate::Drop(PromptId(id.to_string()))
+    }
+
+    #[test_case(add("1"), &[], &[], &["1"], &[]; "add new prompt")]
+    #[test_case(add("1"), &[], &["1"], &[], &[]; "add prompt that we have been told to drop")]
+    #[test_case(drop_id("1"), &["1"], &[], &[], &[]; "drop for pending prompt")]
+    #[test_case(drop_id("1"), &[], &[], &[], &["1"]; "drop prompt not seen yet")]
+    #[test]
+    fn process_update(
+        update: PromptUpdate,
+        current_pending: &[&str],
+        current_to_drop: &[&str],
+        expected_pending: &[&str],
+        expected_to_drop: &[&str],
+    ) {
+        let (_, rx_prompts) = unbounded_channel();
+        let (_, rx_actioned_prompts) = unbounded_channel();
+        let pending_prompts = current_pending.iter().map(|id| ep(id)).collect();
+        let prompts_to_drop = current_to_drop
+            .iter()
+            .map(|id| PromptId(id.to_string()))
+            .collect();
+
+        let mut w = Worker {
+            rx_prompts,
+            rx_actioned_prompts,
+            active_prompt: Arc::new(Mutex::new(None)),
+            pending_prompts,
+            prompts_to_drop,
+            dead_prompts: Vec::new(),
+            recv_timeout: Duration::from_millis(100),
+            ui: FlutterUi {
+                cmd: "".to_string(),
+            },
+            running: true,
+        };
+
+        w.process_update(update);
+
+        let pending: Vec<&str> = w
+            .pending_prompts
+            .iter()
+            .map(|ep| ep.prompt.id().0.as_str())
+            .collect();
+        let to_drop: Vec<&str> = w.prompts_to_drop.iter().map(|id| id.0.as_str()).collect();
+
+        assert_eq!(pending, expected_pending);
+        assert_eq!(to_drop, expected_to_drop);
+    }
+
     #[test_case("1", "1", 10, Recv::Success, &["drop-me"], &["dead"]; "recv expected within timeout")]
     #[test_case("2", "1", 10, Recv::Unexpected, &["drop-me"], &["dead"]; "recv unexpected within timeout")]
     #[test_case("dead", "1", 10, Recv::DeadPrompt, &["drop-me"], &[]; "recv dead prompt")]
@@ -236,8 +356,9 @@ mod tests {
 
         let mut w = Worker {
             rx_prompts,
-            active_prompt: Arc::new(Mutex::new(None)),
             rx_actioned_prompts,
+            active_prompt: Arc::new(Mutex::new(None)),
+            pending_prompts: VecDeque::new(),
             prompts_to_drop: Vec::new(),
             dead_prompts: vec![PromptId("dead".to_string())],
             recv_timeout: Duration::from_millis(100),
@@ -285,8 +406,9 @@ mod tests {
 
         let mut w = Worker {
             rx_prompts,
-            active_prompt: Arc::new(Mutex::new(None)),
             rx_actioned_prompts,
+            active_prompt: Arc::new(Mutex::new(None)),
+            pending_prompts: VecDeque::new(),
             prompts_to_drop: Vec::new(),
             dead_prompts: vec![PromptId("dead".to_string())],
             recv_timeout: Duration::from_millis(100),
@@ -357,25 +479,30 @@ mod tests {
         }
     }
 
-    #[test_case(&[], &[]; "channel close without prompts")]
-    #[test_case(&["1"], &[rep("1", 10, "1", &[])]; "single")]
+    #[test_case(vec![], &[]; "channel close without prompts")]
+    #[test_case(vec![add("1")], &[rep("1", 10, "1", &[])]; "single")]
     #[test_case(
-        &["1", "2", "3"],
+        vec![add("1"), add("2"), add("3")],
         &[rep("1", 10, "1", &[]), rep("2", 10, "2", &[]), rep("3", 10, "3", &[])];
         "multiple"
     )]
     #[test_case(
-        &["1", "2", "3"],
+        vec![add("1"), add("2"), add("3")],
         &[rep("1", 10, "1", &["2"]), rep("3", 10, "3", &[])];
         "first reply actions second prompt as well"
     )]
     #[test_case(
-        &["1", "2"],
+        vec![add("1"), add("2")],
         &[rep("1", 200, "1", &[]), rep("2", 50, "2", &[])];
         "delayed reply skips"
     )]
+    #[test_case(
+        vec![add("1"), add("2"), add("3"), drop_id("2"), add("4")],
+        &[rep("1", 10, "1", &[]), rep("3", 10, "3", &[]), rep("4", 10, "4", &[])];
+        "explicit drop of previous prompt"
+    )]
     #[tokio::test]
-    async fn sequence(prompts: &[&str], replies: &[Reply]) {
+    async fn sequence(updates: Vec<PromptUpdate>, replies: &[Reply]) {
         let (tx_prompts, rx_prompts) = unbounded_channel();
         let (tx_actioned_prompts, rx_actioned_prompts) = unbounded_channel();
         let active_prompt = Arc::new(Mutex::new(None));
@@ -389,8 +516,9 @@ mod tests {
 
         let mut w = Worker {
             rx_prompts,
-            active_prompt,
             rx_actioned_prompts,
+            active_prompt,
+            pending_prompts: VecDeque::new(),
             prompts_to_drop: Vec::new(),
             dead_prompts: vec![],
             recv_timeout: Duration::from_millis(100),
@@ -402,19 +530,8 @@ mod tests {
         // for the home interface
         env::set_var("SNAP_REAL_HOME", "/home/ubuntu");
 
-        for id in prompts {
-            let _ = tx_prompts.send(EnrichedPrompt {
-                prompt: TypedPrompt::Home(Prompt {
-                    id: PromptId(id.to_string()),
-                    timestamp: String::new(),
-                    snap: "test".to_string(),
-                    interface: "home".to_string(),
-                    constraints: HomeConstraints::default(),
-                }),
-                meta: None,
-            });
-
-            w.step().await.unwrap();
+        for update in updates {
+            let _ = tx_prompts.send(update);
         }
 
         drop(tx_prompts);

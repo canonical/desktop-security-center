@@ -5,7 +5,7 @@
 //! enriched prompts themselves are simply passed off on a channel for downstream consumption and
 //! mapping into the data required for the prompt UI.
 use crate::{
-    daemon::EnrichedPrompt,
+    daemon::{EnrichedPrompt, PromptUpdate},
     snapd_client::{PromptId, SnapMeta, SnapdSocketClient, TypedPrompt},
     Error, Result, NO_PROMPTS_FOR_USER, PROMPT_NOT_FOUND,
 };
@@ -27,16 +27,23 @@ async fn get_snap_meta(client: &SnapdSocketClient, snap: &str) -> Option<SnapMet
 #[derive(Debug, Clone)]
 struct PollLoopState {
     client: SnapdSocketClient,
-    tx: UnboundedSender<EnrichedPrompt>,
+    tx: UnboundedSender<PromptUpdate>,
     running: bool,
 }
 
 impl PollLoopState {
-    fn new(client: SnapdSocketClient, tx: UnboundedSender<EnrichedPrompt>) -> Self {
+    fn new(client: SnapdSocketClient, tx: UnboundedSender<PromptUpdate>) -> Self {
         Self {
             client,
             tx,
             running: true,
+        }
+    }
+
+    fn send_update(&mut self, update: PromptUpdate) {
+        if let Err(error) = self.tx.send(update) {
+            warn!(%error, "receiver channel for enriched prompts has been dropped. Exiting.");
+            self.running = false;
         }
     }
 
@@ -48,7 +55,8 @@ impl PollLoopState {
             Err(Error::SnapdError { message })
                 if message == PROMPT_NOT_FOUND || message == NO_PROMPTS_FOR_USER =>
             {
-                return
+                self.send_update(PromptUpdate::Drop(id));
+                return;
             }
 
             Err(e) => {
@@ -64,11 +72,7 @@ impl PollLoopState {
 
     async fn process_prompt(&mut self, prompt: TypedPrompt) {
         let meta = get_snap_meta(&self.client, prompt.snap()).await;
-
-        if let Err(error) = self.tx.send(EnrichedPrompt { prompt, meta }) {
-            warn!(%error, "receiver channel for enriched prompts has been dropped. Exiting.");
-            self.running = false;
-        }
+        self.send_update(PromptUpdate::Add(EnrichedPrompt { prompt, meta }));
     }
 
     /// Catch up on all pending prompts before dropping into polling the notices API
@@ -122,7 +126,7 @@ impl PollLoopState {
 /// does not directly process the prompts themselves.
 pub async fn poll_for_prompts(
     client: SnapdSocketClient,
-    tx: UnboundedSender<EnrichedPrompt>,
+    tx: UnboundedSender<PromptUpdate>,
 ) -> Result<()> {
     let mut state = PollLoopState::new(client, tx);
     state.handle_initial_prompts().await;

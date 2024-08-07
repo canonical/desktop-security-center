@@ -20,6 +20,13 @@ pub struct EnrichedPrompt {
     meta: Option<SnapMeta>,
 }
 
+#[allow(clippy::large_enum_variant)]
+#[derive(Debug, Clone)]
+pub enum PromptUpdate {
+    Add(EnrichedPrompt),
+    Drop(PromptId),
+}
+
 // Server -> worker
 #[derive(Debug, Clone)]
 pub struct ActionedPrompt {
