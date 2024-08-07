@@ -246,7 +246,7 @@ where
                 }
             }
 
-            Ok(Some(ActionedPrompt::Gone { id })) => {
+            Ok(Some(ActionedPrompt::NotFound { id })) => {
                 if self.dead_prompts.contains(&id) {
                     warn!(id=%id.0, "attempt to reply to dead prompt that is now gone");
                     self.dead_prompts.retain(|i| i != &id);
@@ -442,7 +442,7 @@ mod tests {
             running: false,
         };
 
-        let _ = tx_actioned_prompts.send(ActionedPrompt::Gone {
+        let _ = tx_actioned_prompts.send(ActionedPrompt::NotFound {
             id: PromptId(sent_id.to_string()),
         });
 

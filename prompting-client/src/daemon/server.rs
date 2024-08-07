@@ -12,8 +12,10 @@ use crate::{
     },
     snapd_client::{
         self,
-        interfaces::home::{HomeInterface, HomeReplyConstraints, PatternType, TypedPathPattern},
-        PromptId, PromptReply as SnapPromptReply, SnapdSocketClient, TypedPromptReply,
+        interfaces::home::{
+            HomeInterface, HomeReplyConstraints, HomeUiInputData, PatternType, TypedPathPattern,
+        },
+        PromptId, PromptReply as SnapPromptReply, SnapMeta, SnapdSocketClient, TypedPromptReply,
         TypedUiInput, UiInput,
     },
     Error, NO_PROMPTS_FOR_USER, PROMPT_NOT_FOUND,
@@ -136,7 +138,7 @@ impl<T: ReplyToPrompt> AppArmorPrompting for Service<T> {
                 if [NO_PROMPTS_FOR_USER, PROMPT_NOT_FOUND].contains(&message.as_ref()) =>
             {
                 warn!(id=%id.0, "prompt not found (id={})", id.0);
-                self.update_worker(ActionedPrompt::Gone { id }).await;
+                self.update_worker(ActionedPrompt::NotFound { id }).await;
 
                 PromptReplyResponse {
                     prompt_reply_type: PromptReplyType::PromptNotFound as i32,
@@ -197,48 +199,65 @@ fn map_prompt_reply(mut reply: PromptReply) -> Result<TypedPromptReply, Status> 
 }
 
 fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {
+    let SnapMeta {
+        name,
+        updated_at,
+        store_url,
+        publisher,
+    } = input.meta;
+
+    let HomeUiInputData {
+        requested_path,
+        home_dir,
+        requested_permissions,
+        available_permissions,
+        initial_permissions,
+        initial_pattern_option,
+        pattern_options,
+    } = input.data;
+
     Prompt::HomePrompt(HomePrompt {
         meta_data: Some(MetaData {
             prompt_id: input.id.0,
-            snap_name: input.meta.name,
-            store_url: input.meta.store_url,
-            publisher: input.meta.publisher,
-            updated_at: input.meta.updated_at,
+            snap_name: name,
+            store_url,
+            publisher,
+            updated_at,
         }),
-        requested_path: input.data.requested_path,
-        home_dir: input.data.home_dir,
-        requested_permissions: input.data.requested_permissions,
-        initial_permissions: input.data.initial_permissions,
-        available_permissions: input.data.available_permissions,
-        initial_pattern_option: input.data.initial_pattern_option as i32,
-        pattern_options: input
-            .data
-            .pattern_options
+        requested_path,
+        home_dir,
+        requested_permissions,
+        initial_permissions,
+        available_permissions,
+        initial_pattern_option: initial_pattern_option as i32,
+        pattern_options: pattern_options
             .into_iter()
-            .map(
-                |TypedPathPattern {
-                     pattern_type,
-                     path_pattern,
-                     show_initially,
-                 }| {
-                    let home_pattern_type = map_enum!(
-                        PatternType => HomePatternType;
-                        [
-                            RequestedDirectory, RequestedFile, TopLevelDirectory,
-                            HomeDirectory, MatchingFileExtension, ContainingDirectory
-                        ];
-                        pattern_type;
-                    );
-
-                    PatternOption {
-                        home_pattern_type: home_pattern_type as i32,
-                        path_pattern,
-                        show_initially,
-                    }
-                },
-            )
+            .map(map_pattern_option)
             .collect(),
     })
+}
+
+fn map_pattern_option(
+    TypedPathPattern {
+        pattern_type,
+        path_pattern,
+        show_initially,
+    }: TypedPathPattern,
+) -> PatternOption {
+    let home_pattern_type = map_enum!(
+        PatternType => HomePatternType;
+        [
+            RequestedDirectory, RequestedFile, TopLevelDirectory,
+            HomeDirectory, MatchingFileExtension, ContainingDirectory
+        ];
+        pattern_type;
+    );
+
+    PatternOption {
+        home_pattern_type: home_pattern_type as i32,
+        path_pattern,
+        show_initially,
+    }
 }
 
 #[cfg(test)]

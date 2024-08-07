@@ -31,7 +31,7 @@ pub enum PromptUpdate {
 #[derive(Debug, Clone)]
 pub enum ActionedPrompt {
     Actioned { id: PromptId, others: Vec<PromptId> },
-    Gone { id: PromptId },
+    NotFound { id: PromptId },
 }
 
 /// Start our backgroud polling and processing loops before dropping into running the tonic GRPC
