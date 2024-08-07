@@ -164,6 +164,12 @@ class ActionButton extends ConsumerWidget {
                 if (context.mounted) {
                   await YaruWindow.of(context).close();
                 }
+              } else if (response is PromptReplyResponsePromptNotFound) {
+                // FIXME: really this needs to display an error to the user and then close
+                // but we need to at make sure that the UI doesn't hang as an initial step
+                if (context.mounted) {
+                  await YaruWindow.of(context).close();
+                }
               }
             }
           : null,

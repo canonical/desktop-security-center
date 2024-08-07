@@ -68,44 +68,61 @@ void main() {
     );
   });
 
-  testWidgets('submit prompt reply', (tester) async {
-    final container = createContainer();
-    registerMockPromptDetails(
-      promptDetails: testDetails,
-    );
-    final client = registerMockAppArmorPromptingClient(
-      promptDetails: testDetails,
-      replyResponse: PromptReplyResponse.success(),
-    );
-    await tester.pumpApp(
-      (_) => UncontrolledProviderScope(
-        container: container,
-        child: const PromptPage(),
+  group('submit prompt reply', () {
+    final testCases = [
+      (
+        name: 'successful',
+        replyResponse: PromptReplyResponse.success(),
       ),
-    );
-
-    await tester.tap(
-      find.text(HomePatternType.customPath.localize(tester.l10n, 'Downloads')),
-    );
-
-    final windowClosed = YaruTestWindow.waitForClosed();
-
-    await tester.tap(find.text(tester.l10n.promptActionOptionDenyOnce));
-    await tester.pumpAndSettle();
-
-    verify(
-      client.replyToPrompt(
-        PromptReply.home(
-          promptId: 'promptId',
-          action: Action.deny,
-          lifespan: Lifespan.single,
-          pathPattern: '/home/ubuntu/Downloads/file.txt',
-          permissions: {Permission.read},
-        ),
+      (
+        name: 'prompt not found',
+        replyResponse: PromptReplyResponse.promptNotFound(message: 'not found'),
       ),
-    ).called(1);
+    ];
 
-    await expectLater(windowClosed, completes);
+    for (final testCase in testCases) {
+      testWidgets(testCase.name, (tester) async {
+        final container = createContainer();
+        registerMockPromptDetails(
+          promptDetails: testDetails,
+        );
+        final client = registerMockAppArmorPromptingClient(
+          promptDetails: testDetails,
+          replyResponse: testCase.replyResponse,
+        );
+        await tester.pumpApp(
+          (_) => UncontrolledProviderScope(
+            container: container,
+            child: const PromptPage(),
+          ),
+        );
+
+        await tester.tap(
+          find.text(
+            HomePatternType.customPath.localize(tester.l10n, 'Downloads'),
+          ),
+        );
+
+        final windowClosed = YaruTestWindow.waitForClosed();
+
+        await tester.tap(find.text(tester.l10n.promptActionOptionDenyOnce));
+        await tester.pumpAndSettle();
+
+        verify(
+          client.replyToPrompt(
+            PromptReply.home(
+              promptId: 'promptId',
+              action: Action.deny,
+              lifespan: Lifespan.single,
+              pathPattern: '/home/ubuntu/Downloads/file.txt',
+              permissions: {Permission.read},
+            ),
+          ),
+        ).called(1);
+
+        await expectLater(windowClosed, completes);
+      });
+    }
   });
 
   testWidgets('show custom path error', (tester) async {
