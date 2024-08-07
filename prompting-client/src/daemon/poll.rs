@@ -9,15 +9,25 @@ use crate::{
     snapd_client::{PromptId, SnapMeta, SnapdSocketClient, TypedPrompt},
     Error, Result, NO_PROMPTS_FOR_USER, PROMPT_NOT_FOUND,
 };
-use std::collections::HashMap;
+use cached::proc_macro::cached;
 use tokio::sync::mpsc::UnboundedSender;
 use tracing::{debug, error, info, warn};
+
+#[cached(
+    time = 3600,  // seconds
+    option = true,
+    sync_writes = true,
+    key = "String",
+    convert = r#"{ String::from(snap) }"#
+)]
+async fn get_snap_meta(client: &SnapdSocketClient, snap: &str) -> Option<SnapMeta> {
+    client.snap_metadata(snap).await
+}
 
 #[derive(Debug, Clone)]
 struct PollLoopState {
     client: SnapdSocketClient,
     tx: UnboundedSender<EnrichedPrompt>,
-    meta_cache: HashMap<String, SnapMeta>,
     running: bool,
 }
 
@@ -26,23 +36,7 @@ impl PollLoopState {
         Self {
             client,
             tx,
-            meta_cache: Default::default(),
             running: true,
-        }
-    }
-
-    // FIXME: need to have a timeout on how long we keep this cached or see if there is a notice we
-    // can subscribe to which tells us when a snap has been updated
-    async fn get(&mut self, snap: &str) -> Option<SnapMeta> {
-        match self.meta_cache.get(snap) {
-            Some(meta) => Some(meta.clone()),
-            None => {
-                let meta = self.client.snap_metadata(snap).await;
-                if let Some(meta) = &meta {
-                    self.meta_cache.insert(snap.to_string(), meta.clone());
-                }
-                meta
-            }
         }
     }
 
@@ -69,7 +63,7 @@ impl PollLoopState {
     }
 
     async fn process_prompt(&mut self, prompt: TypedPrompt) {
-        let meta = self.get(prompt.snap()).await;
+        let meta = get_snap_meta(&self.client, prompt.snap()).await;
 
         if let Err(error) = self.tx.send(EnrichedPrompt { prompt, meta }) {
             warn!(%error, "receiver channel for enriched prompts has been dropped. Exiting.");
