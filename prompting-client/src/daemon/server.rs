@@ -82,6 +82,12 @@ impl<T: ReplyToPrompt> Service<T> {
             tx_actioned_prompts,
         }
     }
+
+    async fn update_worker(&self, actioned_prompt: ActionedPrompt) {
+        if let Err(e) = self.tx_actioned_prompts.send(actioned_prompt) {
+            panic!("send on closed tx_actioned_prompts channel: {e}");
+        }
+    }
 }
 
 #[async_trait]
@@ -117,9 +123,8 @@ impl<T: ReplyToPrompt> AppArmorPrompting for Service<T> {
         info!(id=%id.0, "replying to prompt id={}", id.0);
         let resp = match self.client.reply(&id, reply).await {
             Ok(others) => {
-                if let Err(e) = self.tx_actioned_prompts.send(ActionedPrompt { id, others }) {
-                    panic!("send on closed tx_actioned_prompts channel: {e}");
-                }
+                self.update_worker(ActionedPrompt::Actioned { id, others })
+                    .await;
 
                 PromptReplyResponse {
                     prompt_reply_type: PromptReplyType::Success as i32,
@@ -131,6 +136,8 @@ impl<T: ReplyToPrompt> AppArmorPrompting for Service<T> {
                 if [NO_PROMPTS_FOR_USER, PROMPT_NOT_FOUND].contains(&message.as_ref()) =>
             {
                 warn!(id=%id.0, "prompt not found (id={})", id.0);
+                self.update_worker(ActionedPrompt::Gone { id }).await;
+
                 PromptReplyResponse {
                     prompt_reply_type: PromptReplyType::PromptNotFound as i32,
                     message: "prompt not found".to_string(),
@@ -441,7 +448,6 @@ mod tests {
     #[test_case(Some(ui_input()), Some(prompt()); "non-empty prompt")]
     #[tokio::test]
     async fn test_get_current_prompt(ui_input: Option<TypedUiInput>, expected: Option<Prompt>) {
-        // Test setup
         let mock_client = MockClient {
             want_err: false,
             expected_reply: None,
@@ -451,7 +457,6 @@ mod tests {
         let mut client =
             setup_server_and_client(mock_client, active_prompt, tx_actioned_prompts).await;
 
-        // Run test
         let resp = client
             .get_current_prompt(Request::new(()))
             .await
@@ -459,18 +464,15 @@ mod tests {
             .into_inner()
             .prompt;
 
-        // Check output
         assert_eq!(resp, expected);
     }
 
-    // TODO(matt): include diff (see notes) and add to logic / tests
     #[test_case(prompt_reply(None), ExpectedErrors{snapd_err: false, tx_err: false, want_err: true}; "Error when map_prompt_reply fails")]
     #[test_case(prompt_reply(prompt_reply_inner()), ExpectedErrors{snapd_err: true, tx_err: false, want_err: false}; "Returns unknown error code when snapd returns an error")]
     #[test_case(prompt_reply(prompt_reply_inner()), ExpectedErrors{snapd_err: false, tx_err: true, want_err: true}; "Error when returning actioned prompts returns an error")]
     #[test_case(prompt_reply(prompt_reply_inner()), ExpectedErrors{snapd_err: false, tx_err: false, want_err: false}; "Succesfully reply to a prompt")]
     #[tokio::test]
     async fn test_reply_to_prompt(prompt_reply: PromptReply, expected_errors: ExpectedErrors) {
-        // Test setup
         let mock_client = MockClient {
             want_err: expected_errors.snapd_err,
             expected_reply: Some(typed_prompt_reply()),
@@ -484,10 +486,8 @@ mod tests {
         let mut client =
             setup_server_and_client(mock_client, active_prompt, tx_actioned_prompts).await;
 
-        // Run the test
         let resp = client.reply_to_prompt(Request::new(prompt_reply)).await;
 
-        // Check test output
         if expected_errors.want_err {
             assert!(resp.is_err());
             return;
@@ -503,9 +503,12 @@ mod tests {
             resp.unwrap().into_inner().prompt_reply_type,
             PromptReplyType::Success as i32
         );
+
         if let Some(mut rx) = rx_actioned_prompts {
-            let received_prompt_id = rx.recv().await.unwrap();
-            assert_eq!(received_prompt_id.id.0, "1".to_string());
+            match rx.recv().await {
+                Some(ActionedPrompt::Actioned { id, .. }) => assert_eq!(id.0, "1".to_string()),
+                res => panic!("expected actioned prompt, got {res:?}"),
+            }
         }
     }
 }

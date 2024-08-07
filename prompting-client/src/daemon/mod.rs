@@ -29,9 +29,9 @@ pub enum PromptUpdate {
 
 // Server -> worker
 #[derive(Debug, Clone)]
-pub struct ActionedPrompt {
-    id: PromptId,
-    others: Vec<PromptId>,
+pub enum ActionedPrompt {
+    Actioned { id: PromptId, others: Vec<PromptId> },
+    Gone { id: PromptId },
 }
 
 /// Start our backgroud polling and processing loops before dropping into running the tonic GRPC

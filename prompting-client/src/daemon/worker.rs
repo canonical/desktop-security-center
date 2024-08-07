@@ -23,6 +23,7 @@ const RECV_TIMEOUT: Duration = Duration::from_millis(200);
 enum Recv {
     Success,
     Timeout,
+    Gone,
     DeadPrompt,
     Unexpected,
     ChannelClosed,
@@ -197,7 +198,7 @@ where
 
         loop {
             match self.wait_for_expected_prompt(&expected_id).await {
-                Recv::Success | Recv::Timeout => break,
+                Recv::Success | Recv::Timeout | Recv::Gone => break,
                 Recv::DeadPrompt | Recv::Unexpected => continue,
                 Recv::ChannelClosed => {
                     self.running = false;
@@ -226,7 +227,7 @@ where
 
     async fn wait_for_expected_prompt(&mut self, expected_id: &PromptId) -> Recv {
         match timeout(self.recv_timeout, self.rx_actioned_prompts.recv()).await {
-            Ok(Some(ActionedPrompt { id, others })) => {
+            Ok(Some(ActionedPrompt::Actioned { id, others })) => {
                 debug!(recv_id=%id.0, "reply sent for prompt");
                 debug!(to_drop=?others, "updating prompts to drop");
                 self.prompts_to_drop.extend(others);
@@ -241,6 +242,20 @@ where
                     Recv::Success
                 } else {
                     warn!(expected=%expected_id.0, seen=%id.0, "unexpected prompt reply");
+                    Recv::Unexpected
+                }
+            }
+
+            Ok(Some(ActionedPrompt::Gone { id })) => {
+                if self.dead_prompts.contains(&id) {
+                    warn!(id=%id.0, "attempt to reply to dead prompt that is now gone");
+                    self.dead_prompts.retain(|i| i != &id);
+                }
+
+                if &id == expected_id {
+                    Recv::Gone
+                } else {
+                    warn!(expected=%expected_id.0, seen=%id.0, "unexpected prompt is now gone");
                     Recv::Unexpected
                 }
             }
@@ -370,7 +385,7 @@ mod tests {
 
         tokio::spawn(async move {
             sleep(Duration::from_millis(sleep_ms)).await;
-            let _ = tx_actioned_prompts.send(ActionedPrompt {
+            let _ = tx_actioned_prompts.send(ActionedPrompt::Actioned {
                 id: PromptId(sent_id.to_string()),
                 others: vec![PromptId("drop-me".to_string())],
             });
@@ -389,6 +404,53 @@ mod tests {
                     .map(|id| PromptId(id.to_string()))
             )
         );
+        assert_eq!(
+            w.dead_prompts,
+            Vec::from_iter(
+                expected_dead_prompts
+                    .iter()
+                    .map(|id| PromptId(id.to_string()))
+            )
+        );
+    }
+
+    #[test_case("1", "1", Recv::Gone, &["dead"]; "gone for expected prompt")]
+    #[test_case("2", "1", Recv::Unexpected, &["dead"]; "gone for unexpected prompt")]
+    #[test_case("dead", "dead", Recv::Gone, &[]; "gone for expected dead prompt")]
+    #[test_case("dead", "1", Recv::Unexpected, &[]; "gone for unexpected dead prompt")]
+    #[tokio::test]
+    async fn wait_for_expected_prompt_gone(
+        sent_id: &str,
+        expected_id: &str,
+        expected_recv: Recv,
+        expected_dead_prompts: &[&str],
+    ) {
+        let (_, rx_prompts) = unbounded_channel();
+        let (tx_actioned_prompts, rx_actioned_prompts) = unbounded_channel();
+
+        let mut w = Worker {
+            rx_prompts,
+            rx_actioned_prompts,
+            active_prompt: Arc::new(Mutex::new(None)),
+            pending_prompts: VecDeque::new(),
+            prompts_to_drop: Vec::new(),
+            dead_prompts: vec![PromptId("dead".to_string())],
+            recv_timeout: Duration::from_millis(100),
+            ui: FlutterUi {
+                cmd: "".to_string(),
+            },
+            running: false,
+        };
+
+        let _ = tx_actioned_prompts.send(ActionedPrompt::Gone {
+            id: PromptId(sent_id.to_string()),
+        });
+
+        let recv = w
+            .wait_for_expected_prompt(&PromptId(expected_id.to_string()))
+            .await;
+
+        assert_eq!(recv, expected_recv);
         assert_eq!(
             w.dead_prompts,
             Vec::from_iter(
@@ -469,7 +531,7 @@ mod tests {
             // Send from a task so the Worker sees the UI "exit" and starts waiting for the reply
             tokio::spawn(async move {
                 sleep(Duration::from_millis(sleep_ms)).await;
-                let _ = tx.send(ActionedPrompt {
+                let _ = tx.send(ActionedPrompt::Actioned {
                     id: PromptId(id.to_string()),
                     others: drop.iter().map(|id| PromptId(id.to_string())).collect(),
                 });
