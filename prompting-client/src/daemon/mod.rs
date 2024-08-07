@@ -20,11 +20,18 @@ pub struct EnrichedPrompt {
     meta: Option<SnapMeta>,
 }
 
+#[allow(clippy::large_enum_variant)]
+#[derive(Debug, Clone)]
+pub enum PromptUpdate {
+    Add(EnrichedPrompt),
+    Drop(PromptId),
+}
+
 // Server -> worker
 #[derive(Debug, Clone)]
-pub struct ActionedPrompt {
-    id: PromptId,
-    others: Vec<PromptId>,
+pub enum ActionedPrompt {
+    Actioned { id: PromptId, others: Vec<PromptId> },
+    NotFound { id: PromptId },
 }
 
 /// Start our backgroud polling and processing loops before dropping into running the tonic GRPC

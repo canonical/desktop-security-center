@@ -12,8 +12,10 @@ use crate::{
     },
     snapd_client::{
         self,
-        interfaces::home::{HomeInterface, HomeReplyConstraints, PatternType, TypedPathPattern},
-        PromptId, PromptReply as SnapPromptReply, SnapdSocketClient, TypedPromptReply,
+        interfaces::home::{
+            HomeInterface, HomeReplyConstraints, HomeUiInputData, PatternType, TypedPathPattern,
+        },
+        PromptId, PromptReply as SnapPromptReply, SnapMeta, SnapdSocketClient, TypedPromptReply,
         TypedUiInput, UiInput,
     },
     Error, NO_PROMPTS_FOR_USER, PROMPT_NOT_FOUND,
@@ -82,6 +84,12 @@ impl<T: ReplyToPrompt> Service<T> {
             tx_actioned_prompts,
         }
     }
+
+    async fn update_worker(&self, actioned_prompt: ActionedPrompt) {
+        if let Err(e) = self.tx_actioned_prompts.send(actioned_prompt) {
+            panic!("send on closed tx_actioned_prompts channel: {e}");
+        }
+    }
 }
 
 #[async_trait]
@@ -117,9 +125,8 @@ impl<T: ReplyToPrompt> AppArmorPrompting for Service<T> {
         info!(id=%id.0, "replying to prompt id={}", id.0);
         let resp = match self.client.reply(&id, reply).await {
             Ok(others) => {
-                if let Err(e) = self.tx_actioned_prompts.send(ActionedPrompt { id, others }) {
-                    panic!("send on closed tx_actioned_prompts channel: {e}");
-                }
+                self.update_worker(ActionedPrompt::Actioned { id, others })
+                    .await;
 
                 PromptReplyResponse {
                     prompt_reply_type: PromptReplyType::Success as i32,
@@ -131,6 +138,8 @@ impl<T: ReplyToPrompt> AppArmorPrompting for Service<T> {
                 if [NO_PROMPTS_FOR_USER, PROMPT_NOT_FOUND].contains(&message.as_ref()) =>
             {
                 warn!(id=%id.0, "prompt not found (id={})", id.0);
+                self.update_worker(ActionedPrompt::NotFound { id }).await;
+
                 PromptReplyResponse {
                     prompt_reply_type: PromptReplyType::PromptNotFound as i32,
                     message: "prompt not found".to_string(),
@@ -190,48 +199,65 @@ fn map_prompt_reply(mut reply: PromptReply) -> Result<TypedPromptReply, Status> 
 }
 
 fn map_home_response(input: UiInput<HomeInterface>) -> Prompt {
+    let SnapMeta {
+        name,
+        updated_at,
+        store_url,
+        publisher,
+    } = input.meta;
+
+    let HomeUiInputData {
+        requested_path,
+        home_dir,
+        requested_permissions,
+        available_permissions,
+        initial_permissions,
+        initial_pattern_option,
+        pattern_options,
+    } = input.data;
+
     Prompt::HomePrompt(HomePrompt {
         meta_data: Some(MetaData {
             prompt_id: input.id.0,
-            snap_name: input.meta.name,
-            store_url: input.meta.store_url,
-            publisher: input.meta.publisher,
-            updated_at: input.meta.updated_at,
+            snap_name: name,
+            store_url,
+            publisher,
+            updated_at,
         }),
-        requested_path: input.data.requested_path,
-        home_dir: input.data.home_dir,
-        requested_permissions: input.data.requested_permissions,
-        initial_permissions: input.data.initial_permissions,
-        available_permissions: input.data.available_permissions,
-        initial_pattern_option: input.data.initial_pattern_option as i32,
-        pattern_options: input
-            .data
-            .pattern_options
+        requested_path,
+        home_dir,
+        requested_permissions,
+        initial_permissions,
+        available_permissions,
+        initial_pattern_option: initial_pattern_option as i32,
+        pattern_options: pattern_options
             .into_iter()
-            .map(
-                |TypedPathPattern {
-                     pattern_type,
-                     path_pattern,
-                     show_initially,
-                 }| {
-                    let home_pattern_type = map_enum!(
-                        PatternType => HomePatternType;
-                        [
-                            RequestedDirectory, RequestedFile, TopLevelDirectory,
-                            HomeDirectory, MatchingFileExtension, ContainingDirectory
-                        ];
-                        pattern_type;
-                    );
-
-                    PatternOption {
-                        home_pattern_type: home_pattern_type as i32,
-                        path_pattern,
-                        show_initially,
-                    }
-                },
-            )
+            .map(map_pattern_option)
             .collect(),
     })
+}
+
+fn map_pattern_option(
+    TypedPathPattern {
+        pattern_type,
+        path_pattern,
+        show_initially,
+    }: TypedPathPattern,
+) -> PatternOption {
+    let home_pattern_type = map_enum!(
+        PatternType => HomePatternType;
+        [
+            RequestedDirectory, RequestedFile, TopLevelDirectory,
+            HomeDirectory, MatchingFileExtension, ContainingDirectory
+        ];
+        pattern_type;
+    );
+
+    PatternOption {
+        home_pattern_type: home_pattern_type as i32,
+        path_pattern,
+        show_initially,
+    }
 }
 
 #[cfg(test)]
@@ -441,7 +467,6 @@ mod tests {
     #[test_case(Some(ui_input()), Some(prompt()); "non-empty prompt")]
     #[tokio::test]
     async fn test_get_current_prompt(ui_input: Option<TypedUiInput>, expected: Option<Prompt>) {
-        // Test setup
         let mock_client = MockClient {
             want_err: false,
             expected_reply: None,
@@ -451,7 +476,6 @@ mod tests {
         let mut client =
             setup_server_and_client(mock_client, active_prompt, tx_actioned_prompts).await;
 
-        // Run test
         let resp = client
             .get_current_prompt(Request::new(()))
             .await
@@ -459,18 +483,15 @@ mod tests {
             .into_inner()
             .prompt;
 
-        // Check output
         assert_eq!(resp, expected);
     }
 
-    // TODO(matt): include diff (see notes) and add to logic / tests
     #[test_case(prompt_reply(None), ExpectedErrors{snapd_err: false, tx_err: false, want_err: true}; "Error when map_prompt_reply fails")]
     #[test_case(prompt_reply(prompt_reply_inner()), ExpectedErrors{snapd_err: true, tx_err: false, want_err: false}; "Returns unknown error code when snapd returns an error")]
     #[test_case(prompt_reply(prompt_reply_inner()), ExpectedErrors{snapd_err: false, tx_err: true, want_err: true}; "Error when returning actioned prompts returns an error")]
     #[test_case(prompt_reply(prompt_reply_inner()), ExpectedErrors{snapd_err: false, tx_err: false, want_err: false}; "Succesfully reply to a prompt")]
     #[tokio::test]
     async fn test_reply_to_prompt(prompt_reply: PromptReply, expected_errors: ExpectedErrors) {
-        // Test setup
         let mock_client = MockClient {
             want_err: expected_errors.snapd_err,
             expected_reply: Some(typed_prompt_reply()),
@@ -484,10 +505,8 @@ mod tests {
         let mut client =
             setup_server_and_client(mock_client, active_prompt, tx_actioned_prompts).await;
 
-        // Run the test
         let resp = client.reply_to_prompt(Request::new(prompt_reply)).await;
 
-        // Check test output
         if expected_errors.want_err {
             assert!(resp.is_err());
             return;
@@ -503,9 +522,12 @@ mod tests {
             resp.unwrap().into_inner().prompt_reply_type,
             PromptReplyType::Success as i32
         );
+
         if let Some(mut rx) = rx_actioned_prompts {
-            let received_prompt_id = rx.recv().await.unwrap();
-            assert_eq!(received_prompt_id.id.0, "1".to_string());
+            match rx.recv().await {
+                Some(ActionedPrompt::Actioned { id, .. }) => assert_eq!(id.0, "1".to_string()),
+                res => panic!("expected actioned prompt, got {res:?}"),
+            }
         }
     }
 }
