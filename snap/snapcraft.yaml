@@ -10,6 +10,7 @@ compression: lzo
 apps:
   security-center:
     command: bin/security_center
+    desktop: bin/data/flutter_assets/assets/security-center.desktop
     extensions: [gnome]
     plugs:
       - snapd-control
