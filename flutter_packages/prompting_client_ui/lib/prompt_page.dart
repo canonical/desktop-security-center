@@ -14,6 +14,7 @@ class PromptPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final prompt = ref.watch(currentPromptProvider);
+    // TODO: need to set up a provider for getting this using windowManager
     const titleBarHeight = 46.0;
 
     return Scaffold(
@@ -23,29 +24,26 @@ class PromptPage extends ConsumerWidget {
         isMinimizable: false,
         isClosable: false,
       ),
-      body: MeasureSizeBuilder(
-        builder: (context, size) {
-          print('size change: ${size.width}x${size.height}');
-          if (size.width > 0) {
-            windowManager.setSize(
-              Size(
-                size.width,
-                size.height + titleBarHeight,
-              ),
+      body: SingleChildScrollView(
+        child: MeasureSizeBuilder(
+          builder: (context, size) {
+            if (size.width > 0) {
+              windowManager.setSize(
+                Size(
+                  size.width,
+                  size.height + titleBarHeight,
+                ),
+              );
+            }
+
+            return Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: switch (prompt) {
+                PromptDetailsHome() => const HomePromptPage(),
+              },
             );
-          }
-          return ListView(
-            shrinkWrap: true,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: switch (prompt) {
-                  PromptDetailsHome() => const HomePromptPage(),
-                },
-              ),
-            ],
-          );
-        },
+          },
+        ),
       ),
     );
   }

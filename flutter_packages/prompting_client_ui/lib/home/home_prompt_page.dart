@@ -20,7 +20,7 @@ class HomePromptPage extends ConsumerWidget {
       homePromptDataModelProvider.select((m) => m.showMoreOptions),
     );
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      // mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Header(),
