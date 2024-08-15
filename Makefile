@@ -45,7 +45,7 @@ clean-request-rules:
 # for prompts. There is probably a lighter touch way of getting things working again
 # but this does the trick.
 .PHONY: bounce-snapd
-bounce-snapd: clean-request-rules snapd-edge snapd-prompting
+bounce-snapd: snapd-edge clean-request-rules snapd-prompting
 
 .PHONY: create-or-start-vm
 create-or-start-vm:
@@ -165,7 +165,7 @@ local-clean-request-rules:
 	fi
 
 .PHONY: local-bounce-snapd
-local-bounce-snapd: local-clean-request-rules local-snapd-edge local-snapd-prompting
+local-bounce-snapd: local-snapd-edge local-clean-request-rules local-snapd-prompting
 
 .PHONY: local-install-client
 local-install-client:
