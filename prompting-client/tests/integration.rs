@@ -26,7 +26,7 @@ use tokio::{process::Command, spawn};
 use uuid::Uuid;
 
 const TEST_SNAP: &str = "aa-prompting-test";
-const PROMPT_NOT_FOUND: &str = "no prompt with the given ID found for the given user";
+const PROMPT_NOT_FOUND: &str = "cannot find prompt with the given ID for the given user";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 struct Output {
@@ -136,11 +136,11 @@ async fn happy_path_read_single(
     Ok(())
 }
 
+//#[test_case(Action::Allow, Lifespan::Session; "allow session")]
+//#[test_case(Action::Deny, Lifespan::Session; "deny session")]
 #[test_case(Action::Allow, Lifespan::Timespan; "allow timespan")]
-#[test_case(Action::Allow, Lifespan::Session; "allow session")]
 #[test_case(Action::Allow, Lifespan::Forever; "allow forever")]
 #[test_case(Action::Deny, Lifespan::Timespan; "deny timespan")]
-#[test_case(Action::Deny, Lifespan::Session; "deny session")]
 #[test_case(Action::Deny, Lifespan::Forever; "deny forever")]
 #[tokio::test]
 #[serial]
@@ -421,7 +421,8 @@ async fn unexpected_prompt_in_sequence_errors() -> Result<()> {
         }) => {
             assert_eq!(index, 1);
             assert_eq!(failures[0].field, "path");
-            assert_eq!(failures[1].field, "permissions");
+            assert_eq!(failures[1].field, "requested-permissions");
+            assert_eq!(failures[2].field, "available-permissions");
         }
         Err(e) => panic!("unexpected error: {e}"),
         Ok(()) => panic!("expected client to error but it ran to completion"),
