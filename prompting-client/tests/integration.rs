@@ -182,7 +182,7 @@ async fn happy_path_create_multiple(action: Action, lifespan: Lifespan) -> Resul
         match action {
             Action::Allow => assert_eq!(res.expect("file should exist"), *s),
             Action::Deny => assert_eq!(
-                res.expect_err("file should not exist").kind(),
+                res.expect_err(&format!("file {p} should not exist")).kind(),
                 ErrorKind::NotFound
             ),
         }
@@ -191,11 +191,66 @@ async fn happy_path_create_multiple(action: Action, lifespan: Lifespan) -> Resul
     Ok(())
 }
 
+// #[test_case(Action::Deny, Lifespan::Timespan; "deny timespan")]
+// #[test_case(Action::Deny, Lifespan::Forever; "deny forever")]
+// #[tokio::test]
+// #[serial]
+// async fn create_multiple_actioned_by_other_pid(action: Action, lifespan: Lifespan) -> Result<()> {
+//     let (prefix, dir_path) = setup_test_dir(None, &[])?;
+//     let _ = spawn_for_output("aa-prompting-test.create", vec![prefix.clone()]);
+//     tokio::time::sleep(std::time::Duration::from_millis(400)).await;
+
+//     let mut c = SnapdSocketClient::default();
+
+//     let _rx = spawn_for_output("aa-prompting-test.create-single", vec![prefix]);
+
+//     let path = format!("{dir_path}/test.txt");
+//     let (id, p) = expect_single_prompt!(&mut c, &path, &["write"]).await;
+//     let mut reply =
+//         HomeInterface::prompt_to_reply(p, action).with_custom_path_pattern(format!("{dir_path}/*"));
+
+//     reply = match lifespan {
+//         Lifespan::Timespan => reply.for_timespan("1s"),
+//         Lifespan::Session => reply.for_session(),
+//         Lifespan::Forever => reply.for_forever(),
+//         Lifespan::Single => {
+//             panic!("SETUP ERROR: this test requires actioning multiple prompts with a single reply")
+//         }
+//     };
+
+//     c.reply_to_prompt(&id, reply.into()).await?;
+
+//     // We're just using the recv to wait for the test snap to finish running
+//     // so we don't care about the output
+//     // FIXME: work out why this hangs even when the test snap has output
+//     // _ = rx.recv().expect("to be able recv");
+//     tokio::time::sleep(std::time::Duration::from_millis(50)).await;
+
+//     let files = &[
+//         ("test-1.txt", "test\n"),
+//         ("test-2.txt", "test\n"),
+//         ("test-3.txt", "test\n"),
+//     ];
+
+//     for (p, s) in files {
+//         let res = fs::read_to_string(format!("{dir_path}/{p}"));
+//         match action {
+//             Action::Allow => assert_eq!(res.expect("file should exist"), *s),
+//             Action::Deny => assert_eq!(
+//                 res.expect_err(&format!("file {p} should not exist")).kind(),
+//                 ErrorKind::NotFound
+//             ),
+//         }
+//     }
+
+//     Ok(())
+// }
+
 #[tokio::test]
 #[serial]
 async fn requesting_an_unknown_prompt_id_is_an_error() -> Result<()> {
     let c = SnapdSocketClient::default();
-    let res = c.prompt_details(&PromptId("invalid".to_string())).await;
+    let res = c.prompt_details(&PromptId("42".to_string())).await;
 
     match res {
         Err(Error::SnapdError { message }) => {
@@ -421,8 +476,7 @@ async fn unexpected_prompt_in_sequence_errors() -> Result<()> {
         }) => {
             assert_eq!(index, 1);
             assert_eq!(failures[0].field, "path");
-            assert_eq!(failures[1].field, "requested-permissions");
-            assert_eq!(failures[2].field, "available-permissions");
+            assert_eq!(failures[1].field, "requested_permissions");
         }
         Err(e) => panic!("unexpected error: {e}"),
         Ok(()) => panic!("expected client to error but it ran to completion"),

@@ -7,7 +7,7 @@
         "interface": "home",
         "constraints": {
           "path": "/home/[a-zA-Z0-9]+/test/.+/test-1.txt",
-          "permissions": [ "write" ],
+          "requested-permissions": [ "write" ],
           "available-permissions": [ "read", "write", "execute" ]
         }
       },
@@ -25,7 +25,7 @@
         "interface": "home",
         "constraints": {
           "path": "/home/[a-zA-Z0-9]+/test/.+/test-2.txt",
-          "permissions": [ "write" ],
+          "requested-permissions": [ "write" ],
           "available-permissions": [ "read", "write", "execute" ]
         }
       },

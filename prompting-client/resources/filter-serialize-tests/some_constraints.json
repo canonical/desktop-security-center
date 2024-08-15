@@ -2,6 +2,6 @@
   "snap": "snapName",
   "interface": "home",
   "constraints": {
-    "permissions": [ "read" ]
+    "requested-permissions": [ "read" ]
   }
 }

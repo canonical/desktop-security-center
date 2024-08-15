@@ -3,7 +3,7 @@
   "interface": "home",
   "constraints": {
     "path": "/home/foo/bar",
-    "permissions": [ "read" ],
+    "requested-permissions": [ "read" ],
     "available-permissions": [ "read", "write", "execute" ]
   }
 }

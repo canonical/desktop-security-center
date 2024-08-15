@@ -71,7 +71,16 @@ impl Client for UnixSocketClient {
 
         let res = self.get(uri).await?;
 
-        let resp: SnapdResponse<T> = body_json(res).await?;
+        let raw_resp: serde_json::Value = body_json(res).await?;
+        if !path.contains("notices") {
+            println!(
+                ">> raw resp for GET of {path}: {}",
+                serde_json::to_string(&raw_resp)?
+            );
+        }
+        let resp: SnapdResponse<T> = serde_json::from_value(raw_resp)?;
+
+        // let resp: SnapdResponse<T> = body_json(res).await?;
         match resp.result {
             ResOrErr::Res(t) => Ok(t),
             ResOrErr::Err { message } => Err(Error::SnapdError { message }),
@@ -89,11 +98,21 @@ impl Client for UnixSocketClient {
             uri: s,
         })?;
 
+        let raw_body = serde_json::to_string(&body)?;
+        println!(">> raw body for POST to {path}: {raw_body}");
+
         let res = self
             .post(uri, "application/json", serde_json::to_vec(&body)?)
             .await?;
 
-        let resp: SnapdResponse<T> = body_json(res).await?;
+        let raw_resp: serde_json::Value = body_json(res).await?;
+        println!(
+            ">> raw resp for POST to {path}: {}",
+            serde_json::to_string(&raw_resp)?
+        );
+        let resp: SnapdResponse<T> = serde_json::from_value(raw_resp)?;
+
+        // let resp: SnapdResponse<T> = body_json(res).await?;
         match resp.result {
             ResOrErr::Res(t) => Ok(t),
             ResOrErr::Err { message } => Err(Error::SnapdError { message }),
@@ -205,14 +224,14 @@ where
         id: &PromptId,
         reply: TypedPromptReply,
     ) -> Result<Vec<PromptId>> {
-        let resp: Vec<PromptId> = self
+        let resp: Option<Vec<PromptId>> = self
             .client
             .post_json(&format!("interfaces/requests/prompts/{}", id.0), reply)
             .await?;
 
         debug!(prompt = id.0, ?resp, "response from snapd");
 
-        Ok(resp)
+        Ok(resp.unwrap_or_default())
     }
 
     /// Pull metadata for rendering apparmor prompts using the `snaps` snapd endpoint.
@@ -334,5 +353,48 @@ mod tests {
             Err(Error::NotAvailable) => (),
             res => panic!("expected NotAvailable, got {res:?}"),
         }
+    }
+
+    const RAW_PROMPT: &str = r#"{
+  "result": {
+    "constraints": {
+      "available-permissions": [
+        "read",
+        "write",
+        "execute"
+      ],
+      "path": "/home/ubuntu/test/0ec9a598-eee3-4785-bd5a-c5c0e3ff04e9/test-2.txt",
+      "requested-permissions": [
+        "write"
+      ]
+    },
+    "id": "00000000000000BE",
+    "interface": "home",
+    "snap": "aa-prompting-test",
+    "timestamp": "2024-08-15T13:28:17.077016791Z"
+  },
+  "status": "OK",
+  "status-code": 200,
+  "type": "sync",
+  "warning-count": 2,
+  "warning-timestamp": "2024-08-14T06:39:37.371971895Z"
+}"#;
+
+    #[test]
+    fn raw_prompt_parsing_works() {
+        let raw: SnapdResponse<RawPrompt> = serde_json::from_str(RAW_PROMPT).unwrap();
+        let expected = RawPrompt {
+            id: PromptId("00000000000000BE".to_string()),
+            timestamp: "2024-08-15T13:28:17.077016791Z".to_string(),
+            snap: "aa-prompting-test".to_string(),
+            interface: "home".to_string(),
+            constraints: serde_json::json!({
+                "available-permissions": vec!["read", "write", "execute"],
+                "path": "/home/ubuntu/test/0ec9a598-eee3-4785-bd5a-c5c0e3ff04e9/test-2.txt",
+                "requested-permissions": vec!["write"]
+            }),
+        };
+
+        assert_eq!(raw.result, ResOrErr::Res(expected));
     }
 }

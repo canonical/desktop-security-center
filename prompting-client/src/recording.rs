@@ -163,7 +163,7 @@ mod tests {
         "interface": "home",
         "constraints": {
           "path": "/home/ubuntu/test.json",
-          "permissions": [
+          "requested-permissions": [
             "write"
           ],
           "available-permissions": [
