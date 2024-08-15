@@ -19,7 +19,7 @@ apps:
       PROMPTING_CLIENT_SOCKET: "${XDG_RUNTIME_DIR}/prompting.sock"
     plugs: &plugs
       - home
-      - snap-prompting-control
+      - snap-interfaces-requests-control
 
   daemon:
     command: bin/prompting-client-daemon
@@ -31,6 +31,10 @@ apps:
       daemon-scope: user
     restart-condition: on-success
     restart-delay: 2s
+
+plugs:
+  snap-interfaces-requests-control:
+    handler-service: daemon
 
 parts:
   flutter-git:
