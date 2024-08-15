@@ -30,9 +30,9 @@ snapd-prompting:
 	lxc exec $(VM_NAME) -- snap refresh snapd --channel=latest/edge/prompting; \
 	lxc exec $(VM_NAME) -- snap set system experimental.apparmor-prompting=true
 
-.PHONY: snapd-stable
-snapd-stable:
-	lxc exec $(VM_NAME) -- snap refresh snapd --channel=latest/stable; \
+.PHONY: snapd-edge
+snapd-edge:
+	lxc exec $(VM_NAME) -- snap refresh snapd --channel=latest/edge; \
 	lxc exec $(VM_NAME) -- snap set system experimental.apparmor-prompting=false
 
 .PHONY: clean-request-rules
@@ -45,7 +45,7 @@ clean-request-rules:
 # for prompts. There is probably a lighter touch way of getting things working again
 # but this does the trick.
 .PHONY: bounce-snapd
-bounce-snapd: clean-request-rules snapd-stable snapd-prompting
+bounce-snapd: clean-request-rules snapd-edge snapd-prompting
 
 .PHONY: create-or-start-vm
 create-or-start-vm:
@@ -67,7 +67,7 @@ create-or-start-vm:
 	@sleep 5
 	@echo ":: VM ($(VM_NAME)) now ready"
 	@echo ":: Installing snapd..."
-	@lxc exec $(VM_NAME) -- snap install snapd
+	@lxc exec $(VM_NAME) -- snap install snapd --channel=latest/edge
 	@echo ":: Installing the app center..."
 	@lxc exec $(VM_NAME) -- snap install snap-store --channel=latest/stable/ubuntu-24.04
 
@@ -153,9 +153,9 @@ local-snapd-prompting:
 	snap refresh snapd --channel=latest/edge/prompting; \
 	snap set system experimental.apparmor-prompting=true
 
-.PHONY: local-snapd-stable
-local-snapd-stable:
-	snap refresh snapd --channel=latest/stable; \
+.PHONY: local-snapd-edge
+local-snapd-edge:
+	snap refresh snapd --channel=latest/edge; \
 	snap set system experimental.apparmor-prompting=false
 
 .PHONY: local-clean-request-rules
@@ -165,7 +165,7 @@ local-clean-request-rules:
 	fi
 
 .PHONY: local-bounce-snapd
-local-bounce-snapd: local-clean-request-rules local-snapd-stable local-snapd-prompting
+local-bounce-snapd: local-clean-request-rules local-snapd-edge local-snapd-prompting
 
 .PHONY: local-install-client
 local-install-client:
