@@ -98,6 +98,7 @@ ensure-client-in-vm:
 		lxc file push $$FILE_NAME $(VM_NAME)/home/ubuntu/ ; \
 		lxc exec $(VM_NAME) -- snap set system experimental.user-daemons=true ; \
 		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$$FILE_NAME ; \
+		lxc exec $(VM_NAME) -- snap connect $(SNAP_NAME):snap-interfaces-requests-control ; \
 	fi
 
 .PHONY: update-client-in-vm
@@ -122,8 +123,12 @@ ensure-test-snap:
 .PHONY: update-test-snap
 update-test-snap: clean-test-snap ensure-test-snap
 
+# There must be a snap with the snap-interfaces-requests-control interface
+# connected and a "handler-service" attribute mapping to one of its app names,
+# so we must ensure that the client is present before we try to enable
+# prompting.
 .PHONY: prepare-vm
-prepare-vm: create-or-start-vm snapd-prompting ensure-test-snap ensure-client-in-vm bounce-snapd
+prepare-vm: create-or-start-vm ensure-test-snap ensure-client-in-vm bounce-snapd
 
 .PHONY: integration-tests
 integration-tests:
@@ -176,4 +181,5 @@ local-install-client:
 	snapcraft ; \
 	FILE_NAME=$$(ls | grep -E '$(SNAP_NAME)_' | head -n1) ; \
 	echo ":: Installing $(SNAP_NAME)..." ; \
-	snap install --dangerous $$FILE_NAME ;
+	snap install --dangerous $$FILE_NAME ; \
+	snap connect $(SNAP_NAME):snap-interfaces-requests-control ;
