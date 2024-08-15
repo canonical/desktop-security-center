@@ -71,16 +71,7 @@ impl Client for UnixSocketClient {
 
         let res = self.get(uri).await?;
 
-        let raw_resp: serde_json::Value = body_json(res).await?;
-        if !path.contains("notices") {
-            println!(
-                ">> raw resp for GET of {path}: {}",
-                serde_json::to_string(&raw_resp)?
-            );
-        }
-        let resp: SnapdResponse<T> = serde_json::from_value(raw_resp)?;
-
-        // let resp: SnapdResponse<T> = body_json(res).await?;
+        let resp: SnapdResponse<T> = body_json(res).await?;
         match resp.result {
             ResOrErr::Res(t) => Ok(t),
             ResOrErr::Err { message } => Err(Error::SnapdError { message }),
@@ -98,21 +89,11 @@ impl Client for UnixSocketClient {
             uri: s,
         })?;
 
-        let raw_body = serde_json::to_string(&body)?;
-        println!(">> raw body for POST to {path}: {raw_body}");
-
         let res = self
             .post(uri, "application/json", serde_json::to_vec(&body)?)
             .await?;
 
-        let raw_resp: serde_json::Value = body_json(res).await?;
-        println!(
-            ">> raw resp for POST to {path}: {}",
-            serde_json::to_string(&raw_resp)?
-        );
-        let resp: SnapdResponse<T> = serde_json::from_value(raw_resp)?;
-
-        // let resp: SnapdResponse<T> = body_json(res).await?;
+        let resp: SnapdResponse<T> = body_json(res).await?;
         match resp.result {
             ResOrErr::Res(t) => Ok(t),
             ResOrErr::Err { message } => Err(Error::SnapdError { message }),
