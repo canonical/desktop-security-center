@@ -30,9 +30,9 @@ snapd-prompting:
 	lxc exec $(VM_NAME) -- snap refresh snapd --channel=latest/edge/prompting; \
 	lxc exec $(VM_NAME) -- snap set system experimental.apparmor-prompting=true
 
-.PHONY: snapd-stable
-snapd-stable:
-	lxc exec $(VM_NAME) -- snap refresh snapd --channel=latest/stable; \
+.PHONY: snapd-edge
+snapd-edge:
+	lxc exec $(VM_NAME) -- snap refresh snapd --channel=latest/edge; \
 	lxc exec $(VM_NAME) -- snap set system experimental.apparmor-prompting=false
 
 .PHONY: clean-request-rules
@@ -45,7 +45,7 @@ clean-request-rules:
 # for prompts. There is probably a lighter touch way of getting things working again
 # but this does the trick.
 .PHONY: bounce-snapd
-bounce-snapd: clean-request-rules snapd-stable snapd-prompting
+bounce-snapd: snapd-edge clean-request-rules snapd-prompting
 
 .PHONY: create-or-start-vm
 create-or-start-vm:
@@ -67,7 +67,7 @@ create-or-start-vm:
 	@sleep 5
 	@echo ":: VM ($(VM_NAME)) now ready"
 	@echo ":: Installing snapd..."
-	@lxc exec $(VM_NAME) -- snap install snapd
+	@lxc exec $(VM_NAME) -- snap install snapd --channel=latest/edge
 	@echo ":: Installing the app center..."
 	@lxc exec $(VM_NAME) -- snap install snap-store --channel=latest/stable/ubuntu-24.04
 
@@ -98,6 +98,7 @@ ensure-client-in-vm:
 		lxc file push $$FILE_NAME $(VM_NAME)/home/ubuntu/ ; \
 		lxc exec $(VM_NAME) -- snap set system experimental.user-daemons=true ; \
 		lxc exec $(VM_NAME) -- snap install --dangerous /home/ubuntu/$$FILE_NAME ; \
+		lxc exec $(VM_NAME) -- snap connect $(SNAP_NAME):snap-interfaces-requests-control ; \
 	fi
 
 .PHONY: update-client-in-vm
@@ -122,8 +123,12 @@ ensure-test-snap:
 .PHONY: update-test-snap
 update-test-snap: clean-test-snap ensure-test-snap
 
+# There must be a snap with the snap-interfaces-requests-control interface
+# connected and a "handler-service" attribute mapping to one of its app names,
+# so we must ensure that the client is present before we try to enable
+# prompting.
 .PHONY: prepare-vm
-prepare-vm: create-or-start-vm snapd-prompting ensure-test-snap ensure-client-in-vm bounce-snapd
+prepare-vm: create-or-start-vm ensure-test-snap ensure-client-in-vm bounce-snapd
 
 .PHONY: integration-tests
 integration-tests:
@@ -139,7 +144,7 @@ integration-tests:
 	lxc file push integration-tests $(VM_NAME)/home/ubuntu/; \
 	rm integration-tests; \
 	lxc exec $(VM_NAME) -- rm -rf /home/ubuntu/test; \
-	lxc exec --user=1000 --env HOME=/home/ubuntu $(VM_NAME) /home/ubuntu/integration-tests;
+	lxc exec --user=1000 --env HOME=/home/ubuntu $(VM_NAME) /home/ubuntu/integration-tests $(CASES);
 
 .PHONY: clean
 clean:
@@ -153,9 +158,9 @@ local-snapd-prompting:
 	snap refresh snapd --channel=latest/edge/prompting; \
 	snap set system experimental.apparmor-prompting=true
 
-.PHONY: local-snapd-stable
-local-snapd-stable:
-	snap refresh snapd --channel=latest/stable; \
+.PHONY: local-snapd-edge
+local-snapd-edge:
+	snap refresh snapd --channel=latest/edge; \
 	snap set system experimental.apparmor-prompting=false
 
 .PHONY: local-clean-request-rules
@@ -165,7 +170,7 @@ local-clean-request-rules:
 	fi
 
 .PHONY: local-bounce-snapd
-local-bounce-snapd: local-clean-request-rules local-snapd-stable local-snapd-prompting
+local-bounce-snapd: local-snapd-edge local-clean-request-rules local-snapd-prompting
 
 .PHONY: local-install-client
 local-install-client:
@@ -176,4 +181,5 @@ local-install-client:
 	snapcraft ; \
 	FILE_NAME=$$(ls | grep -E '$(SNAP_NAME)_' | head -n1) ; \
 	echo ":: Installing $(SNAP_NAME)..." ; \
-	snap install --dangerous $$FILE_NAME ;
+	snap install --dangerous $$FILE_NAME ; \
+	snap connect $(SNAP_NAME):snap-interfaces-requests-control ;

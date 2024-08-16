@@ -6,8 +6,8 @@
        "snap": "aa-prompting-test",
        "interface": "home",
        "constraints": {
-          "path": "/home/[a-zA-Z0-9]+/test/.+/test-1.txt",
-         "permissions": [ "write" ],
+         "path": "/home/[a-zA-Z0-9]+/test/.+/test-1.txt",
+         "requested-permissions": [ "write" ],
          "available-permissions": [ "read", "write", "execute" ]
        }
      },

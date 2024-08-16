@@ -244,7 +244,7 @@ mod tests {
                 constraints:
                     Some(HomeConstraintsFilter {
                         path,
-                        permissions,
+                        requested_permissions,
                         available_permissions,
                     }),
             } => {
@@ -254,7 +254,7 @@ mod tests {
                     path.map(|re| re.to_string()).as_deref(),
                     Some("/home/foo/bar")
                 );
-                assert_eq!(permissions, Some(vec!["read".to_string()]));
+                assert_eq!(requested_permissions, Some(vec!["read".to_string()]));
                 assert_eq!(
                     available_permissions,
                     Some(vec![
@@ -311,7 +311,7 @@ mod tests {
             snap: "test".to_string(),
             constraints: HomeConstraints {
                 path: "/home/foo/bar".to_string(),
-                permissions: vec!["read".to_string()],
+                requested_permissions: vec!["read".to_string()],
                 available_permissions: vec!["read".to_string(), "write".to_string()],
             },
         };

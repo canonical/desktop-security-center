@@ -35,17 +35,19 @@ pub struct ReadOnlyActivePrompt {
 }
 
 impl ReadOnlyActivePrompt {
+    #[cfg(test)]
+    pub fn new(ui_input: Option<TypedUiInput>) -> Self {
+        Self {
+            active_prompt: Arc::new(Mutex::new(ui_input)),
+        }
+    }
+
     pub fn get(&self) -> Option<TypedUiInput> {
         let guard = match self.active_prompt.lock() {
             Ok(guard) => guard,
             Err(err) => err.into_inner(),
         };
         guard.clone()
-    }
-    pub fn new(ui_intput: Option<TypedUiInput>) -> Self {
-        Self {
-            active_prompt: Arc::new(Mutex::new(ui_intput)),
-        }
     }
 }
 

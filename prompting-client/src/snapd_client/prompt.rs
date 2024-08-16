@@ -227,3 +227,30 @@ pub enum Lifespan {
     Forever,
     Timespan,
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const RAW_PROMPT: &str = r#"{
+  "id": "0000000000000002",
+  "timestamp": "2024-08-14T07:28:22.694800024Z",
+  "snap": "firefox",
+  "interface": "home",
+  "constraints": {}
+}"#;
+
+    #[test]
+    fn raw_prompt_deserializes() {
+        let raw: RawPrompt = serde_json::from_str(RAW_PROMPT).unwrap();
+        let expected = RawPrompt {
+            id: PromptId("0000000000000002".to_string()),
+            timestamp: "2024-08-14T07:28:22.694800024Z".to_string(),
+            snap: "firefox".to_string(),
+            interface: "home".to_string(),
+            constraints: serde_json::json!({}),
+        };
+
+        assert_eq!(raw, expected);
+    }
+}

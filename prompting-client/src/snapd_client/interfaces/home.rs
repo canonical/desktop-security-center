@@ -20,7 +20,7 @@ impl Prompt<HomeInterface> {
     }
 
     pub fn requested_permissions(&self) -> &[String] {
-        &self.constraints.permissions
+        &self.constraints.requested_permissions
     }
 }
 
@@ -133,7 +133,7 @@ impl SnapInterface for HomeInterface {
             duration: None,
             constraints: HomeReplyConstraints {
                 path_pattern: prompt.constraints.path,
-                permissions: prompt.constraints.permissions,
+                permissions: prompt.constraints.requested_permissions,
                 available_permissions: prompt.constraints.available_permissions,
             },
         }
@@ -154,7 +154,7 @@ impl SnapInterface for HomeInterface {
         // We elevate the initially selected permissions in the ui from write -> read/write
         // in order to minimise the number of prompts users encounter in the common case that
         // an app wants to interact with a file after writing it.
-        let mut initial_permissions = prompt.constraints.permissions.clone();
+        let mut initial_permissions = prompt.constraints.requested_permissions.clone();
         if prompt.constraints.is_only_write() {
             initial_permissions.push("read".to_string());
         }
@@ -165,7 +165,7 @@ impl SnapInterface for HomeInterface {
             data: HomeUiInputData {
                 requested_path: prompt.constraints.path,
                 home_dir: home_dir_from_env(),
-                requested_permissions: prompt.constraints.permissions.clone(),
+                requested_permissions: prompt.constraints.requested_permissions.clone(),
                 available_permissions: prompt.constraints.available_permissions,
                 initial_permissions,
                 pattern_options,
@@ -192,13 +192,13 @@ impl SnapInterface for HomeInterface {
 #[serde(rename_all = "kebab-case")]
 pub struct HomeConstraints {
     pub(crate) path: String,
-    pub(crate) permissions: Vec<String>,
+    pub(crate) requested_permissions: Vec<String>,
     pub(crate) available_permissions: Vec<String>,
 }
 
 impl HomeConstraints {
     fn is_only_write(&self) -> bool {
-        self.permissions.len() == 1 && self.permissions[0] == "write"
+        self.requested_permissions.len() == 1 && self.requested_permissions[0] == "write"
     }
 }
 
@@ -267,7 +267,7 @@ pub struct HomeReplyConstraints {
 pub struct HomeConstraintsFilter {
     #[serde(with = "serde_option_regex", default)]
     pub path: Option<Regex>,
-    pub permissions: Option<Vec<String>>,
+    pub requested_permissions: Option<Vec<String>>,
     pub available_permissions: Option<Vec<String>>,
 }
 
@@ -278,8 +278,8 @@ impl HomeConstraintsFilter {
         Ok(self)
     }
 
-    pub fn with_permissions(&mut self, permissions: Vec<impl Into<String>>) -> &mut Self {
-        self.permissions = Some(permissions.into_iter().map(|p| p.into()).collect());
+    pub fn with_requested_permissions(&mut self, permissions: Vec<impl Into<String>>) -> &mut Self {
+        self.requested_permissions = Some(permissions.into_iter().map(|p| p.into()).collect());
         self
     }
 
@@ -305,7 +305,7 @@ impl ConstraintsFilter for HomeConstraintsFilter {
             }
         }
 
-        field_matches!(self, constraints, failures, permissions);
+        field_matches!(self, constraints, failures, requested_permissions);
         field_matches!(self, constraints, failures, available_permissions);
 
         if failures.is_empty() {
@@ -438,7 +438,7 @@ mod tests {
       "interface": "home",
       "constraints": {
         "path": "/home/ubuntu/Downloads/",
-        "permissions": [
+        "requested-permissions": [
           "read"
         ],
         "available-permissions": [

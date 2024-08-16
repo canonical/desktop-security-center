@@ -21,12 +21,13 @@ use std::{
     env, fs,
     io::{self, ErrorKind},
     sync::mpsc::{channel, Receiver},
+    time::Duration,
 };
-use tokio::{process::Command, spawn};
+use tokio::{process::Command, spawn, time::sleep};
 use uuid::Uuid;
 
 const TEST_SNAP: &str = "aa-prompting-test";
-const PROMPT_NOT_FOUND: &str = "no prompt with the given ID found for the given user";
+const PROMPT_NOT_FOUND: &str = "cannot find prompt with the given ID for the given user";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 struct Output {
@@ -136,11 +137,11 @@ async fn happy_path_read_single(
     Ok(())
 }
 
+//#[test_case(Action::Allow, Lifespan::Session; "allow session")]
+//#[test_case(Action::Deny, Lifespan::Session; "deny session")]
 #[test_case(Action::Allow, Lifespan::Timespan; "allow timespan")]
-#[test_case(Action::Allow, Lifespan::Session; "allow session")]
 #[test_case(Action::Allow, Lifespan::Forever; "allow forever")]
 #[test_case(Action::Deny, Lifespan::Timespan; "deny timespan")]
-#[test_case(Action::Deny, Lifespan::Session; "deny session")]
 #[test_case(Action::Deny, Lifespan::Forever; "deny forever")]
 #[tokio::test]
 #[serial]
@@ -165,11 +166,7 @@ async fn happy_path_create_multiple(action: Action, lifespan: Lifespan) -> Resul
 
     c.reply_to_prompt(&id, reply.into()).await?;
 
-    // We're just using the recv to wait for the test snap to finish running
-    // so we don't care about the output
-    // FIXME: work out why this hangs even when the test snap has output
-    // _ = rx.recv().expect("to be able recv");
-    tokio::time::sleep(std::time::Duration::from_millis(50)).await;
+    sleep(Duration::from_millis(50)).await;
 
     let files = &[
         ("test-1.txt", "test\n"),
@@ -182,7 +179,66 @@ async fn happy_path_create_multiple(action: Action, lifespan: Lifespan) -> Resul
         match action {
             Action::Allow => assert_eq!(res.expect("file should exist"), *s),
             Action::Deny => assert_eq!(
-                res.expect_err("file should not exist").kind(),
+                res.expect_err(&format!("file {p} should not exist")).kind(),
+                ErrorKind::NotFound
+            ),
+        }
+    }
+
+    Ok(())
+}
+
+#[ignore = "snapd parks the second process for 60s before generating the prompt so this is slow"]
+#[test_case(Action::Allow, Lifespan::Timespan; "allow timespan")]
+#[test_case(Action::Allow, Lifespan::Forever; "allow forever")]
+#[test_case(Action::Deny, Lifespan::Timespan; "deny timespan")]
+#[test_case(Action::Deny, Lifespan::Forever; "deny forever")]
+#[tokio::test]
+#[serial]
+async fn create_multiple_actioned_by_other_pid(action: Action, lifespan: Lifespan) -> Result<()> {
+    let (prefix, dir_path) = setup_test_dir(None, &[])?;
+    let _ = spawn_for_output("aa-prompting-test.create", vec![prefix.clone()]);
+    sleep(Duration::from_millis(400)).await;
+
+    let mut c = SnapdSocketClient::default();
+
+    let _rx = spawn_for_output(
+        "aa-prompting-test.create-single",
+        vec![prefix, "test\n".to_string()],
+    );
+
+    let path = format!("{dir_path}/test.txt");
+    let (id, p) = expect_single_prompt!(&mut c, &path, &["write"]).await;
+    let mut reply =
+        HomeInterface::prompt_to_reply(p, action).with_custom_path_pattern(format!("{dir_path}/*"));
+
+    reply = match lifespan {
+        Lifespan::Timespan => reply.for_timespan("1s"),
+        Lifespan::Session => reply.for_session(),
+        Lifespan::Forever => reply.for_forever(),
+        Lifespan::Single => {
+            panic!("SETUP ERROR: this test requires actioning multiple prompts with a single reply")
+        }
+    };
+
+    // Replying to the prompt from create-single while the original create process is hung waiting
+    // for its prompt to be actioned. The rule we create here should action that prompt and then
+    // create a rule that handles the remaining two writes without prompting.
+    c.reply_to_prompt(&id, reply.into()).await?;
+    sleep(Duration::from_millis(50)).await;
+
+    let files = &[
+        ("test-1.txt", "test\n"),
+        ("test-2.txt", "test\n"),
+        ("test-3.txt", "test\n"),
+    ];
+
+    for (p, s) in files {
+        let res = fs::read_to_string(format!("{dir_path}/{p}"));
+        match action {
+            Action::Allow => assert_eq!(res.expect("file should exist"), *s),
+            Action::Deny => assert_eq!(
+                res.expect_err(&format!("file {p} should not exist")).kind(),
                 ErrorKind::NotFound
             ),
         }
@@ -195,7 +251,7 @@ async fn happy_path_create_multiple(action: Action, lifespan: Lifespan) -> Resul
 #[serial]
 async fn requesting_an_unknown_prompt_id_is_an_error() -> Result<()> {
     let c = SnapdSocketClient::default();
-    let res = c.prompt_details(&PromptId("invalid".to_string())).await;
+    let res = c.prompt_details(&PromptId("42".to_string())).await;
 
     match res {
         Err(Error::SnapdError { message }) => {
@@ -208,9 +264,7 @@ async fn requesting_an_unknown_prompt_id_is_an_error() -> Result<()> {
     Ok(())
 }
 
-// FIXME: we will want to have these errors returned in a way that allows to present a meaningful
-// error message to the user.
-#[test_case("not a valid custom path!", "invalid path pattern"; "malformed path")]
+#[test_case("not a valid custom path!", "cannot decode request body into prompt reply: cannot parse path pattern"; "malformed path")]
 #[test_case("/home/bob/*", "constraints in reply do not match original request"; "invalid path")]
 #[tokio::test]
 #[serial]
@@ -227,30 +281,37 @@ async fn incorrect_custom_paths_error(reply_path: &str, expected_prefix: &str) -
     match c.reply_to_prompt(&id, reply).await {
         Err(Error::SnapdError { message }) => assert!(
             message.starts_with(expected_prefix),
-            "message format not as expected: {message}"
+            "message format not as expected: {message:?}"
         ),
-        Err(e) => panic!("expected a snapd error, got: {e}"),
+        Err(e) => panic!("expected a snapd error, got: {e:?}"),
         Ok(_) => panic!("should have errored but got an OK response"),
     }
 
     Ok(())
 }
 
+#[test_case("9d", "cannot parse duration: time: unknown unit"; "unknown unit")]
+#[test_case("foo", "cannot parse duration: time: invalid duration"; "invalid duration")]
+#[test_case("5", "cannot parse duration: time: missing unit in duration"; "missing units")]
+#[test_case("0s", "cannot have zero or negative duration"; "zero value")]
+#[test_case("-12s", "cannot have zero or negative duration"; "negative value")]
+// 9223372036854775807 is i64::MAX https://pkg.go.dev/time#Duration
+#[test_case("9223372037s", "cannot parse duration: time: invalid duration"; "overflow")]
 #[tokio::test]
 #[serial]
-async fn invalid_timeperiod_duration_errors() -> Result<()> {
+async fn invalid_timeperiod_duration_errors(timespan: &str, expected_prefix: &str) -> Result<()> {
     let mut c = SnapdSocketClient::default();
     let (prefix, dir_path) = setup_test_dir(None, &[("test.txt", "test")])?;
 
     let _rx = spawn_for_output("aa-prompting-test.read", vec![prefix]);
     let (id, p) = expect_single_prompt!(&mut c, &format!("{dir_path}/test.txt"), &["read"]).await;
     let reply = HomeInterface::prompt_to_reply(p, Action::Allow)
-        .for_timespan("foo")
+        .for_timespan(timespan)
         .into();
 
     match c.reply_to_prompt(&id, reply).await {
         Err(Error::SnapdError { message }) => assert!(
-            message.starts_with("error parsing duration string:"),
+            message.starts_with(expected_prefix),
             "message format not as expected: {message}"
         ),
         Err(e) => panic!("expected a snapd error, got: {e}"),
@@ -327,7 +388,7 @@ async fn overwriting_a_file_works() -> Result<()> {
         .for_forever()
         .into();
     c.reply_to_prompt(&id, reply).await?;
-    tokio::time::sleep(std::time::Duration::from_millis(50)).await;
+    sleep(Duration::from_millis(50)).await;
 
     // The file should have been created and contain the correct content
     let res = fs::read_to_string(format!("{dir_path}/test.txt"));
@@ -338,7 +399,7 @@ async fn overwriting_a_file_works() -> Result<()> {
         "aa-prompting-test.create-single",
         vec![prefix, "after".to_string()],
     );
-    tokio::time::sleep(std::time::Duration::from_millis(300)).await;
+    sleep(Duration::from_millis(300)).await;
     let output = rx.recv().expect("to be able recv");
     assert_eq!(output.stdout, "done\n");
     assert_eq!(output.stderr, "");
@@ -359,7 +420,7 @@ async fn scripted_client_works_with_simple_matching() -> Result<()> {
 
     let _rx = spawn_for_output("aa-prompting-test.create", vec![prefix]);
     let res = run_scripted_client_loop(&mut c, format!("{dir_path}/seq.json"), None).await;
-    tokio::time::sleep(std::time::Duration::from_millis(50)).await;
+    sleep(Duration::from_millis(50)).await;
 
     if let Err(e) = res {
         panic!("unexpected error running scripted client: {e}");
@@ -421,7 +482,7 @@ async fn unexpected_prompt_in_sequence_errors() -> Result<()> {
         }) => {
             assert_eq!(index, 1);
             assert_eq!(failures[0].field, "path");
-            assert_eq!(failures[1].field, "permissions");
+            assert_eq!(failures[1].field, "requested_permissions");
         }
         Err(e) => panic!("unexpected error: {e}"),
         Ok(()) => panic!("expected client to error but it ran to completion"),
@@ -466,7 +527,7 @@ async fn prompt_after_a_sequence_without_grace_period_is_ok() -> Result<()> {
     // Sleep to create a gap between this test and the next so that the outstanding prompts do not
     // get picked up as part of that test. Without this we are racey around what the first prompt
     // seen by the next test case is.
-    tokio::time::sleep(std::time::Duration::from_millis(100)).await;
+    sleep(Duration::from_millis(100)).await;
 
     match res {
         Ok(()) => Ok(()),

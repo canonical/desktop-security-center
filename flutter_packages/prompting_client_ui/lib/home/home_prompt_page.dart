@@ -211,7 +211,8 @@ class LifespanToggle extends ConsumerWidget {
       title: l10n.promptLifespanTitle,
       options: const [
         Lifespan.forever,
-        Lifespan.session,
+        // TODO: re-enable support for session lifetimes once this is working in snapd
+        // Lifespan.session,
         Lifespan.single,
       ],
       optionTitle: (lifespan) => lifespan.localize(l10n),

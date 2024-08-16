@@ -27,16 +27,23 @@ jobs:
           toolchain: stable
           components: clippy, rustfmt
 
+      - name: Build prompting-client snap
+        id: snapcraft-client
+        uses: snapcore/action-build@v1
+
       - name: Build testing snap
-        id: snapcraft
+        id: snapcraft-testing
         uses: snapcore/action-build@v1
         with:
           path: testing-snap
 
-      - name: Setup snapd and test snap
+      - name: Setup snapd and snaps
         run: |
-          sudo snap install --dangerous ${{ steps.snapcraft.outputs.snap }}
           sudo snap refresh snapd --channel=latest/edge/prompting
+          sudo snap set system experimental.user-daemons=true
+          sudo snap install --dangerous ${{ steps.snapcraft-client.outputs.snap }}
+          sudo snap install --dangerous ${{ steps.snapcraft-testing.outputs.snap }}
+          sudo snap connect prompting-client:snap-interfaces-requests-control
           sudo snap set system experimental.apparmor-prompting=true
 
       - name: Install dependencies
