@@ -26,7 +26,7 @@ void main() {
           PromptReply.home(
             promptId: 'promptId',
             action: Action.deny,
-            lifespan: Lifespan.session,
+            lifespan: Lifespan.forever,
             pathPattern: '/home/ubuntu/**/',
             permissions: {
               Permission.write,
@@ -57,7 +57,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Select lifespan
-    await tester.tap(find.text(Lifespan.session.localize(tester.l10n)));
+    await tester.tap(find.text(Lifespan.forever.localize(tester.l10n)));
 
     // De-select 'read' permission, select 'execute' permission
     await tester.tap(find.text(Permission.read.localize(tester.l10n)));
