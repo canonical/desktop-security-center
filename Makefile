@@ -144,7 +144,7 @@ integration-tests:
 	lxc file push integration-tests $(VM_NAME)/home/ubuntu/; \
 	rm integration-tests; \
 	lxc exec $(VM_NAME) -- rm -rf /home/ubuntu/test; \
-	lxc exec --user=1000 --env HOME=/home/ubuntu $(VM_NAME) /home/ubuntu/integration-tests;
+	lxc exec --user=1000 --env HOME=/home/ubuntu $(VM_NAME) /home/ubuntu/integration-tests $(CASES);
 
 .PHONY: clean
 clean:
