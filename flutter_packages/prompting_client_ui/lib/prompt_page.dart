@@ -36,12 +36,13 @@ class PromptPage extends ConsumerWidget {
               );
             }
 
-            return Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: switch (prompt) {
-                PromptDetailsHome() => const HomePromptPage(),
-              },
-            );
+            return SizeChangedLayoutNotifier(
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: switch (prompt) {
+                  PromptDetailsHome() => const HomePromptPage(),
+                },
+              ),
           },
         ),
       ),
