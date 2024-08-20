@@ -25,14 +25,12 @@ install-local-tooling:
 		apt install virt-viewer ; \
 	fi
 
-.PHONY: snapd-prompting
-snapd-prompting:
-	lxc exec $(VM_NAME) -- snap refresh snapd --channel=latest/edge/prompting; \
+.PHONY: enable-prompting
+enable-prompting:
 	lxc exec $(VM_NAME) -- snap set system experimental.apparmor-prompting=true
 
-.PHONY: snapd-edge
-snapd-edge:
-	lxc exec $(VM_NAME) -- snap refresh snapd --channel=latest/edge; \
+.PHONY: disable-prompting
+disable-prompting:
 	lxc exec $(VM_NAME) -- snap set system experimental.apparmor-prompting=false
 
 .PHONY: clean-request-rules
@@ -45,7 +43,7 @@ clean-request-rules:
 # for prompts. There is probably a lighter touch way of getting things working again
 # but this does the trick.
 .PHONY: bounce-snapd
-bounce-snapd: snapd-edge clean-request-rules snapd-prompting
+bounce-snapd: disable-prompting clean-request-rules enable-prompting
 
 .PHONY: create-or-start-vm
 create-or-start-vm:
@@ -153,14 +151,12 @@ clean:
 
 # Targets for local use rather than against the VM
 
-.PHONY: local-snapd-prompting
-local-snapd-prompting:
-	snap refresh snapd --channel=latest/edge/prompting; \
+.PHONY: local-enable-prompting
+local-enable-prompting:
 	snap set system experimental.apparmor-prompting=true
 
-.PHONY: local-snapd-edge
-local-snapd-edge:
-	snap refresh snapd --channel=latest/edge; \
+.PHONY: local-disable-prompting
+local-disable-prompting:
 	snap set system experimental.apparmor-prompting=false
 
 .PHONY: local-clean-request-rules
@@ -170,7 +166,7 @@ local-clean-request-rules:
 	fi
 
 .PHONY: local-bounce-snapd
-local-bounce-snapd: local-snapd-edge local-clean-request-rules local-snapd-prompting
+local-bounce-snapd: local-disable-prompting local-clean-request-rules local-enable-prompting
 
 .PHONY: local-install-client
 local-install-client:

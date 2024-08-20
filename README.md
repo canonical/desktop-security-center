@@ -21,7 +21,7 @@ observed from snaps when running under apparmor prompting
 ### Running in a lxd VM (Recommended)
 
 So long as you have `lxd` installed you will be able to quickly spin up and
-bootstrap a VM for local testing against the `latest/edge/prompting` channel
+bootstrap a VM for local testing against the `latest/edge` channel
 of snapd.
 
 > If you have your own preferred workflow for local development and testing
@@ -93,7 +93,7 @@ $ make integration-tests
 
 This test suite is not intended for full coverage of the API interactions
 between the client and snapd, but it should be sufficient to check and validate
-the behaviour of the client against the most recent `latest/edge/prompting`
+the behaviour of the client against the most recent `latest/edge`
 channel of snapd.
 
 
