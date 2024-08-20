@@ -25,7 +25,7 @@ class PromptPage extends ConsumerWidget {
       body: SingleChildScrollView(
         child: MeasureSizeBuilder(
           builder: (context, size) {
-            if (size.width > 0) {
+            if (size.width >= 100 && size.height >= 100) {
               windowManager.setSize(
                 Size(
                   size.width,
