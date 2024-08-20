@@ -19,6 +19,7 @@ void main() {
         child: const PromptPage(),
       ),
     );
+    await tester.pumpAndSettle();
     expect(find.byType(HomePromptPage), findsOneWidget);
   });
 }
