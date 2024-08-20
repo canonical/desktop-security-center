@@ -251,7 +251,9 @@ async fn create_multiple_actioned_by_other_pid(action: Action, lifespan: Lifespa
 #[serial]
 async fn requesting_an_unknown_prompt_id_is_an_error() -> Result<()> {
     let c = SnapdSocketClient::default();
-    let res = c.prompt_details(&PromptId("0123456789ABCDEF".to_string())).await;
+    let res = c
+        .prompt_details(&PromptId("0123456789ABCDEF".to_string()))
+        .await;
 
     match res {
         Err(Error::SnapdError { message }) => {
