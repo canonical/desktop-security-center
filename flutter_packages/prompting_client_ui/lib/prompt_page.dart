@@ -14,8 +14,6 @@ class PromptPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final prompt = ref.watch(currentPromptProvider);
-    // TODO: need to set up a provider for getting this using windowManager
-    const titleBarHeight = 46.0;
 
     return Scaffold(
       appBar: YaruWindowTitleBar(
@@ -31,7 +29,7 @@ class PromptPage extends ConsumerWidget {
               windowManager.setSize(
                 Size(
                   size.width,
-                  size.height + titleBarHeight,
+                  size.height + kYaruTitleBarHeight,
                 ),
               );
             }
