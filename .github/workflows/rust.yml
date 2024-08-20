@@ -39,7 +39,7 @@ jobs:
 
       - name: Setup snapd and snaps
         run: |
-          sudo snap refresh snapd --channel=latest/edge/prompting
+          sudo snap refresh snapd --channel=latest/edge
           sudo snap set system experimental.user-daemons=true
           sudo snap install --dangerous ${{ steps.snapcraft-client.outputs.snap }}
           sudo snap install --dangerous ${{ steps.snapcraft-testing.outputs.snap }}
