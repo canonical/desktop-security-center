@@ -43,6 +43,7 @@ class PromptPage extends ConsumerWidget {
                   PromptDetailsHome() => const HomePromptPage(),
                 },
               ),
+            );
           },
         ),
       ),
