@@ -2,13 +2,12 @@ name: prompting-client
 base: core22
 version: git
 title: Prompting Client
-summary: A client for snapd apparmor prompting
-description: |
-  The official client for snap apparmor prompting.
+summary: Prompting Client
+description: The prompting user interface for snap apparmor prompting
 source-code: https://github.com/canonical/prompting-client.git
 issues: https://github.com/canonical/prompting-client/issues
 license: GPL-3.0
-grade: devel
+grade: stable
 confinement: strict
 
 apps:
