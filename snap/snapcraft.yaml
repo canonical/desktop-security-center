@@ -3,6 +3,9 @@ base: core24
 version: git
 summary: Desktop Security Center
 description: Security Center UI for the desktop
+source-code: https://github.com/canonical/desktop-security-center.git
+issues: https://github.com/canonical/desktop-security-center/issues
+license: GPL-3.0
 grade: stable
 confinement: strict
 compression: lzo
