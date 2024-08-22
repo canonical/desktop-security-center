@@ -3,7 +3,7 @@ base: core24
 version: git
 summary: Desktop Security Center
 description: Security Center UI for the desktop
-grade: devel
+grade: stable
 confinement: strict
 compression: lzo
 
