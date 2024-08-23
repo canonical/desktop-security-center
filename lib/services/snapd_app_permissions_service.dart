@@ -9,16 +9,78 @@ final _log = Logger('snapd_app_permissions_service');
 class SnapdAppPermissionsService implements AppPermissionsService {
   SnapdAppPermissionsService(this._client);
   final SnapdClient _client;
+  late final StreamController<AppPermissionsServiceStatus> _statusController;
+
+  static const _retryDelay = Duration(milliseconds: 200);
 
   @override
-  Future<List<SnapdRule>> getRules({
-    String? snap,
-    String? interface,
-  }) =>
-      _client.getRules(
-        snap: snap,
-        interface: interface,
-      );
+  Future<void> init() async {
+    _statusController = StreamController<AppPermissionsServiceStatus>.broadcast(
+      onListen: _longPollingLoop,
+    );
+    await _updateStatus();
+  }
+
+  @override
+  Future<void> dispose() async {
+    await _statusController.close();
+  }
+
+  @override
+  Stream<AppPermissionsServiceStatus> get status => _statusController.stream;
+
+  Future<void> _longPollingLoop() async {
+    Exception? lastError;
+    while (!_statusController.isClosed) {
+      try {
+        if (lastError != null) {
+          await _updateStatus();
+          lastError = null;
+        }
+        final notices = await _client.getNotices(
+          types: [SnapdNoticeType.interfacesRequestsRuleUpdate],
+          after: DateTime.now(),
+          timeout: '10s',
+        );
+        if (notices.isNotEmpty) {
+          await _updateStatus();
+        }
+      } on Exception catch (e) {
+        _log.debug('Error while long-polling notices: $e');
+        lastError = e;
+        await Future.delayed(_retryDelay);
+      }
+    }
+  }
+
+  Future<void> _updateStatus() async {
+    final isEnabled = await _client
+        .systemInfo()
+        .then(
+          (systemInfo) =>
+              systemInfo.features?['apparmor-prompting']?['enabled'] as bool? ??
+              false,
+        )
+        .onError((e, __) {
+      _log.debug('Error while checking if prompting is enabled: $e');
+      return false;
+    });
+    while (true) {
+      try {
+        if (!isEnabled) {
+          await _client.getNotices(after: DateTime.now(), timeout: '10ms');
+          _statusController.add(AppPermissionsServiceStatus.disabled());
+        } else {
+          final rules = await _client.getRules();
+          _statusController.add(AppPermissionsServiceStatus.enabled(rules));
+        }
+        break;
+      } on SnapdException catch (e) {
+        _log.debug('Error while updating status: $e');
+        await Future.delayed(_retryDelay);
+      }
+    }
+  }
 
   @override
   Future<void> removeRule(String id) => _client.removeRule(id);
@@ -33,44 +95,39 @@ class SnapdAppPermissionsService implements AppPermissionsService {
         interface: interface,
       );
 
-  @override
-  Future<bool> isEnabled() => _client.systemInfo().then(
-        (systemInfo) =>
-            systemInfo.features!['apparmor-prompting']!['enabled'] as bool,
-      );
-
-  Stream<AppPermissionsServiceStatus> _guard(
+  Future<void> _guard(
     Future<String> Function() action,
     AppPermissionsServiceStatus Function(double progress) progressState,
-  ) async* {
-    yield AppPermissionsServiceStatusWaitingForAuth();
+  ) async {
+    _statusController.add(AppPermissionsServiceStatusWaitingForAuth());
     try {
       final changeId = await action();
-      yield progressState(0.0);
+      _statusController.add(progressState(0.0));
       _log.debug('Change ID: $changeId');
       await for (final change in _client.watchChange(changeId)) {
         _log.debug('Change: $change');
         if (change.ready) {
           break;
         } else if (change.err != null) {
-          yield AppPermissionsServiceStatus.error(change.err!);
+          _statusController.add(AppPermissionsServiceStatus.error(change.err!));
           break;
         }
-        yield progressState(change.progress);
+        _statusController.add(progressState(change.progress));
       }
+      await _updateStatus();
     } on SnapdException catch (e) {
       _log.error('Error: $e');
-      yield AppPermissionsServiceStatus.error(e);
+      _statusController.add(AppPermissionsServiceStatus.error(e));
     }
   }
 
   @override
-  Stream<AppPermissionsServiceStatus> enable() => _guard(
+  Future<void> enable() => _guard(
         _client.enablePrompting,
         AppPermissionsServiceStatus.enabling,
       );
   @override
-  Stream<AppPermissionsServiceStatus> disable() => _guard(
+  Future<void> disable() => _guard(
         _client.disablePrompting,
         AppPermissionsServiceStatus.disabling,
       );

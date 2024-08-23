@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -27,14 +28,7 @@ class FakeAppPermissionsService implements AppPermissionsService {
   }
 
   final List<SnapdRule> rules;
-  bool _enabled = true;
-
-  @override
-  Future<List<SnapdRule>> getRules({
-    String? snap,
-    String? interface,
-  }) async =>
-      rules;
+  late final StreamController<AppPermissionsServiceStatus> _statusController;
 
   @override
   Future<void> removeRule(String id) async {
@@ -54,19 +48,34 @@ class FakeAppPermissionsService implements AppPermissionsService {
   }
 
   @override
-  Future<bool> isEnabled() async => _enabled;
-
-  @override
-  Stream<AppPermissionsServiceStatus> enable() async* {
-    yield AppPermissionsServiceStatusEnabling(0.0);
-    await Future.delayed(const Duration(seconds: 3));
-    _enabled = true;
+  Future<void> dispose() async {
+    await _statusController.close();
   }
 
   @override
-  Stream<AppPermissionsServiceStatus> disable() async* {
-    yield AppPermissionsServiceStatusDisabling(0.0);
+  Future<void> init() async {
+    _statusController = StreamController<AppPermissionsServiceStatus>.broadcast(
+      onListen: () async {
+        await Future.delayed(const Duration(milliseconds: 200));
+        _statusController.add(AppPermissionsServiceStatus.enabled(rules));
+      },
+    );
+  }
+
+  @override
+  Stream<AppPermissionsServiceStatus> get status => _statusController.stream;
+
+  @override
+  Future<void> disable() async {
+    _statusController.add(AppPermissionsServiceStatus.disabling(0.0));
     await Future.delayed(const Duration(seconds: 3));
-    _enabled = false;
+    _statusController.add(AppPermissionsServiceStatus.disabled());
+  }
+
+  @override
+  Future<void> enable() async {
+    _statusController.add(AppPermissionsServiceStatus.enabling(0.0));
+    await Future.delayed(const Duration(seconds: 3));
+    _statusController.add(AppPermissionsServiceStatus.enabled(rules));
   }
 }
