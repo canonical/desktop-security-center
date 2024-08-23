@@ -25,6 +25,8 @@ sealed class AppPermissionsServiceStatus with _$AppPermissionsServiceStatus {
       AppPermissionsServiceStatusDisabling;
   factory AppPermissionsServiceStatus.waitingForAuth() =
       AppPermissionsServiceStatusWaitingForAuth;
+  factory AppPermissionsServiceStatus.waitingForSnapd() =
+      AppPermissionsServiceStatusWaitingForSnapd;
 
   AppPermissionsServiceStatus._();
 

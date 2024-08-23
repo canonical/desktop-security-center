@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
@@ -10,8 +11,15 @@ class SnapdAppPermissionsService implements AppPermissionsService {
   SnapdAppPermissionsService(this._client);
   final SnapdClient _client;
   late final StreamController<AppPermissionsServiceStatus> _statusController;
+  AppPermissionsServiceStatus? _lastStatus;
 
   static const _retryDelay = Duration(milliseconds: 200);
+
+  void _emitStatus(AppPermissionsServiceStatus status) {
+    if (_statusController.isClosed) return;
+    _statusController.add(status);
+    _lastStatus = status;
+  }
 
   @override
   Future<void> init() async {
@@ -27,7 +35,8 @@ class SnapdAppPermissionsService implements AppPermissionsService {
   }
 
   @override
-  Stream<AppPermissionsServiceStatus> get status => _statusController.stream;
+  Stream<AppPermissionsServiceStatus> get status =>
+      _statusController.stream.distinct();
 
   Future<void> _longPollingLoop() async {
     Exception? lastError;
@@ -69,14 +78,18 @@ class SnapdAppPermissionsService implements AppPermissionsService {
       try {
         if (!isEnabled) {
           await _client.getNotices(after: DateTime.now(), timeout: '10ms');
-          _statusController.add(AppPermissionsServiceStatus.disabled());
+          _emitStatus(AppPermissionsServiceStatus.disabled());
         } else {
           final rules = await _client.getRules();
-          _statusController.add(AppPermissionsServiceStatus.enabled(rules));
+          _emitStatus(AppPermissionsServiceStatus.enabled(rules));
         }
         break;
       } on SnapdException catch (e) {
         _log.debug('Error while updating status: $e');
+        if (_lastStatus is AppPermissionsServiceStatusEnabled ||
+            _lastStatus is AppPermissionsServiceStatusDisabled) {
+          _emitStatus(AppPermissionsServiceStatus.waitingForSnapd());
+        }
         await Future.delayed(_retryDelay);
       }
     }
@@ -99,25 +112,25 @@ class SnapdAppPermissionsService implements AppPermissionsService {
     Future<String> Function() action,
     AppPermissionsServiceStatus Function(double progress) progressState,
   ) async {
-    _statusController.add(AppPermissionsServiceStatusWaitingForAuth());
+    _emitStatus(AppPermissionsServiceStatusWaitingForAuth());
     try {
       final changeId = await action();
-      _statusController.add(progressState(0.0));
+      _emitStatus(progressState(0.0));
       _log.debug('Change ID: $changeId');
       await for (final change in _client.watchChange(changeId)) {
         _log.debug('Change: $change');
         if (change.ready) {
           break;
         } else if (change.err != null) {
-          _statusController.add(AppPermissionsServiceStatus.error(change.err!));
+          _emitStatus(AppPermissionsServiceStatus.error(change.err!));
           break;
         }
-        _statusController.add(progressState(change.progress));
+        _emitStatus(progressState(change.progress));
       }
       await _updateStatus();
     } on SnapdException catch (e) {
       _log.error('Error: $e');
-      _statusController.add(AppPermissionsServiceStatus.error(e));
+      _emitStatus(AppPermissionsServiceStatus.error(e));
     }
   }
 
