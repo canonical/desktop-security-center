@@ -11,7 +11,7 @@ import '../test_utils.dart';
 void main() {
   testWidgets('display and delete rules', (tester) async {
     final container = createContainer();
-    final mockRulesService = registerMockRulesService(
+    final mockRulesService = registerMockAppPermissionsService(
       rules: [
         SnapdRule(
           id: 'ruleId',
@@ -60,7 +60,7 @@ void main() {
 
   testWidgets('no rules', (tester) async {
     final container = createContainer();
-    registerMockRulesService();
+    registerMockAppPermissionsService();
     registerMockLocalSnapData();
     await tester.pumpApp(
       (_) => UncontrolledProviderScope(

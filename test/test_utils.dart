@@ -48,15 +48,18 @@ ProviderContainer createContainer({
 }
 
 @GenerateMocks([AppPermissionsService])
-AppPermissionsService registerMockRulesService({
+AppPermissionsService registerMockAppPermissionsService({
   List<SnapdRule> rules = const [],
   bool enabled = true,
 }) {
   final service = MockAppPermissionsService();
-  when(service.getRules()).thenAnswer((_) async => rules);
-  when(service.isEnabled()).thenAnswer((_) async => enabled);
-  when(service.enable()).thenAnswer((_) => const Stream.empty());
-  when(service.disable()).thenAnswer((_) => const Stream.empty());
+  when(service.status).thenAnswer(
+    (_) => Stream.value(
+      enabled
+          ? AppPermissionsServiceStatus.enabled(rules)
+          : AppPermissionsServiceStatus.disabled(),
+    ),
+  );
 
   registerMockService<AppPermissionsService>(service);
   addTearDown(unregisterService<AppPermissionsService>);
@@ -69,4 +72,22 @@ LocalSnapData registerMockLocalSnapData({
   registerServiceInstance<LocalSnapData>(snaps);
   addTearDown(unregisterService<LocalSnapData>);
   return snaps;
+}
+
+@GenerateMocks([SnapdClient])
+SnapdClient registerMockSnapdClient({
+  List<SnapdNotice> notices = const [],
+}) {
+  final client = MockSnapdClient();
+  when(
+    client.getNotices(
+      types: anyNamed('types'),
+      after: anyNamed('after'),
+      timeout: anyNamed('timeout'),
+    ),
+  ).thenAnswer((_) async => notices);
+
+  registerServiceInstance<SnapdClient>(client);
+  addTearDown(unregisterService<SnapdClient>);
+  return client;
 }
