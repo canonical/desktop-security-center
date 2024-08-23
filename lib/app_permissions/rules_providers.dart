@@ -14,30 +14,18 @@ class PromptingStatusModel extends _$PromptingStatusModel {
   late final _service = getService<AppPermissionsService>();
 
   @override
-  Future<AppPermissionsServiceStatus> build() async {
-    if (await _service.isEnabled()) {
-      return AppPermissionsServiceStatus.enabled();
-    } else {
-      return AppPermissionsServiceStatus.disabled();
-    }
-  }
+  Stream<AppPermissionsServiceStatus> build() => _service.status;
 
-  Future<void> _guard(
-    Stream<AppPermissionsServiceStatus> Function() action,
-  ) async {
-    await for (final status in action()) {
-      state = AsyncData(status);
-    }
-    state = await AsyncValue.guard(build);
-  }
-
-  Future<void> enable() => _guard(_service.enable);
-  Future<void> disable() => _guard(_service.disable);
+  Future<void> enable() => _service.enable();
+  Future<void> disable() => _service.disable();
 }
 
 @riverpod
-Future<List<SnapdRule>> rules(RulesRef ref) =>
-    getService<AppPermissionsService>().getRules();
+Future<List<SnapdRule>> rules(RulesRef ref) async =>
+    switch (await ref.watch(promptingStatusModelProvider.future)) {
+      AppPermissionsServiceStatusEnabled(rules: final rules) => rules,
+      _ => [],
+    };
 
 @riverpod
 Future<Map<SnapdInterface, int>> interfaceSnapCounts(

@@ -45,13 +45,15 @@ Future<void> main(List<String> args) async {
     registerService<AppPermissionsService>(
       () => FakeAppPermissionsService.fromFile(
         argResults['test-rules'] as String,
-      ),
+      )..init(),
+      dispose: (service) => service.dispose(),
     );
   } else {
     registerService<AppPermissionsService>(
       () => SnapdAppPermissionsService(
         getService<SnapdClient>(),
-      ),
+      )..init(),
+      dispose: (service) => service.dispose(),
     );
   }
   runApp(const ProviderScope(child: SecurityCenterApp()));
