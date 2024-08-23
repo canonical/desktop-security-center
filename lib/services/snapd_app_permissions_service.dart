@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/services/app_permissions_service.dart';
@@ -80,7 +81,13 @@ class SnapdAppPermissionsService implements AppPermissionsService {
           await _client.getNotices(after: DateTime.now(), timeout: '10ms');
           _emitStatus(AppPermissionsServiceStatus.disabled());
         } else {
-          final rules = await _client.getRules();
+          final rules = await _client.getRules().onError(
+            (e, __) {
+              _log.error('Error while fetching rules: $e');
+              return [];
+            },
+            test: (e) => e is HttpException,
+          );
           _emitStatus(AppPermissionsServiceStatus.enabled(rules));
         }
         break;
