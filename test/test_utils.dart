@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:security_center/app_permissions/snap_metadata_providers.dart';
@@ -11,6 +12,8 @@ import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'test_utils.mocks.dart';
+
+part 'test_utils.freezed.dart';
 
 extension WidgetTesterX on WidgetTester {
   BuildContext get context => element(find.byType(Scaffold).first);
@@ -77,7 +80,11 @@ LocalSnapData registerMockLocalSnapData({
 
 @GenerateMocks([SnapdService])
 SnapdService registerMockSnapdService({
-  List<SnapdNotice> notices = const [],
+  List<NoticesEvent> noticesEvents = const [],
+  List<SnapdRule> rules = const [],
+  bool promptingEnabled = true,
+  String changeId = '',
+  List<SnapdChange> changes = const [],
 }) {
   final client = MockSnapdService();
 
@@ -87,9 +94,44 @@ SnapdService registerMockSnapdService({
       after: anyNamed('after'),
       timeout: anyNamed('timeout'),
     ),
-  ).thenAnswer((_) async => notices);
+  ).thenAnswer(
+    (_) async {
+      if (noticesEvents.isEmpty) {
+        return [];
+      } else {
+        final event = noticesEvents.removeAt(0);
+        return switch (event) {
+          NoticesEventSuccess(notices: final notices) => notices,
+          NoticesEventError(error: final error) => throw error,
+        };
+      }
+    },
+  );
+
+  when(client.systemInfo()).thenAnswer(
+    (_) async => SnapdSystemInfoResponse(
+      refresh: SnapdSystemRefreshInfo(next: DateTime(1970)),
+      features: {
+        'apparmor-prompting': {'enabled': promptingEnabled},
+      },
+    ),
+  );
+
+  when(client.getRules()).thenAnswer((_) async => rules);
+
+  when(client.enablePrompting()).thenAnswer((_) async => changeId);
+  when(client.disablePrompting()).thenAnswer((_) async => changeId);
+
+  when(client.watchChange(changeId))
+      .thenAnswer((_) => Stream.fromIterable(changes));
 
   registerServiceInstance<SnapdService>(client);
   addTearDown(unregisterService<SnapdService>);
   return client;
+}
+
+@freezed
+sealed class NoticesEvent with _$NoticesEvent {
+  factory NoticesEvent.success(List<SnapdNotice> notices) = NoticesEventSuccess;
+  factory NoticesEvent.error(Object error) = NoticesEventError;
 }
