@@ -7,6 +7,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:security_center/app_permissions/app_rules_page.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/main.dart' as app;
+import 'package:security_center/services/snapd_service.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
@@ -86,7 +87,7 @@ List<SnapdRuleMask> getTestRules({String? snap, String? interface}) {
 
 Future<void> writeSnapdRules() async {
   final ruleMasks = getTestRules();
-  final snapd = SnapdClient();
+  final snapd = SnapdService();
   for (final rule in ruleMasks) {
     await snapd.addRule(rule);
   }
@@ -94,7 +95,7 @@ Future<void> writeSnapdRules() async {
 }
 
 Future<void> expectSnapdRules(List<SnapdRuleMask> rules) async {
-  final snapd = SnapdClient();
+  final snapd = SnapdService();
   final actual = await snapd.getRules();
   snapd.close();
 

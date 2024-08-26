@@ -26,7 +26,7 @@ void main() {
         ),
       ],
     );
-    registerMockSnapdClient();
+    registerMockSnapdService();
     await tester.pumpApp(
       (_) => UncontrolledProviderScope(
         container: container,

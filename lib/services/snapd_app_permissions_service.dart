@@ -3,14 +3,15 @@ import 'dart:io';
 
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/services/app_permissions_service.dart';
+import 'package:security_center/services/snapd_service.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 
 final _log = Logger('snapd_app_permissions_service');
 
 class SnapdAppPermissionsService implements AppPermissionsService {
-  SnapdAppPermissionsService(this._client);
-  final SnapdClient _client;
+  SnapdAppPermissionsService(this._snapd);
+  final SnapdService _snapd;
   late final StreamController<AppPermissionsServiceStatus> _statusController;
   AppPermissionsServiceStatus? _lastStatus;
 
@@ -47,7 +48,7 @@ class SnapdAppPermissionsService implements AppPermissionsService {
           await _updateStatus();
           lastError = null;
         }
-        final notices = await _client.getNotices(
+        final notices = await _snapd.getNotices(
           types: [SnapdNoticeType.interfacesRequestsRuleUpdate],
           after: DateTime.now(),
           timeout: '10s',
@@ -64,7 +65,7 @@ class SnapdAppPermissionsService implements AppPermissionsService {
   }
 
   Future<void> _updateStatus() async {
-    final isEnabled = await _client
+    final isEnabled = await _snapd
         .systemInfo()
         .then(
           (systemInfo) =>
@@ -78,10 +79,10 @@ class SnapdAppPermissionsService implements AppPermissionsService {
     while (true) {
       try {
         if (!isEnabled) {
-          await _client.getNotices(after: DateTime.now(), timeout: '10ms');
+          await _snapd.getNotices(after: DateTime.now(), timeout: '10ms');
           _emitStatus(AppPermissionsServiceStatus.disabled());
         } else {
-          final rules = await _client.getRules().onError(
+          final rules = await _snapd.getRules().onError(
             (e, __) {
               _log.error('Error while fetching rules: $e');
               return [];
@@ -103,14 +104,14 @@ class SnapdAppPermissionsService implements AppPermissionsService {
   }
 
   @override
-  Future<void> removeRule(String id) => _client.removeRule(id);
+  Future<void> removeRule(String id) => _snapd.removeRule(id);
 
   @override
   Future<void> removeAllRules({
     required String snap,
     String? interface,
   }) =>
-      _client.removeRules(
+      _snapd.removeRules(
         snap,
         interface: interface,
       );
@@ -124,7 +125,7 @@ class SnapdAppPermissionsService implements AppPermissionsService {
       final changeId = await action();
       _emitStatus(progressState(0.0));
       _log.debug('Change ID: $changeId');
-      await for (final change in _client.watchChange(changeId)) {
+      await for (final change in _snapd.watchChange(changeId)) {
         _log.debug('Change: $change');
         if (change.ready) {
           break;
@@ -143,24 +144,14 @@ class SnapdAppPermissionsService implements AppPermissionsService {
 
   @override
   Future<void> enable() => _guard(
-        _client.enablePrompting,
+        _snapd.enablePrompting,
         AppPermissionsServiceStatus.enabling,
       );
   @override
   Future<void> disable() => _guard(
-        _client.disablePrompting,
+        _snapd.disablePrompting,
         AppPermissionsServiceStatus.disabling,
       );
-}
-
-extension on SnapdClient {
-  Stream<SnapdChange> watchChange(
-    String id, {
-    Duration interval = const Duration(milliseconds: 100),
-  }) =>
-      Stream.periodic(interval, (_) => getChange(id))
-          .asyncMap((response) async => response)
-          .distinct();
 }
 
 extension on SnapdChange {
