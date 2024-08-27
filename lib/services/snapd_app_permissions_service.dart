@@ -137,8 +137,12 @@ class SnapdAppPermissionsService implements AppPermissionsService {
       }
       await _updateStatus();
     } on SnapdException catch (e) {
-      _log.error('Error: $e');
-      _emitStatus(AppPermissionsServiceStatus.error(e));
+      if (e.kind == 'auth-cancelled') {
+        await _updateStatus();
+      } else {
+        _log.error('Error: $e');
+        _emitStatus(AppPermissionsServiceStatus.error(e));
+      }
     }
   }
 

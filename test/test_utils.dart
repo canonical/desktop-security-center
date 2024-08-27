@@ -85,6 +85,7 @@ SnapdService registerMockSnapdService({
   bool promptingEnabled = true,
   String changeId = '',
   List<SnapdChange> changes = const [],
+  bool authCancelled = false,
 }) {
   final client = MockSnapdService();
 
@@ -119,8 +120,20 @@ SnapdService registerMockSnapdService({
 
   when(client.getRules()).thenAnswer((_) async => rules);
 
-  when(client.enablePrompting()).thenAnswer((_) async => changeId);
-  when(client.disablePrompting()).thenAnswer((_) async => changeId);
+  Future<String> toggleReply(Invocation _) async {
+    if (authCancelled) {
+      throw SnapdException(
+        message: 'cancelled',
+        kind: 'auth-cancelled',
+        status: 'Forbidden',
+        statusCode: 403,
+      );
+    }
+    return changeId;
+  }
+
+  when(client.enablePrompting()).thenAnswer(toggleReply);
+  when(client.disablePrompting()).thenAnswer(toggleReply);
 
   when(client.watchChange(changeId))
       .thenAnswer((_) => Stream.fromIterable(changes));

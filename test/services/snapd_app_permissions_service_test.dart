@@ -89,12 +89,14 @@ void main() {
       String name,
       bool enabled,
       Future<void> Function(AppPermissionsService) callback,
+      bool authCancelled,
       List<AppPermissionsServiceStatus> expectedStatuses
     })>[
       (
         name: 'enable',
         enabled: true,
         callback: (service) => service.enable(),
+        authCancelled: false,
         expectedStatuses: [
           AppPermissionsServiceStatus.waitingForAuth(),
           AppPermissionsServiceStatus.enabling(0.0),
@@ -106,10 +108,21 @@ void main() {
         name: 'disable',
         enabled: false,
         callback: (service) => service.disable(),
+        authCancelled: false,
         expectedStatuses: [
           AppPermissionsServiceStatus.waitingForAuth(),
           AppPermissionsServiceStatus.disabling(0.0),
           AppPermissionsServiceStatus.disabling(0.5),
+          AppPermissionsServiceStatus.disabled(),
+        ],
+      ),
+      (
+        name: 'auth cancelled',
+        enabled: false,
+        callback: (service) => service.enable(),
+        authCancelled: true,
+        expectedStatuses: [
+          AppPermissionsServiceStatus.waitingForAuth(),
           AppPermissionsServiceStatus.disabled(),
         ],
       ),
@@ -142,6 +155,7 @@ void main() {
                 ],
               ),
             ],
+            authCancelled: testCase.authCancelled,
           ),
         );
         await service.init();
