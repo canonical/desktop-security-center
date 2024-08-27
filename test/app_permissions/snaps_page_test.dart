@@ -10,7 +10,7 @@ import '../test_utils.dart';
 void main() {
   testWidgets('display snaps', (tester) async {
     final container = createContainer();
-    registerMockRulesService(
+    registerMockAppPermissionsService(
       rules: [
         SnapdRule(
           id: 'ruleId',

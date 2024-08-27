@@ -13,7 +13,7 @@ import '../test_utils.dart';
 void main() {
   testWidgets('display interfaces', (tester) async {
     final container = createContainer();
-    registerMockRulesService(
+    registerMockAppPermissionsService(
       rules: [
         SnapdRule(
           id: 'ruleId',
@@ -26,6 +26,7 @@ void main() {
         ),
       ],
     );
+    registerMockSnapdService();
     await tester.pumpApp(
       (_) => UncontrolledProviderScope(
         container: container,
@@ -68,7 +69,8 @@ void main() {
       ]) {
         testWidgets(testCase.name, (tester) async {
           final container = createContainer();
-          final service = registerMockRulesService(enabled: testCase.enabled);
+          final service =
+              registerMockAppPermissionsService(enabled: testCase.enabled);
           await tester.pumpApp(
             (_) => UncontrolledProviderScope(
               container: container,
@@ -119,7 +121,7 @@ void main() {
       ]) {
         testWidgets(testCase.name, (tester) async {
           final container = createContainer();
-          registerMockRulesService();
+          registerMockAppPermissionsService();
           await tester.pumpApp(
             (_) => UncontrolledProviderScope(
               container: container,

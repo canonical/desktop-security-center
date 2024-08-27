@@ -13,7 +13,7 @@ part 'app_permissions_service.freezed.dart';
 
 @freezed
 sealed class AppPermissionsServiceStatus with _$AppPermissionsServiceStatus {
-  factory AppPermissionsServiceStatus.enabled() =
+  factory AppPermissionsServiceStatus.enabled(List<SnapdRule> rules) =
       AppPermissionsServiceStatusEnabled;
   factory AppPermissionsServiceStatus.disabled() =
       AppPermissionsServiceStatusDisabled;
@@ -25,6 +25,8 @@ sealed class AppPermissionsServiceStatus with _$AppPermissionsServiceStatus {
       AppPermissionsServiceStatusDisabling;
   factory AppPermissionsServiceStatus.waitingForAuth() =
       AppPermissionsServiceStatusWaitingForAuth;
+  factory AppPermissionsServiceStatus.waitingForSnapd() =
+      AppPermissionsServiceStatusWaitingForSnapd;
 
   AppPermissionsServiceStatus._();
 
@@ -33,15 +35,13 @@ sealed class AppPermissionsServiceStatus with _$AppPermissionsServiceStatus {
 }
 
 abstract class AppPermissionsService {
-  Future<List<SnapdRule>> getRules({
-    String? snap,
-    String? interface,
-  });
+  Future<void> init();
+  Future<void> dispose();
 
+  Stream<AppPermissionsServiceStatus> get status;
+
+  Future<void> enable();
+  Future<void> disable();
   Future<void> removeRule(String id);
   Future<void> removeAllRules({required String snap, String? interface});
-
-  Future<bool> isEnabled();
-  Stream<AppPermissionsServiceStatus> enable();
-  Stream<AppPermissionsServiceStatus> disable();
 }

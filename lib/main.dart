@@ -8,7 +8,7 @@ import 'package:security_center/security_center_app.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/services/fake_app_permissions_service.dart';
 import 'package:security_center/services/snapd_app_permissions_service.dart';
-import 'package:snapd/snapd.dart';
+import 'package:security_center/services/snapd_service.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
@@ -36,22 +36,24 @@ Future<void> main(List<String> args) async {
     exit(2);
   }
 
-  registerService<SnapdClient>(SnapdClient.new);
+  registerService<SnapdService>(SnapdService.new);
 
-  final snapMetadata = await getService<SnapdClient>().getSnaps();
+  final snapMetadata = await getService<SnapdService>().getSnaps();
   registerServiceInstance<LocalSnapData>(snapMetadata);
 
   if (argResults.flag('dry-run')) {
     registerService<AppPermissionsService>(
       () => FakeAppPermissionsService.fromFile(
         argResults['test-rules'] as String,
-      ),
+      )..init(),
+      dispose: (service) => service.dispose(),
     );
   } else {
     registerService<AppPermissionsService>(
       () => SnapdAppPermissionsService(
-        getService<SnapdClient>(),
-      ),
+        getService<SnapdService>(),
+      )..init(),
+      dispose: (service) => service.dispose(),
     );
   }
   runApp(const ProviderScope(child: SecurityCenterApp()));
