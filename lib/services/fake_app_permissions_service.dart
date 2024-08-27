@@ -48,11 +48,6 @@ class FakeAppPermissionsService implements AppPermissionsService {
   }
 
   @override
-  Future<void> dispose() async {
-    await _statusController.close();
-  }
-
-  @override
   Future<void> init() async {
     _statusController = StreamController<AppPermissionsServiceStatus>.broadcast(
       onListen: () async {
@@ -60,6 +55,11 @@ class FakeAppPermissionsService implements AppPermissionsService {
         _statusController.add(AppPermissionsServiceStatus.enabled(rules));
       },
     );
+  }
+
+  @override
+  Future<void> dispose() async {
+    await _statusController.close();
   }
 
   @override
