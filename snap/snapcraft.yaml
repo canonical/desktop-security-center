@@ -27,6 +27,7 @@ parts:
       - clang
       - cmake
       - curl
+      - git
       - libgtk-3-dev
       - ninja-build
       - unzip
