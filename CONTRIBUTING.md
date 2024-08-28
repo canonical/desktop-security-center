@@ -100,9 +100,9 @@ to minimize diff review.
 #### Flutter
 
 [Install Flutter](https://flutter.dev/docs/get-started/install/linux) - the
-currently used version is specified in `.tool-versions`. If you're using
-[asdf](https://asdf-vm.com/) to manage your Flutter SDK, you can simply run
-`asdf install` to install the required version.
+currently used version is specified in `.fvmrc`. If you're using
+[FVM](https://fvm.app/) to manage your Flutter SDK, you can simply run
+`fvm install` to install the required version.
 
 Install the [Flutter Linux prerequisites](https://docs.flutter.dev/get-started/install/linux#linux-prerequisites)
 
