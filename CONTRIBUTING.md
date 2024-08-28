@@ -1,4 +1,4 @@
-# Contributing to the Prompting Client
+# Contributing to the Desktop Security Center
 
 A big welcome and thank you for considering contributing to the Desktop Security
 Center and Ubuntu! It’s people like you that make it a reality for users in our
@@ -97,49 +97,57 @@ to minimize diff review.
 
 ### Required dependencies
 
-#### Flutter
-
-[Install Flutter](https://flutter.dev/docs/get-started/install/linux) - the
-currently used version is specified in `.fvmrc`. If you're using
-[FVM](https://fvm.app/) to manage your Flutter SDK, you can simply run
-`fvm install` to install the required version.
+[Install Flutter](https://flutter.dev/docs/get-started/install/linux) - the currently used version is specified in `.fvmrc`. If you're using [fvm](https://fvm.app) to manage your Flutter SDK, you can simply run `fvm install` to install the required version.
 
 Install the [Flutter Linux prerequisites](https://docs.flutter.dev/get-started/install/linux#linux-prerequisites)
 
-We provide a [Melos](https://docs.page/invertase/melos) configuration to make
-it straightforward to execute common tasks.
+We provide a [Melos](https://docs.page/invertase/melos) configuration to make it straightforward to execute common tasks.
+
+Install fvm (you can also install it from the scripts directory in the repository):
+```
+curl -fsSL https://fvm.app/install.sh | bash
+```
 
 Install Melos:
-```bash
-$ dart pub global activate melos
+```
+dart pub global activate melos
 ```
 
 Bootstrap the monorepo:
-```bash
-$ melos bootstrap
+```
+melos bootstrap
 ```
 
-`melos bootstrap` connects all the local packages/apps to each other with the
-help of `pubspec_overrides.yaml` files, and it also runs `pub get` in all
-packages/apps.
+`melos bootstrap` connects all the local packages/apps to each other with the help of `pubspec_overrides.yaml` files, and it also runs `pub get` in all packages/apps.
 
 ### Building and running the binaries
 
-TODO
+You can run the application with
+```
+fvm flutter run
+```
+
+and build a release version with
+```
+melos build
+```
+
 
 ### About the testsuite
 
-The project includes a comprehensive testsuite made of unit and integration
-tests. All the tests must pass before the review is considered. If you have
-troubles with the testsuite, feel free to mention it on your PR description.
+The project includes a comprehensive test suite. All the tests must pass before the review is considered. If you have troubles with the testsuite, feel free to mention it on your PR description.
 
-#### Flutter
-```bash
-$ melos test
+The test suite uses the [mockito](https://pub.dev/packages/mockito) framework to generate mocks. If you modify existing tests or add new ones, you might need to regenerate the mocks by running
+```
+melos generate
 ```
 
-The test suite must pass before merging the PR to our main branch. Any new
-feature, change or fix must be covered by corresponding tests.
+You can run the tests with
+```
+melos test
+```
+
+The test suite must pass before merging the PR to our main branch. Any new feature, change or fix must be covered by corresponding tests.
 
 ### Code style
 
