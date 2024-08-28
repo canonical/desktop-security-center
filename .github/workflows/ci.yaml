@@ -87,11 +87,15 @@ jobs:
             ${{ runner.os }}-repo-
       - uses: Atsumi3/actions-setup-fvm@0.0.3
       - uses: bluefireteam/melos-action@v2
-      - run: |
-          sudo apt update
-          sudo apt install -y clang cmake libglib2.0-dev libgtk-3-dev liblzma-dev ninja-build pkg-config polkitd xvfb
-          sudo snap refresh snapd --channel=latest/edge/prompting
-          sudo snap install --edge prompting-client
+      - name: Install dependencies
+        run: sudo apt update && sudo apt install -y clang cmake libglib2.0-dev libgtk-3-dev liblzma-dev ninja-build pkg-config polkitd xvfb
+      - name: Setup apparmor prompting
+        run: |
+          sudo snap refresh snapd --channel=latest/edge
+          sudo snap install prompting-client
           sudo snap set system experimental.apparmor-prompting=true
-          sudo cp integration_test/assets/snapd-ci.pkla /var/lib/polkit-1/localauthority/50-local.d/
-          xvfb-run -a -s '-screen 0 1024x768x24 +extension GLX' flutter test integration_test
+      - name: Setup polkit rules
+        run: sudo cp packages/security_center/integration_test/assets/snapd-ci.pkla /var/lib/polkit-1/localauthority/50-local.d/
+      - name: Run integration tests
+        working-directory: packages/security_center
+        run: xvfb-run -a -s '-screen 0 1024x768x24 +extension GLX' flutter test integration_test
