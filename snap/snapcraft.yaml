@@ -11,7 +11,7 @@ confinement: strict
 compression: lzo
 
 apps:
-  security-center:
+  desktop-security-center:
     command: bin/security_center
     extensions: [gnome]
     plugs:
