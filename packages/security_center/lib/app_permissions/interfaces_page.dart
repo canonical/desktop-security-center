@@ -92,11 +92,14 @@ class _PromptingSwitch extends ConsumerWidget {
     final notifier = ref.read(promptingStatusModelProvider.notifier);
     final l10n = AppLocalizations.of(context);
     return YaruBorderContainer(
-      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           YaruSwitchListTile(
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 16,
+            ),
             title: Row(
               children: [
                 Flexible(child: Text(l10n.snapPermissionsEnableTitle)),
