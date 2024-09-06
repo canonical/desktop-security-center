@@ -152,8 +152,11 @@ class _InterfaceList extends ConsumerWidget {
                     contentPadding: const EdgeInsets.all(16),
                     leading: Icon(interfaceSnapCount.key.icon, size: 48),
                     title: Text(interfaceSnapCount.key.localizedTitle(l10n)),
-                    subtitle:
-                        Text(l10n.interfaceSnapCount(interfaceSnapCount.value)),
+                    subtitle: Text(
+                      interfaceSnapCount.value > 0
+                          ? l10n.interfaceSnapCount(interfaceSnapCount.value)
+                          : l10n.snapRulesPageEmptyTileLabel,
+                    ),
                     trailing: const Icon(YaruIcons.pan_end),
                     onTap: () => Navigator.of(context)
                         .pushSnapPermissions(interface: interfaceSnapCount.key),

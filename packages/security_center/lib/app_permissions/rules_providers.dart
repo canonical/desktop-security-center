@@ -33,7 +33,7 @@ Future<Map<SnapdInterface, int>> interfaceSnapCounts(
 ) async {
   final rules = await ref.watch(rulesProvider.future);
   final interfaceSnaps = rules.fold<Map<String, Set<String>>>(
-    {},
+    {'home': {}},
     (snaps, rule) {
       snaps[rule.interface] = (snaps[rule.interface] ?? {})..add(rule.snap);
       return snaps;

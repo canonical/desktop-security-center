@@ -6,6 +6,7 @@ import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/navigator.dart';
 import 'package:security_center/widgets/app_icon.dart';
+import 'package:security_center/widgets/empty_rules_tile.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
@@ -58,7 +59,7 @@ class _Body extends ConsumerWidget {
         const SizedBox(height: 12),
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
-        TileList(children: tiles),
+        TileList(children: tiles.isEmpty ? [const EmptyRulesTile()] : tiles),
       ],
     );
   }
