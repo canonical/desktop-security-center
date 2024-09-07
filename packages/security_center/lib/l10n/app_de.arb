@@ -1,4 +1,77 @@
 {
   "snapPermissionsExperimentalLabel": "Experimentell",
-  "@snapPermissionsExperimentalLabel": {}
+  "@snapPermissionsExperimentalLabel": {},
+  "appTitle": "Sicherheitszentrum",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Bis zur Abmeldung zulassen",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Bis zur Abmeldung verweigern",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Immer zulassen",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Immer verweigern",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Lesen",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionExecuteLabel": "Ausführen",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableTitle": "Snaps müssen nach Systemberechtigungen fragen",
+  "@snapPermissionsEnableTitle": {},
+  "snapPermissionsDisablingLabel": "Das Deaktivieren kann ein paar Sekunden dauern ...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsPageTitle": "App-Berechtigungen",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesPageDescription": "{interface}-Berechtigungen für {snap} verwalten.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Noch keine Regeln",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Alle Regeln entfernen",
+  "@snapRulesRemoveAll": {},
+  "interfacePageTitle": "Berechtigungen verwalten",
+  "@interfacePageTitle": {},
+  "homeInterfacePageTitle": "Benutzerordner",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Berechtigungen für den Zugriff auf Dateien in Ihrem Benutzerordner verwalten.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageLinkLearnMore": "Mehr erfahren",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Rückmeldung geben",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfaceSnapCount": "{n, plural, =0{keine Apps} =1{1 App} other {{n} Apps}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionWriteLabel": "Schreiben",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionsEnableWarning": "Dies ist eine experimentelle Funktion zur Kontrolle des Zugriffs auf die Ressourcen Ihres Systems.",
+  "@snapPermissionsEnableWarning": {},
+  "interfacePageDescription": "Streng begrenzte Apps werden Sie fragen, bevor sie auf Dateien und Ordner zugreifen. Diese Funktion ist experimentell und kann sich noch ändern.",
+  "@interfacePageDescription": {},
+  "snapPermissionsEnablingLabel": "Das Aktivieren kann ein paar Sekunden dauern ...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsOtherDescription": "Sie können andere Berechtigungen unter Einstellungen › Anwendungen verwalten.",
+  "@snapPermissionsOtherDescription": {},
+  "snapRulesCount": "{n, plural, =0{keine Regeln} =1{1 Regel} other{{n} Regeln}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "interfacePageLinkReportIssues": "Probleme melden",
+  "@interfacePageLinkReportIssues": {}
 }
