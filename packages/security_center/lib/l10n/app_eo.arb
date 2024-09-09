@@ -1,1 +1,77 @@
-{}
+{
+  "snapdRuleCategoryForeverDenied": "Malpermesi ĉiam",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Legi",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "Skribi",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Ruli",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableTitle": "Igi snap-programojn peti por sistemaj permesoj",
+  "@snapPermissionsEnableTitle": {},
+  "snapPermissionsEnableWarning": "Jen eksperimenta funkcio por kontroli uzojn de sistemaĵoj.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsExperimentalLabel": "Eksperimente",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsPageTitle": "Programaj permesoj",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesCount": "{n, plural, =0{neniu regulo} =1{1 regulo} other{{n} reguloj}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnablingLabel": "Ŝaltante, tio eble daŭros kelkajn sekundojn…",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "Malŝaltante, tio eble daŭros kelkajn sekundojn…",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsOtherDescription": "Vi povas administri aliajn permesojn ĉe «Agordoj › Aplikoj».",
+  "@snapPermissionsOtherDescription": {},
+  "interfacePageLinkLearnMore": "Lerni plu",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkReportIssues": "Raporti problemojn",
+  "@interfacePageLinkReportIssues": {},
+  "homeInterfacePageTitle": "Hejmdosierujo",
+  "@homeInterfacePageTitle": {},
+  "snapRulesPageEmptyTileLabel": "Neniu regulo ankoraŭ",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Forigi ĉiujn regulojn",
+  "@snapRulesRemoveAll": {},
+  "interfacePageTitle": "Administri permesojn",
+  "@interfacePageTitle": {},
+  "interfacePageLinkGiveFeedback": "Recenzi",
+  "@interfacePageLinkGiveFeedback": {},
+  "snapRulesPageDescription": "Administri permesojn de {snap} pri {interface}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "homeInterfacePageDescription": "Administri permesojn uzi dosierojn en via hejma dosierujo.",
+  "@homeInterfacePageDescription": {},
+  "snapdRuleCategorySessionDenied": "Malpermesi ĝis adiaŭo",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategorySessionAllowed": "Permesi ĝis adiaŭo",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategoryForeverAllowed": "Permesi ĉiam",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "interfaceSnapCount": "{n, plural, =0{neniu programo} =1{1 programo} other {{n} programoj}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "interfacePageDescription": "Strikte enfermitaj programoj petos vin antaŭ ol uzi dosierojn kaj dosierujojn. Tiu funkcio estas eksperimenta kaj eble modifota.",
+  "@interfacePageDescription": {},
+  "appTitle": "Sekureca Centro",
+  "@appTitle": {}
+}
