@@ -1,1 +1,77 @@
-{}
+{
+  "snapdRuleCategorySessionDenied": "Zamítnout do odhlášení",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapPermissionsEnableTitle": "Vyžadovat, aby snapy žádaly o systémová oprávnění",
+  "@snapPermissionsEnableTitle": {},
+  "snapPermissionsDisablingLabel": "Deaktivuje se, může to trvat několik sekund...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsEnablingLabel": "Aktivuje se, může to trvat několik sekund...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsOtherDescription": "Další oprávnění můžete spravovat v Nastavení › Aplikace.",
+  "@snapPermissionsOtherDescription": {},
+  "snapRulesCount": "{n, plural, =0{žádná pravidla} =1{1 pravidlo} other{{n} pravidel}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesRemoveAll": "Odstranit všechna pravidla",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "Domovská složka",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Spravujte oprávnění pro přístup k souborům ve vaší domovské složce.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageLinkLearnMore": "Dozvědět se více",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Poskytnout zpětnou vazbu",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "Nahlásit problémy",
+  "@interfacePageLinkReportIssues": {},
+  "appTitle": "Centrum zabezpečení",
+  "@appTitle": {},
+  "snapPermissionsEnableWarning": "Toto je experimentální funkce pro řízení přístupu ke zdrojům vašeho systému.",
+  "@snapPermissionsEnableWarning": {},
+  "snapdRuleCategorySessionAllowed": "Povolit do odhlášení",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategoryForeverAllowed": "Vždy povolit",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapPermissionReadLabel": "Čtení",
+  "@snapPermissionReadLabel": {},
+  "snapdRuleCategoryForeverDenied": "Vždy zamítnout",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionWriteLabel": "Zápis",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Spouštění",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsExperimentalLabel": "Experimentální",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsPageTitle": "Oprávnění aplikací",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesPageEmptyTileLabel": "Zatím žádná pravidla",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesPageDescription": "Spravujte oprávnění {interface} pro {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "interfacePageTitle": "Spravovat oprávnění",
+  "@interfacePageTitle": {},
+  "interfacePageDescription": "Přísně omezené aplikace se vás před přístupem k souborům a složkám zeptají. Tato funkce je experimentální a podléhá změnám.",
+  "@interfacePageDescription": {},
+  "interfaceSnapCount": "{n, plural, =0{žádné aplikace} =1{1 aplikace} other {{n} aplikací}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  }
+}
