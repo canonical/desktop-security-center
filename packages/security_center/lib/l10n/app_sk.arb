@@ -1,1 +1,24 @@
-{}
+{
+  "appTitle": "Centrum zabezpečenia",
+  "@appTitle": {},
+  "snapPermissionsEnablingLabel": "Zapnutie môže trvať niekoľko sekúnd...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "Vypnutie môže trvať niekoľko sekúnd...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsPageTitle": "Povolenia aplikácie",
+  "@snapPermissionsPageTitle": {},
+  "interfacePageLinkReportIssues": "Nahláste problémy",
+  "@interfacePageLinkReportIssues": {},
+  "snapPermissionsExperimentalLabel": "Experimentálne",
+  "@snapPermissionsExperimentalLabel": {},
+  "interfacePageLinkGiveFeedback": "Poskytnite spätnú väzbu",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkLearnMore": "Zistite viac",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageTitle": "Spravovať povolenia",
+  "@interfacePageTitle": {},
+  "snapPermissionsOtherDescription": "Ďalšie povolenia môžete spravovať v časti Nastavenia › Aplikácie.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsEnableWarning": "Toto je experimentálna funkcia na riadenie prístupu k zdrojom vášho systému.",
+  "@snapPermissionsEnableWarning": {}
+}
