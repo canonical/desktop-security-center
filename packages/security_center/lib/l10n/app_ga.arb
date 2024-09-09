@@ -1,1 +1,16 @@
-{}
+{
+  "snapdRuleCategoryForeverDenied": "Diúltaigh i gcónaí",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionWriteLabel": "Scríobh",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionReadLabel": "Léigh",
+  "@snapPermissionReadLabel": {},
+  "appTitle": "Ionad Slándála",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Ceadaigh go dtí go logáil amach",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Diúltaigh go dtí logáil amach",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Ceadaigh i gcónaí",
+  "@snapdRuleCategoryForeverAllowed": {}
+}
