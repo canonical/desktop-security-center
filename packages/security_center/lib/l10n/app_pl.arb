@@ -1,1 +1,77 @@
-{}
+{
+  "snapPermissionsDisablingLabel": "Wyłączanie, może to potrwać kilka sekund...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsPageTitle": "Uprawnienia programów",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesPageDescription": "Zarządzaj uprawnieniami {interface} dla {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesRemoveAll": "Usuń wszystkie reguły",
+  "@snapRulesRemoveAll": {},
+  "interfacePageTitle": "Zarządzaj uprawnieniami",
+  "@interfacePageTitle": {},
+  "interfacePageDescription": "Ściśle ograniczone programy będą pytać przed uzyskaniem dostępu do plików i katalogów. Ta funkcja jest eksperymentalna i może ulec zmianie.",
+  "@interfacePageDescription": {},
+  "interfacePageLinkLearnMore": "Dowiedz się więcej",
+  "@interfacePageLinkLearnMore": {},
+  "snapPermissionsExperimentalLabel": "Eksperymentalne",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsOtherDescription": "Możesz zarządzać pozostałymi uprawnieniami w Ustawienia › Programy.",
+  "@snapPermissionsOtherDescription": {},
+  "snapRulesCount": "{n, plural, =0{bez reguł} =1{1 reguła} other{{n} reguł}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Brak reguł",
+  "@snapRulesPageEmptyTileLabel": {},
+  "homeInterfacePageTitle": "Katalog osobisty",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Zarządzaj uprawnieniami dostępu do plików w katalogu osobistym.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageLinkGiveFeedback": "Przekaż opinię",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "Zgłoś problemy",
+  "@interfacePageLinkReportIssues": {},
+  "interfaceSnapCount": "{n, plural, =0{bez programów} =1{1 program} other {{n} programów}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnableTitle": "Wymagaj, aby snapy prosiły o uprawnienia systemowe",
+  "@snapPermissionsEnableTitle": {},
+  "appTitle": "Centrum zabezpieczeń",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Zezwól do momentu wylogowania",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapPermissionExecuteLabel": "Wykonywanie",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableWarning": "Jest to funkcja eksperymentalna, która ma na celu kontrolowanie dostępu do zasobów systemu.",
+  "@snapPermissionsEnableWarning": {},
+  "snapdRuleCategorySessionDenied": "Odmów do momentu wylogowania",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Zezwól zawsze",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Odmów zawsze",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Odczyt",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "Zapis",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionsEnablingLabel": "Włączanie, może to potrwać kilka sekund...",
+  "@snapPermissionsEnablingLabel": {}
+}
