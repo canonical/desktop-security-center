@@ -54,7 +54,13 @@ enum _Link {
   giveFeedback,
   reportIssues;
 
-  String get url => switch (this) { _ => '' };
+  String get url => switch (this) {
+        giveFeedback =>
+          'https://t.maze.co/266411709?guerilla=true&source=securitycenter',
+        reportIssues =>
+          'https://github.com/canonical/desktop-security-center/issues/new',
+        _ => '',
+      };
   String localize(AppLocalizations l10n) => switch (this) {
         learnMore => l10n.interfacePageLinkLearnMore,
         giveFeedback => l10n.interfacePageLinkGiveFeedback,
