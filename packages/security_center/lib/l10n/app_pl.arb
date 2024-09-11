@@ -52,7 +52,7 @@
       }
     }
   },
-  "snapPermissionsEnableTitle": "Wymagaj, aby snapy prosiły o uprawnienia systemowe",
+  "snapPermissionsEnableTitle": "Wymagaj, aby programy prosiły o uprawnienia systemowe",
   "@snapPermissionsEnableTitle": {},
   "appTitle": "Centrum zabezpieczeń",
   "@appTitle": {},
