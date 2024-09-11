@@ -15,7 +15,7 @@
   "@snapPermissionReadLabel": {},
   "snapPermissionExecuteLabel": "Ausführen",
   "@snapPermissionExecuteLabel": {},
-  "snapPermissionsEnableTitle": "Snaps müssen nach Systemberechtigungen fragen",
+  "snapPermissionsEnableTitle": "Apps müssen nach Systemberechtigungen fragen",
   "@snapPermissionsEnableTitle": {},
   "snapPermissionsDisablingLabel": "Das Deaktivieren kann ein paar Sekunden dauern ...",
   "@snapPermissionsDisablingLabel": {},
