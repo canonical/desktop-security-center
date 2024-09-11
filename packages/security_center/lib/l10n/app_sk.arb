@@ -59,7 +59,7 @@
   "@snapdRuleCategoryForeverDenied": {},
   "snapdRuleCategorySessionDenied": "Odmietnuť do odhlásenia",
   "@snapdRuleCategorySessionDenied": {},
-  "snapPermissionsEnableTitle": "Vyžadovať, aby snapy žiadali o systémové oprávnenia",
+  "snapPermissionsEnableTitle": "Vyžadovať, aby aplikácie žiadali o systémové oprávnenia",
   "@snapPermissionsEnableTitle": {},
   "snapRulesPageDescription": "Spravujte oprávnenie {interface} pre {snap}.",
   "@snapRulesPageDescription": {
