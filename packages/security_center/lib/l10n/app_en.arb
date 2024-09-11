@@ -16,7 +16,7 @@
     "@snapPermissionWriteLabel": {},
     "snapPermissionExecuteLabel": "Execute",
     "@snapPermissionExecuteLabel": {},
-    "snapPermissionsEnableTitle": "Require snaps to ask for system permissions",
+    "snapPermissionsEnableTitle": "Require apps to ask for system permissions",
     "@snapPermissionsEnableTitle": {},
     "snapPermissionsEnableWarning": "This is an experimental feature for controlling access to your system’s resources.",
     "@snapPermissionsEnableWarning": {},
