@@ -19,7 +19,7 @@ body:
   attributes:
     label: Describe the bug
     description: |
-      A clear and concise description of what the bug is.
+      A clear and concise description of what the bug is. You can also attach screenshots or recordings.
   validations:
     required: false
 - type: textarea
@@ -71,6 +71,6 @@ body:
   attributes:
     label: Additional context
     description: |
-      Provide any additional context that may be relevant to the feature request. You can attach screenshots, logs (remember to anonymize!), or any other information that you think might be helpful.
+      You can attach screenshots, recordings, logs (remember to anonymize!), or any other information that you think might be helpful.
   validations:
     required: false
