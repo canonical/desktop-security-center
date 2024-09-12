@@ -1,7 +1,7 @@
 name: Feature request
 description: Suggest an idea for the Security Center
 labels:
-  - feature-request
+  - enhancement
 assignees:
   - juanruitina
 body:
