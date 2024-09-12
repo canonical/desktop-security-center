@@ -47,7 +47,7 @@
   "@appTitle": {},
   "snapdRuleCategorySessionDenied": "Denegar hasta cerrar sesión",
   "@snapdRuleCategorySessionDenied": {},
-  "snapPermissionsEnableTitle": "Requerir que los snaps soliciten permisos del sistema",
+  "snapPermissionsEnableTitle": "Exigir a las aplicaciones que pidan permisos al sistema",
   "@snapPermissionsEnableTitle": {},
   "snapPermissionWriteLabel": "Escribir",
   "@snapPermissionWriteLabel": {},
