@@ -7,7 +7,7 @@
   "@snapPermissionReadLabel": {},
   "snapPermissionExecuteLabel": "Exekvera",
   "@snapPermissionExecuteLabel": {},
-  "snapPermissionsEnableTitle": "Kräv snappar att be om systembehörigheter",
+  "snapPermissionsEnableTitle": "Kräv program att be om systembehörigheter",
   "@snapPermissionsEnableTitle": {},
   "snapPermissionsEnableWarning": "Det här är en experimentell funktion för att kontrollera åtkomst till ditt systems resurser.",
   "@snapPermissionsEnableWarning": {},
