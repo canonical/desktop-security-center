@@ -16,5 +16,42 @@
   "snapdRuleCategoryForeverAllowed": "Autoriser toujours",
   "@snapdRuleCategoryForeverAllowed": {},
   "snapdRuleCategoryForeverDenied": "Refuser toujours",
-  "@snapdRuleCategoryForeverDenied": {}
+  "@snapdRuleCategoryForeverDenied": {},
+  "appTitle": "Centre de sécurité",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Autoriser jusqu’à fermeture de session",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Refuser jusqu’à fermeture de session",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapPermissionsEnableTitle": "Exiger que les apps demandent des autorisations système",
+  "@snapPermissionsEnableTitle": {},
+  "snapPermissionsEnableWarning": "Il s’agit d’une fonctionnalité expérimentale pour contrôler l’accès aux ressources de votre système.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "Activation, cela peut prendre quelques secondes...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "Désactivation, cela peut prendre quelques secondes...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsOtherDescription": "Vous pouvez gérer d’autres autorisations dans Paramètres › Applications.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "Permissions d'app",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesPageEmptyTileLabel": "Pas encore de règles",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Supprimer toutes les règles",
+  "@snapRulesRemoveAll": {},
+  "interfacePageTitle": "Gérer permissions",
+  "@interfacePageTitle": {},
+  "interfacePageDescription": "Les applications limitées strictement vous demanderont avant d’accéder aux fichiers et dossiers. Cette fonctionnalité est expérimentale et sujète à modifications.",
+  "@interfacePageDescription": {},
+  "snapRulesPageDescription": "Gérer autorisations {interface} pour {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  }
 }
