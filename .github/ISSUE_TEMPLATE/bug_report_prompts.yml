@@ -1,0 +1,76 @@
+name: Bug report for App Permissions prompts
+description: Issues with prompts and specific apps? Let us know.
+title: "[Prompting bug]: "
+labels:
+  - bug
+assignees:
+  - sminez
+  - juanruitina
+body:
+- type: checkboxes
+  attributes:
+    label: Is there an existing issue for this?
+    description: |
+      Please search to see if an issue already exists for this feature: https://github.com/canonical/desktop-security-center/issues.
+    options:
+    - label: I have searched the existing issues
+      required: true
+- type: textarea
+  attributes:
+    label: Describe the bug
+    description: |
+      A clear and concise description of what the bug is.
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Steps to reproduce the behavior
+    placeholder: |
+      1. Go to '...'
+      2. Click on '....'
+      3. Scroll down to '....'
+      4. See error
+  validations:
+    required: false
+- type: textarea
+  id: expected_behavior
+  attributes:
+    label: Expected behavior
+    description: |
+      A clear and concise description of what you expected to happen.
+  validations:
+    required: false
+- type: dropdown
+  attributes:
+    label: Ubuntu release
+    description: What version of our Ubuntu are you running?
+    options:
+      - '24.10'
+      - 24.04 LTS
+      - Other (specify in the last field)
+  validations:
+    required: false
+- type: dropdown
+  attributes:
+    label: What architecture are you using?
+    multiple: false
+    options:
+      - amd64
+      - arm64
+      - Other (specify in the last field)
+      - I don't know
+  validations:
+    required: false
+- type: input
+  attributes:
+    label: App or apps where you encountered the issue
+    description: Remember only [strictly confined snaps](https://snapcraft.io/docs/snap-confinement) are covered by App Permissions. Apps from the App Center are snaps. Debs, Flatpaks and AppImages are not.
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Additional context
+    description: |
+      Provide any additional context that may be relevant to the feature request. You can attach screenshots, logs (remember to anonymize!), or any other information that you think might be helpful.
+  validations:
+    required: false
