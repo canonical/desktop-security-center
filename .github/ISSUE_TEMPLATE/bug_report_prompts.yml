@@ -1,8 +1,8 @@
 name: Bug report for App Permissions prompts
 description: Issues with prompts and specific apps? Let us know.
-title: "[Prompting bug]: "
 labels:
   - bug
+  - prompting
 assignees:
   - sminez
   - juanruitina

@@ -1,6 +1,5 @@
 name: Bug report for the Security Center
 description: Create a report to help us improve
-title: "[Bug]: "
 labels:
   - bug
 assignees:
