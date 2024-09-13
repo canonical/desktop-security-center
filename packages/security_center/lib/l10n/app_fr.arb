@@ -53,5 +53,23 @@
         "type": "String"
       }
     }
+  },
+  "snapRulesCount": "{n, plural, =0{aucune règle} =1{1 règle} other{{n} règles}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "homeInterfacePageTitle": "Dossier d’accueil",
+  "@homeInterfacePageTitle": {},
+  "interfaceSnapCount": "{n, plural, =0{aucune app} =1{1 app} other {{n} apps}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
   }
 }
