@@ -21,9 +21,9 @@
   "@snapPermissionsOtherDescription": {},
   "snapPermissionsEnableWarning": "Toto je experimentálna funkcia na riadenie prístupu k zdrojom vášho systému.",
   "@snapPermissionsEnableWarning": {},
-  "snapdRuleCategorySessionAllowed": "Povoliť do odhlásenia",
+  "snapdRuleCategorySessionAllowed": "Povolené do odhlásenia",
   "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategoryForeverAllowed": "Vždy povoliť",
+  "snapdRuleCategoryForeverAllowed": "Vždy povolené",
   "@snapdRuleCategoryForeverAllowed": {},
   "snapPermissionReadLabel": "Čítanie",
   "@snapPermissionReadLabel": {},
@@ -31,7 +31,7 @@
   "@snapPermissionExecuteLabel": {},
   "snapPermissionWriteLabel": "Zapisovanie",
   "@snapPermissionWriteLabel": {},
-  "snapRulesCount": "{n, plural, =0{žiadne pravidlá} =1{1 pravidlo} other{{n} pravidiel}}",
+  "snapRulesCount": "{n, plural, =0{žiadne pravidlá} =1{1 pravidlo} =2{2 pravidlá} =3{3 pravidlá} =4{4 pravidlá} other{{n} pravidiel}}",
   "@snapRulesCount": {
     "placeholders": {
       "n": {
@@ -43,11 +43,11 @@
   "@snapRulesPageEmptyTileLabel": {},
   "snapRulesRemoveAll": "Odstrániť všetky pravidlá",
   "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "Domovský priečinok",
+  "homeInterfacePageTitle": "Priečinok domov",
   "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Spravujte oprávnenia pre prístup k súborom vo svojom domovskom priečinku.",
+  "homeInterfacePageDescription": "Spravujte oprávnenia pre prístup k súborom vo vašom priečinku domov.",
   "@homeInterfacePageDescription": {},
-  "interfaceSnapCount": "{n, plural, =0{žiadne aplikácie} =1{1 aplikácia} other {{n} aplikácií}}",
+  "interfaceSnapCount": "{n, plural, =0{žiadne aplikácie} =1{1 aplikácia} =2{2 aplikácie} =3{3 aplikácie} =4{4 aplikácie} other {{n} aplikácií}}",
   "@interfaceSnapCount": {
     "placeholders": {
       "n": {
@@ -55,9 +55,9 @@
       }
     }
   },
-  "snapdRuleCategoryForeverDenied": "Vždy odmietnuť",
+  "snapdRuleCategoryForeverDenied": "Vždy odmietnuté",
   "@snapdRuleCategoryForeverDenied": {},
-  "snapdRuleCategorySessionDenied": "Odmietnuť do odhlásenia",
+  "snapdRuleCategorySessionDenied": "Odmietnuté do odhlásenia",
   "@snapdRuleCategorySessionDenied": {},
   "snapPermissionsEnableTitle": "Vyžadovať, aby aplikácie žiadali o systémové oprávnenia",
   "@snapPermissionsEnableTitle": {},
@@ -72,6 +72,6 @@
       }
     }
   },
-  "interfacePageDescription": "Prísne obmedzené aplikácie sa vás pred prístupom k súborom a priečinkom opýtajú. Táto funkcia je experimentálna a podlieha zmenám.",
+  "interfacePageDescription": "Prísne obmedzené aplikácie sa vás opýtajú pred prístupom k súborom a priečinkom. Táto funkcia je experimentálna a podlieha zmenám.",
   "@interfacePageDescription": {}
 }
