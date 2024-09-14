@@ -13,7 +13,7 @@
   "@snapPermissionReadLabel": {},
   "snapPermissionWriteLabel": "Запись",
   "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Выполнить",
+  "snapPermissionExecuteLabel": "Выполнение",
   "@snapPermissionExecuteLabel": {},
   "snapPermissionsEnableWarning": "Это экспериментальная функция для контроля доступа к ресурсам системы.",
   "@snapPermissionsEnableWarning": {},
