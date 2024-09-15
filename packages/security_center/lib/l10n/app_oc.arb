@@ -1,4 +1,55 @@
 {
   "appTitle": "Centre de seguretat",
-  "@appTitle": {}
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Autorizar fins la desconnexion",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Refusar fins la desconnexion",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Totjorn autorizar",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Totjorn refusar",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Lectura",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "Escritura",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Executar",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsExperimentalLabel": "Experimental",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsPageTitle": "Permissions de l’aplicacion",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesPageDescription": "Gestion de las autorizacions {interface} per {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Cap de règlas pel moment",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Levar totas las règlas",
+  "@snapRulesRemoveAll": {},
+  "snapRulesCount": "{n, plural, =0{cap de règlas} =1{1 règla} other{{n} règlas}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "interfacePageTitle": "Gerir las permissions",
+  "@interfacePageTitle": {},
+  "interfacePageLinkLearnMore": "Ne saber mai",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Far un retorn",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "Senhalar de problèmas",
+  "@interfacePageLinkReportIssues": {},
+  "homeInterfacePageTitle": "Repertòri personal",
+  "@homeInterfacePageTitle": {}
 }
