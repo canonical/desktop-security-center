@@ -45,7 +45,7 @@
   "@snapRulesRemoveAll": {},
   "homeInterfacePageTitle": "Priečinok domov",
   "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Spravujte oprávnenia pre prístup k súborom vo vašom priečinku domov.",
+  "homeInterfacePageDescription": "Spravujte oprávnenia pre prístup k súborom vo vašom domovskom priečinku.",
   "@homeInterfacePageDescription": {},
   "interfaceSnapCount": "{n, plural, =0{žiadne aplikácie} =1{1 aplikácia} =2{2 aplikácie} =3{3 aplikácie} =4{4 aplikácie} other {{n} aplikácií}}",
   "@interfaceSnapCount": {
@@ -61,7 +61,7 @@
   "@snapdRuleCategorySessionDenied": {},
   "snapPermissionsEnableTitle": "Vyžadovať, aby aplikácie žiadali o systémové oprávnenia",
   "@snapPermissionsEnableTitle": {},
-  "snapRulesPageDescription": "Spravujte oprávnenie {interface} pre {snap}.",
+  "snapRulesPageDescription": "Spravujte {interface} pre aplikáciu {snap}.",
   "@snapRulesPageDescription": {
     "placeholders": {
       "interface": {
