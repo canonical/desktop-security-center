@@ -71,5 +71,7 @@
         "type": "int"
       }
     }
-  }
+  },
+  "homeInterfacePageDescription": "Gérer les autorisations d’accès aux fichiers dans votre dossier personnel.",
+  "@homeInterfacePageDescription": {}
 }
