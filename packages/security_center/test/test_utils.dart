@@ -83,6 +83,7 @@ SnapdService registerMockSnapdService({
   List<NoticesEvent> noticesEvents = const [],
   List<SnapdRule> rules = const [],
   bool promptingEnabled = true,
+  bool promptingSupported = true,
   String changeId = '',
   List<SnapdChange> changes = const [],
   bool authCancelled = false,
@@ -113,7 +114,10 @@ SnapdService registerMockSnapdService({
     (_) async => SnapdSystemInfoResponse(
       refresh: SnapdSystemRefreshInfo(next: DateTime(1970)),
       features: {
-        'apparmor-prompting': {'enabled': promptingEnabled},
+        'apparmor-prompting': {
+          'enabled': promptingEnabled,
+          'supported': promptingSupported,
+        },
       },
     ),
   );
