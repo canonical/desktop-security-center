@@ -27,7 +27,7 @@
   "@snapPermissionsOtherDescription": {},
   "snapPermissionsPageTitle": "Разрешения приложений",
   "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, plural, =0{нет правил} =1{1 правило} =2{2 правила} =3{3 правила} =4{4 правила} other{{n} правил}}",
+  "snapRulesCount": "{n, plural, =0{нет правил} =1{1 правило} =2{2 правила} other{{n} правил}}",
   "@snapRulesCount": {
     "placeholders": {
       "n": {
@@ -60,7 +60,7 @@
   "@interfacePageLinkGiveFeedback": {},
   "interfacePageLinkReportIssues": "Сообщить о проблеме",
   "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, plural, =0{нет приложений} =1{1 приложение} =2{2 приложения} =3{3 приложения} =4{4 приложения} other {{n} приложений}}",
+  "interfaceSnapCount": "{n, plural, =0{нет приложений} =1{1 приложение} =2{2 приложения} other {{n} приложений}}",
   "@interfaceSnapCount": {
     "placeholders": {
       "n": {
