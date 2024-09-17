@@ -31,7 +31,7 @@
   "@snapPermissionExecuteLabel": {},
   "snapPermissionWriteLabel": "Zapisovanie",
   "@snapPermissionWriteLabel": {},
-  "snapRulesCount": "{n, plural, =0{žiadne pravidlá} =1{1 pravidlo} =2{2 pravidlá} =3{3 pravidlá} =4{4 pravidlá} other{{n} pravidiel}}",
+  "snapRulesCount": "{n, plural, =0{žiadne pravidlá} =1{1 pravidlo} =2{2 pravidlá} other{{n} pravidiel}}",
   "@snapRulesCount": {
     "placeholders": {
       "n": {
@@ -47,7 +47,7 @@
   "@homeInterfacePageTitle": {},
   "homeInterfacePageDescription": "Spravujte oprávnenia pre prístup k súborom vo vašom domovskom priečinku.",
   "@homeInterfacePageDescription": {},
-  "interfaceSnapCount": "{n, plural, =0{žiadne aplikácie} =1{1 aplikácia} =2{2 aplikácie} =3{3 aplikácie} =4{4 aplikácie} other {{n} aplikácií}}",
+  "interfaceSnapCount": "{n, plural, =0{žiadne aplikácie} =1{1 aplikácia} =2{2 aplikácie} other {{n} aplikácií}}",
   "@interfaceSnapCount": {
     "placeholders": {
       "n": {
