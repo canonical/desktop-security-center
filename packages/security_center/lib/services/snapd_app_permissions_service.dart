@@ -9,6 +9,8 @@ import 'package:ubuntu_logger/ubuntu_logger.dart';
 
 final _log = Logger('snapd_app_permissions_service');
 
+typedef PromptingInfo = ({bool isEnabled, bool isSupported});
+
 class SnapdAppPermissionsService implements AppPermissionsService {
   SnapdAppPermissionsService(this._snapd);
   final SnapdService _snapd;
@@ -45,14 +47,22 @@ class SnapdAppPermissionsService implements AppPermissionsService {
 
   Future<void> _longPollingLoop() async {
     Exception? lastError;
+    PromptingInfo? lastPromptingInfo;
+
     while (!_statusController.isClosed) {
       try {
-        if (lastError != null) {
+        final promptingInfo = await _getPromptingInfo();
+        if (lastError != null || promptingInfo != lastPromptingInfo) {
           await _updateStatus();
           lastError = null;
+          lastPromptingInfo = promptingInfo;
         }
         final notices = await _snapd.getNotices(
-          types: [SnapdNoticeType.interfacesRequestsRuleUpdate],
+          types: [
+            promptingInfo.isSupported
+                ? SnapdNoticeType.interfacesRequestsRuleUpdate
+                : SnapdNoticeType.warning,
+          ],
           after: DateTime.now(),
           timeout: '10s',
         );
@@ -67,7 +77,7 @@ class SnapdAppPermissionsService implements AppPermissionsService {
     }
   }
 
-  Future<void> _updateStatus() async {
+  Future<PromptingInfo> _getPromptingInfo() async {
     final systemInfo = await _snapd
         .systemInfo()
         .then(
@@ -81,10 +91,20 @@ class SnapdAppPermissionsService implements AppPermissionsService {
 
     final isSupported = systemInfo?['supported'] as bool? ?? false;
     final isEnabled = systemInfo?['enabled'] as bool? ?? false;
-    _log.debug('Prompting supported: $isSupported, enabled: $isEnabled');
+
+    return (isSupported: isSupported, isEnabled: isEnabled);
+  }
+
+  Future<void> _updateStatus() async {
     while (true) {
       try {
-        if (isSupported && isEnabled) {
+        // Check if snapd responds to notices. It might happen that
+        // system-info already sends a reply, but snapd is not ready for
+        // long-polling yet.
+        await _snapd.getNotices(after: DateTime.now(), timeout: '10ms');
+
+        final promptingInfo = await _getPromptingInfo();
+        if (promptingInfo.isSupported && promptingInfo.isEnabled) {
           final rules = await _snapd.getRules().onError(
             (e, __) {
               _log.error('Error while fetching rules: $e');
@@ -94,11 +114,7 @@ class SnapdAppPermissionsService implements AppPermissionsService {
           );
           _emitStatus(AppPermissionsServiceStatus.enabled(rules));
         } else {
-          // Check if snapd responds to notices. It might happen that
-          // system-info already sends a reply, but snapd is not ready for
-          // long-polling yet.
-          await _snapd.getNotices(after: DateTime.now(), timeout: '10ms');
-          if (isSupported) {
+          if (promptingInfo.isSupported) {
             _emitStatus(AppPermissionsServiceStatus.disabled());
           } else {
             _emitStatus(AppPermissionsServiceStatus.unavailable());
