@@ -15,7 +15,7 @@ import 'package:yaru/yaru.dart';
 
 Future<void> main(List<String> args) async {
   await YaruWindowTitleBar.ensureInitialized();
-  Logger.setup(path: '', level: LogLevel.info);
+  Logger.setup(path: '');
 
   final parser = ArgParser()
     ..addFlag(

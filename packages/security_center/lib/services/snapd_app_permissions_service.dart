@@ -18,6 +18,7 @@ class SnapdAppPermissionsService implements AppPermissionsService {
   static const _retryDelay = Duration(milliseconds: 200);
 
   void _emitStatus(AppPermissionsServiceStatus status) {
+    _log.debug('Emitting status: $status');
     if (_statusController.isClosed) return;
     _statusController.add(status);
     _lastStatus = status;
@@ -26,9 +27,11 @@ class SnapdAppPermissionsService implements AppPermissionsService {
   @override
   Future<void> init() async {
     _statusController = StreamController<AppPermissionsServiceStatus>.broadcast(
-      onListen: _longPollingLoop,
+      onListen: () {
+        _updateStatus();
+        _longPollingLoop();
+      },
     );
-    await _updateStatus();
   }
 
   @override
@@ -65,23 +68,23 @@ class SnapdAppPermissionsService implements AppPermissionsService {
   }
 
   Future<void> _updateStatus() async {
-    final isEnabled = await _snapd
+    final systemInfo = await _snapd
         .systemInfo()
         .then(
-          (systemInfo) =>
-              systemInfo.features?['apparmor-prompting']?['enabled'] as bool? ??
-              false,
+          (systemInfo) => systemInfo.features?['apparmor-prompting']
+              as Map<String, dynamic>?,
         )
         .onError((e, __) {
-      _log.debug('Error while checking if prompting is enabled: $e');
-      return false;
+      _log.error('Error while fetching system info: $e');
+      return null;
     });
+
+    final isSupported = systemInfo?['supported'] as bool? ?? false;
+    final isEnabled = systemInfo?['enabled'] as bool? ?? false;
+    _log.debug('Prompting supported: $isSupported, enabled: $isEnabled');
     while (true) {
       try {
-        if (!isEnabled) {
-          await _snapd.getNotices(after: DateTime.now(), timeout: '10ms');
-          _emitStatus(AppPermissionsServiceStatus.disabled());
-        } else {
+        if (isSupported && isEnabled) {
           final rules = await _snapd.getRules().onError(
             (e, __) {
               _log.error('Error while fetching rules: $e');
@@ -90,6 +93,16 @@ class SnapdAppPermissionsService implements AppPermissionsService {
             test: (e) => e is HttpException,
           );
           _emitStatus(AppPermissionsServiceStatus.enabled(rules));
+        } else {
+          // Check if snapd responds to notices. It might happen that
+          // system-info already sends a reply, but snapd is not ready for
+          // long-polling yet.
+          await _snapd.getNotices(after: DateTime.now(), timeout: '10ms');
+          if (isSupported) {
+            _emitStatus(AppPermissionsServiceStatus.disabled());
+          } else {
+            _emitStatus(AppPermissionsServiceStatus.unavailable());
+          }
         }
         break;
       } on SnapdException catch (e) {

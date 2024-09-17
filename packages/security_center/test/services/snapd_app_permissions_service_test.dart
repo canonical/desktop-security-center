@@ -30,11 +30,15 @@ void main() {
   group('status stream', () {
     final testCases = <({
       String name,
+      bool promptingEnabled,
+      bool promptingSupported,
       List<NoticesEvent> noticeEvents,
       List<AppPermissionsServiceStatus> expectedStatuses
     })>[
       (
         name: 'successful rule update',
+        promptingEnabled: true,
+        promptingSupported: true,
         noticeEvents: [
           NoticesEvent.success([testNotice]),
         ],
@@ -44,6 +48,8 @@ void main() {
       ),
       (
         name: 'empty notices don\'t change status',
+        promptingEnabled: true,
+        promptingSupported: true,
         noticeEvents: [
           NoticesEvent.success([testNotice]),
           NoticesEvent.success([]),
@@ -54,6 +60,8 @@ void main() {
       ),
       (
         name: 'retry after error',
+        promptingEnabled: true,
+        promptingSupported: true,
         noticeEvents: [
           NoticesEvent.success([testNotice]),
           NoticesEvent.error(SnapdException(message: 'error')),
@@ -61,6 +69,35 @@ void main() {
         ],
         expectedStatuses: [
           AppPermissionsServiceStatus.enabled(testRules),
+        ],
+      ),
+      (
+        name: 'prompting unsupported and disabled',
+        promptingEnabled: false,
+        promptingSupported: false,
+        noticeEvents: [
+          NoticesEvent.success([]),
+        ],
+        expectedStatuses: [
+          AppPermissionsServiceStatus.unavailable(),
+        ],
+      ),
+      (
+        name: 'prompting supported but disabled',
+        promptingEnabled: false,
+        promptingSupported: true,
+        noticeEvents: [],
+        expectedStatuses: [
+          AppPermissionsServiceStatus.disabled(),
+        ],
+      ),
+      (
+        name: 'prompting enabled but unsupported',
+        promptingEnabled: true,
+        promptingSupported: false,
+        noticeEvents: [],
+        expectedStatuses: [
+          AppPermissionsServiceStatus.unavailable(),
         ],
       ),
     ];
@@ -71,6 +108,8 @@ void main() {
           registerMockSnapdService(
             noticesEvents: testCase.noticeEvents,
             rules: testRules,
+            promptingEnabled: testCase.promptingEnabled,
+            promptingSupported: testCase.promptingSupported,
           ),
         );
         await service.init();
@@ -92,12 +131,17 @@ void main() {
       bool authCancelled,
       List<AppPermissionsServiceStatus> expectedStatuses
     })>[
+      // The mock service doesn't have a mutable state, so it will return the
+      // same status after enabling/disabling the feature. This test asserts
+      // that the intermediate statuses are emitted correctly and the service
+      // emits a status update before and after the feature is toggled.
       (
         name: 'enable',
         enabled: true,
         callback: (service) => service.enable(),
         authCancelled: false,
         expectedStatuses: [
+          AppPermissionsServiceStatus.enabled([]),
           AppPermissionsServiceStatus.waitingForAuth(),
           AppPermissionsServiceStatus.enabling(0.0),
           AppPermissionsServiceStatus.enabling(0.5),
@@ -110,6 +154,7 @@ void main() {
         callback: (service) => service.disable(),
         authCancelled: false,
         expectedStatuses: [
+          AppPermissionsServiceStatus.disabled(),
           AppPermissionsServiceStatus.waitingForAuth(),
           AppPermissionsServiceStatus.disabling(0.0),
           AppPermissionsServiceStatus.disabling(0.5),
@@ -122,6 +167,7 @@ void main() {
         callback: (service) => service.enable(),
         authCancelled: true,
         expectedStatuses: [
+          AppPermissionsServiceStatus.disabled(),
           AppPermissionsServiceStatus.waitingForAuth(),
           AppPermissionsServiceStatus.disabled(),
         ],
@@ -160,11 +206,15 @@ void main() {
         );
         await service.init();
         addTearDown(service.dispose);
+        service.status.listen(null);
+        await expectLater(
+          service.status,
+          emits(testCase.expectedStatuses.removeAt(0)),
+        );
         service.status.listen(
           (status) =>
               expect(status, equals(testCase.expectedStatuses.removeAt(0))),
         );
-
         await testCase.callback(service);
       });
     }
