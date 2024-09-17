@@ -1,1 +1,77 @@
-{}
+{
+  "snapdRuleCategoryForeverAllowed": "Tillåt alltid",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Neka alltid",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Läs",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionExecuteLabel": "Exekvera",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableTitle": "Kräv program att be om systembehörigheter",
+  "@snapPermissionsEnableTitle": {},
+  "snapPermissionsEnableWarning": "Det här är en experimentell funktion för att kontrollera åtkomst till ditt systems resurser.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsDisablingLabel": "Inaktiverar, det kan ta några sekunder...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsPageTitle": "Program behörigheter",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesPageEmptyTileLabel": "Inga regler ännu",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Ta bort alla regler",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "Hemkatalog",
+  "@homeInterfacePageTitle": {},
+  "interfacePageTitle": "Hantera behörigheter",
+  "@interfacePageTitle": {},
+  "interfacePageLinkLearnMore": "Läs mer",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Ge feedback",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfaceSnapCount": "{n, plural, =0{inga program} =1{1 program} other {{n} flera program}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "appTitle": "Säkerhetscenter",
+  "@appTitle": {},
+  "snapdRuleCategorySessionDenied": "Neka tills utloggning",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategorySessionAllowed": "Tillåt tills utloggning",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapPermissionWriteLabel": "Skriv",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionsExperimentalLabel": "Experimentell",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapRulesCount": "{n, plural, =0{inga regler} =1{1 regel} other{{n} regler}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsOtherDescription": "Du kan hantera andra behörigheter i Inställningar › Program.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsEnablingLabel": "Aktiverar, det kan ta några sekunder...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapRulesPageDescription": "Hantera {interface} behörigheter för {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "homeInterfacePageDescription": "Hantera behörigheter för att komma åt filer i din hemkatalog.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageDescription": "Strikt begränsade program kommer att fråga dig innan du kommer åt filer och mappar. Den här funktionen är experimentell och kan ändras.",
+  "@interfacePageDescription": {},
+  "interfacePageLinkReportIssues": "Rapportera problem",
+  "@interfacePageLinkReportIssues": {}
+}

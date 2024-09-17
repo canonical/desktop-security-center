@@ -1,1 +1,22 @@
-{}
+{
+  "snapdRuleCategoryForeverAllowed": "Alltid nekt",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Alltid nekt",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapRulesRemoveAll": "Fjern alle regler",
+  "@snapRulesRemoveAll": {},
+  "interfacePageTitle": "Håndter tilganger",
+  "@interfacePageTitle": {},
+  "interfacePageLinkLearnMore": "Lær mer",
+  "@interfacePageLinkLearnMore": {},
+  "appTitle": "Sikkeretssenter",
+  "@appTitle": {},
+  "snapRulesPageEmptyTileLabel": "Ingen regler enda",
+  "@snapRulesPageEmptyTileLabel": {},
+  "homeInterfacePageTitle": "Hjemmemappe",
+  "@homeInterfacePageTitle": {},
+  "interfacePageLinkGiveFeedback": "Gi tilbakemelding",
+  "@interfacePageLinkGiveFeedback": {},
+  "snapPermissionsPageTitle": "Programtilganger",
+  "@snapPermissionsPageTitle": {}
+}

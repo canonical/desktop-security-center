@@ -1,1 +1,77 @@
-{}
+{
+  "snapPermissionWriteLabel": "Écrire",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Exécuter",
+  "@snapPermissionExecuteLabel": {},
+  "interfacePageLinkGiveFeedback": "Donnez votre avis",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "Signaler un problème",
+  "@interfacePageLinkReportIssues": {},
+  "snapPermissionReadLabel": "Lire",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionsExperimentalLabel": "Expérimental",
+  "@snapPermissionsExperimentalLabel": {},
+  "interfacePageLinkLearnMore": "En savoir plus",
+  "@interfacePageLinkLearnMore": {},
+  "snapdRuleCategoryForeverAllowed": "Autoriser toujours",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Refuser toujours",
+  "@snapdRuleCategoryForeverDenied": {},
+  "appTitle": "Centre de sécurité",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Autoriser jusqu’à fermeture de session",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Refuser jusqu’à fermeture de session",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapPermissionsEnableTitle": "Exiger que les apps demandent des autorisations système",
+  "@snapPermissionsEnableTitle": {},
+  "snapPermissionsEnableWarning": "Il s’agit d’une fonctionnalité expérimentale pour contrôler l’accès aux ressources de votre système.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "Activation, cela peut prendre quelques secondes...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "Désactivation, cela peut prendre quelques secondes...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsOtherDescription": "Vous pouvez gérer d’autres autorisations dans Paramètres › Applications.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "Permissions d'app",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesPageEmptyTileLabel": "Pas encore de règles",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Supprimer toutes les règles",
+  "@snapRulesRemoveAll": {},
+  "interfacePageTitle": "Gérer permissions",
+  "@interfacePageTitle": {},
+  "interfacePageDescription": "Les applications limitées strictement vous demanderont avant d’accéder aux fichiers et dossiers. Cette fonctionnalité est expérimentale et sujète à modifications.",
+  "@interfacePageDescription": {},
+  "snapRulesPageDescription": "Gérer autorisations {interface} pour {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesCount": "{n, plural, =0{aucune règle} =1{1 règle} other{{n} règles}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "homeInterfacePageTitle": "Dossier d’accueil",
+  "@homeInterfacePageTitle": {},
+  "interfaceSnapCount": "{n, plural, =0{aucune app} =1{1 app} other {{n} apps}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "homeInterfacePageDescription": "Gérer les autorisations d’accès aux fichiers dans votre dossier personnel.",
+  "@homeInterfacePageDescription": {}
+}

@@ -1,1 +1,77 @@
-{}
+{
+  "snapdRuleCategoryForeverDenied": "Diúltaigh i gcónaí",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionWriteLabel": "Scríobh",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionReadLabel": "Léigh",
+  "@snapPermissionReadLabel": {},
+  "appTitle": "Ionad Slándála",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Ceadaigh go dtí go logáil amach",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Diúltaigh go dtí logáil amach",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Ceadaigh i gcónaí",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapPermissionExecuteLabel": "Rith",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableTitle": "Éilíonn aipeanna ceadanna córais a iarraidh",
+  "@snapPermissionsEnableTitle": {},
+  "snapPermissionsEnableWarning": "Is gné thurgnamhach é seo chun rochtain ar acmhainní do chórais a rialú.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsDisablingLabel": "Á dhíchumasú, seans go dtógfaidh sé cúpla soicind...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Turgnamhach",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsOtherDescription": "Is féidir leat ceadanna eile a bhainistiú i Socruithe › Feidhmchláir.",
+  "@snapPermissionsOtherDescription": {},
+  "snapRulesPageEmptyTileLabel": "Níl aon rialacha fós",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Bain na rialacha go léir",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "Fillteán baile",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Bainistigh ceadanna chun comhaid a rochtain i d'fhillteán Baile.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "Bainistigh ceadanna",
+  "@interfacePageTitle": {},
+  "interfacePageLinkGiveFeedback": "Tabhair aiseolas",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfaceSnapCount": "{n, plural, =0{gan aipeanna} =1{1 aip} other{{n} aipeanna}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesCount": "{n, plural, =0{gan rialacha} =1{1 riail} other{{n} rialacha}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesPageDescription": "Bainistigh ceadanna {interface} le haghaidh {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "interfacePageDescription": "Iarrfaidh aipeanna atá teoranta go docht ort roimh rochtain a fháil ar chomhaid agus ar fhillteáin. Tá an ghné seo turgnamhach agus faoi réir athruithe.",
+  "@interfacePageDescription": {},
+  "interfacePageLinkLearnMore": "Foghlaim níos mó",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkReportIssues": "Saincheisteanna a thuairisciú",
+  "@interfacePageLinkReportIssues": {},
+  "snapPermissionsEnablingLabel": "Á chumasú, seans go dtógfaidh sé cúpla soicind...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsPageTitle": "Ceadanna Aip",
+  "@snapPermissionsPageTitle": {}
+}

@@ -1,1 +1,77 @@
-{}
+{
+  "snapdRuleCategoryForeverAllowed": "Permitir siempre",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Rechazar siempre",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Leer",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionsEnableWarning": "Esta es una función experimental para controlar el acceso a los recursos de tu sistema.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "Habilitándolo, puede tardar unos segundos...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "Desactivándolo, puede tardar unos segundos...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Experimental",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsOtherDescription": "Puedes administrar otros permisos en Configuración › Aplicaciones.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "Permisos de la aplicación",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesCount": "{n, plural, =0{sin reglas} =1{1 regla} other{{n} reglas}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "interfacePageDescription": "Las aplicaciones estrictamente limitadas te preguntarán antes de acceder a archivos y carpetas. Esta característica es experimental y está sujeta a cambios.",
+  "@interfacePageDescription": {},
+  "interfacePageLinkLearnMore": "Leer más",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Dar tu opinión",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "Informar de problemas",
+  "@interfacePageLinkReportIssues": {},
+  "interfaceSnapCount": "{n, plural, =0{si aplicaciones} =1{1 aplicación} other {{n} aplicaciones}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapdRuleCategorySessionAllowed": "Permitir hasta cerrar sesión",
+  "@snapdRuleCategorySessionAllowed": {},
+  "appTitle": "Centro de seguridad",
+  "@appTitle": {},
+  "snapdRuleCategorySessionDenied": "Denegar hasta cerrar sesión",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapPermissionsEnableTitle": "Exigir a las aplicaciones que pidan permisos al sistema",
+  "@snapPermissionsEnableTitle": {},
+  "snapPermissionWriteLabel": "Escribir",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Ejecutar",
+  "@snapPermissionExecuteLabel": {},
+  "snapRulesPageDescription": "Administrar los permisos de {interface} para {snap} .",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Aún no hay reglas",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Eliminar todas las reglas",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "Carpeta de usuario",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Administrar los permisos para acceder a los archivos en la carpeta del usuario.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "Administrar permisos",
+  "@interfacePageTitle": {}
+}

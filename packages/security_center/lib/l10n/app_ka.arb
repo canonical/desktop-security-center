@@ -1,1 +1,18 @@
-{}
+{
+  "appTitle": "უსაფრთხოების ცენტრი",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "დაშვება გასვლამდე",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "აკრძალვა გასვლამდე",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "ყოველთვის დაშვება",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "ყოველთვის აკრძალვა",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "წაკითხვა",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "ჩაწერა",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "გაშვება",
+  "@snapPermissionExecuteLabel": {}
+}

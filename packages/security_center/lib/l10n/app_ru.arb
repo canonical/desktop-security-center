@@ -1,1 +1,77 @@
-{}
+{
+  "appTitle": "Центр безопасности",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Разрешить до выхода из системы",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Запретить до выхода из системы",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Разрешать всегда",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Никогда не разрешать",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Чтение",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "Запись",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Выполнение",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableWarning": "Это экспериментальная функция для контроля доступа к ресурсам системы.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "Включение может занять несколько секунд...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "Отключение может занять несколько секунд...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Экспериментально",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsOtherDescription": "Управлять другими разрешениями можно в Настройках › Приложения.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "Разрешения приложений",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesCount": "{n, plural, =0{нет правил} =1{1 правило} =2{2 правила} other{{n} правил}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesPageDescription": "Управление разрешениями к {interface} для {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Правил ещё нет",
+  "@snapRulesPageEmptyTileLabel": {},
+  "homeInterfacePageTitle": "Домашняя папка",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Управление разрешениями для доступа к файлам в Домашней папке.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "Управление разрешениями",
+  "@interfacePageTitle": {},
+  "interfacePageLinkLearnMore": "Узнать больше",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Отправить отзыв",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "Сообщить о проблеме",
+  "@interfacePageLinkReportIssues": {},
+  "interfaceSnapCount": "{n, plural, =0{нет приложений} =1{1 приложение} =2{2 приложения} other {{n} приложений}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnableTitle": "Требовать с приложений запрос системных разрешений",
+  "@snapPermissionsEnableTitle": {},
+  "snapRulesRemoveAll": "Удалить все правила",
+  "@snapRulesRemoveAll": {},
+  "interfacePageDescription": "Строго ограниченные приложения будут спрашивать Вас, прежде чем получить доступ к файлам и папкам. Эта функция является экспериментальной и может быть изменена.",
+  "@interfacePageDescription": {}
+}
