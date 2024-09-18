@@ -60,7 +60,7 @@ enum _Link {
         giveFeedback =>
           'https://t.maze.co/266411709?guerilla=true&source=securitycenter',
         reportIssues =>
-          'https://github.com/canonical/desktop-security-center/issues/new',
+          'https://github.com/canonical/desktop-security-center/issues/new/choose',
       };
   String localize(AppLocalizations l10n) => switch (this) {
         learnMore => l10n.interfacePageLinkLearnMore,
