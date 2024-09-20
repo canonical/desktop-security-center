@@ -1,1 +1,77 @@
-{}
+{
+  "appTitle": "Sikkerhedscenter",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Tillad indtil, der logges ud",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Nægt indtil, der logges ud",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Tillad altid",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Nægt altid",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Læs",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "Skriv",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Udfør",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableWarning": "Dette er en eksperimentel funktion til at kontrollere adgangen til dit systems ressourcer.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "Det kan tage nogle sekunder at aktivere …",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "Det kan tage nogle sekunder at deaktivere …",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Eksperimentel",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsOtherDescription": "Du kan håndtere andre rettigheder under Indstillinger › Programmer.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "Programrettigheder",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesCount": "{n, plural, =0{no rules} =1{1 rule} andre{{n} regler}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesPageDescription": "Håndtér {interface}rettigheder for {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Endnu ingen regler",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Fjern alle regler",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "Hjemmemappe",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Håndtér rettigheder for filadgang i din hjemmemappe.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "Håndtér rettigheder",
+  "@interfacePageTitle": {},
+  "interfacePageDescription": "Strengt begrænsede promgarmmer vil spørge dig, før de får adgang til filer og mapper. Denne funktion er eksperimentel og kan ændres.",
+  "@interfacePageDescription": {},
+  "interfacePageLinkLearnMore": "Læs mere",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Giv feedback",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "Rapportér problemer",
+  "@interfacePageLinkReportIssues": {},
+  "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 app} andre {{n} apps}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnableTitle": "Kræv, at programmer spørger om systemrettigheder",
+  "@snapPermissionsEnableTitle": {}
+}
