@@ -9,11 +9,11 @@
   "@snapdRuleCategoryForeverAllowed": {},
   "snapdRuleCategoryForeverDenied": "Nægt altid",
   "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "Læs",
+  "snapPermissionReadLabel": "Læse",
   "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "Skriv",
+  "snapPermissionWriteLabel": "Skrive",
   "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Udfør",
+  "snapPermissionExecuteLabel": "Kørsel",
   "@snapPermissionExecuteLabel": {},
   "snapPermissionsEnableWarning": "Dette er en eksperimentel funktion til at kontrollere adgangen til dit systems ressourcer.",
   "@snapPermissionsEnableWarning": {},
@@ -27,7 +27,7 @@
   "@snapPermissionsOtherDescription": {},
   "snapPermissionsPageTitle": "Programrettigheder",
   "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, plural, =0{no rules} =1{1 rule} andre{{n} regler}}",
+  "snapRulesCount": "{n, plural, =0{ingen regler} =1{1 regel} other{{n} regler}}",
   "@snapRulesCount": {
     "placeholders": {
       "n": {
@@ -35,7 +35,7 @@
       }
     }
   },
-  "snapRulesPageDescription": "Håndtér {interface}rettigheder for {snap}.",
+  "snapRulesPageDescription": "Håndtér {interface}-rettigheder for {snap}.",
   "@snapRulesPageDescription": {
     "placeholders": {
       "interface": {
@@ -56,7 +56,7 @@
   "@homeInterfacePageDescription": {},
   "interfacePageTitle": "Håndtér rettigheder",
   "@interfacePageTitle": {},
-  "interfacePageDescription": "Strengt begrænsede promgarmmer vil spørge dig, før de får adgang til filer og mapper. Denne funktion er eksperimentel og kan ændres.",
+  "interfacePageDescription": "Strengt isolerede programmer vil spørge dig, før de får adgang til filer og mapper. Denne funktion er eksperimentel og kan ændres.",
   "@interfacePageDescription": {},
   "interfacePageLinkLearnMore": "Læs mere",
   "@interfacePageLinkLearnMore": {},
@@ -64,7 +64,7 @@
   "@interfacePageLinkGiveFeedback": {},
   "interfacePageLinkReportIssues": "Rapportér problemer",
   "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 app} andre {{n} apps}}",
+  "interfaceSnapCount": "{n, plural, =0{ingen programmer} =1{1 program} other {{n} programmer}}",
   "@interfaceSnapCount": {
     "placeholders": {
       "n": {
