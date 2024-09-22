@@ -1,1 +1,64 @@
-{}
+{
+  "interfaceSnapCount": "{n, plural, =0{ei sovelluksia} =1{1 sovellus} other {{n} sovellusta}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapdRuleCategoryForeverAllowed": "Salli aina",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Estä aina",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Lue",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionsDisablingLabel": "Poistetaa käytöstä, tämä saattaa kestään hetken...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Kokeellinen",
+  "@snapPermissionsExperimentalLabel": {},
+  "interfacePageLinkLearnMore": "Lue lisää",
+  "@interfacePageLinkLearnMore": {},
+  "appTitle": "Tietoturvakeskus",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Salli uloskirjautumiseen asti",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Estä uloskirjautumiseen asti",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapPermissionWriteLabel": "Kirjoita",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Suorita",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableTitle": "Vaadi sovellusten kysyä järjestelmän käyttöoikeuksia",
+  "@snapPermissionsEnableTitle": {},
+  "snapPermissionsEnableWarning": "Tämä on kokeellinen ominaisuus, jonka avulla on mahdollista hallita pääsyä järjestelmän resursseihin.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "Otetaan käyttöön, tämä saattaa kestää hetken...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsOtherDescription": "Voit hallita muita oikeuksia menemällä Asetukset › Sovellukset.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "Sovelluksen oikeudet",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesCount": "{n, plural, =0{ei sääntöjä} =1{1 sääntö} other{{n} sääntöä}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Ei vielä sääntöjä",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Poista kaikki säännöt",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "Kotikansio",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Hallitse oikeuksia kotikansiossa olevie tiedostojen käytön suhteen.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "Hallitse oikeuksia",
+  "@interfacePageTitle": {},
+  "interfacePageLinkGiveFeedback": "Anna palautetta",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "Ilmoita ongelmista",
+  "@interfacePageLinkReportIssues": {}
+}
