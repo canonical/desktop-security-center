@@ -51,5 +51,27 @@
   "interfacePageLinkReportIssues": "Senhalar de problèmas",
   "@interfacePageLinkReportIssues": {},
   "homeInterfacePageTitle": "Repertòri personal",
-  "@homeInterfacePageTitle": {}
+  "@homeInterfacePageTitle": {},
+  "snapPermissionsEnableWarning": "Es una foncionalitat experimentala per contrarotlar l’accès a las ressorsas de vòstre ordenador.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "Activacion, aquò pòt trigar...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "Desactivacion, aquò pòt trigar...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsOtherDescription": "Podètz gerir d’autras autorizacions dins Paramètres › Aplicacions.",
+  "@snapPermissionsOtherDescription": {},
+  "homeInterfacePageDescription": "Gerir las autorizacions d’accès als fichièrs dins vòstre repertòri personal.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageDescription": "Las aplicacions estrictament limitadas vos demandaràn abans d’accedir als archius e dossièrs. Aquesta foncionalitat es experimentala e portada a modificacion.",
+  "@interfacePageDescription": {},
+  "interfaceSnapCount": "{n, plural, =0{cap d’aplicacions} =1{1 aplicacion} other {{n} aplicacions}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnableTitle": "Exigir que las aplicacions demanden d’autorizacions al sistèma",
+  "@snapPermissionsEnableTitle": {}
 }
