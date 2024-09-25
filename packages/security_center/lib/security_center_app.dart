@@ -43,8 +43,7 @@ class _Home extends ConsumerWidget {
         tileBuilder: Routes.tileBuilder,
         pageBuilder: Routes.pageBuilder,
         controller: ref.watch(yaruPageControllerProvider),
-        layoutDelegate:
-            const YaruMasterFixedPaneDelegate(paneWidth: kPaneWidth),
+        paneLayoutDelegate: const YaruFixedPaneDelegate(paneSize: kPaneWidth),
         breakpoint: 0,
         navigatorKey: ref.watch(appNavigatorProvider),
         navigatorObservers: [AppNavigatorObserver(ref)],
