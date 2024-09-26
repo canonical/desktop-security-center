@@ -24,7 +24,6 @@ class AppIcon extends StatelessWidget {
               imageUrl: iconUrl!,
               imageBuilder: (_, imageProvider) => Image(
                 image: imageProvider,
-                filterQuality: FilterQuality.medium,
                 fit: BoxFit.fitHeight,
               ),
               placeholder: (_, __) => placeholder,
