@@ -1,1 +1,77 @@
-{}
+{
+  "appTitle": "Biztonsági központ",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Engedélyezés a kijelentkezésig",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Letiltás a kijelentkezésig",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverDenied": "Letiltás mindig",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionsEnableWarning": "Ez egy kísérleti funkció a rendszer erőforrásaihoz való hozzáférés szabályozására.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "Engedélyezés, ez eltarthat néhány másodpercig…",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "Letiltás, ez eltarthat néhány másodpercig…",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Kísérleti",
+  "@snapPermissionsExperimentalLabel": {},
+  "interfacePageLinkReportIssues": "Hiba jelentése",
+  "@interfacePageLinkReportIssues": {},
+  "interfaceSnapCount": "{n, plural, =0{nincsenek alkalmazások} =1{1 alkalmazás} other {{n} alkalmazás}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnableTitle": "Megkövetelés az alkalmazásoktól, hogy rendszerjogosultságokat kérjenek",
+  "@snapPermissionsEnableTitle": {},
+  "snapPermissionReadLabel": "Olvasás",
+  "@snapPermissionReadLabel": {},
+  "snapdRuleCategoryForeverAllowed": "Engedélyezés mindig",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapPermissionWriteLabel": "Írás",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Végrehajtás",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsOtherDescription": "Az egyéb jogosultságokat a Beállítások › Alkalmazások lapon kezelheti.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "Alkalmazás jogosultságai",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesCount": "{n, plural, =0{nincsenek szabályok} =1{1 szabály} other{{n} szabály}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesPageDescription": "A(z) {interface} jogosultságainak kezelése a(z) {snap} snap-csomagnál.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Még nincsenek szabályok",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Összes szabály eltávolítása",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "Saját mappa",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "A saját mappában lévő fájlok hozzáféréséhez való jogosultságok kezelése.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "Jogosultságok kezelése",
+  "@interfacePageTitle": {},
+  "interfacePageDescription": "A szigorúan korlátozott alkalmazások megkérdezik Önt, mielőtt hozzáférnének a fájlokhoz és a mappákhoz. Ez a funkció kísérleti és változhat a jövőben.",
+  "@interfacePageDescription": {},
+  "interfacePageLinkLearnMore": "Tudjon meg többet",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Visszajelzés küldése",
+  "@interfacePageLinkGiveFeedback": {}
+}
