@@ -71,7 +71,9 @@ body:
   attributes:
     label: System info
     description: |
-      Please run this command in your terminal: `uname -rv && snap info snapd prompting-client desktop-security-center` and paste the output here. It will give us information about your system such as the kernel version and the versions of the relevant packages.
+      Please run this command in your terminal:
+      ```uname -rv && snap info snapd prompting-client desktop-security-center```
+      and paste the output here. It will give us information about your system such as the kernel version and the versions of the relevant packages.
   validations:
     required: false
 - type: textarea
