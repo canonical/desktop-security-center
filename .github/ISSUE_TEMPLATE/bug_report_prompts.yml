@@ -80,7 +80,7 @@ body:
   attributes:
     label: Additional context
     description: |
-      You can attach screenshots, recordings, or any other information that you think might be helpful. You can also paste logs that seem relevant: you can get them running this command in your terminal: 
+      You can attach screenshots, recordings, or any other information that you think might be helpful. You can also paste logs that seem relevant: you can get them by running this command in your terminal: 
       ```journalctl --user | grep prompting-client.daemon```
       Please remember to anonymize any personal data.
   validations:
