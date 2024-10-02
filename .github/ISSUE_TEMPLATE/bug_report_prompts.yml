@@ -61,12 +61,6 @@ body:
       - I don't know
   validations:
     required: false
-- type: input
-  attributes:
-    label: App or apps where you encountered the issue
-    description: Remember only [strictly confined snaps](https://snapcraft.io/docs/snap-confinement) are covered by App Permissions. Apps from the App Center are snaps. Debs, Flatpaks and AppImages are not.
-  validations:
-    required: false
 - type: textarea
   attributes:
     label: System info
@@ -76,10 +70,18 @@ body:
       and paste the output here. It will give us information about your system such as the kernel version and the versions of the relevant packages.
   validations:
     required: false
+- type: input
+  attributes:
+    label: App or apps where you encountered the issue
+    description: Remember only [strictly confined snaps](https://snapcraft.io/docs/snap-confinement) are covered by App Permissions. Apps from the App Center are snaps. Debs, Flatpaks and AppImages are not.
+  validations:
+    required: false
 - type: textarea
   attributes:
     label: Additional context
     description: |
-      You can attach screenshots, recordings, logs (remember to anonymize!), or any other information that you think might be helpful.
+      You can attach screenshots, recordings, or any other information that you think might be helpful. You can also paste logs that seem relevant: you can get them running this command in your terminal: 
+      ```journalctl --user | grep prompting-client.daemon```
+      Please remember to anonymize any personal data.
   validations:
     required: false
