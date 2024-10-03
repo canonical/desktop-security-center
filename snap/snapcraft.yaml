@@ -1,5 +1,5 @@
 name: desktop-security-center
-base: core24
+base: core22
 version: git
 summary: Desktop Security Center
 description: Security Center UI for the desktop
