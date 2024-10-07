@@ -1,1 +1,77 @@
-{}
+{
+  "snapRulesRemoveAll": "Hapus semua aturan",
+  "@snapRulesRemoveAll": {},
+  "interfacePageTitle": "Kelola izin",
+  "@interfacePageTitle": {},
+  "interfacePageLinkReportIssues": "Laporkan masalah",
+  "@interfacePageLinkReportIssues": {},
+  "appTitle": "Pusat Keamanan",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Izinkan sampai log keluar",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Tolak sampai log keluar",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Selalu izinkan",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Selalu tolak",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Baca",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "Tulis",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Jalankan",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableWarning": "Ini adalah fitur eksperimental untuk mengendalikan akses ke sumber daya sistem Anda.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "Memfungsikan, itu mungkin perlu waktu beberapa detik ...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "Menonaktifkan, itu mungkin perlu waktu beberapa detik ...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Eksperimental",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsOtherDescription": "Anda dapat mengelola izin lain dalam Pengaturan › Aplikasi.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "Izin Aplikasi",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesCount": "{n, plural, =0{tidak ada aturan} =1{1 aturan} other{{n} aturan}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesPageDescription": "Kelola izin {interface} untuk {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Belum ada aturan",
+  "@snapRulesPageEmptyTileLabel": {},
+  "homeInterfacePageTitle": "Folder rumah",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Kelola izin untuk mengakses berkas di folder Rumah Anda.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageDescription": "Aplikasi yang ketat dibatasi akan bertanya sebelum mengakses berkas dan folder. Fitur ini eksperimen dan mungkin berubah.",
+  "@interfacePageDescription": {},
+  "interfacePageLinkLearnMore": "Pelajari selengkapnya",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Berikan umpan balik",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfaceSnapCount": "{n, plural, =0{tidak ada aplikasi} =1{1 aplikasi} other {{n} aplikasi}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnableTitle": "Membutuhkan aplikasi untuk meminta izin sistem",
+  "@snapPermissionsEnableTitle": {}
+}

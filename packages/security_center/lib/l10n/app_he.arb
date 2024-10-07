@@ -1,1 +1,77 @@
-{}
+{
+  "snapdRuleCategorySessionDenied": "לדחות עד היציאה מהחשבון",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapPermissionExecuteLabel": "הפעלה",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsExperimentalLabel": "ניסיוני",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapRulesPageEmptyTileLabel": "אין כללים עדיין",
+  "@snapRulesPageEmptyTileLabel": {},
+  "homeInterfacePageDescription": "ניהול הרשאות לגישה לקבצים בתיקיית הבית שלך.",
+  "@homeInterfacePageDescription": {},
+  "appTitle": "מרכז אבטחה",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "לאפשר עד היציאה מהחשבון",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategoryForeverAllowed": "לאפשר תמיד",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "לדחות תמיד",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "קריאה",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "כתיבה",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionsEnableWarning": "זאת יכולת ניסיונית לשליטה בגישה למשאבי המערכת שלך.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "האפשרות מופעלת, זה עלול לקחת כמה שניות…",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "האפשרות נכבית, זה עלול לקחת כמה שניות…",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsOtherDescription": "אפשר לנהל הגדרות אחרות דרך הגדרות › יישומים.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "הרשאות יישום",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesCount": "{n, plural, =0{אין כללים} =1{כלל אחד} other{{n} כללים}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesPageDescription": "ניהול ההרשאות של {interface} עבור {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesRemoveAll": "להסיר את כל הכללים",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "תיקיית הבית",
+  "@homeInterfacePageTitle": {},
+  "interfacePageTitle": "ניהול הרשאות",
+  "@interfacePageTitle": {},
+  "interfacePageLinkLearnMore": "מידע נוסף",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageDescription": "יישומים מוגבלים באופן הדוק יבקשו ממך הרשאה בטרם גישה לקבצים ולתיקיות. היכולת הזאת ניסיונית ועלולה להשתנות.",
+  "@interfacePageDescription": {},
+  "interfacePageLinkGiveFeedback": "שליחת משוב",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "דיווח על תקלות",
+  "@interfacePageLinkReportIssues": {},
+  "interfaceSnapCount": "{n, plural, =0{אין יישומים} =1{יישום אחד} other {{n} יישומים}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnableTitle": "לדרוש מהיישומים לבקש הרשאות מערכת",
+  "@snapPermissionsEnableTitle": {}
+}

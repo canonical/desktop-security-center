@@ -1,7 +1,7 @@
 {
   "snapdRuleCategorySessionDenied": "Zamítnout do odhlášení",
   "@snapdRuleCategorySessionDenied": {},
-  "snapPermissionsEnableTitle": "Vyžadovat, aby snapy žádaly o systémová oprávnění",
+  "snapPermissionsEnableTitle": "Vyžadovat, aby aplikace žádaly o systémová oprávnění",
   "@snapPermissionsEnableTitle": {},
   "snapPermissionsDisablingLabel": "Deaktivuje se, může to trvat několik sekund...",
   "@snapPermissionsDisablingLabel": {},

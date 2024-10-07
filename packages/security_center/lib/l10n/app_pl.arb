@@ -18,7 +18,7 @@
   "@snapRulesRemoveAll": {},
   "interfacePageTitle": "Zarządzaj uprawnieniami",
   "@interfacePageTitle": {},
-  "interfacePageDescription": "Ściśle ograniczone programy będą pytać przed uzyskaniem dostępu do plików i katalogów. Ta funkcja jest eksperymentalna i może ulec zmianie.",
+  "interfacePageDescription": "Ściśle ograniczone programy będą pytać przed uzyskaniem dostępu do plików i katalogów. Ta funkcja jest eksperymentalna i może ulec zmianie.",
   "@interfacePageDescription": {},
   "interfacePageLinkLearnMore": "Dowiedz się więcej",
   "@interfacePageLinkLearnMore": {},
@@ -26,7 +26,7 @@
   "@snapPermissionsExperimentalLabel": {},
   "snapPermissionsOtherDescription": "Możesz zarządzać pozostałymi uprawnieniami w Ustawienia › Programy.",
   "@snapPermissionsOtherDescription": {},
-  "snapRulesCount": "{n, plural, =0{bez reguł} =1{1 reguła} other{{n} reguł}}",
+  "snapRulesCount": "{n, plural, =0{bez reguł} =1{1 reguła} few{{n} reguły} many{{n} reguł} other{{n} reguł}}",
   "@snapRulesCount": {
     "placeholders": {
       "n": {
@@ -36,15 +36,15 @@
   },
   "snapRulesPageEmptyTileLabel": "Brak reguł",
   "@snapRulesPageEmptyTileLabel": {},
-  "homeInterfacePageTitle": "Katalog osobisty",
+  "homeInterfacePageTitle": "Katalog domowy",
   "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Zarządzaj uprawnieniami dostępu do plików w katalogu osobistym.",
+  "homeInterfacePageDescription": "Zarządzaj uprawnieniami dostępu do plików w katalogu domowym.",
   "@homeInterfacePageDescription": {},
   "interfacePageLinkGiveFeedback": "Przekaż opinię",
   "@interfacePageLinkGiveFeedback": {},
   "interfacePageLinkReportIssues": "Zgłoś problemy",
   "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, plural, =0{bez programów} =1{1 program} other {{n} programów}}",
+  "interfaceSnapCount": "{n, plural, =0{bez programów} =1{1 program} few{{n} programy} many{{n} programów} other{{n} programów}}",
   "@interfaceSnapCount": {
     "placeholders": {
       "n": {
@@ -52,21 +52,21 @@
       }
     }
   },
-  "snapPermissionsEnableTitle": "Wymagaj, aby programy prosiły o uprawnienia systemowe",
+  "snapPermissionsEnableTitle": "Wymagaj, aby programy prosiły o uprawnienia systemowe",
   "@snapPermissionsEnableTitle": {},
   "appTitle": "Centrum zabezpieczeń",
   "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "Zezwól do momentu wylogowania",
+  "snapdRuleCategorySessionAllowed": "Zezwalaj do momentu wylogowania",
   "@snapdRuleCategorySessionAllowed": {},
   "snapPermissionExecuteLabel": "Wykonywanie",
   "@snapPermissionExecuteLabel": {},
   "snapPermissionsEnableWarning": "Jest to funkcja eksperymentalna, która ma na celu kontrolowanie dostępu do zasobów systemu.",
   "@snapPermissionsEnableWarning": {},
-  "snapdRuleCategorySessionDenied": "Odmów do momentu wylogowania",
+  "snapdRuleCategorySessionDenied": "Odmawiaj do momentu wylogowania",
   "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverAllowed": "Zezwól zawsze",
+  "snapdRuleCategoryForeverAllowed": "Zezwalaj zawsze",
   "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "Odmów zawsze",
+  "snapdRuleCategoryForeverDenied": "Odmawiaj zawsze",
   "@snapdRuleCategoryForeverDenied": {},
   "snapPermissionReadLabel": "Odczyt",
   "@snapPermissionReadLabel": {},
