@@ -1,1 +1,75 @@
-{}
+{
+  "snapPermissionWriteLabel": "نوشتن",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "اجرا",
+  "@snapPermissionExecuteLabel": {},
+  "interfacePageLinkReportIssues": "گزارش اشکال‌ها",
+  "@interfacePageLinkReportIssues": {},
+  "interfacePageLinkLearnMore": "دانستن بیش‌تر",
+  "@interfacePageLinkLearnMore": {},
+  "interfaceSnapCount": "{n, plural, =0{بدون کاره} other {{n} کاره}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsDisablingLabel": "از کار انداختن. ممکن است چند ثانیه زمان ببرد…",
+  "@snapPermissionsDisablingLabel": {},
+  "appTitle": "مرکز امنیت",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "اجازه تا خروج",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapPermissionReadLabel": "خواندن",
+  "@snapPermissionReadLabel": {},
+  "snapdRuleCategoryForeverAllowed": "اجازه برای همیشه",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "رد کردن برای همیشه",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapdRuleCategorySessionDenied": "رد تا خروج",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapPermissionsEnablingLabel": "به کار انداختن. ممکن است چند ثانیه زمان ببرد…",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsEnableWarning": "این یک ویژگی آزمایشی برای واپایش دسترسی به منابع سامانه‌تان است.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsExperimentalLabel": "آزمایشی",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsPageTitle": "اجازه‌های کاره",
+  "@snapPermissionsPageTitle": {},
+  "homeInterfacePageTitle": "شاخهٔ خانه",
+  "@homeInterfacePageTitle": {},
+  "interfacePageTitle": "مدیریت اجازه‌ها",
+  "@interfacePageTitle": {},
+  "interfacePageLinkGiveFeedback": "دادن بازخورد",
+  "@interfacePageLinkGiveFeedback": {},
+  "snapRulesPageEmptyTileLabel": "هنوز بدون قاعده",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "برداشتن همهٔ قاعده‌ها",
+  "@snapRulesRemoveAll": {},
+  "snapRulesPageDescription": "مدیریت اجازه‌های {interface} برای {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesCount": "{n, plural, =0{بدون قاعده} other{{n} قاعده}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsOtherDescription": "مدیریت دیگر اجازه‌ها در تنظمیات › برنامه‌ها.",
+  "@snapPermissionsOtherDescription": {},
+  "homeInterfacePageDescription": "مدیریت اجازه‌ها برای دسترسی به پرونده‌ها در شاخهٔ خانگیتان.",
+  "@homeInterfacePageDescription": {},
+  "snapPermissionsEnableTitle": "نیازمند درخواست اجازهٔ سامانه‌ای از سوی کاره",
+  "@snapPermissionsEnableTitle": {}
+}
