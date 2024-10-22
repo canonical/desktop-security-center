@@ -1,1 +1,67 @@
-{}
+{
+  "snapPermissionsEnableTitle": "각 앱이 시스템 권한을 요청하도록 하기",
+  "@snapPermissionsEnableTitle": {},
+  "appTitle": "보안 센터",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "로그아웃 전까지 허용",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "로그아웃 전까지 거부",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "항상 허용",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "항상 거부",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "읽기",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "쓰기",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "실행",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableWarning": "이 기능은 시스템 리소스 접근을 제어하기 위한 실험적 기능입니다.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "켜는 중, 몇 초 걸릴 수 있습니다...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "끄는 중, 몇 초 걸릴 수 있습니다...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsExperimentalLabel": "실험적 기능",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsOtherDescription": "다른 권한은 설정 > 앱에서 관리 가능합니다.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "앱 권한",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesCount": "{n}개 정책",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesPageDescription": "{snap}에 대한 {interface} 권한을 관리합니다.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "정책 없음",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "모든 정책 삭제",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "홈 폴더",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "사용자의 홈 폴더의 파일에 접근하는 권한을 관리합니다.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "권한 관리",
+  "@interfacePageTitle": {},
+  "interfacePageLinkLearnMore": "더 알아보기",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "피드백 작성",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "이슈 보고",
+  "@interfacePageLinkReportIssues": {}
+}

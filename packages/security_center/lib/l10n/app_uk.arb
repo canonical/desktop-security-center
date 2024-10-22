@@ -1,1 +1,77 @@
-{}
+{
+  "appTitle": "Центр безпеки",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Дозволити до виходу з системи",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Заборонити до виходу з системи",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Завжди дозволяти",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapPermissionReadLabel": "Читання",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "Запис",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionsEnableWarning": "Це експериментальна можливість контролю доступу до ресурсів системи.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "Увімкнення може тривати кілька секунд...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Експериментально",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsPageTitle": "Дозволи застосунків",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesCount": "{n, plural, =0{немає правил} =1{1 правило} few{{n} правила} many{{n} правил} other{{n} правило}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Ще немає правил",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Вилучити всі правила",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "Домашня тека",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Керувати дозволами на доступ до файлів у теці «Домівка».",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "Керувати дозволами",
+  "@interfacePageTitle": {},
+  "interfacePageDescription": "Суворо обмежені застосунки запитуватимуть вас перед доступом до файлів і тек. Ця функція експериментальна і може бути змінена.",
+  "@interfacePageDescription": {},
+  "interfacePageLinkLearnMore": "Докладніше",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Надіслати відгук",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "Повідомити про проблеми",
+  "@interfacePageLinkReportIssues": {},
+  "snapdRuleCategoryForeverDenied": "Завжди забороняти",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionExecuteLabel": "Виконання",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsDisablingLabel": "Вимкнення може тривати кілька секунд...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsOtherDescription": "Ви можете керувати іншими дозволами в Налаштуваннях › Програми.",
+  "@snapPermissionsOtherDescription": {},
+  "snapRulesPageDescription": "Керувати дозволами {interface} для {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "interfaceSnapCount": "{n, plural, =0{немає застосунків} =1{1 застосунок} few{{n} застосунки} many{{n} застосунків} other {{n} застосунок}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnableTitle": "Вимагати від застосунків запитувати системні дозволи",
+  "@snapPermissionsEnableTitle": {}
+}
