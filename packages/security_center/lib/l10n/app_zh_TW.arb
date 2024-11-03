@@ -1,1 +1,61 @@
-{}
+{
+  "appTitle": "安全中心",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "允許直到登出",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "拒絕直到登出",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "總是允許",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "總是拒絕",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "讀取",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "寫入",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionsEnablingLabel": "啟用中，可能需要幾秒鐘...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "停用中，可能需要幾秒鐘...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionExecuteLabel": "執行",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableWarning": "這是一項實驗性功能，用於控制對系統資源的存取。",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsExperimentalLabel": "實驗性的",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsOtherDescription": "您可以在「設定」>「程式」中管理其他權限。",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "應用程式權限",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesPageDescription": "管理 {snap} 的 {interface} 權限。",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "還沒有規則",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "移除所有規則",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageDescription": "管理存取您家目錄中檔案的權限。",
+  "@homeInterfacePageDescription": {},
+  "homeInterfacePageTitle": "家目錄",
+  "@homeInterfacePageTitle": {},
+  "interfacePageTitle": "管理權限",
+  "@interfacePageTitle": {},
+  "interfacePageLinkLearnMore": "了解更多",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkReportIssues": "回報問題",
+  "@interfacePageLinkReportIssues": {},
+  "interfacePageLinkGiveFeedback": "提供回饋",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageDescription": "受嚴格限制的應用程式會在存取檔案和資料夾之前詢問您。此功能是實驗性的，可能會改變。",
+  "@interfacePageDescription": {},
+  "snapPermissionsEnableTitle": "需要應用程式要求系統權限",
+  "@snapPermissionsEnableTitle": {}
+}
