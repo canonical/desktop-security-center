@@ -57,5 +57,21 @@
   "interfacePageDescription": "受嚴格限制的應用程式會在存取檔案和資料夾之前詢問您。此功能是實驗性的，可能會改變。",
   "@interfacePageDescription": {},
   "snapPermissionsEnableTitle": "需要應用程式要求系統權限",
-  "@snapPermissionsEnableTitle": {}
+  "@snapPermissionsEnableTitle": {},
+  "snapRulesCount": "{n, plural, =0{沒有規則} =1{1 條規則} other{{n} 條規則}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "interfaceSnapCount": "{n, plural, =0{沒有應用程式} =1{1 個應用程式} other {{n} 個應用程式}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  }
 }
