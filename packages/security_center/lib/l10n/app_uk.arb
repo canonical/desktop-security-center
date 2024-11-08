@@ -17,7 +17,7 @@
   "@snapPermissionsEnablingLabel": {},
   "snapPermissionsExperimentalLabel": "Експериментально",
   "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsPageTitle": "Дозволи програм",
+  "snapPermissionsPageTitle": "Дозволи застосунків",
   "@snapPermissionsPageTitle": {},
   "snapRulesCount": "{n, plural, =0{немає правил} =1{1 правило} few{{n} правила} many{{n} правил} other{{n} правило}}",
   "@snapRulesCount": {
@@ -37,7 +37,7 @@
   "@homeInterfacePageDescription": {},
   "interfacePageTitle": "Керувати дозволами",
   "@interfacePageTitle": {},
-  "interfacePageDescription": "Суворо обмежені програми запитуватимуть Вас перед доступом до файлів і тек. Ця функція є експериментальною та може бути змінена.",
+  "interfacePageDescription": "Суворо обмежені застосунки запитуватимуть вас перед доступом до файлів і тек. Ця функція експериментальна і може бути змінена.",
   "@interfacePageDescription": {},
   "interfacePageLinkLearnMore": "Докладніше",
   "@interfacePageLinkLearnMore": {},
@@ -64,7 +64,7 @@
       }
     }
   },
-  "interfaceSnapCount": "{n, plural, =0{немає програм} =1{1 програма} few{{n} програми} many{{n} програм} other {{n} програм(а)}}",
+  "interfaceSnapCount": "{n, plural, =0{немає застосунків} =1{1 застосунок} few{{n} застосунки} many{{n} застосунків} other {{n} застосунок}}",
   "@interfaceSnapCount": {
     "placeholders": {
       "n": {
@@ -72,6 +72,6 @@
       }
     }
   },
-  "snapPermissionsEnableTitle": "Вимагати від програм запитувати про системні дозволи",
+  "snapPermissionsEnableTitle": "Вимагати від застосунків запитувати про системні дозволи",
   "@snapPermissionsEnableTitle": {}
 }
