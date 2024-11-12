@@ -29,7 +29,7 @@
   "@snapPermissionReadLabel": {},
   "snapPermissionExecuteLabel": "Spúšťanie",
   "@snapPermissionExecuteLabel": {},
-  "snapPermissionWriteLabel": "Zapisovanie",
+  "snapPermissionWriteLabel": "Zápis",
   "@snapPermissionWriteLabel": {},
   "snapRulesCount": "{n, plural, =0{žiadne pravidlá} =1{pravidlo (1)} other{pravidlá ({n})}}",
   "@snapRulesCount": {

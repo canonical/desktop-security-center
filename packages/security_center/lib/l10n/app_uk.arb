@@ -72,6 +72,6 @@
       }
     }
   },
-  "snapPermissionsEnableTitle": "Вимагати від застосунків запитувати системні дозволи",
+  "snapPermissionsEnableTitle": "Вимагати від застосунків запитувати про системні дозволи",
   "@snapPermissionsEnableTitle": {}
 }
