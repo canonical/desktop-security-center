@@ -9,7 +9,7 @@ body:
   attributes:
     label: Is there an existing issue for this?
     description: |
-      Please search to see if an issue already exists for this feature: https://github.com/canonical/steam-snap/issues?q=label%3Aenhancement.
+      Please search to see if an issue already exists for this feature: https://github.com/canonical/desktop-security-center/issues?q=label%3Aenhancement.
     options:
     - label: I have searched the existing issues
       required: true
