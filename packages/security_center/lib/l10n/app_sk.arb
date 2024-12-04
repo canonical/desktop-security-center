@@ -19,7 +19,7 @@
   "@interfacePageTitle": {},
   "snapPermissionsOtherDescription": "Ďalšie oprávnenia môžete spravovať v časti Nastavenia › Aplikácie.",
   "@snapPermissionsOtherDescription": {},
-  "snapPermissionsEnableWarning": "Toto je experimentálna funkcia na riadenie prístupu k zdrojom vášho systému.",
+  "snapPermissionsEnableWarning": "Táto experimentálna funkcia slúži na kontrolu prístupu k zdrojom vášho systému.",
   "@snapPermissionsEnableWarning": {},
   "snapdRuleCategorySessionAllowed": "Povolené do ukončenia",
   "@snapdRuleCategorySessionAllowed": {},
@@ -59,7 +59,7 @@
   "@snapdRuleCategoryForeverDenied": {},
   "snapdRuleCategorySessionDenied": "Odmietnuté do ukončenia",
   "@snapdRuleCategorySessionDenied": {},
-  "snapPermissionsEnableTitle": "Vyžadovať, aby aplikácie žiadali o systémové oprávnenia",
+  "snapPermissionsEnableTitle": "Donútiť aplikácie požiadať o oprávnenia",
   "@snapPermissionsEnableTitle": {},
   "snapRulesPageDescription": "Spravujte oprávnenia {interface} pre {snap}.",
   "@snapRulesPageDescription": {
@@ -72,6 +72,6 @@
       }
     }
   },
-  "interfacePageDescription": "Prísne obmedzené aplikácie sa vás opýtajú pred prístupom k súborom a priečinkom. Táto funkcia je experimentálna a podlieha zmenám.",
+  "interfacePageDescription": "Aplikácie s prísnymi obmedzeniami budú žiadať o povolenie pred prístupom k súborom a priečinkom. Táto funkcia je experimentálna a môže sa meniť.",
   "@interfacePageDescription": {}
 }

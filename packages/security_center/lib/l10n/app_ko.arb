@@ -29,7 +29,7 @@
   "@snapPermissionsOtherDescription": {},
   "snapPermissionsPageTitle": "앱 권한",
   "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n}개 정책",
+  "snapRulesCount": "{n, plural, =0{정책 없음} =1{1개 정책} other{{n}개 정책}}",
   "@snapRulesCount": {
     "placeholders": {
       "n": {
@@ -63,5 +63,15 @@
   "interfacePageLinkGiveFeedback": "피드백 작성",
   "@interfacePageLinkGiveFeedback": {},
   "interfacePageLinkReportIssues": "이슈 보고",
-  "@interfacePageLinkReportIssues": {}
+  "@interfacePageLinkReportIssues": {},
+  "interfacePageDescription": "엄격하게 제한된 앱은 파일과 폴더에 액세스하기 전에 사용자에게 묻습니다. 이 기능은 실험적이며 추후 변경될 수 있습니다.",
+  "@interfacePageDescription": {},
+  "interfaceSnapCount": "{n, plural, =0{앱 없음} =1{1개의 앱} other {{n}개의 앱}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  }
 }
