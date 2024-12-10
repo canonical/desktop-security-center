@@ -1,1 +1,77 @@
-{}
+{
+  "appTitle": "安全中心",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "直到登出前都允许",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategoryForeverAllowed": "始终允许",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapPermissionReadLabel": "读取",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "写入",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "执行",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableWarning": "这是一项用于控制对您系统资源访问的实验性功能。",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "正在启用，此操作可能需要一些时间...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsOtherDescription": "您可以在 设置 > 应用程序 中管理其它权限。",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "应用程序权限",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesPageDescription": "管理 {snap} 的 {interface} 权限。",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "homeInterfacePageTitle": "主文件夹",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "管理访问您主文件夹中文件的权限。",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "管理权限",
+  "@interfacePageTitle": {},
+  "interfacePageDescription": "严格受限的应用将会在访问文件和文件夹前询问您的授权。此功能系实验性功能且可能会在日后更改。",
+  "@interfacePageDescription": {},
+  "interfacePageLinkLearnMore": "了解更多",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "意见反馈",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "报告问题",
+  "@interfacePageLinkReportIssues": {},
+  "interfaceSnapCount": "{n, plural, =0{0 个应用} =1{1 个应用} other {{n} 个应用}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnableTitle": "要求应用程序申请系统权限",
+  "@snapPermissionsEnableTitle": {},
+  "snapPermissionsExperimentalLabel": "实验性",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsDisablingLabel": "正在禁用，此操作可能需要一些时间...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapRulesCount": "{n, plural, =0{0 则规则} =1{1 则规则} other{{n} 则规则}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapdRuleCategorySessionDenied": "直到登出前都拒绝",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverDenied": "始终拒绝",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapRulesPageEmptyTileLabel": "尚无规则",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "删除所有规则",
+  "@snapRulesRemoveAll": {}
+}
