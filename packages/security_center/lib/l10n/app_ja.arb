@@ -1,1 +1,6 @@
-{}
+{
+  "appTitle": "セキュリティセンター",
+  "@appTitle": {},
+  "snapPermissionsExperimentalLabel": "実験的",
+  "@snapPermissionsExperimentalLabel": {}
+}
