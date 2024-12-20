@@ -56,7 +56,7 @@
   "@interfacePageLinkGiveFeedback": {},
   "interfacePageDescription": "受嚴格限制的應用程式會在存取檔案和資料夾之前詢問您。此功能是實驗性的，可能會改變。",
   "@interfacePageDescription": {},
-  "snapPermissionsEnableTitle": "需要應用程式要求系統權限",
+  "snapPermissionsEnableTitle": "要求應用程式請求系統權限",
   "@snapPermissionsEnableTitle": {},
   "snapRulesCount": "{n, plural, =0{沒有規則} =1{1 條規則} other{{n} 條規則}}",
   "@snapRulesCount": {
