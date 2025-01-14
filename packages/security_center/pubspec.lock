@@ -834,9 +834,9 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
+      ref: rules-api
       resolved-ref: "54d9e79126d2ab0b50412113be19ab1c65d6aa84"
-      url: "../../../snapd.dart"
+      url: "https://github.com/canonical/snapd.dart.git"
     source: git
     version: "0.6.4"
   source_gen:

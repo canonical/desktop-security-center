@@ -27,7 +27,8 @@ dependencies:
   # snapd: ^0.7.0              <-- Need to release this first before merging
   snapd:
     git:
-      url: ../../../snapd.dart
+      url: https://github.com/canonical/snapd.dart.git
+      ref: rules-api
   ubuntu_localizations: ^0.4.0
   ubuntu_logger: ^0.1.1
   ubuntu_service: ^0.3.2
