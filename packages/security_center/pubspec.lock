@@ -505,6 +505,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.9.0"
+  json_serializable:
+    dependency: "direct dev"
+    description:
+      name: json_serializable
+      sha256: c2fcb3920cf2b6ae6845954186420fca40bc0a8abcc84903b7801f17d7050d7c
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.9.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -825,10 +833,11 @@ packages:
   snapd:
     dependency: "direct main"
     description:
-      name: snapd
-      sha256: da7575a196f84a6e653adb2949ad8d11ebf6ef77cd4f5a7fd21ffd435aeca6ec
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "54d9e79126d2ab0b50412113be19ab1c65d6aa84"
+      url: "../../../snapd.dart"
+    source: git
     version: "0.6.4"
   source_gen:
     dependency: transitive
@@ -838,6 +847,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
+  source_helper:
+    dependency: transitive
+    description:
+      name: source_helper
+      sha256: "86d247119aedce8e63f4751bd9626fc9613255935558447569ad42f9f5b48b3c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.5"
   source_span:
     dependency: transitive
     description:

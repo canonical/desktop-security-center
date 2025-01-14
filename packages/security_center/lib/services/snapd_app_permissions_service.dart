@@ -136,6 +136,10 @@ class SnapdAppPermissionsService implements AppPermissionsService {
   Future<void> removeRule(String id) => _snapd.removeRule(id);
 
   @override
+  Future<void> patchRule(String id, Map<String, dynamic> constraints) =>
+      _snapd.patchRule(id, constraints);
+
+  @override
   Future<void> removeAllRules({
     required String snap,
     String? interface,

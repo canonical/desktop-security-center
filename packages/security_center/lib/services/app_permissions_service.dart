@@ -2,12 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:snapd/snapd.dart';
 
 export 'package:snapd/snapd.dart'
-    show
-        SnapdRule,
-        SnapdRuleMask,
-        SnapdConstraints,
-        SnapdRequestLifespan,
-        SnapdRequestOutcome;
+    show SnapdRule, SnapdRuleMask, SnapdRequestLifespan, SnapdRequestOutcome;
 
 part 'app_permissions_service.freezed.dart';
 
@@ -45,5 +40,6 @@ abstract class AppPermissionsService {
   Future<void> enable();
   Future<void> disable();
   Future<void> removeRule(String id);
+  Future<void> patchRule(String id, Map<String, dynamic> constraints);
   Future<void> removeAllRules({required String snap, String? interface});
 }

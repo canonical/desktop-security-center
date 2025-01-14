@@ -20,9 +20,7 @@ void main() {
           timestamp: DateTime(2024),
           snap: 'firefox',
           interface: 'home',
-          constraints: const SnapdConstraints(),
-          outcome: SnapdRequestOutcome.allow,
-          lifespan: SnapdRequestLifespan.forever,
+          constraints: {},
         ),
       ],
     );

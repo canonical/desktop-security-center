@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/app_permissions/home_interface.dart';
 import 'package:security_center/app_permissions/rules_category.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snap_metadata_providers.dart';
@@ -19,38 +20,36 @@ class AppRulesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model =
-        ref.watch(snapRulesModelProvider(snap: snap, interface: interface));
-    return model.when(
-      data: (rules) => _Body(
-        snap: snap,
-        interface: interface,
-        rules: rules,
-      ),
-      error: (error, _) => ErrorWidget(error),
-      loading: () => const Center(child: YaruCircularProgressIndicator()),
-    );
+    return switch (interface) {
+      SnapdInterface.home => ref
+          .watch(snapHomeRulesModelProvider(snap: snap))
+          .when(
+            data: (ruleFragments) => _HomeBody(
+              snap: snap,
+              ruleFragments: ruleFragments,
+            ),
+            error: (error, _) => ErrorWidget(error),
+            loading: () => const Center(child: YaruCircularProgressIndicator()),
+          ),
+    };
   }
 }
 
-class _Body extends ConsumerWidget {
-  const _Body({
+class _HomeBody extends ConsumerWidget {
+  const _HomeBody({
     required this.snap,
-    required this.interface,
-    required this.rules,
+    required this.ruleFragments,
   });
 
   final String snap;
-  final SnapdInterface interface;
-  final List<SnapdRule> rules;
+  final List<SnapdHomeRuleFragment> ruleFragments;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.read(
-      snapRulesModelProvider(snap: snap, interface: interface).notifier,
-    );
+    final notifier = ref.read(snapHomeRulesModelProvider(snap: snap).notifier);
     final l10n = AppLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
+
     return ScrollablePage(
       children: [
         Row(
@@ -65,10 +64,13 @@ class _Body extends ConsumerWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          l10n.snapRulesPageDescription(interface.localizedTitle(l10n), snap),
+          l10n.snapRulesPageDescription(
+            SnapdInterface.home.localizedTitle(l10n),
+            snap,
+          ),
         ),
         const SizedBox(height: 24),
-        if (rules.isEmpty) ...[
+        if (ruleFragments.isEmpty) ...[
           const TileList(
             children: [
               EmptyRulesTile(),
@@ -77,12 +79,13 @@ class _Body extends ConsumerWidget {
           const SizedBox(height: 24),
         ],
         for (final category in SnapdRuleCategory.values)
-          _RuleSection(
+          _HomeRuleSection(
             title: category.localizedTitle(l10n),
-            rules: rules.filterByCategory(category).toList(),
-            onRemove: notifier.removeRule,
+            ruleFragments: ruleFragments.filterByCategory(category).toList(),
+            onRemoveRule: notifier.removeRule,
+            onRemovePerms: notifier.removePermissions,
           ),
-        if (rules.isNotEmpty)
+        if (ruleFragments.isNotEmpty)
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.error,
@@ -95,20 +98,22 @@ class _Body extends ConsumerWidget {
   }
 }
 
-class _RuleSection extends ConsumerWidget {
-  const _RuleSection({
+class _HomeRuleSection extends ConsumerWidget {
+  const _HomeRuleSection({
     required this.title,
-    required this.rules,
-    required this.onRemove,
+    required this.ruleFragments,
+    required this.onRemoveRule,
+    required this.onRemovePerms,
   });
 
   final String title;
-  final List<SnapdRule> rules;
-  final void Function(String id) onRemove;
+  final List<SnapdHomeRuleFragment> ruleFragments;
+  final void Function(String id) onRemoveRule;
+  final void Function(String id, List<Permission> perms) onRemovePerms;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (rules.isEmpty) {
+    if (ruleFragments.isEmpty) {
       return const SizedBox();
     }
     return Column(
@@ -120,8 +125,9 @@ class _RuleSection extends ConsumerWidget {
         ),
         const SizedBox(height: 16),
         _RuleList(
-          rules: rules,
-          onRemove: onRemove,
+          ruleFragments: ruleFragments,
+          onRemoveRule: onRemoveRule,
+          onRemovePerms: onRemovePerms,
         ),
         const SizedBox(height: 24),
       ],
@@ -131,14 +137,20 @@ class _RuleSection extends ConsumerWidget {
 
 class _RuleList extends TileList {
   _RuleList({
-    required List<SnapdRule> rules,
-    required void Function(String id) onRemove,
+    required List<SnapdHomeRuleFragment> ruleFragments,
+    required void Function(String id) onRemoveRule,
+    required void Function(String id, List<Permission> perms) onRemovePerms,
   }) : super(
-          children: rules
+          children: ruleFragments
               .map(
-                (rule) => RuleTile(
-                  rule: rule,
-                  onRemove: () => onRemove(rule.id),
+                (ruleFragment) => RuleTile(
+                  ruleFragment: ruleFragment,
+                  onRemove: () => ruleFragment.deleteRuleOnRemoval
+                      ? onRemoveRule(ruleFragment.ruleId)
+                      : onRemovePerms(
+                          ruleFragment.ruleId,
+                          ruleFragment.permissions,
+                        ),
                 ),
               )
               .toList(),
@@ -146,22 +158,24 @@ class _RuleList extends TileList {
 }
 
 class RuleTile extends StatelessWidget {
-  const RuleTile({required this.rule, required this.onRemove, super.key});
-  final SnapdRule rule;
+  const RuleTile({
+    required this.ruleFragment,
+    required this.onRemove,
+    super.key,
+  });
+
+  final SnapdHomeRuleFragment ruleFragment;
   final VoidCallback onRemove;
 
   @override
   Widget build(BuildContext context) {
-    final permissions =
-        rule.constraints.permissions?.map(Permission.fromString);
     final l10n = AppLocalizations.of(context);
     return ListTile(
-      title: Text(rule.constraints.pathPattern ?? ''),
+      title: Text(ruleFragment.pathPattern),
       subtitle: Text(
-        permissions
-                ?.map((permission) => permission.localize(l10n))
-                .join(', ') ??
-            '',
+        ruleFragment.permissions
+            .map((permission) => permission.localize(l10n))
+            .join(', '),
       ),
       trailing: YaruIconButton(
         icon: const Icon(YaruIcons.window_close),
@@ -169,22 +183,4 @@ class RuleTile extends StatelessWidget {
       ),
     );
   }
-}
-
-enum Permission {
-  read,
-  write,
-  execute;
-
-  static Permission fromString(String permission) =>
-      Permission.values.firstWhere(
-        (e) => e.name == permission,
-        orElse: () => throw ArgumentError('Unknown permission: $permission'),
-      );
-
-  String localize(AppLocalizations l10n) => switch (this) {
-        Permission.read => l10n.snapPermissionReadLabel,
-        Permission.write => l10n.snapPermissionWriteLabel,
-        Permission.execute => l10n.snapPermissionExecuteLabel,
-      };
 }

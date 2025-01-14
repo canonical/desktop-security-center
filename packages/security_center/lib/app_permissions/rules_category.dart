@@ -1,5 +1,5 @@
+import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/l10n.dart';
-import 'package:snapd/snapd.dart';
 
 enum SnapdRuleCategory {
   foreverAllowed,
@@ -15,8 +15,10 @@ enum SnapdRuleCategory {
       };
 }
 
-extension SnapdRulesCategoryFilter on List<SnapdRule> {
-  Iterable<SnapdRule> filterByCategory(SnapdRuleCategory category) =>
+extension SnapdHomeRuleFragmentCategoryFilter on List<SnapdHomeRuleFragment> {
+  Iterable<SnapdHomeRuleFragment> filterByCategory(
+    SnapdRuleCategory category,
+  ) =>
       switch (category) {
         SnapdRuleCategory.sessionAllowed => where(
             (rule) =>
