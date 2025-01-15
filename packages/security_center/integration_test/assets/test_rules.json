@@ -1,6 +1,6 @@
 [
     {
-        "snap": "firefox",
+        "snap": "integration-test-snap",
         "interface": "home",
         "constraints": {
             "path-pattern": "/home/ubuntu/Downloads/**",
@@ -17,7 +17,7 @@
         }
     },
     {
-        "snap": "firefox",
+        "snap": "integration-test-snap",
         "interface": "home",
         "constraints": {
             "path-pattern": "/home/ubuntu/private/**",

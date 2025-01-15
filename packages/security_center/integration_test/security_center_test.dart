@@ -14,6 +14,7 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 import '../test/test_utils.dart';
 
 const testRulesPath = 'integration_test/assets/test_rules.json';
+const testSnap = 'integration-test-snap';
 
 void main() {
   tearDown(resetAllServices);
@@ -29,10 +30,10 @@ void main() {
         .tap(find.text(SnapdInterface.home.localizedTitle(tester.l10n)));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('firefox'));
+    await tester.tap(find.text(testSnap));
     await tester.pumpAndSettle();
 
-    final testRules = getTestRules(interface: 'home', snap: 'firefox');
+    final testRules = getTestRules(interface: 'home', snap: testSnap);
 
     for (final rule in testRules) {
       expectHomeRule(tester, rule);
@@ -95,6 +96,10 @@ List<SnapdRuleMask> getTestRules({String? snap, String? interface}) {
 Future<void> writeSnapdRules() async {
   final ruleMasks = getTestRules();
   final snapd = SnapdService();
+
+  // Ensure that we start with an empty rule set
+  await snapd.removeRules(testSnap);
+
   for (final rule in ruleMasks) {
     await snapd.addRule(rule);
   }
@@ -118,8 +123,21 @@ Future<void> expectSnapdRules(List<SnapdRuleMask> rules) async {
 
 extension on SnapdRuleMask {
   bool matches(SnapdRule rule) {
+    final maskConstraints = HomeRuleConstraints.fromJson(constraints);
+    final ruleConstraints = HomeRuleConstraints.fromJson(rule.constraints);
+
+    // Snapd always returns an 'expiration' field in rules even when the lifespan is
+    // 'forever' so we need to explicitly match on the fields we care about within
+    // permissions rather than just asserting that the constraints match.
     return (snap == rule.snap) &&
         (interface == rule.interface) &&
-        (constraints == rule.constraints);
+        (maskConstraints.pathPattern == ruleConstraints.pathPattern) &&
+        maskConstraints.permissions.entries.every(
+          (entry) =>
+              ruleConstraints.permissions[entry.key]!.outcome ==
+                  entry.value.outcome &&
+              ruleConstraints.permissions[entry.key]!.lifespan ==
+                  entry.value.lifespan,
+        );
   }
 }
