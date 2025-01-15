@@ -152,6 +152,28 @@ class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
     DateTime? expiration,
   }) = _SnapdHomeRuleFragment;
 
+  static List<SnapdHomeRuleFragment> fromConstraints(
+    String id,
+    String snap,
+    bool isSinglePermission,
+    HomeRuleConstraints constraints,
+  ) {
+    return constraints.permissions.entries
+        .map(
+          (entry) => SnapdHomeRuleFragment(
+            ruleId: id,
+            deleteRuleOnRemoval: isSinglePermission,
+            snap: snap,
+            pathPattern: constraints.pathPattern,
+            permissions: [entry.key],
+            outcome: entry.value.outcome,
+            lifespan: entry.value.lifespan,
+            expiration: entry.value.expiration,
+          ),
+        )
+        .toList();
+  }
+
   static List<SnapdHomeRuleFragment> fromRule(SnapdRule rule) {
     if (rule.outcome != null) {
       // Top level outcome, lifespan & expiration identifies this as coming from the old
@@ -177,19 +199,11 @@ class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
     final constraints = HomeRuleConstraints.fromJson(rule.constraints);
     final isSinglePermission = constraints.permissions.length == 1;
 
-    return constraints.permissions.entries
-        .map(
-          (entry) => SnapdHomeRuleFragment(
-            ruleId: rule.id,
-            deleteRuleOnRemoval: isSinglePermission,
-            snap: rule.snap,
-            pathPattern: constraints.pathPattern,
-            permissions: [entry.key],
-            outcome: entry.value.outcome,
-            lifespan: entry.value.lifespan,
-            expiration: entry.value.expiration,
-          ),
-        )
-        .toList();
+    return SnapdHomeRuleFragment.fromConstraints(
+      rule.id,
+      rule.snap,
+      isSinglePermission,
+      constraints,
+    );
   }
 }

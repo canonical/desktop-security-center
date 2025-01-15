@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:security_center/app_permissions/app_rules_page.dart';
+import 'package:security_center/app_permissions/home_interface.dart';
+import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/main.dart' as app;
 import 'package:security_center/services/snapd_service.dart';
-import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import '../test/test_utils.dart';
@@ -35,7 +35,7 @@ void main() {
     final testRules = getTestRules(interface: 'home', snap: 'firefox');
 
     for (final rule in testRules) {
-      expectRule(tester, rule);
+      expectHomeRule(tester, rule);
     }
 
     await expectSnapdRules(testRules);
@@ -47,31 +47,38 @@ void main() {
   });
 }
 
-void expectRule(WidgetTester tester, SnapdRuleMask rule) {
-  // This verifies that the specified rule is displayed in the UI by checking
-  // that the widgets in the following list share a unique common ancestor.
-  final tile = [
-    find.text(rule.constraints.pathPattern!),
-    find.text(
-      rule.constraints.permissions!
-          .map(
-            (permission) =>
-                Permission.fromString(permission).localize(tester.l10n),
-          )
-          .join(', '),
-    ),
-  ]
-      // List of sets of ancestors for each text widget.
-      .map(
-        (finder) => find
-            .ancestor(of: finder, matching: find.byType(ListTile))
-            .evaluate()
-            .toSet(),
-      )
-      // Intersection of all sets.
-      .reduce((value, element) => value.intersection(element));
+void expectHomeRule(WidgetTester tester, SnapdRuleMask rule) {
+  final constraints = HomeRuleConstraints.fromJson(rule.constraints);
+  final ruleFragments = SnapdHomeRuleFragment.fromConstraints(
+    'ruleId',
+    rule.snap,
+    false,
+    constraints,
+  );
 
-  expect(tile.length, equals(1));
+  for (final ruleFragment in ruleFragments) {
+    // This verifies that the specified rule is displayed in the UI by checking
+    // that the widgets in the following list share a unique common ancestor.
+    final tile = [
+      find.text(ruleFragment.pathPattern),
+      find.text(
+        ruleFragment.permissions
+            .map((permission) => permission.localize(tester.l10n))
+            .join(', '),
+      ),
+    ]
+        // List of sets of ancestors for each text widget.
+        .map(
+          (finder) => find
+              .ancestor(of: finder, matching: find.byType(ListTile))
+              .evaluate()
+              .toSet(),
+        )
+        // Intersection of all sets.
+        .reduce((value, element) => value.intersection(element));
+
+    expect(tile.length, equals(1));
+  }
 }
 
 List<SnapdRuleMask> getTestRules({String? snap, String? interface}) {
@@ -113,8 +120,6 @@ extension on SnapdRuleMask {
   bool matches(SnapdRule rule) {
     return (snap == rule.snap) &&
         (interface == rule.interface) &&
-        (constraints == rule.constraints) &&
-        (outcome == rule.outcome) &&
-        (lifespan == rule.lifespan);
+        (constraints == rule.constraints);
   }
 }
