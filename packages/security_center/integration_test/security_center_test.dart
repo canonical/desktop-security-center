@@ -53,7 +53,6 @@ void expectHomeRule(WidgetTester tester, SnapdRuleMask rule) {
   final ruleFragments = SnapdHomeRuleFragment.fromConstraints(
     'ruleId',
     rule.snap,
-    false,
     constraints,
   );
 

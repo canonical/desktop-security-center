@@ -155,9 +155,10 @@ class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
   static List<SnapdHomeRuleFragment> fromConstraints(
     String id,
     String snap,
-    bool isSinglePermission,
     HomeRuleConstraints constraints,
   ) {
+    final isSinglePermission = constraints.permissions.length == 1;
+
     return constraints.permissions.entries
         .map(
           (entry) => SnapdHomeRuleFragment(
@@ -197,12 +198,10 @@ class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
     }
 
     final constraints = HomeRuleConstraints.fromJson(rule.constraints);
-    final isSinglePermission = constraints.permissions.length == 1;
 
     return SnapdHomeRuleFragment.fromConstraints(
       rule.id,
       rule.snap,
-      isSinglePermission,
       constraints,
     );
   }
