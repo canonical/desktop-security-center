@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 
 extension on SnapdRuleMask {
@@ -11,8 +12,6 @@ extension on SnapdRuleMask {
         snap: snap,
         interface: interface,
         constraints: constraints,
-        outcome: outcome,
-        lifespan: lifespan,
       );
 }
 
@@ -33,6 +32,18 @@ class FakeAppPermissionsService implements AppPermissionsService {
   @override
   Future<void> removeRule(String id) async {
     rules.removeWhere((rule) => rule.id == id);
+  }
+
+  @override
+  Future<void> patchRule(String id, Map<String, dynamic> constraints) async {
+    final rule = rules.firstWhere((rule) => rule.id == id);
+    rule.constraints.addAll(constraints);
+
+    // Setting a permission to 'null' causes snapd to remove it from the permission map
+    if (rule.interface == SnapdInterface.home.toString()) {
+      (rule.constraints['permissions'] as Map<String, dynamic>)
+          .removeWhere((k, v) => v == null);
+    }
   }
 
   @override

@@ -12,9 +12,15 @@ void main() {
       timestamp: DateTime(2024),
       snap: 'firefox',
       interface: 'home',
-      constraints: const SnapdConstraints(),
-      outcome: SnapdRequestOutcome.allow,
-      lifespan: SnapdRequestLifespan.forever,
+      constraints: {
+        'path-pattern': '/home/bob/Downloads/**',
+        'permissions': {
+          'read': {
+            'outcome': 'allow',
+            'lifespan': 'forever',
+          },
+        },
+      },
     ),
   ];
   final testNotice = SnapdNotice(

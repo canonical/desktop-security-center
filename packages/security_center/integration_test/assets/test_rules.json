@@ -1,29 +1,40 @@
 [
     {
-        "snap": "firefox",
+        "snap": "integration-test-snap",
         "interface": "home",
         "constraints": {
             "path-pattern": "/home/ubuntu/Downloads/**",
-            "permissions": [
-                "read",
-                "write"
-            ]
-        },
-        "outcome": "allow",
-        "lifespan": "forever"
+            "permissions": {
+                "read": {
+                    "outcome": "allow",
+                    "lifespan": "forever"
+                },
+                "write": {
+                    "outcome": "allow",
+                    "lifespan": "forever"
+                }
+            }
+        }
     },
     {
-        "snap": "firefox",
+        "snap": "integration-test-snap",
         "interface": "home",
         "constraints": {
             "path-pattern": "/home/ubuntu/private/**",
-            "permissions": [
-                "read",
-                "write",
-                "execute"
-            ]
-        },
-        "outcome": "deny",
-        "lifespan": "forever"
+            "permissions": {
+                "read": {
+                    "outcome": "deny",
+                    "lifespan": "forever"
+                },
+                "write": {
+                    "outcome": "deny",
+                    "lifespan": "forever"
+                },
+                "execute": {
+                    "outcome": "deny",
+                    "lifespan": "forever"
+                }
+            }
+        }
     }
 ]
