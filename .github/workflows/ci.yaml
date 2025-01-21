@@ -3,7 +3,7 @@ name: Flutter CI
 on:
   push:
     branches:
-      - security-center
+      - main
   pull_request:
   workflow_dispatch:
 
