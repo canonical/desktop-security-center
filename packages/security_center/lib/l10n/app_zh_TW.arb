@@ -27,7 +27,7 @@
   "@snapPermissionsOtherDescription": {},
   "snapPermissionsPageTitle": "應用程式權限",
   "@snapPermissionsPageTitle": {},
-  "snapRulesPageDescription": "管理 {snap} 的 {interface} 權限。",
+  "snapRulesPageDescription": "管理 {snap} 的{interface}權限。",
   "@snapRulesPageDescription": {
     "placeholders": {
       "interface": {
