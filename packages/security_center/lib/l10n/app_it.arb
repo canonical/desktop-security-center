@@ -53,5 +53,9 @@
   "interfacePageLinkReportIssues": "Segnala errori",
   "@interfacePageLinkReportIssues": {},
   "snapPermissionsEnableTitle": "Impone alle app di richiedere i permessi di sistema",
-  "@snapPermissionsEnableTitle": {}
+  "@snapPermissionsEnableTitle": {},
+  "homeInterfacePageTitle": "Cartella Home",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Gestisci i permessi per accedere ai file della tua cartella Home.",
+  "@homeInterfacePageDescription": {}
 }
