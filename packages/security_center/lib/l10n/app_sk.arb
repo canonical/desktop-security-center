@@ -1,9 +1,9 @@
 {
   "appTitle": "Centrum zabezpečenia",
   "@appTitle": {},
-  "snapPermissionsEnablingLabel": "Aktivuje sa, môže to trvať niekoľko sekúnd…",
+  "snapPermissionsEnablingLabel": "Aktivuje sa, môže to trvať niekoľko sekúnd...",
   "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "Deaktivuje sa, môže to trvať niekoľko sekúnd…",
+  "snapPermissionsDisablingLabel": "Deaktivuje sa, môže to trvať niekoľko sekúnd...",
   "@snapPermissionsDisablingLabel": {},
   "snapPermissionsPageTitle": "Práva aplikácie",
   "@snapPermissionsPageTitle": {},
