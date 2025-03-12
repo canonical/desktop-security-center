@@ -1,1 +1,12 @@
-{}
+{
+  "snapdRuleCategorySessionDenied": "Keela kuni väljalogimiseni",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverDenied": "Keela alati",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Luba alati",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "appTitle": "Andmeturbekeskus",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Luba kuni väljalogimiseni",
+  "@snapdRuleCategorySessionAllowed": {}
+}
