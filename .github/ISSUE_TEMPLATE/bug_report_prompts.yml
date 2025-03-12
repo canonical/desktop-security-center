@@ -4,7 +4,8 @@ labels:
   - bug
   - prompting
 assignees:
-  - sminez
+  - d-loose
+  - matthew-hagemann
   - juanruitina
 body:
 - type: checkboxes
