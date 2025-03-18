@@ -8,5 +8,70 @@
   "appTitle": "Andmeturbekeskus",
   "@appTitle": {},
   "snapdRuleCategorySessionAllowed": "Luba kuni väljalogimiseni",
-  "@snapdRuleCategorySessionAllowed": {}
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapPermissionReadLabel": "Lugemine",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "Kirjutamine",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Käivitamine",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableWarning": "See on katseline funktsionaalsus, mis võimaldab kontrollida ligipääsu süsteemiressurssidele.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "Lülitame sisse, selleks kulub mõni sekund...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Katseline",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsOtherDescription": "Muid õigusi saad hallata valikust „Sätted › Rakendused“.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "Rakenduste õigused",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesPageDescription": "Halda „{snap}“ paketi õigusi „{interface}“ liidese kasutamisel.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Reeglid on veel määratlemata",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Eemalda kõik reeglid",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "Kodukaust",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Halda failide ligipääsuõigusi kodukaustas.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "Halda õigusi",
+  "@interfacePageTitle": {},
+  "interfacePageLinkLearnMore": "Loe lisaks",
+  "@interfacePageLinkLearnMore": {},
+  "interfaceSnapCount": "{n, plural, =0{ühtegi rakendust pole seadistatud} =1{1 rakendus} other {{n} rakendust}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnableTitle": "Eelda, et rakendused küsivad operatsioonisüsteemilt õigusi",
+  "@snapPermissionsEnableTitle": {},
+  "snapRulesCount": "{n, plural, =0{reeglid on määratlemata} =1{1 reegel} other{{n} reeglit}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "interfacePageDescription": "Kui rakendus töötab rangelt seadistatud eraldatud konteineris, siis ta peab sult enne failide ja kaustade avamist luba küsima. See funktsionaalsus on veel katsejärgus ning selles võib tekkida muudatusi.",
+  "@interfacePageDescription": {},
+  "interfacePageLinkGiveFeedback": "Jaga tagasisidet",
+  "@interfacePageLinkGiveFeedback": {},
+  "snapPermissionsDisablingLabel": "Lülitame välja, selleks kulub mõni sekund...",
+  "@snapPermissionsDisablingLabel": {},
+  "interfacePageLinkReportIssues": "Teata veast või problemist",
+  "@interfacePageLinkReportIssues": {}
 }
