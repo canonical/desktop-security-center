@@ -54,3 +54,6 @@ parts:
       fvm flutter build linux --release -v
       mkdir -p $CRAFT_PART_INSTALL/bin/
       cp -r build/linux/*/release/bundle/* $CRAFT_PART_INSTALL/bin/
+      cd ../../
+      mkdir -p $CRAFT_PART_INSTALL/meta/gui/icons/hicolor/scalable/apps
+      cp snap.desktop-security-center.Canonical.svg  $CRAFT_PART_INSTALL/meta/gui/icons/hicolor/scalable/apps
