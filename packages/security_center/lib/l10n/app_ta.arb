@@ -31,7 +31,7 @@
   "@snapPermissionsOtherDescription": {},
   "snapPermissionsPageTitle": "பயன்பாட்டு அனுமதிகள்",
   "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, பன்மை, = 0 {no rules} = 1 {1 rule} பிற {{n} விதிகள்}}",
+  "snapRulesCount": "{n, plural, = 0{no rules} = 1{1 rule} other {{n} விதிகள்}}",
   "@snapRulesCount": {
     "placeholders": {
       "n": {
@@ -39,7 +39,7 @@
       }
     }
   },
-  "snapRulesPageDescription": "{ச்னாப் க்கு க்கான {interface} அனுமதிகளை நிர்வகிக்கவும்.",
+  "snapRulesPageDescription": "Manage {interface} permissions for {snap}.",
   "@snapRulesPageDescription": {
     "placeholders": {
       "interface": {
@@ -64,7 +64,7 @@
   "@interfacePageLinkGiveFeedback": {},
   "interfacePageLinkReportIssues": "சிக்கல்களைப் புகாரளிக்கவும்",
   "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, பன்மை, = 0 {no apps} = 1 {1 app} பிற {{n} பயன்பாடுகள்}}",
+  "interfaceSnapCount": "{n, plural, = 0 {no apps} = 1 {1 app} other {{n} பயன்பாடுகள்}}",
   "@interfaceSnapCount": {
     "placeholders": {
       "n": {
