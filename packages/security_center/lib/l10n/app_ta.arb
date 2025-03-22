@@ -1,37 +1,37 @@
 {
-  "snapPermissionsEnableWarning": "உங்கள் கணினியின் வளங்களுக்கான அணுகலைக் கட்டுப்படுத்த இது ஒரு சோதனை அம்சமாகும்.",
+  "snapPermissionsEnableWarning": "உங்கள் கணினியின் வளங்களுக்கான அணுகலைக் கட்டுப்படுத்த இது ஒரு சோதனை நற்பண்பாகும்.",
   "@snapPermissionsEnableWarning": {},
-  "snapPermissionsDisablingLabel": "முடக்குதல், இதற்கு சில வினாடிகள் ஆகலாம் ...",
+  "snapPermissionsDisablingLabel": "முடக்குதல், இதற்குச் சில நொடிகள் ஆகலாம் ...",
   "@snapPermissionsDisablingLabel": {},
   "snapRulesPageEmptyTileLabel": "இன்னும் விதிகள் இல்லை",
   "@snapRulesPageEmptyTileLabel": {},
-  "snapPermissionsEnablingLabel": "செயல்படுத்த, இது சில வினாடிகள் ஆகலாம் ...",
+  "snapPermissionsEnablingLabel": "செயல்படுத்த, இது சில நொடிகள் ஆகலாம் ...",
   "@snapPermissionsEnablingLabel": {},
   "snapRulesRemoveAll": "எல்லா விதிகளையும் அகற்று",
   "@snapRulesRemoveAll": {},
   "appTitle": "பாதுகாப்பு நடுவண்",
   "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "வெளியேறும் வரை அனுமதிக்கவும்",
+  "snapdRuleCategorySessionAllowed": "வெளியேறும் வரை இசைவு",
   "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "வெளியேறும் வரை மறுக்கவும்",
+  "snapdRuleCategorySessionDenied": "வெளியேறும் வரை மறு",
   "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverAllowed": "எப்போதும் அனுமதிக்கவும்",
+  "snapdRuleCategoryForeverAllowed": "எப்போதும் இசைவு",
   "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "எப்போதும் மறுக்கவும்",
+  "snapdRuleCategoryForeverDenied": "எப்போதும் மறு",
   "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "படிக்க",
+  "snapPermissionReadLabel": "படி",
   "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "எழுதுங்கள்",
+  "snapPermissionWriteLabel": "எழுது",
   "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "செயல்படுத்தவும்",
+  "snapPermissionExecuteLabel": "இயக்கு",
   "@snapPermissionExecuteLabel": {},
   "snapPermissionsExperimentalLabel": "சோதனை",
   "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsOtherDescription": "அமைப்புகளில் பிற அனுமதிகளை நீங்கள் நிர்வகிக்கலாம் ›பயன்பாடுகள்.",
+  "snapPermissionsOtherDescription": "பிற இசைவுகளை நீங்கள் நிர்வகிக்கலாம் அமைப்புகள்›பயன்பாடுகள்.",
   "@snapPermissionsOtherDescription": {},
-  "snapPermissionsPageTitle": "பயன்பாட்டு அனுமதிகள்",
+  "snapPermissionsPageTitle": "பயன்பாட்டு இசைவுகள்",
   "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, plural, = 0{no rules} = 1{1 rule} other {{n} விதிகள்}}",
+  "snapRulesCount": "{n, plural, =0{விதிகள் இல்லை} =1{1 விதி} other {{n} விதிகள்}}",
   "@snapRulesCount": {
     "placeholders": {
       "n": {
@@ -39,7 +39,7 @@
       }
     }
   },
-  "snapRulesPageDescription": "Manage {interface} permissions for {snap}.",
+  "snapRulesPageDescription": "{snap}க்கான {interface} இசைவுகளை நிர்வகி.",
   "@snapRulesPageDescription": {
     "placeholders": {
       "interface": {
@@ -52,19 +52,19 @@
   },
   "homeInterfacePageTitle": "வீட்டு கோப்புறை",
   "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "உங்கள் வீட்டு கோப்புறையில் கோப்புகளை அணுக அனுமதிகளை நிர்வகிக்கவும்.",
+  "homeInterfacePageDescription": "உங்கள் வீட்டு கோப்புறையில் கோப்புகளை அணுக இசைவுகளை நிர்வகி.",
   "@homeInterfacePageDescription": {},
-  "interfacePageTitle": "அனுமதிகளை நிர்வகிக்கவும்",
+  "interfacePageTitle": "இசைவுகளை நிர்வகி",
   "@interfacePageTitle": {},
   "interfacePageDescription": "கோப்புகள் மற்றும் கோப்புறைகளை அணுகுவதற்கு முன் கண்டிப்பாக வரையறுக்கப்பட்ட பயன்பாடுகள் உங்களிடம் கேட்கும். இந்த நற்பொருத்தம் சோதனை மற்றும் மாற்றங்களுக்கு உட்பட்டது.",
   "@interfacePageDescription": {},
   "interfacePageLinkLearnMore": "மேலும் அறிக",
   "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "கருத்து தெரிவிக்கவும்",
+  "interfacePageLinkGiveFeedback": "கருத்து தெரிவி",
   "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "சிக்கல்களைப் புகாரளிக்கவும்",
+  "interfacePageLinkReportIssues": "சிக்கல்களைப் புகாரளி",
   "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, plural, = 0 {no apps} = 1 {1 app} other {{n} பயன்பாடுகள்}}",
+  "interfaceSnapCount": "{n, plural, =0 {பயன்பாடுகள் இல்லை} =1 {1 பயன்பாடு} other {{n} பயன்பாடுகள்}}",
   "@interfaceSnapCount": {
     "placeholders": {
       "n": {
@@ -72,6 +72,6 @@
       }
     }
   },
-  "snapPermissionsEnableTitle": "கணினி அனுமதிகளைக் கேட்க பயன்பாடுகள் தேவை",
+  "snapPermissionsEnableTitle": "கணினி இசைவுகளைக் கேட்கப் பயன்பாடுகள் தேவை",
   "@snapPermissionsEnableTitle": {}
 }
