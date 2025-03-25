@@ -27,13 +27,13 @@
   },
   "interfacePageDescription": "Las aplicaciones estrictamente limitadas te preguntarán antes de acceder a archivos y carpetas. Esta característica es experimental y está sujeta a cambios.",
   "@interfacePageDescription": {},
-  "interfacePageLinkLearnMore": "Leer más",
+  "interfacePageLinkLearnMore": "Aprender más",
   "@interfacePageLinkLearnMore": {},
   "interfacePageLinkGiveFeedback": "Dar tu opinión",
   "@interfacePageLinkGiveFeedback": {},
   "interfacePageLinkReportIssues": "Informar de problemas",
   "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, plural, =0{si aplicaciones} =1{1 aplicación} other {{n} aplicaciones}}",
+  "interfaceSnapCount": "{n, plural, =0{sin aplicaciones} =1{1 aplicación} other {{n} aplicaciones}}",
   "@interfaceSnapCount": {
     "placeholders": {
       "n": {
