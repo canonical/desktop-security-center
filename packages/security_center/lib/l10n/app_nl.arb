@@ -1,1 +1,77 @@
-{}
+{
+  "interfacePageDescription": "Strikt beperkte apps zullen toestemming vragen voordat ze toegang krijgen tot bestanden en mappen. Deze functie is experimenteel en onderhevig aan wijzigingen.",
+  "@interfacePageDescription": {},
+  "appTitle": "Beveiligingscentrum",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Toestaan tot afmelding",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Weigeren tot afmelding",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Altijd toestaan",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Altijd weigeren",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Lezen",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "Schrijven",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Uitvoeren",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableWarning": "Dit is een experimentele functie voor het toegangsbeheer tot de systeembronnen.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "Inschakelen, een ogenblik geduld…",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "Uitschakelen, een ogenblik geduld…",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Experimenteel",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsOtherDescription": "Je kunt andere machtigingen beheren in Instellingen › Toepassingen.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "App-machtigingen",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesPageDescription": "{interface}-machtigingen beheren voor {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Nog geen regels",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Alle regels verwijderen",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "Thuismap",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Machtigingen beheren voor toegang tot bestanden in je thuismap.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "Machtigingen beheren",
+  "@interfacePageTitle": {},
+  "interfacePageLinkLearnMore": "Meer informatie",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Reacties geven",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "Problemen melden",
+  "@interfacePageLinkReportIssues": {},
+  "interfaceSnapCount": "{n, plural, =0{geen apps} =1{1 app} other {{n} apps}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnableTitle": "Apps moeten om systeemmachtigingen vragen",
+  "@snapPermissionsEnableTitle": {},
+  "snapRulesCount": "{n, plural, =0{geen regel} =1{1 regel} other{{n} regels}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  }
+}
