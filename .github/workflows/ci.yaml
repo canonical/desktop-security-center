@@ -82,7 +82,7 @@ jobs:
         run: melos build
 
       - name: Run TICS analysis
-        if: github.event_name == 'push'
+        # if: github.event_name == 'push'
         uses: tiobe/tics-github-action@v3
         with:
           mode: qserver
