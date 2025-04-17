@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/app_permissions/home_interface.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
@@ -24,7 +25,7 @@ class PromptingStatusModel extends _$PromptingStatusModel {
 }
 
 @riverpod
-Future<List<SnapdRule>> rules(RulesRef ref) async =>
+Future<List<SnapdRule>> rules(Ref ref) async =>
     switch (await ref.watch(promptingStatusModelProvider.future)) {
       AppPermissionsServiceStatusEnabled(rules: final rules) => rules,
       _ => [],
@@ -32,7 +33,7 @@ Future<List<SnapdRule>> rules(RulesRef ref) async =>
 
 @riverpod
 Future<Map<SnapdInterface, int>> interfaceSnapCounts(
-  InterfaceSnapCountsRef ref,
+  Ref ref,
 ) async {
   final rules = await ref.watch(rulesProvider.future);
   final interfaceSnaps = rules.fold<Map<String, Set<String>>>(
@@ -50,7 +51,7 @@ Future<Map<SnapdInterface, int>> interfaceSnapCounts(
 
 @riverpod
 Future<Map<String, int>> snapRuleCounts(
-  SnapRuleCountsRef ref, {
+  Ref ref, {
   required SnapdInterface interface,
 }) async {
   final rules = await ref.watch(rulesProvider.future);
