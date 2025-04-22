@@ -37,5 +37,19 @@
   "interfacePageTitle": "Διαχείριση Αδειών",
   "@interfacePageTitle": {},
   "snapPermissionsEnablingLabel": "Ενεργοποιώ,μπορεί να πάρει κάποια δευτερόλεπτα...",
-  "@snapPermissionsEnablingLabel": {}
+  "@snapPermissionsEnablingLabel": {},
+  "snapdRuleCategorySessionAllowed": "Επιτρέψτε μέχρι να αποσυνδεθείτε",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Απορρίψτε μέχρι να αποσυνδεθείτε",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverDenied": "Απορρίπτω πάντα",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionsEnableWarning": "Αυτή είναι μια δοκιμαστική λειτουργία για να έχετε πρόσβαση στις πηγές του συστήματός σας.",
+  "@snapPermissionsEnableWarning": {},
+  "interfacePageLinkLearnMore": "Μάθετε περισσότερα",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkReportIssues": "Αναφορά προβλήματος",
+  "@interfacePageLinkReportIssues": {},
+  "snapdRuleCategoryForeverAllowed": "Επιτρέπω πάντα",
+  "@snapdRuleCategoryForeverAllowed": {}
 }
