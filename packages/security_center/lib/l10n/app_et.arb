@@ -17,7 +17,7 @@
   "@snapPermissionExecuteLabel": {},
   "snapPermissionsEnableWarning": "See on katseline funktsionaalsus, mis võimaldab kontrollida ligipääsu süsteemiressurssidele.",
   "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "Lülitame sisse, selleks kulub mõni sekund...",
+  "snapPermissionsEnablingLabel": "Lülitan sisse, selleks kulub mõni sekund...",
   "@snapPermissionsEnablingLabel": {},
   "snapPermissionsExperimentalLabel": "Katseline",
   "@snapPermissionsExperimentalLabel": {},
@@ -70,7 +70,7 @@
   "@interfacePageDescription": {},
   "interfacePageLinkGiveFeedback": "Jaga tagasisidet",
   "@interfacePageLinkGiveFeedback": {},
-  "snapPermissionsDisablingLabel": "Lülitame välja, selleks kulub mõni sekund...",
+  "snapPermissionsDisablingLabel": "Lülitan välja, selleks kulub mõni sekund...",
   "@snapPermissionsDisablingLabel": {},
   "interfacePageLinkReportIssues": "Teata veast või problemist",
   "@interfacePageLinkReportIssues": {}
