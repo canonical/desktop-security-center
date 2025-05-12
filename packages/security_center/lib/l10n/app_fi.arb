@@ -13,7 +13,7 @@
   "@snapdRuleCategoryForeverDenied": {},
   "snapPermissionReadLabel": "Lue",
   "@snapPermissionReadLabel": {},
-  "snapPermissionsDisablingLabel": "Poistetaa käytöstä, tämä saattaa kestään hetken...",
+  "snapPermissionsDisablingLabel": "Poistetaan käytöstä, tämä saattaa kestää hetken...",
   "@snapPermissionsDisablingLabel": {},
   "snapPermissionsExperimentalLabel": "Kokeellinen",
   "@snapPermissionsExperimentalLabel": {},
@@ -53,12 +53,25 @@
   "@snapRulesRemoveAll": {},
   "homeInterfacePageTitle": "Kotikansio",
   "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Hallitse oikeuksia kotikansiossa olevie tiedostojen käytön suhteen.",
+  "homeInterfacePageDescription": "Hallitse oikeuksia kotikansiossa olevien tiedostojen käytön suhteen.",
   "@homeInterfacePageDescription": {},
   "interfacePageTitle": "Hallitse oikeuksia",
   "@interfacePageTitle": {},
   "interfacePageLinkGiveFeedback": "Anna palautetta",
   "@interfacePageLinkGiveFeedback": {},
   "interfacePageLinkReportIssues": "Ilmoita ongelmista",
-  "@interfacePageLinkReportIssues": {}
+  "@interfacePageLinkReportIssues": {},
+  "snapRulesPageDescription": "Hallitse rajapinnan {interface} oikeuksia snap-paketille {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "interfacePageDescription": "Tiukasti rajoitetut sovellukset kysyvät lupaa ennen tiedostojen tai kansioiden käsittelyä. Tämä ominaisuus on kokeellinen ja saattaa muuttua.",
+  "@interfacePageDescription": {}
 }
