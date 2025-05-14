@@ -18,6 +18,16 @@ apps:
       - network
       - snapd-control
 
+  hwctlsh:
+    command: bin/hwctl.sh
+    daemon: oneshot
+    plugs:
+      - hardware-observe
+      - kernel-module-observe
+      - network
+      - network-setup-observe
+      - system-observe
+
 parts:
   fvm:
     plugin: nil
@@ -35,6 +45,29 @@ parts:
       - xz-utils
       - zip
     override-prime: ""
+
+  hwctl:
+    plugin: rust
+    source: https://github.com/canonical/hardware-api
+    source-type: git
+    source-tag: v0.9.0
+    source-subdir: client
+    build-packages:
+      - jq
+      - libssl-dev
+      - pkg-config
+    organize:
+      hwctl: bin/hwctl
+    prime:
+      - bin
+
+  hwctlsh:
+    plugin: dump
+    source: hwctl
+    organize:
+      hwctl.sh: bin/hwctl.sh
+    prime:
+      - bin
 
   security-center:
     after: [fvm]
