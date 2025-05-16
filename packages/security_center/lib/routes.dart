@@ -3,6 +3,7 @@ import 'package:security_center/app_permissions/app_rules_page.dart';
 import 'package:security_center/app_permissions/interfaces_page.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/app_permissions/snaps_page.dart';
+import 'package:security_center/hwctl/hwctl_page.dart';
 import 'package:security_center/l10n.dart';
 import 'package:yaru/yaru.dart';
 
@@ -12,6 +13,12 @@ enum Routes {
     builder: _appPermissionsBuilder,
     title: _appPermissionsTitle,
     icon: _appPermissionsIcon,
+  ),
+  hwctl(
+    route: '/hwctl',
+    builder: _hwctlBuilder,
+    title: _hwctlTitle,
+    icon: _hwctlIcon,
   );
 
   const Routes({
@@ -62,6 +69,19 @@ enum Routes {
       };
   static IconData _appPermissionsIcon(bool selected) =>
       selected ? YaruIcons.key_filled : YaruIcons.key;
+
+  static Widget _hwctlBuilder(
+    BuildContext context, [
+    Map<String, String> queryParameters = const {},
+  ]) =>
+      HwctlPage();
+  static String _hwctlTitle(
+    AppLocalizations l10n, [
+    Map<String, String> queryParameters = const {},
+  ]) =>
+      'hwctl';
+  static IconData _hwctlIcon(bool selected) =>
+      selected ? YaruIcons.chip_filled : YaruIcons.chip;
 
   static (
     String route,
