@@ -4,6 +4,7 @@ import 'package:security_center/app_permissions/interfaces_page.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/app_permissions/snaps_page.dart';
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
+import 'package:security_center/hwctl/hwctl_page.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/feature_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -21,6 +22,12 @@ enum Routes {
     builder: _diskEncryptionBuilder,
     title: _diskEncryptionTitle,
     icon: _diskEncryptionIcon,
+  ),
+  hwctl(
+    route: '/hwctl',
+    builder: _hwctlBuilder,
+    title: _hwctlTitle,
+    icon: _hwctlIcon,
   );
 
   const Routes({
@@ -91,9 +98,23 @@ enum Routes {
   static IconData _diskEncryptionIcon(bool selected) =>
       selected ? YaruIcons.drive_harddisk_filled : YaruIcons.drive_harddisk;
 
-  static (String route, Map<String, String> queryParameters) _parseName(
-    String name,
-  ) {
+  static Widget _hwctlBuilder(
+    BuildContext context, [
+    Map<String, String> queryParameters = const {},
+  ]) =>
+      HwctlPage();
+  static String _hwctlTitle(
+    AppLocalizations l10n, [
+    Map<String, String> queryParameters = const {},
+  ]) =>
+      'hwctl';
+  static IconData _hwctlIcon(bool selected) =>
+      selected ? YaruIcons.chip_filled : YaruIcons.chip;
+
+  static (
+    String route,
+    Map<String, String> queryParameters,
+  ) _parseName(String name) {
     final uri = Uri.parse(name);
     return (uri.path, uri.queryParameters);
   }
