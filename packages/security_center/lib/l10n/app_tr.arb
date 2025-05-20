@@ -1,1 +1,22 @@
-{}
+{
+  "appTitle": "Güvenlik Merkezi",
+  "@appTitle": {},
+  "snapdRuleCategoryForeverAllowed": "Her zaman izin ver",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Her zaman reddet",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Okuma",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "Yazma",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Çalıştır",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnablingLabel": "Etkinleştiriliyor, birkaç saniye sürebilir…",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "Devre dışı bırakılıyor, birkaç saniye sürebilir…",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Deneysel",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsPageTitle": "Uygulama İzinleri",
+  "@snapPermissionsPageTitle": {}
+}
