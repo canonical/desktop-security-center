@@ -52,7 +52,7 @@ parts:
     plugin: rust
     source: https://github.com/canonical/hardware-api
     source-type: git
-    source-tag: v0.9.0
+    source-commit: 26a0444a2fbea879cf5e68af704c952aedf3d021
     source-subdir: client
     build-packages:
       - jq
