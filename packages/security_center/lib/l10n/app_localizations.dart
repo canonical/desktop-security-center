@@ -401,11 +401,11 @@ abstract class AppLocalizations {
   /// **'{n, plural, =0{no apps} =1{1 app} other {{n} apps}}'**
   String interfaceSnapCount(int n);
 
-  /// No description provided for @diskEncryption.
+  /// No description provided for @diskEncryptionPageTitle.
   ///
   /// In en, this message translates to:
   /// **'Disk Encryption'**
-  String get diskEncryption;
+  String get diskEncryptionPageTitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

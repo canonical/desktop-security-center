@@ -110,7 +110,7 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get diskEncryption => 'Disk Encryption';
+  String get diskEncryptionPageTitle => 'Disk Encryption';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).

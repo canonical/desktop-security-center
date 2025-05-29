@@ -110,7 +110,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get diskEncryption => 'Disk Encryption';
+  String get diskEncryptionPageTitle => 'Disk Encryption';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).

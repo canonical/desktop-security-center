@@ -110,5 +110,5 @@ class AppLocalizationsMl extends AppLocalizations {
   }
 
   @override
-  String get diskEncryption => 'Disk Encryption';
+  String get diskEncryptionPageTitle => 'Disk Encryption';
 }
