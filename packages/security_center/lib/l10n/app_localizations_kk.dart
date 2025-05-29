@@ -108,4 +108,7 @@ class AppLocalizationsKk extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get diskEncryption => 'Disk Encryption';
 }

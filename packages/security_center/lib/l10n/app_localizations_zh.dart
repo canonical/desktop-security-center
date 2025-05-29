@@ -108,6 +108,9 @@ class AppLocalizationsZh extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get diskEncryption => 'Disk Encryption';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).

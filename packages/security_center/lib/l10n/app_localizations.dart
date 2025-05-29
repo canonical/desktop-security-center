@@ -400,6 +400,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{n, plural, =0{no apps} =1{1 app} other {{n} apps}}'**
   String interfaceSnapCount(int n);
+
+  /// No description provided for @diskEncryption.
+  ///
+  /// In en, this message translates to:
+  /// **'Disk Encryption'**
+  String get diskEncryption;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

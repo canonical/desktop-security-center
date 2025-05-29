@@ -108,4 +108,7 @@ class AppLocalizationsCs extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get diskEncryption => 'Disk Encryption';
 }
