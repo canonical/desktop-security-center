@@ -57,6 +57,9 @@ class SystemDataContainer with _$SystemDataContainer {
 
     // TODO: any more fields that might be added by snapd.
   }) = _SystemDataContainer;
+
+  factory SystemDataContainer.fromJson(Map<String, dynamic> json) =>
+      _$SystemDataContainerFromJson(json);
 }
 
 /// A service for managing recovery keys.
