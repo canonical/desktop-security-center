@@ -13,7 +13,9 @@ void main() {
     await tester.pumpWidget(
       UncontrolledProviderScope(
         container: container,
-        child: MaterialApp(home: DiskEncryptionPage()), // fix so dialogs remain in same provider scope
+        child: MaterialApp(
+            home:
+                DiskEncryptionPage()), // fix so dialogs remain in same provider scope
       ),
     );
     await tester.pump();
@@ -35,7 +37,6 @@ void main() {
 
     expect(find.text('Valid key'), findsOneWidget);
   });
-
 
   testWidgets('recovery key is invalid', (tester) async {
     final container = createContainer();

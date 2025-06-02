@@ -29,47 +29,47 @@ enum Routes {
   });
 
   factory Routes.fromRoute(String route) => Routes.values.firstWhere(
-    (e) => e.route == route,
-    orElse: () => throw ArgumentError('Unknown route: $route'),
-  );
+        (e) => e.route == route,
+        orElse: () => throw ArgumentError('Unknown route: $route'),
+      );
 
   final String route;
   final Widget Function(
     BuildContext context, [
     Map<String, String> queryParameters,
-  ])
-  builder;
+  ]) builder;
   final String Function(
     AppLocalizations l10n, [
     Map<String, String> queryParameters,
-  ])
-  title;
+  ]) title;
   final IconData Function(bool selected)? icon;
 
   // App Permissions
   static Widget _appPermissionsBuilder(
     BuildContext context, [
     Map<String, String> queryParameters = const {},
-  ]) => switch (queryParameters) {
-    {'snap': final snap, 'interface': final interface} => AppRulesPage(
-      snap: snap,
-      interface: SnapdInterface.fromString(interface),
-    ),
-    {'interface': final interface} => SnapsPage(
-      interface: SnapdInterface.fromString(interface),
-    ),
-    _ => const InterfacesPage(),
-  };
+  ]) =>
+      switch (queryParameters) {
+        {'snap': final snap, 'interface': final interface} => AppRulesPage(
+            snap: snap,
+            interface: SnapdInterface.fromString(interface),
+          ),
+        {'interface': final interface} => SnapsPage(
+            interface: SnapdInterface.fromString(interface),
+          ),
+        _ => const InterfacesPage(),
+      };
   static String _appPermissionsTitle(
     AppLocalizations l10n, [
     Map<String, String> queryParameters = const {},
-  ]) => switch (queryParameters) {
-    {'snap': final snap} => snap,
-    {'interface': final interface} => SnapdInterface.fromString(
-      interface,
-    ).localizedTitle(l10n),
-    _ => l10n.snapPermissionsPageTitle,
-  };
+  ]) =>
+      switch (queryParameters) {
+        {'snap': final snap} => snap,
+        {'interface': final interface} => SnapdInterface.fromString(
+            interface,
+          ).localizedTitle(l10n),
+        _ => l10n.snapPermissionsPageTitle,
+      };
   static IconData _appPermissionsIcon(bool selected) =>
       selected ? YaruIcons.key_filled : YaruIcons.key;
 
@@ -77,12 +77,14 @@ enum Routes {
   static Widget _diskEncryptionBuilder(
     BuildContext context, [
     Map<String, String> queryParameters = const {},
-  ]) => const DiskEncryptionPage();
+  ]) =>
+      const DiskEncryptionPage();
 
   static String _diskEncryptionTitle(
     AppLocalizations l10n, [
     Map<String, String> queryParameters = const {},
-  ]) => l10n.diskEncryptionPageTitle;
+  ]) =>
+      l10n.diskEncryptionPageTitle;
 
   static IconData _diskEncryptionIcon(bool selected) =>
       selected ? YaruIcons.drive_harddisk_filled : YaruIcons.drive_harddisk;
@@ -97,9 +99,8 @@ enum Routes {
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final (route, queryParameters) = _parseName(settings.name!);
     return MaterialPageRoute(
-      builder:
-          (context) =>
-              Routes.fromRoute(route).builder(context, queryParameters),
+      builder: (context) =>
+          Routes.fromRoute(route).builder(context, queryParameters),
       settings: settings,
     );
   }
@@ -111,9 +112,9 @@ enum Routes {
 
   static YaruMasterTileBuilder get tileBuilder =>
       (context, index, selected, availableWidth) => YaruMasterTile(
-        leading: Icon(values[index].icon?.call(selected)),
-        title: Text(values[index].title(AppLocalizations.of(context))),
-      );
+            leading: Icon(values[index].icon?.call(selected)),
+            title: Text(values[index].title(AppLocalizations.of(context))),
+          );
   static IndexedWidgetBuilder get pageBuilder =>
       (context, index) => values[index].builder(context);
 }

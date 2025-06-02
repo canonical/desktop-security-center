@@ -44,19 +44,17 @@ void showRecoveryKeyDialog(BuildContext context) {
         builder: (ctx, ref, _) {
           final dataAsync = ref.watch(systemContainersModelProvider);
           return dataAsync.when(
-            loading:
-                () => const AlertDialog(
-                  title: Text('Check Recovery Key'),
-                  content: SizedBox(
-                    height: 80,
-                    child: Center(child: CircularProgressIndicator()),
-                  ),
-                ),
-            error:
-                (e, _) => AlertDialog(
-                  title: const Text('Something went wrong'),
-                  content: Text(e.toString()),
-                ),
+            loading: () => const AlertDialog(
+              title: Text('Check Recovery Key'),
+              content: SizedBox(
+                height: 80,
+                child: Center(child: CircularProgressIndicator()),
+              ),
+            ),
+            error: (e, _) => AlertDialog(
+              title: const Text('Something went wrong'),
+              content: Text(e.toString()),
+            ),
             data: (data) {
               return AlertDialog(
                 title: const Text('Check Recovery Key'),
@@ -67,20 +65,18 @@ void showRecoveryKeyDialog(BuildContext context) {
                       decoration: const InputDecoration(
                         labelText: 'Recovery Key',
                       ),
-                      onChanged:
-                          ref
-                              .read(systemContainersModelProvider.notifier)
-                              .setRecoveryKeyToCheck,
+                      onChanged: ref
+                          .read(systemContainersModelProvider.notifier)
+                          .setRecoveryKeyToCheck,
                     ),
                     const SizedBox(height: 16),
                     if (data.dialogStatusMessage != null)
                       Text(
                         data.dialogStatusMessage!,
                         style: TextStyle(
-                          color:
-                              data.dialogStatusMessage == 'Valid key'
-                                  ? Colors.green
-                                  : Colors.red,
+                          color: data.dialogStatusMessage == 'Valid key'
+                              ? Colors.green
+                              : Colors.red,
                         ),
                       ),
                   ],
