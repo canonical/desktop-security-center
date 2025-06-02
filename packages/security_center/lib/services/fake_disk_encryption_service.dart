@@ -5,21 +5,35 @@ import 'dart:math';
 import 'package:security_center/services/disk_encryption_service.dart';
 
 class FakeDiskEncryptionService implements DiskEncryptionService {
-  FakeDiskEncryptionService({required this.containers});
+  FakeDiskEncryptionService({
+    required this.containers,
+    Map<String, String>? initialRecoveryKeys,
+  }) : _recoveryKeys = initialRecoveryKeys ?? {};
 
   /// Load initial containers from a JSON file.
   factory FakeDiskEncryptionService.fromFile(String path) {
-    final jsonList = jsonDecode(File(path).readAsStringSync()) as List;
-    final containers =
-        jsonList
-            .map((e) => SystemDataContainer.fromJson(e as Map<String, dynamic>))
-            .toList();
-    return FakeDiskEncryptionService(containers: containers);
+    final raw = File(path).readAsStringSync();
+    final jsonList = jsonDecode(raw) as List;
+    final containers = <SystemDataContainer>[];
+    for (var i = 0; i < jsonList.length; i++) {
+      final map = jsonList[i] as Map<String, dynamic>;
+      try {
+        final container = SystemDataContainer.fromJson(map);
+        containers.add(container);
+      } catch (e) {
+        rethrow;
+      }
+    }
+
+    return FakeDiskEncryptionService(
+      containers: containers,
+      initialRecoveryKeys: {'some-key-id': 'abcdef'},
+    );
   }
 
   /// List of mocked system data containers.
   final List<SystemDataContainer> containers;
-  final Map<String, String> _recoveryKeys = {};
+  final Map<String, String> _recoveryKeys;
   final Random _random = Random();
 
   /// Generates a fake recovery key and key ID.
@@ -63,9 +77,10 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
   /// Throws if the given recovery key isn't valid.
   @override
-  Future<void> checkRecoveryKey(String recoveryKey) async {
+  Future<bool> checkRecoveryKey(String recoveryKey) async {
     if (!_recoveryKeys.containsValue(recoveryKey)) {
-      throw StateError('Invalid recovery key');
+      return false;
     }
+    return true;
   }
 }
