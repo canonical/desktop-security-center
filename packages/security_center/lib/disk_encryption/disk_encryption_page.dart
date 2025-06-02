@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
+import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 
 class DiskEncryptionPage extends ConsumerWidget {
@@ -17,19 +18,21 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return ScrollablePage(
       children: [
-        Text('Recovery key', style: Theme.of(context).textTheme.titleMedium),
-        const SizedBox(height: 16),
         Text(
-          'You should always store the recovery key for your encrypted disk somewhere safe to avoid losing access to all your data.',
+          l10n.diskEncryptionPageRecoveryKey,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
+        const SizedBox(height: 16),
+        Text(l10n.diskEncryptionPageStoreYourKey),
         const SizedBox(height: 16),
         OutlinedButton(
           onPressed: () {
             showRecoveryKeyDialog(context);
           },
-          child: const Text('Check recovery key...'),
+          child: Text(l10n.diskEncryptionPageCheckKey),
         ),
       ],
     );
@@ -37,6 +40,7 @@ class _Body extends StatelessWidget {
 }
 
 void showRecoveryKeyDialog(BuildContext context) {
+  final l10n = AppLocalizations.of(context);
   showDialog(
     context: context,
     builder: (context) {
@@ -44,8 +48,8 @@ void showRecoveryKeyDialog(BuildContext context) {
         builder: (ctx, ref, _) {
           final dataAsync = ref.watch(systemContainersModelProvider);
           return dataAsync.when(
-            loading: () => const AlertDialog(
-              title: Text('Check Recovery Key'),
+            loading: () => AlertDialog(
+              title: Text(l10n.diskEncryptionPageDialogHeaderCheckKey),
               content: SizedBox(
                 height: 80,
                 child: Center(child: CircularProgressIndicator()),
@@ -57,13 +61,13 @@ void showRecoveryKeyDialog(BuildContext context) {
             ),
             data: (data) {
               return AlertDialog(
-                title: const Text('Check Recovery Key'),
+                title: Text(l10n.diskEncryptionPageDialogHeaderCheckKey),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextField(
-                      decoration: const InputDecoration(
-                        labelText: 'Recovery Key',
+                      decoration: InputDecoration(
+                        labelText: l10n.diskEncryptionPageRecoveryKey,
                       ),
                       onChanged: ref
                           .read(systemContainersModelProvider.notifier)
@@ -74,7 +78,8 @@ void showRecoveryKeyDialog(BuildContext context) {
                       Text(
                         data.dialogStatusMessage!,
                         style: TextStyle(
-                          color: data.dialogStatusMessage == 'Valid key'
+                          color: data.dialogStatusMessage ==
+                                  l10n.diskEncryptionPageValidKey
                               ? Colors.green
                               : Colors.red,
                         ),
@@ -92,11 +97,13 @@ void showRecoveryKeyDialog(BuildContext context) {
                         data.recoveryKeyToCheck,
                       );
                       notifier.setDialogStatusMessage(
-                        valid ? 'Valid key' : 'Invalid key',
+                        valid
+                            ? l10n.diskEncryptionPageValidKey
+                            : l10n.diskEncryptionPageInvalidKey,
                       );
                       notifier.setIsChecking(false);
                     },
-                    child: const Text('Check'),
+                    child: Text(l10n.diskEncryptionPageCheck),
                   ),
                 ],
               );

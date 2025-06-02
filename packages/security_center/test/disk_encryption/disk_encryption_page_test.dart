@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
 
@@ -9,60 +8,60 @@ void main() {
   testWidgets('recovery key is valid', (tester) async {
     final container = createContainer();
     registerMockDiskEncryptionService();
-    await tester.pumpWidget(
-      UncontrolledProviderScope(
-        container: container,
-        child: MaterialApp(
-          home: DiskEncryptionPage(),
-        ), // fix so dialogs remain in same provider scope
-      ),
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
 
-    expect(find.text('Check recovery key...'), findsOneWidget);
-    await tester.tap(find.text('Check recovery key...'));
+    expect(find.text(tester.l10n.diskEncryptionPageCheckKey), findsOneWidget);
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageCheckKey));
     await tester.pumpAndSettle();
 
     await tester.enterText(
       find.byWidgetPredicate(
-        (w) => w is TextField && w.decoration?.labelText == 'Recovery Key',
+        (w) =>
+            w is TextField &&
+            w.decoration?.labelText ==
+                tester.l10n.diskEncryptionPageRecoveryKey,
       ),
       'abcdef',
     );
     await tester.pump();
 
-    await tester.tap(find.text('Check'));
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageCheck));
     await tester.pumpAndSettle();
 
-    expect(find.text('Valid key'), findsOneWidget);
+    expect(find.text(tester.l10n.diskEncryptionPageValidKey), findsOneWidget);
   });
 
   testWidgets('recovery key is invalid', (tester) async {
     final container = createContainer();
     registerMockDiskEncryptionService(checkRecoveryKey: false);
-    await tester.pumpWidget(
-      UncontrolledProviderScope(
-        container: container,
-        child: MaterialApp(home: DiskEncryptionPage()),
-      ),
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
 
-    expect(find.text('Check recovery key...'), findsOneWidget);
-    await tester.tap(find.text('Check recovery key...'));
+    expect(find.text(tester.l10n.diskEncryptionPageCheckKey), findsOneWidget);
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageCheckKey));
     await tester.pumpAndSettle();
 
     await tester.enterText(
       find.byWidgetPredicate(
-        (w) => w is TextField && w.decoration?.labelText == 'Recovery Key',
+        (w) =>
+            w is TextField &&
+            w.decoration?.labelText ==
+                tester.l10n.diskEncryptionPageRecoveryKey,
       ),
       'abcdef',
     );
     await tester.pump();
 
-    await tester.tap(find.text('Check'));
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageCheck));
     await tester.pumpAndSettle();
 
-    expect(find.text('Invalid key'), findsOneWidget);
+    expect(find.text(tester.l10n.diskEncryptionPageCheck), findsOneWidget);
   });
 }
