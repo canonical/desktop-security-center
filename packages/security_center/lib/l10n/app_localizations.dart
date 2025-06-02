@@ -406,6 +406,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Disk Encryption'**
   String get diskEncryptionPageTitle;
+
+  /// No description provided for @diskEncryptionPageRecoveryKey.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery key'**
+  String get diskEncryptionPageRecoveryKey;
+
+  /// No description provided for @diskEncryptionPageStoreYourKey.
+  ///
+  /// In en, this message translates to:
+  /// **'You should always store the recovery key for your encrypted disk somewhere safe to avoid losing access to all your data.'**
+  String get diskEncryptionPageStoreYourKey;
+
+  /// No description provided for @diskEncryptionPageCheckKey.
+  ///
+  /// In en, this message translates to:
+  /// **'Check recovery key...'**
+  String get diskEncryptionPageCheckKey;
+
+  /// No description provided for @diskEncryptionPageDialogHeaderCheckKey.
+  ///
+  /// In en, this message translates to:
+  /// **'Check Recovery Key'**
+  String get diskEncryptionPageDialogHeaderCheckKey;
+
+  /// No description provided for @diskEncryptionPageCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Check'**
+  String get diskEncryptionPageCheck;
+
+  /// No description provided for @diskEncryptionPageValidKey.
+  ///
+  /// In en, this message translates to:
+  /// **'Valid key'**
+  String get diskEncryptionPageValidKey;
+
+  /// No description provided for @diskEncryptionPageInvalidKey.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid key'**
+  String get diskEncryptionPageInvalidKey;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

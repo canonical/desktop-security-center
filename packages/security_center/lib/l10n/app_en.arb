@@ -76,5 +76,19 @@
         }
     },
     "diskEncryptionPageTitle": "Disk Encryption",
-    "@diskEncryptionPageTitle": {}
+    "@diskEncryptionPageTitle": {},
+    "diskEncryptionPageRecoveryKey": "Recovery key",
+    "@diskEncryptionPageRecoveryKey": {},
+    "diskEncryptionPageStoreYourKey": "You should always store the recovery key for your encrypted disk somewhere safe to avoid losing access to all your data.",
+    "@diskEncryptionPageStoreYourKey": {},
+    "diskEncryptionPageCheckKey": "Check recovery key...",
+    "@diskEncryptionPageCheckKey": {},
+    "diskEncryptionPageDialogHeaderCheckKey": "Check Recovery Key",
+    "@diskEncryptionPageDialogHeaderCheckKey": {},
+    "diskEncryptionPageCheck": "Check",
+    "@diskEncryptionPageCheck": {},
+    "diskEncryptionPageValidKey": "Valid key",
+    "@diskEncryptionPageValidKey": {},
+    "diskEncryptionPageInvalidKey": "Invalid key",
+    "@diskEncryptionPageInvalidKey": {}
 }

@@ -111,4 +111,25 @@ class AppLocalizationsKa extends AppLocalizations {
 
   @override
   String get diskEncryptionPageTitle => 'Disk Encryption';
+
+  @override
+  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+
+  @override
+  String get diskEncryptionPageStoreYourKey => 'You should always store the recovery key for your encrypted disk somewhere safe to avoid losing access to all your data.';
+
+  @override
+  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+
+  @override
+  String get diskEncryptionPageDialogHeaderCheckKey => 'Check Recovery Key';
+
+  @override
+  String get diskEncryptionPageCheck => 'Check';
+
+  @override
+  String get diskEncryptionPageValidKey => 'Valid key';
+
+  @override
+  String get diskEncryptionPageInvalidKey => 'Invalid key';
 }
