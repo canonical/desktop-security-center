@@ -1,0 +1,11 @@
+[
+  {
+    "volume-name": "volume1",
+    "name": "container1",
+    "encrypted": true,
+    "key-slots": [
+      { "name": "recovery-12345", "type": "recovery" }
+    ]
+  }
+]
+
