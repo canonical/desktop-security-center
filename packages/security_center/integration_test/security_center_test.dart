@@ -26,8 +26,9 @@ void main() {
     await app.main([]);
     await tester.pumpAndSettle();
 
-    await tester
-        .tap(find.text(SnapdInterface.home.localizedTitle(tester.l10n)));
+    await tester.tap(
+      find.text(SnapdInterface.home.localizedTitle(tester.l10n)),
+    );
     await tester.pumpAndSettle();
 
     await tester.tap(find.text(testSnap));
@@ -46,6 +47,54 @@ void main() {
 
     await expectSnapdRules([]);
   });
+
+  testWidgets('Check recovery key is valid', (tester) async {
+    await app.main([]);
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageTitle));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Check recovery key...'));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(
+      find.byWidgetPredicate(
+        (w) => w is TextField && w.decoration?.labelText == 'Recovery Key',
+      ),
+      'abcdef',
+    );
+    await tester.pump();
+
+    await tester.tap(find.text('Check'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Valid key'), findsOneWidget);
+  });
+
+  testWidgets('Check recovery key is invalid', (tester) async {
+    await app.main([]);
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageTitle));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Check recovery key...'));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(
+      find.byWidgetPredicate(
+        (w) => w is TextField && w.decoration?.labelText == 'Recovery Key',
+      ),
+      'abcde',
+    );
+    await tester.pump();
+
+    await tester.tap(find.text('Check'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Invalid key'), findsOneWidget);
+  });
 }
 
 void expectHomeRule(WidgetTester tester, SnapdRuleMask rule) {
@@ -60,19 +109,20 @@ void expectHomeRule(WidgetTester tester, SnapdRuleMask rule) {
     // This verifies that the specified rule is displayed in the UI by checking
     // that the widgets in the following list share a unique common ancestor.
     final tile = [
-      find.text(ruleFragment.pathPattern),
-      find.text(
-        ruleFragment.permissions
-            .map((permission) => permission.localize(tester.l10n))
-            .join(', '),
-      ),
-    ]
+          find.text(ruleFragment.pathPattern),
+          find.text(
+            ruleFragment.permissions
+                .map((permission) => permission.localize(tester.l10n))
+                .join(', '),
+          ),
+        ]
         // List of sets of ancestors for each text widget.
         .map(
-          (finder) => find
-              .ancestor(of: finder, matching: find.byType(ListTile))
-              .evaluate()
-              .toSet(),
+          (finder) =>
+              find
+                  .ancestor(of: finder, matching: find.byType(ListTile))
+                  .evaluate()
+                  .toSet(),
         )
         // Intersection of all sets.
         .reduce((value, element) => value.intersection(element));
