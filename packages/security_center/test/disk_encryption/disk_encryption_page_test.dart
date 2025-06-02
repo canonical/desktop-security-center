@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
-import 'package:yaru/yaru.dart';
 
 import '../test_utils.dart';
 
@@ -14,8 +13,8 @@ void main() {
       UncontrolledProviderScope(
         container: container,
         child: MaterialApp(
-            home:
-                DiskEncryptionPage()), // fix so dialogs remain in same provider scope
+          home: DiskEncryptionPage(),
+        ), // fix so dialogs remain in same provider scope
       ),
     );
     await tester.pump();

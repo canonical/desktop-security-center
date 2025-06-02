@@ -27,7 +27,6 @@ dependencies:
   snapd: ^0.7.0
   ubuntu_localizations: ^0.5.2+1
   ubuntu_logger: ^0.2.0
-  ubuntu_widgets: ^0.7.2
   ubuntu_service: ^0.4.0
   url_launcher: ^6.3.0
   xdg_directories: ^1.0.4
@@ -41,8 +40,8 @@ dev_dependencies:
   freezed: ^2.5.2
   integration_test:
     sdk: flutter
-  json_serializable: ^6.8.0
   json_annotation: ^4.9.0
+  json_serializable: ^6.8.0
   mockito: ^5.4.4
   riverpod_generator: ^2.4.0
   ubuntu_lints: ^0.4.1

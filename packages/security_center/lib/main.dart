@@ -19,13 +19,14 @@ Future<void> main(List<String> args) async {
   await YaruWindowTitleBar.ensureInitialized();
   Logger.setup(path: '');
 
-  final parser = ArgParser()
-    ..addFlag('dry-run', help: 'Use a fake rules service instead of snapd')
-    ..addOption(
-      'test-rules',
-      help: 'Path to a JSON file containing test rules',
-      defaultsTo: 'integration_test/assets/test_rules.json',
-    );
+  final parser =
+      ArgParser()
+        ..addFlag('dry-run', help: 'Use a fake rules service instead of snapd')
+        ..addOption(
+          'test-rules',
+          help: 'Path to a JSON file containing test rules',
+          defaultsTo: 'integration_test/assets/test_rules.json',
+        );
 
   final ArgResults argResults;
   try {
@@ -38,9 +39,10 @@ Future<void> main(List<String> args) async {
   registerService<SnapdService>(SnapdService.new);
 
   registerService<DiskEncryptionService>(
-      () => FakeDiskEncryptionService.fromFile(
-            'integration_test/assets/test_containers.json',
-          ));
+    () => FakeDiskEncryptionService.fromFile(
+      'integration_test/assets/test_containers.json',
+    ),
+  );
 
   final snapMetadata = await getService<SnapdService>().getSnaps();
   registerServiceInstance<LocalSnapData>(snapMetadata);
