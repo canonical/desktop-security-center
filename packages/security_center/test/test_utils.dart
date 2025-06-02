@@ -28,6 +28,21 @@ extension WidgetTesterX on WidgetTester {
       ),
     );
   }
+
+  Future<void> pumpAppWithProviders(
+    WidgetBuilder builder,
+    ProviderContainer container,
+  ) {
+    return pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          home: Scaffold(body: Builder(builder: builder)),
+          localizationsDelegates: localizationsDelegates,
+        ),
+      ),
+    );
+  }
 }
 
 /// A testing utility which creates a [ProviderContainer] and automatically
