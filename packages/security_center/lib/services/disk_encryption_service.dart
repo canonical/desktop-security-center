@@ -77,5 +77,5 @@ abstract class DiskEncryptionService {
   Future<void> deleteKeySlot(String keyName);
 
   /// Checks if a recovery key is still valid for use.
-  Future<void> checkRecoveryKey(String recoveryKey);
+  Future<bool> checkRecoveryKey(String recoveryKey);
 }
