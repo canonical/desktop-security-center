@@ -72,7 +72,7 @@ void main() {
     await tester.tap(find.text(tester.l10n.diskEncryptionPageCheck));
     await tester.pumpAndSettle();
 
-    expect(find.text(tester.l10n.diskEncryptionPageValidKey), findsOneWidget);
+    expect(find.text(tester.l10n.diskEncryptionPageKeyWorks), findsOneWidget);
   });
 
   testWidgets('Check recovery key is invalid', (tester) async {
@@ -99,7 +99,8 @@ void main() {
     await tester.tap(find.text(tester.l10n.diskEncryptionPageCheck));
     await tester.pumpAndSettle();
 
-    expect(find.text(tester.l10n.diskEncryptionPageInvalidKey), findsOneWidget);
+    expect(
+        find.text(tester.l10n.diskEncryptionPageKeyDoesntWork), findsOneWidget);
   });
 }
 
