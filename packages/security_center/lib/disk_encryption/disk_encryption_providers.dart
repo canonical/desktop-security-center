@@ -12,8 +12,7 @@ class SystemContainersData with _$SystemContainersData {
     required List<SystemDataContainer> containers,
     RecoveryKeyDetails? generatedRecoveryKey,
     @Default('') String recoveryKeyToCheck,
-    @Default(false) bool isChecking,
-    String? dialogStatusMessage,
+    bool? validKey,
   }) = _SystemContainersData;
 }
 
@@ -29,20 +28,7 @@ class SystemContainersModel extends _$SystemContainersModel {
 
   void setRecoveryKeyToCheck(String key) {
     state = state.whenData(
-      (data) => data.copyWith(
-        recoveryKeyToCheck: key,
-        dialogStatusMessage: null,
-      ),
-    );
-  }
-
-  void setIsChecking(bool checking) {
-    state = state.whenData((data) => data.copyWith(isChecking: checking));
-  }
-
-  void setDialogStatusMessage(String message) {
-    state = state.whenData(
-      (data) => data.copyWith(dialogStatusMessage: message),
+      (data) => data.copyWith(recoveryKeyToCheck: key, validKey: null),
     );
   }
 
@@ -71,6 +57,8 @@ class SystemContainersModel extends _$SystemContainersModel {
   }
 
   Future<bool> checkRecoveryKey(String recoveryKey) async {
-    return _service.checkRecoveryKey(recoveryKey);
+    final result = await _service.checkRecoveryKey(recoveryKey);
+    state = state.whenData((data) => data.copyWith(validKey: result));
+    return result;
   }
 }
