@@ -100,7 +100,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-        find.text(tester.l10n.diskEncryptionPageKeyDoesntWork), findsOneWidget);
+      find.text(tester.l10n.diskEncryptionPageKeyDoesntWork),
+      findsOneWidget,
+    );
   });
 }
 
