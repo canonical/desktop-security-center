@@ -1,1 +1,77 @@
-{}
+{
+  "appTitle": "Centre de seguretat",
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Permet fins que es tanqui la sessió",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Denega fins que es tanqui la sessió",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Permet sempre",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Rebutja sempre",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionWriteLabel": "Escriptura",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionReadLabel": "Lectura",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionExecuteLabel": "Execució",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableWarning": "Aquesta és una funció experimental per controlar l'accés als recursos del vostre sistema.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "S'està habilitant, pot trigar uns segons...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "S'està desactivant, pot trigar uns segons...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Experimental",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsOtherDescription": "Podeu administrar altres permisos a Configuració › Aplicacions.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "Permisos de l'aplicació",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesCount": "{n, plural, =0{sense regles} =1{1 regla} other{{n} regles}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesPageDescription": "Administrar els permisos de {interface} per a {snap} .",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesRemoveAll": "Elimina totes les regles",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "Carpeta d'usuari",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Administra els permisos per accedir als fitxers a la carpeta d'usuari.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "Administra els permisos",
+  "@interfacePageTitle": {},
+  "interfacePageDescription": "Les aplicacions confinades estrictament us demanaran abans d'accedir a fitxers i carpetes. Aquesta característica és experimental i està subjecta a canvis.",
+  "@interfacePageDescription": {},
+  "interfacePageLinkLearnMore": "Apreneu més",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Doneu retroacció",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "Informeu els problemes",
+  "@interfacePageLinkReportIssues": {},
+  "interfaceSnapCount": "{n, plural, =0{sense aplicacions} =1{1 aplicació} other {{n} aplicacions}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapPermissionsEnableTitle": "Exigeix a les aplicacions que demanin permisos al sistema",
+  "@snapPermissionsEnableTitle": {},
+  "snapRulesPageEmptyTileLabel": "Encara no hi ha regles",
+  "@snapRulesPageEmptyTileLabel": {}
+}
