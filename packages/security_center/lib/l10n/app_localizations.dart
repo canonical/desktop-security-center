@@ -448,6 +448,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid key'**
   String get diskEncryptionPageInvalidKey;
+
+  /// No description provided for @diskEncryptionPageEnterKey.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your recovery key'**
+  String get diskEncryptionPageEnterKey;
+
+  /// No description provided for @diskEncryptionPageKeyWorks.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery key works'**
+  String get diskEncryptionPageKeyWorks;
+
+  /// No description provided for @diskEncryptionPageKeyWorksBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember to keep it somewhere safe.'**
+  String get diskEncryptionPageKeyWorksBody;
+
+  /// No description provided for @diskEncryptionPageKeyDoesntWork.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery key invalid'**
+  String get diskEncryptionPageKeyDoesntWork;
+
+  /// No description provided for @diskEncryptionPageKeyDoesntWorkBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your key and try again.'**
+  String get diskEncryptionPageKeyDoesntWorkBody;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

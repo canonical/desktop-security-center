@@ -132,4 +132,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get diskEncryptionPageInvalidKey => 'Invalid key';
+
+  @override
+  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+
+  @override
+  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+
+  @override
+  String get diskEncryptionPageKeyWorksBody => 'Remember to keep it somewhere safe.';
+
+  @override
+  String get diskEncryptionPageKeyDoesntWork => 'Recovery key invalid';
+
+  @override
+  String get diskEncryptionPageKeyDoesntWorkBody => 'Please check your key and try again.';
 }

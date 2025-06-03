@@ -90,5 +90,15 @@
     "diskEncryptionPageValidKey": "Valid key",
     "@diskEncryptionPageValidKey": {},
     "diskEncryptionPageInvalidKey": "Invalid key",
-    "@diskEncryptionPageInvalidKey": {}
+    "@diskEncryptionPageInvalidKey": {},
+    "diskEncryptionPageEnterKey": "Enter your recovery key",
+    "@diskEncryptionPageEnterKey": {},
+    "diskEncryptionPageKeyWorks": "Recovery key works",
+    "@diskEncryptionPageKeyWorks": {},
+    "diskEncryptionPageKeyWorksBody": "Remember to keep it somewhere safe.",
+    "@diskEncryptionPageKeyWorksBody": {},
+    "diskEncryptionPageKeyDoesntWork": "Recovery key invalid",
+    "@diskEncryptionPageKeyDoesntWork": {},
+    "diskEncryptionPageKeyDoesntWorkBody": "Please check your key and try again.",
+    "@diskEncryptionPageKeyDoesntWorkBody": {}
 }
