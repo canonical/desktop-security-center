@@ -151,4 +151,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody => 'Check the key or replace it with a new one.';
+
+  @override
+  String get diskEncryptionPageError => 'Error';
 }

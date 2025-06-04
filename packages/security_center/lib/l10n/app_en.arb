@@ -100,5 +100,7 @@
     "diskEncryptionPageKeyDoesntWork": "Recovery key does not work",
     "@diskEncryptionPageKeyDoesntWork": {},
     "diskEncryptionPageKeyDoesntWorkBody": "Check the key or replace it with a new one.",
-    "@diskEncryptionPageKeyDoesntWorkBody": {}
+    "@diskEncryptionPageKeyDoesntWorkBody": {},
+    "diskEncryptionPageError": "Error",
+    "@diskEncryptionPageError": {}
 }

@@ -147,6 +147,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody => 'Check the key or replace it with a new one.';
+
+  @override
+  String get diskEncryptionPageError => 'Error';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).

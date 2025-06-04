@@ -478,6 +478,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Check the key or replace it with a new one.'**
   String get diskEncryptionPageKeyDoesntWorkBody;
+
+  /// No description provided for @diskEncryptionPageError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get diskEncryptionPageError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

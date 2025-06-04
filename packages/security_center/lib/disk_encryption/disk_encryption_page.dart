@@ -131,7 +131,7 @@ class CheckRecoveryKeyDialog extends StatelessWidget {
             ] else if (data is CheckRecoveryKeyDialogStateError) ...[
               const SizedBox(height: 16),
               YaruInfoBox(
-                title: Text('Error'),
+                title: Text(l10n.diskEncryptionPageError),
                 subtitle: Text(notifier.getError().toString()),
                 yaruInfoType: YaruInfoType.danger,
               ),

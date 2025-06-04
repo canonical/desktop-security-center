@@ -80,6 +80,11 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   /// Throws if the given recovery key isn't valid.
   @override
   Future<bool> checkRecoveryKey(String recoveryKey) async {
+    // 2 seconds delay to simulate API roundtime.
+    await Future.delayed(const Duration(seconds: 2));
+    // throw Exception( // Uncomment to simulate an error
+    //   'Mocked error',
+    // );
     if (!_recoveryKeys.containsValue(recoveryKey)) {
       return false;
     }
