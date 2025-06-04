@@ -147,8 +147,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get diskEncryptionPageKeyWorksBody => 'Remember to keep it somewhere safe.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key invalid';
+  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
 
   @override
-  String get diskEncryptionPageKeyDoesntWorkBody => 'Please check your key and try again.';
+  String get diskEncryptionPageKeyDoesntWorkBody => 'Check the key or replace it with a new one.';
 }

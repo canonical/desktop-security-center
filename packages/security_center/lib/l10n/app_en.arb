@@ -97,8 +97,8 @@
     "@diskEncryptionPageKeyWorks": {},
     "diskEncryptionPageKeyWorksBody": "Remember to keep it somewhere safe.",
     "@diskEncryptionPageKeyWorksBody": {},
-    "diskEncryptionPageKeyDoesntWork": "Recovery key invalid",
+    "diskEncryptionPageKeyDoesntWork": "Recovery key does not work",
     "@diskEncryptionPageKeyDoesntWork": {},
-    "diskEncryptionPageKeyDoesntWorkBody": "Please check your key and try again.",
+    "diskEncryptionPageKeyDoesntWorkBody": "Check the key or replace it with a new one.",
     "@diskEncryptionPageKeyDoesntWorkBody": {}
 }

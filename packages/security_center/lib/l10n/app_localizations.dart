@@ -470,13 +470,13 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageKeyDoesntWork.
   ///
   /// In en, this message translates to:
-  /// **'Recovery key invalid'**
+  /// **'Recovery key does not work'**
   String get diskEncryptionPageKeyDoesntWork;
 
   /// No description provided for @diskEncryptionPageKeyDoesntWorkBody.
   ///
   /// In en, this message translates to:
-  /// **'Please check your key and try again.'**
+  /// **'Check the key or replace it with a new one.'**
   String get diskEncryptionPageKeyDoesntWorkBody;
 }
 
