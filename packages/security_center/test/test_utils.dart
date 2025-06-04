@@ -93,6 +93,7 @@ LocalSnapData registerMockLocalSnapData({List<Snap> snaps = const []}) {
 @GenerateMocks([DiskEncryptionService])
 DiskEncryptionService registerMockDiskEncryptionService({
   bool checkRecoveryKey = true,
+  bool checkError = false,
 }) {
   final service = MockDiskEncryptionService();
 
@@ -113,7 +114,12 @@ DiskEncryptionService registerMockDiskEncryptionService({
     (_) async => RecoveryKeyDetails(recoveryKey: 'mock-key', keyId: 'mock-id'),
   );
   when(service.addRecoveryKey(any)).thenAnswer((_) async {});
-  when(service.checkRecoveryKey(any)).thenAnswer((_) async => checkRecoveryKey);
+  when(service.checkRecoveryKey(any)).thenAnswer((_) async {
+    if (checkError) {
+      throw Exception('Mock check recovery key error');
+    }
+    return checkRecoveryKey;
+  });
   registerMockService<DiskEncryptionService>(service);
   addTearDown(unregisterService<DiskEncryptionService>);
   return service;

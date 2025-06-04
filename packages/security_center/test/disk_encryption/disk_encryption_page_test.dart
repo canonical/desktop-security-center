@@ -35,6 +35,39 @@ void main() {
     expect(find.text(tester.l10n.diskEncryptionPageKeyWorks), findsOneWidget);
   });
 
+  testWidgets('error is thrown checking recovery key', (tester) async {
+    final container = createContainer();
+    registerMockDiskEncryptionService(
+      checkRecoveryKey: false,
+      checkError: true,
+    );
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text(tester.l10n.diskEncryptionPageCheckKey), findsOneWidget);
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageCheckKey));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(
+      find.byWidgetPredicate(
+        (w) =>
+            w is TextField &&
+            w.decoration?.labelText ==
+                tester.l10n.diskEncryptionPageRecoveryKey,
+      ),
+      'abcdef',
+    );
+    await tester.pump();
+
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageCheck));
+    await tester.pumpAndSettle();
+
+    expect(find.text(tester.l10n.diskEncryptionPageError), findsOneWidget);
+  });
+
   testWidgets('recovery key is invalid', (tester) async {
     final container = createContainer();
     registerMockDiskEncryptionService(checkRecoveryKey: false);

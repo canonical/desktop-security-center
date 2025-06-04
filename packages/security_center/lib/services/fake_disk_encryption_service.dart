@@ -7,11 +7,15 @@ import 'package:security_center/services/disk_encryption_service.dart';
 class FakeDiskEncryptionService implements DiskEncryptionService {
   FakeDiskEncryptionService({
     required this.containers,
+    required this.checkError,
     Map<String, String>? initialRecoveryKeys,
   }) : _recoveryKeys = initialRecoveryKeys ?? {};
 
   /// Load initial containers from a JSON file.
-  factory FakeDiskEncryptionService.fromFile(String path) {
+  factory FakeDiskEncryptionService.fromFile(
+    String path, {
+    bool checkError = false,
+  }) {
     final raw = File(path).readAsStringSync();
     final jsonList = jsonDecode(raw) as List;
     final containers = <SystemDataContainer>[];
@@ -28,12 +32,14 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     return FakeDiskEncryptionService(
       containers: containers,
       initialRecoveryKeys: {'some-key-id': 'abcdef'},
+      checkError: checkError,
     );
   }
 
   /// List of mocked system data containers.
   final List<SystemDataContainer> containers;
   final Map<String, String> _recoveryKeys;
+  final bool checkError;
   final Random _random = Random();
   final CheckRecoveryKeyDialogState _checkRecoveryKeyDialogState =
       CheckRecoveryKeyDialogState.empty();
@@ -80,11 +86,10 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   /// Throws if the given recovery key isn't valid.
   @override
   Future<bool> checkRecoveryKey(String recoveryKey) async {
-    // 2 seconds delay to simulate API roundtime.
-    await Future.delayed(const Duration(seconds: 2));
-    // throw Exception( // Uncomment to simulate an error
-    //   'Mocked error',
-    // );
+    // await Future.delayed(const Duration(seconds: 2)); // Uncomment to simulate a delay
+    if (checkError) {
+      throw Exception('Mocked error');
+    }
     if (!_recoveryKeys.containsValue(recoveryKey)) {
       return false;
     }
