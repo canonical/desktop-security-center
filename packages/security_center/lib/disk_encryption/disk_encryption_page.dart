@@ -65,10 +65,10 @@ void showRecoveryKeyDialog(BuildContext context) {
 
 class CheckRecoveryKeyDialog extends StatelessWidget {
   const CheckRecoveryKeyDialog({
-    super.key,
     required this.l10n,
     required this.data,
     required this.notifier,
+    super.key,
   });
 
   final AppLocalizations l10n;
@@ -110,10 +110,11 @@ class CheckRecoveryKeyDialog extends StatelessWidget {
                 child: Text(l10n.diskEncryptionPageCheck),
               ),
             ),
-            const SizedBox(height: 16),
             if (data is CheckRecoveryKeyDialogStateLoading) ...[
+              const SizedBox(height: 16),
               const YaruCircularProgressIndicator(),
             ] else if (data is CheckRecoveryKeyDialogStateResult) ...[
+              const SizedBox(height: 16),
               if (notifier.getCheckResult()) ...[
                 YaruInfoBox(
                   title: Text(l10n.diskEncryptionPageKeyWorks),
@@ -128,12 +129,13 @@ class CheckRecoveryKeyDialog extends StatelessWidget {
                 ),
               ],
             ] else if (data is CheckRecoveryKeyDialogStateError) ...[
+              const SizedBox(height: 16),
               YaruInfoBox(
                 title: Text('Error'),
                 subtitle: Text(notifier.getError().toString()),
                 yaruInfoType: YaruInfoType.danger,
               ),
-            ]
+            ],
           ],
         ),
       ),
