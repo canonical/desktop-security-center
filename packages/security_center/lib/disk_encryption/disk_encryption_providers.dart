@@ -42,14 +42,4 @@ class CheckRecoveryKeyDialogModel extends _$CheckRecoveryKeyDialogModel {
       state = CheckRecoveryKeyDialogState.input(key);
     }
   }
-
-  bool getCheckResult() {
-    assert(state is CheckRecoveryKeyDialogStateResult);
-    return (state as CheckRecoveryKeyDialogStateResult).valid;
-  }
-
-  Exception getError() {
-    assert(state is CheckRecoveryKeyDialogStateError);
-    return (state as CheckRecoveryKeyDialogStateError).e;
-  }
 }
