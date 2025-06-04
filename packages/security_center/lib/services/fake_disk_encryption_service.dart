@@ -35,6 +35,8 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   final List<SystemDataContainer> containers;
   final Map<String, String> _recoveryKeys;
   final Random _random = Random();
+  final CheckRecoveryKeyDialogState _checkRecoveryKeyDialogState =
+      CheckRecoveryKeyDialogState.empty();
 
   /// Generates a fake recovery key and key ID.
   @override
@@ -83,4 +85,9 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     }
     return true;
   }
+
+  /// Returns the current state of the Check Recovery Key dialog.
+  @override
+  CheckRecoveryKeyDialogState get recoveryKeyDialogState =>
+      _checkRecoveryKeyDialogState;
 }

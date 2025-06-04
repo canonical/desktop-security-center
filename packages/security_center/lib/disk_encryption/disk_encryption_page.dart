@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
+import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:yaru/yaru.dart';
 
@@ -47,89 +48,95 @@ void showRecoveryKeyDialog(BuildContext context) {
     builder: (context) {
       return Consumer(
         builder: (ctx, ref, _) {
-          final dataAsync = ref.watch(systemContainersModelProvider);
-          return dataAsync.when(
-            loading: () => AlertDialog(
-              title: YaruDialogTitleBar(
-                title: Text(l10n.diskEncryptionPageDialogHeaderCheckKey),
-              ),
-              titlePadding: EdgeInsets.zero,
-              content: SizedBox(
-                width: 450,
-                height: 80,
-                child: Center(child: CircularProgressIndicator()),
-              ),
-            ),
-            error: (e, _) => AlertDialog(
-              title: const Text('Error'),
-              content: Text(e.toString()),
-            ),
-            data: (data) {
-              return AlertDialog(
-                title: YaruDialogTitleBar(
-                  title: Text(l10n.diskEncryptionPageDialogHeaderCheckKey),
-                ),
-                titlePadding: EdgeInsets.zero,
-                content: SizedBox(
-                  width: 450,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextField(
-                        autofocus: true,
-                        decoration: InputDecoration(
-                          labelText: l10n.diskEncryptionPageRecoveryKey,
-                          hintText:
-                              'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
-                        ),
-                        onChanged: ref
-                            .read(systemContainersModelProvider.notifier)
-                            .setRecoveryKeyToCheck,
-                      ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton(
-                          onPressed: data.recoveryKeyToCheck.isEmpty ||
-                                  data.validKey != null
-                              ? null
-                              : () async {
-                                  final notifier = ref.read(
-                                    systemContainersModelProvider.notifier,
-                                  );
-                                  await notifier.checkRecoveryKey(
-                                    data.recoveryKeyToCheck,
-                                  );
-                                },
-                          child: Text(l10n.diskEncryptionPageCheck),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      if (data.validKey == null) ...[
-                        SizedBox.shrink(),
-                      ] else if (data.validKey!) ...[
-                        YaruInfoBox(
-                          title: Text(l10n.diskEncryptionPageKeyWorks),
-                          subtitle: Text(l10n.diskEncryptionPageKeyWorksBody),
-                          yaruInfoType: YaruInfoType.success,
-                        ),
-                      ] else ...[
-                        YaruInfoBox(
-                          title: Text(l10n.diskEncryptionPageKeyDoesntWork),
-                          subtitle: Text(
-                            l10n.diskEncryptionPageKeyDoesntWorkBody,
-                          ),
-                          yaruInfoType: YaruInfoType.danger,
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-              );
-            },
+          final data = ref.watch(checkRecoveryKeyDialogModelProvider);
+          final notifier = ref.read(
+            checkRecoveryKeyDialogModelProvider.notifier,
+          );
+          return CheckRecoveryKeyDialog(
+            l10n: l10n,
+            data: data,
+            notifier: notifier,
           );
         },
       );
     },
   );
+}
+
+class CheckRecoveryKeyDialog extends StatelessWidget {
+  const CheckRecoveryKeyDialog({
+    super.key,
+    required this.l10n,
+    required this.data,
+    required this.notifier,
+  });
+
+  final AppLocalizations l10n;
+  final CheckRecoveryKeyDialogState data;
+  final CheckRecoveryKeyDialogModel notifier;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: YaruDialogTitleBar(
+        title: Text(l10n.diskEncryptionPageDialogHeaderCheckKey),
+      ),
+      titlePadding: EdgeInsets.zero,
+      content: SizedBox(
+        width: 450,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              autofocus: true,
+              decoration: InputDecoration(
+                labelText: l10n.diskEncryptionPageRecoveryKey,
+                hintText: 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
+              ),
+              onChanged: notifier.setKeyToCheck,
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: switch (data) {
+                  CheckRecoveryKeyDialogStateInput() =>
+                    notifier.checkRecoveryKey,
+                  CheckRecoveryKeyDialogStateLoading() => null,
+                  CheckRecoveryKeyDialogStateError() => null,
+                  CheckRecoveryKeyDialogStateResult() => null,
+                  CheckRecoveryKeyDialogStateEmpty() => null,
+                },
+                child: Text(l10n.diskEncryptionPageCheck),
+              ),
+            ),
+            const SizedBox(height: 16),
+            if (data is CheckRecoveryKeyDialogStateLoading) ...[
+              const YaruCircularProgressIndicator(),
+            ] else if (data is CheckRecoveryKeyDialogStateResult) ...[
+              if (notifier.getCheckResult()) ...[
+                YaruInfoBox(
+                  title: Text(l10n.diskEncryptionPageKeyWorks),
+                  subtitle: Text(l10n.diskEncryptionPageKeyWorksBody),
+                  yaruInfoType: YaruInfoType.success,
+                ),
+              ] else ...[
+                YaruInfoBox(
+                  title: Text(l10n.diskEncryptionPageKeyDoesntWork),
+                  subtitle: Text(l10n.diskEncryptionPageKeyDoesntWorkBody),
+                  yaruInfoType: YaruInfoType.danger,
+                ),
+              ],
+            ] else if (data is CheckRecoveryKeyDialogStateError) ...[
+              YaruInfoBox(
+                title: Text('Error'),
+                subtitle: Text(notifier.getError().toString()),
+                yaruInfoType: YaruInfoType.danger,
+              ),
+            ]
+          ],
+        ),
+      ),
+    );
+  }
 }
