@@ -416,7 +416,7 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageStoreYourKey.
   ///
   /// In en, this message translates to:
-  /// **'The recovery key lets you regain access to the disk if decryption fails. Save the key somewhere safe to avoid losing access to all your data.'**
+  /// **'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.'**
   String get diskEncryptionPageStoreYourKey;
 
   /// No description provided for @diskEncryptionPageLearnMore.
