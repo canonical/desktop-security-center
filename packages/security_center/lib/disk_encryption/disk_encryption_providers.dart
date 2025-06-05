@@ -3,10 +3,28 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
+part 'disk_encryption_providers.freezed.dart';
 part 'disk_encryption_providers.g.dart';
 part 'disk_encryption_providers.freezed.dart';
 
-/// Dialog state for managing the recovery key check process.
+/// Dialog state for managing the replace recovery key flow.
+@freezed
+sealed class ReplaceRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
+  factory ReplaceRecoveryKeyDialogState.empty() =
+      ReplaceRecoveryKeyDialogStateEmpty;
+  factory ReplaceRecoveryKeyDialogState.input(String keyToCheck) =
+      ReplaceRecoveryKeyDialogStateInput;
+  factory ReplaceRecoveryKeyDialogState.qr() =
+      ReplaceRecoveryKeyDialogStateQr;
+  factory ReplaceRecoveryKeyDialogState.result(bool valid) =
+      ReplaceRecoveryKeyDialogStateResult;
+  factory ReplaceRecoveryKeyDialogState.loading() =
+      ReplaceRecoveryKeyDialogStateLoading;
+  factory ReplaceRecoveryKeyDialogState.error(Exception e) =
+      ReplaceRecoveryKeyDialogStateError;
+}
+
+/// Dialog state for managing the recovery key check flow.
 @freezed
 sealed class CheckRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
   factory CheckRecoveryKeyDialogState.empty() =
@@ -20,6 +38,16 @@ sealed class CheckRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
   factory CheckRecoveryKeyDialogState.error(Exception e) =
       CheckRecoveryKeyDialogStateError;
 }
+
+@freezed
+class RecoveryKeyData with _$RecoveryKeyData {
+  const factory RecoveryKeyData() = _RecoveryKeyData;
+}
+
+// @riverpod
+// class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
+//    late final _service = getService<DiskEncryptionService>();
+// }
 
 @riverpod
 class CheckRecoveryKeyDialogModel extends _$CheckRecoveryKeyDialogModel {

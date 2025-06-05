@@ -4,7 +4,7 @@
     "name": "container1",
     "encrypted": true,
     "key-slots": [
-      { "name": "recovery-12345", "type": "recovery" }
+      { "name": "default-recovery", "type": "platform" }
     ]
   }
 ]

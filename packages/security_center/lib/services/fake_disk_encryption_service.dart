@@ -32,7 +32,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
     return FakeDiskEncryptionService(
       containers: containers,
-      initialRecoveryKeys: {'some-key-id': 'abcdef'},
+      initialRecoveryKeys: {'default-recovery': 'abcdef'},
       checkError: checkError,
     );
   }
@@ -58,14 +58,14 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
   /// Adds an existing recovery key (by keyId) to the first available slot.
   @override
-  Future<void> addRecoveryKey(String keyId) async {
+  Future<void> replaceRecoveryKey(String keyId) async {
     if (!_recoveryKeys.containsKey(keyId)) {
       throw StateError('Unknown recovery key ID: $keyId');
     }
 
-    // Waiting for clarification on container-roles, for now, just add to all container.
-    final slotName = 'recovery-$keyId';
+    final slotName = 'default-recovery';
     for (final c in containers) {
+      c.keySlots.removeWhere((s) => s.name == slotName);
       c.keySlots.add(KeySlot(name: slotName, type: KeySlotType.recovery));
     }
   }
@@ -76,14 +76,6 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     return containers;
   }
 
-  /// Deletes the contents of the named key slot in all containers.
-  @override
-  Future<void> deleteKeySlot(String keyName) async {
-    for (final c in containers) {
-      c.keySlots.removeWhere((ks) => ks.name == keyName);
-    }
-  }
-
   /// Throws if the given recovery key isn't valid.
   @override
   Future<bool> checkRecoveryKey(String recoveryKey) async {
@@ -91,10 +83,16 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     if (checkError) {
       throw Exception('Mocked error');
     }
-    if (!_recoveryKeys.containsValue(recoveryKey)) {
-      return false;
+
+    // Keyslot with name needs to exist && recovery key must exist with same name
+    if ((containers.any(
+          (c) => c.keySlots.any((k) => k.name == 'default-recovery'),
+        )) &&
+        (_recoveryKeys.containsKey('default-recovery') &&
+            _recoveryKeys['default-recovery'] == recoveryKey)) {
+      return true;
     }
-    return true;
+    return false;
   }
 
   /// Returns the current state of the Check Recovery Key dialog.
