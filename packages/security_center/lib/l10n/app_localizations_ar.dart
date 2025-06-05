@@ -116,7 +116,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get diskEncryptionPageRecoveryKey => 'Recovery key';
 
   @override
-  String get diskEncryptionPageStoreYourKey => 'You should always store the recovery key for your encrypted disk somewhere safe to avoid losing access to all your data.';
+  String get diskEncryptionPageStoreYourKey => 'The recovery key lets you regain access to the disk if decryption fails. Save the key somewhere safe to avoid losing access to all your data.';
+
+  @override
+  String get diskEncryptionPageLearnMore => 'Learn more about recovery keys';
 
   @override
   String get diskEncryptionPageCheckKey => 'Check recovery key...';

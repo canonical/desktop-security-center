@@ -3,8 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:yaru/yaru.dart';
+
+const _learnMoreUrl =
+    'https://discourse.ubuntu.com/t/hardware-backed-encryption-and-recovery-keys-in-ubuntu-desktop/58243';
 
 class DiskEncryptionPage extends ConsumerWidget {
   const DiskEncryptionPage({super.key});
@@ -28,7 +32,9 @@ class _Body extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 16),
-        Text(l10n.diskEncryptionPageStoreYourKey),
+        MarkdownText(
+          '${l10n.diskEncryptionPageStoreYourKey} ${l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl)}',
+        ),
         const SizedBox(height: 16),
         OutlinedButton(
           onPressed: () {

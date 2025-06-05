@@ -416,8 +416,14 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageStoreYourKey.
   ///
   /// In en, this message translates to:
-  /// **'You should always store the recovery key for your encrypted disk somewhere safe to avoid losing access to all your data.'**
+  /// **'The recovery key lets you regain access to the disk if decryption fails. Save the key somewhere safe to avoid losing access to all your data.'**
   String get diskEncryptionPageStoreYourKey;
+
+  /// No description provided for @diskEncryptionPageLearnMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn more about recovery keys'**
+  String get diskEncryptionPageLearnMore;
 
   /// No description provided for @diskEncryptionPageCheckKey.
   ///
