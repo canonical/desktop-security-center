@@ -24,7 +24,7 @@ void main() {
 
         final navigator = container.read(appNavigatorProvider);
         unawaited(navigator.currentState!.pushNamed(route.route));
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         expect(
           find.descendant(

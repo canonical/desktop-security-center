@@ -74,5 +74,35 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "diskEncryptionPageTitle": "Disk Encryption",
+    "@diskEncryptionPageTitle": {},
+    "diskEncryptionPageRecoveryKey": "Recovery key",
+    "@diskEncryptionPageRecoveryKey": {},
+    "diskEncryptionPageStoreYourKey": "The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.",
+    "@diskEncryptionPageStoreYourKey": {},
+    "diskEncryptionPageLearnMore": "Learn more about recovery keys",
+    "@diskEncryptionPageStoreLearnMore": {},
+    "diskEncryptionPageCheckKey": "Check recovery key...",
+    "@diskEncryptionPageCheckKey": {},
+    "diskEncryptionPageDialogHeaderCheckKey": "Check Recovery Key",
+    "@diskEncryptionPageDialogHeaderCheckKey": {},
+    "diskEncryptionPageCheck": "Check",
+    "@diskEncryptionPageCheck": {},
+    "diskEncryptionPageValidKey": "Valid key",
+    "@diskEncryptionPageValidKey": {},
+    "diskEncryptionPageInvalidKey": "Invalid key",
+    "@diskEncryptionPageInvalidKey": {},
+    "diskEncryptionPageEnterKey": "Enter your recovery key",
+    "@diskEncryptionPageEnterKey": {},
+    "diskEncryptionPageKeyWorks": "Recovery key works",
+    "@diskEncryptionPageKeyWorks": {},
+    "diskEncryptionPageKeyWorksBody": "Remember to keep it somewhere safe.",
+    "@diskEncryptionPageKeyWorksBody": {},
+    "diskEncryptionPageKeyDoesntWork": "Recovery key does not work",
+    "@diskEncryptionPageKeyDoesntWork": {},
+    "diskEncryptionPageKeyDoesntWorkBody": "Check the key or replace it with a new one.",
+    "@diskEncryptionPageKeyDoesntWorkBody": {},
+    "diskEncryptionPageError": "Error",
+    "@diskEncryptionPageError": {}
 }

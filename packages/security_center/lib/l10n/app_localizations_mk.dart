@@ -108,4 +108,49 @@ class AppLocalizationsMk extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get diskEncryptionPageTitle => 'Disk Encryption';
+
+  @override
+  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+
+  @override
+  String get diskEncryptionPageStoreYourKey => 'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.';
+
+  @override
+  String get diskEncryptionPageLearnMore => 'Learn more about recovery keys';
+
+  @override
+  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+
+  @override
+  String get diskEncryptionPageDialogHeaderCheckKey => 'Check Recovery Key';
+
+  @override
+  String get diskEncryptionPageCheck => 'Check';
+
+  @override
+  String get diskEncryptionPageValidKey => 'Valid key';
+
+  @override
+  String get diskEncryptionPageInvalidKey => 'Invalid key';
+
+  @override
+  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+
+  @override
+  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+
+  @override
+  String get diskEncryptionPageKeyWorksBody => 'Remember to keep it somewhere safe.';
+
+  @override
+  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+
+  @override
+  String get diskEncryptionPageKeyDoesntWorkBody => 'Check the key or replace it with a new one.';
+
+  @override
+  String get diskEncryptionPageError => 'Error';
 }

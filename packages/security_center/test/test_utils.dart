@@ -7,6 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:security_center/app_permissions/snap_metadata_providers.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/app_permissions_service.dart';
+import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/snapd_service.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -24,6 +25,21 @@ extension WidgetTesterX on WidgetTester {
       MaterialApp(
         home: Scaffold(body: Builder(builder: builder)),
         localizationsDelegates: localizationsDelegates,
+      ),
+    );
+  }
+
+  Future<void> pumpAppWithProviders(
+    WidgetBuilder builder,
+    ProviderContainer container,
+  ) {
+    return pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          home: Scaffold(body: Builder(builder: builder)),
+          localizationsDelegates: localizationsDelegates,
+        ),
       ),
     );
   }
@@ -78,6 +94,41 @@ LocalSnapData registerMockLocalSnapData({
   return snaps;
 }
 
+@GenerateMocks([DiskEncryptionService])
+DiskEncryptionService registerMockDiskEncryptionService({
+  bool checkRecoveryKey = true,
+  bool checkError = false,
+}) {
+  final service = MockDiskEncryptionService();
+
+  when(service.enumerateKeySlots()).thenAnswer(
+    (_) async => [
+      SystemDataContainer(
+        volumeName: 'system-data',
+        name: 'system-data',
+        encrypted: true,
+        keySlots: [
+          KeySlot(name: 'mock-recovery-key', type: KeySlotType.recovery),
+        ],
+      ),
+    ],
+  );
+  when(service.deleteKeySlot(any)).thenAnswer((_) async {});
+  when(service.generateRecoveryKey()).thenAnswer(
+    (_) async => RecoveryKeyDetails(recoveryKey: 'mock-key', keyId: 'mock-id'),
+  );
+  when(service.addRecoveryKey(any)).thenAnswer((_) async {});
+  when(service.checkRecoveryKey(any)).thenAnswer((_) async {
+    if (checkError) {
+      throw Exception('Mock check recovery key error');
+    }
+    return checkRecoveryKey;
+  });
+  registerMockService<DiskEncryptionService>(service);
+  addTearDown(unregisterService<DiskEncryptionService>);
+  return service;
+}
+
 @GenerateMocks([SnapdService])
 SnapdService registerMockSnapdService({
   List<NoticesEvent> noticesEvents = const [],
@@ -96,19 +147,17 @@ SnapdService registerMockSnapdService({
       after: anyNamed('after'),
       timeout: anyNamed('timeout'),
     ),
-  ).thenAnswer(
-    (_) async {
-      if (noticesEvents.isEmpty) {
-        return [];
-      } else {
-        final event = noticesEvents.removeAt(0);
-        return switch (event) {
-          NoticesEventSuccess(notices: final notices) => notices,
-          NoticesEventError(error: final error) => throw error,
-        };
-      }
-    },
-  );
+  ).thenAnswer((_) async {
+    if (noticesEvents.isEmpty) {
+      return [];
+    } else {
+      final event = noticesEvents.removeAt(0);
+      return switch (event) {
+        NoticesEventSuccess(notices: final notices) => notices,
+        NoticesEventError(error: final error) => throw error,
+      };
+    }
+  });
 
   when(client.systemInfo()).thenAnswer(
     (_) async => SnapdSystemInfoResponse(
@@ -139,8 +188,9 @@ SnapdService registerMockSnapdService({
   when(client.enablePrompting()).thenAnswer(toggleReply);
   when(client.disablePrompting()).thenAnswer(toggleReply);
 
-  when(client.watchChange(changeId))
-      .thenAnswer((_) => Stream.fromIterable(changes));
+  when(
+    client.watchChange(changeId),
+  ).thenAnswer((_) => Stream.fromIterable(changes));
 
   registerServiceInstance<SnapdService>(client);
   addTearDown(unregisterService<SnapdService>);
