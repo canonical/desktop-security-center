@@ -101,5 +101,7 @@
   "diskEncryptionPageKeyDoesntWork": "Klucz odzyskiwania nie działa",
   "@diskEncryptionPageKeyDoesntWork": {},
   "diskEncryptionPageKeyDoesntWorkBody": "Sprawdź klucz lub wymień go na nowy.",
-  "@diskEncryptionPageKeyDoesntWorkBody": {}
+  "@diskEncryptionPageKeyDoesntWorkBody": {},
+  "diskEncryptionPageError": "Błąd",
+  "@diskEncryptionPageError": {}
 }
