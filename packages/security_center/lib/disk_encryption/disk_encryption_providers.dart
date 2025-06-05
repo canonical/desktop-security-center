@@ -1,8 +1,25 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 part 'disk_encryption_providers.g.dart';
+part 'disk_encryption_providers.freezed.dart';
+
+/// Dialog state for managing the recovery key check process.
+@freezed
+sealed class CheckRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
+  factory CheckRecoveryKeyDialogState.empty() =
+      CheckRecoveryKeyDialogStateEmpty;
+  factory CheckRecoveryKeyDialogState.input(String keyToCheck) =
+      CheckRecoveryKeyDialogStateInput;
+  factory CheckRecoveryKeyDialogState.result(bool valid) =
+      CheckRecoveryKeyDialogStateResult;
+  factory CheckRecoveryKeyDialogState.loading() =
+      CheckRecoveryKeyDialogStateLoading;
+  factory CheckRecoveryKeyDialogState.error(Exception e) =
+      CheckRecoveryKeyDialogStateError;
+}
 
 @riverpod
 class CheckRecoveryKeyDialogModel extends _$CheckRecoveryKeyDialogModel {

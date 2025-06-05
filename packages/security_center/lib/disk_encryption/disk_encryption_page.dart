@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
-import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:yaru/yaru.dart';
@@ -77,7 +77,6 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
               ),
               onChanged: notifier.setKeyToCheck,
             ),
-            const SizedBox(height: 16),
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
@@ -89,33 +88,28 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
                 child: Text(l10n.diskEncryptionPageCheck),
               ),
             ),
-            if (data is CheckRecoveryKeyDialogStateLoading) ...[
-              const SizedBox(height: 16),
+            if (data is CheckRecoveryKeyDialogStateLoading)
               const YaruCircularProgressIndicator(),
-            ] else if (data is CheckRecoveryKeyDialogStateResult) ...[
-              const SizedBox(height: 16),
-              if (data.valid) ...[
+            if (data is CheckRecoveryKeyDialogStateResult)
+              if (data.valid)
                 YaruInfoBox(
                   title: Text(l10n.diskEncryptionPageKeyWorks),
                   subtitle: Text(l10n.diskEncryptionPageKeyWorksBody),
                   yaruInfoType: YaruInfoType.success,
-                ),
-              ] else ...[
+                )
+              else
                 YaruInfoBox(
                   title: Text(l10n.diskEncryptionPageKeyDoesntWork),
                   subtitle: Text(l10n.diskEncryptionPageKeyDoesntWorkBody),
                   yaruInfoType: YaruInfoType.danger,
                 ),
-              ],
-            ] else if (data is CheckRecoveryKeyDialogStateError) ...[
-              const SizedBox(height: 16),
+            if (data is CheckRecoveryKeyDialogStateError)
               YaruInfoBox(
                 title: Text(l10n.diskEncryptionPageError),
                 subtitle: Text(data.e.toString()),
                 yaruInfoType: YaruInfoType.danger,
               ),
-            ],
-          ],
+          ].separatedBy(const SizedBox(height: 16)),
         ),
       ),
     );

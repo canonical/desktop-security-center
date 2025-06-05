@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 
 class FakeDiskEncryptionService implements DiskEncryptionService {

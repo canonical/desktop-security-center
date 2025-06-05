@@ -1,22 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 
 part 'disk_encryption_service.freezed.dart';
 part 'disk_encryption_service.g.dart';
-
-/// Dialog state for managing the recovery key check process.
-@freezed
-sealed class CheckRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
-  factory CheckRecoveryKeyDialogState.empty() =
-      CheckRecoveryKeyDialogStateEmpty;
-  factory CheckRecoveryKeyDialogState.input(String keyToCheck) =
-      CheckRecoveryKeyDialogStateInput;
-  factory CheckRecoveryKeyDialogState.result(bool valid) =
-      CheckRecoveryKeyDialogStateResult;
-  factory CheckRecoveryKeyDialogState.loading() =
-      CheckRecoveryKeyDialogStateLoading;
-  factory CheckRecoveryKeyDialogState.error(Exception e) =
-      CheckRecoveryKeyDialogStateError;
-}
 
 /// A Class to model the recovery key details returned.
 @freezed
