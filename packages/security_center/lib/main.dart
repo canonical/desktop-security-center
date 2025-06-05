@@ -20,7 +20,10 @@ Future<void> main(List<String> args) async {
   Logger.setup(path: '');
 
   final parser = ArgParser()
-    ..addFlag('dry-run', help: 'Use a fake rules service instead of snapd')
+    ..addFlag(
+      'dry-run',
+      help: 'Use a fake rules service instead of snapd',
+    )
     ..addOption(
       'test-rules',
       help: 'Path to a JSON file containing test rules',
@@ -48,14 +51,16 @@ Future<void> main(List<String> args) async {
 
   if (argResults.flag('dry-run')) {
     registerService<AppPermissionsService>(
-      () =>
-          FakeAppPermissionsService.fromFile(argResults['test-rules'] as String)
-            ..init(),
+      () => FakeAppPermissionsService.fromFile(
+        argResults['test-rules'] as String,
+      )..init(),
       dispose: (service) => service.dispose(),
     );
   } else {
     registerService<AppPermissionsService>(
-      () => SnapdAppPermissionsService(getService<SnapdService>())..init(),
+      () => SnapdAppPermissionsService(
+        getService<SnapdService>(),
+      )..init(),
       dispose: (service) => service.dispose(),
     );
   }
