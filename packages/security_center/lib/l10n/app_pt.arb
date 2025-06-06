@@ -1,4 +1,8 @@
 {
   "appTitle": "Centro de Segurança",
-  "@appTitle": {}
+  "@appTitle": {},
+  "snapdRuleCategorySessionAllowed": "Permitir até o fim da sessão",
+  "@snapdRuleCategorySessionAllowed": {},
+  "snapdRuleCategorySessionDenied": "Negar até o fim da sessão",
+  "@snapdRuleCategorySessionDenied": {}
 }
