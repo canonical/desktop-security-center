@@ -73,5 +73,17 @@
     }
   },
   "snapPermissionsEnableTitle": "Exigir que las aplicacions demanden d’autorizacions al sistèma",
-  "@snapPermissionsEnableTitle": {}
+  "@snapPermissionsEnableTitle": {},
+  "diskEncryptionPageTitle": "Chiframent de disc",
+  "@diskEncryptionPageTitle": {},
+  "diskEncryptionPageRecoveryKey": "Clau de recuperacion",
+  "@diskEncryptionPageRecoveryKey": {},
+  "diskEncryptionPageCheck": "Verificar",
+  "@diskEncryptionPageCheck": {},
+  "diskEncryptionPageInvalidKey": "Clau invalida",
+  "@diskEncryptionPageInvalidKey": {},
+  "diskEncryptionPageValidKey": "Clau valida",
+  "@diskEncryptionPageValidKey": {},
+  "diskEncryptionPageError": "Error",
+  "@diskEncryptionPageError": {}
 }
