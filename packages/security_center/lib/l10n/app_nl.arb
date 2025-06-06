@@ -73,5 +73,35 @@
         "type": "int"
       }
     }
-  }
+  },
+  "diskEncryptionPageRecoveryKey": "Herstelcode",
+  "@diskEncryptionPageRecoveryKey": {},
+  "diskEncryptionPageStoreYourKey": "Met de herstelcode kunt u weer toegang krijgen tot uw gegevens als uw schijf niet kan worden ontgrendeld tijdens het opstarten. Bewaar deze op een veilige plek.",
+  "@diskEncryptionPageStoreYourKey": {},
+  "diskEncryptionPageLearnMore": "Met informatie over herstelcodes",
+  "@diskEncryptionPageLearnMore": {},
+  "diskEncryptionPageCheckKey": "Herstelcode controleren…",
+  "@diskEncryptionPageCheckKey": {},
+  "diskEncryptionPageDialogHeaderCheckKey": "Herstelcode controleren",
+  "@diskEncryptionPageDialogHeaderCheckKey": {},
+  "diskEncryptionPageCheck": "Controleren",
+  "@diskEncryptionPageCheck": {},
+  "diskEncryptionPageValidKey": "Geldige code",
+  "@diskEncryptionPageValidKey": {},
+  "diskEncryptionPageInvalidKey": "Ongeldige code",
+  "@diskEncryptionPageInvalidKey": {},
+  "diskEncryptionPageEnterKey": "Voert uw herstelcode in",
+  "@diskEncryptionPageEnterKey": {},
+  "diskEncryptionPageKeyWorks": "Herstelcode functioneert",
+  "@diskEncryptionPageKeyWorks": {},
+  "diskEncryptionPageKeyWorksBody": "Vergeet niet om het op een veilige plek te bewaren.",
+  "@diskEncryptionPageKeyWorksBody": {},
+  "diskEncryptionPageKeyDoesntWork": "De herstelcode werkt niet",
+  "@diskEncryptionPageKeyDoesntWork": {},
+  "diskEncryptionPageKeyDoesntWorkBody": "Controleer de code of vervang hem voor een nieuwe.",
+  "@diskEncryptionPageKeyDoesntWorkBody": {},
+  "diskEncryptionPageError": "Fout",
+  "@diskEncryptionPageError": {},
+  "diskEncryptionPageTitle": "Schijfversleuteling",
+  "@diskEncryptionPageTitle": {}
 }
