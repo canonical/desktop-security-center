@@ -73,5 +73,13 @@
   "snapRulesRemoveAll": "Удалить все правила",
   "@snapRulesRemoveAll": {},
   "interfacePageDescription": "Строго ограниченные приложения будут спрашивать Вас, прежде чем получить доступ к файлам и папкам. Эта функция является экспериментальной и может быть изменена.",
-  "@interfacePageDescription": {}
+  "@interfacePageDescription": {},
+  "diskEncryptionPageRecoveryKey": "Ключ восстановления",
+  "@diskEncryptionPageRecoveryKey": {},
+  "diskEncryptionPageStoreYourKey": "Если ваш диск не разблокируется во время запуска, то ключ восстановления позволит вам восстановить доступ к своим данным. Сохраните его в безопасном месте.",
+  "@diskEncryptionPageStoreYourKey": {},
+  "diskEncryptionPageLearnMore": "Узнайте больше о ключах восстановления",
+  "@diskEncryptionPageLearnMore": {},
+  "diskEncryptionPageTitle": "Шифрование диска",
+  "@diskEncryptionPageTitle": {}
 }
