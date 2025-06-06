@@ -490,6 +490,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error'**
   String get diskEncryptionPageError;
+
+  /// No description provided for @diskEncryptionPageReplaceButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace recovery key...'**
+  String get diskEncryptionPageReplaceButton;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace recovery key'**
+  String get diskEncryptionPageReplaceDialogHeader;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.'**
+  String get diskEncryptionPageReplaceDialogBody;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogShowQR.
+  ///
+  /// In en, this message translates to:
+  /// **'Show QR code'**
+  String get diskEncryptionPageReplaceDialogShowQR;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save to file'**
+  String get diskEncryptionPageReplaceDialogSave;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogAcknowledge.
+  ///
+  /// In en, this message translates to:
+  /// **'I saved my recovery key somewhere safe'**
+  String get diskEncryptionPageReplaceDialogAcknowledge;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogReplace.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace'**
+  String get diskEncryptionPageReplaceDialogReplace;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogDiscard.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get diskEncryptionPageReplaceDialogDiscard;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogSuccessHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery key replacement failed'**
+  String get diskEncryptionPageReplaceDialogSuccessHeader;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogSuccessBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong replacing your recovery key, your old key will remain vaild.'**
+  String get diskEncryptionPageReplaceDialogSuccessBody;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogQRHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Desktop - Encryption recovery key'**
+  String get diskEncryptionPageReplaceDialogQRHeader;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogQRBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.'**
+  String get diskEncryptionPageReplaceDialogQRBody;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
