@@ -1,4 +1,6 @@
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
@@ -19,11 +21,11 @@ class DiskEncryptionPage extends ConsumerWidget {
   }
 }
 
-class _Body extends StatelessWidget {
+class _Body extends ConsumerWidget {
   const _Body();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     return ScrollablePage(
       children: [
@@ -36,18 +38,53 @@ class _Body extends StatelessWidget {
           '${l10n.diskEncryptionPageStoreYourKey} ${l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl)}',
         ),
         const SizedBox(height: 16),
-        OutlinedButton(
-          onPressed: () {
-            showRecoveryKeyDialog(context);
-          },
-          child: Text(l10n.diskEncryptionPageCheckKey),
-        ),
+        CheckRecoveryKeyButtons(),
       ],
     );
   }
 }
 
-void showRecoveryKeyDialog(BuildContext context) {
+class CheckRecoveryKeyButtons extends ConsumerWidget {
+  const CheckRecoveryKeyButtons({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final systemContainerModel = ref.watch(systemContainersModelProvider);
+
+    // We need the system containers to validate the state of encryption and if a pin / passphrase is in use.
+    return systemContainerModel.when(
+      data: (_) {
+        return Row(
+          children: [
+            OutlinedButton(
+              onPressed: () {
+                showCheckRecoveryKeyDialog(context);
+              },
+              child: Text(l10n.diskEncryptionPageCheckKey),
+            ),
+            const SizedBox(width: 16),
+            OutlinedButton(
+              onPressed: () {
+                showReplaceRecoveryKeyDialog(context);
+              },
+              child: Text(l10n.diskEncryptionPageReplaceButton),
+            ),
+          ],
+        );
+      },
+      error:
+          (e, stack) => YaruInfoBox(
+            title: Text(l10n.diskEncryptionPageError),
+            subtitle: Text(e.toString()),
+            yaruInfoType: YaruInfoType.danger,
+          ),
+      loading: () => const YaruLinearProgressIndicator(),
+    );
+  }
+}
+
+void showCheckRecoveryKeyDialog(BuildContext context) {
   showDialog(context: context, builder: (_) => const CheckRecoveryKeyDialog());
 }
 
@@ -110,6 +147,210 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
                 yaruInfoType: YaruInfoType.danger,
               ),
           ].separatedBy(const SizedBox(height: 16)),
+        ),
+      ),
+    );
+  }
+}
+
+void showReplaceRecoveryKeyDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (_) => const ReplaceRecoveryKeyDialog(),
+  );
+}
+
+class ReplaceRecoveryKeyDialog extends ConsumerWidget {
+  const ReplaceRecoveryKeyDialog({super.key});
+
+  void saveToClipboard(BuildContext context, String text) {
+    final l10n = AppLocalizations.of(context);
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(l10n.diskEncryptionPageClipboardNotification)),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final replaceData = ref.watch(replaceRecoveryKeyDialogModelProvider);
+    final replaceNotifier = ref.read(
+      replaceRecoveryKeyDialogModelProvider.notifier,
+    );
+    final recoveryKey = ref.watch(generatedRecoveryKeyModelProvider);
+
+    final l10n = AppLocalizations.of(context);
+    return AlertDialog(
+      title: YaruDialogTitleBar(
+        title: Text(l10n.diskEncryptionPageReplaceDialogHeader),
+      ),
+      titlePadding: EdgeInsets.zero,
+      content: SizedBox(
+        width: 450,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(l10n.diskEncryptionPageReplaceDialogBody),
+            if (recoveryKey is AsyncLoading)
+              YaruLinearProgressIndicator()
+            else if (recoveryKey is AsyncData)
+              Builder(
+                // This builder is needed to access the build context that contains
+                // the ScaffoldMessenger to display the Snackbar
+                builder: (context) {
+                  return TextFormField(
+                    onTap:
+                        () => saveToClipboard(
+                          context,
+                          recoveryKey.value!.recoveryKey,
+                        ),
+                    initialValue: recoveryKey.value!.recoveryKey,
+                    decoration: InputDecoration(
+                      labelText: l10n.diskEncryptionPageRecoveryKey,
+                      suffixIcon: YaruIconButton(
+                        icon: const Icon(YaruIcons.copy, size: 16),
+                        onPressed:
+                            () => saveToClipboard(
+                              context,
+                              recoveryKey.value!.recoveryKey,
+                            ),
+                      ),
+                      suffixIconConstraints: BoxConstraints(
+                        maxWidth: 32,
+                        maxHeight: 32,
+                      ),
+                    ),
+                    readOnly: true,
+                    minLines: 1,
+                    maxLines: 2,
+                    style: TextStyle(
+                      inherit: false,
+                      fontFamily: 'Ubuntu Mono',
+                      fontSize:
+                          Theme.of(context).textTheme.bodyMedium!.fontSize,
+                      textBaseline: TextBaseline.alphabetic,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  );
+                },
+              ),
+            Row(
+              children: [
+                OutlinedButton(
+                  onPressed: null,
+                  child: Text(l10n.diskEncryptionPageReplaceDialogSave),
+                ),
+                OutlinedButton(
+                  onPressed:
+                      replaceData is! ReplaceRecoveryKeyDialogStateEmpty
+                          ? () => showDialog(
+                            context: context,
+                            builder:
+                                (_) => _RecoveryKeyQRDialog(
+                                  recoveryKey: recoveryKey.value!.recoveryKey,
+                                ),
+                          )
+                          : null,
+                  child: Text(l10n.diskEncryptionPageReplaceDialogShowQR),
+                ),
+              ].separatedBy(const SizedBox(width: 16)),
+            ),
+            YaruCheckButton(
+              title: Text(
+                l10n.diskEncryptionPageReplaceDialogAcknowledge,
+                maxLines: 2,
+                // TODO: remove hardcoded style once this is avialable in yaru.
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              value:
+                  replaceData is ReplaceRecoveryKeyDialogStateWaitingForUser
+                      ? replaceData.acknowledged
+                      : false,
+              onChanged:
+                  replaceData is ReplaceRecoveryKeyDialogStateWaitingForUser
+                      ? (_) => replaceNotifier.acknowledge()
+                      : null,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                OutlinedButton(
+                  onPressed: null,
+                  child: Text(l10n.diskEncryptionPageReplaceDialogDiscard),
+                ),
+                ElevatedButton(
+                  onPressed: null,
+                  child: Text(l10n.diskEncryptionPageReplaceDialogReplace),
+                ),
+              ].separatedBy(const SizedBox(width: 16)),
+            ),
+            // if (data is ReplaceRecoveryKeyDialogStateLoading)
+            //   const YaruCircularProgressIndicator(),
+            // if (data is ReplaceRecoveryKeyDialogStateResult)
+            //   if (data.valid)
+            //     YaruInfoBox(
+            //       title: Text(l10n.diskEncryptionPageKeyWorks),
+            //       subtitle: Text(l10n.diskEncryptionPageKeyWorksBody),
+            //       yaruInfoType: YaruInfoType.success,
+            //     )
+            //   else
+            //     YaruInfoBox(
+            //       title: Text(l10n.diskEncryptionPageKeyDoesntWork),
+            //       subtitle: Text(l10n.diskEncryptionPageKeyDoesntWorkBody),
+            //       yaruInfoType: YaruInfoType.danger,
+            //     ),
+            // if (data is CheckRecoveryKeyDialogStateError)
+            //   YaruInfoBox(
+            //     title: Text(l10n.diskEncryptionPageError),
+            //     subtitle: Text(data.e.toString()),
+            //     yaruInfoType: YaruInfoType.danger,
+            //   ),
+          ].separatedBy(const SizedBox(height: 16)),
+        ),
+      ),
+    );
+  }
+}
+
+class _RecoveryKeyQRDialog extends ConsumerWidget {
+  const _RecoveryKeyQRDialog({required this.recoveryKey});
+
+  final String recoveryKey;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    // final flavor = ref.watch(flavorProvider);
+    return AlertDialog(
+      title: YaruDialogTitleBar(
+        title: Text(l10n.diskEncryptionPageReplaceDialogQRHeader),
+      ),
+      titlePadding: EdgeInsets.zero,
+      content: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 500),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(l10n.diskEncryptionPageReplaceDialogQRBody),
+            BarcodeWidget(
+              margin: const EdgeInsets.all(16),
+              color: Theme.of(context).colorScheme.onSurface,
+              barcode: Barcode.qrCode(),
+              data: recoveryKey,
+              width: 200,
+              height: 200,
+            ),
+            Text(
+              recoveryKey,
+              style: TextStyle(
+                inherit: false,
+                fontFamily: 'Ubuntu Mono',
+                fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
+                textBaseline: TextBaseline.alphabetic,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -8,7 +8,8 @@ part 'disk_encryption_providers.g.dart';
 
 /// Dialog state for managing the replace recovery key flow.
 @freezed
-sealed class ReplaceRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
+sealed class ReplaceRecoveryKeyDialogState
+    with _$ReplaceRecoveryKeyDialogState {
   factory ReplaceRecoveryKeyDialogState.empty() =
       ReplaceRecoveryKeyDialogStateEmpty;
   factory ReplaceRecoveryKeyDialogState.waitingForUser(bool acknowledged) =
@@ -48,6 +49,7 @@ class SystemContainersModel extends _$SystemContainersModel {
   @override
   Future<List<SystemDataContainer>> build() async {
     final containers = await _service.enumerateKeySlots();
+    // TODO: Validate the keyslots contain sane defaults
     return containers;
   }
 }
@@ -55,34 +57,46 @@ class SystemContainersModel extends _$SystemContainersModel {
 @riverpod
 class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   late final _service = getService<DiskEncryptionService>();
-  RecoveryKeyDetails? generatedRecoveryKey;
 
   @override
-  ReplaceRecoveryKeyDialogState build() =>
-      ReplaceRecoveryKeyDialogState.empty();
+  ReplaceRecoveryKeyDialogState build() {
+    // listen for the key to land
+    ref.listen<AsyncValue<RecoveryKeyDetails>>(
+      generatedRecoveryKeyModelProvider,
+      (prev, next) {
+        if (prev is AsyncLoading && next is AsyncData) {
+          state = ReplaceRecoveryKeyDialogStateWaitingForUser(false);
+        }
+      },
+    );
+    return ReplaceRecoveryKeyDialogState.empty();
+  }
 
-  Future<void> generateRecoveryKey() async {
-    assert(state is ReplaceRecoveryKeyDialogStateGenerating);
+  Future<void> replaceRecoveryKey(String key) async {
+    assert(state is ReplaceRecoveryKeyDialogStateWaitingForUser);
+    assert((state as ReplaceRecoveryKeyDialogStateWaitingForUser).acknowledged);
+
     try {
-      final result = await _service.generateRecoveryKey();
-      generatedRecoveryKey = result;
-      state = ReplaceRecoveryKeyDialogState.waitingForUser(false);
+      await _service.replaceRecoveryKey(key);
+      state = ReplaceRecoveryKeyDialogState.replaced();
     } on Exception catch (e) {
       state = ReplaceRecoveryKeyDialogState.error(e);
     }
   }
 
-  Future<void> replaceRecoveryKey() async {
+  void acknowledge() {
     assert(state is ReplaceRecoveryKeyDialogStateWaitingForUser);
-    assert((state as ReplaceRecoveryKeyDialogStateWaitingForUser).acknowledged);
-    assert(generatedRecoveryKey != null);
+    state = ReplaceRecoveryKeyDialogStateWaitingForUser(true);
+  }
+}
 
-    try {
-      await _service.replaceRecoveryKey(generatedRecoveryKey!.keyId);
-      state = ReplaceRecoveryKeyDialogState.replaced();
-    } on Exception catch (e) {
-      state = ReplaceRecoveryKeyDialogState.error(e);
-    }
+@riverpod
+class GeneratedRecoveryKeyModel extends _$GeneratedRecoveryKeyModel {
+  final _service = getService<DiskEncryptionService>();
+
+  @override
+  Future<RecoveryKeyDetails> build() async {
+    return _service.generateRecoveryKey();
   }
 }
 

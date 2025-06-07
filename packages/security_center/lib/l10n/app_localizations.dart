@@ -562,6 +562,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.'**
   String get diskEncryptionPageReplaceDialogQRBody;
+
+  /// No description provided for @diskEncryptionPageClipboardNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard'**
+  String get diskEncryptionPageClipboardNotification;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -189,6 +189,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody => 'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+
+  @override
+  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).

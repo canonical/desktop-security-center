@@ -132,5 +132,7 @@
     "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Encryption recovery key",
     "@diskEncryptionPageReplaceDialogQRHeader": {},
     "diskEncryptionPageReplaceDialogQRBody": "Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.",
-    "@diskEncryptionPageReplaceDialogQRBody": {}
+    "@diskEncryptionPageReplaceDialogQRBody": {},
+    "diskEncryptionPageClipboardNotification": "Copied to clipboard",
+    "@diskEncryptionPageClipboardNotification": {}
 }

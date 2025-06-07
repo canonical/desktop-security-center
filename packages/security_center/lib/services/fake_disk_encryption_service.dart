@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
@@ -41,15 +40,14 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   final List<SystemDataContainer> containers;
   final Map<String, String> _recoveryKeys;
   final bool checkError;
-  final Random _random = Random();
   final CheckRecoveryKeyDialogState _checkRecoveryKeyDialogState =
       CheckRecoveryKeyDialogState.empty();
 
   /// Generates a fake recovery key and key ID.
   @override
   Future<RecoveryKeyDetails> generateRecoveryKey() async {
-    final keyBytes = List<int>.generate(16, (_) => _random.nextInt(256));
-    final recoveryKey = base64UrlEncode(keyBytes);
+    await Future.delayed(const Duration(seconds: 2));
+    final recoveryKey = '55055-39320-64491-48436-47667-15525-36879-32875';
     final keyId = DateTime.now().millisecondsSinceEpoch.toString();
 
     _recoveryKeys[keyId] = recoveryKey;
@@ -73,6 +71,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   /// Returns containers.
   @override
   Future<List<SystemDataContainer>> enumerateKeySlots() async {
+    await Future.delayed(const Duration(seconds: 2)); // Uncomment to simulate a delay
     return containers;
   }
 
