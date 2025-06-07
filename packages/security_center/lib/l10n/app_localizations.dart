@@ -568,6 +568,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copied to clipboard'**
   String get diskEncryptionPageClipboardNotification;
+
+  /// No description provided for @recoveryKeyExceptionFileSystemTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery key file not saved'**
+  String get recoveryKeyExceptionFileSystemTitle;
+
+  /// No description provided for @recoveryKeyExceptionDisallowedPathTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery key file cannot be saved in a temporary location'**
+  String get recoveryKeyExceptionDisallowedPathTitle;
+
+  /// No description provided for @recoveryKeyExceptionUnknownTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown error'**
+  String get recoveryKeyExceptionUnknownTitle;
+
+  /// No description provided for @recoveryKeyExceptionFileSystemBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission to write to that folder. Try a different location or use another method.'**
+  String get recoveryKeyExceptionFileSystemBody;
+
+  /// No description provided for @recoveryKeyExceptionDisallowedPathBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a different location, such as a removable drive, or use another method.'**
+  String get recoveryKeyExceptionDisallowedPathBody;
+
+  /// No description provided for @recoveryKeyFilePickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save recovery key file'**
+  String get recoveryKeyFilePickerTitle;
+
+  /// No description provided for @recoveryKeyFilePickerFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Text files'**
+  String get recoveryKeyFilePickerFilter;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

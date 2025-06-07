@@ -134,5 +134,12 @@
     "diskEncryptionPageReplaceDialogQRBody": "Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.",
     "@diskEncryptionPageReplaceDialogQRBody": {},
     "diskEncryptionPageClipboardNotification": "Copied to clipboard",
-    "@diskEncryptionPageClipboardNotification": {}
+    "@diskEncryptionPageClipboardNotification": {},
+    "recoveryKeyExceptionFileSystemTitle": "Recovery key file not saved",
+    "recoveryKeyExceptionDisallowedPathTitle": "Recovery key file cannot be saved in a temporary location",
+    "recoveryKeyExceptionUnknownTitle": "Unknown error",
+    "recoveryKeyExceptionFileSystemBody": "You do not have permission to write to that folder. Try a different location or use another method.",
+    "recoveryKeyExceptionDisallowedPathBody": "Try a different location, such as a removable drive, or use another method.",
+    "recoveryKeyFilePickerTitle": "Save recovery key file",
+    "recoveryKeyFilePickerFilter": "Text files"
 }
