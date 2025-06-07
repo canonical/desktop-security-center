@@ -4,13 +4,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
+import 'package:security_center/widgets/file_picker_dialog.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
 
 const _learnMoreUrl =
     'https://discourse.ubuntu.com/t/hardware-backed-encryption-and-recovery-keys-in-ubuntu-desktop/58243';
+const defaultRecoveryKeyFileName = 'recovery-key.txt';
 
 class DiskEncryptionPage extends ConsumerWidget {
   const DiskEncryptionPage({super.key});
@@ -237,7 +240,30 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
             Row(
               children: [
                 OutlinedButton(
-                  onPressed: null,
+                  onPressed: replaceData is! ReplaceRecoveryKeyDialogStateEmpty ? () async {
+                    try {
+                      final uri = await showSaveFileDialog(
+                        context: context,
+                        title: l10n.recoveryKeyFilePickerTitle,
+                        defaultFileName: defaultRecoveryKeyFileName,
+                        filters: [
+                          XdgFileChooserFilter(
+                            l10n.recoveryKeyFilePickerFilter,
+                            [XdgFileChooserGlobPattern('*.txt')],
+                          ),
+                        ],
+                      );
+                      if (uri != null) {
+                        await replaceNotifier.writeRecoveryKey(
+                          uri,
+                          recoveryKey.value!.recoveryKey,
+                        );
+                      }
+                      //model.setError(null);
+                    } on Exception catch (e) {
+                      //model.setError(RecoveryKeyException.from(e));
+                    }
+                  } : null,
                   child: Text(l10n.diskEncryptionPageReplaceDialogSave),
                 ),
                 OutlinedButton(

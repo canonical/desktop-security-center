@@ -1,10 +1,31 @@
+import 'dart:io';
+
+import 'package:file/local.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:path/path.dart' as p;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 part 'disk_encryption_providers.freezed.dart';
 part 'disk_encryption_providers.g.dart';
+
+@freezed
+sealed class RecoveryKeyException
+    with _$RecoveryKeyException
+    implements Exception {
+  factory RecoveryKeyException.disallowedPath() =
+      RecoveryKeyExceptionDisallowedPath;
+  factory RecoveryKeyException.fileSystem() = RecoveryKeyExceptionFileSystem;
+  factory RecoveryKeyException.unknown({required String rawError}) =
+      RecoveryKeyExceptionUnknown;
+
+  factory RecoveryKeyException.from(Object? e) => switch (e) {
+    final FileSystemException _ => RecoveryKeyException.fileSystem(),
+    final RecoveryKeyException e => e,
+    final e => RecoveryKeyException.unknown(rawError: e.toString()),
+  };
+}
 
 /// Dialog state for managing the replace recovery key flow.
 @freezed
@@ -57,6 +78,8 @@ class SystemContainersModel extends _$SystemContainersModel {
 @riverpod
 class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   late final _service = getService<DiskEncryptionService>();
+  final _fs = LocalFileSystem();
+  final _run = Process.run;
 
   @override
   ReplaceRecoveryKeyDialogState build() {
@@ -87,6 +110,28 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   void acknowledge() {
     assert(state is ReplaceRecoveryKeyDialogStateWaitingForUser);
     state = ReplaceRecoveryKeyDialogStateWaitingForUser(true);
+  }
+
+  Future<String?> _findFileSystem(Uri uri) async {
+    final result = await _run('findmnt', [
+      '-no',
+      'SOURCE',
+      '-T',
+      p.dirname(uri.path),
+    ]);
+    if (result.exitCode != 0) {
+      return null;
+    }
+
+    return (result.stdout as String?)?.trim();
+  }
+
+  Future<void> writeRecoveryKey(Uri uri, String recoveryKey) async {
+    if (uri.pathSegments.first == 'target' ||
+        ['/cow', 'tmpfs'].contains(await _findFileSystem(uri))) {
+      throw RecoveryKeyException.disallowedPath();
+    }
+    await _fs.file(uri.path).writeAsString(recoveryKey);
   }
 }
 
