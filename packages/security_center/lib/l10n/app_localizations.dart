@@ -542,14 +542,26 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageReplaceDialogSuccessHeader.
   ///
   /// In en, this message translates to:
-  /// **'Recovery key replacement failed'**
+  /// **'Recovery key replaced'**
   String get diskEncryptionPageReplaceDialogSuccessHeader;
 
   /// No description provided for @diskEncryptionPageReplaceDialogSuccessBody.
   ///
   /// In en, this message translates to:
-  /// **'Something went wrong replacing your recovery key, your old key will remain vaild.'**
+  /// **'Remember to keep it somewhere safe.'**
   String get diskEncryptionPageReplaceDialogSuccessBody;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogErrorHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery key replacement failed'**
+  String get diskEncryptionPageReplaceDialogErrorHeader;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogErrorBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong replacing your recovery key, your old key will remain vaild.'**
+  String get diskEncryptionPageReplaceDialogErrorBody;
 
   /// No description provided for @diskEncryptionPageReplaceDialogQRHeader.
   ///

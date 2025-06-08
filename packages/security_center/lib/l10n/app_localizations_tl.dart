@@ -179,10 +179,16 @@ class AppLocalizationsTl extends AppLocalizations {
   String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
 
   @override
-  String get diskEncryptionPageReplaceDialogSuccessHeader => 'Recovery key replacement failed';
+  String get diskEncryptionPageReplaceDialogSuccessHeader => 'Recovery key replaced';
 
   @override
-  String get diskEncryptionPageReplaceDialogSuccessBody => 'Something went wrong replacing your recovery key, your old key will remain vaild.';
+  String get diskEncryptionPageReplaceDialogSuccessBody => 'Remember to keep it somewhere safe.';
+
+  @override
+  String get diskEncryptionPageReplaceDialogErrorHeader => 'Recovery key replacement failed';
+
+  @override
+  String get diskEncryptionPageReplaceDialogErrorBody => 'Something went wrong replacing your recovery key, your old key will remain vaild.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader => 'Ubuntu Desktop - Encryption recovery key';

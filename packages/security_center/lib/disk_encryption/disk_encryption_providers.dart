@@ -127,9 +127,13 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   }
 
   Future<void> writeRecoveryKey(Uri uri, String recoveryKey) async {
+    assert(state is ReplaceRecoveryKeyDialogStateWaitingForUser);
     if (uri.pathSegments.first == 'target' ||
         ['/cow', 'tmpfs'].contains(await _findFileSystem(uri))) {
-      throw RecoveryKeyException.disallowedPath();
+      state = ReplaceRecoveryKeyDialogState.error(
+        RecoveryKeyException.disallowedPath(),
+      );
+      return;
     }
     await _fs.file(uri.path).writeAsString(recoveryKey);
   }
