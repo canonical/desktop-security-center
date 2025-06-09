@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:file/file.dart';
 import 'package:file/local.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -88,7 +89,7 @@ final filePickerProvider = Provider<FilePicker>(
   (ref) => showSaveFileDialog,
 );
 
-final fileSystemProvider = Provider<LocalFileSystem>((_) => LocalFileSystem());
+final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
 typedef ProcessRunner =
     Future<ProcessResult> Function(String executable, List<String> arguments);
@@ -97,7 +98,7 @@ final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 @riverpod
 class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   late final _service = getService<DiskEncryptionService>();
-  late final LocalFileSystem _fs = ref.read(fileSystemProvider);
+  late final FileSystem _fs = ref.read(fileSystemProvider);
   late final ProcessRunner _run = ref.read(processRunnerProvider);
 
   @override

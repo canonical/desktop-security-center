@@ -1,6 +1,9 @@
 import 'package:barcode_widget/barcode_widget.dart';
+import 'package:file/local.dart';
+import 'package:file/memory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:path/path.dart' as p;
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
 import 'package:yaru/yaru.dart';
 
@@ -229,5 +232,119 @@ void main() {
     final qrCode = find.byType(BarcodeWidget);
     expect(qrCode, findsOneWidget);
     expect(find.text('mock-recovery-key'), findsAtLeast(2));
+  });
+
+  testWidgets('Show recovery key replacement QR code', (tester) async {
+    final container = createContainer();
+    registerMockDiskEncryptionService();
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(tester.l10n.diskEncryptionPageReplaceButton),
+      findsOneWidget,
+    );
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageReplaceButton));
+    await tester.pumpAndSettle();
+
+    final qrCodeButton = find.widgetWithText(
+      OutlinedButton,
+      tester.l10n.diskEncryptionPageReplaceDialogShowQR,
+    );
+    expect(qrCodeButton, findsOneWidget);
+    expect(tester.widget<OutlinedButton>(qrCodeButton).enabled, equals(true));
+
+    await tester.tap(qrCodeButton);
+    await tester.pumpAndSettle();
+
+    final qrCode = find.byType(BarcodeWidget);
+    expect(qrCode, findsOneWidget);
+    expect(find.text('mock-recovery-key'), findsAtLeast(2));
+  });
+
+  group('save key to file', () {
+    final cases = [
+      (
+        name: 'valid path writes file',
+        uri: Uri.file('/home/user/key.txt'),
+        mount: '/dev/sda1',
+        expectError: false,
+      ),
+      (
+        name: 'blocked: /target/',
+        uri: Uri.file('/target/foo.txt'),
+        mount: '/dev/sda1',
+        expectError: true,
+      ),
+      (
+        name: 'blocked: cow overlay',
+        uri: Uri.file('/any/f.txt'),
+        mount: '/cow',
+        expectError: true,
+      ),
+      (
+        name: 'blocked: tmpfs',
+        uri: Uri.file('/tmp/f.txt'),
+        mount: 'tmpfs',
+        expectError: true,
+      ),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        // 1) Prepare container with mocks
+
+        final memFs = MemoryFileSystem();
+        memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
+        final fsOv = fileSystemOverride(memFs);
+        final pickerOv = filePickerOverride(tc.uri);
+        final runnerOv = processRunnerOverride({
+          p.dirname(tc.uri.path): tc.mount,
+        });
+
+        final container = createContainer(
+          overrides: [pickerOv, fsOv, runnerOv],
+        );
+        registerMockDiskEncryptionService();
+
+        // 2) Pump the page
+        await tester.pumpAppWithProviders(
+          (_) => const DiskEncryptionPage(),
+          container,
+        );
+        await tester.pumpAndSettle();
+
+        expect(
+          find.text(tester.l10n.diskEncryptionPageReplaceButton),
+          findsOneWidget,
+        );
+        await tester.tap(
+          find.text(tester.l10n.diskEncryptionPageReplaceButton),
+        );
+        await tester.pumpAndSettle();
+
+        // 4) Click “Save to file”
+        final saveBtn = find.text(
+          tester.l10n.diskEncryptionPageReplaceDialogSave,
+        );
+        await tester.tap(saveBtn);
+        await tester.pumpAndSettle();
+
+        // 5) Assert
+        if (tc.expectError) {
+          expect(
+            find.text(tester.l10n.diskEncryptionPageError),
+            findsOneWidget,
+          );
+        } else {
+          // verify the in-memory FS got the right content
+          final content = memFs.file(tc.uri.path).readAsStringSync();
+          expect(content, 'mock-recovery-key');
+        }
+      });
+    }
   });
 }
