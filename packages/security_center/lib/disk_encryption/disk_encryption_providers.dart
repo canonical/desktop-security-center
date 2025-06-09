@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:file/local.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:path/path.dart' as p;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:security_center/widgets/file_picker_dialog.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
+import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 
 part 'disk_encryption_providers.freezed.dart';
 part 'disk_encryption_providers.g.dart';
@@ -75,18 +78,27 @@ class SystemContainersModel extends _$SystemContainersModel {
   }
 }
 
-final fileSystemProvider = Provider<LocalFileSystem>((_) => LocalFileSystem());
-typedef ProcessRunner = Future<ProcessResult> Function(
-  String executable,
-  List<String> arguments,
+typedef FilePicker = Future<Uri?> Function({
+  required BuildContext context,
+  required String title,
+  String? defaultFileName,
+  List<XdgFileChooserFilter> filters,
+});
+final filePickerProvider = Provider<FilePicker>(
+  (ref) => showSaveFileDialog,
 );
+
+final fileSystemProvider = Provider<LocalFileSystem>((_) => LocalFileSystem());
+
+typedef ProcessRunner =
+    Future<ProcessResult> Function(String executable, List<String> arguments);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @riverpod
 class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   late final _service = getService<DiskEncryptionService>();
-  late final LocalFileSystem _fs        = ref.read(fileSystemProvider);
-  late final ProcessRunner _run    = ref.read(processRunnerProvider);
+  late final LocalFileSystem _fs = ref.read(fileSystemProvider);
+  late final ProcessRunner _run = ref.read(processRunnerProvider);
 
   @override
   ReplaceRecoveryKeyDialogState build() {

@@ -181,6 +181,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
       replaceRecoveryKeyDialogModelProvider.notifier,
     );
     final recoveryKey = ref.watch(generatedRecoveryKeyModelProvider);
+    final filePicker = ref.read(filePickerProvider);
 
     final l10n = AppLocalizations.of(context);
     return AlertDialog(
@@ -244,7 +245,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                       replaceData is! ReplaceRecoveryKeyDialogStateEmpty
                           ? () async {
                             try {
-                              final uri = await showSaveFileDialog(
+                              final uri = await filePicker(
                                 context: context,
                                 title: l10n.recoveryKeyFilePickerTitle,
                                 defaultFileName: defaultRecoveryKeyFileName,
