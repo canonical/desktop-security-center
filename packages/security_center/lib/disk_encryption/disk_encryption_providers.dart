@@ -75,11 +75,18 @@ class SystemContainersModel extends _$SystemContainersModel {
   }
 }
 
+final fileSystemProvider = Provider<LocalFileSystem>((_) => LocalFileSystem());
+typedef ProcessRunner = Future<ProcessResult> Function(
+  String executable,
+  List<String> arguments,
+);
+final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
+
 @riverpod
 class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   late final _service = getService<DiskEncryptionService>();
-  final _fs = LocalFileSystem();
-  final _run = Process.run;
+  late final LocalFileSystem _fs        = ref.read(fileSystemProvider);
+  late final ProcessRunner _run    = ref.read(processRunnerProvider);
 
   @override
   ReplaceRecoveryKeyDialogState build() {
