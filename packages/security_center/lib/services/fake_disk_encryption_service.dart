@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
@@ -37,7 +38,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   }
 
   /// List of mocked system data containers.
-  final List<SystemDataContainer> containers;
+  List<SystemDataContainer> containers;
   final Map<String, String> _recoveryKeys;
   final bool checkError;
   final CheckRecoveryKeyDialogState _checkRecoveryKeyDialogState =
@@ -47,7 +48,10 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   @override
   Future<RecoveryKeyDetails> generateRecoveryKey() async {
     await Future.delayed(const Duration(seconds: 2));
-    final recoveryKey = '55055-39320-64491-48436-47667-15525-36879-32875';
+    final rand = Random();
+    final lastSegment = rand.nextInt(100000).toString().padLeft(5, '0');
+    final recoveryKey =
+        '55055-39320-64491-48436-47667-15525-36879-$lastSegment';
     final keyId = DateTime.now().millisecondsSinceEpoch.toString();
 
     _recoveryKeys[keyId] = recoveryKey;
@@ -61,17 +65,15 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       throw StateError('Unknown recovery key ID: $keyId');
     }
 
-    final slotName = 'default-recovery';
-    for (final c in containers) {
-      c.keySlots.removeWhere((s) => s.name == slotName);
-      c.keySlots.add(KeySlot(name: slotName, type: KeySlotType.recovery));
-    }
+    _recoveryKeys['default-recovery'] = _recoveryKeys[keyId]!;
   }
 
   /// Returns containers.
   @override
   Future<List<SystemDataContainer>> enumerateKeySlots() async {
-    await Future.delayed(const Duration(seconds: 2)); // Uncomment to simulate a delay
+    await Future.delayed(
+      const Duration(seconds: 2),
+    ); // Uncomment to simulate a delay
     return containers;
   }
 
