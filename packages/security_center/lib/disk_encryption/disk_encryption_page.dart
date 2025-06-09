@@ -76,12 +76,11 @@ class CheckRecoveryKeyButtons extends ConsumerWidget {
           ],
         );
       },
-      error:
-          (e, stack) => YaruInfoBox(
-            title: Text(l10n.diskEncryptionPageError),
-            subtitle: Text(e.toString()),
-            yaruInfoType: YaruInfoType.danger,
-          ),
+      error: (e, stack) => YaruInfoBox(
+        title: Text(l10n.diskEncryptionPageError),
+        subtitle: Text(e.toString()),
+        yaruInfoType: YaruInfoType.danger,
+      ),
       loading: () => const YaruLinearProgressIndicator(),
     );
   }
@@ -203,21 +202,19 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                 // the ScaffoldMessenger to display the Snackbar
                 builder: (context) {
                   return TextFormField(
-                    onTap:
-                        () => saveToClipboard(
-                          context,
-                          recoveryKey.value!.recoveryKey,
-                        ),
+                    onTap: () => saveToClipboard(
+                      context,
+                      recoveryKey.value!.recoveryKey,
+                    ),
                     initialValue: recoveryKey.value!.recoveryKey,
                     decoration: InputDecoration(
                       labelText: l10n.diskEncryptionPageRecoveryKey,
                       suffixIcon: YaruIconButton(
                         icon: const Icon(YaruIcons.copy, size: 16),
-                        onPressed:
-                            () => saveToClipboard(
-                              context,
-                              recoveryKey.value!.recoveryKey,
-                            ),
+                        onPressed: () => saveToClipboard(
+                          context,
+                          recoveryKey.value!.recoveryKey,
+                        ),
                       ),
                       suffixIconConstraints: BoxConstraints(
                         maxWidth: 32,
@@ -241,46 +238,43 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
             Row(
               children: [
                 OutlinedButton(
-                  onPressed:
-                      replaceData is! ReplaceRecoveryKeyDialogStateEmpty
-                          ? () async {
-                            try {
-                              final uri = await filePicker(
-                                context: context,
-                                title: l10n.recoveryKeyFilePickerTitle,
-                                defaultFileName: defaultRecoveryKeyFileName,
-                                filters: [
-                                  XdgFileChooserFilter(
-                                    l10n.recoveryKeyFilePickerFilter,
-                                    [XdgFileChooserGlobPattern('*.txt')],
-                                  ),
-                                ],
+                  onPressed: replaceData is! ReplaceRecoveryKeyDialogStateEmpty
+                      ? () async {
+                          try {
+                            final uri = await filePicker(
+                              context: context,
+                              title: l10n.recoveryKeyFilePickerTitle,
+                              defaultFileName: defaultRecoveryKeyFileName,
+                              filters: [
+                                XdgFileChooserFilter(
+                                  l10n.recoveryKeyFilePickerFilter,
+                                  [XdgFileChooserGlobPattern('*.txt')],
+                                ),
+                              ],
+                            );
+                            if (uri != null) {
+                              await replaceNotifier.writeRecoveryKey(
+                                uri,
+                                recoveryKey.value!.recoveryKey,
                               );
-                              if (uri != null) {
-                                await replaceNotifier.writeRecoveryKey(
-                                  uri,
-                                  recoveryKey.value!.recoveryKey,
-                                );
-                              }
-                              //model.setError(null);
-                            } on Exception catch (e) {
-                              //model.setError(RecoveryKeyException.from(e));
                             }
+                            //model.setError(null);
+                          } on Exception catch (e) {
+                            //model.setError(RecoveryKeyException.from(e));
                           }
-                          : null,
+                        }
+                      : null,
                   child: Text(l10n.diskEncryptionPageReplaceDialogSave),
                 ),
                 OutlinedButton(
-                  onPressed:
-                      replaceData is! ReplaceRecoveryKeyDialogStateEmpty
-                          ? () => showDialog(
+                  onPressed: replaceData is! ReplaceRecoveryKeyDialogStateEmpty
+                      ? () => showDialog(
                             context: context,
-                            builder:
-                                (_) => _RecoveryKeyQRDialog(
-                                  recoveryKey: recoveryKey.value!.recoveryKey,
-                                ),
+                            builder: (_) => _RecoveryKeyQRDialog(
+                              recoveryKey: recoveryKey.value!.recoveryKey,
+                            ),
                           )
-                          : null,
+                      : null,
                   child: Text(l10n.diskEncryptionPageReplaceDialogShowQR),
                 ),
               ].separatedBy(const SizedBox(width: 16)),
@@ -292,10 +286,9 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                 // TODO: remove hardcoded style once this is avialable in yaru.
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              value:
-                  replaceData is ReplaceRecoveryKeyDialogStateWaitingForUser
-                      ? replaceData.acknowledged
-                      : false,
+              value: replaceData is ReplaceRecoveryKeyDialogStateWaitingForUser
+                  ? replaceData.acknowledged
+                  : false,
               onChanged:
                   replaceData is ReplaceRecoveryKeyDialogStateWaitingForUser
                       ? (_) => replaceNotifier.acknowledge()
@@ -312,13 +305,13 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   child: Text(l10n.diskEncryptionPageReplaceDialogDiscard),
                 ),
                 ElevatedButton(
-                  onPressed:
-                      replaceData is ReplaceRecoveryKeyDialogStateWaitingForUser &&
-                              replaceData.acknowledged == true
-                          ? () => replaceNotifier.replaceRecoveryKey(
+                  onPressed: replaceData
+                              is ReplaceRecoveryKeyDialogStateWaitingForUser &&
+                          replaceData.acknowledged == true
+                      ? () => replaceNotifier.replaceRecoveryKey(
                             recoveryKey.value!.keyId,
                           )
-                          : null,
+                      : null,
                   child: Text(l10n.diskEncryptionPageReplaceDialogReplace),
                 ),
               ].separatedBy(const SizedBox(width: 16)),

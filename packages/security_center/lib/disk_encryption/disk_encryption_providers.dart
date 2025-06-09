@@ -25,10 +25,10 @@ sealed class RecoveryKeyException
       RecoveryKeyExceptionUnknown;
 
   factory RecoveryKeyException.from(Object? e) => switch (e) {
-    final FileSystemException _ => RecoveryKeyException.fileSystem(),
-    final RecoveryKeyException e => e,
-    final e => RecoveryKeyException.unknown(rawError: e.toString()),
-  };
+        final FileSystemException _ => RecoveryKeyException.fileSystem(),
+        final RecoveryKeyException e => e,
+        final e => RecoveryKeyException.unknown(rawError: e.toString()),
+      };
 }
 
 /// Dialog state for managing the replace recovery key flow.
@@ -91,8 +91,8 @@ final filePickerProvider = Provider<FilePicker>(
 
 final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
-typedef ProcessRunner =
-    Future<ProcessResult> Function(String executable, List<String> arguments);
+typedef ProcessRunner = Future<ProcessResult> Function(
+    String executable, List<String> arguments);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @riverpod

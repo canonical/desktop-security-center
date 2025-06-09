@@ -40,7 +40,7 @@ Future<void> main(List<String> args) async {
   }
 
   registerService<SnapdService>(SnapdService.new);
-  
+
   registerService<DiskEncryptionService>(
     () => FakeDiskEncryptionService.fromFile(
       'integration_test/assets/test_containers.json',
