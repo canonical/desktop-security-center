@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:file/local.dart';
 import 'package:file/memory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,7 +15,6 @@ import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/snapd_service.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
-import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 
 import 'test_utils.mocks.dart';
 

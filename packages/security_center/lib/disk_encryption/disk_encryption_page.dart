@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
-import 'package:security_center/widgets/file_picker_dialog.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
@@ -240,28 +239,25 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                 OutlinedButton(
                   onPressed: replaceData is! ReplaceRecoveryKeyDialogStateEmpty
                       ? () async {
-                          try {
-                            final uri = await filePicker(
-                              context: context,
-                              title: l10n.recoveryKeyFilePickerTitle,
-                              defaultFileName: defaultRecoveryKeyFileName,
-                              filters: [
-                                XdgFileChooserFilter(
-                                  l10n.recoveryKeyFilePickerFilter,
-                                  [XdgFileChooserGlobPattern('*.txt')],
-                                ),
-                              ],
+                          final uri = await filePicker(
+                            context: context,
+                            title: l10n.recoveryKeyFilePickerTitle,
+                            defaultFileName: defaultRecoveryKeyFileName,
+                            filters: [
+                              XdgFileChooserFilter(
+                                l10n.recoveryKeyFilePickerFilter,
+                                [XdgFileChooserGlobPattern('*.txt')],
+                              ),
+                            ],
+                          );
+                          if (uri != null) {
+                            await replaceNotifier.writeRecoveryKey(
+                              uri,
+                              recoveryKey.value!.recoveryKey,
                             );
-                            if (uri != null) {
-                              await replaceNotifier.writeRecoveryKey(
-                                uri,
-                                recoveryKey.value!.recoveryKey,
-                              );
-                            }
-                            //model.setError(null);
-                          } on Exception catch (e) {
-                            //model.setError(RecoveryKeyException.from(e));
                           }
+                          //model.setError(null);
+                          //model.setError(RecoveryKeyException.from(e));
                         }
                       : null,
                   child: Text(l10n.diskEncryptionPageReplaceDialogSave),
