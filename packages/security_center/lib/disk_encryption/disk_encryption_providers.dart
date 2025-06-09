@@ -35,19 +35,12 @@ sealed class RecoveryKeyException
 @freezed
 sealed class ReplaceRecoveryKeyDialogState
     with _$ReplaceRecoveryKeyDialogState {
-  factory ReplaceRecoveryKeyDialogState.empty() =
-      ReplaceRecoveryKeyDialogStateEmpty;
-  factory ReplaceRecoveryKeyDialogState.waitingForUser(bool acknowledged) =
-      ReplaceRecoveryKeyDialogStateWaitingForUser;
-  factory ReplaceRecoveryKeyDialogState.qr() = ReplaceRecoveryKeyDialogStateQr;
-  factory ReplaceRecoveryKeyDialogState.save() =
-      ReplaceRecoveryKeyDialogStateSave;
-  factory ReplaceRecoveryKeyDialogState.replaced() =
-      ReplaceRecoveryKeyDialogStateReplaced;
-  factory ReplaceRecoveryKeyDialogState.loading() =
-      ReplaceRecoveryKeyDialogStateLoading;
   factory ReplaceRecoveryKeyDialogState.generating() =
       ReplaceRecoveryKeyDialogStateGenerating;
+  factory ReplaceRecoveryKeyDialogState.input(bool acknowledged) =
+      ReplaceRecoveryKeyDialogStateInput;
+  factory ReplaceRecoveryKeyDialogState.success() =
+      ReplaceRecoveryKeyDialogStateSuccess;
   factory ReplaceRecoveryKeyDialogState.error(Exception e) =
       ReplaceRecoveryKeyDialogStateError;
 }
@@ -118,7 +111,7 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
       (prev, next) {
         if (prev is AsyncLoading && next is AsyncData) {
           state = state.copyWith(
-            dialogState: ReplaceRecoveryKeyDialogStateWaitingForUser(false),
+            dialogState: ReplaceRecoveryKeyDialogStateInput(false),
           );
         } else if (prev is AsyncLoading && next is AsyncError) {
           state = state.copyWith(
@@ -130,21 +123,20 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
       },
     );
     return ReplaceRecoveryKeyDialogModelData(
-      dialogState: ReplaceRecoveryKeyDialogState.empty(),
+      dialogState: ReplaceRecoveryKeyDialogState.generating(),
     );
   }
 
   Future<void> replaceRecoveryKey(String key) async {
-    assert(state.dialogState is ReplaceRecoveryKeyDialogStateWaitingForUser);
+    assert(state.dialogState is ReplaceRecoveryKeyDialogStateInput);
     assert(
-      (state.dialogState as ReplaceRecoveryKeyDialogStateWaitingForUser)
-          .acknowledged,
+      (state.dialogState as ReplaceRecoveryKeyDialogStateInput).acknowledged,
     );
 
     try {
       await _service.replaceRecoveryKey(key);
       state = state.copyWith(
-        dialogState: ReplaceRecoveryKeyDialogState.replaced(),
+        dialogState: ReplaceRecoveryKeyDialogState.success(),
       );
     } on Exception catch (e) {
       state = state.copyWith(
@@ -154,9 +146,9 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   }
 
   void acknowledge() {
-    assert(state.dialogState is ReplaceRecoveryKeyDialogStateWaitingForUser);
+    assert(state.dialogState is ReplaceRecoveryKeyDialogStateInput);
     state = state.copyWith(
-      dialogState: ReplaceRecoveryKeyDialogStateWaitingForUser(true),
+      dialogState: ReplaceRecoveryKeyDialogStateInput(true),
     );
   }
 
@@ -176,8 +168,8 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
 
   Future<void> writeRecoveryKey(Uri uri, String recoveryKey) async {
     assert(
-      state.dialogState is ReplaceRecoveryKeyDialogStateWaitingForUser ||
-          state.dialogState is ReplaceRecoveryKeyDialogStateReplaced,
+      state.dialogState is ReplaceRecoveryKeyDialogStateInput ||
+          state.dialogState is ReplaceRecoveryKeyDialogStateSuccess,
     );
     if (uri.pathSegments.first == 'target' ||
         ['/cow', 'tmpfs'].contains(await _findFileSystem(uri))) {

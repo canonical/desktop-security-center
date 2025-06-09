@@ -243,7 +243,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                 children: [
                   OutlinedButton(
                     onPressed: replaceDialogState
-                                is! ReplaceRecoveryKeyDialogStateEmpty &&
+                                is! ReplaceRecoveryKeyDialogStateGenerating &&
                             replaceDialogState
                                 is! ReplaceRecoveryKeyDialogStateError
                         ? () async {
@@ -277,7 +277,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   ),
                   OutlinedButton(
                     onPressed: replaceDialogState
-                                is! ReplaceRecoveryKeyDialogStateEmpty &&
+                                is! ReplaceRecoveryKeyDialogStateGenerating &&
                             replaceDialogState
                                 is! ReplaceRecoveryKeyDialogStateError
                         ? () => showDialog(
@@ -298,28 +298,27 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   // TODO: remove hardcoded style once this is avialable in yaru.
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                value: replaceDialogState
-                        is ReplaceRecoveryKeyDialogStateWaitingForUser
+                value: replaceDialogState is ReplaceRecoveryKeyDialogStateInput
                     ? replaceDialogState.acknowledged
                     : false,
-                onChanged: replaceDialogState
-                        is ReplaceRecoveryKeyDialogStateWaitingForUser
-                    ? (_) => replaceNotifier.acknowledge()
-                    : null,
+                onChanged:
+                    replaceDialogState is ReplaceRecoveryKeyDialogStateInput
+                        ? (_) => replaceNotifier.acknowledge()
+                        : null,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   OutlinedButton(
-                    onPressed: replaceDialogState
-                            is ReplaceRecoveryKeyDialogStateWaitingForUser
-                        ? () => Navigator.of(context).pop()
-                        : null,
+                    onPressed:
+                        replaceDialogState is ReplaceRecoveryKeyDialogStateInput
+                            ? () => Navigator.of(context).pop()
+                            : null,
                     child: Text(l10n.diskEncryptionPageReplaceDialogDiscard),
                   ),
                   ElevatedButton(
                     onPressed: replaceDialogState
-                                is ReplaceRecoveryKeyDialogStateWaitingForUser &&
+                                is ReplaceRecoveryKeyDialogStateInput &&
                             replaceDialogState.acknowledged == true
                         ? () => replaceNotifier.replaceRecoveryKey(
                               recoveryKey.value!.keyId,
@@ -329,7 +328,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   ),
                 ].separatedBy(const SizedBox(width: 16)),
               ),
-              if (replaceDialogState is ReplaceRecoveryKeyDialogStateReplaced &&
+              if (replaceDialogState is ReplaceRecoveryKeyDialogStateSuccess &&
                   replaceDialogError == null)
                 YaruInfoBox(
                   title:
