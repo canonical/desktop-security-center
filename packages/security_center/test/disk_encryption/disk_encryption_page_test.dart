@@ -264,6 +264,55 @@ void main() {
     expect(find.text('mock-recovery-key'), findsAtLeast(2));
   });
 
+  testWidgets('recovery key generation fails', (tester) async {
+    final container = createContainer();
+    registerMockDiskEncryptionService(generateError: true);
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(tester.l10n.diskEncryptionPageReplaceButton),
+      findsOneWidget,
+    );
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageReplaceButton));
+    await tester.pumpAndSettle();
+
+    // Expect everything to be disabled
+    final qrCodeButton = find.widgetWithText(
+      OutlinedButton,
+      tester.l10n.diskEncryptionPageReplaceDialogShowQR,
+    );
+    expect(qrCodeButton, findsOneWidget);
+    expect(tester.widget<OutlinedButton>(qrCodeButton).enabled, equals(false));
+
+    final saveButton = find.widgetWithText(
+      OutlinedButton,
+      tester.l10n.diskEncryptionPageReplaceDialogSave,
+    );
+    expect(saveButton, findsOneWidget);
+    expect(tester.widget<OutlinedButton>(saveButton).enabled, equals(false));
+
+    final discardButton = find.widgetWithText(
+      OutlinedButton,
+      tester.l10n.diskEncryptionPageReplaceDialogDiscard,
+    );
+    expect(discardButton, findsOneWidget);
+    expect(tester.widget<OutlinedButton>(discardButton).enabled, equals(false));
+
+    final replaceButton = find.widgetWithText(
+      ElevatedButton,
+      tester.l10n.diskEncryptionPageReplaceDialogReplace,
+    );
+    expect(replaceButton, findsOneWidget);
+    expect(tester.widget<ElevatedButton>(replaceButton).enabled, equals(false));
+
+    final checkBox = find.byType(YaruCheckButton);
+    expect(tester.widget<YaruCheckButton>(checkBox).value, isFalse);
+  });
+
   group('save key to file', () {
     final cases = [
       (

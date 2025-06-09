@@ -131,6 +131,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool checkRecoveryKey = true,
   bool checkError = false,
   bool replaceError = false,
+  bool generateError = false,
 }) {
   final service = MockDiskEncryptionService();
 
@@ -146,10 +147,15 @@ DiskEncryptionService registerMockDiskEncryptionService({
       ),
     ],
   );
-  when(service.generateRecoveryKey()).thenAnswer(
-    (_) async =>
-        RecoveryKeyDetails(recoveryKey: 'mock-recovery-key', keyId: 'mock-id'),
-  );
+  when(service.generateRecoveryKey()).thenAnswer((_) async {
+    if (generateError) {
+      throw Exception('Mock generate recovery key error');
+    }
+    return RecoveryKeyDetails(
+      recoveryKey: 'mock-recovery-key',
+      keyId: 'mock-id',
+    );
+  });
   when(service.replaceRecoveryKey(any)).thenAnswer((_) async {
     if (replaceError) {
       throw Exception('Mock replace recovery key error');
