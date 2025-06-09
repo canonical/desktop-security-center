@@ -98,6 +98,7 @@ LocalSnapData registerMockLocalSnapData({
 DiskEncryptionService registerMockDiskEncryptionService({
   bool checkRecoveryKey = true,
   bool checkError = false,
+  bool replaceError = false,
 }) {
   final service = MockDiskEncryptionService();
 
@@ -113,11 +114,14 @@ DiskEncryptionService registerMockDiskEncryptionService({
       ),
     ],
   );
-  when(service.deleteKeySlot(any)).thenAnswer((_) async {});
   when(service.generateRecoveryKey()).thenAnswer(
-    (_) async => RecoveryKeyDetails(recoveryKey: 'mock-key', keyId: 'mock-id'),
+    (_) async => RecoveryKeyDetails(recoveryKey: 'mock-recovery-key', keyId: 'mock-id'),
   );
-  when(service.addRecoveryKey(any)).thenAnswer((_) async {});
+  when(service.replaceRecoveryKey(any)).thenAnswer((_) async {
+    if (replaceError) {
+      throw Exception('Mock replace recovery key error');
+    }
+  });
   when(service.checkRecoveryKey(any)).thenAnswer((_) async {
     if (checkError) {
       throw Exception('Mock check recovery key error');

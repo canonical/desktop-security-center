@@ -105,7 +105,7 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
       ),
       titlePadding: EdgeInsets.zero,
       content: SizedBox(
-        width: 450,
+        width: 460,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -189,7 +189,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
       ),
       titlePadding: EdgeInsets.zero,
       content: SizedBox(
-        width: 450,
+        width: 460,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
