@@ -294,8 +294,7 @@ void main() {
 
     for (final tc in cases) {
       testWidgets(tc.name, (tester) async {
-        // 1) Prepare container with mocks
-
+        // Prepare container with mocks
         final memFs = MemoryFileSystem();
         memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
         final fsOv = fileSystemOverride(memFs);
@@ -309,13 +308,12 @@ void main() {
         );
         registerMockDiskEncryptionService();
 
-        // 2) Pump the page
+        // Pump the page
         await tester.pumpAppWithProviders(
           (_) => const DiskEncryptionPage(),
           container,
         );
         await tester.pumpAndSettle();
-
         expect(
           find.text(tester.l10n.diskEncryptionPageReplaceButton),
           findsOneWidget,
@@ -325,23 +323,120 @@ void main() {
         );
         await tester.pumpAndSettle();
 
-        // 4) Click “Save to file”
+        // Click “Save to file”
         final saveBtn = find.text(
           tester.l10n.diskEncryptionPageReplaceDialogSave,
         );
         await tester.tap(saveBtn);
         await tester.pumpAndSettle();
 
-        // 5) Assert
+        // Assert
         if (tc.expectError) {
           expect(
-            find.text(tester.l10n.diskEncryptionPageError),
+            find.text(tester.l10n.recoveryKeyExceptionDisallowedPathTitle),
             findsOneWidget,
           );
         } else {
           // verify the in-memory FS got the right content
           final content = memFs.file(tc.uri.path).readAsStringSync();
           expect(content, 'mock-recovery-key');
+        }
+      });
+    }
+  });
+
+  // We want the user to still be able to save the recovery key after hitting replace.
+  group('save key to file post replace', () {
+    final cases = [
+      (
+        name: 'valid path writes file',
+        uri: Uri.file('/home/user/key.txt'),
+        mount: '/dev/sda1',
+        expectError: false,
+      ),
+      (
+        name: 'blocked: tmpfs',
+        uri: Uri.file('/tmp/f.txt'),
+        mount: 'tmpfs',
+        expectError: true,
+      ),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        // Prepare container with mocks
+        final memFs = MemoryFileSystem();
+        memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
+        final fsOv = fileSystemOverride(memFs);
+        final pickerOv = filePickerOverride(tc.uri);
+        final runnerOv = processRunnerOverride({
+          p.dirname(tc.uri.path): tc.mount,
+        });
+        final container = createContainer(
+          overrides: [pickerOv, fsOv, runnerOv],
+        );
+        registerMockDiskEncryptionService();
+
+        // Pump the page
+        await tester.pumpAppWithProviders(
+          (_) => const DiskEncryptionPage(),
+          container,
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.text(tester.l10n.diskEncryptionPageReplaceButton),
+          findsOneWidget,
+        );
+        await tester.tap(
+          find.text(tester.l10n.diskEncryptionPageReplaceButton),
+        );
+        await tester.pumpAndSettle();
+
+        // Go through replace flow
+        final checkBox = find.byType(YaruCheckButton);
+        expect(tester.widget<YaruCheckButton>(checkBox).value, isFalse);
+
+        final replaceButton = find.widgetWithText(
+          ElevatedButton,
+          tester.l10n.diskEncryptionPageReplaceDialogReplace,
+        );
+        expect(tester.widget<ElevatedButton>(replaceButton).enabled, isFalse);
+        await tester.tap(checkBox);
+        await tester.pumpAndSettle();
+        expect(tester.widget<YaruCheckButton>(checkBox).value, isTrue);
+        expect(tester.widget<ElevatedButton>(replaceButton).enabled, isTrue);
+        await tester.tap(replaceButton);
+        await tester.pumpAndSettle();
+        expect(
+          find.text(tester.l10n.diskEncryptionPageReplaceDialogSuccessHeader),
+          findsOneWidget,
+        );
+
+        // Click “Save to file”
+        final saveBtn = find.text(
+          tester.l10n.diskEncryptionPageReplaceDialogSave,
+        );
+        await tester.tap(saveBtn);
+        await tester.pumpAndSettle();
+
+        // Assert
+        if (tc.expectError) {
+          expect(
+            find.text(tester.l10n.recoveryKeyExceptionDisallowedPathTitle),
+            findsOneWidget,
+          );
+          expect(
+            find.text(tester.l10n.diskEncryptionPageReplaceDialogSuccessHeader),
+            findsNothing,
+          );
+        } else {
+          // verify the in-memory FS got the right content
+          final content = memFs.file(tc.uri.path).readAsStringSync();
+          expect(content, 'mock-recovery-key');
+          expect(
+            find.text(tester.l10n.diskEncryptionPageReplaceDialogSuccessHeader),
+            findsOneWidget,
+          );
         }
       });
     }

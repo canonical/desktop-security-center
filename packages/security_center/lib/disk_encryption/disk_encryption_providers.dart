@@ -25,10 +25,10 @@ sealed class RecoveryKeyException
       RecoveryKeyExceptionUnknown;
 
   factory RecoveryKeyException.from(Object? e) => switch (e) {
-        final FileSystemException _ => RecoveryKeyException.fileSystem(),
-        final RecoveryKeyException e => e,
-        final e => RecoveryKeyException.unknown(rawError: e.toString()),
-      };
+    final FileSystemException _ => RecoveryKeyException.fileSystem(),
+    final RecoveryKeyException e => e,
+    final e => RecoveryKeyException.unknown(rawError: e.toString()),
+  };
 }
 
 /// Dialog state for managing the replace recovery key flow.
@@ -37,8 +37,9 @@ sealed class ReplaceRecoveryKeyDialogState
     with _$ReplaceRecoveryKeyDialogState {
   factory ReplaceRecoveryKeyDialogState.empty() =
       ReplaceRecoveryKeyDialogStateEmpty;
-  factory ReplaceRecoveryKeyDialogState.waitingForUser(bool acknowledged) =
-      ReplaceRecoveryKeyDialogStateWaitingForUser;
+  factory ReplaceRecoveryKeyDialogState.waitingForUser(
+    bool acknowledged,
+  ) = ReplaceRecoveryKeyDialogStateWaitingForUser;
   factory ReplaceRecoveryKeyDialogState.qr() = ReplaceRecoveryKeyDialogStateQr;
   factory ReplaceRecoveryKeyDialogState.save() =
       ReplaceRecoveryKeyDialogStateSave;
@@ -79,23 +80,27 @@ class SystemContainersModel extends _$SystemContainersModel {
   }
 }
 
-typedef FilePicker = Future<Uri?> Function({
-  required BuildContext context,
-  required String title,
-  String? defaultFileName,
-  List<XdgFileChooserFilter> filters,
-});
-final filePickerProvider = Provider<FilePicker>(
-  (ref) => showSaveFileDialog,
-);
+typedef FilePicker =
+    Future<Uri?> Function({
+      required BuildContext context,
+      required String title,
+      String? defaultFileName,
+      List<XdgFileChooserFilter> filters,
+    });
+final filePickerProvider = Provider<FilePicker>((ref) => showSaveFileDialog);
 
 final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
-typedef ProcessRunner = Future<ProcessResult> Function(
-  String executable,
-  List<String> arguments,
-);
+typedef ProcessRunner =
+    Future<ProcessResult> Function(String executable, List<String> arguments);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
+
+@freezed
+class ReplaceRecoveryKeyDialogModelData  with _$ReplaceRecoveryKeyDialogModelData   {
+  factory ReplaceRecoveryKeyDialogModelData ({
+    required ReplaceRecoveryKeyDialogState dialogState,
+    RecoveryKeyException? error,
+  }) = _ReplaceRecoveryKeyDialogModelData ;}
 
 @riverpod
 class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
@@ -104,34 +109,34 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   late final ProcessRunner _run = ref.read(processRunnerProvider);
 
   @override
-  ReplaceRecoveryKeyDialogState build() {
+  ReplaceRecoveryKeyDialogModelData build() {
     // listen for the key to land
     ref.listen<AsyncValue<RecoveryKeyDetails>>(
       generatedRecoveryKeyModelProvider,
       (prev, next) {
         if (prev is AsyncLoading && next is AsyncData) {
-          state = ReplaceRecoveryKeyDialogStateWaitingForUser(false);
+          state = ReplaceRecoveryKeyDialogModelData(dialogState: ReplaceRecoveryKeyDialogStateWaitingForUser(false));
         }
       },
     );
-    return ReplaceRecoveryKeyDialogState.empty();
+    return ReplaceRecoveryKeyDialogModelData(dialogState: ReplaceRecoveryKeyDialogState.empty());
   }
 
   Future<void> replaceRecoveryKey(String key) async {
-    assert(state is ReplaceRecoveryKeyDialogStateWaitingForUser);
-    assert((state as ReplaceRecoveryKeyDialogStateWaitingForUser).acknowledged);
+    assert(state.dialogState is ReplaceRecoveryKeyDialogStateWaitingForUser);
+    assert((state.dialogState as ReplaceRecoveryKeyDialogStateWaitingForUser).acknowledged);
 
     try {
       await _service.replaceRecoveryKey(key);
-      state = ReplaceRecoveryKeyDialogState.replaced();
+      state = state.copyWith(dialogState: ReplaceRecoveryKeyDialogState.replaced());
     } on Exception catch (e) {
-      state = ReplaceRecoveryKeyDialogState.error(e);
+      state = state.copyWith(dialogState: ReplaceRecoveryKeyDialogState.error(e));
     }
   }
 
   void acknowledge() {
-    assert(state is ReplaceRecoveryKeyDialogStateWaitingForUser);
-    state = ReplaceRecoveryKeyDialogStateWaitingForUser(true);
+    assert(state.dialogState is ReplaceRecoveryKeyDialogStateWaitingForUser);
+    state = state.copyWith(dialogState: ReplaceRecoveryKeyDialogStateWaitingForUser(true));
   }
 
   Future<String?> _findFileSystem(Uri uri) async {
@@ -149,15 +154,17 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   }
 
   Future<void> writeRecoveryKey(Uri uri, String recoveryKey) async {
-    assert(state is ReplaceRecoveryKeyDialogStateWaitingForUser);
+    assert(state.dialogState is ReplaceRecoveryKeyDialogStateWaitingForUser || state.dialogState is ReplaceRecoveryKeyDialogStateReplaced);
     if (uri.pathSegments.first == 'target' ||
         ['/cow', 'tmpfs'].contains(await _findFileSystem(uri))) {
-      state = ReplaceRecoveryKeyDialogState.error(
-        RecoveryKeyException.disallowedPath(),
-      );
+      setError(RecoveryKeyException.disallowedPath());
       return;
     }
     await _fs.file(uri.path).writeAsString(recoveryKey);
+  }
+
+  void setError(RecoveryKeyException? error) {
+    state = state.copyWith(error: error);
   }
 }
 
