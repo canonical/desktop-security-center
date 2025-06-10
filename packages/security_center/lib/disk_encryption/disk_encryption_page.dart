@@ -175,10 +175,9 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final replaceDialogState =
-        ref.watch(replaceRecoveryKeyDialogModelProvider).dialogState;
-    final replaceDialogError =
-        ref.watch(replaceRecoveryKeyDialogModelProvider).error;
+    final replaceDialogModel = ref.watch(replaceRecoveryKeyDialogModelProvider);
+    final replaceDialogState = replaceDialogModel.dialogState;
+    final replaceDialogError = replaceDialogModel.error;
     final replaceNotifier = ref.read(
       replaceRecoveryKeyDialogModelProvider.notifier,
     );
@@ -201,43 +200,36 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
               if (recoveryKey is AsyncLoading)
                 YaruLinearProgressIndicator()
               else if (recoveryKey is AsyncData)
-                Builder(
-                  // This builder is needed to access the build context that contains
-                  // the ScaffoldMessenger to display the Snackbar
-                  builder: (context) {
-                    return TextFormField(
-                      onTap: () => saveToClipboard(
+                TextFormField(
+                  onTap: () => saveToClipboard(
+                    context,
+                    recoveryKey.value!.recoveryKey,
+                  ),
+                  initialValue: recoveryKey.value!.recoveryKey,
+                  decoration: InputDecoration(
+                    labelText: l10n.diskEncryptionPageRecoveryKey,
+                    suffixIcon: YaruIconButton(
+                      icon: const Icon(YaruIcons.copy, size: 16),
+                      onPressed: () => saveToClipboard(
                         context,
                         recoveryKey.value!.recoveryKey,
                       ),
-                      initialValue: recoveryKey.value!.recoveryKey,
-                      decoration: InputDecoration(
-                        labelText: l10n.diskEncryptionPageRecoveryKey,
-                        suffixIcon: YaruIconButton(
-                          icon: const Icon(YaruIcons.copy, size: 16),
-                          onPressed: () => saveToClipboard(
-                            context,
-                            recoveryKey.value!.recoveryKey,
-                          ),
-                        ),
-                        suffixIconConstraints: BoxConstraints(
-                          maxWidth: 32,
-                          maxHeight: 32,
-                        ),
-                      ),
-                      readOnly: true,
-                      minLines: 1,
-                      maxLines: 2,
-                      style: TextStyle(
-                        inherit: false,
-                        fontFamily: 'Ubuntu Mono',
-                        fontSize:
-                            Theme.of(context).textTheme.bodyMedium!.fontSize,
-                        textBaseline: TextBaseline.alphabetic,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                    );
-                  },
+                    ),
+                    suffixIconConstraints: BoxConstraints(
+                      maxWidth: 32,
+                      maxHeight: 32,
+                    ),
+                  ),
+                  readOnly: true,
+                  minLines: 1,
+                  maxLines: 2,
+                  style: TextStyle(
+                    inherit: false,
+                    fontFamily: 'Ubuntu Mono',
+                    fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
+                    textBaseline: TextBaseline.alphabetic,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
               Row(
                 children: [
@@ -365,7 +357,6 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    // final flavor = ref.watch(flavorProvider);
     return AlertDialog(
       title: YaruDialogTitleBar(
         title: Text(l10n.diskEncryptionPageReplaceDialogQRHeader),
