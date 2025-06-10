@@ -628,6 +628,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Text files'**
   String get recoveryKeyFilePickerFilter;
+
+  /// No description provided for @recoveryKeyTPMEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Hardware-backed encryption is enabled'**
+  String get recoveryKeyTPMEnabled;
+
+  /// No description provided for @recoveryKeyPassphraseEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Encryption passphrase is enabled'**
+  String get recoveryKeyPassphraseEnabled;
+
+  /// No description provided for @recoveryKeyPassphraseHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Encryption  passphrase'**
+  String get recoveryKeyPassphraseHeader;
+
+  /// No description provided for @recoveryKeyPassphraseBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to enter your passpharse during startup to unlock the disk. You can change the passphrase but not disable it.'**
+  String get recoveryKeyPassphraseBody;
+
+  /// No description provided for @recoveryKeyPassphraseButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Change passphrase...'**
+  String get recoveryKeyPassphraseButton;
+
+  /// No description provided for @recoveryKeyPassphraseCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Current passphrase'**
+  String get recoveryKeyPassphraseCurrent;
+
+  /// No description provided for @recoveryKeyPassphraseNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New passphrase'**
+  String get recoveryKeyPassphraseNew;
+
+  /// No description provided for @recoveryKeyPassphraseConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm passphrase'**
+  String get recoveryKeyPassphraseConfirm;
+
+  /// No description provided for @recoveryKeyPassphraseCurrentError.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect passphrase, try again'**
+  String get recoveryKeyPassphraseCurrentError;
+
+  /// No description provided for @recoveryKeyPassphraseNewError.
+  ///
+  /// In en, this message translates to:
+  /// **'Must be at least 4 characters long'**
+  String get recoveryKeyPassphraseNewError;
+
+  /// No description provided for @recoveryKeyPassphraseConfirmError.
+  ///
+  /// In en, this message translates to:
+  /// **'Passphrases do not match, try again'**
+  String get recoveryKeyPassphraseConfirmError;
+
+  /// No description provided for @recoveryKeyPINEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Encryption PIN is enabled'**
+  String get recoveryKeyPINEnabled;
+
+  /// No description provided for @recoveryKeyPINHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Encryption Pin'**
+  String get recoveryKeyPINHeader;
+
+  /// No description provided for @recoveryKeyPINBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.'**
+  String get recoveryKeyPINBody;
+
+  /// No description provided for @recoveryKeyPINButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Change PIN...'**
+  String get recoveryKeyPINButton;
+
+  /// No description provided for @recoveryKeyPINCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Current PIN'**
+  String get recoveryKeyPINCurrent;
+
+  /// No description provided for @recoveryKeyPINNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New PIN'**
+  String get recoveryKeyPINNew;
+
+  /// No description provided for @recoveryKeyPINConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm PIN'**
+  String get recoveryKeyPINConfirm;
+
+  /// No description provided for @recoveryKeyPINCurrentError.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect PIN, try again'**
+  String get recoveryKeyPINCurrentError;
+
+  /// No description provided for @recoveryKeyPINNewError.
+  ///
+  /// In en, this message translates to:
+  /// **'Must be at least 4 digits long'**
+  String get recoveryKeyPINNewError;
+
+  /// No description provided for @recoveryKeyPINConfirmError.
+  ///
+  /// In en, this message translates to:
+  /// **'PINs do not match, try again'**
+  String get recoveryKeyPINConfirmError;
+
+  /// No description provided for @recoveryKeyPassphraseShow.
+  ///
+  /// In en, this message translates to:
+  /// **'Show'**
+  String get recoveryKeyPassphraseShow;
+
+  /// No description provided for @recoveryKeyPassphraseChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get recoveryKeyPassphraseChange;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -222,4 +222,73 @@ class AppLocalizationsBs extends AppLocalizations {
 
   @override
   String get recoveryKeyFilePickerFilter => 'Text files';
+
+  @override
+  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+
+  @override
+  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+
+  @override
+  String get recoveryKeyPassphraseHeader => 'Encryption  passphrase';
+
+  @override
+  String get recoveryKeyPassphraseBody => 'You need to enter your passpharse during startup to unlock the disk. You can change the passphrase but not disable it.';
+
+  @override
+  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+
+  @override
+  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+
+  @override
+  String get recoveryKeyPassphraseNew => 'New passphrase';
+
+  @override
+  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+
+  @override
+  String get recoveryKeyPassphraseCurrentError => 'Incorrect passphrase, try again';
+
+  @override
+  String get recoveryKeyPassphraseNewError => 'Must be at least 4 characters long';
+
+  @override
+  String get recoveryKeyPassphraseConfirmError => 'Passphrases do not match, try again';
+
+  @override
+  String get recoveryKeyPINEnabled => 'Encryption PIN is enabled';
+
+  @override
+  String get recoveryKeyPINHeader => 'Encryption Pin';
+
+  @override
+  String get recoveryKeyPINBody => 'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.';
+
+  @override
+  String get recoveryKeyPINButton => 'Change PIN...';
+
+  @override
+  String get recoveryKeyPINCurrent => 'Current PIN';
+
+  @override
+  String get recoveryKeyPINNew => 'New PIN';
+
+  @override
+  String get recoveryKeyPINConfirm => 'Confirm PIN';
+
+  @override
+  String get recoveryKeyPINCurrentError => 'Incorrect PIN, try again';
+
+  @override
+  String get recoveryKeyPINNewError => 'Must be at least 4 digits long';
+
+  @override
+  String get recoveryKeyPINConfirmError => 'PINs do not match, try again';
+
+  @override
+  String get recoveryKeyPassphraseShow => 'Show';
+
+  @override
+  String get recoveryKeyPassphraseChange => 'Change';
 }
