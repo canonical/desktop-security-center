@@ -286,6 +286,12 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                     ),
                   ].separatedBy(const SizedBox(width: 16)),
                 ),
+                if (replaceDialogError != null)
+                  YaruInfoBox(
+                    title: Text(replaceDialogError.localizedTitle(l10n)),
+                    subtitle: Text(replaceDialogError.localizedBody(l10n)),
+                    yaruInfoType: YaruInfoType.danger,
+                  ),
                 YaruCheckButton(
                   title: Text(
                     l10n.diskEncryptionPageReplaceDialogAcknowledge,
@@ -338,12 +344,6 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   YaruInfoBox(
                     title: Text(l10n.diskEncryptionPageError),
                     subtitle: Text(replaceDialogState.e.toString()),
-                    yaruInfoType: YaruInfoType.danger,
-                  ),
-                if (replaceDialogError != null)
-                  YaruInfoBox(
-                    title: Text(replaceDialogError.localizedTitle(l10n)),
-                    subtitle: Text(replaceDialogError.localizedBody(l10n)),
                     yaruInfoType: YaruInfoType.danger,
                   ),
               ].separatedBy(const SizedBox(height: 16)),
