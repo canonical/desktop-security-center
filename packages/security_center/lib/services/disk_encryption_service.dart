@@ -44,6 +44,9 @@ class KeySlot with _$KeySlot {
 @freezed
 class SystemDataContainer with _$SystemDataContainer {
   const factory SystemDataContainer({
+    /// Containr role. For enumerating with a TPM, we expect a system-data and a system-save.
+    required String containerRole,
+
     /// Name from gadget
     required String volumeName,
 

@@ -25,10 +25,18 @@ sealed class RecoveryKeyException
       RecoveryKeyExceptionUnknown;
 
   factory RecoveryKeyException.from(Object? e) => switch (e) {
-        final FileSystemException _ => RecoveryKeyException.fileSystem(),
-        final RecoveryKeyException e => e,
-        final e => RecoveryKeyException.unknown(rawError: e.toString()),
-      };
+    final FileSystemException _ => RecoveryKeyException.fileSystem(),
+    final RecoveryKeyException e => e,
+    final e => RecoveryKeyException.unknown(rawError: e.toString()),
+  };
+}
+
+/// Enum representing the different types of authentication for the TPM
+@freezed
+sealed class TPMAuthentication with _$TPMAuthentication {
+  factory TPMAuthentication.pin() = TPMAuthenticationPIN;
+  factory TPMAuthentication.passphrase() = TPMAuthenticationPassphrase;
+  factory TPMAuthentication.none() = TPMAuthenticationNone;
 }
 
 /// Dialog state for managing the replace recovery key flow.
@@ -61,31 +69,34 @@ sealed class CheckRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
 }
 
 @riverpod
-class SystemContainersModel extends _$SystemContainersModel {
+class TPMAuthenticationModel extends _$TPMAuthenticationModel {
   late final _service = getService<DiskEncryptionService>();
 
   @override
-  Future<List<SystemDataContainer>> build() async {
+  Future<TPMAuthentication> build() async {
     final containers = await _service.enumerateKeySlots();
-    // TODO: Validate the keyslots contain sane defaults
-    return containers;
+    
+    final targetContainers = containers.where(
+        (c) => c.containerRole == "system-data"
+    );
+    
+    return TPMAuthentication.none();
   }
 }
 
-typedef FilePicker = Future<Uri?> Function({
-  required BuildContext context,
-  required String title,
-  String? defaultFileName,
-  List<XdgFileChooserFilter> filters,
-});
+typedef FilePicker =
+    Future<Uri?> Function({
+      required BuildContext context,
+      required String title,
+      String? defaultFileName,
+      List<XdgFileChooserFilter> filters,
+    });
 final filePickerProvider = Provider<FilePicker>((ref) => showSaveFileDialog);
 
 final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
-typedef ProcessRunner = Future<ProcessResult> Function(
-  String executable,
-  List<String> arguments,
-);
+typedef ProcessRunner =
+    Future<ProcessResult> Function(String executable, List<String> arguments);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @freezed

@@ -1,5 +1,6 @@
 [
   {
+    "container-role": "system-data",
     "volume-name": "volume1",
     "name": "container1",
     "encrypted": true,

@@ -58,20 +58,24 @@ class CheckRecoveryKeyButtons extends ConsumerWidget {
     // We need the system containers to validate the state of encryption and if a pin / passphrase is in use.
     return systemContainerModel.when(
       data: (_) {
-        return Row(
+        return Column(
           children: [
-            OutlinedButton(
-              onPressed: () {
-                showCheckRecoveryKeyDialog(context);
-              },
-              child: Text(l10n.diskEncryptionPageCheckKey),
-            ),
-            const SizedBox(width: 16),
-            OutlinedButton(
-              onPressed: () {
-                showReplaceRecoveryKeyDialog(context);
-              },
-              child: Text(l10n.diskEncryptionPageReplaceButton),
+            Row(
+              children: [
+                OutlinedButton(
+                  onPressed: () {
+                    showCheckRecoveryKeyDialog(context);
+                  },
+                  child: Text(l10n.diskEncryptionPageCheckKey),
+                ),
+                const SizedBox(width: 16),
+                OutlinedButton(
+                  onPressed: () {
+                    showReplaceRecoveryKeyDialog(context);
+                  },
+                  child: Text(l10n.diskEncryptionPageReplaceButton),
+                ),
+              ],
             ),
           ],
         );
