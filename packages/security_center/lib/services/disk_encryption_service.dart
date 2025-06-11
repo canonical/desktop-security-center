@@ -68,14 +68,11 @@ abstract class DiskEncryptionService {
   /// Generates and returns a new recovery key.
   Future<RecoveryKeyDetails> generateRecoveryKey();
 
-  /// Adds a recovery key to an available key slot.
-  Future<void> addRecoveryKey(String keyId);
+  /// replaces existing recovery key with a new oneslot.
+  Future<void> replaceRecoveryKey(String keyId);
 
   /// Lists all key slot and their statuses.
   Future<List<SystemDataContainer>> enumerateKeySlots();
-
-  /// Deletes the contenets of a specified key slot.
-  Future<void> deleteKeySlot(String keyName);
 
   /// Checks if a recovery key is still valid for use.
   Future<bool> checkRecoveryKey(String recoveryKey);

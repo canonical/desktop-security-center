@@ -490,6 +490,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error'**
   String get diskEncryptionPageError;
+
+  /// No description provided for @diskEncryptionPageReplaceButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace recovery key...'**
+  String get diskEncryptionPageReplaceButton;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace recovery key'**
+  String get diskEncryptionPageReplaceDialogHeader;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.'**
+  String get diskEncryptionPageReplaceDialogBody;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogShowQR.
+  ///
+  /// In en, this message translates to:
+  /// **'Show QR code'**
+  String get diskEncryptionPageReplaceDialogShowQR;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save to file'**
+  String get diskEncryptionPageReplaceDialogSave;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogAcknowledge.
+  ///
+  /// In en, this message translates to:
+  /// **'I saved my recovery key somewhere safe'**
+  String get diskEncryptionPageReplaceDialogAcknowledge;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogReplace.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace'**
+  String get diskEncryptionPageReplaceDialogReplace;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogDiscard.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get diskEncryptionPageReplaceDialogDiscard;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogSuccessHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery key replaced'**
+  String get diskEncryptionPageReplaceDialogSuccessHeader;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogSuccessBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember to keep it somewhere safe.'**
+  String get diskEncryptionPageReplaceDialogSuccessBody;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogErrorHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery key replacement failed'**
+  String get diskEncryptionPageReplaceDialogErrorHeader;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogErrorBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong replacing your recovery key, your old key will remain vaild.'**
+  String get diskEncryptionPageReplaceDialogErrorBody;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogQRHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Desktop - Encryption recovery key'**
+  String get diskEncryptionPageReplaceDialogQRHeader;
+
+  /// No description provided for @diskEncryptionPageReplaceDialogQRBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.'**
+  String get diskEncryptionPageReplaceDialogQRBody;
+
+  /// No description provided for @diskEncryptionPageClipboardNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard'**
+  String get diskEncryptionPageClipboardNotification;
+
+  /// No description provided for @recoveryKeyExceptionFileSystemTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery key file not saved'**
+  String get recoveryKeyExceptionFileSystemTitle;
+
+  /// No description provided for @recoveryKeyExceptionDisallowedPathTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery key file cannot be saved in a temporary location'**
+  String get recoveryKeyExceptionDisallowedPathTitle;
+
+  /// No description provided for @recoveryKeyExceptionUnknownTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown error'**
+  String get recoveryKeyExceptionUnknownTitle;
+
+  /// No description provided for @recoveryKeyExceptionFileSystemBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission to write to that folder. Try a different location or use another method.'**
+  String get recoveryKeyExceptionFileSystemBody;
+
+  /// No description provided for @recoveryKeyExceptionDisallowedPathBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a different location, such as a removable drive, or use another method.'**
+  String get recoveryKeyExceptionDisallowedPathBody;
+
+  /// No description provided for @recoveryKeyFilePickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save recovery key file'**
+  String get recoveryKeyFilePickerTitle;
+
+  /// No description provided for @recoveryKeyFilePickerFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Text files'**
+  String get recoveryKeyFilePickerFilter;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,10 +1,14 @@
+import 'dart:io';
+import 'package:file/memory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:path/path.dart' as p;
 import 'package:security_center/app_permissions/snap_metadata_providers.dart';
+import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
@@ -94,10 +98,40 @@ LocalSnapData registerMockLocalSnapData({
   return snaps;
 }
 
+Override filePickerOverride(Uri? uri) {
+  return filePickerProvider.overrideWithValue(({
+    required context,
+    required title,
+    defaultFileName,
+    filters = const [],
+  }) async {
+    return uri;
+  });
+}
+
+Override fileSystemOverride(MemoryFileSystem fs) {
+  return fileSystemProvider.overrideWithValue(fs);
+}
+
+Override processRunnerOverride(Map<String, String> mountByPath) {
+  Future<ProcessResult> fakeRun(String exe, List<String> args) async {
+    final path = args.last;
+    if (mountByPath.containsKey(path) ||
+        mountByPath.containsKey(p.join(path, p.basename(path)))) {
+      return ProcessResult(0, 0, '${mountByPath[path]}\n', '');
+    }
+    return ProcessResult(1, 1, '', 'error');
+  }
+
+  return processRunnerProvider.overrideWithValue(fakeRun);
+}
+
 @GenerateMocks([DiskEncryptionService])
 DiskEncryptionService registerMockDiskEncryptionService({
   bool checkRecoveryKey = true,
   bool checkError = false,
+  bool replaceError = false,
+  bool generateError = false,
 }) {
   final service = MockDiskEncryptionService();
 
@@ -113,11 +147,20 @@ DiskEncryptionService registerMockDiskEncryptionService({
       ),
     ],
   );
-  when(service.deleteKeySlot(any)).thenAnswer((_) async {});
-  when(service.generateRecoveryKey()).thenAnswer(
-    (_) async => RecoveryKeyDetails(recoveryKey: 'mock-key', keyId: 'mock-id'),
-  );
-  when(service.addRecoveryKey(any)).thenAnswer((_) async {});
+  when(service.generateRecoveryKey()).thenAnswer((_) async {
+    if (generateError) {
+      throw Exception('Mock generate recovery key error');
+    }
+    return RecoveryKeyDetails(
+      recoveryKey: 'mock-recovery-key',
+      keyId: 'mock-id',
+    );
+  });
+  when(service.replaceRecoveryKey(any)).thenAnswer((_) async {
+    if (replaceError) {
+      throw Exception('Mock replace recovery key error');
+    }
+  });
   when(service.checkRecoveryKey(any)).thenAnswer((_) async {
     if (checkError) {
       throw Exception('Mock check recovery key error');

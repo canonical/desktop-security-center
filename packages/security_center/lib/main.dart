@@ -13,6 +13,7 @@ import 'package:security_center/services/snapd_app_permissions_service.dart';
 import 'package:security_center/services/snapd_service.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
+import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
 
 Future<void> main(List<String> args) async {
@@ -45,6 +46,8 @@ Future<void> main(List<String> args) async {
       'integration_test/assets/test_containers.json',
     ),
   );
+
+  registerService(XdgDesktopPortalClient.new);
 
   final snapMetadata = await getService<SnapdService>().getSnaps();
   registerServiceInstance<LocalSnapData>(snapMetadata);

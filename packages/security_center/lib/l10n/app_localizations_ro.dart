@@ -153,4 +153,70 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get diskEncryptionPageError => 'Error';
+
+  @override
+  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+
+  @override
+  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+
+  @override
+  String get diskEncryptionPageReplaceDialogBody => 'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+
+  @override
+  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+
+  @override
+  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+
+  @override
+  String get diskEncryptionPageReplaceDialogAcknowledge => 'I saved my recovery key somewhere safe';
+
+  @override
+  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+
+  @override
+  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+
+  @override
+  String get diskEncryptionPageReplaceDialogSuccessHeader => 'Recovery key replaced';
+
+  @override
+  String get diskEncryptionPageReplaceDialogSuccessBody => 'Remember to keep it somewhere safe.';
+
+  @override
+  String get diskEncryptionPageReplaceDialogErrorHeader => 'Recovery key replacement failed';
+
+  @override
+  String get diskEncryptionPageReplaceDialogErrorBody => 'Something went wrong replacing your recovery key, your old key will remain vaild.';
+
+  @override
+  String get diskEncryptionPageReplaceDialogQRHeader => 'Ubuntu Desktop - Encryption recovery key';
+
+  @override
+  String get diskEncryptionPageReplaceDialogQRBody => 'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+
+  @override
+  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+
+  @override
+  String get recoveryKeyExceptionFileSystemTitle => 'Recovery key file not saved';
+
+  @override
+  String get recoveryKeyExceptionDisallowedPathTitle => 'Recovery key file cannot be saved in a temporary location';
+
+  @override
+  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+
+  @override
+  String get recoveryKeyExceptionFileSystemBody => 'You do not have permission to write to that folder. Try a different location or use another method.';
+
+  @override
+  String get recoveryKeyExceptionDisallowedPathBody => 'Try a different location, such as a removable drive, or use another method.';
+
+  @override
+  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+
+  @override
+  String get recoveryKeyFilePickerFilter => 'Text files';
 }
