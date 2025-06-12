@@ -85,5 +85,13 @@
   "diskEncryptionPageValidKey": "Clau valida",
   "@diskEncryptionPageValidKey": {},
   "diskEncryptionPageError": "Error",
-  "@diskEncryptionPageError": {}
+  "@diskEncryptionPageError": {},
+  "diskEncryptionPageCopySemanticLabel": "Copiar",
+  "@diskEncryptionPageCopySemanticLabel": {},
+  "recoveryKeyFilePickerFilter": "Fichièr tèxt",
+  "@recoveryKeyFilePickerFilter": {},
+  "recoveryKeyExceptionUnknownTitle": "Error desconeguda",
+  "@recoveryKeyExceptionUnknownTitle": {},
+  "diskEncryptionPageReplaceDialogDiscard": "Ignorar",
+  "@diskEncryptionPageReplaceDialogDiscard": {}
 }
