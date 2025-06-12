@@ -581,6 +581,12 @@ abstract class AppLocalizations {
   /// **'Copied to clipboard'**
   String get diskEncryptionPageClipboardNotification;
 
+  /// No description provided for @diskEncryptionPageCopySemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get diskEncryptionPageCopySemanticLabel;
+
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.
   ///
   /// In en, this message translates to:

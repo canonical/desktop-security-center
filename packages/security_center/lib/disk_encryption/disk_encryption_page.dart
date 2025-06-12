@@ -211,7 +211,12 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                     decoration: InputDecoration(
                       labelText: l10n.diskEncryptionPageRecoveryKey,
                       suffixIcon: YaruIconButton(
-                        icon: const Icon(YaruIcons.copy, size: 16),
+                        icon: Icon(
+                          YaruIcons.copy,
+                          size: 16,
+                          semanticLabel:
+                              l10n.diskEncryptionPageCopySemanticLabel,
+                        ),
                         onPressed: () => saveToClipboard(
                           context,
                           recoveryKey.value!.recoveryKey,

@@ -202,6 +202,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
 
   @override
+  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+
+  @override
   String get recoveryKeyExceptionFileSystemTitle => 'Recovery key file not saved';
 
   @override
