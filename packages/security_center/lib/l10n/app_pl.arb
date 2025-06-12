@@ -147,5 +147,7 @@
   "recoveryKeyExceptionFileSystemBody": "Nie masz uprawnień do zapisu w tym folderze. Spróbuj innej lokalizacji lub użyj innej metody.",
   "@recoveryKeyExceptionFileSystemBody": {},
   "diskEncryptionPageReplaceDialogBody": "Zapisz nowy klucz odzyskiwania w bezpiecznym miejscu. Po jego wymianie nie będzie można używać starego klucza.",
-  "@diskEncryptionPageReplaceDialogBody": {}
+  "@diskEncryptionPageReplaceDialogBody": {},
+  "diskEncryptionPageCopySemanticLabel": "Skopiuj",
+  "@diskEncryptionPageCopySemanticLabel": {}
 }
