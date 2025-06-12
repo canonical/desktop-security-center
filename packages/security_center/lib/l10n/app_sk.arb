@@ -147,5 +147,7 @@
   "diskEncryptionPageReplaceDialogQRBody": "Naskenujte QR kód na skopírovanie obnovovacieho kľúča a uložte ho na bezpečné miesto, napríklad do správcu hesiel. Môžete si tiež vytvoriť snímku obrazovky na neskoršie použitie.",
   "@diskEncryptionPageReplaceDialogQRBody": {},
   "recoveryKeyExceptionFileSystemTitle": "Súbor s obnovovacím kľúčom nebol uložený",
-  "@recoveryKeyExceptionFileSystemTitle": {}
+  "@recoveryKeyExceptionFileSystemTitle": {},
+  "diskEncryptionPageCopySemanticLabel": "Kopírovať",
+  "@diskEncryptionPageCopySemanticLabel": {}
 }
