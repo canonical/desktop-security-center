@@ -53,11 +53,11 @@ class CheckRecoveryKeyButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final systemContainerModel = ref.watch(systemContainersModelProvider);
+    final tpmAuthenticationModel = ref.watch(tPMAuthenticationModelProvider);
 
     // We need the system containers to validate the state of encryption and if a pin / passphrase is in use.
-    return systemContainerModel.when(
-      data: (_) {
+    return tpmAuthenticationModel.when(
+      data: (data) {
         return Column(
           children: [
             Row(
@@ -75,6 +75,7 @@ class CheckRecoveryKeyButtons extends ConsumerWidget {
                   },
                   child: Text(l10n.diskEncryptionPageReplaceButton),
                 ),
+              Text(data.toString()),
               ],
             ),
           ],

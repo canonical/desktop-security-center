@@ -75,12 +75,22 @@ class TPMAuthenticationModel extends _$TPMAuthenticationModel {
   @override
   Future<TPMAuthentication> build() async {
     final containers = await _service.enumerateKeySlots();
-    
-    final targetContainers = containers.where(
-        (c) => c.containerRole == "system-data"
+
+    final systemDataVolume = containers.firstWhere(
+      (c) => c.containerRole == 'system-data',
     );
-    
-    return TPMAuthentication.none();
+
+    final recoveryKeySlot = systemDataVolume.keySlots.firstWhere(
+      (k) => k.name == 'default-recovery' && k.type == KeySlotType.platform,
+    );
+    switch (recoveryKeySlot.authMode) {
+      case AuthMode.pin:
+        return TPMAuthentication.pin();
+      case AuthMode.passphrase:
+        return TPMAuthentication.passphrase();
+      case _:
+        return TPMAuthentication.none();
+    }
   }
 }
 
