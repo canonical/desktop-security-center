@@ -147,5 +147,7 @@
   "diskEncryptionPageReplaceDialogQRBody": "Scan de QR-code om de herstelcode te kopiëren en deze ergens veilig op te slaan, zoals een wachtwoordbeheerder. U kunt ook een foto maken voor later gebruik.",
   "@diskEncryptionPageReplaceDialogQRBody": {},
   "diskEncryptionPageReplaceDialogBody": "Sla de nieuwe herstelcode ergens veilig op. Eenmaal vervangen, kan de oude sleutel niet meer gebruikt worden.",
-  "@diskEncryptionPageReplaceDialogBody": {}
+  "@diskEncryptionPageReplaceDialogBody": {},
+  "diskEncryptionPageCopySemanticLabel": "Kopiëren",
+  "@diskEncryptionPageCopySemanticLabel": {}
 }
