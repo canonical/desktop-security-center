@@ -103,5 +103,9 @@
   "diskEncryptionPageEnterKey": "Masukkan kunci pemulihan Anda",
   "@diskEncryptionPageEnterKey": {},
   "diskEncryptionPageInvalidKey": "Kunci tidak valid",
-  "@diskEncryptionPageInvalidKey": {}
+  "@diskEncryptionPageInvalidKey": {},
+  "diskEncryptionPageReplaceButton": "Mengganti kunci pemulihan ...",
+  "@diskEncryptionPageReplaceButton": {},
+  "diskEncryptionPageReplaceDialogHeader": "Mengganti kunci pemulihan",
+  "@diskEncryptionPageReplaceDialogHeader": {}
 }
