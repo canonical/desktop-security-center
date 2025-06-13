@@ -147,5 +147,7 @@
   "diskEncryptionPageReplaceDialogBody": "Sábháil an eochair athshlánaithe nua in áit shábháilte. Nuair a chuirfidh tú ceann eile ina háit, ní bheidh tú in ann an seaneochair a úsáid a thuilleadh.",
   "@diskEncryptionPageReplaceDialogBody": {},
   "recoveryKeyExceptionDisallowedPathBody": "Bain triail as suíomh difriúil, amhail tiomántán inbhainte, nó bain úsáid as modh eile.",
-  "@recoveryKeyExceptionDisallowedPathBody": {}
+  "@recoveryKeyExceptionDisallowedPathBody": {},
+  "diskEncryptionPageCopySemanticLabel": "Cóipeáil",
+  "@diskEncryptionPageCopySemanticLabel": {}
 }
