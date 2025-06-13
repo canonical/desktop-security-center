@@ -86,7 +86,7 @@
   "@diskEncryptionPageCheckKey": {},
   "diskEncryptionPageCheck": "Skontrolovať",
   "@diskEncryptionPageCheck": {},
-  "diskEncryptionPageEnterKey": "Zadajte svoj kľúč na obnovenie",
+  "diskEncryptionPageEnterKey": "Zadajte svoj obnovovací kľúč",
   "@diskEncryptionPageEnterKey": {},
   "diskEncryptionPageDialogHeaderCheckKey": "Kontrola kľúča obnovenia",
   "@diskEncryptionPageDialogHeaderCheckKey": {},
