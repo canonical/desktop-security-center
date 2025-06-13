@@ -147,5 +147,7 @@
   "diskEncryptionPageKeyDoesntWorkBody": "Zkontrolovat klíč nebo ho nahradit novým.",
   "@diskEncryptionPageKeyDoesntWorkBody": {},
   "diskEncryptionPageError": "Chyba",
-  "@diskEncryptionPageError": {}
+  "@diskEncryptionPageError": {},
+  "diskEncryptionPageCopySemanticLabel": "Zkopírovat",
+  "@diskEncryptionPageCopySemanticLabel": {}
 }
