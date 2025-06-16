@@ -454,7 +454,7 @@ class ChangeAuthDialog extends ConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            OldPassphraseFormField(authMode: authMode),
+            CurrentPassphraseFormField(authMode: authMode),
             PassphraseFormField(authMode: authMode),
             ConfirmPassphraseFormField(authMode: authMode),
           ].separatedBy(const SizedBox(height: 16)),

@@ -14,19 +14,23 @@ import 'package:yaru/icons.dart';
 
 // TODO: this will need to be conditionally hooked up to the /storage/v2/calculate_entropy
 //       endpoint in Subiquity once it is available
-class OldPassphraseFormField extends ConsumerStatefulWidget {
-  const OldPassphraseFormField({ required this.authMode, super.key, this.fieldWidth});
+class CurrentPassphraseFormField extends ConsumerStatefulWidget {
+  const CurrentPassphraseFormField({
+    required this.authMode,
+    super.key,
+    this.fieldWidth,
+  });
 
   final double? fieldWidth;
   final AuthMode authMode;
 
   @override
-  ConsumerState<OldPassphraseFormField> createState() =>
-      _OldPassphraseFormFieldState();
+  ConsumerState<CurrentPassphraseFormField> createState() =>
+      _CurrentPassphraseFormFieldState();
 }
 
-class _OldPassphraseFormFieldState
-    extends ConsumerState<OldPassphraseFormField> {
+class _CurrentPassphraseFormFieldState
+    extends ConsumerState<CurrentPassphraseFormField> {
   final _controller = TextEditingController();
 
   @override
@@ -64,7 +68,11 @@ class _OldPassphraseFormFieldState
 }
 
 class PassphraseFormField extends ConsumerStatefulWidget {
-  const PassphraseFormField({required this.authMode, super.key, this.fieldWidth});
+  const PassphraseFormField({
+    required this.authMode,
+    super.key,
+    this.fieldWidth,
+  });
 
   final double? fieldWidth;
   final AuthMode authMode;
@@ -101,9 +109,13 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
       labelText: widget.authMode.localizedNewHint(lang),
       obscureText: !model.showPassphrase,
       suffixIcon: const _SecurityKeyShowButton(),
-      validator: RequiredValidator(
-        errorText: widget.authMode.localizedNewError(lang),
-      ),
+      validator: MultiValidator([
+        RequiredValidator(errorText: widget.authMode.localizedNewError(lang)),
+        MinLengthValidator(
+          4,
+          errorText: widget.authMode.localizedNewError(lang),
+        ),
+      ]),
       onChanged: (value) {
         notifier.newPass = value;
       },
@@ -112,7 +124,11 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
 }
 
 class ConfirmPassphraseFormField extends ConsumerStatefulWidget {
-  const ConfirmPassphraseFormField({required this.authMode, this.fieldWidth, super.key});
+  const ConfirmPassphraseFormField({
+    required this.authMode,
+    this.fieldWidth,
+    super.key,
+  });
 
   final double? fieldWidth;
   final AuthMode authMode;

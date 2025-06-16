@@ -42,7 +42,7 @@ extension AuthModeL10n on AuthMode {
 
   String localizedConfirmHint(AppLocalizations l10n) => switch (this) {
     AuthMode.passphrase => l10n.recoveryKeyPassphraseConfirm,
-    AuthMode.pin => l10n.recoveryKeyPassphraseConfirm,
+    AuthMode.pin => l10n.recoveryKeyPINConfirm,
     AuthMode.none => throw _unreachable,
   };
 
