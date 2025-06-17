@@ -773,17 +773,41 @@ abstract class AppLocalizations {
   /// **'Show'**
   String get recoveryKeyPassphraseShow;
 
+  /// No description provided for @recoveryKeyPassphraseHide.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide'**
+  String get recoveryKeyPassphraseHide;
+
   /// No description provided for @recoveryKeyPassphraseChange.
   ///
   /// In en, this message translates to:
   /// **'Change'**
   String get recoveryKeyPassphraseChange;
 
-  /// No description provided for @recoveryKeyPassphraseHide.
+  /// No description provided for @recoveryKeyPassphrasePINSuccessHeader.
   ///
   /// In en, this message translates to:
-  /// **'Hide'**
-  String get recoveryKeyPassphraseHide;
+  /// **'PIN updated'**
+  String get recoveryKeyPassphrasePINSuccessHeader;
+
+  /// No description provided for @recoveryKeyPassphrasePINSuccessBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You PIN was successfully updated.'**
+  String get recoveryKeyPassphrasePINSuccessBody;
+
+  /// No description provided for @recoveryKeyPassphrasePassphraseSuccessHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Passphrase updated'**
+  String get recoveryKeyPassphrasePassphraseSuccessHeader;
+
+  /// No description provided for @recoveryKeyPassphrasePassphraseSuccessBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You passphrase was successfully updated.'**
+  String get recoveryKeyPassphrasePassphraseSuccessBody;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

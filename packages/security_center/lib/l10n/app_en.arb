@@ -168,6 +168,10 @@
     "recoveryKeyPINConfirmError": "PINs do not match, try again",
     "recoveryKeyPINDialogHeader": "Change PIN",
     "recoveryKeyPassphraseShow": "Show",
+    "recoveryKeyPassphraseHide": "Hide",
     "recoveryKeyPassphraseChange": "Change",
-    "recoveryKeyPassphraseHide": "Hide"
+    "recoveryKeyPassphrasePINSuccessHeader": "PIN updated",
+    "recoveryKeyPassphrasePINSuccessBody": "You PIN was successfully updated.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Passphrase updated",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "You passphrase was successfully updated."
 }

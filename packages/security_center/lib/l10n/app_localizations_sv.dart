@@ -296,8 +296,20 @@ class AppLocalizationsSv extends AppLocalizations {
   String get recoveryKeyPassphraseShow => 'Show';
 
   @override
+  String get recoveryKeyPassphraseHide => 'Hide';
+
+  @override
   String get recoveryKeyPassphraseChange => 'Change';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphrasePINSuccessHeader => 'PIN updated';
+
+  @override
+  String get recoveryKeyPassphrasePINSuccessBody => 'You PIN was successfully updated.';
+
+  @override
+  String get recoveryKeyPassphrasePassphraseSuccessHeader => 'Passphrase updated';
+
+  @override
+  String get recoveryKeyPassphrasePassphraseSuccessBody => 'You passphrase was successfully updated.';
 }
