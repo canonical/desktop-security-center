@@ -34,7 +34,6 @@ sealed class RecoveryKeyException
 /// Dialog state for managing the change auth flow.
 @freezed
 sealed class ChangeAuthDialogState with _$ChangeAuthDialogState {
-  factory ChangeAuthDialogState.loading() = ChangeAuthDialogStateLoading;
   factory ChangeAuthDialogState.input() = ChangeAuthDialogStateInput;
   factory ChangeAuthDialogState.success() = ChangeAuthDialogStateSuccess;
   factory ChangeAuthDialogState.error(Exception e) = ChangeAuthDialogStateError;
@@ -78,7 +77,6 @@ class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
     @Default('') String newPass,
     @Default('') String confirmPass,
     @Default(false) bool showPassphrase,
-    @Default(null) Exception? validationError,
   }) = _ChangeAuthDialogModelData;
 }
 
@@ -144,19 +142,16 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
   }
 
   bool get isValid {
-    // Check if all fields have content
     if (state.oldPass.isEmpty ||
         state.newPass.isEmpty ||
         state.confirmPass.isEmpty) {
       return false;
     }
 
-    // Check minimum length for new password/PIN (4 characters)
     if (state.newPass.length < 4) {
       return false;
     }
 
-    // Check if new password matches confirm password
     if (state.newPass != state.confirmPass) {
       return false;
     }
