@@ -128,6 +128,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool checkError = false,
   bool replaceError = false,
   bool generateError = false,
+  AuthMode authMode = AuthMode.pin,
 }) {
   final service = MockDiskEncryptionService();
 
@@ -138,7 +139,13 @@ DiskEncryptionService registerMockDiskEncryptionService({
         name: 'system-data',
         encrypted: true,
         keySlots: [
-          KeySlot(name: 'mock-recovery-key', type: KeySlotType.recovery),
+          KeySlot(
+            name: 'default-recovery',
+            type: KeySlotType.platform,
+            role: 'foo',
+            platformName: 'bar',
+            authMode: authMode,
+          ),
         ],
         containerRole: 'system-data',
       ),
