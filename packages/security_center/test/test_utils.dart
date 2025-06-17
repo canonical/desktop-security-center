@@ -59,9 +59,7 @@ ProviderContainer createContainer({
   // Create a ProviderContainer, and optionally allow specifying parameters.
   final container = ProviderContainer(
     parent: parent,
-    overrides: [
-      ...overrides,
-    ],
+    overrides: [...overrides],
     observers: observers,
   );
 
@@ -90,9 +88,7 @@ AppPermissionsService registerMockAppPermissionsService({
   return service;
 }
 
-LocalSnapData registerMockLocalSnapData({
-  List<Snap> snaps = const [],
-}) {
+LocalSnapData registerMockLocalSnapData({List<Snap> snaps = const []}) {
   registerServiceInstance<LocalSnapData>(snaps);
   addTearDown(unregisterService<LocalSnapData>);
   return snaps;
@@ -144,6 +140,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
         keySlots: [
           KeySlot(name: 'mock-recovery-key', type: KeySlotType.recovery),
         ],
+        containerRole: 'system-data',
       ),
     ],
   );
