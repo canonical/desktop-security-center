@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as p;
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
+import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:yaru/yaru.dart';
 
 import '../test_utils.dart';
@@ -486,6 +487,336 @@ void main() {
             find.text(tester.l10n.diskEncryptionPageReplaceDialogSuccessHeader),
             findsOneWidget,
           );
+        }
+      });
+    }
+  });
+
+  testWidgets('chagne passphrase - show toggles visibility', (tester) async {
+    final container = createContainer();
+    registerMockDiskEncryptionService();
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text(tester.l10n.recoveryKeyPINButton), findsOneWidget);
+    await tester.tap(find.text(tester.l10n.recoveryKeyPINButton));
+    await tester.pumpAndSettle();
+
+    // Find all Show buttons (should be 3 - current, new, confirm passphrase)
+    final showButtons = find.text(tester.l10n.recoveryKeyPassphraseShow);
+    expect(showButtons, findsNWidgets(3));
+
+    // Find the text fields and enter text
+    final textFields = find.byType(TextField);
+    expect(textFields, findsNWidgets(3));
+
+    await tester.enterText(textFields.at(0), '1234');
+    await tester.enterText(textFields.at(1), '5678');
+    await tester.enterText(textFields.at(2), '5678');
+    await tester.pump();
+
+    // Verify text is obscured initially
+    expect(tester.widget<TextField>(textFields.at(0)).obscureText, isTrue);
+    expect(tester.widget<TextField>(textFields.at(1)).obscureText, isTrue);
+    expect(tester.widget<TextField>(textFields.at(2)).obscureText, isTrue);
+
+    // Tap the first show button
+    await tester.tap(showButtons.first);
+    await tester.pumpAndSettle();
+
+    // Verify text is now not obscured
+    expect(tester.widget<TextField>(textFields.at(0)).obscureText, isFalse);
+    expect(tester.widget<TextField>(textFields.at(1)).obscureText, isFalse);
+    expect(tester.widget<TextField>(textFields.at(2)).obscureText, isFalse);
+
+    // Verify buttons now show 'Hide' instead of 'Show'
+    final hideButtons = find.text(tester.l10n.recoveryKeyPassphraseHide);
+    expect(hideButtons, findsNWidgets(3));
+    expect(find.text(tester.l10n.recoveryKeyPassphraseShow), findsNothing);
+  });
+
+  group('change auth - submit disabled with short input and shows error', () {
+    final cases = [
+      (name: 'PIN', authMode: AuthMode.pin),
+      (name: 'passphrase', authMode: AuthMode.passphrase),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final container = createContainer();
+        registerMockDiskEncryptionService(authMode: tc.authMode);
+        await tester.pumpAppWithProviders(
+          (_) => const DiskEncryptionPage(),
+          container,
+        );
+        await tester.pumpAndSettle();
+
+        // Open change dialog based on auth mode
+        final buttonText = tc.authMode == AuthMode.pin
+            ? tester.l10n.recoveryKeyPINButton
+            : tester.l10n.recoveryKeyPassphraseButton;
+
+        expect(find.text(buttonText), findsOneWidget);
+        await tester.tap(find.text(buttonText));
+        await tester.pumpAndSettle();
+
+        // Find the text fields and change button
+        final textFields = find.byType(TextField);
+        expect(textFields, findsNWidgets(3));
+
+        final changeButton = find.widgetWithText(
+          ElevatedButton,
+          tester.l10n.recoveryKeyPassphraseChange,
+        );
+        expect(changeButton, findsOneWidget);
+
+        // Initially button should be disabled (no input)
+        expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
+
+        // Enter valid current auth but short new auth (< 4 characters/digits)
+        if (tc.authMode == AuthMode.pin) {
+          await tester.enterText(textFields.at(0), '1234');
+          await tester.enterText(textFields.at(1), '12');
+          await tester.enterText(textFields.at(2), '12');
+        } else {
+          await tester.enterText(textFields.at(0), 'pass');
+          await tester.enterText(textFields.at(1), 'xy');
+          await tester.enterText(textFields.at(2), 'xy');
+        }
+        await tester.pump();
+
+        // Button should still be disabled due to validation error
+        expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
+
+        // Check that appropriate error message is visible
+        final expectedError = tc.authMode == AuthMode.pin
+            ? tester.l10n.recoveryKeyPINNewError
+            : tester.l10n.recoveryKeyPassphraseNewError;
+        expect(find.text(expectedError), findsOneWidget);
+      });
+    }
+  });
+
+  group('change auth - submit disabled when new and confirm do not match', () {
+    final cases = [
+      (name: 'PIN', authMode: AuthMode.pin),
+      (name: 'passphrase', authMode: AuthMode.passphrase),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final container = createContainer();
+        registerMockDiskEncryptionService(authMode: tc.authMode);
+        await tester.pumpAppWithProviders(
+          (_) => const DiskEncryptionPage(),
+          container,
+        );
+        await tester.pumpAndSettle();
+
+        // Open change dialog based on auth mode
+        final buttonText = tc.authMode == AuthMode.pin
+            ? tester.l10n.recoveryKeyPINButton
+            : tester.l10n.recoveryKeyPassphraseButton;
+
+        expect(find.text(buttonText), findsOneWidget);
+        await tester.tap(find.text(buttonText));
+        await tester.pumpAndSettle();
+
+        // Find the text fields and change button
+        final textFields = find.byType(TextField);
+        expect(textFields, findsNWidgets(3));
+
+        final changeButton = find.widgetWithText(
+          ElevatedButton,
+          tester.l10n.recoveryKeyPassphraseChange,
+        );
+        expect(changeButton, findsOneWidget);
+
+        // Initially button should be disabled (no input)
+        expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
+
+        // Enter valid current auth and valid new auth, but mismatched confirm
+        if (tc.authMode == AuthMode.pin) {
+          await tester.enterText(textFields.at(0), '1234');
+          await tester.enterText(textFields.at(1), '5678');
+          await tester.enterText(textFields.at(2), '9999');
+        } else {
+          await tester.enterText(textFields.at(0), 'currentpass');
+          await tester.enterText(textFields.at(1), 'newpass');
+          await tester.enterText(textFields.at(2), 'different');
+        }
+        await tester.pump();
+
+        // Button should still be disabled due to validation error
+        expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
+
+        // Check that appropriate mismatch error message is visible
+        final expectedError = tc.authMode == AuthMode.pin
+            ? tester.l10n.recoveryKeyPINConfirmError
+            : tester.l10n.recoveryKeyPassphraseConfirmError;
+        expect(find.text(expectedError), findsOneWidget);
+      });
+    }
+  });
+
+  group('change auth - submit with valid inputs', () {
+    final cases = [
+      (
+        name: 'PIN success',
+        authMode: AuthMode.pin,
+        changePINPassphraseError: false,
+      ),
+      (
+        name: 'PIN failure',
+        authMode: AuthMode.pin,
+        changePINPassphraseError: true,
+      ),
+      (
+        name: 'passphrase success',
+        authMode: AuthMode.passphrase,
+        changePINPassphraseError: false,
+      ),
+      (
+        name: 'passphrase failure',
+        authMode: AuthMode.passphrase,
+        changePINPassphraseError: true,
+      ),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final container = createContainer();
+        registerMockDiskEncryptionService(
+          authMode: tc.authMode,
+          changePINPassphraseError: tc.changePINPassphraseError,
+        );
+        await tester.pumpAppWithProviders(
+          (_) => const DiskEncryptionPage(),
+          container,
+        );
+        await tester.pumpAndSettle();
+
+        // Open change dialog based on auth mode
+        final buttonText = tc.authMode == AuthMode.pin
+            ? tester.l10n.recoveryKeyPINButton
+            : tester.l10n.recoveryKeyPassphraseButton;
+
+        expect(find.text(buttonText), findsOneWidget);
+        await tester.tap(find.text(buttonText));
+        await tester.pumpAndSettle();
+
+        // Find the text fields and change button
+        final textFields = find.byType(TextField);
+        expect(textFields, findsNWidgets(3));
+
+        final changeButton = find.widgetWithText(
+          ElevatedButton,
+          tester.l10n.recoveryKeyPassphraseChange,
+        );
+        expect(changeButton, findsOneWidget);
+
+        // Initially button should be disabled (no input)
+        expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
+
+        // Enter valid inputs for all fields
+        if (tc.authMode == AuthMode.pin) {
+          await tester.enterText(textFields.at(0), '1234');
+          await tester.enterText(textFields.at(1), '5678');
+          await tester.enterText(textFields.at(2), '5678');
+        } else {
+          await tester.enterText(textFields.at(0), 'currentpass');
+          await tester.enterText(textFields.at(1), 'newpass');
+          await tester.enterText(textFields.at(2), 'newpass');
+        }
+        await tester.pump();
+
+        // Button should now be enabled with valid inputs
+        expect(tester.widget<ElevatedButton>(changeButton).enabled, isTrue);
+
+        // Submit the form
+        await tester.tap(changeButton);
+        await tester.pumpAndSettle();
+
+        // Check the result based on success/failure
+        if (tc.changePINPassphraseError) {
+          // Should show error message
+          expect(
+            find.text(tester.l10n.diskEncryptionPageError),
+            findsOneWidget,
+          );
+
+          // Fields should remain enabled on error (so user can retry)
+          for (var i = 0; i < 3; i++) {
+            final textField = tester.widget<TextField>(textFields.at(i));
+            expect(textField.enabled, isTrue);
+          }
+        } else {
+          // Should show success message based on auth mode
+          final expectedSuccess = tc.authMode == AuthMode.pin
+              ? tester.l10n.recoveryKeyPassphrasePINSuccessHeader
+              : tester.l10n.recoveryKeyPassphrasePassphraseSuccessHeader;
+          expect(find.text(expectedSuccess), findsOneWidget);
+
+          // All fields should be disabled on success
+          for (var i = 0; i < 3; i++) {
+            final textField = tester.widget<TextField>(textFields.at(i));
+            expect(textField.enabled, isFalse);
+          }
+        }
+        // Submit button is disabled either way
+        expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
+      });
+    }
+  });
+
+  group('change auth - input filtering validation', () {
+    final cases = [
+      (name: 'PIN', authMode: AuthMode.pin),
+      (name: 'passphrase', authMode: AuthMode.passphrase),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final container = createContainer();
+        registerMockDiskEncryptionService(authMode: tc.authMode);
+        await tester.pumpAppWithProviders(
+          (_) => const DiskEncryptionPage(),
+          container,
+        );
+        await tester.pumpAndSettle();
+
+        // Open change dialog based on auth mode
+        final buttonText = tc.authMode == AuthMode.pin
+            ? tester.l10n.recoveryKeyPINButton
+            : tester.l10n.recoveryKeyPassphraseButton;
+
+        expect(find.text(buttonText), findsOneWidget);
+        await tester.tap(find.text(buttonText));
+        await tester.pumpAndSettle();
+
+        // Find the text fields
+        final textFields = find.byType(TextField);
+        expect(textFields, findsNWidgets(3));
+
+        // Test input filtering by entering mixed alphanumeric text
+        const mixedInput = 'a1b2c3d4';
+
+        // Enter mixed text in all three fields
+        await tester.enterText(textFields.at(0), mixedInput);
+        await tester.enterText(textFields.at(1), mixedInput);
+        await tester.enterText(textFields.at(2), mixedInput);
+        await tester.pump();
+
+        // Check the actual text in the controllers based on auth mode
+        final expectedText = tc.authMode == AuthMode.pin ? '1234' : mixedInput;
+
+        // Verify filtering behavior in all text fields
+        for (var i = 0; i < 3; i++) {
+          final textField = tester.widget<TextField>(textFields.at(i));
+          expect(textField.controller?.text, expectedText);
         }
       });
     }
