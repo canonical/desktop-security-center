@@ -80,7 +80,8 @@ abstract class DiskEncryptionService {
   /// Checks if a recovery key is still valid for use.
   Future<bool> checkRecoveryKey(String recoveryKey);
 
-  Future<void> changePINPassphrase(AuthMode authMode, String oldPass, String newPass);
+  Future<void> changePINPassphrase(
+      AuthMode authMode, String oldPass, String newPass);
 
   /// Holds the current state of the Check Recovery Key dialog.
   CheckRecoveryKeyDialogState get recoveryKeyDialogState;

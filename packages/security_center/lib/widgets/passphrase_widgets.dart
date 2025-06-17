@@ -212,10 +212,9 @@ class _SecurityKeyShowButton extends ConsumerWidget {
       child: TextButton.icon(
         icon: Icon(
           showSecurityKey ? YaruIcons.eye : YaruIcons.hide,
-          color:
-              isDisabled
-                  ? theme.disabledColor
-                  : theme.colorScheme.onSecondaryContainer,
+          color: isDisabled
+              ? theme.disabledColor
+              : theme.colorScheme.onSecondaryContainer,
         ),
         label: Text(
           showSecurityKey
@@ -224,10 +223,9 @@ class _SecurityKeyShowButton extends ConsumerWidget {
         ),
         onPressed: notifier.toggleShowPassphrase,
         style: TextButton.styleFrom(
-          foregroundColor:
-              isDisabled
-                  ? theme.disabledColor
-                  : theme.colorScheme.onSecondaryContainer,
+          foregroundColor: isDisabled
+              ? theme.disabledColor
+              : theme.colorScheme.onSecondaryContainer,
           backgroundColor: theme.colorScheme.onSurface.withOpacity(0.12),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(

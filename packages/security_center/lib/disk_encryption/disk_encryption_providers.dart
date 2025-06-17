@@ -25,10 +25,10 @@ sealed class RecoveryKeyException
       RecoveryKeyExceptionUnknown;
 
   factory RecoveryKeyException.from(Object? e) => switch (e) {
-    final FileSystemException _ => RecoveryKeyException.fileSystem(),
-    final RecoveryKeyException e => e,
-    final e => RecoveryKeyException.unknown(rawError: e.toString()),
-  };
+        final FileSystemException _ => RecoveryKeyException.fileSystem(),
+        final RecoveryKeyException e => e,
+        final e => RecoveryKeyException.unknown(rawError: e.toString()),
+      };
 }
 
 /// Dialog state for managing the change auth flow.
@@ -97,8 +97,10 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
   Future<void> changePINPassphrase() async {
     assert(state.dialogState is ChangeAuthDialogStateInput);
     try {
-      await _service.changePINPassphrase(state.authMode, state.oldPass, state.newPass);
-      state = state.copyWith(dialogState: ChangeAuthDialogState.success(), showPassphrase: false);
+      await _service.changePINPassphrase(
+          state.authMode, state.oldPass, state.newPass);
+      state = state.copyWith(
+          dialogState: ChangeAuthDialogState.success(), showPassphrase: false);
     } on Exception catch (e) {
       state = state.copyWith(dialogState: ChangeAuthDialogState.error(e));
     }
@@ -109,37 +111,43 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
   }
 
   set authMode(AuthMode authmode) {
-    state = state.copyWith(authMode: authmode, dialogState: ChangeAuthDialogStateInput());
+    state = state.copyWith(
+        authMode: authmode, dialogState: ChangeAuthDialogStateInput());
   }
 
   set confirmPass(String value) {
-    state = state.copyWith(confirmPass: value, dialogState: ChangeAuthDialogStateInput());
+    state = state.copyWith(
+        confirmPass: value, dialogState: ChangeAuthDialogStateInput());
   }
 
   set newPass(String value) {
-    state = state.copyWith(newPass: value, dialogState: ChangeAuthDialogStateInput());
+    state = state.copyWith(
+        newPass: value, dialogState: ChangeAuthDialogStateInput());
   }
 
-  set oldPass (String value) {
-    state = state.copyWith(oldPass: value, dialogState: ChangeAuthDialogStateInput());
+  set oldPass(String value) {
+    state = state.copyWith(
+        oldPass: value, dialogState: ChangeAuthDialogStateInput());
   }
 
   bool get isValid {
     // Check if all fields have content
-    if (state.oldPass.isEmpty || state.newPass.isEmpty || state.confirmPass.isEmpty) {
+    if (state.oldPass.isEmpty ||
+        state.newPass.isEmpty ||
+        state.confirmPass.isEmpty) {
       return false;
     }
-    
+
     // Check minimum length for new password/PIN (4 characters)
     if (state.newPass.length < 4) {
       return false;
     }
-    
+
     // Check if new password matches confirm password
     if (state.newPass != state.confirmPass) {
       return false;
     }
-    
+
     return true;
   }
 }
@@ -160,22 +168,21 @@ class TPMAuthenticationModel extends _$TPMAuthenticationModel {
       (k) => k.name == 'default-recovery' && k.type == KeySlotType.platform,
     );
     return recoveryKeySlot.authMode!;
-    }
   }
+}
 
-typedef FilePicker =
-    Future<Uri?> Function({
-      required BuildContext context,
-      required String title,
-      String? defaultFileName,
-      List<XdgFileChooserFilter> filters,
-    });
+typedef FilePicker = Future<Uri?> Function({
+  required BuildContext context,
+  required String title,
+  String? defaultFileName,
+  List<XdgFileChooserFilter> filters,
+});
 final filePickerProvider = Provider<FilePicker>((ref) => showSaveFileDialog);
 
 final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
-typedef ProcessRunner =
-    Future<ProcessResult> Function(String executable, List<String> arguments);
+typedef ProcessRunner = Future<ProcessResult> Function(
+    String executable, List<String> arguments);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @freezed

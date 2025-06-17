@@ -45,7 +45,6 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   final CheckRecoveryKeyDialogState _checkRecoveryKeyDialogState =
       CheckRecoveryKeyDialogState.empty();
 
-
   /// Generates a fake recovery key and key ID.
   @override
   Future<RecoveryKeyDetails> generateRecoveryKey() async {
@@ -104,9 +103,10 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       _checkRecoveryKeyDialogState;
 
   @override
-  Future<void> changePINPassphrase(AuthMode auth, String oldAuth, String newAuth) async {
+  Future<void> changePINPassphrase(
+      AuthMode auth, String oldAuth, String newAuth) async {
     if (oldAuth != _auth) {
-        throw Exception('Auths dont match');
+      throw Exception('Auths dont match');
     }
     _auth = newAuth;
   }

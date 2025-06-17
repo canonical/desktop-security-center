@@ -83,58 +83,57 @@ class CheckRecoveryKeyButtons extends ConsumerWidget {
             // TPM Authentication specific content
             switch (data) {
               AuthMode.pin => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.recoveryKeyPINHeader,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(l10n.recoveryKeyPINBody),
-                  const SizedBox(height: 16),
-                  OutlinedButton(
-                    onPressed: () {
-                      ref
-                          .read(changeAuthDialogModelProvider.notifier)
-                          .authMode = AuthMode.pin;
-                      showChangeAuthDialog(context, AuthMode.pin);
-                    },
-                    child: Text(l10n.recoveryKeyPINButton),
-                  ),
-                ],
-              ),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.recoveryKeyPINHeader,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(l10n.recoveryKeyPINBody),
+                    const SizedBox(height: 16),
+                    OutlinedButton(
+                      onPressed: () {
+                        ref
+                            .read(changeAuthDialogModelProvider.notifier)
+                            .authMode = AuthMode.pin;
+                        showChangeAuthDialog(context, AuthMode.pin);
+                      },
+                      child: Text(l10n.recoveryKeyPINButton),
+                    ),
+                  ],
+                ),
               AuthMode.passphrase => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.recoveryKeyPassphraseHeader,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(l10n.recoveryKeyPassphraseBody),
-                  const SizedBox(height: 16),
-                  OutlinedButton(
-                    onPressed: () {
-                      ref
-                          .read(changeAuthDialogModelProvider.notifier)
-                          .authMode = AuthMode.passphrase;
-                      showChangeAuthDialog(context, AuthMode.passphrase);
-                    },
-                    child: Text(l10n.recoveryKeyPassphraseButton),
-                  ),
-                ],
-              ),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.recoveryKeyPassphraseHeader,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(l10n.recoveryKeyPassphraseBody),
+                    const SizedBox(height: 16),
+                    OutlinedButton(
+                      onPressed: () {
+                        ref
+                            .read(changeAuthDialogModelProvider.notifier)
+                            .authMode = AuthMode.passphrase;
+                        showChangeAuthDialog(context, AuthMode.passphrase);
+                      },
+                      child: Text(l10n.recoveryKeyPassphraseButton),
+                    ),
+                  ],
+                ),
               AuthMode.none => const SizedBox.shrink(),
             },
           ],
         );
       },
-      error:
-          (e, stack) => YaruInfoBox(
-            title: Text(l10n.diskEncryptionPageError),
-            subtitle: Text(e.toString()),
-            yaruInfoType: YaruInfoType.danger,
-          ),
+      error: (e, stack) => YaruInfoBox(
+        title: Text(l10n.diskEncryptionPageError),
+        subtitle: Text(e.toString()),
+        yaruInfoType: YaruInfoType.danger,
+      ),
       loading: () => const YaruLinearProgressIndicator(),
     );
   }
@@ -257,11 +256,10 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   YaruLinearProgressIndicator()
                 else if (recoveryKey is AsyncData)
                   TextFormField(
-                    onTap:
-                        () => saveToClipboard(
-                          context,
-                          recoveryKey.value!.recoveryKey,
-                        ),
+                    onTap: () => saveToClipboard(
+                      context,
+                      recoveryKey.value!.recoveryKey,
+                    ),
                     initialValue: recoveryKey.value!.recoveryKey,
                     decoration: InputDecoration(
                       labelText: l10n.diskEncryptionPageRecoveryKey,
@@ -272,11 +270,10 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                           semanticLabel:
                               l10n.diskEncryptionPageCopySemanticLabel,
                         ),
-                        onPressed:
-                            () => saveToClipboard(
-                              context,
-                              recoveryKey.value!.recoveryKey,
-                            ),
+                        onPressed: () => saveToClipboard(
+                          context,
+                          recoveryKey.value!.recoveryKey,
+                        ),
                       ),
                       suffixIconConstraints: BoxConstraints(
                         maxWidth: 32,
@@ -298,55 +295,51 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                 Row(
                   children: [
                     OutlinedButton(
-                      onPressed:
-                          replaceDialogState
-                                      is! ReplaceRecoveryKeyDialogStateGenerating &&
-                                  replaceDialogState
-                                      is! ReplaceRecoveryKeyDialogStateError
-                              ? () async {
-                                replaceNotifier.setError(null);
-                                try {
-                                  final uri = await filePicker(
-                                    context: context,
-                                    title: l10n.recoveryKeyFilePickerTitle,
-                                    defaultFileName: defaultRecoveryKeyFileName,
-                                    filters: [
-                                      XdgFileChooserFilter(
-                                        l10n.recoveryKeyFilePickerFilter,
-                                        [XdgFileChooserGlobPattern('*.txt')],
-                                      ),
-                                    ],
-                                  );
-                                  if (uri != null) {
-                                    await replaceNotifier.writeRecoveryKey(
-                                      uri,
-                                      recoveryKey.value!.recoveryKey,
-                                    );
-                                  }
-                                } on Exception catch (e) {
-                                  replaceNotifier.setError(
-                                    RecoveryKeyException.from(e),
+                      onPressed: replaceDialogState
+                                  is! ReplaceRecoveryKeyDialogStateGenerating &&
+                              replaceDialogState
+                                  is! ReplaceRecoveryKeyDialogStateError
+                          ? () async {
+                              replaceNotifier.setError(null);
+                              try {
+                                final uri = await filePicker(
+                                  context: context,
+                                  title: l10n.recoveryKeyFilePickerTitle,
+                                  defaultFileName: defaultRecoveryKeyFileName,
+                                  filters: [
+                                    XdgFileChooserFilter(
+                                      l10n.recoveryKeyFilePickerFilter,
+                                      [XdgFileChooserGlobPattern('*.txt')],
+                                    ),
+                                  ],
+                                );
+                                if (uri != null) {
+                                  await replaceNotifier.writeRecoveryKey(
+                                    uri,
+                                    recoveryKey.value!.recoveryKey,
                                   );
                                 }
+                              } on Exception catch (e) {
+                                replaceNotifier.setError(
+                                  RecoveryKeyException.from(e),
+                                );
                               }
-                              : null,
+                            }
+                          : null,
                       child: Text(l10n.diskEncryptionPageReplaceDialogSave),
                     ),
                     OutlinedButton(
-                      onPressed:
-                          replaceDialogState
-                                      is! ReplaceRecoveryKeyDialogStateGenerating &&
-                                  replaceDialogState
-                                      is! ReplaceRecoveryKeyDialogStateError
-                              ? () => showDialog(
+                      onPressed: replaceDialogState
+                                  is! ReplaceRecoveryKeyDialogStateGenerating &&
+                              replaceDialogState
+                                  is! ReplaceRecoveryKeyDialogStateError
+                          ? () => showDialog(
                                 context: context,
-                                builder:
-                                    (_) => _RecoveryKeyQRDialog(
-                                      recoveryKey:
-                                          recoveryKey.value!.recoveryKey,
-                                    ),
+                                builder: (_) => _RecoveryKeyQRDialog(
+                                  recoveryKey: recoveryKey.value!.recoveryKey,
+                                ),
                               )
-                              : null,
+                          : null,
                       child: Text(l10n.diskEncryptionPageReplaceDialogShowQR),
                     ),
                   ].separatedBy(const SizedBox(width: 16)),
@@ -377,22 +370,20 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     OutlinedButton(
-                      onPressed:
-                          replaceDialogState
-                                  is ReplaceRecoveryKeyDialogStateInput
-                              ? () => Navigator.of(context).pop()
-                              : null,
+                      onPressed: replaceDialogState
+                              is ReplaceRecoveryKeyDialogStateInput
+                          ? () => Navigator.of(context).pop()
+                          : null,
                       child: Text(l10n.diskEncryptionPageReplaceDialogDiscard),
                     ),
                     ElevatedButton(
-                      onPressed:
-                          replaceDialogState
-                                      is ReplaceRecoveryKeyDialogStateInput &&
-                                  replaceDialogState.acknowledged == true
-                              ? () => replaceNotifier.replaceRecoveryKey(
+                      onPressed: replaceDialogState
+                                  is ReplaceRecoveryKeyDialogStateInput &&
+                              replaceDialogState.acknowledged == true
+                          ? () => replaceNotifier.replaceRecoveryKey(
                                 recoveryKey.value!.keyId,
                               )
-                              : null,
+                          : null,
                       child: Text(l10n.diskEncryptionPageReplaceDialogReplace),
                     ),
                   ].separatedBy(const SizedBox(width: 16)),
@@ -463,11 +454,10 @@ class ChangeAuthDialog extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
-                  onPressed:
-                      model.dialogState is ChangeAuthDialogStateInput &&
-                              notifier.isValid
-                          ? notifier.changePINPassphrase
-                          : null,
+                  onPressed: model.dialogState is ChangeAuthDialogStateInput &&
+                          notifier.isValid
+                      ? notifier.changePINPassphrase
+                      : null,
                   child: Text(l10n.recoveryKeyPassphraseChange),
                 ),
               ],
@@ -490,7 +480,8 @@ class ChangeAuthDialog extends ConsumerWidget {
               YaruInfoBox(
                 title: Text(l10n.diskEncryptionPageError),
                 subtitle: Text(
-                  (model.dialogState as ChangeAuthDialogStateError).e
+                  (model.dialogState as ChangeAuthDialogStateError)
+                      .e
                       .toString(),
                 ),
                 yaruInfoType: YaruInfoType.danger,
