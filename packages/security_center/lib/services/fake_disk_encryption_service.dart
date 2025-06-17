@@ -104,7 +104,10 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
   @override
   Future<void> changePINPassphrase(
-      AuthMode auth, String oldAuth, String newAuth) async {
+    AuthMode auth,
+    String oldAuth,
+    String newAuth,
+  ) async {
     if (oldAuth != _auth) {
       throw Exception('Auths dont match');
     }

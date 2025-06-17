@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
@@ -226,7 +225,7 @@ class _SecurityKeyShowButton extends ConsumerWidget {
           foregroundColor: isDisabled
               ? theme.disabledColor
               : theme.colorScheme.onSecondaryContainer,
-          backgroundColor: theme.colorScheme.onSurface.withOpacity(0.12),
+          backgroundColor: theme.colorScheme.onSurface.withValues(alpha: 0.12),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(4.0),
