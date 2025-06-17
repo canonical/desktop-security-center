@@ -459,7 +459,42 @@ class ChangeAuthDialog extends ConsumerWidget {
             CurrentPassphraseFormField(authMode: authMode),
             PassphraseFormField(authMode: authMode),
             ConfirmPassphraseFormField(authMode: authMode),
-            OutlinedButton(onPressed: model.dialogState is ChangeAuthDialogStateInput && notifier.isValid ? () => notifier.changePINPassphrase() : null, child: Text(l10n.recoveryKeyPassphraseChange))
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed:
+                      model.dialogState is ChangeAuthDialogStateInput &&
+                              notifier.isValid
+                          ? notifier.changePINPassphrase
+                          : null,
+                  child: Text(l10n.recoveryKeyPassphraseChange),
+                ),
+              ],
+            ),
+            if (model.dialogState is ChangeAuthDialogStateSuccess)
+              YaruInfoBox(
+                title: Text(
+                  authMode == AuthMode.passphrase
+                      ? l10n.recoveryKeyPassphrasePassphraseSuccessHeader
+                      : l10n.recoveryKeyPassphrasePINSuccessHeader,
+                ),
+                subtitle: Text(
+                  authMode == AuthMode.passphrase
+                      ? l10n.recoveryKeyPassphrasePassphraseSuccessBody
+                      : l10n.recoveryKeyPassphrasePINSuccessBody,
+                ),
+                yaruInfoType: YaruInfoType.success,
+              ),
+            if (model.dialogState is ChangeAuthDialogStateError)
+              YaruInfoBox(
+                title: Text(l10n.diskEncryptionPageError),
+                subtitle: Text(
+                  (model.dialogState as ChangeAuthDialogStateError).e
+                      .toString(),
+                ),
+                yaruInfoType: YaruInfoType.danger,
+              ),
           ].separatedBy(const SizedBox(height: 16)),
         ),
       ),

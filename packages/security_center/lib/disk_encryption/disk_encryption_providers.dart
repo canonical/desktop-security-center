@@ -96,7 +96,12 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
 
   Future<void> changePINPassphrase() async {
     assert(state.dialogState is ChangeAuthDialogStateInput);
-    await _service.changePINPassphrase(state.authMode, state.newPass, state.oldPass);
+    try {
+      await _service.changePINPassphrase(state.authMode, state.oldPass, state.newPass);
+      state = state.copyWith(dialogState: ChangeAuthDialogState.success(), showPassphrase: false);
+    } on Exception catch (e) {
+      state = state.copyWith(dialogState: ChangeAuthDialogState.error(e));
+    }
   }
 
   void toggleShowPassphrase() {
@@ -104,19 +109,19 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
   }
 
   set authMode(AuthMode authmode) {
-    state = state.copyWith(authMode: authmode);
+    state = state.copyWith(authMode: authmode, dialogState: ChangeAuthDialogStateInput());
   }
 
   set confirmPass(String value) {
-    state = state.copyWith(confirmPass: value);
+    state = state.copyWith(confirmPass: value, dialogState: ChangeAuthDialogStateInput());
   }
 
   set newPass(String value) {
-    state = state.copyWith(newPass: value);
+    state = state.copyWith(newPass: value, dialogState: ChangeAuthDialogStateInput());
   }
 
   set oldPass (String value) {
-    state = state.copyWith(oldPass: value);
+    state = state.copyWith(oldPass: value, dialogState: ChangeAuthDialogStateInput());
   }
 
   bool get isValid {

@@ -50,6 +50,7 @@ class _CurrentPassphraseFormFieldState
     final model = ref.watch(changeAuthDialogModelProvider);
     final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
     final lang = AppLocalizations.of(context);
+    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
 
     return ValidatedFormField(
       controller: _controller,
@@ -57,6 +58,7 @@ class _CurrentPassphraseFormFieldState
       labelText: widget.authMode.localizedCurrentHint(lang),
       obscureText: !model.showPassphrase,
       suffixIcon: const _SecurityKeyShowButton(),
+      enabled: !isDisabled,
       validator: RequiredValidator(
         errorText: widget.authMode.localizedCurrentError(lang),
       ),
@@ -102,6 +104,7 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
     final model = ref.watch(changeAuthDialogModelProvider);
     final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
     final lang = AppLocalizations.of(context);
+    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
 
     return ValidatedFormField(
       controller: _controller,
@@ -109,6 +112,7 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
       labelText: widget.authMode.localizedNewHint(lang),
       obscureText: !model.showPassphrase,
       suffixIcon: const _SecurityKeyShowButton(),
+      enabled: !isDisabled,
       validator: MultiValidator([
         RequiredValidator(errorText: widget.authMode.localizedNewError(lang)),
         MinLengthValidator(
@@ -159,6 +163,7 @@ class _ConfirmPassphraseFormFieldState
     final model = ref.watch(changeAuthDialogModelProvider);
     final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
     final lang = AppLocalizations.of(context);
+    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
 
     return ValidatedFormField(
       controller: _controller,
@@ -166,6 +171,7 @@ class _ConfirmPassphraseFormFieldState
       labelText: widget.authMode.localizedConfirmHint(lang),
       obscureText: !model.showPassphrase,
       suffixIcon: const _SecurityKeyShowButton(),
+      enabled: !isDisabled,
       validator: EqualValidator(
         model.newPass,
         errorText: widget.authMode.localizedConfirmError(lang),
@@ -196,30 +202,33 @@ class _SecurityKeyShowButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final lang = AppLocalizations.of(context);
-    final showSecurityKey = ref.watch(
-      changeAuthDialogModelProvider.select((model) => model.showPassphrase),
-    );
+    final model = ref.watch(changeAuthDialogModelProvider);
+    final notifier = ref.read(changeAuthDialogModelProvider.notifier);
+    final showSecurityKey = model.showPassphrase;
+    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
 
     return Padding(
       padding: const EdgeInsets.all(1.0),
       child: TextButton.icon(
         icon: Icon(
           showSecurityKey ? YaruIcons.eye : YaruIcons.hide,
-          color: theme.colorScheme.onSecondaryContainer,
+          color:
+              isDisabled
+                  ? theme.disabledColor
+                  : theme.colorScheme.onSecondaryContainer,
         ),
         label: Text(
           showSecurityKey
               ? lang.recoveryKeyPassphraseHide
               : lang.recoveryKeyPassphraseShow,
         ),
-        onPressed: () {
-          ref
-              .read(changeAuthDialogModelProvider.notifier)
-              .toggleShowPassphrase();
-        },
+        onPressed: notifier.toggleShowPassphrase,
         style: TextButton.styleFrom(
-          foregroundColor: theme.colorScheme.onSecondaryContainer,
-          backgroundColor: theme.colorScheme.primaryContainer,
+          foregroundColor:
+              isDisabled
+                  ? theme.disabledColor
+                  : theme.colorScheme.onSecondaryContainer,
+          backgroundColor: theme.colorScheme.onSurface.withOpacity(0.12),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(4.0),
