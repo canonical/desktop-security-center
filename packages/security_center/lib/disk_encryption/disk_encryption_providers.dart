@@ -118,6 +118,25 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
   set oldPass (String value) {
     state = state.copyWith(oldPass: value);
   }
+
+  bool get isValid {
+    // Check if all fields have content
+    if (state.oldPass.isEmpty || state.newPass.isEmpty || state.confirmPass.isEmpty) {
+      return false;
+    }
+    
+    // Check minimum length for new password/PIN (4 characters)
+    if (state.newPass.length < 4) {
+      return false;
+    }
+    
+    // Check if new password matches confirm password
+    if (state.newPass != state.confirmPass) {
+      return false;
+    }
+    
+    return true;
+  }
 }
 
 @riverpod

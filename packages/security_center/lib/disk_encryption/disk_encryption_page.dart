@@ -439,6 +439,8 @@ class ChangeAuthDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final model = ref.watch(changeAuthDialogModelProvider);
+    final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
     assert(authMode != AuthMode.none);
 
     final title = switch (authMode) {
@@ -457,6 +459,7 @@ class ChangeAuthDialog extends ConsumerWidget {
             CurrentPassphraseFormField(authMode: authMode),
             PassphraseFormField(authMode: authMode),
             ConfirmPassphraseFormField(authMode: authMode),
+            OutlinedButton(onPressed: model.dialogState is ChangeAuthDialogStateInput && notifier.isValid ? () => notifier.changePINPassphrase() : null, child: Text(l10n.recoveryKeyPassphraseChange))
           ].separatedBy(const SizedBox(height: 16)),
         ),
       ),
