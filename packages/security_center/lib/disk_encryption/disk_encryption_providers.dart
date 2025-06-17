@@ -31,12 +31,13 @@ sealed class RecoveryKeyException
   };
 }
 
-/// Enum representing the different types of authentication for the TPM
+/// Dialog state for managing the change auth flow.
 @freezed
-sealed class TPMAuthentication with _$TPMAuthentication {
-  factory TPMAuthentication.pin() = TPMAuthenticationPIN;
-  factory TPMAuthentication.passphrase() = TPMAuthenticationPassphrase;
-  factory TPMAuthentication.none() = TPMAuthenticationNone;
+sealed class ChangeAuthDialogState with _$ChangeAuthDialogState {
+  factory ChangeAuthDialogState.loading() = ChangeAuthDialogStateLoading;
+  factory ChangeAuthDialogState.input() = ChangeAuthDialogStateInput;
+  factory ChangeAuthDialogState.success() = ChangeAuthDialogStateSuccess;
+  factory ChangeAuthDialogState.error(Exception e) = ChangeAuthDialogStateError;
 }
 
 /// Dialog state for managing the replace recovery key flow.
@@ -68,12 +69,63 @@ sealed class CheckRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
       CheckRecoveryKeyDialogStateError;
 }
 
+@freezed
+class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
+  factory ChangeAuthDialogModelData({
+    required ChangeAuthDialogState dialogState,
+    required AuthMode authMode,
+    @Default('') String oldPass,
+    @Default('') String newPass,
+    @Default('') String confirmPass,
+    @Default(false) bool showPassphrase,
+    @Default(null) Exception? validationError,
+  }) = _ChangeAuthDialogModelData;
+}
+
+@riverpod
+class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
+  late final _service = getService<DiskEncryptionService>();
+
+  @override
+  ChangeAuthDialogModelData build() {
+    return ChangeAuthDialogModelData(
+      dialogState: ChangeAuthDialogState.input(),
+      authMode: AuthMode.none,
+    );
+  }
+
+  Future<void> changePINPassphrase() async {
+    assert(state.dialogState is ChangeAuthDialogStateInput);
+    await _service.changePINPassphrase(state.authMode, state.newPass, state.oldPass);
+  }
+
+  void toggleShowPassphrase() {
+    state = state.copyWith(showPassphrase: !state.showPassphrase);
+  }
+
+  set authMode(AuthMode authmode) {
+    state = state.copyWith(authMode: authmode);
+  }
+
+  set confirmPass(String value) {
+    state = state.copyWith(confirmPass: value);
+  }
+
+  set newPass(String value) {
+    state = state.copyWith(newPass: value);
+  }
+
+  set oldPass (String value) {
+    state = state.copyWith(oldPass: value);
+  }
+}
+
 @riverpod
 class TPMAuthenticationModel extends _$TPMAuthenticationModel {
   late final _service = getService<DiskEncryptionService>();
 
   @override
-  Future<TPMAuthentication> build() async {
+  Future<AuthMode> build() async {
     final containers = await _service.enumerateKeySlots();
 
     final systemDataVolume = containers.firstWhere(
@@ -83,16 +135,9 @@ class TPMAuthenticationModel extends _$TPMAuthenticationModel {
     final recoveryKeySlot = systemDataVolume.keySlots.firstWhere(
       (k) => k.name == 'default-recovery' && k.type == KeySlotType.platform,
     );
-    switch (recoveryKeySlot.authMode) {
-      case AuthMode.pin:
-        return TPMAuthentication.pin();
-      case AuthMode.passphrase:
-        return TPMAuthentication.passphrase();
-      case _:
-        return TPMAuthentication.none();
+    return recoveryKeySlot.authMode!;
     }
   }
-}
 
 typedef FilePicker =
     Future<Uri?> Function({

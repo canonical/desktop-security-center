@@ -257,6 +257,9 @@ class AppLocalizationsMr extends AppLocalizations {
   String get recoveryKeyPassphraseConfirmError => 'Passphrases do not match, try again';
 
   @override
+  String get recoveryKeyPassphraseDialogHeader => 'Change Passphrase';
+
+  @override
   String get recoveryKeyPINEnabled => 'Encryption PIN is enabled';
 
   @override
@@ -287,8 +290,14 @@ class AppLocalizationsMr extends AppLocalizations {
   String get recoveryKeyPINConfirmError => 'PINs do not match, try again';
 
   @override
+  String get recoveryKeyPINDialogHeader => 'Change PIN';
+
+  @override
   String get recoveryKeyPassphraseShow => 'Show';
 
   @override
   String get recoveryKeyPassphraseChange => 'Change';
+
+  @override
+  String get recoveryKeyPassphraseHide => 'Hide';
 }

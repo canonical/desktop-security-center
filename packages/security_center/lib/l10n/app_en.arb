@@ -155,6 +155,7 @@
     "recoveryKeyPassphraseCurrentError": "Incorrect passphrase, try again",
     "recoveryKeyPassphraseNewError": "Must be at least 4 characters long",
     "recoveryKeyPassphraseConfirmError": "Passphrases do not match, try again",
+    "recoveryKeyPassphraseDialogHeader": "Change Passphrase",
     "recoveryKeyPINEnabled": "Encryption PIN is enabled",
     "recoveryKeyPINHeader": "Encryption Pin",
     "recoveryKeyPINBody": "You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.",
@@ -165,6 +166,8 @@
     "recoveryKeyPINCurrentError": "Incorrect PIN, try again",
     "recoveryKeyPINNewError": "Must be at least 4 digits long",
     "recoveryKeyPINConfirmError": "PINs do not match, try again",
+    "recoveryKeyPINDialogHeader": "Change PIN",
     "recoveryKeyPassphraseShow": "Show",
-    "recoveryKeyPassphraseChange": "Change"
+    "recoveryKeyPassphraseChange": "Change",
+    "recoveryKeyPassphraseHide": "Hide"
 }

@@ -695,6 +695,12 @@ abstract class AppLocalizations {
   /// **'Passphrases do not match, try again'**
   String get recoveryKeyPassphraseConfirmError;
 
+  /// No description provided for @recoveryKeyPassphraseDialogHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Passphrase'**
+  String get recoveryKeyPassphraseDialogHeader;
+
   /// No description provided for @recoveryKeyPINEnabled.
   ///
   /// In en, this message translates to:
@@ -755,6 +761,12 @@ abstract class AppLocalizations {
   /// **'PINs do not match, try again'**
   String get recoveryKeyPINConfirmError;
 
+  /// No description provided for @recoveryKeyPINDialogHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Change PIN'**
+  String get recoveryKeyPINDialogHeader;
+
   /// No description provided for @recoveryKeyPassphraseShow.
   ///
   /// In en, this message translates to:
@@ -766,6 +778,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change'**
   String get recoveryKeyPassphraseChange;
+
+  /// No description provided for @recoveryKeyPassphraseHide.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide'**
+  String get recoveryKeyPassphraseHide;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
