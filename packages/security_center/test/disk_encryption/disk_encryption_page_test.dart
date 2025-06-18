@@ -538,68 +538,6 @@ void main() {
     expect(find.text(tester.l10n.recoveryKeyPassphraseShow), findsNothing);
   });
 
-  group('change auth - submit disabled with short input and shows error', () {
-    final cases = [
-      (name: 'Pin', authMode: AuthMode.pin),
-      (name: 'passphrase', authMode: AuthMode.passphrase),
-    ];
-
-    for (final tc in cases) {
-      testWidgets(tc.name, (tester) async {
-        final container = createContainer();
-        registerMockDiskEncryptionService(authMode: tc.authMode);
-        await tester.pumpAppWithProviders(
-          (_) => const DiskEncryptionPage(),
-          container,
-        );
-        await tester.pumpAndSettle();
-
-        // Open change dialog based on auth mode
-        final buttonText = tc.authMode == AuthMode.pin
-            ? tester.l10n.recoveryKeyPinButton
-            : tester.l10n.recoveryKeyPassphraseButton;
-
-        expect(find.text(buttonText), findsOneWidget);
-        await tester.tap(find.text(buttonText));
-        await tester.pumpAndSettle();
-
-        // Find the text fields and change button
-        final textFields = find.byType(TextField);
-        expect(textFields, findsNWidgets(3));
-
-        final changeButton = find.widgetWithText(
-          ElevatedButton,
-          tester.l10n.recoveryKeyPassphraseChange,
-        );
-        expect(changeButton, findsOneWidget);
-
-        // Initially button should be disabled (no input)
-        expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
-
-        // Enter valid current auth but short new auth (< 4 characters/digits)
-        if (tc.authMode == AuthMode.pin) {
-          await tester.enterText(textFields.at(0), '1234');
-          await tester.enterText(textFields.at(1), '12');
-          await tester.enterText(textFields.at(2), '12');
-        } else {
-          await tester.enterText(textFields.at(0), 'pass');
-          await tester.enterText(textFields.at(1), 'xy');
-          await tester.enterText(textFields.at(2), 'xy');
-        }
-        await tester.pump();
-
-        // Button should still be disabled due to validation error
-        expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
-
-        // Check that appropriate error message is visible
-        final expectedError = tc.authMode == AuthMode.pin
-            ? tester.l10n.recoveryKeyPinNewError
-            : tester.l10n.recoveryKeyPassphraseNewError;
-        expect(find.text(expectedError), findsOneWidget);
-      });
-    }
-  });
-
   group('change auth - submit disabled when new and confirm do not match', () {
     final cases = [
       (name: 'Pin', authMode: AuthMode.pin),

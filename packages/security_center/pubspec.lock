@@ -668,14 +668,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
-  password_strength:
-    dependency: transitive
-    description:
-      name: password_strength
-      sha256: "0e51e3d864e37873a1347e658147f88b66e141ee36c58e19828dc5637961e1ce"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
   path:
     dependency: "direct main"
     description:
@@ -1121,14 +1113,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.0"
-  ubuntu_widgets:
-    dependency: "direct main"
-    description:
-      name: ubuntu_widgets
-      sha256: "55a569992f39fd6e8a3116becf9cda988e4d551f85b86f4862852cebdf44b20f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.2"
   url_launcher:
     dependency: "direct main"
     description:

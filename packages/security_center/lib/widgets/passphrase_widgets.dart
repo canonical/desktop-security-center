@@ -2,13 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
-import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:yaru/icons.dart';
 
 class CurrentPassphraseFormField extends ConsumerStatefulWidget {
@@ -49,16 +47,14 @@ class _CurrentPassphraseFormFieldState
     final lang = AppLocalizations.of(context);
     final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
 
-    return ValidatedFormField(
+    return TextFormField(
       controller: _controller,
-      fieldWidth: widget.fieldWidth,
-      labelText: widget.authMode.localizedCurrentHint(lang),
-      obscureText: !model.showPassphrase,
-      suffixIcon: const _SecurityKeyShowButton(),
-      enabled: !isDisabled,
-      validator: RequiredValidator(
-        errorText: widget.authMode.localizedCurrentError(lang),
+      decoration: InputDecoration(
+        labelText: widget.authMode.localizedCurrentHint(lang),
+        suffixIcon: const _SecurityKeyShowButton(),
       ),
+      obscureText: !model.showPassphrase,
+      enabled: !isDisabled,
       onChanged: (value) {
         notifier.oldPass = value;
       },
@@ -103,20 +99,14 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
     final lang = AppLocalizations.of(context);
     final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
 
-    return ValidatedFormField(
+    return TextFormField(
       controller: _controller,
-      fieldWidth: widget.fieldWidth,
-      labelText: widget.authMode.localizedNewHint(lang),
+      decoration: InputDecoration(
+        labelText: widget.authMode.localizedNewHint(lang),
+        suffixIcon: const _SecurityKeyShowButton(),
+      ),
       obscureText: !model.showPassphrase,
-      suffixIcon: const _SecurityKeyShowButton(),
       enabled: !isDisabled,
-      validator: MultiValidator([
-        RequiredValidator(errorText: widget.authMode.localizedNewError(lang)),
-        MinLengthValidator(
-          4,
-          errorText: widget.authMode.localizedNewError(lang),
-        ),
-      ]),
       onChanged: (value) {
         notifier.newPass = value;
       },
@@ -162,17 +152,17 @@ class _ConfirmPassphraseFormFieldState
     final lang = AppLocalizations.of(context);
     final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
 
-    return ValidatedFormField(
+    return TextFormField(
       controller: _controller,
-      fieldWidth: widget.fieldWidth,
-      labelText: widget.authMode.localizedConfirmHint(lang),
-      obscureText: !model.showPassphrase,
-      suffixIcon: const _SecurityKeyShowButton(),
-      enabled: !isDisabled,
-      validator: EqualValidator(
-        model.newPass,
-        errorText: widget.authMode.localizedConfirmError(lang),
+      decoration: InputDecoration(
+        labelText: widget.authMode.localizedConfirmHint(lang),
+        suffixIcon: const _SecurityKeyShowButton(),
+        errorText: !notifier.passphraseConfirmed
+            ? widget.authMode.localizedConfirmError(lang)
+            : null,
       ),
+      obscureText: !model.showPassphrase,
+      enabled: !isDisabled,
       onChanged: (value) {
         notifier.confirmPass = value;
       },

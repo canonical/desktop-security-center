@@ -41,7 +41,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   List<SystemDataContainer> containers;
   final Map<String, String> _recoveryKeys;
   final bool checkError;
-  String _auth = 'abcde';
+  String _auth = '12345';
   final CheckRecoveryKeyDialogState _checkRecoveryKeyDialogState =
       CheckRecoveryKeyDialogState.empty();
 

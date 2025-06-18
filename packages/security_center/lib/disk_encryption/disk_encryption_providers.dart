@@ -148,14 +148,17 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
       return false;
     }
 
-    if (state.newPass.length < 4) {
-      return false;
-    }
-
     if (state.newPass != state.confirmPass) {
       return false;
     }
 
+    return true;
+  }
+
+  bool get passphraseConfirmed {
+    if (state.newPass != state.confirmPass) {
+      return false;
+    }
     return true;
   }
 }
@@ -190,9 +193,7 @@ final filePickerProvider = Provider<FilePicker>((ref) => showSaveFileDialog);
 final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
 typedef ProcessRunner = Future<ProcessResult> Function(
-  String executable,
-  List<String> arguments,
-);
+    String executable, List<String> arguments);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @freezed
