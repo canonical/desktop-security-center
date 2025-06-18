@@ -492,7 +492,7 @@ void main() {
     }
   });
 
-  testWidgets('chagne passphrase - show toggles visibility', (tester) async {
+  testWidgets('change passphrase - show toggles visibility', (tester) async {
     final container = createContainer();
     registerMockDiskEncryptionService();
     await tester.pumpAppWithProviders(

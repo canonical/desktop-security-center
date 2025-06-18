@@ -11,8 +11,6 @@ import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:yaru/icons.dart';
 
-// TODO: this will need to be conditionally hooked up to the /storage/v2/calculate_entropy
-//       endpoint in Subiquity once it is available
 class CurrentPassphraseFormField extends ConsumerStatefulWidget {
   const CurrentPassphraseFormField({
     required this.authMode,
@@ -210,7 +208,7 @@ class _SecurityKeyShowButton extends ConsumerWidget {
       padding: const EdgeInsets.all(1.0),
       child: TextButton.icon(
         icon: Icon(
-          showSecurityKey ? YaruIcons.eye : YaruIcons.hide,
+          showSecurityKey ? YaruIcons.hide : YaruIcons.eye,
           color: isDisabled
               ? theme.disabledColor
               : theme.colorScheme.onSecondaryContainer,
