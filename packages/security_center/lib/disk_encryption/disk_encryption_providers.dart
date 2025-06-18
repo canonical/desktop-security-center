@@ -92,7 +92,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
     );
   }
 
-  Future<void> changePINPassphrase() async {
+  Future<void> changePinPassphrase() async {
     assert(state.dialogState is ChangeAuthDialogStateInput);
     try {
       await _service.changePINPassphrase(
@@ -161,7 +161,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
 }
 
 @riverpod
-class TPMAuthenticationModel extends _$TPMAuthenticationModel {
+class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   late final _service = getService<DiskEncryptionService>();
 
   @override

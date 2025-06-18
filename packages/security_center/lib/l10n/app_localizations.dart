@@ -701,71 +701,71 @@ abstract class AppLocalizations {
   /// **'Change Passphrase'**
   String get recoveryKeyPassphraseDialogHeader;
 
-  /// No description provided for @recoveryKeyPINEnabled.
+  /// No description provided for @recoveryKeyPinEnabled.
   ///
   /// In en, this message translates to:
   /// **'Encryption PIN is enabled'**
-  String get recoveryKeyPINEnabled;
+  String get recoveryKeyPinEnabled;
 
-  /// No description provided for @recoveryKeyPINHeader.
+  /// No description provided for @recoveryKeyPinHeader.
   ///
   /// In en, this message translates to:
   /// **'Encryption Pin'**
-  String get recoveryKeyPINHeader;
+  String get recoveryKeyPinHeader;
 
-  /// No description provided for @recoveryKeyPINBody.
+  /// No description provided for @recoveryKeyPinBody.
   ///
   /// In en, this message translates to:
   /// **'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.'**
-  String get recoveryKeyPINBody;
+  String get recoveryKeyPinBody;
 
-  /// No description provided for @recoveryKeyPINButton.
+  /// No description provided for @recoveryKeyPinButton.
   ///
   /// In en, this message translates to:
   /// **'Change PIN...'**
-  String get recoveryKeyPINButton;
+  String get recoveryKeyPinButton;
 
-  /// No description provided for @recoveryKeyPINCurrent.
+  /// No description provided for @recoveryKeyPinCurrent.
   ///
   /// In en, this message translates to:
   /// **'Current PIN'**
-  String get recoveryKeyPINCurrent;
+  String get recoveryKeyPinCurrent;
 
-  /// No description provided for @recoveryKeyPINNew.
+  /// No description provided for @recoveryKeyPinNew.
   ///
   /// In en, this message translates to:
   /// **'New PIN'**
-  String get recoveryKeyPINNew;
+  String get recoveryKeyPinNew;
 
-  /// No description provided for @recoveryKeyPINConfirm.
+  /// No description provided for @recoveryKeyPinConfirm.
   ///
   /// In en, this message translates to:
   /// **'Confirm PIN'**
-  String get recoveryKeyPINConfirm;
+  String get recoveryKeyPinConfirm;
 
-  /// No description provided for @recoveryKeyPINCurrentError.
+  /// No description provided for @recoveryKeyPinCurrentError.
   ///
   /// In en, this message translates to:
   /// **'Incorrect PIN, try again'**
-  String get recoveryKeyPINCurrentError;
+  String get recoveryKeyPinCurrentError;
 
-  /// No description provided for @recoveryKeyPINNewError.
+  /// No description provided for @recoveryKeyPinNewError.
   ///
   /// In en, this message translates to:
   /// **'Must be at least 4 digits long'**
-  String get recoveryKeyPINNewError;
+  String get recoveryKeyPinNewError;
 
-  /// No description provided for @recoveryKeyPINConfirmError.
+  /// No description provided for @recoveryKeyPinConfirmError.
   ///
   /// In en, this message translates to:
   /// **'PINs do not match, try again'**
-  String get recoveryKeyPINConfirmError;
+  String get recoveryKeyPinConfirmError;
 
-  /// No description provided for @recoveryKeyPINDialogHeader.
+  /// No description provided for @recoveryKeyPinDialogHeader.
   ///
   /// In en, this message translates to:
   /// **'Change PIN'**
-  String get recoveryKeyPINDialogHeader;
+  String get recoveryKeyPinDialogHeader;
 
   /// No description provided for @recoveryKeyPassphraseShow.
   ///
@@ -785,17 +785,17 @@ abstract class AppLocalizations {
   /// **'Change'**
   String get recoveryKeyPassphraseChange;
 
-  /// No description provided for @recoveryKeyPassphrasePINSuccessHeader.
+  /// No description provided for @recoveryKeyPassphrasePinSuccessHeader.
   ///
   /// In en, this message translates to:
   /// **'PIN updated'**
-  String get recoveryKeyPassphrasePINSuccessHeader;
+  String get recoveryKeyPassphrasePinSuccessHeader;
 
-  /// No description provided for @recoveryKeyPassphrasePINSuccessBody.
+  /// No description provided for @recoveryKeyPassphrasePinSuccessBody.
   ///
   /// In en, this message translates to:
   /// **'You PIN was successfully updated.'**
-  String get recoveryKeyPassphrasePINSuccessBody;
+  String get recoveryKeyPassphrasePinSuccessBody;
 
   /// No description provided for @recoveryKeyPassphrasePassphraseSuccessHeader.
   ///

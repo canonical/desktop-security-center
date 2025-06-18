@@ -260,37 +260,37 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recoveryKeyPassphraseDialogHeader => 'Change Passphrase';
 
   @override
-  String get recoveryKeyPINEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
 
   @override
-  String get recoveryKeyPINHeader => 'Encryption Pin';
+  String get recoveryKeyPinHeader => 'Encryption Pin';
 
   @override
-  String get recoveryKeyPINBody => 'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.';
+  String get recoveryKeyPinBody => 'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.';
 
   @override
-  String get recoveryKeyPINButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'Change PIN...';
 
   @override
-  String get recoveryKeyPINCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'Current PIN';
 
   @override
-  String get recoveryKeyPINNew => 'New PIN';
+  String get recoveryKeyPinNew => 'New PIN';
 
   @override
-  String get recoveryKeyPINConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'Confirm PIN';
 
   @override
-  String get recoveryKeyPINCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
 
   @override
-  String get recoveryKeyPINNewError => 'Must be at least 4 digits long';
+  String get recoveryKeyPinNewError => 'Must be at least 4 digits long';
 
   @override
-  String get recoveryKeyPINConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
 
   @override
-  String get recoveryKeyPINDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'Change PIN';
 
   @override
   String get recoveryKeyPassphraseShow => 'Show';
@@ -302,10 +302,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recoveryKeyPassphraseChange => 'Change';
 
   @override
-  String get recoveryKeyPassphrasePINSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
 
   @override
-  String get recoveryKeyPassphrasePINSuccessBody => 'You PIN was successfully updated.';
+  String get recoveryKeyPassphrasePinSuccessBody => 'You PIN was successfully updated.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader => 'Passphrase updated';

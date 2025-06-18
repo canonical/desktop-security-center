@@ -55,7 +55,7 @@ class CheckRecoveryKeyButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final tpmAuthenticationModel = ref.watch(tPMAuthenticationModelProvider);
+    final tpmAuthenticationModel = ref.watch(tpmAuthenticationModelProvider);
 
     // We need the system containers to validate the state of encryption and if a pin / passphrase is in use.
     return tpmAuthenticationModel.when(
@@ -86,11 +86,11 @@ class CheckRecoveryKeyButtons extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      l10n.recoveryKeyPINHeader,
+                      l10n.recoveryKeyPinHeader,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
-                    Text(l10n.recoveryKeyPINBody),
+                    Text(l10n.recoveryKeyPinBody),
                     const SizedBox(height: 16),
                     OutlinedButton(
                       onPressed: () {
@@ -99,7 +99,7 @@ class CheckRecoveryKeyButtons extends ConsumerWidget {
                             .authMode = AuthMode.pin;
                         showChangeAuthDialog(context, AuthMode.pin);
                       },
-                      child: Text(l10n.recoveryKeyPINButton),
+                      child: Text(l10n.recoveryKeyPinButton),
                     ),
                   ],
                 ),
@@ -436,7 +436,7 @@ class ChangeAuthDialog extends ConsumerWidget {
 
     final title = switch (authMode) {
       AuthMode.passphrase => l10n.recoveryKeyPassphraseHeader,
-      _ => l10n.recoveryKeyPINDialogHeader,
+      _ => l10n.recoveryKeyPinDialogHeader,
     };
 
     return AlertDialog(
@@ -456,7 +456,7 @@ class ChangeAuthDialog extends ConsumerWidget {
                 ElevatedButton(
                   onPressed: model.dialogState is ChangeAuthDialogStateInput &&
                           notifier.isValid
-                      ? notifier.changePINPassphrase
+                      ? notifier.changePinPassphrase
                       : null,
                   child: Text(l10n.recoveryKeyPassphraseChange),
                 ),
@@ -467,12 +467,12 @@ class ChangeAuthDialog extends ConsumerWidget {
                 title: Text(
                   authMode == AuthMode.passphrase
                       ? l10n.recoveryKeyPassphrasePassphraseSuccessHeader
-                      : l10n.recoveryKeyPassphrasePINSuccessHeader,
+                      : l10n.recoveryKeyPassphrasePinSuccessHeader,
                 ),
                 subtitle: Text(
                   authMode == AuthMode.passphrase
                       ? l10n.recoveryKeyPassphrasePassphraseSuccessBody
-                      : l10n.recoveryKeyPassphrasePINSuccessBody,
+                      : l10n.recoveryKeyPassphrasePinSuccessBody,
                 ),
                 yaruInfoType: YaruInfoType.success,
               ),

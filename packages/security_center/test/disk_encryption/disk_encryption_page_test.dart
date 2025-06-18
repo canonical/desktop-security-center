@@ -501,8 +501,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text(tester.l10n.recoveryKeyPINButton), findsOneWidget);
-    await tester.tap(find.text(tester.l10n.recoveryKeyPINButton));
+    expect(find.text(tester.l10n.recoveryKeyPinButton), findsOneWidget);
+    await tester.tap(find.text(tester.l10n.recoveryKeyPinButton));
     await tester.pumpAndSettle();
 
     // Find all Show buttons (should be 3 - current, new, confirm passphrase)
@@ -540,7 +540,7 @@ void main() {
 
   group('change auth - submit disabled with short input and shows error', () {
     final cases = [
-      (name: 'PIN', authMode: AuthMode.pin),
+      (name: 'Pin', authMode: AuthMode.pin),
       (name: 'passphrase', authMode: AuthMode.passphrase),
     ];
 
@@ -556,7 +556,7 @@ void main() {
 
         // Open change dialog based on auth mode
         final buttonText = tc.authMode == AuthMode.pin
-            ? tester.l10n.recoveryKeyPINButton
+            ? tester.l10n.recoveryKeyPinButton
             : tester.l10n.recoveryKeyPassphraseButton;
 
         expect(find.text(buttonText), findsOneWidget);
@@ -593,7 +593,7 @@ void main() {
 
         // Check that appropriate error message is visible
         final expectedError = tc.authMode == AuthMode.pin
-            ? tester.l10n.recoveryKeyPINNewError
+            ? tester.l10n.recoveryKeyPinNewError
             : tester.l10n.recoveryKeyPassphraseNewError;
         expect(find.text(expectedError), findsOneWidget);
       });
@@ -602,7 +602,7 @@ void main() {
 
   group('change auth - submit disabled when new and confirm do not match', () {
     final cases = [
-      (name: 'PIN', authMode: AuthMode.pin),
+      (name: 'Pin', authMode: AuthMode.pin),
       (name: 'passphrase', authMode: AuthMode.passphrase),
     ];
 
@@ -618,7 +618,7 @@ void main() {
 
         // Open change dialog based on auth mode
         final buttonText = tc.authMode == AuthMode.pin
-            ? tester.l10n.recoveryKeyPINButton
+            ? tester.l10n.recoveryKeyPinButton
             : tester.l10n.recoveryKeyPassphraseButton;
 
         expect(find.text(buttonText), findsOneWidget);
@@ -655,7 +655,7 @@ void main() {
 
         // Check that appropriate mismatch error message is visible
         final expectedError = tc.authMode == AuthMode.pin
-            ? tester.l10n.recoveryKeyPINConfirmError
+            ? tester.l10n.recoveryKeyPinConfirmError
             : tester.l10n.recoveryKeyPassphraseConfirmError;
         expect(find.text(expectedError), findsOneWidget);
       });
@@ -665,24 +665,24 @@ void main() {
   group('change auth - submit with valid inputs', () {
     final cases = [
       (
-        name: 'PIN success',
+        name: 'Pin success',
         authMode: AuthMode.pin,
-        changePINPassphraseError: false,
+        changePinPassphraseError: false,
       ),
       (
-        name: 'PIN failure',
+        name: 'Pin failure',
         authMode: AuthMode.pin,
-        changePINPassphraseError: true,
+        changePinPassphraseError: true,
       ),
       (
         name: 'passphrase success',
         authMode: AuthMode.passphrase,
-        changePINPassphraseError: false,
+        changePinPassphraseError: false,
       ),
       (
         name: 'passphrase failure',
         authMode: AuthMode.passphrase,
-        changePINPassphraseError: true,
+        changePinPassphraseError: true,
       ),
     ];
 
@@ -691,7 +691,7 @@ void main() {
         final container = createContainer();
         registerMockDiskEncryptionService(
           authMode: tc.authMode,
-          changePINPassphraseError: tc.changePINPassphraseError,
+          changePinPassphraseError: tc.changePinPassphraseError,
         );
         await tester.pumpAppWithProviders(
           (_) => const DiskEncryptionPage(),
@@ -701,7 +701,7 @@ void main() {
 
         // Open change dialog based on auth mode
         final buttonText = tc.authMode == AuthMode.pin
-            ? tester.l10n.recoveryKeyPINButton
+            ? tester.l10n.recoveryKeyPinButton
             : tester.l10n.recoveryKeyPassphraseButton;
 
         expect(find.text(buttonText), findsOneWidget);
@@ -741,7 +741,7 @@ void main() {
         await tester.pumpAndSettle();
 
         // Check the result based on success/failure
-        if (tc.changePINPassphraseError) {
+        if (tc.changePinPassphraseError) {
           // Should show error message
           expect(
             find.text(tester.l10n.diskEncryptionPageError),
@@ -756,7 +756,7 @@ void main() {
         } else {
           // Should show success message based on auth mode
           final expectedSuccess = tc.authMode == AuthMode.pin
-              ? tester.l10n.recoveryKeyPassphrasePINSuccessHeader
+              ? tester.l10n.recoveryKeyPassphrasePinSuccessHeader
               : tester.l10n.recoveryKeyPassphrasePassphraseSuccessHeader;
           expect(find.text(expectedSuccess), findsOneWidget);
 
@@ -774,7 +774,7 @@ void main() {
 
   group('change auth - input filtering validation', () {
     final cases = [
-      (name: 'PIN', authMode: AuthMode.pin),
+      (name: 'Pin', authMode: AuthMode.pin),
       (name: 'passphrase', authMode: AuthMode.passphrase),
     ];
 
@@ -790,7 +790,7 @@ void main() {
 
         // Open change dialog based on auth mode
         final buttonText = tc.authMode == AuthMode.pin
-            ? tester.l10n.recoveryKeyPINButton
+            ? tester.l10n.recoveryKeyPinButton
             : tester.l10n.recoveryKeyPassphraseButton;
 
         expect(find.text(buttonText), findsOneWidget);

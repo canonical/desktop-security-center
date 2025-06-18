@@ -25,43 +25,43 @@ final _unreachable = Exception('unreachable l10n string');
 extension AuthModeL10n on AuthMode {
   String localizedHeader(AppLocalizations l10n) => switch (this) {
         AuthMode.passphrase => l10n.recoveryKeyPassphraseDialogHeader,
-        AuthMode.pin => l10n.recoveryKeyPINDialogHeader,
+        AuthMode.pin => l10n.recoveryKeyPinDialogHeader,
         AuthMode.none => throw _unreachable,
       };
 
   String localizedCurrentHint(AppLocalizations l10n) => switch (this) {
         AuthMode.passphrase => l10n.recoveryKeyPassphraseCurrent,
-        AuthMode.pin => l10n.recoveryKeyPINCurrent,
+        AuthMode.pin => l10n.recoveryKeyPinCurrent,
         AuthMode.none => throw _unreachable,
       };
 
   String localizedNewHint(AppLocalizations l10n) => switch (this) {
         AuthMode.passphrase => l10n.recoveryKeyPassphraseNew,
-        AuthMode.pin => l10n.recoveryKeyPINNew,
+        AuthMode.pin => l10n.recoveryKeyPinNew,
         AuthMode.none => throw _unreachable,
       };
 
   String localizedConfirmHint(AppLocalizations l10n) => switch (this) {
         AuthMode.passphrase => l10n.recoveryKeyPassphraseConfirm,
-        AuthMode.pin => l10n.recoveryKeyPINConfirm,
+        AuthMode.pin => l10n.recoveryKeyPinConfirm,
         AuthMode.none => throw _unreachable,
       };
 
   String localizedCurrentError(AppLocalizations l10n) => switch (this) {
         AuthMode.passphrase => l10n.recoveryKeyPassphraseCurrentError,
-        AuthMode.pin => l10n.recoveryKeyPINCurrentError,
+        AuthMode.pin => l10n.recoveryKeyPinCurrentError,
         AuthMode.none => throw _unreachable,
       };
 
   String localizedNewError(AppLocalizations l10n) => switch (this) {
         AuthMode.passphrase => l10n.recoveryKeyPassphraseNewError,
-        AuthMode.pin => l10n.recoveryKeyPINNewError,
+        AuthMode.pin => l10n.recoveryKeyPinNewError,
         AuthMode.none => throw _unreachable,
       };
 
   String localizedConfirmError(AppLocalizations l10n) => switch (this) {
         AuthMode.passphrase => l10n.recoveryKeyPassphraseConfirmError,
-        AuthMode.pin => l10n.recoveryKeyPINConfirmError,
+        AuthMode.pin => l10n.recoveryKeyPinConfirmError,
         AuthMode.none => throw _unreachable,
       };
 }

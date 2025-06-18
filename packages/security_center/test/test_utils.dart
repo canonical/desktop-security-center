@@ -128,7 +128,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool checkError = false,
   bool replaceError = false,
   bool generateError = false,
-  bool changePINPassphraseError = false,
+  bool changePinPassphraseError = false,
   AuthMode authMode = AuthMode.pin,
 }) {
   final service = MockDiskEncryptionService();
@@ -173,7 +173,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
     return checkRecoveryKey;
   });
   when(service.changePINPassphrase(any, any, any)).thenAnswer((_) async {
-    if (changePINPassphraseError) {
+    if (changePinPassphraseError) {
       throw Exception('Mock change PIN/passphrase error');
     }
   });
