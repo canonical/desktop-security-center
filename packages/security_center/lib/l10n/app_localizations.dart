@@ -749,12 +749,6 @@ abstract class AppLocalizations {
   /// **'Incorrect PIN, try again'**
   String get recoveryKeyPinCurrentError;
 
-  /// No description provided for @recoveryKeyPinNewError.
-  ///
-  /// In en, this message translates to:
-  /// **'Must be at least 4 digits long'**
-  String get recoveryKeyPinNewError;
-
   /// No description provided for @recoveryKeyPinConfirmError.
   ///
   /// In en, this message translates to:

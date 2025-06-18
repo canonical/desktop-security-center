@@ -284,9 +284,6 @@ class AppLocalizationsBg extends AppLocalizations {
   String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
 
   @override
-  String get recoveryKeyPinNewError => 'Must be at least 4 digits long';
-
-  @override
   String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
 
   @override

@@ -164,7 +164,6 @@
     "recoveryKeyPinNew": "New PIN",
     "recoveryKeyPinConfirm": "Confirm PIN",
     "recoveryKeyPinCurrentError": "Incorrect PIN, try again",
-    "recoveryKeyPinNewError": "Must be at least 4 digits long",
     "recoveryKeyPinConfirmError": "PINs do not match, try again",
     "recoveryKeyPinDialogHeader": "Change PIN",
     "recoveryKeyPassphraseShow": "Show",

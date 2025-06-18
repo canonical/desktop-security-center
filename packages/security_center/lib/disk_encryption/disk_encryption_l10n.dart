@@ -53,12 +53,6 @@ extension AuthModeL10n on AuthMode {
         AuthMode.none => throw _unreachable,
       };
 
-  String localizedNewError(AppLocalizations l10n) => switch (this) {
-        AuthMode.passphrase => l10n.recoveryKeyPassphraseNewError,
-        AuthMode.pin => l10n.recoveryKeyPinNewError,
-        AuthMode.none => throw _unreachable,
-      };
-
   String localizedConfirmError(AppLocalizations l10n) => switch (this) {
         AuthMode.passphrase => l10n.recoveryKeyPassphraseConfirmError,
         AuthMode.pin => l10n.recoveryKeyPinConfirmError,
