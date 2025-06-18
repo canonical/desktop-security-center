@@ -222,4 +222,91 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get recoveryKeyFilePickerFilter => 'Text files';
+
+  @override
+  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+
+  @override
+  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+
+  @override
+  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+
+  @override
+  String get recoveryKeyPassphraseBody => 'You need to enter your passpharse during startup to unlock the disk. You can change the passphrase but not disable it.';
+
+  @override
+  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+
+  @override
+  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+
+  @override
+  String get recoveryKeyPassphraseNew => 'New passphrase';
+
+  @override
+  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+
+  @override
+  String get recoveryKeyPassphraseCurrentError => 'Incorrect passphrase, try again';
+
+  @override
+  String get recoveryKeyPassphraseNewError => 'Must be at least 4 characters long';
+
+  @override
+  String get recoveryKeyPassphraseConfirmError => 'Passphrases do not match, try again';
+
+  @override
+  String get recoveryKeyPassphraseDialogHeader => 'Change Passphrase';
+
+  @override
+  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+
+  @override
+  String get recoveryKeyPinHeader => 'Encryption PIN';
+
+  @override
+  String get recoveryKeyPinBody => 'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.';
+
+  @override
+  String get recoveryKeyPinButton => 'Change PIN...';
+
+  @override
+  String get recoveryKeyPinCurrent => 'Current PIN';
+
+  @override
+  String get recoveryKeyPinNew => 'New PIN';
+
+  @override
+  String get recoveryKeyPinConfirm => 'Confirm PIN';
+
+  @override
+  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+
+  @override
+  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+
+  @override
+  String get recoveryKeyPinDialogHeader => 'Change PIN';
+
+  @override
+  String get recoveryKeyPassphraseShow => 'Show';
+
+  @override
+  String get recoveryKeyPassphraseHide => 'Hide';
+
+  @override
+  String get recoveryKeyPassphraseChange => 'Change';
+
+  @override
+  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+
+  @override
+  String get recoveryKeyPassphrasePinSuccessBody => 'You PIN was successfully updated.';
+
+  @override
+  String get recoveryKeyPassphrasePassphraseSuccessHeader => 'Passphrase updated';
+
+  @override
+  String get recoveryKeyPassphrasePassphraseSuccessBody => 'You passphrase was successfully updated.';
 }

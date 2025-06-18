@@ -1,10 +1,11 @@
 [
   {
+    "container-role": "system-data",
     "volume-name": "volume1",
     "name": "container1",
     "encrypted": true,
     "key-slots": [
-      { "name": "default-recovery", "type": "platform" }
+      { "name": "default-recovery", "type": "platform", "role": "foo", "platform-name" : "bar", "auth-mode": "pin"}
     ]
   }
 ]

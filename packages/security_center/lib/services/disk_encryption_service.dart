@@ -44,6 +44,9 @@ class KeySlot with _$KeySlot {
 @freezed
 class SystemDataContainer with _$SystemDataContainer {
   const factory SystemDataContainer({
+    /// Containr role. For enumerating with a TPM, we expect a system-data and a system-save.
+    required String containerRole,
+
     /// Name from gadget
     required String volumeName,
 
@@ -76,6 +79,12 @@ abstract class DiskEncryptionService {
 
   /// Checks if a recovery key is still valid for use.
   Future<bool> checkRecoveryKey(String recoveryKey);
+
+  Future<void> changePINPassphrase(
+    AuthMode authMode,
+    String oldPass,
+    String newPass,
+  );
 
   /// Holds the current state of the Check Recovery Key dialog.
   CheckRecoveryKeyDialogState get recoveryKeyDialogState;

@@ -59,9 +59,7 @@ ProviderContainer createContainer({
   // Create a ProviderContainer, and optionally allow specifying parameters.
   final container = ProviderContainer(
     parent: parent,
-    overrides: [
-      ...overrides,
-    ],
+    overrides: [...overrides],
     observers: observers,
   );
 
@@ -90,9 +88,7 @@ AppPermissionsService registerMockAppPermissionsService({
   return service;
 }
 
-LocalSnapData registerMockLocalSnapData({
-  List<Snap> snaps = const [],
-}) {
+LocalSnapData registerMockLocalSnapData({List<Snap> snaps = const []}) {
   registerServiceInstance<LocalSnapData>(snaps);
   addTearDown(unregisterService<LocalSnapData>);
   return snaps;
@@ -132,6 +128,8 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool checkError = false,
   bool replaceError = false,
   bool generateError = false,
+  bool changePinPassphraseError = false,
+  AuthMode authMode = AuthMode.pin,
 }) {
   final service = MockDiskEncryptionService();
 
@@ -142,8 +140,15 @@ DiskEncryptionService registerMockDiskEncryptionService({
         name: 'system-data',
         encrypted: true,
         keySlots: [
-          KeySlot(name: 'mock-recovery-key', type: KeySlotType.recovery),
+          KeySlot(
+            name: 'default-recovery',
+            type: KeySlotType.platform,
+            role: 'foo',
+            platformName: 'bar',
+            authMode: authMode,
+          ),
         ],
+        containerRole: 'system-data',
       ),
     ],
   );
@@ -166,6 +171,11 @@ DiskEncryptionService registerMockDiskEncryptionService({
       throw Exception('Mock check recovery key error');
     }
     return checkRecoveryKey;
+  });
+  when(service.changePINPassphrase(any, any, any)).thenAnswer((_) async {
+    if (changePinPassphraseError) {
+      throw Exception('Mock change PIN/passphrase error');
+    }
   });
   registerMockService<DiskEncryptionService>(service);
   addTearDown(unregisterService<DiskEncryptionService>);

@@ -31,6 +31,14 @@ sealed class RecoveryKeyException
       };
 }
 
+/// Dialog state for managing the change auth flow.
+@freezed
+sealed class ChangeAuthDialogState with _$ChangeAuthDialogState {
+  factory ChangeAuthDialogState.input() = ChangeAuthDialogStateInput;
+  factory ChangeAuthDialogState.success() = ChangeAuthDialogStateSuccess;
+  factory ChangeAuthDialogState.error(Exception e) = ChangeAuthDialogStateError;
+}
+
 /// Dialog state for managing the replace recovery key flow.
 @freezed
 sealed class ReplaceRecoveryKeyDialogState
@@ -60,15 +68,117 @@ sealed class CheckRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
       CheckRecoveryKeyDialogStateError;
 }
 
+@freezed
+class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
+  factory ChangeAuthDialogModelData({
+    required ChangeAuthDialogState dialogState,
+    required AuthMode authMode,
+    @Default('') String oldPass,
+    @Default('') String newPass,
+    @Default('') String confirmPass,
+    @Default(false) bool showPassphrase,
+  }) = _ChangeAuthDialogModelData;
+}
+
 @riverpod
-class SystemContainersModel extends _$SystemContainersModel {
+class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
   late final _service = getService<DiskEncryptionService>();
 
   @override
-  Future<List<SystemDataContainer>> build() async {
+  ChangeAuthDialogModelData build() {
+    return ChangeAuthDialogModelData(
+      dialogState: ChangeAuthDialogState.input(),
+      authMode: AuthMode.none,
+    );
+  }
+
+  Future<void> changePinPassphrase() async {
+    assert(state.dialogState is ChangeAuthDialogStateInput);
+    try {
+      await _service.changePINPassphrase(
+        state.authMode,
+        state.oldPass,
+        state.newPass,
+      );
+      state = state.copyWith(
+        dialogState: ChangeAuthDialogState.success(),
+        showPassphrase: false,
+      );
+    } on Exception catch (e) {
+      state = state.copyWith(dialogState: ChangeAuthDialogState.error(e));
+    }
+  }
+
+  void toggleShowPassphrase() {
+    state = state.copyWith(showPassphrase: !state.showPassphrase);
+  }
+
+  set authMode(AuthMode authmode) {
+    state = state.copyWith(
+      authMode: authmode,
+      dialogState: ChangeAuthDialogStateInput(),
+    );
+  }
+
+  set confirmPass(String value) {
+    state = state.copyWith(
+      confirmPass: value,
+      dialogState: ChangeAuthDialogStateInput(),
+    );
+  }
+
+  set newPass(String value) {
+    state = state.copyWith(
+      newPass: value,
+      dialogState: ChangeAuthDialogStateInput(),
+    );
+  }
+
+  set oldPass(String value) {
+    state = state.copyWith(
+      oldPass: value,
+      dialogState: ChangeAuthDialogStateInput(),
+    );
+  }
+
+  bool get isValid {
+    if (state.oldPass.isEmpty ||
+        state.newPass.isEmpty ||
+        state.confirmPass.isEmpty) {
+      return false;
+    }
+
+    if (state.newPass != state.confirmPass) {
+      return false;
+    }
+
+    return true;
+  }
+
+  bool get passphraseConfirmed {
+    if (state.newPass != state.confirmPass) {
+      return false;
+    }
+    return true;
+  }
+}
+
+@riverpod
+class TpmAuthenticationModel extends _$TpmAuthenticationModel {
+  late final _service = getService<DiskEncryptionService>();
+
+  @override
+  Future<AuthMode> build() async {
     final containers = await _service.enumerateKeySlots();
-    // TODO: Validate the keyslots contain sane defaults
-    return containers;
+
+    final systemDataVolume = containers.firstWhere(
+      (c) => c.containerRole == 'system-data',
+    );
+
+    final recoveryKeySlot = systemDataVolume.keySlots.firstWhere(
+      (k) => k.name == 'default-recovery' && k.type == KeySlotType.platform,
+    );
+    return recoveryKeySlot.authMode!;
   }
 }
 

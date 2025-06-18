@@ -41,6 +41,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   List<SystemDataContainer> containers;
   final Map<String, String> _recoveryKeys;
   final bool checkError;
+  String _auth = '12345';
   final CheckRecoveryKeyDialogState _checkRecoveryKeyDialogState =
       CheckRecoveryKeyDialogState.empty();
 
@@ -100,4 +101,16 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   @override
   CheckRecoveryKeyDialogState get recoveryKeyDialogState =>
       _checkRecoveryKeyDialogState;
+
+  @override
+  Future<void> changePINPassphrase(
+    AuthMode auth,
+    String oldAuth,
+    String newAuth,
+  ) async {
+    if (oldAuth != _auth) {
+      throw Exception('Auths dont match');
+    }
+    _auth = newAuth;
+  }
 }

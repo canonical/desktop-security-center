@@ -5,8 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
+import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
+import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
@@ -53,26 +55,77 @@ class CheckRecoveryKeyButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final systemContainerModel = ref.watch(systemContainersModelProvider);
+    final tpmAuthenticationModel = ref.watch(tpmAuthenticationModelProvider);
 
     // We need the system containers to validate the state of encryption and if a pin / passphrase is in use.
-    return systemContainerModel.when(
-      data: (_) {
-        return Row(
+    return tpmAuthenticationModel.when(
+      data: (data) {
+        return Column(
           children: [
-            OutlinedButton(
-              onPressed: () {
-                showCheckRecoveryKeyDialog(context);
-              },
-              child: Text(l10n.diskEncryptionPageCheckKey),
+            Row(
+              children: [
+                OutlinedButton(
+                  onPressed: () {
+                    showCheckRecoveryKeyDialog(context);
+                  },
+                  child: Text(l10n.diskEncryptionPageCheckKey),
+                ),
+                const SizedBox(width: 16),
+                OutlinedButton(
+                  onPressed: () {
+                    showReplaceRecoveryKeyDialog(context);
+                  },
+                  child: Text(l10n.diskEncryptionPageReplaceButton),
+                ),
+              ],
             ),
-            const SizedBox(width: 16),
-            OutlinedButton(
-              onPressed: () {
-                showReplaceRecoveryKeyDialog(context);
-              },
-              child: Text(l10n.diskEncryptionPageReplaceButton),
-            ),
+            const SizedBox(height: 16),
+            // TPM Authentication specific content
+            switch (data) {
+              AuthMode.pin => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.recoveryKeyPinHeader,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(l10n.recoveryKeyPinBody),
+                    const SizedBox(height: 16),
+                    OutlinedButton(
+                      onPressed: () {
+                        ref
+                            .read(changeAuthDialogModelProvider.notifier)
+                            .authMode = AuthMode.pin;
+                        showChangeAuthDialog(context, AuthMode.pin);
+                      },
+                      child: Text(l10n.recoveryKeyPinButton),
+                    ),
+                  ],
+                ),
+              AuthMode.passphrase => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.recoveryKeyPassphraseHeader,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(l10n.recoveryKeyPassphraseBody),
+                    const SizedBox(height: 16),
+                    OutlinedButton(
+                      onPressed: () {
+                        ref
+                            .read(changeAuthDialogModelProvider.notifier)
+                            .authMode = AuthMode.passphrase;
+                        showChangeAuthDialog(context, AuthMode.passphrase);
+                      },
+                      child: Text(l10n.recoveryKeyPassphraseButton),
+                    ),
+                  ],
+                ),
+              AuthMode.none => const SizedBox.shrink(),
+            },
           ],
         );
       },
@@ -339,10 +392,12 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                         is ReplaceRecoveryKeyDialogStateSuccess &&
                     replaceDialogError == null)
                   YaruInfoBox(
-                    title:
-                        Text(l10n.diskEncryptionPageReplaceDialogSuccessHeader),
-                    subtitle:
-                        Text(l10n.diskEncryptionPageReplaceDialogSuccessBody),
+                    title: Text(
+                      l10n.diskEncryptionPageReplaceDialogSuccessHeader,
+                    ),
+                    subtitle: Text(
+                      l10n.diskEncryptionPageReplaceDialogSuccessBody,
+                    ),
                     yaruInfoType: YaruInfoType.success,
                   ),
                 if (replaceDialogState is ReplaceRecoveryKeyDialogStateError)
@@ -354,6 +409,84 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
               ].separatedBy(const SizedBox(height: 16)),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+void showChangeAuthDialog(BuildContext context, AuthMode authMode) {
+  showDialog(
+    context: context,
+    builder: (_) => ChangeAuthDialog(authMode: authMode),
+  );
+}
+
+class ChangeAuthDialog extends ConsumerWidget {
+  const ChangeAuthDialog({required this.authMode, super.key});
+
+  final AuthMode authMode;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final model = ref.watch(changeAuthDialogModelProvider);
+    final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
+    assert(authMode != AuthMode.none);
+
+    final title = switch (authMode) {
+      AuthMode.passphrase => l10n.recoveryKeyPassphraseHeader,
+      _ => l10n.recoveryKeyPinDialogHeader,
+    };
+
+    return AlertDialog(
+      title: YaruDialogTitleBar(title: Text(title)),
+      titlePadding: EdgeInsets.zero,
+      content: SizedBox(
+        width: 460,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CurrentPassphraseFormField(authMode: authMode),
+            PassphraseFormField(authMode: authMode),
+            ConfirmPassphraseFormField(authMode: authMode),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: model.dialogState is ChangeAuthDialogStateInput &&
+                          notifier.isValid
+                      ? notifier.changePinPassphrase
+                      : null,
+                  child: Text(l10n.recoveryKeyPassphraseChange),
+                ),
+              ],
+            ),
+            if (model.dialogState is ChangeAuthDialogStateSuccess)
+              YaruInfoBox(
+                title: Text(
+                  authMode == AuthMode.passphrase
+                      ? l10n.recoveryKeyPassphrasePassphraseSuccessHeader
+                      : l10n.recoveryKeyPassphrasePinSuccessHeader,
+                ),
+                subtitle: Text(
+                  authMode == AuthMode.passphrase
+                      ? l10n.recoveryKeyPassphrasePassphraseSuccessBody
+                      : l10n.recoveryKeyPassphrasePinSuccessBody,
+                ),
+                yaruInfoType: YaruInfoType.success,
+              ),
+            if (model.dialogState is ChangeAuthDialogStateError)
+              YaruInfoBox(
+                title: Text(l10n.diskEncryptionPageError),
+                subtitle: Text(
+                  (model.dialogState as ChangeAuthDialogStateError)
+                      .e
+                      .toString(),
+                ),
+                yaruInfoType: YaruInfoType.danger,
+              ),
+          ].separatedBy(const SizedBox(height: 16)),
         ),
       ),
     );
