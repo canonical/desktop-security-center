@@ -644,7 +644,7 @@ abstract class AppLocalizations {
   /// No description provided for @recoveryKeyPassphraseHeader.
   ///
   /// In en, this message translates to:
-  /// **'Encryption  passphrase'**
+  /// **'Change passphrase'**
   String get recoveryKeyPassphraseHeader;
 
   /// No description provided for @recoveryKeyPassphraseBody.
@@ -710,7 +710,7 @@ abstract class AppLocalizations {
   /// No description provided for @recoveryKeyPinHeader.
   ///
   /// In en, this message translates to:
-  /// **'Encryption Pin'**
+  /// **'Encryption PIN'**
   String get recoveryKeyPinHeader;
 
   /// No description provided for @recoveryKeyPinBody.

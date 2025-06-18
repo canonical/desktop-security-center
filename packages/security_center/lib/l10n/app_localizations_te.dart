@@ -230,7 +230,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Encryption  passphrase';
+  String get recoveryKeyPassphraseHeader => 'Change passphrase';
 
   @override
   String get recoveryKeyPassphraseBody => 'You need to enter your passpharse during startup to unlock the disk. You can change the passphrase but not disable it.';
@@ -263,7 +263,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption Pin';
+  String get recoveryKeyPinHeader => 'Encryption PIN';
 
   @override
   String get recoveryKeyPinBody => 'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.';
