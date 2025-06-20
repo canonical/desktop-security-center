@@ -8,11 +8,30 @@ import 'package:path/path.dart' as p;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/file_picker_dialog.dart';
+import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 
 part 'disk_encryption_providers.freezed.dart';
 part 'disk_encryption_providers.g.dart';
+
+final _log = Logger('disk_encryption_providers');
+
+enum Entropy {
+  belowMin,
+  min,
+  optimal;
+
+  static Entropy from(EntropyResponse response) {
+    if (response.entropyBits < response.minEntropyBits) {
+      return Entropy.belowMin;
+    }
+    if (response.entropyBits < response.optimalEntropyBits) {
+      return Entropy.min;
+    }
+    return Entropy.optimal;
+  }
+}
 
 @freezed
 sealed class RecoveryKeyException
@@ -25,10 +44,10 @@ sealed class RecoveryKeyException
       RecoveryKeyExceptionUnknown;
 
   factory RecoveryKeyException.from(Object? e) => switch (e) {
-        final FileSystemException _ => RecoveryKeyException.fileSystem(),
-        final RecoveryKeyException e => e,
-        final e => RecoveryKeyException.unknown(rawError: e.toString()),
-      };
+    final FileSystemException _ => RecoveryKeyException.fileSystem(),
+    final RecoveryKeyException e => e,
+    final e => RecoveryKeyException.unknown(rawError: e.toString()),
+  };
 }
 
 /// Dialog state for managing the change auth flow.
@@ -73,6 +92,7 @@ class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
   factory ChangeAuthDialogModelData({
     required ChangeAuthDialogState dialogState,
     required AuthMode authMode,
+    Entropy? entropy,
     @Default('') String oldPass,
     @Default('') String newPass,
     @Default('') String confirmPass,
@@ -127,11 +147,26 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
     );
   }
 
-  set newPass(String value) {
+  Future<void> setNewPass(String value) async {
     state = state.copyWith(
       newPass: value,
       dialogState: ChangeAuthDialogStateInput(),
     );
+    if (value.isEmpty) {
+      _log.debug('new passphrase is empty');
+      state = state.copyWith(entropy: null);
+      return;
+    }
+    try {
+      final response = await _service.pinPassphraseEntropyCheck(
+        state.authMode,
+        value,
+      );
+      state = state.copyWith(entropy: Entropy.from(response));
+    } on Exception catch (e) {
+      state = state.copyWith(entropy: null);
+      _log.error(e);
+    }
   }
 
   set oldPass(String value) {
@@ -149,6 +184,10 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
     }
 
     if (state.newPass != state.confirmPass) {
+      return false;
+    }
+
+    if (state.entropy == null || state.entropy == Entropy.belowMin) {
       return false;
     }
 
@@ -182,20 +221,19 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   }
 }
 
-typedef FilePicker = Future<Uri?> Function({
-  required BuildContext context,
-  required String title,
-  String? defaultFileName,
-  List<XdgFileChooserFilter> filters,
-});
+typedef FilePicker =
+    Future<Uri?> Function({
+      required BuildContext context,
+      required String title,
+      String? defaultFileName,
+      List<XdgFileChooserFilter> filters,
+    });
 final filePickerProvider = Provider<FilePicker>((ref) => showSaveFileDialog);
 
 final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
-typedef ProcessRunner = Future<ProcessResult> Function(
-  String executable,
-  List<String> arguments,
-);
+typedef ProcessRunner =
+    Future<ProcessResult> Function(String executable, List<String> arguments);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @freezed
