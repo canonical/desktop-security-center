@@ -802,6 +802,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You passphrase was successfully updated.'**
   String get recoveryKeyPassphrasePassphraseSuccessBody;
+
+  /// No description provided for @recoveryKeyPassphraseEntropyBelowMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Weak passphrase, make it longer or more complex'**
+  String get recoveryKeyPassphraseEntropyBelowMin;
+
+  /// No description provided for @recoveryKeyPassphraseEntropyBelowOptimal.
+  ///
+  /// In en, this message translates to:
+  /// **'Fair passphrase, make it longer or more complex for better security'**
+  String get recoveryKeyPassphraseEntropyBelowOptimal;
+
+  /// No description provided for @recoveryKeyPassphraseEntropyOptimal.
+  ///
+  /// In en, this message translates to:
+  /// **'Strong passphrase'**
+  String get recoveryKeyPassphraseEntropyOptimal;
+
+  /// No description provided for @recoveryKeyPinEntropyBelowMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Weak PIN, make it longer or less predictable'**
+  String get recoveryKeyPinEntropyBelowMin;
+
+  /// No description provided for @recoveryKeyPinEntropyBelowOptimal.
+  ///
+  /// In en, this message translates to:
+  /// **'Fair PIN, make it longer or less predictable for better security'**
+  String get recoveryKeyPinEntropyBelowOptimal;
+
+  /// No description provided for @recoveryKeyPinEntropyOptimal.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN is long enough'**
+  String get recoveryKeyPinEntropyOptimal;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

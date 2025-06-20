@@ -172,5 +172,11 @@
     "recoveryKeyPassphrasePinSuccessHeader": "PIN updated",
     "recoveryKeyPassphrasePinSuccessBody": "You PIN was successfully updated.",
     "recoveryKeyPassphrasePassphraseSuccessHeader": "Passphrase updated",
-    "recoveryKeyPassphrasePassphraseSuccessBody": "You passphrase was successfully updated."
+    "recoveryKeyPassphrasePassphraseSuccessBody": "You passphrase was successfully updated.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Weak passphrase, make it longer or more complex",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Fair passphrase, make it longer or more complex for better security",
+    "recoveryKeyPassphraseEntropyOptimal": "Strong passphrase",
+    "recoveryKeyPinEntropyBelowMin": "Weak PIN, make it longer or less predictable",
+    "recoveryKeyPinEntropyBelowOptimal": "Fair PIN, make it longer or less predictable for better security",
+    "recoveryKeyPinEntropyOptimal": "PIN is long enough"
 }
