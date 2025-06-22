@@ -88,7 +88,7 @@
   "@diskEncryptionPageCheckKey": {},
   "diskEncryptionPageDialogHeaderCheckKey": "Проверка ключа восстановления",
   "@diskEncryptionPageDialogHeaderCheckKey": {},
-  "diskEncryptionPageCheck": "Проверка",
+  "diskEncryptionPageCheck": "Проверить",
   "@diskEncryptionPageCheck": {},
   "diskEncryptionPageInvalidKey": "Некорректный ключ",
   "@diskEncryptionPageInvalidKey": {},
