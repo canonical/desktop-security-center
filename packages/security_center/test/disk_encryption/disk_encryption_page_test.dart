@@ -600,6 +600,106 @@ void main() {
     }
   });
 
+  group('change auth - entropy hinting', () {
+    final cases = [
+      (name: 'Pin', authMode: AuthMode.pin),
+      (name: 'passphrase', authMode: AuthMode.passphrase),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final container = createContainer();
+        registerMockDiskEncryptionService(authMode: tc.authMode);
+        await tester.pumpAppWithProviders(
+          (_) => const DiskEncryptionPage(),
+          container,
+        );
+        await tester.pumpAndSettle();
+
+        // Open change dialog based on auth mode
+        final buttonText = tc.authMode == AuthMode.pin
+            ? tester.l10n.recoveryKeyPinButton
+            : tester.l10n.recoveryKeyPassphraseButton;
+
+        expect(find.text(buttonText), findsOneWidget);
+        await tester.tap(find.text(buttonText));
+        await tester.pumpAndSettle();
+
+        // Find the text fields and change button
+        final textFields = find.byType(TextField);
+        expect(textFields, findsNWidgets(3));
+
+        final changeButton = find.widgetWithText(
+          ElevatedButton,
+          tester.l10n.recoveryKeyPassphraseChange,
+        );
+        expect(changeButton, findsOneWidget);
+
+        // Initially button should be disabled (no input)
+        expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
+
+        // Enter auth that is too short
+        if (tc.authMode == AuthMode.pin) {
+          await tester.enterText(textFields.at(0), '1234');
+          await tester.enterText(textFields.at(1), '321');
+          await tester.enterText(textFields.at(2), '321');
+        } else {
+          await tester.enterText(textFields.at(0), 'currentpass');
+          await tester.enterText(textFields.at(1), 'new');
+          await tester.enterText(textFields.at(2), 'new');
+        }
+        await tester.pump();
+
+        // Button should still be disabled due to validation error
+        expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
+
+        // Check that we have a below min error hint
+        final expectedError = tc.authMode == AuthMode.pin
+            ? tester.l10n.recoveryKeyPinEntropyBelowMin
+            : tester.l10n.recoveryKeyPassphraseEntropyBelowMin;
+        expect(find.text(expectedError), findsOneWidget);
+
+        // Enter auth that is at min entropy threshold
+        if (tc.authMode == AuthMode.pin) {
+          await tester.enterText(textFields.at(1), '3210');
+          await tester.enterText(textFields.at(2), '3210');
+        } else {
+          await tester.enterText(textFields.at(1), 'newp');
+          await tester.enterText(textFields.at(2), 'newp');
+        }
+        await tester.pump();
+
+        // Button should be active
+        expect(tester.widget<ElevatedButton>(changeButton).enabled, isTrue);
+
+        // Check that we have a below optimal hint
+        final expectedBelowOptimal = tc.authMode == AuthMode.pin
+            ? tester.l10n.recoveryKeyPinEntropyBelowOptimal
+            : tester.l10n.recoveryKeyPassphraseEntropyBelowOptimal;
+        expect(find.text(expectedBelowOptimal), findsOneWidget);
+
+        // Enter auth that is at opimal entropy threshold
+        if (tc.authMode == AuthMode.pin) {
+          await tester.enterText(textFields.at(1), '321098');
+          await tester.enterText(textFields.at(2), '321098');
+        } else {
+          await tester.enterText(textFields.at(1), 'newpas');
+          await tester.enterText(textFields.at(2), 'newpas');
+        }
+        await tester.pump();
+
+        // Button should still be active
+        expect(tester.widget<ElevatedButton>(changeButton).enabled, isTrue);
+
+        // Check that we have optimal hint
+        final expectedOptimal = tc.authMode == AuthMode.pin
+            ? tester.l10n.recoveryKeyPinEntropyOptimal
+            : tester.l10n.recoveryKeyPassphraseEntropyOptimal;
+        expect(find.text(expectedOptimal), findsOneWidget);
+      });
+    }
+  });
+
   group('change auth - submit with valid inputs', () {
     final cases = [
       (

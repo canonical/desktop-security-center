@@ -129,7 +129,9 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool replaceError = false,
   bool generateError = false,
   bool changePinPassphraseError = false,
+  bool entropyCheckError = false,
   AuthMode authMode = AuthMode.pin,
+  EntropyResponse Function(String)? entropyResponseBuilder,
 }) {
   final service = MockDiskEncryptionService();
 
@@ -176,6 +178,21 @@ DiskEncryptionService registerMockDiskEncryptionService({
     if (changePinPassphraseError) {
       throw Exception('Mock change PIN/passphrase error');
     }
+  });
+  when(service.pinPassphraseEntropyCheck(any, any))
+      .thenAnswer((invocation) async {
+    if (entropyCheckError) {
+      throw Exception('Mock entropy check error');
+    }
+    final newPass = invocation.positionalArguments[1] as String;
+    if (entropyResponseBuilder != null) {
+      return entropyResponseBuilder(newPass);
+    }
+    return EntropyResponse(
+      entropyBits: newPass.length,
+      minEntropyBits: 4,
+      optimalEntropyBits: 6,
+    );
   });
   registerMockService<DiskEncryptionService>(service);
   addTearDown(unregisterService<DiskEncryptionService>);
