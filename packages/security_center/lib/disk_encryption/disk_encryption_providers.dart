@@ -115,7 +115,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
   ChangeAuthDialogModelData build() {
     return ChangeAuthDialogModelData(
       dialogState: ChangeAuthDialogState.input(),
-      authMode: AuthMode.none,
+      authMode: AuthMode.passphrase,
     );
   }
 
@@ -224,7 +224,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
     // final recoveryKeySlot = systemDataVolume.keySlots.firstWhere(
     //   (k) => k.name == 'default-recovery' && k.type == KeySlotType.platform,
     // );
-    return AuthMode.pin;
+    return AuthMode.passphrase;
   }
 }
 
