@@ -105,11 +105,10 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
       decoration: InputDecoration(
         labelText: widget.authMode.localizedNewHint(lang),
         suffixIcon: const _SecurityKeyShowButton(),
-        errorText:
-            model.entropy == Entropy.belowMin
-                ? model.entropy?.localizedHint(l10n, widget.authMode)
-                : null,
-        helperText: 
+        errorText: model.entropy == Entropy.belowMin
+            ? model.entropy?.localizedHint(l10n, widget.authMode)
+            : null,
+        helperText:
             model.entropy == Entropy.min || model.entropy == Entropy.optimal
                 ? model.entropy?.localizedHint(l10n, widget.authMode)
                 : null,
@@ -167,10 +166,9 @@ class _ConfirmPassphraseFormFieldState
       decoration: InputDecoration(
         labelText: widget.authMode.localizedConfirmHint(lang),
         suffixIcon: const _SecurityKeyShowButton(),
-        errorText:
-            !notifier.passphraseConfirmed
-                ? widget.authMode.localizedConfirmError(lang)
-                : null,
+        errorText: !notifier.passphraseConfirmed
+            ? widget.authMode.localizedConfirmError(lang)
+            : null,
       ),
       obscureText: !model.showPassphrase,
       enabled: !isDisabled,
@@ -210,10 +208,9 @@ class _SecurityKeyShowButton extends ConsumerWidget {
       child: TextButton.icon(
         icon: Icon(
           showSecurityKey ? YaruIcons.hide : YaruIcons.eye,
-          color:
-              isDisabled
-                  ? theme.disabledColor
-                  : theme.colorScheme.onSecondaryContainer,
+          color: isDisabled
+              ? theme.disabledColor
+              : theme.colorScheme.onSecondaryContainer,
         ),
         label: Text(
           showSecurityKey
@@ -222,10 +219,9 @@ class _SecurityKeyShowButton extends ConsumerWidget {
         ),
         onPressed: notifier.toggleShowPassphrase,
         style: TextButton.styleFrom(
-          foregroundColor:
-              isDisabled
-                  ? theme.disabledColor
-                  : theme.colorScheme.onSecondaryContainer,
+          foregroundColor: isDisabled
+              ? theme.disabledColor
+              : theme.colorScheme.onSecondaryContainer,
           backgroundColor: theme.colorScheme.onSurface.withValues(alpha: 0.12),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(

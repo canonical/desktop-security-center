@@ -7,13 +7,14 @@ part 'disk_encryption_service.g.dart';
 /// A Class to model an Entropy response from Snapd
 @freezed
 class EntropyResponse with _$EntropyResponse {
-    const factory EntropyResponse({
-        required int entropyBits,
-        required int minEntropyBits,
-        required int optimalEntropyBits,
-    }) = _EntropyResponse;
+  const factory EntropyResponse({
+    required int entropyBits,
+    required int minEntropyBits,
+    required int optimalEntropyBits,
+  }) = _EntropyResponse;
 
-    factory EntropyResponse.fromJson(Map<String, dynamic> json)=> _$EntropyResponseFromJson(json); 
+  factory EntropyResponse.fromJson(Map<String, dynamic> json) =>
+      _$EntropyResponseFromJson(json);
 }
 
 /// A Class to model the recovery key details returned.
