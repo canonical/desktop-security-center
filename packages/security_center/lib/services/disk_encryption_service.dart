@@ -4,6 +4,21 @@ import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 part 'disk_encryption_service.freezed.dart';
 part 'disk_encryption_service.g.dart';
 
+/// A Class to model an Entropy response from Snapd
+@freezed
+class EntropyResponse with _$EntropyResponse {
+  const factory EntropyResponse({
+    required bool success,
+    required int entropyBits,
+    required int minEntropyBits,
+    required int optimalEntropyBits,
+    List<String>? failureReasons,
+  }) = _EntropyResponse;
+
+  factory EntropyResponse.fromJson(Map<String, dynamic> json) =>
+      _$EntropyResponseFromJson(json);
+}
+
 /// A Class to model the recovery key details returned.
 @freezed
 class RecoveryKeyDetails with _$RecoveryKeyDetails {
@@ -83,6 +98,12 @@ abstract class DiskEncryptionService {
   Future<void> changePINPassphrase(
     AuthMode authMode,
     String oldPass,
+    String newPass,
+  );
+
+  /// Checks strength of new pin / passphrase
+  Future<EntropyResponse> pinPassphraseEntropyCheck(
+    AuthMode authmode,
     String newPass,
   );
 

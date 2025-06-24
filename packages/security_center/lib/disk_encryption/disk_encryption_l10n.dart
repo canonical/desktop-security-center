@@ -59,3 +59,25 @@ extension AuthModeL10n on AuthMode {
         AuthMode.none => throw _unreachable,
       };
 }
+
+extension SemanticEntropyL10n on SemanticEntropy {
+  String localizedHint(AppLocalizations l10n, AuthMode authMode) =>
+      switch (this) {
+        SemanticEntropy.belowMin => switch (authMode) {
+            AuthMode.pin => l10n.recoveryKeyPinEntropyBelowMin,
+            AuthMode.passphrase => l10n.recoveryKeyPassphraseEntropyBelowMin,
+            AuthMode.none => throw _unreachable,
+          },
+        SemanticEntropy.belowOptimal => switch (authMode) {
+            AuthMode.pin => l10n.recoveryKeyPinEntropyBelowOptimal,
+            AuthMode.passphrase =>
+              l10n.recoveryKeyPassphraseEntropyBelowOptimal,
+            AuthMode.none => throw _unreachable,
+          },
+        SemanticEntropy.optimal => switch (authMode) {
+            AuthMode.pin => l10n.recoveryKeyPinEntropyOptimal,
+            AuthMode.passphrase => l10n.recoveryKeyPassphraseEntropyOptimal,
+            AuthMode.none => throw _unreachable,
+          },
+      };
+}

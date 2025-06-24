@@ -313,4 +313,22 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody => 'You passphrase was successfully updated.';
+
+  @override
+  String get recoveryKeyPassphraseEntropyBelowMin => 'Weak passphrase, make it longer or more complex';
+
+  @override
+  String get recoveryKeyPassphraseEntropyBelowOptimal => 'Fair passphrase, make it longer or more complex for better security';
+
+  @override
+  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+
+  @override
+  String get recoveryKeyPinEntropyBelowMin => 'Weak PIN, make it longer or less predictable';
+
+  @override
+  String get recoveryKeyPinEntropyBelowOptimal => 'Fair PIN, make it longer or less predictable for better security';
+
+  @override
+  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
 }

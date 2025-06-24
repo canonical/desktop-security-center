@@ -113,4 +113,17 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     }
     _auth = newAuth;
   }
+
+  @override
+  Future<EntropyResponse> pinPassphraseEntropyCheck(
+    AuthMode authmode,
+    String newPass,
+  ) async {
+    return EntropyResponse(
+      entropyBits: newPass.length,
+      minEntropyBits: 4,
+      optimalEntropyBits: 6,
+      success: newPass.length >= 4,
+    );
+  }
 }

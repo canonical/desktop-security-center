@@ -7,6 +7,7 @@ import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:yaru/icons.dart';
 
 class CurrentPassphraseFormField extends ConsumerStatefulWidget {
@@ -47,17 +48,33 @@ class _CurrentPassphraseFormFieldState
     final lang = AppLocalizations.of(context);
     final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
 
-    return TextFormField(
-      controller: _controller,
-      decoration: InputDecoration(
-        labelText: widget.authMode.localizedCurrentHint(lang),
-        suffixIcon: const _SecurityKeyShowButton(),
-      ),
-      obscureText: !model.showPassphrase,
-      enabled: !isDisabled,
-      onChanged: (value) {
-        notifier.oldPass = value;
-      },
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            controller: _controller,
+            decoration: InputDecoration(
+              labelText: widget.authMode.localizedCurrentHint(lang),
+              suffixIcon: const _SecurityKeyShowButton(),
+            ),
+            obscureText: !model.showPassphrase,
+            enabled: !isDisabled,
+            onChanged: (value) {
+              notifier.oldPass = value;
+            },
+          ),
+        ),
+        if (model.oldPass.isNotEmpty &&
+            model.dialogState is! ChangeAuthDialogStateError)
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: Baseline(
+              baseline: 0,
+              baselineType: TextBaseline.alphabetic,
+              child: SuccessIcon(),
+            ),
+          ),
+      ],
     );
   }
 }
@@ -98,18 +115,50 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
     final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
     final lang = AppLocalizations.of(context);
     final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
+    final l10n = AppLocalizations.of(context);
 
-    return TextFormField(
-      controller: _controller,
-      decoration: InputDecoration(
-        labelText: widget.authMode.localizedNewHint(lang),
-        suffixIcon: const _SecurityKeyShowButton(),
-      ),
-      obscureText: !model.showPassphrase,
-      enabled: !isDisabled,
-      onChanged: (value) {
-        notifier.newPass = value;
-      },
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            controller: _controller,
+            decoration: InputDecoration(
+              labelText: widget.authMode.localizedNewHint(lang),
+              errorText: model.entropy != null && !model.entropy!.success
+                  ? model.entropy?.semanticEntropy.localizedHint(
+                      l10n,
+                      widget.authMode,
+                    )
+                  : null,
+              helperText: model.entropy?.semanticEntropy ==
+                          SemanticEntropy.belowOptimal ||
+                      model.entropy?.semanticEntropy == SemanticEntropy.optimal
+                  ? model.entropy?.semanticEntropy.localizedHint(
+                      l10n,
+                      widget.authMode,
+                    )
+                  : null,
+              helperStyle: Theme.of(context).textTheme.bodySmall,
+              helperMaxLines: 2,
+              errorMaxLines: 2,
+            ),
+            obscureText: !model.showPassphrase,
+            enabled: !isDisabled,
+            onChanged: notifier.setNewPass,
+          ),
+        ),
+        if (model.entropy != null &&
+            model.entropy!.success &&
+            model.dialogState is! ChangeAuthDialogStateError)
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: Baseline(
+              baseline: 0,
+              baselineType: TextBaseline.alphabetic,
+              child: SuccessIcon(),
+            ),
+          ),
+      ],
     );
   }
 }
@@ -152,20 +201,36 @@ class _ConfirmPassphraseFormFieldState
     final lang = AppLocalizations.of(context);
     final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
 
-    return TextFormField(
-      controller: _controller,
-      decoration: InputDecoration(
-        labelText: widget.authMode.localizedConfirmHint(lang),
-        suffixIcon: const _SecurityKeyShowButton(),
-        errorText: !notifier.passphraseConfirmed
-            ? widget.authMode.localizedConfirmError(lang)
-            : null,
-      ),
-      obscureText: !model.showPassphrase,
-      enabled: !isDisabled,
-      onChanged: (value) {
-        notifier.confirmPass = value;
-      },
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            controller: _controller,
+            decoration: InputDecoration(
+              labelText: widget.authMode.localizedConfirmHint(lang),
+              errorText: !notifier.passphraseConfirmed
+                  ? widget.authMode.localizedConfirmError(lang)
+                  : null,
+            ),
+            obscureText: !model.showPassphrase,
+            enabled: !isDisabled,
+            onChanged: (value) {
+              notifier.confirmPass = value;
+            },
+          ),
+        ),
+        if (model.confirmPass.isNotEmpty &&
+            notifier.passphraseConfirmed &&
+            model.dialogState is! ChangeAuthDialogStateError)
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: Baseline(
+              baseline: 0,
+              baselineType: TextBaseline.alphabetic,
+              child: SuccessIcon(),
+            ),
+          ),
+      ],
     );
   }
 }

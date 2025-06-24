@@ -8,11 +8,36 @@ import 'package:path/path.dart' as p;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/file_picker_dialog.dart';
+import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 
 part 'disk_encryption_providers.freezed.dart';
 part 'disk_encryption_providers.g.dart';
+
+final _log = Logger('disk_encryption_providers');
+
+enum SemanticEntropy {
+  belowMin,
+  belowOptimal,
+  optimal;
+}
+
+extension EntropyResponseSemantic on EntropyResponse {
+  SemanticEntropy get semanticEntropy {
+    if (minEntropyBits > optimalEntropyBits) {
+      _log.info(
+        'received entropy response with minEntropyBits > optimalEntropyBits: $this',
+      );
+    }
+    if (entropyBits < minEntropyBits) {
+      return SemanticEntropy.belowMin;
+    } else if (entropyBits < optimalEntropyBits) {
+      return SemanticEntropy.belowOptimal;
+    }
+    return SemanticEntropy.optimal;
+  }
+}
 
 @freezed
 sealed class RecoveryKeyException
@@ -73,6 +98,7 @@ class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
   factory ChangeAuthDialogModelData({
     required ChangeAuthDialogState dialogState,
     required AuthMode authMode,
+    EntropyResponse? entropy,
     @Default('') String oldPass,
     @Default('') String newPass,
     @Default('') String confirmPass,
@@ -127,11 +153,26 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
     );
   }
 
-  set newPass(String value) {
+  Future<void> setNewPass(String value) async {
     state = state.copyWith(
       newPass: value,
       dialogState: ChangeAuthDialogStateInput(),
     );
+    if (value.isEmpty) {
+      _log.debug('new passphrase is empty');
+      state = state.copyWith(entropy: null);
+      return;
+    }
+    try {
+      final response = await _service.pinPassphraseEntropyCheck(
+        state.authMode,
+        value,
+      );
+      state = state.copyWith(entropy: response);
+    } on Exception catch (e) {
+      state = state.copyWith(entropy: null);
+      _log.error(e);
+    }
   }
 
   set oldPass(String value) {
@@ -149,6 +190,10 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
     }
 
     if (state.newPass != state.confirmPass) {
+      return false;
+    }
+
+    if (state.entropy == null || !state.entropy!.success) {
       return false;
     }
 
