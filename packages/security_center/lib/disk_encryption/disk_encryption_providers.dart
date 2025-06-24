@@ -9,6 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/file_picker_dialog.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
+import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 
@@ -121,7 +122,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
   Future<void> changePinPassphrase() async {
     assert(state.dialogState is ChangeAuthDialogStateInput);
     try {
-      await _service.changePINPassphrase(
+      await _service.changePinPassphrase(
         state.authMode,
         state.oldPass,
         state.newPass,
@@ -214,16 +215,16 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
   @override
   Future<AuthMode> build() async {
-    final containers = await _service.enumerateKeySlots();
+    // final containers = await _service.enumerateKeySlots();
 
-    final systemDataVolume = containers.firstWhere(
-      (c) => c.containerRole == 'system-data',
-    );
+    // final systemDataVolume = containers.firstWhere(
+    //   (c) => c.containerRole == 'system-data',
+    // );
 
-    final recoveryKeySlot = systemDataVolume.keySlots.firstWhere(
-      (k) => k.name == 'default-recovery' && k.type == KeySlotType.platform,
-    );
-    return recoveryKeySlot.authMode!;
+    // final recoveryKeySlot = systemDataVolume.keySlots.firstWhere(
+    //   (k) => k.name == 'default-recovery' && k.type == KeySlotType.platform,
+    // );
+    return AuthMode.pin;
   }
 }
 
@@ -261,7 +262,7 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   @override
   ReplaceRecoveryKeyDialogModelData build() {
     // listen for the key to land
-    ref.listen<AsyncValue<RecoveryKeyDetails>>(
+    ref.listen<AsyncValue<SnapdGenerateRecoveryKeyResponse>>(
       generatedRecoveryKeyModelProvider,
       (prev, next) {
         if (prev is AsyncLoading && next is AsyncData) {
@@ -287,7 +288,7 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
     assert(
       (state.dialogState as ReplaceRecoveryKeyDialogStateInput).acknowledged,
     );
-
+    // TODO: loading state
     try {
       await _service.replaceRecoveryKey(key);
       state = state.copyWith(
@@ -345,7 +346,7 @@ class GeneratedRecoveryKeyModel extends _$GeneratedRecoveryKeyModel {
   final _service = getService<DiskEncryptionService>();
 
   @override
-  Future<RecoveryKeyDetails> build() async {
+  Future<SnapdGenerateRecoveryKeyResponse> build() async {
     return _service.generateRecoveryKey();
   }
 }
