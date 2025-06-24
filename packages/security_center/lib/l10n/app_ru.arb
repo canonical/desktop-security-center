@@ -207,5 +207,17 @@
   "recoveryKeyPassphraseHeader": "Изменить парольную фразу",
   "@recoveryKeyPassphraseHeader": {},
   "diskEncryptionPageReplaceDialogQRBody": "Отсканируйте QR-код, чтобы скопировать ключ восстановления и сохранить его в безопасном месте, например, в менеджере паролей. Кроме того, вы можете сделать фотографию, чтобы воспользоваться ей позже.",
-  "@diskEncryptionPageReplaceDialogQRBody": {}
+  "@diskEncryptionPageReplaceDialogQRBody": {},
+  "recoveryKeyPassphraseEntropyOptimal": "Надежная парольная фраза",
+  "@recoveryKeyPassphraseEntropyOptimal": {},
+  "recoveryKeyPinEntropyBelowMin": "Слабый PIN-код, сделайте его длиннее или менее предсказуемым",
+  "@recoveryKeyPinEntropyBelowMin": {},
+  "recoveryKeyPassphraseEntropyBelowOptimal": "Подходящая парольная фраза, но для большей безопасности можете сделать её длиннее или более сложной",
+  "@recoveryKeyPassphraseEntropyBelowOptimal": {},
+  "recoveryKeyPinEntropyBelowOptimal": "Подходящий PIN-код, но для большей безопасности можете сделать его длиннее или менее предсказуемым",
+  "@recoveryKeyPinEntropyBelowOptimal": {},
+  "recoveryKeyPinEntropyOptimal": "PIN-код достаточно длинный",
+  "@recoveryKeyPinEntropyOptimal": {},
+  "recoveryKeyPassphraseEntropyBelowMin": "Слабая парольная фраза, сделайте её длиннее или более сложной",
+  "@recoveryKeyPassphraseEntropyBelowMin": {}
 }
