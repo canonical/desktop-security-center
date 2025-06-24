@@ -207,5 +207,17 @@
   "recoveryKeyPinBody": "Pri spustení musíte zadať svoj PIN, aby ste odomkli disk. PIN môžete zmeniť, ale nie vypnúť.",
   "@recoveryKeyPinBody": {},
   "recoveryKeyPinCurrentError": "Nesprávny PIN, skúste to znova",
-  "@recoveryKeyPinCurrentError": {}
+  "@recoveryKeyPinCurrentError": {},
+  "recoveryKeyPassphraseEntropyOptimal": "Silná prístupová fráza",
+  "@recoveryKeyPassphraseEntropyOptimal": {},
+  "recoveryKeyPinEntropyBelowMin": "Slabý PIN, vytvorte ho dlhší alebo menej predvídateľný",
+  "@recoveryKeyPinEntropyBelowMin": {},
+  "recoveryKeyPinEntropyBelowOptimal": "Priemerný PIN, vytvorte ho dlhší alebo menej predvídateľný pre lepšiu bezpečnosť",
+  "@recoveryKeyPinEntropyBelowOptimal": {},
+  "recoveryKeyPinEntropyOptimal": "PIN je dostatočne dlhý",
+  "@recoveryKeyPinEntropyOptimal": {},
+  "recoveryKeyPassphraseEntropyBelowOptimal": "Priemerná prístupová fráza, vytvorte ju dlhšiu alebo zložitejšiu pre lepšiu bezpečnosť",
+  "@recoveryKeyPassphraseEntropyBelowOptimal": {},
+  "recoveryKeyPassphraseEntropyBelowMin": "Slabá prístupová fráza, vytvorte ju dlhšiu alebo zložitejšiu",
+  "@recoveryKeyPassphraseEntropyBelowMin": {}
 }
