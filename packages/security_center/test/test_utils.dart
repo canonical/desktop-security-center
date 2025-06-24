@@ -192,6 +192,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
       entropyBits: newPass.length,
       minEntropyBits: 4,
       optimalEntropyBits: 6,
+      success: newPass.length >= 4,
     );
   });
   registerMockService<DiskEncryptionService>(service);

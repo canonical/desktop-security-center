@@ -17,19 +17,25 @@ part 'disk_encryption_providers.g.dart';
 
 final _log = Logger('disk_encryption_providers');
 
-enum Entropy {
+enum SemanticEntropy {
   belowMin,
-  min,
+  belowOptimal,
   optimal;
+}
 
-  static Entropy from(EntropyResponse response) {
-    if (response.entropyBits < response.minEntropyBits) {
-      return Entropy.belowMin;
+extension EntropyResponseSemantic on EntropyResponse {
+  SemanticEntropy get semanticEntropy {
+    if (minEntropyBits > optimalEntropyBits) {
+      _log.info(
+        'received entropy response with minEntropyBits > optimalEntropyBits: $this',
+      );
     }
-    if (response.entropyBits < response.optimalEntropyBits) {
-      return Entropy.min;
+    if (entropyBits < minEntropyBits) {
+      return SemanticEntropy.belowMin;
+    } else if (entropyBits < optimalEntropyBits) {
+      return SemanticEntropy.belowOptimal;
     }
-    return Entropy.optimal;
+    return SemanticEntropy.optimal;
   }
 }
 
@@ -92,7 +98,7 @@ class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
   factory ChangeAuthDialogModelData({
     required ChangeAuthDialogState dialogState,
     required AuthMode authMode,
-    Entropy? entropy,
+    EntropyResponse? entropy,
     @Default('') String oldPass,
     @Default('') String newPass,
     @Default('') String confirmPass,
@@ -162,7 +168,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
         state.authMode,
         value,
       );
-      state = state.copyWith(entropy: Entropy.from(response));
+      state = state.copyWith(entropy: response);
     } on Exception catch (e) {
       state = state.copyWith(entropy: null);
       _log.error(e);
@@ -187,7 +193,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
       return false;
     }
 
-    if (state.entropy == null || state.entropy == Entropy.belowMin) {
+    if (state.entropy == null || !state.entropy!.success) {
       return false;
     }
 
