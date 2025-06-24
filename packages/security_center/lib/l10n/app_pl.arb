@@ -207,5 +207,17 @@
   "recoveryKeyPassphrasePassphraseSuccessHeader": "Hasło zaktualizowane",
   "@recoveryKeyPassphrasePassphraseSuccessHeader": {},
   "recoveryKeyPassphrasePassphraseSuccessBody": "Twoje hasło zostało pomyślnie zaktualizowane.",
-  "@recoveryKeyPassphrasePassphraseSuccessBody": {}
+  "@recoveryKeyPassphrasePassphraseSuccessBody": {},
+  "recoveryKeyPassphraseEntropyBelowMin": "Słabe hasło, wydłuż je lub zwiększ złożoność",
+  "@recoveryKeyPassphraseEntropyBelowMin": {},
+  "recoveryKeyPassphraseEntropyBelowOptimal": "Wystarczające hasło, wydłuż je lub zwiększ złożoność, aby zwiększyć bezpieczeństwo",
+  "@recoveryKeyPassphraseEntropyBelowOptimal": {},
+  "recoveryKeyPassphraseEntropyOptimal": "Silne hasło",
+  "@recoveryKeyPassphraseEntropyOptimal": {},
+  "recoveryKeyPinEntropyOptimal": "Kod PIN jest wystarczająco długi",
+  "@recoveryKeyPinEntropyOptimal": {},
+  "recoveryKeyPinEntropyBelowMin": "Słaby kod PIN, wydłuż go lub uczyń mniej przewidywalnym",
+  "@recoveryKeyPinEntropyBelowMin": {},
+  "recoveryKeyPinEntropyBelowOptimal": "Wystarczający kod PIN, uczyń go dłuższym lub mniej przewidywalnym, aby zapewnić większe bezpieczeństwo",
+  "@recoveryKeyPinEntropyBelowOptimal": {}
 }
