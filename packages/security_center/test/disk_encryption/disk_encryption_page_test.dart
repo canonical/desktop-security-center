@@ -505,9 +505,9 @@ void main() {
     await tester.tap(find.text(tester.l10n.recoveryKeyPinButton));
     await tester.pumpAndSettle();
 
-    // Find all Show buttons (should be 3 - current, new, confirm passphrase)
+    // Find Show button
     final showButtons = find.text(tester.l10n.recoveryKeyPassphraseShow);
-    expect(showButtons, findsNWidgets(3));
+    expect(showButtons, findsOneWidget);
 
     // Find the text fields and enter text
     final textFields = find.byType(TextField);
@@ -533,8 +533,8 @@ void main() {
     expect(tester.widget<TextField>(textFields.at(2)).obscureText, isFalse);
 
     // Verify buttons now show 'Hide' instead of 'Show'
-    final hideButtons = find.text(tester.l10n.recoveryKeyPassphraseHide);
-    expect(hideButtons, findsNWidgets(3));
+    final hideButton = find.text(tester.l10n.recoveryKeyPassphraseHide);
+    expect(hideButton, findsOneWidget);
     expect(find.text(tester.l10n.recoveryKeyPassphraseShow), findsNothing);
   });
 
