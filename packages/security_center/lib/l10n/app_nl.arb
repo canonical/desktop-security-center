@@ -207,5 +207,17 @@
   "recoveryKeyPassphraseNewError": "Moet minimaal 4 tekens lang zijn",
   "@recoveryKeyPassphraseNewError": {},
   "recoveryKeyPassphraseBody": "U moet uw wachtwoord tijdens het opstarten invoeren om de schijf te ontgrendelen. U kunt de wachtwoordzin wijzigen, maar niet uitschakelen.",
-  "@recoveryKeyPassphraseBody": {}
+  "@recoveryKeyPassphraseBody": {},
+  "recoveryKeyPassphraseEntropyBelowOptimal": "Redelijke wachtwoordzin, maak het langer of complexer voor een betere beveiliging",
+  "@recoveryKeyPassphraseEntropyBelowOptimal": {},
+  "recoveryKeyPassphraseEntropyOptimal": "Sterke wachtwoordzin",
+  "@recoveryKeyPassphraseEntropyOptimal": {},
+  "recoveryKeyPinEntropyOptimal": "Pincode is lang genoeg",
+  "@recoveryKeyPinEntropyOptimal": {},
+  "recoveryKeyPinEntropyBelowOptimal": "Redelijke pincode, maak hem langer of minder voorspelbaar voor een betere beveiliging",
+  "@recoveryKeyPinEntropyBelowOptimal": {},
+  "recoveryKeyPassphraseEntropyBelowMin": "Zwakke wachtwoordzin, maak het langer of complexer",
+  "@recoveryKeyPassphraseEntropyBelowMin": {},
+  "recoveryKeyPinEntropyBelowMin": "Zwakke pincode, maak hem langer of minder voorspelbaar",
+  "@recoveryKeyPinEntropyBelowMin": {}
 }
