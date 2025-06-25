@@ -40,12 +40,6 @@ Future<void> main(List<String> args) async {
 
   registerService<SnapdService>(SnapdService.new);
 
-  // registerService<DiskEncryptionService>(
-  //   () => FakeDiskEncryptionService.fromFile(
-  //     'integration_test/assets/test_containers.json',
-  //   ),
-  // );
-
   registerService(XdgDesktopPortalClient.new);
 
   final snapMetadata = await getService<SnapdService>().getSnaps();
@@ -58,16 +52,21 @@ Future<void> main(List<String> args) async {
             ..init(),
       dispose: (service) => service.dispose(),
     );
+
+    registerService<DiskEncryptionService>(
+      () => FakeDiskEncryptionService.fromFile(
+        'integration_test/assets/test_containers.json',
+      ),
+    );
   } else {
     registerService<AppPermissionsService>(
       () => SnapdAppPermissionsService(getService<SnapdService>())..init(),
       dispose: (service) => service.dispose(),
     );
+    registerService<DiskEncryptionService>(
+      () => SnapdDiskEncryptionService(getService<SnapdService>()),
+    );
   }
-
-  registerService<DiskEncryptionService>(
-    () => SnapdDiskEncryptionService(getService<SnapdService>()),
-  );
 
   runApp(const ProviderScope(child: SecurityCenterApp()));
 }
