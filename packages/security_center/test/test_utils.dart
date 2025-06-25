@@ -131,34 +131,38 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool changePinPassphraseError = false,
   bool entropyCheckError = false,
   AuthMode authMode = AuthMode.pin,
-  EntropyResponse Function(String)? entropyResponseBuilder,
+  SnapdEntropyResponse Function(String)? entropyResponseBuilder,
 }) {
   final service = MockDiskEncryptionService();
 
   when(service.enumerateKeySlots()).thenAnswer(
-    (_) async => [
-      SystemDataContainer(
-        volumeName: 'system-data',
-        name: 'system-data',
-        encrypted: true,
-        keySlots: [
-          KeySlot(
-            name: 'default-recovery',
-            type: KeySlotType.platform,
-            role: 'foo',
-            platformName: 'bar',
-            authMode: authMode,
-          ),
-        ],
-        containerRole: 'system-data',
-      ),
-    ],
+    (_) async => SnapdSystemVolumesResponse(
+      byContainerRole: {
+        'system-data': SnapdSystemVolume(
+          volumeName: 'system-data',
+          name: 'system-data',
+          encrypted: true,
+          keyslots: [
+            SnapdSystemVolumeKeySlot(
+              name: 'default-recovery',
+              type: SnapdSystemVolumeKeySlotType.platform,
+              roles: ['foo'],
+              platformName: 'bar',
+              authMode: SnapdSystemVolumeAuthMode.values.firstWhere(
+                (mode) => mode.name == authMode.name,
+                orElse: () => SnapdSystemVolumeAuthMode.pin,
+              ),
+            ),
+          ],
+        ),
+      },
+    ),
   );
   when(service.generateRecoveryKey()).thenAnswer((_) async {
     if (generateError) {
       throw Exception('Mock generate recovery key error');
     }
-    return RecoveryKeyDetails(
+    return SnapdGenerateRecoveryKeyResponse(
       recoveryKey: 'mock-recovery-key',
       keyId: 'mock-id',
     );
@@ -174,7 +178,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
     }
     return checkRecoveryKey;
   });
-  when(service.changePINPassphrase(any, any, any)).thenAnswer((_) async {
+  when(service.changePinPassphrase(any, any, any)).thenAnswer((_) async {
     if (changePinPassphraseError) {
       throw Exception('Mock change PIN/passphrase error');
     }
@@ -188,11 +192,10 @@ DiskEncryptionService registerMockDiskEncryptionService({
     if (entropyResponseBuilder != null) {
       return entropyResponseBuilder(newPass);
     }
-    return EntropyResponse(
+    return SnapdEntropyResponse(
       entropyBits: newPass.length,
       minEntropyBits: 4,
       optimalEntropyBits: 6,
-      success: newPass.length >= 4,
     );
   });
   registerMockService<DiskEncryptionService>(service);

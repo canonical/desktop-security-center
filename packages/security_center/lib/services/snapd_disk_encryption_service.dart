@@ -63,4 +63,19 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
     }
     return;
   }
+
+  @override
+  Future<SnapdEntropyResponse> pinPassphraseEntropyCheck(
+    AuthMode authmode,
+    String newPass,
+  ) async {
+    switch (authmode) {
+      case AuthMode.none:
+        throw UnimplementedError();
+      case AuthMode.pin:
+        return _snapd.checkPin(newPass);
+      case AuthMode.passphrase:
+        return _snapd.checkPassphrase(newPass);
+    }
+  }
 }

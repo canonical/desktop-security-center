@@ -18,6 +18,14 @@ class EntropyResponse with _$EntropyResponse {
 
   factory EntropyResponse.fromJson(Map<String, dynamic> json) =>
       _$EntropyResponseFromJson(json);
+
+  factory EntropyResponse.fromSnapdEntropyResponse(SnapdEntropyResponse snapdResponse) =>
+      EntropyResponse(
+        success: snapdResponse.minEntropyBits <= snapdResponse.entropyBits,
+        entropyBits: snapdResponse.entropyBits,
+        minEntropyBits: snapdResponse.minEntropyBits,
+        optimalEntropyBits: snapdResponse.optimalEntropyBits,
+      );
 }
 
 /// A Class to model the recovery key details returned.
@@ -102,11 +110,8 @@ abstract class DiskEncryptionService {
     String newPass,
   );
 
-  Future<EntropyResponse> pinPassphraseEntropyCheck(
-    AuthMode authmode,
+  Future<SnapdEntropyResponse> pinPassphraseEntropyCheck(
+    AuthMode authMode,
     String newPass,
   );
-
-  /// Holds the current state of the Check Recovery Key dialog.
-  CheckRecoveryKeyDialogState get recoveryKeyDialogState;
 }
