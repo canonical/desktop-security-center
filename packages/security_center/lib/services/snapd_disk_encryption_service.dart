@@ -52,9 +52,8 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   @override
   Future<void> replaceRecoveryKey(String keyId) async {
     final changeId = await _snapd.replaceRecoveryKey(keyId);
-    final result = await _snapd
-        .watchChange(changeId)
-        .firstWhere((change) => change.ready);
+    final result =
+        await _snapd.watchChange(changeId).firstWhere((change) => change.ready);
     if (result.err != null) {
       // TODO: this error message
       throw Exception(

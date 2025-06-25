@@ -8,38 +8,29 @@ import 'package:snapd/snapd.dart';
 
 class FakeDiskEncryptionService implements DiskEncryptionService {
   FakeDiskEncryptionService({
-    required this.containers,
+    required this.systemVolumes,
     required this.checkError,
     Map<String, String>? initialRecoveryKeys,
   }) : _recoveryKeys = initialRecoveryKeys ?? {};
 
-  /// Load initial containers from a JSON file.
+  /// Load initial system volumes from a JSON file.
   factory FakeDiskEncryptionService.fromFile(
     String path, {
     bool checkError = false,
   }) {
     final raw = File(path).readAsStringSync();
-    final jsonList = jsonDecode(raw) as List;
-    final containers = <SystemDataContainer>[];
-    for (var i = 0; i < jsonList.length; i++) {
-      final map = jsonList[i] as Map<String, dynamic>;
-      try {
-        final container = SystemDataContainer.fromJson(map);
-        containers.add(container);
-      } catch (e) {
-        rethrow;
-      }
-    }
+    final json = jsonDecode(raw) as Map<String, dynamic>;
+    final systemVolumes = SnapdSystemVolumesResponse.fromJson(json);
 
     return FakeDiskEncryptionService(
-      containers: containers,
+      systemVolumes: systemVolumes,
       initialRecoveryKeys: {'default-recovery': '1234'},
       checkError: checkError,
     );
   }
 
-  /// List of mocked system data containers.
-  List<SystemDataContainer> containers;
+  /// Mocked system volumes response.
+  SnapdSystemVolumesResponse systemVolumes;
   final Map<String, String> _recoveryKeys;
   final bool checkError;
   String _auth = '12345';
@@ -55,7 +46,8 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     final keyId = DateTime.now().millisecondsSinceEpoch.toString();
 
     _recoveryKeys[keyId] = recoveryKey;
-    return SnapdGenerateRecoveryKeyResponse(recoveryKey: recoveryKey, keyId: keyId);
+    return SnapdGenerateRecoveryKeyResponse(
+        recoveryKey: recoveryKey, keyId: keyId);
   }
 
   /// Adds an existing recovery key (by keyId) to the first available slot.
@@ -68,14 +60,13 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     _recoveryKeys['default-recovery'] = _recoveryKeys[keyId]!;
   }
 
-  /// Returns containers.
+  /// Returns system volumes.
   @override
   Future<SnapdSystemVolumesResponse> enumerateKeySlots() async {
-    // await Future.delayed(
-    //   const Duration(seconds: 2),
-    // ); // Uncomment to simulate a delay
-    // return containers;
-    throw UnimplementedError('ahhhh!!!');
+    await Future.delayed(
+      const Duration(seconds: 2),
+    ); // Uncomment to simulate a delay
+    return systemVolumes;
   }
 
   /// Throws if the given recovery key isn't valid.
@@ -87,8 +78,8 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     }
 
     // Keyslot with name needs to exist && recovery key must exist with same name
-    if ((containers.any(
-          (c) => c.keySlots.any((k) => k.name == 'default-recovery'),
+    if ((systemVolumes.byContainerRole.values.any(
+          (volume) => volume.keyslots.any((k) => k.name == 'default-recovery'),
         )) &&
         (_recoveryKeys.containsKey('default-recovery') &&
             _recoveryKeys['default-recovery'] == recoveryKey)) {

@@ -19,7 +19,8 @@ class EntropyResponse with _$EntropyResponse {
   factory EntropyResponse.fromJson(Map<String, dynamic> json) =>
       _$EntropyResponseFromJson(json);
 
-  factory EntropyResponse.fromSnapdEntropyResponse(SnapdEntropyResponse snapdResponse) =>
+  factory EntropyResponse.fromSnapdEntropyResponse(
+          SnapdEntropyResponse snapdResponse) =>
       EntropyResponse(
         success: snapdResponse.minEntropyBits <= snapdResponse.entropyBits,
         entropyBits: snapdResponse.entropyBits,

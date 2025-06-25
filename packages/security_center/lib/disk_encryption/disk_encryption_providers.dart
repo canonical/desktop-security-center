@@ -169,7 +169,8 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
         state.authMode,
         value,
       );
-      state = state.copyWith(entropy: EntropyResponse.fromSnapdEntropyResponse(response));
+      state = state.copyWith(
+          entropy: EntropyResponse.fromSnapdEntropyResponse(response));
     } on Exception catch (e) {
       state = state.copyWith(entropy: null);
       _log.error(e);
@@ -215,16 +216,41 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
   @override
   Future<AuthMode> build() async {
-    // final containers = await _service.enumerateKeySlots();
+    // Temporary work around while we wait for snapd to implement enumerateKeySlots()
+    try {
+      final volumesResponse = await _service.enumerateKeySlots();
+      _log.debug(volumesResponse);
 
-    // final systemDataVolume = containers.firstWhere(
-    //   (c) => c.containerRole == 'system-data',
-    // );
+      final systemDataVolume = volumesResponse.byContainerRole['system-data'];
+      if (systemDataVolume == null) {
+        _log.error('No system-data volume found');
+        return AuthMode.passphrase;
+      }
 
-    // final recoveryKeySlot = systemDataVolume.keySlots.firstWhere(
-    //   (k) => k.name == 'default-recovery' && k.type == KeySlotType.platform,
-    // );
-    return AuthMode.passphrase;
+      final recoveryKeySlot = systemDataVolume.keyslots.firstWhere(
+        (k) =>
+            k.name == 'default-recovery' &&
+            k.type == SnapdSystemVolumeKeySlotType.platform,
+        orElse: () =>
+            throw StateError('No default-recovery platform key slot found'),
+      );
+
+      final authMode = recoveryKeySlot.authMode;
+      if (authMode != null) {
+        switch (authMode) {
+          case SnapdSystemVolumeAuthMode.none:
+            return AuthMode.none;
+          case SnapdSystemVolumeAuthMode.pin:
+            return AuthMode.pin;
+          case SnapdSystemVolumeAuthMode.passphrase:
+            return AuthMode.passphrase;
+        }
+      }
+      return AuthMode.passphrase;
+    } on Exception catch (e) {
+      _log.error('Failed to determine TPM authentication mode: $e');
+      return AuthMode.passphrase;
+    }
   }
 }
 

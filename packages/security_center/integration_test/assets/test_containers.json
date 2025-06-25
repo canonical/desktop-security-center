@@ -1,12 +1,18 @@
-[
-  {
-    "container-role": "system-data",
-    "volume-name": "volume1",
-    "name": "container1",
-    "encrypted": true,
-    "key-slots": [
-      { "name": "default-recovery", "type": "platform", "role": "foo", "platform-name" : "bar", "auth-mode": "pin"}
-    ]
+{
+  "by-container-role": {
+    "system-data": {
+      "volume-name": "volume1",
+      "name": "container1",
+      "encrypted": true,
+      "keyslots": [
+        {
+          "name": "default-recovery",
+          "type": "platform",
+          "roles": ["foo"],
+          "platform-name": "bar",
+          "auth-mode": "pin"
+        }
+      ]
+    }
   }
-]
-
+}
