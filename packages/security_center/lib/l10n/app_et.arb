@@ -207,5 +207,17 @@
   "recoveryKeyPassphrasePassphraseSuccessHeader": "Salafraas on uuendatud",
   "@recoveryKeyPassphrasePassphraseSuccessHeader": {},
   "recoveryKeyPassphrasePassphraseSuccessBody": "Sinu salafraasi muutmine õnnestus.",
-  "@recoveryKeyPassphrasePassphraseSuccessBody": {}
+  "@recoveryKeyPassphrasePassphraseSuccessBody": {},
+  "recoveryKeyPassphraseEntropyBelowMin": "Salafraas on kehv, palun muuda ta pikemaks ja keerukamaks",
+  "@recoveryKeyPassphraseEntropyBelowMin": {},
+  "recoveryKeyPassphraseEntropyOptimal": "Salafraas on korralik",
+  "@recoveryKeyPassphraseEntropyOptimal": {},
+  "recoveryKeyPinEntropyBelowMin": "PIN-kood on kehv, palun muuda ta pikemaks ja vähem ennustatavaks",
+  "@recoveryKeyPinEntropyBelowMin": {},
+  "recoveryKeyPinEntropyOptimal": "PIN-kood on piisavalt pikk",
+  "@recoveryKeyPinEntropyOptimal": {},
+  "recoveryKeyPinEntropyBelowOptimal": "PIN-kood on juba täitsa hea, parema turvalisuse nimel palun muuda ta pikemaks ja vähem ennustatavaks",
+  "@recoveryKeyPinEntropyBelowOptimal": {},
+  "recoveryKeyPassphraseEntropyBelowOptimal": "Salafraas on juba täitsa hea, parema turvalisuse nimel palun muuda ta pikemaks ja keerukamaks",
+  "@recoveryKeyPassphraseEntropyBelowOptimal": {}
 }
