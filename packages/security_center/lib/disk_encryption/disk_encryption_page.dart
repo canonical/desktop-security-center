@@ -401,11 +401,6 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                     ),
                   ].separatedBy(const SizedBox(width: 16)),
                 ),
-                if (recoveryKey.isLoading)
-                  const Padding(
-                    padding: EdgeInsets.only(top: 16),
-                    child: YaruLinearProgressIndicator(),
-                  ),
                 if (replaceDialogState
                         is ReplaceRecoveryKeyDialogStateSuccess &&
                     replaceDialogError == null)
