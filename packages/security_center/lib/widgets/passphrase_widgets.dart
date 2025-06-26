@@ -68,11 +68,7 @@ class _CurrentPassphraseFormFieldState
             model.dialogState is! ChangeAuthDialogStateError)
           Padding(
             padding: const EdgeInsets.only(left: 10.0),
-            child: Baseline(
-              baseline: 0,
-              baselineType: TextBaseline.alphabetic,
-              child: SuccessIcon(),
-            ),
+            child: SuccessIcon(),
           ),
       ],
     );
@@ -224,11 +220,7 @@ class _ConfirmPassphraseFormFieldState
             model.dialogState is! ChangeAuthDialogStateError)
           Padding(
             padding: const EdgeInsets.only(left: 10.0),
-            child: Baseline(
-              baseline: 0,
-              baselineType: TextBaseline.alphabetic,
-              child: SuccessIcon(),
-            ),
+            child: SuccessIcon(),
           ),
       ],
     );
