@@ -238,7 +238,6 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
     );
     final recoveryKey = ref.watch(generatedRecoveryKeyModelProvider);
     final filePicker = ref.read(filePickerProvider);
-    final theme = Theme.of(context);
 
     final l10n = AppLocalizations.of(context);
     return Scaffold(
@@ -451,7 +450,6 @@ class ChangeAuthDialog extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final model = ref.watch(changeAuthDialogModelProvider);
     final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
-    final theme = Theme.of(context);
     assert(authMode != AuthMode.none);
 
     final title = switch (authMode) {
