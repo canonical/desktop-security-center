@@ -18,23 +18,24 @@ class SecurityCenterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return YaruTheme(
-      builder: (context, yaru, _) => MaterialApp(
-        theme: yaru.theme?.copyWith(
+    ThemeData? buttonOverrides(ThemeData? theme) => theme?.copyWith(
           elevatedButtonTheme: ElevatedButtonThemeData(
-            style: yaru.theme?.elevatedButtonTheme.style?.copyWith(
+            style: theme.elevatedButtonTheme.style?.copyWith(
               minimumSize: WidgetStateProperty.all(kActionButtonSize),
             ),
           ),
           outlinedButtonTheme: OutlinedButtonThemeData(
-            style: yaru.theme?.outlinedButtonTheme.style?.copyWith(
+            style: theme.outlinedButtonTheme.style?.copyWith(
               minimumSize: WidgetStateProperty.all(kActionButtonSize),
             ),
           ),
-        ),
-        darkTheme: yaru.darkTheme,
-        highContrastTheme: yaruHighContrastLight,
-        highContrastDarkTheme: yaruHighContrastDark,
+        );
+    return YaruTheme(
+      builder: (context, yaru, _) => MaterialApp(
+        theme: buttonOverrides(yaru.theme),
+        darkTheme: buttonOverrides(yaru.darkTheme),
+        highContrastTheme: buttonOverrides(yaruHighContrastLight),
+        highContrastDarkTheme: buttonOverrides(yaruHighContrastDark),
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
         debugShowCheckedModeBanner: false,
