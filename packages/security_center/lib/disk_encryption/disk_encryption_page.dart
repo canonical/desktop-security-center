@@ -17,7 +17,6 @@ const _learnMoreUrl =
     'https://discourse.ubuntu.com/t/hardware-backed-encryption-and-recovery-keys-in-ubuntu-desktop/58243';
 const defaultRecoveryKeyFileName = 'recovery-key.txt';
 
-const actionButtonSize = Size(100, 40);
 const yaruProgressSize = 20.0;
 
 class DiskEncryptionPage extends ConsumerWidget {
@@ -374,9 +373,6 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     OutlinedButton(
-                      style: theme.filledButtonTheme.style?.copyWith(
-                        minimumSize: WidgetStateProperty.all(actionButtonSize),
-                      ),
                       onPressed: replaceDialogState
                               is ReplaceRecoveryKeyDialogStateInput
                           ? () => Navigator.of(context).pop()
@@ -384,9 +380,6 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                       child: Text(l10n.diskEncryptionPageReplaceDialogDiscard),
                     ),
                     ElevatedButton(
-                      style: theme.filledButtonTheme.style?.copyWith(
-                        minimumSize: WidgetStateProperty.all(actionButtonSize),
-                      ),
                       onPressed: replaceDialogState
                                   is ReplaceRecoveryKeyDialogStateInput &&
                               replaceDialogState.acknowledged == true &&
@@ -481,9 +474,6 @@ class ChangeAuthDialog extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
-                  style: theme.filledButtonTheme.style?.copyWith(
-                    minimumSize: WidgetStateProperty.all(actionButtonSize),
-                  ),
                   onPressed: model.dialogState is ChangeAuthDialogStateInput &&
                           notifier.isValid
                       ? notifier.changePinPassphrase

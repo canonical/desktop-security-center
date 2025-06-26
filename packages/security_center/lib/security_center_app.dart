@@ -8,6 +8,7 @@ import 'package:security_center/routes.dart';
 import 'package:yaru/yaru.dart';
 
 const kPaneWidth = 240.0;
+const kActionButtonSize = Size(100, 40);
 
 final yaruPageControllerProvider =
     Provider((ref) => YaruPageController(length: Routes.values.length));
@@ -19,7 +20,18 @@ class SecurityCenterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return YaruTheme(
       builder: (context, yaru, _) => MaterialApp(
-        theme: yaru.theme,
+        theme: yaru.theme?.copyWith(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: yaru.theme?.elevatedButtonTheme.style?.copyWith(
+              minimumSize: WidgetStateProperty.all(kActionButtonSize),
+            ),
+          ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: yaru.theme?.outlinedButtonTheme.style?.copyWith(
+              minimumSize: WidgetStateProperty.all(kActionButtonSize),
+            ),
+          ),
+        ),
         darkTheme: yaru.darkTheme,
         highContrastTheme: yaruHighContrastLight,
         highContrastDarkTheme: yaruHighContrastDark,
