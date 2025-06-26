@@ -17,6 +17,8 @@ const _learnMoreUrl =
     'https://discourse.ubuntu.com/t/hardware-backed-encryption-and-recovery-keys-in-ubuntu-desktop/58243';
 const defaultRecoveryKeyFileName = 'recovery-key.txt';
 
+const actionButtonSize = Size(100, 40);
+
 class DiskEncryptionPage extends ConsumerWidget {
   const DiskEncryptionPage({super.key});
 
@@ -236,6 +238,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
     );
     final recoveryKey = ref.watch(generatedRecoveryKeyModelProvider);
     final filePicker = ref.read(filePickerProvider);
+    final theme = Theme.of(context);
 
     final l10n = AppLocalizations.of(context);
     return Scaffold(
@@ -370,6 +373,9 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     OutlinedButton(
+                      style: theme.filledButtonTheme.style?.copyWith(
+                        minimumSize: WidgetStateProperty.all(actionButtonSize),
+                      ),
                       onPressed: replaceDialogState
                               is ReplaceRecoveryKeyDialogStateInput
                           ? () => Navigator.of(context).pop()
@@ -377,17 +383,36 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                       child: Text(l10n.diskEncryptionPageReplaceDialogDiscard),
                     ),
                     ElevatedButton(
+                      style: theme.filledButtonTheme.style?.copyWith(
+                        minimumSize: WidgetStateProperty.all(actionButtonSize),
+                      ),
                       onPressed: replaceDialogState
                                   is ReplaceRecoveryKeyDialogStateInput &&
-                              replaceDialogState.acknowledged == true
+                              replaceDialogState.acknowledged == true &&
+                              !recoveryKey.isLoading
                           ? () => replaceNotifier.replaceRecoveryKey(
                                 recoveryKey.value!.keyId,
                               )
                           : null,
-                      child: Text(l10n.diskEncryptionPageReplaceDialogReplace),
+                      child: replaceDialogState
+                              is ReplaceRecoveryKeyDialogStateLoading
+                          ? SizedBox.square(
+                              dimension: 16.0,
+                              child: YaruCircularProgressIndicator(
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : Text(
+                              l10n.diskEncryptionPageReplaceDialogReplace,
+                            ),
                     ),
                   ].separatedBy(const SizedBox(width: 16)),
                 ),
+                if (recoveryKey.isLoading)
+                  const Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: YaruLinearProgressIndicator(),
+                  ),
                 if (replaceDialogState
                         is ReplaceRecoveryKeyDialogStateSuccess &&
                     replaceDialogError == null)
@@ -432,6 +457,7 @@ class ChangeAuthDialog extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final model = ref.watch(changeAuthDialogModelProvider);
     final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
+    final theme = Theme.of(context);
     assert(authMode != AuthMode.none);
 
     final title = switch (authMode) {
@@ -454,11 +480,21 @@ class ChangeAuthDialog extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
+                  style: theme.filledButtonTheme.style?.copyWith(
+                    minimumSize: WidgetStateProperty.all(actionButtonSize),
+                  ),
                   onPressed: model.dialogState is ChangeAuthDialogStateInput &&
                           notifier.isValid
                       ? notifier.changePinPassphrase
                       : null,
-                  child: Text(l10n.recoveryKeyPassphraseChange),
+                  child: model.dialogState is ChangeAuthDialogStateLoading
+                      ? SizedBox.square(
+                          dimension: 16.0,
+                          child: YaruCircularProgressIndicator(
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : Text(l10n.recoveryKeyPassphraseChange),
                 ),
               ],
             ),

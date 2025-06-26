@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:snapd/snapd.dart';
 
 part 'disk_encryption_service.freezed.dart';
@@ -20,7 +19,8 @@ class EntropyResponse with _$EntropyResponse {
       _$EntropyResponseFromJson(json);
 
   factory EntropyResponse.fromSnapdEntropyResponse(
-          SnapdEntropyResponse snapdResponse) =>
+    SnapdEntropyResponse snapdResponse,
+  ) =>
       EntropyResponse(
         success: snapdResponse.minEntropyBits <= snapdResponse.entropyBits,
         entropyBits: snapdResponse.entropyBits,

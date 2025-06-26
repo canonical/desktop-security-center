@@ -8,8 +8,8 @@ import 'package:path/path.dart' as p;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/file_picker_dialog.dart';
-import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:snapd/snapd.dart';
+import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 
@@ -18,11 +18,7 @@ part 'disk_encryption_providers.g.dart';
 
 final _log = Logger('disk_encryption_providers');
 
-enum SemanticEntropy {
-  belowMin,
-  belowOptimal,
-  optimal;
-}
+enum SemanticEntropy { belowMin, belowOptimal, optimal }
 
 extension EntropyResponseSemantic on EntropyResponse {
   SemanticEntropy get semanticEntropy {
@@ -61,6 +57,7 @@ sealed class RecoveryKeyException
 @freezed
 sealed class ChangeAuthDialogState with _$ChangeAuthDialogState {
   factory ChangeAuthDialogState.input() = ChangeAuthDialogStateInput;
+  factory ChangeAuthDialogState.loading() = ChangeAuthDialogStateLoading;
   factory ChangeAuthDialogState.success() = ChangeAuthDialogStateSuccess;
   factory ChangeAuthDialogState.error(Exception e) = ChangeAuthDialogStateError;
 }
@@ -73,6 +70,8 @@ sealed class ReplaceRecoveryKeyDialogState
       ReplaceRecoveryKeyDialogStateGenerating;
   factory ReplaceRecoveryKeyDialogState.input(bool acknowledged) =
       ReplaceRecoveryKeyDialogStateInput;
+  factory ReplaceRecoveryKeyDialogState.loading() =
+      ReplaceRecoveryKeyDialogStateLoading;
   factory ReplaceRecoveryKeyDialogState.success() =
       ReplaceRecoveryKeyDialogStateSuccess;
   factory ReplaceRecoveryKeyDialogState.error(Exception e) =
@@ -121,6 +120,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
 
   Future<void> changePinPassphrase() async {
     assert(state.dialogState is ChangeAuthDialogStateInput);
+    state = state.copyWith(dialogState: ChangeAuthDialogState.loading());
     try {
       await _service.changePinPassphrase(
         state.authMode,
@@ -170,7 +170,8 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
         value,
       );
       state = state.copyWith(
-          entropy: EntropyResponse.fromSnapdEntropyResponse(response));
+        entropy: EntropyResponse.fromSnapdEntropyResponse(response),
+      );
     } on Exception catch (e) {
       state = state.copyWith(entropy: null);
       _log.error(e);
@@ -265,9 +266,7 @@ final filePickerProvider = Provider<FilePicker>((ref) => showSaveFileDialog);
 final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
 typedef ProcessRunner = Future<ProcessResult> Function(
-  String executable,
-  List<String> arguments,
-);
+    String executable, List<String> arguments);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @freezed
@@ -314,7 +313,10 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
     assert(
       (state.dialogState as ReplaceRecoveryKeyDialogStateInput).acknowledged,
     );
-    // TODO: loading state
+
+    state = state.copyWith(
+      dialogState: ReplaceRecoveryKeyDialogState.loading(),
+    );
     try {
       await _service.replaceRecoveryKey(key);
       state = state.copyWith(

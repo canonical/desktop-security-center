@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:snapd/snapd.dart';
 
@@ -47,7 +46,9 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
     _recoveryKeys[keyId] = recoveryKey;
     return SnapdGenerateRecoveryKeyResponse(
-        recoveryKey: recoveryKey, keyId: keyId);
+      recoveryKey: recoveryKey,
+      keyId: keyId,
+    );
   }
 
   /// Adds an existing recovery key (by keyId) to the first available slot.
@@ -56,7 +57,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     if (!_recoveryKeys.containsKey(keyId)) {
       throw StateError('Unknown recovery key ID: $keyId');
     }
-
+    await Future.delayed(const Duration(seconds: 2));
     _recoveryKeys['default-recovery'] = _recoveryKeys[keyId]!;
   }
 
