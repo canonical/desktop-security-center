@@ -18,6 +18,7 @@ const _learnMoreUrl =
 const defaultRecoveryKeyFileName = 'recovery-key.txt';
 
 const actionButtonSize = Size(100, 40);
+const yaruProgressSize = 20.0;
 
 class DiskEncryptionPage extends ConsumerWidget {
   const DiskEncryptionPage({super.key});
@@ -397,7 +398,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                       child: replaceDialogState
                               is ReplaceRecoveryKeyDialogStateLoading
                           ? SizedBox.square(
-                              dimension: 16.0,
+                              dimension: yaruProgressSize,
                               child: YaruCircularProgressIndicator(
                                 strokeWidth: 2,
                               ),
@@ -489,7 +490,7 @@ class ChangeAuthDialog extends ConsumerWidget {
                       : null,
                   child: model.dialogState is ChangeAuthDialogStateLoading
                       ? SizedBox.square(
-                          dimension: 16.0,
+                          dimension: yaruProgressSize,
                           child: YaruCircularProgressIndicator(
                             strokeWidth: 2,
                           ),
