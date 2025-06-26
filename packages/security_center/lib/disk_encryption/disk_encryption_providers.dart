@@ -18,7 +18,11 @@ part 'disk_encryption_providers.g.dart';
 
 final _log = Logger('disk_encryption_providers');
 
-enum SemanticEntropy { belowMin, belowOptimal, optimal }
+enum SemanticEntropy {
+  belowMin,
+  belowOptimal,
+  optimal;
+}
 
 extension EntropyResponseSemantic on EntropyResponse {
   SemanticEntropy get semanticEntropy {

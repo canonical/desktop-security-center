@@ -96,7 +96,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   ) async {
     await Future.delayed(
       const Duration(seconds: 2),
-    ); // Uncomment to simulate a delay
+    );
     if (oldAuth != _auth) {
       throw Exception('Auths dont match');
     }
