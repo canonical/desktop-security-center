@@ -207,5 +207,17 @@
   "recoveryKeyPassphraseHeader": "變更密碼",
   "@recoveryKeyPassphraseHeader": {},
   "recoveryKeyPassphrasePassphraseSuccessBody": "您的密碼已成功更新。",
-  "@recoveryKeyPassphrasePassphraseSuccessBody": {}
+  "@recoveryKeyPassphrasePassphraseSuccessBody": {},
+  "recoveryKeyPassphraseEntropyOptimal": "強大的密碼",
+  "@recoveryKeyPassphraseEntropyOptimal": {},
+  "recoveryKeyPinEntropyBelowMin": "較弱的 PIN 碼，使其更長或更難預測",
+  "@recoveryKeyPinEntropyBelowMin": {},
+  "recoveryKeyPassphraseEntropyBelowMin": "密碼太弱，請將它設得更長或更複雜",
+  "@recoveryKeyPassphraseEntropyBelowMin": {},
+  "recoveryKeyPassphraseEntropyBelowOptimal": "公平的密碼，將它變得更長或更複雜，以提高安全性",
+  "@recoveryKeyPassphraseEntropyBelowOptimal": {},
+  "recoveryKeyPinEntropyOptimal": "PIN 碼夠長",
+  "@recoveryKeyPinEntropyOptimal": {},
+  "recoveryKeyPinEntropyBelowOptimal": "公平的 PIN 碼，使其更長或更不易預測，以提高安全性",
+  "@recoveryKeyPinEntropyBelowOptimal": {}
 }
