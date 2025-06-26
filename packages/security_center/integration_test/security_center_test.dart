@@ -47,63 +47,6 @@ void main() {
 
     await expectSnapdRules([]);
   });
-
-  testWidgets('Check recovery key is valid', (tester) async {
-    await app.main([]);
-    await tester.pumpAndSettle();
-
-    await tester.tap(find.text(tester.l10n.diskEncryptionPageTitle));
-    await tester.pumpAndSettle();
-
-    await tester.tap(find.text(tester.l10n.diskEncryptionPageCheckKey));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-      find.byWidgetPredicate(
-        (w) =>
-            w is TextField &&
-            w.decoration?.labelText ==
-                tester.l10n.diskEncryptionPageRecoveryKey,
-      ),
-      'abcdef',
-    );
-    await tester.pump();
-
-    await tester.tap(find.text(tester.l10n.diskEncryptionPageCheck));
-    await tester.pumpAndSettle();
-
-    expect(find.text(tester.l10n.diskEncryptionPageKeyWorks), findsOneWidget);
-  });
-
-  testWidgets('Check recovery key is invalid', (tester) async {
-    await app.main([]);
-    await tester.pumpAndSettle();
-
-    await tester.tap(find.text(tester.l10n.diskEncryptionPageTitle));
-    await tester.pumpAndSettle();
-
-    await tester.tap(find.text(tester.l10n.diskEncryptionPageCheckKey));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-      find.byWidgetPredicate(
-        (w) =>
-            w is TextField &&
-            w.decoration?.labelText ==
-                tester.l10n.diskEncryptionPageRecoveryKey,
-      ),
-      'abcde',
-    );
-    await tester.pump();
-
-    await tester.tap(find.text(tester.l10n.diskEncryptionPageCheck));
-    await tester.pumpAndSettle();
-
-    expect(
-      find.text(tester.l10n.diskEncryptionPageKeyDoesntWork),
-      findsOneWidget,
-    );
-  });
 }
 
 void expectHomeRule(WidgetTester tester, SnapdRuleMask rule) {

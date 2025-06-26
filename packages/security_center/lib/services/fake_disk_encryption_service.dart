@@ -2,52 +2,41 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:snapd/snapd.dart';
 
 class FakeDiskEncryptionService implements DiskEncryptionService {
   FakeDiskEncryptionService({
-    required this.containers,
+    required this.systemVolumes,
     required this.checkError,
     Map<String, String>? initialRecoveryKeys,
   }) : _recoveryKeys = initialRecoveryKeys ?? {};
 
-  /// Load initial containers from a JSON file.
+  /// Load initial system volumes from a JSON file.
   factory FakeDiskEncryptionService.fromFile(
     String path, {
     bool checkError = false,
   }) {
     final raw = File(path).readAsStringSync();
-    final jsonList = jsonDecode(raw) as List;
-    final containers = <SystemDataContainer>[];
-    for (var i = 0; i < jsonList.length; i++) {
-      final map = jsonList[i] as Map<String, dynamic>;
-      try {
-        final container = SystemDataContainer.fromJson(map);
-        containers.add(container);
-      } catch (e) {
-        rethrow;
-      }
-    }
+    final json = jsonDecode(raw) as Map<String, dynamic>;
+    final systemVolumes = SnapdSystemVolumesResponse.fromJson(json);
 
     return FakeDiskEncryptionService(
-      containers: containers,
-      initialRecoveryKeys: {'default-recovery': 'abcdef'},
+      systemVolumes: systemVolumes,
+      initialRecoveryKeys: {'default-recovery': '1234'},
       checkError: checkError,
     );
   }
 
-  /// List of mocked system data containers.
-  List<SystemDataContainer> containers;
+  /// Mocked system volumes response.
+  SnapdSystemVolumesResponse systemVolumes;
   final Map<String, String> _recoveryKeys;
   final bool checkError;
   String _auth = '12345';
-  final CheckRecoveryKeyDialogState _checkRecoveryKeyDialogState =
-      CheckRecoveryKeyDialogState.empty();
 
   /// Generates a fake recovery key and key ID.
   @override
-  Future<RecoveryKeyDetails> generateRecoveryKey() async {
+  Future<SnapdGenerateRecoveryKeyResponse> generateRecoveryKey() async {
     await Future.delayed(const Duration(seconds: 2));
     final rand = Random();
     final lastSegment = rand.nextInt(100000).toString().padLeft(5, '0');
@@ -56,7 +45,10 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     final keyId = DateTime.now().millisecondsSinceEpoch.toString();
 
     _recoveryKeys[keyId] = recoveryKey;
-    return RecoveryKeyDetails(recoveryKey: recoveryKey, keyId: keyId);
+    return SnapdGenerateRecoveryKeyResponse(
+      recoveryKey: recoveryKey,
+      keyId: keyId,
+    );
   }
 
   /// Adds an existing recovery key (by keyId) to the first available slot.
@@ -65,17 +57,16 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     if (!_recoveryKeys.containsKey(keyId)) {
       throw StateError('Unknown recovery key ID: $keyId');
     }
-
     _recoveryKeys['default-recovery'] = _recoveryKeys[keyId]!;
   }
 
-  /// Returns containers.
+  /// Returns system volumes.
   @override
-  Future<List<SystemDataContainer>> enumerateKeySlots() async {
+  Future<SnapdSystemVolumesResponse> enumerateKeySlots() async {
     await Future.delayed(
       const Duration(seconds: 2),
     ); // Uncomment to simulate a delay
-    return containers;
+    return systemVolumes;
   }
 
   /// Throws if the given recovery key isn't valid.
@@ -87,8 +78,8 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     }
 
     // Keyslot with name needs to exist && recovery key must exist with same name
-    if ((containers.any(
-          (c) => c.keySlots.any((k) => k.name == 'default-recovery'),
+    if ((systemVolumes.byContainerRole.values.any(
+          (volume) => volume.keyslots.any((k) => k.name == 'default-recovery'),
         )) &&
         (_recoveryKeys.containsKey('default-recovery') &&
             _recoveryKeys['default-recovery'] == recoveryKey)) {
@@ -97,17 +88,15 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     return false;
   }
 
-  /// Returns the current state of the Check Recovery Key dialog.
   @override
-  CheckRecoveryKeyDialogState get recoveryKeyDialogState =>
-      _checkRecoveryKeyDialogState;
-
-  @override
-  Future<void> changePINPassphrase(
+  Future<void> changePinPassphrase(
     AuthMode auth,
     String oldAuth,
     String newAuth,
   ) async {
+    await Future.delayed(
+      const Duration(seconds: 2),
+    );
     if (oldAuth != _auth) {
       throw Exception('Auths dont match');
     }
@@ -115,15 +104,14 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<EntropyResponse> pinPassphraseEntropyCheck(
+  Future<SnapdEntropyResponse> pinPassphraseEntropyCheck(
     AuthMode authmode,
     String newPass,
   ) async {
-    return EntropyResponse(
+    return SnapdEntropyResponse(
       entropyBits: newPass.length,
       minEntropyBits: 4,
       optimalEntropyBits: 6,
-      success: newPass.length >= 4,
     );
   }
 }

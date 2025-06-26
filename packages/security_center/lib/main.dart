@@ -10,6 +10,7 @@ import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/fake_app_permissions_service.dart';
 import 'package:security_center/services/fake_disk_encryption_service.dart';
 import 'package:security_center/services/snapd_app_permissions_service.dart';
+import 'package:security_center/services/snapd_disk_encryption_service.dart';
 import 'package:security_center/services/snapd_service.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -41,12 +42,6 @@ Future<void> main(List<String> args) async {
 
   registerService<SnapdService>(SnapdService.new);
 
-  registerService<DiskEncryptionService>(
-    () => FakeDiskEncryptionService.fromFile(
-      'integration_test/assets/test_containers.json',
-    ),
-  );
-
   registerService(XdgDesktopPortalClient.new);
 
   final snapMetadata = await getService<SnapdService>().getSnaps();
@@ -59,12 +54,21 @@ Future<void> main(List<String> args) async {
       )..init(),
       dispose: (service) => service.dispose(),
     );
+
+    registerService<DiskEncryptionService>(
+      () => FakeDiskEncryptionService.fromFile(
+        'integration_test/assets/test_containers.json',
+      ),
+    );
   } else {
     registerService<AppPermissionsService>(
       () => SnapdAppPermissionsService(
         getService<SnapdService>(),
       )..init(),
       dispose: (service) => service.dispose(),
+    );
+    registerService<DiskEncryptionService>(
+      () => SnapdDiskEncryptionService(getService<SnapdService>()),
     );
   }
   runApp(const ProviderScope(child: SecurityCenterApp()));

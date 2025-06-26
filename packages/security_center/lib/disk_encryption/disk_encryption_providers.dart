@@ -8,6 +8,7 @@ import 'package:path/path.dart' as p;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/file_picker_dialog.dart';
+import 'package:snapd/snapd.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
@@ -60,6 +61,7 @@ sealed class RecoveryKeyException
 @freezed
 sealed class ChangeAuthDialogState with _$ChangeAuthDialogState {
   factory ChangeAuthDialogState.input() = ChangeAuthDialogStateInput;
+  factory ChangeAuthDialogState.loading() = ChangeAuthDialogStateLoading;
   factory ChangeAuthDialogState.success() = ChangeAuthDialogStateSuccess;
   factory ChangeAuthDialogState.error(Exception e) = ChangeAuthDialogStateError;
 }
@@ -72,6 +74,8 @@ sealed class ReplaceRecoveryKeyDialogState
       ReplaceRecoveryKeyDialogStateGenerating;
   factory ReplaceRecoveryKeyDialogState.input(bool acknowledged) =
       ReplaceRecoveryKeyDialogStateInput;
+  factory ReplaceRecoveryKeyDialogState.loading() =
+      ReplaceRecoveryKeyDialogStateLoading;
   factory ReplaceRecoveryKeyDialogState.success() =
       ReplaceRecoveryKeyDialogStateSuccess;
   factory ReplaceRecoveryKeyDialogState.error(Exception e) =
@@ -114,14 +118,15 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
   ChangeAuthDialogModelData build() {
     return ChangeAuthDialogModelData(
       dialogState: ChangeAuthDialogState.input(),
-      authMode: AuthMode.none,
+      authMode: AuthMode.passphrase,
     );
   }
 
   Future<void> changePinPassphrase() async {
     assert(state.dialogState is ChangeAuthDialogStateInput);
+    state = state.copyWith(dialogState: ChangeAuthDialogState.loading());
     try {
-      await _service.changePINPassphrase(
+      await _service.changePinPassphrase(
         state.authMode,
         state.oldPass,
         state.newPass,
@@ -168,7 +173,9 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
         state.authMode,
         value,
       );
-      state = state.copyWith(entropy: response);
+      state = state.copyWith(
+        entropy: EntropyResponse.fromSnapdEntropyResponse(response),
+      );
     } on Exception catch (e) {
       state = state.copyWith(entropy: null);
       _log.error(e);
@@ -214,16 +221,41 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
   @override
   Future<AuthMode> build() async {
-    final containers = await _service.enumerateKeySlots();
+    // Temporary work around while we wait for snapd to implement enumerateKeySlots()
+    try {
+      final volumesResponse = await _service.enumerateKeySlots();
+      _log.debug(volumesResponse);
 
-    final systemDataVolume = containers.firstWhere(
-      (c) => c.containerRole == 'system-data',
-    );
+      final systemDataVolume = volumesResponse.byContainerRole['system-data'];
+      if (systemDataVolume == null) {
+        _log.error('No system-data volume found');
+        return AuthMode.passphrase;
+      }
 
-    final recoveryKeySlot = systemDataVolume.keySlots.firstWhere(
-      (k) => k.name == 'default-recovery' && k.type == KeySlotType.platform,
-    );
-    return recoveryKeySlot.authMode!;
+      final recoveryKeySlot = systemDataVolume.keyslots.firstWhere(
+        (k) =>
+            k.name == 'default-recovery' &&
+            k.type == SnapdSystemVolumeKeySlotType.platform,
+        orElse: () =>
+            throw StateError('No default-recovery platform key slot found'),
+      );
+
+      final authMode = recoveryKeySlot.authMode;
+      if (authMode != null) {
+        switch (authMode) {
+          case SnapdSystemVolumeAuthMode.none:
+            return AuthMode.none;
+          case SnapdSystemVolumeAuthMode.pin:
+            return AuthMode.pin;
+          case SnapdSystemVolumeAuthMode.passphrase:
+            return AuthMode.passphrase;
+        }
+      }
+      return AuthMode.passphrase;
+    } on Exception catch (e) {
+      _log.error('Failed to determine TPM authentication mode: $e');
+      return AuthMode.passphrase;
+    }
   }
 }
 
@@ -261,7 +293,7 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   @override
   ReplaceRecoveryKeyDialogModelData build() {
     // listen for the key to land
-    ref.listen<AsyncValue<RecoveryKeyDetails>>(
+    ref.listen<AsyncValue<SnapdGenerateRecoveryKeyResponse>>(
       generatedRecoveryKeyModelProvider,
       (prev, next) {
         if (prev is AsyncLoading && next is AsyncData) {
@@ -288,6 +320,9 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
       (state.dialogState as ReplaceRecoveryKeyDialogStateInput).acknowledged,
     );
 
+    state = state.copyWith(
+      dialogState: ReplaceRecoveryKeyDialogState.loading(),
+    );
     try {
       await _service.replaceRecoveryKey(key);
       state = state.copyWith(
@@ -345,7 +380,7 @@ class GeneratedRecoveryKeyModel extends _$GeneratedRecoveryKeyModel {
   final _service = getService<DiskEncryptionService>();
 
   @override
-  Future<RecoveryKeyDetails> build() async {
+  Future<SnapdGenerateRecoveryKeyResponse> build() async {
     return _service.generateRecoveryKey();
   }
 }

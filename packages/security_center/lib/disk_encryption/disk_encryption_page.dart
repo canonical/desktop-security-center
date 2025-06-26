@@ -17,6 +17,8 @@ const _learnMoreUrl =
     'https://discourse.ubuntu.com/t/hardware-backed-encryption-and-recovery-keys-in-ubuntu-desktop/58243';
 const defaultRecoveryKeyFileName = 'recovery-key.txt';
 
+const yaruProgressSize = 20.0;
+
 class DiskEncryptionPage extends ConsumerWidget {
   const DiskEncryptionPage({super.key});
 
@@ -379,15 +381,31 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                     ElevatedButton(
                       onPressed: replaceDialogState
                                   is ReplaceRecoveryKeyDialogStateInput &&
-                              replaceDialogState.acknowledged == true
+                              replaceDialogState.acknowledged == true &&
+                              !recoveryKey.isLoading
                           ? () => replaceNotifier.replaceRecoveryKey(
                                 recoveryKey.value!.keyId,
                               )
                           : null,
-                      child: Text(l10n.diskEncryptionPageReplaceDialogReplace),
+                      child: replaceDialogState
+                              is ReplaceRecoveryKeyDialogStateLoading
+                          ? SizedBox.square(
+                              dimension: yaruProgressSize,
+                              child: YaruCircularProgressIndicator(
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : Text(
+                              l10n.diskEncryptionPageReplaceDialogReplace,
+                            ),
                     ),
                   ].separatedBy(const SizedBox(width: 16)),
                 ),
+                if (recoveryKey.isLoading)
+                  const Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: YaruLinearProgressIndicator(),
+                  ),
                 if (replaceDialogState
                         is ReplaceRecoveryKeyDialogStateSuccess &&
                     replaceDialogError == null)
@@ -458,7 +476,14 @@ class ChangeAuthDialog extends ConsumerWidget {
                           notifier.isValid
                       ? notifier.changePinPassphrase
                       : null,
-                  child: Text(l10n.recoveryKeyPassphraseChange),
+                  child: model.dialogState is ChangeAuthDialogStateLoading
+                      ? SizedBox.square(
+                          dimension: yaruProgressSize,
+                          child: YaruCircularProgressIndicator(
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : Text(l10n.recoveryKeyPassphraseChange),
                 ),
               ],
             ),

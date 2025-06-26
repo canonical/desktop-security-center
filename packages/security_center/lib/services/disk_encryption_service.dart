@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
+import 'package:snapd/snapd.dart';
 
 part 'disk_encryption_service.freezed.dart';
 part 'disk_encryption_service.g.dart';
@@ -17,6 +17,16 @@ class EntropyResponse with _$EntropyResponse {
 
   factory EntropyResponse.fromJson(Map<String, dynamic> json) =>
       _$EntropyResponseFromJson(json);
+
+  factory EntropyResponse.fromSnapdEntropyResponse(
+    SnapdEntropyResponse snapdResponse,
+  ) =>
+      EntropyResponse(
+        success: snapdResponse.minEntropyBits <= snapdResponse.entropyBits,
+        entropyBits: snapdResponse.entropyBits,
+        minEntropyBits: snapdResponse.minEntropyBits,
+        optimalEntropyBits: snapdResponse.optimalEntropyBits,
+      );
 }
 
 /// A Class to model the recovery key details returned.
@@ -84,29 +94,25 @@ class SystemDataContainer with _$SystemDataContainer {
 /// A service for managing recovery keys.
 abstract class DiskEncryptionService {
   /// Generates and returns a new recovery key.
-  Future<RecoveryKeyDetails> generateRecoveryKey();
+  Future<SnapdGenerateRecoveryKeyResponse> generateRecoveryKey();
 
   /// replaces existing recovery key with a new oneslot.
   Future<void> replaceRecoveryKey(String keyId);
 
   /// Lists all key slot and their statuses.
-  Future<List<SystemDataContainer>> enumerateKeySlots();
+  Future<SnapdSystemVolumesResponse> enumerateKeySlots();
 
   /// Checks if a recovery key is still valid for use.
   Future<bool> checkRecoveryKey(String recoveryKey);
 
-  Future<void> changePINPassphrase(
+  Future<void> changePinPassphrase(
     AuthMode authMode,
     String oldPass,
     String newPass,
   );
 
-  /// Checks strength of new pin / passphrase
-  Future<EntropyResponse> pinPassphraseEntropyCheck(
-    AuthMode authmode,
+  Future<SnapdEntropyResponse> pinPassphraseEntropyCheck(
+    AuthMode authMode,
     String newPass,
   );
-
-  /// Holds the current state of the Check Recovery Key dialog.
-  CheckRecoveryKeyDialogState get recoveryKeyDialogState;
 }
