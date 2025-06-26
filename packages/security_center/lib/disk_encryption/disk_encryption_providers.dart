@@ -266,7 +266,9 @@ final filePickerProvider = Provider<FilePicker>((ref) => showSaveFileDialog);
 final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
 typedef ProcessRunner = Future<ProcessResult> Function(
-    String executable, List<String> arguments);
+  String executable,
+  List<String> arguments,
+);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @freezed

@@ -57,7 +57,6 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     if (!_recoveryKeys.containsKey(keyId)) {
       throw StateError('Unknown recovery key ID: $keyId');
     }
-    await Future.delayed(const Duration(seconds: 2));
     _recoveryKeys['default-recovery'] = _recoveryKeys[keyId]!;
   }
 
