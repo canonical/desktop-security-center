@@ -67,13 +67,18 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
     AuthMode authmode,
     String newPass,
   ) async {
-    switch (authmode) {
-      case AuthMode.none:
-        throw UnimplementedError();
-      case AuthMode.pin:
-        return _snapd.checkPin(newPass);
-      case AuthMode.passphrase:
-        return _snapd.checkPassphrase(newPass);
+    try {
+      switch (authmode) {
+        case AuthMode.none:
+          throw UnimplementedError();
+        case AuthMode.pin:
+          return _snapd.checkPin(newPass);
+        case AuthMode.passphrase:
+          return _snapd.checkPassphrase(newPass);
+      }
+    } on SnapdException catch (e) {
+      _log.error(e);
+      rethrow;
     }
   }
 }

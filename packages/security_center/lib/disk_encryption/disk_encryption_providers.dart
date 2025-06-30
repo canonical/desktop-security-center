@@ -19,7 +19,11 @@ part 'disk_encryption_providers.g.dart';
 
 final _log = Logger('disk_encryption_providers');
 
-enum SemanticEntropy { belowMin, belowOptimal, optimal }
+enum SemanticEntropy {
+  belowMin,
+  belowOptimal,
+  optimal;
+}
 
 extension EntropyResponseSemantic on EntropyResponse {
   SemanticEntropy get semanticEntropy {
@@ -292,7 +296,9 @@ final filePickerProvider = Provider<FilePicker>((ref) => showSaveFileDialog);
 final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
 typedef ProcessRunner = Future<ProcessResult> Function(
-    String executable, List<String> arguments);
+  String executable,
+  List<String> arguments,
+);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @freezed
