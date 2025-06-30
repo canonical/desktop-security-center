@@ -19,11 +19,7 @@ part 'disk_encryption_providers.g.dart';
 
 final _log = Logger('disk_encryption_providers');
 
-enum SemanticEntropy {
-  belowMin,
-  belowOptimal,
-  optimal;
-}
+enum SemanticEntropy { belowMin, belowOptimal, optimal }
 
 extension EntropyResponseSemantic on EntropyResponse {
   SemanticEntropy get semanticEntropy {
@@ -260,13 +256,11 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         return AuthMode.passphrase;
       }
 
-      final recoveryKeySlot = systemDataVolume.keyslots.firstWhere(
-        (k) =>
-            k.name == 'default-recovery' &&
-            k.type == SnapdSystemVolumeKeySlotType.platform,
-        orElse: () =>
-            throw StateError('No default-recovery platform key slot found'),
-      );
+      final recoveryKeySlot = systemDataVolume.keyslots['default-recovery'];
+
+      if (recoveryKeySlot == null) {
+        throw Exception('No default-recovery keyslot found');
+      }
 
       final authMode = recoveryKeySlot.authMode;
       if (authMode != null) {
@@ -298,9 +292,7 @@ final filePickerProvider = Provider<FilePicker>((ref) => showSaveFileDialog);
 final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
 typedef ProcessRunner = Future<ProcessResult> Function(
-  String executable,
-  List<String> arguments,
-);
+    String executable, List<String> arguments);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @freezed

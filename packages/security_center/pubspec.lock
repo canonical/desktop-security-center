@@ -926,7 +926,7 @@ packages:
     description:
       path: "."
       ref: systems-volumes-api
-      resolved-ref: bb0ce2939d235ae2d7059e8f4cd9338da039d2ae
+      resolved-ref: e630ea3c44852b35639fd540b03edd9d12c18811
       url: "https://github.com/canonical/snapd.dart"
     source: git
     version: "0.7.1"

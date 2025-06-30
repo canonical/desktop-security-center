@@ -79,7 +79,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
     // Keyslot with name needs to exist && recovery key must exist with same name
     if ((systemVolumes.byContainerRole.values.any(
-          (volume) => volume.keyslots.any((k) => k.name == 'default-recovery'),
+          (volume) => volume.keyslots.keys.any((k) => k == 'default-recovery'),
         )) &&
         (_recoveryKeys.containsKey('default-recovery') &&
             _recoveryKeys['default-recovery'] == recoveryKey)) {

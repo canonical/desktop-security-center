@@ -142,9 +142,8 @@ DiskEncryptionService registerMockDiskEncryptionService({
           volumeName: 'system-data',
           name: 'system-data',
           encrypted: true,
-          keyslots: [
-            SnapdSystemVolumeKeySlot(
-              name: 'default-recovery',
+          keyslots: {
+            'default-recovery': SnapdSystemVolumeKeySlot(
               type: SnapdSystemVolumeKeySlotType.platform,
               roles: ['foo'],
               platformName: 'bar',
@@ -153,7 +152,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
                 orElse: () => SnapdSystemVolumeAuthMode.pin,
               ),
             ),
-          ],
+          },
         ),
       },
     ),
