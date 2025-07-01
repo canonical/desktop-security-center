@@ -120,31 +120,39 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
     return Row(
       children: [
         Expanded(
-          child: TextFormField(
-            controller: _controller,
-            decoration: InputDecoration(
-              labelText: widget.authMode.localizedNewHint(lang),
-              errorText: model.entropy != null && !model.entropy!.success
-                  ? model.entropy?.semanticEntropy.localizedHint(
-                      l10n,
-                      widget.authMode,
-                    )
-                  : null,
-              helperText: model.entropy?.semanticEntropy ==
-                          SemanticEntropy.belowOptimal ||
-                      model.entropy?.semanticEntropy == SemanticEntropy.optimal
-                  ? model.entropy?.semanticEntropy.localizedHint(
-                      l10n,
-                      widget.authMode,
-                    )
-                  : null,
-              helperStyle: Theme.of(context).textTheme.bodySmall,
-              helperMaxLines: 2,
-              errorMaxLines: 2,
+          child: Focus(
+            onFocusChange: (hasFocus) {
+              if (!hasFocus) {
+                notifier.setNewPass(_controller.text);
+              }
+            },
+            child: TextFormField(
+              controller: _controller,
+              decoration: InputDecoration(
+                labelText: widget.authMode.localizedNewHint(lang),
+                errorText: model.entropy != null && !model.entropy!.success
+                    ? model.entropy?.semanticEntropy.localizedHint(
+                        l10n,
+                        widget.authMode,
+                      )
+                    : null,
+                helperText: model.entropy?.semanticEntropy ==
+                            SemanticEntropy.belowOptimal ||
+                        model.entropy?.semanticEntropy ==
+                            SemanticEntropy.optimal
+                    ? model.entropy?.semanticEntropy.localizedHint(
+                        l10n,
+                        widget.authMode,
+                      )
+                    : null,
+                helperStyle: Theme.of(context).textTheme.bodySmall,
+                helperMaxLines: 2,
+                errorMaxLines: 2,
+              ),
+              obscureText: !model.showPassphrase,
+              enabled: !isDisabled,
+              onChanged: (value) => notifier.setNewPass(value, debounce: true),
             ),
-            obscureText: !model.showPassphrase,
-            enabled: !isDisabled,
-            onChanged: notifier.setNewPass,
           ),
         ),
         if (model.entropy != null &&
@@ -204,19 +212,26 @@ class _ConfirmPassphraseFormFieldState
     return Row(
       children: [
         Expanded(
-          child: TextFormField(
-            controller: _controller,
-            decoration: InputDecoration(
-              labelText: widget.authMode.localizedConfirmHint(lang),
-              errorText: !notifier.passphraseConfirmed
-                  ? widget.authMode.localizedConfirmError(lang)
-                  : null,
-            ),
-            obscureText: !model.showPassphrase,
-            enabled: !isDisabled,
-            onChanged: (value) {
-              notifier.confirmPass = value;
+          child: Focus(
+            onFocusChange: (hasFocus) {
+              if (!hasFocus) {
+                notifier.setConfirmPass(_controller.text);
+              }
             },
+            child: TextFormField(
+              controller: _controller,
+              decoration: InputDecoration(
+                labelText: widget.authMode.localizedConfirmHint(lang),
+                errorText: !notifier.passphraseConfirmed
+                    ? widget.authMode.localizedConfirmError(lang)
+                    : null,
+              ),
+              obscureText: !model.showPassphrase,
+              enabled: !isDisabled,
+              onChanged: (value) {
+                notifier.setConfirmPass(value, debounce: true);
+              },
+            ),
           ),
         ),
         if (model.confirmPass.isNotEmpty &&

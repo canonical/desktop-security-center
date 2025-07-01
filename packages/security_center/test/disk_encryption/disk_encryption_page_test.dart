@@ -10,6 +10,8 @@ import 'package:yaru/yaru.dart';
 import '../test_utils.dart';
 
 void main() {
+  const debounceDelay = Duration(milliseconds: 500);
+
   testWidgets('recovery key is valid', (tester) async {
     final container = createContainer();
     registerMockDiskEncryptionService();
@@ -586,7 +588,7 @@ void main() {
           await tester.enterText(textFields.at(1), 'newpass');
           await tester.enterText(textFields.at(2), 'different');
         }
-        await tester.pump();
+        await tester.pumpAndSettle(debounceDelay);
 
         // Button should still be disabled due to validation error
         expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
@@ -648,7 +650,7 @@ void main() {
           await tester.enterText(textFields.at(1), 'new');
           await tester.enterText(textFields.at(2), 'new');
         }
-        await tester.pump();
+        await tester.pumpAndSettle(debounceDelay);
 
         // Button should still be disabled due to validation error
         expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
@@ -667,7 +669,7 @@ void main() {
           await tester.enterText(textFields.at(1), 'newp');
           await tester.enterText(textFields.at(2), 'newp');
         }
-        await tester.pump();
+        await tester.pumpAndSettle(debounceDelay);
 
         // Button should be active
         expect(tester.widget<ElevatedButton>(changeButton).enabled, isTrue);
@@ -686,7 +688,7 @@ void main() {
           await tester.enterText(textFields.at(1), 'newpas');
           await tester.enterText(textFields.at(2), 'newpas');
         }
-        await tester.pump();
+        await tester.pumpAndSettle(debounceDelay);
 
         // Button should still be active
         expect(tester.widget<ElevatedButton>(changeButton).enabled, isTrue);
@@ -769,14 +771,14 @@ void main() {
           await tester.enterText(textFields.at(1), 'newpass');
           await tester.enterText(textFields.at(2), 'newpass');
         }
-        await tester.pump();
+        await tester.pumpAndSettle(debounceDelay);
 
         // Button should now be enabled with valid inputs
         expect(tester.widget<ElevatedButton>(changeButton).enabled, isTrue);
 
         // Submit the form
         await tester.tap(changeButton);
-        await tester.pumpAndSettle();
+        await tester.pumpAndSettle(debounceDelay);
 
         // Check the result based on success/failure
         if (tc.changePinPassphraseError) {
@@ -846,7 +848,7 @@ void main() {
         await tester.enterText(textFields.at(0), mixedInput);
         await tester.enterText(textFields.at(1), mixedInput);
         await tester.enterText(textFields.at(2), mixedInput);
-        await tester.pump();
+        await tester.pumpAndSettle(debounceDelay);
 
         // Check the actual text in the controllers based on auth mode
         final expectedText = tc.authMode == AuthMode.pin ? '1234' : mixedInput;

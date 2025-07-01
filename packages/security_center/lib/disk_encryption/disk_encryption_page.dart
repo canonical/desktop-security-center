@@ -449,7 +449,7 @@ class ChangeAuthDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final model = ref.watch(changeAuthDialogModelProvider);
-    final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
+    final notifier = ref.read(changeAuthDialogModelProvider.notifier);
     assert(authMode != AuthMode.none);
 
     final title = switch (authMode) {
