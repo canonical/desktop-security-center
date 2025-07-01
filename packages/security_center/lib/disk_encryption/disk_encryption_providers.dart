@@ -19,11 +19,7 @@ part 'disk_encryption_providers.g.dart';
 
 final _log = Logger('disk_encryption_providers');
 
-enum SemanticEntropy {
-  belowMin,
-  belowOptimal,
-  optimal;
-}
+enum SemanticEntropy { belowMin, belowOptimal, optimal }
 
 extension EntropyResponseSemantic on EntropyResponse {
   SemanticEntropy get semanticEntropy {
@@ -52,10 +48,10 @@ sealed class RecoveryKeyException
       RecoveryKeyExceptionUnknown;
 
   factory RecoveryKeyException.from(Object? e) => switch (e) {
-        final FileSystemException _ => RecoveryKeyException.fileSystem(),
-        final RecoveryKeyException e => e,
-        final e => RecoveryKeyException.unknown(rawError: e.toString()),
-      };
+    final FileSystemException _ => RecoveryKeyException.fileSystem(),
+    final RecoveryKeyException e => e,
+    final e => RecoveryKeyException.unknown(rawError: e.toString()),
+  };
 }
 
 /// Dialog state for managing the change auth flow.
@@ -160,53 +156,52 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
     );
   }
 
-  Future<void> setConfirmPass(
-    String value, {
-    bool debounce = false,
-  }) async {
+  Future<void> setConfirmPass(String value, {bool debounce = false}) async {
     if (state.dialogState is! ChangeAuthDialogStateInput) return;
     _confirmTimer?.cancel();
-    _confirmTimer =
-        Timer(debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
-            () async {
-      state = state.copyWith(
-        confirmPass: value,
-        dialogState: ChangeAuthDialogStateInput(),
-      );
-    });
+    _confirmTimer = Timer(
+      debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
+      () async {
+        state = state.copyWith(
+          confirmPass: value,
+          dialogState: ChangeAuthDialogStateInput(),
+        );
+      },
+    );
   }
 
-  Future<void> setNewPass(
-    String value, {
-    bool debounce = false,
-  }) async {
+  Future<void> setNewPass(String value, {bool debounce = false}) async {
     if (state.dialogState is! ChangeAuthDialogStateInput) return;
     _newPassTimer?.cancel();
-    _newPassTimer =
-        Timer(debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
-            () async {
-      state = state.copyWith(
-        newPass: value,
-        dialogState: ChangeAuthDialogStateInput(),
-      );
-      if (value.isEmpty) {
-        _log.debug('new passphrase is empty');
-        state = state.copyWith(entropy: null);
-        return;
-      }
-      try {
-        final response = await _service.pinPassphraseEntropyCheck(
-          state.authMode,
-          value,
-        );
+    _newPassTimer = Timer(
+      debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
+      () async {
         state = state.copyWith(
-          entropy: EntropyResponse.fromSnapdEntropyResponse(response),
+          newPass: value,
+          dialogState: ChangeAuthDialogStateInput(),
         );
-      } on Exception catch (e) {
-        state = state.copyWith(entropy: null);
-        _log.error(e);
-      }
-    });
+        if (value.isEmpty) {
+          _log.debug('new passphrase is empty');
+          state = state.copyWith(entropy: null);
+          return;
+        }
+        try {
+          final response = await _service.pinPassphraseEntropyCheck(
+            state.authMode,
+            value,
+          );
+          state = state.copyWith(
+            entropy: EntropyResponse.fromSnapdEntropyResponse(response),
+          );
+        } on Exception catch (e) {
+          state = state.copyWith(
+            entropy: null,
+            dialogState: ChangeAuthDialogState.error(e),
+          );
+          _log.error(e);
+        }
+      },
+    );
   }
 
   set oldPass(String value) {
@@ -285,20 +280,19 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   }
 }
 
-typedef FilePicker = Future<Uri?> Function({
-  required BuildContext context,
-  required String title,
-  String? defaultFileName,
-  List<XdgFileChooserFilter> filters,
-});
+typedef FilePicker =
+    Future<Uri?> Function({
+      required BuildContext context,
+      required String title,
+      String? defaultFileName,
+      List<XdgFileChooserFilter> filters,
+    });
 final filePickerProvider = Provider<FilePicker>((ref) => showSaveFileDialog);
 
 final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
-typedef ProcessRunner = Future<ProcessResult> Function(
-  String executable,
-  List<String> arguments,
-);
+typedef ProcessRunner =
+    Future<ProcessResult> Function(String executable, List<String> arguments);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @freezed
