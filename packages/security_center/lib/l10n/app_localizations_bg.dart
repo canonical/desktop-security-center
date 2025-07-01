@@ -327,4 +327,7 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+
+  @override
+  String get recoveryKeySnapdErrorHeader => 'Snapd Error';
 }

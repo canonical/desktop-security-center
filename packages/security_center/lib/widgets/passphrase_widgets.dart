@@ -46,7 +46,9 @@ class _CurrentPassphraseFormFieldState
     final model = ref.watch(changeAuthDialogModelProvider);
     final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
     final lang = AppLocalizations.of(context);
-    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
+    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess ||
+        (model.dialogState is ChangeAuthDialogStateError &&
+            (model.dialogState as ChangeAuthDialogStateError).fatal);
 
     return Row(
       children: [
@@ -114,7 +116,9 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
     final model = ref.watch(changeAuthDialogModelProvider);
     final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
     final lang = AppLocalizations.of(context);
-    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
+    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess ||
+        (model.dialogState is ChangeAuthDialogStateError &&
+            (model.dialogState as ChangeAuthDialogStateError).fatal);
     final l10n = AppLocalizations.of(context);
 
     return Row(
@@ -207,7 +211,9 @@ class _ConfirmPassphraseFormFieldState
     final model = ref.watch(changeAuthDialogModelProvider);
     final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
     final lang = AppLocalizations.of(context);
-    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
+    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess ||
+        (model.dialogState is ChangeAuthDialogStateError &&
+            (model.dialogState as ChangeAuthDialogStateError).fatal);
 
     return Row(
       children: [
@@ -272,7 +278,9 @@ class _SecurityKeyShowButton extends ConsumerWidget {
     final model = ref.watch(changeAuthDialogModelProvider);
     final notifier = ref.read(changeAuthDialogModelProvider.notifier);
     final showSecurityKey = model.showPassphrase;
-    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess;
+    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess ||
+        (model.dialogState is ChangeAuthDialogStateError &&
+            (model.dialogState as ChangeAuthDialogStateError).fatal);
 
     return Padding(
       padding: const EdgeInsets.all(1.0),

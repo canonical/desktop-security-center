@@ -503,7 +503,9 @@ class ChangeAuthDialog extends ConsumerWidget {
               ),
             if (model.dialogState is ChangeAuthDialogStateError)
               YaruInfoBox(
-                title: Text(l10n.diskEncryptionPageError),
+                title: (model.dialogState as ChangeAuthDialogStateError).fatal
+                    ? Text(l10n.recoveryKeySnapdErrorHeader)
+                    : Text(l10n.diskEncryptionPageError),
                 subtitle: Text(
                   (model.dialogState as ChangeAuthDialogStateError)
                       .e

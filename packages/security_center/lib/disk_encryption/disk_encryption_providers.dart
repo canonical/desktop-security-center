@@ -48,10 +48,10 @@ sealed class RecoveryKeyException
       RecoveryKeyExceptionUnknown;
 
   factory RecoveryKeyException.from(Object? e) => switch (e) {
-    final FileSystemException _ => RecoveryKeyException.fileSystem(),
-    final RecoveryKeyException e => e,
-    final e => RecoveryKeyException.unknown(rawError: e.toString()),
-  };
+        final FileSystemException _ => RecoveryKeyException.fileSystem(),
+        final RecoveryKeyException e => e,
+        final e => RecoveryKeyException.unknown(rawError: e.toString()),
+      };
 }
 
 /// Dialog state for managing the change auth flow.
@@ -60,7 +60,8 @@ sealed class ChangeAuthDialogState with _$ChangeAuthDialogState {
   factory ChangeAuthDialogState.input() = ChangeAuthDialogStateInput;
   factory ChangeAuthDialogState.loading() = ChangeAuthDialogStateLoading;
   factory ChangeAuthDialogState.success() = ChangeAuthDialogStateSuccess;
-  factory ChangeAuthDialogState.error(Exception e) = ChangeAuthDialogStateError;
+  factory ChangeAuthDialogState.error(Exception e, bool fatal) =
+      ChangeAuthDialogStateError;
 }
 
 /// Dialog state for managing the replace recovery key flow.
@@ -140,7 +141,8 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
         showPassphrase: false,
       );
     } on Exception catch (e) {
-      state = state.copyWith(dialogState: ChangeAuthDialogState.error(e));
+      state =
+          state.copyWith(dialogState: ChangeAuthDialogState.error(e, false));
     }
   }
 
@@ -196,7 +198,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
         } on Exception catch (e) {
           state = state.copyWith(
             entropy: null,
-            dialogState: ChangeAuthDialogState.error(e),
+            dialogState: ChangeAuthDialogState.error(e, true),
           );
           _log.error(e);
         }
@@ -280,19 +282,18 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   }
 }
 
-typedef FilePicker =
-    Future<Uri?> Function({
-      required BuildContext context,
-      required String title,
-      String? defaultFileName,
-      List<XdgFileChooserFilter> filters,
-    });
+typedef FilePicker = Future<Uri?> Function({
+  required BuildContext context,
+  required String title,
+  String? defaultFileName,
+  List<XdgFileChooserFilter> filters,
+});
 final filePickerProvider = Provider<FilePicker>((ref) => showSaveFileDialog);
 
 final fileSystemProvider = Provider<FileSystem>((_) => LocalFileSystem());
 
-typedef ProcessRunner =
-    Future<ProcessResult> Function(String executable, List<String> arguments);
+typedef ProcessRunner = Future<ProcessResult> Function(
+    String executable, List<String> arguments);
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @freezed
