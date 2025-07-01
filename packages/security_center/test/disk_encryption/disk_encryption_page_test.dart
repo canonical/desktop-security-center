@@ -702,6 +702,44 @@ void main() {
     }
   });
 
+  testWidgets('change auth - snapd errors are fatal', (tester) async {
+    final container = createContainer();
+    registerMockDiskEncryptionService(entropyCheckError: true);
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text(tester.l10n.recoveryKeyPinButton), findsOneWidget);
+    await tester.tap(find.text(tester.l10n.recoveryKeyPinButton));
+    await tester.pumpAndSettle(debounceDelay);
+
+    // Find new auth text field and enter text
+    final textFields = find.byType(TextField);
+    expect(textFields, findsNWidgets(3));
+
+    await tester.enterText(textFields.at(1), '5678');
+    await tester.pumpAndSettle(debounceDelay);
+
+    // Find the snapd error header
+    expect(find.text(tester.l10n.recoveryKeySnapdErrorHeader), findsOneWidget);
+
+    // All text fields are disabled on a fatal error
+    for (var i = 0; i < 3; i++) {
+      final textField = tester.widget<TextField>(textFields.at(i));
+      expect(textField.enabled, isFalse);
+    }
+
+    // Submit button is disabled
+    final changeButton = find.widgetWithText(
+      ElevatedButton,
+      tester.l10n.recoveryKeyPassphraseChange,
+    );
+    expect(changeButton, findsOneWidget);
+    expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
+  });
+
   group('change auth - submit with valid inputs', () {
     final cases = [
       (
