@@ -19,7 +19,11 @@ part 'disk_encryption_providers.g.dart';
 
 final _log = Logger('disk_encryption_providers');
 
-enum SemanticEntropy { belowMin, belowOptimal, optimal }
+enum SemanticEntropy {
+  belowMin,
+  belowOptimal,
+  optimal;
+}
 
 extension EntropyResponseSemantic on EntropyResponse {
   SemanticEntropy get semanticEntropy {
@@ -141,8 +145,9 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
         showPassphrase: false,
       );
     } on Exception catch (e) {
-      state =
-          state.copyWith(dialogState: ChangeAuthDialogState.error(e, false));
+      state = state.copyWith(
+        dialogState: ChangeAuthDialogState.error(e, false),
+      );
     }
   }
 
@@ -158,52 +163,56 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
     );
   }
 
-  Future<void> setConfirmPass(String value, {bool debounce = false}) async {
+  Future<void> setConfirmPass(
+    String value, {
+    bool debounce = false,
+  }) async {
     if (state.dialogState is! ChangeAuthDialogStateInput) return;
     _confirmTimer?.cancel();
-    _confirmTimer = Timer(
-      debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
-      () async {
-        state = state.copyWith(
-          confirmPass: value,
-          dialogState: ChangeAuthDialogStateInput(),
-        );
-      },
-    );
+    _confirmTimer =
+        Timer(debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
+            () async {
+      state = state.copyWith(
+        confirmPass: value,
+        dialogState: ChangeAuthDialogStateInput(),
+      );
+    });
   }
 
-  Future<void> setNewPass(String value, {bool debounce = false}) async {
+  Future<void> setNewPass(
+    String value, {
+    bool debounce = false,
+  }) async {
     if (state.dialogState is! ChangeAuthDialogStateInput) return;
     _newPassTimer?.cancel();
-    _newPassTimer = Timer(
-      debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
-      () async {
-        state = state.copyWith(
-          newPass: value,
-          dialogState: ChangeAuthDialogStateInput(),
+    _newPassTimer =
+        Timer(debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
+            () async {
+      state = state.copyWith(
+        newPass: value,
+        dialogState: ChangeAuthDialogStateInput(),
+      );
+      if (value.isEmpty) {
+        _log.debug('new passphrase is empty');
+        state = state.copyWith(entropy: null);
+        return;
+      }
+      try {
+        final response = await _service.pinPassphraseEntropyCheck(
+          state.authMode,
+          value,
         );
-        if (value.isEmpty) {
-          _log.debug('new passphrase is empty');
-          state = state.copyWith(entropy: null);
-          return;
-        }
-        try {
-          final response = await _service.pinPassphraseEntropyCheck(
-            state.authMode,
-            value,
-          );
-          state = state.copyWith(
-            entropy: EntropyResponse.fromSnapdEntropyResponse(response),
-          );
-        } on Exception catch (e) {
-          state = state.copyWith(
-            entropy: null,
-            dialogState: ChangeAuthDialogState.error(e, true),
-          );
-          _log.error(e);
-        }
-      },
-    );
+        state = state.copyWith(
+          entropy: EntropyResponse.fromSnapdEntropyResponse(response),
+        );
+      } on Exception catch (e) {
+        state = state.copyWith(
+          entropy: null,
+          dialogState: ChangeAuthDialogStateError(e, true),
+        );
+        _log.error(e);
+      }
+    });
   }
 
   set oldPass(String value) {
