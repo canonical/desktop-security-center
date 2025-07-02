@@ -219,5 +219,7 @@
   "recoveryKeyPassphraseEntropyBelowOptimal": "Priemerná prístupová fráza, vytvorte ju dlhšiu alebo zložitejšiu pre lepšiu bezpečnosť",
   "@recoveryKeyPassphraseEntropyBelowOptimal": {},
   "recoveryKeyPassphraseEntropyBelowMin": "Slabá prístupová fráza, vytvorte ju dlhšiu alebo zložitejšiu",
-  "@recoveryKeyPassphraseEntropyBelowMin": {}
+  "@recoveryKeyPassphraseEntropyBelowMin": {},
+  "recoveryKeySomethingWentWrongHeader": "Niečo sa pokazilo",
+  "@recoveryKeySomethingWentWrongHeader": {}
 }
