@@ -219,5 +219,7 @@
   "recoveryKeyPinEntropyOptimal": "PIN-код достаточно длинный",
   "@recoveryKeyPinEntropyOptimal": {},
   "recoveryKeyPassphraseEntropyBelowMin": "Слабая парольная фраза, сделайте её длиннее или более сложной",
-  "@recoveryKeyPassphraseEntropyBelowMin": {}
+  "@recoveryKeyPassphraseEntropyBelowMin": {},
+  "recoveryKeySomethingWentWrongHeader": "Что-то пошло не так",
+  "@recoveryKeySomethingWentWrongHeader": {}
 }
