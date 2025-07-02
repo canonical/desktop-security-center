@@ -104,14 +104,15 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<SnapdEntropyResponse> pinPassphraseEntropyCheck(
+  Future<EntropyResponse> pinPassphraseEntropyCheck(
     AuthMode authmode,
     String newPass,
   ) async {
-    return SnapdEntropyResponse(
+    final snapdResponse = SnapdEntropyResponse(
       entropyBits: newPass.length,
       minEntropyBits: 4,
       optimalEntropyBits: 6,
     );
+    return EntropyResponse.fromSnapdEntropyResponse(snapdResponse);
   }
 }

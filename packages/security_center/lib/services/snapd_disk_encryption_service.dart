@@ -63,7 +63,7 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<SnapdEntropyResponse> pinPassphraseEntropyCheck(
+  Future<EntropyResponse> pinPassphraseEntropyCheck(
     AuthMode authmode,
     String newPass,
   ) async {
@@ -72,13 +72,39 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
         case AuthMode.none:
           throw UnimplementedError();
         case AuthMode.pin:
-          return _snapd.checkPin(newPass);
+          final response = await _snapd.checkPin(newPass);
+          return EntropyResponse.fromSnapdEntropyResponse(response);
         case AuthMode.passphrase:
-          return _snapd.checkPassphrase(newPass);
+          final response = await _snapd.checkPassphrase(newPass);
+          return EntropyResponse.fromSnapdEntropyResponse(response);
       }
     } on SnapdException catch (e) {
-      _log.error(e);
-      rethrow;
+      switch (e.kind) {
+        case 'invalid-passphrase':
+        case 'invalid-pin':
+          if (e.value is Map<String, dynamic>) {
+            final valueMap = e.value as Map<String, dynamic>;
+            return EntropyResponse(
+              success: false,
+              entropyBits: valueMap['entropy-bits'] as int? ?? 0,
+              minEntropyBits: valueMap['min-entropy-bits'] as int? ?? 0,
+              optimalEntropyBits: valueMap['optimal-entropy-bits'] as int? ?? 0,
+              failureReasons: (valueMap['failure-reasons'] as List?)
+                  ?.map((e) => e.toString())
+                  .toList(),
+            );
+          }
+          return EntropyResponse(
+            success: false,
+            entropyBits: 0,
+            minEntropyBits: 0,
+            optimalEntropyBits: 0,
+            failureReasons: [e.message],
+          );
+        default:
+          _log.error(e);
+          rethrow;
+      }
     }
   }
 }

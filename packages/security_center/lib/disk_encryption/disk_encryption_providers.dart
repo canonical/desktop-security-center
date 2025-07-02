@@ -203,7 +203,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
           value,
         );
         state = state.copyWith(
-          entropy: EntropyResponse.fromSnapdEntropyResponse(response),
+          entropy: response,
         );
       } on Exception catch (e) {
         state = state.copyWith(
