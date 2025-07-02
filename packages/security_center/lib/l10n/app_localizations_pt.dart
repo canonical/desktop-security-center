@@ -329,7 +329,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
 
   @override
-  String get recoveryKeySnapdErrorHeader => 'Snapd Error';
+  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).

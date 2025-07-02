@@ -329,5 +329,5 @@ class AppLocalizationsMl extends AppLocalizations {
   String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
 
   @override
-  String get recoveryKeySnapdErrorHeader => 'Snapd Error';
+  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
 }

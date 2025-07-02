@@ -723,7 +723,10 @@ void main() {
     await tester.pumpAndSettle(debounceDelay);
 
     // Find the snapd error header
-    expect(find.text(tester.l10n.recoveryKeySnapdErrorHeader), findsOneWidget);
+    expect(
+      find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
+      findsOneWidget,
+    );
 
     // All text fields are disabled on a fatal error
     for (var i = 0; i < 3; i++) {
