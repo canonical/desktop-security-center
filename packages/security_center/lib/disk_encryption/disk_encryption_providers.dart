@@ -64,7 +64,8 @@ sealed class ChangeAuthDialogState with _$ChangeAuthDialogState {
   factory ChangeAuthDialogState.input() = ChangeAuthDialogStateInput;
   factory ChangeAuthDialogState.loading() = ChangeAuthDialogStateLoading;
   factory ChangeAuthDialogState.success() = ChangeAuthDialogStateSuccess;
-  factory ChangeAuthDialogState.error(Exception e) = ChangeAuthDialogStateError;
+  factory ChangeAuthDialogState.error(Exception e, bool fatal) =
+      ChangeAuthDialogStateError;
 }
 
 /// Dialog state for managing the replace recovery key flow.
@@ -144,7 +145,9 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
         showPassphrase: false,
       );
     } on Exception catch (e) {
-      state = state.copyWith(dialogState: ChangeAuthDialogState.error(e));
+      state = state.copyWith(
+        dialogState: ChangeAuthDialogState.error(e, false),
+      );
     }
   }
 
@@ -200,10 +203,13 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
           value,
         );
         state = state.copyWith(
-          entropy: EntropyResponse.fromSnapdEntropyResponse(response),
+          entropy: response,
         );
       } on Exception catch (e) {
-        state = state.copyWith(entropy: null);
+        state = state.copyWith(
+          entropy: null,
+          dialogState: ChangeAuthDialogStateError(e, true),
+        );
         _log.error(e);
       }
     });
@@ -260,13 +266,11 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         return AuthMode.passphrase;
       }
 
-      final recoveryKeySlot = systemDataVolume.keyslots.firstWhere(
-        (k) =>
-            k.name == 'default-recovery' &&
-            k.type == SnapdSystemVolumeKeySlotType.platform,
-        orElse: () =>
-            throw StateError('No default-recovery platform key slot found'),
-      );
+      final recoveryKeySlot = systemDataVolume.keyslots['default-recovery'];
+
+      if (recoveryKeySlot == null) {
+        throw Exception('No default-recovery keyslot found');
+      }
 
       final authMode = recoveryKeySlot.authMode;
       if (authMode != null) {

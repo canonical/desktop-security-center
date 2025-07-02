@@ -4,15 +4,14 @@
       "volume-name": "volume1",
       "name": "container1",
       "encrypted": true,
-      "keyslots": [
-        {
-          "name": "default-recovery",
+      "keyslots": {
+        "default-recovery": {
           "type": "platform",
           "roles": ["foo"],
           "platform-name": "bar",
           "auth-mode": "pin"
         }
-      ]
+      }
     }
   }
 }

@@ -327,6 +327,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+
+  @override
+  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).

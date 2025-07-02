@@ -111,7 +111,7 @@ abstract class DiskEncryptionService {
     String newPass,
   );
 
-  Future<SnapdEntropyResponse> pinPassphraseEntropyCheck(
+  Future<EntropyResponse> pinPassphraseEntropyCheck(
     AuthMode authMode,
     String newPass,
   );

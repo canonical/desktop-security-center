@@ -838,6 +838,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'PIN is long enough'**
   String get recoveryKeyPinEntropyOptimal;
+
+  /// No description provided for @recoveryKeySomethingWentWrongHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get recoveryKeySomethingWentWrongHeader;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -131,7 +131,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool changePinPassphraseError = false,
   bool entropyCheckError = false,
   AuthMode authMode = AuthMode.pin,
-  SnapdEntropyResponse Function(String)? entropyResponseBuilder,
+  EntropyResponse Function(String)? entropyResponseBuilder,
 }) {
   final service = MockDiskEncryptionService();
 
@@ -142,9 +142,8 @@ DiskEncryptionService registerMockDiskEncryptionService({
           volumeName: 'system-data',
           name: 'system-data',
           encrypted: true,
-          keyslots: [
-            SnapdSystemVolumeKeySlot(
-              name: 'default-recovery',
+          keyslots: {
+            'default-recovery': SnapdSystemVolumeKeySlot(
               type: SnapdSystemVolumeKeySlotType.platform,
               roles: ['foo'],
               platformName: 'bar',
@@ -153,7 +152,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
                 orElse: () => SnapdSystemVolumeAuthMode.pin,
               ),
             ),
-          ],
+          },
         ),
       },
     ),
@@ -192,11 +191,12 @@ DiskEncryptionService registerMockDiskEncryptionService({
     if (entropyResponseBuilder != null) {
       return entropyResponseBuilder(newPass);
     }
-    return SnapdEntropyResponse(
+    final snapdResponse = SnapdEntropyResponse(
       entropyBits: newPass.length,
       minEntropyBits: 4,
       optimalEntropyBits: 6,
     );
+    return EntropyResponse.fromSnapdEntropyResponse(snapdResponse);
   });
   registerMockService<DiskEncryptionService>(service);
   addTearDown(unregisterService<DiskEncryptionService>);
