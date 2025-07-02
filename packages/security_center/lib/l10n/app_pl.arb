@@ -219,5 +219,7 @@
   "recoveryKeyPinEntropyBelowMin": "Słaby kod PIN, wydłuż go lub uczyń mniej przewidywalnym",
   "@recoveryKeyPinEntropyBelowMin": {},
   "recoveryKeyPinEntropyBelowOptimal": "Wystarczający kod PIN, uczyń go dłuższym lub mniej przewidywalnym, aby zapewnić większe bezpieczeństwo",
-  "@recoveryKeyPinEntropyBelowOptimal": {}
+  "@recoveryKeyPinEntropyBelowOptimal": {},
+  "recoveryKeySomethingWentWrongHeader": "Wystąpił problem",
+  "@recoveryKeySomethingWentWrongHeader": {}
 }
