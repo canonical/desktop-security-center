@@ -219,5 +219,7 @@
   "recoveryKeyPinEntropyBelowOptimal": "PIN-kood on juba täitsa hea, parema turvalisuse nimel palun muuda ta pikemaks ja vähem ennustatavaks",
   "@recoveryKeyPinEntropyBelowOptimal": {},
   "recoveryKeyPassphraseEntropyBelowOptimal": "Salafraas on juba täitsa hea, parema turvalisuse nimel palun muuda ta pikemaks ja keerukamaks",
-  "@recoveryKeyPassphraseEntropyBelowOptimal": {}
+  "@recoveryKeyPassphraseEntropyBelowOptimal": {},
+  "recoveryKeySomethingWentWrongHeader": "Midagi läks valesti",
+  "@recoveryKeySomethingWentWrongHeader": {}
 }
