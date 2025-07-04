@@ -219,5 +219,7 @@
   "recoveryKeyPinEntropyOptimal": "PIN 碼夠長",
   "@recoveryKeyPinEntropyOptimal": {},
   "recoveryKeyPinEntropyBelowOptimal": "公平的 PIN 碼，使其更長或更不易預測，以提高安全性",
-  "@recoveryKeyPinEntropyBelowOptimal": {}
+  "@recoveryKeyPinEntropyBelowOptimal": {},
+  "recoveryKeySomethingWentWrongHeader": "出了問題",
+  "@recoveryKeySomethingWentWrongHeader": {}
 }
