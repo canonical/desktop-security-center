@@ -219,5 +219,7 @@
   "recoveryKeyPassphraseEntropyBelowMin": "Zwakke wachtwoordzin, maak het langer of complexer",
   "@recoveryKeyPassphraseEntropyBelowMin": {},
   "recoveryKeyPinEntropyBelowMin": "Zwakke pincode, maak hem langer of minder voorspelbaar",
-  "@recoveryKeyPinEntropyBelowMin": {}
+  "@recoveryKeyPinEntropyBelowMin": {},
+  "recoveryKeySomethingWentWrongHeader": "Er ging iets mis",
+  "@recoveryKeySomethingWentWrongHeader": {}
 }
