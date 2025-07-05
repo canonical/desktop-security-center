@@ -219,5 +219,7 @@
   "recoveryKeyPassphraseEntropyBelowOptimal": "Pasfrása cothrom, déan níos faide nó níos casta é le haghaidh slándála níos fearr",
   "@recoveryKeyPassphraseEntropyBelowOptimal": {},
   "recoveryKeyPinEntropyBelowOptimal": "UAP cothrom, déan é níos faide nó níos lú intuartha le haghaidh slándála níos fearr",
-  "@recoveryKeyPinEntropyBelowOptimal": {}
+  "@recoveryKeyPinEntropyBelowOptimal": {},
+  "recoveryKeySomethingWentWrongHeader": "Chuaigh rud éigin mícheart",
+  "@recoveryKeySomethingWentWrongHeader": {}
 }
