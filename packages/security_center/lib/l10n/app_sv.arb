@@ -219,5 +219,7 @@
   "recoveryKeyPinBody": "Du måste ange din PIN-kod under uppstart för att låsa upp disken. Du kan ändra PIN-koden men inte inaktivera den.",
   "@recoveryKeyPinBody": {},
   "recoveryKeyPassphraseEntropyBelowOptimal": "Rättvis lösenfras, gör den längre eller mer komplex för bättre säkerhet",
-  "@recoveryKeyPassphraseEntropyBelowOptimal": {}
+  "@recoveryKeyPassphraseEntropyBelowOptimal": {},
+  "recoveryKeySomethingWentWrongHeader": "Något gick fel",
+  "@recoveryKeySomethingWentWrongHeader": {}
 }
