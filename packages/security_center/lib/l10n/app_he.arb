@@ -207,5 +207,19 @@
   "recoveryKeyPassphraseCurrentError": "מילת צופן שגויה, נא לנסות שוב",
   "@recoveryKeyPassphraseCurrentError": {},
   "recoveryKeyPassphraseBody": "יש למלא את מילת הצופן שלך עם העלייה כדי לשחרר את נעילת הכונן. אפשר לשנות את מילת הצופן הזאת אבל לא להשבית אותה.",
-  "@recoveryKeyPassphraseBody": {}
+  "@recoveryKeyPassphraseBody": {},
+  "recoveryKeyPassphraseEntropyBelowMin": "מילת צופן חלשה, נא להפוך אותה למורכבת יותר לניחוש",
+  "@recoveryKeyPassphraseEntropyBelowMin": {},
+  "recoveryKeyPassphraseEntropyBelowOptimal": "מילת צופן הוגנת, נא להאריך אותה או לסבך אותה כדי לשפר את האבטחה",
+  "@recoveryKeyPassphraseEntropyBelowOptimal": {},
+  "recoveryKeyPassphraseEntropyOptimal": "מילת צופן חזקה",
+  "@recoveryKeyPassphraseEntropyOptimal": {},
+  "recoveryKeyPinEntropyBelowMin": "קוד אישי חלש, נא להאריך או לסבך אותו",
+  "@recoveryKeyPinEntropyBelowMin": {},
+  "recoveryKeyPinEntropyBelowOptimal": "קוד אישי סביר, נא להאריך או לסבך אותו לשיפור האבטחה",
+  "@recoveryKeyPinEntropyBelowOptimal": {},
+  "recoveryKeyPinEntropyOptimal": "הקוד האישי ארוך מספיק",
+  "@recoveryKeyPinEntropyOptimal": {},
+  "recoveryKeySomethingWentWrongHeader": "משהו השתבש",
+  "@recoveryKeySomethingWentWrongHeader": {}
 }
