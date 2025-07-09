@@ -214,6 +214,12 @@
   "@recoveryKeyPassphraseEntropyBelowOptimal": {},
   "recoveryKeyPassphraseEntropyOptimal": "강력한 비밀번호",
   "@recoveryKeyPassphraseEntropyOptimal": {},
-  "recoveryKeyPinEntropyBelowMin": "약한 PIN입니다. 더 길거나 복잡하게 만드세요",
-  "@recoveryKeyPinEntropyBelowMin": {}
+  "recoveryKeyPinEntropyBelowMin": "약한 PIN입니다. 더 길거나 예측하기 힘들게 만드세요",
+  "@recoveryKeyPinEntropyBelowMin": {},
+  "recoveryKeyPinEntropyBelowOptimal": "적당한 PIN입니다. 더 길거나 예측하기 힘들게 만들어 더욱 안전힌 PIN을 만드세요",
+  "@recoveryKeyPinEntropyBelowOptimal": {},
+  "recoveryKeyPinEntropyOptimal": "PIN이 충분히 깁니다",
+  "@recoveryKeyPinEntropyOptimal": {},
+  "recoveryKeySomethingWentWrongHeader": "문제가 발생했습니다",
+  "@recoveryKeySomethingWentWrongHeader": {}
 }
