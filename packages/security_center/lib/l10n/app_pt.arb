@@ -1,8 +1,121 @@
 {
   "appTitle": "Centro de Segurança",
   "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "Permitir até o fim da sessão",
+  "snapdRuleCategorySessionAllowed": "Permitir até terminar a sessão",
   "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "Negar até o fim da sessão",
-  "@snapdRuleCategorySessionDenied": {}
+  "snapdRuleCategorySessionDenied": "Negar até terminar a sessão",
+  "@snapdRuleCategorySessionDenied": {},
+  "snapdRuleCategoryForeverAllowed": "Permitir sempre",
+  "@snapdRuleCategoryForeverAllowed": {},
+  "snapdRuleCategoryForeverDenied": "Negar sempre",
+  "@snapdRuleCategoryForeverDenied": {},
+  "snapPermissionReadLabel": "Ler",
+  "@snapPermissionReadLabel": {},
+  "snapPermissionWriteLabel": "Gravar",
+  "@snapPermissionWriteLabel": {},
+  "snapPermissionExecuteLabel": "Executar",
+  "@snapPermissionExecuteLabel": {},
+  "snapPermissionsEnableTitle": "Requer aplicações para solicitar por permissões do sistema",
+  "@snapPermissionsEnableTitle": {},
+  "snapPermissionsEnableWarning": "É uma funcionalidade experimental para controlar o acesso aos recursos do seu sistema.",
+  "@snapPermissionsEnableWarning": {},
+  "snapPermissionsEnablingLabel": "A ativar, pode demorar uns segundos...",
+  "@snapPermissionsEnablingLabel": {},
+  "snapPermissionsDisablingLabel": "A desativar, pode demorar uns segundos...",
+  "@snapPermissionsDisablingLabel": {},
+  "snapPermissionsExperimentalLabel": "Experimental",
+  "@snapPermissionsExperimentalLabel": {},
+  "snapPermissionsOtherDescription": "Pode gerir outras permissões em Definições > Aplicações.",
+  "@snapPermissionsOtherDescription": {},
+  "snapPermissionsPageTitle": "Permissões de Aplicação",
+  "@snapPermissionsPageTitle": {},
+  "snapRulesCount": "{n, plural, =0{no rules} =1{1 regra} other{{n} regras}}",
+  "@snapRulesCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "snapRulesPageDescription": "Gerir permissões de {interface} para {snap}.",
+  "@snapRulesPageDescription": {
+    "placeholders": {
+      "interface": {
+        "type": "String"
+      },
+      "snap": {
+        "type": "String"
+      }
+    }
+  },
+  "snapRulesPageEmptyTileLabel": "Ainda sem regras",
+  "@snapRulesPageEmptyTileLabel": {},
+  "snapRulesRemoveAll": "Remover todas as regras",
+  "@snapRulesRemoveAll": {},
+  "homeInterfacePageTitle": "Pasta de Início",
+  "@homeInterfacePageTitle": {},
+  "homeInterfacePageDescription": "Gerir permissões para aceder aos ficheiros na sua pasta de Início.",
+  "@homeInterfacePageDescription": {},
+  "interfacePageTitle": "Gerir permissões",
+  "@interfacePageTitle": {},
+  "interfacePageLinkLearnMore": "Saber mais",
+  "@interfacePageLinkLearnMore": {},
+  "interfacePageLinkGiveFeedback": "Dar opinião",
+  "@interfacePageLinkGiveFeedback": {},
+  "interfacePageLinkReportIssues": "Reportar problemas",
+  "@interfacePageLinkReportIssues": {},
+  "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 aplicação} other {{n} aplicações}}",
+  "@interfaceSnapCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "diskEncryptionPageTitle": "Encriptação de Disco",
+  "@diskEncryptionPageTitle": {},
+  "diskEncryptionPageRecoveryKey": "Código de recuperação",
+  "@diskEncryptionPageRecoveryKey": {},
+  "diskEncryptionPageLearnMore": "Saiba mais sobre os códigos de recuperação",
+  "@diskEncryptionPageLearnMore": {},
+  "diskEncryptionPageCheckKey": "Verificar código de recuperação...",
+  "@diskEncryptionPageCheckKey": {},
+  "diskEncryptionPageDialogHeaderCheckKey": "Verificar Código de Recuperação",
+  "@diskEncryptionPageDialogHeaderCheckKey": {},
+  "diskEncryptionPageCheck": "Verificar",
+  "@diskEncryptionPageCheck": {},
+  "diskEncryptionPageValidKey": "Código válido",
+  "@diskEncryptionPageValidKey": {},
+  "diskEncryptionPageInvalidKey": "Código inválido",
+  "@diskEncryptionPageInvalidKey": {},
+  "diskEncryptionPageEnterKey": "Insira o seu código de recuperação",
+  "@diskEncryptionPageEnterKey": {},
+  "diskEncryptionPageKeyWorks": "Código de recuperação funciona",
+  "@diskEncryptionPageKeyWorks": {},
+  "diskEncryptionPageKeyWorksBody": "Lembre-se de o manter num local seguro.",
+  "@diskEncryptionPageKeyWorksBody": {},
+  "diskEncryptionPageKeyDoesntWork": "Código de recuperação não funciona",
+  "@diskEncryptionPageKeyDoesntWork": {},
+  "diskEncryptionPageKeyDoesntWorkBody": "Verifique o código ou substitua-o por um novo.",
+  "@diskEncryptionPageKeyDoesntWorkBody": {},
+  "diskEncryptionPageError": "Erro",
+  "@diskEncryptionPageError": {},
+  "diskEncryptionPageReplaceButton": "Substituir o código de recuperação...",
+  "@diskEncryptionPageReplaceButton": {},
+  "diskEncryptionPageReplaceDialogHeader": "Substituir código de recuperação",
+  "@diskEncryptionPageReplaceDialogHeader": {},
+  "diskEncryptionPageReplaceDialogShowQR": "Mostrar código QR",
+  "@diskEncryptionPageReplaceDialogShowQR": {},
+  "diskEncryptionPageReplaceDialogSave": "Guardar em ficheiro",
+  "@diskEncryptionPageReplaceDialogSave": {},
+  "diskEncryptionPageReplaceDialogAcknowledge": "Eu guardei o meu código de recuperação num local seguro",
+  "@diskEncryptionPageReplaceDialogAcknowledge": {},
+  "diskEncryptionPageReplaceDialogReplace": "Substituir",
+  "@diskEncryptionPageReplaceDialogReplace": {},
+  "diskEncryptionPageReplaceDialogDiscard": "Rejeitar",
+  "@diskEncryptionPageReplaceDialogDiscard": {},
+  "diskEncryptionPageReplaceDialogSuccessHeader": "Código de recuperação substituído",
+  "@diskEncryptionPageReplaceDialogSuccessHeader": {},
+  "diskEncryptionPageReplaceDialogSuccessBody": "Lembre-se de o manter num local seguro",
+  "@diskEncryptionPageReplaceDialogSuccessBody": {}
 }
