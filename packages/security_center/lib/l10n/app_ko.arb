@@ -210,8 +210,10 @@
   "@recoveryKeyPassphrasePassphraseSuccessBody": {},
   "recoveryKeyPassphraseEntropyBelowMin": "약한 비밀번호입니다. 더 길거나 복잡하게 만드세요",
   "@recoveryKeyPassphraseEntropyBelowMin": {},
-  "recoveryKeyPassphraseEntropyBelowOptimal": "적당한 비밀번호입니다. 더 길게 만들거나 복잡하게 만들어 더욱 안전한 비밀번호를 만드세요",
+  "recoveryKeyPassphraseEntropyBelowOptimal": "적당한 비밀번호입니다. 더 길거나 복잡하게 만들어 더욱 안전한 비밀번호를 만드세요",
   "@recoveryKeyPassphraseEntropyBelowOptimal": {},
   "recoveryKeyPassphraseEntropyOptimal": "강력한 비밀번호",
-  "@recoveryKeyPassphraseEntropyOptimal": {}
+  "@recoveryKeyPassphraseEntropyOptimal": {},
+  "recoveryKeyPinEntropyBelowMin": "약한 PIN입니다. 더 길거나 복잡하게 만드세요",
+  "@recoveryKeyPinEntropyBelowMin": {}
 }
