@@ -166,7 +166,7 @@
   "@recoveryKeyPassphraseNew": {},
   "recoveryKeyPassphraseConfirm": "비밀번호 확인",
   "@recoveryKeyPassphraseConfirm": {},
-  "recoveryKeyPassphraseCurrentError": "암호가 일치하지 않습니다. 다시 시도해 보세요",
+  "recoveryKeyPassphraseCurrentError": "비밀번호가 일치하지 않습니다. 다시 시도해 보세요",
   "@recoveryKeyPassphraseCurrentError": {},
   "recoveryKeyPassphraseNewError": "4글자 이상이어야 합니다",
   "@recoveryKeyPassphraseNewError": {},
