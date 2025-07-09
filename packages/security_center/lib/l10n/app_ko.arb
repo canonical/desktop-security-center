@@ -73,5 +73,23 @@
         "type": "int"
       }
     }
-  }
+  },
+  "diskEncryptionPageTitle": "디스크 암호화",
+  "@diskEncryptionPageTitle": {},
+  "diskEncryptionPageRecoveryKey": "복구 키",
+  "@diskEncryptionPageRecoveryKey": {},
+  "diskEncryptionPageStoreYourKey": "복구 키는 시작 중에 디스크 잠금 해제가 실패했을 경우 데이터에 다시 접근하기 위해 필요합니다. 다른 안전한 장소에 보관해 두십시오.",
+  "@diskEncryptionPageStoreYourKey": {},
+  "diskEncryptionPageLearnMore": "복구 키에 대해 더 알아보기",
+  "@diskEncryptionPageLearnMore": {},
+  "diskEncryptionPageCheckKey": "복구 키 검증...",
+  "@diskEncryptionPageCheckKey": {},
+  "diskEncryptionPageDialogHeaderCheckKey": "복구 키 검증",
+  "@diskEncryptionPageDialogHeaderCheckKey": {},
+  "diskEncryptionPageCheck": "검증",
+  "@diskEncryptionPageCheck": {},
+  "diskEncryptionPageValidKey": "올바른 키",
+  "@diskEncryptionPageValidKey": {},
+  "diskEncryptionPageInvalidKey": "유효하지 않은 키",
+  "@diskEncryptionPageInvalidKey": {}
 }
