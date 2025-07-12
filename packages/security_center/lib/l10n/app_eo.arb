@@ -219,5 +219,7 @@
   "recoveryKeyPassphraseConfirmError": "Pasfrazoj ne kongruas; reprovu",
   "@recoveryKeyPassphraseConfirmError": {},
   "diskEncryptionPageStoreYourKey": "La restaŭra ŝlosilo ebligas al vi reakiri viajn datenojn, se vi ne povas malŝlosi vian diskon dum starto. Konservu ĝin en sekura loko.",
-  "@diskEncryptionPageStoreYourKey": {}
+  "@diskEncryptionPageStoreYourKey": {},
+  "recoveryKeySomethingWentWrongHeader": "Io fiaskis",
+  "@recoveryKeySomethingWentWrongHeader": {}
 }
