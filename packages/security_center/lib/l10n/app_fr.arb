@@ -207,5 +207,13 @@
   "recoveryKeyPinCurrent": "PIN actuel",
   "@recoveryKeyPinCurrent": {},
   "recoveryKeyPassphrasePassphraseSuccessBody": "Votre phrase de passe a été mise à jour avec succès.",
-  "@recoveryKeyPassphrasePassphraseSuccessBody": {}
+  "@recoveryKeyPassphrasePassphraseSuccessBody": {},
+  "recoveryKeyPassphraseEntropyBelowMin": "Phrase de passe faible, faites-la plus longue ou plus complexe",
+  "@recoveryKeyPassphraseEntropyBelowMin": {},
+  "recoveryKeyPinEntropyBelowMin": "Code PIN faible, rendez-le plus long ou moins prévisible",
+  "@recoveryKeyPinEntropyBelowMin": {},
+  "recoveryKeyPinEntropyBelowOptimal": "PIN acceptable, le rendre plus long ou moins prévisible pour une meilleure sécurité",
+  "@recoveryKeyPinEntropyBelowOptimal": {},
+  "recoveryKeyPinEntropyOptimal": "Le PIN est assez long",
+  "@recoveryKeyPinEntropyOptimal": {}
 }
