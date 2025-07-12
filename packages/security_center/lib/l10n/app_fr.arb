@@ -1,13 +1,13 @@
 {
   "snapPermissionWriteLabel": "Écrire",
   "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Exécuter",
+  "snapPermissionExecuteLabel": "Exécution",
   "@snapPermissionExecuteLabel": {},
-  "interfacePageLinkGiveFeedback": "Donnez votre avis",
+  "interfacePageLinkGiveFeedback": "Donner votre avis",
   "@interfacePageLinkGiveFeedback": {},
   "interfacePageLinkReportIssues": "Signaler un problème",
   "@interfacePageLinkReportIssues": {},
-  "snapPermissionReadLabel": "Lire",
+  "snapPermissionReadLabel": "Lecture",
   "@snapPermissionReadLabel": {},
   "snapPermissionsExperimentalLabel": "Expérimental",
   "@snapPermissionsExperimentalLabel": {},
@@ -214,6 +214,12 @@
   "@recoveryKeyPinEntropyBelowMin": {},
   "recoveryKeyPinEntropyBelowOptimal": "PIN acceptable, le rendre plus long ou moins prévisible pour une meilleure sécurité",
   "@recoveryKeyPinEntropyBelowOptimal": {},
-  "recoveryKeyPinEntropyOptimal": "Le PIN est assez long",
-  "@recoveryKeyPinEntropyOptimal": {}
+  "recoveryKeyPinEntropyOptimal": "Le PIN est suffisamment long",
+  "@recoveryKeyPinEntropyOptimal": {},
+  "recoveryKeySomethingWentWrongHeader": "Quelque chose a mal tourné",
+  "@recoveryKeySomethingWentWrongHeader": {},
+  "recoveryKeyPassphraseEntropyBelowOptimal": "Phrase de passe suffisante, rendez-la plus longue ou plus complexe pour une meilleure sécurité",
+  "@recoveryKeyPassphraseEntropyBelowOptimal": {},
+  "recoveryKeyPassphraseEntropyOptimal": "Phrase de passe forte",
+  "@recoveryKeyPassphraseEntropyOptimal": {}
 }
