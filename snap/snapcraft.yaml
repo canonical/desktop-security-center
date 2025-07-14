@@ -17,6 +17,7 @@ apps:
     plugs:
       - network
       - snapd-control
+      - snap-fde-control
 
 parts:
   fvm:
