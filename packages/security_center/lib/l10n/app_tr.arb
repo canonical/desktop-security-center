@@ -210,6 +210,16 @@
   "@recoveryKeyPassphrasePassphraseSuccessBody": {},
   "recoveryKeyPassphraseEntropyBelowMin": "Zayıf parola cümlesi, daha uzun veya daha karmaşık hale getirin",
   "@recoveryKeyPassphraseEntropyBelowMin": {},
-  "recoveryKeyPassphraseEntropyBelowOptimal": "Adil bir parola kullanın, daha iyi güvenlik için daha uzun veya daha karmaşık hale getirin",
-  "@recoveryKeyPassphraseEntropyBelowOptimal": {}
+  "recoveryKeyPassphraseEntropyBelowOptimal": "Güçlü bir parola kullanın, daha iyi güvenlik için daha uzun veya daha karmaşık hale getirin",
+  "@recoveryKeyPassphraseEntropyBelowOptimal": {},
+  "recoveryKeyPassphraseEntropyOptimal": "Güçlü parola",
+  "@recoveryKeyPassphraseEntropyOptimal": {},
+  "recoveryKeyPinEntropyBelowMin": "Zayıf PIN, daha uzun veya daha az tahmin edilebilir hale getirin",
+  "@recoveryKeyPinEntropyBelowMin": {},
+  "recoveryKeyPinEntropyBelowOptimal": "Güçlü PIN kullanın, daha iyi güvenlik için daha uzun veya daha az tahmin edilebilir hale getirin",
+  "@recoveryKeyPinEntropyBelowOptimal": {},
+  "recoveryKeyPinEntropyOptimal": "PIN yeterince uzun",
+  "@recoveryKeyPinEntropyOptimal": {},
+  "recoveryKeySomethingWentWrongHeader": "Bir şeyler ters gitti",
+  "@recoveryKeySomethingWentWrongHeader": {}
 }
