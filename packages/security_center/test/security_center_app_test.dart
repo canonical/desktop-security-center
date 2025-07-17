@@ -11,29 +11,60 @@ import 'test_utils.dart';
 
 void main() {
   group('app routes', () {
-    for (final route in Routes.values) {
-      testWidgets('route ${route.route}', (tester) async {
-        final container = createContainer();
-        await tester.pumpApp(
-          (_) => UncontrolledProviderScope(
-            container: container,
-            child: const SecurityCenterApp(),
-          ),
-        );
-        await tester.pump();
+    final cases = [
+      (
+        name: 'all routes enabled',
+        isDiskEncryptionAvailable: true,
+      ),
+      (
+        name: 'disk encryption hidden',
+        isDiskEncryptionAvailable: false,
+      ),
+    ];
+    for (final tc in cases) {
+      for (final route in Routes.values) {
+        testWidgets('route ${route.route}', (tester) async {
+          registerMockFeatureService(
+              isDiskEncryptionAvailable: tc.isDiskEncryptionAvailable);
 
-        final navigator = container.read(appNavigatorProvider);
-        unawaited(navigator.currentState!.pushNamed(route.route));
-        await tester.pumpAndSettle();
+          final container = createContainer();
+          await tester.pumpApp(
+            (_) => UncontrolledProviderScope(
+              container: container,
+              child: const SecurityCenterApp(),
+            ),
+          );
+          await tester.pump();
 
-        expect(
-          find.descendant(
-            of: find.byType(YaruWindowTitleBar),
-            matching: find.text(route.title(tester.l10n)),
-          ),
-          findsOneWidget,
-        );
-      });
+          final navigator = container.read(appNavigatorProvider);
+          unawaited(navigator.currentState!.pushNamed(route.route));
+          await tester.pumpAndSettle();
+
+          // Assert availableRoutes is built correctly based on feature service
+          expect(Routes.availableRoutes, contains(Routes.appPermissions));
+          expect(
+              Routes.availableRoutes,
+              tc.isDiskEncryptionAvailable
+                  ? contains(Routes.diskEncryption)
+                  : isNot(contains(Routes.diskEncryption)));
+
+          // Assert we only build routes of supported features
+          expect(
+            find.descendant(
+              of: find.byType(YaruMasterTile),
+              matching: find.text(Routes.appPermissions.title(tester.l10n)),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: find.byType(YaruMasterTile),
+              matching: find.text(Routes.diskEncryption.title(tester.l10n)),
+            ),
+            tc.isDiskEncryptionAvailable ? findsOneWidget : findsNothing,
+          );
+        });
+      }
     }
   });
 }
