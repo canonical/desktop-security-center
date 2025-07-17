@@ -4,6 +4,7 @@ import 'package:args/args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/app_permissions/snap_metadata_providers.dart';
+import 'package:security_center/routes.dart';
 import 'package:security_center/security_center_app.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
@@ -44,6 +45,9 @@ Future<void> main(List<String> args) async {
   // Create and register feature service to determine available features
   final featureService = FeatureService(isDryRun: argResults.flag('dry-run'));
   registerServiceInstance<FeatureService>(featureService);
+
+  // Initialize available routes
+  AvailableRoutes.init();
 
   registerService<SnapdService>(SnapdService.new);
 

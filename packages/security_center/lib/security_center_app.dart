@@ -11,7 +11,8 @@ const kPaneWidth = 240.0;
 const kActionButtonSize = Size(100, 40);
 
 final yaruPageControllerProvider = Provider(
-    (ref) => YaruPageController(length: Routes.availableRoutes.length));
+  (ref) => YaruPageController(length: Routes.availableRoutes.length),
+);
 
 class SecurityCenterApp extends StatelessWidget {
   const SecurityCenterApp({super.key});

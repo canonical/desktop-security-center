@@ -112,16 +112,24 @@ enum Routes {
     return Routes.fromRoute(route).title(l10n, queryParameters);
   }
 
-  static YaruMasterTileBuilder get tileBuilder => (context, index, selected,
-          availableWidth) =>
-      YaruMasterTile(
-        leading: Icon(availableRoutes[index].icon?.call(selected)),
-        title: Text(availableRoutes[index].title(AppLocalizations.of(context))),
-      );
+  static YaruMasterTileBuilder get tileBuilder =>
+      (context, index, selected, availableWidth) => YaruMasterTile(
+            leading: Icon(availableRoutes[index].icon?.call(selected)),
+            title: Text(
+              availableRoutes[index].title(AppLocalizations.of(context)),
+            ),
+          );
   static IndexedWidgetBuilder get pageBuilder =>
       (context, index) => availableRoutes[index].builder(context);
 
-  static List<Routes> get availableRoutes {
+  static List<Routes> get availableRoutes => AvailableRoutes.routes;
+}
+
+class AvailableRoutes {
+  static List<Routes> _routes = [];
+  static List<Routes> get routes => _routes;
+
+  static void init() {
     final routes = <Routes>[Routes.appPermissions];
 
     // Only include disk encryption if the feature is available
@@ -130,6 +138,6 @@ enum Routes {
       routes.add(Routes.diskEncryption);
     }
 
-    return routes;
+    _routes = routes;
   }
 }

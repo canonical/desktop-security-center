@@ -26,7 +26,8 @@ class FeatureService {
       return file.existsSync();
     } on Exception catch (e) {
       _log.error(
-          'Error encountered when checking existance of /dev/disk/by-level/ubuntu-data-enc: $e');
+        'Error encountered when checking existance of /dev/disk/by-level/ubuntu-data-enc: $e',
+      );
       return false;
     }
   }

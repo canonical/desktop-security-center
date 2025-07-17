@@ -25,7 +25,9 @@ void main() {
       for (final route in Routes.values) {
         testWidgets('route ${route.route}', (tester) async {
           registerMockFeatureService(
-              isDiskEncryptionAvailable: tc.isDiskEncryptionAvailable);
+            isDiskEncryptionAvailable: tc.isDiskEncryptionAvailable,
+          );
+          AvailableRoutes.init();
 
           final container = createContainer();
           await tester.pumpApp(
@@ -43,10 +45,11 @@ void main() {
           // Assert availableRoutes is built correctly based on feature service
           expect(Routes.availableRoutes, contains(Routes.appPermissions));
           expect(
-              Routes.availableRoutes,
-              tc.isDiskEncryptionAvailable
-                  ? contains(Routes.diskEncryption)
-                  : isNot(contains(Routes.diskEncryption)));
+            Routes.availableRoutes,
+            tc.isDiskEncryptionAvailable
+                ? contains(Routes.diskEncryption)
+                : isNot(contains(Routes.diskEncryption)),
+          );
 
           // Assert we only build routes of supported features
           expect(
