@@ -112,12 +112,18 @@ enum Routes {
     return Routes.fromRoute(route).title(l10n, queryParameters);
   }
 
-  static YaruMasterTileBuilder get tileBuilder => (context, index, selected,
-          availableWidth) =>
-      YaruMasterTile(
-        leading: Icon(availableRoutes[index].icon?.call(selected)),
-        title: Text(availableRoutes[index].title(AppLocalizations.of(context))),
-      );
+  static YaruMasterTileBuilder get tileBuilder => (
+        context,
+        index,
+        selected,
+        availableWidth,
+      ) =>
+          YaruMasterTile(
+            leading: Icon(availableRoutes[index].icon?.call(selected)),
+            title: Text(
+              availableRoutes[index].title(AppLocalizations.of(context)),
+            ),
+          );
   static IndexedWidgetBuilder get pageBuilder =>
       (context, index) => availableRoutes[index].builder(context);
 
