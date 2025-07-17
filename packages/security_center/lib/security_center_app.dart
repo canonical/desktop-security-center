@@ -10,8 +10,8 @@ import 'package:yaru/yaru.dart';
 const kPaneWidth = 240.0;
 const kActionButtonSize = Size(100, 40);
 
-final yaruPageControllerProvider =
-    Provider((ref) => YaruPageController(length: Routes.values.length));
+final yaruPageControllerProvider = Provider(
+    (ref) => YaruPageController(length: Routes.availableRoutes.length));
 
 class SecurityCenterApp extends StatelessWidget {
   const SecurityCenterApp({super.key});
@@ -78,7 +78,8 @@ class _TitleBar extends ConsumerWidget implements PreferredSizeWidget {
     if (routeSettings?.name != null) {
       title = Routes.titleOf(l10n, routeSettings!);
     } else {
-      title = Routes.values[max(ref.watch(yaruPageControllerProvider).index, 0)]
+      title = Routes
+          .availableRoutes[max(ref.watch(yaruPageControllerProvider).index, 0)]
           .title(l10n);
     }
     return Row(

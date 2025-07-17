@@ -5,6 +5,8 @@ import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/app_permissions/snaps_page.dart';
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
 import 'package:security_center/l10n.dart';
+import 'package:security_center/services/feature_service.dart';
+import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
 enum Routes {
@@ -110,11 +112,25 @@ enum Routes {
     return Routes.fromRoute(route).title(l10n, queryParameters);
   }
 
-  static YaruMasterTileBuilder get tileBuilder =>
-      (context, index, selected, availableWidth) => YaruMasterTile(
-            leading: Icon(values[index].icon?.call(selected)),
-            title: Text(values[index].title(AppLocalizations.of(context))),
-          );
+  static YaruMasterTileBuilder get tileBuilder => (context, index, selected,
+          availableWidth) =>
+      YaruMasterTile(
+        leading: Icon(availableRoutes[index].icon?.call(selected)),
+        title: Text(availableRoutes[index].title(AppLocalizations.of(context))),
+      );
   static IndexedWidgetBuilder get pageBuilder =>
-      (context, index) => values[index].builder(context);
+      (context, index) => availableRoutes[index].builder(context);
+
+  /// Returns available routes based on feature availability
+  static List<Routes> get availableRoutes {
+    final routes = <Routes>[Routes.appPermissions];
+
+    // Only include disk encryption if the feature is available
+    final featureService = getService<FeatureService>();
+    if (featureService.isDiskEncryptionAvailable) {
+      routes.add(Routes.diskEncryption);
+    }
+
+    return routes;
+  }
 }
