@@ -121,7 +121,6 @@ enum Routes {
   static IndexedWidgetBuilder get pageBuilder =>
       (context, index) => availableRoutes[index].builder(context);
 
-  /// Returns available routes based on feature availability
   static List<Routes> get availableRoutes {
     final routes = <Routes>[Routes.appPermissions];
 

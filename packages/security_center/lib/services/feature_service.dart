@@ -15,12 +15,12 @@ class FeatureService {
     if (isDryRun) {
       return true;
     }
-    return _isSnapdManagedFDE();
+    return _isUsingFDE();
   }
 
-  /// Checks if the system is using TPM/FDE by detecting the existence of
+  /// Checks if the system is using FDE by detecting the existence of
   /// /dev/disk/by-label/ubuntu-data-enc
-  bool _isSnapdManagedFDE() {
+  bool _isUsingFDE() {
     try {
       final file = File('/dev/disk/by-label/ubuntu-data-enc');
       return file.existsSync();

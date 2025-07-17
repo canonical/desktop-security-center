@@ -52,7 +52,7 @@ Future<void> main(List<String> args) async {
   final snapMetadata = await getService<SnapdService>().getSnaps();
   registerServiceInstance<LocalSnapData>(snapMetadata);
 
-  if (argResults.flag('dry-run')) {
+  if (featureService.isDryRun) {
     registerService<AppPermissionsService>(
       () => FakeAppPermissionsService.fromFile(
         argResults['test-rules'] as String,
@@ -70,7 +70,7 @@ Future<void> main(List<String> args) async {
 
   // Register disk encryption service if the feature is available
   if (featureService.isDiskEncryptionAvailable) {
-    if (argResults.flag('dry-run')) {
+    if (featureService.isDryRun) {
       registerService<DiskEncryptionService>(
         () => FakeDiskEncryptionService.fromFile(
           'integration_test/assets/test_containers.json',
