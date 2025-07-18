@@ -12,6 +12,7 @@ import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:security_center/services/feature_service.dart';
 import 'package:security_center/services/snapd_service.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -269,6 +270,20 @@ SnapdService registerMockSnapdService({
   registerServiceInstance<SnapdService>(client);
   addTearDown(unregisterService<SnapdService>);
   return client;
+}
+
+@GenerateMocks([FeatureService])
+FeatureService registerMockFeatureService({
+  bool isDiskEncryptionAvailable = true,
+  bool isDryRun = false,
+}) {
+  final service = MockFeatureService();
+  when(service.isDiskEncryptionAvailable).thenReturn(isDiskEncryptionAvailable);
+  when(service.isDryRun).thenReturn(isDryRun);
+
+  registerMockService<FeatureService>(service);
+  addTearDown(unregisterService<FeatureService>);
+  return service;
 }
 
 @freezed
