@@ -16,14 +16,23 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
     String oldPass,
     String newPass,
   ) async {
+    final String changeId;
     switch (authMode) {
       case AuthMode.none:
         throw UnimplementedError();
       case AuthMode.pin:
-        await _snapd.changePin(oldPass, newPass);
+        changeId = await _snapd.changePin(oldPass, newPass);
       case AuthMode.passphrase:
-        await _snapd.changePassphrase(oldPass, newPass);
+        changeId = await _snapd.changePassphrase(oldPass, newPass);
     }
+    final result =
+        await _snapd.watchChange(changeId).firstWhere((change) => change.ready);
+    if (result.err != null) {
+      throw Exception(
+        'changePinPassphrase encountered an error: ${result.err!}',
+      );
+    }
+    return;
   }
 
   @override
