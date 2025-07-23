@@ -635,6 +635,18 @@ abstract class AppLocalizations {
   /// **'Hardware-backed encryption is enabled'**
   String get recoveryKeyTPMEnabled;
 
+  /// No description provided for @recoveryKeyTPMExplanationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).'**
+  String get recoveryKeyTPMExplanationBody;
+
+  /// No description provided for @recoveryKeyTPMExplanationLearnMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn more about hardware-backed encryption'**
+  String get recoveryKeyTPMExplanationLearnMore;
+
   /// No description provided for @recoveryKeyPassphraseEnabled.
   ///
   /// In en, this message translates to:

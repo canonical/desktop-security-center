@@ -231,6 +231,12 @@ class AppLocalizationsPl extends AppLocalizations {
   String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
 
   @override
+  String get recoveryKeyTPMExplanationBody => 'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+
+  @override
+  String get recoveryKeyTPMExplanationLearnMore => 'Learn more about hardware-backed encryption';
+
+  @override
   String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
 
   @override
