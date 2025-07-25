@@ -107,5 +107,21 @@
   "diskEncryptionPageReplaceButton": "Mengganti kunci pemulihan ...",
   "@diskEncryptionPageReplaceButton": {},
   "diskEncryptionPageReplaceDialogHeader": "Mengganti kunci pemulihan",
-  "@diskEncryptionPageReplaceDialogHeader": {}
+  "@diskEncryptionPageReplaceDialogHeader": {},
+  "recoveryKeySomethingWentWrongHeader": "Ada yang salah",
+  "@recoveryKeySomethingWentWrongHeader": {},
+  "diskEncryptionPageReplaceDialogBody": "Simpan kunci pemulihan baru di suatu tempat aman. Sekali Anda menggantinya, Anda tidak akan dapat menggunakan kunci lama lagi.",
+  "@diskEncryptionPageReplaceDialogBody": {},
+  "diskEncryptionPageReplaceDialogShowQR": "Tampilkan kode QR",
+  "@diskEncryptionPageReplaceDialogShowQR": {},
+  "diskEncryptionPageReplaceDialogSave": "Simpan ke berkas",
+  "@diskEncryptionPageReplaceDialogSave": {},
+  "diskEncryptionPageReplaceDialogAcknowledge": "Saya menyimpan kunci pemulihan saya di suatu tempat aman",
+  "@diskEncryptionPageReplaceDialogAcknowledge": {},
+  "diskEncryptionPageReplaceDialogReplace": "Gantikan",
+  "@diskEncryptionPageReplaceDialogReplace": {},
+  "diskEncryptionPageReplaceDialogDiscard": "Singkirkan",
+  "@diskEncryptionPageReplaceDialogDiscard": {},
+  "diskEncryptionPageReplaceDialogSuccessHeader": "Kunci pemulihan diganti",
+  "@diskEncryptionPageReplaceDialogSuccessHeader": {}
 }
