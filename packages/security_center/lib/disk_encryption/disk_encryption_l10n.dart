@@ -20,6 +20,18 @@ extension RecoveryKeyExceptionL10n on RecoveryKeyException {
       };
 }
 
+extension TpmStateExceptionL10n on TpmStateException {
+  String localizedHeader(AppLocalizations l10n) => switch (this) {
+        _ => l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader
+      };
+  String localizedBody(AppLocalizations l10n) => switch (this) {
+        TpmStateExceptionFailed() =>
+          l10n.diskEncryptionPageErrorFailedToRetrieveStatusBody,
+        TpmStateExceptionUnsupportedState() =>
+          l10n.diskEncryptionPageErrorUnsupportedStateBody,
+      };
+}
+
 final _unreachable = Exception('unreachable l10n string');
 
 extension AuthModeL10n on AuthMode {

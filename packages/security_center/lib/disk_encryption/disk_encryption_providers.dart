@@ -58,6 +58,14 @@ sealed class RecoveryKeyException
       };
 }
 
+@freezed
+sealed class TpmStateException with _$TpmStateException implements Exception {
+  factory TpmStateException.failed({required String rawError}) =
+      TpmStateExceptionFailed;
+  factory TpmStateException.unsupportedState() =
+      TpmStateExceptionUnsupportedState;
+}
+
 /// Dialog state for managing the change auth flow.
 @freezed
 sealed class ChangeAuthDialogState with _$ChangeAuthDialogState {
@@ -254,39 +262,44 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   late final _service = getService<DiskEncryptionService>();
 
   @override
-  Future<AuthMode> build() async {
+  Future<TpmState> build() async {
     // Temporary work around while we wait for snapd to implement enumerateKeySlots()
     try {
       final volumesResponse = await _service.enumerateKeySlots();
-      _log.debug(volumesResponse);
 
       final systemDataVolume = volumesResponse.byContainerRole['system-data'];
       if (systemDataVolume == null) {
         _log.error('No system-data volume found');
-        return AuthMode.passphrase;
+        throw TpmStateExceptionUnsupportedState();
       }
 
       final recoveryKeySlot = systemDataVolume.keyslots['default-recovery'];
 
       if (recoveryKeySlot == null) {
-        throw Exception('No default-recovery keyslot found');
+        throw TpmStateExceptionUnsupportedState();
+      }
+
+      // We can rely on 'tpm2' as a way of asserting keys use the TPM
+      if (recoveryKeySlot.platformName != 'tpm2') {
+        _log.debug('tpm2 not present in platform name');
+        return TpmState.notInUse();
       }
 
       final authMode = recoveryKeySlot.authMode;
       if (authMode != null) {
         switch (authMode) {
           case SnapdSystemVolumeAuthMode.none:
-            return AuthMode.none;
+            return TpmState.inUse(AuthMode.none);
           case SnapdSystemVolumeAuthMode.pin:
-            return AuthMode.pin;
+            return TpmState.inUse(AuthMode.pin);
           case SnapdSystemVolumeAuthMode.passphrase:
-            return AuthMode.passphrase;
+            return TpmState.inUse(AuthMode.passphrase);
         }
       }
-      return AuthMode.passphrase;
+      return TpmState.inUse(AuthMode.none);
     } on Exception catch (e) {
       _log.error('Failed to determine TPM authentication mode: $e');
-      return AuthMode.passphrase;
+      throw TpmStateExceptionFailed(rawError: e.toString());
     }
   }
 }

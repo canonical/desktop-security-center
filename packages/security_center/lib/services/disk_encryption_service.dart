@@ -49,6 +49,13 @@ enum KeySlotType { recovery, platform }
 @JsonEnum(fieldRename: FieldRename.kebab)
 enum AuthMode { none, pin, passphrase }
 
+/// State of TPM usage on the system, encapsulating AuthMode.
+@freezed
+sealed class TpmState with _$TpmState {
+  const factory TpmState.notInUse() = TpmNotInUse;
+  const factory TpmState.inUse(AuthMode authMode) = TpmInUse;
+}
+
 /// A class to model the key slot on a LUKS container.
 @freezed
 class KeySlot with _$KeySlot {
