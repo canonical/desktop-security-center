@@ -207,6 +207,15 @@ class AppLocalizationsPl extends AppLocalizations {
   String get diskEncryptionPageCopySemanticLabel => 'Copy';
 
   @override
+  String get diskEncryptionPageErrorFailedToRetrieveStatusHeader => 'Encryption settings not available';
+
+  @override
+  String get diskEncryptionPageErrorFailedToRetrieveStatusBody => 'Failed to retrieve the encryption status of this computer.';
+
+  @override
+  String get diskEncryptionPageErrorUnsupportedStateBody => 'Your computer\'s TPM configuration is not in a supported state.';
+
+  @override
   String get recoveryKeyExceptionFileSystemTitle => 'Recovery key file not saved';
 
   @override

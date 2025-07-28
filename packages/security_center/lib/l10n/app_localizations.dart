@@ -587,6 +587,24 @@ abstract class AppLocalizations {
   /// **'Copy'**
   String get diskEncryptionPageCopySemanticLabel;
 
+  /// No description provided for @diskEncryptionPageErrorFailedToRetrieveStatusHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Encryption settings not available'**
+  String get diskEncryptionPageErrorFailedToRetrieveStatusHeader;
+
+  /// No description provided for @diskEncryptionPageErrorFailedToRetrieveStatusBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to retrieve the encryption status of this computer.'**
+  String get diskEncryptionPageErrorFailedToRetrieveStatusBody;
+
+  /// No description provided for @diskEncryptionPageErrorUnsupportedStateBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your computer\'s TPM configuration is not in a supported state.'**
+  String get diskEncryptionPageErrorUnsupportedStateBody;
+
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.
   ///
   /// In en, this message translates to:
