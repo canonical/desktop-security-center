@@ -33,20 +33,77 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
     return ScrollablePage(
       children: [
-        Text(
-          l10n.diskEncryptionPageRecoveryKey,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        const SizedBox(height: 16),
-        MarkdownText(
-          '${l10n.diskEncryptionPageStoreYourKey} ${l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl)}',
-        ),
-        const SizedBox(height: 16),
+        const TPMStatusContainer(),
         CheckRecoveryKeyButtons(),
       ],
+    );
+  }
+}
+
+class TPMStatusContainer extends ConsumerWidget {
+  const TPMStatusContainer({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final tpmAuthenticationModel = ref.watch(tpmAuthenticationModelProvider);
+
+    return tpmAuthenticationModel.when(
+      data: (tpmState) => (tpmState is TpmInUse)
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                YaruBorderContainer(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                          horizontal: 16,
+                        ),
+                        leading: const Icon(YaruIcons.lock, size: 24),
+                        title: Text(
+                          l10n.recoveryKeyTPMEnabled,
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                      ),
+                      if (tpmState.authMode != AuthMode.none) ...[
+                        const Divider(),
+                        ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 16,
+                          ),
+                          leading: const Icon(YaruIcons.ok_simple, size: 24),
+                          title: Text(
+                            tpmState.authMode == AuthMode.pin
+                                ? l10n.recoveryKeyPinEnabled
+                                : l10n.recoveryKeyPassphraseEnabled,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  l10n.recoveryKeyTPMExplanationBody,
+                  textAlign: TextAlign.left,
+                ),
+                const SizedBox(height: 16),
+              ],
+            )
+          : SizedBox.shrink(), // FIXME: the correct warning
+      error: (e, stack) => YaruInfoBox(
+        title: Text(l10n.diskEncryptionPageError),
+        subtitle: Text(e.toString()),
+        yaruInfoType: YaruInfoType.danger,
+      ),
+      loading: () => const YaruLinearProgressIndicator(),
     );
   }
 }
@@ -61,82 +118,98 @@ class CheckRecoveryKeyButtons extends ConsumerWidget {
 
     // We need the system containers to validate the state of encryption and if a pin / passphrase is in use.
     return tpmAuthenticationModel.when(
-      data: (data) {
-        return Column(
-          children: [
-            Row(
+      data: (data) => (data is TpmInUse)
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                OutlinedButton(
-                  onPressed: () {
-                    showCheckRecoveryKeyDialog(context);
-                  },
-                  child: Text(l10n.diskEncryptionPageCheckKey),
+                Text(
+                  l10n.diskEncryptionPageRecoveryKey,
+                  style: Theme.of(context).textTheme.titleMedium,
+                  textAlign: TextAlign.left,
                 ),
-                const SizedBox(width: 16),
-                OutlinedButton(
-                  onPressed: () {
-                    showReplaceRecoveryKeyDialog(context);
-                  },
-                  child: Text(l10n.diskEncryptionPageReplaceButton),
+                const SizedBox(height: 16),
+                MarkdownText(
+                  '${l10n.diskEncryptionPageStoreYourKey} ${l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl)}',
                 ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    OutlinedButton(
+                      onPressed: () {
+                        showCheckRecoveryKeyDialog(context);
+                      },
+                      child: Text(l10n.diskEncryptionPageCheckKey),
+                    ),
+                    const SizedBox(width: 16),
+                    OutlinedButton(
+                      onPressed: () {
+                        showReplaceRecoveryKeyDialog(context);
+                      },
+                      child: Text(l10n.diskEncryptionPageReplaceButton),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                // TPM Authentication specific content
+                switch (data) {
+                  TpmInUse(authMode: AuthMode.pin) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          l10n.recoveryKeyPinHeader,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(l10n.recoveryKeyPinBody),
+                        const SizedBox(height: 16),
+                        OutlinedButton(
+                          onPressed: () {
+                            ref
+                                .read(changeAuthDialogModelProvider.notifier)
+                                .authMode = AuthMode.pin;
+                            showChangeAuthDialog(context, AuthMode.pin);
+                          },
+                          child: Text(l10n.recoveryKeyPinButton),
+                        ),
+                      ],
+                    ),
+                  TpmInUse(authMode: AuthMode.passphrase) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          l10n.recoveryKeyPassphraseHeader,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(l10n.recoveryKeyPassphraseBody),
+                        const SizedBox(height: 16),
+                        OutlinedButton(
+                          onPressed: () {
+                            ref
+                                .read(changeAuthDialogModelProvider.notifier)
+                                .authMode = AuthMode.passphrase;
+                            showChangeAuthDialog(context, AuthMode.passphrase);
+                          },
+                          child: Text(l10n.recoveryKeyPassphraseButton),
+                        ),
+                      ],
+                    ),
+
+                  // FIXME
+                  TpmInUse(authMode: AuthMode.none) => const SizedBox.shrink(),
+                  TpmNotInUse() => const SizedBox.shrink(),
+                },
               ],
-            ),
-            const SizedBox(height: 16),
-            // TPM Authentication specific content
-            switch (data) {
-              AuthMode.pin => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.recoveryKeyPinHeader,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(l10n.recoveryKeyPinBody),
-                    const SizedBox(height: 16),
-                    OutlinedButton(
-                      onPressed: () {
-                        ref
-                            .read(changeAuthDialogModelProvider.notifier)
-                            .authMode = AuthMode.pin;
-                        showChangeAuthDialog(context, AuthMode.pin);
-                      },
-                      child: Text(l10n.recoveryKeyPinButton),
-                    ),
-                  ],
-                ),
-              AuthMode.passphrase => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.recoveryKeyPassphraseHeader,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(l10n.recoveryKeyPassphraseBody),
-                    const SizedBox(height: 16),
-                    OutlinedButton(
-                      onPressed: () {
-                        ref
-                            .read(changeAuthDialogModelProvider.notifier)
-                            .authMode = AuthMode.passphrase;
-                        showChangeAuthDialog(context, AuthMode.passphrase);
-                      },
-                      child: Text(l10n.recoveryKeyPassphraseButton),
-                    ),
-                  ],
-                ),
-              AuthMode.none => const SizedBox.shrink(),
-            },
-          ],
-        );
-      },
+            )
+          : SizedBox.shrink(),
       error: (e, stack) => YaruInfoBox(
         title: Text(l10n.diskEncryptionPageError),
         subtitle: Text(e.toString()),
         yaruInfoType: YaruInfoType.danger,
       ),
-      loading: () => const YaruLinearProgressIndicator(),
+      // Loading indicator will be taken care of by the TPMStatusContainer widget,
+      // as both will react to the same state changes.
+      loading: () => const SizedBox.shrink(),
     );
   }
 }
