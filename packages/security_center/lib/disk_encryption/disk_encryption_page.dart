@@ -184,7 +184,7 @@ class EncryptionPageBody extends ConsumerWidget {
             subtitle: Text(tpmError.localizedBody(l10n)),
             yaruInfoType: YaruInfoType.danger,
           );
-        } catch (error) {
+        } on Exception catch (error) {
           return YaruInfoBox(
             title: Text(l10n.diskEncryptionPageError),
             subtitle: Text(error.toString()),

@@ -942,27 +942,39 @@ void main() {
         // Verify the expected error message is displayed based on the error type
         if (tc.enumerateKeySlots404Error) {
           expect(
-              find.text(
-                  tester.l10n.diskEncryptionPageErrorUnsupportedSnapdHeader),
-              findsOneWidget);
+            find.text(
+              tester.l10n.diskEncryptionPageErrorUnsupportedSnapdHeader,
+            ),
+            findsOneWidget,
+          );
           expect(
-              find.text(
-                  tester.l10n.diskEncryptionPageErrorUnsupportedSnapdBody),
-              findsOneWidget);
+            find.text(
+              tester.l10n.diskEncryptionPageErrorUnsupportedSnapdBody,
+            ),
+            findsOneWidget,
+          );
         } else if (tc.enumerateKeySlotsFailure) {
           expect(
-              find.text(tester.l10n.diskEncryptionPageError), findsOneWidget);
-          expect(find.text('Exception: Mock enumerate key slots error'),
-              findsOneWidget);
+            find.text(tester.l10n.diskEncryptionPageError),
+            findsOneWidget,
+          );
+          expect(
+            find.text('Exception: Mock enumerate key slots error'),
+            findsOneWidget,
+          );
         } else if (tc.unsupportedTmpState) {
           expect(
-              find.text(tester
-                  .l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader),
-              findsOneWidget);
+            find.text(
+              tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
+            ),
+            findsOneWidget,
+          );
           expect(
-              find.text(
-                  tester.l10n.diskEncryptionPageErrorUnsupportedStateBody),
-              findsOneWidget);
+            find.text(
+              tester.l10n.diskEncryptionPageErrorUnsupportedStateBody,
+            ),
+            findsOneWidget,
+          );
         }
       });
     }

@@ -144,7 +144,6 @@ DiskEncryptionService registerMockDiskEncryptionService({
       throw SnapdException(
         message: '',
         kind: '',
-        status: '',
         statusCode: 404,
       );
     }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 
 final _log = Logger('feature_service');
