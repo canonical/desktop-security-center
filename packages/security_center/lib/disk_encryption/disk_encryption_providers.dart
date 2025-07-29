@@ -59,12 +59,18 @@ sealed class RecoveryKeyException
 }
 
 @freezed
+sealed class SnapdStateException
+    with _$SnapdStateException
+    implements Exception {
+  factory SnapdStateException.unsupportedSnapdVersion() =
+      SnapdStateExceptionUnsupportedSnapdVersion;
+  factory SnapdStateException.unconnectedSnapInterface() =
+      SnapdStateExceptionUnconnectedSnapInterface;
+}
+
+@freezed
 sealed class TpmStateException with _$TpmStateException implements Exception {
   factory TpmStateException.failed() = TpmStateExceptionFailed;
-  factory TpmStateException.unsupportedSnapdVersion() =
-      TpmStateExceptionUnsupportedSnapdVersion;
-  factory TpmStateException.unconnectedSnapdInterface() =
-      TpmStateExceptionUnconnectedSnapdInterface;
   factory TpmStateException.unsupportedState() =
       TpmStateExceptionUnsupportedState;
 }
@@ -303,7 +309,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
     } on SnapdException catch (e) {
       if (e.statusCode == 404) {}
       _log.error('Failed to determine TPM authentication mode: $e');
-      throw TpmStateExceptionFailed(rawError: e.toString());
+      throw SnapdStateExceptionUnsupportedSnapdVersion();
     }
   }
 }
