@@ -212,6 +212,18 @@ class AppLocalizationsSv extends AppLocalizations {
   String get diskEncryptionPageErrorUnsupportedStateBody => 'Your computer\'s TPM configuration is not in a supported state.';
 
   @override
+  String get diskEncryptionPageErrorUnsupportedSnapdHeader => 'Your snapd version is not supported';
+
+  @override
+  String get diskEncryptionPageErrorUnsupportedSnapdBody => 'Check the Security Center and snapd are up to date.';
+
+  @override
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader => 'Security Center cannot connect to the snapd interface';
+
+  @override
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody => 'to fix this, run this command in the terminal:/nsnap connect desktop-security-center:snapd';
+
+  @override
   String get recoveryKeyExceptionFileSystemTitle => 'Recovery key file not saved';
 
   @override

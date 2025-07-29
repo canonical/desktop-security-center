@@ -605,6 +605,30 @@ abstract class AppLocalizations {
   /// **'Your computer\'s TPM configuration is not in a supported state.'**
   String get diskEncryptionPageErrorUnsupportedStateBody;
 
+  /// No description provided for @diskEncryptionPageErrorUnsupportedSnapdHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Your snapd version is not supported'**
+  String get diskEncryptionPageErrorUnsupportedSnapdHeader;
+
+  /// No description provided for @diskEncryptionPageErrorUnsupportedSnapdBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the Security Center and snapd are up to date.'**
+  String get diskEncryptionPageErrorUnsupportedSnapdBody;
+
+  /// No description provided for @diskEncryptionPageErrorUnconnectedSnapInterfaceHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Security Center cannot connect to the snapd interface'**
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader;
+
+  /// No description provided for @diskEncryptionPageErrorUnconnectedSnapInterfaceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'to fix this, run this command in the terminal:/nsnap connect desktop-security-center:snapd'**
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody;
+
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.
   ///
   /// In en, this message translates to:
