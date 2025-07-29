@@ -8,7 +8,7 @@
         "default-recovery": {
           "type": "platform",
           "roles": ["foo"],
-          "platform-name": "bar",
+          "platform-name": "tpm2",
           "auth-mode": "pin"
         }
       }

@@ -103,7 +103,8 @@ class EncryptionPageBody extends ConsumerWidget {
             '${l10n.diskEncryptionPageStoreYourKey} ${l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl)}',
           ),
           const SizedBox(height: 16),
-          Row(
+          Wrap(
+            spacing: 16,
             children: [
               OutlinedButton(
                 onPressed: () {
@@ -111,7 +112,6 @@ class EncryptionPageBody extends ConsumerWidget {
                 },
                 child: Text(l10n.diskEncryptionPageCheckKey),
               ),
-              const SizedBox(width: 16),
               OutlinedButton(
                 onPressed: () {
                   showReplaceRecoveryKeyDialog(context);
