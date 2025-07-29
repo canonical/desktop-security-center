@@ -133,11 +133,28 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool entropyCheckError = false,
   AuthMode authMode = AuthMode.pin,
   EntropyResponse Function(String)? entropyResponseBuilder,
+  bool enumerateKeySlots404Error = false,
+  bool enumerateKeySlotsFailure = false,
+  bool unsupportedTmpState = false,
 }) {
   final service = MockDiskEncryptionService();
 
-  when(service.enumerateKeySlots()).thenAnswer(
-    (_) async => SnapdSystemVolumesResponse(
+  when(service.enumerateKeySlots()).thenAnswer((_) async {
+    if (enumerateKeySlots404Error) {
+      throw SnapdException(
+        message: '',
+        kind: '',
+        status: '',
+        statusCode: 404,
+      );
+    }
+    if (enumerateKeySlotsFailure) {
+      throw Exception('Mock enumerate key slots error');
+    }
+
+    final platformName = unsupportedTmpState ? 'not-tpm2' : 'tpm2';
+
+    return SnapdSystemVolumesResponse(
       byContainerRole: {
         'system-data': SnapdSystemVolume(
           volumeName: 'system-data',
@@ -147,7 +164,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
             'default-recovery': SnapdSystemVolumeKeySlot(
               type: SnapdSystemVolumeKeySlotType.platform,
               roles: ['foo'],
-              platformName: 'bar',
+              platformName: platformName,
               authMode: SnapdSystemVolumeAuthMode.values.firstWhere(
                 (mode) => mode.name == authMode.name,
                 orElse: () => SnapdSystemVolumeAuthMode.pin,
@@ -156,8 +173,8 @@ DiskEncryptionService registerMockDiskEncryptionService({
           },
         ),
       },
-    ),
-  );
+    );
+  });
   when(service.generateRecoveryKey()).thenAnswer((_) async {
     if (generateError) {
       throw Exception('Mock generate recovery key error');

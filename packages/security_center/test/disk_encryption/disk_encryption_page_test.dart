@@ -902,4 +902,69 @@ void main() {
       });
     }
   });
+
+  group('TPM authentication error handling', () {
+    final cases = [
+      (
+        name: '404 error from enumerate keyslots API',
+        enumerateKeySlots404Error: true,
+        enumerateKeySlotsFailure: false,
+        unsupportedTmpState: false,
+      ),
+      (
+        name: 'general failure from enumerate keyslots endpoint',
+        enumerateKeySlots404Error: false,
+        enumerateKeySlotsFailure: true,
+        unsupportedTmpState: false,
+      ),
+      (
+        name: 'unsupported TPM state',
+        enumerateKeySlots404Error: false,
+        enumerateKeySlotsFailure: false,
+        unsupportedTmpState: true,
+      ),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final container = createContainer();
+        registerMockDiskEncryptionService(
+          enumerateKeySlots404Error: tc.enumerateKeySlots404Error,
+          enumerateKeySlotsFailure: tc.enumerateKeySlotsFailure,
+          unsupportedTmpState: tc.unsupportedTmpState,
+        );
+        await tester.pumpAppWithProviders(
+          (_) => const DiskEncryptionPage(),
+          container,
+        );
+        await tester.pumpAndSettle();
+
+        // Verify the expected error message is displayed based on the error type
+        if (tc.enumerateKeySlots404Error) {
+          expect(
+              find.text(
+                  tester.l10n.diskEncryptionPageErrorUnsupportedSnapdHeader),
+              findsOneWidget);
+          expect(
+              find.text(
+                  tester.l10n.diskEncryptionPageErrorUnsupportedSnapdBody),
+              findsOneWidget);
+        } else if (tc.enumerateKeySlotsFailure) {
+          expect(
+              find.text(tester.l10n.diskEncryptionPageError), findsOneWidget);
+          expect(find.text('Exception: Mock enumerate key slots error'),
+              findsOneWidget);
+        } else if (tc.unsupportedTmpState) {
+          expect(
+              find.text(tester
+                  .l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader),
+              findsOneWidget);
+          expect(
+              find.text(
+                  tester.l10n.diskEncryptionPageErrorUnsupportedStateBody),
+              findsOneWidget);
+        }
+      });
+    }
+  });
 }

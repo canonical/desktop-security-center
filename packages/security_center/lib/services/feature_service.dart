@@ -21,14 +21,15 @@ class FeatureService {
   /// Checks if the system is using FDE by detecting the existence of
   /// /dev/disk/by-label/ubuntu-data-enc
   bool _isUsingFDE() {
-    try {
-      final file = File('/dev/disk/by-label/ubuntu-data-enc');
-      return file.existsSync();
-    } on Exception catch (e) {
-      _log.error(
-        'Error encountered when checking existance of /dev/disk/by-level/ubuntu-data-enc: $e',
-      );
-      return false;
-    }
+    return true;
+    // try {
+    //   final file = File('/dev/disk/by-label/ubuntu-data-enc');
+    //   return file.existsSync();
+    // } on Exception catch (e) {
+    //   _log.error(
+    //     'Error encountered when checking existance of /dev/disk/by-level/ubuntu-data-enc: $e',
+    //   );
+    //   return false;
+    // }
   }
 }
