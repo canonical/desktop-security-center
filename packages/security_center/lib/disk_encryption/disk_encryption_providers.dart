@@ -60,8 +60,11 @@ sealed class RecoveryKeyException
 
 @freezed
 sealed class TpmStateException with _$TpmStateException implements Exception {
-  factory TpmStateException.failed({required String rawError}) =
-      TpmStateExceptionFailed;
+  factory TpmStateException.failed() = TpmStateExceptionFailed;
+  factory TpmStateException.unsupportedSnapdVersion() =
+      TpmStateExceptionUnsupportedSnapdVersion;
+  factory TpmStateException.unconnectedSnapdInterface() =
+      TpmStateExceptionUnconnectedSnapdInterface;
   factory TpmStateException.unsupportedState() =
       TpmStateExceptionUnsupportedState;
 }
@@ -262,7 +265,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   late final _service = getService<DiskEncryptionService>();
 
   @override
-  Future<TpmState> build() async {
+  Future<AuthMode> build() async {
     // Temporary work around while we wait for snapd to implement enumerateKeySlots()
     try {
       final volumesResponse = await _service.enumerateKeySlots();
@@ -281,23 +284,24 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
       // We can rely on 'tpm2' as a way of asserting keys use the TPM
       if (recoveryKeySlot.platformName != 'tpm2') {
-        _log.debug('tpm2 not present in platform name');
-        return TpmState.notInUse();
+        _log.error('tpm2 not present in platform name');
+        throw TpmStateExceptionUnsupportedState();
       }
 
       final authMode = recoveryKeySlot.authMode;
       if (authMode != null) {
         switch (authMode) {
           case SnapdSystemVolumeAuthMode.none:
-            return TpmState.inUse(AuthMode.none);
+            return AuthMode.none;
           case SnapdSystemVolumeAuthMode.pin:
-            return TpmState.inUse(AuthMode.pin);
+            return AuthMode.pin;
           case SnapdSystemVolumeAuthMode.passphrase:
-            return TpmState.inUse(AuthMode.passphrase);
+            return AuthMode.passphrase;
         }
       }
-      return TpmState.inUse(AuthMode.none);
-    } on Exception catch (e) {
+      return AuthMode.none;
+    } on SnapdException catch (e) {
+      if (e.statusCode == 404) {}
       _log.error('Failed to determine TPM authentication mode: $e');
       throw TpmStateExceptionFailed(rawError: e.toString());
     }

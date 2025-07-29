@@ -22,13 +22,24 @@ extension RecoveryKeyExceptionL10n on RecoveryKeyException {
 
 extension TpmStateExceptionL10n on TpmStateException {
   String localizedHeader(AppLocalizations l10n) => switch (this) {
-        _ => l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader
+        TpmStateExceptionFailed() =>
+          l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
+        TpmStateExceptionUnsupportedState() =>
+          l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
+        TpmStateExceptionUnsupportedSnapdVersion() =>
+          l10n.diskEncryptionPageErrorUnsupportedSnapdHeader,
+        TpmStateExceptionUnconnectedSnapdInterface() =>
+          l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceHeader,
       };
   String localizedBody(AppLocalizations l10n) => switch (this) {
         TpmStateExceptionFailed() =>
           l10n.diskEncryptionPageErrorFailedToRetrieveStatusBody,
         TpmStateExceptionUnsupportedState() =>
           l10n.diskEncryptionPageErrorUnsupportedStateBody,
+        TpmStateExceptionUnsupportedSnapdVersion() =>
+          l10n.diskEncryptionPageErrorUnsupportedSnapdBody,
+        TpmStateExceptionUnconnectedSnapdInterface() =>
+          l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceBody,
       };
 }
 
