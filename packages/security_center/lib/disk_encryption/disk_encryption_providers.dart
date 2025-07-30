@@ -283,13 +283,26 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
       }
 
       final recoveryKeySlot = systemDataVolume.keyslots['default-recovery'];
+      final defaultKeySlot = systemDataVolume.keyslots['default'];
+      final defaultFallbackKeySlot =
+          systemDataVolume.keyslots['default-fallback'];
 
       if (recoveryKeySlot == null) {
+        _log.error('recoveryKeySlot not found');
+        throw TpmStateExceptionUnsupportedState();
+      }
+      if (defaultKeySlot == null) {
+        _log.error('defaultKeySlot not found');
+        throw TpmStateExceptionUnsupportedState();
+      }
+      if (defaultFallbackKeySlot == null) {
+        _log.error('defaultFallbackKeySlot not found');
         throw TpmStateExceptionUnsupportedState();
       }
 
       // We can rely on 'tpm2' as a way of asserting keys use the TPM
-      if (recoveryKeySlot.platformName != 'tpm2') {
+      if (defaultKeySlot.platformName != 'tpm2' ||
+          defaultFallbackKeySlot.platformName != 'tpm2') {
         _log.error('tpm2 not present in platform name');
         throw TpmStateExceptionUnsupportedState();
       }
@@ -305,6 +318,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
             return AuthMode.passphrase;
         }
       }
+
       return AuthMode.none;
     } on SnapdException catch (e) {
       _log.error('Failed to determine TPM authentication mode: $e');

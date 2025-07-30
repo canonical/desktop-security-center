@@ -904,62 +904,126 @@ void main() {
   });
 
   group('TPM authentication error handling', () {
-    final cases = [
+    final cases = <({
+      String name,
+      AuthMode authMode,
+      bool enumerateKeySlots404Error,
+      bool enumerateKeySlots401Error,
+      bool enumerateKeySlotsFailure,
+      bool missingRecoveryKeySlot,
+      bool missingDefaultKeySlot,
+      bool missingDefaultFallbackKeySlot,
+      bool invalidTpmPlatformName,
+    })>[
       (
         name: '404 error from enumerate keyslots API',
+        authMode: AuthMode.pin,
         enumerateKeySlots404Error: true,
         enumerateKeySlots401Error: false,
         enumerateKeySlotsFailure: false,
-        unsupportedTmpState: false,
-        authMode: AuthMode.pin,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
       ),
       (
         name: 'general failure from enumerate keyslots endpoint',
+        authMode: AuthMode.pin,
         enumerateKeySlots404Error: false,
         enumerateKeySlots401Error: false,
         enumerateKeySlotsFailure: true,
-        unsupportedTmpState: false,
-        authMode: AuthMode.pin,
-      ),
-      (
-        name: 'unsupported TPM state',
-        enumerateKeySlots404Error: false,
-        enumerateKeySlots401Error: false,
-        enumerateKeySlotsFailure: false,
-        unsupportedTmpState: true,
-        authMode: AuthMode.pin,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
       ),
       (
         name: 'Status banners shown - authmode none',
+        authMode: AuthMode.none,
         enumerateKeySlots404Error: false,
         enumerateKeySlots401Error: false,
         enumerateKeySlotsFailure: false,
-        unsupportedTmpState: false,
-        authMode: AuthMode.none,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
       ),
       (
         name: 'Status banners shown - authmode PIN',
+        authMode: AuthMode.pin,
         enumerateKeySlots404Error: false,
         enumerateKeySlots401Error: false,
         enumerateKeySlotsFailure: false,
-        unsupportedTmpState: false,
-        authMode: AuthMode.pin,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
       ),
       (
         name: 'Status banners shown - authmode passphrase',
+        authMode: AuthMode.passphrase,
         enumerateKeySlots404Error: false,
         enumerateKeySlots401Error: false,
         enumerateKeySlotsFailure: false,
-        unsupportedTmpState: false,
-        authMode: AuthMode.passphrase,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
       ),
       (
         name:
             '401 error from enumerate keyslots API (snap-fde-control interface)',
+        authMode: AuthMode.pin,
         enumerateKeySlots404Error: false,
         enumerateKeySlots401Error: true,
         enumerateKeySlotsFailure: false,
-        unsupportedTmpState: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
+      ),
+      (
+        name: 'missing recovery keyslot',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots401Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: true,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
+      ),
+      (
+        name: 'missing default keyslot',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots401Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: true,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
+      ),
+      (
+        name: 'missing default-fallback keyslot',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots401Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: true,
+        invalidTpmPlatformName: false,
+      ),
+      (
+        name: 'invalid TPM platform name',
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots401Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: true,
         authMode: AuthMode.pin,
       ),
     ];
@@ -971,7 +1035,10 @@ void main() {
           enumerateKeySlots404Error: tc.enumerateKeySlots404Error,
           enumerateKeySlots401Error: tc.enumerateKeySlots401Error,
           enumerateKeySlotsFailure: tc.enumerateKeySlotsFailure,
-          unsupportedTmpState: tc.unsupportedTmpState,
+          missingRecoveryKeySlot: tc.missingRecoveryKeySlot,
+          missingDefaultKeySlot: tc.missingDefaultKeySlot,
+          missingDefaultFallbackKeySlot: tc.missingDefaultFallbackKeySlot,
+          invalidTpmPlatformName: tc.invalidTpmPlatformName,
           authMode: tc.authMode,
         );
         await tester.pumpAppWithProviders(
@@ -984,7 +1051,10 @@ void main() {
         final isHappyPath = !tc.enumerateKeySlots404Error &&
             !tc.enumerateKeySlots401Error &&
             !tc.enumerateKeySlotsFailure &&
-            !tc.unsupportedTmpState;
+            !tc.missingRecoveryKeySlot &&
+            !tc.missingDefaultKeySlot &&
+            !tc.missingDefaultFallbackKeySlot &&
+            !tc.invalidTpmPlatformName;
 
         if (isHappyPath) {
           // Verify TPM enabled message is always shown in happy path
@@ -1063,7 +1133,10 @@ void main() {
               ),
               findsOneWidget,
             );
-          } else if (tc.unsupportedTmpState) {
+          } else if (tc.missingRecoveryKeySlot ||
+              tc.missingDefaultKeySlot ||
+              tc.missingDefaultFallbackKeySlot ||
+              tc.invalidTpmPlatformName) {
             expect(
               find.text(
                 tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,

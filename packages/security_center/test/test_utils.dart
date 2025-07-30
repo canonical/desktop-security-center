@@ -136,7 +136,10 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool enumerateKeySlots404Error = false,
   bool enumerateKeySlots401Error = false,
   bool enumerateKeySlotsFailure = false,
-  bool unsupportedTmpState = false,
+  bool missingRecoveryKeySlot = false,
+  bool missingDefaultKeySlot = false,
+  bool missingDefaultFallbackKeySlot = false,
+  bool invalidTpmPlatformName = false,
 }) {
   final service = MockDiskEncryptionService();
 
@@ -159,7 +162,38 @@ DiskEncryptionService registerMockDiskEncryptionService({
       throw SnapdException(message: '');
     }
 
-    final platformName = unsupportedTmpState ? 'not-tpm2' : 'tpm2';
+    final platformName = invalidTpmPlatformName ? 'not-tpm2' : 'tpm2';
+    final recoveryKeySlotAuthMode = SnapdSystemVolumeAuthMode.values.firstWhere(
+      (mode) => mode.name == authMode.name,
+      orElse: () => SnapdSystemVolumeAuthMode.pin,
+    );
+
+    final keyslots = <String, SnapdSystemVolumeKeySlot>{};
+
+    if (!missingRecoveryKeySlot) {
+      keyslots['default-recovery'] = SnapdSystemVolumeKeySlot(
+        type: SnapdSystemVolumeKeySlotType.platform,
+        roles: ['foo'],
+        platformName: platformName,
+        authMode: recoveryKeySlotAuthMode,
+      );
+    }
+
+    if (!missingDefaultKeySlot) {
+      keyslots['default'] = SnapdSystemVolumeKeySlot(
+        type: SnapdSystemVolumeKeySlotType.platform,
+        roles: ['foo'],
+        platformName: platformName,
+      );
+    }
+
+    if (!missingDefaultFallbackKeySlot) {
+      keyslots['default-fallback'] = SnapdSystemVolumeKeySlot(
+        type: SnapdSystemVolumeKeySlotType.platform,
+        roles: ['foo'],
+        platformName: platformName,
+      );
+    }
 
     return SnapdSystemVolumesResponse(
       byContainerRole: {
@@ -167,17 +201,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
           volumeName: 'system-data',
           name: 'system-data',
           encrypted: true,
-          keyslots: {
-            'default-recovery': SnapdSystemVolumeKeySlot(
-              type: SnapdSystemVolumeKeySlotType.platform,
-              roles: ['foo'],
-              platformName: platformName,
-              authMode: SnapdSystemVolumeAuthMode.values.firstWhere(
-                (mode) => mode.name == authMode.name,
-                orElse: () => SnapdSystemVolumeAuthMode.pin,
-              ),
-            ),
-          },
+          keyslots: keyslots,
         ),
       },
     );
