@@ -140,6 +140,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool missingDefaultKeySlot = false,
   bool missingDefaultFallbackKeySlot = false,
   bool invalidTpmPlatformName = false,
+  bool authModeMismatch = false,
 }) {
   final service = MockDiskEncryptionService();
 
@@ -163,7 +164,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
     }
 
     final platformName = invalidTpmPlatformName ? 'not-tpm2' : 'tpm2';
-    final recoveryKeySlotAuthMode = SnapdSystemVolumeAuthMode.values.firstWhere(
+    final keySlotAuthMode = SnapdSystemVolumeAuthMode.values.firstWhere(
       (mode) => mode.name == authMode.name,
       orElse: () => SnapdSystemVolumeAuthMode.pin,
     );
@@ -175,7 +176,6 @@ DiskEncryptionService registerMockDiskEncryptionService({
         type: SnapdSystemVolumeKeySlotType.platform,
         roles: ['foo'],
         platformName: platformName,
-        authMode: recoveryKeySlotAuthMode,
       );
     }
 
@@ -184,6 +184,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
         type: SnapdSystemVolumeKeySlotType.platform,
         roles: ['foo'],
         platformName: platformName,
+        authMode: keySlotAuthMode,
       );
     }
 
@@ -192,6 +193,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
         type: SnapdSystemVolumeKeySlotType.platform,
         roles: ['foo'],
         platformName: platformName,
+        authMode: authModeMismatch ? null : keySlotAuthMode,
       );
     }
 

@@ -307,7 +307,15 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         throw TpmStateExceptionUnsupportedState();
       }
 
-      final authMode = recoveryKeySlot.authMode;
+      final authMode = defaultKeySlot.authMode;
+
+      if (defaultFallbackKeySlot.authMode != authMode) {
+        _log.error(
+          'defaultKeySlot authMode does not match defaultFallbackKeySlot authMode',
+        );
+        throw TpmStateExceptionUnsupportedState();
+      }
+
       if (authMode != null) {
         switch (authMode) {
           case SnapdSystemVolumeAuthMode.none:
