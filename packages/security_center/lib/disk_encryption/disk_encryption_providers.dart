@@ -307,9 +307,11 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
       }
       return AuthMode.none;
     } on SnapdException catch (e) {
-      if (e.statusCode == 404) {}
       _log.error('Failed to determine TPM authentication mode: $e');
-      throw SnapdStateExceptionUnsupportedSnapdVersion();
+      if (e.statusCode == 404) {
+        throw SnapdStateExceptionUnsupportedSnapdVersion();
+      }
+      throw TpmStateExceptionFailed();
     }
   }
 }

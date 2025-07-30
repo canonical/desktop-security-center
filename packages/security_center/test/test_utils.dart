@@ -148,7 +148,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
       );
     }
     if (enumerateKeySlotsFailure) {
-      throw Exception('Mock enumerate key slots error');
+      throw SnapdException(message: '');
     }
 
     final platformName = unsupportedTmpState ? 'not-tpm2' : 'tpm2';

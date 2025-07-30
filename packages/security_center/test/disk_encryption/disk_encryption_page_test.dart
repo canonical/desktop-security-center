@@ -910,18 +910,42 @@ void main() {
         enumerateKeySlots404Error: true,
         enumerateKeySlotsFailure: false,
         unsupportedTmpState: false,
+        authMode: AuthMode.pin,
       ),
       (
         name: 'general failure from enumerate keyslots endpoint',
         enumerateKeySlots404Error: false,
         enumerateKeySlotsFailure: true,
         unsupportedTmpState: false,
+        authMode: AuthMode.pin,
       ),
       (
         name: 'unsupported TPM state',
         enumerateKeySlots404Error: false,
         enumerateKeySlotsFailure: false,
         unsupportedTmpState: true,
+        authMode: AuthMode.pin,
+      ),
+      (
+        name: 'Status banners shown - authmode none',
+        enumerateKeySlots404Error: false,
+        enumerateKeySlotsFailure: false,
+        unsupportedTmpState: false,
+        authMode: AuthMode.none,
+      ),
+      (
+        name: 'Status banners shown - authmode PIN',
+        enumerateKeySlots404Error: false,
+        enumerateKeySlotsFailure: false,
+        unsupportedTmpState: false,
+        authMode: AuthMode.pin,
+      ),
+      (
+        name: 'Status banners shown - authmode passphrase',
+        enumerateKeySlots404Error: false,
+        enumerateKeySlotsFailure: false,
+        unsupportedTmpState: false,
+        authMode: AuthMode.passphrase,
       ),
     ];
 
@@ -932,6 +956,7 @@ void main() {
           enumerateKeySlots404Error: tc.enumerateKeySlots404Error,
           enumerateKeySlotsFailure: tc.enumerateKeySlotsFailure,
           unsupportedTmpState: tc.unsupportedTmpState,
+          authMode: tc.authMode,
         );
         await tester.pumpAppWithProviders(
           (_) => const DiskEncryptionPage(),
@@ -939,42 +964,88 @@ void main() {
         );
         await tester.pumpAndSettle();
 
-        // Verify the expected error message is displayed based on the error type
-        if (tc.enumerateKeySlots404Error) {
+        // Check if this is a happy path (no errors)
+        final isHappyPath = !tc.enumerateKeySlots404Error &&
+            !tc.enumerateKeySlotsFailure &&
+            !tc.unsupportedTmpState;
+
+        if (isHappyPath) {
+          // Verify TPM enabled message is always shown in happy path
           expect(
-            find.text(
-              tester.l10n.diskEncryptionPageErrorUnsupportedSnapdHeader,
-            ),
+            find.text(tester.l10n.recoveryKeyTPMEnabled),
             findsOneWidget,
           );
-          expect(
-            find.text(
-              tester.l10n.diskEncryptionPageErrorUnsupportedSnapdBody,
-            ),
-            findsOneWidget,
-          );
-        } else if (tc.enumerateKeySlotsFailure) {
-          expect(
-            find.text(tester.l10n.diskEncryptionPageError),
-            findsOneWidget,
-          );
-          expect(
-            find.text('Exception: Mock enumerate key slots error'),
-            findsOneWidget,
-          );
-        } else if (tc.unsupportedTmpState) {
-          expect(
-            find.text(
-              tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
-            ),
-            findsOneWidget,
-          );
-          expect(
-            find.text(
-              tester.l10n.diskEncryptionPageErrorUnsupportedStateBody,
-            ),
-            findsOneWidget,
-          );
+
+          // Verify auth mode specific message based on auth mode
+          switch (tc.authMode) {
+            case AuthMode.none:
+              // For none mode, no additional auth text should be shown
+              expect(
+                find.text(tester.l10n.recoveryKeyPinEnabled),
+                findsNothing,
+              );
+              expect(
+                find.text(tester.l10n.recoveryKeyPassphraseEnabled),
+                findsNothing,
+              );
+              break;
+            case AuthMode.pin:
+              expect(
+                find.text(tester.l10n.recoveryKeyPinEnabled),
+                findsOneWidget,
+              );
+              break;
+            case AuthMode.passphrase:
+              expect(
+                find.text(
+                  tester.l10n.recoveryKeyPassphraseEnabled,
+                ),
+                findsOneWidget,
+              );
+              break;
+          }
+        } else {
+          // Verify the expected error message is displayed based on the error type
+          if (tc.enumerateKeySlots404Error) {
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorUnsupportedSnapdHeader,
+              ),
+              findsOneWidget,
+            );
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorUnsupportedSnapdBody,
+              ),
+              findsOneWidget,
+            );
+          } else if (tc.enumerateKeySlotsFailure) {
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
+              ),
+              findsOneWidget,
+            );
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusBody,
+              ),
+              findsOneWidget,
+            );
+          } else if (tc.unsupportedTmpState) {
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
+              ),
+              findsOneWidget,
+            );
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorUnsupportedStateBody,
+              ),
+              findsOneWidget,
+            );
+          }
         }
       });
     }
