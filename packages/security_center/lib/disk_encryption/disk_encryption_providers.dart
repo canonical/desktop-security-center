@@ -333,7 +333,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
       if (e.statusCode == 404) {
         throw SnapdStateExceptionUnsupportedSnapdVersion();
       }
-      if (e.statusCode == 401) {
+      if (e.statusCode == 403) {
         throw SnapdStateExceptionUnconnectedSnapInterface();
       }
       throw TpmStateExceptionFailed();

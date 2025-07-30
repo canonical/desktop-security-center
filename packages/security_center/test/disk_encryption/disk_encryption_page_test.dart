@@ -909,7 +909,7 @@ void main() {
         name: '404 error from enumerate keyslots API',
         authMode: AuthMode.pin,
         enumerateKeySlots404Error: true,
-        enumerateKeySlots401Error: false,
+        enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
         missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
@@ -921,7 +921,7 @@ void main() {
         name: 'general failure from enumerate keyslots endpoint',
         authMode: AuthMode.pin,
         enumerateKeySlots404Error: false,
-        enumerateKeySlots401Error: false,
+        enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: true,
         missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
@@ -933,7 +933,7 @@ void main() {
         name: 'Status banners shown - authmode none',
         authMode: AuthMode.none,
         enumerateKeySlots404Error: false,
-        enumerateKeySlots401Error: false,
+        enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
         missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
@@ -945,7 +945,7 @@ void main() {
         name: 'Status banners shown - authmode PIN',
         authMode: AuthMode.pin,
         enumerateKeySlots404Error: false,
-        enumerateKeySlots401Error: false,
+        enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
         missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
@@ -957,7 +957,7 @@ void main() {
         name: 'Status banners shown - authmode passphrase',
         authMode: AuthMode.passphrase,
         enumerateKeySlots404Error: false,
-        enumerateKeySlots401Error: false,
+        enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
         missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
@@ -970,7 +970,7 @@ void main() {
             '401 error from enumerate keyslots API (snap-fde-control interface)',
         authMode: AuthMode.pin,
         enumerateKeySlots404Error: false,
-        enumerateKeySlots401Error: true,
+        enumerateKeySlots403Error: true,
         enumerateKeySlotsFailure: false,
         missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
@@ -982,7 +982,7 @@ void main() {
         name: 'missing recovery keyslot',
         authMode: AuthMode.pin,
         enumerateKeySlots404Error: false,
-        enumerateKeySlots401Error: false,
+        enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
         missingRecoveryKeySlot: true,
         missingDefaultKeySlot: false,
@@ -994,7 +994,7 @@ void main() {
         name: 'missing default keyslot',
         authMode: AuthMode.pin,
         enumerateKeySlots404Error: false,
-        enumerateKeySlots401Error: false,
+        enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
         missingRecoveryKeySlot: false,
         missingDefaultKeySlot: true,
@@ -1006,7 +1006,7 @@ void main() {
         name: 'missing default-fallback keyslot',
         authMode: AuthMode.pin,
         enumerateKeySlots404Error: false,
-        enumerateKeySlots401Error: false,
+        enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
         missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
@@ -1017,7 +1017,7 @@ void main() {
       (
         name: 'invalid TPM platform name',
         enumerateKeySlots404Error: false,
-        enumerateKeySlots401Error: false,
+        enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
         missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
@@ -1030,7 +1030,7 @@ void main() {
         name: 'auth mode mismatch between recovery and fallback keyslots',
         authMode: AuthMode.pin,
         enumerateKeySlots404Error: false,
-        enumerateKeySlots401Error: false,
+        enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
         missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
@@ -1045,7 +1045,7 @@ void main() {
         final container = createContainer();
         registerMockDiskEncryptionService(
           enumerateKeySlots404Error: tc.enumerateKeySlots404Error,
-          enumerateKeySlots401Error: tc.enumerateKeySlots401Error,
+          enumerateKeySlots403Error: tc.enumerateKeySlots403Error,
           enumerateKeySlotsFailure: tc.enumerateKeySlotsFailure,
           missingRecoveryKeySlot: tc.missingRecoveryKeySlot,
           missingDefaultKeySlot: tc.missingDefaultKeySlot,
@@ -1062,7 +1062,7 @@ void main() {
 
         // Check if this is a happy path (no errors)
         final isHappyPath = !tc.enumerateKeySlots404Error &&
-            !tc.enumerateKeySlots401Error &&
+            !tc.enumerateKeySlots403Error &&
             !tc.enumerateKeySlotsFailure &&
             !tc.missingRecoveryKeySlot &&
             !tc.missingDefaultKeySlot &&
@@ -1120,7 +1120,7 @@ void main() {
               ),
               findsOneWidget,
             );
-          } else if (tc.enumerateKeySlots401Error) {
+          } else if (tc.enumerateKeySlots403Error) {
             expect(
               find.text(
                 tester
