@@ -134,6 +134,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
   AuthMode authMode = AuthMode.pin,
   EntropyResponse Function(String)? entropyResponseBuilder,
   bool enumerateKeySlots404Error = false,
+  bool enumerateKeySlots401Error = false,
   bool enumerateKeySlotsFailure = false,
   bool unsupportedTmpState = false,
 }) {
@@ -145,6 +146,13 @@ DiskEncryptionService registerMockDiskEncryptionService({
         message: '',
         kind: '',
         statusCode: 404,
+      );
+    }
+    if (enumerateKeySlots401Error) {
+      throw SnapdException(
+        message: '',
+        kind: '',
+        statusCode: 401,
       );
     }
     if (enumerateKeySlotsFailure) {

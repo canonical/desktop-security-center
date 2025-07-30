@@ -908,6 +908,7 @@ void main() {
       (
         name: '404 error from enumerate keyslots API',
         enumerateKeySlots404Error: true,
+        enumerateKeySlots401Error: false,
         enumerateKeySlotsFailure: false,
         unsupportedTmpState: false,
         authMode: AuthMode.pin,
@@ -915,6 +916,7 @@ void main() {
       (
         name: 'general failure from enumerate keyslots endpoint',
         enumerateKeySlots404Error: false,
+        enumerateKeySlots401Error: false,
         enumerateKeySlotsFailure: true,
         unsupportedTmpState: false,
         authMode: AuthMode.pin,
@@ -922,6 +924,7 @@ void main() {
       (
         name: 'unsupported TPM state',
         enumerateKeySlots404Error: false,
+        enumerateKeySlots401Error: false,
         enumerateKeySlotsFailure: false,
         unsupportedTmpState: true,
         authMode: AuthMode.pin,
@@ -929,6 +932,7 @@ void main() {
       (
         name: 'Status banners shown - authmode none',
         enumerateKeySlots404Error: false,
+        enumerateKeySlots401Error: false,
         enumerateKeySlotsFailure: false,
         unsupportedTmpState: false,
         authMode: AuthMode.none,
@@ -936,6 +940,7 @@ void main() {
       (
         name: 'Status banners shown - authmode PIN',
         enumerateKeySlots404Error: false,
+        enumerateKeySlots401Error: false,
         enumerateKeySlotsFailure: false,
         unsupportedTmpState: false,
         authMode: AuthMode.pin,
@@ -943,9 +948,19 @@ void main() {
       (
         name: 'Status banners shown - authmode passphrase',
         enumerateKeySlots404Error: false,
+        enumerateKeySlots401Error: false,
         enumerateKeySlotsFailure: false,
         unsupportedTmpState: false,
         authMode: AuthMode.passphrase,
+      ),
+      (
+        name:
+            '401 error from enumerate keyslots API (snap-fde-control interface)',
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots401Error: true,
+        enumerateKeySlotsFailure: false,
+        unsupportedTmpState: false,
+        authMode: AuthMode.pin,
       ),
     ];
 
@@ -954,6 +969,7 @@ void main() {
         final container = createContainer();
         registerMockDiskEncryptionService(
           enumerateKeySlots404Error: tc.enumerateKeySlots404Error,
+          enumerateKeySlots401Error: tc.enumerateKeySlots401Error,
           enumerateKeySlotsFailure: tc.enumerateKeySlotsFailure,
           unsupportedTmpState: tc.unsupportedTmpState,
           authMode: tc.authMode,
@@ -966,6 +982,7 @@ void main() {
 
         // Check if this is a happy path (no errors)
         final isHappyPath = !tc.enumerateKeySlots404Error &&
+            !tc.enumerateKeySlots401Error &&
             !tc.enumerateKeySlotsFailure &&
             !tc.unsupportedTmpState;
 
@@ -1016,6 +1033,20 @@ void main() {
             expect(
               find.text(
                 tester.l10n.diskEncryptionPageErrorUnsupportedSnapdBody,
+              ),
+              findsOneWidget,
+            );
+          } else if (tc.enumerateKeySlots401Error) {
+            expect(
+              find.text(
+                tester
+                    .l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceHeader,
+              ),
+              findsOneWidget,
+            );
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceBody,
               ),
               findsOneWidget,
             );
