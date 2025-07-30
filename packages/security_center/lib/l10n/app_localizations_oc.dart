@@ -221,7 +221,7 @@ class AppLocalizationsOc extends AppLocalizations {
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader => 'Security Center cannot connect to the snapd interface';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody => 'to fix this, run this command in the terminal:/nsnap connect desktop-security-center:snapd';
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody => 'To fix this, run this command in the terminal:\nsnap connect desktop-security-center:snap-fde-control';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle => 'Recovery key file not saved';
