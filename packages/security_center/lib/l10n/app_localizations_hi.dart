@@ -233,6 +233,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
 
   @override
+  String get recoveryKeyExceptionFilePermissionTitle => 'Failed to save your recovery key to file';
+
+  @override
+  String get recoveryKeyExceptionFilePermissionBody => 'You do not have permission to write to that file location.';
+
+  @override
   String get recoveryKeyExceptionFileSystemBody => 'You do not have permission to write to that folder. Try a different location or use another method.';
 
   @override

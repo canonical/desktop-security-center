@@ -8,6 +8,8 @@ extension RecoveryKeyExceptionL10n on RecoveryKeyException {
           l10n.recoveryKeyExceptionDisallowedPathTitle,
         RecoveryKeyExceptionFileSystem() =>
           l10n.recoveryKeyExceptionFileSystemTitle,
+        RecoveryKeyExceptionFilePermission() =>
+          l10n.recoveryKeyExceptionFilePermissionTitle,
         RecoveryKeyExceptionUnknown() => l10n.recoveryKeyExceptionUnknownTitle,
       };
   String localizedBody(AppLocalizations l10n) => switch (this) {
@@ -15,6 +17,8 @@ extension RecoveryKeyExceptionL10n on RecoveryKeyException {
           l10n.recoveryKeyExceptionDisallowedPathBody,
         RecoveryKeyExceptionFileSystem() =>
           l10n.recoveryKeyExceptionFileSystemBody,
+        RecoveryKeyExceptionFilePermission() =>
+          l10n.recoveryKeyExceptionFilePermissionBody,
         RecoveryKeyExceptionUnknown() =>
           (this as RecoveryKeyExceptionUnknown).rawError,
       };

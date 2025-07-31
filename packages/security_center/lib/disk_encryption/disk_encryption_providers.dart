@@ -5,7 +5,6 @@ import 'package:file/file.dart';
 import 'package:file/local.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:path/path.dart' as p;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/file_picker_dialog.dart';
@@ -48,6 +47,8 @@ sealed class RecoveryKeyException
   factory RecoveryKeyException.disallowedPath() =
       RecoveryKeyExceptionDisallowedPath;
   factory RecoveryKeyException.fileSystem() = RecoveryKeyExceptionFileSystem;
+  factory RecoveryKeyException.filePermission() =
+      RecoveryKeyExceptionFilePermission;
   factory RecoveryKeyException.unknown({required String rawError}) =
       RecoveryKeyExceptionUnknown;
 
@@ -370,7 +371,6 @@ class ReplaceRecoveryKeyDialogModelData
 class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   late final _service = getService<DiskEncryptionService>();
   late final FileSystem _fs = ref.read(fileSystemProvider);
-  late final ProcessRunner _run = ref.read(processRunnerProvider);
 
   @override
   ReplaceRecoveryKeyDialogModelData build() {
@@ -424,30 +424,11 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
     );
   }
 
-  Future<String?> _findFileSystem(Uri uri) async {
-    final result = await _run('findmnt', [
-      '-no',
-      'SOURCE',
-      '-T',
-      p.dirname(uri.path),
-    ]);
-
-    if (result.exitCode != 0) {
-      return null;
-    }
-    return (result.stdout as String?)?.trim();
-  }
-
   Future<void> writeRecoveryKey(Uri uri, String recoveryKey) async {
     assert(
       state.dialogState is ReplaceRecoveryKeyDialogStateInput ||
           state.dialogState is ReplaceRecoveryKeyDialogStateSuccess,
     );
-    if (uri.pathSegments.first == 'target' ||
-        ['/cow', 'tmpfs'].contains(await _findFileSystem(uri))) {
-      setError(RecoveryKeyException.disallowedPath());
-      return;
-    }
     await _fs.file(uri.path).writeAsString(recoveryKey);
   }
 

@@ -371,6 +371,12 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                                     ),
                                   ],
                                 );
+                                if (uri.toString() == '') {
+                                  replaceNotifier.setError(
+                                    RecoveryKeyExceptionFilePermission(),
+                                  );
+                                  return;
+                                }
                                 if (uri != null) {
                                   await replaceNotifier.writeRecoveryKey(
                                     uri,

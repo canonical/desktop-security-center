@@ -321,25 +321,11 @@ void main() {
       (
         name: 'valid path writes file',
         uri: Uri.file('/home/user/key.txt'),
-        mount: '/dev/sda1',
         expectError: false,
       ),
       (
-        name: 'blocked: /target/',
-        uri: Uri.file('/target/foo.txt'),
-        mount: '/dev/sda1',
-        expectError: true,
-      ),
-      (
-        name: 'blocked: cow overlay',
-        uri: Uri.file('/any/f.txt'),
-        mount: '/cow',
-        expectError: true,
-      ),
-      (
-        name: 'blocked: tmpfs',
-        uri: Uri.file('/tmp/f.txt'),
-        mount: 'tmpfs',
+        name: 'error on restriced path',
+        uri: Uri.file('/root/key.txt'),
         expectError: true,
       ),
     ];
@@ -348,11 +334,14 @@ void main() {
       testWidgets(tc.name, (tester) async {
         // Prepare container with mocks
         final memFs = MemoryFileSystem();
-        memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
+        if (!tc.expectError) {
+          memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
+        }
         final fsOv = fileSystemOverride(memFs);
-        final pickerOv = filePickerOverride(tc.uri);
+        final pickerOv =
+            filePickerOverride(tc.expectError ? Uri.parse('') : tc.uri);
         final runnerOv = processRunnerOverride({
-          p.dirname(tc.uri.path): tc.mount,
+          p.dirname(tc.uri.path): '/dev/sda1',
         });
 
         final container = createContainer(
@@ -385,7 +374,7 @@ void main() {
         // Assert
         if (tc.expectError) {
           expect(
-            find.text(tester.l10n.recoveryKeyExceptionDisallowedPathTitle),
+            find.text(tester.l10n.recoveryKeyExceptionFilePermissionTitle),
             findsOneWidget,
           );
         } else {
@@ -403,13 +392,11 @@ void main() {
       (
         name: 'valid path writes file',
         uri: Uri.file('/home/user/key.txt'),
-        mount: '/dev/sda1',
         expectError: false,
       ),
       (
-        name: 'blocked: tmpfs',
-        uri: Uri.file('/tmp/f.txt'),
-        mount: 'tmpfs',
+        name: 'error on restricted path',
+        uri: Uri.file('/root/key.txt'),
         expectError: true,
       ),
     ];
@@ -418,11 +405,14 @@ void main() {
       testWidgets(tc.name, (tester) async {
         // Prepare container with mocks
         final memFs = MemoryFileSystem();
-        memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
+        if (!tc.expectError) {
+          memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
+        }
         final fsOv = fileSystemOverride(memFs);
-        final pickerOv = filePickerOverride(tc.uri);
+        final pickerOv =
+            filePickerOverride(tc.expectError ? Uri.parse('') : tc.uri);
         final runnerOv = processRunnerOverride({
-          p.dirname(tc.uri.path): tc.mount,
+          p.dirname(tc.uri.path): '/dev/sda1',
         });
         final container = createContainer(
           overrides: [pickerOv, fsOv, runnerOv],
@@ -474,7 +464,7 @@ void main() {
         // Assert
         if (tc.expectError) {
           expect(
-            find.text(tester.l10n.recoveryKeyExceptionDisallowedPathTitle),
+            find.text(tester.l10n.recoveryKeyExceptionFilePermissionTitle),
             findsOneWidget,
           );
           expect(

@@ -74,20 +74,24 @@ class _FilePickerState extends ConsumerState<_FilePicker> {
       final uri = Uri.parse(
         await switch (widget.action) {
           _FilePickerAction.open => _portal.fileChooser
-              .openFile(
-                title: widget.title,
-                filters: widget.filters,
-              )
-              .first
-              .then((result) => result.uris.first),
+                .openFile(
+                  title: widget.title,
+                  filters: widget.filters,
+                )
+                .first
+                .then((result) {
+              return result.uris.firstOrNull ?? '';
+            }),
           _FilePickerAction.save => _portal.fileChooser
-              .saveFile(
-                title: widget.title,
-                filters: widget.filters,
-                currentName: widget.defaultFileName,
-              )
-              .first
-              .then((result) => result.uris.first)
+                .saveFile(
+                  title: widget.title,
+                  filters: widget.filters,
+                  currentName: widget.defaultFileName,
+                )
+                .first
+                .then((result) {
+              return result.uris.firstOrNull ?? '';
+            }),
         },
       );
       if (mounted) {

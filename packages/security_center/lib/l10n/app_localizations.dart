@@ -647,6 +647,18 @@ abstract class AppLocalizations {
   /// **'Unknown error'**
   String get recoveryKeyExceptionUnknownTitle;
 
+  /// No description provided for @recoveryKeyExceptionFilePermissionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save your recovery key to file'**
+  String get recoveryKeyExceptionFilePermissionTitle;
+
+  /// No description provided for @recoveryKeyExceptionFilePermissionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission to write to that file location.'**
+  String get recoveryKeyExceptionFilePermissionBody;
+
   /// No description provided for @recoveryKeyExceptionFileSystemBody.
   ///
   /// In en, this message translates to:

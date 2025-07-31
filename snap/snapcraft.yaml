@@ -18,6 +18,7 @@ apps:
       - network
       - snapd-control
       - snap-fde-control
+      - removable-media
 
 parts:
   fvm:
