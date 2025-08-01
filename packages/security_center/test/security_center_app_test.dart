@@ -27,6 +27,7 @@ void main() {
           registerMockFeatureService(
             isDiskEncryptionAvailable: tc.isDiskEncryptionAvailable,
           );
+          registerMockDiskEncryptionService();
           AvailableRoutes.init();
 
           final container = createContainer();

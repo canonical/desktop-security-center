@@ -5,7 +5,6 @@ import 'package:file/file.dart';
 import 'package:file/local.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:path/path.dart' as p;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/file_picker_dialog.dart';
@@ -48,6 +47,8 @@ sealed class RecoveryKeyException
   factory RecoveryKeyException.disallowedPath() =
       RecoveryKeyExceptionDisallowedPath;
   factory RecoveryKeyException.fileSystem() = RecoveryKeyExceptionFileSystem;
+  factory RecoveryKeyException.filePermission() =
+      RecoveryKeyExceptionFilePermission;
   factory RecoveryKeyException.unknown({required String rawError}) =
       RecoveryKeyExceptionUnknown;
 
@@ -56,6 +57,23 @@ sealed class RecoveryKeyException
         final RecoveryKeyException e => e,
         final e => RecoveryKeyException.unknown(rawError: e.toString()),
       };
+}
+
+@freezed
+sealed class SnapdStateException
+    with _$SnapdStateException
+    implements Exception {
+  factory SnapdStateException.unsupportedSnapdVersion() =
+      SnapdStateExceptionUnsupportedSnapdVersion;
+  factory SnapdStateException.unconnectedSnapInterface() =
+      SnapdStateExceptionUnconnectedSnapInterface;
+}
+
+@freezed
+sealed class TpmStateException with _$TpmStateException implements Exception {
+  factory TpmStateException.failed() = TpmStateExceptionFailed;
+  factory TpmStateException.unsupportedState() =
+      TpmStateExceptionUnsupportedState;
 }
 
 /// Dialog state for managing the change auth flow.
@@ -258,21 +276,47 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
     // Temporary work around while we wait for snapd to implement enumerateKeySlots()
     try {
       final volumesResponse = await _service.enumerateKeySlots();
-      _log.debug(volumesResponse);
 
       final systemDataVolume = volumesResponse.byContainerRole['system-data'];
       if (systemDataVolume == null) {
         _log.error('No system-data volume found');
-        return AuthMode.passphrase;
+        throw TpmStateExceptionUnsupportedState();
       }
 
       final recoveryKeySlot = systemDataVolume.keyslots['default-recovery'];
+      final defaultKeySlot = systemDataVolume.keyslots['default'];
+      final defaultFallbackKeySlot =
+          systemDataVolume.keyslots['default-fallback'];
 
       if (recoveryKeySlot == null) {
-        throw Exception('No default-recovery keyslot found');
+        _log.error('recoveryKeySlot not found');
+        throw TpmStateExceptionUnsupportedState();
+      }
+      if (defaultKeySlot == null) {
+        _log.error('defaultKeySlot not found');
+        throw TpmStateExceptionUnsupportedState();
+      }
+      if (defaultFallbackKeySlot == null) {
+        _log.error('defaultFallbackKeySlot not found');
+        throw TpmStateExceptionUnsupportedState();
       }
 
-      final authMode = recoveryKeySlot.authMode;
+      // We can rely on 'tpm2' as a way of asserting keys use the TPM
+      if (defaultKeySlot.platformName != 'tpm2' ||
+          defaultFallbackKeySlot.platformName != 'tpm2') {
+        _log.error('tpm2 not present in platform name');
+        throw TpmStateExceptionUnsupportedState();
+      }
+
+      final authMode = defaultKeySlot.authMode;
+
+      if (defaultFallbackKeySlot.authMode != authMode) {
+        _log.error(
+          'defaultKeySlot authMode does not match defaultFallbackKeySlot authMode',
+        );
+        throw TpmStateExceptionUnsupportedState();
+      }
+
       if (authMode != null) {
         switch (authMode) {
           case SnapdSystemVolumeAuthMode.none:
@@ -283,10 +327,17 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
             return AuthMode.passphrase;
         }
       }
-      return AuthMode.passphrase;
-    } on Exception catch (e) {
+
+      return AuthMode.none;
+    } on SnapdException catch (e) {
       _log.error('Failed to determine TPM authentication mode: $e');
-      return AuthMode.passphrase;
+      if (e.statusCode == 404) {
+        throw SnapdStateExceptionUnsupportedSnapdVersion();
+      }
+      if (e.statusCode == 403) {
+        throw SnapdStateExceptionUnconnectedSnapInterface();
+      }
+      throw TpmStateExceptionFailed();
     }
   }
 }
@@ -320,7 +371,6 @@ class ReplaceRecoveryKeyDialogModelData
 class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   late final _service = getService<DiskEncryptionService>();
   late final FileSystem _fs = ref.read(fileSystemProvider);
-  late final ProcessRunner _run = ref.read(processRunnerProvider);
 
   @override
   ReplaceRecoveryKeyDialogModelData build() {
@@ -359,6 +409,7 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
       await _service.replaceRecoveryKey(key);
       state = state.copyWith(
         dialogState: ReplaceRecoveryKeyDialogState.success(),
+        error: null,
       );
     } on Exception catch (e) {
       state = state.copyWith(
@@ -374,30 +425,11 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
     );
   }
 
-  Future<String?> _findFileSystem(Uri uri) async {
-    final result = await _run('findmnt', [
-      '-no',
-      'SOURCE',
-      '-T',
-      p.dirname(uri.path),
-    ]);
-
-    if (result.exitCode != 0) {
-      return null;
-    }
-    return (result.stdout as String?)?.trim();
-  }
-
   Future<void> writeRecoveryKey(Uri uri, String recoveryKey) async {
     assert(
       state.dialogState is ReplaceRecoveryKeyDialogStateInput ||
           state.dialogState is ReplaceRecoveryKeyDialogStateSuccess,
     );
-    if (uri.pathSegments.first == 'target' ||
-        ['/cow', 'tmpfs'].contains(await _findFileSystem(uri))) {
-      setError(RecoveryKeyException.disallowedPath());
-      return;
-    }
     await _fs.file(uri.path).writeAsString(recoveryKey);
   }
 

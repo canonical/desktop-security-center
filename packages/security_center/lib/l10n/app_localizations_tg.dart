@@ -119,6 +119,11 @@ class AppLocalizationsTg extends AppLocalizations {
   String get diskEncryptionPageStoreYourKey => 'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.';
 
   @override
+  String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
+    return 'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+  }
+
+  @override
   String get diskEncryptionPageLearnMore => 'Learn more about recovery keys';
 
   @override
@@ -203,6 +208,30 @@ class AppLocalizationsTg extends AppLocalizations {
   String get diskEncryptionPageCopySemanticLabel => 'Copy';
 
   @override
+  String get diskEncryptionPageErrorFailedToRetrieveStatusHeader => 'Encryption settings not available';
+
+  @override
+  String get diskEncryptionPageErrorFailedToRetrieveStatusBody => 'Failed to retrieve the encryption status of this computer.';
+
+  @override
+  String get diskEncryptionPageErrorUnsupportedStateBody => 'Your computer\'s TPM configuration is not in a supported state.';
+
+  @override
+  String get diskEncryptionPageErrorUnsupportedSnapdHeader => 'Your snapd version is not supported';
+
+  @override
+  String get diskEncryptionPageErrorUnsupportedSnapdBody => 'Check the Security Center and snapd are up to date.';
+
+  @override
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader => 'Security Center cannot connect to the snapd interface';
+
+  @override
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody => 'To fix this, run this command in the terminal:';
+
+  @override
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand => 'snap connect desktop-security-center:snap-fde-control';
+
+  @override
   String get recoveryKeyExceptionFileSystemTitle => 'Recovery key file not saved';
 
   @override
@@ -210,6 +239,12 @@ class AppLocalizationsTg extends AppLocalizations {
 
   @override
   String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+
+  @override
+  String get recoveryKeyExceptionFilePermissionTitle => 'Failed to save your recovery key to file';
+
+  @override
+  String get recoveryKeyExceptionFilePermissionBody => 'You do not have permission to write to that file location.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody => 'You do not have permission to write to that folder. Try a different location or use another method.';
@@ -225,6 +260,12 @@ class AppLocalizationsTg extends AppLocalizations {
 
   @override
   String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+
+  @override
+  String get recoveryKeyTPMExplanationBody => 'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+
+  @override
+  String get recoveryKeyTPMExplanationLearnMore => 'Learn more about hardware-backed encryption';
 
   @override
   String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
@@ -264,6 +305,9 @@ class AppLocalizationsTg extends AppLocalizations {
 
   @override
   String get recoveryKeyPinHeader => 'Encryption PIN';
+
+  @override
+  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
 
   @override
   String get recoveryKeyPinBody => 'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.';

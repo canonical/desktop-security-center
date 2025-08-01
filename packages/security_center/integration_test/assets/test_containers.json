@@ -7,8 +7,19 @@
       "keyslots": {
         "default-recovery": {
           "type": "platform",
-          "roles": ["foo"],
-          "platform-name": "bar",
+          "roles": ["recovery"],
+          "platform-name": "tpm2"
+        },
+        "default": {
+          "type": "platform",
+          "roles": ["unlock"],
+          "platform-name": "tpm2",
+          "auth-mode": "pin"
+        },
+        "default-fallback": {
+          "type": "platform",
+          "roles": ["unlock-fallback"],
+          "platform-name": "tpm2",
           "auth-mode": "pin"
         }
       }

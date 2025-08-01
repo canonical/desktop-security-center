@@ -321,25 +321,11 @@ void main() {
       (
         name: 'valid path writes file',
         uri: Uri.file('/home/user/key.txt'),
-        mount: '/dev/sda1',
         expectError: false,
       ),
       (
-        name: 'blocked: /target/',
-        uri: Uri.file('/target/foo.txt'),
-        mount: '/dev/sda1',
-        expectError: true,
-      ),
-      (
-        name: 'blocked: cow overlay',
-        uri: Uri.file('/any/f.txt'),
-        mount: '/cow',
-        expectError: true,
-      ),
-      (
-        name: 'blocked: tmpfs',
-        uri: Uri.file('/tmp/f.txt'),
-        mount: 'tmpfs',
+        name: 'error on restriced path',
+        uri: Uri.file('/root/key.txt'),
         expectError: true,
       ),
     ];
@@ -348,11 +334,14 @@ void main() {
       testWidgets(tc.name, (tester) async {
         // Prepare container with mocks
         final memFs = MemoryFileSystem();
-        memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
+        if (!tc.expectError) {
+          memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
+        }
         final fsOv = fileSystemOverride(memFs);
-        final pickerOv = filePickerOverride(tc.uri);
+        final pickerOv =
+            filePickerOverride(tc.expectError ? Uri.parse('') : tc.uri);
         final runnerOv = processRunnerOverride({
-          p.dirname(tc.uri.path): tc.mount,
+          p.dirname(tc.uri.path): '/dev/sda1',
         });
 
         final container = createContainer(
@@ -385,7 +374,7 @@ void main() {
         // Assert
         if (tc.expectError) {
           expect(
-            find.text(tester.l10n.recoveryKeyExceptionDisallowedPathTitle),
+            find.text(tester.l10n.recoveryKeyExceptionFilePermissionTitle),
             findsOneWidget,
           );
         } else {
@@ -403,13 +392,11 @@ void main() {
       (
         name: 'valid path writes file',
         uri: Uri.file('/home/user/key.txt'),
-        mount: '/dev/sda1',
         expectError: false,
       ),
       (
-        name: 'blocked: tmpfs',
-        uri: Uri.file('/tmp/f.txt'),
-        mount: 'tmpfs',
+        name: 'error on restricted path',
+        uri: Uri.file('/root/key.txt'),
         expectError: true,
       ),
     ];
@@ -418,11 +405,14 @@ void main() {
       testWidgets(tc.name, (tester) async {
         // Prepare container with mocks
         final memFs = MemoryFileSystem();
-        memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
+        if (!tc.expectError) {
+          memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
+        }
         final fsOv = fileSystemOverride(memFs);
-        final pickerOv = filePickerOverride(tc.uri);
+        final pickerOv =
+            filePickerOverride(tc.expectError ? Uri.parse('') : tc.uri);
         final runnerOv = processRunnerOverride({
-          p.dirname(tc.uri.path): tc.mount,
+          p.dirname(tc.uri.path): '/dev/sda1',
         });
         final container = createContainer(
           overrides: [pickerOv, fsOv, runnerOv],
@@ -474,7 +464,7 @@ void main() {
         // Assert
         if (tc.expectError) {
           expect(
-            find.text(tester.l10n.recoveryKeyExceptionDisallowedPathTitle),
+            find.text(tester.l10n.recoveryKeyExceptionFilePermissionTitle),
             findsOneWidget,
           );
           expect(
@@ -898,6 +888,278 @@ void main() {
         for (var i = 0; i < 3; i++) {
           final textField = tester.widget<TextField>(textFields.at(i));
           expect(textField.controller?.text, expectedText);
+        }
+      });
+    }
+  });
+
+  group('TPM authentication error handling', () {
+    final cases = [
+      (
+        name: '404 error from enumerate keyslots API',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: true,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+      ),
+      (
+        name: 'general failure from enumerate keyslots endpoint',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: true,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+      ),
+      (
+        name: 'Status banners shown - authmode none',
+        authMode: AuthMode.none,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+      ),
+      (
+        name: 'Status banners shown - authmode PIN',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+      ),
+      (
+        name: 'Status banners shown - authmode passphrase',
+        authMode: AuthMode.passphrase,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+      ),
+      (
+        name:
+            '403 error from enumerate keyslots API (snap-fde-control interface)',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: true,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+      ),
+      (
+        name: 'missing recovery keyslot',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: true,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+      ),
+      (
+        name: 'missing default keyslot',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: true,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+      ),
+      (
+        name: 'missing default-fallback keyslot',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: true,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+      ),
+      (
+        name: 'invalid TPM platform name',
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: true,
+        authMode: AuthMode.pin,
+        authModeMismatch: false,
+      ),
+      (
+        name: 'auth mode mismatch between recovery and fallback keyslots',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingRecoveryKeySlot: false,
+        missingDefaultKeySlot: false,
+        missingDefaultFallbackKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: true,
+      ),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final container = createContainer();
+        registerMockDiskEncryptionService(
+          enumerateKeySlots404Error: tc.enumerateKeySlots404Error,
+          enumerateKeySlots403Error: tc.enumerateKeySlots403Error,
+          enumerateKeySlotsFailure: tc.enumerateKeySlotsFailure,
+          missingRecoveryKeySlot: tc.missingRecoveryKeySlot,
+          missingDefaultKeySlot: tc.missingDefaultKeySlot,
+          missingDefaultFallbackKeySlot: tc.missingDefaultFallbackKeySlot,
+          invalidTpmPlatformName: tc.invalidTpmPlatformName,
+          authMode: tc.authMode,
+          authModeMismatch: tc.authModeMismatch,
+        );
+        await tester.pumpAppWithProviders(
+          (_) => const DiskEncryptionPage(),
+          container,
+        );
+        await tester.pumpAndSettle();
+
+        // Check if this is a happy path (no errors)
+        final isHappyPath = !tc.enumerateKeySlots404Error &&
+            !tc.enumerateKeySlots403Error &&
+            !tc.enumerateKeySlotsFailure &&
+            !tc.missingRecoveryKeySlot &&
+            !tc.missingDefaultKeySlot &&
+            !tc.missingDefaultFallbackKeySlot &&
+            !tc.invalidTpmPlatformName &&
+            !tc.authModeMismatch;
+
+        if (isHappyPath) {
+          // Verify TPM enabled message is always shown in happy path
+          expect(
+            find.text(tester.l10n.recoveryKeyTPMEnabled),
+            findsOneWidget,
+          );
+
+          // Verify auth mode specific message based on auth mode
+          switch (tc.authMode) {
+            case AuthMode.none:
+              // For none mode, no additional auth text should be shown
+              expect(
+                find.text(tester.l10n.recoveryKeyPinEnabled),
+                findsNothing,
+              );
+              expect(
+                find.text(tester.l10n.recoveryKeyPassphraseEnabled),
+                findsNothing,
+              );
+              break;
+            case AuthMode.pin:
+              expect(
+                find.text(tester.l10n.recoveryKeyPinEnabled),
+                findsOneWidget,
+              );
+              break;
+            case AuthMode.passphrase:
+              expect(
+                find.text(
+                  tester.l10n.recoveryKeyPassphraseEnabled,
+                ),
+                findsOneWidget,
+              );
+              break;
+          }
+        } else {
+          // Verify the expected error message is displayed based on the error type
+          if (tc.enumerateKeySlots404Error) {
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorUnsupportedSnapdHeader,
+              ),
+              findsOneWidget,
+            );
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorUnsupportedSnapdBody,
+              ),
+              findsOneWidget,
+            );
+          } else if (tc.enumerateKeySlots403Error) {
+            expect(
+              find.text(
+                tester
+                    .l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceHeader,
+              ),
+              findsOneWidget,
+            );
+            expect(
+              find.byWidgetPredicate(
+                (widget) =>
+                    widget is RichText &&
+                    widget.text.toPlainText().contains(
+                          tester.l10n
+                              .diskEncryptionPageErrorUnconnectedSnapInterfaceBody,
+                        ),
+              ),
+              findsOneWidget,
+            );
+          } else if (tc.enumerateKeySlotsFailure) {
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
+              ),
+              findsOneWidget,
+            );
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusBody,
+              ),
+              findsOneWidget,
+            );
+          } else if (tc.missingRecoveryKeySlot ||
+              tc.missingDefaultKeySlot ||
+              tc.missingDefaultFallbackKeySlot ||
+              tc.invalidTpmPlatformName ||
+              tc.authModeMismatch) {
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
+              ),
+              findsOneWidget,
+            );
+            expect(
+              find.text(
+                tester.l10n.diskEncryptionPageErrorUnsupportedStateBody,
+              ),
+              findsOneWidget,
+            );
+          }
         }
       });
     }

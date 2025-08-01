@@ -8,6 +8,8 @@ extension RecoveryKeyExceptionL10n on RecoveryKeyException {
           l10n.recoveryKeyExceptionDisallowedPathTitle,
         RecoveryKeyExceptionFileSystem() =>
           l10n.recoveryKeyExceptionFileSystemTitle,
+        RecoveryKeyExceptionFilePermission() =>
+          l10n.recoveryKeyExceptionFilePermissionTitle,
         RecoveryKeyExceptionUnknown() => l10n.recoveryKeyExceptionUnknownTitle,
       };
   String localizedBody(AppLocalizations l10n) => switch (this) {
@@ -15,8 +17,45 @@ extension RecoveryKeyExceptionL10n on RecoveryKeyException {
           l10n.recoveryKeyExceptionDisallowedPathBody,
         RecoveryKeyExceptionFileSystem() =>
           l10n.recoveryKeyExceptionFileSystemBody,
+        RecoveryKeyExceptionFilePermission() =>
+          l10n.recoveryKeyExceptionFilePermissionBody,
         RecoveryKeyExceptionUnknown() =>
           (this as RecoveryKeyExceptionUnknown).rawError,
+      };
+}
+
+extension SnapdStateExceptionL10n on SnapdStateException {
+  String localizedHeader(AppLocalizations l10n) => switch (this) {
+        SnapdStateExceptionUnsupportedSnapdVersion() =>
+          l10n.diskEncryptionPageErrorUnsupportedSnapdHeader,
+        SnapdStateExceptionUnconnectedSnapInterface() =>
+          l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceHeader,
+      };
+  String localizedBody(AppLocalizations l10n) => switch (this) {
+        SnapdStateExceptionUnsupportedSnapdVersion() =>
+          l10n.diskEncryptionPageErrorUnsupportedSnapdBody,
+        SnapdStateExceptionUnconnectedSnapInterface() =>
+          l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceBody,
+      };
+  String? localizedCommand(AppLocalizations l10n) => switch (this) {
+        SnapdStateExceptionUnsupportedSnapdVersion() => null,
+        SnapdStateExceptionUnconnectedSnapInterface() =>
+          l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceCommand,
+      };
+}
+
+extension TpmStateExceptionL10n on TpmStateException {
+  String localizedHeader(AppLocalizations l10n) => switch (this) {
+        TpmStateExceptionFailed() =>
+          l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
+        TpmStateExceptionUnsupportedState() =>
+          l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
+      };
+  String localizedBody(AppLocalizations l10n) => switch (this) {
+        TpmStateExceptionFailed() =>
+          l10n.diskEncryptionPageErrorFailedToRetrieveStatusBody,
+        TpmStateExceptionUnsupportedState() =>
+          l10n.diskEncryptionPageErrorUnsupportedStateBody,
       };
 }
 

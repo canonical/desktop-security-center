@@ -133,31 +133,81 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool entropyCheckError = false,
   AuthMode authMode = AuthMode.pin,
   EntropyResponse Function(String)? entropyResponseBuilder,
+  bool enumerateKeySlots404Error = false,
+  bool enumerateKeySlots403Error = false,
+  bool enumerateKeySlotsFailure = false,
+  bool missingRecoveryKeySlot = false,
+  bool missingDefaultKeySlot = false,
+  bool missingDefaultFallbackKeySlot = false,
+  bool invalidTpmPlatformName = false,
+  bool authModeMismatch = false,
 }) {
   final service = MockDiskEncryptionService();
 
-  when(service.enumerateKeySlots()).thenAnswer(
-    (_) async => SnapdSystemVolumesResponse(
+  when(service.enumerateKeySlots()).thenAnswer((_) async {
+    if (enumerateKeySlots404Error) {
+      throw SnapdException(
+        message: '',
+        kind: '',
+        statusCode: 404,
+      );
+    }
+    if (enumerateKeySlots403Error) {
+      throw SnapdException(
+        message: '',
+        kind: '',
+        statusCode: 403,
+      );
+    }
+    if (enumerateKeySlotsFailure) {
+      throw SnapdException(message: '');
+    }
+
+    final platformName = invalidTpmPlatformName ? 'not-tpm2' : 'tpm2';
+    final keySlotAuthMode = SnapdSystemVolumeAuthMode.values.firstWhere(
+      (mode) => mode.name == authMode.name,
+      orElse: () => SnapdSystemVolumeAuthMode.pin,
+    );
+
+    final keyslots = <String, SnapdSystemVolumeKeySlot>{};
+
+    if (!missingRecoveryKeySlot) {
+      keyslots['default-recovery'] = SnapdSystemVolumeKeySlot(
+        type: SnapdSystemVolumeKeySlotType.platform,
+        roles: ['foo'],
+        platformName: platformName,
+      );
+    }
+
+    if (!missingDefaultKeySlot) {
+      keyslots['default'] = SnapdSystemVolumeKeySlot(
+        type: SnapdSystemVolumeKeySlotType.platform,
+        roles: ['foo'],
+        platformName: platformName,
+        authMode: keySlotAuthMode,
+      );
+    }
+
+    if (!missingDefaultFallbackKeySlot) {
+      keyslots['default-fallback'] = SnapdSystemVolumeKeySlot(
+        type: SnapdSystemVolumeKeySlotType.platform,
+        roles: ['foo'],
+        platformName: platformName,
+        authMode: authModeMismatch ? null : keySlotAuthMode,
+      );
+    }
+
+    return SnapdSystemVolumesResponse(
       byContainerRole: {
         'system-data': SnapdSystemVolume(
           volumeName: 'system-data',
           name: 'system-data',
           encrypted: true,
-          keyslots: {
-            'default-recovery': SnapdSystemVolumeKeySlot(
-              type: SnapdSystemVolumeKeySlotType.platform,
-              roles: ['foo'],
-              platformName: 'bar',
-              authMode: SnapdSystemVolumeAuthMode.values.firstWhere(
-                (mode) => mode.name == authMode.name,
-                orElse: () => SnapdSystemVolumeAuthMode.pin,
-              ),
-            ),
-          },
+          keyslots: keyslots,
         ),
       },
-    ),
-  );
+    );
+  });
   when(service.generateRecoveryKey()).thenAnswer((_) async {
     if (generateError) {
       throw Exception('Mock generate recovery key error');

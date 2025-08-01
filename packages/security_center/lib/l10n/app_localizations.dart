@@ -419,6 +419,12 @@ abstract class AppLocalizations {
   /// **'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.'**
   String get diskEncryptionPageStoreYourKey;
 
+  /// No description provided for @diskEncryptionPageStoreYourKeyWithLink.
+  ///
+  /// In en, this message translates to:
+  /// **'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe. {learnMoreLink}'**
+  String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink);
+
   /// No description provided for @diskEncryptionPageLearnMore.
   ///
   /// In en, this message translates to:
@@ -587,6 +593,54 @@ abstract class AppLocalizations {
   /// **'Copy'**
   String get diskEncryptionPageCopySemanticLabel;
 
+  /// No description provided for @diskEncryptionPageErrorFailedToRetrieveStatusHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Encryption settings not available'**
+  String get diskEncryptionPageErrorFailedToRetrieveStatusHeader;
+
+  /// No description provided for @diskEncryptionPageErrorFailedToRetrieveStatusBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to retrieve the encryption status of this computer.'**
+  String get diskEncryptionPageErrorFailedToRetrieveStatusBody;
+
+  /// No description provided for @diskEncryptionPageErrorUnsupportedStateBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your computer\'s TPM configuration is not in a supported state.'**
+  String get diskEncryptionPageErrorUnsupportedStateBody;
+
+  /// No description provided for @diskEncryptionPageErrorUnsupportedSnapdHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Your snapd version is not supported'**
+  String get diskEncryptionPageErrorUnsupportedSnapdHeader;
+
+  /// No description provided for @diskEncryptionPageErrorUnsupportedSnapdBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the Security Center and snapd are up to date.'**
+  String get diskEncryptionPageErrorUnsupportedSnapdBody;
+
+  /// No description provided for @diskEncryptionPageErrorUnconnectedSnapInterfaceHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Security Center cannot connect to the snapd interface'**
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader;
+
+  /// No description provided for @diskEncryptionPageErrorUnconnectedSnapInterfaceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'To fix this, run this command in the terminal:'**
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody;
+
+  /// No description provided for @diskEncryptionPageErrorUnconnectedSnapInterfaceCommand.
+  ///
+  /// In en, this message translates to:
+  /// **'snap connect desktop-security-center:snap-fde-control'**
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand;
+
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.
   ///
   /// In en, this message translates to:
@@ -604,6 +658,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown error'**
   String get recoveryKeyExceptionUnknownTitle;
+
+  /// No description provided for @recoveryKeyExceptionFilePermissionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save your recovery key to file'**
+  String get recoveryKeyExceptionFilePermissionTitle;
+
+  /// No description provided for @recoveryKeyExceptionFilePermissionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission to write to that file location.'**
+  String get recoveryKeyExceptionFilePermissionBody;
 
   /// No description provided for @recoveryKeyExceptionFileSystemBody.
   ///
@@ -634,6 +700,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hardware-backed encryption is enabled'**
   String get recoveryKeyTPMEnabled;
+
+  /// No description provided for @recoveryKeyTPMExplanationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).'**
+  String get recoveryKeyTPMExplanationBody;
+
+  /// No description provided for @recoveryKeyTPMExplanationLearnMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn more about hardware-backed encryption'**
+  String get recoveryKeyTPMExplanationLearnMore;
 
   /// No description provided for @recoveryKeyPassphraseEnabled.
   ///
@@ -712,6 +790,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Encryption PIN'**
   String get recoveryKeyPinHeader;
+
+  /// No description provided for @recoveryKeyEncrpytionPassphraseHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Encryption passphrase'**
+  String get recoveryKeyEncrpytionPassphraseHeader;
 
   /// No description provided for @recoveryKeyPinBody.
   ///
