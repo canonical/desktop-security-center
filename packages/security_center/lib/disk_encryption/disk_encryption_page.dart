@@ -172,7 +172,7 @@ class EncryptionPageBody extends ConsumerWidget {
       error: (e, stack) => switch (e) {
         final SnapdStateException snapdError => YaruInfoBox(
           title: Text(snapdError.localizedHeader(l10n)),
-          subtitle: Text(snapdError.localizedBody(l10n)),
+          subtitle: _buildSnapdErrorSubtitle(context, snapdError, l10n),
           yaruInfoType: YaruInfoType.warning,
         ),
         final TpmStateException tpmError => YaruInfoBox(
@@ -188,6 +188,27 @@ class EncryptionPageBody extends ConsumerWidget {
       },
       loading: () => const YaruLinearProgressIndicator(),
     );
+  }
+
+  Widget _buildSnapdErrorSubtitle(BuildContext context, SnapdStateException error, AppLocalizations l10n) {
+    final command = error.localizedCommand(l10n);
+    if (command != null) {
+      return RichText(
+        text: TextSpan(
+          style: DefaultTextStyle.of(context).style,
+          children: [
+            TextSpan(text: error.localizedBody(l10n)),
+            const TextSpan(text: '\n'),
+            TextSpan(
+              text: command,
+              // size 14 is a bit too big in monospace font from testing
+              style: const TextStyle(fontFamily: 'monospace', fontSize: 13),
+            ),
+          ],
+        ),
+      );
+    }
+    return Text(error.localizedBody(l10n));
   }
 }
 

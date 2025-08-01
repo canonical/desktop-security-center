@@ -632,8 +632,14 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageErrorUnconnectedSnapInterfaceBody.
   ///
   /// In en, this message translates to:
-  /// **'To fix this, run this command in the terminal:\nsnap connect desktop-security-center:snap-fde-control'**
+  /// **'To fix this, run this command in the terminal:'**
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody;
+
+  /// No description provided for @diskEncryptionPageErrorUnconnectedSnapInterfaceCommand.
+  ///
+  /// In en, this message translates to:
+  /// **'snap connect desktop-security-center:snap-fde-control'**
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand;
 
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.
   ///
