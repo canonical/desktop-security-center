@@ -221,5 +221,39 @@
   "recoveryKeyPassphraseEntropyBelowMin": "Slabá prístupová fráza, vytvorte ju dlhšiu alebo zložitejšiu",
   "@recoveryKeyPassphraseEntropyBelowMin": {},
   "recoveryKeySomethingWentWrongHeader": "Niečo sa pokazilo",
-  "@recoveryKeySomethingWentWrongHeader": {}
+  "@recoveryKeySomethingWentWrongHeader": {},
+  "diskEncryptionPageStoreYourKeyWithLink": "Kľúč na obnovenie vám umožní získať prístup k svojim údajom, ak sa disk nepodarí odomknúť pri štarte. Uložte ho na bezpečné miesto. {learnMoreLink}",
+  "@diskEncryptionPageStoreYourKeyWithLink": {
+    "placeholders": {
+      "learnMoreLink": {
+        "type": "String"
+      }
+    }
+  },
+  "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Nastavenia šifrovania nie sú k dispozícii",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusHeader": {},
+  "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Nepodarilo sa získať stav šifrovania tohto počítača.",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+  "diskEncryptionPageErrorUnsupportedStateBody": "Konfigurácia TPM vášho počítača nie je v podporovanom stave.",
+  "@diskEncryptionPageErrorUnsupportedStateBody": {},
+  "diskEncryptionPageErrorUnsupportedSnapdHeader": "Vaša verzia snapd nie je podporovaná",
+  "@diskEncryptionPageErrorUnsupportedSnapdHeader": {},
+  "diskEncryptionPageErrorUnsupportedSnapdBody": "Skontrolujte, či je Centrum zabezpečenia a snapd aktuálne.",
+  "@diskEncryptionPageErrorUnsupportedSnapdBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Centrum zabezpečenia sa nemôže pripojiť k rozhraniu snapd",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Aby ste to opravili, spustite tento príkaz v termináli:",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
+  "recoveryKeyExceptionFilePermissionTitle": "Nepodarilo sa uložiť váš kľúč na obnovenie do súboru",
+  "@recoveryKeyExceptionFilePermissionTitle": {},
+  "recoveryKeyExceptionFilePermissionBody": "Nemáte povolenie zapisovať do tohto umiestnenia súboru.",
+  "@recoveryKeyExceptionFilePermissionBody": {},
+  "recoveryKeyTPMExplanationBody": "Šifrovacie kľúče sú uložené v Trusted Platform Module (TPM) vášho počítača.",
+  "@recoveryKeyTPMExplanationBody": {},
+  "recoveryKeyTPMExplanationLearnMore": "Zistite viac o šifrovaní podporovanom hardvérom",
+  "@recoveryKeyTPMExplanationLearnMore": {},
+  "recoveryKeyEncrpytionPassphraseHeader": "Šifrovacia prístupová fráza",
+  "@recoveryKeyEncrpytionPassphraseHeader": {}
 }
