@@ -100,7 +100,7 @@ class EncryptionPageBody extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
           MarkdownText(
-            '${l10n.diskEncryptionPageStoreYourKey} ${l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl)}',
+            l10n.diskEncryptionPageStoreYourKeyWithLink(l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl)),
           ),
           const SizedBox(height: 16),
           Wrap(

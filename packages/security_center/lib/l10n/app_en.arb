@@ -81,6 +81,14 @@
     "@diskEncryptionPageRecoveryKey": {},
     "diskEncryptionPageStoreYourKey": "The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.",
     "@diskEncryptionPageStoreYourKey": {},
+    "diskEncryptionPageStoreYourKeyWithLink": "The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
     "diskEncryptionPageLearnMore": "Learn more about recovery keys",
     "@diskEncryptionPageStoreLearnMore": {},
     "diskEncryptionPageCheckKey": "Check recovery key...",

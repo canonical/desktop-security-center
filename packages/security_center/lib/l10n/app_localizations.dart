@@ -419,6 +419,12 @@ abstract class AppLocalizations {
   /// **'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.'**
   String get diskEncryptionPageStoreYourKey;
 
+  /// No description provided for @diskEncryptionPageStoreYourKeyWithLink.
+  ///
+  /// In en, this message translates to:
+  /// **'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe. {learnMoreLink}'**
+  String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink);
+
   /// No description provided for @diskEncryptionPageLearnMore.
   ///
   /// In en, this message translates to:

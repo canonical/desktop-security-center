@@ -119,6 +119,11 @@ class AppLocalizationsKm extends AppLocalizations {
   String get diskEncryptionPageStoreYourKey => 'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.';
 
   @override
+  String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
+    return 'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+  }
+
+  @override
   String get diskEncryptionPageLearnMore => 'Learn more about recovery keys';
 
   @override
