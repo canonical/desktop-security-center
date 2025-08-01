@@ -169,28 +169,22 @@ class EncryptionPageBody extends ConsumerWidget {
           },
         ],
       ),
-      error: (e, stack) {
-        try {
-          throw e;
-        } on SnapdStateException catch (snapdError) {
-          return YaruInfoBox(
-            title: Text(snapdError.localizedHeader(l10n)),
-            subtitle: Text(snapdError.localizedBody(l10n)),
-            yaruInfoType: YaruInfoType.warning,
-          );
-        } on TpmStateException catch (tpmError) {
-          return YaruInfoBox(
-            title: Text(tpmError.localizedHeader(l10n)),
-            subtitle: Text(tpmError.localizedBody(l10n)),
-            yaruInfoType: YaruInfoType.danger,
-          );
-        } on Exception catch (error) {
-          return YaruInfoBox(
-            title: Text(l10n.diskEncryptionPageError),
-            subtitle: Text(error.toString()),
-            yaruInfoType: YaruInfoType.danger,
-          );
-        }
+      error: (e, stack) => switch (e) {
+        final SnapdStateException snapdError => YaruInfoBox(
+          title: Text(snapdError.localizedHeader(l10n)),
+          subtitle: Text(snapdError.localizedBody(l10n)),
+          yaruInfoType: YaruInfoType.warning,
+        ),
+        final TpmStateException tpmError => YaruInfoBox(
+          title: Text(tpmError.localizedHeader(l10n)),
+          subtitle: Text(tpmError.localizedBody(l10n)),
+          yaruInfoType: YaruInfoType.danger,
+        ),
+        _ => YaruInfoBox(
+          title: Text(l10n.diskEncryptionPageError),
+          subtitle: Text(e.toString()),
+          yaruInfoType: YaruInfoType.danger,
+        ),
       },
       loading: () => const YaruLinearProgressIndicator(),
     );
