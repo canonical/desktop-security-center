@@ -957,7 +957,7 @@ void main() {
       ),
       (
         name:
-            '401 error from enumerate keyslots API (snap-fde-control interface)',
+            '403 error from enumerate keyslots API (snap-fde-control interface)',
         authMode: AuthMode.pin,
         enumerateKeySlots404Error: false,
         enumerateKeySlots403Error: true,
@@ -1119,8 +1119,13 @@ void main() {
               findsOneWidget,
             );
             expect(
-              find.text(
-                tester.l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceBody,
+              find.byWidgetPredicate(
+                (widget) =>
+                    widget is RichText &&
+                    widget.text.toPlainText().contains(
+                          tester.l10n
+                              .diskEncryptionPageErrorUnconnectedSnapInterfaceBody,
+                        ),
               ),
               findsOneWidget,
             );

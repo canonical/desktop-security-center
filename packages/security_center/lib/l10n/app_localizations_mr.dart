@@ -307,6 +307,9 @@ class AppLocalizationsMr extends AppLocalizations {
   String get recoveryKeyPinHeader => 'Encryption PIN';
 
   @override
+  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+
+  @override
   String get recoveryKeyPinBody => 'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.';
 
   @override

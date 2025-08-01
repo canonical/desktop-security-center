@@ -791,6 +791,12 @@ abstract class AppLocalizations {
   /// **'Encryption PIN'**
   String get recoveryKeyPinHeader;
 
+  /// No description provided for @recoveryKeyEncrpytionPassphraseHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Encryption passphrase'**
+  String get recoveryKeyEncrpytionPassphraseHeader;
+
   /// No description provided for @recoveryKeyPinBody.
   ///
   /// In en, this message translates to:
