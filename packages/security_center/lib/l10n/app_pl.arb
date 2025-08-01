@@ -221,5 +221,39 @@
   "recoveryKeyPinEntropyBelowOptimal": "Wystarczający kod PIN, uczyń go dłuższym lub mniej przewidywalnym, aby zapewnić większe bezpieczeństwo",
   "@recoveryKeyPinEntropyBelowOptimal": {},
   "recoveryKeySomethingWentWrongHeader": "Wystąpił problem",
-  "@recoveryKeySomethingWentWrongHeader": {}
+  "@recoveryKeySomethingWentWrongHeader": {},
+  "diskEncryptionPageErrorUnsupportedStateBody": "Konfiguracja modułu TPM na tym komputerze nie jest obsługiwana.",
+  "@diskEncryptionPageErrorUnsupportedStateBody": {},
+  "diskEncryptionPageErrorUnsupportedSnapdHeader": "Zainstalowana wersja snapd nie jest obsługiwana",
+  "@diskEncryptionPageErrorUnsupportedSnapdHeader": {},
+  "diskEncryptionPageErrorUnsupportedSnapdBody": "Sprawdź, czy Centrum zabezpieczeń i snapd są aktualne.",
+  "@diskEncryptionPageErrorUnsupportedSnapdBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Centrum zabezpieczeń nie może połączyć się z interfejsem snapd",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "W celu naprawy uruchom to polecenie w terminalu:",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
+  "diskEncryptionPageStoreYourKeyWithLink": "Klucz odzyskiwania umożliwia odzyskanie dostępu do danych, jeśli dysk nie zostanie odblokowany podczas uruchamiania. Zapisz go w bezpiecznym miejscu. {learnMoreLink}",
+  "@diskEncryptionPageStoreYourKeyWithLink": {
+    "placeholders": {
+      "learnMoreLink": {
+        "type": "String"
+      }
+    }
+  },
+  "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Ustawienia szyfrowania niedostępne",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusHeader": {},
+  "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Nie udało się pobrać stanu szyfrowania tego komputera.",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+  "recoveryKeyExceptionFilePermissionTitle": "Nie udało się zapisać klucza odzyskiwania do pliku",
+  "@recoveryKeyExceptionFilePermissionTitle": {},
+  "recoveryKeyExceptionFilePermissionBody": "Nie masz uprawnień do zapisu w tej lokalizacji pliku.",
+  "@recoveryKeyExceptionFilePermissionBody": {},
+  "recoveryKeyTPMExplanationBody": "Klucze szyfrujące przechowywane są w module Trusted Platform Module (TPM) tego komputera.",
+  "@recoveryKeyTPMExplanationBody": {},
+  "recoveryKeyTPMExplanationLearnMore": "Dowiedz się więcej o szyfrowaniu sprzętowym",
+  "@recoveryKeyTPMExplanationLearnMore": {},
+  "recoveryKeyEncrpytionPassphraseHeader": "Hasło szyfrowania",
+  "@recoveryKeyEncrpytionPassphraseHeader": {}
 }
