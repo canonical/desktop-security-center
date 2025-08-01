@@ -409,6 +409,7 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
       await _service.replaceRecoveryKey(key);
       state = state.copyWith(
         dialogState: ReplaceRecoveryKeyDialogState.success(),
+        error: null,
       );
     } on Exception catch (e) {
       state = state.copyWith(
