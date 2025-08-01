@@ -100,7 +100,9 @@ class EncryptionPageBody extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
           MarkdownText(
-            l10n.diskEncryptionPageStoreYourKeyWithLink(l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl)),
+            l10n.diskEncryptionPageStoreYourKeyWithLink(
+              l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl),
+            ),
           ),
           const SizedBox(height: 16),
           Wrap(
@@ -171,26 +173,30 @@ class EncryptionPageBody extends ConsumerWidget {
       ),
       error: (e, stack) => switch (e) {
         final SnapdStateException snapdError => YaruInfoBox(
-          title: Text(snapdError.localizedHeader(l10n)),
-          subtitle: _buildSnapdErrorSubtitle(context, snapdError, l10n),
-          yaruInfoType: YaruInfoType.warning,
-        ),
+            title: Text(snapdError.localizedHeader(l10n)),
+            subtitle: _buildSnapdErrorSubtitle(context, snapdError, l10n),
+            yaruInfoType: YaruInfoType.warning,
+          ),
         final TpmStateException tpmError => YaruInfoBox(
-          title: Text(tpmError.localizedHeader(l10n)),
-          subtitle: Text(tpmError.localizedBody(l10n)),
-          yaruInfoType: YaruInfoType.danger,
-        ),
+            title: Text(tpmError.localizedHeader(l10n)),
+            subtitle: Text(tpmError.localizedBody(l10n)),
+            yaruInfoType: YaruInfoType.danger,
+          ),
         _ => YaruInfoBox(
-          title: Text(l10n.diskEncryptionPageError),
-          subtitle: Text(e.toString()),
-          yaruInfoType: YaruInfoType.danger,
-        ),
+            title: Text(l10n.diskEncryptionPageError),
+            subtitle: Text(e.toString()),
+            yaruInfoType: YaruInfoType.danger,
+          ),
       },
       loading: () => const YaruLinearProgressIndicator(),
     );
   }
 
-  Widget _buildSnapdErrorSubtitle(BuildContext context, SnapdStateException error, AppLocalizations l10n) {
+  Widget _buildSnapdErrorSubtitle(
+    BuildContext context,
+    SnapdStateException error,
+    AppLocalizations l10n,
+  ) {
     final command = error.localizedCommand(l10n);
     if (command != null) {
       return RichText(
