@@ -221,5 +221,39 @@
   "recoveryKeyPinEntropyOptimal": "PIN je dostatečně dlouhý",
   "@recoveryKeyPinEntropyOptimal": {},
   "recoveryKeySomethingWentWrongHeader": "Něco se pokazilo",
-  "@recoveryKeySomethingWentWrongHeader": {}
+  "@recoveryKeySomethingWentWrongHeader": {},
+  "diskEncryptionPageErrorUnsupportedSnapdHeader": "Vámi používaná verze snapd není podporována",
+  "@diskEncryptionPageErrorUnsupportedSnapdHeader": {},
+  "diskEncryptionPageErrorUnsupportedSnapdBody": "Zkontrolovat, že Centrum zabezpečení a snapd jsou aktuální.",
+  "@diskEncryptionPageErrorUnsupportedSnapdBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Centru zabezpečení se nepodařilo připojit k rozhraní snapd",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Opravíte to spuštěním tohoto příkazu v terminálu:",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
+  "recoveryKeyExceptionFilePermissionTitle": "Nepodařilo se uložit váš záchranný klíč do souboru",
+  "@recoveryKeyExceptionFilePermissionTitle": {},
+  "recoveryKeyExceptionFilePermissionBody": "Nemáte oprávnění zapisovat do tohoto umístění souboru.",
+  "@recoveryKeyExceptionFilePermissionBody": {},
+  "recoveryKeyTPMExplanationBody": "Šifrovací klíče jsou uchovávány v modulu důvěryhodné platformy (TPM) počítače.",
+  "@recoveryKeyTPMExplanationBody": {},
+  "recoveryKeyTPMExplanationLearnMore": "Zjistit víc o šifrování obsluhovaném hardwarem",
+  "@recoveryKeyTPMExplanationLearnMore": {},
+  "recoveryKeyEncrpytionPassphraseHeader": "Šifrovací heslová fráze",
+  "@recoveryKeyEncrpytionPassphraseHeader": {},
+  "diskEncryptionPageStoreYourKeyWithLink": "Záchranný klíč vám umožní získat zpět přístup ke svým datům v případě, že se disk nepodaří odemknout při startu systému. Uložte si ho někde bezpečně. {learnMoreLink}",
+  "@diskEncryptionPageStoreYourKeyWithLink": {
+    "placeholders": {
+      "learnMoreLink": {
+        "type": "String"
+      }
+    }
+  },
+  "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Nastavení šifrování není k dispozici",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusHeader": {},
+  "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Nepodařilo se získat stav šifrování tohoto počítače.",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+  "diskEncryptionPageErrorUnsupportedStateBody": "Nastavení TPM počítače se nenachází v podporovaném stavu.",
+  "@diskEncryptionPageErrorUnsupportedStateBody": {}
 }
