@@ -221,5 +221,39 @@
   "recoveryKeyPassphraseEntropyBelowMin": "Слабая парольная фраза, сделайте её длиннее или более сложной",
   "@recoveryKeyPassphraseEntropyBelowMin": {},
   "recoveryKeySomethingWentWrongHeader": "Что-то пошло не так",
-  "@recoveryKeySomethingWentWrongHeader": {}
+  "@recoveryKeySomethingWentWrongHeader": {},
+  "diskEncryptionPageStoreYourKeyWithLink": "Ключ восстановления позволит вам восстановить доступ к данным, если диск не удалось разблокировать при запуске. Сохраните его в безопасном месте. {learnMoreLink}",
+  "@diskEncryptionPageStoreYourKeyWithLink": {
+    "placeholders": {
+      "learnMoreLink": {
+        "type": "String"
+      }
+    }
+  },
+  "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Настройки шифрования недоступны",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusHeader": {},
+  "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Не удалось получить статус шифрования этого компьютера.",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+  "diskEncryptionPageErrorUnsupportedStateBody": "Конфигурация TPM вашего компьютера не поддерживается.",
+  "@diskEncryptionPageErrorUnsupportedStateBody": {},
+  "diskEncryptionPageErrorUnsupportedSnapdHeader": "Ваша версия snapd не поддерживается",
+  "@diskEncryptionPageErrorUnsupportedSnapdHeader": {},
+  "diskEncryptionPageErrorUnsupportedSnapdBody": "Проверьте, что Центр безопасности и snapd обновлены.",
+  "@diskEncryptionPageErrorUnsupportedSnapdBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Центр безопасности не может подключиться к интерфейсу snapd",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Чтобы исправить это, выполните следующую команду в терминале:",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
+  "recoveryKeyExceptionFilePermissionTitle": "Не удалось сохранить ключ восстановления в файл",
+  "@recoveryKeyExceptionFilePermissionTitle": {},
+  "recoveryKeyExceptionFilePermissionBody": "У вас нет прав на запись в этот файл.",
+  "@recoveryKeyExceptionFilePermissionBody": {},
+  "recoveryKeyTPMExplanationBody": "Ключи шифрования хранятся в доверенном платформенном модуле (TPM) вашего компьютера.",
+  "@recoveryKeyTPMExplanationBody": {},
+  "recoveryKeyTPMExplanationLearnMore": "Узнайте больше об аппаратном шифровании",
+  "@recoveryKeyTPMExplanationLearnMore": {},
+  "recoveryKeyEncrpytionPassphraseHeader": "Парольная фраза шифрования",
+  "@recoveryKeyEncrpytionPassphraseHeader": {}
 }
