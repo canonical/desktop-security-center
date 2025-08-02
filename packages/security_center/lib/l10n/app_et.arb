@@ -221,5 +221,39 @@
   "recoveryKeyPassphraseEntropyBelowOptimal": "Salafraas on juba täitsa hea, parema turvalisuse nimel palun muuda ta pikemaks ja keerukamaks",
   "@recoveryKeyPassphraseEntropyBelowOptimal": {},
   "recoveryKeySomethingWentWrongHeader": "Midagi läks valesti",
-  "@recoveryKeySomethingWentWrongHeader": {}
+  "@recoveryKeySomethingWentWrongHeader": {},
+  "recoveryKeyEncrpytionPassphraseHeader": "Krüptimise salafraas",
+  "@recoveryKeyEncrpytionPassphraseHeader": {},
+  "recoveryKeyTPMExplanationLearnMore": "Lisateave riistvarapõhise krüptimise kohta",
+  "@recoveryKeyTPMExplanationLearnMore": {},
+  "recoveryKeyExceptionFilePermissionBody": "Sul pole õigusi sellesse asukohta kirjutamiseks.",
+  "@recoveryKeyExceptionFilePermissionBody": {},
+  "recoveryKeyExceptionFilePermissionTitle": "Taastevõtme salvestamine faili ei õnnestunud",
+  "@recoveryKeyExceptionFilePermissionTitle": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Vea parandamiseks käivita terminalis järgnev käsk:",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {},
+  "diskEncryptionPageStoreYourKeyWithLink": "Taastevõti võimaldab sul tagada ligipääsu oma andmetele, kui andmekandja lukustuse eemaldamine arvuti käivitamisel ei toimi. Salvesta ta turvaliselt kas digitaalses salasõnalaekas või vana kooli seifis. {learnMoreLink}",
+  "@diskEncryptionPageStoreYourKeyWithLink": {
+    "placeholders": {
+      "learnMoreLink": {
+        "type": "String"
+      }
+    }
+  },
+  "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Krüptimise seadistused pole saadaval",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusHeader": {},
+  "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Selle arvuti krüptimise oleku tuvastamine ei õnnestunud.",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+  "diskEncryptionPageErrorUnsupportedStateBody": "Sinu arvuti raudavara TPM-i mooduli seadistus on mittetoetatud olekus.",
+  "@diskEncryptionPageErrorUnsupportedStateBody": {},
+  "diskEncryptionPageErrorUnsupportedSnapdHeader": "Sinu arvuti snapd versioon pole toetatud",
+  "@diskEncryptionPageErrorUnsupportedSnapdHeader": {},
+  "diskEncryptionPageErrorUnsupportedSnapdBody": "Palun kontrolli, et Andmeturbekeskus ja snapd oleks uuendatud.",
+  "@diskEncryptionPageErrorUnsupportedSnapdBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Andmeturbekeskus ei suuda luua ühendust snapd teenuse liidesega",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
+  "recoveryKeyTPMExplanationBody": "Krüptovõtmed on salvestatud sinu arvuti TPM-is (Trusted Platform Module).",
+  "@recoveryKeyTPMExplanationBody": {}
 }
