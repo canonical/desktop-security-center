@@ -221,5 +221,39 @@
   "recoveryKeyPinEntropyBelowMin": "Zwakke pincode, maak hem langer of minder voorspelbaar",
   "@recoveryKeyPinEntropyBelowMin": {},
   "recoveryKeySomethingWentWrongHeader": "Er ging iets mis",
-  "@recoveryKeySomethingWentWrongHeader": {}
+  "@recoveryKeySomethingWentWrongHeader": {},
+  "diskEncryptionPageStoreYourKeyWithLink": "De herstelcode stelt je in staat om weer toegang te krijgen tot je gegevens als je schijf tijdens het opstarten niet ontgrendeld kan worden. Bewaar het op een veilige plaats. {learnMoreLink}",
+  "@diskEncryptionPageStoreYourKeyWithLink": {
+    "placeholders": {
+      "learnMoreLink": {
+        "type": "String"
+      }
+    }
+  },
+  "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Versleutelingsinstellingen niet beschikbaar",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusHeader": {},
+  "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Ophalen van de versleutelingsstatus van deze computer is mislukt.",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+  "diskEncryptionPageErrorUnsupportedStateBody": "De TPM-configuratie van uw computer bevindt zich niet in een ondersteunde staat.",
+  "@diskEncryptionPageErrorUnsupportedStateBody": {},
+  "diskEncryptionPageErrorUnsupportedSnapdHeader": "Uw snapd-versie wordt niet ondersteund",
+  "@diskEncryptionPageErrorUnsupportedSnapdHeader": {},
+  "diskEncryptionPageErrorUnsupportedSnapdBody": "Controleer of het Beveiligingscentrum en snapd up-to-date zijn.",
+  "@diskEncryptionPageErrorUnsupportedSnapdBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Beveiligingscentrum kan geen verbinding maken met de snapd-interface",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Om dit te verhelpen, voer deze opdracht uit in de terminal:",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {},
+  "recoveryKeyExceptionFilePermissionTitle": "Herstelcode opslaan in bestand is niet gelukt",
+  "@recoveryKeyExceptionFilePermissionTitle": {},
+  "recoveryKeyExceptionFilePermissionBody": "U heeft geen toestemming om naar die bestandslocatie te schrijven.",
+  "@recoveryKeyExceptionFilePermissionBody": {},
+  "recoveryKeyTPMExplanationBody": "De versleutelingscodes zijn opgeslagen in de Trusted Platform Module (TPM) van uw computer.",
+  "@recoveryKeyTPMExplanationBody": {},
+  "recoveryKeyTPMExplanationLearnMore": "Meer informatie over hardwareondersteunde versleuteling",
+  "@recoveryKeyTPMExplanationLearnMore": {},
+  "recoveryKeyEncrpytionPassphraseHeader": "Versleutelingswachtwoordzin",
+  "@recoveryKeyEncrpytionPassphraseHeader": {}
 }
