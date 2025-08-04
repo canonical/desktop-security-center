@@ -221,5 +221,39 @@
   "recoveryKeyPassphraseEntropyBelowOptimal": "Rättvis lösenfras, gör den längre eller mer komplex för bättre säkerhet",
   "@recoveryKeyPassphraseEntropyBelowOptimal": {},
   "recoveryKeySomethingWentWrongHeader": "Något gick fel",
-  "@recoveryKeySomethingWentWrongHeader": {}
+  "@recoveryKeySomethingWentWrongHeader": {},
+  "diskEncryptionPageStoreYourKeyWithLink": "Återställningsnyckeln låter dig återfå åtkomst till din data om din disk inte låses upp under uppstart. Spara den på ett säkert ställe. {learnMoreLink}",
+  "@diskEncryptionPageStoreYourKeyWithLink": {
+    "placeholders": {
+      "learnMoreLink": {
+        "type": "String"
+      }
+    }
+  },
+  "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Krypteringsinställningar är inte tillgängliga",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusHeader": {},
+  "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Misslyckades att hämta krypteringsstatus för denna dator.",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+  "diskEncryptionPageErrorUnsupportedStateBody": "Datorns TPM-konfiguration är inte i ett tillstånd som stöds.",
+  "@diskEncryptionPageErrorUnsupportedStateBody": {},
+  "diskEncryptionPageErrorUnsupportedSnapdHeader": "Din snapd version stöds inte",
+  "@diskEncryptionPageErrorUnsupportedSnapdHeader": {},
+  "diskEncryptionPageErrorUnsupportedSnapdBody": "Kontrollera att säkerhetscentret och snapd är uppdaterade.",
+  "@diskEncryptionPageErrorUnsupportedSnapdBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Säkerhetscentret kan inte ansluta till snapd-gränssnitt",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "För att åtgärda detta, kör följande kommando i terminalen:",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
+  "recoveryKeyExceptionFilePermissionTitle": "Misslyckades med att spara din återställningsnyckel till fil",
+  "@recoveryKeyExceptionFilePermissionTitle": {},
+  "recoveryKeyExceptionFilePermissionBody": "Du har inte behörighet att skriva till den filplatsen.",
+  "@recoveryKeyExceptionFilePermissionBody": {},
+  "recoveryKeyTPMExplanationBody": "Krypteringsnycklarna lagras i din dators Trusted Platform Module (TPM).",
+  "@recoveryKeyTPMExplanationBody": {},
+  "recoveryKeyTPMExplanationLearnMore": "Lär dig mer om hårdvarustödd kryptering",
+  "@recoveryKeyTPMExplanationLearnMore": {},
+  "recoveryKeyEncrpytionPassphraseHeader": "Lösenfras för kryptering",
+  "@recoveryKeyEncrpytionPassphraseHeader": {}
 }
