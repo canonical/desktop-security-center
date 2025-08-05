@@ -221,5 +221,39 @@
   "recoveryKeyPassphraseEntropyBelowOptimal": "Phrase de passe suffisante, rendez-la plus longue ou plus complexe pour une meilleure sécurité",
   "@recoveryKeyPassphraseEntropyBelowOptimal": {},
   "recoveryKeyPassphraseEntropyOptimal": "Phrase de passe forte",
-  "@recoveryKeyPassphraseEntropyOptimal": {}
+  "@recoveryKeyPassphraseEntropyOptimal": {},
+  "diskEncryptionPageStoreYourKeyWithLink": "La clé de récupération (de secours) vous permet de retrouver l’accès à vos données si votre disque ne parvient pas à se déverrouiller pendant le démarrage. Enregistrez-la dans un endroit sûr. {learnMoreLink}",
+  "@diskEncryptionPageStoreYourKeyWithLink": {
+    "placeholders": {
+      "learnMoreLink": {
+        "type": "String"
+      }
+    }
+  },
+  "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Paramètres de chiffrement non disponibles",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusHeader": {},
+  "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Échec de la récupération du statut de chiffrement de cet ordinateur.",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+  "diskEncryptionPageErrorUnsupportedStateBody": "La configuration du TPM de votre ordinateur n’est pas dans un état pris en charge.",
+  "@diskEncryptionPageErrorUnsupportedStateBody": {},
+  "diskEncryptionPageErrorUnsupportedSnapdHeader": "Votre version Snapd n’est pas prise en charge",
+  "@diskEncryptionPageErrorUnsupportedSnapdHeader": {},
+  "diskEncryptionPageErrorUnsupportedSnapdBody": "Vérifiez que le centre de sécurité et Snapd sont à jour.",
+  "@diskEncryptionPageErrorUnsupportedSnapdBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Le centre de sécurité ne parvient pas à se connecter à l’interface Snapd",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Pour résoudre ceci, exécutez cette commande dans le terminal :",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
+  "recoveryKeyExceptionFilePermissionTitle": "Échec d'enregistrement de votre clé de récupération dans le fichier",
+  "@recoveryKeyExceptionFilePermissionTitle": {},
+  "recoveryKeyExceptionFilePermissionBody": "Vous n’avez pas la permission d’écrire dans cet emplacement de fichier.",
+  "@recoveryKeyExceptionFilePermissionBody": {},
+  "recoveryKeyTPMExplanationBody": "Les clés de chiffrement sont stockées dans le module TPM (Trusted Platform Module) de votre ordinateur.",
+  "@recoveryKeyTPMExplanationBody": {},
+  "recoveryKeyTPMExplanationLearnMore": "En savoir plus sur le chiffrement matériel",
+  "@recoveryKeyTPMExplanationLearnMore": {},
+  "recoveryKeyEncrpytionPassphraseHeader": "Phrase de passe de chiffrement",
+  "@recoveryKeyEncrpytionPassphraseHeader": {}
 }
