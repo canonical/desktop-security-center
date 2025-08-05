@@ -73,5 +73,19 @@
     }
   },
   "snapPermissionsEnableTitle": "கணினி இசைவுகளைக் கேட்கப் பயன்பாடுகள் தேவை",
-  "@snapPermissionsEnableTitle": {}
+  "@snapPermissionsEnableTitle": {},
+  "recoveryKeyExceptionFileSystemTitle": "மீட்பு விசை கோப்பு சேமிக்கப்படவில்லை",
+  "@recoveryKeyExceptionFileSystemTitle": {},
+  "recoveryKeyExceptionDisallowedPathTitle": "மீட்பு முக்கிய கோப்பை தற்காலிக இடத்தில் சேமிக்க முடியாது",
+  "@recoveryKeyExceptionDisallowedPathTitle": {},
+  "recoveryKeyExceptionUnknownTitle": "தெரியாத பிழை",
+  "@recoveryKeyExceptionUnknownTitle": {},
+  "recoveryKeyExceptionFileSystemBody": "அந்த கோப்புறையில் எழுத உங்களுக்கு இசைவு இல்லை. வேறு இடத்தை முயற்சிக்கவும் அல்லது மற்றொரு முறையைப் பயன்படுத்தவும்.",
+  "@recoveryKeyExceptionFileSystemBody": {},
+  "recoveryKeyExceptionDisallowedPathBody": "நீக்கக்கூடிய இயக்கி போன்ற வேறு இடத்தை முயற்சிக்கவும் அல்லது மற்றொரு முறையைப் பயன்படுத்தவும்.",
+  "@recoveryKeyExceptionDisallowedPathBody": {},
+  "recoveryKeyFilePickerTitle": "மீட்பு விசை கோப்பை சேமிக்கவும்",
+  "@recoveryKeyFilePickerTitle": {},
+  "recoveryKeyFilePickerFilter": "உரை கோப்புகள்",
+  "@recoveryKeyFilePickerFilter": {}
 }
