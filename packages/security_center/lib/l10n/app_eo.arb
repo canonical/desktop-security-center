@@ -221,5 +221,39 @@
   "diskEncryptionPageStoreYourKey": "La restaŭra ŝlosilo ebligas al vi reakiri viajn datenojn, se vi ne povas malŝlosi vian diskon dum starto. Konservu ĝin en sekura loko.",
   "@diskEncryptionPageStoreYourKey": {},
   "recoveryKeySomethingWentWrongHeader": "Io fiaskis",
-  "@recoveryKeySomethingWentWrongHeader": {}
+  "@recoveryKeySomethingWentWrongHeader": {},
+  "diskEncryptionPageErrorUnsupportedSnapdHeader": "Via versio de snapd ne estas subtenata",
+  "@diskEncryptionPageErrorUnsupportedSnapdHeader": {},
+  "diskEncryptionPageErrorUnsupportedSnapdBody": "Kontrolu, ĉu la Sekureca Centro kaj snapd estas ĝisdataj.",
+  "@diskEncryptionPageErrorUnsupportedSnapdBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Ne povas konekti Sekurecan Centron al la interfaco de snapd",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Por ripari tion, rulu la jenan komandon en la terminalo:",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {},
+  "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+  "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
+  "recoveryKeyEncrpytionPassphraseHeader": "Ĉifra pasfrazo",
+  "@recoveryKeyEncrpytionPassphraseHeader": {},
+  "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Ĉifraj agordoj ne disponeblas",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusHeader": {},
+  "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Malsukcesis akiri la staton de ĉifrado de ĉi tiu komputilo.",
+  "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+  "recoveryKeyTPMExplanationLearnMore": "Lernu plu pri aparato-baza ĉifrado",
+  "@recoveryKeyTPMExplanationLearnMore": {},
+  "diskEncryptionPageStoreYourKeyWithLink": "La restaŭra ŝlosilo ebligas reatingi viajn datenojn, se oni malsukcesas malŝlosi la diskon dum starto. Konservu ĝin en sekura loko. {learnMoreLink}",
+  "@diskEncryptionPageStoreYourKeyWithLink": {
+    "placeholders": {
+      "learnMoreLink": {
+        "type": "String"
+      }
+    }
+  },
+  "recoveryKeyExceptionFilePermissionTitle": "Malsukcesis konservi vian restaŭran ŝlosilon al dosiero",
+  "@recoveryKeyExceptionFilePermissionTitle": {},
+  "recoveryKeyExceptionFilePermissionBody": "Vi ne rajtas skribi al tiu dosierloko.",
+  "@recoveryKeyExceptionFilePermissionBody": {},
+  "diskEncryptionPageErrorUnsupportedStateBody": "La Fidata Platforma Modulo (TPM) de via komputilo ne estas en subtenata stato.",
+  "@diskEncryptionPageErrorUnsupportedStateBody": {},
+  "recoveryKeyTPMExplanationBody": "La ĉifraj ŝlosiloj konserviĝas en la Fidata Platforma Modulo (TPM) de via komputilo.",
+  "@recoveryKeyTPMExplanationBody": {}
 }
