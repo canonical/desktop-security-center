@@ -71,5 +71,15 @@
   "homeInterfacePageDescription": "مدیریت اجازه‌ها برای دسترسی به پرونده‌ها در شاخهٔ خانگیتان.",
   "@homeInterfacePageDescription": {},
   "snapPermissionsEnableTitle": "نیازمند درخواست اجازهٔ سامانه‌ای از سوی کاره",
-  "@snapPermissionsEnableTitle": {}
+  "@snapPermissionsEnableTitle": {},
+  "recoveryKeyExceptionUnknownTitle": "خطای ناشناخته",
+  "@recoveryKeyExceptionUnknownTitle": {},
+  "recoveryKeyFilePickerFilter": "پرونده‌های متنی",
+  "@recoveryKeyFilePickerFilter": {},
+  "recoveryKeyFilePickerTitle": "ذخیرهٔ پروندهٔ کلید بازیابی",
+  "@recoveryKeyFilePickerTitle": {},
+  "recoveryKeyExceptionFileSystemTitle": "پروندهٔ کلید بازیابی ذخیره نشد",
+  "@recoveryKeyExceptionFileSystemTitle": {},
+  "recoveryKeyExceptionDisallowedPathTitle": "کلید بازیابی نتوانست در مکان موقّتی ذخیره شود",
+  "@recoveryKeyExceptionDisallowedPathTitle": {}
 }
