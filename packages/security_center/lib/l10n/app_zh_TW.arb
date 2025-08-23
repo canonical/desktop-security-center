@@ -230,8 +230,30 @@
     "@diskEncryptionPageErrorUnsupportedSnapdHeader": {},
     "diskEncryptionPageErrorUnsupportedSnapdBody": "請確認安全中心與 snapd 已更新至最新版。",
     "@diskEncryptionPageErrorUnsupportedSnapdBody": {},
-    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "安全中心無法連接到 snapd 介面",
     "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "為了解決此問題, 請於終端機中執行下列指令:",
-    "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {}
+    "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {},
+    "diskEncryptionPageStoreYourKeyWithLink": "如果磁碟在啟動時無法解鎖，復原金鑰可讓您重新取得資料。將它保存在安全的地方。{learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "擷取這台電腦的加密狀態失敗。",
+    "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+    "recoveryKeyExceptionFilePermissionTitle": "無法將您的復原金鑰儲存至檔案",
+    "@recoveryKeyExceptionFilePermissionTitle": {},
+    "recoveryKeyExceptionFilePermissionBody": "您沒有寫入該檔案位置的權限。",
+    "@recoveryKeyExceptionFilePermissionBody": {},
+    "recoveryKeyTPMExplanationBody": "加密金鑰儲存在電腦的可信賴平台模組 (TPM) 中。",
+    "@recoveryKeyTPMExplanationBody": {},
+    "recoveryKeyTPMExplanationLearnMore": "進一步了解硬體支援的加密",
+    "@recoveryKeyTPMExplanationLearnMore": {},
+    "recoveryKeyEncrpytionPassphraseHeader": "加密密碼",
+    "@recoveryKeyEncrpytionPassphraseHeader": {},
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap 連接桌面安全中心：snap-fde-control",
+    "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {}
 }
