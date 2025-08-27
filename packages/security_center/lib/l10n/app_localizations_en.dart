@@ -48,7 +48,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get snapPermissionsExperimentalLabel => 'Experimental';
 
   @override
-  String get snapPermissionsOtherDescription => 'You can manage other permissions in Settings › Applications.';
+  String get snapPermissionsOtherDescription => 'You can manage other permissions in Settings › Apps.';
 
   @override
   String get snapPermissionsPageTitle => 'App Permissions';

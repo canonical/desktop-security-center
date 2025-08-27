@@ -26,7 +26,7 @@
     "@snapPermissionsDisablingLabel": {},
     "snapPermissionsExperimentalLabel": "Experimental",
     "@snapPermissionsExperimentalLabel": {},
-    "snapPermissionsOtherDescription": "You can manage other permissions in Settings › Applications.",
+    "snapPermissionsOtherDescription": "You can manage other permissions in Settings › Apps.",
     "@snapPermissionsOtherDescription": {},
     "snapPermissionsPageTitle": "App Permissions",
     "@snapPermissionsPageTitle": {},
