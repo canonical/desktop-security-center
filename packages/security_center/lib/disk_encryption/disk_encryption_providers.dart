@@ -418,10 +418,10 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
     }
   }
 
-  void acknowledge() {
+  void acknowledge(bool acknowledged) {
     assert(state.dialogState is ReplaceRecoveryKeyDialogStateInput);
     state = state.copyWith(
-      dialogState: ReplaceRecoveryKeyDialogStateInput(true),
+      dialogState: ReplaceRecoveryKeyDialogStateInput(acknowledged),
     );
   }
 

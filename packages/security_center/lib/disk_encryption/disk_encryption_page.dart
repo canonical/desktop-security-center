@@ -455,7 +455,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                           : false,
                   onChanged:
                       replaceDialogState is ReplaceRecoveryKeyDialogStateInput
-                          ? (_) => replaceNotifier.acknowledge()
+                          ? (value) => replaceNotifier.acknowledge(value ?? false)
                           : null,
                 ),
                 Row(
