@@ -357,6 +357,34 @@ void main() {
     expect(tester.widget<YaruCheckButton>(checkBox).value, isFalse);
   });
 
+  testWidgets('recovery key generation auth cancelled', (tester) async {
+    final container = createContainer();
+    registerMockDiskEncryptionService(generateAuthCancelled: true);
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(tester.l10n.diskEncryptionPageReplaceButton),
+      findsOneWidget,
+    );
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageReplaceButton));
+    await tester.pumpAndSettle();
+
+    // Dialog should be closed automatically
+    expect(
+      find.text(tester.l10n.diskEncryptionPageReplaceDialogHeader),
+      findsNothing,
+    );
+    // Should be back to main page
+    expect(
+      find.text(tester.l10n.diskEncryptionPageReplaceButton),
+      findsOneWidget,
+    );
+  });
+
   group('save key to file', () {
     final cases = [
       (

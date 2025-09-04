@@ -100,6 +100,8 @@ sealed class ReplaceRecoveryKeyDialogState
       ReplaceRecoveryKeyDialogStateSuccess;
   factory ReplaceRecoveryKeyDialogState.error(Exception e) =
       ReplaceRecoveryKeyDialogStateError;
+  factory ReplaceRecoveryKeyDialogState.authCancelled() =
+      ReplaceRecoveryKeyDialogStateAuthCancelled;
 }
 
 /// Dialog state for managing the recovery key check flow.
@@ -383,11 +385,18 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
             dialogState: ReplaceRecoveryKeyDialogStateInput(false),
           );
         } else if (prev is AsyncLoading && next is AsyncError) {
-          state = state.copyWith(
-            dialogState: ReplaceRecoveryKeyDialogState.error(
-              Exception(next.error.toString()),
-            ),
-          );
+          if (next.error is SnapdException &&
+              (next.error as SnapdException).kind == 'auth-cancelled') {
+            state = state.copyWith(
+              dialogState: ReplaceRecoveryKeyDialogState.authCancelled(),
+            );
+          } else {
+            state = state.copyWith(
+              dialogState: ReplaceRecoveryKeyDialogState.error(
+                Exception(next.error.toString()),
+              ),
+            );
+          }
         }
       },
     );

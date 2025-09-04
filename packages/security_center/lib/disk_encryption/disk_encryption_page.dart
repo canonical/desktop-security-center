@@ -319,6 +319,13 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
     final filePicker = ref.read(filePickerProvider);
 
     final l10n = AppLocalizations.of(context);
+
+    // Close dialog if auth was cancelled
+    if (replaceDialogState is ReplaceRecoveryKeyDialogStateAuthCancelled) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pop();
+      });
+    }
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: AlertDialog(

@@ -130,6 +130,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool authCancelled = false,
   bool replaceError = false,
   bool generateError = false,
+  bool generateAuthCancelled = false,
   bool changePinPassphraseError = false,
   bool entropyCheckError = false,
   AuthMode authMode = AuthMode.pin,
@@ -212,6 +213,12 @@ DiskEncryptionService registerMockDiskEncryptionService({
   when(service.generateRecoveryKey()).thenAnswer((_) async {
     if (generateError) {
       throw Exception('Mock generate recovery key error');
+    }
+    if (generateAuthCancelled) {
+      throw SnapdException(
+        message: 'Mock generate auth cancelled',
+        kind: 'auth-cancelled',
+      );
     }
     return SnapdGenerateRecoveryKeyResponse(
       recoveryKey: 'mock-recovery-key',
