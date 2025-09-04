@@ -142,7 +142,9 @@ void main() {
 
     // Check button is still enabled.
     final checkButton = find.widgetWithText(
-        OutlinedButton, tester.l10n.diskEncryptionPageCheck);
+      OutlinedButton,
+      tester.l10n.diskEncryptionPageCheck,
+    );
     expect(checkButton, findsOneWidget);
     expect(tester.widget<OutlinedButton>(checkButton).enabled, isTrue);
   });

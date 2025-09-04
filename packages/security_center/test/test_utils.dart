@@ -229,7 +229,9 @@ DiskEncryptionService registerMockDiskEncryptionService({
     }
     if (authCancelled) {
       throw SnapdException(
-          message: 'Mock auth cancelled', kind: 'auth-cancelled');
+        message: 'Mock auth cancelled',
+        kind: 'auth-cancelled',
+      );
     }
     if (!checkRecoveryKey) {
       throw Exception('Recovery key does not work');

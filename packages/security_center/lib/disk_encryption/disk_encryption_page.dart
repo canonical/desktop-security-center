@@ -257,11 +257,16 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
                     notifier.checkRecoveryKey,
                   _ => null,
                 },
-                child: Text(l10n.diskEncryptionPageCheck),
+                child: data is CheckRecoveryKeyDialogStateLoading
+                    ? SizedBox.square(
+                        dimension: yaruProgressSize,
+                        child: YaruCircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : Text(l10n.diskEncryptionPageCheck),
               ),
             ),
-            if (data is CheckRecoveryKeyDialogStateLoading)
-              const YaruCircularProgressIndicator(),
             if (data is CheckRecoveryKeyDialogStateResult)
               if (data.valid)
                 YaruInfoBox(
