@@ -127,6 +127,7 @@ Override processRunnerOverride(Map<String, String> mountByPath) {
 DiskEncryptionService registerMockDiskEncryptionService({
   bool checkRecoveryKey = true,
   bool checkError = false,
+  bool authCancelled = false,
   bool replaceError = false,
   bool generateError = false,
   bool changePinPassphraseError = false,
@@ -226,7 +227,14 @@ DiskEncryptionService registerMockDiskEncryptionService({
     if (checkError) {
       throw Exception('Mock check recovery key error');
     }
-    return checkRecoveryKey;
+    if (authCancelled) {
+      throw SnapdException(
+          message: 'Mock auth cancelled', kind: 'auth-cancelled');
+    }
+    if (!checkRecoveryKey) {
+      throw Exception('Recovery key does not work');
+    }
+    return;
   });
   when(service.changePinPassphrase(any, any, any)).thenAnswer((_) async {
     if (changePinPassphraseError) {

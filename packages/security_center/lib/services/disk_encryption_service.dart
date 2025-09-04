@@ -103,7 +103,7 @@ abstract class DiskEncryptionService {
   Future<SnapdSystemVolumesResponse> enumerateKeySlots();
 
   /// Checks if a recovery key is still valid for use.
-  Future<bool> checkRecoveryKey(String recoveryKey);
+  Future<void> checkRecoveryKey(String recoveryKey);
 
   Future<void> changePinPassphrase(
     AuthMode authMode,

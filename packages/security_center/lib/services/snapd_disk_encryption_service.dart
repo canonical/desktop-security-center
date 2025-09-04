@@ -36,14 +36,8 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<bool> checkRecoveryKey(String recoveryKey) async {
-    try {
-      await _snapd.checkRecoveryKey(recoveryKey);
-      return true;
-    } on SnapdException catch (e) {
-      _log.error(e);
-      return false;
-    }
+  Future<void> checkRecoveryKey(String recoveryKey) async {
+    return _snapd.checkRecoveryKey(recoveryKey);
   }
 
   @override

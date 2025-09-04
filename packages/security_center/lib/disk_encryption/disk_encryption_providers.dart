@@ -473,8 +473,14 @@ class CheckRecoveryKeyDialogModel extends _$CheckRecoveryKeyDialogModel {
     // Set the state to loading while checking the key.
     state = CheckRecoveryKeyDialogState.loading();
     try {
-      final result = await _service.checkRecoveryKey(keyToCheck);
-      state = CheckRecoveryKeyDialogState.result(result);
+      await _service.checkRecoveryKey(keyToCheck);
+      state = CheckRecoveryKeyDialogState.result(true);
+    } on SnapdException catch (e) {
+      if (e.kind == 'auth-cancelled') {
+        state = CheckRecoveryKeyDialogState.input(keyToCheck);
+      } else {
+        state = CheckRecoveryKeyDialogState.result(false);
+      }
     } on Exception catch (e) {
       state = CheckRecoveryKeyDialogState.error(e);
     }

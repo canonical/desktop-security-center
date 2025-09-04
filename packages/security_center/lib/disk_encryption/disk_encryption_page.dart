@@ -485,8 +485,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                     ),
                   ].separatedBy(const SizedBox(width: 16)),
                 ),
-                if (recoveryKey.isLoading)
-                    SizedBox.shrink(),
+                if (recoveryKey.isLoading) SizedBox.shrink(),
                 if (replaceDialogState
                         is ReplaceRecoveryKeyDialogStateSuccess &&
                     replaceDialogError == null)
