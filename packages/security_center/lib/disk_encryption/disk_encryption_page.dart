@@ -14,7 +14,7 @@ import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
 
 const _learnMoreUrl =
-    'https://discourse.ubuntu.com/t/hardware-backed-encryption-and-recovery-keys-in-ubuntu-desktop/58243';
+    'https://canonical-ubuntu-desktop-documentation.readthedocs-hosted.com/en/latest/explanation/hardware-backed-disk-encryption/#recovery-key';
 const defaultRecoveryKeyFileName = 'recovery-key.txt';
 
 const yaruProgressSize = 20.0;
@@ -63,10 +63,7 @@ class EncryptionPageBody extends ConsumerWidget {
                     horizontal: 16,
                   ),
                   leading: const Icon(YaruIcons.lock, size: 24),
-                  title: Text(
-                    l10n.recoveryKeyTPMEnabled,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
+                  title: Text(l10n.recoveryKeyTPMEnabled),
                 ),
                 if (data != AuthMode.none) ...[
                   const Divider(),
@@ -80,7 +77,6 @@ class EncryptionPageBody extends ConsumerWidget {
                       data == AuthMode.pin
                           ? l10n.recoveryKeyPinEnabled
                           : l10n.recoveryKeyPassphraseEnabled,
-                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                 ],
@@ -242,6 +238,7 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
           children: [
             TextField(
               autofocus: true,
+              style: const TextStyle(fontFamily: 'monospace'),
               decoration: InputDecoration(
                 labelText: l10n.diskEncryptionPageRecoveryKey,
                 hintText: 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
@@ -256,11 +253,16 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
                     notifier.checkRecoveryKey,
                   _ => null,
                 },
-                child: Text(l10n.diskEncryptionPageCheck),
+                child: data is CheckRecoveryKeyDialogStateLoading
+                    ? SizedBox.square(
+                        dimension: yaruProgressSize,
+                        child: YaruCircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : Text(l10n.diskEncryptionPageCheck),
               ),
             ),
-            if (data is CheckRecoveryKeyDialogStateLoading)
-              const YaruCircularProgressIndicator(),
             if (data is CheckRecoveryKeyDialogStateResult)
               if (data.valid)
                 YaruInfoBox(
@@ -317,6 +319,13 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
     final filePicker = ref.read(filePickerProvider);
 
     final l10n = AppLocalizations.of(context);
+
+    // Close dialog if auth was cancelled
+    if (replaceDialogState is ReplaceRecoveryKeyDialogStateAuthCancelled) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pop();
+      });
+    }
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: AlertDialog(
@@ -343,6 +352,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                     decoration: InputDecoration(
                       labelText: l10n.diskEncryptionPageRecoveryKey,
                       suffixIcon: YaruIconButton(
+                        tooltip: l10n.diskEncryptionPageCopySemanticLabel,
                         icon: Icon(
                           YaruIcons.copy,
                           size: 16,
@@ -446,10 +456,10 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                       replaceDialogState is ReplaceRecoveryKeyDialogStateInput
                           ? replaceDialogState.acknowledged
                           : false,
-                  onChanged:
-                      replaceDialogState is ReplaceRecoveryKeyDialogStateInput
-                          ? (_) => replaceNotifier.acknowledge()
-                          : null,
+                  onChanged: replaceDialogState
+                          is ReplaceRecoveryKeyDialogStateInput
+                      ? (value) => replaceNotifier.acknowledge(value ?? false)
+                      : null,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -484,11 +494,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                     ),
                   ].separatedBy(const SizedBox(width: 16)),
                 ),
-                if (recoveryKey.isLoading)
-                  const Padding(
-                    padding: EdgeInsets.only(top: 16),
-                    child: YaruLinearProgressIndicator(),
-                  ),
+                if (recoveryKey.isLoading) SizedBox.shrink(),
                 if (replaceDialogState
                         is ReplaceRecoveryKeyDialogStateSuccess &&
                     replaceDialogError == null)

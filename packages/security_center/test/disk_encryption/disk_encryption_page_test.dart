@@ -103,9 +103,50 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      find.text(tester.l10n.diskEncryptionPageKeyDoesntWork),
+      find.text(tester.l10n.diskEncryptionPageError),
       findsOneWidget,
     );
+  });
+
+  testWidgets('recovery key is invalid', (tester) async {
+    final container = createContainer();
+    registerMockDiskEncryptionService(authCancelled: true);
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text(tester.l10n.diskEncryptionPageCheckKey), findsOneWidget);
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageCheckKey));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(
+      find.byWidgetPredicate(
+        (w) =>
+            w is TextField &&
+            w.decoration?.labelText ==
+                tester.l10n.diskEncryptionPageRecoveryKey,
+      ),
+      'abcdef',
+    );
+    await tester.pump();
+
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageCheck));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(tester.l10n.diskEncryptionPageError),
+      findsNothing,
+    );
+
+    // Check button is still enabled.
+    final checkButton = find.widgetWithText(
+      OutlinedButton,
+      tester.l10n.diskEncryptionPageCheck,
+    );
+    expect(checkButton, findsOneWidget);
+    expect(tester.widget<OutlinedButton>(checkButton).enabled, isTrue);
   });
 
   group('replace recovery key', () {
@@ -314,6 +355,34 @@ void main() {
 
     final checkBox = find.byType(YaruCheckButton);
     expect(tester.widget<YaruCheckButton>(checkBox).value, isFalse);
+  });
+
+  testWidgets('recovery key generation auth cancelled', (tester) async {
+    final container = createContainer();
+    registerMockDiskEncryptionService(generateAuthCancelled: true);
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(tester.l10n.diskEncryptionPageReplaceButton),
+      findsOneWidget,
+    );
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageReplaceButton));
+    await tester.pumpAndSettle();
+
+    // Dialog should be closed automatically
+    expect(
+      find.text(tester.l10n.diskEncryptionPageReplaceDialogHeader),
+      findsNothing,
+    );
+    // Should be back to main page
+    expect(
+      find.text(tester.l10n.diskEncryptionPageReplaceButton),
+      findsOneWidget,
+    );
   });
 
   group('save key to file', () {

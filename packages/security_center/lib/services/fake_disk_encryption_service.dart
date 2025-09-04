@@ -71,7 +71,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
   /// Throws if the given recovery key isn't valid.
   @override
-  Future<bool> checkRecoveryKey(String recoveryKey) async {
+  Future<void> checkRecoveryKey(String recoveryKey) async {
     // await Future.delayed(const Duration(seconds: 2)); // Uncomment to simulate a delay
     if (checkError) {
       throw Exception('Mocked error');
@@ -83,9 +83,9 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
         )) &&
         (_recoveryKeys.containsKey('default-recovery') &&
             _recoveryKeys['default-recovery'] == recoveryKey)) {
-      return true;
+      return;
     }
-    return false;
+    throw Exception('Recovery key does not work');
   }
 
   @override
