@@ -349,6 +349,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                     decoration: InputDecoration(
                       labelText: l10n.diskEncryptionPageRecoveryKey,
                       suffixIcon: YaruIconButton(
+                        tooltip: l10n.diskEncryptionPageCopySemanticLabel,
                         icon: Icon(
                           YaruIcons.copy,
                           size: 16,
