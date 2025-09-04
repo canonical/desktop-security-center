@@ -63,10 +63,7 @@ class EncryptionPageBody extends ConsumerWidget {
                     horizontal: 16,
                   ),
                   leading: const Icon(YaruIcons.lock, size: 24),
-                  title: Text(
-                    l10n.recoveryKeyTPMEnabled,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
+                  title: Text(l10n.recoveryKeyTPMEnabled),
                 ),
                 if (data != AuthMode.none) ...[
                   const Divider(),
@@ -80,7 +77,6 @@ class EncryptionPageBody extends ConsumerWidget {
                       data == AuthMode.pin
                           ? l10n.recoveryKeyPinEnabled
                           : l10n.recoveryKeyPassphraseEnabled,
-                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                 ],
@@ -453,10 +449,10 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                       replaceDialogState is ReplaceRecoveryKeyDialogStateInput
                           ? replaceDialogState.acknowledged
                           : false,
-                  onChanged:
-                      replaceDialogState is ReplaceRecoveryKeyDialogStateInput
-                          ? (value) => replaceNotifier.acknowledge(value ?? false)
-                          : null,
+                  onChanged: replaceDialogState
+                          is ReplaceRecoveryKeyDialogStateInput
+                      ? (value) => replaceNotifier.acknowledge(value ?? false)
+                      : null,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
