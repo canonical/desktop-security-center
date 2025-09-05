@@ -320,7 +320,7 @@ abstract class AppLocalizations {
   /// No description provided for @snapPermissionsOtherDescription.
   ///
   /// In en, this message translates to:
-  /// **'You can manage other permissions in Settings › Applications.'**
+  /// **'You can manage other permissions in Settings › Apps.'**
   String get snapPermissionsOtherDescription;
 
   /// No description provided for @snapPermissionsPageTitle.
