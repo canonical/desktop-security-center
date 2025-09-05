@@ -282,7 +282,7 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
                 ),
             if (data is CheckRecoveryKeyDialogStateError)
               YaruInfoBox(
-                title: Text(l10n.diskEncryptionPageError),
+                title: Text(l10n.recoveryKeySomethingWentWrongHeader),
                 subtitle: Text(data.e.toString()),
                 yaruInfoType: YaruInfoType.danger,
               ),
@@ -513,7 +513,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   ),
                 if (replaceDialogState is ReplaceRecoveryKeyDialogStateError)
                   YaruInfoBox(
-                    title: Text(l10n.diskEncryptionPageError),
+                    title: Text(l10n.recoveryKeySomethingWentWrongHeader),
                     subtitle: Text(replaceDialogState.e.toString()),
                     yaruInfoType: YaruInfoType.danger,
                   ),
