@@ -72,7 +72,10 @@ void main() {
     await tester.tap(find.text(tester.l10n.diskEncryptionPageCheck));
     await tester.pumpAndSettle();
 
-    expect(find.text(tester.l10n.diskEncryptionPageError), findsOneWidget);
+    expect(
+      find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
+      findsOneWidget,
+    );
   });
 
   testWidgets('recovery key is invalid', (tester) async {
@@ -103,7 +106,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      find.text(tester.l10n.diskEncryptionPageError),
+      find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
       findsOneWidget,
     );
   });
@@ -200,7 +203,7 @@ void main() {
         // Verify outcome
         if (tc.replaceError) {
           expect(
-            find.text(tester.l10n.diskEncryptionPageError),
+            find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
             findsOneWidget,
           );
         } else {
