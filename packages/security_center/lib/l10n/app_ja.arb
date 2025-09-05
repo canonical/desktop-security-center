@@ -1,6 +1,20 @@
 {
-  "appTitle": "セキュリティセンター",
-  "@appTitle": {},
-  "snapPermissionsExperimentalLabel": "実験的",
-  "@snapPermissionsExperimentalLabel": {}
+    "appTitle": "セキュリティセンター",
+    "@appTitle": {},
+    "snapPermissionsExperimentalLabel": "実験的",
+    "@snapPermissionsExperimentalLabel": {},
+    "recoveryKeyExceptionFileSystemTitle": "リカバリーキーファイルが保存できませんでした",
+    "@recoveryKeyExceptionFileSystemTitle": {},
+    "recoveryKeyExceptionDisallowedPathTitle": "リカバリーキーファイルが一時場所に保存できませんでした",
+    "@recoveryKeyExceptionDisallowedPathTitle": {},
+    "recoveryKeyExceptionUnknownTitle": "不明なエラー",
+    "@recoveryKeyExceptionUnknownTitle": {},
+    "recoveryKeyExceptionFileSystemBody": "フォルダーに保存する権限がありません。別の場所にするか、他の方法にしてください。",
+    "@recoveryKeyExceptionFileSystemBody": {},
+    "recoveryKeyExceptionDisallowedPathBody": "USBメモリーなど別の場所に保存するか、他の方法にしてください。",
+    "@recoveryKeyExceptionDisallowedPathBody": {},
+    "recoveryKeyFilePickerTitle": "リカバリーキーファイルの保存",
+    "@recoveryKeyFilePickerTitle": {},
+    "recoveryKeyFilePickerFilter": "テキストファイル",
+    "@recoveryKeyFilePickerFilter": {}
 }
