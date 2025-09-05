@@ -238,10 +238,14 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
           children: [
             TextField(
               autofocus: true,
-              style: const TextStyle(fontFamily: 'monospace'),
+              style: const TextStyle(fontFamily: 'Ubuntu Mono', fontSize: 15),
               decoration: InputDecoration(
                 labelText: l10n.diskEncryptionPageRecoveryKey,
                 hintText: 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
+                labelStyle:
+                    const TextStyle(fontFamily: 'Ubuntu Mono', fontSize: 15),
+                hintStyle:
+                    const TextStyle(fontFamily: 'Ubuntu Mono', fontSize: 15),
               ),
               onChanged: notifier.setKeyToCheck,
             ),
