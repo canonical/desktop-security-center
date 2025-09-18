@@ -13,14 +13,6 @@ final _log = Logger('snap_metadata_providers');
 typedef LocalSnapData = List<Snap>;
 
 @Riverpod(keepAlive: true)
-String? snapIconUrl(Ref ref, String snapName) => getService<LocalSnapData>()
-    .firstWhereOrNull((snap) => snap.name == snapName)
-    ?.media
-    .where((m) => m.type == 'icon')
-    .firstOrNull
-    ?.url;
-
-@Riverpod(keepAlive: true)
 Future<SnapIcon?> snapIcon(Ref ref, String snapName) async {
   try {
     return await getService<SnapdService>().getSnapIcon(snapName);
