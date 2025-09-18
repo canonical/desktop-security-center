@@ -89,6 +89,13 @@ class AppLocalizationsSv extends AppLocalizations {
       'Hantera behörigheter för att komma åt filer i din hemkatalog.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Hantera behörigheter';
 
   @override

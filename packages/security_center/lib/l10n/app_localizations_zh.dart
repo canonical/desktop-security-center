@@ -83,6 +83,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeInterfacePageDescription => '管理访问您主文件夹中文件的权限。';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => '管理权限';
 
   @override

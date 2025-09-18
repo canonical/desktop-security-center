@@ -89,6 +89,13 @@ class AppLocalizationsCs extends AppLocalizations {
       'Spravujte oprávnění pro přístup k souborům ve vaší domovské složce.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Spravovat oprávnění';
 
   @override

@@ -89,6 +89,13 @@ class AppLocalizationsId extends AppLocalizations {
       'Kelola izin untuk mengakses berkas di folder Rumah Anda.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Kelola izin';
 
   @override

@@ -89,6 +89,13 @@ class AppLocalizationsDe extends AppLocalizations {
       'Berechtigungen für den Zugriff auf Dateien in Ihrem Benutzerordner verwalten.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Berechtigungen verwalten';
 
   @override

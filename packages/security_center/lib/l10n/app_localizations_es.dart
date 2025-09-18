@@ -89,6 +89,13 @@ class AppLocalizationsEs extends AppLocalizations {
       'Administrar los permisos para acceder a los archivos en la carpeta del usuario.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Administrar permisos';
 
   @override

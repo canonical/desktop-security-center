@@ -89,6 +89,13 @@ class AppLocalizationsSr extends AppLocalizations {
       'Управљај дозволама за приступ фајловима у вашем Почетном фолдеру.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Управљај дозволама';
 
   @override

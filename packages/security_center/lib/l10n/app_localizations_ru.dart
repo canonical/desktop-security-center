@@ -91,6 +91,13 @@ class AppLocalizationsRu extends AppLocalizations {
       'Управление разрешениями для доступа к файлам в Домашней папке.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Управление разрешениями';
 
   @override

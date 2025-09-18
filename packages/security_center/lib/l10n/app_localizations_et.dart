@@ -89,6 +89,13 @@ class AppLocalizationsEt extends AppLocalizations {
       'Halda failide ligipääsuõigusi kodukaustas.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Halda õigusi';
 
   @override

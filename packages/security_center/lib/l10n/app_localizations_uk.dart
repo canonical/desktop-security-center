@@ -91,6 +91,13 @@ class AppLocalizationsUk extends AppLocalizations {
       'Керувати дозволами на доступ до файлів у теці «Домівка».';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Керувати дозволами';
 
   @override

@@ -89,6 +89,13 @@ class AppLocalizationsDa extends AppLocalizations {
       'Håndtér rettigheder for filadgang i din hjemmemappe.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Håndtér rettigheder';
 
   @override

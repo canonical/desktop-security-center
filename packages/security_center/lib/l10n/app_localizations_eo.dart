@@ -89,6 +89,13 @@ class AppLocalizationsEo extends AppLocalizations {
       'Administri permesojn uzi dosierojn en via hejma dosierujo.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Administri permesojn';
 
   @override
