@@ -37,6 +37,27 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    return switch (interface) {
+      SnapdInterface.home => _HomeBody(
+          snapRuleCounts: snapRuleCounts,
+          interface: interface,
+        ),
+      SnapdInterface.camera => _CameraBody(
+          snapRuleCounts: snapRuleCounts,
+          interface: interface,
+        ),
+    };
+  }
+}
+
+class _HomeBody extends ConsumerWidget {
+  const _HomeBody({required this.snapRuleCounts, required this.interface});
+
+  final Map<String, int> snapRuleCounts;
+  final SnapdInterface interface;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final tiles = snapRuleCounts.entries
         .map(
@@ -65,6 +86,39 @@ class _Body extends ConsumerWidget {
   }
 }
 
+class _CameraBody extends ConsumerWidget {
+  const _CameraBody({required this.snapRuleCounts, required this.interface});
+
+  final Map<String, int> snapRuleCounts;
+  final SnapdInterface interface;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final appTiles = snapRuleCounts.entries
+        .map(
+          (e) => _CameraAppTile(
+            snapName: e.key,
+          ),
+        )
+        .toList();
+
+    return ScrollablePage(
+      children: [
+        Text(
+          interface.localizedTitle(l10n),
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const SizedBox(height: 12),
+        Text(interface.localizedDescription(l10n)),
+        const SizedBox(height: 24),
+        TileList(
+            children: appTiles.isEmpty ? [const EmptyRulesTile()] : appTiles),
+      ],
+    );
+  }
+}
+
 class _AppTile extends ConsumerWidget {
   const _AppTile({
     required this.snapName,
@@ -87,6 +141,30 @@ class _AppTile extends ConsumerWidget {
       subtitle: Text(l10n.snapRulesCount(ruleCount)),
       trailing: const Icon(YaruIcons.pan_end),
       onTap: onTap,
+    );
+  }
+}
+
+class _CameraAppTile extends ConsumerWidget {
+  const _CameraAppTile({
+    required this.snapName,
+  });
+
+  final String snapName;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ListTile(
+      leading: AppIcon(
+        iconUrl: ref.watch(snapIconUrlProvider(snapName)),
+      ),
+      title: Text(ref.watch(snapTitleOrNameProvider(snapName))),
+      trailing: Switch(
+        value: true, // TODO: Connect to actual camera permission state
+        onChanged: (value) {
+          // TODO: Implement camera permission toggle
+        },
+      ),
     );
   }
 }

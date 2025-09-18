@@ -31,6 +31,9 @@ class AppRulesPage extends ConsumerWidget {
             error: (error, _) => ErrorWidget(error),
             loading: () => const Center(child: YaruCircularProgressIndicator()),
           ),
+      SnapdInterface.camera => const Center(
+          child: Text('Camera interface not yet implemented'),
+        ),
     };
   }
 }
