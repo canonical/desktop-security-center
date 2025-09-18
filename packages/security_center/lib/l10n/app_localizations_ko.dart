@@ -84,6 +84,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get homeInterfacePageDescription => '사용자의 홈 폴더의 파일에 접근하는 권한을 관리합니다.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => '권한 관리';
 
   @override

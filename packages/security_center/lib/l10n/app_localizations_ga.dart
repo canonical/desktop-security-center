@@ -90,6 +90,13 @@ class AppLocalizationsGa extends AppLocalizations {
       'Bainistigh ceadanna chun comhaid a rochtain i d\'fhillteán Baile.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Bainistigh ceadanna';
 
   @override

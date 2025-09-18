@@ -89,6 +89,13 @@ class AppLocalizationsTa extends AppLocalizations {
       'உங்கள் வீட்டு கோப்புறையில் கோப்புகளை அணுக இசைவுகளை நிர்வகி.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'இசைவுகளை நிர்வகி';
 
   @override

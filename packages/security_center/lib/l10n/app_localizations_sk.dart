@@ -89,6 +89,13 @@ class AppLocalizationsSk extends AppLocalizations {
       'Spravujte práva pre prístup k súborom vo vašom priečinku domov.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Spravovať oprávnenia';
 
   @override

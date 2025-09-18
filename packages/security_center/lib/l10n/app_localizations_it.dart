@@ -89,6 +89,13 @@ class AppLocalizationsIt extends AppLocalizations {
       'Gestisci i permessi per accedere ai file della tua cartella Home.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Gestione permessi';
 
   @override

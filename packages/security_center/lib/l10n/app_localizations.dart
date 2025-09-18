@@ -368,6 +368,18 @@ abstract class AppLocalizations {
   /// **'Manage permissions to access files in your Home folder.'**
   String get homeInterfacePageDescription;
 
+  /// No description provided for @cameraInterfacePageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get cameraInterfacePageTitle;
+
+  /// No description provided for @cameraInterfacePageDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow apps to access your cameras.'**
+  String get cameraInterfacePageDescription;
+
   /// No description provided for @interfacePageTitle.
   ///
   /// In en, this message translates to:

@@ -93,6 +93,13 @@ class AppLocalizationsPl extends AppLocalizations {
       'Zarządzaj uprawnieniami dostępu do plików w katalogu domowym.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Zarządzaj uprawnieniami';
 
   @override

@@ -88,6 +88,13 @@ class AppLocalizationsHe extends AppLocalizations {
       'ניהול הרשאות לגישה לקבצים בתיקיית הבית שלך.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'ניהול הרשאות';
 
   @override

@@ -89,6 +89,13 @@ class AppLocalizationsOc extends AppLocalizations {
       'Gerir las autorizacions d’accès als fichièrs dins vòstre repertòri personal.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Gerir las permissions';
 
   @override

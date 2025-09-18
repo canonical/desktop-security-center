@@ -90,6 +90,13 @@ class AppLocalizationsHu extends AppLocalizations {
       'A saját mappában lévő fájlok hozzáféréséhez való jogosultságok kezelése.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Jogosultságok kezelése';
 
   @override

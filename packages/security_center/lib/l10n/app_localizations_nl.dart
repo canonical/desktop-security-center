@@ -89,6 +89,13 @@ class AppLocalizationsNl extends AppLocalizations {
       'Machtigingen beheren voor toegang tot bestanden in je thuismap.';
 
   @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
+
+  @override
   String get interfacePageTitle => 'Machtigingen beheren';
 
   @override
