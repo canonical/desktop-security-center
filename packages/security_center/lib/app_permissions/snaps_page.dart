@@ -81,7 +81,7 @@ class _AppTile extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     return ListTile(
       leading: AppIcon(
-        iconUrl: ref.watch(snapIconUrlProvider(snapName)),
+        snapIcon: ref.watch(snapIconProvider(snapName)),
       ),
       title: Text(ref.watch(snapTitleOrNameProvider(snapName))),
       subtitle: Text(l10n.snapRulesCount(ruleCount)),

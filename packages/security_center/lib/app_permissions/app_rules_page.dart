@@ -54,7 +54,7 @@ class _HomeBody extends ConsumerWidget {
       children: [
         Row(
           children: [
-            AppIcon(iconUrl: ref.watch(snapIconUrlProvider(snap))),
+            AppIcon(snapIcon: ref.watch(snapIconProvider(snap))),
             const SizedBox(width: 10),
             Text(
               ref.watch(snapTitleOrNameProvider(snap)),
