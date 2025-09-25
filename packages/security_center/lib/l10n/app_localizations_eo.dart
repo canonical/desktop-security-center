@@ -33,6 +33,9 @@ class AppLocalizationsEo extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Ruli';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Igi programojn peti por sistemaj permesoj';
 

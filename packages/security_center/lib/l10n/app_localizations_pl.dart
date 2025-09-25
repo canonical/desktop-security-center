@@ -35,6 +35,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Wykonywanie';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Wymagaj, aby programy prosiły o uprawnienia systemowe';
 

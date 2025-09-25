@@ -33,6 +33,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Spouštění';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Vyžadovat, aby aplikace žádaly o systémová oprávnění';
 

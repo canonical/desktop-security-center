@@ -33,6 +33,9 @@ class AppLocalizationsKa extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'გაშვება';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'აპებისთვის სისტემური უფლებების მოთხოვნის აუცილებლობა';
 

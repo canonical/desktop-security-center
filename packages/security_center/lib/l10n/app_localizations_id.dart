@@ -33,6 +33,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Jalankan';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Membutuhkan aplikasi untuk meminta izin sistem';
 

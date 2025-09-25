@@ -34,6 +34,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Выполнение';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Требовать с приложений запрос системных разрешений';
 

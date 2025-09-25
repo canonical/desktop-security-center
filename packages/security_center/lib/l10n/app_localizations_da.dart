@@ -33,6 +33,9 @@ class AppLocalizationsDa extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Kørsel';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Kræv, at programmer spørger om systemrettigheder';
 

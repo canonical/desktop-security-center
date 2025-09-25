@@ -33,6 +33,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Виконання';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Вимагати від застосунків запитувати про системні дозволи';
 

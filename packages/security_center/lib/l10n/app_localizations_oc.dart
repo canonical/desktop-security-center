@@ -34,6 +34,9 @@ class AppLocalizationsOc extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Executar';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Exigir que las aplicacions demanden d’autorizacions al sistèma';
 

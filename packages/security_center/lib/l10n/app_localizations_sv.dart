@@ -33,6 +33,9 @@ class AppLocalizationsSv extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Exekvera';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Kräv program att be om systembehörigheter';
 
