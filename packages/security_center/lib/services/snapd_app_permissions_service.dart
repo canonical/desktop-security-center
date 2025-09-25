@@ -133,6 +133,9 @@ class SnapdAppPermissionsService implements AppPermissionsService {
   }
 
   @override
+  Future<void> addRule(SnapdRuleMask rule) => _snapd.addRule(rule);
+
+  @override
   Future<void> removeRule(String id) => _snapd.removeRule(id);
 
   @override
@@ -189,6 +192,21 @@ class SnapdAppPermissionsService implements AppPermissionsService {
         _snapd.disablePrompting,
         AppPermissionsServiceStatus.disabling,
       );
+
+  @override
+  Future<List<String>> getSnapsWithInterface(String interface) async {
+    try {
+      final connections = await _snapd.getConnections(interface: interface);
+      return connections.plugs
+          .where((plug) => plug.interface == interface)
+          .map((plug) => plug.snap)
+          .toSet()
+          .toList();
+    } on Exception catch (e) {
+      _log.error('Error while fetching snaps with interface $interface: $e');
+      return [];
+    }
+  }
 }
 
 extension on SnapdChange {

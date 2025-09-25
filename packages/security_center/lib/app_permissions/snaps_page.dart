@@ -24,7 +24,14 @@ class SnapsPage extends ConsumerWidget {
       data: (snapRuleCounts) =>
           _Body(snapRuleCounts: snapRuleCounts, interface: interface),
       error: (error, _) => ErrorWidget(error),
-      loading: () => const Center(child: YaruCircularProgressIndicator()),
+      loading: () {
+        // Keep showing previous data if available to prevent flickering
+        final previousData = snapRuleCounts.valueOrNull;
+        if (previousData != null) {
+          return _Body(snapRuleCounts: previousData, interface: interface);
+        }
+        return const Center(child: YaruCircularProgressIndicator());
+      },
     );
   }
 }
@@ -99,6 +106,7 @@ class _CameraBody extends ConsumerWidget {
         .map(
           (e) => _CameraAppTile(
             snapName: e.key,
+            hasAccessRule: e.value > 0,
           ),
         )
         .toList();
@@ -113,7 +121,8 @@ class _CameraBody extends ConsumerWidget {
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
         TileList(
-            children: appTiles.isEmpty ? [const EmptyRulesTile()] : appTiles),
+          children: appTiles.isEmpty ? [const EmptyRulesTile()] : appTiles,
+        ),
       ],
     );
   }
@@ -148,21 +157,38 @@ class _AppTile extends ConsumerWidget {
 class _CameraAppTile extends ConsumerWidget {
   const _CameraAppTile({
     required this.snapName,
+    required this.hasAccessRule,
   });
 
   final String snapName;
+  final bool hasAccessRule;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final notifier =
+        ref.read(snapCameraRulesModelProvider(snap: snapName).notifier);
+    final cameraRules = ref.watch(snapCameraRulesModelProvider(snap: snapName));
+
+    final hasAllowRule = cameraRules.when(
+      data: (rules) =>
+          rules.any((rule) => rule.outcome == SnapdRequestOutcome.allow),
+      loading: () => false,
+      error: (_, __) => false,
+    );
+
     return ListTile(
       leading: AppIcon(
         iconUrl: ref.watch(snapIconUrlProvider(snapName)),
       ),
       title: Text(ref.watch(snapTitleOrNameProvider(snapName))),
       trailing: Switch(
-        value: true, // TODO: Connect to actual camera permission state
+        value: hasAllowRule,
         onChanged: (value) {
-          // TODO: Implement camera permission toggle
+          if (value) {
+            notifier.removeAll().then((_) => notifier.createAccessRule());
+          } else {
+            notifier.removeAll();
+          }
         },
       ),
     );
