@@ -8,9 +8,9 @@ part 'camera_interface.g.dart';
 /// Constraints for a camera interface [SnapdRule].
 @freezed
 class CameraRuleConstraints with _$CameraRuleConstraints {
-    const factory CameraRuleConstraints({
-        required Map<Permission, PermissionConstraints> permissions,
-    }) = _CameraRuleConstraints;
+  const factory CameraRuleConstraints({
+    required Map<Permission, PermissionConstraints> permissions,
+  }) = _CameraRuleConstraints;
 
   factory CameraRuleConstraints.fromJson(Map<String, dynamic> json) =>
       _$CameraRuleConstraintsFromJson(json);
@@ -39,6 +39,6 @@ enum Permission {
       );
 
   String localize(AppLocalizations l10n) => switch (this) {
-        Permission.access => l10n.snapPermissionExecuteLabel, // FIXME: wrong string
+        Permission.access => l10n.snapPermissionAccessLabel,
       };
 }
