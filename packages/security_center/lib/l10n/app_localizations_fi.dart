@@ -33,6 +33,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Suorita';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Vaadi sovellusten kysyä järjestelmän käyttöoikeuksia';
 

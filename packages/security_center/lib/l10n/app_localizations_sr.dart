@@ -33,6 +33,9 @@ class AppLocalizationsSr extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Извршавање';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Захтевај да апликације траже дозволе за приступ системским ресурсима';
 

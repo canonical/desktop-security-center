@@ -34,6 +34,9 @@ class AppLocalizationsGa extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Rith';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Éilíonn aipeanna ceadanna córais a iarraidh';
 

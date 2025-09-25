@@ -33,6 +33,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Uitvoeren';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Apps moeten om systeemmachtigingen vragen';
 

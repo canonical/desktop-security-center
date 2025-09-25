@@ -33,6 +33,9 @@ class AppLocalizationsEt extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Käivitamine';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Eelda, et rakendused küsivad operatsioonisüsteemilt õigusi';
 

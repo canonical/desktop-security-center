@@ -33,6 +33,9 @@ class AppLocalizationsFa extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'اجرا';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'نیازمند درخواست اجازهٔ سامانه‌ای از سوی کاره';
 

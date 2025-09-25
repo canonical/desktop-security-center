@@ -290,6 +290,12 @@ abstract class AppLocalizations {
   /// **'Execute'**
   String get snapPermissionExecuteLabel;
 
+  /// No description provided for @snapPermissionAccessLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Access'**
+  String get snapPermissionAccessLabel;
+
   /// No description provided for @snapPermissionsEnableTitle.
   ///
   /// In en, this message translates to:

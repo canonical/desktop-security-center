@@ -33,6 +33,9 @@ class AppLocalizationsSk extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Spúšťanie';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Donútiť aplikácie požiadať o oprávnenia';
 

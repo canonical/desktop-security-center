@@ -33,6 +33,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'இயக்கு';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'கணினி இசைவுகளைக் கேட்கப் பயன்பாடுகள் தேவை';
 

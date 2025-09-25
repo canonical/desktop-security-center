@@ -33,6 +33,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Execute';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Require apps to ask for system permissions';
 

@@ -34,6 +34,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Végrehajtás';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Megkövetelés az alkalmazásoktól, hogy rendszerjogosultságokat kérjenek';
 

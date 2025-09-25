@@ -33,6 +33,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get snapPermissionExecuteLabel => '执行';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle => '要求应用程序申请系统权限';
 
   @override

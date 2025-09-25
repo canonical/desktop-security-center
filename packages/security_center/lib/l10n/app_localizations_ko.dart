@@ -33,6 +33,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get snapPermissionExecuteLabel => '실행';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle => '각 앱이 시스템 권한을 요청하도록 하기';
 
   @override
