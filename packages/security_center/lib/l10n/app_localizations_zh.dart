@@ -33,6 +33,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get snapPermissionExecuteLabel => '执行';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle => '要求应用程序申请系统权限';
 
   @override
@@ -81,6 +84,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeInterfacePageDescription => '管理访问您主文件夹中文件的权限。';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => '管理权限';

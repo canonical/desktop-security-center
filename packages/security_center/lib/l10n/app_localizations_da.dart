@@ -33,6 +33,9 @@ class AppLocalizationsDa extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Kørsel';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Kræv, at programmer spørger om systemrettigheder';
 
@@ -87,6 +90,13 @@ class AppLocalizationsDa extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Håndtér rettigheder for filadgang i din hjemmemappe.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Håndtér rettigheder';

@@ -290,6 +290,12 @@ abstract class AppLocalizations {
   /// **'Execute'**
   String get snapPermissionExecuteLabel;
 
+  /// No description provided for @snapPermissionAccessLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Access'**
+  String get snapPermissionAccessLabel;
+
   /// No description provided for @snapPermissionsEnableTitle.
   ///
   /// In en, this message translates to:
@@ -367,6 +373,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Manage permissions to access files in your Home folder.'**
   String get homeInterfacePageDescription;
+
+  /// No description provided for @cameraInterfacePageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get cameraInterfacePageTitle;
+
+  /// No description provided for @cameraInterfacePageDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow apps to access your cameras.'**
+  String get cameraInterfacePageDescription;
 
   /// No description provided for @interfacePageTitle.
   ///

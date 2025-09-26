@@ -33,6 +33,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Uitvoeren';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Apps moeten om systeemmachtigingen vragen';
 
@@ -87,6 +90,13 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Machtigingen beheren voor toegang tot bestanden in je thuismap.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Machtigingen beheren';

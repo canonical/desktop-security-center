@@ -30,6 +30,13 @@ class FakeAppPermissionsService implements AppPermissionsService {
   late final StreamController<AppPermissionsServiceStatus> _statusController;
 
   @override
+  Future<void> addRule(SnapdRuleMask rule) async {
+    rules.add(rule.toSnapdRule());
+    _statusController
+        .add(AppPermissionsServiceStatus.enabled(List.from(rules)));
+  }
+
+  @override
   Future<void> removeRule(String id) async {
     rules.removeWhere((rule) => rule.id == id);
   }
@@ -88,5 +95,13 @@ class FakeAppPermissionsService implements AppPermissionsService {
     _statusController.add(AppPermissionsServiceStatus.enabling(0.0));
     await Future.delayed(const Duration(seconds: 3));
     _statusController.add(AppPermissionsServiceStatus.enabled(rules));
+}
+
+  @override
+  Future<List<String>> getSnapsWithInterface(String interface) async {
+    if (interface == 'camera') {
+      return ['firefox', 'cheese', 'obs-studio', 'discord'];
+    }
+    return [];
   }
 }

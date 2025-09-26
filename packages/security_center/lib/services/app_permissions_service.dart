@@ -39,7 +39,9 @@ abstract class AppPermissionsService {
 
   Future<void> enable();
   Future<void> disable();
+  Future<void> addRule(SnapdRuleMask rule);
   Future<void> removeRule(String id);
   Future<void> patchRule(String id, Map<String, dynamic> constraints);
   Future<void> removeAllRules({required String snap, String? interface});
+  Future<List<String>> getSnapsWithInterface(String interface);
 }

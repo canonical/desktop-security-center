@@ -34,6 +34,9 @@ class AppLocalizationsOc extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Executar';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Exigir que las aplicacions demanden d’autorizacions al sistèma';
 
@@ -87,6 +90,13 @@ class AppLocalizationsOc extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Gerir las autorizacions d’accès als fichièrs dins vòstre repertòri personal.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Gerir las permissions';

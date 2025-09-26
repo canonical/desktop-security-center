@@ -33,6 +33,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Suorita';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Vaadi sovellusten kysyä järjestelmän käyttöoikeuksia';
 
@@ -87,6 +90,13 @@ class AppLocalizationsFi extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Hallitse oikeuksia kotikansiossa olevie tiedostojen käytön suhteen.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Hallitse oikeuksia';

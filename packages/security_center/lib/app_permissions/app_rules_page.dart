@@ -31,6 +31,7 @@ class AppRulesPage extends ConsumerWidget {
             error: (error, _) => ErrorWidget(error),
             loading: () => const Center(child: YaruCircularProgressIndicator()),
           ),
+      SnapdInterface.camera => const SizedBox.shrink(),
     };
   }
 }

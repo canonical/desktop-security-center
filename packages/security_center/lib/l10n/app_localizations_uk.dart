@@ -33,6 +33,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Виконання';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Вимагати від застосунків запитувати про системні дозволи';
 
@@ -89,6 +92,13 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Керувати дозволами на доступ до файлів у теці «Домівка».';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Керувати дозволами';

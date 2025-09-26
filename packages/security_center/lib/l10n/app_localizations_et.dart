@@ -33,6 +33,9 @@ class AppLocalizationsEt extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Käivitamine';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Eelda, et rakendused küsivad operatsioonisüsteemilt õigusi';
 
@@ -87,6 +90,13 @@ class AppLocalizationsEt extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Halda failide ligipääsuõigusi kodukaustas.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Halda õigusi';

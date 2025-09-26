@@ -33,6 +33,9 @@ class AppLocalizationsKa extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'გაშვება';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'აპებისთვის სისტემური უფლებების მოთხოვნის აუცილებლობა';
 
@@ -87,6 +90,13 @@ class AppLocalizationsKa extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'მართეთ წვდომები თქენს საწყის საქაღალდეში ფაილებთან წვდომისთვის.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'წვდომების მართვა';

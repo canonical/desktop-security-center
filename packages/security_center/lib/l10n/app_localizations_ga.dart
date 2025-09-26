@@ -34,6 +34,9 @@ class AppLocalizationsGa extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Rith';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Éilíonn aipeanna ceadanna córais a iarraidh';
 
@@ -88,6 +91,13 @@ class AppLocalizationsGa extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Bainistigh ceadanna chun comhaid a rochtain i d\'fhillteán Baile.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Bainistigh ceadanna';
