@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:file/memory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -336,6 +337,13 @@ SnapdService registerMockSnapdService({
   when(
     client.watchChange(changeId),
   ).thenAnswer((_) => Stream.fromIterable(changes));
+
+  when(client.getSnapIcon(any)).thenAnswer(
+    (_) async => SnapIcon(
+      contentType: 'image/png',
+      bytes: Uint8List(0),
+    ),
+  );
 
   registerServiceInstance<SnapdService>(client);
   addTearDown(unregisterService<SnapdService>);

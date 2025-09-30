@@ -36,21 +36,5 @@
                 }
             }
         }
-    },
-    {
-        "snap": "firefox",
-        "interface": "camera",
-        "constraints": {
-            "outcome": "allow",
-            "lifespan": "forever"
-        }
-    },
-    {
-        "snap": "thunderbird",
-        "interface": "camera",
-        "constraints": {
-            "outcome": "deny",
-            "lifespan": "forever"
-        }
     }
 ]

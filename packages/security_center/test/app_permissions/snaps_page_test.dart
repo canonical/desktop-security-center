@@ -38,6 +38,7 @@ void main() {
       ],
     );
     registerMockLocalSnapData();
+    registerMockSnapdService();
     await tester.pumpApp(
       (_) => UncontrolledProviderScope(
         container: container,
@@ -110,6 +111,7 @@ void main() {
         snaps: ['firefox', 'cheese', 'obs-studio'],
       );
       registerMockLocalSnapData();
+      registerMockSnapdService();
 
       await tester.pumpApp(
         (_) => UncontrolledProviderScope(
@@ -162,6 +164,7 @@ void main() {
         snaps: ['firefox'],
       );
       registerMockLocalSnapData();
+      registerMockSnapdService();
 
       await tester.pumpApp(
         (_) => UncontrolledProviderScope(
