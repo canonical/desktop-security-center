@@ -31,7 +31,6 @@ Future<void> main(List<String> args) async {
     ..addFlag(
       'enable-camera-interface',
       help: 'Enable the experimental camera interface',
-      defaultsTo: false,
     )
     ..addOption(
       'test-rules',

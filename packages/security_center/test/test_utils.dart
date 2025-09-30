@@ -74,6 +74,7 @@ ProviderContainer createContainer({
 AppPermissionsService registerMockAppPermissionsService({
   List<SnapdRule> rules = const [],
   bool enabled = true,
+  List<String> snaps = const [],
 }) {
   final service = MockAppPermissionsService();
   when(service.status).thenAnswer(
@@ -83,6 +84,8 @@ AppPermissionsService registerMockAppPermissionsService({
           : AppPermissionsServiceStatus.disabled(),
     ),
   );
+
+  when(service.getSnapsWithInterface(any)).thenAnswer((_) async => snaps);
 
   registerMockService<AppPermissionsService>(service);
   addTearDown(unregisterService<AppPermissionsService>);
@@ -343,10 +346,13 @@ SnapdService registerMockSnapdService({
 FeatureService registerMockFeatureService({
   bool isDiskEncryptionAvailable = true,
   bool isDryRun = false,
+  bool isCameraInterfaceAvailable = false,
 }) {
   final service = MockFeatureService();
   when(service.isDiskEncryptionAvailable).thenReturn(isDiskEncryptionAvailable);
   when(service.isDryRun).thenReturn(isDryRun);
+  when(service.isCameraInterfaceAvailable)
+      .thenReturn(isCameraInterfaceAvailable);
 
   registerMockService<FeatureService>(service);
   addTearDown(unregisterService<FeatureService>);

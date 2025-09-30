@@ -88,8 +88,9 @@ class _HomeBody extends ConsumerWidget {
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
         TileList(
-            children:
-                tiles.isEmpty ? [EmptyRulesTile(interface: interface)] : tiles),
+          children:
+              tiles.isEmpty ? [EmptyRulesTile(interface: interface)] : tiles,
+        ),
       ],
     );
   }

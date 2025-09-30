@@ -23,8 +23,10 @@ void main() {
           constraints: {},
         ),
       ],
+      snaps: ['cheese'],
     );
     registerMockSnapdService();
+    registerMockFeatureService(isCameraInterfaceAvailable: true);
     await tester.pumpApp(
       (_) => UncontrolledProviderScope(
         container: container,
@@ -45,6 +47,59 @@ void main() {
       ),
       findsOneWidget,
     );
+
+    final cameraInterfaceTile = find.ancestor(
+      of: find.text(SnapdInterface.camera.localizedTitle(tester.l10n)),
+      matching: find.byType(ListTile),
+    );
+    expect(cameraInterfaceTile, findsOneWidget);
+    expect(
+      find.descendant(
+        of: cameraInterfaceTile,
+        matching: find.text(tester.l10n.interfaceSnapCount(1)),
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('camera interface hidden when feature flag disabled',
+      (tester) async {
+    final container = createContainer();
+    registerMockAppPermissionsService(
+      rules: [
+        SnapdRule(
+          id: 'ruleId',
+          timestamp: DateTime(2024),
+          snap: 'firefox',
+          interface: 'home',
+          constraints: {},
+        ),
+      ],
+      snaps: ['cheese'],
+    );
+    registerMockSnapdService();
+    registerMockFeatureService();
+    await tester.pumpApp(
+      (_) => UncontrolledProviderScope(
+        container: container,
+        child: const InterfacesPage(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // Home interface should still be visible
+    final homeInterfaceTile = find.ancestor(
+      of: find.text(SnapdInterface.home.localizedTitle(tester.l10n)),
+      matching: find.byType(ListTile),
+    );
+    expect(homeInterfaceTile, findsOneWidget);
+
+    // Camera interface should be hidden
+    final cameraInterfaceTile = find.ancestor(
+      of: find.text(SnapdInterface.camera.localizedTitle(tester.l10n)),
+      matching: find.byType(ListTile),
+    );
+    expect(cameraInterfaceTile, findsNothing);
   });
 
   group('toggle prompting', () {
