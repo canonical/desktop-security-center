@@ -8,12 +8,16 @@ import 'package:security_center/app_permissions/camera_interface.dart'
 import 'package:security_center/app_permissions/home_interface.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/services/app_permissions_service.dart';
+import 'package:security_center/services/feature_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 export 'package:security_center/services/app_permissions_service.dart';
 
 part 'rules_providers.freezed.dart';
 part 'rules_providers.g.dart';
+
+@riverpod
+FeatureService featureService(Ref ref) => getService<FeatureService>();
 
 @riverpod
 class PromptingStatusModel extends _$PromptingStatusModel {
@@ -44,10 +48,13 @@ Future<Map<SnapdInterface, int>> interfaceSnapCounts(
   Ref ref,
 ) async {
   final interfaceSnapCounts = <SnapdInterface, int>{};
+  final featureService = ref.watch(featureServiceProvider);
 
-  // For camera interface, get all snaps that have camera interface
-  final cameraSnaps = await ref.watch(cameraSnapsProvider.future);
-  interfaceSnapCounts[SnapdInterface.camera] = cameraSnaps.length;
+  // Only include camera interface if feature is enabled
+  if (featureService.isCameraInterfaceAvailable) {
+    final cameraSnaps = await ref.watch(cameraSnapsProvider.future);
+    interfaceSnapCounts[SnapdInterface.camera] = cameraSnaps.length;
+  }
 
   // For home interface, get all rules
   final rules = await ref.watch(rulesProvider.future);

@@ -28,6 +28,11 @@ Future<void> main(List<String> args) async {
       'dry-run',
       help: 'Use a fake rules service instead of snapd',
     )
+    ..addFlag(
+      'enable-camera-interface',
+      help: 'Enable the experimental camera interface',
+      defaultsTo: false,
+    )
     ..addOption(
       'test-rules',
       help: 'Path to a JSON file containing test rules',
@@ -43,7 +48,10 @@ Future<void> main(List<String> args) async {
   }
 
   // Create and register feature service to determine available features
-  final featureService = FeatureService(isDryRun: argResults.flag('dry-run'));
+  final featureService = FeatureService(
+    isDryRun: argResults.flag('dry-run'),
+    isCameraInterfaceEnabled: argResults.flag('enable-camera-interface'),
+  );
   registerServiceInstance<FeatureService>(featureService);
 
   // Initialize available routes

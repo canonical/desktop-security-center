@@ -7,9 +7,13 @@ final _log = Logger('feature_service');
 /// Service for determining what features are available based on system state
 /// and cli flags
 class FeatureService {
-  FeatureService({required this.isDryRun});
+  FeatureService({
+    required this.isDryRun,
+    this.isCameraInterfaceEnabled = false,
+  });
 
   final bool isDryRun;
+  final bool isCameraInterfaceEnabled;
 
   bool get isDiskEncryptionAvailable {
     if (isDryRun) {
@@ -17,6 +21,8 @@ class FeatureService {
     }
     return _isUsingFDE();
   }
+
+  bool get isCameraInterfaceAvailable => isCameraInterfaceEnabled || isDryRun;
 
   /// Checks if the system is using FDE by detecting the existence of
   /// /dev/disk/by-label/ubuntu-data-enc
