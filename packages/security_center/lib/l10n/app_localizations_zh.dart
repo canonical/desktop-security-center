@@ -77,6 +77,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => '尚无规则';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => '删除所有规则';
 
   @override

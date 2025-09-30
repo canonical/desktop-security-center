@@ -53,6 +53,8 @@
     },
     "snapRulesPageEmptyTileLabel": "No rules yet",
     "@snapRulesPageEmptyTileLabel": {},
+    "cameraRulesPageEmptyTileLabel": "No apps requested access yet",
+    "@cameraRulesPageEmptyTileLabel": {},
     "snapRulesRemoveAll": "Remove all rules",
     "@snapRulesRemoveAll": {},
     "homeInterfacePageTitle": "Home folder",

@@ -82,6 +82,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Zatím žádná pravidla';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Odstranit všechna pravidla';
 
   @override

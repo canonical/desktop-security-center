@@ -356,6 +356,12 @@ abstract class AppLocalizations {
   /// **'No rules yet'**
   String get snapRulesPageEmptyTileLabel;
 
+  /// No description provided for @cameraRulesPageEmptyTileLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'No apps requested access yet'**
+  String get cameraRulesPageEmptyTileLabel;
+
   /// No description provided for @snapRulesRemoveAll.
   ///
   /// In en, this message translates to:

@@ -82,6 +82,9 @@ class AppLocalizationsKa extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'ჯერ წესები არაა';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'ყველა წესის წაშლა';
 
   @override

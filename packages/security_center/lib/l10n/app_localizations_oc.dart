@@ -82,6 +82,9 @@ class AppLocalizationsOc extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Cap de règlas pel moment';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Levar totas las règlas';
 
   @override

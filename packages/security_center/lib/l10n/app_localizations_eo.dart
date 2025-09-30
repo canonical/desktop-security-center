@@ -82,6 +82,9 @@ class AppLocalizationsEo extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Neniu regulo ankoraŭ';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Forigi ĉiujn regulojn';
 
   @override

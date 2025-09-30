@@ -83,6 +83,9 @@ class AppLocalizationsGa extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Níl aon rialacha fós';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Bain na rialacha go léir';
 
   @override

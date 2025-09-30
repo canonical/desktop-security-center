@@ -78,6 +78,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => '정책 없음';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => '모든 정책 삭제';
 
   @override

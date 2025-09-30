@@ -82,6 +82,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Belum ada aturan';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Hapus semua aturan';
 
   @override

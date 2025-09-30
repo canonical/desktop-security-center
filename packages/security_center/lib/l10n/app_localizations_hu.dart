@@ -83,6 +83,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Még nincsenek szabályok';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Összes szabály eltávolítása';
 
   @override

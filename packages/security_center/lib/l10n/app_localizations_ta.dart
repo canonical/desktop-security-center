@@ -82,6 +82,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'இன்னும் விதிகள் இல்லை';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'எல்லா விதிகளையும் அகற்று';
 
   @override

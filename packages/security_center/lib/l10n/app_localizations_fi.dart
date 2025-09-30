@@ -82,6 +82,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Ei vielä sääntöjä';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Poista kaikki säännöt';
 
   @override

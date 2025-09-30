@@ -82,6 +82,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Aún no hay reglas';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Eliminar todas las reglas';
 
   @override
