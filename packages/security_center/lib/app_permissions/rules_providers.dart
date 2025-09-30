@@ -193,7 +193,7 @@ class SnapCameraRulesModel extends _$SnapCameraRulesModel {
   Future<void> removeRule(String id) async {
     final service = getService<AppPermissionsService>();
     await service.removeRule(id);
-    ref.invalidateSelf();
+    ref.invalidate(rulesProvider);
   }
 
   Future<void> createAccessRule({
@@ -218,7 +218,7 @@ class SnapCameraRulesModel extends _$SnapCameraRulesModel {
 
     final service = getService<AppPermissionsService>();
     await service.addRule(rule);
-    ref.invalidateSelf();
+    ref.invalidate(rulesProvider);
   }
 
   Future<void> removeAll() async {
@@ -227,7 +227,7 @@ class SnapCameraRulesModel extends _$SnapCameraRulesModel {
       snap: snap,
       interface: SnapdInterface.camera.name,
     );
-    ref.invalidateSelf();
+    ref.invalidate(rulesProvider);
   }
 }
 

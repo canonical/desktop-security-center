@@ -87,7 +87,9 @@ class _HomeBody extends ConsumerWidget {
         const SizedBox(height: 12),
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
-        TileList(children: tiles.isEmpty ? [const EmptyRulesTile()] : tiles),
+        TileList(
+            children:
+                tiles.isEmpty ? [EmptyRulesTile(interface: interface)] : tiles),
       ],
     );
   }
@@ -106,7 +108,6 @@ class _CameraBody extends ConsumerWidget {
         .map(
           (e) => _CameraAppTile(
             snapName: e.key,
-            hasAccessRule: e.value > 0,
           ),
         )
         .toList();
@@ -121,7 +122,9 @@ class _CameraBody extends ConsumerWidget {
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
         TileList(
-          children: appTiles.isEmpty ? [const EmptyRulesTile()] : appTiles,
+          children: appTiles.isEmpty
+              ? [EmptyRulesTile(interface: interface)]
+              : appTiles,
         ),
       ],
     );
@@ -157,11 +160,9 @@ class _AppTile extends ConsumerWidget {
 class _CameraAppTile extends ConsumerWidget {
   const _CameraAppTile({
     required this.snapName,
-    required this.hasAccessRule,
   });
 
   final String snapName;
-  final bool hasAccessRule;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -176,20 +177,23 @@ class _CameraAppTile extends ConsumerWidget {
       error: (_, __) => false,
     );
 
-    return ListTile(
-      leading: AppIcon(
-        iconUrl: ref.watch(snapIconUrlProvider(snapName)),
-      ),
-      title: Text(ref.watch(snapTitleOrNameProvider(snapName))),
-      trailing: Switch(
-        value: hasAllowRule,
-        onChanged: (value) {
-          if (value) {
-            notifier.removeAll().then((_) => notifier.createAccessRule());
-          } else {
-            notifier.removeAll();
-          }
-        },
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: ListTile(
+        leading: AppIcon(
+          iconUrl: ref.watch(snapIconUrlProvider(snapName)),
+        ),
+        title: Text(ref.watch(snapTitleOrNameProvider(snapName))),
+        trailing: Switch(
+          value: hasAllowRule,
+          onChanged: (value) {
+            if (value) {
+              notifier.removeAll().then((_) => notifier.createAccessRule());
+            } else {
+              notifier.removeAll();
+            }
+          },
+        ),
       ),
     );
   }
