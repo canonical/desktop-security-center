@@ -104,7 +104,7 @@ class FakeAppPermissionsService implements AppPermissionsService {
   @override
   Future<List<String>> getSnapsWithInterface(String interface) async {
     if (interface == 'camera') {
-      return [];
+      return ['firefox', 'thunderbird', 'cheese'];
     }
     return [];
   }

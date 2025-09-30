@@ -45,11 +45,11 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return switch (interface) {
-      SnapdInterface.home => _HomeBody(
+      SnapdInterface.home => _HomeInterfaceBody(
           snapRuleCounts: snapRuleCounts,
           interface: interface,
         ),
-      SnapdInterface.camera => _CameraBody(
+      SnapdInterface.camera => _CameraInterfaceBody(
           snapRuleCounts: snapRuleCounts,
           interface: interface,
         ),
@@ -57,8 +57,11 @@ class _Body extends ConsumerWidget {
   }
 }
 
-class _HomeBody extends ConsumerWidget {
-  const _HomeBody({required this.snapRuleCounts, required this.interface});
+class _HomeInterfaceBody extends ConsumerWidget {
+  const _HomeInterfaceBody({
+    required this.snapRuleCounts,
+    required this.interface,
+  });
 
   final Map<String, int> snapRuleCounts;
   final SnapdInterface interface;
@@ -68,7 +71,7 @@ class _HomeBody extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final tiles = snapRuleCounts.entries
         .map(
-          (e) => _AppTile(
+          (e) => _HomeInterfaceAppTile(
             snapName: e.key,
             ruleCount: e.value,
             onTap: () => Navigator.of(context).pushSnapPermissions(
@@ -96,8 +99,11 @@ class _HomeBody extends ConsumerWidget {
   }
 }
 
-class _CameraBody extends ConsumerWidget {
-  const _CameraBody({required this.snapRuleCounts, required this.interface});
+class _CameraInterfaceBody extends ConsumerWidget {
+  const _CameraInterfaceBody({
+    required this.snapRuleCounts,
+    required this.interface,
+  });
 
   final Map<String, int> snapRuleCounts;
   final SnapdInterface interface;
@@ -107,7 +113,7 @@ class _CameraBody extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final appTiles = snapRuleCounts.entries
         .map(
-          (e) => _CameraAppTile(
+          (e) => _CameraInterfaceAppTile(
             snapName: e.key,
           ),
         )
@@ -132,8 +138,8 @@ class _CameraBody extends ConsumerWidget {
   }
 }
 
-class _AppTile extends ConsumerWidget {
-  const _AppTile({
+class _HomeInterfaceAppTile extends ConsumerWidget {
+  const _HomeInterfaceAppTile({
     required this.snapName,
     required this.ruleCount,
     required this.onTap,
@@ -158,8 +164,8 @@ class _AppTile extends ConsumerWidget {
   }
 }
 
-class _CameraAppTile extends ConsumerWidget {
-  const _CameraAppTile({
+class _CameraInterfaceAppTile extends ConsumerWidget {
+  const _CameraInterfaceAppTile({
     required this.snapName,
   });
 
@@ -182,7 +188,7 @@ class _CameraAppTile extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: ListTile(
         leading: AppIcon(
-          iconUrl: ref.watch(snapIconUrlProvider(snapName)),
+          snapIcon: ref.watch(snapIconProvider(snapName)),
         ),
         title: Text(ref.watch(snapTitleOrNameProvider(snapName))),
         trailing: Switch(
