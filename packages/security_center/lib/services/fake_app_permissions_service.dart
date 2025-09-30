@@ -39,6 +39,8 @@ class FakeAppPermissionsService implements AppPermissionsService {
   @override
   Future<void> removeRule(String id) async {
     rules.removeWhere((rule) => rule.id == id);
+    _statusController
+        .add(AppPermissionsServiceStatus.enabled(List.from(rules)));
   }
 
   @override
@@ -63,6 +65,8 @@ class FakeAppPermissionsService implements AppPermissionsService {
           (rule.snap == snap) &&
           (interface == null || rule.interface == interface),
     );
+    _statusController
+        .add(AppPermissionsServiceStatus.enabled(List.from(rules)));
   }
 
   @override
@@ -95,12 +99,12 @@ class FakeAppPermissionsService implements AppPermissionsService {
     _statusController.add(AppPermissionsServiceStatus.enabling(0.0));
     await Future.delayed(const Duration(seconds: 3));
     _statusController.add(AppPermissionsServiceStatus.enabled(rules));
-}
+  }
 
   @override
   Future<List<String>> getSnapsWithInterface(String interface) async {
     if (interface == 'camera') {
-      return ['firefox', 'cheese', 'obs-studio', 'discord'];
+      return [];
     }
     return [];
   }
