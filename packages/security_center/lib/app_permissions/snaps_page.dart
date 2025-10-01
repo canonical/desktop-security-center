@@ -9,7 +9,10 @@ import 'package:security_center/widgets/app_icon.dart';
 import 'package:security_center/widgets/empty_rules_tile.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
+import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:yaru/yaru.dart';
+
+final _log = Logger('snapd_app_permissions_service');
 
 class SnapsPage extends ConsumerWidget {
   const SnapsPage({required this.interface, super.key});
@@ -24,14 +27,8 @@ class SnapsPage extends ConsumerWidget {
       data: (snapRuleCounts) =>
           _Body(snapRuleCounts: snapRuleCounts, interface: interface),
       error: (error, _) => ErrorWidget(error),
-      loading: () {
-        // Keep showing previous data if available to prevent flickering
-        final previousData = snapRuleCounts.valueOrNull;
-        if (previousData != null) {
-          return _Body(snapRuleCounts: previousData, interface: interface);
-        }
-        return const Center(child: YaruCircularProgressIndicator());
-      },
+      loading: () => const Center(child: YaruCircularProgressIndicator()),
+      skipLoadingOnReload: true,
     );
   }
 }
@@ -181,7 +178,10 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
       data: (rules) =>
           rules.any((rule) => rule.outcome == SnapdRequestOutcome.allow),
       loading: () => false,
-      error: (_, __) => false,
+      error: (error, _) {
+        _log.error('Failed to load camera rules for snap $snapName: $error');
+        return false;
+      },
     );
 
     return Padding(

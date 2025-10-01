@@ -1,6 +1,11 @@
 import 'package:flutter/widgets.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:security_center/l10n.dart';
+import 'package:security_center/services/app_permissions_service.dart';
 import 'package:yaru/yaru.dart';
+
+part 'snapd_interface.freezed.dart';
+part 'snapd_interface.g.dart';
 
 enum SnapdInterface {
   home,
@@ -25,4 +30,17 @@ enum SnapdInterface {
         home => YaruIcons.folder,
         camera => YaruIcons.camera_photo,
       };
+}
+
+/// Permission level constraints for a [SnapdRule].
+@freezed
+class PermissionConstraints with _$PermissionConstraints {
+  const factory PermissionConstraints({
+    required SnapdRequestOutcome outcome,
+    required SnapdRequestLifespan lifespan,
+    DateTime? expiration,
+  }) = _PermissionConstraints;
+
+  factory PermissionConstraints.fromJson(Map<String, dynamic> json) =>
+      _$PermissionConstraintsFromJson(json);
 }

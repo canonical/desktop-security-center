@@ -17,9 +17,6 @@ part 'rules_providers.freezed.dart';
 part 'rules_providers.g.dart';
 
 @riverpod
-FeatureService featureService(Ref ref) => getService<FeatureService>();
-
-@riverpod
 class PromptingStatusModel extends _$PromptingStatusModel {
   late final _service = getService<AppPermissionsService>();
 
@@ -48,7 +45,7 @@ Future<Map<SnapdInterface, int>> interfaceSnapCounts(
   Ref ref,
 ) async {
   final interfaceSnapCounts = <SnapdInterface, int>{};
-  final featureService = ref.watch(featureServiceProvider);
+  final featureService = getService<FeatureService>();
 
   // Only include camera interface if feature is enabled
   if (featureService.isCameraInterfaceAvailable) {
@@ -159,7 +156,7 @@ class SnapHomeRulesModel extends _$SnapHomeRulesModel {
 
   Future<void> removePermissions(
     String id,
-    List<Permission> permissions,
+    List<HomePermission> permissions,
   ) async {
     final constraints = {
       'permissions': {for (final p in permissions) p.name: null},
@@ -209,7 +206,7 @@ class SnapCameraRulesModel extends _$SnapCameraRulesModel {
   }) async {
     final constraints = camera_interface.CameraRuleConstraints(
       permissions: {
-        camera_interface.Permission.access:
+        camera_interface.CameraPermission.access:
             camera_interface.PermissionConstraints(
           outcome: outcome,
           lifespan: lifespan,
@@ -245,7 +242,7 @@ class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
     required bool deleteRuleOnRemoval,
     required String snap,
     required String pathPattern,
-    required List<Permission> permissions,
+    required List<HomePermission> permissions,
     required SnapdRequestOutcome outcome,
     required SnapdRequestLifespan lifespan,
     DateTime? expiration,
@@ -288,7 +285,7 @@ class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
           snap: rule.snap,
           pathPattern: constraints.pathPattern,
           permissions:
-              constraints.permissions.map(Permission.fromString).toList(),
+              constraints.permissions.map(HomePermission.fromString).toList(),
           outcome: rule.outcome!,
           lifespan: rule.lifespan!,
           expiration: rule.expiration,
@@ -311,7 +308,7 @@ class SnapdCameraRuleFragment with _$SnapdCameraRuleFragment {
   const factory SnapdCameraRuleFragment({
     required String ruleId,
     required String snap,
-    required camera_interface.Permission permission,
+    required camera_interface.CameraPermission permission,
     required SnapdRequestOutcome outcome,
     required SnapdRequestLifespan lifespan,
     DateTime? expiration,
@@ -324,7 +321,7 @@ class SnapdCameraRuleFragment with _$SnapdCameraRuleFragment {
       return SnapdCameraRuleFragment(
         ruleId: rule.id,
         snap: rule.snap,
-        permission: camera_interface.Permission.access,
+        permission: camera_interface.CameraPermission.access,
         outcome: rule.outcome!,
         lifespan: rule.lifespan!,
         expiration: rule.expiration,
