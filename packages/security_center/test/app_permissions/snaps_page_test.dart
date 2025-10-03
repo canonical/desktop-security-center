@@ -98,7 +98,14 @@ void main() {
             timestamp: DateTime(2024),
             snap: 'cheese',
             interface: 'camera',
-            constraints: {},
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'allow',
+                  'lifespan': 'session',
+                },
+              },
+            },
           ),
           SnapdRule(
             id: 'cameraRule3',
@@ -130,23 +137,35 @@ void main() {
         findsOneWidget,
       );
 
-      final firefoxTile = find.ancestor(
-        of: find.text('firefox'),
-        matching: find.byType(ListTile),
-      );
-      expect(firefoxTile, findsOneWidget);
+      expect(find.text('firefox'), findsOneWidget);
+      expect(find.text('cheese'), findsOneWidget);
+      expect(find.text('obs-studio'), findsOneWidget);
 
+      // Check that cheese has session subtitle
       final cheeseTile = find.ancestor(
         of: find.text('cheese'),
-        matching: find.byType(ListTile),
+        matching: find.byType(SizedBox),
       );
-      expect(cheeseTile, findsOneWidget);
+      expect(
+        find.descendant(
+          of: cheeseTile,
+          matching: find.text(tester.l10n.snapdRuleCategorySessionAllowed),
+        ),
+        findsOneWidget,
+      );
 
-      final obsStudioTile = find.ancestor(
-        of: find.text('obs-studio'),
-        matching: find.byType(ListTile),
+      // Check that firefox does not have subtitle (forever rule)
+      final firefoxTile = find.ancestor(
+        of: find.text('firefox'),
+        matching: find.byType(SizedBox),
       );
-      expect(obsStudioTile, findsOneWidget);
+      expect(
+        find.descendant(
+          of: firefoxTile,
+          matching: find.text(tester.l10n.snapdRuleCategorySessionAllowed),
+        ),
+        findsNothing,
+      );
     });
 
     testWidgets('camera interface toggle functionality', (tester) async {
@@ -174,16 +193,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final firefoxTile = find.ancestor(
-        of: find.text('firefox'),
-        matching: find.byType(ListTile),
-      );
-      expect(firefoxTile, findsOneWidget);
-
-      final switchWidget = find.descendant(
-        of: firefoxTile,
-        matching: find.byType(Switch),
-      );
+      final switchWidget = find.byType(Switch);
       expect(switchWidget, findsOneWidget);
 
       final switchValue = tester.widget<Switch>(switchWidget).value;
@@ -211,6 +221,84 @@ void main() {
           ),
         ),
       ).called(1);
+    });
+
+    testWidgets('reset button calls removeAllRules for each snap',
+        (tester) async {
+      final container = createContainer();
+      final service = registerMockAppPermissionsService(
+        rules: [
+          SnapdRule(
+            id: 'cameraRule1',
+            timestamp: DateTime(2024),
+            snap: 'firefox',
+            interface: 'camera',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'allow',
+                  'lifespan': 'forever',
+                },
+              },
+            },
+          ),
+          SnapdRule(
+            id: 'cameraRule2',
+            timestamp: DateTime(2024),
+            snap: 'cheese',
+            interface: 'camera',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'allow',
+                  'lifespan': 'forever',
+                },
+              },
+            },
+          ),
+          SnapdRule(
+            id: 'cameraRule3',
+            timestamp: DateTime(2024),
+            snap: 'obs-studio',
+            interface: 'camera',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'allow',
+                  'lifespan': 'forever',
+                },
+              },
+            },
+          ),
+        ],
+        snaps: ['firefox', 'cheese', 'obs-studio'],
+      );
+      registerMockLocalSnapData();
+      registerMockSnapdService();
+
+      await tester.pumpApp(
+        (_) => UncontrolledProviderScope(
+          container: container,
+          child: const SnapsPage(interface: SnapdInterface.camera),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final resetButton = find.widgetWithText(
+        ElevatedButton,
+        tester.l10n.snapRulesResetAllPermissions,
+      );
+      expect(resetButton, findsOneWidget);
+
+      await tester.tap(resetButton);
+      await tester.pumpAndSettle();
+
+      verify(service.removeAllRules(snap: 'firefox', interface: 'camera'))
+          .called(1);
+      verify(service.removeAllRules(snap: 'cheese', interface: 'camera'))
+          .called(1);
+      verify(service.removeAllRules(snap: 'obs-studio', interface: 'camera'))
+          .called(1);
     });
   });
 }

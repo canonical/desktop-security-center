@@ -130,6 +130,23 @@ class _CameraInterfaceBody extends ConsumerWidget {
               ? [EmptyRulesTile(interface: interface)]
               : appTiles,
         ),
+        if (appTiles.isNotEmpty) ...[
+          const SizedBox(height: 24),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.error,
+            ),
+            onPressed: () async {
+              for (final snapName in snapRuleCounts.keys) {
+                final notifier = ref.read(
+                  snapCameraRulesModelProvider(snap: snapName).notifier,
+                );
+                await notifier.removeAll();
+              }
+            },
+            child: Text(l10n.snapRulesResetAllPermissions),
+          ),
+        ],
       ],
     );
   }
@@ -170,17 +187,53 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
     final notifier =
         ref.read(snapCameraRulesModelProvider(snap: snapName).notifier);
     final cameraRules = ref.watch(snapCameraRulesModelProvider(snap: snapName));
 
-    final hasAllowRule = cameraRules.when(
-      data: (rules) =>
-          rules.any((rule) => rule.outcome == SnapdRequestOutcome.allow),
-      loading: () => false,
+    final (isOn, subtitle) = cameraRules.when(
+      data: (rules) {
+        return switch (rules.length) {
+          0 => (false, null),
+          1 => switch ((rules.first.outcome, rules.first.lifespan)) {
+              (SnapdRequestOutcome.allow, SnapdRequestLifespan.forever) => (
+                  true,
+                  null
+                ),
+              (SnapdRequestOutcome.allow, SnapdRequestLifespan.session) => (
+                  true,
+                  l10n.snapdRuleCategorySessionAllowed
+                ),
+              (SnapdRequestOutcome.deny, SnapdRequestLifespan.forever) => (
+                  false,
+                  null
+                ),
+              _ => (
+                  false,
+                  () {
+                    _log.warning(
+                      'Snap $snapName has unexpected camera rule: outcome=${rules.first.outcome}, lifespan=${rules.first.lifespan}',
+                    );
+                    return null;
+                  }()
+                ),
+            },
+          _ => (
+              false,
+              () {
+                _log.warning(
+                  'Snap $snapName has ${rules.length} camera rules, expected 0 or 1',
+                );
+                return null;
+              }()
+            ),
+        };
+      },
+      loading: () => (false, null),
       error: (error, _) {
         _log.error('Failed to load camera rules for snap $snapName: $error');
-        return false;
+        return (false, null);
       },
     );
 
@@ -190,15 +243,17 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
         leading: AppIcon(
           snapIcon: ref.watch(snapIconProvider(snapName)),
         ),
+        minTileHeight: 60.0,
         title: Text(ref.watch(snapTitleOrNameProvider(snapName))),
+        subtitle: subtitle != null ? Text(subtitle) : null,
         trailing: Switch(
-          value: hasAllowRule,
-          onChanged: (value) {
-            if (value) {
-              notifier.removeAll().then((_) => notifier.createAccessRule());
-            } else {
-              notifier.removeAll();
-            }
+          value: isOn,
+          onChanged: (value) async {
+            await notifier.removeAll();
+            await notifier.createAccessRule(
+              outcome:
+                  value ? SnapdRequestOutcome.allow : SnapdRequestOutcome.deny,
+            );
           },
         ),
       ),
