@@ -144,7 +144,7 @@ void main() {
       // Check that cheese has session subtitle
       final cheeseTile = find.ancestor(
         of: find.text('cheese'),
-        matching: find.byType(SizedBox),
+        matching: find.byType(ListTile),
       );
       expect(
         find.descendant(
@@ -157,7 +157,7 @@ void main() {
       // Check that firefox does not have subtitle (forever rule)
       final firefoxTile = find.ancestor(
         of: find.text('firefox'),
-        matching: find.byType(SizedBox),
+        matching: find.byType(ListTile),
       );
       expect(
         find.descendant(

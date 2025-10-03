@@ -47,12 +47,6 @@ Future<Map<SnapdInterface, int>> interfaceSnapCounts(
   final interfaceSnapCounts = <SnapdInterface, int>{};
   final featureService = getService<FeatureService>();
 
-  // Only include camera interface if feature is enabled
-  if (featureService.isCameraInterfaceAvailable) {
-    final cameraSnaps = await ref.watch(cameraSnapsProvider.future);
-    interfaceSnapCounts[SnapdInterface.camera] = cameraSnaps.length;
-  }
-
   // For home interface, get all rules
   final rules = await ref.watch(rulesProvider.future);
   final homeSnaps = rules
@@ -60,6 +54,12 @@ Future<Map<SnapdInterface, int>> interfaceSnapCounts(
       .map((rule) => rule.snap)
       .toSet();
   interfaceSnapCounts[SnapdInterface.home] = homeSnaps.length;
+
+  // Only include camera interface if feature is enabled
+  if (featureService.isCameraInterfaceAvailable) {
+    final cameraSnaps = await ref.watch(cameraSnapsProvider.future);
+    interfaceSnapCounts[SnapdInterface.camera] = cameraSnaps.length;
+  }
 
   return interfaceSnapCounts;
 }
