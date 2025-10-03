@@ -179,8 +179,22 @@ void main() {
             interface: 'camera',
             constraints: {},
           ),
+          SnapdRule(
+            id: 'cameraRule2',
+            timestamp: DateTime(2024),
+            snap: 'cheese',
+            interface: 'camera',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'allow',
+                  'lifespan': 'forever',
+                },
+              },
+            },
+          ),
         ],
-        snaps: ['firefox'],
+        snaps: ['firefox', 'cheese'],
       );
       registerMockLocalSnapData();
       registerMockSnapdService();
@@ -193,14 +207,25 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final switchWidget = find.byType(Switch);
-      expect(switchWidget, findsOneWidget);
+      final switchWidgets = find.byType(Switch);
+      expect(switchWidgets, findsNWidgets(2));
 
-      final switchValue = tester.widget<Switch>(switchWidget).value;
-      expect(switchValue, false);
+      // Find firefox's switch
+      final firefoxTile = find.ancestor(
+        of: find.text('firefox'),
+        matching: find.byType(ListTile),
+      );
+      final firefoxSwitch = find.descendant(
+        of: firefoxTile,
+        matching: find.byType(Switch),
+      );
 
-      await tester.tap(switchWidget);
-      await tester.pump();
+      final firefoxSwitchValue = tester.widget<Switch>(firefoxSwitch).value;
+      expect(firefoxSwitchValue, false);
+
+      // Toggle firefox on
+      await tester.tap(firefoxSwitch);
+      await tester.pumpAndSettle();
 
       verify(service.removeAllRules(snap: 'firefox', interface: 'camera'))
           .called(1);
@@ -213,6 +238,40 @@ void main() {
               'permissions': {
                 'access': {
                   'outcome': 'allow',
+                  'lifespan': 'forever',
+                  'expiration': null,
+                },
+              },
+            },
+          ),
+        ),
+      ).called(1);
+
+      // Find cheese's switch
+      final cheeseTile = find.ancestor(
+        of: find.text('cheese'),
+        matching: find.byType(ListTile),
+      );
+      final cheeseSwitch = find.descendant(
+        of: cheeseTile,
+        matching: find.byType(Switch),
+      );
+
+      // Toggle cheese off
+      await tester.tap(cheeseSwitch);
+      await tester.pumpAndSettle();
+
+      verify(service.removeAllRules(snap: 'cheese', interface: 'camera'))
+          .called(1);
+      verify(
+        service.addRule(
+          SnapdRuleMask(
+            snap: 'cheese',
+            interface: 'camera',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'deny',
                   'lifespan': 'forever',
                   'expiration': null,
                 },
