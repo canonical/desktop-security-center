@@ -83,6 +83,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get snapRulesRemoveAll => '删除所有规则';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => '主文件夹';
 
   @override

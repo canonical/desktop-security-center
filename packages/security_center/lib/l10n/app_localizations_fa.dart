@@ -87,6 +87,9 @@ class AppLocalizationsFa extends AppLocalizations {
   String get snapRulesRemoveAll => 'برداشتن همهٔ قاعده‌ها';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'شاخهٔ خانه';
 
   @override

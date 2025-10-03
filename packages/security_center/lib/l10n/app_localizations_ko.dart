@@ -84,6 +84,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get snapRulesRemoveAll => '모든 정책 삭제';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => '홈 폴더';
 
   @override

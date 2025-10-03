@@ -88,6 +88,9 @@ class AppLocalizationsDa extends AppLocalizations {
   String get snapRulesRemoveAll => 'Fjern alle regler';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Hjemmemappe';
 
   @override

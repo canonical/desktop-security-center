@@ -368,6 +368,12 @@ abstract class AppLocalizations {
   /// **'Remove all rules'**
   String get snapRulesRemoveAll;
 
+  /// No description provided for @snapRulesResetAllPermissions.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all permissions'**
+  String get snapRulesResetAllPermissions;
+
   /// No description provided for @homeInterfacePageTitle.
   ///
   /// In en, this message translates to:

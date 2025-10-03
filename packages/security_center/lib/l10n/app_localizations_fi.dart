@@ -88,6 +88,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get snapRulesRemoveAll => 'Poista kaikki säännöt';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Kotikansio';
 
   @override

@@ -88,6 +88,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get snapRulesRemoveAll => 'Hapus semua aturan';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Folder rumah';
 
   @override

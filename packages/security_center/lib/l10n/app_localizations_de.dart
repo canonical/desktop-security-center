@@ -88,6 +88,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get snapRulesRemoveAll => 'Alle Regeln entfernen';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Benutzerordner';
 
   @override

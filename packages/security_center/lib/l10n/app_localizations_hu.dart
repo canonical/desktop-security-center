@@ -89,6 +89,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get snapRulesRemoveAll => 'Összes szabály eltávolítása';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Saját mappa';
 
   @override

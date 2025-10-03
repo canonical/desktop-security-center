@@ -88,6 +88,9 @@ class AppLocalizationsEo extends AppLocalizations {
   String get snapRulesRemoveAll => 'Forigi ĉiujn regulojn';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Hejmdosierujo';
 
   @override

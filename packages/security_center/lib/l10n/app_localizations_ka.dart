@@ -88,6 +88,9 @@ class AppLocalizationsKa extends AppLocalizations {
   String get snapRulesRemoveAll => 'ყველა წესის წაშლა';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'საწყისის საქაღალდე';
 
   @override

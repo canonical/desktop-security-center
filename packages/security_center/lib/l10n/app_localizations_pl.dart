@@ -92,6 +92,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get snapRulesRemoveAll => 'Usuń wszystkie reguły';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Katalog domowy';
 
   @override

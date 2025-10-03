@@ -88,6 +88,9 @@ class AppLocalizationsOc extends AppLocalizations {
   String get snapRulesRemoveAll => 'Levar totas las règlas';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Repertòri personal';
 
   @override

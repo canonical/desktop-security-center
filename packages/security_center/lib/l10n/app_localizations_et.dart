@@ -88,6 +88,9 @@ class AppLocalizationsEt extends AppLocalizations {
   String get snapRulesRemoveAll => 'Eemalda kõik reeglid';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Kodukaust';
 
   @override

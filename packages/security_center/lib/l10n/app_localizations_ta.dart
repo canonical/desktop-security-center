@@ -88,6 +88,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get snapRulesRemoveAll => 'எல்லா விதிகளையும் அகற்று';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'வீட்டு கோப்புறை';
 
   @override

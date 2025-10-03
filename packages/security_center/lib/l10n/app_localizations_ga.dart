@@ -89,6 +89,9 @@ class AppLocalizationsGa extends AppLocalizations {
   String get snapRulesRemoveAll => 'Bain na rialacha go léir';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Fillteán baile';
 
   @override

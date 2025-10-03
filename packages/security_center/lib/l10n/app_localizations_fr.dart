@@ -90,6 +90,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get snapRulesRemoveAll => 'Supprimer toutes les règles';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Dossier d’accueil';
 
   @override

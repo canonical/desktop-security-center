@@ -88,6 +88,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get snapRulesRemoveAll => 'Rimuovi tutte le regole';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Cartella Home';
 
   @override

@@ -88,6 +88,9 @@ class AppLocalizationsSi extends AppLocalizations {
   String get snapRulesRemoveAll => 'Remove all rules';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Home folder';
 
   @override

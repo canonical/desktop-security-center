@@ -57,6 +57,8 @@
     "@cameraRulesPageEmptyTileLabel": {},
     "snapRulesRemoveAll": "Remove all rules",
     "@snapRulesRemoveAll": {},
+    "snapRulesResetAllPermissions": "Reset all permissions",
+    "@snapRulesResetAllPermissions": {},
     "homeInterfacePageTitle": "Home folder",
     "@homeInterfacePageTitle": {},
     "homeInterfacePageDescription": "Manage permissions to access files in your Home folder.",

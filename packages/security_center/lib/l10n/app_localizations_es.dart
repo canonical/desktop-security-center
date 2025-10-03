@@ -88,6 +88,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get snapRulesRemoveAll => 'Eliminar todas las reglas';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Carpeta de usuario';
 
   @override

@@ -88,6 +88,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get snapRulesRemoveAll => 'Odstranit všechna pravidla';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Domovská složka';
 
   @override

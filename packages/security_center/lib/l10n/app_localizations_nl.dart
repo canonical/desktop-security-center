@@ -88,6 +88,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get snapRulesRemoveAll => 'Alle regels verwijderen';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Thuismap';
 
   @override

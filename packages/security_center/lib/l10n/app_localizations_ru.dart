@@ -90,6 +90,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get snapRulesRemoveAll => 'Удалить все правила';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Домашняя папка';
 
   @override

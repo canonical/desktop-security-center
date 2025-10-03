@@ -88,6 +88,9 @@ class AppLocalizationsSk extends AppLocalizations {
   String get snapRulesRemoveAll => 'Odstrániť všetky pravidlá';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'Priečinok domov';
 
   @override

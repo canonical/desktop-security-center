@@ -87,6 +87,9 @@ class AppLocalizationsHe extends AppLocalizations {
   String get snapRulesRemoveAll => 'להסיר את כל הכללים';
 
   @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
+
+  @override
   String get homeInterfacePageTitle => 'תיקיית הבית';
 
   @override
