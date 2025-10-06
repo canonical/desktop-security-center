@@ -33,6 +33,9 @@ class AppLocalizationsNb extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Execute';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Require apps to ask for system permissions';
 
@@ -79,7 +82,13 @@ class AppLocalizationsNb extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Ingen regler enda';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Fjern alle regler';
+
+  @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
 
   @override
   String get homeInterfacePageTitle => 'Hjemmemappe';
@@ -87,6 +96,13 @@ class AppLocalizationsNb extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Manage permissions to access files in your Home folder.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Håndter tilganger';

@@ -34,6 +34,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Выполнение';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Требовать с приложений запрос системных разрешений';
 
@@ -81,7 +84,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Правил ещё нет';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Удалить все правила';
+
+  @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
 
   @override
   String get homeInterfacePageTitle => 'Домашняя папка';
@@ -89,6 +98,13 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Управление разрешениями для доступа к файлам в Домашней папке.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Управление разрешениями';

@@ -33,6 +33,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Spouštění';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Vyžadovat, aby aplikace žádaly o systémová oprávnění';
 
@@ -79,7 +82,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Zatím žádná pravidla';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Odstranit všechna pravidla';
+
+  @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
 
   @override
   String get homeInterfacePageTitle => 'Domovská složka';
@@ -87,6 +96,13 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Spravujte oprávnění pro přístup k souborům ve vaší domovské složce.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Spravovat oprávnění';

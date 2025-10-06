@@ -34,6 +34,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Végrehajtás';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Megkövetelés az alkalmazásoktól, hogy rendszerjogosultságokat kérjenek';
 
@@ -80,7 +83,13 @@ class AppLocalizationsHu extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Még nincsenek szabályok';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Összes szabály eltávolítása';
+
+  @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
 
   @override
   String get homeInterfacePageTitle => 'Saját mappa';
@@ -88,6 +97,13 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'A saját mappában lévő fájlok hozzáféréséhez való jogosultságok kezelése.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Jogosultságok kezelése';

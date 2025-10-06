@@ -33,6 +33,9 @@ class AppLocalizationsEo extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Ruli';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Igi programojn peti por sistemaj permesoj';
 
@@ -79,7 +82,13 @@ class AppLocalizationsEo extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Neniu regulo ankoraŭ';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Forigi ĉiujn regulojn';
+
+  @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
 
   @override
   String get homeInterfacePageTitle => 'Hejmdosierujo';
@@ -87,6 +96,13 @@ class AppLocalizationsEo extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Administri permesojn uzi dosierojn en via hejma dosierujo.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Administri permesojn';

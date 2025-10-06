@@ -33,6 +33,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'இயக்கு';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'கணினி இசைவுகளைக் கேட்கப் பயன்பாடுகள் தேவை';
 
@@ -79,7 +82,13 @@ class AppLocalizationsTa extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'இன்னும் விதிகள் இல்லை';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'எல்லா விதிகளையும் அகற்று';
+
+  @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
 
   @override
   String get homeInterfacePageTitle => 'வீட்டு கோப்புறை';
@@ -87,6 +96,13 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'உங்கள் வீட்டு கோப்புறையில் கோப்புகளை அணுக இசைவுகளை நிர்வகி.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'இசைவுகளை நிர்வகி';

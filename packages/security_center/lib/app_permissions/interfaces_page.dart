@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
+import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/navigator.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
@@ -165,7 +166,9 @@ class _InterfaceList extends ConsumerWidget {
                     subtitle: Text(
                       interfaceSnapCount.value > 0
                           ? l10n.interfaceSnapCount(interfaceSnapCount.value)
-                          : l10n.snapRulesPageEmptyTileLabel,
+                          : (interfaceSnapCount.key == SnapdInterface.camera
+                              ? l10n.cameraRulesPageEmptyTileLabel
+                              : l10n.snapRulesPageEmptyTileLabel),
                     ),
                     trailing: const Icon(YaruIcons.pan_end),
                     onTap: () => Navigator.of(context)

@@ -101,7 +101,7 @@ void main() {
           (widget) =>
               widget is RuleTile &&
               widget.ruleFragment.ruleId == 'ruleId' &&
-              widget.ruleFragment.permissions.contains(Permission.read),
+              widget.ruleFragment.permissions.contains(HomePermission.read),
         ),
         matching: find.byType(YaruIconButton),
       ),

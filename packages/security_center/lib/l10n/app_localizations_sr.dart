@@ -33,6 +33,9 @@ class AppLocalizationsSr extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Извршавање';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Захтевај да апликације траже дозволе за приступ системским ресурсима';
 
@@ -79,7 +82,13 @@ class AppLocalizationsSr extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Још увек нема правила';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Уклони сва правила';
+
+  @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
 
   @override
   String get homeInterfacePageTitle => 'Почетни фолдер';
@@ -87,6 +96,13 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Управљај дозволама за приступ фајловима у вашем Почетном фолдеру.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Управљај дозволама';

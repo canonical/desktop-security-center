@@ -33,6 +33,9 @@ class AppLocalizationsFa extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'اجرا';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'نیازمند درخواست اجازهٔ سامانه‌ای از سوی کاره';
 
@@ -78,7 +81,13 @@ class AppLocalizationsFa extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'هنوز بدون قاعده';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'برداشتن همهٔ قاعده‌ها';
+
+  @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
 
   @override
   String get homeInterfacePageTitle => 'شاخهٔ خانه';
@@ -86,6 +95,13 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'مدیریت اجازه‌ها برای دسترسی به پرونده‌ها در شاخهٔ خانگیتان.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'مدیریت اجازه‌ها';

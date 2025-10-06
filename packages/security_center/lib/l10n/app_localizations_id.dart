@@ -33,6 +33,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Jalankan';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle =>
       'Membutuhkan aplikasi untuk meminta izin sistem';
 
@@ -79,7 +82,13 @@ class AppLocalizationsId extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Belum ada aturan';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'Hapus semua aturan';
+
+  @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
 
   @override
   String get homeInterfacePageTitle => 'Folder rumah';
@@ -87,6 +96,13 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'Kelola izin untuk mengakses berkas di folder Rumah Anda.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'Kelola izin';

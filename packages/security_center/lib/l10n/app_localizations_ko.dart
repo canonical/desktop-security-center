@@ -33,6 +33,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get snapPermissionExecuteLabel => '실행';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle => '각 앱이 시스템 권한을 요청하도록 하기';
 
   @override
@@ -75,13 +78,26 @@ class AppLocalizationsKo extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => '정책 없음';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => '모든 정책 삭제';
+
+  @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
 
   @override
   String get homeInterfacePageTitle => '홈 폴더';
 
   @override
   String get homeInterfacePageDescription => '사용자의 홈 폴더의 파일에 접근하는 권한을 관리합니다.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => '권한 관리';

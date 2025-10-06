@@ -33,6 +33,9 @@ class AppLocalizationsHe extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'הפעלה';
 
   @override
+  String get snapPermissionAccessLabel => 'Access';
+
+  @override
   String get snapPermissionsEnableTitle => 'לדרוש מהיישומים לבקש הרשאות מערכת';
 
   @override
@@ -78,7 +81,13 @@ class AppLocalizationsHe extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'אין כללים עדיין';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+
+  @override
   String get snapRulesRemoveAll => 'להסיר את כל הכללים';
+
+  @override
+  String get snapRulesResetAllPermissions => 'Reset all permissions';
 
   @override
   String get homeInterfacePageTitle => 'תיקיית הבית';
@@ -86,6 +95,13 @@ class AppLocalizationsHe extends AppLocalizations {
   @override
   String get homeInterfacePageDescription =>
       'ניהול הרשאות לגישה לקבצים בתיקיית הבית שלך.';
+
+  @override
+  String get cameraInterfacePageTitle => 'Camera';
+
+  @override
+  String get cameraInterfacePageDescription =>
+      'Allow apps to access your cameras.';
 
   @override
   String get interfacePageTitle => 'ניהול הרשאות';

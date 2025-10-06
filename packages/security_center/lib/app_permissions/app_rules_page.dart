@@ -31,6 +31,7 @@ class AppRulesPage extends ConsumerWidget {
             error: (error, _) => ErrorWidget(error),
             loading: () => const Center(child: YaruCircularProgressIndicator()),
           ),
+      SnapdInterface.camera => const SizedBox.shrink(),
     };
   }
 }
@@ -109,7 +110,7 @@ class _HomeRuleSection extends ConsumerWidget {
   final String title;
   final List<SnapdHomeRuleFragment> ruleFragments;
   final void Function(String id) onRemoveRule;
-  final void Function(String id, List<Permission> perms) onRemovePerms;
+  final void Function(String id, List<HomePermission> perms) onRemovePerms;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -139,7 +140,7 @@ class _RuleList extends TileList {
   _RuleList({
     required List<SnapdHomeRuleFragment> ruleFragments,
     required void Function(String id) onRemoveRule,
-    required void Function(String id, List<Permission> perms) onRemovePerms,
+    required void Function(String id, List<HomePermission> perms) onRemovePerms,
   }) : super(
           children: ruleFragments
               .map(
