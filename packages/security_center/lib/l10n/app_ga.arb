@@ -255,5 +255,15 @@
     "recoveryKeyTPMExplanationLearnMore": "Foghlaim tuilleadh faoi chriptiú atá bunaithe ar chrua-earraí",
     "@recoveryKeyTPMExplanationLearnMore": {},
     "recoveryKeyEncrpytionPassphraseHeader": "Pasfrása criptithe",
-    "@recoveryKeyEncrpytionPassphraseHeader": {}
+    "@recoveryKeyEncrpytionPassphraseHeader": {},
+    "snapPermissionAccessLabel": "Rochtain",
+    "@snapPermissionAccessLabel": {},
+    "cameraRulesPageEmptyTileLabel": "Níl aon aipeanna tar éis rochtain a iarraidh go fóill",
+    "@cameraRulesPageEmptyTileLabel": {},
+    "snapRulesResetAllPermissions": "Athshocraigh na ceadanna go léir",
+    "@snapRulesResetAllPermissions": {},
+    "cameraInterfacePageTitle": "Ceamara",
+    "@cameraInterfacePageTitle": {},
+    "cameraInterfacePageDescription": "Lig d’aipeanna rochtain a fháil ar do cheamaraí.",
+    "@cameraInterfacePageDescription": {}
 }
