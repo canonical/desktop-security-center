@@ -253,5 +253,15 @@
     "recoveryKeyTPMExplanationLearnMore": "מידע נוסף על הצפנה בגיבוי חומרה",
     "@recoveryKeyTPMExplanationLearnMore": {},
     "recoveryKeyEncrpytionPassphraseHeader": "מילת צופן להצפנה",
-    "@recoveryKeyEncrpytionPassphraseHeader": {}
+    "@recoveryKeyEncrpytionPassphraseHeader": {},
+    "snapPermissionAccessLabel": "גישה",
+    "@snapPermissionAccessLabel": {},
+    "cameraRulesPageEmptyTileLabel": "אף יישום לא ביקש גישה עדיין",
+    "@cameraRulesPageEmptyTileLabel": {},
+    "snapRulesResetAllPermissions": "איפוס כל ההרשאות",
+    "@snapRulesResetAllPermissions": {},
+    "cameraInterfacePageTitle": "מצלמה",
+    "@cameraInterfacePageTitle": {},
+    "cameraInterfacePageDescription": "לאפשר ליישומים לגשת למצלמות שלך.",
+    "@cameraInterfacePageDescription": {}
 }
