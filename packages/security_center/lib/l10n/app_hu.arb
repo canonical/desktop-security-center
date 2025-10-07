@@ -255,5 +255,15 @@
     "recoveryKeyPinEntropyOptimal": "A PIN-kód elég hosszú",
     "@recoveryKeyPinEntropyOptimal": {},
     "recoveryKeySomethingWentWrongHeader": "Valami probléma történt",
-    "@recoveryKeySomethingWentWrongHeader": {}
+    "@recoveryKeySomethingWentWrongHeader": {},
+    "snapPermissionAccessLabel": "Hozzáférés",
+    "@snapPermissionAccessLabel": {},
+    "cameraRulesPageEmptyTileLabel": "Még egyetlen alkalmazás sem kért hozzáférést",
+    "@cameraRulesPageEmptyTileLabel": {},
+    "snapRulesResetAllPermissions": "Összes jogosultság visszaállítása",
+    "@snapRulesResetAllPermissions": {},
+    "cameraInterfacePageTitle": "Kamera",
+    "@cameraInterfacePageTitle": {},
+    "cameraInterfacePageDescription": "Engedélyezés az alkalmazások számára, hogy hozzáférjenek a kamerákhoz.",
+    "@cameraInterfacePageDescription": {}
 }
