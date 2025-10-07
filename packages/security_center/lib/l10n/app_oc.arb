@@ -42,7 +42,7 @@
             }
         }
     },
-    "interfacePageTitle": "Gerir las permissions",
+    "interfacePageTitle": "Gerir las autorizacions",
     "@interfacePageTitle": {},
     "interfacePageLinkLearnMore": "Ne saber mai",
     "@interfacePageLinkLearnMore": {},
@@ -157,5 +157,11 @@
     "recoveryKeySomethingWentWrongHeader": "Quicòm a trucat",
     "@recoveryKeySomethingWentWrongHeader": {},
     "recoveryKeyFilePickerTitle": "Salvar lo fichièr de clau de recuperacion",
-    "@recoveryKeyFilePickerTitle": {}
+    "@recoveryKeyFilePickerTitle": {},
+    "cameraInterfacePageTitle": "Camèra",
+    "@cameraInterfacePageTitle": {},
+    "cameraInterfacePageDescription": "Autorizar l’accès a las camèras.",
+    "@cameraInterfacePageDescription": {},
+    "snapPermissionAccessLabel": "Accès",
+    "@snapPermissionAccessLabel": {}
 }
