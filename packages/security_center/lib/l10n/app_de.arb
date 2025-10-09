@@ -255,5 +255,15 @@
     "recoveryKeyPinEntropyOptimal": "PIN ist lang genug",
     "@recoveryKeyPinEntropyOptimal": {},
     "recoveryKeySomethingWentWrongHeader": "Irgendetwas ist schiefgelaufen",
-    "@recoveryKeySomethingWentWrongHeader": {}
+    "@recoveryKeySomethingWentWrongHeader": {},
+    "snapPermissionAccessLabel": "Zugriff",
+    "@snapPermissionAccessLabel": {},
+    "cameraRulesPageEmptyTileLabel": "Noch keine Apps haben Zugriff angefordert",
+    "@cameraRulesPageEmptyTileLabel": {},
+    "snapRulesResetAllPermissions": "Alle Berechtigungen zurücksetzen",
+    "@snapRulesResetAllPermissions": {},
+    "cameraInterfacePageTitle": "Kamera",
+    "@cameraInterfacePageTitle": {},
+    "cameraInterfacePageDescription": "Erlauben Sie Apps den Zugriff auf Ihre Kameras.",
+    "@cameraInterfacePageDescription": {}
 }
