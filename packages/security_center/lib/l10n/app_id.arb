@@ -255,5 +255,15 @@
     "recoveryKeyPinEntropyBelowOptimal": "PIN yang lumayan, jadikan lebih panjang atau lebih sulit ditebak untuk keamanan yang lebih baik",
     "@recoveryKeyPinEntropyBelowOptimal": {},
     "recoveryKeyPinEntropyOptimal": "PIN cukup panjang",
-    "@recoveryKeyPinEntropyOptimal": {}
+    "@recoveryKeyPinEntropyOptimal": {},
+    "snapPermissionAccessLabel": "Akses",
+    "@snapPermissionAccessLabel": {},
+    "cameraRulesPageEmptyTileLabel": "Belum ada aplikasi yang meminta akses",
+    "@cameraRulesPageEmptyTileLabel": {},
+    "snapRulesResetAllPermissions": "Atur ulang semua izin",
+    "@snapRulesResetAllPermissions": {},
+    "cameraInterfacePageTitle": "Kamera",
+    "@cameraInterfacePageTitle": {},
+    "cameraInterfacePageDescription": "Izinkan aplikasi untuk mengakses kamera Anda.",
+    "@cameraInterfacePageDescription": {}
 }
