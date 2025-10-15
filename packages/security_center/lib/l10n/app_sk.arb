@@ -176,7 +176,7 @@
     "@recoveryKeyPinCurrent": {},
     "recoveryKeyPinNew": "Nový PIN",
     "@recoveryKeyPinNew": {},
-    "recoveryKeyPinConfirm": "Potvrďte PIN",
+    "recoveryKeyPinConfirm": "Potvrďte PIN kód",
     "@recoveryKeyPinConfirm": {},
     "recoveryKeyPinConfirmError": "PIN kódy sa nezhodujú, skúste to znova",
     "@recoveryKeyPinConfirmError": {},
