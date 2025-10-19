@@ -1,77 +1,159 @@
 {
-  "snapdRuleCategoryForeverAllowed": "Permitir siempre",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "Rechazar siempre",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "Leer",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionsEnableWarning": "Esta es una función experimental para controlar el acceso a los recursos de tu sistema.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "Habilitándolo, puede tardar unos segundos...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "Desactivándolo, puede tardar unos segundos…",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsExperimentalLabel": "Experimental",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsOtherDescription": "Puedes administrar otros permisos en Configuración › Aplicaciones.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsPageTitle": "Permisos de la aplicación",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, plural, =0{sin reglas} =1{1 regla} other{{n} reglas}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "interfacePageDescription": "Las aplicaciones estrictamente limitadas te preguntarán antes de acceder a archivos y carpetas. Esta característica es experimental y está sujeta a cambios.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkLearnMore": "Aprender más",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "Dar tu opinión",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "Informar de problemas",
-  "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, plural, =0{sin aplicaciones} =1{1 aplicación} other {{n} aplicaciones}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapdRuleCategorySessionAllowed": "Permitir hasta cerrar sesión",
-  "@snapdRuleCategorySessionAllowed": {},
-  "appTitle": "Centro de seguridad",
-  "@appTitle": {},
-  "snapdRuleCategorySessionDenied": "Denegar hasta cerrar sesión",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapPermissionsEnableTitle": "Exigir a las aplicaciones que pidan permisos al sistema",
-  "@snapPermissionsEnableTitle": {},
-  "snapPermissionWriteLabel": "Escribir",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Ejecutar",
-  "@snapPermissionExecuteLabel": {},
-  "snapRulesPageDescription": "Administrar los permisos de {interface} para {snap} .",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "Aún no hay reglas",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Eliminar todas las reglas",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "Carpeta de usuario",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Administrar los permisos para acceder a los archivos en la carpeta del usuario.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageTitle": "Administrar permisos",
-  "@interfacePageTitle": {}
+    "snapdRuleCategoryForeverAllowed": "Permitir siempre",
+    "@snapdRuleCategoryForeverAllowed": {},
+    "snapdRuleCategoryForeverDenied": "Rechazar siempre",
+    "@snapdRuleCategoryForeverDenied": {},
+    "snapPermissionReadLabel": "Leer",
+    "@snapPermissionReadLabel": {},
+    "snapPermissionsEnableWarning": "Esta es una función experimental para controlar el acceso a los recursos de tu sistema.",
+    "@snapPermissionsEnableWarning": {},
+    "snapPermissionsEnablingLabel": "Habilitándolo, puede tardar unos segundos...",
+    "@snapPermissionsEnablingLabel": {},
+    "snapPermissionsDisablingLabel": "Desactivándolo, puede tardar unos segundos…",
+    "@snapPermissionsDisablingLabel": {},
+    "snapPermissionsExperimentalLabel": "Experimental",
+    "@snapPermissionsExperimentalLabel": {},
+    "snapPermissionsOtherDescription": "Puedes administrar otros permisos en Configuración › Aplicaciones.",
+    "@snapPermissionsOtherDescription": {},
+    "snapPermissionsPageTitle": "Permisos de la aplicación",
+    "@snapPermissionsPageTitle": {},
+    "snapRulesCount": "{n, plural, =0{sin reglas} =1{1 regla} other{{n} reglas}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "interfacePageDescription": "Las aplicaciones estrictamente limitadas te preguntarán antes de acceder a archivos y carpetas. Esta característica es experimental y está sujeta a cambios.",
+    "@interfacePageDescription": {},
+    "interfacePageLinkLearnMore": "Aprender más",
+    "@interfacePageLinkLearnMore": {},
+    "interfacePageLinkGiveFeedback": "Dar tu opinión",
+    "@interfacePageLinkGiveFeedback": {},
+    "interfacePageLinkReportIssues": "Informar de problemas",
+    "@interfacePageLinkReportIssues": {},
+    "interfaceSnapCount": "{n, plural, =0{sin aplicaciones} =1{1 aplicación} other {{n} aplicaciones}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapdRuleCategorySessionAllowed": "Permitir hasta cerrar sesión",
+    "@snapdRuleCategorySessionAllowed": {},
+    "appTitle": "Centro de seguridad",
+    "@appTitle": {},
+    "snapdRuleCategorySessionDenied": "Denegar hasta cerrar sesión",
+    "@snapdRuleCategorySessionDenied": {},
+    "snapPermissionsEnableTitle": "Exigir a las aplicaciones que pidan permisos al sistema",
+    "@snapPermissionsEnableTitle": {},
+    "snapPermissionWriteLabel": "Escribir",
+    "@snapPermissionWriteLabel": {},
+    "snapPermissionExecuteLabel": "Ejecutar",
+    "@snapPermissionExecuteLabel": {},
+    "snapRulesPageDescription": "Administrar los permisos de {interface} para {snap} .",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Aún no hay reglas",
+    "@snapRulesPageEmptyTileLabel": {},
+    "snapRulesRemoveAll": "Eliminar todas las reglas",
+    "@snapRulesRemoveAll": {},
+    "homeInterfacePageTitle": "Carpeta de usuario",
+    "@homeInterfacePageTitle": {},
+    "homeInterfacePageDescription": "Administrar los permisos para acceder a los archivos en la carpeta del usuario.",
+    "@homeInterfacePageDescription": {},
+    "interfacePageTitle": "Administrar permisos",
+    "@interfacePageTitle": {},
+    "cameraRulesPageEmptyTileLabel": "Ninguna aplicación ha solicitado acceso aún",
+    "@cameraRulesPageEmptyTileLabel": {},
+    "snapRulesResetAllPermissions": "Reiniciar todos los permisos",
+    "@snapRulesResetAllPermissions": {},
+    "cameraInterfacePageTitle": "Cámara",
+    "@cameraInterfacePageTitle": {},
+    "cameraInterfacePageDescription": "Permite a las aplicaciones acceder a tus cámaras.",
+    "@cameraInterfacePageDescription": {},
+    "diskEncryptionPageTitle": "Encriptación de disco",
+    "@diskEncryptionPageTitle": {},
+    "diskEncryptionPageRecoveryKey": "Clave de recuperación",
+    "@diskEncryptionPageRecoveryKey": {},
+    "diskEncryptionPageStoreYourKey": "La clave de recuperación le permite recuperar el acceso a sus datos si el disco no se desbloquea durante el arranque. Guárdelo en un lugar seguro.",
+    "@diskEncryptionPageStoreYourKey": {},
+    "diskEncryptionPageStoreYourKeyWithLink": "La clave de recuperación le permite recuperar el acceso a sus datos si el disco no se desbloquea durante el arranque. Guárdelo en un lugar seguro.{learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "Más información sobre las claves de recuperación",
+    "@diskEncryptionPageLearnMore": {},
+    "diskEncryptionPageCheckKey": "Comprobar la clave de recuperación...",
+    "@diskEncryptionPageCheckKey": {},
+    "diskEncryptionPageCheck": "Comprobar",
+    "@diskEncryptionPageCheck": {},
+    "diskEncryptionPageValidKey": "Clave válida",
+    "@diskEncryptionPageValidKey": {},
+    "diskEncryptionPageInvalidKey": "Clave inválida",
+    "@diskEncryptionPageInvalidKey": {},
+    "diskEncryptionPageEnterKey": "Introduzca la clave de recuperación",
+    "@diskEncryptionPageEnterKey": {},
+    "diskEncryptionPageKeyWorks": "La clave de recuperación funciona",
+    "@diskEncryptionPageKeyWorks": {},
+    "diskEncryptionPageKeyWorksBody": "Recuerde mantenerla en un lugar seguro.",
+    "@diskEncryptionPageKeyWorksBody": {},
+    "diskEncryptionPageKeyDoesntWork": "La clave de recuperación no funciona",
+    "@diskEncryptionPageKeyDoesntWork": {},
+    "diskEncryptionPageKeyDoesntWorkBody": "Compruebe la clave o sustitúyala por una nueva.",
+    "@diskEncryptionPageKeyDoesntWorkBody": {},
+    "diskEncryptionPageError": "Error",
+    "@diskEncryptionPageError": {},
+    "diskEncryptionPageReplaceButton": "Reemplazar la clave de recuperación...",
+    "@diskEncryptionPageReplaceButton": {},
+    "diskEncryptionPageReplaceDialogHeader": "Reemplazar clave de recuperación",
+    "@diskEncryptionPageReplaceDialogHeader": {},
+    "diskEncryptionPageReplaceDialogBody": "Guarde la nueva clave de recuperación en un lugar seguro. Una vez reemplazada, ya no podrá usar la clave vieja.",
+    "@diskEncryptionPageReplaceDialogBody": {},
+    "diskEncryptionPageReplaceDialogShowQR": "Mostrar el código QR",
+    "@diskEncryptionPageReplaceDialogShowQR": {},
+    "diskEncryptionPageReplaceDialogSave": "Guardar como archivo",
+    "@diskEncryptionPageReplaceDialogSave": {},
+    "diskEncryptionPageReplaceDialogReplace": "Reemplazar",
+    "@diskEncryptionPageReplaceDialogReplace": {},
+    "diskEncryptionPageReplaceDialogAcknowledge": "He guardado mi clave de recuperación en un lugar seguro",
+    "@diskEncryptionPageReplaceDialogAcknowledge": {},
+    "diskEncryptionPageReplaceDialogDiscard": "Borrar",
+    "@diskEncryptionPageReplaceDialogDiscard": {},
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Se ha reemplazado la clave de recuperación",
+    "@diskEncryptionPageReplaceDialogSuccessHeader": {},
+    "diskEncryptionPageReplaceDialogErrorHeader": "Ha fallado el reemplazo de clave de seguridad",
+    "@diskEncryptionPageReplaceDialogErrorHeader": {},
+    "diskEncryptionPageReplaceDialogErrorBody": "Ha habido un error al reemplazar su clave de recuperación. Su vieja clave seguirá siendo válida.",
+    "@diskEncryptionPageReplaceDialogErrorBody": {},
+    "diskEncryptionPageClipboardNotification": "Copiado al portapapeles",
+    "@diskEncryptionPageClipboardNotification": {},
+    "diskEncryptionPageCopySemanticLabel": "Copiar",
+    "@diskEncryptionPageCopySemanticLabel": {},
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "La configuración de la encriptación no está disponible",
+    "@diskEncryptionPageErrorFailedToRetrieveStatusHeader": {},
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Ha fallado la comprobación del estado de encriptado de este equipo.",
+    "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+    "diskEncryptionPageErrorUnsupportedStateBody": "La configuración TPM de su equipo no está en un estado soportado.",
+    "@diskEncryptionPageErrorUnsupportedStateBody": {},
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "El centro de seguridad no pudo conectarse a la interfaz de snapd",
+    "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
+    "recoveryKeyExceptionFileSystemTitle": "No se pudo guardar la clave de recuperación",
+    "@recoveryKeyExceptionFileSystemTitle": {}
 }
