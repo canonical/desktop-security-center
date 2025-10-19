@@ -61,7 +61,7 @@
     "@snapdRuleCategorySessionDenied": {},
     "snapPermissionsEnableTitle": "Vyžadovať oprávnenia od aplikácií",
     "@snapPermissionsEnableTitle": {},
-    "snapRulesPageDescription": "Spravujte práva k rozhraniu {interface} pre {snap}.",
+    "snapRulesPageDescription": "Spravujte oprávnenia k {interface} pre {snap}.",
     "@snapRulesPageDescription": {
         "placeholders": {
             "interface": {
@@ -136,7 +136,7 @@
     "@recoveryKeyFilePickerFilter": {},
     "recoveryKeyExceptionDisallowedPathTitle": "Súbor s obnovovacím kľúčom sa nedá uložiť na dočasné miesto",
     "@recoveryKeyExceptionDisallowedPathTitle": {},
-    "recoveryKeyExceptionDisallowedPathBody": "Skúste iné umiestnenie, napríklad vymeniteľné úložisko, alebo použite inú metódu.",
+    "recoveryKeyExceptionDisallowedPathBody": "Skúste iné umiestnenie, napríklad vymeniteľnú jednotku, alebo použite inú metódu.",
     "@recoveryKeyExceptionDisallowedPathBody": {},
     "diskEncryptionPageReplaceButton": "Vymeniť obnovovací kľúč...",
     "@diskEncryptionPageReplaceButton": {},
@@ -258,11 +258,11 @@
     "@recoveryKeyEncrpytionPassphraseHeader": {},
     "cameraRulesPageEmptyTileLabel": "Žiadne aplikácie zatiaľ nepožiadali o prístup",
     "@cameraRulesPageEmptyTileLabel": {},
-    "snapRulesResetAllPermissions": "Vynulovať všetky povolenia",
+    "snapRulesResetAllPermissions": "Obnoviť všetky povolenia",
     "@snapRulesResetAllPermissions": {},
     "cameraInterfacePageTitle": "Kamera",
     "@cameraInterfacePageTitle": {},
-    "cameraInterfacePageDescription": "Povoliť aplikáciám prístup ku kamerám.",
+    "cameraInterfacePageDescription": "Povoliť aplikáciám prístup ku kamere.",
     "@cameraInterfacePageDescription": {},
     "snapPermissionAccessLabel": "Prístup",
     "@snapPermissionAccessLabel": {}
