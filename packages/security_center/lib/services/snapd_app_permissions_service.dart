@@ -166,6 +166,9 @@ class SnapdAppPermissionsService implements AppPermissionsService {
         if (change.ready) {
           break;
         } else if (change.err != null) {
+          _log.error(
+            'Snapd change $changeId completed with an error: ${change.err}',
+          );
           _emitStatus(AppPermissionsServiceStatus.error(change.err!));
           break;
         }
