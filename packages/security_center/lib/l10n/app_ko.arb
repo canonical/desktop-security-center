@@ -227,5 +227,7 @@
     "snapRulesResetAllPermissions": "모든 권한 재설정",
     "@snapRulesResetAllPermissions": {},
     "cameraInterfacePageTitle": "카메라",
-    "@cameraInterfacePageTitle": {}
+    "@cameraInterfacePageTitle": {},
+    "cameraInterfacePageDescription": "앱이 카메라에 접근할 수 있게 승인합니다.",
+    "@cameraInterfacePageDescription": {}
 }
