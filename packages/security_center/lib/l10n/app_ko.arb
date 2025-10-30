@@ -229,5 +229,29 @@
     "cameraInterfacePageTitle": "카메라",
     "@cameraInterfacePageTitle": {},
     "cameraInterfacePageDescription": "앱이 카메라에 접근할 수 있게 승인합니다.",
-    "@cameraInterfacePageDescription": {}
+    "@cameraInterfacePageDescription": {},
+    "cameraRulesPageEmptyTileLabel": "아직 접근을 요청한 앱이 없습니다",
+    "@cameraRulesPageEmptyTileLabel": {},
+    "diskEncryptionPageStoreYourKeyWithLink": "복구 키는 시작 중에 디스크 잠금 해제가 실패했을 경우 데이터에 다시 접근하기 위해 필요합니다. 다른 안전한 장소에 보관해 두십시오. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "암호화 설정 사용 불가",
+    "@diskEncryptionPageErrorFailedToRetrieveStatusHeader": {},
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "이 컴퓨터의 암호화 상태를 가져올 수 없습니다.",
+    "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+    "diskEncryptionPageErrorUnsupportedStateBody": "이 컴퓨터의 TPM 설정이 지원되지 않는 상태입니다.",
+    "@diskEncryptionPageErrorUnsupportedStateBody": {},
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "snapd 버전이 지원되지 않습니다",
+    "@diskEncryptionPageErrorUnsupportedSnapdHeader": {},
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "보안 센터와 snapd가 업데이트되었는지 확인하세요.",
+    "@diskEncryptionPageErrorUnsupportedSnapdBody": {},
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "보안 센터가 snapd 인터페이스에 연결할 수 없습니다",
+    "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "이 문제를 해결하려면 터미널에서 다음 명령어를 실행하세요:",
+    "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {}
 }
