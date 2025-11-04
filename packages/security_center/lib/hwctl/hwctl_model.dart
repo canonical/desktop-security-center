@@ -9,7 +9,7 @@ part 'hwctl_model.g.dart';
 @riverpod
 Future<(String, String)> hwctlData(Ref ref) async {
   final dir = Platform.environment['SNAP_DATA'] ??
-      '/var/snap/desktop-security-center//current/';
+      '/var/snap/desktop-security-center/current/';
   final output = await File(p.join(dir, 'hwctl-output.json'))
       .readAsString()
       .onError((_, __) => '<no output>');
