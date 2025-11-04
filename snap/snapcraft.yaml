@@ -50,9 +50,10 @@ parts:
 
   hwctl:
     plugin: rust
+    rust-features: ["cli"]
     source: https://github.com/canonical/hardware-api
     source-type: git
-    source-commit: 26a0444a2fbea879cf5e68af704c952aedf3d021
+    source-tag: v0.10.1
     source-subdir: client
     build-packages:
       - jq
