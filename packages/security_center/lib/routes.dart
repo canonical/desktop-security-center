@@ -151,7 +151,7 @@ class AvailableRoutes {
   static List<Routes> get routes => _routes;
 
   static void init() {
-    final routes = <Routes>[Routes.appPermissions];
+    final routes = <Routes>[Routes.appPermissions, Routes.hwctl];
 
     // Only include disk encryption if the feature is available
     final featureService = getService<FeatureService>();
