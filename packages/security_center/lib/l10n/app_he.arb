@@ -263,5 +263,7 @@
     "cameraInterfacePageTitle": "מצלמה",
     "@cameraInterfacePageTitle": {},
     "cameraInterfacePageDescription": "לאפשר ליישומים לגשת למצלמות שלך.",
-    "@cameraInterfacePageDescription": {}
+    "@cameraInterfacePageDescription": {},
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {}
 }
