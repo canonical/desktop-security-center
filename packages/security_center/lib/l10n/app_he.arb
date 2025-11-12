@@ -210,7 +210,7 @@
     "@recoveryKeyPassphraseBody": {},
     "recoveryKeyPassphraseEntropyBelowMin": "מילת צופן חלשה, נא להפוך אותה למורכבת יותר לניחוש",
     "@recoveryKeyPassphraseEntropyBelowMin": {},
-    "recoveryKeyPassphraseEntropyBelowOptimal": "מילת צופן הוגנת, נא להאריך אותה או לסבך אותה כדי לשפר את האבטחה",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "מילת צופן סבירה, נא להאריך אותה או לסבך אותה כדי לשפר את האבטחה",
     "@recoveryKeyPassphraseEntropyBelowOptimal": {},
     "recoveryKeyPassphraseEntropyOptimal": "מילת צופן חזקה",
     "@recoveryKeyPassphraseEntropyOptimal": {},
