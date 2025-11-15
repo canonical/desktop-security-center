@@ -255,5 +255,15 @@
     "recoveryKeyEncrpytionPassphraseHeader": "加密密碼",
     "@recoveryKeyEncrpytionPassphraseHeader": {},
     "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap 連接桌面安全中心：snap-fde-control",
-    "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {}
+    "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
+    "snapPermissionAccessLabel": "存取",
+    "@snapPermissionAccessLabel": {},
+    "cameraRulesPageEmptyTileLabel": "目前尚無應用程式要求存取權限",
+    "@cameraRulesPageEmptyTileLabel": {},
+    "snapRulesResetAllPermissions": "重設所有權限",
+    "@snapRulesResetAllPermissions": {},
+    "cameraInterfacePageTitle": "相機",
+    "@cameraInterfacePageTitle": {},
+    "cameraInterfacePageDescription": "允許應用程式存取您的相機。",
+    "@cameraInterfacePageDescription": {}
 }
