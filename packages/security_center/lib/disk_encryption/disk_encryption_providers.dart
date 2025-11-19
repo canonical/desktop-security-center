@@ -76,7 +76,7 @@ sealed class TpmStateException with _$TpmStateException implements Exception {
       TpmStateExceptionUnsupportedState;
 }
 
-/// Dialog state for managing the change auth flow.
+/// Dialog state for managing the flow to update an existing pin or passphrase.
 @freezed
 sealed class ChangeAuthDialogState with _$ChangeAuthDialogState {
   factory ChangeAuthDialogState.input() = ChangeAuthDialogStateInput;
@@ -84,6 +84,24 @@ sealed class ChangeAuthDialogState with _$ChangeAuthDialogState {
   factory ChangeAuthDialogState.success() = ChangeAuthDialogStateSuccess;
   factory ChangeAuthDialogState.error(Exception e, bool fatal) =
       ChangeAuthDialogStateError;
+}
+
+/// Dialog state for managing the flow to swap between pin and passphrase.
+@freezed
+sealed class ChangeAuthModeDialogState with _$ChangeAuthModeDialogState {
+  factory ChangeAuthModeDialogState.input() = ChangeAuthModeDialogStateInput;
+  factory ChangeAuthModeDialogState.loading() = ChangeAuthModeDialogStateLoading;
+  factory ChangeAuthModeDialogState.success() = ChangeAuthModeDialogStateSuccess;
+  factory ChangeAuthModeDialogState.error(Exception e, bool fatal) =
+      ChangeAuthModeDialogStateError;
+}
+
+/// State for managing the flow to remove pin or passphrase (set to None).
+@freezed
+sealed class RemoveAuthState with _$RemoveAuthState {
+  factory RemoveAuthState.idle() = RemoveAuthStateIdle;
+  factory RemoveAuthState.loading() = RemoveAuthStateLoading;
+  factory RemoveAuthState.error(Exception e) = RemoveAuthStateError;
 }
 
 /// Dialog state for managing the replace recovery key flow.
@@ -119,6 +137,7 @@ sealed class CheckRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
       CheckRecoveryKeyDialogStateError;
 }
 
+/// Dialog model for managing the flow to update an existing pin or passphrase.
 @freezed
 class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
   factory ChangeAuthDialogModelData({
@@ -130,6 +149,19 @@ class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
     @Default('') String confirmPass,
     @Default(false) bool showPassphrase,
   }) = _ChangeAuthDialogModelData;
+}
+
+/// Dialog model for managing the flow to swap between pin and passphrase.
+@freezed
+class ChangeAuthModeDialogModelData with _$ChangeAuthModeDialogModelData {
+  factory ChangeAuthModeDialogModelData({
+    required ChangeAuthModeDialogState dialogState,
+    required AuthMode newAuthMode,
+    EntropyResponse? entropy,
+    @Default('') String newPass,
+    @Default('') String confirmPass,
+    @Default(false) bool showPassphrase,
+  }) = _ChangeAuthModeDialogModelData;
 }
 
 @riverpod
@@ -500,6 +532,162 @@ class CheckRecoveryKeyDialogModel extends _$CheckRecoveryKeyDialogModel {
       state = CheckRecoveryKeyDialogState.empty();
     } else {
       state = CheckRecoveryKeyDialogState.input(key);
+    }
+  }
+}
+
+@riverpod
+class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
+  late final _service = getService<DiskEncryptionService>();
+  Timer? _newPassTimer;
+  Timer? _confirmTimer;
+  static const debounceDuration = Duration(milliseconds: 500);
+
+  @override
+  ChangeAuthModeDialogModelData build(AuthMode newAuthMode) {
+    assert(
+      newAuthMode != AuthMode.none,
+      'ChangeAuthModeDialogModel does not handle removal (AuthMode.none)',
+    );
+    ref.onDispose(() {
+      _newPassTimer?.cancel();
+      _confirmTimer?.cancel();
+    });
+    return ChangeAuthModeDialogModelData(
+      dialogState: ChangeAuthModeDialogState.input(),
+      newAuthMode: newAuthMode,
+    );
+  }
+
+  // Under the hood, we are asking snapd to replace the platform key in use,
+  // and requesting the new one have a different auth mode. This dialog only
+  // supports swapping between Pin <-> Passphrase. Removal (-> None) is handled
+  // separately without a dialog.
+  Future<void> replaceAuthMode() async {
+    assert(state.dialogState is ChangeAuthModeDialogStateInput);
+    state = state.copyWith(dialogState: ChangeAuthModeDialogState.loading());
+    try {
+      await _service.replacePlatformKey(
+        authMode: state.newAuthMode,
+        passphrase: state.newAuthMode == AuthMode.passphrase ? state.newPass : null,
+        pin: state.newAuthMode == AuthMode.pin ? state.newPass : null,
+      );
+      state = state.copyWith(
+        dialogState: ChangeAuthModeDialogState.success(),
+        showPassphrase: false,
+      );
+    } on Exception catch (e) {
+      state = state.copyWith(
+        dialogState: ChangeAuthModeDialogState.error(e, false),
+      );
+    }
+  }
+
+  void toggleShowPassphrase() {
+    if (state.dialogState is! ChangeAuthModeDialogStateInput) return;
+    state = state.copyWith(showPassphrase: !state.showPassphrase);
+  }
+
+  Future<void> setConfirmPass(
+    String value, {
+    bool debounce = false,
+  }) async {
+    if (state.dialogState is! ChangeAuthModeDialogStateInput) return;
+    _confirmTimer?.cancel();
+    _confirmTimer =
+        Timer(debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
+            () async {
+      state = state.copyWith(
+        confirmPass: value,
+        dialogState: ChangeAuthModeDialogStateInput(),
+      );
+    });
+  }
+
+  Future<void> setNewPass(
+    String value, {
+    bool debounce = false,
+  }) async {
+    if (state.dialogState is! ChangeAuthModeDialogStateInput) return;
+    _newPassTimer?.cancel();
+    _newPassTimer =
+        Timer(debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
+            () async {
+      state = state.copyWith(
+        newPass: value,
+        dialogState: ChangeAuthModeDialogStateInput(),
+      );
+      if (value.isEmpty) {
+        _log.debug('new passphrase is empty');
+        state = state.copyWith(entropy: null);
+        return;
+      }
+      try {
+        final response = await _service.pinPassphraseEntropyCheck(
+          state.newAuthMode,
+          value,
+        );
+        state = state.copyWith(
+          entropy: response,
+        );
+      } on Exception catch (e) {
+        state = state.copyWith(
+          entropy: null,
+          dialogState: ChangeAuthModeDialogStateError(e, true),
+        );
+        _log.error(e);
+      }
+    });
+  }
+
+  bool get isValid {
+    if (state.newPass.isEmpty || state.confirmPass.isEmpty) {
+      return false;
+    }
+
+    if (state.newPass != state.confirmPass) {
+      return false;
+    }
+
+    if (state.entropy == null || !state.entropy!.success) {
+      return false;
+    }
+
+    return true;
+  }
+
+  bool get passphraseConfirmed {
+    if (state.confirmPass.isNotEmpty && state.newPass != state.confirmPass) {
+      return false;
+    }
+    return true;
+  }
+}
+
+@riverpod
+class RemoveAuthModel extends _$RemoveAuthModel {
+  late final _service = getService<DiskEncryptionService>();
+
+  @override
+  RemoveAuthState build(AuthMode currentAuthMode) {
+    assert(
+      currentAuthMode != AuthMode.none,
+      'RemoveAuthModel requires a non-None auth mode to remove',
+    );
+    return RemoveAuthState.idle();
+  }
+
+  Future<void> removeAuth() async {
+    assert(state is RemoveAuthStateIdle || state is RemoveAuthStateError);
+    state = RemoveAuthState.loading();
+    try {
+      await _service.replacePlatformKey(
+        authMode: AuthMode.none,
+      );
+      // Return to idle - the page will reflect the change automatically
+      state = RemoveAuthState.idle();
+    } on Exception catch (e) {
+      state = RemoveAuthState.error(e);
     }
   }
 }
