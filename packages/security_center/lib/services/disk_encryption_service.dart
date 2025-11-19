@@ -96,7 +96,7 @@ abstract class DiskEncryptionService {
   /// Generates and returns a new recovery key.
   Future<SnapdGenerateRecoveryKeyResponse> generateRecoveryKey();
 
-  /// replaces existing recovery key with a new oneslot.
+  /// Replaces existing recovery key with a new oneslot.
   Future<void> replaceRecoveryKey(String keyId);
 
   /// Lists all key slot and their statuses.
@@ -115,4 +115,11 @@ abstract class DiskEncryptionService {
     AuthMode authMode,
     String newPass,
   );
+
+  /// Replaces a platform protected key (used to swap auth mode from pin/passphrase/none).
+  Future<void> replacePlatformKey({
+    required AuthMode authMode,
+    String? passphrase,
+    String? pin,
+  });
 }
