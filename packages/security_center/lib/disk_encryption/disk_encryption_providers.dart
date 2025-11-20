@@ -90,8 +90,10 @@ sealed class ChangeAuthDialogState with _$ChangeAuthDialogState {
 @freezed
 sealed class ChangeAuthModeDialogState with _$ChangeAuthModeDialogState {
   factory ChangeAuthModeDialogState.input() = ChangeAuthModeDialogStateInput;
-  factory ChangeAuthModeDialogState.loading() = ChangeAuthModeDialogStateLoading;
-  factory ChangeAuthModeDialogState.success() = ChangeAuthModeDialogStateSuccess;
+  factory ChangeAuthModeDialogState.loading() =
+      ChangeAuthModeDialogStateLoading;
+  factory ChangeAuthModeDialogState.success() =
+      ChangeAuthModeDialogStateSuccess;
   factory ChangeAuthModeDialogState.error(Exception e, bool fatal) =
       ChangeAuthModeDialogStateError;
 }
@@ -569,7 +571,8 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
     try {
       await _service.replacePlatformKey(
         authMode: state.newAuthMode,
-        passphrase: state.newAuthMode == AuthMode.passphrase ? state.newPass : null,
+        passphrase:
+            state.newAuthMode == AuthMode.passphrase ? state.newPass : null,
         pin: state.newAuthMode == AuthMode.pin ? state.newPass : null,
       );
       state = state.copyWith(
