@@ -689,13 +689,13 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageAddPassphraseDialogHeading.
   ///
   /// In en, this message translates to:
-  /// **'Add PIN'**
+  /// **'Add passphrase'**
   String get diskEncryptionPageAddPassphraseDialogHeading;
 
   /// No description provided for @diskEncryptionPageAddPinDialogHeading.
   ///
   /// In en, this message translates to:
-  /// **'Add passphrase'**
+  /// **'Add PIN'**
   String get diskEncryptionPageAddPinDialogHeading;
 
   /// No description provided for @diskEncryptionPageAddPinDialogBody.

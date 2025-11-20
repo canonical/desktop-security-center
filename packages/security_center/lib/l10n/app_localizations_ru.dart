@@ -283,10 +283,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
 
   @override
   String get diskEncryptionPageAddPinDialogBody =>
