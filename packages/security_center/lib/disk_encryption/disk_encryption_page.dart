@@ -131,14 +131,30 @@ class EncryptionPageBody extends ConsumerWidget {
                   const SizedBox(height: 8),
                   Text(l10n.recoveryKeyPinBody),
                   const SizedBox(height: 16),
-                  OutlinedButton(
-                    onPressed: () {
-                      ref
-                          .read(changeAuthDialogModelProvider.notifier)
-                          .authMode = AuthMode.pin;
-                      showChangeAuthDialog(context, AuthMode.pin);
-                    },
-                    child: Text(l10n.recoveryKeyPinButton),
+                  Wrap(
+                    spacing: 16,
+                    children: [
+                      OutlinedButton(
+                        onPressed: () {
+                          ref
+                              .read(changeAuthDialogModelProvider.notifier)
+                              .authMode = AuthMode.pin;
+                          showChangeAuthDialog(context, AuthMode.pin);
+                        },
+                        child: Text(l10n.recoveryKeyPinButton),
+                      ),
+                      OutlinedButton(
+                        onPressed: () async {
+                          await ref
+                              .read(removeAuthModelProvider(AuthMode.pin)
+                                  .notifier)
+                              .removeAuth();
+                          // Refresh the page to show new auth mode
+                          ref.invalidate(tpmAuthenticationModelProvider);
+                        },
+                        child: Text(l10n.diskEncryptionPageRemovePinButton),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -152,18 +168,71 @@ class EncryptionPageBody extends ConsumerWidget {
                   const SizedBox(height: 8),
                   Text(l10n.recoveryKeyPassphraseBody),
                   const SizedBox(height: 16),
-                  OutlinedButton(
-                    onPressed: () {
-                      ref
-                          .read(changeAuthDialogModelProvider.notifier)
-                          .authMode = AuthMode.passphrase;
-                      showChangeAuthDialog(context, AuthMode.passphrase);
-                    },
-                    child: Text(l10n.recoveryKeyPassphraseButton),
+                  Wrap(
+                    spacing: 16,
+                    children: [
+                      OutlinedButton(
+                        onPressed: () {
+                          ref
+                              .read(changeAuthDialogModelProvider.notifier)
+                              .authMode = AuthMode.passphrase;
+                          showChangeAuthDialog(context, AuthMode.passphrase);
+                        },
+                        child: Text(l10n.recoveryKeyPassphraseButton),
+                      ),
+                      OutlinedButton(
+                        onPressed: () async {
+                          await ref
+                              .read(
+                                removeAuthModelProvider(AuthMode.passphrase)
+                                    .notifier,
+                              )
+                              .removeAuth();
+                          // Refresh the page to show new auth mode
+                          ref.invalidate(tpmAuthenticationModelProvider);
+                        },
+                        child:
+                            Text(l10n.diskEncryptionPageRevomePassphraseButton),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            _ => const SizedBox.shrink(),
+            AuthMode.none => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.diskEncryptionPageAdditionalSecurityHeader,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 8),
+                  MarkdownText(
+                    l10n.diskEncryptionPageAdditionalSecurityBody(
+                      l10n.diskEncryptionPageAdditionalSecurityLearnMore
+                          .link(_learnMoreUrl),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Wrap(
+                    spacing: 16,
+                    children: [
+                      OutlinedButton(
+                        onPressed: () {
+                          showChangeAuthModeDialog(
+                              context, AuthMode.passphrase);
+                        },
+                        child: Text(l10n.diskEncryptionPageAddPassphraseButton),
+                      ),
+                      OutlinedButton(
+                        onPressed: () {
+                          showChangeAuthModeDialog(context, AuthMode.pin);
+                        },
+                        child: Text(l10n.diskEncryptionPageAddPinButton),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
           },
         ],
       ),
@@ -620,6 +689,111 @@ class ChangeAuthDialog extends ConsumerWidget {
                     : Text(l10n.diskEncryptionPageError),
                 subtitle: Text(
                   (model.dialogState as ChangeAuthDialogStateError)
+                      .e
+                      .toString(),
+                ),
+                yaruInfoType: YaruInfoType.danger,
+              ),
+          ].separatedBy(const SizedBox(height: 16)),
+        ),
+      ),
+    );
+  }
+}
+
+void showChangeAuthModeDialog(BuildContext context, AuthMode authMode) {
+  showDialog(
+    context: context,
+    builder: (_) => ChangeAuthModeDialog(authMode: authMode),
+  );
+}
+
+class ChangeAuthModeDialog extends ConsumerWidget {
+  const ChangeAuthModeDialog({required this.authMode, super.key});
+
+  final AuthMode authMode;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final model = ref.watch(changeAuthModeDialogModelProvider(authMode));
+    final notifier =
+        ref.read(changeAuthModeDialogModelProvider(authMode).notifier);
+    assert(authMode != AuthMode.none);
+
+    final title = switch (authMode) {
+      AuthMode.passphrase => l10n.diskEncryptionPageAddPassphraseDialogHeading,
+      AuthMode.pin => l10n.diskEncryptionPageAddPinDialogHeading,
+      _ => '',
+    };
+
+    final bodyText = switch (authMode) {
+      AuthMode.passphrase => l10n.diskEncryptionPageAddPassphraseDialogBody,
+      AuthMode.pin => l10n.diskEncryptionPageAddPinDialogBody,
+      _ => '',
+    };
+
+    // Close dialog and refresh page on success
+    if (model.dialogState is ChangeAuthModeDialogStateSuccess) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.invalidate(tpmAuthenticationModelProvider);
+        Navigator.of(context).pop();
+      });
+    }
+
+    return AlertDialog(
+      title: YaruDialogTitleBar(title: Text(title)),
+      titlePadding: EdgeInsets.zero,
+      content: SizedBox(
+        width: 460,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(bodyText),
+            AddPassphraseFormField(authMode: authMode),
+            AddConfirmPassphraseFormField(authMode: authMode),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed:
+                      model.dialogState is ChangeAuthModeDialogStateInput &&
+                              notifier.isValid
+                          ? notifier.replaceAuthMode
+                          : null,
+                  child: model.dialogState is ChangeAuthModeDialogStateLoading
+                      ? SizedBox.square(
+                          dimension: yaruProgressSize,
+                          child: YaruCircularProgressIndicator(
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : Text(l10n.diskEncryptionPageAddPinDialogSaveButton),
+                ),
+              ],
+            ),
+            if (model.dialogState is ChangeAuthModeDialogStateSuccess)
+              YaruInfoBox(
+                title: Text(
+                  authMode == AuthMode.passphrase
+                      ? l10n.recoveryKeyPassphrasePassphraseSuccessHeader
+                      : l10n.recoveryKeyPassphrasePinSuccessHeader,
+                ),
+                subtitle: Text(
+                  authMode == AuthMode.passphrase
+                      ? l10n.recoveryKeyPassphrasePassphraseSuccessBody
+                      : l10n.recoveryKeyPassphrasePinSuccessBody,
+                ),
+                yaruInfoType: YaruInfoType.success,
+              ),
+            if (model.dialogState is ChangeAuthModeDialogStateError)
+              YaruInfoBox(
+                title:
+                    (model.dialogState as ChangeAuthModeDialogStateError).fatal
+                        ? Text(l10n.recoveryKeySomethingWentWrongHeader)
+                        : Text(l10n.diskEncryptionPageError),
+                subtitle: Text(
+                  (model.dialogState as ChangeAuthModeDialogStateError)
                       .e
                       .toString(),
                 ),

@@ -313,3 +313,231 @@ class _SecurityKeyShowButton extends ConsumerWidget {
     );
   }
 }
+
+class AddPassphraseFormField extends ConsumerStatefulWidget {
+  const AddPassphraseFormField({
+    required this.authMode,
+    super.key,
+    this.fieldWidth,
+  });
+
+  final double? fieldWidth;
+  final AuthMode authMode;
+
+  @override
+  ConsumerState<AddPassphraseFormField> createState() =>
+      _AddPassphraseFormFieldState();
+}
+
+class _AddPassphraseFormFieldState
+    extends ConsumerState<AddPassphraseFormField> {
+  final _controller = TextEditingController();
+
+  @override
+  void initState() {
+    final model = ref.read(changeAuthModeDialogModelProvider(widget.authMode));
+    assert(widget.authMode != AuthMode.none);
+
+    super.initState();
+    _controller.value = _controller.value.copyWith(text: model.newPass);
+    if (widget.authMode == AuthMode.pin) {
+      _controller.addListener(() => _filterDigits(_controller));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final model = ref.watch(changeAuthModeDialogModelProvider(widget.authMode));
+    final notifier =
+        ref.watch(changeAuthModeDialogModelProvider(widget.authMode).notifier);
+    final lang = AppLocalizations.of(context);
+    final isDisabled = model.dialogState is ChangeAuthModeDialogStateSuccess ||
+        (model.dialogState is ChangeAuthModeDialogStateError &&
+            (model.dialogState as ChangeAuthModeDialogStateError).fatal);
+    final l10n = AppLocalizations.of(context);
+
+    return Row(
+      children: [
+        Expanded(
+          child: Focus(
+            onFocusChange: (hasFocus) {
+              if (!hasFocus) {
+                notifier.setNewPass(_controller.text);
+              }
+            },
+            child: TextFormField(
+              controller: _controller,
+              decoration: InputDecoration(
+                labelText: widget.authMode.localizedNewHint(lang),
+                errorText: model.entropy != null && !model.entropy!.success
+                    ? model.entropy?.semanticEntropy.localizedHint(
+                        l10n,
+                        widget.authMode,
+                      )
+                    : null,
+                helperText: model.entropy?.semanticEntropy ==
+                            SemanticEntropy.belowOptimal ||
+                        model.entropy?.semanticEntropy ==
+                            SemanticEntropy.optimal
+                    ? model.entropy?.semanticEntropy.localizedHint(
+                        l10n,
+                        widget.authMode,
+                      )
+                    : null,
+                helperStyle: Theme.of(context).textTheme.bodySmall,
+                helperMaxLines: 2,
+                errorMaxLines: 2,
+                suffixIcon: AddAuthShowButton(authMode: widget.authMode),
+              ),
+              obscureText: !model.showPassphrase,
+              enabled: !isDisabled,
+              onChanged: (value) => notifier.setNewPass(value, debounce: true),
+            ),
+          ),
+        ),
+        if (model.entropy != null &&
+            model.entropy!.success &&
+            model.dialogState is! ChangeAuthModeDialogStateError)
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: Baseline(
+              baseline: 0,
+              baselineType: TextBaseline.alphabetic,
+              child: SuccessIcon(),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+class AddConfirmPassphraseFormField extends ConsumerStatefulWidget {
+  const AddConfirmPassphraseFormField({
+    required this.authMode,
+    this.fieldWidth,
+    super.key,
+  });
+
+  final double? fieldWidth;
+  final AuthMode authMode;
+
+  @override
+  ConsumerState<AddConfirmPassphraseFormField> createState() =>
+      _AddConfirmPassphraseFormFieldState();
+}
+
+class _AddConfirmPassphraseFormFieldState
+    extends ConsumerState<AddConfirmPassphraseFormField> {
+  final _controller = TextEditingController();
+
+  @override
+  void initState() {
+    final model = ref.read(changeAuthModeDialogModelProvider(widget.authMode));
+    assert(widget.authMode != AuthMode.none);
+
+    super.initState();
+    _controller.value = _controller.value.copyWith(text: model.confirmPass);
+    if (widget.authMode == AuthMode.pin) {
+      _controller.addListener(() => _filterDigits(_controller));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final model = ref.watch(changeAuthModeDialogModelProvider(widget.authMode));
+    final notifier =
+        ref.watch(changeAuthModeDialogModelProvider(widget.authMode).notifier);
+    final lang = AppLocalizations.of(context);
+    final isDisabled = model.dialogState is ChangeAuthModeDialogStateSuccess ||
+        (model.dialogState is ChangeAuthModeDialogStateError &&
+            (model.dialogState as ChangeAuthModeDialogStateError).fatal);
+
+    return Row(
+      children: [
+        Expanded(
+          child: Focus(
+            onFocusChange: (hasFocus) {
+              if (!hasFocus) {
+                notifier.setConfirmPass(_controller.text);
+              }
+            },
+            child: TextFormField(
+              controller: _controller,
+              decoration: InputDecoration(
+                labelText: widget.authMode.localizedConfirmHint(lang),
+                errorText: !notifier.passphraseConfirmed
+                    ? widget.authMode.localizedConfirmError(lang)
+                    : null,
+              ),
+              obscureText: !model.showPassphrase,
+              enabled: !isDisabled,
+              onChanged: (value) {
+                notifier.setConfirmPass(value, debounce: true);
+              },
+            ),
+          ),
+        ),
+        if (model.confirmPass.isNotEmpty &&
+            notifier.passphraseConfirmed &&
+            model.dialogState is! ChangeAuthModeDialogStateError)
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: Baseline(
+              baseline: 0,
+              baselineType: TextBaseline.alphabetic,
+              child: SuccessIcon(),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+class AddAuthShowButton extends ConsumerWidget {
+  const AddAuthShowButton({required this.authMode, super.key});
+
+  final AuthMode authMode;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final lang = AppLocalizations.of(context);
+    final model = ref.watch(changeAuthModeDialogModelProvider(authMode));
+    final notifier =
+        ref.read(changeAuthModeDialogModelProvider(authMode).notifier);
+    final showSecurityKey = model.showPassphrase;
+    final isDisabled = model.dialogState is ChangeAuthModeDialogStateSuccess ||
+        (model.dialogState is ChangeAuthModeDialogStateError &&
+            (model.dialogState as ChangeAuthModeDialogStateError).fatal);
+
+    return Padding(
+      padding: const EdgeInsets.all(1.0),
+      child: TextButton.icon(
+        icon: Icon(
+          showSecurityKey ? YaruIcons.hide : YaruIcons.eye,
+          color: isDisabled
+              ? theme.disabledColor
+              : theme.colorScheme.onSecondaryContainer,
+        ),
+        label: Text(
+          showSecurityKey
+              ? lang.recoveryKeyPassphraseHide
+              : lang.recoveryKeyPassphraseShow,
+        ),
+        onPressed: notifier.toggleShowPassphrase,
+        style: TextButton.styleFrom(
+          foregroundColor: isDisabled
+              ? theme.disabledColor
+              : theme.colorScheme.onSecondaryContainer,
+          backgroundColor: theme.colorScheme.onSurface.withValues(alpha: 0.12),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(4.0),
+              bottomRight: Radius.circular(4.0),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
