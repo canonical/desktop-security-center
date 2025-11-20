@@ -274,6 +274,47 @@ class AppLocalizationsOc extends AppLocalizations {
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
+  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+
+  @override
+  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+
+  @override
+  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add PIN';
+
+  @override
+  String get diskEncryptionPageAddPinDialogHeading => 'Add passphrase';
+
+  @override
+  String get diskEncryptionPageAddPinDialogBody =>
+      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password. If you forget your PIN, you can regain access to the disk by using the recovery key.';
+
+  @override
+  String get diskEncryptionPageAddPassphraseDialogBody =>
+      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password. If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+
+  @override
+  String get diskEncryptionPageAdditionalSecurityHeader =>
+      'Additional security';
+
+  @override
+  String diskEncryptionPageAdditionalSecurityBody(String learnMoreLink) {
+    return 'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts. $learnMoreLink';
+  }
+
+  @override
+  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+
+  @override
+  String get diskEncryptionPageAddPinDialogSaveButton => 'Save';
+
+  @override
+  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+
+  @override
+  String get diskEncryptionPageRevomePassphraseButton => 'Revome passphrase...';
+
+  @override
   String get recoveryKeyExceptionFileSystemTitle =>
       'Recovery key file not saved';
 
