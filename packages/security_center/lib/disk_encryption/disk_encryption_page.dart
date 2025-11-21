@@ -146,8 +146,9 @@ class EncryptionPageBody extends ConsumerWidget {
                       OutlinedButton(
                         onPressed: () async {
                           await ref
-                              .read(removeAuthModelProvider(AuthMode.pin)
-                                  .notifier)
+                              .read(
+                                removeAuthModelProvider(AuthMode.pin).notifier,
+                              )
                               .removeAuth();
                           // Refresh the page to show new auth mode
                           ref.invalidate(tpmAuthenticationModelProvider);
@@ -219,7 +220,9 @@ class EncryptionPageBody extends ConsumerWidget {
                       OutlinedButton(
                         onPressed: () {
                           showChangeAuthModeDialog(
-                              context, AuthMode.passphrase);
+                            context,
+                            AuthMode.passphrase,
+                          );
                         },
                         child: Text(l10n.diskEncryptionPageAddPassphraseButton),
                       ),
@@ -744,6 +747,8 @@ class ChangeAuthModeDialog extends ConsumerWidget {
     return AlertDialog(
       title: YaruDialogTitleBar(title: Text(title)),
       titlePadding: EdgeInsets.zero,
+      insetPadding:
+          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 16.0),
       content: SizedBox(
         width: 460,
         child: Column(
