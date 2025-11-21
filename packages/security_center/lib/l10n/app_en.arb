@@ -181,7 +181,7 @@
     "diskEncryptionPageAdditionalSecurityLearnMore": "Learn more",
     "diskEncryptionPageAddPinDialogSaveButton": "Save",
     "diskEncryptionPageRemovePinButton": "Remove PIN...",
-    "diskEncryptionPageRevomePassphraseButton": "Revome passphrase...",
+    "diskEncryptionPageRemovePassphraseButton": "Remove passphrase...",
     "recoveryKeyExceptionFileSystemTitle": "Recovery key file not saved",
     "recoveryKeyExceptionDisallowedPathTitle": "Recovery key file cannot be saved in a temporary location",
     "recoveryKeyExceptionUnknownTitle": "Unknown error",

@@ -311,7 +311,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
 
   @override
-  String get diskEncryptionPageRevomePassphraseButton => 'Revome passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>

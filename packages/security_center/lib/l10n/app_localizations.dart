@@ -740,11 +740,11 @@ abstract class AppLocalizations {
   /// **'Remove PIN...'**
   String get diskEncryptionPageRemovePinButton;
 
-  /// No description provided for @diskEncryptionPageRevomePassphraseButton.
+  /// No description provided for @diskEncryptionPageRemovePassphraseButton.
   ///
   /// In en, this message translates to:
-  /// **'Revome passphrase...'**
-  String get diskEncryptionPageRevomePassphraseButton;
+  /// **'Remove passphrase...'**
+  String get diskEncryptionPageRemovePassphraseButton;
 
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.
   ///

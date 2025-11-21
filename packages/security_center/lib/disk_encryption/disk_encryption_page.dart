@@ -204,7 +204,7 @@ class EncryptionPageBody extends ConsumerWidget {
                           ref.invalidate(tpmAuthenticationModelProvider);
                         },
                         child:
-                            Text(l10n.diskEncryptionPageRevomePassphraseButton),
+                            Text(l10n.diskEncryptionPageRemovePassphraseButton),
                       ),
                     ],
                   ),
