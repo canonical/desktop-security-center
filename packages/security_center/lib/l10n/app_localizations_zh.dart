@@ -360,7 +360,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passpharse during startup to unlock the disk. You can change the passphrase but not disable it.';
+      'You need to enter your passpharse during startup to unlock the disk.';
 
   @override
   String get recoveryKeyPassphraseButton => 'Change passphrase...';
@@ -400,7 +400,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.';
+      'You need to enter your PIN during startup to unlock the disk.';
 
   @override
   String get recoveryKeyPinButton => 'Change PIN...';

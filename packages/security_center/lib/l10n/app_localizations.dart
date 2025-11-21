@@ -833,7 +833,7 @@ abstract class AppLocalizations {
   /// No description provided for @recoveryKeyPassphraseBody.
   ///
   /// In en, this message translates to:
-  /// **'You need to enter your passpharse during startup to unlock the disk. You can change the passphrase but not disable it.'**
+  /// **'You need to enter your passpharse during startup to unlock the disk.'**
   String get recoveryKeyPassphraseBody;
 
   /// No description provided for @recoveryKeyPassphraseButton.
@@ -905,7 +905,7 @@ abstract class AppLocalizations {
   /// No description provided for @recoveryKeyPinBody.
   ///
   /// In en, this message translates to:
-  /// **'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.'**
+  /// **'You need to enter your PIN during startup to unlock the disk.'**
   String get recoveryKeyPinBody;
 
   /// No description provided for @recoveryKeyPinButton.
