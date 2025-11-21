@@ -48,6 +48,9 @@ class EncryptionPageBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final tpmAuthenticationModel = ref.watch(tpmAuthenticationModelProvider);
+    final removePinState = ref.watch(removeAuthModelProvider(AuthMode.pin));
+    final removePassphraseState =
+        ref.watch(removeAuthModelProvider(AuthMode.passphrase));
 
     return tpmAuthenticationModel.when(
       data: (data) => Column(
@@ -157,6 +160,14 @@ class EncryptionPageBody extends ConsumerWidget {
                       ),
                     ],
                   ),
+                  if (removePinState is RemoveAuthStateError) ...[
+                    const SizedBox(height: 16),
+                    YaruInfoBox(
+                      title: Text(l10n.diskEncryptionPageError),
+                      subtitle: Text(removePinState.e.toString()),
+                      yaruInfoType: YaruInfoType.danger,
+                    ),
+                  ],
                 ],
               ),
             AuthMode.passphrase => Column(
@@ -197,6 +208,14 @@ class EncryptionPageBody extends ConsumerWidget {
                       ),
                     ],
                   ),
+                  if (removePassphraseState is RemoveAuthStateError) ...[
+                    const SizedBox(height: 16),
+                    YaruInfoBox(
+                      title: Text(l10n.diskEncryptionPageError),
+                      subtitle: Text(removePassphraseState.e.toString()),
+                      yaruInfoType: YaruInfoType.danger,
+                    ),
+                  ],
                 ],
               ),
             AuthMode.none => Column(

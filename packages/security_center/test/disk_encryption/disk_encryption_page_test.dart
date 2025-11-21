@@ -1698,15 +1698,20 @@ void main() {
         await tester.tap(find.text(buttonText));
         await tester.pumpAndSettle();
 
-        // For the remove tests, we just verify that the button was clicked
-        // and the appropriate method was called on the service.
         if (tc.replacePlatformKeyError) {
-          // On error, the page stays in the same state
+          // On error, verify error box appears
+          expect(
+            find.text(tester.l10n.diskEncryptionPageError),
+            findsOneWidget,
+          );
           // Button should still be visible
           expect(find.text(buttonText), findsOneWidget);
         } else {
-          // On success, verify that replacePlatformKey was called with AuthMode.none
-          expect(find.text(buttonText), findsOneWidget);
+          // On success, no error should appear
+          expect(
+            find.text(tester.l10n.diskEncryptionPageError),
+            findsNothing,
+          );
         }
       });
     }
