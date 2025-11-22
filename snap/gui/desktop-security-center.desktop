@@ -2,7 +2,7 @@
 Type=Application
 Version=1.0
 Exec=desktop-security-center %U
-Icon=${SNAP}/meta/gui/desktop-security-center.png
+Icon=snap.desktop-security-center.Canonical
 Terminal=false
 Categories=System;Utility;Permissions;Settings;Security;
 Keywords=Ubuntu;Permissions;Snaps;Security;
