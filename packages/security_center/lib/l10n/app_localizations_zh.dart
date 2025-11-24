@@ -309,6 +309,22 @@ class AppLocalizationsZh extends AppLocalizations {
   String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
 
   @override
+  String get diskEncryptionPageAddingPin =>
+      'Adding PIN, it might take a few seconds...';
+
+  @override
+  String get diskEncryptionPageAddingPassphrase =>
+      'Adding passphrase, it might take a few seconds...';
+
+  @override
+  String get diskEncryptionPageRemovingPin =>
+      'Removing PIN, it might take a few seconds...';
+
+  @override
+  String get diskEncryptionPageRemovingPassphrase =>
+      'Removing passphrase, it might take a few seconds...';
+
+  @override
   String get recoveryKeyExceptionFileSystemTitle =>
       'Recovery key file not saved';
 

@@ -746,6 +746,30 @@ abstract class AppLocalizations {
   /// **'Remove passphrase...'**
   String get diskEncryptionPageRemovePassphraseButton;
 
+  /// No description provided for @diskEncryptionPageAddingPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Adding PIN, it might take a few seconds...'**
+  String get diskEncryptionPageAddingPin;
+
+  /// No description provided for @diskEncryptionPageAddingPassphrase.
+  ///
+  /// In en, this message translates to:
+  /// **'Adding passphrase, it might take a few seconds...'**
+  String get diskEncryptionPageAddingPassphrase;
+
+  /// No description provided for @diskEncryptionPageRemovingPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Removing PIN, it might take a few seconds...'**
+  String get diskEncryptionPageRemovingPin;
+
+  /// No description provided for @diskEncryptionPageRemovingPassphrase.
+  ///
+  /// In en, this message translates to:
+  /// **'Removing passphrase, it might take a few seconds...'**
+  String get diskEncryptionPageRemovingPassphrase;
+
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.
   ///
   /// In en, this message translates to:
