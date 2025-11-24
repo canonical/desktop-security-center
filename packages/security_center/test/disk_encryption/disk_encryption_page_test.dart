@@ -1239,7 +1239,8 @@ void main() {
 
   group('add auth mode - show toggles visibility', () {
     final cases = [
-      (name: 'Pin', authMode: AuthMode.pin),
+      // FIXME: awaiting PIN support in snapd
+      //(name: 'Pin', authMode: AuthMode.pin),
       (name: 'Passphrase', authMode: AuthMode.passphrase),
     ];
 
@@ -1297,7 +1298,8 @@ void main() {
   group('add auth mode - submit disabled when new and confirm do not match',
       () {
     final cases = [
-      (name: 'Pin', authMode: AuthMode.pin),
+      // FIXME: awaiting PIN support in snapd
+      //(name: 'Pin', authMode: AuthMode.pin),
       (name: 'Passphrase', authMode: AuthMode.passphrase),
     ];
 
@@ -1357,7 +1359,8 @@ void main() {
 
   group('add auth mode - entropy hinting', () {
     final cases = [
-      (name: 'Pin', authMode: AuthMode.pin),
+      // FIXME: awaiting PIN support in snapd
+      //(name: 'Pin', authMode: AuthMode.pin),
       (name: 'Passphrase', authMode: AuthMode.passphrase),
     ];
 
@@ -1466,10 +1469,11 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      find.text(tester.l10n.diskEncryptionPageAddPinButton),
+      find.text(tester.l10n.diskEncryptionPageAddPassphraseButton),
       findsOneWidget,
     );
-    await tester.tap(find.text(tester.l10n.diskEncryptionPageAddPinButton));
+    await tester
+        .tap(find.text(tester.l10n.diskEncryptionPageAddPassphraseButton));
     await tester.pumpAndSettle(debounceDelay);
 
     // Find new auth text field and enter text
@@ -1502,16 +1506,17 @@ void main() {
 
   group('add auth mode - submit with valid inputs', () {
     final cases = [
-      (
-        name: 'Pin success',
-        authMode: AuthMode.pin,
-        replacePlatformKeyError: false,
-      ),
-      (
-        name: 'Pin failure',
-        authMode: AuthMode.pin,
-        replacePlatformKeyError: true,
-      ),
+      // FIXME: awaiting PIN support in snapd
+      // (
+      //   name: 'Pin success',
+      //   authMode: AuthMode.pin,
+      //   replacePlatformKeyError: false,
+      // ),
+      // (
+      //   name: 'Pin failure',
+      //   authMode: AuthMode.pin,
+      //   replacePlatformKeyError: true,
+      // ),
       (
         name: 'Passphrase success',
         authMode: AuthMode.passphrase,
@@ -1600,7 +1605,8 @@ void main() {
 
   group('add auth mode - input filtering validation', () {
     final cases = [
-      (name: 'Pin', authMode: AuthMode.pin),
+      // FIXME: awaiting PIN support in snapd
+      //(name: 'Pin', authMode: AuthMode.pin),
       (name: 'Passphrase', authMode: AuthMode.passphrase),
     ];
 
