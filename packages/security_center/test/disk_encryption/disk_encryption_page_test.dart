@@ -1572,32 +1572,27 @@ void main() {
         // Button should now be enabled with valid inputs
         expect(tester.widget<ElevatedButton>(saveButton).enabled, isTrue);
 
-        // Submit the form
         await tester.tap(saveButton);
-        await tester.pumpAndSettle(debounceDelay);
+        await tester.pumpAndSettle();
 
         // Check the result based on success/failure
         if (tc.replacePlatformKeyError) {
-          // Should show error message
           expect(
             find.text(tester.l10n.diskEncryptionPageError),
             findsOneWidget,
           );
 
-          // Fields should remain enabled on error (so user can retry)
-          for (var i = 0; i < 2; i++) {
-            final textField = tester.widget<TextField>(textFields.at(i));
-            expect(textField.enabled, isTrue);
-          }
-          // Submit button is disabled on error
-          expect(tester.widget<ElevatedButton>(saveButton).enabled, isFalse);
+          // Add buttons should be re-enabled after error
+          final addButtonText = tc.authMode == AuthMode.pin
+              ? tester.l10n.diskEncryptionPageAddPinButton
+              : tester.l10n.diskEncryptionPageAddPassphraseButton;
+          final addButton = find.widgetWithText(OutlinedButton, addButtonText);
+          expect(tester.widget<OutlinedButton>(addButton).enabled, isTrue);
         } else {
-          // On success, the dialog closes automatically via Navigator.pop
-          // so we verify the dialog is no longer present
-          final dialogHeading = tc.authMode == AuthMode.pin
-              ? tester.l10n.diskEncryptionPageAddPinDialogHeading
-              : tester.l10n.diskEncryptionPageAddPassphraseDialogHeading;
-          expect(find.text(dialogHeading), findsNothing);
+          expect(
+            find.text(tester.l10n.diskEncryptionPageError),
+            findsNothing,
+          );
         }
       });
     }
@@ -1692,22 +1687,31 @@ void main() {
         // Find and tap the appropriate remove button
         final buttonText = tc.authMode == AuthMode.pin
             ? tester.l10n.diskEncryptionPageRemovePinButton
-            : tester.l10n.diskEncryptionPageRevomePassphraseButton;
+            : tester.l10n.diskEncryptionPageRemovePassphraseButton;
 
         expect(find.text(buttonText), findsOneWidget);
         await tester.tap(find.text(buttonText));
+
         await tester.pumpAndSettle();
 
         if (tc.replacePlatformKeyError) {
-          // On error, verify error box appears
+          // On error, verify error box appears on main page
           expect(
             find.text(tester.l10n.diskEncryptionPageError),
             findsOneWidget,
           );
-          // Button should still be visible
-          expect(find.text(buttonText), findsOneWidget);
+          // Button should still be visible and re-enabled
+          final removeButton = find.widgetWithText(OutlinedButton, buttonText);
+          expect(removeButton, findsOneWidget);
+          expect(
+            tester.widget<OutlinedButton>(removeButton).enabled,
+            isTrue,
+          );
+          final statusText = tc.authMode == AuthMode.pin
+              ? tester.l10n.recoveryKeyPinEnabled
+              : tester.l10n.recoveryKeyPassphraseEnabled;
+          expect(find.text(statusText), findsOneWidget);
         } else {
-          // On success, no error should appear
           expect(
             find.text(tester.l10n.diskEncryptionPageError),
             findsNothing,
