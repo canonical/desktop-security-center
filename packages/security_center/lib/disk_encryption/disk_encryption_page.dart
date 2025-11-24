@@ -226,8 +226,10 @@ class EncryptionPageBody extends ConsumerWidget {
                                 ? null
                                 : () {
                                     ref
-                                        .read(changeAuthDialogModelProvider
-                                            .notifier)
+                                        .read(
+                                          changeAuthDialogModelProvider
+                                              .notifier,
+                                        )
                                         .authMode = AuthMode.pin;
                                     showChangeAuthDialog(context, AuthMode.pin);
                                   },
@@ -283,8 +285,10 @@ class EncryptionPageBody extends ConsumerWidget {
                                 ? null
                                 : () {
                                     ref
-                                        .read(changeAuthDialogModelProvider
-                                            .notifier)
+                                        .read(
+                                          changeAuthDialogModelProvider
+                                              .notifier,
+                                        )
                                         .authMode = AuthMode.passphrase;
                                     showChangeAuthDialog(
                                       context,
@@ -300,13 +304,14 @@ class EncryptionPageBody extends ConsumerWidget {
                                     ref
                                         .read(
                                           removeAuthModelProvider(
-                                                  AuthMode.passphrase)
-                                              .notifier,
+                                            AuthMode.passphrase,
+                                          ).notifier,
                                         )
                                         .removeAuth();
                                   },
                             child: Text(
-                                l10n.diskEncryptionPageRemovePassphraseButton),
+                              l10n.diskEncryptionPageRemovePassphraseButton,
+                            ),
                           ),
                         ],
                       ),
@@ -372,7 +377,8 @@ class EncryptionPageBody extends ConsumerWidget {
                                     );
                                   },
                             child: Text(
-                                l10n.diskEncryptionPageAddPassphraseButton),
+                              l10n.diskEncryptionPageAddPassphraseButton,
+                            ),
                           ),
                           OutlinedButton(
                             onPressed: isAdding
