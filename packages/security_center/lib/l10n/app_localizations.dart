@@ -449,13 +449,13 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageStoreYourKey.
   ///
   /// In en, this message translates to:
-  /// **'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.'**
+  /// **'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.'**
   String get diskEncryptionPageStoreYourKey;
 
   /// No description provided for @diskEncryptionPageStoreYourKeyWithLink.
   ///
   /// In en, this message translates to:
-  /// **'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe. {learnMoreLink}'**
+  /// **'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. {learnMoreLink}'**
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink);
 
   /// No description provided for @diskEncryptionPageLearnMore.
@@ -731,7 +731,7 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageAddPinDialogSaveButton.
   ///
   /// In en, this message translates to:
-  /// **'Save'**
+  /// **'Add'**
   String get diskEncryptionPageAddPinDialogSaveButton;
 
   /// No description provided for @diskEncryptionPageRemovePinButton.
@@ -755,7 +755,7 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageAddingPassphrase.
   ///
   /// In en, this message translates to:
-  /// **'Adding passphrase, it might take a few seconds...'**
+  /// **'Adding passphrase, this might take a few seconds...'**
   String get diskEncryptionPageAddingPassphrase;
 
   /// No description provided for @diskEncryptionPageRemovingPin.
@@ -767,7 +767,7 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageRemovingPassphrase.
   ///
   /// In en, this message translates to:
-  /// **'Removing passphrase, it might take a few seconds...'**
+  /// **'Removing passphrase, this might take a few seconds...'**
   String get diskEncryptionPageRemovingPassphrase;
 
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.

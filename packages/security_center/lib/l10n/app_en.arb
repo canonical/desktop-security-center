@@ -89,9 +89,9 @@
     "@diskEncryptionPageTitle": {},
     "diskEncryptionPageRecoveryKey": "Recovery key",
     "@diskEncryptionPageRecoveryKey": {},
-    "diskEncryptionPageStoreYourKey": "The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.",
+    "diskEncryptionPageStoreYourKey": "The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.",
     "@diskEncryptionPageStoreYourKey": {},
-    "diskEncryptionPageStoreYourKeyWithLink": "The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe. {learnMoreLink}",
+    "diskEncryptionPageStoreYourKeyWithLink": "The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. {learnMoreLink}",
     "@diskEncryptionPageStoreYourKeyWithLink": {
         "placeholders": {
             "learnMoreLink": {
@@ -179,13 +179,13 @@
         }
     },
     "diskEncryptionPageAdditionalSecurityLearnMore": "Learn more",
-    "diskEncryptionPageAddPinDialogSaveButton": "Save",
+    "diskEncryptionPageAddPinDialogSaveButton": "Add",
     "diskEncryptionPageRemovePinButton": "Remove PIN...",
     "diskEncryptionPageRemovePassphraseButton": "Remove passphrase...",
     "diskEncryptionPageAddingPin": "Adding PIN, it might take a few seconds...",
-    "diskEncryptionPageAddingPassphrase": "Adding passphrase, it might take a few seconds...",
+    "diskEncryptionPageAddingPassphrase": "Adding passphrase, this might take a few seconds...",
     "diskEncryptionPageRemovingPin": "Removing PIN, it might take a few seconds...",
-    "diskEncryptionPageRemovingPassphrase": "Removing passphrase, it might take a few seconds...",
+    "diskEncryptionPageRemovingPassphrase": "Removing passphrase, this might take a few seconds...",
     "recoveryKeyExceptionFileSystemTitle": "Recovery key file not saved",
     "recoveryKeyExceptionDisallowedPathTitle": "Recovery key file cannot be saved in a temporary location",
     "recoveryKeyExceptionUnknownTitle": "Unknown error",

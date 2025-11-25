@@ -134,11 +134,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.';
+      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
   }
 
   @override
@@ -300,7 +300,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Save';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
 
   @override
   String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
@@ -314,7 +314,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, it might take a few seconds...';
+      'Adding passphrase, this might take a few seconds...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
@@ -322,7 +322,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, it might take a few seconds...';
+      'Removing passphrase, this might take a few seconds...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
