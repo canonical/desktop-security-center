@@ -388,7 +388,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passpharse during startup to unlock the disk.';
+      'You need to enter your passphrase every time your computer starts.';
 
   @override
   String get recoveryKeyPassphraseButton => 'Change passphrase...';
@@ -428,7 +428,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN during startup to unlock the disk.';
+      'You need to enter your PIN every time your computer starts.';
 
   @override
   String get recoveryKeyPinButton => 'Change PIN...';
