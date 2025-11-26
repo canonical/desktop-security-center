@@ -45,11 +45,11 @@ class AppLocalizationsCa extends AppLocalizations {
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Enabling, it might take a few seconds...';
+      'Enabling, this may take a few seconds...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Disabling, it might take a few seconds...';
+      'Disabling, this may take a few seconds...';
 
   @override
   String get snapPermissionsExperimentalLabel => 'Experimental';
@@ -316,19 +316,19 @@ class AppLocalizationsCa extends AppLocalizations {
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, it might take a few seconds...';
+      'Adding PIN, this may take a few seconds...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this might take a few seconds...';
+      'Adding passphrase, this may take a few seconds...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, it might take a few seconds...';
+      'Removing PIN, this may take a few seconds...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this might take a few seconds...';
+      'Removing passphrase, this may take a few seconds...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>

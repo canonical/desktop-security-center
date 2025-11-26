@@ -311,13 +311,13 @@ abstract class AppLocalizations {
   /// No description provided for @snapPermissionsEnablingLabel.
   ///
   /// In en, this message translates to:
-  /// **'Enabling, it might take a few seconds...'**
+  /// **'Enabling, this may take a few seconds...'**
   String get snapPermissionsEnablingLabel;
 
   /// No description provided for @snapPermissionsDisablingLabel.
   ///
   /// In en, this message translates to:
-  /// **'Disabling, it might take a few seconds...'**
+  /// **'Disabling, this may take a few seconds...'**
   String get snapPermissionsDisablingLabel;
 
   /// No description provided for @snapPermissionsExperimentalLabel.
@@ -749,25 +749,25 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageAddingPin.
   ///
   /// In en, this message translates to:
-  /// **'Adding PIN, it might take a few seconds...'**
+  /// **'Adding PIN, this may take a few seconds...'**
   String get diskEncryptionPageAddingPin;
 
   /// No description provided for @diskEncryptionPageAddingPassphrase.
   ///
   /// In en, this message translates to:
-  /// **'Adding passphrase, this might take a few seconds...'**
+  /// **'Adding passphrase, this may take a few seconds...'**
   String get diskEncryptionPageAddingPassphrase;
 
   /// No description provided for @diskEncryptionPageRemovingPin.
   ///
   /// In en, this message translates to:
-  /// **'Removing PIN, it might take a few seconds...'**
+  /// **'Removing PIN, this may take a few seconds...'**
   String get diskEncryptionPageRemovingPin;
 
   /// No description provided for @diskEncryptionPageRemovingPassphrase.
   ///
   /// In en, this message translates to:
-  /// **'Removing passphrase, this might take a few seconds...'**
+  /// **'Removing passphrase, this may take a few seconds...'**
   String get diskEncryptionPageRemovingPassphrase;
 
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.
