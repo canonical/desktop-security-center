@@ -48,347 +48,22 @@ class EncryptionPageBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-
     final tpmAuthenticationModel = ref.watch(tpmAuthenticationModelProvider);
-
-    // Track providers for adding and removing PINs and passphrases
-    final removePinModel = ref.watch(removeAuthModelProvider(AuthMode.pin));
-    final removePassphraseModel =
-        ref.watch(removeAuthModelProvider(AuthMode.passphrase));
-    final addPinModel =
-        ref.watch(changeAuthModeDialogModelProvider(AuthMode.pin));
-    final addPassphraseModel =
-        ref.watch(changeAuthModeDialogModelProvider(AuthMode.passphrase));
 
     return tpmAuthenticationModel.when(
       data: (data) {
-        // Check loading states
-        final isRemovingPin = removePinModel is RemoveAuthStateLoading;
-        final isRemovingPassphrase =
-            removePassphraseModel is RemoveAuthStateLoading;
-        final isAddingPin =
-            addPinModel.dialogState is ChangeAuthModeDialogStateLoading;
-        final isAddingPassphrase =
-            addPassphraseModel.dialogState is ChangeAuthModeDialogStateLoading;
-        final isLoading = isRemovingPin ||
-            isRemovingPassphrase ||
-            isAddingPin ||
-            isAddingPassphrase;
-
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TileList(
-              children: [
-                ConstrainedBox(
-                  constraints: const BoxConstraints(minHeight: 52),
-                  child: Center(
-                    child: ListTile(
-                      leading: const Icon(YaruIcons.lock, size: 24),
-                      title: Text(l10n.recoveryKeyTPMEnabled),
-                    ),
-                  ),
-                ),
-                // Show enabled status row || loading row
-                if (data != AuthMode.none &&
-                    !isRemovingPin &&
-                    !isRemovingPassphrase) ...[
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(minHeight: 52),
-                    child: Center(
-                      child: ListTile(
-                        leading: const Icon(YaruIcons.ok_simple, size: 24),
-                        title: Text(
-                          data == AuthMode.pin
-                              ? l10n.recoveryKeyPinEnabled
-                              : l10n.recoveryKeyPassphraseEnabled,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-                // Show loading indicator if an PIN/passphrase is being added/removed
-                if (isLoading) ...[
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(minHeight: 52),
-                    child: Center(
-                      child: ListTile(
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              isRemovingPin
-                                  ? l10n.diskEncryptionPageRemovingPin
-                                  : isRemovingPassphrase
-                                      ? l10n
-                                          .diskEncryptionPageRemovingPassphrase
-                                      : isAddingPin
-                                          ? l10n.diskEncryptionPageAddingPin
-                                          : l10n
-                                              .diskEncryptionPageAddingPassphrase,
-                            ),
-                            const SizedBox(height: 8),
-                            const YaruLinearProgressIndicator(),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ],
-            ),
+            _AuthStatusTileList(authMode: data),
             const SizedBox(height: 32),
-            Text(
-              l10n.diskEncryptionPageRecoveryKey,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-              textAlign: TextAlign.left,
-            ),
-            const SizedBox(height: 8),
-            Text(l10n.diskEncryptionPageStoreYourKey),
-            const SizedBox(height: 8),
-            Wrap(
-              spacing: 16,
-              children: [
-                OutlinedButton(
-                  onPressed: () {
-                    showCheckRecoveryKeyDialog(context);
-                  },
-                  child: Text(l10n.diskEncryptionPageCheckKey),
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    showReplaceRecoveryKeyDialog(context);
-                  },
-                  child: Text(l10n.diskEncryptionPageReplaceButton),
-                ),
-              ],
-            ),
+            const _RecoveryKeyActions(),
             const SizedBox(height: 32),
             // TPM Authentication specific content
             switch (data) {
-              AuthMode.pin => () {
-                  final isRemoving = removePinModel is RemoveAuthStateLoading;
-                  final hasError = removePinModel is RemoveAuthStateError;
-
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l10n.recoveryKeyPinHeader,
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(l10n.recoveryKeyPinBody),
-                      const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 16,
-                        children: [
-                          OutlinedButton(
-                            onPressed: isRemoving
-                                ? null
-                                : () {
-                                    ref
-                                        .read(
-                                          changeAuthDialogModelProvider
-                                              .notifier,
-                                        )
-                                        .authMode = AuthMode.pin;
-                                    showChangeAuthDialog(context, AuthMode.pin);
-                                  },
-                            child: Text(l10n.recoveryKeyPinButton),
-                          ),
-                          OutlinedButton(
-                            onPressed: isRemoving
-                                ? null
-                                : () {
-                                    ref
-                                        .read(
-                                          removeAuthModelProvider(AuthMode.pin)
-                                              .notifier,
-                                        )
-                                        .removeAuth();
-                                  },
-                            child: Text(l10n.diskEncryptionPageRemovePinButton),
-                          ),
-                        ],
-                      ),
-                      if (hasError) ...[
-                        const SizedBox(height: 8),
-                        YaruInfoBox(
-                          title: Text(l10n.diskEncryptionPageError),
-                          subtitle: Text(removePinModel.e.toString()),
-                          yaruInfoType: YaruInfoType.danger,
-                        ),
-                      ],
-                    ],
-                  );
-                }(),
-              AuthMode.passphrase => () {
-                  final isRemoving =
-                      removePassphraseModel is RemoveAuthStateLoading;
-                  final hasError =
-                      removePassphraseModel is RemoveAuthStateError;
-
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l10n.recoveryKeyEncrpytionPassphraseHeader,
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(l10n.recoveryKeyPassphraseBody),
-                      const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 16,
-                        children: [
-                          OutlinedButton(
-                            onPressed: isRemoving
-                                ? null
-                                : () {
-                                    ref
-                                        .read(
-                                          changeAuthDialogModelProvider
-                                              .notifier,
-                                        )
-                                        .authMode = AuthMode.passphrase;
-                                    showChangeAuthDialog(
-                                      context,
-                                      AuthMode.passphrase,
-                                    );
-                                  },
-                            child: Text(l10n.recoveryKeyPassphraseButton),
-                          ),
-                          OutlinedButton(
-                            onPressed: isRemoving
-                                ? null
-                                : () {
-                                    ref
-                                        .read(
-                                          removeAuthModelProvider(
-                                            AuthMode.passphrase,
-                                          ).notifier,
-                                        )
-                                        .removeAuth();
-                                  },
-                            child: Text(
-                              l10n.diskEncryptionPageRemovePassphraseButton,
-                            ),
-                          ),
-                        ],
-                      ),
-                      if (hasError) ...[
-                        const SizedBox(height: 8),
-                        YaruInfoBox(
-                          title: Text(l10n.diskEncryptionPageError),
-                          subtitle: Text(removePassphraseModel.e.toString()),
-                          yaruInfoType: YaruInfoType.danger,
-                        ),
-                      ],
-                    ],
-                  );
-                }(),
-              AuthMode.none => () {
-                  // Check if we're in loading state
-                  final isAddingPin = addPinModel.dialogState
-                      is ChangeAuthModeDialogStateLoading;
-                  final isAddingPassphrase = addPassphraseModel.dialogState
-                      is ChangeAuthModeDialogStateLoading;
-                  final isAdding = isAddingPin || isAddingPassphrase;
-
-                  // Check for errors
-                  final pinError =
-                      addPinModel.dialogState is ChangeAuthModeDialogStateError
-                          ? (addPinModel.dialogState
-                                  as ChangeAuthModeDialogStateError)
-                              .e
-                          : null;
-                  final passphraseError = addPassphraseModel.dialogState
-                          is ChangeAuthModeDialogStateError
-                      ? (addPassphraseModel.dialogState
-                              as ChangeAuthModeDialogStateError)
-                          .e
-                      : null;
-
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l10n.diskEncryptionPageAdditionalSecurityHeader,
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                      ),
-                      const SizedBox(height: 8),
-                      MarkdownText(
-                        l10n.diskEncryptionPageAdditionalSecurityBody(
-                          l10n.diskEncryptionPageAdditionalSecurityLearnMore
-                              .link(_learnMoreUrl),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 16,
-                        children: [
-                          OutlinedButton(
-                            onPressed: isAdding
-                                ? null
-                                : () {
-                                    showChangeAuthModeDialog(
-                                      context,
-                                      AuthMode.passphrase,
-                                      ref,
-                                    );
-                                  },
-                            child: Text(
-                              l10n.diskEncryptionPageAddPassphraseButton,
-                            ),
-                          ),
-                          // FIXME: PIN support is not yet impletented in snapd
-                          // OutlinedButton(
-                          //   onPressed: isAdding
-                          //       ? null
-                          //       : () {
-                          //           showChangeAuthModeDialog(
-                          //             context,
-                          //             AuthMode.pin,
-                          //             ref,
-                          //           );
-                          //         },
-                          //   child: Text(l10n.diskEncryptionPageAddPinButton),
-                          // ),
-                        ],
-                      ),
-                      // Show error if present
-                      if (pinError != null) ...[
-                        const SizedBox(height: 8),
-                        YaruInfoBox(
-                          title: Text(l10n.diskEncryptionPageError),
-                          subtitle: Text(pinError.toString()),
-                          yaruInfoType: YaruInfoType.danger,
-                        ),
-                      ],
-                      if (passphraseError != null) ...[
-                        const SizedBox(height: 8),
-                        YaruInfoBox(
-                          title: Text(l10n.diskEncryptionPageError),
-                          subtitle: Text(passphraseError.toString()),
-                          yaruInfoType: YaruInfoType.danger,
-                        ),
-                      ],
-                    ],
-                  );
-                }(),
+              AuthMode.pin => const _PinAuthenticationActions(),
+              AuthMode.passphrase => const _PassphraseAuthenticationActions(),
+              AuthMode.none => const _NoAuthenticationActions(),
             },
             const SizedBox(height: 32),
             MarkdownText(
@@ -996,6 +671,371 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _NoAuthenticationActions extends ConsumerWidget {
+  const _NoAuthenticationActions();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final addPinModel =
+        ref.watch(changeAuthModeDialogModelProvider(AuthMode.pin));
+    final addPassphraseModel =
+        ref.watch(changeAuthModeDialogModelProvider(AuthMode.passphrase));
+
+    final isAddingPin =
+        addPinModel.dialogState is ChangeAuthModeDialogStateLoading;
+    final isAddingPassphrase =
+        addPassphraseModel.dialogState is ChangeAuthModeDialogStateLoading;
+    final isAdding = isAddingPin || isAddingPassphrase;
+
+    final pinError = addPinModel.dialogState is ChangeAuthModeDialogStateError
+        ? (addPinModel.dialogState as ChangeAuthModeDialogStateError).e
+        : null;
+    final passphraseError = addPassphraseModel.dialogState
+            is ChangeAuthModeDialogStateError
+        ? (addPassphraseModel.dialogState as ChangeAuthModeDialogStateError).e
+        : null;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.diskEncryptionPageAdditionalSecurityHeader,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 8),
+        MarkdownText(
+          l10n.diskEncryptionPageAdditionalSecurityBody(
+            l10n.diskEncryptionPageAdditionalSecurityLearnMore
+                .link(_learnMoreUrl),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 16,
+          children: [
+            OutlinedButton(
+              onPressed: isAdding
+                  ? null
+                  : () {
+                      showChangeAuthModeDialog(
+                        context,
+                        AuthMode.passphrase,
+                        ref,
+                      );
+                    },
+              child: Text(
+                l10n.diskEncryptionPageAddPassphraseButton,
+              ),
+            ),
+            // FIXME: PIN support is not yet impletented in snapd
+            // OutlinedButton(
+            //   onPressed: isAdding
+            //       ? null
+            //       : () {
+            //           showChangeAuthModeDialog(
+            //             context,
+            //             AuthMode.pin,
+            //             ref,
+            //           );
+            //         },
+            //   child: Text(l10n.diskEncryptionPageAddPinButton),
+            // ),
+          ],
+        ),
+        // Show error if present
+        if (pinError != null) ...[
+          const SizedBox(height: 8),
+          YaruInfoBox(
+            title: Text(l10n.diskEncryptionPageError),
+            subtitle: Text(pinError.toString()),
+            yaruInfoType: YaruInfoType.danger,
+          ),
+        ],
+        if (passphraseError != null) ...[
+          const SizedBox(height: 8),
+          YaruInfoBox(
+            title: Text(l10n.diskEncryptionPageError),
+            subtitle: Text(passphraseError.toString()),
+            yaruInfoType: YaruInfoType.danger,
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _PassphraseAuthenticationActions extends ConsumerWidget {
+  const _PassphraseAuthenticationActions();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final removePassphraseModel =
+        ref.watch(removeAuthModelProvider(AuthMode.passphrase));
+    final isRemoving = removePassphraseModel is RemoveAuthStateLoading;
+    final hasError = removePassphraseModel is RemoveAuthStateError;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.recoveryKeyEncrpytionPassphraseHeader,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 8),
+        Text(l10n.recoveryKeyPassphraseBody),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 16,
+          children: [
+            OutlinedButton(
+              onPressed: isRemoving
+                  ? null
+                  : () {
+                      ref
+                          .read(
+                            changeAuthDialogModelProvider.notifier,
+                          )
+                          .authMode = AuthMode.passphrase;
+                      showChangeAuthDialog(
+                        context,
+                        AuthMode.passphrase,
+                      );
+                    },
+              child: Text(l10n.recoveryKeyPassphraseButton),
+            ),
+            OutlinedButton(
+              onPressed: isRemoving
+                  ? null
+                  : () {
+                      ref
+                          .read(
+                            removeAuthModelProvider(
+                              AuthMode.passphrase,
+                            ).notifier,
+                          )
+                          .removeAuth();
+                    },
+              child: Text(
+                l10n.diskEncryptionPageRemovePassphraseButton,
+              ),
+            ),
+          ],
+        ),
+        if (hasError) ...[
+          const SizedBox(height: 8),
+          YaruInfoBox(
+            title: Text(l10n.diskEncryptionPageError),
+            subtitle: Text(removePassphraseModel.e.toString()),
+            yaruInfoType: YaruInfoType.danger,
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _PinAuthenticationActions extends ConsumerWidget {
+  const _PinAuthenticationActions();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final removePinModel = ref.watch(removeAuthModelProvider(AuthMode.pin));
+    final isRemoving = removePinModel is RemoveAuthStateLoading;
+    final hasError = removePinModel is RemoveAuthStateError;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.recoveryKeyPinHeader,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 8),
+        Text(l10n.recoveryKeyPinBody),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 16,
+          children: [
+            OutlinedButton(
+              onPressed: isRemoving
+                  ? null
+                  : () {
+                      ref
+                          .read(
+                            changeAuthDialogModelProvider.notifier,
+                          )
+                          .authMode = AuthMode.pin;
+                      showChangeAuthDialog(context, AuthMode.pin);
+                    },
+              child: Text(l10n.recoveryKeyPinButton),
+            ),
+            OutlinedButton(
+              onPressed: isRemoving
+                  ? null
+                  : () {
+                      ref
+                          .read(
+                            removeAuthModelProvider(AuthMode.pin).notifier,
+                          )
+                          .removeAuth();
+                    },
+              child: Text(l10n.diskEncryptionPageRemovePinButton),
+            ),
+          ],
+        ),
+        if (hasError) ...[
+          const SizedBox(height: 8),
+          YaruInfoBox(
+            title: Text(l10n.diskEncryptionPageError),
+            subtitle: Text(removePinModel.e.toString()),
+            yaruInfoType: YaruInfoType.danger,
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _RecoveryKeyActions extends StatelessWidget {
+  const _RecoveryKeyActions();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.diskEncryptionPageRecoveryKey,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+          textAlign: TextAlign.left,
+        ),
+        const SizedBox(height: 8),
+        Text(l10n.diskEncryptionPageStoreYourKey),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 16,
+          children: [
+            OutlinedButton(
+              onPressed: () {
+                showCheckRecoveryKeyDialog(context);
+              },
+              child: Text(l10n.diskEncryptionPageCheckKey),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                showReplaceRecoveryKeyDialog(context);
+              },
+              child: Text(l10n.diskEncryptionPageReplaceButton),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _AuthStatusTileList extends ConsumerWidget {
+  const _AuthStatusTileList({required this.authMode});
+
+  final AuthMode authMode;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final removePinModel = ref.watch(removeAuthModelProvider(AuthMode.pin));
+    final removePassphraseModel =
+        ref.watch(removeAuthModelProvider(AuthMode.passphrase));
+    final addPinModel =
+        ref.watch(changeAuthModeDialogModelProvider(AuthMode.pin));
+    final addPassphraseModel =
+        ref.watch(changeAuthModeDialogModelProvider(AuthMode.passphrase));
+
+    final isRemovingPin = removePinModel is RemoveAuthStateLoading;
+    final isRemovingPassphrase =
+        removePassphraseModel is RemoveAuthStateLoading;
+    final isAddingPin =
+        addPinModel.dialogState is ChangeAuthModeDialogStateLoading;
+    final isAddingPassphrase =
+        addPassphraseModel.dialogState is ChangeAuthModeDialogStateLoading;
+    final isLoading = isRemovingPin ||
+        isRemovingPassphrase ||
+        isAddingPin ||
+        isAddingPassphrase;
+
+    return TileList(
+      children: [
+        ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 52),
+          child: Center(
+            child: ListTile(
+              leading: const Icon(YaruIcons.lock, size: 24),
+              title: Text(l10n.recoveryKeyTPMEnabled),
+            ),
+          ),
+        ),
+        // Show enabled status row || loading row
+        if (authMode != AuthMode.none &&
+            !isRemovingPin &&
+            !isRemovingPassphrase) ...[
+          ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 52),
+            child: Center(
+              child: ListTile(
+                leading: const Icon(YaruIcons.ok_simple, size: 24),
+                title: Text(
+                  authMode == AuthMode.pin
+                      ? l10n.recoveryKeyPinEnabled
+                      : l10n.recoveryKeyPassphraseEnabled,
+                ),
+              ),
+            ),
+          ),
+        ],
+        // Show loading indicator if an PIN/passphrase is being added/removed
+        if (isLoading) ...[
+          ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 52),
+            child: Center(
+              child: ListTile(
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      isRemovingPin
+                          ? l10n.diskEncryptionPageRemovingPin
+                          : isRemovingPassphrase
+                              ? l10n.diskEncryptionPageRemovingPassphrase
+                              : isAddingPin
+                                  ? l10n.diskEncryptionPageAddingPin
+                                  : l10n.diskEncryptionPageAddingPassphrase,
+                    ),
+                    const SizedBox(height: 8),
+                    const YaruLinearProgressIndicator(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ],
     );
   }
 }
