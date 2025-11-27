@@ -49,42 +49,6 @@ class EncryptionPageBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
 
-    // Listen for Add PIN/Passphrase success, invalidate state
-    ref.listen<ChangeAuthModeDialogModelData>(
-      changeAuthModeDialogModelProvider(AuthMode.pin),
-      (previous, next) {
-        if (next.dialogState is ChangeAuthModeDialogStateSuccess) {
-          ref.invalidate(tpmAuthenticationModelProvider);
-        }
-      },
-    );
-    ref.listen<ChangeAuthModeDialogModelData>(
-      changeAuthModeDialogModelProvider(AuthMode.passphrase),
-      (previous, next) {
-        if (next.dialogState is ChangeAuthModeDialogStateSuccess) {
-          ref.invalidate(tpmAuthenticationModelProvider);
-        }
-      },
-    );
-
-    // Listen for Remove PIN/Passphrase success, invalidate state
-    ref.listen<RemoveAuthState>(
-      removeAuthModelProvider(AuthMode.pin),
-      (previous, next) {
-        if (previous is RemoveAuthStateLoading && next is RemoveAuthStateIdle) {
-          ref.invalidate(tpmAuthenticationModelProvider);
-        }
-      },
-    );
-    ref.listen<RemoveAuthState>(
-      removeAuthModelProvider(AuthMode.passphrase),
-      (previous, next) {
-        if (previous is RemoveAuthStateLoading && next is RemoveAuthStateIdle) {
-          ref.invalidate(tpmAuthenticationModelProvider);
-        }
-      },
-    );
-
     final tpmAuthenticationModel = ref.watch(tpmAuthenticationModelProvider);
 
     // Track providers for adding and removing PINs and passphrases

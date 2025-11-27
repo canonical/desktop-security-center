@@ -575,6 +575,8 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
             state.newAuthMode == AuthMode.passphrase ? state.newPass : null,
         pin: state.newAuthMode == AuthMode.pin ? state.newPass : null,
       );
+      // Refresh the TPM authentication state before marking success
+      final _ = await ref.refresh(tpmAuthenticationModelProvider.future);
       state = state.copyWith(
         dialogState: ChangeAuthModeDialogState.success(),
         showPassphrase: false,
@@ -687,7 +689,8 @@ class RemoveAuthModel extends _$RemoveAuthModel {
       await _service.replacePlatformKey(
         authMode: AuthMode.none,
       );
-      // Return to idle - the page will reflect the change automatically
+      // Refresh the TPM authentication state before returning to idle
+      final _ = await ref.refresh(tpmAuthenticationModelProvider.future);
       state = RemoveAuthState.idle();
     } on Exception catch (e) {
       state = RemoveAuthState.error(e);
