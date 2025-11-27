@@ -172,24 +172,21 @@ class EncryptionPageBody extends ConsumerWidget {
                   ],
                 ],
             ),
-            const SizedBox(height: 16),
-            Text(
-              l10n.recoveryKeyTPMExplanationBody,
-              textAlign: TextAlign.left,
-            ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 32),
             Text(
               l10n.diskEncryptionPageRecoveryKey,
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
               textAlign: TextAlign.left,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             MarkdownText(
               l10n.diskEncryptionPageStoreYourKeyWithLink(
                 l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             Wrap(
               spacing: 16,
               children: [
@@ -207,7 +204,7 @@ class EncryptionPageBody extends ConsumerWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 32),
             // TPM Authentication specific content
             switch (data) {
               AuthMode.pin => () {
@@ -219,11 +216,13 @@ class EncryptionPageBody extends ConsumerWidget {
                     children: [
                       Text(
                         l10n.recoveryKeyPinHeader,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                       const SizedBox(height: 8),
                       Text(l10n.recoveryKeyPinBody),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 8),
                       Wrap(
                         spacing: 16,
                         children: [
@@ -257,7 +256,7 @@ class EncryptionPageBody extends ConsumerWidget {
                         ],
                       ),
                       if (hasError) ...[
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 8),
                         YaruInfoBox(
                           title: Text(l10n.diskEncryptionPageError),
                           subtitle: Text(removePinModel.e.toString()),
@@ -278,11 +277,13 @@ class EncryptionPageBody extends ConsumerWidget {
                     children: [
                       Text(
                         l10n.recoveryKeyEncrpytionPassphraseHeader,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                       const SizedBox(height: 8),
                       Text(l10n.recoveryKeyPassphraseBody),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 8),
                       Wrap(
                         spacing: 16,
                         children: [
@@ -322,7 +323,7 @@ class EncryptionPageBody extends ConsumerWidget {
                         ],
                       ),
                       if (hasError) ...[
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 8),
                         YaruInfoBox(
                           title: Text(l10n.diskEncryptionPageError),
                           subtitle: Text(removePassphraseModel.e.toString()),
@@ -359,7 +360,9 @@ class EncryptionPageBody extends ConsumerWidget {
                     children: [
                       Text(
                         l10n.diskEncryptionPageAdditionalSecurityHeader,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                       const SizedBox(height: 8),
                       MarkdownText(
@@ -368,7 +371,7 @@ class EncryptionPageBody extends ConsumerWidget {
                               .link(_learnMoreUrl),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 8),
                       Wrap(
                         spacing: 16,
                         children: [
@@ -403,7 +406,7 @@ class EncryptionPageBody extends ConsumerWidget {
                       ),
                       // Show error if present
                       if (pinError != null) ...[
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 8),
                         YaruInfoBox(
                           title: Text(l10n.diskEncryptionPageError),
                           subtitle: Text(pinError.toString()),
@@ -411,7 +414,7 @@ class EncryptionPageBody extends ConsumerWidget {
                         ),
                       ],
                       if (passphraseError != null) ...[
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 8),
                         YaruInfoBox(
                           title: Text(l10n.diskEncryptionPageError),
                           subtitle: Text(passphraseError.toString()),
