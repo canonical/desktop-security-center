@@ -10,6 +10,7 @@ import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/tile_list.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
 
@@ -113,58 +114,63 @@ class EncryptionPageBody extends ConsumerWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            YaruBorderContainer(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            TileList(
                 children: [
-                  ListTile(
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 16,
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(minHeight: 52),
+                    child: Center(
+                      child: ListTile(
+                        leading: const Icon(YaruIcons.lock, size: 24),
+                        title: Text(l10n.recoveryKeyTPMEnabled),
+                      ),
                     ),
-                    leading: const Icon(YaruIcons.lock, size: 24),
-                    title: Text(l10n.recoveryKeyTPMEnabled),
                   ),
                   // Show enabled status row || loading row
                   if (data != AuthMode.none &&
                       !isRemovingPin &&
                       !isRemovingPassphrase) ...[
-                    const Divider(),
-                    ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 16,
-                      ),
-                      leading: const Icon(YaruIcons.ok_simple, size: 24),
-                      title: Text(
-                        data == AuthMode.pin
-                            ? l10n.recoveryKeyPinEnabled
-                            : l10n.recoveryKeyPassphraseEnabled,
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(minHeight: 52),
+                      child: Center(
+                        child: ListTile(
+                          leading: const Icon(YaruIcons.ok_simple, size: 24),
+                          title: Text(
+                            data == AuthMode.pin
+                                ? l10n.recoveryKeyPinEnabled
+                                : l10n.recoveryKeyPassphraseEnabled,
+                          ),
+                        ),
                       ),
                     ),
                   ],
                   // Show loading indicator if an PIN/passphrase is being added/removed
                   if (isLoading) ...[
-                    const Divider(),
-                    ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 16,
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(minHeight: 52),
+                      child: Center(
+                        child: ListTile(
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                isRemovingPin
+                                    ? l10n.diskEncryptionPageRemovingPin
+                                    : isRemovingPassphrase
+                                        ? l10n.diskEncryptionPageRemovingPassphrase
+                                        : isAddingPin
+                                            ? l10n.diskEncryptionPageAddingPin
+                                            : l10n.diskEncryptionPageAddingPassphrase,
+                              ),
+                              const SizedBox(height: 8),
+                              const YaruLinearProgressIndicator(),
+                            ],
+                          ),
+                        ),
                       ),
-                      title: Text(
-                        isRemovingPin
-                            ? l10n.diskEncryptionPageRemovingPin
-                            : isRemovingPassphrase
-                                ? l10n.diskEncryptionPageRemovingPassphrase
-                                : isAddingPin
-                                    ? l10n.diskEncryptionPageAddingPin
-                                    : l10n.diskEncryptionPageAddingPassphrase,
-                      ),
-                      subtitle: const YaruLinearProgressIndicator(),
                     ),
                   ],
                 ],
-              ),
             ),
             const SizedBox(height: 16),
             Text(
