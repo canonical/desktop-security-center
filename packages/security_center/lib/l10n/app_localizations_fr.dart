@@ -150,7 +150,8 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageLearnMore => 'Learn more about recovery keys';
+  String get diskEncryptionPageLearnMore =>
+      'Learn more about hardware-backed encryption';
 
   @override
   String get diskEncryptionPageCheckKey => 'Check recovery key...';

@@ -461,7 +461,7 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageLearnMore.
   ///
   /// In en, this message translates to:
-  /// **'Learn more about recovery keys'**
+  /// **'Learn more about hardware-backed encryption'**
   String get diskEncryptionPageLearnMore;
 
   /// No description provided for @diskEncryptionPageCheckKey.

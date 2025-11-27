@@ -99,7 +99,7 @@
             }
         }
     },
-    "diskEncryptionPageLearnMore": "Learn more about recovery keys",
+    "diskEncryptionPageLearnMore": "Learn more about hardware-backed encryption",
     "@diskEncryptionPageStoreLearnMore": {},
     "diskEncryptionPageCheckKey": "Check recovery key...",
     "@diskEncryptionPageCheckKey": {},
