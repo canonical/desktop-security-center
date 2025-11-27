@@ -181,11 +181,7 @@ class EncryptionPageBody extends ConsumerWidget {
               textAlign: TextAlign.left,
             ),
             const SizedBox(height: 8),
-            MarkdownText(
-              l10n.diskEncryptionPageStoreYourKeyWithLink(
-                l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl),
-              ),
-            ),
+            Text(l10n.diskEncryptionPageStoreYourKey),
             const SizedBox(height: 8),
             Wrap(
               spacing: 16,
@@ -425,6 +421,10 @@ class EncryptionPageBody extends ConsumerWidget {
                   );
                 }(),
             },
+            const SizedBox(height: 32),
+            MarkdownText(
+              l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl),
+            ),
           ],
         );
       },
