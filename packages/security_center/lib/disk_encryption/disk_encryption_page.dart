@@ -79,62 +79,64 @@ class EncryptionPageBody extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TileList(
-                children: [
+              children: [
+                ConstrainedBox(
+                  constraints: const BoxConstraints(minHeight: 52),
+                  child: Center(
+                    child: ListTile(
+                      leading: const Icon(YaruIcons.lock, size: 24),
+                      title: Text(l10n.recoveryKeyTPMEnabled),
+                    ),
+                  ),
+                ),
+                // Show enabled status row || loading row
+                if (data != AuthMode.none &&
+                    !isRemovingPin &&
+                    !isRemovingPassphrase) ...[
                   ConstrainedBox(
                     constraints: const BoxConstraints(minHeight: 52),
                     child: Center(
                       child: ListTile(
-                        leading: const Icon(YaruIcons.lock, size: 24),
-                        title: Text(l10n.recoveryKeyTPMEnabled),
+                        leading: const Icon(YaruIcons.ok_simple, size: 24),
+                        title: Text(
+                          data == AuthMode.pin
+                              ? l10n.recoveryKeyPinEnabled
+                              : l10n.recoveryKeyPassphraseEnabled,
+                        ),
                       ),
                     ),
                   ),
-                  // Show enabled status row || loading row
-                  if (data != AuthMode.none &&
-                      !isRemovingPin &&
-                      !isRemovingPassphrase) ...[
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(minHeight: 52),
-                      child: Center(
-                        child: ListTile(
-                          leading: const Icon(YaruIcons.ok_simple, size: 24),
-                          title: Text(
-                            data == AuthMode.pin
-                                ? l10n.recoveryKeyPinEnabled
-                                : l10n.recoveryKeyPassphraseEnabled,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                  // Show loading indicator if an PIN/passphrase is being added/removed
-                  if (isLoading) ...[
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(minHeight: 52),
-                      child: Center(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                isRemovingPin
-                                    ? l10n.diskEncryptionPageRemovingPin
-                                    : isRemovingPassphrase
-                                        ? l10n.diskEncryptionPageRemovingPassphrase
-                                        : isAddingPin
-                                            ? l10n.diskEncryptionPageAddingPin
-                                            : l10n.diskEncryptionPageAddingPassphrase,
-                              ),
-                              const SizedBox(height: 8),
-                              const YaruLinearProgressIndicator(),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
                 ],
+                // Show loading indicator if an PIN/passphrase is being added/removed
+                if (isLoading) ...[
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(minHeight: 52),
+                    child: Center(
+                      child: ListTile(
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              isRemovingPin
+                                  ? l10n.diskEncryptionPageRemovingPin
+                                  : isRemovingPassphrase
+                                      ? l10n
+                                          .diskEncryptionPageRemovingPassphrase
+                                      : isAddingPin
+                                          ? l10n.diskEncryptionPageAddingPin
+                                          : l10n
+                                              .diskEncryptionPageAddingPassphrase,
+                            ),
+                            const SizedBox(height: 8),
+                            const YaruLinearProgressIndicator(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ],
             ),
             const SizedBox(height: 32),
             Text(
@@ -176,9 +178,10 @@ class EncryptionPageBody extends ConsumerWidget {
                     children: [
                       Text(
                         l10n.recoveryKeyPinHeader,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                       const SizedBox(height: 8),
                       Text(l10n.recoveryKeyPinBody),
@@ -237,9 +240,10 @@ class EncryptionPageBody extends ConsumerWidget {
                     children: [
                       Text(
                         l10n.recoveryKeyEncrpytionPassphraseHeader,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                       const SizedBox(height: 8),
                       Text(l10n.recoveryKeyPassphraseBody),
@@ -320,9 +324,10 @@ class EncryptionPageBody extends ConsumerWidget {
                     children: [
                       Text(
                         l10n.diskEncryptionPageAdditionalSecurityHeader,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                       const SizedBox(height: 8),
                       MarkdownText(
@@ -889,9 +894,16 @@ class ChangeAuthModeDialog extends ConsumerWidget {
       _ => '',
     };
 
-    final bodyText = switch (authMode) {
-      AuthMode.passphrase => l10n.diskEncryptionPageAddPassphraseDialogBody,
-      AuthMode.pin => l10n.diskEncryptionPageAddPinDialogBody,
+    final bodyMainText = switch (authMode) {
+      AuthMode.passphrase => l10n.diskEncryptionPageAddPassphraseDialogBodyMain,
+      AuthMode.pin => l10n.diskEncryptionPageAddPinDialogBodyMain,
+      _ => '',
+    };
+
+    final bodyRecoveryText = switch (authMode) {
+      AuthMode.passphrase =>
+        l10n.diskEncryptionPageAddPassphraseDialogBodyRecovery,
+      AuthMode.pin => l10n.diskEncryptionPageAddPinDialogBodyRecovery,
       _ => '',
     };
 
@@ -905,7 +917,8 @@ class ChangeAuthModeDialog extends ConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(bodyText),
+            Text(bodyMainText),
+            Text(bodyRecoveryText),
             AddPassphraseFormField(authMode: authMode),
             AddConfirmPassphraseFormField(authMode: authMode),
             Row(

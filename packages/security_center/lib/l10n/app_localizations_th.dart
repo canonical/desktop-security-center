@@ -287,12 +287,20 @@ class AppLocalizationsTh extends AppLocalizations {
   String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
 
   @override
-  String get diskEncryptionPageAddPinDialogBody =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password. If you forget your PIN, you can regain access to the disk by using the recovery key.';
+  String get diskEncryptionPageAddPinDialogBodyMain =>
+      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogBody =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password. If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+  String get diskEncryptionPageAddPinDialogBodyRecovery =>
+      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+
+  @override
+  String get diskEncryptionPageAddPassphraseDialogBodyMain =>
+      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+
+  @override
+  String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
+      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityHeader =>

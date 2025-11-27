@@ -698,17 +698,29 @@ abstract class AppLocalizations {
   /// **'Add PIN'**
   String get diskEncryptionPageAddPinDialogHeading;
 
-  /// No description provided for @diskEncryptionPageAddPinDialogBody.
+  /// No description provided for @diskEncryptionPageAddPinDialogBodyMain.
   ///
   /// In en, this message translates to:
-  /// **'You will need to enter your PIN every time your computer starts. This PIN is different from your user password. If you forget your PIN, you can regain access to the disk by using the recovery key.'**
-  String get diskEncryptionPageAddPinDialogBody;
+  /// **'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.'**
+  String get diskEncryptionPageAddPinDialogBodyMain;
 
-  /// No description provided for @diskEncryptionPageAddPassphraseDialogBody.
+  /// No description provided for @diskEncryptionPageAddPinDialogBodyRecovery.
   ///
   /// In en, this message translates to:
-  /// **'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password. If you forget your passphrase, you can regain access to the disk by using the recovery key.'**
-  String get diskEncryptionPageAddPassphraseDialogBody;
+  /// **'If you forget your PIN, you can regain access to the disk by using the recovery key.'**
+  String get diskEncryptionPageAddPinDialogBodyRecovery;
+
+  /// No description provided for @diskEncryptionPageAddPassphraseDialogBodyMain.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.'**
+  String get diskEncryptionPageAddPassphraseDialogBodyMain;
+
+  /// No description provided for @diskEncryptionPageAddPassphraseDialogBodyRecovery.
+  ///
+  /// In en, this message translates to:
+  /// **'If you forget your passphrase, you can regain access to the disk by using the recovery key.'**
+  String get diskEncryptionPageAddPassphraseDialogBodyRecovery;
 
   /// No description provided for @diskEncryptionPageAdditionalSecurityHeader.
   ///
