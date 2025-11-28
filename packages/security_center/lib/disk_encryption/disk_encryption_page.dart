@@ -55,15 +55,16 @@ class EncryptionPageBody extends ConsumerWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _AuthStatusTileList(authMode: data),
+            _AuthStatusTileList(tpmState: data),
             const SizedBox(height: 32),
             const _RecoveryKeyActions(),
             const SizedBox(height: 32),
             // TPM Authentication specific content
-            switch (data) {
-              AuthMode.pin => const _PinAuthenticationActions(),
-              AuthMode.passphrase => const _PassphraseAuthenticationActions(),
-              AuthMode.none => const _NoAuthenticationActions(),
+            switch (data.currentAuthMode) {
+              AuthMode.pin => _PinAuthenticationActions(tpmState: data),
+              AuthMode.passphrase =>
+                _PassphraseAuthenticationActions(tpmState: data),
+              AuthMode.none => _NoneAuthenticationActions(tpmState: data),
             },
             const SizedBox(height: 32),
             MarkdownText(
@@ -675,30 +676,16 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
   }
 }
 
-class _NoAuthenticationActions extends ConsumerWidget {
-  const _NoAuthenticationActions();
+class _NoneAuthenticationActions extends ConsumerWidget {
+  const _NoneAuthenticationActions({required this.tpmState});
+
+  final TpmAuthState tpmState;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final addPinModel =
-        ref.watch(changeAuthModeDialogModelProvider(AuthMode.pin));
-    final addPassphraseModel =
-        ref.watch(changeAuthModeDialogModelProvider(AuthMode.passphrase));
-
-    final isAddingPin =
-        addPinModel.dialogState is ChangeAuthModeDialogStateLoading;
-    final isAddingPassphrase =
-        addPassphraseModel.dialogState is ChangeAuthModeDialogStateLoading;
-    final isAdding = isAddingPin || isAddingPassphrase;
-
-    final pinError = addPinModel.dialogState is ChangeAuthModeDialogStateError
-        ? (addPinModel.dialogState as ChangeAuthModeDialogStateError).e
-        : null;
-    final passphraseError = addPassphraseModel.dialogState
-            is ChangeAuthModeDialogStateError
-        ? (addPassphraseModel.dialogState as ChangeAuthModeDialogStateError).e
-        : null;
+    final isAdding = tpmState.pendingOperation is AuthOperationAdding;
+    final hasError = tpmState.operationError != null;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -750,19 +737,11 @@ class _NoAuthenticationActions extends ConsumerWidget {
           ],
         ),
         // Show error if present
-        if (pinError != null) ...[
+        if (hasError) ...[
           const SizedBox(height: 8),
           YaruInfoBox(
             title: Text(l10n.diskEncryptionPageError),
-            subtitle: Text(pinError.toString()),
-            yaruInfoType: YaruInfoType.danger,
-          ),
-        ],
-        if (passphraseError != null) ...[
-          const SizedBox(height: 8),
-          YaruInfoBox(
-            title: Text(l10n.diskEncryptionPageError),
-            subtitle: Text(passphraseError.toString()),
+            subtitle: Text(tpmState.operationError.toString()),
             yaruInfoType: YaruInfoType.danger,
           ),
         ],
@@ -772,15 +751,15 @@ class _NoAuthenticationActions extends ConsumerWidget {
 }
 
 class _PassphraseAuthenticationActions extends ConsumerWidget {
-  const _PassphraseAuthenticationActions();
+  const _PassphraseAuthenticationActions({required this.tpmState});
+
+  final TpmAuthState tpmState;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final removePassphraseModel =
-        ref.watch(removeAuthModelProvider(AuthMode.passphrase));
-    final isRemoving = removePassphraseModel is RemoveAuthStateLoading;
-    final hasError = removePassphraseModel is RemoveAuthStateError;
+    final isRemoving = tpmState.pendingOperation is AuthOperationRemoving;
+    final hasError = tpmState.operationError != null;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -818,12 +797,8 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
                   ? null
                   : () {
                       ref
-                          .read(
-                            removeAuthModelProvider(
-                              AuthMode.passphrase,
-                            ).notifier,
-                          )
-                          .removeAuth();
+                          .read(tpmAuthenticationModelProvider.notifier)
+                          .changeAuthMode(AuthMode.none);
                     },
               child: Text(
                 l10n.diskEncryptionPageRemovePassphraseButton,
@@ -835,7 +810,7 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
           const SizedBox(height: 8),
           YaruInfoBox(
             title: Text(l10n.diskEncryptionPageError),
-            subtitle: Text(removePassphraseModel.e.toString()),
+            subtitle: Text(tpmState.operationError.toString()),
             yaruInfoType: YaruInfoType.danger,
           ),
         ],
@@ -845,14 +820,15 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
 }
 
 class _PinAuthenticationActions extends ConsumerWidget {
-  const _PinAuthenticationActions();
+  const _PinAuthenticationActions({required this.tpmState});
+
+  final TpmAuthState tpmState;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final removePinModel = ref.watch(removeAuthModelProvider(AuthMode.pin));
-    final isRemoving = removePinModel is RemoveAuthStateLoading;
-    final hasError = removePinModel is RemoveAuthStateError;
+    final isRemoving = tpmState.pendingOperation is AuthOperationRemoving;
+    final hasError = tpmState.operationError != null;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -887,10 +863,8 @@ class _PinAuthenticationActions extends ConsumerWidget {
                   ? null
                   : () {
                       ref
-                          .read(
-                            removeAuthModelProvider(AuthMode.pin).notifier,
-                          )
-                          .removeAuth();
+                          .read(tpmAuthenticationModelProvider.notifier)
+                          .changeAuthMode(AuthMode.none);
                     },
               child: Text(l10n.diskEncryptionPageRemovePinButton),
             ),
@@ -900,7 +874,7 @@ class _PinAuthenticationActions extends ConsumerWidget {
           const SizedBox(height: 8),
           YaruInfoBox(
             title: Text(l10n.diskEncryptionPageError),
-            subtitle: Text(removePinModel.e.toString()),
+            subtitle: Text(tpmState.operationError.toString()),
             yaruInfoType: YaruInfoType.danger,
           ),
         ],
@@ -951,33 +925,31 @@ class _RecoveryKeyActions extends StatelessWidget {
   }
 }
 
-class _AuthStatusTileList extends ConsumerWidget {
-  const _AuthStatusTileList({required this.authMode});
+class _AuthStatusTileList extends StatelessWidget {
+  const _AuthStatusTileList({required this.tpmState});
 
-  final AuthMode authMode;
+  final TpmAuthState tpmState;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final removePinModel = ref.watch(removeAuthModelProvider(AuthMode.pin));
-    final removePassphraseModel =
-        ref.watch(removeAuthModelProvider(AuthMode.passphrase));
-    final addPinModel =
-        ref.watch(changeAuthModeDialogModelProvider(AuthMode.pin));
-    final addPassphraseModel =
-        ref.watch(changeAuthModeDialogModelProvider(AuthMode.passphrase));
+    final pendingOperation = tpmState.pendingOperation;
+    final currentMode = tpmState.currentAuthMode;
 
-    final isRemovingPin = removePinModel is RemoveAuthStateLoading;
-    final isRemovingPassphrase =
-        removePassphraseModel is RemoveAuthStateLoading;
-    final isAddingPin =
-        addPinModel.dialogState is ChangeAuthModeDialogStateLoading;
-    final isAddingPassphrase =
-        addPassphraseModel.dialogState is ChangeAuthModeDialogStateLoading;
-    final isLoading = isRemovingPin ||
-        isRemovingPassphrase ||
-        isAddingPin ||
-        isAddingPassphrase;
+    String? loadingMessage;
+    if (pendingOperation != null) {
+      loadingMessage = switch (pendingOperation) {
+        AuthOperationRemoving(mode: AuthMode.pin) =>
+          l10n.diskEncryptionPageRemovingPin,
+        AuthOperationRemoving(mode: AuthMode.passphrase) =>
+          l10n.diskEncryptionPageRemovingPassphrase,
+        AuthOperationAdding(mode: AuthMode.pin) =>
+          l10n.diskEncryptionPageAddingPin,
+        AuthOperationAdding(mode: AuthMode.passphrase) =>
+          l10n.diskEncryptionPageAddingPassphrase,
+        _ => null,
+      };
+    }
 
     return TileList(
       children: [
@@ -990,17 +962,15 @@ class _AuthStatusTileList extends ConsumerWidget {
             ),
           ),
         ),
-        // Show enabled status row || loading row
-        if (authMode != AuthMode.none &&
-            !isRemovingPin &&
-            !isRemovingPassphrase) ...[
+        // Show enabled status row when not loading and has auth enabled
+        if (currentMode != AuthMode.none && pendingOperation == null) ...[
           ConstrainedBox(
             constraints: const BoxConstraints(minHeight: 52),
             child: Center(
               child: ListTile(
                 leading: const Icon(YaruIcons.ok_simple, size: 24),
                 title: Text(
-                  authMode == AuthMode.pin
+                  currentMode == AuthMode.pin
                       ? l10n.recoveryKeyPinEnabled
                       : l10n.recoveryKeyPassphraseEnabled,
                 ),
@@ -1008,8 +978,8 @@ class _AuthStatusTileList extends ConsumerWidget {
             ),
           ),
         ],
-        // Show loading indicator if an PIN/passphrase is being added/removed
-        if (isLoading) ...[
+        // Show loading indicator if an operation is in progress
+        if (loadingMessage != null) ...[
           ConstrainedBox(
             constraints: const BoxConstraints(minHeight: 52),
             child: Center(
@@ -1018,15 +988,7 @@ class _AuthStatusTileList extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      isRemovingPin
-                          ? l10n.diskEncryptionPageRemovingPin
-                          : isRemovingPassphrase
-                              ? l10n.diskEncryptionPageRemovingPassphrase
-                              : isAddingPin
-                                  ? l10n.diskEncryptionPageAddingPin
-                                  : l10n.diskEncryptionPageAddingPassphrase,
-                    ),
+                    Text(loadingMessage),
                     const SizedBox(height: 8),
                     const YaruLinearProgressIndicator(),
                   ],

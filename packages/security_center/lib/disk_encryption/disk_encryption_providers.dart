@@ -98,12 +98,25 @@ sealed class ChangeAuthModeDialogState with _$ChangeAuthModeDialogState {
       ChangeAuthModeDialogStateError;
 }
 
-/// State for managing the flow to remove pin or passphrase (set to None).
+/// Represents an ongoing operation to replace a platform key.
 @freezed
-sealed class RemoveAuthState with _$RemoveAuthState {
-  factory RemoveAuthState.idle() = RemoveAuthStateIdle;
-  factory RemoveAuthState.loading() = RemoveAuthStateLoading;
-  factory RemoveAuthState.error(Exception e) = RemoveAuthStateError;
+sealed class AuthOperation with _$AuthOperation {
+  const factory AuthOperation.adding(AuthMode mode) = AuthOperationAdding;
+  const factory AuthOperation.removing(AuthMode mode) = AuthOperationRemoving;
+}
+
+/// State for TPM authentication mode, including pending operations to change current platform key.
+@freezed
+class TpmAuthState with _$TpmAuthState {
+  const factory TpmAuthState({
+    required AuthMode currentAuthMode,
+    AuthOperation? pendingOperation,
+    Exception? operationError,
+  }) = _TpmAuthState;
+
+  const TpmAuthState._();
+
+  bool get isLoading => pendingOperation != null;
 }
 
 /// Dialog state for managing the replace recovery key flow.
@@ -308,7 +321,12 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   late final _service = getService<DiskEncryptionService>();
 
   @override
-  Future<AuthMode> build() async {
+  Future<TpmAuthState> build() async {
+    final currentMode = await _fetchCurrentAuthMode();
+    return TpmAuthState(currentAuthMode: currentMode);
+  }
+
+  Future<AuthMode> _fetchCurrentAuthMode() async {
     // Temporary work around while we wait for snapd to implement enumerateKeySlots()
     try {
       final volumesResponse = await _service.enumerateKeySlots();
@@ -374,6 +392,43 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         throw SnapdStateExceptionUnconnectedSnapInterface();
       }
       throw TpmStateExceptionFailed();
+    }
+  }
+
+  Future<void> changeAuthMode(AuthMode newMode, {String? passphrase}) async {
+    assert(state.hasValue, 'State must be loaded before changing auth mode');
+
+    final currentMode = state.value!.currentAuthMode;
+    final operation = newMode == AuthMode.none
+        ? AuthOperation.removing(currentMode)
+        : AuthOperation.adding(newMode);
+
+    state = AsyncData(
+      state.value!.copyWith(
+        pendingOperation: operation,
+        operationError: null,
+      ),
+    );
+
+    try {
+      await _service.replacePlatformKey(
+        authMode: newMode,
+        passphrase: newMode == AuthMode.passphrase ? passphrase : null,
+        pin: newMode == AuthMode.pin ? passphrase : null,
+      );
+
+      // Refresh current mode
+      final updatedMode = await _fetchCurrentAuthMode();
+      state = AsyncData(
+        TpmAuthState(currentAuthMode: updatedMode),
+      );
+    } on Exception catch (e) {
+      state = AsyncData(
+        state.value!.copyWith(
+          pendingOperation: null,
+          operationError: e,
+        ),
+      );
     }
   }
 }
@@ -561,22 +616,13 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
     );
   }
 
-  // Under the hood, we are asking snapd to replace the platform key in use,
-  // and requesting the new one have a different auth mode. This dialog only
-  // supports swapping between Pin <-> Passphrase. Removal (-> None) is handled
-  // separately without a dialog.
   Future<void> replaceAuthMode() async {
     assert(state.dialogState is ChangeAuthModeDialogStateInput);
     state = state.copyWith(dialogState: ChangeAuthModeDialogState.loading());
     try {
-      await _service.replacePlatformKey(
-        authMode: state.newAuthMode,
-        passphrase:
-            state.newAuthMode == AuthMode.passphrase ? state.newPass : null,
-        pin: state.newAuthMode == AuthMode.pin ? state.newPass : null,
-      );
-      // Refresh the TPM authentication state before marking success
-      final _ = await ref.refresh(tpmAuthenticationModelProvider.future);
+      await ref
+          .read(tpmAuthenticationModelProvider.notifier)
+          .changeAuthMode(state.newAuthMode, passphrase: state.newPass);
       state = state.copyWith(
         dialogState: ChangeAuthModeDialogState.success(),
         showPassphrase: false,
@@ -666,34 +712,5 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
       return false;
     }
     return true;
-  }
-}
-
-@riverpod
-class RemoveAuthModel extends _$RemoveAuthModel {
-  late final _service = getService<DiskEncryptionService>();
-
-  @override
-  RemoveAuthState build(AuthMode currentAuthMode) {
-    assert(
-      currentAuthMode != AuthMode.none,
-      'RemoveAuthModel requires a non-None auth mode to remove',
-    );
-    return RemoveAuthState.idle();
-  }
-
-  Future<void> removeAuth() async {
-    assert(state is RemoveAuthStateIdle || state is RemoveAuthStateError);
-    state = RemoveAuthState.loading();
-    try {
-      await _service.replacePlatformKey(
-        authMode: AuthMode.none,
-      );
-      // Refresh the TPM authentication state before returning to idle
-      final _ = await ref.refresh(tpmAuthenticationModelProvider.future);
-      state = RemoveAuthState.idle();
-    } on Exception catch (e) {
-      state = RemoveAuthState.error(e);
-    }
   }
 }
