@@ -10,11 +10,12 @@ import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/tile_list.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
 
 const _learnMoreUrl =
-    'https://canonical-ubuntu-desktop-documentation.readthedocs-hosted.com/en/latest/explanation/hardware-backed-disk-encryption/#recovery-key';
+    'https://documentation.ubuntu.com/desktop/en/latest/explanation/hardware-backed-disk-encryption/';
 const defaultRecoveryKeyFileName = 'recovery-key.txt';
 
 const yaruProgressSize = 20.0;
@@ -50,123 +51,28 @@ class EncryptionPageBody extends ConsumerWidget {
     final tpmAuthenticationModel = ref.watch(tpmAuthenticationModelProvider);
 
     return tpmAuthenticationModel.when(
-      data: (data) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          YaruBorderContainer(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 16,
-                  ),
-                  leading: const Icon(YaruIcons.lock, size: 24),
-                  title: Text(l10n.recoveryKeyTPMEnabled),
-                ),
-                if (data != AuthMode.none) ...[
-                  const Divider(),
-                  ListTile(
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 16,
-                    ),
-                    leading: const Icon(YaruIcons.ok_simple, size: 24),
-                    title: Text(
-                      data == AuthMode.pin
-                          ? l10n.recoveryKeyPinEnabled
-                          : l10n.recoveryKeyPassphraseEnabled,
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            l10n.recoveryKeyTPMExplanationBody,
-            textAlign: TextAlign.left,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            l10n.diskEncryptionPageRecoveryKey,
-            style: Theme.of(context).textTheme.titleMedium,
-            textAlign: TextAlign.left,
-          ),
-          const SizedBox(height: 16),
-          MarkdownText(
-            l10n.diskEncryptionPageStoreYourKeyWithLink(
+      data: (data) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _AuthStatusTileList(tpmState: data),
+            const SizedBox(height: 32),
+            const _RecoveryKeyActions(),
+            const SizedBox(height: 32),
+            // TPM Authentication specific content
+            switch (data.currentAuthMode) {
+              AuthMode.pin => _PinAuthenticationActions(tpmState: data),
+              AuthMode.passphrase =>
+                _PassphraseAuthenticationActions(tpmState: data),
+              AuthMode.none => _NoneAuthenticationActions(tpmState: data),
+            },
+            const SizedBox(height: 32),
+            MarkdownText(
               l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl),
             ),
-          ),
-          const SizedBox(height: 16),
-          Wrap(
-            spacing: 16,
-            children: [
-              OutlinedButton(
-                onPressed: () {
-                  showCheckRecoveryKeyDialog(context);
-                },
-                child: Text(l10n.diskEncryptionPageCheckKey),
-              ),
-              OutlinedButton(
-                onPressed: () {
-                  showReplaceRecoveryKeyDialog(context);
-                },
-                child: Text(l10n.diskEncryptionPageReplaceButton),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          // TPM Authentication specific content
-          switch (data) {
-            AuthMode.pin => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.recoveryKeyPinHeader,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(l10n.recoveryKeyPinBody),
-                  const SizedBox(height: 16),
-                  OutlinedButton(
-                    onPressed: () {
-                      ref
-                          .read(changeAuthDialogModelProvider.notifier)
-                          .authMode = AuthMode.pin;
-                      showChangeAuthDialog(context, AuthMode.pin);
-                    },
-                    child: Text(l10n.recoveryKeyPinButton),
-                  ),
-                ],
-              ),
-            AuthMode.passphrase => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.recoveryKeyEncrpytionPassphraseHeader,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(l10n.recoveryKeyPassphraseBody),
-                  const SizedBox(height: 16),
-                  OutlinedButton(
-                    onPressed: () {
-                      ref
-                          .read(changeAuthDialogModelProvider.notifier)
-                          .authMode = AuthMode.passphrase;
-                      showChangeAuthDialog(context, AuthMode.passphrase);
-                    },
-                    child: Text(l10n.recoveryKeyPassphraseButton),
-                  ),
-                ],
-              ),
-            _ => const SizedBox.shrink(),
-          },
-        ],
-      ),
+          ],
+        );
+      },
       error: (e, stack) => switch (e) {
         final SnapdStateException snapdError => YaruInfoBox(
             title: Text(snapdError.localizedHeader(l10n)),
@@ -632,6 +538,100 @@ class ChangeAuthDialog extends ConsumerWidget {
   }
 }
 
+void showChangeAuthModeDialog(
+  BuildContext context,
+  AuthMode authMode,
+  WidgetRef ref,
+) {
+  // Reset the provider state to ensure clean slate when dialog opens
+  ref.invalidate(changeAuthModeDialogModelProvider(authMode));
+  showDialog(
+    context: context,
+    builder: (_) => ChangeAuthModeDialog(authMode: authMode),
+  );
+}
+
+class ChangeAuthModeDialog extends ConsumerWidget {
+  const ChangeAuthModeDialog({required this.authMode, super.key});
+
+  final AuthMode authMode;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final model = ref.watch(changeAuthModeDialogModelProvider(authMode));
+    final notifier =
+        ref.read(changeAuthModeDialogModelProvider(authMode).notifier);
+    assert(authMode != AuthMode.none);
+
+    final title = switch (authMode) {
+      AuthMode.passphrase => l10n.diskEncryptionPageAddPassphraseDialogHeading,
+      AuthMode.pin => l10n.diskEncryptionPageAddPinDialogHeading,
+      _ => '',
+    };
+
+    final bodyMainText = switch (authMode) {
+      AuthMode.passphrase => l10n.diskEncryptionPageAddPassphraseDialogBodyMain,
+      AuthMode.pin => l10n.diskEncryptionPageAddPinDialogBodyMain,
+      _ => '',
+    };
+
+    final bodyRecoveryText = switch (authMode) {
+      AuthMode.passphrase =>
+        l10n.diskEncryptionPageAddPassphraseDialogBodyRecovery,
+      AuthMode.pin => l10n.diskEncryptionPageAddPinDialogBodyRecovery,
+      _ => '',
+    };
+
+    return AlertDialog(
+      title: YaruDialogTitleBar(title: Text(title)),
+      titlePadding: EdgeInsets.zero,
+      insetPadding:
+          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 16.0),
+      content: SizedBox(
+        width: 460,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(bodyMainText),
+            Text(bodyRecoveryText),
+            AddPassphraseFormField(authMode: authMode),
+            AddConfirmPassphraseFormField(authMode: authMode),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed:
+                      model.dialogState is ChangeAuthModeDialogStateInput &&
+                              notifier.isValid
+                          ? () {
+                              Navigator.of(context).pop();
+                              notifier.replaceAuthMode();
+                            }
+                          : null,
+                  child: Text(l10n.diskEncryptionPageAddPinDialogSaveButton),
+                ),
+              ],
+            ),
+            // Show fatal errors in dialog (like entropy check failures)
+            if (model.dialogState is ChangeAuthModeDialogStateError &&
+                (model.dialogState as ChangeAuthModeDialogStateError).fatal)
+              YaruInfoBox(
+                title: Text(l10n.recoveryKeySomethingWentWrongHeader),
+                subtitle: Text(
+                  (model.dialogState as ChangeAuthModeDialogStateError)
+                      .e
+                      .toString(),
+                ),
+                yaruInfoType: YaruInfoType.danger,
+              ),
+          ].separatedBy(const SizedBox(height: 16)),
+        ),
+      ),
+    );
+  }
+}
+
 class _RecoveryKeyQRDialog extends ConsumerWidget {
   const _RecoveryKeyQRDialog({required this.recoveryKey});
 
@@ -672,6 +672,321 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _NoneAuthenticationActions extends ConsumerWidget {
+  const _NoneAuthenticationActions({required this.tpmState});
+
+  final TpmAuthState tpmState;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final isAdding = tpmState.pendingOperation is AuthOperationAdding;
+    final hasError = tpmState.operationError != null;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.diskEncryptionPageAdditionalSecurityHeader,
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          l10n.diskEncryptionPageAdditionalSecurityBody,
+        ),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 16,
+          children: [
+            OutlinedButton(
+              onPressed: isAdding
+                  ? null
+                  : () {
+                      showChangeAuthModeDialog(
+                        context,
+                        AuthMode.passphrase,
+                        ref,
+                      );
+                    },
+              child: Text(
+                l10n.diskEncryptionPageAddPassphraseButton,
+              ),
+            ),
+            // FIXME: PIN support is not yet impletented in snapd
+            // OutlinedButton(
+            //   onPressed: isAdding
+            //       ? null
+            //       : () {
+            //           showChangeAuthModeDialog(
+            //             context,
+            //             AuthMode.pin,
+            //             ref,
+            //           );
+            //         },
+            //   child: Text(l10n.diskEncryptionPageAddPinButton),
+            // ),
+          ],
+        ),
+        // Show error if present
+        if (hasError) ...[
+          const SizedBox(height: 8),
+          YaruInfoBox(
+            title: Text(l10n.diskEncryptionPageError),
+            subtitle: Text(tpmState.operationError.toString()),
+            yaruInfoType: YaruInfoType.danger,
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _PassphraseAuthenticationActions extends ConsumerWidget {
+  const _PassphraseAuthenticationActions({required this.tpmState});
+
+  final TpmAuthState tpmState;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final isRemoving = tpmState.pendingOperation is AuthOperationRemoving;
+    final hasError = tpmState.operationError != null;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.recoveryKeyEncrpytionPassphraseHeader,
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        const SizedBox(height: 8),
+        Text(l10n.recoveryKeyPassphraseBody),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 16,
+          children: [
+            OutlinedButton(
+              onPressed: isRemoving
+                  ? null
+                  : () {
+                      ref
+                          .read(
+                            changeAuthDialogModelProvider.notifier,
+                          )
+                          .authMode = AuthMode.passphrase;
+                      showChangeAuthDialog(
+                        context,
+                        AuthMode.passphrase,
+                      );
+                    },
+              child: Text(l10n.recoveryKeyPassphraseButton),
+            ),
+            OutlinedButton(
+              onPressed: isRemoving
+                  ? null
+                  : () {
+                      ref
+                          .read(tpmAuthenticationModelProvider.notifier)
+                          .changeAuthMode(AuthMode.none);
+                    },
+              child: Text(
+                l10n.diskEncryptionPageRemovePassphraseButton,
+              ),
+            ),
+          ],
+        ),
+        if (hasError) ...[
+          const SizedBox(height: 8),
+          YaruInfoBox(
+            title: Text(l10n.diskEncryptionPageError),
+            subtitle: Text(tpmState.operationError.toString()),
+            yaruInfoType: YaruInfoType.danger,
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _PinAuthenticationActions extends ConsumerWidget {
+  const _PinAuthenticationActions({required this.tpmState});
+
+  final TpmAuthState tpmState;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final isRemoving = tpmState.pendingOperation is AuthOperationRemoving;
+    final hasError = tpmState.operationError != null;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.recoveryKeyPinHeader,
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        const SizedBox(height: 8),
+        Text(l10n.recoveryKeyPinBody),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 16,
+          children: [
+            OutlinedButton(
+              onPressed: isRemoving
+                  ? null
+                  : () {
+                      ref
+                          .read(
+                            changeAuthDialogModelProvider.notifier,
+                          )
+                          .authMode = AuthMode.pin;
+                      showChangeAuthDialog(context, AuthMode.pin);
+                    },
+              child: Text(l10n.recoveryKeyPinButton),
+            ),
+            OutlinedButton(
+              onPressed: isRemoving
+                  ? null
+                  : () {
+                      ref
+                          .read(tpmAuthenticationModelProvider.notifier)
+                          .changeAuthMode(AuthMode.none);
+                    },
+              child: Text(l10n.diskEncryptionPageRemovePinButton),
+            ),
+          ],
+        ),
+        if (hasError) ...[
+          const SizedBox(height: 8),
+          YaruInfoBox(
+            title: Text(l10n.diskEncryptionPageError),
+            subtitle: Text(tpmState.operationError.toString()),
+            yaruInfoType: YaruInfoType.danger,
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _RecoveryKeyActions extends StatelessWidget {
+  const _RecoveryKeyActions();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.diskEncryptionPageRecoveryKey,
+          style: Theme.of(context).textTheme.titleSmall,
+          textAlign: TextAlign.left,
+        ),
+        const SizedBox(height: 8),
+        Text(l10n.diskEncryptionPageStoreYourKey),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 16,
+          children: [
+            OutlinedButton(
+              onPressed: () {
+                showCheckRecoveryKeyDialog(context);
+              },
+              child: Text(l10n.diskEncryptionPageCheckKey),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                showReplaceRecoveryKeyDialog(context);
+              },
+              child: Text(l10n.diskEncryptionPageReplaceButton),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _AuthStatusTileList extends StatelessWidget {
+  const _AuthStatusTileList({required this.tpmState});
+
+  final TpmAuthState tpmState;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final pendingOperation = tpmState.pendingOperation;
+    final currentMode = tpmState.currentAuthMode;
+
+    String? loadingMessage;
+    if (pendingOperation != null) {
+      loadingMessage = switch (pendingOperation) {
+        AuthOperationRemoving(mode: AuthMode.pin) =>
+          l10n.diskEncryptionPageRemovingPin,
+        AuthOperationRemoving(mode: AuthMode.passphrase) =>
+          l10n.diskEncryptionPageRemovingPassphrase,
+        AuthOperationAdding(mode: AuthMode.pin) =>
+          l10n.diskEncryptionPageAddingPin,
+        AuthOperationAdding(mode: AuthMode.passphrase) =>
+          l10n.diskEncryptionPageAddingPassphrase,
+        _ => null,
+      };
+    }
+
+    return TileList(
+      children: [
+        ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 52),
+          child: Center(
+            child: ListTile(
+              leading: const Icon(YaruIcons.lock, size: 24),
+              title: Text(l10n.recoveryKeyTPMEnabled),
+            ),
+          ),
+        ),
+        // Show enabled status row when not loading and has auth enabled
+        if (currentMode != AuthMode.none && pendingOperation == null) ...[
+          ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 52),
+            child: Center(
+              child: ListTile(
+                leading: const Icon(YaruIcons.ok_simple, size: 24),
+                title: Text(
+                  currentMode == AuthMode.pin
+                      ? l10n.recoveryKeyPinEnabled
+                      : l10n.recoveryKeyPassphraseEnabled,
+                ),
+              ),
+            ),
+          ),
+        ],
+        // Show loading indicator if an operation is in progress
+        if (loadingMessage != null) ...[
+          ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 52),
+            child: Center(
+              child: ListTile(
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(loadingMessage),
+                    const SizedBox(height: 8),
+                    const YaruLinearProgressIndicator(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ],
     );
   }
 }

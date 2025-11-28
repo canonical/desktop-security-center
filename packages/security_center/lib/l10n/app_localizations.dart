@@ -311,13 +311,13 @@ abstract class AppLocalizations {
   /// No description provided for @snapPermissionsEnablingLabel.
   ///
   /// In en, this message translates to:
-  /// **'Enabling, it might take a few seconds...'**
+  /// **'Enabling, this may take a few seconds...'**
   String get snapPermissionsEnablingLabel;
 
   /// No description provided for @snapPermissionsDisablingLabel.
   ///
   /// In en, this message translates to:
-  /// **'Disabling, it might take a few seconds...'**
+  /// **'Disabling, this may take a few seconds...'**
   String get snapPermissionsDisablingLabel;
 
   /// No description provided for @snapPermissionsExperimentalLabel.
@@ -449,19 +449,19 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageStoreYourKey.
   ///
   /// In en, this message translates to:
-  /// **'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.'**
+  /// **'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.'**
   String get diskEncryptionPageStoreYourKey;
 
   /// No description provided for @diskEncryptionPageStoreYourKeyWithLink.
   ///
   /// In en, this message translates to:
-  /// **'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe. {learnMoreLink}'**
+  /// **'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. {learnMoreLink}'**
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink);
 
   /// No description provided for @diskEncryptionPageLearnMore.
   ///
   /// In en, this message translates to:
-  /// **'Learn more about recovery keys'**
+  /// **'Learn more about hardware-backed encryption'**
   String get diskEncryptionPageLearnMore;
 
   /// No description provided for @diskEncryptionPageCheckKey.
@@ -674,6 +674,114 @@ abstract class AppLocalizations {
   /// **'snap connect desktop-security-center:snap-fde-control'**
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand;
 
+  /// No description provided for @diskEncryptionPageAddPinButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add PIN...'**
+  String get diskEncryptionPageAddPinButton;
+
+  /// No description provided for @diskEncryptionPageAddPassphraseButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add passphrase...'**
+  String get diskEncryptionPageAddPassphraseButton;
+
+  /// No description provided for @diskEncryptionPageAddPassphraseDialogHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Add passphrase'**
+  String get diskEncryptionPageAddPassphraseDialogHeading;
+
+  /// No description provided for @diskEncryptionPageAddPinDialogHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Add PIN'**
+  String get diskEncryptionPageAddPinDialogHeading;
+
+  /// No description provided for @diskEncryptionPageAddPinDialogBodyMain.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.'**
+  String get diskEncryptionPageAddPinDialogBodyMain;
+
+  /// No description provided for @diskEncryptionPageAddPinDialogBodyRecovery.
+  ///
+  /// In en, this message translates to:
+  /// **'If you forget your PIN, you can regain access to the disk by using the recovery key.'**
+  String get diskEncryptionPageAddPinDialogBodyRecovery;
+
+  /// No description provided for @diskEncryptionPageAddPassphraseDialogBodyMain.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.'**
+  String get diskEncryptionPageAddPassphraseDialogBodyMain;
+
+  /// No description provided for @diskEncryptionPageAddPassphraseDialogBodyRecovery.
+  ///
+  /// In en, this message translates to:
+  /// **'If you forget your passphrase, you can regain access to the disk by using the recovery key.'**
+  String get diskEncryptionPageAddPassphraseDialogBodyRecovery;
+
+  /// No description provided for @diskEncryptionPageAdditionalSecurityHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional security'**
+  String get diskEncryptionPageAdditionalSecurityHeader;
+
+  /// No description provided for @diskEncryptionPageAdditionalSecurityBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.'**
+  String get diskEncryptionPageAdditionalSecurityBody;
+
+  /// No description provided for @diskEncryptionPageAdditionalSecurityLearnMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn more'**
+  String get diskEncryptionPageAdditionalSecurityLearnMore;
+
+  /// No description provided for @diskEncryptionPageAddPinDialogSaveButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get diskEncryptionPageAddPinDialogSaveButton;
+
+  /// No description provided for @diskEncryptionPageRemovePinButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove PIN...'**
+  String get diskEncryptionPageRemovePinButton;
+
+  /// No description provided for @diskEncryptionPageRemovePassphraseButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove passphrase...'**
+  String get diskEncryptionPageRemovePassphraseButton;
+
+  /// No description provided for @diskEncryptionPageAddingPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Adding PIN, this may take a few seconds...'**
+  String get diskEncryptionPageAddingPin;
+
+  /// No description provided for @diskEncryptionPageAddingPassphrase.
+  ///
+  /// In en, this message translates to:
+  /// **'Adding passphrase, this may take a few seconds...'**
+  String get diskEncryptionPageAddingPassphrase;
+
+  /// No description provided for @diskEncryptionPageRemovingPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Removing PIN, this may take a few seconds...'**
+  String get diskEncryptionPageRemovingPin;
+
+  /// No description provided for @diskEncryptionPageRemovingPassphrase.
+  ///
+  /// In en, this message translates to:
+  /// **'Removing passphrase, this may take a few seconds...'**
+  String get diskEncryptionPageRemovingPassphrase;
+
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.
   ///
   /// In en, this message translates to:
@@ -761,7 +869,7 @@ abstract class AppLocalizations {
   /// No description provided for @recoveryKeyPassphraseBody.
   ///
   /// In en, this message translates to:
-  /// **'You need to enter your passpharse during startup to unlock the disk. You can change the passphrase but not disable it.'**
+  /// **'You need to enter your passphrase every time your computer starts.'**
   String get recoveryKeyPassphraseBody;
 
   /// No description provided for @recoveryKeyPassphraseButton.
@@ -833,7 +941,7 @@ abstract class AppLocalizations {
   /// No description provided for @recoveryKeyPinBody.
   ///
   /// In en, this message translates to:
-  /// **'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.'**
+  /// **'You need to enter your PIN every time your computer starts.'**
   String get recoveryKeyPinBody;
 
   /// No description provided for @recoveryKeyPinButton.

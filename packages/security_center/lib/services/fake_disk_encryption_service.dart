@@ -115,4 +115,76 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     );
     return EntropyResponse.fromSnapdEntropyResponse(snapdResponse);
   }
+
+  @override
+  Future<void> replacePlatformKey({
+    required AuthMode authMode,
+    String? passphrase,
+    String? pin,
+  }) async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    // Validate that the required auth credential is provided
+    switch (authMode) {
+      case AuthMode.passphrase:
+        if (passphrase == null || passphrase.isEmpty) {
+          throw Exception('Passphrase required for passphrase auth mode');
+        }
+        _auth = passphrase;
+      case AuthMode.pin:
+        if (pin == null || pin.isEmpty) {
+          throw Exception('PIN required for pin auth mode');
+        }
+        _auth = pin;
+      case AuthMode.none:
+        _auth = '';
+    }
+
+    // Update the authMode in all platform key slots in systemVolumes
+    final updatedVolumes = <String, SnapdSystemVolume>{};
+    for (final entry in systemVolumes.byContainerRole.entries) {
+      final containerRole = entry.key;
+      final volume = entry.value;
+
+      final updatedKeyslots = <String, SnapdSystemVolumeKeySlot>{};
+      for (final keyEntry in volume.keyslots.entries) {
+        final keyName = keyEntry.key;
+        final keyslot = keyEntry.value;
+
+        // Only update platform keys
+        if (keyslot.type == SnapdSystemVolumeKeySlotType.platform) {
+          updatedKeyslots[keyName] = SnapdSystemVolumeKeySlot(
+            type: keyslot.type,
+            roles: keyslot.roles,
+            platformName: keyslot.platformName,
+            authMode: _authModeToSnapd(authMode),
+          );
+        } else {
+          updatedKeyslots[keyName] = keyslot;
+        }
+      }
+
+      updatedVolumes[containerRole] = SnapdSystemVolume(
+        volumeName: volume.volumeName,
+        name: volume.name,
+        encrypted: volume.encrypted,
+        keyslots: updatedKeyslots,
+      );
+    }
+
+    systemVolumes = SnapdSystemVolumesResponse(
+      byContainerRole: updatedVolumes,
+    );
+  }
+
+  SnapdSystemVolumeAuthMode _authModeToSnapd(AuthMode authMode) {
+    switch (authMode) {
+      case AuthMode.none:
+        return SnapdSystemVolumeAuthMode.none;
+      case AuthMode.pin:
+        return SnapdSystemVolumeAuthMode.pin;
+      case AuthMode.passphrase:
+        return SnapdSystemVolumeAuthMode.passphrase;
+    }
+  }
 }
