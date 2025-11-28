@@ -731,8 +731,8 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageAdditionalSecurityBody.
   ///
   /// In en, this message translates to:
-  /// **'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts. {learnMoreLink}'**
-  String diskEncryptionPageAdditionalSecurityBody(String learnMoreLink);
+  /// **'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.'**
+  String get diskEncryptionPageAdditionalSecurityBody;
 
   /// No description provided for @diskEncryptionPageAdditionalSecurityLearnMore.
   ///

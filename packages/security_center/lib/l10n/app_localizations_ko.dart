@@ -302,9 +302,8 @@ class AppLocalizationsKo extends AppLocalizations {
       'Additional security';
 
   @override
-  String diskEncryptionPageAdditionalSecurityBody(String learnMoreLink) {
-    return 'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts. $learnMoreLink';
-  }
+  String get diskEncryptionPageAdditionalSecurityBody =>
+      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';

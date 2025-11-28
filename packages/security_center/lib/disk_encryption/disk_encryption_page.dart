@@ -697,11 +697,8 @@ class _NoneAuthenticationActions extends ConsumerWidget {
               ),
         ),
         const SizedBox(height: 8),
-        MarkdownText(
-          l10n.diskEncryptionPageAdditionalSecurityBody(
-            l10n.diskEncryptionPageAdditionalSecurityLearnMore
-                .link(_learnMoreUrl),
-          ),
+        Text(
+          l10n.diskEncryptionPageAdditionalSecurityBody,
         ),
         const SizedBox(height: 8),
         Wrap(
