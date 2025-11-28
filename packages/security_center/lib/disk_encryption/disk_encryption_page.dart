@@ -692,9 +692,7 @@ class _NoneAuthenticationActions extends ConsumerWidget {
       children: [
         Text(
           l10n.diskEncryptionPageAdditionalSecurityHeader,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         const SizedBox(height: 8),
         Text(
@@ -763,9 +761,7 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
       children: [
         Text(
           l10n.recoveryKeyEncrpytionPassphraseHeader,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         const SizedBox(height: 8),
         Text(l10n.recoveryKeyPassphraseBody),
@@ -832,9 +828,7 @@ class _PinAuthenticationActions extends ConsumerWidget {
       children: [
         Text(
           l10n.recoveryKeyPinHeader,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         const SizedBox(height: 8),
         Text(l10n.recoveryKeyPinBody),
@@ -892,9 +886,7 @@ class _RecoveryKeyActions extends StatelessWidget {
       children: [
         Text(
           l10n.diskEncryptionPageRecoveryKey,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.titleSmall,
           textAlign: TextAlign.left,
         ),
         const SizedBox(height: 8),
