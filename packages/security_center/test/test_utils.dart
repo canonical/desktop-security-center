@@ -137,7 +137,6 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool generateAuthCancelled = false,
   bool changePinPassphraseError = false,
   bool entropyCheckError = false,
-  bool replacePlatformKeyError = false,
   AuthMode authMode = AuthMode.pin,
   EntropyResponse Function(String)? entropyResponseBuilder,
   bool enumerateKeySlots404Error = false,
@@ -253,17 +252,6 @@ DiskEncryptionService registerMockDiskEncryptionService({
   when(service.changePinPassphrase(any, any, any)).thenAnswer((_) async {
     if (changePinPassphraseError) {
       throw Exception('Mock change PIN/passphrase error');
-    }
-  });
-  when(
-    service.replacePlatformKey(
-      authMode: anyNamed('authMode'),
-      passphrase: anyNamed('passphrase'),
-      pin: anyNamed('pin'),
-    ),
-  ).thenAnswer((_) async {
-    if (replacePlatformKeyError) {
-      throw Exception('Mock replace platform key error');
     }
   });
   when(service.pinPassphraseEntropyCheck(any, any))

@@ -110,32 +110,4 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
       }
     }
   }
-
-  @override
-  Future<void> replacePlatformKey({
-    required AuthMode authMode,
-    String? passphrase,
-    String? pin,
-  }) async {
-    final snapdAuthMode = switch (authMode) {
-      AuthMode.none => SnapdSystemVolumeAuthMode.none,
-      AuthMode.pin => SnapdSystemVolumeAuthMode.pin,
-      AuthMode.passphrase => SnapdSystemVolumeAuthMode.passphrase,
-    };
-
-    final changeId = await _snapd.replacePlatformKey(
-      authMode: snapdAuthMode,
-      passphrase: passphrase,
-      pin: pin,
-    );
-
-    final result =
-        await _snapd.watchChange(changeId).firstWhere((change) => change.ready);
-    if (result.err != null) {
-      throw Exception(
-        'replacePlatformKey encountered an error: ${result.err!}',
-      );
-    }
-    return;
-  }
 }

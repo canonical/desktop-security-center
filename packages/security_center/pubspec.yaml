@@ -27,10 +27,7 @@ dependencies:
   path: ^1.9.0
   riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5
-  snapd:
-    git:
-      url: https://github.com/canonical/snapd.dart.git
-      ref: main
+  snapd: ^0.7.3
   ubuntu_localizations: ^0.5.2+1
   ubuntu_logger: ^0.2.0
   ubuntu_service: ^0.4.0

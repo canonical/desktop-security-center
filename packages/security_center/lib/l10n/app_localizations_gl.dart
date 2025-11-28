@@ -45,11 +45,11 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Enabling, this may take a few seconds...';
+      'Enabling, it might take a few seconds...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Disabling, this may take a few seconds...';
+      'Disabling, it might take a few seconds...';
 
   @override
   String get snapPermissionsExperimentalLabel => 'Experimental';
@@ -140,16 +140,15 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'The recovery key lets you regain access to your data if your disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
   }
 
   @override
-  String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+  String get diskEncryptionPageLearnMore => 'Learn more about recovery keys';
 
   @override
   String get diskEncryptionPageCheckKey => 'Check recovery key...';
@@ -275,70 +274,6 @@ class AppLocalizationsGl extends AppLocalizations {
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
-
-  @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
-
-  @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
-
-  @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
-
-  @override
-  String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
-
-  @override
-  String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
-
-  @override
-  String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
-
-  @override
-  String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
-
-  @override
-  String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
-
-  @override
-  String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
-
-  @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
-
-  @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
-
-  @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
-
-  @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
-
-  @override
-  String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
-
-  @override
-  String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
-
-  @override
-  String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
-
-  @override
-  String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
-
-  @override
   String get recoveryKeyExceptionFileSystemTitle =>
       'Recovery key file not saved';
 
@@ -390,7 +325,7 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      'You need to enter your passpharse during startup to unlock the disk. You can change the passphrase but not disable it.';
 
   @override
   String get recoveryKeyPassphraseButton => 'Change passphrase...';
@@ -430,7 +365,7 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      'You need to enter your PIN during startup to unlock the disk. You can change the PIN but not disable it.';
 
   @override
   String get recoveryKeyPinButton => 'Change PIN...';
