@@ -172,7 +172,7 @@
     "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "இதை சரிசெய்ய, இந்த கட்டளையை முனையத்தில் இயக்கவும்:",
     "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {},
-    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "ச்னாப் இணைக்க டெச்க்டாப்-பாதுகாப்பு-மையம்: ச்னாப்-எஃப்.டி.இ-கட்டுப்பாடு",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
     "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
     "recoveryKeyExceptionFilePermissionTitle": "கோப்புக்கு உங்கள் மீட்பு விசையை சேமிப்பதில் தோல்வி",
     "@recoveryKeyExceptionFilePermissionTitle": {},
