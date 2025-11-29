@@ -1,1 +1,55 @@
-{}
+{
+    "appTitle": "Κέντρο Ασφαλείας",
+    "@appTitle": {},
+    "snapPermissionReadLabel": "Διάβασε",
+    "@snapPermissionReadLabel": {},
+    "snapPermissionWriteLabel": "Γράψε",
+    "@snapPermissionWriteLabel": {},
+    "snapPermissionExecuteLabel": "Εκτέλεση",
+    "@snapPermissionExecuteLabel": {},
+    "snapPermissionsDisablingLabel": "Απενεργοποιώ,μπορεί να πάρει κάποια δευτερόλεπτα...",
+    "@snapPermissionsDisablingLabel": {},
+    "snapPermissionsExperimentalLabel": "Πειραματικά",
+    "@snapPermissionsExperimentalLabel": {},
+    "snapPermissionsOtherDescription": "Μπορείς να διαχειριστείς άλλες άδειες στις Ρυθμίσεις › Εφαρμογές.",
+    "@snapPermissionsOtherDescription": {},
+    "snapPermissionsPageTitle": "Άδειες Εφαρμογής",
+    "@snapPermissionsPageTitle": {},
+    "snapRulesPageDescription": "Διαχείριση{interface} αδειών για {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Κανένας κανόνας ακόμα",
+    "@snapRulesPageEmptyTileLabel": {},
+    "snapRulesRemoveAll": "Αφαίρεση όλων των κανόνων",
+    "@snapRulesRemoveAll": {},
+    "homeInterfacePageTitle": "Αρχικός φάκελος",
+    "@homeInterfacePageTitle": {},
+    "homeInterfacePageDescription": "Διαχείριση αδειών για να έχετε πρόσβαση για αρχεία στον Αρχικό φάκελο.",
+    "@homeInterfacePageDescription": {},
+    "interfacePageTitle": "Διαχείριση Αδειών",
+    "@interfacePageTitle": {},
+    "snapPermissionsEnablingLabel": "Ενεργοποιώ,μπορεί να πάρει κάποια δευτερόλεπτα...",
+    "@snapPermissionsEnablingLabel": {},
+    "snapdRuleCategorySessionAllowed": "Επιτρέψτε μέχρι να αποσυνδεθείτε",
+    "@snapdRuleCategorySessionAllowed": {},
+    "snapdRuleCategorySessionDenied": "Απορρίψτε μέχρι να αποσυνδεθείτε",
+    "@snapdRuleCategorySessionDenied": {},
+    "snapdRuleCategoryForeverDenied": "Απορρίπτω πάντα",
+    "@snapdRuleCategoryForeverDenied": {},
+    "snapPermissionsEnableWarning": "Αυτή είναι μια δοκιμαστική λειτουργία για να έχετε πρόσβαση στις πηγές του συστήματός σας.",
+    "@snapPermissionsEnableWarning": {},
+    "interfacePageLinkLearnMore": "Μάθετε περισσότερα",
+    "@interfacePageLinkLearnMore": {},
+    "interfacePageLinkReportIssues": "Αναφορά προβλήματος",
+    "@interfacePageLinkReportIssues": {},
+    "snapdRuleCategoryForeverAllowed": "Επιτρέπω πάντα",
+    "@snapdRuleCategoryForeverAllowed": {}
+}
