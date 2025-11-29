@@ -254,7 +254,7 @@
     "@recoveryKeyTPMExplanationLearnMore": {},
     "recoveryKeyEncrpytionPassphraseHeader": "加密密碼",
     "@recoveryKeyEncrpytionPassphraseHeader": {},
-    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap 連接桌面安全中心：snap-fde-control",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
     "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {},
     "snapPermissionAccessLabel": "存取",
     "@snapPermissionAccessLabel": {},
