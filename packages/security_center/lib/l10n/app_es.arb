@@ -96,7 +96,7 @@
             }
         }
     },
-    "diskEncryptionPageLearnMore": "Más información sobre las claves de recuperación",
+    "diskEncryptionPageLearnMore": "Más información sobre el cifrado basado en hardware",
     "@diskEncryptionPageLearnMore": {},
     "diskEncryptionPageCheckKey": "Comprobar la clave de recuperación...",
     "@diskEncryptionPageCheckKey": {},
@@ -265,5 +265,17 @@
     "recoveryKeyPinButton": "Cambiar PIN...",
     "@recoveryKeyPinButton": {},
     "recoveryKeyPinCurrent": "PIN actual",
-    "@recoveryKeyPinCurrent": {}
+    "@recoveryKeyPinCurrent": {},
+    "diskEncryptionPageAddPinButton": "Agregar PIN…",
+    "@diskEncryptionPageAddPinButton": {},
+    "diskEncryptionPageAddPassphraseButton": "Agregar frase de paso…",
+    "@diskEncryptionPageAddPassphraseButton": {},
+    "diskEncryptionPageAddPassphraseDialogHeading": "Agregar frase de paso",
+    "@diskEncryptionPageAddPassphraseDialogHeading": {},
+    "diskEncryptionPageAddPinDialogHeading": "Agregar PIN",
+    "@diskEncryptionPageAddPinDialogHeading": {},
+    "diskEncryptionPageAddPinDialogBodyMain": "Necesitará introducir su PIN cada vez que ejecute el acceso. Este PIN es diferente de su contraseña de usuario.",
+    "@diskEncryptionPageAddPinDialogBodyMain": {},
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Si olvida su PIN, pude obtener acceso al disco utilizando la clave de recuperación.",
+    "@diskEncryptionPageAddPinDialogBodyRecovery": {}
 }
