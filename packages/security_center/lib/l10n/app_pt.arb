@@ -76,7 +76,7 @@
     "@diskEncryptionPageTitle": {},
     "diskEncryptionPageRecoveryKey": "Código de recuperação",
     "@diskEncryptionPageRecoveryKey": {},
-    "diskEncryptionPageLearnMore": "Saiba mais sobre os códigos de recuperação",
+    "diskEncryptionPageLearnMore": "Saiba mais sobre criptografia com suporte de hardware",
     "@diskEncryptionPageLearnMore": {},
     "diskEncryptionPageCheckKey": "Verificar código de recuperação...",
     "@diskEncryptionPageCheckKey": {},
@@ -221,5 +221,39 @@
     "recoveryKeyPassphraseBody": "Tem de inserir a sua frase passe durante o arranque para desbloquear o disco. Pode-a alterar, mas não desativá-la.",
     "@recoveryKeyPassphraseBody": {},
     "recoveryKeyPinBody": "Tem de inserir o seu CÓDIGO durante o arranque para desbloquear o disco. Pode alterá-lo, mas não desativá-lo.",
-    "@recoveryKeyPinBody": {}
+    "@recoveryKeyPinBody": {},
+    "snapPermissionAccessLabel": "Acesso",
+    "@snapPermissionAccessLabel": {},
+    "cameraRulesPageEmptyTileLabel": "Nenhum aplicativo solicitou acesso ainda",
+    "@cameraRulesPageEmptyTileLabel": {},
+    "snapRulesResetAllPermissions": "Redefinir todas as permissões",
+    "@snapRulesResetAllPermissions": {},
+    "cameraInterfacePageTitle": "Câmera",
+    "@cameraInterfacePageTitle": {},
+    "cameraInterfacePageDescription": "Permita que os aplicativos acessem suas câmeras.",
+    "@cameraInterfacePageDescription": {},
+    "diskEncryptionPageStoreYourKeyWithLink": "A chave de recuperação permite que você recupere o acesso aos seus dados caso o disco não desbloqueie durante a inicialização. Guarde-a em um local seguro. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Configurações de criptografia não disponíveis",
+    "@diskEncryptionPageErrorFailedToRetrieveStatusHeader": {},
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Não foi possível recuperar o estado de criptografia deste computador.",
+    "@diskEncryptionPageErrorFailedToRetrieveStatusBody": {},
+    "diskEncryptionPageErrorUnsupportedStateBody": "A configuração do TPM do seu computador não está em um estado compatível.",
+    "@diskEncryptionPageErrorUnsupportedStateBody": {},
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Sua versão do snapd não é compatível",
+    "@diskEncryptionPageErrorUnsupportedSnapdHeader": {},
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Verifique se o Centro de Segurança e o snapd estão atualizados.",
+    "@diskEncryptionPageErrorUnsupportedSnapdBody": {},
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "O Centro de Segurança não consegue se conectar à interface snapd",
+    "@diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": {},
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Para corrigir isso, execute o seguinte comando no terminal:",
+    "@diskEncryptionPageErrorUnconnectedSnapInterfaceBody": {},
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "@diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": {}
 }
