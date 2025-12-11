@@ -56,6 +56,13 @@ scripts:
     melos exec -c 1 --fail-fast --depends-on=flutter_localizations -- \
      fvm flutter gen-l10n
 
+  # sync app titles from l10n ARB files to desktop file
+  sync-desktop-titles: >
+    ARB_DIR=packages/security_center/lib/l10n
+    DESKTOP_FILE=snap/gui/desktop-security-center.desktop
+    NAME_VARIABLE=appTitle
+    ./scripts/import_app_title_to_desktop_flie.py
+
   # run integration tests in all packages
   integration_test: >
     melos exec -c 1 --fail-fast --dir-exists=integration_test -- \
