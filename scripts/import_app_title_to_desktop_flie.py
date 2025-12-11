@@ -1,8 +1,29 @@
 #!/usr/bin/env python3
 
 import json
+import os
 import re
 from pathlib import Path
+
+
+# Load and validate environment variables
+def load_env_config() -> tuple[Path, Path, str] | None:
+    arb_dir_str = os.getenv('ARB_DIR')
+    desktop_file_str = os.getenv('DESKTOP_FILE')
+    name_variable = os.getenv('NAME_VARIABLE')
+
+    # Fail fast if required environment variables are not set
+    if not arb_dir_str:
+        print("Error: ARB_DIR environment variable is required")
+        return None
+    if not desktop_file_str:
+        print("Error: DESKTOP_FILE environment variable is required")
+        return None
+    if not name_variable:
+        print("Error: NAME_VARIABLE environment variable is required")
+        return None
+
+    return Path(arb_dir_str), Path(desktop_file_str), name_variable
 
 
 # Extract locale code from ARB file name
@@ -12,8 +33,7 @@ def extract_locale_from_arb_file(file_path):
 
 
 # Get app titles from ARB files
-def get_app_titles(title_variable: str) -> dict[str, str] | None:
-    arb_dir = Path('packages/security_center/lib/l10n')
+def get_app_titles(arb_dir: Path, name_variable: str) -> dict[str, str] | None:
 
     if not arb_dir.exists() or not arb_dir.is_dir():
         print(f"Directory {arb_dir} does not exist.")
@@ -30,7 +50,7 @@ def get_app_titles(title_variable: str) -> dict[str, str] | None:
 
         with arb_file.open('r', encoding='utf-8') as f:
             data = json.load(f)
-            app_title = data.get(title_variable)
+            app_title = data.get(name_variable)
             if app_title:
                 app_titles[locale] = app_title
                 print(f' Found: {locale} = "{app_title}"')
@@ -40,7 +60,11 @@ def get_app_titles(title_variable: str) -> dict[str, str] | None:
 
 # Update desktop file with new app titles
 def main():
-    desktop_file = Path('snap/gui/desktop-security-center.desktop')
+    config = load_env_config()
+    if config is None:
+        return 1
+
+    arb_dir, desktop_file, name_variable = config
 
     if not desktop_file.exists():
         print(f"Desktop file {desktop_file} does not exist.")
@@ -56,7 +80,7 @@ def main():
             continue
         new_lines.append(line)
 
-    app_titles = get_app_titles('appTitle')
+    app_titles = get_app_titles(arb_dir, name_variable)
 
     if app_titles is None:
         return 1
