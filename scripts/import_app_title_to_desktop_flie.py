@@ -42,7 +42,7 @@ def get_app_titles(arb_dir: Path, name_variable: str) -> dict[str, str] | None:
     # Load app titles from ARB files
     app_titles = {}
 
-    for arb_file in arb_dir.glob('app_*.arb'):
+    for arb_file in sorted(arb_dir.glob('app_*.arb')):
         locale = extract_locale_from_arb_file(arb_file.name)
         if not locale:
             print(f"Could not extract locale from file name: {arb_file.name}")
