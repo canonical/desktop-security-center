@@ -1,29 +1,35 @@
 #!/usr/bin/env python3
 
+import argparse
 import json
-import os
 import re
 from pathlib import Path
 
 
-# Load and validate environment variables
-def load_env_config() -> tuple[Path, Path, str] | None:
-    arb_dir_str = os.getenv('ARB_DIR')
-    desktop_file_str = os.getenv('DESKTOP_FILE')
-    name_variable = os.getenv('NAME_VARIABLE')
-
-    # Fail fast if required environment variables are not set
-    if not arb_dir_str:
-        print("Error: ARB_DIR environment variable is required")
-        return None
-    if not desktop_file_str:
-        print("Error: DESKTOP_FILE environment variable is required")
-        return None
-    if not name_variable:
-        print("Error: NAME_VARIABLE environment variable is required")
-        return None
-
-    return Path(arb_dir_str), Path(desktop_file_str), name_variable
+# Parse command-line arguments
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description='Import localized app titles from ARB files into a .desktop file'
+    )
+    parser.add_argument(
+        '--arb-dir',
+        type=Path,
+        required=True,
+        help='Directory containing ARB localization files'
+    )
+    parser.add_argument(
+        '--desktop-file',
+        type=Path,
+        required=True,
+        help='Path to the .desktop file to update'
+    )
+    parser.add_argument(
+        '--name-variable',
+        type=str,
+        required=True,
+        help='JSON key for the app title in ARB files'
+    )
+    return parser.parse_args()
 
 
 # Extract locale code from ARB file name
@@ -60,11 +66,10 @@ def get_app_titles(arb_dir: Path, name_variable: str) -> dict[str, str] | None:
 
 # Update desktop file with new app titles
 def main():
-    config = load_env_config()
-    if config is None:
-        return 1
-
-    arb_dir, desktop_file, name_variable = config
+    args = parse_args()
+    arb_dir = args.arb_dir
+    desktop_file = args.desktop_file
+    name_variable = args.name_variable
 
     if not desktop_file.exists():
         print(f"Error: Desktop file {desktop_file} does not exist.")
