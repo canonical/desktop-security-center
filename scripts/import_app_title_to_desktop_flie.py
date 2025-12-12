@@ -28,7 +28,7 @@ def load_env_config() -> tuple[Path, Path, str] | None:
 
 # Extract locale code from ARB file name
 def extract_locale_from_arb_file(file_path):
-    match = re.match(r'app_([a-z]{2}(?:_[A-Z]{2})?).arb$', file_path)
+    match = re.match(r'app_([a-z]{2}(?:_[A-Z]{2})?)\.arb$', file_path)
     return match.group(1) if match else None
 
 
@@ -84,10 +84,13 @@ def main():
         # See if we are in the [Desktop Entry] section
         if line.strip() == '[Desktop Entry]':
             in_desktop_entry = True
-        elif line.strip().startswith('[') and line.strip().endswith(']'):
-            # We've left the [Desktop Entry] section
+            new_lines.append(line)
+            continue
+
+        # See if we are leaving the [Desktop Entry] section
+        if in_desktop_entry and line.strip().startswith('[') and line.strip().endswith(']'):
             # If we haven't found an insertion point yet, set it to the end of [Desktop Entry]
-            if in_desktop_entry and insertion_index is None:
+            if insertion_index is None:
                 insertion_index = len(new_lines)
             in_desktop_entry = False
 
@@ -97,7 +100,9 @@ def main():
 
         # Anchor insertion point immediately after the Name= line for readability
         if in_desktop_entry and line.startswith('Name=') and insertion_index is None:
-            insertion_index = len(new_lines) + 1
+            new_lines.append(line)
+            insertion_index = len(new_lines)
+            continue
 
         new_lines.append(line)
 
@@ -129,6 +134,7 @@ def main():
     # Write updated desktop file
     desktop_file.write_text('\n'.join(new_lines) + '\n', encoding='utf-8')
     print(f"Updated desktop file written to {desktop_file}")
+
     return 0
 
 
