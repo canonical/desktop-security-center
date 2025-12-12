@@ -33,8 +33,8 @@ def parse_args() -> argparse.Namespace:
 
 
 # Extract locale code from ARB file name
-def extract_locale_from_arb_file(file_path):
-    match = re.match(r'app_([a-z]{2}(?:_[A-Z]{2})?)\.arb$', file_path)
+def extract_locale_from_arb_file_name(file_path) -> str | None:
+    match = re.match(r'app_([a-z]{2,3}(?:_[A-Z]{2})?)\.arb$', file_path)
     return match.group(1) if match else None
 
 
@@ -49,7 +49,7 @@ def get_app_titles(arb_dir: Path, name_variable: str) -> dict[str, str] | None:
     app_titles = {}
 
     for arb_file in sorted(arb_dir.glob('app_*.arb')):
-        locale = extract_locale_from_arb_file(arb_file.name)
+        locale = extract_locale_from_arb_file_name(arb_file.name)
         if not locale:
             print(f"Could not extract locale from file name: {arb_file.name}")
             continue
