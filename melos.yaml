@@ -58,7 +58,7 @@ scripts:
 
   # sync app titles from l10n ARB files to desktop file
   sync-desktop-titles: >
-    ./scripts/import_app_title_to_desktop_flie.py --arb-dir packages/security_center/lib/l10n --desktop-file snap/gui/desktop-security-center.desktop --name-variable appTitle
+    ./scripts/import_app_title_to_desktop_file.py --arb-dir packages/security_center/lib/l10n --desktop-file snap/gui/desktop-security-center.desktop --name-variable appTitle
 
   # run integration tests in all packages
   integration_test: >
