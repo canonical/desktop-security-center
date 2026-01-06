@@ -149,6 +149,9 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
                       )
                     : null,
                 helperStyle: Theme.of(context).textTheme.bodySmall,
+                errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
                 helperMaxLines: 2,
                 errorMaxLines: 2,
               ),
@@ -230,6 +233,9 @@ class _ConfirmPassphraseFormFieldState
                 errorText: !notifier.passphraseConfirmed
                     ? widget.authMode.localizedConfirmError(lang)
                     : null,
+                errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
               ),
               obscureText: !model.showPassphrase,
               enabled: !isDisabled,
@@ -383,6 +389,9 @@ class _AddPassphraseFormFieldState
                       )
                     : null,
                 helperStyle: Theme.of(context).textTheme.bodySmall,
+                errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
                 helperMaxLines: 2,
                 errorMaxLines: 2,
                 suffixIcon: AddAuthShowButton(authMode: widget.authMode),
@@ -466,6 +475,9 @@ class _AddConfirmPassphraseFormFieldState
                 errorText: !notifier.passphraseConfirmed
                     ? widget.authMode.localizedConfirmError(lang)
                     : null,
+                errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
               ),
               obscureText: !model.showPassphrase,
               enabled: !isDisabled,
