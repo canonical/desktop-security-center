@@ -4,8 +4,8 @@ import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/navigator.dart';
+import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
-import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
@@ -78,8 +78,9 @@ class _Links extends StatelessWidget {
     return Row(
       children: _Link.values
           .map(
-            (link) => MarkdownText(
-              link.localize(AppLocalizations.of(context)).link(link.url),
+            (link) => Hyperlink(
+              text: link.localize(AppLocalizations.of(context)),
+              url: link.url,
             ),
           )
           .toList()
@@ -175,14 +176,16 @@ class _InterfaceList extends ConsumerWidget {
                         ),
                         subtitle: Text(
                           interfaceSnapCount.value > 0
-                              ? l10n.interfaceSnapCount(interfaceSnapCount.value)
+                              ? l10n
+                                  .interfaceSnapCount(interfaceSnapCount.value)
                               : (interfaceSnapCount.key == SnapdInterface.camera
                                   ? l10n.cameraRulesPageEmptyTileLabel
                                   : l10n.snapRulesPageEmptyTileLabel),
                         ),
                         trailing: const Icon(YaruIcons.pan_end),
-                        onTap: () => Navigator.of(context)
-                            .pushSnapPermissions(interface: interfaceSnapCount.key),
+                        onTap: () => Navigator.of(context).pushSnapPermissions(
+                          interface: interfaceSnapCount.key,
+                        ),
                       ),
                     ),
                   ),

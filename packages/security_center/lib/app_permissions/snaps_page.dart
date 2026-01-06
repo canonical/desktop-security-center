@@ -262,8 +262,9 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
             onChanged: (value) async {
               await notifier.removeAll();
               await notifier.createAccessRule(
-                outcome:
-                    value ? SnapdRequestOutcome.allow : SnapdRequestOutcome.deny,
+                outcome: value
+                    ? SnapdRequestOutcome.allow
+                    : SnapdRequestOutcome.deny,
               );
             },
           ),

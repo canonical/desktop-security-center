@@ -6,8 +6,8 @@ import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
-import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
@@ -67,8 +67,9 @@ class EncryptionPageBody extends ConsumerWidget {
               AuthMode.none => _NoneAuthenticationActions(tpmState: data),
             },
             const SizedBox(height: 32),
-            MarkdownText(
-              l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl),
+            Hyperlink(
+              text: l10n.diskEncryptionPageLearnMore,
+              url: _learnMoreUrl,
             ),
           ],
         );
