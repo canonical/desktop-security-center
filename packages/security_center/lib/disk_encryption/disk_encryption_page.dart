@@ -947,7 +947,10 @@ class _AuthStatusTileList extends StatelessWidget {
           child: Center(
             child: ListTile(
               leading: const Icon(YaruIcons.lock, size: 24),
-              title: Text(l10n.recoveryKeyTPMEnabled),
+              title: Text(
+                l10n.recoveryKeyTPMEnabled,
+                style: Theme.of(context).textTheme.labelLarge,
+              ),
             ),
           ),
         ),
@@ -962,6 +965,7 @@ class _AuthStatusTileList extends StatelessWidget {
                   currentMode == AuthMode.pin
                       ? l10n.recoveryKeyPinEnabled
                       : l10n.recoveryKeyPassphraseEnabled,
+                  style: Theme.of(context).textTheme.labelLarge,
                 ),
               ),
             ),
@@ -977,7 +981,10 @@ class _AuthStatusTileList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(loadingMessage),
+                    Text(
+                      loadingMessage,
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
                     const SizedBox(height: 8),
                     const YaruLinearProgressIndicator(),
                   ],
