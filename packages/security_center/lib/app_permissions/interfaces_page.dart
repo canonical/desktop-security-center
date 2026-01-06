@@ -110,7 +110,12 @@ class _PromptingSwitch extends ConsumerWidget {
             ),
             title: Row(
               children: [
-                Flexible(child: Text(l10n.snapPermissionsEnableTitle)),
+                Flexible(
+                  child: Text(
+                    l10n.snapPermissionsEnableTitle,
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+                ),
                 const SizedBox(width: 10),
                 YaruInfoBadge(
                   title: Text(l10n.snapPermissionsExperimentalLabel),
@@ -159,20 +164,27 @@ class _InterfaceList extends ConsumerWidget {
             final l10n = AppLocalizations.of(context);
             final tiles = interfaceSnapCounts.entries
                 .map(
-                  (interfaceSnapCount) => ListTile(
-                    contentPadding: const EdgeInsets.all(16),
-                    leading: Icon(interfaceSnapCount.key.icon, size: 48),
-                    title: Text(interfaceSnapCount.key.localizedTitle(l10n)),
-                    subtitle: Text(
-                      interfaceSnapCount.value > 0
-                          ? l10n.interfaceSnapCount(interfaceSnapCount.value)
-                          : (interfaceSnapCount.key == SnapdInterface.camera
-                              ? l10n.cameraRulesPageEmptyTileLabel
-                              : l10n.snapRulesPageEmptyTileLabel),
+                  (interfaceSnapCount) => ConstrainedBox(
+                    constraints: const BoxConstraints(minHeight: 52),
+                    child: Center(
+                      child: ListTile(
+                        leading: Icon(interfaceSnapCount.key.icon, size: 32),
+                        title: Text(
+                          interfaceSnapCount.key.localizedTitle(l10n),
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        subtitle: Text(
+                          interfaceSnapCount.value > 0
+                              ? l10n.interfaceSnapCount(interfaceSnapCount.value)
+                              : (interfaceSnapCount.key == SnapdInterface.camera
+                                  ? l10n.cameraRulesPageEmptyTileLabel
+                                  : l10n.snapRulesPageEmptyTileLabel),
+                        ),
+                        trailing: const Icon(YaruIcons.pan_end),
+                        onTap: () => Navigator.of(context)
+                            .pushSnapPermissions(interface: interfaceSnapCount.key),
+                      ),
                     ),
-                    trailing: const Icon(YaruIcons.pan_end),
-                    onTap: () => Navigator.of(context)
-                        .pushSnapPermissions(interface: interfaceSnapCount.key),
                   ),
                 )
                 .toList();

@@ -166,14 +166,22 @@ class _HomeInterfaceAppTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    return ListTile(
-      leading: AppIcon(
-        snapIcon: ref.watch(snapIconProvider(snapName)),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: 52),
+      child: Center(
+        child: ListTile(
+          leading: AppIcon(
+            snapIcon: ref.watch(snapIconProvider(snapName)),
+          ),
+          title: Text(
+            ref.watch(snapTitleOrNameProvider(snapName)),
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+          subtitle: Text(l10n.snapRulesCount(ruleCount)),
+          trailing: const Icon(YaruIcons.pan_end),
+          onTap: onTap,
+        ),
       ),
-      title: Text(ref.watch(snapTitleOrNameProvider(snapName))),
-      subtitle: Text(l10n.snapRulesCount(ruleCount)),
-      trailing: const Icon(YaruIcons.pan_end),
-      onTap: onTap,
     );
   }
 }
@@ -237,24 +245,28 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
       },
     );
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6.0),
-      child: ListTile(
-        leading: AppIcon(
-          snapIcon: ref.watch(snapIconProvider(snapName)),
-        ),
-        minTileHeight: 60.0,
-        title: Text(ref.watch(snapTitleOrNameProvider(snapName))),
-        subtitle: subtitle != null ? Text(subtitle) : null,
-        trailing: Switch(
-          value: isOn,
-          onChanged: (value) async {
-            await notifier.removeAll();
-            await notifier.createAccessRule(
-              outcome:
-                  value ? SnapdRequestOutcome.allow : SnapdRequestOutcome.deny,
-            );
-          },
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: 52),
+      child: Center(
+        child: ListTile(
+          leading: AppIcon(
+            snapIcon: ref.watch(snapIconProvider(snapName)),
+          ),
+          title: Text(
+            ref.watch(snapTitleOrNameProvider(snapName)),
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+          subtitle: subtitle != null ? Text(subtitle) : null,
+          trailing: Switch(
+            value: isOn,
+            onChanged: (value) async {
+              await notifier.removeAll();
+              await notifier.createAccessRule(
+                outcome:
+                    value ? SnapdRequestOutcome.allow : SnapdRequestOutcome.deny,
+              );
+            },
+          ),
         ),
       ),
     );

@@ -171,16 +171,24 @@ class RuleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return ListTile(
-      title: Text(ruleFragment.pathPattern),
-      subtitle: Text(
-        ruleFragment.permissions
-            .map((permission) => permission.localize(l10n))
-            .join(', '),
-      ),
-      trailing: YaruIconButton(
-        icon: const Icon(YaruIcons.window_close),
-        onPressed: onRemove,
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: 52),
+      child: Center(
+        child: ListTile(
+          title: Text(
+            ruleFragment.pathPattern,
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+          subtitle: Text(
+            ruleFragment.permissions
+                .map((permission) => permission.localize(l10n))
+                .join(', '),
+          ),
+          trailing: YaruIconButton(
+            icon: const Icon(YaruIcons.window_close),
+            onPressed: onRemove,
+          ),
+        ),
       ),
     );
   }
