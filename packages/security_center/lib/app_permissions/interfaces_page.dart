@@ -167,7 +167,8 @@ class _InterfaceList extends ConsumerWidget {
             final tiles = interfaceSnapCounts.entries
                 .map(
                   (interfaceSnapCount) => ConstrainedBox(
-                    constraints: const BoxConstraints(minHeight: kMinTileHeight),
+                    constraints:
+                        const BoxConstraints(minHeight: kMinTileHeight),
                     child: Center(
                       child: ListTile(
                         leading: Icon(interfaceSnapCount.key.icon, size: 32),
