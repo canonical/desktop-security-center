@@ -2,6 +2,7 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/constants.dart';
 import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
@@ -944,7 +945,7 @@ class _AuthStatusTileList extends StatelessWidget {
     return TileList(
       children: [
         ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 52),
+          constraints: const BoxConstraints(minHeight: kMinTileHeight),
           child: Center(
             child: ListTile(
               leading: const Icon(YaruIcons.lock, size: 24),
@@ -958,7 +959,7 @@ class _AuthStatusTileList extends StatelessWidget {
         // Show enabled status row when not loading and has auth enabled
         if (currentMode != AuthMode.none && pendingOperation == null) ...[
           ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: 52),
+            constraints: const BoxConstraints(minHeight: kMinTileHeight),
             child: Center(
               child: ListTile(
                 leading: const Icon(YaruIcons.ok_simple, size: 24),
@@ -975,7 +976,7 @@ class _AuthStatusTileList extends StatelessWidget {
         // Show loading indicator if an operation is in progress
         if (loadingMessage != null) ...[
           ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: 52),
+            constraints: const BoxConstraints(minHeight: kMinTileHeight),
             child: Center(
               child: ListTile(
                 title: Column(

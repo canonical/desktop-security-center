@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snap_metadata_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
+import 'package:security_center/constants.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/navigator.dart';
 import 'package:security_center/widgets/app_icon.dart';
@@ -167,7 +168,7 @@ class _HomeInterfaceAppTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: 52),
+      constraints: const BoxConstraints(minHeight: kMinTileHeight),
       child: Center(
         child: ListTile(
           leading: AppIcon(
@@ -246,7 +247,7 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
     );
 
     return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: 52),
+      constraints: const BoxConstraints(minHeight: kMinTileHeight),
       child: Center(
         child: ListTile(
           leading: AppIcon(

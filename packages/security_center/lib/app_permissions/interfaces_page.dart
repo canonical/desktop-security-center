@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
+import 'package:security_center/constants.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/navigator.dart';
 import 'package:security_center/widgets/hyperlink.dart';
@@ -166,7 +167,7 @@ class _InterfaceList extends ConsumerWidget {
             final tiles = interfaceSnapCounts.entries
                 .map(
                   (interfaceSnapCount) => ConstrainedBox(
-                    constraints: const BoxConstraints(minHeight: 52),
+                    constraints: const BoxConstraints(minHeight: kMinTileHeight),
                     child: Center(
                       child: ListTile(
                         leading: Icon(interfaceSnapCount.key.icon, size: 32),
