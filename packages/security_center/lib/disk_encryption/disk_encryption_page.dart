@@ -153,6 +153,7 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
                 textBaseline: TextBaseline.alphabetic,
                 color: Theme.of(context).colorScheme.onSurface,
                 height: 1.5,
+                letterSpacing: 0,
               ),
               decoration: InputDecoration(
                 labelText: l10n.diskEncryptionPageRecoveryKey,
@@ -164,6 +165,7 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
                   textBaseline: TextBaseline.alphabetic,
                   color: Theme.of(context).colorScheme.onSurface,
                   height: 1.5,
+                  letterSpacing: 0,
                 ),
                 hintStyle: TextStyle(
                   inherit: false,
@@ -172,6 +174,7 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
                   textBaseline: TextBaseline.alphabetic,
                   color: Theme.of(context).colorScheme.onSurface,
                   height: 1.5,
+                  letterSpacing: 0,
                 ),
               ),
               onChanged: notifier.setKeyToCheck,
@@ -310,6 +313,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                           Theme.of(context).textTheme.bodyMedium!.fontSize,
                       textBaseline: TextBaseline.alphabetic,
                       color: Theme.of(context).colorScheme.onSurface,
+                      letterSpacing: 0,
                     ),
                   ),
                 Row(
@@ -669,6 +673,7 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
                 fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
                 textBaseline: TextBaseline.alphabetic,
                 color: Theme.of(context).colorScheme.onSurface,
+                letterSpacing: 0,
               ),
             ),
           ],
