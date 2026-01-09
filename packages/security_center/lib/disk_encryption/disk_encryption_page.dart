@@ -2,7 +2,6 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:security_center/constants.dart';
 import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
@@ -11,6 +10,7 @@ import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
@@ -949,54 +949,30 @@ class _AuthStatusTileList extends StatelessWidget {
 
     return TileList(
       children: [
-        ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: kMinTileHeight),
-          child: Center(
-            child: ListTile(
-              leading: const Icon(YaruIcons.lock, size: 24),
-              title: Text(
-                l10n.recoveryKeyTPMEnabled,
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
-            ),
-          ),
+        SecurityCenterListTile(
+          leading: const Icon(YaruIcons.lock, size: 24),
+          title: l10n.recoveryKeyTPMEnabled,
         ),
         // Show enabled status row when not loading and has auth enabled
         if (currentMode != AuthMode.none && pendingOperation == null) ...[
-          ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: kMinTileHeight),
-            child: Center(
-              child: ListTile(
-                leading: const Icon(YaruIcons.ok_simple, size: 24),
-                title: Text(
-                  currentMode == AuthMode.pin
-                      ? l10n.recoveryKeyPinEnabled
-                      : l10n.recoveryKeyPassphraseEnabled,
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-              ),
-            ),
+          SecurityCenterListTile(
+            leading: const Icon(YaruIcons.ok_simple, size: 24),
+            title: currentMode == AuthMode.pin
+                ? l10n.recoveryKeyPinEnabled
+                : l10n.recoveryKeyPassphraseEnabled,
           ),
         ],
         // Show loading indicator if an operation is in progress
         if (loadingMessage != null) ...[
-          ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: kMinTileHeight),
-            child: Center(
-              child: ListTile(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      loadingMessage,
-                      style: Theme.of(context).textTheme.labelLarge,
-                    ),
-                    const SizedBox(height: 8),
-                    const YaruLinearProgressIndicator(),
-                  ],
-                ),
-              ),
+          SecurityCenterListTile(
+            title: loadingMessage,
+            subtitle: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 8),
+                YaruLinearProgressIndicator(),
+              ],
             ),
           ),
         ],

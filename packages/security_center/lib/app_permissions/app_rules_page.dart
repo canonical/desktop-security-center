@@ -5,11 +5,11 @@ import 'package:security_center/app_permissions/rules_category.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snap_metadata_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
-import 'package:security_center/constants.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/widgets/app_icon.dart';
 import 'package:security_center/widgets/empty_rules_tile.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
@@ -172,24 +172,16 @@ class RuleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: kMinTileHeight),
-      child: Center(
-        child: ListTile(
-          title: Text(
-            ruleFragment.pathPattern,
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
-          subtitle: Text(
-            ruleFragment.permissions
-                .map((permission) => permission.localize(l10n))
-                .join(', '),
-          ),
-          trailing: YaruIconButton(
-            icon: const Icon(YaruIcons.window_close),
-            onPressed: onRemove,
-          ),
-        ),
+    return SecurityCenterListTile(
+      title: ruleFragment.pathPattern,
+      subtitle: Text(
+        ruleFragment.permissions
+            .map((permission) => permission.localize(l10n))
+            .join(', '),
+      ),
+      trailing: YaruIconButton(
+        icon: const Icon(YaruIcons.window_close),
+        onPressed: onRemove,
       ),
     );
   }
