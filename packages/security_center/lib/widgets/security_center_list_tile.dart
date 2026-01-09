@@ -9,6 +9,8 @@ import 'package:security_center/constants.dart';
 /// - Title styled with [TextTheme.labelLarge] with zero letter spacing
 /// - Subtitle styled with [TextTheme.labelMedium] by default
 /// - Support for leading and trailing widgets
+/// - Optional centered title alignment
+/// - Optional enabled/disabled state
 class SecurityCenterListTile extends StatelessWidget {
   const SecurityCenterListTile({
     required this.title,
@@ -16,6 +18,8 @@ class SecurityCenterListTile extends StatelessWidget {
     this.leading,
     this.trailing,
     this.onTap,
+    this.centerTitle = false,
+    this.enabled = true,
     super.key,
   });
 
@@ -34,20 +38,28 @@ class SecurityCenterListTile extends StatelessWidget {
   /// Called when the user taps this list tile.
   final VoidCallback? onTap;
 
+  /// Whether to center the title text. Defaults to false.
+  final bool centerTitle;
+
+  /// Whether the list tile is enabled. Defaults to true.
+  final bool enabled;
+
   @override
   Widget build(BuildContext context) {
+    final titleWidget = Text(
+      title,
+      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+            letterSpacing: 0,
+          ),
+    );
+
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: kMinTileHeight),
       child: Center(
         child: ListTile(
           contentPadding: const EdgeInsets.only(left: 16, right: 16),
           leading: leading,
-          title: Text(
-            title,
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  letterSpacing: 0,
-                ),
-          ),
+          title: centerTitle ? Center(child: titleWidget) : titleWidget,
           subtitle: subtitle != null
               ? DefaultTextStyle(
                   style: Theme.of(context).textTheme.labelMedium ??
@@ -57,6 +69,7 @@ class SecurityCenterListTile extends StatelessWidget {
               : null,
           trailing: trailing,
           onTap: onTap,
+          enabled: enabled,
         ),
       ),
     );

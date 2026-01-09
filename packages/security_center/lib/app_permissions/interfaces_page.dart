@@ -141,17 +141,14 @@ class _PromptingSwitch extends ConsumerWidget {
           if (promptingStatus is AppPermissionsServiceStatusEnabling ||
               promptingStatus is AppPermissionsServiceStatusDisabling) ...[
             const Divider(),
-            ListTile(
-              title: Text(
-                switch (promptingStatus) {
-                  AppPermissionsServiceStatusDisabling() =>
-                    l10n.snapPermissionsDisablingLabel,
-                  AppPermissionsServiceStatusEnabling() =>
-                    l10n.snapPermissionsEnablingLabel,
-                  _ => '',
-                },
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+            SecurityCenterListTile(
+              title: switch (promptingStatus) {
+                AppPermissionsServiceStatusDisabling() =>
+                  l10n.snapPermissionsDisablingLabel,
+                AppPermissionsServiceStatusEnabling() =>
+                  l10n.snapPermissionsEnablingLabel,
+                _ => '',
+              },
               subtitle: const YaruLinearProgressIndicator(),
             ),
           ],
