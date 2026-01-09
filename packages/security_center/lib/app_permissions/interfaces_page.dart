@@ -35,18 +35,23 @@ class _Body extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return ScrollablePage(
       children: [
-        _PromptingSwitch(promptingStatus: promptingStatus),
-        Text(l10n.interfacePageDescription),
-        const _Links(),
+        ...[
+          _PromptingSwitch(promptingStatus: promptingStatus),
+          Text(l10n.interfacePageDescription),
+          const _Links(),
+        ].separatedBy(const SizedBox(height: 8)),
         if (promptingStatus.isEnabled) ...[
-          Text(
-            l10n.interfacePageTitle,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const _InterfaceList(),
+          const SizedBox(height: 32),
+          ...[
+            Text(
+              l10n.interfacePageTitle,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            const _InterfaceList(),
+            Text(l10n.snapPermissionsOtherDescription),
+          ].separatedBy(const SizedBox(height: 8)),
         ],
-        Text(l10n.snapPermissionsOtherDescription),
-      ].separatedBy(const SizedBox(height: 24)),
+      ],
     );
   }
 }
