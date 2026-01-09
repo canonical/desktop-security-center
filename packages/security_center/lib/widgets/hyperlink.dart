@@ -68,6 +68,10 @@ class _HyperlinkFocusBorderState extends State<_HyperlinkFocusBorder> {
       child: InkWell(
         onTap: () => launchUrlString(widget.url),
         onFocusChange: (value) => setState(() => _focused = value),
+        hoverColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        focusColor: Colors.transparent,
         borderRadius:
             const BorderRadius.all(Radius.circular(kYaruButtonRadius + 2)),
         child: widget.child,
