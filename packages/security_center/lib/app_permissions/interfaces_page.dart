@@ -120,7 +120,9 @@ class _PromptingSwitch extends ConsumerWidget {
                 Flexible(
                   child: Text(
                     l10n.snapPermissionsEnableTitle,
-                    style: Theme.of(context).textTheme.labelLarge,
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.normal,
+                        ),
                   ),
                 ),
                 const SizedBox(width: 10),

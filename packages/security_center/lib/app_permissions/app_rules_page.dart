@@ -71,14 +71,14 @@ class _HomeBody extends ConsumerWidget {
             snap,
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 32),
         if (ruleFragments.isEmpty) ...[
           const TileList(
             children: [
               EmptyRulesTile(),
             ],
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 32),
         ],
         for (final category in SnapdRuleCategory.values)
           _HomeRuleSection(
@@ -123,15 +123,15 @@ class _HomeRuleSection extends ConsumerWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
         _RuleList(
           ruleFragments: ruleFragments,
           onRemoveRule: onRemoveRule,
           onRemovePerms: onRemovePerms,
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 32),
       ],
     );
   }
