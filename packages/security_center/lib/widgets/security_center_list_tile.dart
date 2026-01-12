@@ -50,26 +50,49 @@ class SecurityCenterListTile extends StatelessWidget {
       title,
       style: Theme.of(context).textTheme.labelLarge?.copyWith(
             letterSpacing: 0,
+            fontWeight: FontWeight.normal,
           ),
     );
 
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: kMinTileHeight),
-      child: Center(
-        child: ListTile(
-          contentPadding: const EdgeInsets.only(left: 16, right: 16),
-          leading: leading,
-          title: centerTitle ? Center(child: titleWidget) : titleWidget,
-          subtitle: subtitle != null
-              ? DefaultTextStyle(
-                  style: Theme.of(context).textTheme.labelMedium ??
-                      const TextStyle(),
-                  child: subtitle!,
-                )
-              : null,
-          trailing: trailing,
-          onTap: onTap,
-          enabled: enabled,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: enabled ? onTap : null,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Center(
+              child: Row(
+                children: [
+                  if (leading != null) ...[
+                    leading!,
+                    const SizedBox(width: 16),
+                  ],
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        centerTitle ? Center(child: titleWidget) : titleWidget,
+                        if (subtitle != null) ...[
+                          DefaultTextStyle(
+                            style: Theme.of(context).textTheme.labelMedium ??
+                                const TextStyle(),
+                            child: subtitle!,
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                  if (trailing != null) ...[
+                    const SizedBox(width: 16),
+                    trailing!,
+                  ],
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
