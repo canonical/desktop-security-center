@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:security_center/app_permissions/home_interface.dart';
@@ -9,6 +8,7 @@ import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/main.dart' as app;
 import 'package:security_center/services/snapd_service.dart';
+import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import '../test/test_utils.dart';
@@ -71,7 +71,10 @@ void expectHomeRule(WidgetTester tester, SnapdRuleMask rule) {
         // List of sets of ancestors for each text widget.
         .map(
           (finder) => find
-              .ancestor(of: finder, matching: find.byType(ListTile))
+              .ancestor(
+                of: finder,
+                matching: find.byType(SecurityCenterListTile),
+              )
               .evaluate()
               .toSet(),
         )
