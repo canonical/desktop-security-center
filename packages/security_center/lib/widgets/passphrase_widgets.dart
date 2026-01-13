@@ -70,9 +70,8 @@ class _CurrentPassphraseFormFieldState
             model.dialogState is! ChangeAuthDialogStateError)
           Padding(
             padding: const EdgeInsets.only(left: 10.0),
-            child: Baseline(
-              baseline: 0,
-              baselineType: TextBaseline.alphabetic,
+            child: Align(
+              alignment: Alignment.centerLeft,
               child: SuccessIcon(),
             ),
           ),
@@ -150,6 +149,9 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
                       )
                     : null,
                 helperStyle: Theme.of(context).textTheme.bodySmall,
+                errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
                 helperMaxLines: 2,
                 errorMaxLines: 2,
               ),
@@ -231,6 +233,9 @@ class _ConfirmPassphraseFormFieldState
                 errorText: !notifier.passphraseConfirmed
                     ? widget.authMode.localizedConfirmError(lang)
                     : null,
+                errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
               ),
               obscureText: !model.showPassphrase,
               enabled: !isDisabled,
@@ -245,9 +250,8 @@ class _ConfirmPassphraseFormFieldState
             model.dialogState is! ChangeAuthDialogStateError)
           Padding(
             padding: const EdgeInsets.only(left: 10.0),
-            child: Baseline(
-              baseline: 0,
-              baselineType: TextBaseline.alphabetic,
+            child: Align(
+              alignment: Alignment.centerLeft,
               child: SuccessIcon(),
             ),
           ),
@@ -385,6 +389,9 @@ class _AddPassphraseFormFieldState
                       )
                     : null,
                 helperStyle: Theme.of(context).textTheme.bodySmall,
+                errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
                 helperMaxLines: 2,
                 errorMaxLines: 2,
                 suffixIcon: AddAuthShowButton(authMode: widget.authMode),
@@ -468,6 +475,9 @@ class _AddConfirmPassphraseFormFieldState
                 errorText: !notifier.passphraseConfirmed
                     ? widget.authMode.localizedConfirmError(lang)
                     : null,
+                errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
               ),
               obscureText: !model.showPassphrase,
               enabled: !isDisabled,
@@ -482,9 +492,8 @@ class _AddConfirmPassphraseFormFieldState
             model.dialogState is! ChangeAuthModeDialogStateError)
           Padding(
             padding: const EdgeInsets.only(left: 10.0),
-            child: Baseline(
-              baseline: 0,
-              baselineType: TextBaseline.alphabetic,
+            child: Align(
+              alignment: Alignment.centerLeft,
               child: SuccessIcon(),
             ),
           ),

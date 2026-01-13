@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
+import 'package:security_center/widgets/security_center_list_tile.dart';
 
 class EmptyRulesTile extends StatelessWidget {
   const EmptyRulesTile({this.interface, super.key});
@@ -15,10 +16,9 @@ class EmptyRulesTile extends StatelessWidget {
       _ => l10n.snapRulesPageEmptyTileLabel,
     };
 
-    return ListTile(
-      title: Center(
-        child: Text(text),
-      ),
+    return SecurityCenterListTile(
+      title: text,
+      centerTitle: true,
       enabled: false,
     );
   }

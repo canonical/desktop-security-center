@@ -4,9 +4,10 @@ import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/navigator.dart';
+import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
-import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
@@ -34,18 +35,23 @@ class _Body extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return ScrollablePage(
       children: [
-        _PromptingSwitch(promptingStatus: promptingStatus),
-        Text(l10n.interfacePageDescription),
-        const _Links(),
+        ...[
+          _PromptingSwitch(promptingStatus: promptingStatus),
+          Text(l10n.interfacePageDescription),
+          const _Links(),
+        ].separatedBy(const SizedBox(height: 8)),
         if (promptingStatus.isEnabled) ...[
-          Text(
-            l10n.interfacePageTitle,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const _InterfaceList(),
+          const SizedBox(height: 32),
+          ...[
+            Text(
+              l10n.interfacePageTitle,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            const _InterfaceList(),
+            Text(l10n.snapPermissionsOtherDescription),
+          ].separatedBy(const SizedBox(height: 8)),
         ],
-        Text(l10n.snapPermissionsOtherDescription),
-      ].separatedBy(const SizedBox(height: 24)),
+      ],
     );
   }
 }
@@ -78,8 +84,9 @@ class _Links extends StatelessWidget {
     return Row(
       children: _Link.values
           .map(
-            (link) => MarkdownText(
-              link.localize(AppLocalizations.of(context)).link(link.url),
+            (link) => Hyperlink(
+              text: link.localize(AppLocalizations.of(context)),
+              url: link.url,
             ),
           )
           .toList()
@@ -110,7 +117,14 @@ class _PromptingSwitch extends ConsumerWidget {
             ),
             title: Row(
               children: [
-                Flexible(child: Text(l10n.snapPermissionsEnableTitle)),
+                Flexible(
+                  child: Text(
+                    l10n.snapPermissionsEnableTitle,
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.normal,
+                        ),
+                  ),
+                ),
                 const SizedBox(width: 10),
                 YaruInfoBadge(
                   title: Text(l10n.snapPermissionsExperimentalLabel),
@@ -129,17 +143,14 @@ class _PromptingSwitch extends ConsumerWidget {
           if (promptingStatus is AppPermissionsServiceStatusEnabling ||
               promptingStatus is AppPermissionsServiceStatusDisabling) ...[
             const Divider(),
-            ListTile(
-              title: Text(
-                switch (promptingStatus) {
-                  AppPermissionsServiceStatusDisabling() =>
-                    l10n.snapPermissionsDisablingLabel,
-                  AppPermissionsServiceStatusEnabling() =>
-                    l10n.snapPermissionsEnablingLabel,
-                  _ => '',
-                },
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+            SecurityCenterListTile(
+              title: switch (promptingStatus) {
+                AppPermissionsServiceStatusDisabling() =>
+                  l10n.snapPermissionsDisablingLabel,
+                AppPermissionsServiceStatusEnabling() =>
+                  l10n.snapPermissionsEnablingLabel,
+                _ => '',
+              },
               subtitle: const YaruLinearProgressIndicator(),
             ),
           ],
@@ -159,10 +170,9 @@ class _InterfaceList extends ConsumerWidget {
             final l10n = AppLocalizations.of(context);
             final tiles = interfaceSnapCounts.entries
                 .map(
-                  (interfaceSnapCount) => ListTile(
-                    contentPadding: const EdgeInsets.all(16),
-                    leading: Icon(interfaceSnapCount.key.icon, size: 48),
-                    title: Text(interfaceSnapCount.key.localizedTitle(l10n)),
+                  (interfaceSnapCount) => SecurityCenterListTile(
+                    leading: Icon(interfaceSnapCount.key.icon, size: 32),
+                    title: interfaceSnapCount.key.localizedTitle(l10n),
                     subtitle: Text(
                       interfaceSnapCount.value > 0
                           ? l10n.interfaceSnapCount(interfaceSnapCount.value)
@@ -171,8 +181,9 @@ class _InterfaceList extends ConsumerWidget {
                               : l10n.snapRulesPageEmptyTileLabel),
                     ),
                     trailing: const Icon(YaruIcons.pan_end),
-                    onTap: () => Navigator.of(context)
-                        .pushSnapPermissions(interface: interfaceSnapCount.key),
+                    onTap: () => Navigator.of(context).pushSnapPermissions(
+                      interface: interfaceSnapCount.key,
+                    ),
                   ),
                 )
                 .toList();

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -6,6 +5,7 @@ import 'package:security_center/app_permissions/interfaces_page.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
+import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:yaru/yaru.dart';
 
 import '../test_utils.dart';
@@ -37,7 +37,7 @@ void main() {
 
     final homeInterfaceTile = find.ancestor(
       of: find.text(SnapdInterface.home.localizedTitle(tester.l10n)),
-      matching: find.byType(ListTile),
+      matching: find.byType(SecurityCenterListTile),
     );
     expect(homeInterfaceTile, findsOneWidget);
     expect(
@@ -50,7 +50,7 @@ void main() {
 
     final cameraInterfaceTile = find.ancestor(
       of: find.text(SnapdInterface.camera.localizedTitle(tester.l10n)),
-      matching: find.byType(ListTile),
+      matching: find.byType(SecurityCenterListTile),
     );
     expect(cameraInterfaceTile, findsOneWidget);
     expect(
@@ -90,14 +90,14 @@ void main() {
     // Home interface should still be visible
     final homeInterfaceTile = find.ancestor(
       of: find.text(SnapdInterface.home.localizedTitle(tester.l10n)),
-      matching: find.byType(ListTile),
+      matching: find.byType(SecurityCenterListTile),
     );
     expect(homeInterfaceTile, findsOneWidget);
 
     // Camera interface should be hidden
     final cameraInterfaceTile = find.ancestor(
       of: find.text(SnapdInterface.camera.localizedTitle(tester.l10n)),
-      matching: find.byType(ListTile),
+      matching: find.byType(SecurityCenterListTile),
     );
     expect(cameraInterfaceTile, findsNothing);
   });

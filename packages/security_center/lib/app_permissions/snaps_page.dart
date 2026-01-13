@@ -8,6 +8,7 @@ import 'package:security_center/navigator.dart';
 import 'package:security_center/widgets/app_icon.dart';
 import 'package:security_center/widgets/empty_rules_tile.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:yaru/yaru.dart';
@@ -80,11 +81,6 @@ class _HomeInterfaceBody extends ConsumerWidget {
         .toList();
     return ScrollablePage(
       children: [
-        Text(
-          interface.localizedTitle(l10n),
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        const SizedBox(height: 12),
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
         TileList(
@@ -166,11 +162,11 @@ class _HomeInterfaceAppTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    return ListTile(
+    return SecurityCenterListTile(
       leading: AppIcon(
         snapIcon: ref.watch(snapIconProvider(snapName)),
       ),
-      title: Text(ref.watch(snapTitleOrNameProvider(snapName))),
+      title: ref.watch(snapTitleOrNameProvider(snapName)),
       subtitle: Text(l10n.snapRulesCount(ruleCount)),
       trailing: const Icon(YaruIcons.pan_end),
       onTap: onTap,
@@ -237,25 +233,21 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
       },
     );
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6.0),
-      child: ListTile(
-        leading: AppIcon(
-          snapIcon: ref.watch(snapIconProvider(snapName)),
-        ),
-        minTileHeight: 60.0,
-        title: Text(ref.watch(snapTitleOrNameProvider(snapName))),
-        subtitle: subtitle != null ? Text(subtitle) : null,
-        trailing: Switch(
-          value: isOn,
-          onChanged: (value) async {
-            await notifier.removeAll();
-            await notifier.createAccessRule(
-              outcome:
-                  value ? SnapdRequestOutcome.allow : SnapdRequestOutcome.deny,
-            );
-          },
-        ),
+    return SecurityCenterListTile(
+      leading: AppIcon(
+        snapIcon: ref.watch(snapIconProvider(snapName)),
+      ),
+      title: ref.watch(snapTitleOrNameProvider(snapName)),
+      subtitle: subtitle != null ? Text(subtitle) : null,
+      trailing: Switch(
+        value: isOn,
+        onChanged: (value) async {
+          await notifier.removeAll();
+          await notifier.createAccessRule(
+            outcome:
+                value ? SnapdRequestOutcome.allow : SnapdRequestOutcome.deny,
+          );
+        },
       ),
     );
   }

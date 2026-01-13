@@ -5,6 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/app_permissions/snaps_page.dart';
 import 'package:security_center/services/app_permissions_service.dart';
+import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:snapd/snapd.dart';
 
 import '../test_utils.dart';
@@ -49,7 +50,7 @@ void main() {
 
     final firefoxTile = find.ancestor(
       of: find.text('firefox'),
-      matching: find.byType(ListTile),
+      matching: find.byType(SecurityCenterListTile),
     );
     expect(firefoxTile, findsOneWidget);
     expect(
@@ -62,7 +63,7 @@ void main() {
 
     final libreofficeTile = find.ancestor(
       of: find.text('libreoffice'),
-      matching: find.byType(ListTile),
+      matching: find.byType(SecurityCenterListTile),
     );
     expect(libreofficeTile, findsOneWidget);
     expect(
@@ -144,7 +145,7 @@ void main() {
       // Check that cheese has session subtitle
       final cheeseTile = find.ancestor(
         of: find.text('cheese'),
-        matching: find.byType(ListTile),
+        matching: find.byType(SecurityCenterListTile),
       );
       expect(
         find.descendant(
@@ -157,7 +158,7 @@ void main() {
       // Check that firefox does not have subtitle (forever rule)
       final firefoxTile = find.ancestor(
         of: find.text('firefox'),
-        matching: find.byType(ListTile),
+        matching: find.byType(SecurityCenterListTile),
       );
       expect(
         find.descendant(
@@ -213,7 +214,7 @@ void main() {
       // Find firefox's switch
       final firefoxTile = find.ancestor(
         of: find.text('firefox'),
-        matching: find.byType(ListTile),
+        matching: find.byType(SecurityCenterListTile),
       );
       final firefoxSwitch = find.descendant(
         of: firefoxTile,
@@ -250,7 +251,7 @@ void main() {
       // Find cheese's switch
       final cheeseTile = find.ancestor(
         of: find.text('cheese'),
-        matching: find.byType(ListTile),
+        matching: find.byType(SecurityCenterListTile),
       );
       final cheeseSwitch = find.descendant(
         of: cheeseTile,

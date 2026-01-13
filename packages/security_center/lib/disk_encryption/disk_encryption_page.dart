@@ -6,10 +6,11 @@ import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
-import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
@@ -67,8 +68,9 @@ class EncryptionPageBody extends ConsumerWidget {
               AuthMode.none => _NoneAuthenticationActions(tpmState: data),
             },
             const SizedBox(height: 32),
-            MarkdownText(
-              l10n.diskEncryptionPageLearnMore.link(_learnMoreUrl),
+            Hyperlink(
+              text: l10n.diskEncryptionPageLearnMore,
+              url: _learnMoreUrl,
             ),
           ],
         );
@@ -151,6 +153,7 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
                 textBaseline: TextBaseline.alphabetic,
                 color: Theme.of(context).colorScheme.onSurface,
                 height: 1.5,
+                letterSpacing: 0,
               ),
               decoration: InputDecoration(
                 labelText: l10n.diskEncryptionPageRecoveryKey,
@@ -162,6 +165,7 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
                   textBaseline: TextBaseline.alphabetic,
                   color: Theme.of(context).colorScheme.onSurface,
                   height: 1.5,
+                  letterSpacing: 0,
                 ),
                 hintStyle: TextStyle(
                   inherit: false,
@@ -170,6 +174,7 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
                   textBaseline: TextBaseline.alphabetic,
                   color: Theme.of(context).colorScheme.onSurface,
                   height: 1.5,
+                  letterSpacing: 0,
                 ),
               ),
               onChanged: notifier.setKeyToCheck,
@@ -308,6 +313,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                           Theme.of(context).textTheme.bodyMedium!.fontSize,
                       textBaseline: TextBaseline.alphabetic,
                       color: Theme.of(context).colorScheme.onSurface,
+                      letterSpacing: 0,
                     ),
                   ),
                 Row(
@@ -667,6 +673,7 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
                 fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
                 textBaseline: TextBaseline.alphabetic,
                 color: Theme.of(context).colorScheme.onSurface,
+                letterSpacing: 0,
               ),
             ),
           ],
@@ -942,47 +949,30 @@ class _AuthStatusTileList extends StatelessWidget {
 
     return TileList(
       children: [
-        ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 52),
-          child: Center(
-            child: ListTile(
-              leading: const Icon(YaruIcons.lock, size: 24),
-              title: Text(l10n.recoveryKeyTPMEnabled),
-            ),
-          ),
+        SecurityCenterListTile(
+          leading: const Icon(YaruIcons.lock, size: 24),
+          title: l10n.recoveryKeyTPMEnabled,
         ),
         // Show enabled status row when not loading and has auth enabled
         if (currentMode != AuthMode.none && pendingOperation == null) ...[
-          ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: 52),
-            child: Center(
-              child: ListTile(
-                leading: const Icon(YaruIcons.ok_simple, size: 24),
-                title: Text(
-                  currentMode == AuthMode.pin
-                      ? l10n.recoveryKeyPinEnabled
-                      : l10n.recoveryKeyPassphraseEnabled,
-                ),
-              ),
-            ),
+          SecurityCenterListTile(
+            leading: const Icon(YaruIcons.ok_simple, size: 24),
+            title: currentMode == AuthMode.pin
+                ? l10n.recoveryKeyPinEnabled
+                : l10n.recoveryKeyPassphraseEnabled,
           ),
         ],
         // Show loading indicator if an operation is in progress
         if (loadingMessage != null) ...[
-          ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: 52),
-            child: Center(
-              child: ListTile(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(loadingMessage),
-                    const SizedBox(height: 8),
-                    const YaruLinearProgressIndicator(),
-                  ],
-                ),
-              ),
+          SecurityCenterListTile(
+            title: loadingMessage,
+            subtitle: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 8),
+                YaruLinearProgressIndicator(),
+              ],
             ),
           ),
         ],

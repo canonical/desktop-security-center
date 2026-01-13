@@ -9,6 +9,7 @@ import 'package:security_center/l10n.dart';
 import 'package:security_center/widgets/app_icon.dart';
 import 'package:security_center/widgets/empty_rules_tile.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
@@ -70,14 +71,14 @@ class _HomeBody extends ConsumerWidget {
             snap,
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 32),
         if (ruleFragments.isEmpty) ...[
           const TileList(
             children: [
               EmptyRulesTile(),
             ],
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 32),
         ],
         for (final category in SnapdRuleCategory.values)
           _HomeRuleSection(
@@ -122,15 +123,15 @@ class _HomeRuleSection extends ConsumerWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
         _RuleList(
           ruleFragments: ruleFragments,
           onRemoveRule: onRemoveRule,
           onRemovePerms: onRemovePerms,
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 32),
       ],
     );
   }
@@ -171,8 +172,8 @@ class RuleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return ListTile(
-      title: Text(ruleFragment.pathPattern),
+    return SecurityCenterListTile(
+      title: ruleFragment.pathPattern,
       subtitle: Text(
         ruleFragment.permissions
             .map((permission) => permission.localize(l10n))
