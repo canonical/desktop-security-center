@@ -122,4 +122,7 @@ abstract class DiskEncryptionService {
     String? passphrase,
     String? pin,
   });
+
+  /// Gets the TPM backed FDE status from snapd.
+  Future<SnapdStorageEncryptedResponse> getStorageEncrypted();
 }

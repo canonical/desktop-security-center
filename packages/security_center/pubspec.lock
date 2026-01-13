@@ -910,7 +910,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: d99af51912f23d4444a9ad7a5c9e786fd70613a1
+      resolved-ref: a51cb4035a5dfe166de67c806d749259bf6226a5
       url: "https://github.com/canonical/snapd.dart.git"
     source: git
     version: "0.7.3"

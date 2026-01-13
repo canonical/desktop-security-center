@@ -138,4 +138,9 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
     }
     return;
   }
+
+  @override
+  Future<SnapdStorageEncryptedResponse> getStorageEncrypted() {
+    return _snapd.getStorageEncrypted();
+  }
 }
