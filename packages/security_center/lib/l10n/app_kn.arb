@@ -1,4 +1,16 @@
 {
     "appTitle": "ಭದ್ರತಾ ಕೇಂದ್ರ",
-    "@appTitle": {}
+    "@appTitle": {},
+    "snapdRuleCategorySessionAllowed": "ಲಾಗ್‌ಔಟ್ ಆಗುವವರೆಗೆ ಅನುಮತಿಸಿ",
+    "@snapdRuleCategorySessionAllowed": {},
+    "snapdRuleCategorySessionDenied": "ಲಾಗ್‌ಔಟ್ ಆಗುವವರೆಗೆ ನಿರಾಕರಿಸಿ",
+    "@snapdRuleCategorySessionDenied": {},
+    "snapdRuleCategoryForeverAllowed": "ಯಾವಾಗಲೂ ಅನುಮತಿಸಿ",
+    "@snapdRuleCategoryForeverAllowed": {},
+    "snapdRuleCategoryForeverDenied": "ಯಾವಾಗಲೂ ನಿರಾಕರಿಸು",
+    "@snapdRuleCategoryForeverDenied": {},
+    "snapPermissionReadLabel": "ಓದು",
+    "@snapPermissionReadLabel": {},
+    "snapPermissionWriteLabel": "ಬರೆಯಿರಿ",
+    "@snapPermissionWriteLabel": {}
 }
