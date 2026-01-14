@@ -327,8 +327,26 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   }
 
   Future<AuthMode> _fetchCurrentAuthMode() async {
-    // Temporary work around while we wait for snapd to implement enumerateKeySlots()
     try {
+      // Check TPM-backed FDE status
+      final storageStatus = await _service.getStorageEncrypted();
+
+      // Treat inactive and failed as error cases
+      switch (storageStatus.status) {
+        case SnapdStorageEncryptionStatus.inactive:
+        case SnapdStorageEncryptionStatus.failed:
+          _log.error(
+            'Storage encryption is not active: ${storageStatus.status}',
+          );
+          throw TpmStateExceptionFailed();
+        case SnapdStorageEncryptionStatus.active:
+        case SnapdStorageEncryptionStatus.degraded:
+        case SnapdStorageEncryptionStatus.recovery:
+          // Success cases - continue to fetch auth mode
+          break;
+      }
+
+      // Get auth mode from keyslots
       final volumesResponse = await _service.enumerateKeySlots();
 
       final systemDataVolume = volumesResponse.byContainerRole['system-data'];
@@ -337,39 +355,14 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         throw TpmStateExceptionUnsupportedState();
       }
 
-      final recoveryKeySlot = systemDataVolume.keyslots['default-recovery'];
       final defaultKeySlot = systemDataVolume.keyslots['default'];
-      final defaultFallbackKeySlot =
-          systemDataVolume.keyslots['default-fallback'];
 
-      if (recoveryKeySlot == null) {
-        _log.error('recoveryKeySlot not found');
-        throw TpmStateExceptionUnsupportedState();
-      }
       if (defaultKeySlot == null) {
         _log.error('defaultKeySlot not found');
         throw TpmStateExceptionUnsupportedState();
       }
-      if (defaultFallbackKeySlot == null) {
-        _log.error('defaultFallbackKeySlot not found');
-        throw TpmStateExceptionUnsupportedState();
-      }
-
-      // We can rely on 'tpm2' as a way of asserting keys use the TPM
-      if (defaultKeySlot.platformName != 'tpm2' ||
-          defaultFallbackKeySlot.platformName != 'tpm2') {
-        _log.error('tpm2 not present in platform name');
-        throw TpmStateExceptionUnsupportedState();
-      }
 
       final authMode = defaultKeySlot.authMode;
-
-      if (defaultFallbackKeySlot.authMode != authMode) {
-        _log.error(
-          'defaultKeySlot authMode does not match defaultFallbackKeySlot authMode',
-        );
-        throw TpmStateExceptionUnsupportedState();
-      }
 
       if (authMode != null) {
         switch (authMode) {
