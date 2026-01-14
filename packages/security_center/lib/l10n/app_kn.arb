@@ -12,5 +12,46 @@
     "snapPermissionReadLabel": "ಓದು",
     "@snapPermissionReadLabel": {},
     "snapPermissionWriteLabel": "ಬರೆಯಿರಿ",
-    "@snapPermissionWriteLabel": {}
+    "@snapPermissionWriteLabel": {},
+    "snapPermissionsDisablingLabel": "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತಿದೆ, ಇದು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಬಹುದು...",
+    "@snapPermissionsDisablingLabel": {},
+    "snapPermissionsExperimentalLabel": "ಪ್ರಾಯೋಗಿಕ",
+    "@snapPermissionsExperimentalLabel": {},
+    "snapPermissionsOtherDescription": "ನೀವು ಸೆಟ್ಟಿಂಗ್‌ಗಳು › ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ ಇತರ ಅನುಮತಿಗಳನ್ನು ನಿರ್ವಹಿಸಬಹುದು.",
+    "@snapPermissionsOtherDescription": {},
+    "snapPermissionsPageTitle": "ಅಪ್ಲಿಕೇಶನ್ ಅನುಮತಿಗಳು",
+    "@snapPermissionsPageTitle": {},
+    "snapRulesCount": "{n, ಬಹುವಚನ, =0{ನಿಯಮಗಳಿಲ್ಲ} =1{1 ನಿಯಮ} ಇತರೆ{{n} ನಿಯಮಗಳು}}{n, ಬಹುವಚನ, =0{ನಿಯಮಗಳಿಲ್ಲ} =1{1 ನಿಯಮ} ಇತರೆ{{n} ನಿಯಮಗಳು}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "{snap} ಗಾಗಿ {interface} ಅನುಮತಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "ಇನ್ನೂ ಯಾವುದೇ ನಿಯಮಗಳಿಲ್ಲ",
+    "@snapRulesPageEmptyTileLabel": {},
+    "cameraRulesPageEmptyTileLabel": "ಯಾವುದೇ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಇನ್ನೂ ಪ್ರವೇಶವನ್ನು ವಿನಂತಿಸಿಲ್ಲ",
+    "@cameraRulesPageEmptyTileLabel": {},
+    "snapRulesRemoveAll": "ಎಲ್ಲಾ ನಿಯಮಗಳನ್ನು ತೆಗೆದುಹಾಕಿ",
+    "@snapRulesRemoveAll": {},
+    "snapRulesResetAllPermissions": "ಎಲ್ಲಾ ಅನುಮತಿಗಳನ್ನು ಮರುಹೊಂದಿಸಿ",
+    "@snapRulesResetAllPermissions": {},
+    "homeInterfacePageTitle": "ಹೋಮ್ ಫೋಲ್ಡರ್",
+    "@homeInterfacePageTitle": {},
+    "homeInterfacePageDescription": "ನಿಮ್ಮ ಹೋಮ್ ಫೋಲ್ಡರ್‌ನಲ್ಲಿ ಫೈಲ್‌ಗಳನ್ನು ಪ್ರವೇಶಿಸಲು ಅನುಮತಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
+    "@homeInterfacePageDescription": {},
+    "cameraInterfacePageTitle": "ಕ್ಯಾಮೆರಾ",
+    "@cameraInterfacePageTitle": {}
 }
