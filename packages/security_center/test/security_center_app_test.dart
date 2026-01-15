@@ -22,7 +22,7 @@ void main() {
         storageEncryptionStatus: SnapdStorageEncryptionStatus.inactive,
       ),
       (
-        name: 'disk encryption hidden - failed',
+        name: 'disk encryption shown - failed',
         storageEncryptionStatus: SnapdStorageEncryptionStatus.failed,
       ),
     ];
@@ -50,8 +50,7 @@ void main() {
           // Assert availableRoutes is built correctly based on storage encryption status
           expect(Routes.availableRoutes, contains(Routes.appPermissions));
           final shouldShowDiskEncryption = tc.storageEncryptionStatus !=
-                  SnapdStorageEncryptionStatus.inactive &&
-              tc.storageEncryptionStatus != SnapdStorageEncryptionStatus.failed;
+              SnapdStorageEncryptionStatus.inactive;
           expect(
             Routes.availableRoutes,
             shouldShowDiskEncryption

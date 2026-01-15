@@ -136,12 +136,11 @@ class AvailableRoutes {
   static Future<void> init() async {
     final routes = <Routes>[Routes.appPermissions];
 
-    // Only include disk encryption if status is not inactive or failed
+    // Only include disk encryption if status is not inactive
     try {
       final diskService = getService<DiskEncryptionService>();
       final status = await diskService.getStorageEncrypted();
-      if (status.status != SnapdStorageEncryptionStatus.inactive &&
-          status.status != SnapdStorageEncryptionStatus.failed) {
+      if (status.status != SnapdStorageEncryptionStatus.inactive) {
         routes.add(Routes.diskEncryption);
       }
     } on Exception catch (e) {

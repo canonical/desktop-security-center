@@ -334,9 +334,13 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
       // Treat inactive and failed as error cases
       switch (storageStatus.status) {
         case SnapdStorageEncryptionStatus.inactive:
-        case SnapdStorageEncryptionStatus.failed:
           _log.error(
             'Storage encryption is not active: ${storageStatus.status}',
+          );
+          throw TpmStateExceptionFailed();
+        case SnapdStorageEncryptionStatus.failed:
+          _log.error(
+            'Storage encryption state returned failure: ${storageStatus.status}',
           );
           throw TpmStateExceptionFailed();
         case SnapdStorageEncryptionStatus.active:
