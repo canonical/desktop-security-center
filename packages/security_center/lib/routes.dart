@@ -5,9 +5,13 @@ import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/app_permissions/snaps_page.dart';
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
 import 'package:security_center/l10n.dart';
-import 'package:security_center/services/feature_service.dart';
+import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:snapd/snapd.dart';
+import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
+
+final _log = Logger('routes');
 
 enum Routes {
   appPermissions(
@@ -129,13 +133,21 @@ class AvailableRoutes {
   static List<Routes> _routes = [];
   static List<Routes> get routes => _routes;
 
-  static void init() {
+  static Future<void> init() async {
     final routes = <Routes>[Routes.appPermissions];
 
-    // Only include disk encryption if the feature is available
-    final featureService = getService<FeatureService>();
-    if (featureService.isDiskEncryptionAvailable) {
-      routes.add(Routes.diskEncryption);
+    // Only include disk encryption if status is not inactive
+    try {
+      final diskService = getService<DiskEncryptionService>();
+      final status = await diskService.getStorageEncrypted();
+      if (status.status != SnapdStorageEncryptionStatus.inactive) {
+        routes.add(Routes.diskEncryption);
+      }
+    } on Exception catch (e) {
+      // If the API call fails, don't show the disk encryption route
+      _log.error(
+        'Failed to get storage encryption status, skipping page registration: $e',
+      );
     }
 
     _routes = routes;

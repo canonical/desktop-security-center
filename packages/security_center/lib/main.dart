@@ -53,9 +53,6 @@ Future<void> main(List<String> args) async {
   );
   registerServiceInstance<FeatureService>(featureService);
 
-  // Initialize available routes
-  AvailableRoutes.init();
-
   registerService<SnapdService>(SnapdService.new);
 
   registerService(XdgDesktopPortalClient.new);
@@ -79,19 +76,21 @@ Future<void> main(List<String> args) async {
     );
   }
 
-  // Register disk encryption service if the feature is available
-  if (featureService.isDiskEncryptionAvailable) {
-    if (featureService.isDryRun) {
-      registerService<DiskEncryptionService>(
-        () => FakeDiskEncryptionService.fromFile(
-          'integration_test/assets/test_containers.json',
-        ),
-      );
-    } else {
-      registerService<DiskEncryptionService>(
-        () => SnapdDiskEncryptionService(getService<SnapdService>()),
-      );
-    }
+  // Register disk encryption service
+  if (featureService.isDryRun) {
+    registerService<DiskEncryptionService>(
+      () => FakeDiskEncryptionService.fromFile(
+        'integration_test/assets/test_containers.json',
+      ),
+    );
+  } else {
+    registerService<DiskEncryptionService>(
+      () => SnapdDiskEncryptionService(getService<SnapdService>()),
+    );
   }
+
+  // Initialize available routes
+  await AvailableRoutes.init();
+
   runApp(const ProviderScope(child: SecurityCenterApp()));
 }

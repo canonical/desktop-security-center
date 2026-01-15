@@ -10,12 +10,15 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     required this.systemVolumes,
     required this.checkError,
     Map<String, String>? initialRecoveryKeys,
+    this.storageEncryptionStatus = SnapdStorageEncryptionStatus.active,
   }) : _recoveryKeys = initialRecoveryKeys ?? {};
 
   /// Load initial system volumes from a JSON file.
   factory FakeDiskEncryptionService.fromFile(
     String path, {
     bool checkError = false,
+    SnapdStorageEncryptionStatus storageEncryptionStatus =
+        SnapdStorageEncryptionStatus.active,
   }) {
     final raw = File(path).readAsStringSync();
     final json = jsonDecode(raw) as Map<String, dynamic>;
@@ -25,6 +28,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       systemVolumes: systemVolumes,
       initialRecoveryKeys: {'default-recovery': '1234'},
       checkError: checkError,
+      storageEncryptionStatus: storageEncryptionStatus,
     );
   }
 
@@ -32,6 +36,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   SnapdSystemVolumesResponse systemVolumes;
   final Map<String, String> _recoveryKeys;
   final bool checkError;
+  final SnapdStorageEncryptionStatus storageEncryptionStatus;
   String _auth = '12345';
 
   /// Generates a fake recovery key and key ID.
@@ -186,5 +191,10 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       case AuthMode.passphrase:
         return SnapdSystemVolumeAuthMode.passphrase;
     }
+  }
+
+  @override
+  Future<SnapdStorageEncryptedResponse> getStorageEncrypted() async {
+    return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
   }
 }

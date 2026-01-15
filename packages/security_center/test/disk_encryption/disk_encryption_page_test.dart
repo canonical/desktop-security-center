@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as p;
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:snapd/snapd.dart';
 import 'package:yaru/yaru.dart';
 
 import '../test_utils.dart';
@@ -973,11 +974,10 @@ void main() {
         enumerateKeySlots404Error: true,
         enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
-        missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
-        missingDefaultFallbackKeySlot: false,
         invalidTpmPlatformName: false,
         authModeMismatch: false,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.active,
       ),
       (
         name: 'general failure from enumerate keyslots endpoint',
@@ -985,11 +985,10 @@ void main() {
         enumerateKeySlots404Error: false,
         enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: true,
-        missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
-        missingDefaultFallbackKeySlot: false,
         invalidTpmPlatformName: false,
         authModeMismatch: false,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.active,
       ),
       (
         name: 'Status banners shown - authmode none',
@@ -997,11 +996,10 @@ void main() {
         enumerateKeySlots404Error: false,
         enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
-        missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
-        missingDefaultFallbackKeySlot: false,
         invalidTpmPlatformName: false,
         authModeMismatch: false,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.active,
       ),
       (
         name: 'Status banners shown - authmode PIN',
@@ -1009,11 +1007,10 @@ void main() {
         enumerateKeySlots404Error: false,
         enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
-        missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
-        missingDefaultFallbackKeySlot: false,
         invalidTpmPlatformName: false,
         authModeMismatch: false,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.active,
       ),
       (
         name: 'Status banners shown - authmode passphrase',
@@ -1021,11 +1018,54 @@ void main() {
         enumerateKeySlots404Error: false,
         enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
-        missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
-        missingDefaultFallbackKeySlot: false,
         invalidTpmPlatformName: false,
         authModeMismatch: false,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.active,
+      ),
+      (
+        name: 'storage encryption status inactive',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingDefaultKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.inactive,
+      ),
+      (
+        name: 'storage encryption status failed',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingDefaultKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.failed,
+      ),
+      (
+        name: 'storage encryption status degraded - success',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingDefaultKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.degraded,
+      ),
+      (
+        name: 'storage encryption status recovery - success',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingDefaultKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.recovery,
       ),
       (
         name:
@@ -1034,23 +1074,10 @@ void main() {
         enumerateKeySlots404Error: false,
         enumerateKeySlots403Error: true,
         enumerateKeySlotsFailure: false,
-        missingRecoveryKeySlot: false,
         missingDefaultKeySlot: false,
-        missingDefaultFallbackKeySlot: false,
         invalidTpmPlatformName: false,
         authModeMismatch: false,
-      ),
-      (
-        name: 'missing recovery keyslot',
-        authMode: AuthMode.pin,
-        enumerateKeySlots404Error: false,
-        enumerateKeySlots403Error: false,
-        enumerateKeySlotsFailure: false,
-        missingRecoveryKeySlot: true,
-        missingDefaultKeySlot: false,
-        missingDefaultFallbackKeySlot: false,
-        invalidTpmPlatformName: false,
-        authModeMismatch: false,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.active,
       ),
       (
         name: 'missing default keyslot',
@@ -1058,47 +1085,10 @@ void main() {
         enumerateKeySlots404Error: false,
         enumerateKeySlots403Error: false,
         enumerateKeySlotsFailure: false,
-        missingRecoveryKeySlot: false,
         missingDefaultKeySlot: true,
-        missingDefaultFallbackKeySlot: false,
         invalidTpmPlatformName: false,
         authModeMismatch: false,
-      ),
-      (
-        name: 'missing default-fallback keyslot',
-        authMode: AuthMode.pin,
-        enumerateKeySlots404Error: false,
-        enumerateKeySlots403Error: false,
-        enumerateKeySlotsFailure: false,
-        missingRecoveryKeySlot: false,
-        missingDefaultKeySlot: false,
-        missingDefaultFallbackKeySlot: true,
-        invalidTpmPlatformName: false,
-        authModeMismatch: false,
-      ),
-      (
-        name: 'invalid TPM platform name',
-        enumerateKeySlots404Error: false,
-        enumerateKeySlots403Error: false,
-        enumerateKeySlotsFailure: false,
-        missingRecoveryKeySlot: false,
-        missingDefaultKeySlot: false,
-        missingDefaultFallbackKeySlot: false,
-        invalidTpmPlatformName: true,
-        authMode: AuthMode.pin,
-        authModeMismatch: false,
-      ),
-      (
-        name: 'auth mode mismatch between recovery and fallback keyslots',
-        authMode: AuthMode.pin,
-        enumerateKeySlots404Error: false,
-        enumerateKeySlots403Error: false,
-        enumerateKeySlotsFailure: false,
-        missingRecoveryKeySlot: false,
-        missingDefaultKeySlot: false,
-        missingDefaultFallbackKeySlot: false,
-        invalidTpmPlatformName: false,
-        authModeMismatch: true,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.active,
       ),
     ];
 
@@ -1109,12 +1099,11 @@ void main() {
           enumerateKeySlots404Error: tc.enumerateKeySlots404Error,
           enumerateKeySlots403Error: tc.enumerateKeySlots403Error,
           enumerateKeySlotsFailure: tc.enumerateKeySlotsFailure,
-          missingRecoveryKeySlot: tc.missingRecoveryKeySlot,
           missingDefaultKeySlot: tc.missingDefaultKeySlot,
-          missingDefaultFallbackKeySlot: tc.missingDefaultFallbackKeySlot,
           invalidTpmPlatformName: tc.invalidTpmPlatformName,
           authMode: tc.authMode,
           authModeMismatch: tc.authModeMismatch,
+          storageEncryptionStatus: tc.storageEncryptionStatus,
         );
         await tester.pumpAppWithProviders(
           (_) => const DiskEncryptionPage(),
@@ -1126,11 +1115,10 @@ void main() {
         final isHappyPath = !tc.enumerateKeySlots404Error &&
             !tc.enumerateKeySlots403Error &&
             !tc.enumerateKeySlotsFailure &&
-            !tc.missingRecoveryKeySlot &&
             !tc.missingDefaultKeySlot &&
-            !tc.missingDefaultFallbackKeySlot &&
-            !tc.invalidTpmPlatformName &&
-            !tc.authModeMismatch;
+            tc.storageEncryptionStatus !=
+                SnapdStorageEncryptionStatus.inactive &&
+            tc.storageEncryptionStatus != SnapdStorageEncryptionStatus.failed;
 
         if (isHappyPath) {
           // Verify TPM enabled message is always shown in happy path
@@ -1201,7 +1189,11 @@ void main() {
               ),
               findsOneWidget,
             );
-          } else if (tc.enumerateKeySlotsFailure) {
+          } else if (tc.enumerateKeySlotsFailure ||
+              tc.storageEncryptionStatus ==
+                  SnapdStorageEncryptionStatus.inactive ||
+              tc.storageEncryptionStatus ==
+                  SnapdStorageEncryptionStatus.failed) {
             expect(
               find.text(
                 tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
@@ -1214,11 +1206,7 @@ void main() {
               ),
               findsOneWidget,
             );
-          } else if (tc.missingRecoveryKeySlot ||
-              tc.missingDefaultKeySlot ||
-              tc.missingDefaultFallbackKeySlot ||
-              tc.invalidTpmPlatformName ||
-              tc.authModeMismatch) {
+          } else if (tc.missingDefaultKeySlot) {
             expect(
               find.text(
                 tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
