@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:security_center/navigator.dart';
 import 'package:security_center/routes.dart';
 import 'package:security_center/security_center_app.dart';
+import 'package:snapd/snapd.dart';
 import 'package:yaru/yaru.dart';
 
 import 'test_utils.dart';
@@ -14,21 +15,24 @@ void main() {
     final cases = [
       (
         name: 'all routes enabled',
-        isDiskEncryptionAvailable: true,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.active,
       ),
       (
-        name: 'disk encryption hidden',
-        isDiskEncryptionAvailable: false,
+        name: 'disk encryption hidden - inactive',
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.inactive,
+      ),
+      (
+        name: 'disk encryption hidden - failed',
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.failed,
       ),
     ];
     for (final tc in cases) {
       for (final route in Routes.values) {
-        testWidgets('route ${route.route}', (tester) async {
-          registerMockFeatureService(
-            isDiskEncryptionAvailable: tc.isDiskEncryptionAvailable,
+        testWidgets('${tc.name}: route ${route.route}', (tester) async {
+          registerMockDiskEncryptionService(
+            storageEncryptionStatus: tc.storageEncryptionStatus,
           );
-          registerMockDiskEncryptionService();
-          AvailableRoutes.init();
+          await AvailableRoutes.init();
 
           final container = createContainer();
           await tester.pumpApp(
@@ -43,11 +47,14 @@ void main() {
           unawaited(navigator.currentState!.pushNamed(route.route));
           await tester.pumpAndSettle();
 
-          // Assert availableRoutes is built correctly based on feature service
+          // Assert availableRoutes is built correctly based on storage encryption status
           expect(Routes.availableRoutes, contains(Routes.appPermissions));
+          final shouldShowDiskEncryption = tc.storageEncryptionStatus !=
+                  SnapdStorageEncryptionStatus.inactive &&
+              tc.storageEncryptionStatus != SnapdStorageEncryptionStatus.failed;
           expect(
             Routes.availableRoutes,
-            tc.isDiskEncryptionAvailable
+            shouldShowDiskEncryption
                 ? contains(Routes.diskEncryption)
                 : isNot(contains(Routes.diskEncryption)),
           );
@@ -65,7 +72,7 @@ void main() {
               of: find.byType(YaruMasterTile),
               matching: find.text(Routes.diskEncryption.title(tester.l10n)),
             ),
-            tc.isDiskEncryptionAvailable ? findsOneWidget : findsNothing,
+            shouldShowDiskEncryption ? findsOneWidget : findsNothing,
           );
         });
       }
