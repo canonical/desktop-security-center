@@ -148,8 +148,14 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool missingDefaultFallbackKeySlot = false,
   bool invalidTpmPlatformName = false,
   bool authModeMismatch = false,
+  SnapdStorageEncryptionStatus storageEncryptionStatus =
+      SnapdStorageEncryptionStatus.active,
 }) {
   final service = MockDiskEncryptionService();
+
+  when(service.getStorageEncrypted()).thenAnswer(
+    (_) async => SnapdStorageEncryptedResponse(status: storageEncryptionStatus),
+  );
 
   when(service.enumerateKeySlots()).thenAnswer((_) async {
     if (enumerateKeySlots404Error) {
