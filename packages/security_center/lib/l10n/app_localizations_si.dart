@@ -508,4 +508,84 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+
+  @override
+  String get ubuntuProPageTitle => 'Ubuntu Pro';
+
+  @override
+  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+
+  @override
+  String ubuntuProDisabled(String learnMoreLink) {
+    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+  }
+
+  @override
+  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+
+  @override
+  String get ubuntuProEnable => 'Enable Ubuntu Pro';
+
+  @override
+  String get ubuntuProDisable => 'Disable Ubuntu Pro';
+
+  @override
+  String get ubuntuProCompliance => 'Compliance and hardening';
+
+  @override
+  String get ubuntuProComplianceDisclaimer =>
+      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+
+  @override
+  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+
+  @override
+  String get ubuntuProComplianceUSGDescription =>
+      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+
+  @override
+  String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
+
+  @override
+  String get ubuntuProComplianceFIPSDescription =>
+      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+
+  @override
+  String get ubuntuProComplianceDocumentation =>
+      'Security compliance documentation';
+
+  @override
+  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+
+  @override
+  String get ubuntuProESMDescription =>
+      'ESM provides 10 years of security patches for +25,000 open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.';
+
+  @override
+  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+
+  @override
+  String get ubuntuProESMMainDescription =>
+      'Security updates for 2,300 Ubuntu Main package until 2036';
+
+  @override
+  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+
+  @override
+  String get ubuntuProESMUniverseDescription =>
+      'Additional security updates for 23,000 Ubuntu Universe packages until 2036';
+
+  @override
+  String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
+
+  @override
+  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+
+  @override
+  String get ubuntuProLivepatchEnableDescription =>
+      'Apply kernel security updates while the system runs';
+
+  @override
+  String get ubuntuProLivepatchShowTitle =>
+      'Show Livepatch status in the top bar';
 }

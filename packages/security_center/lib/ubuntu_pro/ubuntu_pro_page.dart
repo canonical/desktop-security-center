@@ -1,0 +1,292 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:security_center/l10n.dart';
+import 'package:security_center/routes.dart';
+import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
+import 'package:security_center/widgets/iterable_extensions.dart';
+import 'package:security_center/widgets/markdown_text.dart';
+import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+import 'package:yaru/yaru.dart';
+
+class UbuntuProPage extends ConsumerWidget {
+  const UbuntuProPage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
+    final navigator = Navigator.of(context);
+
+    return ScrollablePage(
+      children: [
+        Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              SvgPicture.asset(
+                'assets/Ubuntu-tag.svg',
+                height: (theme.textTheme.headlineMedium?.fontSize ?? 34) * 2,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                l10n.ubuntuProPageTitle,
+                style: theme.textTheme.headlineMedium,
+              ),
+            ],
+          ),
+        ),
+        _UbuntuProStatus(),
+        _ESMSection(),
+        _LivepatchSection(),
+        YaruBorderContainer(
+          constraints: const BoxConstraints(minHeight: 56),
+          child: Center(
+            child: ListTile(
+              onTap: () {
+                navigator.pushNamed(Routes.compliance.route);
+              },
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(l10n.ubuntuProCompliance),
+                  YaruIconButton(icon: Icon(Icons.chevron_right)),
+                ],
+              ),
+            ),
+          ),
+        ),
+        ref.watch(ubuntuProModelProvider).whenOrNull(
+                  data: (data) => data.attached
+                      ? ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: YaruColors.red),
+                          onPressed: () {},
+                          child: Text(l10n.ubuntuProDisable),
+                        )
+                      : null,
+                ) ??
+            SizedBox.shrink(),
+      ].separatedBy(const SizedBox(height: 24)),
+    );
+  }
+}
+
+class _UbuntuProStatus extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+
+    return ref.watch(ubuntuProModelProvider).when(
+          data: (data) => data.attached
+              ? Column(
+                  children: [
+                    const SizedBox(height: 24),
+                    YaruBorderContainer(
+                      constraints: const BoxConstraints(minHeight: 56),
+                      child: Center(
+                        child: ListTile(
+                          leading: const Icon(YaruIcons.checkmark, size: 24),
+                          title: Text(l10n.ubuntuProEnabled),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : Column(
+                  children: [
+                    MarkdownText(
+                      l10n.ubuntuProDisabled(
+                        l10n.ubuntuProLearnMore.link('https://ubuntu.com/pro'),
+                      ),
+                      alignment: WrapAlignment.center,
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton(
+                      onPressed: () =>
+                          launchUrlString('https://ubuntu.com/pro/dashboard'),
+                      child: Text(l10n.ubuntuProEnable),
+                    ),
+                    const SizedBox(height: 24),
+                  ],
+                ),
+          error: (error, stackTrace) => Text(error.toString()),
+          loading: () => const Center(child: YaruCircularProgressIndicator()),
+        );
+  }
+}
+
+class _ESMSection extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
+
+    final esmAppProvider =
+        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.esmApps));
+    final esmInfraProvider =
+        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.esmInfra));
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.ubuntuProESMTitle,
+          style:
+              theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+        ),
+        Text(l10n.ubuntuProESMDescription),
+        YaruBorderContainer(
+          child: Column(
+            children: [
+              YaruSwitchListTile(
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 16,
+                ),
+                value: esmInfraProvider.whenOrNull(
+                      data: (data) => data != null && data.enabled,
+                    ) ??
+                    false,
+                onChanged: esmInfraProvider.whenOrNull(
+                  data: (data) => data != null && data.entitled
+                      ? (value) => ref
+                          .read(
+                            ubuntuProFeatureModelProvider(
+                              UbuntuProFeature.esmInfra,
+                            ).notifier,
+                          )
+                          .toggleFeature(value)
+                      : null,
+                ),
+                title: _LoadingText(
+                  text: l10n.ubuntuProESMMainTitle,
+                  isLoading: esmInfraProvider.isLoading,
+                ),
+                subtitle: Text(l10n.ubuntuProESMMainDescription),
+              ),
+              Divider(),
+              YaruSwitchListTile(
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 16,
+                ),
+                value: esmAppProvider.whenOrNull(
+                      data: (data) => data != null && data.enabled,
+                    ) ??
+                    false,
+                onChanged: esmAppProvider.whenOrNull(
+                  data: (data) => data != null && data.entitled
+                      ? (value) => ref
+                          .read(
+                            ubuntuProFeatureModelProvider(
+                              UbuntuProFeature.esmApps,
+                            ).notifier,
+                          )
+                          .toggleFeature(value)
+                      : null,
+                ),
+                title: _LoadingText(
+                  text: l10n.ubuntuProESMUniverseTitle,
+                  isLoading: esmAppProvider.isLoading,
+                ),
+                subtitle: Text(l10n.ubuntuProESMUniverseDescription),
+              ),
+            ],
+          ),
+        ),
+      ].separatedBy(const SizedBox(height: 12)),
+    );
+  }
+}
+
+class _LivepatchSection extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
+
+    final livepatchProvider =
+        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.livepatch));
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.ubuntuProLivepatchTitle,
+          style:
+              theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+        ),
+        YaruBorderContainer(
+          child: Column(
+            children: [
+              YaruSwitchListTile(
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 16,
+                ),
+                value: livepatchProvider.whenOrNull(
+                      data: (data) => data != null && data.enabled,
+                    ) ??
+                    false,
+                onChanged: livepatchProvider.whenOrNull(
+                  data: (data) => data != null && data.entitled
+                      ? (value) => ref
+                          .read(
+                            ubuntuProFeatureModelProvider(
+                              UbuntuProFeature.livepatch,
+                            ).notifier,
+                          )
+                          .toggleFeature(value)
+                      : null,
+                ),
+                title: _LoadingText(
+                  text: l10n.ubuntuProLivepatchEnableTitle,
+                  isLoading: livepatchProvider.isLoading,
+                ),
+                subtitle: Text(l10n.ubuntuProLivepatchEnableDescription),
+              ),
+              Divider(),
+              YaruSwitchListTile(
+                value: false,
+                onChanged: null,
+                title: Text(l10n.ubuntuProLivepatchShowTitle),
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ].separatedBy(const SizedBox(height: 12)),
+    );
+  }
+}
+
+class _LoadingText extends StatelessWidget {
+  const _LoadingText({required this.text, required this.isLoading});
+
+  final String text;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Row(
+      children: [
+        Text(text),
+        if (isLoading) ...[
+          const SizedBox(width: 8),
+          SizedBox.square(
+            dimension: theme.textTheme.bodyMedium?.fontSize,
+            child: CircularProgressIndicator(),
+          ),
+        ],
+      ],
+    );
+  }
+}

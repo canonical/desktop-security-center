@@ -1081,6 +1081,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong'**
   String get recoveryKeySomethingWentWrongHeader;
+
+  /// No description provided for @ubuntuProPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Pro'**
+  String get ubuntuProPageTitle;
+
+  /// No description provided for @ubuntuProEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Pro is enabled'**
+  String get ubuntuProEnabled;
+
+  /// No description provided for @ubuntuProDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Enterprise-grade security and compliance for your computer. Always free for personal use. {learnMoreLink}'**
+  String ubuntuProDisabled(String learnMoreLink);
+
+  /// No description provided for @ubuntuProLearnMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn about Ubuntu Pro'**
+  String get ubuntuProLearnMore;
+
+  /// No description provided for @ubuntuProEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Ubuntu Pro'**
+  String get ubuntuProEnable;
+
+  /// No description provided for @ubuntuProDisable.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable Ubuntu Pro'**
+  String get ubuntuProDisable;
+
+  /// No description provided for @ubuntuProCompliance.
+  ///
+  /// In en, this message translates to:
+  /// **'Compliance and hardening'**
+  String get ubuntuProCompliance;
+
+  /// No description provided for @ubuntuProComplianceDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.'**
+  String get ubuntuProComplianceDisclaimer;
+
+  /// No description provided for @ubuntuProComplianceUSGTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Security Guide (USG)'**
+  String get ubuntuProComplianceUSGTitle;
+
+  /// No description provided for @ubuntuProComplianceUSGDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.'**
+  String get ubuntuProComplianceUSGDescription;
+
+  /// No description provided for @ubuntuProComplianceFIPSTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'FIPS 140-2'**
+  String get ubuntuProComplianceFIPSTitle;
+
+  /// No description provided for @ubuntuProComplianceFIPSDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.'**
+  String get ubuntuProComplianceFIPSDescription;
+
+  /// No description provided for @ubuntuProComplianceDocumentation.
+  ///
+  /// In en, this message translates to:
+  /// **'Security compliance documentation'**
+  String get ubuntuProComplianceDocumentation;
+
+  /// No description provided for @ubuntuProESMTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Expanded Security Maintenance (ESM)'**
+  String get ubuntuProESMTitle;
+
+  /// No description provided for @ubuntuProESMDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'ESM provides 10 years of security patches for +25,000 open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.'**
+  String get ubuntuProESMDescription;
+
+  /// No description provided for @ubuntuProESMMainTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Main packages (esm-infra)'**
+  String get ubuntuProESMMainTitle;
+
+  /// No description provided for @ubuntuProESMMainDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Security updates for 2,300 Ubuntu Main package until 2036'**
+  String get ubuntuProESMMainDescription;
+
+  /// No description provided for @ubuntuProESMUniverseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Universe packages (esm-apps)'**
+  String get ubuntuProESMUniverseTitle;
+
+  /// No description provided for @ubuntuProESMUniverseDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional security updates for 23,000 Ubuntu Universe packages until 2036'**
+  String get ubuntuProESMUniverseDescription;
+
+  /// No description provided for @ubuntuProLivepatchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Kernel Livepatch'**
+  String get ubuntuProLivepatchTitle;
+
+  /// No description provided for @ubuntuProLivepatchEnableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Livepatch'**
+  String get ubuntuProLivepatchEnableTitle;
+
+  /// No description provided for @ubuntuProLivepatchEnableDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply kernel security updates while the system runs'**
+  String get ubuntuProLivepatchEnableDescription;
+
+  /// No description provided for @ubuntuProLivepatchShowTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Livepatch status in the top bar'**
+  String get ubuntuProLivepatchShowTitle;
 }
 
 class _AppLocalizationsDelegate

@@ -200,7 +200,7 @@
     "recoveryKeyTPMExplanationLearnMore": "Learn more about hardware-backed encryption",
     "recoveryKeyPassphraseEnabled": "Encryption passphrase is enabled",
     "recoveryKeyPassphraseHeader": "Change passphrase",
-    "recoveryKeyPassphraseBody": "You need to enter your passphrase every time your computer starts.", 
+    "recoveryKeyPassphraseBody": "You need to enter your passphrase every time your computer starts.",
     "recoveryKeyPassphraseButton": "Change passphrase...",
     "recoveryKeyPassphraseCurrent": "Current passphrase",
     "recoveryKeyPassphraseNew": "New passphrase",
@@ -233,5 +233,35 @@
     "recoveryKeyPinEntropyBelowMin": "Weak PIN, make it longer or less predictable",
     "recoveryKeyPinEntropyBelowOptimal": "Fair PIN, make it longer or less predictable for better security",
     "recoveryKeyPinEntropyOptimal": "PIN is long enough",
-    "recoveryKeySomethingWentWrongHeader": "Something went wrong"
+    "recoveryKeySomethingWentWrongHeader": "Something went wrong",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro is enabled",
+    "ubuntuProDisabled": "Enterprise-grade security and compliance for your computer. Always free for personal use. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Learn about Ubuntu Pro",
+    "ubuntuProEnable": "Enable Ubuntu Pro",
+    "ubuntuProDisable": "Disable Ubuntu Pro",
+    "ubuntuProCompliance": "Compliance and hardening",
+    "ubuntuProComplianceDisclaimer": "Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu Security Guide (USG)",
+    "ubuntuProComplianceUSGDescription": "Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.",
+    "ubuntuProComplianceDocumentation": "Security compliance documentation",
+    "ubuntuProESMTitle": "Expanded Security Maintenance (ESM)",
+    "ubuntuProESMDescription": "ESM provides 10 years of security patches for +25,000 open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.",
+    "ubuntuProESMMainTitle": "Main packages (esm-infra)",
+    "ubuntuProESMMainDescription": "Security updates for 2,300 Ubuntu Main package until 2036",
+    "ubuntuProESMUniverseTitle": "Universe packages (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Additional security updates for 23,000 Ubuntu Universe packages until 2036",
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Enable Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Apply kernel security updates while the system runs",
+    "ubuntuProLivepatchShowTitle": "Show Livepatch status in the top bar"
 }

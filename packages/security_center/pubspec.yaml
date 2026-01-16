@@ -22,6 +22,7 @@ dependencies:
     sdk: flutter
   flutter_markdown: ^0.7.3
   flutter_riverpod: ^2.5.1
+  flutter_svg: ^2.2.3
   form_field_validator: ^1.1.0
   freezed_annotation: ^2.4.1
   handy_window: ^0.4.0
@@ -60,3 +61,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/Ubuntu-tag.svg
