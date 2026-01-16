@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const kPagePadding = 30.0;
+
 class ScrollablePage extends StatelessWidget {
   const ScrollablePage({required this.children, super.key});
 
@@ -9,7 +11,7 @@ class ScrollablePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.all(kPagePadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: children,

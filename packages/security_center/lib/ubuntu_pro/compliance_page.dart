@@ -1,0 +1,91 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/l10n.dart';
+import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
+import 'package:security_center/widgets/iterable_extensions.dart';
+import 'package:security_center/widgets/markdown_text.dart';
+import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:yaru/yaru.dart';
+
+class ComplianceHardeningPage extends ConsumerWidget {
+  const ComplianceHardeningPage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+
+    final usgProvider =
+        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.usg));
+    final fipsProvider =
+        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.fipsUpdates));
+
+    return ScrollablePage(
+      children: [
+        YaruInfoBox(
+          yaruInfoType: YaruInfoType.warning,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text(l10n.ubuntuProComplianceDisclaimer),
+          ),
+        ),
+        YaruBorderContainer(
+          child: Column(
+            children: [
+              YaruSwitchListTile(
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 16,
+                ),
+                value: usgProvider.whenOrNull(
+                      data: (data) => data != null && data.enabled,
+                    ) ??
+                    false,
+                onChanged: usgProvider.whenOrNull(
+                  data: (data) => data != null && data.entitled
+                      ? (value) => ref
+                          .read(
+                            ubuntuProFeatureModelProvider(
+                              UbuntuProFeature.usg,
+                            ).notifier,
+                          )
+                          .toggleFeature(value)
+                      : null,
+                ),
+                title: Text(l10n.ubuntuProComplianceUSGTitle),
+                subtitle: Text(l10n.ubuntuProComplianceUSGDescription),
+              ),
+              Divider(),
+              YaruSwitchListTile(
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 16,
+                ),
+                value: fipsProvider.whenOrNull(
+                      data: (data) => data != null && data.enabled,
+                    ) ??
+                    false,
+                onChanged: fipsProvider.whenOrNull(
+                  data: (data) => data != null && data.entitled
+                      ? (value) => ref
+                          .read(
+                            ubuntuProFeatureModelProvider(
+                              UbuntuProFeature.fipsUpdates,
+                            ).notifier,
+                          )
+                          .toggleFeature(value)
+                      : null,
+                ),
+                title: Text(l10n.ubuntuProComplianceFIPSTitle),
+                subtitle: Text(l10n.ubuntuProComplianceFIPSDescription),
+              ),
+            ],
+          ),
+        ),
+        MarkdownText(
+          l10n.ubuntuProComplianceDocumentation
+              .link('https://ubuntu.com/security/certifications/docs'),
+        ),
+      ].separatedBy(const SizedBox(height: 24)),
+    );
+  }
+}
