@@ -723,19 +723,18 @@ class _NoneAuthenticationActions extends ConsumerWidget {
                 l10n.diskEncryptionPageAddPassphraseButton,
               ),
             ),
-            // FIXME: PIN support is not yet impletented in snapd
-            // OutlinedButton(
-            //   onPressed: isAdding
-            //       ? null
-            //       : () {
-            //           showChangeAuthModeDialog(
-            //             context,
-            //             AuthMode.pin,
-            //             ref,
-            //           );
-            //         },
-            //   child: Text(l10n.diskEncryptionPageAddPinButton),
-            // ),
+            OutlinedButton(
+              onPressed: isAdding
+                  ? null
+                  : () {
+                      showChangeAuthModeDialog(
+                        context,
+                        AuthMode.pin,
+                        ref,
+                      );
+                    },
+              child: Text(l10n.diskEncryptionPageAddPinButton),
+            ),
           ],
         ),
         // Show error if present
