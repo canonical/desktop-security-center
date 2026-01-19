@@ -1227,8 +1227,7 @@ void main() {
 
   group('add auth mode - show toggles visibility', () {
     final cases = [
-      // FIXME: awaiting PIN support in snapd
-      //(name: 'Pin', authMode: AuthMode.pin),
+      (name: 'Pin', authMode: AuthMode.pin),
       (name: 'Passphrase', authMode: AuthMode.passphrase),
     ];
 
@@ -1286,8 +1285,7 @@ void main() {
   group('add auth mode - submit disabled when new and confirm do not match',
       () {
     final cases = [
-      // FIXME: awaiting PIN support in snapd
-      //(name: 'Pin', authMode: AuthMode.pin),
+      (name: 'Pin', authMode: AuthMode.pin),
       (name: 'Passphrase', authMode: AuthMode.passphrase),
     ];
 
@@ -1347,8 +1345,7 @@ void main() {
 
   group('add auth mode - entropy hinting', () {
     final cases = [
-      // FIXME: awaiting PIN support in snapd
-      //(name: 'Pin', authMode: AuthMode.pin),
+      (name: 'Pin', authMode: AuthMode.pin),
       (name: 'Passphrase', authMode: AuthMode.passphrase),
     ];
 
@@ -1494,17 +1491,16 @@ void main() {
 
   group('add auth mode - submit with valid inputs', () {
     final cases = [
-      // FIXME: awaiting PIN support in snapd
-      // (
-      //   name: 'Pin success',
-      //   authMode: AuthMode.pin,
-      //   replacePlatformKeyError: false,
-      // ),
-      // (
-      //   name: 'Pin failure',
-      //   authMode: AuthMode.pin,
-      //   replacePlatformKeyError: true,
-      // ),
+      (
+        name: 'Pin success',
+        authMode: AuthMode.pin,
+        replacePlatformKeyError: false,
+      ),
+      (
+        name: 'Pin failure',
+        authMode: AuthMode.pin,
+        replacePlatformKeyError: true,
+      ),
       (
         name: 'Passphrase success',
         authMode: AuthMode.passphrase,
@@ -1593,8 +1589,7 @@ void main() {
 
   group('add auth mode - input filtering validation', () {
     final cases = [
-      // FIXME: awaiting PIN support in snapd
-      //(name: 'Pin', authMode: AuthMode.pin),
+      (name: 'Pin', authMode: AuthMode.pin),
       (name: 'Passphrase', authMode: AuthMode.passphrase),
     ];
 
