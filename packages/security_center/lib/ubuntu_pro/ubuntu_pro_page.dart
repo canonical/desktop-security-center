@@ -19,6 +19,8 @@ class UbuntuProPage extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final navigator = Navigator.of(context);
 
+    final availabilityProvider = ref.watch(ubuntuProAvailabilityModelProvider);
+
     return ScrollablePage(
       children: [
         Center(
@@ -28,7 +30,7 @@ class UbuntuProPage extends ConsumerWidget {
             children: [
               SvgPicture.asset(
                 'assets/Ubuntu-tag.svg',
-                height: (theme.textTheme.headlineMedium?.fontSize ?? 34) * 2,
+                height: 68,
               ),
               const SizedBox(width: 8),
               Text(
@@ -38,12 +40,13 @@ class UbuntuProPage extends ConsumerWidget {
             ],
           ),
         ),
-        _UbuntuProStatus(),
-        _ESMSection(),
-        _LivepatchSection(),
-        YaruBorderContainer(
-          constraints: const BoxConstraints(minHeight: 56),
-          child: Center(
+        _UbuntuProAvailability(),
+        if (availabilityProvider.value != null &&
+            availabilityProvider.value!.available) ...[
+          _ESMSection(),
+          _LivepatchSection(),
+          YaruBorderContainer(
+            padding: EdgeInsets.symmetric(vertical: 8),
             child: ListTile(
               onTap: () {
                 navigator.pushNamed(Routes.compliance.route);
@@ -57,20 +60,55 @@ class UbuntuProPage extends ConsumerWidget {
               ),
             ),
           ),
-        ),
-        ref.watch(ubuntuProModelProvider).whenOrNull(
-                  data: (data) => data.attached
-                      ? ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: YaruColors.red),
-                          onPressed: () {},
-                          child: Text(l10n.ubuntuProDisable),
-                        )
-                      : null,
-                ) ??
-            SizedBox.shrink(),
+          ref.watch(ubuntuProModelProvider).whenOrNull(
+                    data: (data) => data.attached
+                        ? ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: YaruColors.red),
+                            onPressed: () {},
+                            child: Text(l10n.ubuntuProDisable),
+                          )
+                        : null,
+                  ) ??
+              SizedBox.shrink(),
+        ],
       ].separatedBy(const SizedBox(height: 24)),
     );
+  }
+}
+
+class _UbuntuProAvailability extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+
+    return ref.watch(ubuntuProAvailabilityModelProvider).when(
+          data: (data) => data.available
+              ? _UbuntuProStatus()
+              : Column(
+                  children: [
+                    MarkdownText(
+                      l10n.ubuntuProDisabled(
+                        l10n.ubuntuProLearnMore.link('https://ubuntu.com/pro'),
+                      ),
+                      alignment: WrapAlignment.center,
+                    ),
+                    const SizedBox(height: 24),
+                    YaruBorderContainer(
+                      padding: EdgeInsetsGeometry.symmetric(vertical: 8),
+                      child: Center(
+                        child: ListTile(
+                          leading: const Icon(YaruIcons.edit_clear, size: 24),
+                          title: Text(l10n.ubuntuProNotSupported),
+                          subtitle: Text(l10n.ubuntuProNotSupportedDetails),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+          error: (error, stackTrace) => Text(error.toString()),
+          loading: () => const Center(child: YaruCircularProgressIndicator()),
+        );
   }
 }
 
@@ -85,12 +123,10 @@ class _UbuntuProStatus extends ConsumerWidget {
                   children: [
                     const SizedBox(height: 24),
                     YaruBorderContainer(
-                      constraints: const BoxConstraints(minHeight: 56),
-                      child: Center(
-                        child: ListTile(
-                          leading: const Icon(YaruIcons.checkmark, size: 24),
-                          title: Text(l10n.ubuntuProEnabled),
-                        ),
+                      padding: EdgeInsetsGeometry.symmetric(vertical: 8),
+                      child: ListTile(
+                        leading: const Icon(YaruIcons.checkmark, size: 24),
+                        title: Text(l10n.ubuntuProEnabled),
                       ),
                     ),
                   ],
