@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:dbus/dbus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -50,9 +51,7 @@ class UbuntuProModel extends _$UbuntuProModel {
     final attached =
         signal.values[1].asStringVariantDict()['Attached']?.asBoolean();
     if (attached != null) {
-      state = AsyncData(
-        UbuntuProModelData(attached: attached),
-      );
+      state = AsyncData(UbuntuProModelData(attached: attached));
     }
   }
 
@@ -61,6 +60,53 @@ class UbuntuProModel extends _$UbuntuProModel {
     StackTrace stackTrace,
   ) async {
     state = AsyncError(error, stackTrace);
+  }
+}
+
+@freezed
+class UbuntuProAvailabilityData with _$UbuntuProAvailabilityData {
+  factory UbuntuProAvailabilityData({
+    required bool available,
+    required String? version,
+  }) = _UbuntuProAvailabilityData;
+}
+
+@riverpod
+class UbuntuProAvailabilityModel extends _$UbuntuProAvailabilityModel {
+  @override
+  Future<UbuntuProAvailabilityData> build() async {
+    final version = await _getVersion();
+    return UbuntuProAvailabilityData(
+      available: _isLTS(version),
+      version: version,
+    );
+  }
+
+  Future<String?> _getVersion() async {
+    final filePath = Platform.environment['SNAP'] != null
+        ? '/var/lib/snapd/hostfs/etc/os-release'
+        : '/etc/os-release';
+
+    final osRelease = await File(filePath).readAsLines();
+    for (final line in osRelease) {
+      final split = line.split('=');
+      final key = split[0].trim();
+      var value = split[1].trim();
+      if ((value.startsWith('"') && value.endsWith('"')) ||
+          (value.startsWith('\'') && value.endsWith('\''))) {
+        value = value.substring(1, value.length - 1);
+      }
+
+      if (key.toUpperCase() == 'VERSION') {
+        return value;
+      }
+    }
+
+    return null;
+  }
+
+  bool _isLTS(String? version) {
+    return version != null && version.contains('LTS');
   }
 }
 

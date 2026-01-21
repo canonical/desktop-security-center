@@ -1088,6 +1088,18 @@ abstract class AppLocalizations {
   /// **'Ubuntu Pro'**
   String get ubuntuProPageTitle;
 
+  /// No description provided for @ubuntuProNotSupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Pro is not available for this Ubuntu version'**
+  String get ubuntuProNotSupported;
+
+  /// No description provided for @ubuntuProNotSupportedDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Pro requires an LTS release'**
+  String get ubuntuProNotSupportedDetails;
+
   /// No description provided for @ubuntuProEnabled.
   ///
   /// In en, this message translates to:

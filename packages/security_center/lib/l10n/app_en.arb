@@ -235,6 +235,8 @@
     "recoveryKeyPinEntropyOptimal": "PIN is long enough",
     "recoveryKeySomethingWentWrongHeader": "Something went wrong",
     "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro is not available for this Ubuntu version",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro requires an LTS release",
     "ubuntuProEnabled": "Ubuntu Pro is enabled",
     "ubuntuProDisabled": "Enterprise-grade security and compliance for your computer. Always free for personal use. {learnMoreLink}",
     "@ubuntuProDisabled": {

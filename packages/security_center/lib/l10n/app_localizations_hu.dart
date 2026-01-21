@@ -514,6 +514,14 @@ class AppLocalizationsHu extends AppLocalizations {
   String get ubuntuProPageTitle => 'Ubuntu Pro';
 
   @override
+  String get ubuntuProNotSupported =>
+      'Ubuntu Pro is not available for this Ubuntu version';
+
+  @override
+  String get ubuntuProNotSupportedDetails =>
+      'Ubuntu Pro requires an LTS release';
+
+  @override
   String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
 
   @override
