@@ -246,6 +246,7 @@ class _LivepatchSection extends ConsumerWidget {
 
     final livepatchProvider =
         ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.livepatch));
+    final statusIconProvider = ref.watch(gSettingsUpdateNotifierModelProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -286,8 +287,13 @@ class _LivepatchSection extends ConsumerWidget {
               ),
               Divider(),
               YaruSwitchListTile(
-                value: false,
-                onChanged: null,
+                value: statusIconProvider.whenOrNull(
+                      data: (data) => data.showStatusIcon,
+                    ) ??
+                    false,
+                onChanged: (value) => ref
+                    .read(gSettingsUpdateNotifierModelProvider.notifier)
+                    .toggleStatusIcon(value),
                 title: Text(l10n.ubuntuProLivepatchShowTitle),
                 contentPadding: const EdgeInsets.symmetric(
                   vertical: 8,
