@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dbus/dbus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gsettings/gsettings.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:snapd/snapd.dart';
 
@@ -107,6 +108,51 @@ class UbuntuProAvailabilityModel extends _$UbuntuProAvailabilityModel {
 
   bool _isLTS(String? version) {
     return version != null && version.contains('LTS');
+  }
+}
+
+final updateNotifierStream = StreamProvider.autoDispose((ref) async* {
+  final settings = GSettings('com.ubuntu.update-notifier');
+  await for (final keys in settings.keysChanged) {
+    yield keys;
+  }
+});
+
+@freezed
+class GSettingsUpdateNotifierData with _$GSettingsUpdateNotifierData {
+  factory GSettingsUpdateNotifierData({
+    required bool showStatusIcon,
+  }) = _GSettingsUpdateNotifierData;
+}
+
+@riverpod
+class GSettingsUpdateNotifierModel extends _$GSettingsUpdateNotifierModel {
+  final settings = GSettings('com.ubuntu.update-notifier');
+
+  @override
+  Future<GSettingsUpdateNotifierData> build() async {
+    ref.watch(updateNotifierStream).whenData(
+      (value) async {
+        state = AsyncData(
+          GSettingsUpdateNotifierData(
+            showStatusIcon: await _getStatusIcon(),
+          ),
+        );
+      },
+    );
+
+    return GSettingsUpdateNotifierData(
+      showStatusIcon: await _getStatusIcon(),
+    );
+  }
+
+  Future<bool> _getStatusIcon() async {
+    final showStatusIcon = await settings.get('show-livepatch-status-icon');
+    return showStatusIcon.asBoolean();
+  }
+
+  Future<void> toggleStatusIcon(bool value) async {
+    await settings.set('show-livepatch-status-icon', DBusBoolean(value));
   }
 }
 
