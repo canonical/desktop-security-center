@@ -3,11 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/routes.dart';
+import 'package:security_center/ubuntu_pro/attach_dialog.dart';
+import 'package:security_center/ubuntu_pro/detatch_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import 'package:yaru/yaru.dart';
 
 class UbuntuProPage extends ConsumerWidget {
@@ -64,9 +65,15 @@ class UbuntuProPage extends ConsumerWidget {
                     data: (data) => data.attached
                         ? ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: YaruColors.red),
-                            onPressed: () {},
-                            child: Text(l10n.ubuntuProDisable),
+                              backgroundColor: YaruColors.red,
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (_) => const DetachDialog(),
+                              );
+                            },
+                            child: Text(l10n.ubuntuProDisablePro),
                           )
                         : null,
                   ) ??
@@ -141,9 +148,11 @@ class _UbuntuProStatus extends ConsumerWidget {
                     ),
                     const SizedBox(height: 24),
                     ElevatedButton(
-                      onPressed: () =>
-                          launchUrlString('https://ubuntu.com/pro/dashboard'),
-                      child: Text(l10n.ubuntuProEnable),
+                      onPressed: () => showDialog(
+                        context: context,
+                        builder: (_) => const AttachDialog(),
+                      ),
+                      child: Text(l10n.ubuntuProEnablePro),
                     ),
                     const SizedBox(height: 24),
                   ],

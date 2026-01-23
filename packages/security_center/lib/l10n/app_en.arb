@@ -247,8 +247,45 @@
         }
     },
     "ubuntuProLearnMore": "Learn about Ubuntu Pro",
-    "ubuntuProEnable": "Enable Ubuntu Pro",
-    "ubuntuProDisable": "Disable Ubuntu Pro",
+    "ubuntuProEnablePro": "Enable Ubuntu Pro",
+    "ubuntuProEnableMagic": "Enable with Ubuntu One account",
+    "ubuntuProEnableMagicSubtitle": "You will be able to register a new account",
+    "ubuntuProMagicPrompt": "Use your existing free personal or company Ubuntu One account, or register a new account.",
+    "ubuntuProMagicContinueInBrowser": "Continue in browser",
+    "ubuntuProMagicDescription": "You can also log in at {attachLink} and enter the code {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProEnableToken": "Enable with a token",
+    "ubuntuProEnableTokenSubtitle": "From your IT admin or from {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Get an Ubuntu Pro token from your administrator or from {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Disable Ubuntu Pro",
+    "ubuntuProDisable": "Disable",
+    "ubuntuProDisablePrompt": "Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?",
+    "ubuntuProEnable": "Enable",
+    "ubuntuProCancel": "Cancel",
     "ubuntuProCompliance": "Compliance and hardening",
     "ubuntuProComplianceDisclaimer": "Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.",
     "ubuntuProComplianceUSGTitle": "Ubuntu Security Guide (USG)",

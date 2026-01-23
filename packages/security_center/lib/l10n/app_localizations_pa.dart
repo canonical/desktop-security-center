@@ -532,10 +532,58 @@ class AppLocalizationsPa extends AppLocalizations {
   String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
 
   @override
-  String get ubuntuProEnable => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
 
   @override
-  String get ubuntuProDisable => 'Disable Ubuntu Pro';
+  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+
+  @override
+  String get ubuntuProEnableMagicSubtitle =>
+      'You will be able to register a new account';
+
+  @override
+  String get ubuntuProMagicPrompt =>
+      'Use your existing free personal or company Ubuntu One account, or register a new account.';
+
+  @override
+  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+
+  @override
+  String ubuntuProMagicDescription(String attachLink, String attachCode) {
+    return 'You can also log in at $attachLink and enter the code $attachCode';
+  }
+
+  @override
+  String get ubuntuProEnableToken => 'Enable with a token';
+
+  @override
+  String ubuntuProEnableTokenSubtitle(String proLink) {
+    return 'From your IT admin or from $proLink';
+  }
+
+  @override
+  String ubuntuProTokenPrompt(String proLink) {
+    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+  }
+
+  @override
+  String get ubuntuProTokenLabel => 'Token';
+
+  @override
+  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+
+  @override
+  String get ubuntuProDisable => 'Disable';
+
+  @override
+  String get ubuntuProDisablePrompt =>
+      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+
+  @override
+  String get ubuntuProEnable => 'Enable';
+
+  @override
+  String get ubuntuProCancel => 'Cancel';
 
   @override
   String get ubuntuProCompliance => 'Compliance and hardening';

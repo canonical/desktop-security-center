@@ -1118,17 +1118,95 @@ abstract class AppLocalizations {
   /// **'Learn about Ubuntu Pro'**
   String get ubuntuProLearnMore;
 
-  /// No description provided for @ubuntuProEnable.
+  /// No description provided for @ubuntuProEnablePro.
   ///
   /// In en, this message translates to:
   /// **'Enable Ubuntu Pro'**
-  String get ubuntuProEnable;
+  String get ubuntuProEnablePro;
+
+  /// No description provided for @ubuntuProEnableMagic.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable with Ubuntu One account'**
+  String get ubuntuProEnableMagic;
+
+  /// No description provided for @ubuntuProEnableMagicSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You will be able to register a new account'**
+  String get ubuntuProEnableMagicSubtitle;
+
+  /// No description provided for @ubuntuProMagicPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Use your existing free personal or company Ubuntu One account, or register a new account.'**
+  String get ubuntuProMagicPrompt;
+
+  /// No description provided for @ubuntuProMagicContinueInBrowser.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue in browser'**
+  String get ubuntuProMagicContinueInBrowser;
+
+  /// No description provided for @ubuntuProMagicDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You can also log in at {attachLink} and enter the code {attachCode}'**
+  String ubuntuProMagicDescription(String attachLink, String attachCode);
+
+  /// No description provided for @ubuntuProEnableToken.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable with a token'**
+  String get ubuntuProEnableToken;
+
+  /// No description provided for @ubuntuProEnableTokenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'From your IT admin or from {proLink}'**
+  String ubuntuProEnableTokenSubtitle(String proLink);
+
+  /// No description provided for @ubuntuProTokenPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Get an Ubuntu Pro token from your administrator or from {proLink}'**
+  String ubuntuProTokenPrompt(String proLink);
+
+  /// No description provided for @ubuntuProTokenLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Token'**
+  String get ubuntuProTokenLabel;
+
+  /// No description provided for @ubuntuProDisablePro.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable Ubuntu Pro'**
+  String get ubuntuProDisablePro;
 
   /// No description provided for @ubuntuProDisable.
   ///
   /// In en, this message translates to:
-  /// **'Disable Ubuntu Pro'**
+  /// **'Disable'**
   String get ubuntuProDisable;
+
+  /// No description provided for @ubuntuProDisablePrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?'**
+  String get ubuntuProDisablePrompt;
+
+  /// No description provided for @ubuntuProEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable'**
+  String get ubuntuProEnable;
+
+  /// No description provided for @ubuntuProCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get ubuntuProCancel;
 
   /// No description provided for @ubuntuProCompliance.
   ///

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dbus/dbus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gsettings/gsettings.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:snapd/snapd.dart';
 
@@ -20,22 +21,18 @@ class UbuntuProModelData with _$UbuntuProModelData {
 @riverpod
 class UbuntuProModel extends _$UbuntuProModel {
   final DBusClient dbusClient = DBusClient.system();
+  late final DBusRemoteObjectManager objectManager;
   late final StreamSubscription<DBusSignal> propertiesChangedSignal;
 
   @override
   Future<UbuntuProModelData> build() async {
-    final object = DBusRemoteObjectManager(
+    objectManager = DBusRemoteObjectManager(
       dbusClient,
       name: 'com.canonical.UbuntuAdvantage',
       path: DBusObjectPath('/com/canonical/UbuntuAdvantage/Manager'),
     );
 
-    final attached = await object.getProperty(
-      'com.canonical.UbuntuAdvantage.Manager',
-      'Attached',
-    );
-
-    propertiesChangedSignal = object.propertiesChanged.listen(
+    propertiesChangedSignal = objectManager.propertiesChanged.listen(
       _onPropertiesChanged,
       onError: _onPropertiesChangedError,
     );
@@ -43,6 +40,10 @@ class UbuntuProModel extends _$UbuntuProModel {
       await propertiesChangedSignal.cancel();
     });
 
+    final attached = await objectManager.getProperty(
+      'com.canonical.UbuntuAdvantage.Manager',
+      'Attached',
+    );
     return UbuntuProModelData(attached: attached.asBoolean());
   }
 
@@ -61,6 +62,32 @@ class UbuntuProModel extends _$UbuntuProModel {
     StackTrace stackTrace,
   ) async {
     state = AsyncError(error, stackTrace);
+  }
+
+  Future<void> attach(String token) async {
+    try {
+      state = AsyncLoading();
+      await objectManager.callMethod(
+        'com.canonical.UbuntuAdvantage.Manager',
+        'Attach',
+        [DBusString(token)],
+      );
+    } on DBusMethodResponseException catch (error, stackTrace) {
+      state = AsyncError(error, stackTrace);
+    }
+  }
+
+  Future<void> detach() async {
+    try {
+      state = AsyncLoading();
+      await objectManager.callMethod(
+        'com.canonical.UbuntuAdvantage.Manager',
+        'Detach',
+        [],
+      );
+    } on DBusMethodResponseException catch (error, stackTrace) {
+      state = AsyncError(error, stackTrace);
+    }
   }
 }
 
@@ -111,12 +138,13 @@ class UbuntuProAvailabilityModel extends _$UbuntuProAvailabilityModel {
   }
 }
 
-final updateNotifierStream = StreamProvider.autoDispose((ref) async* {
+@riverpod
+Stream<List<String>> updateNotifierStream(Ref ref) async* {
   final settings = GSettings('com.ubuntu.update-notifier');
   await for (final keys in settings.keysChanged) {
     yield keys;
   }
-});
+}
 
 @freezed
 class GSettingsUpdateNotifierData with _$GSettingsUpdateNotifierData {
@@ -131,15 +159,7 @@ class GSettingsUpdateNotifierModel extends _$GSettingsUpdateNotifierModel {
 
   @override
   Future<GSettingsUpdateNotifierData> build() async {
-    ref.watch(updateNotifierStream).whenData(
-      (value) async {
-        state = AsyncData(
-          GSettingsUpdateNotifierData(
-            showStatusIcon: await _getStatusIcon(),
-          ),
-        );
-      },
-    );
+    ref.watch(updateNotifierStreamProvider);
 
     return GSettingsUpdateNotifierData(
       showStatusIcon: await _getStatusIcon(),
