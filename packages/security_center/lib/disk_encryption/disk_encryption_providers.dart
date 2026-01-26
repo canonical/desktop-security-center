@@ -343,6 +343,11 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
             'Storage encryption state returned failure: ${storageStatus.status}',
           );
           throw TpmStateExceptionFailed();
+        case SnapdStorageEncryptionStatus.indeterminate:
+          _log.info(
+            'Storage encryption state returned: ${storageStatus.status}',
+          );
+          break;
         case SnapdStorageEncryptionStatus.active:
         case SnapdStorageEncryptionStatus.degraded:
         case SnapdStorageEncryptionStatus.recovery:
