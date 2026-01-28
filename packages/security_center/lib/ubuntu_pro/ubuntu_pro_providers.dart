@@ -6,88 +6,32 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gsettings/gsettings.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:snapd/snapd.dart';
+import 'package:ubuntu_service/ubuntu_service.dart';
 
 part 'ubuntu_pro_providers.g.dart';
 part 'ubuntu_pro_providers.freezed.dart';
 
-@freezed
-class UbuntuProModelData with _$UbuntuProModelData {
-  factory UbuntuProModelData({
-    required bool attached,
-  }) = _UbuntuProModelData;
-}
-
 @riverpod
 class UbuntuProModel extends _$UbuntuProModel {
-  final DBusClient dbusClient = DBusClient.system();
-  late final DBusRemoteObjectManager objectManager;
-  late final StreamSubscription<DBusSignal> propertiesChangedSignal;
+  final _service = getService<UbuntuProManagerService>();
 
   @override
-  Future<UbuntuProModelData> build() async {
-    objectManager = DBusRemoteObjectManager(
-      dbusClient,
-      name: 'com.canonical.UbuntuAdvantage',
-      path: DBusObjectPath('/com/canonical/UbuntuAdvantage/Manager'),
-    );
-
-    propertiesChangedSignal = objectManager.propertiesChanged.listen(
-      _onPropertiesChanged,
-      onError: _onPropertiesChangedError,
-    );
-    ref.onDispose(() async {
-      await propertiesChangedSignal.cancel();
+  UbuntuProData build() {
+    _service.stream.stream.listen((data) {
+      state = data;
     });
 
-    final attached = await objectManager.getProperty(
-      'com.canonical.UbuntuAdvantage.Manager',
-      'Attached',
-    );
-    return UbuntuProModelData(attached: attached.asBoolean());
-  }
-
-  Future<void> _onPropertiesChanged(DBusSignal signal) async {
-    if (signal.path.value != '/com/canonical/UbuntuAdvantage/Manager') return;
-
-    final attached =
-        signal.values[1].asStringVariantDict()['Attached']?.asBoolean();
-    if (attached != null) {
-      state = AsyncData(UbuntuProModelData(attached: attached));
-    }
-  }
-
-  Future<void> _onPropertiesChangedError(
-    Object error,
-    StackTrace stackTrace,
-  ) async {
-    state = AsyncError(error, stackTrace);
+    return _service.data;
   }
 
   Future<void> attach(String token) async {
-    try {
-      state = AsyncLoading();
-      await objectManager.callMethod(
-        'com.canonical.UbuntuAdvantage.Manager',
-        'Attach',
-        [DBusString(token)],
-      );
-    } on DBusMethodResponseException catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
-    }
+    await _service.attach(token);
   }
 
   Future<void> detach() async {
-    try {
-      state = AsyncLoading();
-      await objectManager.callMethod(
-        'com.canonical.UbuntuAdvantage.Manager',
-        'Detach',
-        [],
-      );
-    } on DBusMethodResponseException catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
-    }
+    await _service.detach();
   }
 }
 
@@ -366,5 +310,57 @@ class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
     } on DBusMethodResponseException {
       state = AsyncData(state.value);
     }
+  }
+}
+
+@freezed
+class MagicAttachData with _$MagicAttachData {
+  factory MagicAttachData({
+    required MagicAttachResponse response,
+  }) = _MagicAttachData;
+
+  const MagicAttachData._();
+
+  bool get validContract => response.contractID != null;
+}
+
+@riverpod
+class MagicAttachModel extends _$MagicAttachModel {
+  final _service = getService<MagicAttachService>();
+  final _proService = getService<UbuntuProManagerService>();
+  late final Timer _timer;
+
+  @override
+  Future<MagicAttachData> build() async {
+    await _service.init();
+    final response = await _service.newToken();
+    _timer = Timer.periodic(
+      Duration(seconds: 10),
+      (timer) => updateToken(),
+    );
+    ref.onDispose(() => _timer.cancel());
+    return MagicAttachData(response: response);
+  }
+
+  Future<void> updateToken() async {
+    if (!state.hasValue) return;
+
+    final contractResponse =
+        await _service.getContractToken(state.value!.response.token);
+    state = AsyncData(state.value!.copyWith(response: contractResponse));
+
+    if (state.value!.validContract) {
+      _timer.cancel();
+    }
+  }
+
+  Future<void> attach() async {
+    if (state.value == null || !state.value!.validContract) {
+      state = AsyncError(
+        'Magic attach contract is invalid',
+        StackTrace.current,
+      );
+    }
+    await _proService.attach(state.value!.response.contractToken!);
   }
 }

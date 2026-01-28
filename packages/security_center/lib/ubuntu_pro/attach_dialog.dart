@@ -84,11 +84,12 @@ class AttachDialog extends StatelessWidget {
   }
 }
 
-class _MagicLinkDialog extends StatelessWidget {
+class _MagicLinkDialog extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final code = 'ABCDEF'; // TODO: implement magic attach
+    final theme = Theme.of(context);
+    final magicAttachProvider = ref.watch(magicAttachModelProvider);
 
     return AlertDialog(
       title: YaruDialogTitleBar(
@@ -118,18 +119,52 @@ class _MagicLinkDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(l10n.ubuntuProMagicPrompt),
-            OutlinedButton(
-              onPressed: () => launchUrlString(
-                'https://ubuntu.com/pro/attach?magic-attach-code=$code',
-              ),
-              child: Text(l10n.ubuntuProMagicContinueInBrowser),
+            Row(
+              children: [
+                OutlinedButton(
+                  onPressed: magicAttachProvider.whenOrNull(
+                    data: (data) => data.validContract
+                        ? null
+                        : () => launchUrlString(
+                              'https://ubuntu.com/pro/attach?magic-attach-code=${data.response.userCode}',
+                            ),
+                  ),
+                  child: magicAttachProvider.when(
+                    data: (data) => Text(l10n.ubuntuProMagicContinueInBrowser),
+                    error: (error, _) => Text(error.toString()),
+                    loading: () => SizedBox.square(
+                      dimension: theme.textTheme.bodyMedium?.fontSize,
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Visibility(
+                  visible: magicAttachProvider.whenOrNull(
+                        data: (data) => data.validContract,
+                      ) ??
+                      false,
+                  child: Icon(YaruIcons.ok),
+                )
+              ],
             ),
-            MarkdownText(
-              l10n.ubuntuProMagicDescription(
-                'ubuntu.com/pro/attach'.link('https://ubuntu.com/pro/attach'),
-                code,
-              ),
-            )
+            magicAttachProvider.whenOrNull(
+                  data: (data) => data.validContract
+                      ? ElevatedButton(
+                          onPressed: () => ref
+                              .read(magicAttachModelProvider.notifier)
+                              .attach(),
+                          child: Text(l10n.ubuntuProEnable),
+                        )
+                      : MarkdownText(
+                          l10n.ubuntuProMagicDescription(
+                            'ubuntu.com/pro/attach'
+                                .link('https://ubuntu.com/pro/attach'),
+                            data.response.userCode,
+                          ),
+                        ),
+                ) ??
+                SizedBox.shrink(),
           ].separatedBy(const SizedBox(height: 24)),
         ),
       ),
@@ -148,9 +183,7 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
-    final ubuntuProProvider = ref.watch(ubuntuProModelProvider);
 
     return AlertDialog(
       title: YaruDialogTitleBar(
@@ -188,13 +221,7 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
                   });
                 }
               : null,
-          child: ubuntuProProvider.whenOrNull(
-                loading: () => SizedBox.square(
-                  dimension: theme.textTheme.bodyMedium?.fontSize,
-                  child: CircularProgressIndicator(),
-                ),
-              ) ??
-              Text(l10n.ubuntuProEnable),
+          child: Text(l10n.ubuntuProEnable),
         ),
       ],
       content: SizedBox(
@@ -212,10 +239,6 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
               enabled: canInput,
               decoration: InputDecoration(
                 labelText: l10n.ubuntuProTokenLabel,
-                errorMaxLines: 2,
-                errorText: ubuntuProProvider.whenOrNull(
-                  error: (error, stackTrace) => error.toString(),
-                ),
               ),
               controller: textController,
             ),

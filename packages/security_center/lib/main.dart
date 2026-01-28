@@ -14,6 +14,7 @@ import 'package:security_center/services/feature_service.dart';
 import 'package:security_center/services/snapd_app_permissions_service.dart';
 import 'package:security_center/services/snapd_disk_encryption_service.dart';
 import 'package:security_center/services/snapd_service.dart';
+import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
@@ -90,6 +91,12 @@ Future<void> main(List<String> args) async {
       () => SnapdDiskEncryptionService(getService<SnapdService>()),
     );
   }
+
+  registerService<UbuntuProManagerService>(
+    () => UbuntuProManagerService()..init(),
+    dispose: (service) => service.dispose(),
+  );
+  registerService<MagicAttachService>(() => MagicAttachService()..init());
 
   // Initialize available routes
   await AvailableRoutes.init();
