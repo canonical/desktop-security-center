@@ -187,14 +187,14 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
   static const debounceDuration = Duration(milliseconds: 500);
 
   @override
-  ChangeAuthDialogModelData build() {
+  ChangeAuthDialogModelData build(AuthMode authMode) {
     ref.onDispose(() {
       _newPassTimer?.cancel();
       _confirmTimer?.cancel();
     });
     return ChangeAuthDialogModelData(
       dialogState: ChangeAuthDialogState.input(),
-      authMode: AuthMode.passphrase,
+      authMode: authMode,
     );
   }
 
@@ -221,13 +221,6 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
   void toggleShowPassphrase() {
     if (state.dialogState is! ChangeAuthDialogStateInput) return;
     state = state.copyWith(showPassphrase: !state.showPassphrase);
-  }
-
-  set authMode(AuthMode authmode) {
-    state = state.copyWith(
-      authMode: authmode,
-      dialogState: ChangeAuthDialogStateInput(),
-    );
   }
 
   Future<void> setConfirmPass(
