@@ -61,23 +61,20 @@ class UbuntuProPage extends ConsumerWidget {
               ),
             ),
           ),
-          ref.watch(ubuntuProModelProvider).whenOrNull(
-                    data: (data) => data.attached
-                        ? ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: YaruColors.red,
-                            ),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (_) => const DetachDialog(),
-                              );
-                            },
-                            child: Text(l10n.ubuntuProDisablePro),
-                          )
-                        : null,
-                  ) ??
-              SizedBox.shrink(),
+          ref.watch(ubuntuProModelProvider).attached
+              ? ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: YaruColors.red,
+                  ),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) => const DetachDialog(),
+                    );
+                  },
+                  child: Text(l10n.ubuntuProDisablePro),
+                )
+              : SizedBox.shrink(),
         ],
       ].separatedBy(const SizedBox(height: 24)),
     );
@@ -124,42 +121,38 @@ class _UbuntuProStatus extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
 
-    return ref.watch(ubuntuProModelProvider).when(
-          data: (data) => data.attached
-              ? Column(
-                  children: [
-                    const SizedBox(height: 24),
-                    YaruBorderContainer(
-                      padding: EdgeInsetsGeometry.symmetric(vertical: 8),
-                      child: ListTile(
-                        leading: const Icon(YaruIcons.checkmark, size: 24),
-                        title: Text(l10n.ubuntuProEnabled),
-                      ),
-                    ),
-                  ],
-                )
-              : Column(
-                  children: [
-                    MarkdownText(
-                      l10n.ubuntuProDisabled(
-                        l10n.ubuntuProLearnMore.link('https://ubuntu.com/pro'),
-                      ),
-                      alignment: WrapAlignment.center,
-                    ),
-                    const SizedBox(height: 24),
-                    ElevatedButton(
-                      onPressed: () => showDialog(
-                        context: context,
-                        builder: (_) => const AttachDialog(),
-                      ),
-                      child: Text(l10n.ubuntuProEnablePro),
-                    ),
-                    const SizedBox(height: 24),
-                  ],
+    return !ref.watch(ubuntuProModelProvider).attached
+        ? Column(
+            children: [
+              const SizedBox(height: 24),
+              YaruBorderContainer(
+                padding: EdgeInsetsGeometry.symmetric(vertical: 8),
+                child: ListTile(
+                  leading: const Icon(YaruIcons.checkmark, size: 24),
+                  title: Text(l10n.ubuntuProEnabled),
                 ),
-          error: (error, stackTrace) => Text(error.toString()),
-          loading: () => const Center(child: YaruCircularProgressIndicator()),
-        );
+              ),
+            ],
+          )
+        : Column(
+            children: [
+              MarkdownText(
+                l10n.ubuntuProDisabled(
+                  l10n.ubuntuProLearnMore.link('https://ubuntu.com/pro'),
+                ),
+                alignment: WrapAlignment.center,
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (_) => const AttachDialog(),
+                ),
+                child: Text(l10n.ubuntuProEnablePro),
+              ),
+              const SizedBox(height: 24),
+            ],
+          );
   }
 }
 
