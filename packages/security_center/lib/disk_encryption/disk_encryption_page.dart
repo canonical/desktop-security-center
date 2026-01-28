@@ -472,8 +472,8 @@ class ChangeAuthDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final model = ref.watch(changeAuthDialogModelProvider);
-    final notifier = ref.read(changeAuthDialogModelProvider.notifier);
+    final model = ref.watch(changeAuthDialogModelProvider(authMode));
+    final notifier = ref.read(changeAuthDialogModelProvider(authMode).notifier);
     assert(authMode != AuthMode.none);
 
     final title = switch (authMode) {
@@ -779,11 +779,6 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
               onPressed: isRemoving
                   ? null
                   : () {
-                      ref
-                          .read(
-                            changeAuthDialogModelProvider.notifier,
-                          )
-                          .authMode = AuthMode.passphrase;
                       showChangeAuthDialog(
                         context,
                         AuthMode.passphrase,
@@ -846,11 +841,6 @@ class _PinAuthenticationActions extends ConsumerWidget {
               onPressed: isRemoving
                   ? null
                   : () {
-                      ref
-                          .read(
-                            changeAuthDialogModelProvider.notifier,
-                          )
-                          .authMode = AuthMode.pin;
                       showChangeAuthDialog(context, AuthMode.pin);
                     },
               child: Text(l10n.recoveryKeyPinButton),

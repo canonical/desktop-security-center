@@ -31,7 +31,7 @@ class _CurrentPassphraseFormFieldState
 
   @override
   void initState() {
-    final model = ref.read(changeAuthDialogModelProvider);
+    final model = ref.read(changeAuthDialogModelProvider(widget.authMode));
     assert(widget.authMode != AuthMode.none);
 
     super.initState();
@@ -43,8 +43,9 @@ class _CurrentPassphraseFormFieldState
 
   @override
   Widget build(BuildContext context) {
-    final model = ref.watch(changeAuthDialogModelProvider);
-    final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
+    final model = ref.watch(changeAuthDialogModelProvider(widget.authMode));
+    final notifier =
+        ref.watch(changeAuthDialogModelProvider(widget.authMode).notifier);
     final lang = AppLocalizations.of(context);
     final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess ||
         (model.dialogState is ChangeAuthDialogStateError &&
@@ -57,7 +58,7 @@ class _CurrentPassphraseFormFieldState
             controller: _controller,
             decoration: InputDecoration(
               labelText: widget.authMode.localizedCurrentHint(lang),
-              suffixIcon: const _SecurityKeyShowButton(),
+              suffixIcon: _SecurityKeyShowButton(authMode: widget.authMode),
             ),
             obscureText: !model.showPassphrase,
             enabled: !isDisabled,
@@ -100,7 +101,7 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
 
   @override
   void initState() {
-    final model = ref.read(changeAuthDialogModelProvider);
+    final model = ref.read(changeAuthDialogModelProvider(widget.authMode));
     assert(widget.authMode != AuthMode.none);
 
     super.initState();
@@ -112,8 +113,9 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
 
   @override
   Widget build(BuildContext context) {
-    final model = ref.watch(changeAuthDialogModelProvider);
-    final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
+    final model = ref.watch(changeAuthDialogModelProvider(widget.authMode));
+    final notifier =
+        ref.watch(changeAuthDialogModelProvider(widget.authMode).notifier);
     final lang = AppLocalizations.of(context);
     final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess ||
         (model.dialogState is ChangeAuthDialogStateError &&
@@ -198,7 +200,7 @@ class _ConfirmPassphraseFormFieldState
 
   @override
   void initState() {
-    final model = ref.read(changeAuthDialogModelProvider);
+    final model = ref.read(changeAuthDialogModelProvider(widget.authMode));
     assert(widget.authMode != AuthMode.none);
 
     super.initState();
@@ -210,8 +212,9 @@ class _ConfirmPassphraseFormFieldState
 
   @override
   Widget build(BuildContext context) {
-    final model = ref.watch(changeAuthDialogModelProvider);
-    final notifier = ref.watch(changeAuthDialogModelProvider.notifier);
+    final model = ref.watch(changeAuthDialogModelProvider(widget.authMode));
+    final notifier =
+        ref.watch(changeAuthDialogModelProvider(widget.authMode).notifier);
     final lang = AppLocalizations.of(context);
     final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess ||
         (model.dialogState is ChangeAuthDialogStateError &&
@@ -273,14 +276,16 @@ void _filterDigits(TextEditingController controller) {
 }
 
 class _SecurityKeyShowButton extends ConsumerWidget {
-  const _SecurityKeyShowButton();
+  const _SecurityKeyShowButton({required this.authMode});
+
+  final AuthMode authMode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final lang = AppLocalizations.of(context);
-    final model = ref.watch(changeAuthDialogModelProvider);
-    final notifier = ref.read(changeAuthDialogModelProvider.notifier);
+    final model = ref.watch(changeAuthDialogModelProvider(authMode));
+    final notifier = ref.read(changeAuthDialogModelProvider(authMode).notifier);
     final showSecurityKey = model.showPassphrase;
     final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess ||
         (model.dialogState is ChangeAuthDialogStateError &&
