@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/l10n.dart';
+import 'package:security_center/ubuntu_pro/fips_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
@@ -17,8 +18,7 @@ class ComplianceHardeningPage extends ConsumerWidget {
 
     final usgProvider =
         ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.usg));
-    final fipsProvider =
-        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.fipsUpdates));
+    final fipsProvider = ref.watch(fIPSModelProvider);
 
     return ScrollablePage(
       children: [
@@ -59,21 +59,13 @@ class ComplianceHardeningPage extends ConsumerWidget {
                 vertical: 8,
                 horizontal: 16,
               ),
-              value: fipsProvider.whenOrNull(
-                    data: (data) => data != null && data.enabled,
-                  ) ??
-                  false,
-              onChanged: fipsProvider.whenOrNull(
-                data: (data) => data != null && data.entitled
-                    ? (value) => ref
-                        .read(
-                          ubuntuProFeatureModelProvider(
-                            UbuntuProFeature.fipsUpdates,
-                          ).notifier,
-                        )
-                        .toggleFeature(value)
-                    : null,
-              ),
+              value: fipsProvider.enabled,
+              onChanged: !fipsProvider.canEnable
+                  ? (_) => showDialog(
+                        context: context,
+                        builder: (_) => const FIPSDialog(),
+                      )
+                  : null,
               title: Text(l10n.ubuntuProComplianceFIPSTitle),
               subtitle: Text(l10n.ubuntuProComplianceFIPSDescription),
             ),
