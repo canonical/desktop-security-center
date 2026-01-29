@@ -5,6 +5,7 @@ import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
 class ComplianceHardeningPage extends ConsumerWidget {
@@ -28,58 +29,55 @@ class ComplianceHardeningPage extends ConsumerWidget {
             child: Text(l10n.ubuntuProComplianceDisclaimer),
           ),
         ),
-        YaruBorderContainer(
-          child: Column(
-            children: [
-              YaruSwitchListTile(
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 16,
-                ),
-                value: usgProvider.whenOrNull(
-                      data: (data) => data != null && data.enabled,
-                    ) ??
-                    false,
-                onChanged: usgProvider.whenOrNull(
-                  data: (data) => data != null && data.entitled
-                      ? (value) => ref
-                          .read(
-                            ubuntuProFeatureModelProvider(
-                              UbuntuProFeature.usg,
-                            ).notifier,
-                          )
-                          .toggleFeature(value)
-                      : null,
-                ),
-                title: Text(l10n.ubuntuProComplianceUSGTitle),
-                subtitle: Text(l10n.ubuntuProComplianceUSGDescription),
+        TileList(
+          children: [
+            YaruSwitchListTile(
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
               ),
-              Divider(),
-              YaruSwitchListTile(
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 16,
-                ),
-                value: fipsProvider.whenOrNull(
-                      data: (data) => data != null && data.enabled,
-                    ) ??
-                    false,
-                onChanged: fipsProvider.whenOrNull(
-                  data: (data) => data != null && data.entitled
-                      ? (value) => ref
-                          .read(
-                            ubuntuProFeatureModelProvider(
-                              UbuntuProFeature.fipsUpdates,
-                            ).notifier,
-                          )
-                          .toggleFeature(value)
-                      : null,
-                ),
-                title: Text(l10n.ubuntuProComplianceFIPSTitle),
-                subtitle: Text(l10n.ubuntuProComplianceFIPSDescription),
+              value: usgProvider.whenOrNull(
+                    data: (data) => data != null && data.enabled,
+                  ) ??
+                  false,
+              onChanged: usgProvider.whenOrNull(
+                data: (data) => data != null && data.entitled
+                    ? (value) => ref
+                        .read(
+                          ubuntuProFeatureModelProvider(
+                            UbuntuProFeature.usg,
+                          ).notifier,
+                        )
+                        .toggleFeature(value)
+                    : null,
               ),
-            ],
-          ),
+              title: Text(l10n.ubuntuProComplianceUSGTitle),
+              subtitle: Text(l10n.ubuntuProComplianceUSGDescription),
+            ),
+            YaruSwitchListTile(
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
+              ),
+              value: fipsProvider.whenOrNull(
+                    data: (data) => data != null && data.enabled,
+                  ) ??
+                  false,
+              onChanged: fipsProvider.whenOrNull(
+                data: (data) => data != null && data.entitled
+                    ? (value) => ref
+                        .read(
+                          ubuntuProFeatureModelProvider(
+                            UbuntuProFeature.fipsUpdates,
+                          ).notifier,
+                        )
+                        .toggleFeature(value)
+                    : null,
+              ),
+              title: Text(l10n.ubuntuProComplianceFIPSTitle),
+              subtitle: Text(l10n.ubuntuProComplianceFIPSDescription),
+            ),
+          ],
         ),
         MarkdownText(
           l10n.ubuntuProComplianceDocumentation
