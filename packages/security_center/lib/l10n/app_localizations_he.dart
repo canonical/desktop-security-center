@@ -614,7 +614,7 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for +25,000 open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.';
+      'ESM provides 10 years of security patches for 25,000+ open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.';
 
   @override
   String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
@@ -628,7 +628,7 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get ubuntuProESMUniverseDescription =>
-      'Additional security updates for 23,000 Ubuntu Universe packages until 2036';
+      'Additional security updates for over 23,000 Ubuntu Universe packages until 2036';
 
   @override
   String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
