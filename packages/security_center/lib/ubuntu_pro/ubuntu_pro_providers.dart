@@ -154,6 +154,7 @@ class UbuntuProServiceData with _$UbuntuProServiceData {
 
 enum UbuntuProFeature {
   anboxCloud,
+  fips,
   fipsUpdates,
   realtimeKernel,
   landscape,
@@ -310,6 +311,64 @@ class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
     } on DBusMethodResponseException {
       state = AsyncData(state.value);
     }
+  }
+}
+
+enum FIPSType {
+  fips,
+  fipsUpdates,
+}
+
+@freezed
+class FIPSData with _$FIPSData {
+  factory FIPSData({
+    required FIPSType type,
+    required bool canEnable,
+    required bool enabled,
+  }) = _FIPSData;
+}
+
+@riverpod
+class FIPSModel extends _$FIPSModel {
+  @override
+  FIPSData build() {
+    final fipsProvider =
+        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.fips));
+    final fipsUpdatesProvider =
+        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.fipsUpdates));
+
+    final canEnable = fipsProvider.maybeWhen(
+      data: (data) => data != null && data.entitled,
+      orElse: () => false,
+    );
+    final enabled = fipsProvider.maybeWhen(
+          data: (data) => data != null && data.enabled,
+          orElse: () => false,
+        ) ||
+        fipsUpdatesProvider.maybeWhen(
+          data: (data) => data != null && data.enabled,
+          orElse: () => false,
+        );
+
+    return FIPSData(
+      type: FIPSType.fipsUpdates,
+      canEnable: canEnable,
+      enabled: enabled,
+    );
+  }
+
+  void setType(FIPSType type) {
+    state = state.copyWith(type: type);
+  }
+
+  Future<void> enable() async {
+    final selectedProvider = switch (state.type) {
+      FIPSType.fips => UbuntuProFeature.fips,
+      FIPSType.fipsUpdates => UbuntuProFeature.fipsUpdates,
+    };
+    await ref
+        .read(ubuntuProFeatureModelProvider(selectedProvider).notifier)
+        .enableFeature();
   }
 }
 

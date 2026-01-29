@@ -1244,6 +1244,48 @@ abstract class AppLocalizations {
   /// **'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.'**
   String get ubuntuProComplianceFIPSDescription;
 
+  /// No description provided for @ubuntuProComplianceFIPSEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable FIPS'**
+  String get ubuntuProComplianceFIPSEnable;
+
+  /// No description provided for @ubuntuProComplianceFIPSDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.'**
+  String get ubuntuProComplianceFIPSDisclaimer;
+
+  /// No description provided for @ubuntuProComplianceFIPSPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your preferred FIPS option'**
+  String get ubuntuProComplianceFIPSPrompt;
+
+  /// No description provided for @ubuntuProComplianceFIPSUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'FIPS with updates'**
+  String get ubuntuProComplianceFIPSUpdates;
+
+  /// No description provided for @ubuntuProComplianceFIPSUpdatesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Installs FIPS 140-2 validated packages and allows for regular security updates.'**
+  String get ubuntuProComplianceFIPSUpdatesDescription;
+
+  /// No description provided for @ubuntuProComplianceFIPSNoUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'FIPS without updates'**
+  String get ubuntuProComplianceFIPSNoUpdates;
+
+  /// No description provided for @ubuntuProComplianceFIPSNoUpdatesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.'**
+  String get ubuntuProComplianceFIPSNoUpdatesDescription;
+
   /// No description provided for @ubuntuProComplianceDocumentation.
   ///
   /// In en, this message translates to:

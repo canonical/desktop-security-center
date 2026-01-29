@@ -602,6 +602,31 @@ class AppLocalizationsKo extends AppLocalizations {
       'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
 
   @override
+  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+
+  @override
+  String get ubuntuProComplianceFIPSDisclaimer =>
+      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+
+  @override
+  String get ubuntuProComplianceFIPSPrompt =>
+      'Choose your preferred FIPS option';
+
+  @override
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+
+  @override
+  String get ubuntuProComplianceFIPSUpdatesDescription =>
+      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+
+  @override
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+
+  @override
+  String get ubuntuProComplianceFIPSNoUpdatesDescription =>
+      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+
+  @override
   String get ubuntuProComplianceDocumentation =>
       'Security compliance documentation';
 
