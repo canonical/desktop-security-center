@@ -106,11 +106,7 @@ class MagicAttachService {
   static const defaultConfigFile = 'uaclient.conf';
   static const v1MagicAttach = '/v1/magic-attach';
 
-  late final String _apiBase;
-
-  Future<void> init() async {
-    _apiBase = await _getAPIBase();
-  }
+  late final String _apiBase = _getAPIBase();
 
   Future<MagicAttachResponse> newToken() async {
     final uri = Uri.parse(_apiBase).replace(path: v1MagicAttach);
@@ -141,8 +137,8 @@ class MagicAttachService {
     return MagicAttachResponse.fromJson(jsonBody as Map<String, dynamic>);
   }
 
-  Future<String> _getAPIBase() async {
-    final configFile = await File(_getConfigPath()).readAsLines();
+  String _getAPIBase() {
+    final configFile = File(_getConfigPath()).readAsLinesSync();
     for (final line in configFile) {
       if (line.trim().startsWith('contract_url: ')) {
         final contractURL = line.replaceFirst('contract_url:', '').trim();
