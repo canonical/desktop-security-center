@@ -96,7 +96,7 @@ Future<void> main(List<String> args) async {
     () => UbuntuProManagerService()..init(),
     dispose: (service) => service.dispose(),
   );
-  registerService<MagicAttachService>(() => MagicAttachService()..init());
+  registerService<MagicAttachService>(MagicAttachService.new);
 
   // Initialize available routes
   await AvailableRoutes.init();

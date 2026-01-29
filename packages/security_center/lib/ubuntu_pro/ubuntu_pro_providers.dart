@@ -332,7 +332,6 @@ class MagicAttachModel extends _$MagicAttachModel {
 
   @override
   Future<MagicAttachData> build() async {
-    await _service.init();
     final response = await _service.newToken();
     _timer = Timer.periodic(
       Duration(seconds: 10),
