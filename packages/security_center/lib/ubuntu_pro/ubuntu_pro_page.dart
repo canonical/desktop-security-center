@@ -9,6 +9,8 @@ import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/security_center_list_tile.dart';
+import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
 class UbuntuProPage extends ConsumerWidget {
@@ -46,20 +48,16 @@ class UbuntuProPage extends ConsumerWidget {
             availabilityProvider.value!.available) ...[
           _ESMSection(),
           _LivepatchSection(),
-          YaruBorderContainer(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            child: ListTile(
-              onTap: () {
-                navigator.pushNamed(Routes.compliance.route);
-              },
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(l10n.ubuntuProCompliance),
-                  YaruIconButton(icon: Icon(Icons.chevron_right)),
-                ],
+          TileList(
+            children: [
+              SecurityCenterListTile(
+                title: l10n.ubuntuProCompliance,
+                trailing: Icon(Icons.chevron_right),
+                onTap: () {
+                  navigator.pushNamed(Routes.compliance.route);
+                },
               ),
-            ),
+            ],
           ),
           ref.watch(ubuntuProModelProvider).attached
               ? ElevatedButton(
@@ -121,16 +119,17 @@ class _UbuntuProStatus extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
 
-    return !ref.watch(ubuntuProModelProvider).attached
+    return ref.watch(ubuntuProModelProvider).attached
         ? Column(
             children: [
               const SizedBox(height: 24),
-              YaruBorderContainer(
-                padding: EdgeInsetsGeometry.symmetric(vertical: 8),
-                child: ListTile(
-                  leading: const Icon(YaruIcons.checkmark, size: 24),
-                  title: Text(l10n.ubuntuProEnabled),
-                ),
+              TileList(
+                children: [
+                  SecurityCenterListTile(
+                    leading: const Icon(YaruIcons.checkmark, size: 24),
+                    title: l10n.ubuntuProEnabled,
+                  ),
+                ],
               ),
             ],
           )
@@ -176,65 +175,62 @@ class _ESMSection extends ConsumerWidget {
               theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
         ),
         Text(l10n.ubuntuProESMDescription),
-        YaruBorderContainer(
-          child: Column(
-            children: [
-              YaruSwitchListTile(
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 16,
-                ),
-                value: esmInfraProvider.whenOrNull(
-                      data: (data) => data != null && data.enabled,
-                    ) ??
-                    false,
-                onChanged: esmInfraProvider.whenOrNull(
-                  data: (data) => data != null && data.entitled
-                      ? (value) => ref
-                          .read(
-                            ubuntuProFeatureModelProvider(
-                              UbuntuProFeature.esmInfra,
-                            ).notifier,
-                          )
-                          .toggleFeature(value)
-                      : null,
-                ),
-                title: _LoadingText(
-                  text: l10n.ubuntuProESMMainTitle,
-                  isLoading: esmInfraProvider.isLoading,
-                ),
-                subtitle: Text(l10n.ubuntuProESMMainDescription),
+        TileList(
+          children: [
+            YaruSwitchListTile(
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
               ),
-              Divider(),
-              YaruSwitchListTile(
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 16,
-                ),
-                value: esmAppProvider.whenOrNull(
-                      data: (data) => data != null && data.enabled,
-                    ) ??
-                    false,
-                onChanged: esmAppProvider.whenOrNull(
-                  data: (data) => data != null && data.entitled
-                      ? (value) => ref
-                          .read(
-                            ubuntuProFeatureModelProvider(
-                              UbuntuProFeature.esmApps,
-                            ).notifier,
-                          )
-                          .toggleFeature(value)
-                      : null,
-                ),
-                title: _LoadingText(
-                  text: l10n.ubuntuProESMUniverseTitle,
-                  isLoading: esmAppProvider.isLoading,
-                ),
-                subtitle: Text(l10n.ubuntuProESMUniverseDescription),
+              value: esmInfraProvider.whenOrNull(
+                    data: (data) => data != null && data.enabled,
+                  ) ??
+                  false,
+              onChanged: esmInfraProvider.whenOrNull(
+                data: (data) => data != null && data.entitled
+                    ? (value) => ref
+                        .read(
+                          ubuntuProFeatureModelProvider(
+                            UbuntuProFeature.esmInfra,
+                          ).notifier,
+                        )
+                        .toggleFeature(value)
+                    : null,
               ),
-            ],
-          ),
-        ),
+              title: _LoadingText(
+                text: l10n.ubuntuProESMMainTitle,
+                isLoading: esmInfraProvider.isLoading,
+              ),
+              subtitle: Text(l10n.ubuntuProESMMainDescription),
+            ),
+            YaruSwitchListTile(
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
+              ),
+              value: esmAppProvider.whenOrNull(
+                    data: (data) => data != null && data.enabled,
+                  ) ??
+                  false,
+              onChanged: esmAppProvider.whenOrNull(
+                data: (data) => data != null && data.entitled
+                    ? (value) => ref
+                        .read(
+                          ubuntuProFeatureModelProvider(
+                            UbuntuProFeature.esmApps,
+                          ).notifier,
+                        )
+                        .toggleFeature(value)
+                    : null,
+              ),
+              title: _LoadingText(
+                text: l10n.ubuntuProESMUniverseTitle,
+                isLoading: esmAppProvider.isLoading,
+              ),
+              subtitle: Text(l10n.ubuntuProESMUniverseDescription),
+            ),
+          ],
+        )
       ].separatedBy(const SizedBox(height: 12)),
     );
   }
@@ -258,53 +254,50 @@ class _LivepatchSection extends ConsumerWidget {
           style:
               theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
         ),
-        YaruBorderContainer(
-          child: Column(
-            children: [
-              YaruSwitchListTile(
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 16,
-                ),
-                value: livepatchProvider.whenOrNull(
-                      data: (data) => data != null && data.enabled,
-                    ) ??
-                    false,
-                onChanged: livepatchProvider.whenOrNull(
-                  data: (data) => data != null && data.entitled
-                      ? (value) => ref
-                          .read(
-                            ubuntuProFeatureModelProvider(
-                              UbuntuProFeature.livepatch,
-                            ).notifier,
-                          )
-                          .toggleFeature(value)
-                      : null,
-                ),
-                title: _LoadingText(
-                  text: l10n.ubuntuProLivepatchEnableTitle,
-                  isLoading: livepatchProvider.isLoading,
-                ),
-                subtitle: Text(l10n.ubuntuProLivepatchEnableDescription),
+        TileList(
+          children: [
+            YaruSwitchListTile(
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
               ),
-              Divider(),
-              YaruSwitchListTile(
-                value: statusIconProvider.whenOrNull(
-                      data: (data) => data.showStatusIcon,
-                    ) ??
-                    false,
-                onChanged: (value) => ref
-                    .read(gSettingsUpdateNotifierModelProvider.notifier)
-                    .toggleStatusIcon(value),
-                title: Text(l10n.ubuntuProLivepatchShowTitle),
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 16,
-                ),
+              value: livepatchProvider.whenOrNull(
+                    data: (data) => data != null && data.enabled,
+                  ) ??
+                  false,
+              onChanged: livepatchProvider.whenOrNull(
+                data: (data) => data != null && data.entitled
+                    ? (value) => ref
+                        .read(
+                          ubuntuProFeatureModelProvider(
+                            UbuntuProFeature.livepatch,
+                          ).notifier,
+                        )
+                        .toggleFeature(value)
+                    : null,
               ),
-            ],
-          ),
-        ),
+              title: _LoadingText(
+                text: l10n.ubuntuProLivepatchEnableTitle,
+                isLoading: livepatchProvider.isLoading,
+              ),
+              subtitle: Text(l10n.ubuntuProLivepatchEnableDescription),
+            ),
+            YaruSwitchListTile(
+              value: statusIconProvider.whenOrNull(
+                    data: (data) => data.showStatusIcon,
+                  ) ??
+                  false,
+              onChanged: (value) => ref
+                  .read(gSettingsUpdateNotifierModelProvider.notifier)
+                  .toggleStatusIcon(value),
+              title: Text(l10n.ubuntuProLivepatchShowTitle),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
+              ),
+            ),
+          ],
+        )
       ].separatedBy(const SizedBox(height: 12)),
     );
   }
