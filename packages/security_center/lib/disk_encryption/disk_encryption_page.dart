@@ -21,6 +21,8 @@ const defaultRecoveryKeyFileName = 'recovery-key.txt';
 
 const yaruProgressSize = 20.0;
 
+enum RecoveryKeyDialogMode { replace, reencrypt }
+
 class DiskEncryptionPage extends ConsumerWidget {
   const DiskEncryptionPage({super.key});
 
@@ -231,7 +233,12 @@ void showReplaceRecoveryKeyDialog(BuildContext context) {
 }
 
 class ReplaceRecoveryKeyDialog extends ConsumerWidget {
-  const ReplaceRecoveryKeyDialog({super.key});
+  const ReplaceRecoveryKeyDialog({
+    this.mode = RecoveryKeyDialogMode.replace,
+    super.key,
+  });
+
+  final RecoveryKeyDialogMode mode;
 
   void saveToClipboard(BuildContext context, String text) {
     final l10n = AppLocalizations.of(context);
