@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/routes.dart';
 import 'package:security_center/ubuntu_pro/attach_dialog.dart';
-import 'package:security_center/ubuntu_pro/detatch_dialog.dart';
+import 'package:security_center/ubuntu_pro/detach_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
@@ -119,7 +119,7 @@ class _UbuntuProStatus extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
 
-    return ref.watch(ubuntuProModelProvider).attached
+    return !ref.watch(ubuntuProModelProvider).attached
         ? Column(
             children: [
               const SizedBox(height: 24),
@@ -230,7 +230,7 @@ class _ESMSection extends ConsumerWidget {
               subtitle: Text(l10n.ubuntuProESMUniverseDescription),
             ),
           ],
-        )
+        ),
       ].separatedBy(const SizedBox(height: 12)),
     );
   }
@@ -297,7 +297,7 @@ class _LivepatchSection extends ConsumerWidget {
               ),
             ),
           ],
-        )
+        ),
       ].separatedBy(const SizedBox(height: 12)),
     );
   }
