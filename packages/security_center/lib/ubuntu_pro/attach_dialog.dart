@@ -4,6 +4,7 @@ import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
+import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:yaru/yaru.dart';
 
@@ -12,18 +13,28 @@ class AttachDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Navigator(
+      onGenerateRoute: (settings) =>
+          MaterialPageRoute(builder: (_) => _AttachDialogContent()),
+    );
+  }
+}
+
+class _AttachDialogContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
     return AlertDialog(
       title: YaruDialogTitleBar(
         title: Text(l10n.ubuntuProEnablePro),
+        onClose: Navigator.of(context, rootNavigator: true).pop,
       ),
       titlePadding: EdgeInsets.zero,
+      contentPadding: EdgeInsets.zero,
       content: SizedBox(
         width: 500,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ScrollablePage(
           children: [
             YaruBorderContainer(
               child: Column(
@@ -34,8 +45,7 @@ class AttachDialog extends StatelessWidget {
                       horizontal: 16,
                     ),
                     onTap: () => Navigator.of(context).push(
-                      DialogRoute(
-                        context: context,
+                      MaterialPageRoute(
                         builder: (context) => _MagicLinkDialog(),
                       ),
                     ),
@@ -55,8 +65,7 @@ class AttachDialog extends StatelessWidget {
                       horizontal: 16,
                     ),
                     onTap: () => Navigator.of(context).push(
-                      DialogRoute(
-                        context: context,
+                      MaterialPageRoute(
                         builder: (context) => _TokenDialog(),
                       ),
                     ),
@@ -110,13 +119,24 @@ class _MagicLinkDialog extends ConsumerWidget {
             const Spacer(),
           ],
         ),
+        onClose: Navigator.of(context, rootNavigator: true).pop,
       ),
       titlePadding: EdgeInsets.zero,
+      contentPadding: EdgeInsets.zero,
+      actions: magicAttachProvider.whenOrNull(
+        data: (data) => data.validContract
+            ? [
+                ElevatedButton(
+                  onPressed: () =>
+                      ref.read(magicAttachModelProvider.notifier).attach(),
+                  child: Text(l10n.ubuntuProEnable),
+                ),
+              ]
+            : null,
+      ),
       content: SizedBox(
         width: 500,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ScrollablePage(
           children: [
             Text(l10n.ubuntuProMagicPrompt),
             Row(
@@ -144,27 +164,20 @@ class _MagicLinkDialog extends ConsumerWidget {
                         data: (data) => data.validContract,
                       ) ??
                       false,
-                  child: Icon(YaruIcons.ok),
-                )
+                  child: Icon(
+                    YaruIcons.ok,
+                    color: Colors.green,
+                  ),
+                ),
               ],
             ),
-            magicAttachProvider.whenOrNull(
-                  data: (data) => data.validContract
-                      ? ElevatedButton(
-                          onPressed: () => ref
-                              .read(magicAttachModelProvider.notifier)
-                              .attach(),
-                          child: Text(l10n.ubuntuProEnable),
-                        )
-                      : MarkdownText(
-                          l10n.ubuntuProMagicDescription(
-                            'ubuntu.com/pro/attach'
-                                .link('https://ubuntu.com/pro/attach'),
-                            data.response.userCode,
-                          ),
-                        ),
-                ) ??
-                SizedBox.shrink(),
+            if (magicAttachProvider.asData?.value.validContract == false)
+              MarkdownText(
+                l10n.ubuntuProMagicDescription(
+                  'ubuntu.com/pro/attach'.link('https://ubuntu.com/pro/attach'),
+                  magicAttachProvider.asData!.value.response.userCode,
+                ),
+              )
           ].separatedBy(const SizedBox(height: 24)),
         ),
       ),
@@ -204,8 +217,10 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
             const Spacer(),
           ],
         ),
+        onClose: Navigator.of(context, rootNavigator: true).pop,
       ),
       titlePadding: EdgeInsets.zero,
+      contentPadding: EdgeInsets.zero,
       actions: [
         ElevatedButton(
           onPressed: canInput
@@ -226,8 +241,7 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
       ],
       content: SizedBox(
         width: 500,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ScrollablePage(
           children: [
             MarkdownText(
               l10n.ubuntuProTokenPrompt(

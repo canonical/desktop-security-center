@@ -12,7 +12,7 @@ class DetachDialog extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     return AlertDialog(
       title: YaruDialogTitleBar(
-        title: Text(l10n.ubuntuProDisable),
+        title: Text(l10n.ubuntuProDisablePro),
       ),
       titlePadding: EdgeInsets.zero,
       actions: [
