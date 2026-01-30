@@ -554,7 +554,14 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
+  String get ubuntuProMagicError =>
+      'Unable to enable Ubuntu Pro, please try again';
+
+  @override
   String get ubuntuProEnableToken => 'Enable with a token';
+
+  @override
+  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {

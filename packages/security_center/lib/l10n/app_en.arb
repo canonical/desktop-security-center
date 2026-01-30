@@ -263,7 +263,9 @@
             }
         }
     },
+    "ubuntuProMagicError": "Unable to enable Ubuntu Pro, please try again",
     "ubuntuProEnableToken": "Enable with a token",
+    "ubuntuProEnableTokenError": "Unable to enable Ubuntu Pro",
     "ubuntuProEnableTokenSubtitle": "From your IT admin or from {proLink}",
     "@ubuntuProEnableTokenSubtitle": {
         "placeholders": {

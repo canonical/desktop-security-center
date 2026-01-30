@@ -1154,11 +1154,23 @@ abstract class AppLocalizations {
   /// **'You can also log in at {attachLink} and enter the code {attachCode}'**
   String ubuntuProMagicDescription(String attachLink, String attachCode);
 
+  /// No description provided for @ubuntuProMagicError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to enable Ubuntu Pro, please try again'**
+  String get ubuntuProMagicError;
+
   /// No description provided for @ubuntuProEnableToken.
   ///
   /// In en, this message translates to:
   /// **'Enable with a token'**
   String get ubuntuProEnableToken;
+
+  /// No description provided for @ubuntuProEnableTokenError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to enable Ubuntu Pro'**
+  String get ubuntuProEnableTokenError;
 
   /// No description provided for @ubuntuProEnableTokenSubtitle.
   ///
