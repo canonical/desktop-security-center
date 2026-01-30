@@ -13,6 +13,27 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 part 'ubuntu_pro_providers.g.dart';
 part 'ubuntu_pro_providers.freezed.dart';
 
+@freezed
+sealed class UbuntuProAttachState with _$UbuntuProAttachState {
+  factory UbuntuProAttachState.input() = UbuntuProAttachStateInput;
+  factory UbuntuProAttachState.loading() = UbuntuProAttachStateLoading;
+  factory UbuntuProAttachState.error() = UbuntuProAttachStateError;
+  factory UbuntuProAttachState.success() = UbuntuProAttachStateSuccess;
+}
+
+@freezed
+class UbuntuProData with _$UbuntuProData {
+  factory UbuntuProData({
+    required UbuntuProAttachState state,
+    required UbuntuProManagerData manager,
+    @Default('') String token,
+  }) = _UbuntuProData;
+
+  const UbuntuProData._();
+
+  bool get validToken => token.length >= 24 && token.length <= 30;
+}
+
 @riverpod
 class UbuntuProModel extends _$UbuntuProModel {
   final _service = getService<UbuntuProManagerService>();
@@ -20,18 +41,40 @@ class UbuntuProModel extends _$UbuntuProModel {
   @override
   UbuntuProData build() {
     _service.stream.stream.listen((data) {
-      state = data;
+      state = state.copyWith(manager: _service.data);
     });
 
-    return _service.data;
+    return UbuntuProData(
+      manager: _service.data,
+      state: UbuntuProAttachState.input(),
+    );
   }
 
-  Future<void> attach(String token) async {
-    await _service.attach(token);
+  Future<void> attach() async {
+    try {
+      state = state.copyWith(state: UbuntuProAttachState.loading());
+      await _service.attach(state.token);
+      state = state.copyWith(state: UbuntuProAttachState.success());
+    } on DBusMethodResponseException {
+      state = state.copyWith(state: UbuntuProAttachState.error());
+    }
   }
 
   Future<void> detach() async {
-    await _service.detach();
+    try {
+      state = state.copyWith(state: UbuntuProAttachState.loading());
+      await _service.detach();
+      state = state.copyWith(state: UbuntuProAttachState.success());
+    } on DBusMethodResponseException {
+      state = state.copyWith(state: UbuntuProAttachState.error());
+    }
+  }
+
+  void setToken(String token) {
+    if (state.state is UbuntuProAttachStateError) {
+      state = state.copyWith(state: UbuntuProAttachState.input());
+    }
+    state = state.copyWith(token: token);
   }
 }
 
@@ -375,6 +418,7 @@ class FIPSModel extends _$FIPSModel {
 @freezed
 class MagicAttachData with _$MagicAttachData {
   factory MagicAttachData({
+    required UbuntuProAttachState state,
     required MagicAttachResponse response,
   }) = _MagicAttachData;
 
@@ -385,6 +429,8 @@ class MagicAttachData with _$MagicAttachData {
 
 @riverpod
 class MagicAttachModel extends _$MagicAttachModel {
+  static const refreshDuration = Duration(seconds: 10);
+
   final _service = getService<MagicAttachService>();
   final _proService = getService<UbuntuProManagerService>();
   late final Timer _timer;
@@ -393,11 +439,15 @@ class MagicAttachModel extends _$MagicAttachModel {
   Future<MagicAttachData> build() async {
     final response = await _service.newToken();
     _timer = Timer.periodic(
-      Duration(seconds: 10),
+      refreshDuration,
       (timer) => updateToken(),
     );
     ref.onDispose(() => _timer.cancel());
-    return MagicAttachData(response: response);
+
+    return MagicAttachData(
+      response: response,
+      state: UbuntuProAttachState.input(),
+    );
   }
 
   Future<void> updateToken() async {
@@ -413,12 +463,18 @@ class MagicAttachModel extends _$MagicAttachModel {
   }
 
   Future<void> attach() async {
-    if (state.value == null || !state.value!.validContract) {
-      state = AsyncError(
-        'Magic attach contract is invalid',
-        StackTrace.current,
+    try {
+      state = AsyncData(
+        state.value!.copyWith(state: UbuntuProAttachState.loading()),
+      );
+      await _proService.attach(state.value!.response.contractToken!);
+      state = AsyncData(
+        state.value!.copyWith(state: UbuntuProAttachState.success()),
+      );
+    } on DBusMethodResponseException {
+      state = AsyncData(
+        state.value!.copyWith(state: UbuntuProAttachState.error()),
       );
     }
-    await _proService.attach(state.value!.response.contractToken!);
   }
 }

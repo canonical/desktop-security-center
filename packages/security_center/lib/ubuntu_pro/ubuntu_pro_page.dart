@@ -59,7 +59,7 @@ class UbuntuProPage extends ConsumerWidget {
               ),
             ],
           ),
-          ref.watch(ubuntuProModelProvider).attached
+          ref.watch(ubuntuProModelProvider).manager.attached
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: YaruColors.red,
@@ -119,7 +119,7 @@ class _UbuntuProStatus extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
 
-    return !ref.watch(ubuntuProModelProvider).attached
+    return ref.watch(ubuntuProModelProvider).manager.attached
         ? Column(
             children: [
               const SizedBox(height: 24),

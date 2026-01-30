@@ -11,19 +11,19 @@ part 'ubuntu_pro_service.freezed.dart';
 part 'ubuntu_pro_service.g.dart';
 
 @freezed
-class UbuntuProData with _$UbuntuProData {
-  factory UbuntuProData({
+class UbuntuProManagerData with _$UbuntuProManagerData {
+  factory UbuntuProManagerData({
     required bool attached,
-  }) = _UbuntuProData;
+  }) = _UbuntuProManagerData;
 }
 
 class UbuntuProManagerService {
   final DBusClient _dbusClient = DBusClient.system();
   late final StreamSubscription<DBusSignal> _propertiesChangedSignal;
   late final DBusRemoteObjectManager _manager;
-  UbuntuProData data = UbuntuProData(attached: false);
+  UbuntuProManagerData data = UbuntuProManagerData(attached: false);
 
-  late final StreamController<UbuntuProData> stream;
+  late final StreamController<UbuntuProManagerData> stream;
 
   Future<void> init() async {
     stream = StreamController.broadcast();
@@ -40,7 +40,7 @@ class UbuntuProManagerService {
       'com.canonical.UbuntuAdvantage.Manager',
       'Attached',
     );
-    data = UbuntuProData(attached: attached.asBoolean());
+    data = UbuntuProManagerData(attached: attached.asBoolean());
     stream.add(data);
   }
 
@@ -60,15 +60,11 @@ class UbuntuProManagerService {
   }
 
   Future<void> attach(String token) async {
-    try {
-      await _manager.callMethod(
-        'com.canonical.UbuntuAdvantage.Manager',
-        'Attach',
-        [DBusString(token)],
-      );
-    } on DBusMethodResponseException catch (error, stackTrace) {
-      // TODO: do something with error
-    }
+    await _manager.callMethod(
+      'com.canonical.UbuntuAdvantage.Manager',
+      'Attach',
+      [DBusString(token)],
+    );
   }
 
   Future<void> detach() async {
