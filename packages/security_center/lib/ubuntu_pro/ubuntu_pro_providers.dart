@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:dbus/dbus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -7,7 +6,6 @@ import 'package:gsettings/gsettings.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/ubuntu_pro_service.dart';
-import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 part 'ubuntu_pro_providers.g.dart';
@@ -78,53 +76,6 @@ class UbuntuProModel extends _$UbuntuProModel {
   }
 }
 
-@freezed
-class UbuntuProAvailabilityData with _$UbuntuProAvailabilityData {
-  factory UbuntuProAvailabilityData({
-    required bool available,
-    required String? version,
-  }) = _UbuntuProAvailabilityData;
-}
-
-@riverpod
-class UbuntuProAvailabilityModel extends _$UbuntuProAvailabilityModel {
-  @override
-  Future<UbuntuProAvailabilityData> build() async {
-    final version = await _getVersion();
-    return UbuntuProAvailabilityData(
-      available: _isLTS(version),
-      version: version,
-    );
-  }
-
-  Future<String?> _getVersion() async {
-    final filePath = Platform.environment['SNAP'] != null
-        ? '/var/lib/snapd/hostfs/etc/os-release'
-        : '/etc/os-release';
-
-    final osRelease = await File(filePath).readAsLines();
-    for (final line in osRelease) {
-      final split = line.split('=');
-      final key = split[0].trim();
-      var value = split[1].trim();
-      if ((value.startsWith('"') && value.endsWith('"')) ||
-          (value.startsWith('\'') && value.endsWith('\''))) {
-        value = value.substring(1, value.length - 1);
-      }
-
-      if (key.toUpperCase() == 'VERSION') {
-        return value;
-      }
-    }
-
-    return null;
-  }
-
-  bool _isLTS(String? version) {
-    return version != null && version.contains('LTS');
-  }
-}
-
 @riverpod
 Stream<List<String>> updateNotifierStream(Ref ref) async* {
   final settings = GSettings('com.ubuntu.update-notifier');
@@ -164,195 +115,87 @@ class GSettingsUpdateNotifierModel extends _$GSettingsUpdateNotifierModel {
 }
 
 @freezed
-class UbuntuProServiceData with _$UbuntuProServiceData {
-  factory UbuntuProServiceData({
-    required DBusRemoteObject object,
-    required String path,
-    required String name,
-    required bool entitled,
-    required String status,
-  }) = _UbuntuProServiceData;
-
-  factory UbuntuProServiceData.fromMap(
-    String path,
-    Map<String, DBusValue> dbusMap,
-  ) {
-    return UbuntuProServiceData(
-      object: DBusRemoteObject(
-        DBusClient.system(),
-        name: 'com.canonical.UbuntuAdvantage',
-        path: DBusObjectPath(path),
-      ),
-      path: path,
-      name: dbusMap['Name']!.asString(),
-      entitled: dbusMap['Entitled']!.asString() == 'yes',
-      status: dbusMap['Status']!.asString(),
-    );
-  }
-
-  const UbuntuProServiceData._();
-
-  bool get enabled => status == 'enabled';
+sealed class UbuntuProFeatureState with _$UbuntuProFeatureState {
+  factory UbuntuProFeatureState.enabled() = UbuntuProFeatureStateEnabled;
+  factory UbuntuProFeatureState.disabled() = UbuntuProFeatureStateDisabled;
+  factory UbuntuProFeatureState.loading() = UbuntuProFeatureStateLoading;
+  factory UbuntuProFeatureState.error() = UbuntuProFeatureStateError;
 }
 
-enum UbuntuProFeature {
-  anboxCloud,
-  fips,
-  fipsUpdates,
-  realtimeKernel,
-  landscape,
-  esmInfra,
-  esmApps,
-  livepatch,
-  usg,
+@freezed
+class UbuntuProFeatureData with _$UbuntuProFeatureData {
+  factory UbuntuProFeatureData({
+    required UbuntuProFeatureState state,
+    required UbuntuProServiceData data,
+    required StreamSubscription<UbuntuProServiceData>? stream,
+  }) = _UbuntuProFeatureData;
+
+  const UbuntuProFeatureData._();
+
+  bool get canToggle => data.entitled && state is! UbuntuProFeatureStateLoading;
 }
 
 @riverpod
 class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
-  final DBusClient dbusClient = DBusClient.system();
-  late final StreamSubscription<DBusSignal> stream;
-
-  StreamSubscription<DBusSignal>? propertiesChangedStream;
+  final _service = getService<UbuntuProManagerService>();
 
   @override
-  Future<UbuntuProServiceData?> build(UbuntuProFeature feature) async {
-    final object = DBusRemoteObjectManager(
-      dbusClient,
-      name: 'com.canonical.UbuntuAdvantage',
-      path: DBusObjectPath('/'),
-    );
-
-    // obtain initial feature state
-    final objects = await object.getManagedObjects();
-    UbuntuProServiceData? value;
-    for (final object in objects.entries) {
-      if (!object.key.value
-          .startsWith('/com/canonical/UbuntuAdvantage/Services/')) {
-        continue;
-      }
-      value = _featureStatus(object.key.value, object.value);
-      if (value != null) {
-        await _clearListeners();
-        propertiesChangedStream =
-            value.object.propertiesChanged.listen(_onPropertiesChanged);
-        break;
-      }
-    }
-
-    stream = object.signals.listen((signal) {
-      switch (signal) {
-        case DBusObjectManagerInterfacesAddedSignal():
-          _onInterfacesAdded(signal);
-          break;
-        case DBusObjectManagerInterfacesRemovedSignal():
-          _onInterfacesRemoved(signal);
-          break;
-        default:
-          break;
-      }
-    });
-    ref.onDispose(() async {
-      await stream.cancel();
-    });
-
-    return value;
-  }
-
-  void _onPropertiesChanged(DBusPropertiesChangedSignal signal) {
-    if (signal.changedProperties['Status'] != null) {
-      state = AsyncData(
-        state.value!
-            .copyWith(status: signal.changedProperties['Status']!.asString()),
-      );
-    }
-  }
-
-  Future<void> _onInterfacesAdded(
-    DBusObjectManagerInterfacesAddedSignal signal,
-  ) async {
-    if (signal.changedPath.value
-        .startsWith('/com/canonical/UbuntuAdvantage/Services/')) {
-      final data = _featureStatus(
-        signal.changedPath.value,
-        signal.interfacesAndProperties,
-      );
-      if (data != null) {
-        await _clearListeners();
-        state = AsyncData(data);
-        propertiesChangedStream =
-            data.object.propertiesChanged.listen(_onPropertiesChanged);
-      }
-    }
-  }
-
-  Future<void> _clearListeners() async {
-    if (state.valueOrNull != null) {
-      await propertiesChangedStream?.cancel();
-      propertiesChangedStream = null;
-    }
-  }
-
-  UbuntuProServiceData? _featureStatus(
-    String path,
-    Map<String, Map<String, DBusValue>> properties,
-  ) {
-    final obj = UbuntuProServiceData.fromMap(
-      path,
-      properties['com.canonical.UbuntuAdvantage.Service']!,
-    );
-
-    if (obj.name != feature.name.toKebabCase()) {
+  UbuntuProFeatureData? build(UbuntuProFeature feature) {
+    final featureService = _service.getFeature(feature);
+    if (featureService == null) {
       return null;
     }
 
-    return obj;
+    ref.onDispose(() async => await state?.stream?.cancel());
+    return UbuntuProFeatureData(
+      state: featureService.enabled
+          ? UbuntuProFeatureState.enabled()
+          : UbuntuProFeatureState.disabled(),
+      data: featureService,
+      stream: featureService.stream?.stream.listen(_featureUpdated),
+    );
   }
 
-  Future<void> _onInterfacesRemoved(
-    DBusObjectManagerInterfacesRemovedSignal signal,
-  ) async {
-    if (signal.changedPath.value
-            .startsWith('/com/canonical/UbuntuAdvantage/Services/') &&
-        state.valueOrNull != null &&
-        state.value!.path == signal.changedPath.value) {
-      await _clearListeners();
-      state = AsyncData(null);
-    }
+  void _featureUpdated(UbuntuProServiceData data) {
+    state = state?.copyWith(
+      data: data,
+      state: data.enabled
+          ? UbuntuProFeatureState.enabled()
+          : UbuntuProFeatureState.disabled(),
+    );
   }
 
   Future<void> toggleFeature(bool value) async {
-    if (state.valueOrNull == null) {
+    if (state == null) {
       return;
     }
 
-    state.value!.enabled ? await disableFeature() : await enableFeature();
+    state!.data.enabled ? await disableFeature() : await enableFeature();
   }
 
   Future<void> enableFeature() async {
-    if (state.valueOrNull == null) {
+    if (state == null) {
       return;
     }
 
-    state = const AsyncLoading();
+    state = state?.copyWith(state: UbuntuProFeatureState.loading());
     try {
-      await state.value?.object
-          .callMethod('com.canonical.UbuntuAdvantage.Service', 'Enable', []);
+      await _service.enableFeature(feature);
     } on DBusMethodResponseException {
-      state = AsyncData(state.value);
+      state = state?.copyWith(state: UbuntuProFeatureState.error());
     }
   }
 
   Future<void> disableFeature() async {
-    if (state.valueOrNull == null) {
+    if (state == null) {
       return;
     }
 
-    state = const AsyncLoading();
+    state = state?.copyWith(state: UbuntuProFeatureState.loading());
     try {
-      await state.value?.object
-          .callMethod('com.canonical.UbuntuAdvantage.Service', 'Disable', []);
+      await _service.disableFeature(feature);
     } on DBusMethodResponseException {
-      state = AsyncData(state.value);
+      state = state?.copyWith(state: UbuntuProFeatureState.error());
     }
   }
 }
@@ -380,18 +223,9 @@ class FIPSModel extends _$FIPSModel {
     final fipsUpdatesProvider =
         ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.fipsUpdates));
 
-    final canEnable = fipsProvider.maybeWhen(
-      data: (data) => data != null && data.entitled,
-      orElse: () => false,
-    );
-    final enabled = fipsProvider.maybeWhen(
-          data: (data) => data != null && data.enabled,
-          orElse: () => false,
-        ) ||
-        fipsUpdatesProvider.maybeWhen(
-          data: (data) => data != null && data.enabled,
-          orElse: () => false,
-        );
+    final canEnable = fipsProvider?.data.entitled ?? false;
+    final enabled = (fipsProvider?.data.enabled ?? false) ||
+        (fipsUpdatesProvider?.data.enabled ?? false);
 
     return FIPSData(
       type: FIPSType.fipsUpdates,

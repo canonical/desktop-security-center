@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/routes.dart';
+import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:security_center/ubuntu_pro/attach_dialog.dart';
 import 'package:security_center/ubuntu_pro/detach_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
@@ -22,7 +23,7 @@ class UbuntuProPage extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final navigator = Navigator.of(context);
 
-    final availabilityProvider = ref.watch(ubuntuProAvailabilityModelProvider);
+    final provider = ref.watch(ubuntuProModelProvider);
 
     return ScrollablePage(
       children: [
@@ -44,8 +45,7 @@ class UbuntuProPage extends ConsumerWidget {
           ),
         ),
         _UbuntuProAvailability(),
-        if (availabilityProvider.value != null &&
-            availabilityProvider.value!.available) ...[
+        if (provider.manager.available ?? false) ...[
           _ESMSection(),
           _LivepatchSection(),
           TileList(
@@ -84,33 +84,29 @@ class _UbuntuProAvailability extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
 
-    return ref.watch(ubuntuProAvailabilityModelProvider).when(
-          data: (data) => data.available
-              ? _UbuntuProStatus()
-              : Column(
-                  children: [
-                    MarkdownText(
-                      l10n.ubuntuProDisabled(
-                        l10n.ubuntuProLearnMore.link('https://ubuntu.com/pro'),
-                      ),
-                      alignment: WrapAlignment.center,
-                    ),
-                    const SizedBox(height: 24),
-                    YaruBorderContainer(
-                      padding: EdgeInsetsGeometry.symmetric(vertical: 8),
-                      child: Center(
-                        child: ListTile(
-                          leading: const Icon(YaruIcons.edit_clear, size: 24),
-                          title: Text(l10n.ubuntuProNotSupported),
-                          subtitle: Text(l10n.ubuntuProNotSupportedDetails),
-                        ),
-                      ),
-                    ),
-                  ],
+    return ref.watch(ubuntuProModelProvider).manager.available ?? false
+        ? _UbuntuProStatus()
+        : Column(
+            children: [
+              MarkdownText(
+                l10n.ubuntuProDisabled(
+                  l10n.ubuntuProLearnMore.link('https://ubuntu.com/pro'),
                 ),
-          error: (error, stackTrace) => Text(error.toString()),
-          loading: () => const Center(child: YaruCircularProgressIndicator()),
-        );
+                alignment: WrapAlignment.center,
+              ),
+              const SizedBox(height: 24),
+              YaruBorderContainer(
+                padding: EdgeInsetsGeometry.symmetric(vertical: 8),
+                child: Center(
+                  child: ListTile(
+                    leading: const Icon(YaruIcons.edit_clear, size: 24),
+                    title: Text(l10n.ubuntuProNotSupported),
+                    subtitle: Text(l10n.ubuntuProNotSupportedDetails),
+                  ),
+                ),
+              ),
+            ],
+          );
   }
 }
 
@@ -182,24 +178,20 @@ class _ESMSection extends ConsumerWidget {
                 vertical: 8,
                 horizontal: 16,
               ),
-              value: esmInfraProvider.whenOrNull(
-                    data: (data) => data != null && data.enabled,
-                  ) ??
-                  false,
-              onChanged: esmInfraProvider.whenOrNull(
-                data: (data) => data != null && data.entitled
-                    ? (value) => ref
-                        .read(
-                          ubuntuProFeatureModelProvider(
-                            UbuntuProFeature.esmInfra,
-                          ).notifier,
-                        )
-                        .toggleFeature(value)
-                    : null,
-              ),
+              value: esmInfraProvider?.data.enabled ?? false,
+              onChanged: esmInfraProvider?.canToggle ?? false
+                  ? (value) => ref
+                      .read(
+                        ubuntuProFeatureModelProvider(
+                          UbuntuProFeature.esmInfra,
+                        ).notifier,
+                      )
+                      .toggleFeature(value)
+                  : null,
               title: _LoadingText(
                 text: l10n.ubuntuProESMMainTitle,
-                isLoading: esmInfraProvider.isLoading,
+                isLoading:
+                    esmInfraProvider?.state is UbuntuProFeatureStateLoading,
               ),
               subtitle: Text(l10n.ubuntuProESMMainDescription),
             ),
@@ -208,24 +200,20 @@ class _ESMSection extends ConsumerWidget {
                 vertical: 8,
                 horizontal: 16,
               ),
-              value: esmAppProvider.whenOrNull(
-                    data: (data) => data != null && data.enabled,
-                  ) ??
-                  false,
-              onChanged: esmAppProvider.whenOrNull(
-                data: (data) => data != null && data.entitled
-                    ? (value) => ref
-                        .read(
-                          ubuntuProFeatureModelProvider(
-                            UbuntuProFeature.esmApps,
-                          ).notifier,
-                        )
-                        .toggleFeature(value)
-                    : null,
-              ),
+              value: esmAppProvider?.data.enabled ?? false,
+              onChanged: esmAppProvider?.canToggle ?? false
+                  ? (value) => ref
+                      .read(
+                        ubuntuProFeatureModelProvider(
+                          UbuntuProFeature.esmApps,
+                        ).notifier,
+                      )
+                      .toggleFeature(value)
+                  : null,
               title: _LoadingText(
                 text: l10n.ubuntuProESMUniverseTitle,
-                isLoading: esmAppProvider.isLoading,
+                isLoading:
+                    esmAppProvider?.state is UbuntuProFeatureStateLoading,
               ),
               subtitle: Text(l10n.ubuntuProESMUniverseDescription),
             ),
@@ -261,24 +249,20 @@ class _LivepatchSection extends ConsumerWidget {
                 vertical: 8,
                 horizontal: 16,
               ),
-              value: livepatchProvider.whenOrNull(
-                    data: (data) => data != null && data.enabled,
-                  ) ??
-                  false,
-              onChanged: livepatchProvider.whenOrNull(
-                data: (data) => data != null && data.entitled
-                    ? (value) => ref
-                        .read(
-                          ubuntuProFeatureModelProvider(
-                            UbuntuProFeature.livepatch,
-                          ).notifier,
-                        )
-                        .toggleFeature(value)
-                    : null,
-              ),
+              value: livepatchProvider?.data.enabled ?? false,
+              onChanged: livepatchProvider?.canToggle ?? false
+                  ? (value) => ref
+                      .read(
+                        ubuntuProFeatureModelProvider(
+                          UbuntuProFeature.livepatch,
+                        ).notifier,
+                      )
+                      .toggleFeature(value)
+                  : null,
               title: _LoadingText(
                 text: l10n.ubuntuProLivepatchEnableTitle,
-                isLoading: livepatchProvider.isLoading,
+                isLoading:
+                    livepatchProvider?.state is UbuntuProFeatureStateLoading,
               ),
               subtitle: Text(l10n.ubuntuProLivepatchEnableDescription),
             ),
