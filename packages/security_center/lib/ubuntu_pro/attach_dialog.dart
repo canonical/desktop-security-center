@@ -184,7 +184,7 @@ class _MagicLinkDialog extends ConsumerWidget {
                       color: Colors.red,
                     ),
                   ),
-                ]
+                ],
               ],
             ),
             if (magicAttachProvider.asData?.value.validContract == false)
@@ -195,7 +195,7 @@ class _MagicLinkDialog extends ConsumerWidget {
                   ),
                   magicAttachProvider.asData!.value.response.userCode.bold(),
                 ),
-              )
+              ),
           ].separatedBy(const SizedBox(height: 24)),
         ),
       ),
