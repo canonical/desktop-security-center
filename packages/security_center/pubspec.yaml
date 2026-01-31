@@ -12,6 +12,7 @@ dependencies:
   args: ^2.5.0
   barcode_widget: ^2.0.4
   collection: ^1.18.0
+  dbus: ^0.7.11
   file: ^7.0.0
   flutter:
     sdk: flutter
@@ -20,10 +21,14 @@ dependencies:
     sdk: flutter
   flutter_markdown: ^0.7.3
   flutter_riverpod: ^2.5.1
+  flutter_svg: ^2.2.3
   form_field_validator: ^1.1.0
   freezed_annotation: ^2.4.1
+  gsettings: ^0.2.8
   handy_window: ^0.4.0
+  http: ^1.6.0
   jovial_svg: ^1.1.28
+  os_detect: ^2.0.3
   path: ^1.9.0
   riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5
@@ -57,3 +62,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/Ubuntu-tag.svg
