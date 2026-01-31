@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/l10n.dart';
+import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/tile_list.dart';
@@ -71,18 +72,14 @@ class _FIPSOptionsState extends ConsumerState<_FIPSOptions> {
     final l10n = AppLocalizations.of(context);
 
     final fipsProvider = ref.watch(fIPSModelProvider);
-    final fipsEntitled = ref
-        .watch(UbuntuProFeatureModelProvider(UbuntuProFeature.fips))
-        .maybeWhen(
-          data: (data) => data != null && data.entitled,
-          orElse: () => false,
-        );
-    final fipsUpdatesEntitled = ref
-        .watch(UbuntuProFeatureModelProvider(UbuntuProFeature.fips))
-        .maybeWhen(
-          data: (data) => data != null && data.entitled,
-          orElse: () => false,
-        );
+    final fipsCanToggle = ref
+            .watch(ubuntuProFeatureModelProvider(UbuntuProFeature.fips))
+            ?.canToggle ??
+        false;
+    final fipsUpdatesToggle = ref
+            .watch(ubuntuProFeatureModelProvider(UbuntuProFeature.fipsUpdates))
+            ?.canToggle ??
+        false;
 
     return TileList(
       children: [
@@ -95,7 +92,7 @@ class _FIPSOptionsState extends ConsumerState<_FIPSOptions> {
           ),
           value: FIPSType.fipsUpdates,
           groupValue: fipsProvider.type,
-          onChanged: fipsUpdatesEntitled
+          onChanged: fipsUpdatesToggle
               ? (value) => ref
                   .read(fIPSModelProvider.notifier)
                   .setType(FIPSType.fipsUpdates)
@@ -112,7 +109,7 @@ class _FIPSOptionsState extends ConsumerState<_FIPSOptions> {
           ),
           value: FIPSType.fips,
           groupValue: fipsProvider.type,
-          onChanged: fipsEntitled
+          onChanged: fipsCanToggle
               ? (value) =>
                   ref.read(fIPSModelProvider.notifier).setType(FIPSType.fips)
               : null,

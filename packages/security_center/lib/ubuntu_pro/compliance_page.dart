@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/l10n.dart';
+import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:security_center/ubuntu_pro/fips_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
@@ -36,22 +37,20 @@ class ComplianceHardeningPage extends ConsumerWidget {
                 vertical: 8,
                 horizontal: 16,
               ),
-              value: usgProvider.whenOrNull(
-                    data: (data) => data != null && data.enabled,
-                  ) ??
-                  false,
-              onChanged: usgProvider.whenOrNull(
-                data: (data) => data != null && data.entitled
-                    ? (value) => ref
-                        .read(
-                          ubuntuProFeatureModelProvider(
-                            UbuntuProFeature.usg,
-                          ).notifier,
-                        )
-                        .toggleFeature(value)
-                    : null,
+              value: usgProvider?.data.enabled ?? false,
+              onChanged: usgProvider?.canToggle ?? false
+                  ? (value) => ref
+                      .read(
+                        ubuntuProFeatureModelProvider(
+                          UbuntuProFeature.usg,
+                        ).notifier,
+                      )
+                      .toggleFeature(value)
+                  : null,
+              title: _LoadingText(
+                text: l10n.ubuntuProComplianceUSGTitle,
+                isLoading: usgProvider?.state is UbuntuProFeatureStateLoading,
               ),
-              title: Text(l10n.ubuntuProComplianceUSGTitle),
               subtitle: Text(l10n.ubuntuProComplianceUSGDescription),
             ),
             YaruSwitchListTile(
@@ -60,7 +59,7 @@ class ComplianceHardeningPage extends ConsumerWidget {
                 horizontal: 16,
               ),
               value: fipsProvider.enabled,
-              onChanged: !fipsProvider.canEnable
+              onChanged: fipsProvider.canEnable
                   ? (_) => showDialog(
                         context: context,
                         builder: (_) => const FIPSDialog(),
@@ -76,6 +75,31 @@ class ComplianceHardeningPage extends ConsumerWidget {
               .link('https://ubuntu.com/security/certifications/docs'),
         ),
       ].separatedBy(const SizedBox(height: 24)),
+    );
+  }
+}
+
+class _LoadingText extends StatelessWidget {
+  const _LoadingText({required this.text, required this.isLoading});
+
+  final String text;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Row(
+      children: [
+        Text(text),
+        if (isLoading) ...[
+          const SizedBox(width: 8),
+          SizedBox.square(
+            dimension: theme.textTheme.bodyMedium?.fontSize,
+            child: CircularProgressIndicator(),
+          ),
+        ],
+      ],
     );
   }
 }
