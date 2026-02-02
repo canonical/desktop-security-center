@@ -97,6 +97,10 @@ Future<void> main(List<String> args) async {
     dispose: (service) => service.dispose(),
   );
   registerService<MagicAttachService>(MagicAttachService.new);
+  registerService<GSettingsIconService>(
+    () => GSettingsIconService()..init(),
+    dispose: (service) => service.dispose(),
+  );
 
   // Initialize available routes
   await AvailableRoutes.init();

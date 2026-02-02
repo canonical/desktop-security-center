@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dbus/dbus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:gsettings/gsettings.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/ubuntu_pro_service.dart';
@@ -78,8 +77,8 @@ class UbuntuProModel extends _$UbuntuProModel {
 
 @riverpod
 Stream<List<String>> updateNotifierStream(Ref ref) async* {
-  final settings = GSettings('com.ubuntu.update-notifier');
-  await for (final keys in settings.keysChanged) {
+  final service = getService<GSettingsIconService>();
+  await for (final keys in service.stream.stream) {
     yield keys;
   }
 }
@@ -93,25 +92,19 @@ class GSettingsUpdateNotifierData with _$GSettingsUpdateNotifierData {
 
 @riverpod
 class GSettingsUpdateNotifierModel extends _$GSettingsUpdateNotifierModel {
-  final settings = GSettings('com.ubuntu.update-notifier');
+  final _service = getService<GSettingsIconService>();
 
   @override
   Future<GSettingsUpdateNotifierData> build() async {
     ref.watch(updateNotifierStreamProvider);
 
     return GSettingsUpdateNotifierData(
-      showStatusIcon: await _getStatusIcon(),
+      showStatusIcon: await _service.getStatusIcon(),
     );
   }
 
-  Future<bool> _getStatusIcon() async {
-    final showStatusIcon = await settings.get('show-livepatch-status-icon');
-    return showStatusIcon.asBoolean();
-  }
-
-  Future<void> toggleStatusIcon(bool value) async {
-    await settings.set('show-livepatch-status-icon', DBusBoolean(value));
-  }
+  Future<void> toggleStatusIcon(bool value) async =>
+      _service.toggleStatusIcon(value);
 }
 
 @freezed
