@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dbus/dbus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gsettings/gsettings.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:snapd/snapd.dart';
@@ -361,5 +362,32 @@ class MagicAttachService {
     }
 
     return path.join(defaultEtcPath, defaultConfigFile);
+  }
+}
+
+class GSettingsIconService {
+  final settings = GSettings('com.ubuntu.update-notifier');
+  late final StreamController<List<String>> stream;
+
+  late final StreamSubscription<List<String>> _streamSubscription;
+
+  Future<void> init() async {
+    stream = StreamController.broadcast();
+    _streamSubscription =
+        settings.keysChanged.listen((data) => stream.add(data));
+  }
+
+  Future<void> dispose() async {
+    await stream.close();
+    await _streamSubscription.cancel();
+  }
+
+  Future<bool> getStatusIcon() async {
+    final showStatusIcon = await settings.get('show-livepatch-status-icon');
+    return showStatusIcon.asBoolean();
+  }
+
+  Future<void> toggleStatusIcon(bool value) async {
+    await settings.set('show-livepatch-status-icon', DBusBoolean(value));
   }
 }
