@@ -49,7 +49,6 @@ Future<void> main(List<String> args) async {
   // Create and register feature service to determine available features
   final featureService = FeatureService(
     isDryRun: argResults.flag('dry-run'),
-    isCameraInterfaceEnabled: argResults.flag('enable-camera-interface'),
   );
   registerServiceInstance<FeatureService>(featureService);
 

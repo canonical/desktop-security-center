@@ -12,7 +12,6 @@ final _log = Logger('feature_service');
 class FeatureService {
   FeatureService({
     required this.isDryRun,
-    this.isCameraInterfaceEnabled = false,
     @visibleForTesting FileSystem? fs,
     @visibleForTesting
     ProcessResult Function(
@@ -28,7 +27,6 @@ class FeatureService {
     List<String> arguments,
   ) _runProcess;
   final bool isDryRun;
-  final bool isCameraInterfaceEnabled;
   bool? _isUsingFde;
 
   bool get isDiskEncryptionAvailable {
@@ -38,8 +36,6 @@ class FeatureService {
     _isUsingFde ??= _hasStorageEncryptedManaged() || _hasUbuntuDataEnc();
     return _isUsingFde!;
   }
-
-  bool get isCameraInterfaceAvailable => isCameraInterfaceEnabled || isDryRun;
 
   bool _hasStorageEncryptedManaged() {
     final result = _runProcess('snapctl', ['system-mode']);
