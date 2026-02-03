@@ -229,5 +229,7 @@
     "recoveryKeyPinEntropyBelowMin": "Weak PIN, make it longer or less predictable",
     "recoveryKeyPinEntropyBelowOptimal": "Fair PIN, make it longer or less predictable for better security",
     "recoveryKeyPinEntropyOptimal": "PIN is long enough",
-    "recoveryKeySomethingWentWrongHeader": "Something went wrong"
+    "recoveryKeySomethingWentWrongHeader": "Something went wrong",
+    "diskEncryptionAuthRemovalWarningHeader": "Any PIN and passphrase will be removed",
+    "diskEncryptionAuthRemovalWarningBody": "You can add them again after re-encryption"
 }

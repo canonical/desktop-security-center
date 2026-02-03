@@ -1069,6 +1069,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong'**
   String get recoveryKeySomethingWentWrongHeader;
+
+  /// No description provided for @diskEncryptionAuthRemovalWarningHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Any PIN and passphrase will be removed'**
+  String get diskEncryptionAuthRemovalWarningHeader;
+
+  /// No description provided for @diskEncryptionAuthRemovalWarningBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You can add them again after re-encryption'**
+  String get diskEncryptionAuthRemovalWarningBody;
 }
 
 class _AppLocalizationsDelegate

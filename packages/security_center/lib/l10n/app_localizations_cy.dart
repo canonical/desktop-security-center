@@ -501,4 +501,12 @@ class AppLocalizationsCy extends AppLocalizations {
 
   @override
   String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+
+  @override
+  String get diskEncryptionAuthRemovalWarningHeader =>
+      'Any PIN and passphrase will be removed';
+
+  @override
+  String get diskEncryptionAuthRemovalWarningBody =>
+      'You can add them again after re-encryption';
 }
