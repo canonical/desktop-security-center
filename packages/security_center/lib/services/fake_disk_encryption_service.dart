@@ -197,4 +197,22 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   Future<SnapdStorageEncryptedResponse> getStorageEncrypted() async {
     return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
   }
+
+  @override
+  Future<void> deleteKeyslots() {
+    // TODO: implement deleteKeyslots
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> reEncryptDisk() {
+    // TODO: implement reEncryptDisk
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> reprovisionDisk() {
+    // TODO: implement reprovisionDisk
+    throw UnimplementedError();
+  }
 }

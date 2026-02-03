@@ -70,6 +70,8 @@ class EncryptionPageBody extends ConsumerWidget {
               AuthMode.none => _NoneAuthenticationActions(tpmState: data),
             },
             const SizedBox(height: 32),
+            const _ReEncryptionActions(),
+            const SizedBox(height: 32),
             Hyperlink(
               text: l10n.diskEncryptionPageLearnMore,
               url: _learnMoreUrl,
@@ -225,10 +227,68 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
   }
 }
 
-void showReplaceRecoveryKeyDialog(BuildContext context) {
+Future<void> showAuthRemovalWarning(BuildContext context) async {
+  final result = await showDialog<bool>(
+    context: context,
+    builder: (_) => const AuthRemovalWarningDialog(),
+  );
+
+  if (result == true && context.mounted) {
+    showReplaceRecoveryKeyDialog(context, RecoveryKeyDialogMode.reencrypt);
+  }
+}
+
+class AuthRemovalWarningDialog extends ConsumerWidget {
+  const AuthRemovalWarningDialog({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+
+    return AlertDialog(
+      title: YaruDialogTitleBar(
+        title: Text(l10n.diskEncryptionReEncryption),
+      ),
+      titlePadding: EdgeInsets.zero,
+      content: SizedBox(
+        width: 460,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            YaruInfoBox(
+              title: Text(l10n.diskEncryptionAuthRemovalWarningHeader),
+              subtitle: Text(l10n.diskEncryptionAuthRemovalWarningBody),
+              yaruInfoType: YaruInfoType.warning,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                OutlinedButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text(l10n.cancel),
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: Text(l10n.next),
+                ),
+              ].separatedBy(const SizedBox(width: 16)),
+            ),
+          ].separatedBy(const SizedBox(height: 16)),
+        ),
+      ),
+    );
+  }
+}
+
+void showReplaceRecoveryKeyDialog(
+  BuildContext context, [
+  RecoveryKeyDialogMode mode = RecoveryKeyDialogMode.replace,
+]) {
   showDialog(
     context: context,
-    builder: (_) => const ReplaceRecoveryKeyDialog(),
+    builder: (_) => ReplaceRecoveryKeyDialog(mode: mode),
   );
 }
 
@@ -281,6 +341,12 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(l10n.diskEncryptionPageReplaceDialogBody),
+                if (mode == RecoveryKeyDialogMode.reencrypt)
+                  YaruInfoBox(
+                    title: Text(l10n.diskEncryptionRecoveryKeyRemovalWarningHeader),
+                    subtitle: Text(l10n.diskEncryptionRecoveryKeyRemovalWarningBody),
+                    yaruInfoType: YaruInfoType.warning,
+                  ),
                 if (recoveryKey is AsyncLoading)
                   YaruLinearProgressIndicator()
                 else if (recoveryKey is AsyncData)
@@ -431,7 +497,9 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                               ),
                             )
                           : Text(
-                              l10n.diskEncryptionPageReplaceDialogReplace,
+                              mode == RecoveryKeyDialogMode.reencrypt
+                                  ? l10n.diskEncryptionReEncrypt
+                                  : l10n.diskEncryptionPageReplaceDialogReplace,
                             ),
                     ),
                   ].separatedBy(const SizedBox(width: 16)),
@@ -917,6 +985,32 @@ class _RecoveryKeyActions extends StatelessWidget {
   }
 }
 
+class _ReEncryptionActions extends StatelessWidget {
+  const _ReEncryptionActions();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.diskEncryptionReEncryption,
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        const SizedBox(height: 8),
+        Text(l10n.diskEncryptionReEncryptionBody),
+        const SizedBox(height: 8),
+        OutlinedButton(
+          onPressed: () => showAuthRemovalWarning(context),
+          child: Text(l10n.diskEncryptionReEncryptButton),
+        ),
+      ],
+    );
+  }
+}
+
 class _AuthStatusTileList extends StatelessWidget {
   const _AuthStatusTileList({required this.tpmState});
 
@@ -945,6 +1039,19 @@ class _AuthStatusTileList extends StatelessWidget {
 
     return TileList(
       children: [
+        // Re-encryption progress (hardcoded for now)
+        SecurityCenterListTile(
+          leading: const SizedBox(
+            width: 24,
+            height: 24,
+            child: YaruCircularProgressIndicator(
+              value: 0.45, // 45% hardcoded
+              strokeWidth: 3,
+            ),
+          ),
+          title: 'Re-encrypting the disk...',
+          subtitle: const Text('45%, 2 hours 30 minutes left'),
+        ),
         SecurityCenterListTile(
           leading: const Icon(YaruIcons.lock, size: 24),
           title: l10n.recoveryKeyTPMEnabled,
