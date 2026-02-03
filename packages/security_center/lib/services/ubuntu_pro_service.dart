@@ -72,7 +72,9 @@ class UbuntuProServiceData with _$UbuntuProServiceData {
 }
 
 class UbuntuProManagerService {
-  final DBusClient _dbusClient = DBusClient.system();
+  UbuntuProManagerService(this._dbusClient);
+
+  final DBusClient _dbusClient;
   late final StreamSubscription<DBusSignal> _propertiesChangedSignal;
   late final StreamSubscription<DBusSignal> _serviceManagerListener;
   late final DBusRemoteObjectManager _manager;
@@ -306,9 +308,15 @@ class MagicAttachResponse with _$MagicAttachResponse {
 }
 
 class MagicAttachService {
-  static const defaultEtcPath = '/etc/ubuntu-advantage';
-  static const defaultConfigFile = 'uaclient.conf';
-  static const v1MagicAttach = '/v1/magic-attach';
+  MagicAttachService({
+    this.defaultEtcPath = '/etc/ubuntu-advantage',
+    this.defaultConfigFile = 'uaclient.conf',
+    this.v1MagicAttach = '/v1/magic-attach',
+  });
+
+  final String defaultEtcPath;
+  final String defaultConfigFile;
+  final String v1MagicAttach;
 
   late final String _apiBase = _getAPIBase();
 
@@ -366,7 +374,9 @@ class MagicAttachService {
 }
 
 class GSettingsIconService {
-  final settings = GSettings('com.ubuntu.update-notifier');
+  GSettingsIconService(this.settingsClient);
+
+  final GSettings settingsClient;
   late final StreamController<List<String>> stream;
 
   late final StreamSubscription<List<String>> _streamSubscription;
@@ -374,7 +384,7 @@ class GSettingsIconService {
   Future<void> init() async {
     stream = StreamController.broadcast();
     _streamSubscription =
-        settings.keysChanged.listen((data) => stream.add(data));
+        settingsClient.keysChanged.listen((data) => stream.add(data));
   }
 
   Future<void> dispose() async {
@@ -383,11 +393,12 @@ class GSettingsIconService {
   }
 
   Future<bool> getStatusIcon() async {
-    final showStatusIcon = await settings.get('show-livepatch-status-icon');
+    final showStatusIcon =
+        await settingsClient.get('show-livepatch-status-icon');
     return showStatusIcon.asBoolean();
   }
 
   Future<void> toggleStatusIcon(bool value) async {
-    await settings.set('show-livepatch-status-icon', DBusBoolean(value));
+    await settingsClient.set('show-livepatch-status-icon', DBusBoolean(value));
   }
 }
