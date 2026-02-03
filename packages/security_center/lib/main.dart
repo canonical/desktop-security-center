@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
+import 'package:dbus/dbus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gsettings/gsettings.dart';
 import 'package:security_center/app_permissions/snap_metadata_providers.dart';
 import 'package:security_center/routes.dart';
 import 'package:security_center/security_center_app.dart';
@@ -93,12 +95,12 @@ Future<void> main(List<String> args) async {
   }
 
   registerService<UbuntuProManagerService>(
-    () => UbuntuProManagerService()..init(),
+    () => UbuntuProManagerService(DBusClient.system())..init(),
     dispose: (service) => service.dispose(),
   );
   registerService<MagicAttachService>(MagicAttachService.new);
   registerService<GSettingsIconService>(
-    () => GSettingsIconService()..init(),
+    () => GSettingsIconService(GSettings('com.ubuntu.update-notifier'))..init(),
     dispose: (service) => service.dispose(),
   );
 
