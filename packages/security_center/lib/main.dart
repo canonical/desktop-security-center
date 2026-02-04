@@ -32,6 +32,10 @@ Future<void> main(List<String> args) async {
       'enable-camera-interface',
       help: 'Enable the experimental camera interface',
     )
+    ..addFlag(
+      'enable-microphone-interface',
+      help: 'Enable the experimental microphone interface',
+    )
     ..addOption(
       'test-rules',
       help: 'Path to a JSON file containing test rules',
