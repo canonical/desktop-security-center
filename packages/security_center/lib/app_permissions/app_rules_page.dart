@@ -33,6 +33,7 @@ class AppRulesPage extends ConsumerWidget {
             loading: () => const Center(child: YaruCircularProgressIndicator()),
           ),
       SnapdInterface.camera => const SizedBox.shrink(),
+      SnapdInterface.microphone => const SizedBox.shrink()
     };
   }
 }
