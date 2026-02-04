@@ -32,6 +32,10 @@ Future<void> main(List<String> args) async {
       'enable-camera-interface',
       help: 'Enable the experimental camera interface',
     )
+    ..addFlag(
+      'enable-microphone-interface',
+      help: 'Enable the experimental microphone interface',
+    )
     ..addOption(
       'test-rules',
       help: 'Path to a JSON file containing test rules',
@@ -50,6 +54,8 @@ Future<void> main(List<String> args) async {
   final featureService = FeatureService(
     isDryRun: argResults.flag('dry-run'),
     isCameraInterfaceEnabled: argResults.flag('enable-camera-interface'),
+    isMicrophoneInterfaceEnabled:
+        argResults.flag('enable-microphone-interface'),
   );
   registerServiceInstance<FeatureService>(featureService);
 
