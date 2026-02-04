@@ -361,4 +361,266 @@ void main() {
           .called(1);
     });
   });
+
+  group('microphone interface', () {
+    testWidgets('display microphone interface page with snaps', (tester) async {
+      final container = createContainer();
+      registerMockFeatureService(isMicrophoneInterfaceAvailable: true);
+      registerMockAppPermissionsService(
+        rules: [
+          SnapdRule(
+            id: 'microphoneRule1',
+            timestamp: DateTime(2024),
+            snap: 'firefox',
+            interface: 'microphone',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'allow',
+                  'lifespan': 'forever',
+                },
+              },
+            },
+          ),
+          SnapdRule(
+            id: 'microphoneRule2',
+            timestamp: DateTime(2024),
+            snap: 'cheese',
+            interface: 'microphone',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'allow',
+                  'lifespan': 'forever',
+                },
+              },
+            },
+          ),
+        ],
+        snaps: ['firefox', 'cheese'],
+      );
+      registerMockLocalSnapData();
+      registerMockSnapdService();
+
+      await tester.pumpApp(
+        (_) => UncontrolledProviderScope(
+          container: container,
+          child: const SnapsPage(interface: SnapdInterface.microphone),
+        ),
+      );
+      await tester.pump();
+
+      expect(
+          find.text(tester.l10n.microphoneInterfacePageTitle), findsOneWidget);
+      expect(find.text(tester.l10n.microphoneInterfacePageDescription),
+          findsOneWidget);
+
+      final firefoxTile = find.ancestor(
+        of: find.text('firefox'),
+        matching: find.byType(SecurityCenterListTile),
+      );
+      expect(firefoxTile, findsOneWidget);
+
+      final cheeseTile = find.ancestor(
+        of: find.text('cheese'),
+        matching: find.byType(SecurityCenterListTile),
+      );
+      expect(cheeseTile, findsOneWidget);
+    });
+
+    testWidgets('microphone interface toggle functionality', (tester) async {
+      final container = createContainer();
+      registerMockFeatureService(isMicrophoneInterfaceAvailable: true);
+      final service = registerMockAppPermissionsService(
+        rules: [
+          SnapdRule(
+            id: 'microphoneRule1',
+            timestamp: DateTime(2024),
+            snap: 'firefox',
+            interface: 'microphone',
+            constraints: {},
+          ),
+          SnapdRule(
+            id: 'microphoneRule2',
+            timestamp: DateTime(2024),
+            snap: 'cheese',
+            interface: 'microphone',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'allow',
+                  'lifespan': 'forever',
+                },
+              },
+            },
+          ),
+        ],
+        snaps: ['firefox', 'cheese'],
+      );
+      registerMockLocalSnapData();
+      registerMockSnapdService();
+
+      await tester.pumpApp(
+        (_) => UncontrolledProviderScope(
+          container: container,
+          child: const SnapsPage(interface: SnapdInterface.microphone),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final switchWidgets = find.byType(Switch);
+      expect(switchWidgets, findsNWidgets(2));
+
+      // Find firefox's switch
+      final firefoxTile = find.ancestor(
+        of: find.text('firefox'),
+        matching: find.byType(SecurityCenterListTile),
+      );
+      final firefoxSwitch = find.descendant(
+        of: firefoxTile,
+        matching: find.byType(Switch),
+      );
+
+      final firefoxSwitchValue = tester.widget<Switch>(firefoxSwitch).value;
+      expect(firefoxSwitchValue, false);
+
+      // Toggle firefox on
+      await tester.tap(firefoxSwitch);
+      await tester.pumpAndSettle();
+
+      verify(service.removeAllRules(snap: 'firefox', interface: 'microphone'))
+          .called(1);
+      verify(
+        service.addRule(
+          SnapdRuleMask(
+            snap: 'firefox',
+            interface: 'microphone',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'allow',
+                  'lifespan': 'forever',
+                  'expiration': null,
+                },
+              },
+            },
+          ),
+        ),
+      ).called(1);
+
+      // Find cheese's switch
+      final cheeseTile = find.ancestor(
+        of: find.text('cheese'),
+        matching: find.byType(SecurityCenterListTile),
+      );
+      final cheeseSwitch = find.descendant(
+        of: cheeseTile,
+        matching: find.byType(Switch),
+      );
+
+      // Toggle cheese off
+      await tester.tap(cheeseSwitch);
+      await tester.pumpAndSettle();
+
+      verify(service.removeAllRules(snap: 'cheese', interface: 'microphone'))
+          .called(1);
+      verify(
+        service.addRule(
+          SnapdRuleMask(
+            snap: 'cheese',
+            interface: 'microphone',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'deny',
+                  'lifespan': 'forever',
+                  'expiration': null,
+                },
+              },
+            },
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('reset button calls removeAllRules for each snap',
+        (tester) async {
+      final container = createContainer();
+      registerMockFeatureService(isMicrophoneInterfaceAvailable: true);
+      final service = registerMockAppPermissionsService(
+        rules: [
+          SnapdRule(
+            id: 'microphoneRule1',
+            timestamp: DateTime(2024),
+            snap: 'firefox',
+            interface: 'microphone',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'allow',
+                  'lifespan': 'forever',
+                },
+              },
+            },
+          ),
+          SnapdRule(
+            id: 'microphoneRule2',
+            timestamp: DateTime(2024),
+            snap: 'cheese',
+            interface: 'microphone',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'allow',
+                  'lifespan': 'forever',
+                },
+              },
+            },
+          ),
+          SnapdRule(
+            id: 'microphoneRule3',
+            timestamp: DateTime(2024),
+            snap: 'obs-studio',
+            interface: 'microphone',
+            constraints: {
+              'permissions': {
+                'access': {
+                  'outcome': 'allow',
+                  'lifespan': 'forever',
+                },
+              },
+            },
+          ),
+        ],
+        snaps: ['firefox', 'cheese', 'obs-studio'],
+      );
+      registerMockLocalSnapData();
+      registerMockSnapdService();
+
+      await tester.pumpApp(
+        (_) => UncontrolledProviderScope(
+          container: container,
+          child: const SnapsPage(interface: SnapdInterface.microphone),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final resetButton = find.widgetWithText(
+        ElevatedButton,
+        tester.l10n.snapRulesResetAllPermissions,
+      );
+      expect(resetButton, findsOneWidget);
+
+      await tester.tap(resetButton);
+      await tester.pumpAndSettle();
+
+      verify(service.removeAllRules(snap: 'firefox', interface: 'microphone'))
+          .called(1);
+      verify(service.removeAllRules(snap: 'cheese', interface: 'microphone'))
+          .called(1);
+      verify(service.removeAllRules(
+              snap: 'obs-studio', interface: 'microphone'))
+          .called(1);
+    });
+  });
 }
