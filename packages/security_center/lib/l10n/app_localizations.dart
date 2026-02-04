@@ -398,6 +398,18 @@ abstract class AppLocalizations {
   /// **'Allow apps to access your cameras.'**
   String get cameraInterfacePageDescription;
 
+  /// No description provided for @microphoneInterfacePageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Microphone'**
+  String get microphoneInterfacePageTitle;
+
+  /// No description provided for @microphoneInterfacePageDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow apps to access your microphone.'**
+  String get microphoneInterfacePageDescription;
+
   /// No description provided for @interfacePageTitle.
   ///
   /// In en, this message translates to:
