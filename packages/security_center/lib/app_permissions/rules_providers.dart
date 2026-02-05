@@ -69,11 +69,8 @@ Future<Map<SnapdInterface, int>> interfaceSnapCounts(
     interfaceSnapCounts[SnapdInterface.camera] = cameraSnaps.length;
   }
 
-  // Only include microphone interface if feature is enabled
-  if (featureService.isMicrophoneInterfaceAvailable) {
-    final microphoneSnaps = await ref.watch(microphoneSnapsProvider.future);
-    interfaceSnapCounts[SnapdInterface.microphone] = microphoneSnaps.length;
-  }
+  final microphoneSnaps = await ref.watch(microphoneSnapsProvider.future);
+  interfaceSnapCounts[SnapdInterface.microphone] = microphoneSnaps.length;
 
   return interfaceSnapCounts;
 }

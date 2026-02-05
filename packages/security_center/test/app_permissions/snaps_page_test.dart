@@ -365,7 +365,6 @@ void main() {
   group('microphone interface', () {
     testWidgets('display microphone interface page with snaps', (tester) async {
       final container = createContainer();
-      registerMockFeatureService(isMicrophoneInterfaceAvailable: true);
       registerMockAppPermissionsService(
         rules: [
           SnapdRule(
@@ -434,7 +433,6 @@ void main() {
 
     testWidgets('microphone interface toggle functionality', (tester) async {
       final container = createContainer();
-      registerMockFeatureService(isMicrophoneInterfaceAvailable: true);
       final service = registerMockAppPermissionsService(
         rules: [
           SnapdRule(
@@ -550,7 +548,6 @@ void main() {
     testWidgets('reset button calls removeAllRules for each snap',
         (tester) async {
       final container = createContainer();
-      registerMockFeatureService(isMicrophoneInterfaceAvailable: true);
       final service = registerMockAppPermissionsService(
         rules: [
           SnapdRule(

@@ -373,15 +373,12 @@ FeatureService registerMockFeatureService({
   bool isDiskEncryptionAvailable = true,
   bool isDryRun = false,
   bool isCameraInterfaceAvailable = false,
-  bool isMicrophoneInterfaceAvailable = false,
 }) {
   final service = MockFeatureService();
   when(service.isDiskEncryptionAvailable).thenReturn(isDiskEncryptionAvailable);
   when(service.isDryRun).thenReturn(isDryRun);
   when(service.isCameraInterfaceAvailable)
       .thenReturn(isCameraInterfaceAvailable);
-  when(service.isMicrophoneInterfaceAvailable)
-      .thenReturn(isMicrophoneInterfaceAvailable);
 
   registerMockService<FeatureService>(service);
   addTearDown(unregisterService<FeatureService>);

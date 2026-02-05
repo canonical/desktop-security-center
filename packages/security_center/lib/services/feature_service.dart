@@ -13,7 +13,6 @@ class FeatureService {
   FeatureService({
     required this.isDryRun,
     this.isCameraInterfaceEnabled = false,
-    this.isMicrophoneInterfaceEnabled = false,
     @visibleForTesting FileSystem? fs,
     @visibleForTesting
     ProcessResult Function(
@@ -30,7 +29,6 @@ class FeatureService {
   ) _runProcess;
   final bool isDryRun;
   final bool isCameraInterfaceEnabled;
-  final bool isMicrophoneInterfaceEnabled;
   bool? _isUsingFde;
 
   bool get isDiskEncryptionAvailable {
@@ -42,8 +40,6 @@ class FeatureService {
   }
 
   bool get isCameraInterfaceAvailable => isCameraInterfaceEnabled || isDryRun;
-  bool get isMicrophoneInterfaceAvailable =>
-      isMicrophoneInterfaceEnabled || isDryRun;
 
   bool _hasStorageEncryptedManaged() {
     final result = _runProcess('snapctl', ['system-mode']);
