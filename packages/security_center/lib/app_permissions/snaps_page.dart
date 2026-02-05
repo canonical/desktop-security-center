@@ -15,6 +15,41 @@ import 'package:yaru/yaru.dart';
 
 final _log = Logger('snapd_app_permissions_service');
 
+(bool, String?) _toggleState<T>(
+  List<T> rules,
+  String interfaceName,
+  String snapName,
+  AppLocalizations l10n,
+) {
+  if (rules.isEmpty) return (false, null);
+
+  if (rules.length > 1) {
+    _log.warning(
+      'Snap $snapName has ${rules.length} $interfaceName rules, expected 0 or 1',
+    );
+    return (false, null);
+  }
+
+  final rule = rules.first as dynamic;
+  return switch ((rule.outcome, rule.lifespan)) {
+    (SnapdRequestOutcome.allow, SnapdRequestLifespan.forever) => (true, null),
+    (SnapdRequestOutcome.allow, SnapdRequestLifespan.session) => (
+        true,
+        l10n.snapdRuleCategorySessionAllowed
+      ),
+    (SnapdRequestOutcome.deny, SnapdRequestLifespan.forever) => (false, null),
+    _ => (
+        false,
+        () {
+          _log.warning(
+            'Snap $snapName has unexpected $interfaceName rule: outcome=${rule.outcome}, lifespan=${rule.lifespan}',
+          );
+          return null;
+        }()
+      ),
+  };
+}
+
 class SnapsPage extends ConsumerWidget {
   const SnapsPage({required this.interface, super.key});
 
@@ -48,6 +83,10 @@ class _Body extends ConsumerWidget {
           interface: interface,
         ),
       SnapdInterface.camera => _CameraInterfaceBody(
+          snapRuleCounts: snapRuleCounts,
+          interface: interface,
+        ),
+      SnapdInterface.microphone => _MicrophoneInterfaceBody(
           snapRuleCounts: snapRuleCounts,
           interface: interface,
         ),
@@ -148,6 +187,62 @@ class _CameraInterfaceBody extends ConsumerWidget {
   }
 }
 
+class _MicrophoneInterfaceBody extends ConsumerWidget {
+  const _MicrophoneInterfaceBody({
+    required this.snapRuleCounts,
+    required this.interface,
+  });
+
+  final Map<String, int> snapRuleCounts;
+  final SnapdInterface interface;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final appTiles = snapRuleCounts.entries
+        .map(
+          (e) => _MicrophoneInterfaceAppTile(
+            snapName: e.key,
+          ),
+        )
+        .toList();
+
+    return ScrollablePage(
+      children: [
+        Text(
+          interface.localizedTitle(l10n),
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const SizedBox(height: 12),
+        Text(interface.localizedDescription(l10n)),
+        const SizedBox(height: 24),
+        TileList(
+          children: appTiles.isEmpty
+              ? [EmptyRulesTile(interface: interface)]
+              : appTiles,
+        ),
+        if (appTiles.isNotEmpty) ...[
+          const SizedBox(height: 24),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.error,
+            ),
+            onPressed: () async {
+              for (final snapName in snapRuleCounts.keys) {
+                final notifier = ref.read(
+                  snapMicrophoneRulesModelProvider(snap: snapName).notifier,
+                );
+                await notifier.removeAll();
+              }
+            },
+            child: Text(l10n.snapRulesResetAllPermissions),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
 class _HomeInterfaceAppTile extends ConsumerWidget {
   const _HomeInterfaceAppTile({
     required this.snapName,
@@ -189,46 +284,57 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
     final cameraRules = ref.watch(snapCameraRulesModelProvider(snap: snapName));
 
     final (isOn, subtitle) = cameraRules.when(
-      data: (rules) {
-        return switch (rules.length) {
-          0 => (false, null),
-          1 => switch ((rules.first.outcome, rules.first.lifespan)) {
-              (SnapdRequestOutcome.allow, SnapdRequestLifespan.forever) => (
-                  true,
-                  null
-                ),
-              (SnapdRequestOutcome.allow, SnapdRequestLifespan.session) => (
-                  true,
-                  l10n.snapdRuleCategorySessionAllowed
-                ),
-              (SnapdRequestOutcome.deny, SnapdRequestLifespan.forever) => (
-                  false,
-                  null
-                ),
-              _ => (
-                  false,
-                  () {
-                    _log.warning(
-                      'Snap $snapName has unexpected camera rule: outcome=${rules.first.outcome}, lifespan=${rules.first.lifespan}',
-                    );
-                    return null;
-                  }()
-                ),
-            },
-          _ => (
-              false,
-              () {
-                _log.warning(
-                  'Snap $snapName has ${rules.length} camera rules, expected 0 or 1',
-                );
-                return null;
-              }()
-            ),
-        };
-      },
+      data: (rules) => _toggleState(rules, 'camera', snapName, l10n),
       loading: () => (false, null),
       error: (error, _) {
         _log.error('Failed to load camera rules for snap $snapName: $error');
+        return (false, null);
+      },
+      skipLoadingOnReload: true,
+    );
+
+    return SecurityCenterListTile(
+      leading: AppIcon(
+        snapIcon: ref.watch(snapIconProvider(snapName)),
+      ),
+      title: ref.watch(snapTitleOrNameProvider(snapName)),
+      subtitle: subtitle != null ? Text(subtitle) : null,
+      trailing: Switch(
+        value: isOn,
+        onChanged: (value) async {
+          await notifier.removeAll();
+          await notifier.createAccessRule(
+            outcome:
+                value ? SnapdRequestOutcome.allow : SnapdRequestOutcome.deny,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _MicrophoneInterfaceAppTile extends ConsumerWidget {
+  const _MicrophoneInterfaceAppTile({
+    required this.snapName,
+  });
+
+  final String snapName;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final notifier =
+        ref.read(snapMicrophoneRulesModelProvider(snap: snapName).notifier);
+    final microphoneRules =
+        ref.watch(snapMicrophoneRulesModelProvider(snap: snapName));
+
+    final (isOn, subtitle) = microphoneRules.when(
+      data: (rules) => _toggleState(rules, 'microphone', snapName, l10n),
+      loading: () => (false, null),
+      error: (error, _) {
+        _log.error(
+          'Failed to load microphone rules for snap $snapName: $error',
+        );
         return (false, null);
       },
       skipLoadingOnReload: true,

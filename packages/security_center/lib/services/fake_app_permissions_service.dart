@@ -106,6 +106,9 @@ class FakeAppPermissionsService implements AppPermissionsService {
     if (interface == 'camera') {
       return ['firefox', 'thunderbird', 'cheese'];
     }
+    if (interface == 'microphone') {
+      return ['firefox', 'obs-studio'];
+    }
     return [];
   }
 }
