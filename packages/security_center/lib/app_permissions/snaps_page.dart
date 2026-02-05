@@ -231,6 +231,7 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
         _log.error('Failed to load camera rules for snap $snapName: $error');
         return (false, null);
       },
+      skipLoadingOnReload: true,
     );
 
     return SecurityCenterListTile(
