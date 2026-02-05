@@ -377,8 +377,6 @@ FeatureService registerMockFeatureService({
   final service = MockFeatureService();
   when(service.isDiskEncryptionAvailable).thenReturn(isDiskEncryptionAvailable);
   when(service.isDryRun).thenReturn(isDryRun);
-  when(service.isCameraInterfaceAvailable)
-      .thenReturn(isCameraInterfaceAvailable);
 
   registerMockService<FeatureService>(service);
   addTearDown(unregisterService<FeatureService>);
