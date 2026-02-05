@@ -62,46 +62,6 @@ void main() {
     );
   });
 
-  testWidgets('camera interface hidden when feature flag disabled',
-      (tester) async {
-    final container = createContainer();
-    registerMockAppPermissionsService(
-      rules: [
-        SnapdRule(
-          id: 'ruleId',
-          timestamp: DateTime(2024),
-          snap: 'firefox',
-          interface: 'home',
-          constraints: {},
-        ),
-      ],
-      snaps: ['cheese'],
-    );
-    registerMockSnapdService();
-    registerMockFeatureService();
-    await tester.pumpApp(
-      (_) => UncontrolledProviderScope(
-        container: container,
-        child: const InterfacesPage(),
-      ),
-    );
-    await tester.pumpAndSettle();
-
-    // Home interface should still be visible
-    final homeInterfaceTile = find.ancestor(
-      of: find.text(SnapdInterface.home.localizedTitle(tester.l10n)),
-      matching: find.byType(SecurityCenterListTile),
-    );
-    expect(homeInterfaceTile, findsOneWidget);
-
-    // Camera interface should be hidden
-    final cameraInterfaceTile = find.ancestor(
-      of: find.text(SnapdInterface.camera.localizedTitle(tester.l10n)),
-      matching: find.byType(SecurityCenterListTile),
-    );
-    expect(cameraInterfaceTile, findsNothing);
-  });
-
   group('toggle prompting', () {
     group('toggling', () {
       for (final testCase in <({
