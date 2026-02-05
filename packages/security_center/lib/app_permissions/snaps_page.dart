@@ -333,7 +333,8 @@ class _MicrophoneInterfaceAppTile extends ConsumerWidget {
       loading: () => (false, null),
       error: (error, _) {
         _log.error(
-            'Failed to load microphone rules for snap $snapName: $error');
+          'Failed to load microphone rules for snap $snapName: $error',
+        );
         return (false, null);
       },
       skipLoadingOnReload: true,

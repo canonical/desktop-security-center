@@ -411,9 +411,13 @@ void main() {
       await tester.pump();
 
       expect(
-          find.text(tester.l10n.microphoneInterfacePageTitle), findsOneWidget);
-      expect(find.text(tester.l10n.microphoneInterfacePageDescription),
-          findsOneWidget);
+        find.text(tester.l10n.microphoneInterfacePageTitle),
+        findsOneWidget,
+      );
+      expect(
+        find.text(tester.l10n.microphoneInterfacePageDescription),
+        findsOneWidget,
+      );
 
       final firefoxTile = find.ancestor(
         of: find.text('firefox'),
@@ -618,9 +622,9 @@ void main() {
           .called(1);
       verify(service.removeAllRules(snap: 'cheese', interface: 'microphone'))
           .called(1);
-      verify(service.removeAllRules(
-              snap: 'obs-studio', interface: 'microphone'))
-          .called(1);
+      verify(
+        service.removeAllRules(snap: 'obs-studio', interface: 'microphone'),
+      ).called(1);
     });
   });
 }
