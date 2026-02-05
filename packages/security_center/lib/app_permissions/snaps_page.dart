@@ -15,6 +15,41 @@ import 'package:yaru/yaru.dart';
 
 final _log = Logger('snapd_app_permissions_service');
 
+(bool, String?) _toggleState<T>(
+  List<T> rules,
+  String interfaceName,
+  String snapName,
+  AppLocalizations l10n,
+) {
+  if (rules.isEmpty) return (false, null);
+
+  if (rules.length > 1) {
+    _log.warning(
+      'Snap $snapName has ${rules.length} $interfaceName rules, expected 0 or 1',
+    );
+    return (false, null);
+  }
+
+  final rule = rules.first as dynamic;
+  return switch ((rule.outcome, rule.lifespan)) {
+    (SnapdRequestOutcome.allow, SnapdRequestLifespan.forever) => (true, null),
+    (SnapdRequestOutcome.allow, SnapdRequestLifespan.session) => (
+        true,
+        l10n.snapdRuleCategorySessionAllowed
+      ),
+    (SnapdRequestOutcome.deny, SnapdRequestLifespan.forever) => (false, null),
+    _ => (
+        false,
+        () {
+          _log.warning(
+            'Snap $snapName has unexpected $interfaceName rule: outcome=${rule.outcome}, lifespan=${rule.lifespan}',
+          );
+          return null;
+        }()
+      ),
+  };
+}
+
 class SnapsPage extends ConsumerWidget {
   const SnapsPage({required this.interface, super.key});
 
@@ -249,43 +284,7 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
     final cameraRules = ref.watch(snapCameraRulesModelProvider(snap: snapName));
 
     final (isOn, subtitle) = cameraRules.when(
-      data: (rules) {
-        return switch (rules.length) {
-          0 => (false, null),
-          1 => switch ((rules.first.outcome, rules.first.lifespan)) {
-              (SnapdRequestOutcome.allow, SnapdRequestLifespan.forever) => (
-                  true,
-                  null
-                ),
-              (SnapdRequestOutcome.allow, SnapdRequestLifespan.session) => (
-                  true,
-                  l10n.snapdRuleCategorySessionAllowed
-                ),
-              (SnapdRequestOutcome.deny, SnapdRequestLifespan.forever) => (
-                  false,
-                  null
-                ),
-              _ => (
-                  false,
-                  () {
-                    _log.warning(
-                      'Snap $snapName has unexpected camera rule: outcome=${rules.first.outcome}, lifespan=${rules.first.lifespan}',
-                    );
-                    return null;
-                  }()
-                ),
-            },
-          _ => (
-              false,
-              () {
-                _log.warning(
-                  'Snap $snapName has ${rules.length} camera rules, expected 0 or 1',
-                );
-                return null;
-              }()
-            ),
-        };
-      },
+      data: (rules) => _toggleState(rules, 'camera', snapName, l10n),
       loading: () => (false, null),
       error: (error, _) {
         _log.error('Failed to load camera rules for snap $snapName: $error');
@@ -330,49 +329,14 @@ class _MicrophoneInterfaceAppTile extends ConsumerWidget {
         ref.watch(snapMicrophoneRulesModelProvider(snap: snapName));
 
     final (isOn, subtitle) = microphoneRules.when(
-      data: (rules) {
-        return switch (rules.length) {
-          0 => (false, null),
-          1 => switch ((rules.first.outcome, rules.first.lifespan)) {
-              (SnapdRequestOutcome.allow, SnapdRequestLifespan.forever) => (
-                  true,
-                  null
-                ),
-              (SnapdRequestOutcome.allow, SnapdRequestLifespan.session) => (
-                  true,
-                  l10n.snapdRuleCategorySessionAllowed
-                ),
-              (SnapdRequestOutcome.deny, SnapdRequestLifespan.forever) => (
-                  false,
-                  null
-                ),
-              _ => (
-                  false,
-                  () {
-                    _log.warning(
-                      'Snap $snapName has unexpected microphone rule: outcome=${rules.first.outcome}, lifespan=${rules.first.lifespan}',
-                    );
-                    return null;
-                  }()
-                ),
-            },
-          _ => (
-              false,
-              () {
-                _log.warning(
-                  'Snap $snapName has ${rules.length} microphone rules, expected 0 or 1',
-                );
-                return null;
-              }()
-            ),
-        };
-      },
+      data: (rules) => _toggleState(rules, 'microphone', snapName, l10n),
       loading: () => (false, null),
       error: (error, _) {
         _log.error(
             'Failed to load microphone rules for snap $snapName: $error');
         return (false, null);
       },
+      skipLoadingOnReload: true,
     );
 
     return SecurityCenterListTile(
