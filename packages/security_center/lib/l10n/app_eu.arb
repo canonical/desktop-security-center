@@ -1,1 +1,16 @@
-{}
+{
+    "recoveryKeyExceptionFileSystemTitle": "Berreskuratze gakoaren fitxategia ez da gorde",
+    "@recoveryKeyExceptionFileSystemTitle": {},
+    "recoveryKeyExceptionDisallowedPathTitle": "Berreskuratze gakoaren fitxategia ezin izan da gorde aldi baterako kokalekuan",
+    "@recoveryKeyExceptionDisallowedPathTitle": {},
+    "recoveryKeyExceptionUnknownTitle": "Errore ezezaguna",
+    "@recoveryKeyExceptionUnknownTitle": {},
+    "recoveryKeyExceptionFileSystemBody": "Ez duzu karpeta horretan idazteko baimenik. Saiatu beste kokaleku batean edo erabili bestelako metodo bat.",
+    "@recoveryKeyExceptionFileSystemBody": {},
+    "recoveryKeyExceptionDisallowedPathBody": "Saiatu beste kokaleku batekin, esaterako unitate aldagarri bat, edo erabili bestelako metodo bat.",
+    "@recoveryKeyExceptionDisallowedPathBody": {},
+    "recoveryKeyFilePickerTitle": "Gorde berreskuratze gakoaren fitxategia",
+    "@recoveryKeyFilePickerTitle": {},
+    "recoveryKeyFilePickerFilter": "Testu-fitxategiak",
+    "@recoveryKeyFilePickerFilter": {}
+}
