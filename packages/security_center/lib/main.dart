@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
+import 'package:dbus/dbus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gsettings/gsettings.dart';
 import 'package:security_center/app_permissions/snap_metadata_providers.dart';
 import 'package:security_center/routes.dart';
 import 'package:security_center/security_center_app.dart';
@@ -14,6 +16,7 @@ import 'package:security_center/services/feature_service.dart';
 import 'package:security_center/services/snapd_app_permissions_service.dart';
 import 'package:security_center/services/snapd_disk_encryption_service.dart';
 import 'package:security_center/services/snapd_service.dart';
+import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
@@ -87,6 +90,16 @@ Future<void> main(List<String> args) async {
       () => SnapdDiskEncryptionService(getService<SnapdService>()),
     );
   }
+
+  registerService<UbuntuProManagerService>(
+    () => UbuntuProManagerService(DBusClient.system())..init(),
+    dispose: (service) => service.dispose(),
+  );
+  registerService<MagicAttachService>(MagicAttachService.new);
+  registerService<GSettingsIconService>(
+    () => GSettingsIconService(GSettings('com.ubuntu.update-notifier'))..init(),
+    dispose: (service) => service.dispose(),
+  );
 
   // Initialize available routes
   await AvailableRoutes.init();
