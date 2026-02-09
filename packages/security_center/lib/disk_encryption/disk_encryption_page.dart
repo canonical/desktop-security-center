@@ -60,7 +60,7 @@ class EncryptionPageBody extends ConsumerWidget {
           children: [
             _AuthStatusTileList(tpmState: data),
             const SizedBox(height: 32),
-            const _RecoveryKeyActions(),
+            _RecoveryKeyActions(tpmState: data),
             const SizedBox(height: 32),
             // TPM Authentication specific content
             switch (data.currentAuthMode) {
@@ -70,7 +70,7 @@ class EncryptionPageBody extends ConsumerWidget {
               AuthMode.none => _NoneAuthenticationActions(tpmState: data),
             },
             const SizedBox(height: 32),
-            const _ReEncryptionActions(),
+            _ReEncryptionActions(tpmState: data),
             const SizedBox(height: 32),
             Hyperlink(
               text: l10n.diskEncryptionPageLearnMore,
@@ -233,7 +233,7 @@ Future<void> showAuthRemovalWarning(BuildContext context) async {
     builder: (_) => const AuthRemovalWarningDialog(),
   );
 
-  if (result == true && context.mounted) {
+  if ((result ?? false) && context.mounted) {
     showReplaceRecoveryKeyDialog(context, RecoveryKeyDialogMode.reencrypt);
   }
 }
@@ -343,8 +343,11 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                 Text(l10n.diskEncryptionPageReplaceDialogBody),
                 if (mode == RecoveryKeyDialogMode.reencrypt)
                   YaruInfoBox(
-                    title: Text(l10n.diskEncryptionRecoveryKeyRemovalWarningHeader),
-                    subtitle: Text(l10n.diskEncryptionRecoveryKeyRemovalWarningBody),
+                    title: Text(
+                      l10n.diskEncryptionRecoveryKeyRemovalWarningHeader,
+                    ),
+                    subtitle:
+                        Text(l10n.diskEncryptionRecoveryKeyRemovalWarningBody),
                     yaruInfoType: YaruInfoType.warning,
                   ),
                 if (recoveryKey is AsyncLoading)
@@ -486,6 +489,9 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                               !recoveryKey.isLoading
                           ? () => replaceNotifier.replaceRecoveryKey(
                                 recoveryKey.value!.keyId,
+                                // FIXME: Replace with correct function calls when API's are defined
+                                reencrypt:
+                                    mode == RecoveryKeyDialogMode.reencrypt,
                               )
                           : null,
                       child: replaceDialogState
@@ -785,7 +791,7 @@ class _NoneAuthenticationActions extends ConsumerWidget {
           spacing: 16,
           children: [
             OutlinedButton(
-              onPressed: isAdding
+              onPressed: isAdding || tpmState.isReencrypting
                   ? null
                   : () {
                       showChangeAuthModeDialog(
@@ -799,7 +805,7 @@ class _NoneAuthenticationActions extends ConsumerWidget {
               ),
             ),
             OutlinedButton(
-              onPressed: isAdding
+              onPressed: isAdding || tpmState.isReencrypting
                   ? null
                   : () {
                       showChangeAuthModeDialog(
@@ -851,7 +857,7 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
           spacing: 16,
           children: [
             OutlinedButton(
-              onPressed: isRemoving
+              onPressed: isRemoving || tpmState.isReencrypting
                   ? null
                   : () {
                       showChangeAuthDialog(
@@ -862,7 +868,7 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
               child: Text(l10n.recoveryKeyPassphraseButton),
             ),
             OutlinedButton(
-              onPressed: isRemoving
+              onPressed: isRemoving || tpmState.isReencrypting
                   ? null
                   : () {
                       ref
@@ -913,7 +919,7 @@ class _PinAuthenticationActions extends ConsumerWidget {
           spacing: 16,
           children: [
             OutlinedButton(
-              onPressed: isRemoving
+              onPressed: isRemoving || tpmState.isReencrypting
                   ? null
                   : () {
                       showChangeAuthDialog(context, AuthMode.pin);
@@ -921,7 +927,7 @@ class _PinAuthenticationActions extends ConsumerWidget {
               child: Text(l10n.recoveryKeyPinButton),
             ),
             OutlinedButton(
-              onPressed: isRemoving
+              onPressed: isRemoving || tpmState.isReencrypting
                   ? null
                   : () {
                       ref
@@ -946,7 +952,9 @@ class _PinAuthenticationActions extends ConsumerWidget {
 }
 
 class _RecoveryKeyActions extends StatelessWidget {
-  const _RecoveryKeyActions();
+  const _RecoveryKeyActions({required this.tpmState});
+
+  final TpmAuthState tpmState;
 
   @override
   Widget build(BuildContext context) {
@@ -973,9 +981,11 @@ class _RecoveryKeyActions extends StatelessWidget {
               child: Text(l10n.diskEncryptionPageCheckKey),
             ),
             OutlinedButton(
-              onPressed: () {
-                showReplaceRecoveryKeyDialog(context);
-              },
+              onPressed: tpmState.isReencrypting
+                  ? null
+                  : () {
+                      showReplaceRecoveryKeyDialog(context);
+                    },
               child: Text(l10n.diskEncryptionPageReplaceButton),
             ),
           ],
@@ -986,7 +996,9 @@ class _RecoveryKeyActions extends StatelessWidget {
 }
 
 class _ReEncryptionActions extends StatelessWidget {
-  const _ReEncryptionActions();
+  const _ReEncryptionActions({required this.tpmState});
+
+  final TpmAuthState tpmState;
 
   @override
   Widget build(BuildContext context) {
@@ -1003,7 +1015,9 @@ class _ReEncryptionActions extends StatelessWidget {
         Text(l10n.diskEncryptionReEncryptionBody),
         const SizedBox(height: 8),
         OutlinedButton(
-          onPressed: () => showAuthRemovalWarning(context),
+          onPressed: tpmState.isReencrypting
+              ? null
+              : () => showAuthRemovalWarning(context),
           child: Text(l10n.diskEncryptionReEncryptButton),
         ),
       ],
@@ -1039,25 +1053,31 @@ class _AuthStatusTileList extends StatelessWidget {
 
     return TileList(
       children: [
-        // Re-encryption progress (hardcoded for now)
-        SecurityCenterListTile(
-          leading: const SizedBox(
-            width: 24,
-            height: 24,
-            child: YaruCircularProgressIndicator(
-              value: 0.45, // 45% hardcoded
-              strokeWidth: 3,
+        // Re-encryption progress
+        if (tpmState.isReencrypting)
+          SecurityCenterListTile(
+            leading: const SizedBox(
+              width: 24,
+              height: 24,
+              child: YaruCircularProgressIndicator(
+                value: 0.45, // TODO: wire up actual progress from storageStatus
+                strokeWidth: 3,
+              ),
             ),
+            title: 'Re-encrypting the disk...', // TODO: localize
+            subtitle: const Text(
+              '45%, 2 hours 30 minutes left',
+            ), // TODO: wire up actual time from storageStatus
           ),
-          title: 'Re-encrypting the disk...',
-          subtitle: const Text('45%, 2 hours 30 minutes left'),
-        ),
-        SecurityCenterListTile(
-          leading: const Icon(YaruIcons.lock, size: 24),
-          title: l10n.recoveryKeyTPMEnabled,
-        ),
+        if (!tpmState.isReencrypting)
+          SecurityCenterListTile(
+            leading: const Icon(YaruIcons.lock, size: 24),
+            title: l10n.recoveryKeyTPMEnabled,
+          ),
         // Show enabled status row when not loading and has auth enabled
-        if (currentMode != AuthMode.none && pendingOperation == null) ...[
+        if (currentMode != AuthMode.none &&
+            pendingOperation == null &&
+            !tpmState.isReencrypting) ...[
           SecurityCenterListTile(
             leading: const Icon(YaruIcons.ok_simple, size: 24),
             title: currentMode == AuthMode.pin

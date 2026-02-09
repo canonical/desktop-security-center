@@ -128,7 +128,7 @@ abstract class DiskEncryptionService {
 
   Future<void> reprovisionDisk();
 
-  Future<void> reEncryptDisk();
+  Future<String> reEncryptDisk();
 
   Future<void> deleteKeyslots();
 }

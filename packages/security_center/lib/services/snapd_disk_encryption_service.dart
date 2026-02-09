@@ -151,7 +151,7 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<void> reEncryptDisk() {
+  Future<String> reEncryptDisk() {
     // TODO: implement reEncryptDisk
     throw UnimplementedError();
   }

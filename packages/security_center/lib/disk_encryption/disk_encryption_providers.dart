@@ -110,6 +110,7 @@ sealed class AuthOperation with _$AuthOperation {
 class TpmAuthState with _$TpmAuthState {
   const factory TpmAuthState({
     required AuthMode currentAuthMode,
+    required SnapdStorageEncryptedResponse storageStatus,
     AuthOperation? pendingOperation,
     Exception? operationError,
   }) = _TpmAuthState;
@@ -117,6 +118,9 @@ class TpmAuthState with _$TpmAuthState {
   const TpmAuthState._();
 
   bool get isLoading => pendingOperation != null;
+  // TODO: Change to SnapdStorageEncryptionStatus.reencrypting when that status is added to snapd.dart
+  bool get isReencrypting =>
+      storageStatus.status == SnapdStorageEncryptionStatus.indeterminate;
 }
 
 /// Dialog state for managing the replace recovery key flow.
@@ -315,11 +319,10 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
   @override
   Future<TpmAuthState> build() async {
-    final currentMode = await _fetchCurrentAuthMode();
-    return TpmAuthState(currentAuthMode: currentMode);
+    return _fetchTpmState();
   }
 
-  Future<AuthMode> _fetchCurrentAuthMode() async {
+  Future<TpmAuthState> _fetchTpmState() async {
     try {
       // Check TPM-backed FDE status
       final storageStatus = await _service.getStorageEncrypted();
@@ -366,18 +369,17 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
       final authMode = defaultKeySlot.authMode;
 
-      if (authMode != null) {
-        switch (authMode) {
-          case SnapdSystemVolumeAuthMode.none:
-            return AuthMode.none;
-          case SnapdSystemVolumeAuthMode.pin:
-            return AuthMode.pin;
-          case SnapdSystemVolumeAuthMode.passphrase:
-            return AuthMode.passphrase;
-        }
-      }
+      final currentAuthMode = switch (authMode) {
+        SnapdSystemVolumeAuthMode.none => AuthMode.none,
+        SnapdSystemVolumeAuthMode.pin => AuthMode.pin,
+        SnapdSystemVolumeAuthMode.passphrase => AuthMode.passphrase,
+        null => AuthMode.none,
+      };
 
-      return AuthMode.none;
+      return TpmAuthState(
+        currentAuthMode: currentAuthMode,
+        storageStatus: storageStatus,
+      );
     } on SnapdException catch (e) {
       _log.error('Failed to determine TPM authentication mode: $e');
       if (e.statusCode == 404) {
@@ -412,11 +414,9 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         pin: newMode == AuthMode.pin ? passphrase : null,
       );
 
-      // Refresh current mode
-      final updatedMode = await _fetchCurrentAuthMode();
-      state = AsyncData(
-        TpmAuthState(currentAuthMode: updatedMode),
-      );
+      // Refresh state
+      final updatedState = await _fetchTpmState();
+      state = AsyncData(updatedState);
     } on Exception catch (e) {
       state = AsyncData(
         state.value!.copyWith(
@@ -489,7 +489,8 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
     );
   }
 
-  Future<void> replaceRecoveryKey(String key) async {
+  // TODO: move re-encrypt out of this when we have the API's finalized
+  Future<void> replaceRecoveryKey(String key, {bool reencrypt = false}) async {
     assert(state.dialogState is ReplaceRecoveryKeyDialogStateInput);
     assert(
       (state.dialogState as ReplaceRecoveryKeyDialogStateInput).acknowledged,
@@ -500,6 +501,11 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
     );
     try {
       await _service.replaceRecoveryKey(key);
+      if (reencrypt) {
+        await _service.reEncryptDisk();
+        // Invalidate the TPM auth model to refresh state and detect reencrypting status
+        ref.invalidate(tpmAuthenticationModelProvider);
+      }
       state = state.copyWith(
         dialogState: ReplaceRecoveryKeyDialogState.success(),
         error: null,
