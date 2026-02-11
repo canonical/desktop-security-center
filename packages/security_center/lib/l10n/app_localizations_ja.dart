@@ -532,6 +532,26 @@ class AppLocalizationsJa extends AppLocalizations {
   String get diskEncryptionReEncryptButton => 'Re-encrypt...';
 
   @override
+  String get diskEncryptionNeedsRepairHeader => 'Disk encryption needs repair';
+
+  @override
+  String get diskEncryptionNeedsRepairBody =>
+      'Automatic repair failed during decryption. Repair the disk now to start the computer without a recovery key.';
+
+  @override
+  String get diskEncryptionStartRepairButton => 'Start repair...';
+
+  @override
+  String get diskEncryptionRepairEncryption => 'Repair encryption';
+
+  @override
+  String get diskEncryptionRepairAuthRemovalWarningBody =>
+      'You can add them again after repair.';
+
+  @override
+  String get diskEncryptionRepair => 'Repair';
+
+  @override
   String get cancel => 'Cancel';
 
   @override

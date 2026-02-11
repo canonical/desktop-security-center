@@ -1118,6 +1118,42 @@ abstract class AppLocalizations {
   /// **'Re-encrypt...'**
   String get diskEncryptionReEncryptButton;
 
+  /// No description provided for @diskEncryptionNeedsRepairHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Disk encryption needs repair'**
+  String get diskEncryptionNeedsRepairHeader;
+
+  /// No description provided for @diskEncryptionNeedsRepairBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic repair failed during decryption. Repair the disk now to start the computer without a recovery key.'**
+  String get diskEncryptionNeedsRepairBody;
+
+  /// No description provided for @diskEncryptionStartRepairButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Start repair...'**
+  String get diskEncryptionStartRepairButton;
+
+  /// No description provided for @diskEncryptionRepairEncryption.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair encryption'**
+  String get diskEncryptionRepairEncryption;
+
+  /// No description provided for @diskEncryptionRepairAuthRemovalWarningBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You can add them again after repair.'**
+  String get diskEncryptionRepairAuthRemovalWarningBody;
+
+  /// No description provided for @diskEncryptionRepair.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair'**
+  String get diskEncryptionRepair;
+
   /// No description provided for @cancel.
   ///
   /// In en, this message translates to:
