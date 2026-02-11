@@ -12,6 +12,8 @@ import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:security_center/widgets/tile_list.dart';
+import 'package:snapd/snapd.dart';
+import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
 
@@ -22,6 +24,8 @@ const defaultRecoveryKeyFileName = 'recovery-key.txt';
 const yaruProgressSize = 20.0;
 
 enum RecoveryKeyDialogMode { replace, reencrypt }
+
+enum AuthRemovalWarningMode { reencrypt, repair }
 
 class DiskEncryptionPage extends ConsumerWidget {
   const DiskEncryptionPage({super.key});
@@ -55,9 +59,30 @@ class EncryptionPageBody extends ConsumerWidget {
 
     return tpmAuthenticationModel.when(
       data: (data) {
+        final needsRepair = data.storageStatus.status ==
+            SnapdStorageEncryptionStatus.degraded;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (needsRepair) ...[
+              YaruInfoBox(
+                title: Text(l10n.diskEncryptionNeedsRepairHeader),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(l10n.diskEncryptionNeedsRepairBody),
+                    const SizedBox(height: 16),
+                    OutlinedButton(
+                      onPressed: () => showAuthRemovalWarning(context, ref, AuthRemovalWarningMode.repair),
+                      child: Text(l10n.diskEncryptionStartRepairButton),
+                    ),
+                  ],
+                ),
+                yaruInfoType: YaruInfoType.warning,
+              ),
+              const SizedBox(height: 24),
+            ],
             _AuthStatusTileList(tpmState: data),
             const SizedBox(height: 32),
             _RecoveryKeyActions(tpmState: data),
@@ -227,29 +252,63 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
   }
 }
 
-Future<void> showAuthRemovalWarning(BuildContext context) async {
+Future<void> showAuthRemovalWarning(
+  BuildContext context,
+  WidgetRef ref, [
+  AuthRemovalWarningMode mode = AuthRemovalWarningMode.reencrypt,
+]) async {
   final result = await showDialog<bool>(
     context: context,
-    builder: (_) => const AuthRemovalWarningDialog(),
+    builder: (_) => AuthRemovalWarningDialog(mode: mode),
   );
 
   if ((result ?? false) && context.mounted) {
-    showReplaceRecoveryKeyDialog(context, RecoveryKeyDialogMode.reencrypt);
+    switch (mode) {
+      case AuthRemovalWarningMode.reencrypt:
+        showReplaceRecoveryKeyDialog(context, RecoveryKeyDialogMode.reencrypt);
+        break;
+      case AuthRemovalWarningMode.repair:
+        final service = getService<DiskEncryptionService>();
+        await service.reprovisionDisk();
+        // Invalidate the TPM auth model to refresh state
+        ref.invalidate(tpmAuthenticationModelProvider);
+        break;
+    }
   }
 }
 
 class AuthRemovalWarningDialog extends ConsumerWidget {
   const AuthRemovalWarningDialog({
+    this.mode = AuthRemovalWarningMode.reencrypt,
     super.key,
   });
+
+  final AuthRemovalWarningMode mode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
 
+    final title = switch (mode) {
+      AuthRemovalWarningMode.reencrypt => l10n.diskEncryptionReEncryption,
+      AuthRemovalWarningMode.repair => l10n.diskEncryptionRepairEncryption,
+    };
+
+    final body = switch (mode) {
+      AuthRemovalWarningMode.reencrypt =>
+        l10n.diskEncryptionAuthRemovalWarningBody,
+      AuthRemovalWarningMode.repair =>
+        l10n.diskEncryptionRepairAuthRemovalWarningBody,
+    };
+
+    final buttonText = switch (mode) {
+      AuthRemovalWarningMode.reencrypt => l10n.next,
+      AuthRemovalWarningMode.repair => l10n.diskEncryptionRepair,
+    };
+
     return AlertDialog(
       title: YaruDialogTitleBar(
-        title: Text(l10n.diskEncryptionReEncryption),
+        title: Text(title),
       ),
       titlePadding: EdgeInsets.zero,
       content: SizedBox(
@@ -259,7 +318,7 @@ class AuthRemovalWarningDialog extends ConsumerWidget {
           children: [
             YaruInfoBox(
               title: Text(l10n.diskEncryptionAuthRemovalWarningHeader),
-              subtitle: Text(l10n.diskEncryptionAuthRemovalWarningBody),
+              subtitle: Text(body),
               yaruInfoType: YaruInfoType.warning,
             ),
             Row(
@@ -271,7 +330,7 @@ class AuthRemovalWarningDialog extends ConsumerWidget {
                 ),
                 ElevatedButton(
                   onPressed: () => Navigator.of(context).pop(true),
-                  child: Text(l10n.next),
+                  child: Text(buttonText),
                 ),
               ].separatedBy(const SizedBox(width: 16)),
             ),
@@ -995,13 +1054,13 @@ class _RecoveryKeyActions extends StatelessWidget {
   }
 }
 
-class _ReEncryptionActions extends StatelessWidget {
+class _ReEncryptionActions extends ConsumerWidget {
   const _ReEncryptionActions({required this.tpmState});
 
   final TpmAuthState tpmState;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
 
     return Column(
@@ -1017,7 +1076,7 @@ class _ReEncryptionActions extends StatelessWidget {
         OutlinedButton(
           onPressed: tpmState.isReencrypting
               ? null
-              : () => showAuthRemovalWarning(context),
+              : () => showAuthRemovalWarning(context, ref),
           child: Text(l10n.diskEncryptionReEncryptButton),
         ),
       ],

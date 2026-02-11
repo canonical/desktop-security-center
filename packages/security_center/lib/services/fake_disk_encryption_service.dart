@@ -19,7 +19,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     String path, {
     bool checkError = false,
     SnapdStorageEncryptionStatus storageEncryptionStatus =
-        SnapdStorageEncryptionStatus.active,
+        SnapdStorageEncryptionStatus.degraded,
   }) {
     final raw = File(path).readAsStringSync();
     final json = jsonDecode(raw) as Map<String, dynamic>;
