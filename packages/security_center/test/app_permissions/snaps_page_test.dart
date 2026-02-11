@@ -390,7 +390,7 @@ void main() {
               'permissions': {
                 'access': {
                   'outcome': 'allow',
-                  'lifespan': 'forever',
+                  'lifespan': 'session',
                 },
               },
             },
@@ -407,7 +407,7 @@ void main() {
           child: const SnapsPage(interface: SnapdInterface.microphone),
         ),
       );
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(
         find.text(tester.l10n.microphoneInterfacePageTitle),
@@ -423,12 +423,26 @@ void main() {
         matching: find.byType(SecurityCenterListTile),
       );
       expect(firefoxTile, findsOneWidget);
+      expect(
+        find.descendant(
+          of: firefoxTile,
+          matching: find.text(tester.l10n.snapdRuleCategorySessionAllowed),
+        ),
+        findsNothing,
+      );
 
       final cheeseTile = find.ancestor(
         of: find.text('cheese'),
         matching: find.byType(SecurityCenterListTile),
       );
       expect(cheeseTile, findsOneWidget);
+      expect(
+        find.descendant(
+          of: cheeseTile,
+          matching: find.text(tester.l10n.snapdRuleCategorySessionAllowed),
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets('microphone interface toggle functionality', (tester) async {
