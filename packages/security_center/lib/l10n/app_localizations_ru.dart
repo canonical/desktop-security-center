@@ -107,6 +107,13 @@ class AppLocalizationsRu extends AppLocalizations {
       'Allow apps to access your cameras.';
 
   @override
+  String get microphoneInterfacePageTitle => 'Microphone';
+
+  @override
+  String get microphoneInterfacePageDescription =>
+      'Allow apps to access your microphone.';
+
+  @override
   String get interfacePageTitle => 'Управление разрешениями';
 
   @override
