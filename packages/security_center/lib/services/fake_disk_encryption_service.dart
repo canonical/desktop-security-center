@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
@@ -18,7 +19,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     String path, {
     bool checkError = false,
     SnapdStorageEncryptionStatus storageEncryptionStatus =
-        SnapdStorageEncryptionStatus.active,
+        SnapdStorageEncryptionStatus.degraded,
   }) {
     final raw = File(path).readAsStringSync();
     final json = jsonDecode(raw) as Map<String, dynamic>;
@@ -36,7 +37,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   SnapdSystemVolumesResponse systemVolumes;
   final Map<String, String> _recoveryKeys;
   final bool checkError;
-  final SnapdStorageEncryptionStatus storageEncryptionStatus;
+  SnapdStorageEncryptionStatus storageEncryptionStatus;
   String _auth = '12345';
 
   /// Generates a fake recovery key and key ID.
@@ -195,6 +196,26 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
   @override
   Future<SnapdStorageEncryptedResponse> getStorageEncrypted() async {
+    // For now, just return the current status
+    // TODO: Add progress/estimatedTime fields when available in snapd.dart
     return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
+  }
+
+  @override
+  Future<void> deleteKeyslots() {
+    // TODO: implement deleteKeyslots
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String> reEncryptDisk() async {
+    final changeId = 're-encrypt-${DateTime.now().millisecondsSinceEpoch}';
+    return changeId;
+  }
+
+  @override
+  Future<void> reprovisionDisk() {
+    // TODO: implement reprovisionDisk
+    throw UnimplementedError();
   }
 }

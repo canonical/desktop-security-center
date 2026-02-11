@@ -508,4 +508,59 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+
+  @override
+  String get diskEncryptionAuthRemovalWarningHeader =>
+      'Any PIN and passphrase will be removed';
+
+  @override
+  String get diskEncryptionAuthRemovalWarningBody =>
+      'You can add them again after re-encryption';
+
+  @override
+  String get diskEncryptionRecoveryKeyRemovalWarningHeader =>
+      'Old recovery keys will stop working';
+
+  @override
+  String get diskEncryptionRecoveryKeyRemovalWarningBody =>
+      'You may want to let your IT administrator know you are re-encrypting the disk in case they are storing any recovery keys.';
+
+  @override
+  String get diskEncryptionReEncryption => 'Re-encryption';
+
+  @override
+  String get diskEncryptionReEncryptionBody =>
+      'Re-encrypting the disk secures it if compromised or configured by a third party. This might take long, but you will still be able to use the computer.';
+
+  @override
+  String get diskEncryptionReEncrypt => 'Re-encrypt';
+
+  @override
+  String get diskEncryptionReEncryptButton => 'Re-encrypt...';
+
+  @override
+  String get diskEncryptionNeedsRepairHeader => 'Disk encryption needs repair';
+
+  @override
+  String get diskEncryptionNeedsRepairBody =>
+      'Automatic repair failed during decryption. Repair the disk now to start the computer without a recovery key.';
+
+  @override
+  String get diskEncryptionStartRepairButton => 'Start repair...';
+
+  @override
+  String get diskEncryptionRepairEncryption => 'Repair encryption';
+
+  @override
+  String get diskEncryptionRepairAuthRemovalWarningBody =>
+      'You can add them again after repair.';
+
+  @override
+  String get diskEncryptionRepair => 'Repair';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get next => 'Next';
 }

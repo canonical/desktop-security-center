@@ -1081,6 +1081,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong'**
   String get recoveryKeySomethingWentWrongHeader;
+
+  /// No description provided for @diskEncryptionAuthRemovalWarningHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Any PIN and passphrase will be removed'**
+  String get diskEncryptionAuthRemovalWarningHeader;
+
+  /// No description provided for @diskEncryptionAuthRemovalWarningBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You can add them again after re-encryption'**
+  String get diskEncryptionAuthRemovalWarningBody;
+
+  /// No description provided for @diskEncryptionRecoveryKeyRemovalWarningHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Old recovery keys will stop working'**
+  String get diskEncryptionRecoveryKeyRemovalWarningHeader;
+
+  /// No description provided for @diskEncryptionRecoveryKeyRemovalWarningBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You may want to let your IT administrator know you are re-encrypting the disk in case they are storing any recovery keys.'**
+  String get diskEncryptionRecoveryKeyRemovalWarningBody;
+
+  /// No description provided for @diskEncryptionReEncryption.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-encryption'**
+  String get diskEncryptionReEncryption;
+
+  /// No description provided for @diskEncryptionReEncryptionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-encrypting the disk secures it if compromised or configured by a third party. This might take long, but you will still be able to use the computer.'**
+  String get diskEncryptionReEncryptionBody;
+
+  /// No description provided for @diskEncryptionReEncrypt.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-encrypt'**
+  String get diskEncryptionReEncrypt;
+
+  /// No description provided for @diskEncryptionReEncryptButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-encrypt...'**
+  String get diskEncryptionReEncryptButton;
+
+  /// No description provided for @diskEncryptionNeedsRepairHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Disk encryption needs repair'**
+  String get diskEncryptionNeedsRepairHeader;
+
+  /// No description provided for @diskEncryptionNeedsRepairBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic repair failed during decryption. Repair the disk now to start the computer without a recovery key.'**
+  String get diskEncryptionNeedsRepairBody;
+
+  /// No description provided for @diskEncryptionStartRepairButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Start repair...'**
+  String get diskEncryptionStartRepairButton;
+
+  /// No description provided for @diskEncryptionRepairEncryption.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair encryption'**
+  String get diskEncryptionRepairEncryption;
+
+  /// No description provided for @diskEncryptionRepairAuthRemovalWarningBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You can add them again after repair.'**
+  String get diskEncryptionRepairAuthRemovalWarningBody;
+
+  /// No description provided for @diskEncryptionRepair.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair'**
+  String get diskEncryptionRepair;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
 }
 
 class _AppLocalizationsDelegate
