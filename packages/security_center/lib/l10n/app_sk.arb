@@ -136,7 +136,7 @@
     "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Nepodarilo sa získať stav šifrovania tohto počítača.",
     "diskEncryptionPageErrorUnsupportedStateBody": "Konfigurácia TPM vášho počítača nie je v podporovanom stave.",
     "diskEncryptionPageErrorUnsupportedSnapdHeader": "Vaša verzia snapd nie je podporovaná",
-    "diskEncryptionPageErrorUnsupportedSnapdBody": "Skontrolujte, či je Centrum zabezpečenia a snapd aktuálne.",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Skontrolujte, či je Centrum zabezpečenia a snapd aktualizované.",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Centrum zabezpečenia sa nemôže pripojiť k rozhraniu snapd",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Aby ste to opravili, spustite tento príkaz v termináli:",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
