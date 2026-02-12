@@ -167,5 +167,7 @@
     "diskEncryptionPageAddingPin": "Додавання PIN-коду, це може тривати кілька секунд...",
     "diskEncryptionPageAddingPassphrase": "Додавання парольної фрази, це може тривати кілька секунд...",
     "diskEncryptionPageRemovingPin": "Видалення PIN-коду, це може тривати кілька секунд...",
-    "diskEncryptionPageRemovingPassphrase": "Видалення парольної фрази, це може тривати кілька секунд..."
+    "diskEncryptionPageRemovingPassphrase": "Видалення парольної фрази, це може тривати кілька секунд...",
+    "microphoneInterfacePageTitle": "Мікрофон",
+    "microphoneInterfacePageDescription": "Дозволити застосункам отримувати доступ до вашого мікрофону."
 }
