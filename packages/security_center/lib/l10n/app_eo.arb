@@ -167,5 +167,7 @@
     "diskEncryptionPageAddPassphraseDialogBodyMain": "Vi devas tajpi vian pasfrazon ĉiun fojon, kiam via komputilo startas. Ĉi tiu pasfrazo diferencas de via uzanto-pasvorto.",
     "diskEncryptionPageAddPinDialogBodyRecovery": "Se vi forgesos vian PIN, vi povos reatingi la diskon per la restaŭra ŝlosilo.",
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Se vi forgesos vian pasfrazon, vi povos reatingi la diskon per la restaŭra ŝlosilo.",
-    "diskEncryptionPageAdditionalSecurityBody": "Vi povas starigi pasfrazon aŭ PIN por plia sekureco. Vi devos tajpi ĝin ĉiun fojon, kiam via komputilo startos."
+    "diskEncryptionPageAdditionalSecurityBody": "Vi povas starigi pasfrazon aŭ PIN por plia sekureco. Vi devos tajpi ĝin ĉiun fojon, kiam via komputilo startos.",
+    "microphoneInterfacePageTitle": "Mikrofono",
+    "microphoneInterfacePageDescription": "Permesi al programoj atingi vian mikrofonon."
 }
