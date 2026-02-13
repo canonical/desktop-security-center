@@ -22,6 +22,16 @@ void main() {
       bool wantAvailable,
     })>[
       (
+        name: 'Pro attach (non-LTS)',
+        attached: false,
+        osRelease: osReleaseNonLTS,
+        callback: (service) => service.attach(invalidToken),
+        wantThrows: true,
+        wantNewData: false,
+        wantAttached: false,
+        wantAvailable: false,
+      ),
+      (
         name: 'Pro attach (invalid token)',
         attached: false,
         osRelease: osReleaseLTS,
@@ -72,18 +82,16 @@ void main() {
         expect(service.data.attached, testCase.attached);
         expect(service.data.available, testCase.wantAvailable);
 
-        if (testCase.wantNewData) {
-          unawaited(
-            expectLater(
-              service.stream,
-              emits(
-                predicate<UbuntuProManagerData>(
-                  (data) => data.attached == testCase.wantAttached,
-                ),
-              ),
-            ),
-          );
-        }
+        final expectData = expectLater(
+          service.stream,
+          testCase.wantNewData
+              ? emits(
+                  predicate<UbuntuProManagerData>(
+                    (data) => data.attached == testCase.wantAttached,
+                  ),
+                )
+              : neverEmits(anything),
+        );
 
         if (testCase.wantThrows) {
           await expectLater(
@@ -96,6 +104,9 @@ void main() {
 
         expect(service.data.attached, testCase.wantAttached);
         expect(service.data.available, testCase.wantAvailable);
+
+        await service.dispose();
+        await expectData;
       });
     }
   });
@@ -104,20 +115,20 @@ void main() {
     final testCases = <({
       String name,
       bool attached,
-      bool? enabled,
+      bool enabled,
       UbuntuProFeatureType type,
       Future<void> Function(UbuntuProFeatureService) callback,
-      bool? wantEnabled,
+      bool wantEnabled,
       bool wantNewData,
     })>[
       for (final type in UbuntuProFeatureType.values) ...[
         (
           name: 'Feature enable (not attached)',
           attached: false,
-          enabled: null,
+          enabled: false,
           type: type,
           callback: (service) => service.enableFeature(type),
-          wantEnabled: null,
+          wantEnabled: false,
           wantNewData: false,
         ),
         (
@@ -130,7 +141,7 @@ void main() {
           wantNewData: true,
         ),
         (
-          name: 'Featured disable',
+          name: 'Feature disable',
           attached: true,
           enabled: true,
           type: type,
@@ -146,7 +157,7 @@ void main() {
         final objectManager = FakeFeatureManagerObject(
           type: testCase.type,
           attached: testCase.attached,
-          enabled: testCase.enabled ?? false,
+          enabled: testCase.enabled,
         );
         final dbusClient = MockDBusClient();
 
@@ -165,26 +176,24 @@ void main() {
           service.getFeature(testCase.type),
           testCase.attached ? isNotNull : isNull,
         );
-        expect(service.getFeature(testCase.type)?.enabled, testCase.enabled);
+        expect(service.isEnabled(testCase.type), testCase.enabled);
 
-        if (testCase.wantNewData) {
-          unawaited(
-            expectLater(
-              service.stream,
-              emits(
-                predicate<UbuntuProFeatureType>(
-                  (data) => data == testCase.type,
-                ),
-              ),
-            ),
-          );
-        }
+        final expectData = expectLater(
+          service.stream,
+          testCase.wantNewData
+              ? emits(
+                  predicate<UbuntuProFeatureType>(
+                    (data) => data == testCase.type,
+                  ),
+                )
+              : neverEmits(anything),
+        );
 
         await testCase.callback(service);
-        expect(
-          service.getFeature(testCase.type)?.enabled,
-          testCase.wantEnabled,
-        );
+        expect(service.isEnabled(testCase.type), testCase.wantEnabled);
+
+        await service.dispose();
+        await expectData;
       });
     }
   });
@@ -194,7 +203,7 @@ void main() {
       String name,
       UbuntuProFeatureType type,
       bool attached,
-      bool? wantEnabled,
+      bool wantEnabled,
     })>[
       for (final type in UbuntuProFeatureType.values) ...[
         (
@@ -207,7 +216,7 @@ void main() {
           name: 'Feature removed',
           type: type,
           attached: true,
-          wantEnabled: null,
+          wantEnabled: false,
         ),
       ],
     ];
@@ -253,10 +262,7 @@ void main() {
         }
         await streamCalled;
 
-        expect(
-          service.getFeature(testCase.type)?.enabled,
-          testCase.wantEnabled,
-        );
+        expect(service.isEnabled(testCase.type), testCase.wantEnabled);
       });
     }
   });

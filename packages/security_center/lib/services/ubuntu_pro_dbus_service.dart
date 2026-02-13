@@ -153,6 +153,11 @@ class UbuntuProFeatureService {
     await _stream.close();
   }
 
+  /// Get whether a feature is enabled or not. If the feature is not available,
+  /// this function will also return `false`.
+  bool isEnabled(UbuntuProFeatureType feature) =>
+      getFeature(feature)?.enabled ?? false;
+
   /// Get a feature being tracked, possibly null if unavailable.
   UbuntuProFeature? getFeature(UbuntuProFeatureType feature) {
     return _featureMap[feature]?.data;
