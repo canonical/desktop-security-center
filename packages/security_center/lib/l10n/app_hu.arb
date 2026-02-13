@@ -1,77 +1,171 @@
 {
-  "appTitle": "Biztonsági központ",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "Engedélyezés a kijelentkezésig",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "Letiltás a kijelentkezésig",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverDenied": "Letiltás mindig",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionsEnableWarning": "Ez egy kísérleti funkció a rendszer erőforrásaihoz való hozzáférés szabályozására.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "Engedélyezés, ez eltarthat néhány másodpercig…",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "Letiltás, ez eltarthat néhány másodpercig…",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsExperimentalLabel": "Kísérleti",
-  "@snapPermissionsExperimentalLabel": {},
-  "interfacePageLinkReportIssues": "Hiba jelentése",
-  "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, plural, =0{nincsenek alkalmazások} =1{1 alkalmazás} other {{n} alkalmazás}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsEnableTitle": "Megkövetelés az alkalmazásoktól, hogy rendszerjogosultságokat kérjenek",
-  "@snapPermissionsEnableTitle": {},
-  "snapPermissionReadLabel": "Olvasás",
-  "@snapPermissionReadLabel": {},
-  "snapdRuleCategoryForeverAllowed": "Engedélyezés mindig",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapPermissionWriteLabel": "Írás",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Végrehajtás",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsOtherDescription": "Az egyéb jogosultságokat a Beállítások › Alkalmazások lapon kezelheti.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsPageTitle": "Alkalmazás jogosultságai",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, plural, =0{nincsenek szabályok} =1{1 szabály} other{{n} szabály}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesPageDescription": "A(z) {interface} jogosultságainak kezelése a(z) {snap} snap-csomagnál.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "Még nincsenek szabályok",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Összes szabály eltávolítása",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "Saját mappa",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "A saját mappában lévő fájlok hozzáféréséhez való jogosultságok kezelése.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageTitle": "Jogosultságok kezelése",
-  "@interfacePageTitle": {},
-  "interfacePageDescription": "A szigorúan korlátozott alkalmazások megkérdezik Önt, mielőtt hozzáférnének a fájlokhoz és a mappákhoz. Ez a funkció kísérleti és változhat a jövőben.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkLearnMore": "Tudjon meg többet",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "Visszajelzés küldése",
-  "@interfacePageLinkGiveFeedback": {}
+    "appTitle": "Biztonsági központ",
+    "snapdRuleCategorySessionAllowed": "Engedélyezés a kijelentkezésig",
+    "snapdRuleCategorySessionDenied": "Letiltás a kijelentkezésig",
+    "snapdRuleCategoryForeverDenied": "Letiltás mindig",
+    "snapPermissionsEnableWarning": "Ez egy kísérleti funkció a rendszer erőforrásaihoz való hozzáférés szabályozására.",
+    "snapPermissionsEnablingLabel": "Engedélyezés, ez eltarthat néhány másodpercig…",
+    "snapPermissionsDisablingLabel": "Letiltás, ez eltarthat néhány másodpercig…",
+    "snapPermissionsExperimentalLabel": "Kísérleti",
+    "interfacePageLinkReportIssues": "Hiba jelentése",
+    "interfaceSnapCount": "{n, plural, =0{nincsenek alkalmazások} =1{1 alkalmazás} other {{n} alkalmazás}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsEnableTitle": "Megkövetelés az alkalmazásoktól, hogy rendszerjogosultságokat kérjenek",
+    "snapPermissionReadLabel": "Olvasás",
+    "snapdRuleCategoryForeverAllowed": "Engedélyezés mindig",
+    "snapPermissionWriteLabel": "Írás",
+    "snapPermissionExecuteLabel": "Végrehajtás",
+    "snapPermissionsOtherDescription": "Az egyéb jogosultságokat a Beállítások › Alkalmazások lapon kezelheti.",
+    "snapPermissionsPageTitle": "Alkalmazás jogosultságai",
+    "snapRulesCount": "{n, plural, =0{nincsenek szabályok} =1{1 szabály} other{{n} szabály}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "A(z) {interface} jogosultságainak kezelése a(z) {snap} snap-csomagnál.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Még nincsenek szabályok",
+    "snapRulesRemoveAll": "Összes szabály eltávolítása",
+    "homeInterfacePageTitle": "Saját mappa",
+    "homeInterfacePageDescription": "A saját mappában lévő fájlok hozzáféréséhez való jogosultságok kezelése.",
+    "interfacePageTitle": "Jogosultságok kezelése",
+    "interfacePageDescription": "A szigorúan korlátozott alkalmazások megkérdezik Önt, mielőtt hozzáférnének a fájlokhoz és a mappákhoz. Ez a funkció kísérleti és változhat a jövőben.",
+    "interfacePageLinkLearnMore": "Tudjon meg többet",
+    "interfacePageLinkGiveFeedback": "Visszajelzés küldése",
+    "diskEncryptionPageLearnMore": "Tudjon meg többet a hardveresen támogatott titkosításról",
+    "diskEncryptionPageKeyDoesntWorkBody": "Ellenőrizze a kulcsot, vagy cserélje ki egy másikra.",
+    "diskEncryptionPageTitle": "Lemeztitkosítás",
+    "diskEncryptionPageRecoveryKey": "Helyreállítási kulcs",
+    "diskEncryptionPageStoreYourKey": "A helyreállítási kulcs segítségével szerezheti vissza az adatokhoz való hozzáférést, ha a lemezt nem sikerül feloldani az indítás során. Mentse el biztonságos helyre.",
+    "diskEncryptionPageCheckKey": "Helyreállítási kulcs ellenőrzése…",
+    "diskEncryptionPageCheck": "Ellenőrzés",
+    "diskEncryptionPageValidKey": "Érvényes kulcs",
+    "diskEncryptionPageInvalidKey": "Érvénytelen kulcs",
+    "diskEncryptionPageEnterKey": "Helyreállítási kulcs megadása",
+    "diskEncryptionPageDialogHeaderCheckKey": "Helyreállítási kulcs ellenőrzése",
+    "diskEncryptionPageKeyWorks": "A helyreállítási kulcs működik",
+    "diskEncryptionPageKeyWorksBody": "Ne felejtse el biztonságos helyen tartani.",
+    "diskEncryptionPageKeyDoesntWork": "A helyreállítási kulcs nem működik",
+    "diskEncryptionPageError": "Hiba",
+    "diskEncryptionPageStoreYourKeyWithLink": "A helyreállítási kulcs segítségével szerezheti vissza az adatokhoz való hozzáférést, ha a lemezt nem sikerül feloldani az indítás során. Mentse el biztonságos helyre. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageReplaceButton": "Helyreállítási kulcs cseréje…",
+    "diskEncryptionPageReplaceDialogHeader": "Helyreállítási kulcs cseréje",
+    "diskEncryptionPageReplaceDialogBody": "Mentse el az új helyreállítási kulcsot egy biztonságos helyre. Miután lecserélte, többé már nem tudja használni a régi kulcsot.",
+    "diskEncryptionPageReplaceDialogShowQR": "QR-kód megjelenítése",
+    "diskEncryptionPageReplaceDialogSave": "Mentés fájlba",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Elmentettem a helyreállítási kulcsomat egy biztonságos helyre",
+    "diskEncryptionPageReplaceDialogReplace": "Csere",
+    "diskEncryptionPageReplaceDialogDiscard": "Elvetés",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "A helyreállítási kulcs lecserélve",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Ne felejtse el biztonságos helyen tartani.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "A helyreállítási kulcs cseréje nem sikerült",
+    "diskEncryptionPageReplaceDialogErrorBody": "Valami probléma történt a helyreállítási kulcs cseréje során, a régi kulcs továbbra is érvényes marad.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu asztal – titkosítás helyreállítási kulcsa",
+    "diskEncryptionPageReplaceDialogQRBody": "Olvassa be a QR-kódot a helyreállítási kulcs másolásához, és mentse el biztonságos helyre, például jelszókezelőbe. Fényképet is készíthet a későbbi használathoz.",
+    "diskEncryptionPageClipboardNotification": "Vágólapra másolva",
+    "diskEncryptionPageCopySemanticLabel": "Másolás",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Titkosítási beállítások nem érhetők el",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Nem sikerült lekérni a számítógép titkosítási állapotát.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "A számítógép TPM-konfigurációja nem támogatott állapotban van.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "A snapd verziója nem támogatott",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Ellenőrizze, hogy a biztonsági központ és a snapd naprakészek-e.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "A biztonsági központ nem tud kapcsolódni a snapd csatolójához",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Ennek javításához futtassa ezt a parancsot a terminálban:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "recoveryKeyExceptionFileSystemTitle": "A helyreállítási kulcs fájlja nincs elmentve",
+    "recoveryKeyExceptionDisallowedPathTitle": "A helyreállítási kulcs fájlját nem lehet ideiglenes helyre menteni",
+    "recoveryKeyExceptionUnknownTitle": "Ismeretlen hiba",
+    "recoveryKeyExceptionFilePermissionTitle": "Nem sikerült a helyreállítási kulcsot fájlba menteni",
+    "recoveryKeyExceptionFilePermissionBody": "Nincs jogosultsága az adott fájlhelyre írni.",
+    "recoveryKeyExceptionFileSystemBody": "Nincs jogosultsága az adott mappába való íráshoz. Próbáljon egy másik helyet, vagy használjon más módszert.",
+    "recoveryKeyExceptionDisallowedPathBody": "Próbáljon egy másik helyet, például egy cserélhető meghajtót, vagy használjon más módszert.",
+    "recoveryKeyFilePickerTitle": "Helyreállítási kulcs fájljának mentése",
+    "recoveryKeyFilePickerFilter": "Szövegfájlok",
+    "recoveryKeyTPMEnabled": "A hardveresen támogatott titkosítás engedélyezve",
+    "recoveryKeyTPMExplanationBody": "A titkosítási kulcsok a számítógép platformmegbízhatósági moduljában (TPM) vannak tárolva.",
+    "recoveryKeyTPMExplanationLearnMore": "Tudjon meg többet a hardveresen támogatott titkosításról",
+    "recoveryKeyPassphraseEnabled": "A titkosítási jelmondat engedélyezve",
+    "recoveryKeyPassphraseHeader": "Jelmondat megváltoztatása",
+    "recoveryKeyPassphraseBody": "Meg kell adnia a jelmondatot minden alkalommal, amikor a számítógép elindul.",
+    "recoveryKeyPassphraseButton": "Jelmondat megváltoztatása…",
+    "recoveryKeyPassphraseCurrent": "Jelenlegi jelmondat",
+    "recoveryKeyPassphraseNew": "Új jelmondat",
+    "recoveryKeyPassphraseConfirm": "Jelmondat megerősítése",
+    "recoveryKeyPassphraseCurrentError": "Helytelen jelmondat, próbálja meg újra",
+    "recoveryKeyPassphraseNewError": "Legalább 4 karakter hosszú kell legyen",
+    "recoveryKeyPassphraseConfirmError": "A jelmondatok nem egyeznek, próbálja meg újra",
+    "recoveryKeyPassphraseDialogHeader": "Jelmondat megváltoztatása",
+    "recoveryKeyPinEnabled": "A titkosítási PIN-kód engedélyezve",
+    "recoveryKeyPinHeader": "Titkosítási PIN-kód",
+    "recoveryKeyEncrpytionPassphraseHeader": "Titkosítási jelmondat",
+    "recoveryKeyPinBody": "Meg kell adnia a PIN-kódot minden alkalommal, amikor a számítógép elindul.",
+    "recoveryKeyPinButton": "PIN-kód megváltoztatása…",
+    "recoveryKeyPinCurrent": "Jelenlegi PIN-kód",
+    "recoveryKeyPinNew": "Új PIN-kód",
+    "recoveryKeyPinConfirm": "PIN-kód megerősítése",
+    "recoveryKeyPinCurrentError": "Helytelen PIN-kód, próbálja meg újra",
+    "recoveryKeyPinConfirmError": "A PIN-kódok nem egyeznek, próbálja meg újra",
+    "recoveryKeyPinDialogHeader": "PIN-kód megváltoztatása",
+    "recoveryKeyPassphraseShow": "Megjelenítés",
+    "recoveryKeyPassphraseHide": "Elrejtés",
+    "recoveryKeyPassphraseChange": "Megváltoztatás",
+    "recoveryKeyPassphrasePinSuccessHeader": "A PIN-kód frissítve",
+    "recoveryKeyPassphrasePinSuccessBody": "A PIN-kódja sikeresen frissítve lett.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "A jelmondat frissítve",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "A jelmondata sikeresen frissítve lett.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Gyenge jelmondat, növelje meg a hosszát vagy tegye bonyolultabbá",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Megfelelő jelmondat, de a nagyobb biztonság érdekében növelje meg a hosszát vagy tegye bonyolultabbá",
+    "recoveryKeyPassphraseEntropyOptimal": "Erős jelmondat",
+    "recoveryKeyPinEntropyBelowMin": "Gyenge PIN-kód, növelje meg a hosszát vagy tegye kevésbé kiszámíthatóvá",
+    "recoveryKeyPinEntropyBelowOptimal": "Megfelelő PIN-kód, de a nagyobb biztonság érdekében növelje meg a hosszát vagy tegye kevésbé kiszámíthatóvá",
+    "recoveryKeyPinEntropyOptimal": "A PIN-kód elég hosszú",
+    "recoveryKeySomethingWentWrongHeader": "Valami probléma történt",
+    "snapPermissionAccessLabel": "Hozzáférés",
+    "cameraRulesPageEmptyTileLabel": "Még egyetlen alkalmazás sem kért hozzáférést",
+    "snapRulesResetAllPermissions": "Összes jogosultság visszaállítása",
+    "cameraInterfacePageTitle": "Kamera",
+    "cameraInterfacePageDescription": "Engedélyezés az alkalmazások számára, hogy hozzáférjenek a kamerákhoz.",
+    "diskEncryptionPageAddPinButton": "PIN-kód hozzáadása…",
+    "diskEncryptionPageAddPassphraseButton": "Jelmondat hozzáadása…",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Jelmondat hozzáadása",
+    "diskEncryptionPageAddPinDialogHeading": "PIN-kód hozzáadása",
+    "diskEncryptionPageAddPinDialogBodyMain": "Meg kell adnia a PIN-kódot minden alkalommal, amikor a számítógép elindul. Ez a PIN-kód eltér a felhasználói jelszavától.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Ha elfelejti a PIN-kódot, akkor a helyreállítási kulccsal szerezheti vissza a hozzáférést a lemezhez.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Meg kell adnia a jelmondatot minden alkalommal, amikor a számítógép elindul. Ez a jelmondat eltér a felhasználói jelszavától.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Ha elfelejti a jelmondatot, akkor a helyreállítási kulccsal szerezheti vissza a hozzáférést a lemezhez.",
+    "diskEncryptionPageAdditionalSecurityHeader": "További biztonság",
+    "diskEncryptionPageAdditionalSecurityBody": "Beállíthat jelmondatot vagy PIN-kódot a biztonság növelése érdekében. Ezt minden alkalommal meg kell adnia, amikor a számítógép elindul.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Tudjon meg többet",
+    "diskEncryptionPageAddPinDialogSaveButton": "Hozzáadás",
+    "diskEncryptionPageRemovePinButton": "PIN-kód eltávolítása…",
+    "diskEncryptionPageRemovePassphraseButton": "Jelmondat eltávolítása…",
+    "diskEncryptionPageAddingPin": "PIN-kód hozzáadása, ez eltarthat néhány másodpercig…",
+    "diskEncryptionPageAddingPassphrase": "Jelmondat hozzáadása, ez eltarthat néhány másodpercig…",
+    "diskEncryptionPageRemovingPin": "PIN-kód eltávolítása, ez eltarthat néhány másodpercig…",
+    "diskEncryptionPageRemovingPassphrase": "Jelmondat eltávolítása, ez eltarthat néhány másodpercig…"
 }
