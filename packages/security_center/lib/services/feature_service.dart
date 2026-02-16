@@ -69,12 +69,25 @@ class FeatureService {
   }
 
   bool _hasGreaterVersion(String? v1, String v2) {
-    if (v1 == null) {
-      return false;
+    String cleanVersion(String version) {
+      // Remove leading 'v' if present
+      var clean = version.replaceAll('v', '');
+
+      // Remove dev hash suffix like '+g137.7313916'
+      clean = clean.split('+').first;
+
+      // add '.0' suffix for new minor versions like '2.74'
+      if (clean.split('.').length < 3) {
+        clean = '$clean.0';
+      }
+
+      return clean;
     }
 
+    if (v1 == null) return false;
+
     try {
-      return Version.parse(v1) >= Version.parse(v2);
+      return Version.parse(cleanVersion(v1)) >= Version.parse(cleanVersion(v2));
     } on Exception catch (_) {
       return false;
     }
