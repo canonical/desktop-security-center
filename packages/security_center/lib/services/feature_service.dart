@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file/file.dart';
 import 'package:file/local.dart';
 import 'package:flutter/foundation.dart';
+import 'package:pub_semver/pub_semver.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 
 final _log = Logger('feature_service');
@@ -67,8 +68,15 @@ class FeatureService {
     }
   }
 
-  // TODO: add version comparison
-  bool _hasGreaterVersion(String? a, String b) {
-    return false;
+  bool _hasGreaterVersion(String? v1, String v2) {
+    if (v1 == null) {
+      return false;
+    }
+
+    try {
+      return Version.parse(v1) >= Version.parse(v2);
+    } on Exception catch (_) {
+      return false;
+    }
   }
 }
