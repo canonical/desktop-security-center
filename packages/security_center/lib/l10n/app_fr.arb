@@ -169,5 +169,5 @@
     "diskEncryptionPageRemovingPin": "Retire le code PIN, cela peut prendre quelques secondes...",
     "diskEncryptionPageRemovingPassphrase": "Retire la phrase de passe, cela peut prendre quelques secondes...",
     "microphoneInterfacePageTitle": "Microphone",
-    "microphoneInterfacePageDescription": "Autoriser les applications à accéder à votre microphone."
+    "microphoneInterfacePageDescription": "Autoriser les apps à accéder à votre microphone."
 }
