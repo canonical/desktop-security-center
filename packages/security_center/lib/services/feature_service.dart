@@ -12,6 +12,7 @@ final _log = Logger('feature_service');
 class FeatureService {
   FeatureService({
     required this.isDryRun,
+    this.snapdVersion,
     @visibleForTesting FileSystem? fs,
     @visibleForTesting
     ProcessResult Function(
@@ -27,14 +28,20 @@ class FeatureService {
     List<String> arguments,
   ) _runProcess;
   final bool isDryRun;
+  final String? snapdVersion;
   bool? _isUsingFde;
 
+  // FIXME: This is currently unused
   bool get isDiskEncryptionAvailable {
     if (isDryRun) {
       return true;
     }
     _isUsingFde ??= _hasStorageEncryptedManaged() || _hasUbuntuDataEnc();
     return _isUsingFde!;
+  }
+
+  bool get supportsMicrophone {
+    return _hasGreaterVersion(snapdVersion, '2.75');
   }
 
   bool _hasStorageEncryptedManaged() {
@@ -58,5 +65,10 @@ class FeatureService {
       );
       return false;
     }
+  }
+
+  // TODO: add version comparison
+  bool _hasGreaterVersion(String? a, String b) {
+    return false;
   }
 }

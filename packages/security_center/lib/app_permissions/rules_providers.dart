@@ -10,6 +10,7 @@ import 'package:security_center/app_permissions/microphone_interface.dart'
     as microphone_interface;
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/services/app_permissions_service.dart';
+import 'package:security_center/services/feature_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 export 'package:security_center/services/app_permissions_service.dart';
@@ -52,6 +53,7 @@ Future<Map<SnapdInterface, int>> interfaceSnapCounts(
   Ref ref,
 ) async {
   final interfaceSnapCounts = <SnapdInterface, int>{};
+  final featureService = getService<FeatureService>();
 
   // For home interface, get all rules
   final rules = await ref.watch(rulesProvider.future);
@@ -64,8 +66,10 @@ Future<Map<SnapdInterface, int>> interfaceSnapCounts(
   final cameraSnaps = await ref.watch(cameraSnapsProvider.future);
   interfaceSnapCounts[SnapdInterface.camera] = cameraSnaps.length;
 
-  final microphoneSnaps = await ref.watch(microphoneSnapsProvider.future);
-  interfaceSnapCounts[SnapdInterface.microphone] = microphoneSnaps.length;
+  if (featureService.supportsMicrophone) {
+    final microphoneSnaps = await ref.watch(microphoneSnapsProvider.future);
+    interfaceSnapCounts[SnapdInterface.microphone] = microphoneSnaps.length;
+  }
 
   return interfaceSnapCounts;
 }
