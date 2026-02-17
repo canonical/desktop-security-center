@@ -112,7 +112,7 @@ void main() {
         );
         expect(homeInterfaceTile, findsOneWidget);
 
-        // Microphone interface should be hidden
+        // Microphone interface visibility should match expected behavior
         final microphoneInterfaceTile = find.ancestor(
           of: find.text(SnapdInterface.microphone.localizedTitle(tester.l10n)),
           matching: find.byType(SecurityCenterListTile),
