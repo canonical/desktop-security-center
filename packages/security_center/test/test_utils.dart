@@ -372,11 +372,12 @@ SnapdService registerMockSnapdService({
 FeatureService registerMockFeatureService({
   bool isDiskEncryptionAvailable = true,
   bool isDryRun = false,
-  bool isCameraInterfaceAvailable = false,
+  bool supportsMicrophone = false,
 }) {
   final service = MockFeatureService();
   when(service.isDiskEncryptionAvailable).thenReturn(isDiskEncryptionAvailable);
   when(service.isDryRun).thenReturn(isDryRun);
+  when(service.supportsMicrophone).thenReturn(supportsMicrophone);
 
   registerMockService<FeatureService>(service);
   addTearDown(unregisterService<FeatureService>);

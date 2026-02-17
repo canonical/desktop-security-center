@@ -136,6 +136,7 @@ class AvailableRoutes {
   static Future<void> init() async {
     final routes = <Routes>[Routes.appPermissions];
 
+    // FIXME: this should live in the feature service
     // Only include disk encryption if status is not inactive
     try {
       final diskService = getService<DiskEncryptionService>();

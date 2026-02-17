@@ -46,13 +46,16 @@ Future<void> main(List<String> args) async {
     exit(2);
   }
 
+  registerService<SnapdService>(SnapdService.new);
+
   // Create and register feature service to determine available features
   final featureService = FeatureService(
     isDryRun: argResults.flag('dry-run'),
+    snapdVersion: await getService<SnapdService>()
+        .systemInfo()
+        .then((info) => info.version),
   );
   registerServiceInstance<FeatureService>(featureService);
-
-  registerService<SnapdService>(SnapdService.new);
 
   registerService(XdgDesktopPortalClient.new);
 
