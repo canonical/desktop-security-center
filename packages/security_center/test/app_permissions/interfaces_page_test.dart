@@ -62,80 +62,64 @@ void main() {
     );
   });
 
-  testWidgets('microphone interface hidden when snapd version < 2.75',
-      (tester) async {
-    final container = createContainer();
-    registerMockAppPermissionsService(
-      rules: [
-        SnapdRule(
-          id: 'ruleId',
-          timestamp: DateTime(2024),
-          snap: 'firefox',
-          interface: 'home',
-          constraints: {},
-        ),
-      ],
-      snaps: ['cheese'],
-    );
-    registerMockSnapdService();
-    registerMockFeatureService();
-    await tester.pumpApp(
-      (_) => UncontrolledProviderScope(
-        container: container,
-        child: const InterfacesPage(),
+  group('microphone interface visibility', () {
+    for (final testCase in <({
+      String name,
+      bool supportsMicrophone,
+      Matcher expected,
+    })>[
+      (
+        name: 'hidden when snapd version < 2.75',
+        supportsMicrophone: false,
+        expected: findsNothing,
       ),
-    );
-    await tester.pumpAndSettle();
-    // Home interface should still be visible
-    final homeInterfaceTile = find.ancestor(
-      of: find.text(SnapdInterface.home.localizedTitle(tester.l10n)),
-      matching: find.byType(SecurityCenterListTile),
-    );
-    expect(homeInterfaceTile, findsOneWidget);
-    // Camera interface should be hidden
-    final microphoneInterfaceTile = find.ancestor(
-      of: find.text(SnapdInterface.microphone.localizedTitle(tester.l10n)),
-      matching: find.byType(SecurityCenterListTile),
-    );
-    expect(microphoneInterfaceTile, findsNothing);
-  });
+      (
+        name: 'shown when snapd version >= 2.75',
+        supportsMicrophone: true,
+        expected: findsOneWidget,
+      ),
+    ]) {
+      testWidgets(testCase.name, (tester) async {
+        final container = createContainer();
+        registerMockAppPermissionsService(
+          rules: [
+            SnapdRule(
+              id: 'ruleId',
+              timestamp: DateTime(2024),
+              snap: 'firefox',
+              interface: 'home',
+              constraints: {},
+            ),
+          ],
+          snaps: ['cheese'],
+        );
+        registerMockSnapdService();
+        registerMockFeatureService(
+          supportsMicrophone: testCase.supportsMicrophone,
+        );
+        await tester.pumpApp(
+          (_) => UncontrolledProviderScope(
+            container: container,
+            child: const InterfacesPage(),
+          ),
+        );
+        await tester.pumpAndSettle();
 
-  testWidgets('microphone interface shown when snapd version >= 2.75',
-      (tester) async {
-    final container = createContainer();
-    registerMockAppPermissionsService(
-      rules: [
-        SnapdRule(
-          id: 'ruleId',
-          timestamp: DateTime(2024),
-          snap: 'firefox',
-          interface: 'home',
-          constraints: {},
-        ),
-      ],
-      snaps: ['cheese'],
-    );
-    registerMockSnapdService();
-    registerMockFeatureService(supportsMicrophone: true);
-    await tester.pumpApp(
-      (_) => UncontrolledProviderScope(
-        container: container,
-        child: const InterfacesPage(),
-      ),
-    );
-    await tester.pumpAndSettle();
-    // Home interface should still be visible
-    final homeInterfaceTile = find.ancestor(
-      of: find.text(SnapdInterface.home.localizedTitle(tester.l10n)),
-      matching: find.byType(SecurityCenterListTile),
-    );
-    expect(homeInterfaceTile, findsOneWidget);
-    // Camera interface should be hidden
-    final microphoneInterfaceTile = find.ancestor(
-      of: find.text(SnapdInterface.microphone.localizedTitle(tester.l10n)),
-      matching: find.byType(SecurityCenterListTile),
-    );
-    expect(microphoneInterfaceTile, findsOne);
+        // Home interface should still be visible
+        final homeInterfaceTile = find.ancestor(
+          of: find.text(SnapdInterface.home.localizedTitle(tester.l10n)),
+          matching: find.byType(SecurityCenterListTile),
+        );
+        expect(homeInterfaceTile, findsOneWidget);
+
+        // Microphone interface should be hidden
+        final microphoneInterfaceTile = find.ancestor(
+          of: find.text(SnapdInterface.microphone.localizedTitle(tester.l10n)),
+          matching: find.byType(SecurityCenterListTile),
+        );
+        expect(microphoneInterfaceTile, testCase.expected);
+      });
+    }
   });
 
   group('toggle prompting', () {
