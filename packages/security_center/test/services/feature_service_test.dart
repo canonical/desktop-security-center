@@ -92,6 +92,95 @@ factory: true
       });
     }
   });
+
+  group('Snapd version', () {
+    for (final testCase in [
+      (
+        name: 'snapd version < 2.75, no microphone interface',
+        snapdVersion: '2.74',
+        isDryRun: false,
+        expectedResult: false,
+      ),
+      (
+        name: 'snapd version == 2.75, microphone interface supported',
+        snapdVersion: '2.75',
+        isDryRun: false,
+        expectedResult: true,
+      ),
+      (
+        name: 'snapd version > 2.75, microphone interface supported',
+        snapdVersion: '2.76',
+        isDryRun: false,
+        expectedResult: true,
+      ),
+      (
+        name: 'snapd version with v prefix, microphone interface supported',
+        snapdVersion: 'v2.75',
+        isDryRun: false,
+        expectedResult: true,
+      ),
+      (
+        name: 'snapd version with v prefix, no microphone interface supported',
+        snapdVersion: 'v2.74',
+        isDryRun: false,
+        expectedResult: false,
+      ),
+      (
+        name: 'snapd version with dev hash suffix',
+        snapdVersion: '2.75+g137.7313916',
+        isDryRun: false,
+        expectedResult: true,
+      ),
+      (
+        name: 'snapd version 2.74.1',
+        snapdVersion: '2.74.1',
+        isDryRun: false,
+        expectedResult: false,
+      ),
+      (
+        name: 'snapd version 2.75.0',
+        snapdVersion: '2.75.0',
+        isDryRun: false,
+        expectedResult: true,
+      ),
+      (
+        name: 'snapd version 2.75.1',
+        snapdVersion: '2.75.1',
+        isDryRun: false,
+        expectedResult: true,
+      ),
+      (
+        name: 'snapd version null, no microphone interface',
+        snapdVersion: null,
+        isDryRun: false,
+        expectedResult: false,
+      ),
+      (
+        name: 'dry run mode always returns true',
+        snapdVersion: '2.74',
+        isDryRun: true,
+        expectedResult: true,
+      ),
+      (
+        name: 'dry run mode with null version returns true',
+        snapdVersion: null,
+        isDryRun: true,
+        expectedResult: true,
+      ),
+    ]) {
+      test(testCase.name, () {
+        final service = FeatureService(
+          isDryRun: testCase.isDryRun,
+          snapdVersion: testCase.snapdVersion,
+        );
+
+        expect(
+          service.supportsMicrophone,
+          equals(testCase.expectedResult),
+        );
+      });
+    }
+  });
 }
 
 abstract class _SyncProcess {
