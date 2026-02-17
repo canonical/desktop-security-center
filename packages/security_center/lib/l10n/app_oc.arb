@@ -168,5 +168,6 @@
     "diskEncryptionPageAddingPin": "Apondon del PIN, aquò pòt tardar unas segondas...",
     "diskEncryptionPageAddingPassphrase": "Apondon de la frasa secrèta, aquò pòt tardar unas segondas...",
     "diskEncryptionPageRemovingPin": "Retirament del PIN, aquò pòt tardar unas segondas...",
-    "diskEncryptionPageRemovingPassphrase": "Retirament de la frasa secrèta, aquò pòt tardar unas segondas..."
+    "diskEncryptionPageRemovingPassphrase": "Retirament de la frasa secrèta, aquò pòt tardar unas segondas...",
+    "diskEncryptionPageAdditionalSecurityBody": "Podètz definir una frasa secrèta o un PIN per mai de seguretat. O deuretz picar cada còp que l’ordenador amòda."
 }
