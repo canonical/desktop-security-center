@@ -42,7 +42,9 @@ class FeatureService {
   }
 
   bool get supportsMicrophone {
-    return _hasGreaterVersion(snapdVersion, '2.75');
+    if (isDryRun) return true;
+
+    return _hasGreaterSnapdVersion(snapdVersion, '2.75');
   }
 
   bool _hasStorageEncryptedManaged() {
@@ -68,7 +70,7 @@ class FeatureService {
     }
   }
 
-  bool _hasGreaterVersion(String? v1, String v2) {
+  bool _hasGreaterSnapdVersion(String? v1, String v2) {
     String cleanVersion(String version) {
       // Remove leading 'v' if present
       var clean = version.replaceAll('v', '');
