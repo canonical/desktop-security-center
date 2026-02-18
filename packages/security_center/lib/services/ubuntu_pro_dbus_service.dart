@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:csv/csv.dart';
 import 'package:dbus/dbus.dart';
 import 'package:file/file.dart';
 import 'package:file/local.dart';
@@ -32,8 +33,7 @@ class UbuntuProManagerData with _$UbuntuProManagerData {
   factory UbuntuProManagerData({
     required bool attached,
     bool? available,
-    String? version,
-    int? supportYear,
+    DateTime? eolDate,
   }) = _UbuntuProManagerData;
 }
 
@@ -302,17 +302,21 @@ class UbuntuProManagerService {
     _propertiesChangedSignal =
         _objectManager!.propertiesChanged.listen(_onPropertiesChanged);
 
+    final releases = await _getReleases();
+    final series = await _getSeries();
+    final lts = await _isLTS(series, releases);
+    final eolDate =
+        series != null && lts ? _getEndOfSupport(series, releases) : null;
+
     final attached = await _objectManager!.getProperty(
       'com.canonical.UbuntuAdvantage.Manager',
       'Attached',
     );
 
-    final version = await _getVersion();
     _data = UbuntuProManagerData(
       attached: attached.asBoolean(),
-      available: _isLTS(version),
-      version: version,
-      supportYear: version != null ? _getEndOfSupport(version) : null,
+      available: lts,
+      eolDate: eolDate,
     );
     _stream.add(_data);
   }
@@ -353,13 +357,21 @@ class UbuntuProManagerService {
     _stream.add(_data);
   }
 
+  /// Get past Ubuntu releases from ubuntu.csv.
+  Future<List<List<dynamic>>> _getReleases() async {
+    final filePath = '/usr/share/distro-info/ubuntu.csv';
+    final csvContent = await _fs.file(filePath).readAsString();
+    final data = CsvToListConverter(eol: '\n').convert(csvContent);
+    return data.skip(1).toList();
+  }
+
   /// Get the Ubuntu version of the machine.
-  Future<String?> _getVersion() async {
+  Future<String?> _getSeries() async {
     final filePath = Platform.environment['SNAP'] != null
         ? '/var/lib/snapd/hostfs/etc/os-release'
         : '/etc/os-release';
-
     final osRelease = await _fs.file(filePath).readAsLines();
+
     for (final line in osRelease) {
       final split = line.split('=');
       final key = split[0].trim();
@@ -369,7 +381,7 @@ class UbuntuProManagerService {
         value = value.substring(1, value.length - 1);
       }
 
-      if (key.toUpperCase() == 'VERSION') {
+      if (key.toUpperCase() == 'VERSION_CODENAME') {
         return value;
       }
     }
@@ -378,18 +390,24 @@ class UbuntuProManagerService {
   }
 
   /// Determine if an Ubuntu version string is an LTS.
-  bool _isLTS(String? version) {
-    return version != null && version.contains('LTS');
+  Future<bool> _isLTS(String? series, List<List<dynamic>> releases) async {
+    for (final row in releases) {
+      if (row[2] == series) {
+        return row[0].toString().contains('LTS');
+      }
+    }
+
+    return false;
   }
 
   /// Get the estimated end-of-support year for a given Ubuntu version.
-  int? _getEndOfSupport(String version) {
-    final match = RegExp(r'(\d{2})\.\d{2}').matchAsPrefix(version)?.group(1);
-    if (match == null) return null;
+  DateTime? _getEndOfSupport(String? series, List<List<dynamic>> releases) {
+    for (final row in releases) {
+      if (row[2] == series) {
+        return DateTime.tryParse(row.last.toString());
+      }
+    }
 
-    final yearNum = int.tryParse(match);
-    if (yearNum == null) return null;
-
-    return 2000 + yearNum + 10;
+    return null;
   }
 }

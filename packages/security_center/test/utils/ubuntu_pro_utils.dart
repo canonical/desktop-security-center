@@ -12,6 +12,7 @@ import 'ubuntu_pro_utils.mocks.dart';
 
 MemoryFileSystem mockOSRelease({
   required String osRelease,
+  required String ubuntuCsv,
 }) {
   final mockFs = MemoryFileSystem.test();
   mockFs.file('/var/lib/snapd/hostfs/etc/os-release')
@@ -20,6 +21,9 @@ MemoryFileSystem mockOSRelease({
   mockFs.file('/etc/os-release')
     ..createSync(recursive: true)
     ..writeAsStringSync(osRelease);
+  mockFs.file('/usr/share/distro-info/ubuntu.csv')
+    ..createSync(recursive: true)
+    ..writeAsStringSync(ubuntuCsv);
 
   return mockFs;
 }
@@ -251,6 +255,7 @@ MockDBusRemoteObjectManager mockProManagerObject({
 const validToken = 'CJd8MMN8wXSWsv7wJT8c8dDK';
 const invalidToken = 'CK2RYDcKfupxwXdWhSAxQPCeiULntK';
 
+// content of /etc/os-release for 24.04 LTS
 const osReleaseLTS = '''
 PRETTY_NAME="Ubuntu 24.04.3 LTS"
 NAME="Ubuntu"
@@ -267,6 +272,7 @@ UBUNTU_CODENAME=noble
 LOGO=ubuntu-logo
 ''';
 
+// content of /etc/os-release for 24.10
 const osReleaseNonLTS = '''
 PRETTY_NAME="Ubuntu 24.10"
 NAME="Ubuntu"
@@ -281,6 +287,20 @@ BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 UBUNTU_CODENAME=oracular
 LOGO=ubuntu-logo
+''';
+
+// excerpt of /usr/share/distro-info/ubuntu.csv
+const ubuntuCsv = '''
+version,codename,series,created,release,eol,eol-server,eol-esm
+22.04 LTS,Jammy Jellyfish,jammy,2021-10-14,2022-04-21,2027-06-01,2027-06-01,2032-04-21
+22.10,Kinetic Kudu,kinetic,2022-04-21,2022-10-20,2023-07-20
+23.04,Lunar Lobster,lunar,2022-10-20,2023-04-20,2024-01-25
+23.10,Mantic Minotaur,mantic,2023-04-20,2023-10-12,2024-07-11
+24.04 LTS,Noble Numbat,noble,2023-10-12,2024-04-25,2029-05-31,2029-05-31,2034-04-25
+24.10,Oracular Oriole,oracular,2024-04-25,2024-10-10,2025-07-10
+25.04,Plucky Puffin,plucky,2024-10-10,2025-04-17,2026-01-15
+25.10,Questing Quokka,questing,2025-04-17,2025-10-09,2026-07-09
+26.04 LTS,Resolute Raccoon,resolute,2025-10-09,2026-04-23,2031-05-29,2031-05-29,2036-04-23
 ''';
 
 Map<DBusObjectPath, Map<String, Map<String, DBusValue>>> attachedManagedObjects(

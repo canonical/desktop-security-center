@@ -16,6 +16,7 @@ void main() {
       bool attached,
       String osRelease,
       Future<void> Function(UbuntuProManagerService) callback,
+      int? wantEol,
       bool wantThrows,
       bool wantNewData,
       bool wantAttached,
@@ -26,6 +27,7 @@ void main() {
         attached: false,
         osRelease: osReleaseNonLTS,
         callback: (service) => service.attach(invalidToken),
+        wantEol: null,
         wantThrows: true,
         wantNewData: false,
         wantAttached: false,
@@ -36,6 +38,7 @@ void main() {
         attached: false,
         osRelease: osReleaseLTS,
         callback: (service) => service.attach(invalidToken),
+        wantEol: 2034,
         wantThrows: true,
         wantNewData: false,
         wantAttached: false,
@@ -46,6 +49,7 @@ void main() {
         attached: false,
         osRelease: osReleaseLTS,
         callback: (service) => service.attach(validToken),
+        wantEol: 2034,
         wantThrows: false,
         wantNewData: true,
         wantAttached: true,
@@ -56,6 +60,7 @@ void main() {
         attached: true,
         osRelease: osReleaseLTS,
         callback: (service) => service.detach(),
+        wantEol: 2034,
         wantThrows: false,
         wantNewData: true,
         wantAttached: false,
@@ -65,7 +70,10 @@ void main() {
 
     for (final testCase in testCases) {
       test(testCase.name, () async {
-        final mockFs = mockOSRelease(osRelease: testCase.osRelease);
+        final mockFs = mockOSRelease(
+          osRelease: testCase.osRelease,
+          ubuntuCsv: ubuntuCsv,
+        );
         final objectManager = mockProManagerObject(
           attached: testCase.attached,
         );
@@ -81,6 +89,7 @@ void main() {
 
         expect(service.data.attached, testCase.attached);
         expect(service.data.available, testCase.wantAvailable);
+        expect(service.data.eolDate?.year, testCase.wantEol);
 
         final expectData = expectLater(
           service.stream,
