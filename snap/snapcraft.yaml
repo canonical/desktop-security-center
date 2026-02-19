@@ -19,6 +19,7 @@ apps:
       - snapd-control
       - snap-fde-control
       - removable-media
+      - system-observe
 
 parts:
   fvm:
