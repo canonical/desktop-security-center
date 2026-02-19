@@ -9,7 +9,16 @@ class DetachDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
+    final provider = ref.watch(ubuntuProAttachModelProvider);
+
+    if (provider.state is UbuntuProAttachStateSuccess) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context, rootNavigator: true).pop();
+      });
+    }
+
     return AlertDialog(
       title: YaruDialogTitleBar(
         title: Text(l10n.ubuntuProDisablePro),
@@ -22,14 +31,25 @@ class DetachDialog extends ConsumerWidget {
           },
           child: Text(l10n.ubuntuProCancel),
         ),
-        FilledButton(
+        ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: YaruColors.red,
+            backgroundColor: theme.colorScheme.error,
           ),
-          onPressed: () async {
-            await ref.read(ubuntuProModelProvider.notifier).detach();
-          },
-          child: Text(l10n.ubuntuProDisable),
+          onPressed: provider.state is UbuntuProAttachStateLoading
+              ? null
+              : () async {
+                  await ref
+                      .read(ubuntuProAttachModelProvider.notifier)
+                      .detach();
+                },
+          child: provider.state is UbuntuProAttachStateLoading
+              ? SizedBox.square(
+                  dimension: theme.textTheme.bodyMedium?.fontSize,
+                  child: YaruCircularProgressIndicator(
+                    strokeWidth: 2,
+                  ),
+                )
+              : Text(l10n.ubuntuProDisable),
         ),
       ],
       content: SizedBox(

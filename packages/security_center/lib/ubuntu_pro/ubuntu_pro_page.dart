@@ -22,8 +22,7 @@ class UbuntuProPage extends ConsumerWidget {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
     final navigator = Navigator.of(context);
-
-    final provider = ref.watch(ubuntuProModelProvider);
+    final provider = ref.watch(ubuntuProStatusProvider);
 
     return ScrollablePage(
       children: [
@@ -45,7 +44,7 @@ class UbuntuProPage extends ConsumerWidget {
           ),
         ),
         _UbuntuProAvailability(),
-        if (provider.manager.available ?? false) ...[
+        if (provider.value?.available ?? false) ...[
           _ESMSection(),
           _LivepatchSection(),
           TileList(
@@ -59,20 +58,19 @@ class UbuntuProPage extends ConsumerWidget {
               ),
             ],
           ),
-          ref.watch(ubuntuProModelProvider).manager.attached
-              ? ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: YaruColors.red,
-                  ),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (_) => const DetachDialog(),
-                    );
-                  },
-                  child: Text(l10n.ubuntuProDisablePro),
-                )
-              : SizedBox.shrink(),
+          if (provider.value?.attached ?? false)
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: theme.colorScheme.error,
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (_) => const DetachDialog(),
+                );
+              },
+              child: Text(l10n.ubuntuProDisablePro),
+            ),
         ],
       ].separatedBy(const SizedBox(height: 24)),
     );
@@ -83,8 +81,9 @@ class _UbuntuProAvailability extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final provider = ref.watch(ubuntuProStatusProvider);
 
-    return ref.watch(ubuntuProModelProvider).manager.available ?? false
+    return provider.value?.available ?? false
         ? _UbuntuProStatus()
         : Column(
             children: [
@@ -114,8 +113,9 @@ class _UbuntuProStatus extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final provider = ref.watch(ubuntuProStatusProvider);
 
-    return ref.watch(ubuntuProModelProvider).manager.attached
+    return provider.value?.attached ?? false
         ? Column(
             children: [
               const SizedBox(height: 24),
@@ -305,7 +305,7 @@ class _LoadingText extends StatelessWidget {
           const SizedBox(width: 8),
           SizedBox.square(
             dimension: theme.textTheme.bodyMedium?.fontSize,
-            child: CircularProgressIndicator(),
+            child: const YaruCircularProgressIndicator(strokeWidth: 2),
           ),
         ],
       ],

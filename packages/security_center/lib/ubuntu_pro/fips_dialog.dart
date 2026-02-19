@@ -14,6 +14,13 @@ class FIPSDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
+    final provider = ref.watch(fIPSModelProvider);
+
+    if (provider.state is UbuntuProFeatureStateEnabled) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context, rootNavigator: true).pop();
+      });
+    }
 
     return AlertDialog(
       title: YaruDialogTitleBar(
@@ -22,10 +29,17 @@ class FIPSDialog extends ConsumerWidget {
       titlePadding: EdgeInsets.zero,
       actions: [
         ElevatedButton(
-          onPressed: () async {
-            await ref.read(fIPSModelProvider.notifier).enable();
-          },
-          child: Text(l10n.ubuntuProEnable),
+          onPressed: provider.state is UbuntuProFeatureStateLoading
+              ? null
+              : () => ref.read(fIPSModelProvider.notifier).enable(),
+          child: provider.state is UbuntuProFeatureStateLoading
+              ? SizedBox.square(
+                  dimension: theme.textTheme.bodyMedium?.fontSize,
+                  child: YaruCircularProgressIndicator(
+                    strokeWidth: 2,
+                  ),
+                )
+              : Text(l10n.ubuntuProEnable),
         ),
       ],
       content: SizedBox(

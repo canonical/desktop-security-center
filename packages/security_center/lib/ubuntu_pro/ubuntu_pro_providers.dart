@@ -23,7 +23,6 @@ sealed class UbuntuProAttachState with _$UbuntuProAttachState {
 class UbuntuProData with _$UbuntuProData {
   factory UbuntuProData({
     required UbuntuProAttachState state,
-    required UbuntuProManagerData manager,
     @Default('') String token,
   }) = _UbuntuProData;
 
@@ -33,17 +32,12 @@ class UbuntuProData with _$UbuntuProData {
 }
 
 @riverpod
-class UbuntuProModel extends _$UbuntuProModel {
+class UbuntuProAttachModel extends _$UbuntuProAttachModel {
   final _service = getService<UbuntuProManagerService>();
 
   @override
   UbuntuProData build() {
-    _service.stream.listen((data) {
-      state = state.copyWith(manager: _service.data);
-    });
-
     return UbuntuProData(
-      manager: _service.data,
       state: UbuntuProAttachState.input(),
     );
   }
@@ -74,6 +68,12 @@ class UbuntuProModel extends _$UbuntuProModel {
     }
     state = state.copyWith(token: token);
   }
+}
+
+@riverpod
+Stream<UbuntuProManagerData> ubuntuProStatus(Ref ref) {
+  final service = getService<UbuntuProManagerService>();
+  return service.stream;
 }
 
 @riverpod
@@ -206,6 +206,7 @@ class FIPSData with _$FIPSData {
     required FIPSType type,
     required bool canEnable,
     required bool enabled,
+    required UbuntuProFeatureState state,
   }) = _FIPSData;
 }
 
@@ -226,6 +227,9 @@ class FIPSModel extends _$FIPSModel {
       type: FIPSType.fipsUpdates,
       canEnable: canEnable,
       enabled: enabled,
+      state: enabled
+          ? UbuntuProFeatureState.enabled()
+          : UbuntuProFeatureState.disabled(),
     );
   }
 
@@ -234,6 +238,7 @@ class FIPSModel extends _$FIPSModel {
   }
 
   Future<void> enable() async {
+    state = state.copyWith(state: UbuntuProFeatureState.loading());
     final selectedProvider = switch (state.type) {
       FIPSType.fips => UbuntuProFeatureType.fips,
       FIPSType.fipsUpdates => UbuntuProFeatureType.fipsUpdates,

@@ -96,7 +96,7 @@ class _LoadingText extends StatelessWidget {
           const SizedBox(width: 8),
           SizedBox.square(
             dimension: theme.textTheme.bodyMedium?.fontSize,
-            child: CircularProgressIndicator(),
+            child: const YaruCircularProgressIndicator(strokeWidth: 2),
           ),
         ],
       ],
