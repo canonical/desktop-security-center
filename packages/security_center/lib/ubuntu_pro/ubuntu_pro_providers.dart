@@ -4,6 +4,7 @@ import 'package:dbus/dbus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
@@ -37,7 +38,7 @@ class UbuntuProModel extends _$UbuntuProModel {
 
   @override
   UbuntuProData build() {
-    _service.stream.stream.listen((data) {
+    _service.stream.listen((data) {
       state = state.copyWith(manager: _service.data);
     });
 
@@ -109,6 +110,7 @@ class GSettingsUpdateNotifierModel extends _$GSettingsUpdateNotifierModel {
 
 @freezed
 sealed class UbuntuProFeatureState with _$UbuntuProFeatureState {
+  factory UbuntuProFeatureState.unavailable() = UbuntuProFeatureUnavailable;
   factory UbuntuProFeatureState.enabled() = UbuntuProFeatureStateEnabled;
   factory UbuntuProFeatureState.disabled() = UbuntuProFeatureStateDisabled;
   factory UbuntuProFeatureState.loading() = UbuntuProFeatureStateLoading;
@@ -119,76 +121,76 @@ sealed class UbuntuProFeatureState with _$UbuntuProFeatureState {
 class UbuntuProFeatureData with _$UbuntuProFeatureData {
   factory UbuntuProFeatureData({
     required UbuntuProFeatureState state,
-    required UbuntuProServiceData data,
-    required StreamSubscription<UbuntuProServiceData>? stream,
+    required UbuntuProFeature? data,
+    required StreamSubscription<UbuntuProFeatureType> stream,
   }) = _UbuntuProFeatureData;
 
   const UbuntuProFeatureData._();
 
-  bool get canToggle => data.entitled && state is! UbuntuProFeatureStateLoading;
+  bool get enabled => data?.enabled ?? false;
+  bool get canToggle =>
+      (data?.entitled ?? false) && state is! UbuntuProFeatureStateLoading;
 }
 
 @riverpod
 class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
-  final _service = getService<UbuntuProManagerService>();
+  final _service = getService<UbuntuProFeatureService>();
 
   @override
-  UbuntuProFeatureData? build(UbuntuProFeature feature) {
-    final featureService = _service.getFeature(feature);
-    if (featureService == null) {
-      return null;
-    }
+  UbuntuProFeatureData build(UbuntuProFeatureType featureType) {
+    final feature = _service.getFeature(featureType);
 
-    ref.onDispose(() async => await state?.stream?.cancel());
+    ref.onDispose(() => state.stream.cancel());
     return UbuntuProFeatureData(
-      state: featureService.enabled
-          ? UbuntuProFeatureState.enabled()
-          : UbuntuProFeatureState.disabled(),
-      data: featureService,
-      stream: featureService.stream?.stream.listen(_featureUpdated),
+      state: feature == null
+          ? UbuntuProFeatureState.unavailable()
+          : _service.isEnabled(featureType)
+              ? UbuntuProFeatureState.enabled()
+              : UbuntuProFeatureState.disabled(),
+      data: feature,
+      stream: _service.stream.listen(_featureUpdated),
     );
   }
 
-  void _featureUpdated(UbuntuProServiceData data) {
-    state = state?.copyWith(
-      data: data,
-      state: data.enabled
-          ? UbuntuProFeatureState.enabled()
-          : UbuntuProFeatureState.disabled(),
+  void _featureUpdated(UbuntuProFeatureType featureType) {
+    if (featureType != this.featureType) return;
+
+    final feature = _service.getFeature(featureType);
+    state = state.copyWith(
+      data: feature,
+      state: feature == null
+          ? UbuntuProFeatureState.unavailable()
+          : _service.isEnabled(featureType)
+              ? UbuntuProFeatureState.enabled()
+              : UbuntuProFeatureState.disabled(),
     );
   }
 
   Future<void> toggleFeature(bool value) async {
-    if (state == null) {
-      return;
-    }
+    assert(state.canToggle, 'Feature $featureType cannot be toggled');
 
-    state!.data.enabled ? await disableFeature() : await enableFeature();
+    state.data!.enabled ? await disableFeature() : await enableFeature();
   }
 
   Future<void> enableFeature() async {
-    if (state == null) {
-      return;
-    }
+    assert(state.canToggle, 'Feature $featureType cannot be enabled');
 
-    state = state?.copyWith(state: UbuntuProFeatureState.loading());
+    state = state.copyWith(state: UbuntuProFeatureState.loading());
     try {
-      await _service.enableFeature(feature);
+      await _service.enableFeature(featureType);
     } on DBusMethodResponseException {
-      state = state?.copyWith(state: UbuntuProFeatureState.error());
+      state = state.copyWith(state: UbuntuProFeatureState.error());
     }
   }
 
   Future<void> disableFeature() async {
-    if (state == null) {
-      return;
-    }
+    assert(state.canToggle, 'Feature $featureType cannot be disabled');
 
-    state = state?.copyWith(state: UbuntuProFeatureState.loading());
+    state = state.copyWith(state: UbuntuProFeatureState.loading());
     try {
-      await _service.disableFeature(feature);
+      await _service.disableFeature(featureType);
     } on DBusMethodResponseException {
-      state = state?.copyWith(state: UbuntuProFeatureState.error());
+      state = state.copyWith(state: UbuntuProFeatureState.error());
     }
   }
 }
@@ -212,13 +214,13 @@ class FIPSModel extends _$FIPSModel {
   @override
   FIPSData build() {
     final fipsProvider =
-        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.fips));
-    final fipsUpdatesProvider =
-        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.fipsUpdates));
+        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.fips));
+    final fipsUpdatesProvider = ref
+        .watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.fipsUpdates));
 
-    final canEnable = fipsProvider?.data.entitled ?? false;
-    final enabled = (fipsProvider?.data.enabled ?? false) ||
-        (fipsUpdatesProvider?.data.enabled ?? false);
+    final canEnable = fipsProvider.data?.entitled ?? false;
+    final enabled = (fipsProvider.data?.enabled ?? false) ||
+        (fipsUpdatesProvider.data?.enabled ?? false);
 
     return FIPSData(
       type: FIPSType.fipsUpdates,
@@ -233,8 +235,8 @@ class FIPSModel extends _$FIPSModel {
 
   Future<void> enable() async {
     final selectedProvider = switch (state.type) {
-      FIPSType.fips => UbuntuProFeature.fips,
-      FIPSType.fipsUpdates => UbuntuProFeature.fipsUpdates,
+      FIPSType.fips => UbuntuProFeatureType.fips,
+      FIPSType.fipsUpdates => UbuntuProFeatureType.fipsUpdates,
     };
     await ref
         .read(ubuntuProFeatureModelProvider(selectedProvider).notifier)

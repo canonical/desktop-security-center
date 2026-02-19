@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/routes.dart';
-import 'package:security_center/services/ubuntu_pro_service.dart';
+import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/ubuntu_pro/attach_dialog.dart';
 import 'package:security_center/ubuntu_pro/detach_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
@@ -158,9 +158,9 @@ class _ESMSection extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
 
     final esmAppProvider =
-        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.esmApps));
+        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.esmApps));
     final esmInfraProvider =
-        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.esmInfra));
+        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.esmInfra));
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,12 +178,12 @@ class _ESMSection extends ConsumerWidget {
                 vertical: 8,
                 horizontal: 16,
               ),
-              value: esmInfraProvider?.data.enabled ?? false,
-              onChanged: esmInfraProvider?.canToggle ?? false
+              value: esmInfraProvider.enabled,
+              onChanged: esmInfraProvider.canToggle
                   ? (value) => ref
                       .read(
                         ubuntuProFeatureModelProvider(
-                          UbuntuProFeature.esmInfra,
+                          UbuntuProFeatureType.esmInfra,
                         ).notifier,
                       )
                       .toggleFeature(value)
@@ -191,7 +191,7 @@ class _ESMSection extends ConsumerWidget {
               title: _LoadingText(
                 text: l10n.ubuntuProESMMainTitle,
                 isLoading:
-                    esmInfraProvider?.state is UbuntuProFeatureStateLoading,
+                    esmInfraProvider.state is UbuntuProFeatureStateLoading,
               ),
               subtitle: Text(l10n.ubuntuProESMMainDescription),
             ),
@@ -200,20 +200,19 @@ class _ESMSection extends ConsumerWidget {
                 vertical: 8,
                 horizontal: 16,
               ),
-              value: esmAppProvider?.data.enabled ?? false,
-              onChanged: esmAppProvider?.canToggle ?? false
+              value: esmAppProvider.enabled,
+              onChanged: esmAppProvider.canToggle
                   ? (value) => ref
                       .read(
                         ubuntuProFeatureModelProvider(
-                          UbuntuProFeature.esmApps,
+                          UbuntuProFeatureType.esmApps,
                         ).notifier,
                       )
                       .toggleFeature(value)
                   : null,
               title: _LoadingText(
                 text: l10n.ubuntuProESMUniverseTitle,
-                isLoading:
-                    esmAppProvider?.state is UbuntuProFeatureStateLoading,
+                isLoading: esmAppProvider.state is UbuntuProFeatureStateLoading,
               ),
               subtitle: Text(l10n.ubuntuProESMUniverseDescription),
             ),
@@ -230,8 +229,8 @@ class _LivepatchSection extends ConsumerWidget {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
 
-    final livepatchProvider =
-        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.livepatch));
+    final livepatchProvider = ref
+        .watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.livepatch));
     final statusIconProvider = ref.watch(gSettingsUpdateNotifierModelProvider);
 
     return Column(
@@ -249,12 +248,12 @@ class _LivepatchSection extends ConsumerWidget {
                 vertical: 8,
                 horizontal: 16,
               ),
-              value: livepatchProvider?.data.enabled ?? false,
-              onChanged: livepatchProvider?.canToggle ?? false
+              value: livepatchProvider.enabled,
+              onChanged: livepatchProvider.canToggle
                   ? (value) => ref
                       .read(
                         ubuntuProFeatureModelProvider(
-                          UbuntuProFeature.livepatch,
+                          UbuntuProFeatureType.livepatch,
                         ).notifier,
                       )
                       .toggleFeature(value)
@@ -262,7 +261,7 @@ class _LivepatchSection extends ConsumerWidget {
               title: _LoadingText(
                 text: l10n.ubuntuProLivepatchEnableTitle,
                 isLoading:
-                    livepatchProvider?.state is UbuntuProFeatureStateLoading,
+                    livepatchProvider.state is UbuntuProFeatureStateLoading,
               ),
               subtitle: Text(l10n.ubuntuProLivepatchEnableDescription),
             ),
@@ -271,9 +270,11 @@ class _LivepatchSection extends ConsumerWidget {
                     data: (data) => data.showStatusIcon,
                   ) ??
                   false,
-              onChanged: (value) => ref
-                  .read(gSettingsUpdateNotifierModelProvider.notifier)
-                  .toggleStatusIcon(value),
+              onChanged: livepatchProvider.enabled
+                  ? (value) => ref
+                      .read(gSettingsUpdateNotifierModelProvider.notifier)
+                      .toggleStatusIcon(value)
+                  : null,
               title: Text(l10n.ubuntuProLivepatchShowTitle),
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 8,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/l10n.dart';
-import 'package:security_center/services/ubuntu_pro_service.dart';
+import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/tile_list.dart';
@@ -73,13 +73,11 @@ class _FIPSOptionsState extends ConsumerState<_FIPSOptions> {
 
     final fipsProvider = ref.watch(fIPSModelProvider);
     final fipsCanToggle = ref
-            .watch(ubuntuProFeatureModelProvider(UbuntuProFeature.fips))
-            ?.canToggle ??
-        false;
+        .watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.fips))
+        .canToggle;
     final fipsUpdatesToggle = ref
-            .watch(ubuntuProFeatureModelProvider(UbuntuProFeature.fipsUpdates))
-            ?.canToggle ??
-        false;
+        .watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.fipsUpdates))
+        .canToggle;
 
     return TileList(
       children: [

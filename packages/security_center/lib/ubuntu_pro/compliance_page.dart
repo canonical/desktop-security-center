@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/l10n.dart';
-import 'package:security_center/services/ubuntu_pro_service.dart';
+import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/ubuntu_pro/fips_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
@@ -18,7 +18,7 @@ class ComplianceHardeningPage extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
 
     final usgProvider =
-        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeature.usg));
+        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.usg));
     final fipsProvider = ref.watch(fIPSModelProvider);
 
     return ScrollablePage(
@@ -37,19 +37,19 @@ class ComplianceHardeningPage extends ConsumerWidget {
                 vertical: 8,
                 horizontal: 16,
               ),
-              value: usgProvider?.data.enabled ?? false,
-              onChanged: usgProvider?.canToggle ?? false
+              value: usgProvider.enabled,
+              onChanged: usgProvider.canToggle
                   ? (value) => ref
                       .read(
                         ubuntuProFeatureModelProvider(
-                          UbuntuProFeature.usg,
+                          UbuntuProFeatureType.usg,
                         ).notifier,
                       )
                       .toggleFeature(value)
                   : null,
               title: _LoadingText(
                 text: l10n.ubuntuProComplianceUSGTitle,
-                isLoading: usgProvider?.state is UbuntuProFeatureStateLoading,
+                isLoading: usgProvider.state is UbuntuProFeatureStateLoading,
               ),
               subtitle: Text(l10n.ubuntuProComplianceUSGDescription),
             ),
