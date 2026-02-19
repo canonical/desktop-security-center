@@ -1,77 +1,173 @@
 {
-  "appTitle": "Centrum zabezpečenia",
-  "@appTitle": {},
-  "snapPermissionsEnablingLabel": "Aktivuje sa, môže to trvať niekoľko sekúnd...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "Deaktivuje sa, môže to trvať niekoľko sekúnd...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsPageTitle": "Práva aplikácie",
-  "@snapPermissionsPageTitle": {},
-  "interfacePageLinkReportIssues": "Nahlásiť problémy",
-  "@interfacePageLinkReportIssues": {},
-  "snapPermissionsExperimentalLabel": "Experimentálne",
-  "@snapPermissionsExperimentalLabel": {},
-  "interfacePageLinkGiveFeedback": "Poskytnúť spätnú väzbu",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkLearnMore": "Zistiť viac",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageTitle": "Spravovať oprávnenia",
-  "@interfacePageTitle": {},
-  "snapPermissionsOtherDescription": "Ďalšie oprávnenia môžete spravovať v časti Nastavenia › Aplikácie.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsEnableWarning": "Táto experimentálna funkcia slúži na kontrolu prístupu k častiam vášho systému.",
-  "@snapPermissionsEnableWarning": {},
-  "snapdRuleCategorySessionAllowed": "Povolené do ukončenia",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategoryForeverAllowed": "Vždy povolené",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapPermissionReadLabel": "Čítanie",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionExecuteLabel": "Spúšťanie",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionWriteLabel": "Zápis",
-  "@snapPermissionWriteLabel": {},
-  "snapRulesCount": "{n, plural, =0{žiadne pravidlá} =1{pravidlo (1)} other{pravidlá ({n})}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "Zatiaľ žiadne pravidlá",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Odstrániť všetky pravidlá",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "Priečinok domov",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Spravujte práva pre prístup k súborom vo vašom priečinku domov.",
-  "@homeInterfacePageDescription": {},
-  "interfaceSnapCount": "{n, plural, =0{žiadne aplikácie} =1{aplikácia (1)} other {aplikácie ({n})}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapdRuleCategoryForeverDenied": "Vždy odmietnuté",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapdRuleCategorySessionDenied": "Odmietnuté do ukončenia",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapPermissionsEnableTitle": "Donútiť aplikácie požiadať o oprávnenia",
-  "@snapPermissionsEnableTitle": {},
-  "snapRulesPageDescription": "Spravujte práva k rozhraniu {interface} pre {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "interfacePageDescription": "Aplikácie s prísnymi obmedzeniami budú žiadať o povolenie pred prístupom k súborom a priečinkom. Táto funkcia je experimentálna a môže sa meniť.",
-  "@interfacePageDescription": {}
+    "appTitle": "Centrum zabezpečenia",
+    "snapPermissionsEnablingLabel": "Aktivuje sa, môže to trvať niekoľko sekúnd...",
+    "snapPermissionsDisablingLabel": "Deaktivuje sa, môže to trvať niekoľko sekúnd...",
+    "snapPermissionsPageTitle": "Oprávnenia",
+    "interfacePageLinkReportIssues": "Nahlásiť problémy",
+    "snapPermissionsExperimentalLabel": "Experimentálne",
+    "interfacePageLinkGiveFeedback": "Poskytnúť spätnú väzbu",
+    "interfacePageLinkLearnMore": "Zistiť viac",
+    "interfacePageTitle": "Spravovať oprávnenia",
+    "snapPermissionsOtherDescription": "Ďalšie oprávnenia môžete spravovať v časti Nastavenia › Aplikácie.",
+    "snapPermissionsEnableWarning": "Táto experimentálna funkcia slúži na kontrolu prístupu k zdrojom vášho systému.",
+    "snapdRuleCategorySessionAllowed": "Povolené do odhlásenia",
+    "snapdRuleCategoryForeverAllowed": "Vždy povolené",
+    "snapPermissionReadLabel": "Čítanie",
+    "snapPermissionExecuteLabel": "Spúšťanie",
+    "snapPermissionWriteLabel": "Zápis",
+    "snapRulesCount": "{n, plural, =0{žiadne pravidlá} =1{pravidlo (1)} other{pravidlá ({n})}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Zatiaľ žiadne pravidlá",
+    "snapRulesRemoveAll": "Odstrániť všetky pravidlá",
+    "homeInterfacePageTitle": "Domovský priečinok",
+    "homeInterfacePageDescription": "Spravujte oprávnenia na prístup k súborom v domovskom priečinku.",
+    "interfaceSnapCount": "{n, plural, =0{žiadne aplikácie} =1{aplikácia (1)} other {aplikácie ({n})}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapdRuleCategoryForeverDenied": "Vždy odmietnuté",
+    "snapdRuleCategorySessionDenied": "Odmietnuté do odhlásenia",
+    "snapPermissionsEnableTitle": "Vyžadovať oprávnenia od aplikácií",
+    "snapRulesPageDescription": "Spravujte oprávnenia k {interface} pre {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "interfacePageDescription": "Aplikácie s prísnymi obmedzeniami budú žiadať o povolenie pred prístupom k súborom a priečinkom. Táto funkcia je experimentálna a môže sa meniť.",
+    "diskEncryptionPageRecoveryKey": "Obnovovací kľúč",
+    "diskEncryptionPageLearnMore": "Zistiť viac o šifrovaní podporovanom hardvérom",
+    "diskEncryptionPageValidKey": "Platný kľúč",
+    "diskEncryptionPageInvalidKey": "Neplatný kľúč",
+    "diskEncryptionPageCheckKey": "Skontrolovať obnovovací kľúč...",
+    "diskEncryptionPageCheck": "Skontrolovať",
+    "diskEncryptionPageEnterKey": "Zadajte svoj obnovovací kľúč",
+    "diskEncryptionPageDialogHeaderCheckKey": "Kontrola obnovovacieho kľúča",
+    "diskEncryptionPageKeyDoesntWorkBody": "Skontrolujte kľúč alebo ho nahraďte novým.",
+    "diskEncryptionPageError": "Chyba",
+    "diskEncryptionPageKeyWorksBody": "Nezabudnite ho uložiť na bezpečné miesto.",
+    "diskEncryptionPageTitle": "Šifrovanie disku",
+    "diskEncryptionPageStoreYourKey": "Obnovovací kľúč vám umožní znovu získať prístup k vašim údajom, ak sa disk počas spustenia nepodarí odomknúť. Uložte ho na bezpečné miesto.",
+    "diskEncryptionPageKeyDoesntWork": "Obnovovací kľúč nefunguje",
+    "diskEncryptionPageKeyWorks": "Obnovovací kľúč funguje",
+    "diskEncryptionPageReplaceDialogHeader": "Vymeniť obnovovací kľúč",
+    "diskEncryptionPageReplaceDialogBody": "Uložte nový obnovovací kľúč na bezpečné miesto. Po jeho výmene už nebudete môcť používať starý kľúč.",
+    "diskEncryptionPageReplaceDialogShowQR": "Zobraziť QR kód",
+    "diskEncryptionPageReplaceDialogSave": "Uložiť do súboru",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Uložil(a) som svoj obnovovací kľúč na bezpečné miesto",
+    "diskEncryptionPageReplaceDialogReplace": "Nahradiť",
+    "diskEncryptionPageReplaceDialogDiscard": "Zahodiť",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Obnovovací kľúč bol vymenený",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Nepodarilo sa vymeniť obnovovací kľúč",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop – obnovovací kľúč pre šifrovanie",
+    "diskEncryptionPageClipboardNotification": "Skopírované do schránky",
+    "recoveryKeyExceptionUnknownTitle": "Neznáma chyba",
+    "recoveryKeyExceptionFileSystemBody": "Nemáte oprávnenie zapisovať do tohto priečinka. Skúste iné umiestnenie alebo použite inú metódu.",
+    "recoveryKeyFilePickerTitle": "Uložiť súbor obnovovacieho kľúča",
+    "recoveryKeyFilePickerFilter": "Textové súbory",
+    "recoveryKeyExceptionDisallowedPathTitle": "Súbor s obnovovacím kľúčom sa nedá uložiť do dočasného priečinka",
+    "recoveryKeyExceptionDisallowedPathBody": "Skúste iné umiestnenie, napríklad vymeniteľnú jednotku, alebo použite inú metódu.",
+    "diskEncryptionPageReplaceButton": "Vymeniť obnovovací kľúč...",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Nezabudnite ho uložiť na bezpečné miesto.",
+    "diskEncryptionPageReplaceDialogErrorBody": "Pri výmene obnovovacieho kľúča nastala chyba, váš starý kľúč zostáva platný.",
+    "diskEncryptionPageReplaceDialogQRBody": "Naskenujte QR kód na skopírovanie obnovovacieho kľúča a uložte ho na bezpečné miesto, napríklad do správcu hesiel. Môžete si tiež vytvoriť fotku obrazovky na neskoršie použitie.",
+    "recoveryKeyExceptionFileSystemTitle": "Súbor s obnovovacím kľúčom nebol uložený",
+    "diskEncryptionPageCopySemanticLabel": "Kopírovať",
+    "recoveryKeyPassphraseEnabled": "Šifrovanie prístupovou frázou je povolené",
+    "recoveryKeyPassphraseHeader": "Zmena prístupovej frázy",
+    "recoveryKeyPassphraseButton": "Zmeniť prístupovú frázu...",
+    "recoveryKeyPassphraseCurrent": "Aktuálna prístupová fráza",
+    "recoveryKeyPassphraseNew": "Nová prístupová fráza",
+    "recoveryKeyPassphraseConfirm": "Potvrďte prístupovú frázu",
+    "recoveryKeyPassphraseCurrentError": "Nesprávna prístupová fráza, skúste to znova",
+    "recoveryKeyPassphraseNewError": "Musí mať najmenej 4 znaky",
+    "recoveryKeyPassphraseConfirmError": "Prístupové frázy sa nezhodujú, skúste to znova",
+    "recoveryKeyPassphraseDialogHeader": "Zmena prístupovej frázy",
+    "recoveryKeyPinHeader": "Šifrovací PIN",
+    "recoveryKeyPinCurrent": "Aktuálny PIN",
+    "recoveryKeyPinNew": "Nový PIN",
+    "recoveryKeyPinConfirm": "Potvrďte PIN",
+    "recoveryKeyPinConfirmError": "PINy sa nezhodujú, skúste to znova",
+    "recoveryKeyPinDialogHeader": "Zmena PIN",
+    "recoveryKeyPassphraseShow": "Zobraziť",
+    "recoveryKeyPassphraseHide": "Skryť",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN aktualizovaný",
+    "recoveryKeyPassphrasePinSuccessBody": "Váš PIN bol úspešne aktualizovaný.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Prístupová fráza aktualizovaná",
+    "recoveryKeyPassphraseChange": "Zmeniť",
+    "recoveryKeyPassphraseBody": "Prístupovú frázu budete musieť zadať pri každom spustení počítača.",
+    "recoveryKeyTPMEnabled": "Hardvérom podporované šifrovanie je povolené",
+    "recoveryKeyPinEnabled": "Šifrovací PIN je povolený",
+    "recoveryKeyPinButton": "Zmeniť PIN...",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Vaša prístupová fráza bola úspešne aktualizovaná.",
+    "recoveryKeyPinBody": "PIN budete musieť zadať pri každom spustení počítača.",
+    "recoveryKeyPinCurrentError": "Nesprávny PIN, skúste to znova",
+    "recoveryKeyPassphraseEntropyOptimal": "Silná prístupová fráza",
+    "recoveryKeyPinEntropyBelowMin": "Slabý PIN, vytvorte ho dlhší alebo menej predvídateľný",
+    "recoveryKeyPinEntropyBelowOptimal": "Priemerný PIN, vytvorte ho dlhší alebo menej predvídateľný pre lepšiu bezpečnosť",
+    "recoveryKeyPinEntropyOptimal": "PIN je dostatočne dlhý",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Priemerná prístupová fráza, vytvorte ju dlhšiu alebo zložitejšiu kvôli vyššej bezpečnosti",
+    "recoveryKeyPassphraseEntropyBelowMin": "Slabá prístupová fráza, vytvorte ju dlhšiu alebo zložitejšiu",
+    "recoveryKeySomethingWentWrongHeader": "Niečo sa pokazilo",
+    "diskEncryptionPageStoreYourKeyWithLink": "Obnovovací kľúč vám umožní znovu získať prístup k údajom, ak sa disk nepodarí odomknúť pri spustení. Uložte ho na bezpečné miesto. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Nastavenia šifrovania nie sú k dispozícii",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Nepodarilo sa získať stav šifrovania tohto počítača.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "Konfigurácia TPM vášho počítača nie je v podporovanom stave.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Vaša verzia snapd nie je podporovaná",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Skontrolujte, či je Centrum zabezpečenia a snapd aktualizované.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Centrum zabezpečenia sa nemôže pripojiť k rozhraniu snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Aby ste to opravili, spustite tento príkaz v termináli:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "recoveryKeyExceptionFilePermissionTitle": "Nepodarilo sa uložiť obnovovací kľúč do súboru",
+    "recoveryKeyExceptionFilePermissionBody": "Nemáte oprávnenie zapisovať do tohto umiestnenia súboru.",
+    "recoveryKeyTPMExplanationBody": "Šifrovacie kľúče sú uložené v Trusted Platform Module (TPM) vášho počítača.",
+    "recoveryKeyTPMExplanationLearnMore": "Zistite viac o šifrovaní podporovanom hardvérom",
+    "recoveryKeyEncrpytionPassphraseHeader": "Šifrovacia prístupová fráza",
+    "cameraRulesPageEmptyTileLabel": "Žiadne aplikácie zatiaľ nepožiadali o prístup",
+    "snapRulesResetAllPermissions": "Obnoviť všetky povolenia",
+    "cameraInterfacePageTitle": "Kamera",
+    "cameraInterfacePageDescription": "Povoliť aplikáciám prístup ku kamere.",
+    "snapPermissionAccessLabel": "Prístup",
+    "diskEncryptionPageAddPinButton": "Pridať PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Pridať prístupovú frázu...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Pridať prístupovú frázu",
+    "diskEncryptionPageAddPinDialogHeading": "Pridať PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "PIN budete musieť zadať pri každom spustení počítača. Tento PIN sa líši od vášho používateľského hesla.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Ak zabudnete svoj PIN, môžete znovu získať prístup k disku pomocou obnovovacieho kľúča.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Prístupovú frázu budete musieť zadať pri každom spustení počítača. Táto prístupová fráza sa líši od vášho používateľského hesla.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Ak zabudnete svoju prístupovú frázu, môžete znovu získať prístup k disku pomocou obnovovacieho kľúča.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Dodatočné zabezpečenie",
+    "diskEncryptionPageAdditionalSecurityBody": "Pre zvýšenie zabezpečenia si môžete nastaviť prístupovú frázu alebo PIN. Budete ju musieť zadať pri každom spustení počítača.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Zistiť viac",
+    "diskEncryptionPageAddPinDialogSaveButton": "Pridať",
+    "diskEncryptionPageRemovePinButton": "Odstrániť PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Odstrániť prístupovú frázu...",
+    "diskEncryptionPageAddingPin": "Pridáva sa PIN, môže to trvať niekoľko sekúnd...",
+    "diskEncryptionPageAddingPassphrase": "Pridáva sa prístupová fráza, môže to trvať niekoľko sekúnd...",
+    "diskEncryptionPageRemovingPin": "Odstraňuje sa PIN, môže to trvať niekoľko sekúnd...",
+    "diskEncryptionPageRemovingPassphrase": "Odstraňuje sa prístupová fráza, môže to trvať niekoľko sekúnd...",
+    "microphoneInterfacePageTitle": "Mikrofón",
+    "microphoneInterfacePageDescription": "Povoliť aplikáciám prístup k mikrofónu."
 }

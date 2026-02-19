@@ -1,77 +1,173 @@
 {
-  "snapdRuleCategorySessionDenied": "לדחות עד היציאה מהחשבון",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapPermissionExecuteLabel": "הפעלה",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsExperimentalLabel": "ניסיוני",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapRulesPageEmptyTileLabel": "אין כללים עדיין",
-  "@snapRulesPageEmptyTileLabel": {},
-  "homeInterfacePageDescription": "ניהול הרשאות לגישה לקבצים בתיקיית הבית שלך.",
-  "@homeInterfacePageDescription": {},
-  "appTitle": "מרכז אבטחה",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "לאפשר עד היציאה מהחשבון",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategoryForeverAllowed": "לאפשר תמיד",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "לדחות תמיד",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "קריאה",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "כתיבה",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionsEnableWarning": "זאת יכולת ניסיונית לשליטה בגישה למשאבי המערכת שלך.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "האפשרות מופעלת, זה עלול לקחת כמה שניות…",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "האפשרות נכבית, זה עלול לקחת כמה שניות…",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsOtherDescription": "אפשר לנהל הגדרות אחרות דרך הגדרות › יישומים.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsPageTitle": "הרשאות יישום",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, plural, =0{אין כללים} =1{כלל אחד} other{{n} כללים}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesPageDescription": "ניהול ההרשאות של {interface} עבור {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesRemoveAll": "להסיר את כל הכללים",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "תיקיית הבית",
-  "@homeInterfacePageTitle": {},
-  "interfacePageTitle": "ניהול הרשאות",
-  "@interfacePageTitle": {},
-  "interfacePageLinkLearnMore": "מידע נוסף",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageDescription": "יישומים מוגבלים באופן הדוק יבקשו ממך הרשאה בטרם גישה לקבצים ולתיקיות. היכולת הזאת ניסיונית ועלולה להשתנות.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkGiveFeedback": "שליחת משוב",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "דיווח על תקלות",
-  "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, plural, =0{אין יישומים} =1{יישום אחד} other {{n} יישומים}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsEnableTitle": "לדרוש מהיישומים לבקש הרשאות מערכת",
-  "@snapPermissionsEnableTitle": {}
+    "snapdRuleCategorySessionDenied": "לדחות עד היציאה מהחשבון",
+    "snapPermissionExecuteLabel": "הפעלה",
+    "snapPermissionsExperimentalLabel": "ניסיוני",
+    "snapRulesPageEmptyTileLabel": "אין כללים עדיין",
+    "homeInterfacePageDescription": "ניהול הרשאות לגישה לקבצים בתיקיית הבית שלך.",
+    "appTitle": "מרכז האבטחה",
+    "snapdRuleCategorySessionAllowed": "לאפשר עד היציאה מהחשבון",
+    "snapdRuleCategoryForeverAllowed": "לאפשר תמיד",
+    "snapdRuleCategoryForeverDenied": "לדחות תמיד",
+    "snapPermissionReadLabel": "קריאה",
+    "snapPermissionWriteLabel": "כתיבה",
+    "snapPermissionsEnableWarning": "זאת יכולת ניסיונית לשליטה בגישה למשאבי המערכת שלך.",
+    "snapPermissionsEnablingLabel": "האפשרות מופעלת, זה עלול לקחת כמה שניות…",
+    "snapPermissionsDisablingLabel": "האפשרות נכבית, זה עלול לקחת כמה שניות…",
+    "snapPermissionsOtherDescription": "אפשר לנהל הגדרות אחרות דרך הגדרות › יישומים.",
+    "snapPermissionsPageTitle": "הרשאות יישום",
+    "snapRulesCount": "{n, plural, =0{אין כללים} =1{כלל אחד} other{{n} כללים}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "ניהול ההרשאות של {interface} עבור {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesRemoveAll": "להסיר את כל הכללים",
+    "homeInterfacePageTitle": "תיקיית הבית",
+    "interfacePageTitle": "ניהול הרשאות",
+    "interfacePageLinkLearnMore": "מידע נוסף",
+    "interfacePageDescription": "יישומים מוגבלים באופן הדוק יבקשו ממך הרשאה בטרם גישה לקבצים ולתיקיות. היכולת הזאת ניסיונית ועלולה להשתנות.",
+    "interfacePageLinkGiveFeedback": "שליחת משוב",
+    "interfacePageLinkReportIssues": "דיווח על תקלות",
+    "interfaceSnapCount": "{n, plural, =0{אין יישומים} =1{יישום אחד} other {{n} יישומים}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsEnableTitle": "לדרוש מהיישומים לבקש הרשאות מערכת",
+    "diskEncryptionPageTitle": "הצפנת הכונן",
+    "diskEncryptionPageRecoveryKey": "מפתח שחזור",
+    "diskEncryptionPageStoreYourKey": "מפתח השחזור מאפשר לך להחזיר לעצמך את הגישה לנתונים שלך אם הכונן לא מפוענח עם עליית המערכת. כדאי לשמור אותו במקום בטוח.",
+    "diskEncryptionPageLearnMore": "מידע נוסף על הצפנה בגיבוי חומרה",
+    "diskEncryptionPageCheckKey": "בדיקת מפתח שחזור…",
+    "diskEncryptionPageDialogHeaderCheckKey": "בדיקת מפתח שחזור",
+    "diskEncryptionPageEnterKey": "נא למלא מפתח שחזור",
+    "diskEncryptionPageKeyWorks": "מפתח השחזור עובד",
+    "diskEncryptionPageCheck": "בדיקה",
+    "diskEncryptionPageKeyWorksBody": "חשוב לשמור אותו במקום בטוח.",
+    "diskEncryptionPageValidKey": "מפתח תקף",
+    "diskEncryptionPageInvalidKey": "מפתח שגוי",
+    "diskEncryptionPageKeyDoesntWork": "מפתח השחזור לא עובד",
+    "diskEncryptionPageKeyDoesntWorkBody": "נא לבדוק את המפתח או להחליף אותו בחדש.",
+    "diskEncryptionPageError": "שגיאה",
+    "diskEncryptionPageCopySemanticLabel": "העתקה",
+    "recoveryKeyExceptionFileSystemTitle": "קובץ מפתח השחזור לא נשמר",
+    "recoveryKeyExceptionFileSystemBody": "אין לך הרשאה לכתוב לתיקייה הזאת. נא לנסות מקום אחר או להשתמש בשיטה אחרת.",
+    "recoveryKeyFilePickerTitle": "שמירת קובץ מפתח שחזור",
+    "recoveryKeyFilePickerFilter": "קובצי טקסט",
+    "diskEncryptionPageReplaceButton": "החלפת מפתח שחזור…",
+    "diskEncryptionPageReplaceDialogHeader": "החלפת מפתח שחזור",
+    "diskEncryptionPageReplaceDialogBody": "יש לשמור את מפתח השחזור במקום בטוח. לאחר החלפתו, לא ניתן יהיה עוד להשתמש במפתח הישן.",
+    "diskEncryptionPageReplaceDialogShowQR": "הצגת קוד QR",
+    "diskEncryptionPageReplaceDialogSave": "שמירה לקובץ",
+    "diskEncryptionPageReplaceDialogReplace": "החלפה",
+    "diskEncryptionPageReplaceDialogDiscard": "התעלמות",
+    "diskEncryptionPageReplaceDialogSuccessBody": "חשוב לזכור לשמור אותו במקום בטוח.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "החלפת מפתח השחזור נכשלה",
+    "diskEncryptionPageReplaceDialogErrorBody": "משהו השתבש בהחלפת מפתח השחזור שלך, המפתח הישן שלך יישאר בתוקף.",
+    "diskEncryptionPageReplaceDialogQRBody": "יש לסרוק את קוד ה־QR כדי להעתיק את מפתח השחזור ולשמור אותו במקום בטוח, כגון מנהל סיסמאות. אפשר גם לצלם אותו לשימוש בהמשך.",
+    "recoveryKeyExceptionUnknownTitle": "שגיאה לא ידועה",
+    "diskEncryptionPageReplaceDialogAcknowledge": "שמרתי את מפתח השחזור שלי במקום בטוח",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "מפתח השחזור הוחלף",
+    "diskEncryptionPageReplaceDialogQRHeader": "שולחן עבודה אובונטו - מפתח שחזור הצפנה",
+    "diskEncryptionPageClipboardNotification": "הועתק ללוח הגזירים",
+    "recoveryKeyExceptionDisallowedPathTitle": "לא ניתן לשמור את קובץ מפתח השחזור במקום זמני",
+    "recoveryKeyExceptionDisallowedPathBody": "נא לנסות מקום אחר כגון כונן נתיק או להשתמש בשיטה אחרת.",
+    "recoveryKeyPassphraseEnabled": "מילת צופן להצפנה פעילה",
+    "recoveryKeyPassphraseHeader": "החלפת מילת צופן",
+    "recoveryKeyPassphraseNew": "מילת צופן חדשה",
+    "recoveryKeyPassphraseConfirm": "אישור מילת צופן",
+    "recoveryKeyPassphraseNewError": "חייבת להיות באורך של 4 תווים לפחות",
+    "recoveryKeyPassphraseConfirmError": "מילות הצופן סותרות זו את זו, נא לנסות שוב",
+    "recoveryKeyPassphraseDialogHeader": "החלפת מילת צופן",
+    "recoveryKeyPinHeader": "קוד הצפנה אישי",
+    "recoveryKeyPinButton": "החלפת קוד אישי…",
+    "recoveryKeyPinCurrent": "קוד אישי נוכחי",
+    "recoveryKeyPinNew": "קוד אישי חדש",
+    "recoveryKeyPinConfirm": "אישור קוד אישי",
+    "recoveryKeyPinCurrentError": "קוד אישי שגוי, נא לנסות שוב",
+    "recoveryKeyPinConfirmError": "הקודים האישיים סותרים זה את זה, נא לנסות שוב",
+    "recoveryKeyPinBody": "יש למלא את הקוד האישי (PIN) שלך עם כל עלייה של המחשב שלך.",
+    "recoveryKeyPinDialogHeader": "החלפת קוד אישי",
+    "recoveryKeyPassphraseShow": "הצגה",
+    "recoveryKeyPassphraseHide": "הסתרה",
+    "recoveryKeyPassphraseChange": "החלפה",
+    "recoveryKeyPassphrasePinSuccessHeader": "הקוד האישי עודכן",
+    "recoveryKeyPassphrasePinSuccessBody": "הקוד האישי שלך עודכן בהצלחה.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "מילת הצופן עודכנה",
+    "recoveryKeyPassphraseButton": "החלפת מילת צופן…",
+    "recoveryKeyTPMEnabled": "הצפנה בגיבוי חומרה פעילה",
+    "recoveryKeyPinEnabled": "קוד הצפנה אישי פעיל",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "מילת הצופן שלך עודכנה בהצלחה.",
+    "recoveryKeyPassphraseCurrent": "מילת צופן נוכחית",
+    "recoveryKeyPassphraseCurrentError": "מילת צופן שגויה, נא לנסות שוב",
+    "recoveryKeyPassphraseBody": "יש למלא את מילת הצופן שלך עם כל עלייה של המחשב שלך.",
+    "recoveryKeyPassphraseEntropyBelowMin": "מילת צופן חלשה, נא להפוך אותה למורכבת יותר לניחוש",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "מילת צופן סבירה, נא להאריך אותה או לסבך אותה כדי לשפר את האבטחה",
+    "recoveryKeyPassphraseEntropyOptimal": "מילת צופן חזקה",
+    "recoveryKeyPinEntropyBelowMin": "קוד אישי חלש, נא להאריך או לסבך אותו",
+    "recoveryKeyPinEntropyBelowOptimal": "קוד אישי סביר, נא להאריך או לסבך אותו לשיפור האבטחה",
+    "recoveryKeyPinEntropyOptimal": "הקוד האישי ארוך מספיק",
+    "recoveryKeySomethingWentWrongHeader": "משהו השתבש",
+    "diskEncryptionPageStoreYourKeyWithLink": "מפתח השחזור מאפשר לך להשיב את הגישה לנתונים שלך אם שחרור נעילת הכונן בעלייה נכשל. כדאי לשמור אותו במקום בטוח. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "הגדרות ההצפנה אינן זמינות",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "משיכת מצב ההצפנה מהמחשב הזה נכשלה.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "הגדרות ה־TPM (מודול פלטפורמה מאובטחת) שלך אינן במצב נתמך.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "גרסת ה־snapd שלך אינה נתמכת",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "נא לבדוק שמרכז התוכנות ו־snapd עדכניים.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "מרכז האבטחה לא יכול להתחבר למנשק snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "כדי לתקן את זה, יש להריץ את הפקודה הזאת במסוף:",
+    "recoveryKeyExceptionFilePermissionTitle": "שמירת מפתח השחזור שלך לקובץ נכשלה",
+    "recoveryKeyExceptionFilePermissionBody": "אין לך הרשאה לכתוב למקום של הקובץ הזה.",
+    "recoveryKeyTPMExplanationBody": "מפתחות האבטחה מאוחסנים במודול הפלטפורמה המאובטחת (TPM).",
+    "recoveryKeyTPMExplanationLearnMore": "מידע נוסף על הצפנה בגיבוי חומרה",
+    "recoveryKeyEncrpytionPassphraseHeader": "מילת צופן להצפנה",
+    "snapPermissionAccessLabel": "גישה",
+    "cameraRulesPageEmptyTileLabel": "אף יישום לא ביקש גישה עדיין",
+    "snapRulesResetAllPermissions": "איפוס כל ההרשאות",
+    "cameraInterfacePageTitle": "מצלמה",
+    "cameraInterfacePageDescription": "לאפשר ליישומים לגשת למצלמות שלך.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "diskEncryptionPageAddPinButton": "הוספת קוד אישי (PIN)…",
+    "diskEncryptionPageAddPassphraseButton": "הוספת מילת צופן…",
+    "diskEncryptionPageAddPassphraseDialogHeading": "הוספת מילת צופן",
+    "diskEncryptionPageAddPinDialogHeading": "הוספת קוד אישי (PIN)",
+    "diskEncryptionPageAddPinDialogBodyMain": "את הקוד האישי (PIN) יש להקליד בכל עלייה של המחשב שלך. הקוד האישי הזה אינו זהה לסיסמת המשתמש שלך.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "אם שכחת את הקוד האישי (PIN) שלך, אפשר להשיב את הגישה לכונן בעזרת מפתח שחזור.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "יש למלא את מילת הצופן שלך עם כל עלייה של המחשב. מילת הצופן הזאת אינה זהה לסיסמת המשתמש שלך.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "אם שכחת את מילת הצופן שלך, אפשר להשיב את הגישה לכונן בעזרת מפתח שחזור.",
+    "diskEncryptionPageAdditionalSecurityHeader": "הגברת האבטחה",
+    "diskEncryptionPageAdditionalSecurityBody": "אפשר להגדיר מילת צופן או קוד אישי (PIN) להגברת האבטחה. יש להקליד אותו עם כל עלייה של המחשב.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "מידע נוסף",
+    "diskEncryptionPageAddPinDialogSaveButton": "הוספה",
+    "diskEncryptionPageRemovePinButton": "הסרת קוד אישי (PIN)…",
+    "diskEncryptionPageRemovePassphraseButton": "הסרת מילת צופן…",
+    "diskEncryptionPageAddingPin": "הקוד האישי (PIN) נוסף, הפעולה עלולה לארוך מספר שניות…",
+    "diskEncryptionPageAddingPassphrase": "מילת הצופן נוספת, הפעולה הזאת עלולה לארוך מספר שניות…",
+    "diskEncryptionPageRemovingPin": "מתבצעת הסרה של הקוד האישי (PIN), הפעולה הזאת עלולה לארוך מספר שניות…",
+    "diskEncryptionPageRemovingPassphrase": "מתבצעת הסרה של מילת הצופן, הפעולה הזאת עלולה לארוך מספר שניות…",
+    "microphoneInterfacePageTitle": "מיקרופון",
+    "microphoneInterfacePageDescription": "לאפשר ליישומים לגשת למיקרופון שלך."
 }

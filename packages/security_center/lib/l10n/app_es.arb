@@ -1,77 +1,173 @@
 {
-  "snapdRuleCategoryForeverAllowed": "Permitir siempre",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "Rechazar siempre",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "Leer",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionsEnableWarning": "Esta es una función experimental para controlar el acceso a los recursos de tu sistema.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "Habilitándolo, puede tardar unos segundos...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "Desactivándolo, puede tardar unos segundos…",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsExperimentalLabel": "Experimental",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsOtherDescription": "Puedes administrar otros permisos en Configuración › Aplicaciones.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsPageTitle": "Permisos de la aplicación",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, plural, =0{sin reglas} =1{1 regla} other{{n} reglas}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "interfacePageDescription": "Las aplicaciones estrictamente limitadas te preguntarán antes de acceder a archivos y carpetas. Esta característica es experimental y está sujeta a cambios.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkLearnMore": "Aprender más",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "Dar tu opinión",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "Informar de problemas",
-  "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, plural, =0{sin aplicaciones} =1{1 aplicación} other {{n} aplicaciones}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapdRuleCategorySessionAllowed": "Permitir hasta cerrar sesión",
-  "@snapdRuleCategorySessionAllowed": {},
-  "appTitle": "Centro de seguridad",
-  "@appTitle": {},
-  "snapdRuleCategorySessionDenied": "Denegar hasta cerrar sesión",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapPermissionsEnableTitle": "Exigir a las aplicaciones que pidan permisos al sistema",
-  "@snapPermissionsEnableTitle": {},
-  "snapPermissionWriteLabel": "Escribir",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Ejecutar",
-  "@snapPermissionExecuteLabel": {},
-  "snapRulesPageDescription": "Administrar los permisos de {interface} para {snap} .",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "Aún no hay reglas",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Eliminar todas las reglas",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "Carpeta de usuario",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Administrar los permisos para acceder a los archivos en la carpeta del usuario.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageTitle": "Administrar permisos",
-  "@interfacePageTitle": {}
+    "snapdRuleCategoryForeverAllowed": "Permitir siempre",
+    "snapdRuleCategoryForeverDenied": "Rechazar siempre",
+    "snapPermissionReadLabel": "Leer",
+    "snapPermissionsEnableWarning": "Esta es una función experimental para controlar el acceso a los recursos de tu sistema.",
+    "snapPermissionsEnablingLabel": "Habilitándolo, esto puede tardar unos pocos segundos...",
+    "snapPermissionsDisablingLabel": "Inhabilitado, esto puede tomas unos pocos segundos…",
+    "snapPermissionsExperimentalLabel": "Experimental",
+    "snapPermissionsOtherDescription": "Puedes administrar otros permisos en Configuración › Aplicaciones.",
+    "snapPermissionsPageTitle": "Permisos de la aplicación",
+    "snapRulesCount": "{n, plural, =0{sin reglas} =1{1 regla} other{{n} reglas}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "interfacePageDescription": "Las aplicaciones estrictamente limitadas te preguntarán antes de acceder a archivos y carpetas. Esta característica es experimental y está sujeta a cambios.",
+    "interfacePageLinkLearnMore": "Aprender más",
+    "interfacePageLinkGiveFeedback": "Dar tu opinión",
+    "interfacePageLinkReportIssues": "Informar de problemas",
+    "interfaceSnapCount": "{n, plural, =0{sin aplicaciones} =1{1 aplicación} other {{n} aplicaciones}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapdRuleCategorySessionAllowed": "Permitir hasta cerrar sesión",
+    "appTitle": "Centro de seguridad",
+    "snapdRuleCategorySessionDenied": "Denegar hasta cerrar sesión",
+    "snapPermissionsEnableTitle": "Exigir a las aplicaciones que pidan permisos al sistema",
+    "snapPermissionWriteLabel": "Escribir",
+    "snapPermissionExecuteLabel": "Ejecutar",
+    "snapRulesPageDescription": "Administrar los permisos de {interface} para {snap} .",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Aún no hay reglas",
+    "snapRulesRemoveAll": "Eliminar todas las reglas",
+    "homeInterfacePageTitle": "Carpeta de usuario",
+    "homeInterfacePageDescription": "Administrar los permisos para acceder a los archivos en la carpeta del usuario.",
+    "interfacePageTitle": "Administrar permisos",
+    "cameraRulesPageEmptyTileLabel": "Ninguna aplicación ha solicitado acceso aún",
+    "snapRulesResetAllPermissions": "Reiniciar todos los permisos",
+    "cameraInterfacePageTitle": "Cámara",
+    "cameraInterfacePageDescription": "Permite a las aplicaciones acceder a tus cámaras.",
+    "diskEncryptionPageTitle": "Encriptación de disco",
+    "diskEncryptionPageRecoveryKey": "Clave de recuperación",
+    "diskEncryptionPageStoreYourKey": "La clave de recuperación le permite recuperar el acceso a sus datos si el disco no se desbloquea durante el arranque. Guárdelo en un lugar seguro.",
+    "diskEncryptionPageStoreYourKeyWithLink": "La clave de recuperación le permite recuperar el acceso a sus datos si el disco no se desbloquea durante el arranque. Guárdelo en un lugar seguro.{learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "Aprenda más sobre cifrado basado en hardware en segundo plano",
+    "diskEncryptionPageCheckKey": "Comprobar la clave de recuperación...",
+    "diskEncryptionPageCheck": "Comprobar",
+    "diskEncryptionPageValidKey": "Clave válida",
+    "diskEncryptionPageInvalidKey": "Clave inválida",
+    "diskEncryptionPageEnterKey": "Introduzca la clave de recuperación",
+    "diskEncryptionPageKeyWorks": "La clave de recuperación funciona",
+    "diskEncryptionPageKeyWorksBody": "Recuerde mantenerla en un lugar seguro.",
+    "diskEncryptionPageKeyDoesntWork": "La clave de recuperación no funciona",
+    "diskEncryptionPageKeyDoesntWorkBody": "Compruebe la clave o sustitúyala por una nueva.",
+    "diskEncryptionPageError": "Error",
+    "diskEncryptionPageReplaceButton": "Reemplazar la clave de recuperación...",
+    "diskEncryptionPageReplaceDialogHeader": "Reemplazar clave de recuperación",
+    "diskEncryptionPageReplaceDialogBody": "Guarde la nueva clave de recuperación en un lugar seguro. Una vez reemplazada, ya no podrá usar la clave vieja.",
+    "diskEncryptionPageReplaceDialogShowQR": "Mostrar el código QR",
+    "diskEncryptionPageReplaceDialogSave": "Guardar como archivo",
+    "diskEncryptionPageReplaceDialogReplace": "Reemplazar",
+    "diskEncryptionPageReplaceDialogAcknowledge": "He guardado mi clave de recuperación en un lugar seguro",
+    "diskEncryptionPageReplaceDialogDiscard": "Borrar",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Se ha reemplazado la clave de recuperación",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Ha fallado el reemplazo de clave de seguridad",
+    "diskEncryptionPageReplaceDialogErrorBody": "Ha habido un error al reemplazar su clave de recuperación. Su vieja clave seguirá siendo válida.",
+    "diskEncryptionPageClipboardNotification": "Copiado al portapapeles",
+    "diskEncryptionPageCopySemanticLabel": "Copiar",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "La configuración de la encriptación no está disponible",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Ha fallado la comprobación del estado de encriptado de este equipo.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "La configuración TPM de su equipo no está en un estado soportado.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "El centro de seguridad no pudo conectarse a la interfaz de snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "recoveryKeyExceptionFileSystemTitle": "No se ha guardado la clave de recuperación",
+    "diskEncryptionPageReplaceDialogQRBody": "Escanee el código QR para copiar la clave de recuperación y guardarla en un lugar seguro, como un gestor de contraseñas. También puede tomar una foto para usarlo más tarde.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Su versión de snapd no tiene soporte",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Compruebe que el Centro de seguridad y snapd están actualizados.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Para solucionar esto, ejecute este comando en la terminal:",
+    "recoveryKeyExceptionDisallowedPathTitle": "El archivo de clave de recuperación no se puede guardar en una ubicación temporal",
+    "recoveryKeyExceptionUnknownTitle": "Error desconocido",
+    "snapPermissionAccessLabel": "Acceder",
+    "diskEncryptionPageDialogHeaderCheckKey": "Comprobar clave de recuperación",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Recuerde guardarla en un lugar seguro.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Escritorio de Ubuntu - Clave de recuperación de encriptado",
+    "recoveryKeyExceptionFilePermissionTitle": "Hubo un error al guardar su clave de recuperación a un archivo",
+    "recoveryKeyExceptionFilePermissionBody": "No tiene permisos de escritura en esa ruta de archivos.",
+    "recoveryKeyExceptionFileSystemBody": "No tiene permisos de escritura en esa carpeta. Inténtelo en otra ruta o use otro método.",
+    "recoveryKeyFilePickerFilter": "Archivos de texto",
+    "recoveryKeyFilePickerTitle": "Guardar archivo de clave de recuperación",
+    "recoveryKeyTPMEnabled": "Está habilitada la encriptación con soporte de hardware",
+    "recoveryKeyPassphraseHeader": "Cambiar la contraseña",
+    "recoveryKeyPassphraseButton": "Cambiar la contraseña...",
+    "recoveryKeyPassphraseCurrent": "Contraseña actual",
+    "recoveryKeyPassphraseNew": "Contraseña nueva",
+    "recoveryKeyPassphraseConfirm": "Confirme la contraseña",
+    "recoveryKeyPassphraseCurrentError": "Contraseña incorrecta, inténtelo de nuevo",
+    "recoveryKeyPassphraseNewError": "Debe tener un mínimo de 4 caracteres",
+    "recoveryKeyPassphraseConfirmError": "Las contraseñas no coinciden, inténtelo de nuevo",
+    "recoveryKeyPassphraseDialogHeader": "Cambiar la contraseña",
+    "recoveryKeyPinEnabled": "Se ha activado el PIN de encriptación",
+    "recoveryKeyPinHeader": "PIN de encriptación",
+    "recoveryKeyEncrpytionPassphraseHeader": "Contraseña de encriptación",
+    "recoveryKeyPinNew": "PIN nuevo",
+    "recoveryKeyPinConfirm": "Confirme el PIN",
+    "recoveryKeyPinCurrentError": "PIN incorrecto, inténtelo de nuevo",
+    "recoveryKeyPinConfirmError": "Los PIN no coinciden, inténtelo de nuevo",
+    "recoveryKeyPinDialogHeader": "Cambar el PIN",
+    "recoveryKeyPassphraseShow": "Mostrar",
+    "recoveryKeyPassphraseHide": "Ocultar",
+    "recoveryKeyPassphraseChange": "Cambiar",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN actualizado",
+    "recoveryKeyPassphrasePinSuccessBody": "Su PIN se ha actualizado correctamente.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Contraseña actualizada",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "La contraseña ha sido actualizada correctamente.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Contraseña débil, hágala más larga o más compleja",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Contraseña suficiente, hágala más larga o más compleja para mayor seguridad",
+    "recoveryKeyPassphraseEntropyOptimal": "Contraseña fuerte",
+    "recoveryKeyPinEntropyBelowMin": "PIN débil, hágalo más largo o menos predecible",
+    "recoveryKeyPinEntropyBelowOptimal": "PIN suficiente, hágalo más largo o menos predecible para mayor seguridad",
+    "recoveryKeyPinEntropyOptimal": "La longitud del PIN es suficiente",
+    "recoveryKeySomethingWentWrongHeader": "Ha habido algún error",
+    "recoveryKeyExceptionDisallowedPathBody": "Pruebe una ubicación diferente, como una unidad extraíble, o use otro método.",
+    "recoveryKeyTPMExplanationBody": "Las claves de encriptación se almacenan en el módulo de plataforma de confianza (TPM) del ordenador.",
+    "recoveryKeyTPMExplanationLearnMore": "Más información sobre la encriptación con soporte de hardware",
+    "recoveryKeyPassphraseEnabled": "La contraseña de encriptación está activada",
+    "recoveryKeyPassphraseBody": "Necesita introducir su frase de paso cada vez que su equipo arranque.",
+    "recoveryKeyPinBody": "Necesita introducir su PIN cada vez que su equipo inicie.",
+    "recoveryKeyPinButton": "Cambiar PIN...",
+    "recoveryKeyPinCurrent": "PIN actual",
+    "diskEncryptionPageAddPinButton": "Agregar PIN…",
+    "diskEncryptionPageAddPassphraseButton": "Agregar frase de paso...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Agregar frase de paso",
+    "diskEncryptionPageAddPinDialogHeading": "Agregar PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "Necesitará introducir su PIN cada vez que inicie su equipo. Este PIN es diferente de su contraseña de usuario.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Si olvida su PIN, puede obtener acceso al disco utilizando la clave de recuperación.",
+    "microphoneInterfacePageTitle": "Micrófono",
+    "microphoneInterfacePageDescription": "Concede a las apps para acceder a su micrófono.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Necesitará introducir su frase de acceso cada vez que su equipo arranque. Esta frase de paso es diferente desde su contraseña de usuario.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Si olvida su frase de paso, puede obtener acceso al disco utilizando la llave de recuperación.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Seguridad adicional",
+    "diskEncryptionPageAdditionalSecurityBody": "Puede fijar una frase de paso o un PIN para seguridad adicional. Necesitarás introducirlo cada vez que inicie su equipo.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Aprender más",
+    "diskEncryptionPageAddPinDialogSaveButton": "Agregar",
+    "diskEncryptionPageRemovePinButton": "Retirar PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Retirar frase de acceso...",
+    "diskEncryptionPageAddingPin": "Añadir PIN, esto puede tomar unos pocos segundos...",
+    "diskEncryptionPageAddingPassphrase": "Añadir frase de paso, esta puede tomar unos pocos segundos...",
+    "diskEncryptionPageRemovingPin": "Retirar PIN, esto puede tomar unos pocos segundos...",
+    "diskEncryptionPageRemovingPassphrase": "Retirar frase de paso, esto puede tomar unos pocos segundos..."
 }
