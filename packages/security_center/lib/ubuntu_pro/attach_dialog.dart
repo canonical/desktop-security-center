@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/l10n/app_localizations.dart';
+import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
@@ -167,7 +168,7 @@ class _MagicLinkDialog extends ConsumerWidget {
                         data: (data) => data.validContract
                             ? null
                             : () => launchUrlString(
-                                  'https://ubuntu.com/pro/attach?magic-attach-code=${data.response.userCode}',
+                                  getUbuntuProMagicLink(data.response.userCode),
                                 ),
                       ),
                       child: magicAttachProvider.when(
@@ -211,7 +212,9 @@ class _MagicLinkDialog extends ConsumerWidget {
               MarkdownText(
                 l10n.ubuntuProMagicDescription(
                   'ubuntu.com/pro/attach'.link(
-                    'https://ubuntu.com/pro/attach?magic-attach-code=${magicAttachProvider.asData!.value.response.userCode}',
+                    getUbuntuProMagicLink(
+                      magicAttachProvider.asData!.value.response.userCode,
+                    ),
                   ),
                   magicAttachProvider.asData!.value.response.userCode.bold(),
                 ),
@@ -287,8 +290,7 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
           children: [
             MarkdownText(
               l10n.ubuntuProTokenPrompt(
-                'ubuntu.com/pro/dashboard'
-                    .link('https://ubuntu.com/pro/dashboard'),
+                'ubuntu.com/pro/dashboard'.link(kUbuntuProDashboardLink),
               ),
             ),
             TextField(

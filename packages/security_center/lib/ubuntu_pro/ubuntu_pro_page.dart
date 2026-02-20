@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/routes.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
+import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:security_center/ubuntu_pro/attach_dialog.dart';
 import 'package:security_center/ubuntu_pro/detach_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
@@ -89,7 +90,7 @@ class _UbuntuProAvailability extends ConsumerWidget {
             children: [
               MarkdownText(
                 l10n.ubuntuProDisabled(
-                  l10n.ubuntuProLearnMore.link('https://ubuntu.com/pro'),
+                  l10n.ubuntuProLearnMore.link(kUbuntuProLink),
                 ),
                 alignment: WrapAlignment.center,
               ),
@@ -133,7 +134,7 @@ class _UbuntuProStatus extends ConsumerWidget {
             children: [
               MarkdownText(
                 l10n.ubuntuProDisabled(
-                  l10n.ubuntuProLearnMore.link('https://ubuntu.com/pro'),
+                  l10n.ubuntuProLearnMore.link(kUbuntuProLink),
                 ),
                 alignment: WrapAlignment.center,
               ),

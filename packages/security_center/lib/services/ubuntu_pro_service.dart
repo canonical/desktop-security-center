@@ -11,6 +11,13 @@ import 'package:path/path.dart' as path;
 part 'ubuntu_pro_service.freezed.dart';
 part 'ubuntu_pro_service.g.dart';
 
+const kUbuntuProLink = 'https://ubuntu.com/pro';
+const kUbuntuProDashboardLink = 'https://ubuntu.com/pro/dashboard';
+
+String getUbuntuProMagicLink(String userCode) {
+  return 'https://ubuntu.com/pro/attach?magic-attach-code=$userCode';
+}
+
 @freezed
 class MagicAttachResponse with _$MagicAttachResponse {
   // ignore: invalid_annotation_target
