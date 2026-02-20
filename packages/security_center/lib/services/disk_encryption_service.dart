@@ -125,4 +125,10 @@ abstract class DiskEncryptionService {
 
   /// Gets the TPM backed FDE status from snapd.
   Future<SnapdStorageEncryptedResponse> getStorageEncrypted();
+
+  Future<void> reprovisionDisk();
+
+  Future<String> reEncryptDisk();
+
+  Future<void> deleteKeyslots();
 }

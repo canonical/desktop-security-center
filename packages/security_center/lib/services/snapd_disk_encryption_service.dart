@@ -143,4 +143,22 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   Future<SnapdStorageEncryptedResponse> getStorageEncrypted() {
     return _snapd.getStorageEncrypted();
   }
+
+  @override
+  Future<void> deleteKeyslots() {
+    // TODO: implement deleteKeyslots
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String> reEncryptDisk() {
+    // TODO: implement reEncryptDisk
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> reprovisionDisk() {
+    // TODO: implement reprovisionDisk
+    throw UnimplementedError();
+  }
 }
