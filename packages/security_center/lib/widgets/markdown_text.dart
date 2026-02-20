@@ -15,10 +15,13 @@ class MarkdownText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = DefaultTextStyle.of(context);
+
     return MarkdownBody(
       data: data,
       styleSheet: MarkdownStyleSheet(
         textAlign: alignment ?? WrapAlignment.start,
+        p: textStyle.style,
         a: TextStyle(
           color: Theme.of(context).colorScheme.primary,
           decoration: TextDecoration.underline,
