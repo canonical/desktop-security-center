@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:security_center/l10n.dart';
-import 'package:security_center/routes.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:security_center/ubuntu_pro/attach_dialog.dart';
+import 'package:security_center/ubuntu_pro/compliance_page.dart';
 import 'package:security_center/ubuntu_pro/detach_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
@@ -54,7 +54,11 @@ class UbuntuProPage extends ConsumerWidget {
                 title: l10n.ubuntuProCompliance,
                 trailing: Icon(Icons.chevron_right),
                 onTap: () {
-                  navigator.pushNamed(Routes.compliance.route);
+                  navigator.push(
+                    MaterialPageRoute(
+                      builder: (_) => ComplianceHardeningPage(),
+                    ),
+                  );
                 },
               ),
             ],

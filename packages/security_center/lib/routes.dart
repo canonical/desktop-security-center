@@ -6,7 +6,6 @@ import 'package:security_center/app_permissions/snaps_page.dart';
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
-import 'package:security_center/ubuntu_pro/compliance_page.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_page.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
@@ -31,12 +30,6 @@ enum Routes {
   ubuntuPro(
     route: '/ubuntu_pro',
     builder: _ubuntuProBuilder,
-    title: _ubuntuProTitle,
-    icon: _ubuntuProIcon,
-  ),
-  compliance(
-    route: '/ubuntu_pro/compliance',
-    builder: _complianceBuilder,
     title: _ubuntuProTitle,
     icon: _ubuntuProIcon,
   );
@@ -124,12 +117,6 @@ enum Routes {
 
   static IconData _ubuntuProIcon(bool selected) =>
       selected ? YaruIcons.ubuntu_logo_simple : YaruIcons.drive_harddisk;
-
-  static Widget _complianceBuilder(
-    BuildContext context, [
-    Map<String, String> queryParameters = const {},
-  ]) =>
-      const ComplianceHardeningPage();
 
   static (String route, Map<String, String> queryParameters) _parseName(
     String name,
