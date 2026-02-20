@@ -52,7 +52,7 @@ class UbuntuProPage extends ConsumerWidget {
             children: [
               SecurityCenterListTile(
                 title: l10n.ubuntuProCompliance,
-                trailing: Icon(Icons.chevron_right),
+                trailing: Icon(YaruIcons.pan_end),
                 onTap: () {
                   navigator.push(
                     MaterialPageRoute(
@@ -94,11 +94,14 @@ class _UbuntuProAvailability extends ConsumerWidget {
         ? const _UbuntuProStatus()
         : Column(
             children: [
-              MarkdownText(
-                l10n.ubuntuProDisabled(
-                  l10n.ubuntuProLearnMore.link(kUbuntuProLink),
+              Container(
+                constraints: const BoxConstraints(maxWidth: 410),
+                child: MarkdownText(
+                  l10n.ubuntuProDisabled(
+                    l10n.ubuntuProLearnMore.link(kUbuntuProLink),
+                  ),
+                  alignment: WrapAlignment.center,
                 ),
-                alignment: WrapAlignment.center,
               ),
               const SizedBox(height: 24),
               YaruBorderContainer(

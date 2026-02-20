@@ -53,7 +53,7 @@ class _AttachDialogContent extends StatelessWidget {
                     ),
                     title: l10n.ubuntuProEnableMagic,
                     subtitle: Text(l10n.ubuntuProEnableMagicSubtitle),
-                    trailing: Icon(Icons.chevron_right),
+                    trailing: Icon(YaruIcons.pan_end),
                   ),
                   const Divider(),
                   SecurityCenterListTile(
@@ -68,7 +68,7 @@ class _AttachDialogContent extends StatelessWidget {
                         'ubuntu.com/pro/dashboard',
                       ),
                     ),
-                    trailing: Icon(Icons.chevron_right),
+                    trailing: Icon(YaruIcons.pan_end),
                   ),
                 ],
               ),
@@ -204,7 +204,7 @@ class _MagicLinkDialog extends ConsumerWidget {
                   magicAttachProvider.asData!.value.response.userCode.bold(),
                 ),
               ),
-          ].separatedBy(const SizedBox(height: 24)),
+          ].separatedBy(const SizedBox(height: 16)),
         ),
       ),
     );

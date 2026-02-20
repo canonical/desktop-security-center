@@ -4,6 +4,7 @@ import 'package:security_center/l10n.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
+import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
@@ -27,6 +28,7 @@ class FIPSDialog extends ConsumerWidget {
         title: Text(l10n.ubuntuProComplianceFIPSTitle),
       ),
       titlePadding: EdgeInsets.zero,
+      contentPadding: EdgeInsets.zero,
       actions: [
         ElevatedButton(
           onPressed: provider.state is UbuntuProFeatureStateLoading
@@ -44,9 +46,7 @@ class FIPSDialog extends ConsumerWidget {
       ],
       content: Container(
         constraints: BoxConstraints(maxWidth: 500),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ScrollablePage(
           children: [
             YaruInfoBox(
               yaruInfoType: YaruInfoType.warning,
@@ -66,7 +66,7 @@ class FIPSDialog extends ConsumerWidget {
                 const _FIPSOptions(),
               ].separatedBy(const SizedBox(height: 12)),
             ),
-          ].separatedBy(const SizedBox(height: 24)),
+          ].separatedBy(const SizedBox(height: 16)),
         ),
       ),
     );
