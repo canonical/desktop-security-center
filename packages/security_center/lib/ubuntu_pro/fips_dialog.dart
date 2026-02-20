@@ -63,7 +63,7 @@ class FIPSDialog extends ConsumerWidget {
                   style: theme.textTheme.bodyMedium
                       ?.copyWith(fontWeight: FontWeight.w500),
                 ),
-                _FIPSOptions(),
+                const _FIPSOptions(),
               ].separatedBy(const SizedBox(height: 12)),
             ),
           ].separatedBy(const SizedBox(height: 24)),
@@ -74,6 +74,8 @@ class FIPSDialog extends ConsumerWidget {
 }
 
 class _FIPSOptions extends ConsumerStatefulWidget {
+  const _FIPSOptions();
+
   @override
   ConsumerState<_FIPSOptions> createState() => _FIPSOptionsState();
 }

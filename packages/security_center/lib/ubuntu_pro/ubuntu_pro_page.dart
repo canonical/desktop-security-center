@@ -44,10 +44,10 @@ class UbuntuProPage extends ConsumerWidget {
             ],
           ),
         ),
-        _UbuntuProAvailability(),
-        if (provider.value?.available ?? false) ...[
-          _ESMSection(),
-          _LivepatchSection(),
+        const _UbuntuProAvailability(),
+        if (provider.whenOrNull(data: (data) => data.available) ?? false) ...[
+          const _ESMSection(),
+          const _LivepatchSection(),
           TileList(
             children: [
               SecurityCenterListTile(
@@ -63,7 +63,7 @@ class UbuntuProPage extends ConsumerWidget {
               ),
             ],
           ),
-          if (provider.value?.attached ?? false)
+          if (provider.whenOrNull(data: (data) => data.attached) ?? false)
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: theme.colorScheme.error,
@@ -83,13 +83,15 @@ class UbuntuProPage extends ConsumerWidget {
 }
 
 class _UbuntuProAvailability extends ConsumerWidget {
+  const _UbuntuProAvailability();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final provider = ref.watch(ubuntuProStatusProvider);
 
-    return provider.value?.available ?? false
-        ? _UbuntuProStatus()
+    return provider.whenOrNull(data: (data) => data.available) ?? false
+        ? const _UbuntuProStatus()
         : Column(
             children: [
               MarkdownText(
@@ -115,12 +117,14 @@ class _UbuntuProAvailability extends ConsumerWidget {
 }
 
 class _UbuntuProStatus extends ConsumerWidget {
+  const _UbuntuProStatus();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final provider = ref.watch(ubuntuProStatusProvider);
 
-    return provider.value?.attached ?? false
+    return provider.whenOrNull(data: (data) => data.attached) ?? false
         ? Column(
             children: [
               const SizedBox(height: 24),
@@ -157,6 +161,8 @@ class _UbuntuProStatus extends ConsumerWidget {
 }
 
 class _ESMSection extends ConsumerWidget {
+  const _ESMSection();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
@@ -229,6 +235,8 @@ class _ESMSection extends ConsumerWidget {
 }
 
 class _LivepatchSection extends ConsumerWidget {
+  const _LivepatchSection();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);

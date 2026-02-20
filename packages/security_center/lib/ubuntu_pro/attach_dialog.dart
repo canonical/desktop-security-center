@@ -18,12 +18,14 @@ class AttachDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Navigator(
       onGenerateRoute: (settings) =>
-          MaterialPageRoute(builder: (_) => _AttachDialogContent()),
+          MaterialPageRoute(builder: (_) => const _AttachDialogContent()),
     );
   }
 }
 
 class _AttachDialogContent extends StatelessWidget {
+  const _AttachDialogContent();
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -49,7 +51,7 @@ class _AttachDialogContent extends StatelessWidget {
                     ),
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => _MagicLinkDialog(),
+                        builder: (context) => const _MagicLinkDialog(),
                       ),
                     ),
                     title: Row(
@@ -69,7 +71,7 @@ class _AttachDialogContent extends StatelessWidget {
                     ),
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => _TokenDialog(),
+                        builder: (context) => const _TokenDialog(),
                       ),
                     ),
                     title: Row(
@@ -96,6 +98,8 @@ class _AttachDialogContent extends StatelessWidget {
 }
 
 class _MagicLinkDialog extends ConsumerWidget {
+  const _MagicLinkDialog();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
@@ -227,6 +231,8 @@ class _MagicLinkDialog extends ConsumerWidget {
 }
 
 class _TokenDialog extends ConsumerStatefulWidget {
+  const _TokenDialog();
+
   @override
   ConsumerState<_TokenDialog> createState() => _TokenDialogState();
 }
