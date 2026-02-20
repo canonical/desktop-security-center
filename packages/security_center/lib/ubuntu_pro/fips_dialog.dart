@@ -42,8 +42,8 @@ class FIPSDialog extends ConsumerWidget {
               : Text(l10n.ubuntuProEnable),
         ),
       ],
-      content: SizedBox(
-        width: 500,
+      content: Container(
+        constraints: BoxConstraints(maxWidth: 500),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

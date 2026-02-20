@@ -52,8 +52,8 @@ class DetachDialog extends ConsumerWidget {
               : Text(l10n.ubuntuProDisable),
         ),
       ],
-      content: SizedBox(
-        width: 500,
+      content: Container(
+        constraints: BoxConstraints(maxWidth: 500),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

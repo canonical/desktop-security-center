@@ -6,6 +6,7 @@ import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:yaru/yaru.dart';
 
@@ -37,55 +38,37 @@ class _AttachDialogContent extends StatelessWidget {
       ),
       titlePadding: EdgeInsets.zero,
       contentPadding: EdgeInsets.zero,
-      content: SizedBox(
-        width: _kDialogWidth,
+      content: Container(
+        constraints: BoxConstraints(maxWidth: _kDialogWidth),
         child: ScrollablePage(
           children: [
             YaruBorderContainer(
               child: Column(
                 children: [
-                  ListTile(
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 16,
-                    ),
+                  SecurityCenterListTile(
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const _MagicLinkDialog(),
                       ),
                     ),
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(l10n.ubuntuProEnableMagic),
-                        YaruIconButton(icon: Icon(Icons.chevron_right)),
-                      ],
-                    ),
+                    title: l10n.ubuntuProEnableMagic,
                     subtitle: Text(l10n.ubuntuProEnableMagicSubtitle),
+                    trailing: Icon(Icons.chevron_right),
                   ),
                   const Divider(),
-                  ListTile(
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 16,
-                    ),
+                  SecurityCenterListTile(
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const _TokenDialog(),
                       ),
                     ),
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(l10n.ubuntuProEnableToken),
-                        YaruIconButton(icon: Icon(Icons.chevron_right)),
-                      ],
-                    ),
+                    title: l10n.ubuntuProEnableToken,
                     subtitle: MarkdownText(
                       l10n.ubuntuProEnableTokenSubtitle(
                         'ubuntu.com/pro/dashboard',
                       ),
                     ),
+                    trailing: Icon(Icons.chevron_right),
                   ),
                 ],
               ),
@@ -126,9 +109,7 @@ class _MagicLinkDialog extends ConsumerWidget {
                 onPressed: Navigator.of(context).pop,
               ),
             ),
-            const Spacer(),
-            Text(l10n.ubuntuProEnableMagic),
-            const Spacer(),
+            Flexible(child: Center(child: Text(l10n.ubuntuProEnableMagic))),
           ],
         ),
         onClose: Navigator.of(context, rootNavigator: true).pop,
@@ -157,8 +138,8 @@ class _MagicLinkDialog extends ConsumerWidget {
               ]
             : null,
       ),
-      content: SizedBox(
-        width: _kDialogWidth,
+      content: Container(
+        constraints: const BoxConstraints(maxWidth: _kDialogWidth),
         child: ScrollablePage(
           children: [
             Text(l10n.ubuntuProMagicPrompt),
@@ -265,9 +246,7 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
                 onPressed: Navigator.of(context).pop,
               ),
             ),
-            const Spacer(),
-            Text(l10n.ubuntuProEnableToken),
-            const Spacer(),
+            Flexible(child: Center(child: Text(l10n.ubuntuProEnableToken))),
           ],
         ),
         onClose: Navigator.of(context, rootNavigator: true).pop,
@@ -276,7 +255,7 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
       contentPadding: EdgeInsets.zero,
       actions: [
         ElevatedButton(
-          onPressed: provider.validToken &&
+          onPressed: !provider.validToken ||
                   provider.state is UbuntuProAttachStateLoading
               ? null
               : () => ref.read(ubuntuProAttachModelProvider.notifier).attach(),
