@@ -37,19 +37,21 @@ class MagicAttachResponse with _$MagicAttachResponse {
 
 class MagicAttachService {
   MagicAttachService({
-    this.defaultEtcPath = '/etc/ubuntu-advantage',
-    this.defaultConfigFile = 'uaclient.conf',
-    this.v1MagicAttach = '/v1/magic-attach',
-  });
+    String defaultEtcPath = '/etc/ubuntu-advantage',
+    String defaultConfigFile = 'uaclient.conf',
+    String v1MagicAttach = '/v1/magic-attach',
+  })  : _defaultEtcPath = defaultEtcPath,
+        _defaultConfigFile = defaultConfigFile,
+        _v1MagicAttach = v1MagicAttach;
 
-  final String defaultEtcPath;
-  final String defaultConfigFile;
-  final String v1MagicAttach;
+  final String _defaultEtcPath;
+  final String _defaultConfigFile;
+  final String _v1MagicAttach;
 
   late final String _apiBase = _getAPIBase();
 
   Future<MagicAttachResponse> newToken() async {
-    final uri = Uri.parse(_apiBase).replace(path: v1MagicAttach);
+    final uri = Uri.parse(_apiBase).replace(path: _v1MagicAttach);
     final response = await http.post(uri);
 
     if (response.statusCode >= 300) {
@@ -63,7 +65,7 @@ class MagicAttachService {
   }
 
   Future<MagicAttachResponse> getContractToken(String token) async {
-    final uri = Uri.parse(_apiBase).replace(path: v1MagicAttach);
+    final uri = Uri.parse(_apiBase).replace(path: _v1MagicAttach);
     final response =
         await http.get(uri, headers: {'Authorization': 'Bearer $token'});
 
@@ -97,7 +99,7 @@ class MagicAttachService {
       return configPath;
     }
 
-    return path.join(defaultEtcPath, defaultConfigFile);
+    return path.join(_defaultEtcPath, _defaultConfigFile);
   }
 }
 
