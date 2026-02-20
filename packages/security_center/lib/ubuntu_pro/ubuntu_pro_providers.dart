@@ -71,15 +71,18 @@ class UbuntuProAttachModel extends _$UbuntuProAttachModel {
 }
 
 @riverpod
-Stream<UbuntuProManagerData> ubuntuProStatus(Ref ref) {
+Stream<UbuntuProManagerData> ubuntuProStatus(Ref ref) async* {
   final service = getService<UbuntuProManagerService>();
-  return service.stream;
+  yield service.data;
+  await for (final data in service.stream) {
+    yield data;
+  }
 }
 
 @riverpod
 Stream<List<String>> updateNotifierStream(Ref ref) async* {
   final service = getService<GSettingsIconService>();
-  await for (final keys in service.stream.stream) {
+  await for (final keys in service.stream) {
     yield keys;
   }
 }
@@ -127,6 +130,7 @@ class UbuntuProFeatureData with _$UbuntuProFeatureData {
 
   const UbuntuProFeatureData._();
 
+  bool get entitled => data?.entitled ?? false;
   bool get enabled => data?.enabled ?? false;
   bool get canToggle =>
       (data?.entitled ?? false) && state is! UbuntuProFeatureStateLoading;
@@ -156,6 +160,7 @@ class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
     if (featureType != this.featureType) return;
 
     final feature = _service.getFeature(featureType);
+
     state = state.copyWith(
       data: feature,
       state: feature == null
@@ -219,9 +224,9 @@ class FIPSModel extends _$FIPSModel {
     final fipsUpdatesProvider = ref
         .watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.fipsUpdates));
 
-    final canEnable = fipsProvider.data?.entitled ?? false;
     final enabled = (fipsProvider.data?.enabled ?? false) ||
         (fipsUpdatesProvider.data?.enabled ?? false);
+    final canEnable = !enabled && (fipsProvider.data?.entitled ?? false);
 
     return FIPSData(
       type: FIPSType.fipsUpdates,

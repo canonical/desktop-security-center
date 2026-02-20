@@ -102,31 +102,34 @@ class MagicAttachService {
 }
 
 class GSettingsIconService {
-  GSettingsIconService(this.settingsClient);
+  GSettingsIconService({GSettings? settingsClient})
+      : _settingsClient =
+            settingsClient ?? GSettings('com.ubuntu.update-notifier');
 
-  final GSettings settingsClient;
-  late final StreamController<List<String>> stream;
+  final GSettings _settingsClient;
+  late final StreamController<List<String>> _stream;
+  Stream<List<String>> get stream => _stream.stream;
 
   late final StreamSubscription<List<String>> _streamSubscription;
 
-  Future<void> init() async {
-    stream = StreamController.broadcast();
+  void init() {
+    _stream = StreamController.broadcast();
     _streamSubscription =
-        settingsClient.keysChanged.listen((data) => stream.add(data));
+        _settingsClient.keysChanged.listen((data) => _stream.add(data));
   }
 
   Future<void> dispose() async {
-    await stream.close();
+    await _stream.close();
     await _streamSubscription.cancel();
   }
 
   Future<bool> getStatusIcon() async {
     final showStatusIcon =
-        await settingsClient.get('show-livepatch-status-icon');
+        await _settingsClient.get('show-livepatch-status-icon');
     return showStatusIcon.asBoolean();
   }
 
   Future<void> toggleStatusIcon(bool value) async {
-    await settingsClient.set('show-livepatch-status-icon', DBusBoolean(value));
+    await _settingsClient.set('show-livepatch-status-icon', DBusBoolean(value));
   }
 }

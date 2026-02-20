@@ -283,11 +283,12 @@ class _LivepatchSection extends ConsumerWidget {
                     data: (data) => data.showStatusIcon,
                   ) ??
                   false,
-              onChanged: livepatchProvider.enabled
-                  ? (value) => ref
-                      .read(gSettingsUpdateNotifierModelProvider.notifier)
-                      .toggleStatusIcon(value)
-                  : null,
+              onChanged:
+                  livepatchProvider.enabled && livepatchProvider.canToggle
+                      ? (value) => ref
+                          .read(gSettingsUpdateNotifierModelProvider.notifier)
+                          .toggleStatusIcon(value)
+                      : null,
               title: Text(l10n.ubuntuProLivepatchShowTitle),
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 8,

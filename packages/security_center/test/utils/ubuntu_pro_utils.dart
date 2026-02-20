@@ -6,9 +6,141 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
+import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:snapd/snapd.dart';
+import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'ubuntu_pro_utils.mocks.dart';
+
+@GenerateMocks([GSettingsIconService])
+GSettingsIconService registerMockGSettingsIconService() {
+  final service = MockGSettingsIconService();
+  final stream = StreamController<List<String>>.broadcast();
+  var showIcon = false;
+
+  when(service.stream).thenAnswer((_) => stream.stream);
+  when(service.getStatusIcon()).thenAnswer((_) async {
+    return showIcon;
+  });
+  when(service.toggleStatusIcon(any)).thenAnswer((inv) async {
+    showIcon = inv.positionalArguments.first as bool;
+    stream.add(['show-livepatch-status-icon']);
+  });
+
+  registerMockService<GSettingsIconService>(service);
+  addTearDown(unregisterService<GSettingsIconService>);
+  addTearDown(stream.close);
+  return service;
+}
+
+@GenerateMocks([MagicAttachService])
+MagicAttachService registerMockMagicAttachService() {
+  final service = MockMagicAttachService();
+
+  when(service.newToken()).thenAnswer(
+    (_) async => MagicAttachResponse(
+      expires: DateTime.now(),
+      expiresIn: 0,
+      token: 'token',
+      userCode: 'userCode',
+    ),
+  );
+  when(service.getContractToken('token')).thenAnswer(
+    (_) async => MagicAttachResponse(
+      expires: DateTime.now(),
+      expiresIn: 0,
+      token: 'token',
+      userCode: 'userCode',
+      contractID: 'contractID',
+      contractToken: validToken,
+    ),
+  );
+
+  registerMockService<MagicAttachService>(service);
+  addTearDown(unregisterService<MagicAttachService>);
+  return service;
+}
+
+@GenerateMocks([UbuntuProManagerService])
+UbuntuProManagerService registerMockUbuntuProManagerService({
+  bool attached = true,
+  bool available = true,
+}) {
+  final service = MockUbuntuProManagerService();
+  final stream = StreamController<UbuntuProManagerData>.broadcast();
+  final data = UbuntuProManagerData(
+    attached: attached,
+    available: available,
+    eolDate: DateTime.now(),
+  );
+
+  when(service.data).thenReturn(data);
+  when(service.stream).thenAnswer((_) => stream.stream);
+  when(service.detach()).thenAnswer((_) async {
+    stream.add(
+      data.copyWith(attached: false),
+    );
+  });
+  when(service.attach(validToken)).thenAnswer((_) async {
+    stream.add(
+      data.copyWith(attached: true),
+    );
+  });
+  when(service.attach(invalidToken)).thenThrow(
+    DBusMethodResponseException(DBusMethodErrorResponse('Invalid token')),
+  );
+  stream.add(data);
+
+  registerMockService<UbuntuProManagerService>(service);
+  addTearDown(unregisterService<UbuntuProManagerService>);
+  addTearDown(stream.close);
+  return service;
+}
+
+@GenerateMocks([UbuntuProFeatureService])
+UbuntuProFeatureService registerMockUbuntuProFeatureService({
+  bool featuresEnabled = true,
+  bool featuresEntitled = true,
+}) {
+  final service = MockUbuntuProFeatureService();
+  final stream = StreamController<UbuntuProFeatureType>.broadcast();
+  final featureMap = <UbuntuProFeatureType, UbuntuProFeature>{};
+
+  when(service.stream).thenAnswer((_) => stream.stream);
+
+  for (final featureType in UbuntuProFeatureType.values) {
+    final feature = UbuntuProFeature(
+      object: MockDBusRemoteObject(),
+      type: featureType,
+      path:
+          '/com/canonical/UbuntuAdvantage/Services/${featureType.toPathPart()}',
+      name: featureType.name.toKebabCase(),
+      entitled: featuresEntitled,
+      status: featuresEnabled ? 'enabled' : 'disabled',
+    );
+    featureMap.putIfAbsent(featureType, () => feature);
+
+    when(service.getFeature(featureType))
+        .thenAnswer((_) => featureMap[featureType]);
+    when(service.isEnabled(featureType))
+        .thenAnswer((_) => featureMap[featureType]!.enabled);
+    when(service.enableFeature(featureType)).thenAnswer((_) async {
+      featureMap[featureType] =
+          featureMap[featureType]!.copyWith(status: 'enabled');
+      stream.add(featureType);
+    });
+    when(service.disableFeature(featureType)).thenAnswer((_) async {
+      featureMap[featureType] =
+          featureMap[featureType]!.copyWith(status: 'disabled');
+      stream.add(featureType);
+    });
+  }
+
+  registerMockService<UbuntuProFeatureService>(service);
+  addTearDown(unregisterService<UbuntuProFeatureService>);
+  addTearDown(stream.close);
+  return service;
+}
 
 MemoryFileSystem mockOSRelease({
   required String osRelease,
