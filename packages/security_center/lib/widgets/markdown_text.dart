@@ -5,16 +5,23 @@ import 'package:url_launcher/url_launcher_string.dart';
 class MarkdownText extends StatelessWidget {
   const MarkdownText(
     this.data, {
+    this.alignment,
     super.key,
   });
 
   final String data;
 
+  final WrapAlignment? alignment;
+
   @override
   Widget build(BuildContext context) {
+    final textStyle = DefaultTextStyle.of(context);
+
     return MarkdownBody(
       data: data,
       styleSheet: MarkdownStyleSheet(
+        textAlign: alignment ?? WrapAlignment.start,
+        p: textStyle.style,
         a: TextStyle(
           color: Theme.of(context).colorScheme.primary,
           decoration: TextDecoration.underline,

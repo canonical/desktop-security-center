@@ -26,6 +26,9 @@ void main() {
     await app.main([]);
     await tester.pumpAndSettle();
 
+    await tester.tap(find.text(tester.l10n.snapPermissionsPageTitle));
+    await tester.pumpAndSettle();
+
     await tester.tap(
       find.text(SnapdInterface.home.localizedTitle(tester.l10n)),
     );
