@@ -162,7 +162,7 @@ MemoryFileSystem mockOSRelease({
 
 @GenerateMocks([DBusRemoteObject])
 MockDBusRemoteObject mockFeatureObject({
-  UbuntuProFeatureType type = UbuntuProFeatureType.anboxCloud,
+  UbuntuProFeatureType type = UbuntuProFeatureType.esmApps,
   bool attached = false,
 }) {
   final object = MockDBusRemoteObject();
