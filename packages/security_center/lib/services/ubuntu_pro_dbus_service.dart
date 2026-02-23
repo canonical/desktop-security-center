@@ -191,7 +191,9 @@ class UbuntuProFeatureService {
     if (signal.changedProperties['Status'] == null) return;
 
     final feature = _featureMap.entries
-        .firstWhere((f) => f.value.data.path == signal.path.value);
+        .firstWhereOrNull((f) => f.value.data.path == signal.path.value);
+    if (feature == null) return;
+
     _featureMap.update(
       feature.key,
       (v) => v.copyWith(
@@ -228,7 +230,9 @@ class UbuntuProFeatureService {
     }
 
     final feature = _featureMap.entries
-        .firstWhere((f) => f.value.data.path == signal.changedPath.value);
+        .firstWhereOrNull((f) => f.value.data.path == signal.changedPath.value);
+    if (feature == null) return;
+
     await _removeFeature(feature.key);
   }
 
