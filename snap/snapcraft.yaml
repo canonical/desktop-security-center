@@ -18,6 +18,8 @@ apps:
       - network
       - snapd-control
       - snap-fde-control
+      - ubuntu-pro-control
+      - gsettings
       - removable-media
       - system-observe
 
@@ -38,6 +40,13 @@ parts:
       - xz-utils
       - zip
     override-prime: ""
+
+  update-notifier:
+    plugin: nil
+    stage-packages:
+      - update-notifier
+    stage:
+      - usr/share/glib-2.0/schemas/com.ubuntu.update-notifier.gschema.xml
 
   security-center:
     after: [fvm]
