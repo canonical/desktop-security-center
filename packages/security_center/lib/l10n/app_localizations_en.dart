@@ -661,15 +661,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
 
   @override
-  String get ubuntuProESMMainDescription =>
-      'Security updates for 2,300 Ubuntu Main package until 2036';
+  String ubuntuProESMMainDescription(int year) {
+    return 'Security updates for 2,300 Ubuntu Main package until $year';
+  }
 
   @override
   String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
 
   @override
-  String get ubuntuProESMUniverseDescription =>
-      'Additional security updates for over 23,000 Ubuntu Universe packages until 2036';
+  String ubuntuProESMUniverseDescription(int year) {
+    return 'Additional security updates for over 23,000 Ubuntu Universe packages until $year';
+  }
 
   @override
   String get ubuntuProLivepatchTitle => 'Kernel Livepatch';

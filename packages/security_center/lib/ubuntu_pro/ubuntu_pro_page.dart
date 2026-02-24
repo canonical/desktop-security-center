@@ -170,7 +170,9 @@ class _ESMSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
+    final now = DateTime.now();
 
+    final proProvider = ref.watch(ubuntuProStatusProvider);
     final esmAppProvider =
         ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.esmApps));
     final esmInfraProvider =
@@ -210,7 +212,14 @@ class _ESMSection extends ConsumerWidget {
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(l10n.ubuntuProESMMainDescription),
+                  Text(
+                    l10n.ubuntuProESMMainDescription(
+                      proProvider.whenOrNull(
+                            data: (data) => data.eolDate?.year,
+                          ) ??
+                          now.year,
+                    ),
+                  ),
                   if (esmInfraProvider.state is UbuntuProFeatureStateError)
                     Text(
                       esmInfraProvider.enabled
@@ -245,7 +254,14 @@ class _ESMSection extends ConsumerWidget {
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(l10n.ubuntuProESMUniverseDescription),
+                  Text(
+                    l10n.ubuntuProESMUniverseDescription(
+                      proProvider.whenOrNull(
+                            data: (data) => data.eolDate?.year,
+                          ) ??
+                          now.year,
+                    ),
+                  ),
                   if (esmAppProvider.state is UbuntuProFeatureStateError)
                     Text(
                       esmAppProvider.enabled

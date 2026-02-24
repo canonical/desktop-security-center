@@ -1337,8 +1337,8 @@ abstract class AppLocalizations {
   /// No description provided for @ubuntuProESMMainDescription.
   ///
   /// In en, this message translates to:
-  /// **'Security updates for 2,300 Ubuntu Main package until 2036'**
-  String get ubuntuProESMMainDescription;
+  /// **'Security updates for 2,300 Ubuntu Main package until {year}'**
+  String ubuntuProESMMainDescription(int year);
 
   /// No description provided for @ubuntuProESMUniverseTitle.
   ///
@@ -1349,8 +1349,8 @@ abstract class AppLocalizations {
   /// No description provided for @ubuntuProESMUniverseDescription.
   ///
   /// In en, this message translates to:
-  /// **'Additional security updates for over 23,000 Ubuntu Universe packages until 2036'**
-  String get ubuntuProESMUniverseDescription;
+  /// **'Additional security updates for over 23,000 Ubuntu Universe packages until {year}'**
+  String ubuntuProESMUniverseDescription(int year);
 
   /// No description provided for @ubuntuProLivepatchTitle.
   ///
