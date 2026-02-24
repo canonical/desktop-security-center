@@ -288,6 +288,8 @@
     "ubuntuProDisablePrompt": "Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?",
     "ubuntuProEnable": "Enable",
     "ubuntuProCancel": "Cancel",
+    "ubuntuProFeatureEnableError": "Could not enable the feature, please try again.",
+    "ubuntuProFeatureDisableError": "Could not disable the feature, please try again.",
     "ubuntuProCompliance": "Compliance and hardening",
     "ubuntuProComplianceDisclaimer": "Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.",
     "ubuntuProComplianceUSGTitle": "Ubuntu Security Guide (USG)",

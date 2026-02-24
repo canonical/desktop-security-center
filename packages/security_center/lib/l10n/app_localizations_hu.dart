@@ -594,6 +594,14 @@ class AppLocalizationsHu extends AppLocalizations {
   String get ubuntuProCancel => 'Cancel';
 
   @override
+  String get ubuntuProFeatureEnableError =>
+      'Could not enable the feature, please try again.';
+
+  @override
+  String get ubuntuProFeatureDisableError =>
+      'Could not disable the feature, please try again.';
+
+  @override
   String get ubuntuProCompliance => 'Compliance and hardening';
 
   @override

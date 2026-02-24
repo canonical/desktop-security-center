@@ -207,7 +207,21 @@ class _ESMSection extends ConsumerWidget {
                 isLoading:
                     esmInfraProvider.state is UbuntuProFeatureStateLoading,
               ),
-              subtitle: Text(l10n.ubuntuProESMMainDescription),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(l10n.ubuntuProESMMainDescription),
+                  if (esmInfraProvider.state is UbuntuProFeatureStateError)
+                    Text(
+                      esmInfraProvider.enabled
+                          ? l10n.ubuntuProFeatureDisableError
+                          : l10n.ubuntuProFeatureEnableError,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.error,
+                      ),
+                    ),
+                ],
+              ),
             ),
             YaruSwitchListTile(
               contentPadding: const EdgeInsets.symmetric(
@@ -228,7 +242,21 @@ class _ESMSection extends ConsumerWidget {
                 text: l10n.ubuntuProESMUniverseTitle,
                 isLoading: esmAppProvider.state is UbuntuProFeatureStateLoading,
               ),
-              subtitle: Text(l10n.ubuntuProESMUniverseDescription),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(l10n.ubuntuProESMUniverseDescription),
+                  if (esmAppProvider.state is UbuntuProFeatureStateError)
+                    Text(
+                      esmAppProvider.enabled
+                          ? l10n.ubuntuProFeatureDisableError
+                          : l10n.ubuntuProFeatureEnableError,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.error,
+                      ),
+                    ),
+                ],
+              ),
             ),
           ],
         ),
@@ -279,7 +307,21 @@ class _LivepatchSection extends ConsumerWidget {
                 isLoading:
                     livepatchProvider.state is UbuntuProFeatureStateLoading,
               ),
-              subtitle: Text(l10n.ubuntuProLivepatchEnableDescription),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(l10n.ubuntuProLivepatchEnableDescription),
+                  if (livepatchProvider.state is UbuntuProFeatureStateError)
+                    Text(
+                      livepatchProvider.enabled
+                          ? l10n.ubuntuProFeatureDisableError
+                          : l10n.ubuntuProFeatureEnableError,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.error,
+                      ),
+                    ),
+                ],
+              ),
             ),
             YaruSwitchListTile(
               value: statusIconProvider.whenOrNull(

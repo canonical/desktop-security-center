@@ -16,6 +16,7 @@ class ComplianceHardeningPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
 
     final usgProvider =
         ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.usg));
@@ -51,7 +52,21 @@ class ComplianceHardeningPage extends ConsumerWidget {
                 text: l10n.ubuntuProComplianceUSGTitle,
                 isLoading: usgProvider.state is UbuntuProFeatureStateLoading,
               ),
-              subtitle: Text(l10n.ubuntuProComplianceUSGDescription),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(l10n.ubuntuProComplianceUSGDescription),
+                  if (usgProvider.state is UbuntuProFeatureStateError)
+                    Text(
+                      usgProvider.enabled
+                          ? l10n.ubuntuProFeatureDisableError
+                          : l10n.ubuntuProFeatureEnableError,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.error,
+                      ),
+                    ),
+                ],
+              ),
             ),
             YaruSwitchListTile(
               contentPadding: const EdgeInsets.symmetric(
@@ -66,7 +81,21 @@ class ComplianceHardeningPage extends ConsumerWidget {
                       )
                   : null,
               title: Text(l10n.ubuntuProComplianceFIPSTitle),
-              subtitle: Text(l10n.ubuntuProComplianceFIPSDescription),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(l10n.ubuntuProComplianceFIPSDescription),
+                  if (fipsProvider.state is UbuntuProFeatureStateError)
+                    Text(
+                      fipsProvider.enabled
+                          ? l10n.ubuntuProFeatureDisableError
+                          : l10n.ubuntuProFeatureEnableError,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.error,
+                      ),
+                    ),
+                ],
+              ),
             ),
           ],
         ),

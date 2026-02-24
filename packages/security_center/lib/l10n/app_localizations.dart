@@ -1220,6 +1220,18 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get ubuntuProCancel;
 
+  /// No description provided for @ubuntuProFeatureEnableError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not enable the feature, please try again.'**
+  String get ubuntuProFeatureEnableError;
+
+  /// No description provided for @ubuntuProFeatureDisableError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not disable the feature, please try again.'**
+  String get ubuntuProFeatureDisableError;
+
   /// No description provided for @ubuntuProCompliance.
   ///
   /// In en, this message translates to:
