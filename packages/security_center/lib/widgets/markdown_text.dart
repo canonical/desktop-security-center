@@ -6,12 +6,14 @@ class MarkdownText extends StatelessWidget {
   const MarkdownText(
     this.data, {
     this.alignment,
+    this.selectable = false,
     super.key,
   });
 
   final String data;
 
   final WrapAlignment? alignment;
+  final bool selectable;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class MarkdownText extends StatelessWidget {
 
     return MarkdownBody(
       data: data,
+      selectable: selectable,
       styleSheet: MarkdownStyleSheet(
         textAlign: alignment ?? WrapAlignment.start,
         p: textStyle.style,

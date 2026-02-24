@@ -195,6 +195,7 @@ class _MagicLinkDialog extends ConsumerWidget {
             ),
             if (magicAttachProvider.asData?.value.validContract == false)
               MarkdownText(
+                selectable: true,
                 l10n.ubuntuProMagicDescription(
                   'ubuntu.com/pro/attach'.link(
                     getUbuntuProMagicLink(
