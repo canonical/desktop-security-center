@@ -515,6 +515,14 @@ class AppLocalizationsZh extends AppLocalizations {
       'Ubuntu Pro requires an LTS release';
 
   @override
+  String get ubuntuProNotSupportedSnapd =>
+      'Ubuntu Pro is not supported by this snapd version';
+
+  @override
+  String get ubuntuProNotSupportedSnapdDetails =>
+      'Update snapd to manage Ubuntu Pro';
+
+  @override
   String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
 
   @override

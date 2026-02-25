@@ -236,7 +236,10 @@
     "recoveryKeySomethingWentWrongHeader": "Something went wrong",
     "ubuntuProPageTitle": "Ubuntu Pro",
     "ubuntuProNotSupported": "Ubuntu Pro is not available for this Ubuntu version",
+
     "ubuntuProNotSupportedDetails": "Ubuntu Pro requires an LTS release",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro is not supported by this snapd version",
+    "ubuntuProNotSupportedSnapdDetails": "Update snapd to manage Ubuntu Pro",
     "ubuntuProEnabled": "Ubuntu Pro is enabled",
     "ubuntuProDisabled": "Enterprise-grade security and compliance for your computer. Always free for personal use. {learnMoreLink}",
     "@ubuntuProDisabled": {

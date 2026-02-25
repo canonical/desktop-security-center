@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:security_center/l10n.dart';
+import 'package:security_center/services/feature_service.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:security_center/ubuntu_pro/attach_dialog.dart';
@@ -13,6 +14,7 @@ import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:security_center/widgets/tile_list.dart';
+import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
 class UbuntuProPage extends ConsumerWidget {
@@ -22,8 +24,7 @@ class UbuntuProPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
-    final navigator = Navigator.of(context);
-    final provider = ref.watch(ubuntuProStatusProvider);
+    final featureService = tryGetService<FeatureService>();
 
     return ScrollablePage(
       children: [
@@ -44,6 +45,48 @@ class UbuntuProPage extends ConsumerWidget {
             ],
           ),
         ),
+        if (featureService?.supportsProControl ?? true)
+          _UbuntuProBody()
+        else
+          Column(
+            children: [
+              Container(
+                constraints: const BoxConstraints(maxWidth: 410),
+                child: MarkdownText(
+                  l10n.ubuntuProDisabled(
+                    l10n.ubuntuProLearnMore.link(kUbuntuProLink),
+                  ),
+                  alignment: WrapAlignment.center,
+                ),
+              ),
+              const SizedBox(height: 24),
+              YaruBorderContainer(
+                padding: EdgeInsetsGeometry.symmetric(vertical: 8),
+                child: Center(
+                  child: ListTile(
+                    leading: const Icon(YaruIcons.edit_clear, size: 24),
+                    title: Text(l10n.ubuntuProNotSupportedSnapd),
+                    subtitle: Text(l10n.ubuntuProNotSupportedSnapdDetails),
+                  ),
+                ),
+              ),
+            ],
+          ),
+      ].separatedBy(const SizedBox(height: 24)),
+    );
+  }
+}
+
+class _UbuntuProBody extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
+    final navigator = Navigator.of(context);
+    final provider = ref.watch(ubuntuProStatusProvider);
+
+    return Column(
+      children: [
         const _UbuntuProAvailability(),
         if (provider.whenOrNull(data: (data) => data.available) ?? false) ...[
           const _ESMSection(),

@@ -1100,6 +1100,18 @@ abstract class AppLocalizations {
   /// **'Ubuntu Pro requires an LTS release'**
   String get ubuntuProNotSupportedDetails;
 
+  /// No description provided for @ubuntuProNotSupportedSnapd.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Pro is not supported by this snapd version'**
+  String get ubuntuProNotSupportedSnapd;
+
+  /// No description provided for @ubuntuProNotSupportedSnapdDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Update snapd to manage Ubuntu Pro'**
+  String get ubuntuProNotSupportedSnapdDetails;
+
   /// No description provided for @ubuntuProEnabled.
   ///
   /// In en, this message translates to:
