@@ -90,6 +90,7 @@ void main() {
         tester.widget<YaruRadioListTile<FIPSType>>(fipsUpdates).value,
       );
 
+      await tester.ensureVisible(fipsNoUpdates);
       await tester.tap(fipsNoUpdates);
       await tester.pumpAndSettle();
 

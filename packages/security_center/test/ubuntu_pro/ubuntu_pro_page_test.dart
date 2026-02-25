@@ -41,7 +41,7 @@ void main() {
       );
       expect(disableProFinder, findsOne);
 
-      await tester.scrollUntilVisible(disableProFinder, 1);
+      await tester.ensureVisible(disableProFinder);
       await tester.tap(disableProFinder);
       await tester.pumpAndSettle();
 
@@ -283,7 +283,7 @@ void main() {
         isNull,
       );
 
-      await tester.scrollUntilVisible(livepatchTile, 1);
+      await tester.ensureVisible(livepatchTile);
       await tester.tap(livepatchTile);
       await tester.pumpAndSettle();
 
@@ -294,7 +294,7 @@ void main() {
         isNotNull,
       );
 
-      await tester.scrollUntilVisible(livepatchIconTile, 1);
+      await tester.ensureVisible(livepatchIconTile);
       await tester.tap(livepatchIconTile);
       await tester.pumpAndSettle();
 
