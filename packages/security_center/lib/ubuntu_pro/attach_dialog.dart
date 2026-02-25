@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/constants.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
@@ -9,8 +10,6 @@ import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:yaru/yaru.dart';
-
-const _kDialogWidth = 500.0;
 
 class AttachDialog extends StatelessWidget {
   const AttachDialog({super.key});
@@ -39,8 +38,9 @@ class _AttachDialogContent extends StatelessWidget {
       titlePadding: EdgeInsets.zero,
       contentPadding: EdgeInsets.zero,
       content: Container(
-        constraints: BoxConstraints(maxWidth: _kDialogWidth),
+        constraints: BoxConstraints(maxWidth: kDialogWidth),
         child: ScrollablePage(
+          padding: const EdgeInsets.all(kPageSectionGap),
           children: [
             YaruBorderContainer(
               child: Column(
@@ -97,8 +97,10 @@ class _MagicLinkDialog extends ConsumerWidget {
 
     return AlertDialog(
       title: YaruDialogTitleBar(
+        titleSpacing: 0,
         title: Row(
           children: [
+            const SizedBox(width: 12),
             Visibility(
               maintainSize: true,
               maintainAnimation: true,
@@ -139,8 +141,9 @@ class _MagicLinkDialog extends ConsumerWidget {
             : null,
       ),
       content: Container(
-        constraints: const BoxConstraints(maxWidth: _kDialogWidth),
+        constraints: const BoxConstraints(maxWidth: kDialogWidth),
         child: ScrollablePage(
+          padding: const EdgeInsets.all(kPageSectionGap),
           children: [
             Text(l10n.ubuntuProMagicPrompt),
             Column(
@@ -168,7 +171,7 @@ class _MagicLinkDialog extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Visibility(
                       visible: magicAttachProvider.whenOrNull(
                             data: (data) => data.validContract,
@@ -205,7 +208,7 @@ class _MagicLinkDialog extends ConsumerWidget {
                   magicAttachProvider.asData!.value.response.userCode.bold(),
                 ),
               ),
-          ].separatedBy(const SizedBox(height: 16)),
+          ].separatedBy(const SizedBox(height: kPageSubsectionGap)),
         ),
       ),
     );
@@ -235,8 +238,10 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
 
     return AlertDialog(
       title: YaruDialogTitleBar(
+        titleSpacing: 0,
         title: Row(
           children: [
+            const SizedBox(width: 12),
             Visibility(
               maintainSize: true,
               maintainAnimation: true,
@@ -270,9 +275,10 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
               : Text(l10n.ubuntuProEnable),
         ),
       ],
-      content: SizedBox(
-        width: _kDialogWidth,
+      content: Container(
+        constraints: const BoxConstraints(maxWidth: kDialogWidth),
         child: ScrollablePage(
+          padding: const EdgeInsets.all(kPageSectionGap),
           children: [
             MarkdownText(
               l10n.ubuntuProTokenPrompt(
@@ -291,7 +297,7 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
                   .read(ubuntuProAttachModelProvider.notifier)
                   .setToken(value),
             ),
-          ].separatedBy(const SizedBox(height: 24)),
+          ].separatedBy(const SizedBox(height: kPageSubsectionGap)),
         ),
       ),
     );

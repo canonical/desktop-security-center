@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/constants.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/ubuntu_pro/fips_dialog.dart';
@@ -103,7 +104,7 @@ class ComplianceHardeningPage extends ConsumerWidget {
           l10n.ubuntuProComplianceDocumentation
               .link('https://ubuntu.com/security/certifications/docs'),
         ),
-      ].separatedBy(const SizedBox(height: 24)),
+      ].separatedBy(const SizedBox(height: kPageSectionGap)),
     );
   }
 }

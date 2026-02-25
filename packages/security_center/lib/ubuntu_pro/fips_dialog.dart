@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/constants.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
@@ -45,8 +46,9 @@ class FIPSDialog extends ConsumerWidget {
         ),
       ],
       content: Container(
-        constraints: BoxConstraints(maxWidth: 500),
+        constraints: BoxConstraints(maxWidth: kDialogWidth),
         child: ScrollablePage(
+          padding: const EdgeInsets.all(kPageSectionGap),
           children: [
             YaruInfoBox(
               yaruInfoType: YaruInfoType.warning,
@@ -64,9 +66,9 @@ class FIPSDialog extends ConsumerWidget {
                       ?.copyWith(fontWeight: FontWeight.w500),
                 ),
                 const _FIPSOptions(),
-              ].separatedBy(const SizedBox(height: 12)),
+              ].separatedBy(const SizedBox(height: kPageSubsectionGap)),
             ),
-          ].separatedBy(const SizedBox(height: 16)),
+          ].separatedBy(const SizedBox(height: kPageSectionGap)),
         ),
       ),
     );

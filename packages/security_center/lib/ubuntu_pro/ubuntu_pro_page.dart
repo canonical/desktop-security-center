@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:security_center/constants.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/feature_service.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
@@ -59,12 +60,12 @@ class UbuntuProPage extends ConsumerWidget {
                   alignment: WrapAlignment.center,
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: kPageSectionGap),
               YaruBorderContainer(
                 padding: EdgeInsetsGeometry.symmetric(vertical: 8),
                 child: Center(
                   child: ListTile(
-                    leading: const Icon(YaruIcons.edit_clear, size: 24),
+                    leading: const Icon(YaruIcons.edit_clear, size: kIconSize),
                     title: Text(l10n.ubuntuProNotSupportedSnapd),
                     subtitle: Text(l10n.ubuntuProNotSupportedSnapdDetails),
                   ),
@@ -72,7 +73,7 @@ class UbuntuProPage extends ConsumerWidget {
               ),
             ],
           ),
-      ].separatedBy(const SizedBox(height: 24)),
+      ].separatedBy(const SizedBox(height: kPageSectionGap)),
     );
   }
 }
@@ -86,6 +87,7 @@ class _UbuntuProBody extends ConsumerWidget {
     final provider = ref.watch(ubuntuProStatusProvider);
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const _UbuntuProAvailability(),
         if (provider.whenOrNull(data: (data) => data.available) ?? false) ...[
@@ -120,7 +122,7 @@ class _UbuntuProBody extends ConsumerWidget {
               child: Text(l10n.ubuntuProDisablePro),
             ),
         ],
-      ].separatedBy(const SizedBox(height: 24)),
+      ].separatedBy(const SizedBox(height: kPageSectionGap)),
     );
   }
 }
@@ -151,7 +153,7 @@ class _UbuntuProAvailability extends ConsumerWidget {
                 padding: EdgeInsetsGeometry.symmetric(vertical: 8),
                 child: Center(
                   child: ListTile(
-                    leading: const Icon(YaruIcons.edit_clear, size: 24),
+                    leading: const Icon(YaruIcons.edit_clear, size: kIconSize),
                     title: Text(l10n.ubuntuProNotSupported),
                     subtitle: Text(l10n.ubuntuProNotSupportedDetails),
                   ),
@@ -173,11 +175,11 @@ class _UbuntuProStatus extends ConsumerWidget {
     return provider.whenOrNull(data: (data) => data.attached) ?? false
         ? Column(
             children: [
-              const SizedBox(height: 24),
+              const SizedBox(height: kPageSectionGap),
               TileList(
                 children: [
                   SecurityCenterListTile(
-                    leading: const Icon(YaruIcons.checkmark, size: 24),
+                    leading: const Icon(YaruIcons.checkmark, size: kIconSize),
                     title: l10n.ubuntuProEnabled,
                   ),
                 ],
@@ -192,7 +194,7 @@ class _UbuntuProStatus extends ConsumerWidget {
                 ),
                 alignment: WrapAlignment.center,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: kPageSectionGap),
               ElevatedButton(
                 onPressed: () => showDialog(
                   context: context,
@@ -200,7 +202,7 @@ class _UbuntuProStatus extends ConsumerWidget {
                 ),
                 child: Text(l10n.ubuntuProEnablePro),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: kPageSectionGap),
             ],
           );
   }
@@ -319,7 +321,7 @@ class _ESMSection extends ConsumerWidget {
             ),
           ],
         ),
-      ].separatedBy(const SizedBox(height: 12)),
+      ].separatedBy(const SizedBox(height: kPageSubsectionGap)),
     );
   }
 }
@@ -401,7 +403,7 @@ class _LivepatchSection extends ConsumerWidget {
             ),
           ],
         ),
-      ].separatedBy(const SizedBox(height: 12)),
+      ].separatedBy(const SizedBox(height: kPageSubsectionGap)),
     );
   }
 }
