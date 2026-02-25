@@ -6,10 +6,13 @@ import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/services/ubuntu_pro_service.dart';
+import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 part 'ubuntu_pro_providers.g.dart';
 part 'ubuntu_pro_providers.freezed.dart';
+
+final _log = Logger('ubuntu_pro_providers');
 
 @freezed
 sealed class UbuntuProAttachState with _$UbuntuProAttachState {
@@ -47,7 +50,8 @@ class UbuntuProAttachModel extends _$UbuntuProAttachModel {
       state = state.copyWith(state: UbuntuProAttachState.loading());
       await _service.attach(state.token);
       state = state.copyWith(state: UbuntuProAttachState.success());
-    } on DBusMethodResponseException {
+    } on DBusMethodResponseException catch (error) {
+      _log.error('Unable to attach Pro', error);
       state = state.copyWith(state: UbuntuProAttachState.error());
     }
   }
@@ -57,7 +61,8 @@ class UbuntuProAttachModel extends _$UbuntuProAttachModel {
       state = state.copyWith(state: UbuntuProAttachState.loading());
       await _service.detach();
       state = state.copyWith(state: UbuntuProAttachState.success());
-    } on DBusMethodResponseException {
+    } on DBusMethodResponseException catch (error) {
+      _log.error('Unable to detach Pro', error);
       state = state.copyWith(state: UbuntuProAttachState.error());
     }
   }
@@ -183,7 +188,8 @@ class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
     state = state.copyWith(state: UbuntuProFeatureState.loading());
     try {
       await _service.enableFeature(featureType);
-    } on DBusMethodResponseException {
+    } on DBusMethodResponseException catch (error) {
+      _log.error('Unable to enable $featureType', error);
       state = state.copyWith(state: UbuntuProFeatureState.error());
     }
   }
@@ -194,7 +200,8 @@ class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
     state = state.copyWith(state: UbuntuProFeatureState.loading());
     try {
       await _service.disableFeature(featureType);
-    } on DBusMethodResponseException {
+    } on DBusMethodResponseException catch (error) {
+      _log.error('Unable to disable $featureType', error);
       state = state.copyWith(state: UbuntuProFeatureState.error());
     }
   }
@@ -310,7 +317,8 @@ class MagicAttachModel extends _$MagicAttachModel {
       state = AsyncData(
         state.value!.copyWith(state: UbuntuProAttachState.success()),
       );
-    } on DBusMethodResponseException {
+    } on DBusMethodResponseException catch (error) {
+      _log.error('Unable to attach Pro via magic link', error);
       state = AsyncData(
         state.value!.copyWith(state: UbuntuProAttachState.error()),
       );
