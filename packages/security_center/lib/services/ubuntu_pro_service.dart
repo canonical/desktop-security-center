@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dbus/dbus.dart';
+import 'package:file/file.dart';
+import 'package:file/local.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gsettings/gsettings.dart';
 import 'package:http/http.dart' as http;
@@ -40,16 +42,20 @@ class MagicAttachService {
     String defaultEtcPath = '/etc/ubuntu-advantage',
     String defaultConfigFile = 'uaclient.conf',
     String v1MagicAttach = '/v1/magic-attach',
+    @visibleForTesting FileSystem? fs,
   })  : _defaultEtcPath = defaultEtcPath,
         _defaultConfigFile = defaultConfigFile,
-        _v1MagicAttach = v1MagicAttach;
+        _v1MagicAttach = v1MagicAttach,
+        _fs = fs ?? LocalFileSystem();
 
+  final FileSystem _fs;
   final String _defaultEtcPath;
   final String _defaultConfigFile;
   final String _v1MagicAttach;
 
   late final String _apiBase = _getAPIBase();
 
+  /// Generate a new token and user code for the user to magic attach Pro.
   Future<MagicAttachResponse> newToken() async {
     final uri = Uri.parse(_apiBase).replace(path: _v1MagicAttach);
     final response = await http.post(uri);
@@ -64,6 +70,7 @@ class MagicAttachService {
     return MagicAttachResponse.fromJson(jsonBody as Map<String, dynamic>);
   }
 
+  /// Query for a potential contract from a previously generated token.
   Future<MagicAttachResponse> getContractToken(String token) async {
     final uri = Uri.parse(_apiBase).replace(path: _v1MagicAttach);
     final response =
@@ -80,7 +87,7 @@ class MagicAttachService {
   }
 
   String _getAPIBase() {
-    final configFile = File(_getConfigPath()).readAsLinesSync();
+    final configFile = _fs.file(_getConfigPath()).readAsLinesSync();
     for (final line in configFile) {
       if (line.trim().startsWith('contract_url: ')) {
         final contractURL = line.replaceFirst('contract_url:', '').trim();

@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:dbus/dbus.dart';
 import 'package:file/memory.dart';
@@ -11,6 +13,71 @@ import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'ubuntu_pro_utils.mocks.dart';
+
+Future<void> mockMagicAttachServer({
+  required String token,
+  String? contractToken,
+  bool expireToken = false,
+}) async {
+  final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 8080);
+  addTearDown(server.close);
+
+  final listener = server.listen((request) async {
+    final method = request.method;
+    final path = request.uri.path;
+    final now = DateTime.now();
+
+    switch (method) {
+      case 'GET':
+        switch (path) {
+          case '/v1/magic-attach':
+            if (expireToken) {
+              request.response.statusCode = 401;
+            } else {
+              request.response.write(
+                jsonEncode(
+                  MagicAttachResponse(
+                    expires: now.copyWith(minute: now.minute + 10),
+                    expiresIn: 10,
+                    token: token,
+                    userCode: 'abc',
+                    contractID: 'def',
+                    contractToken: contractToken,
+                  ).toJson(),
+                ),
+              );
+            }
+            await request.response.close();
+            break;
+          default:
+            throw Exception('Unhandled HTTP request path');
+        }
+        break;
+      case 'POST':
+        switch (path) {
+          case '/v1/magic-attach':
+            request.response.write(
+              jsonEncode(
+                MagicAttachResponse(
+                  expires: now.copyWith(minute: now.minute + 10),
+                  expiresIn: 10,
+                  token: token,
+                  userCode: 'abc',
+                ).toJson(),
+              ),
+            );
+            await request.response.close();
+            break;
+          default:
+            throw Exception('Unhandled HTTP request path');
+        }
+        break;
+      default:
+        throw Exception('Unhandled HTTP method');
+    }
+  });
+  addTearDown(listener.cancel);
+}
 
 @GenerateMocks([GSettingsIconService])
 GSettingsIconService registerMockGSettingsIconService() {
@@ -142,9 +209,11 @@ UbuntuProFeatureService registerMockUbuntuProFeatureService({
   return service;
 }
 
-MemoryFileSystem mockOSRelease({
+/// Create relevant files that are usually needed to manage Ubuntu Pro.
+MemoryFileSystem mockProFilesystem({
   required String osRelease,
   required String ubuntuCsv,
+  String? uaclientConf,
 }) {
   final mockFs = MemoryFileSystem.test();
   mockFs.file('/var/lib/snapd/hostfs/etc/os-release')
@@ -153,9 +222,16 @@ MemoryFileSystem mockOSRelease({
   mockFs.file('/etc/os-release')
     ..createSync(recursive: true)
     ..writeAsStringSync(osRelease);
+
   mockFs.file('/usr/share/distro-info/ubuntu.csv')
     ..createSync(recursive: true)
     ..writeAsStringSync(ubuntuCsv);
+
+  if (uaclientConf != null) {
+    mockFs.file('/etc/ubuntu-advantage/uaclient.conf')
+      ..createSync(recursive: true)
+      ..writeAsStringSync(uaclientConf);
+  }
 
   return mockFs;
 }
@@ -433,6 +509,11 @@ version,codename,series,created,release,eol,eol-server,eol-esm
 25.04,Plucky Puffin,plucky,2024-10-10,2025-04-17,2026-01-15
 25.10,Questing Quokka,questing,2025-04-17,2025-10-09,2026-07-09
 26.04 LTS,Resolute Raccoon,resolute,2025-10-09,2026-04-23,2031-05-29,2031-05-29,2036-04-23
+''';
+
+const mockUaclientConf = '''
+contract_url: http://localhost:8080
+log_level: debug
 ''';
 
 Map<DBusObjectPath, Map<String, Map<String, DBusValue>>> attachedManagedObjects(
