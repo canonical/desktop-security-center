@@ -252,8 +252,8 @@
     "ubuntuProLearnMore": "Learn about Ubuntu Pro",
     "ubuntuProEnablePro": "Enable Ubuntu Pro",
     "ubuntuProEnableMagic": "Enable with Ubuntu One account",
-    "ubuntuProEnableMagicSubtitle": "You will be able to register a new account",
-    "ubuntuProMagicPrompt": "Use your existing free personal or company Ubuntu One account, or register a new account.",
+    "ubuntuProEnableMagicSubtitle": "You will be able to create an account for free",
+    "ubuntuProMagicPrompt": "Log in with your Ubuntu One account, or create one for free.",
     "ubuntuProMagicContinueInBrowser": "Continue in browser",
     "ubuntuProMagicDescription": "You can also log in at {attachLink} and enter the code {attachCode}",
     "@ubuntuProMagicDescription": {
