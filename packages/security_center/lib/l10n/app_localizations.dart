@@ -1145,13 +1145,13 @@ abstract class AppLocalizations {
   /// No description provided for @ubuntuProEnableMagicSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'You will be able to register a new account'**
+  /// **'You will be able to create an account for free'**
   String get ubuntuProEnableMagicSubtitle;
 
   /// No description provided for @ubuntuProMagicPrompt.
   ///
   /// In en, this message translates to:
-  /// **'Use your existing free personal or company Ubuntu One account, or register a new account.'**
+  /// **'Log in with your Ubuntu One account, or create one for free.'**
   String get ubuntuProMagicPrompt;
 
   /// No description provided for @ubuntuProMagicContinueInBrowser.
