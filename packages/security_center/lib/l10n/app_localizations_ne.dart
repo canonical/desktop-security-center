@@ -508,4 +508,190 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+
+  @override
+  String get ubuntuProPageTitle => 'Ubuntu Pro';
+
+  @override
+  String get ubuntuProNotSupported =>
+      'Ubuntu Pro is not available for this Ubuntu version';
+
+  @override
+  String get ubuntuProNotSupportedDetails =>
+      'Ubuntu Pro requires an LTS release';
+
+  @override
+  String get ubuntuProNotSupportedSnapd =>
+      'Ubuntu Pro is not supported by this snapd version';
+
+  @override
+  String get ubuntuProNotSupportedSnapdDetails =>
+      'Update snapd to manage Ubuntu Pro';
+
+  @override
+  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+
+  @override
+  String ubuntuProDisabled(String learnMoreLink) {
+    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+  }
+
+  @override
+  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+
+  @override
+  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+
+  @override
+  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+
+  @override
+  String get ubuntuProEnableMagicSubtitle =>
+      'You will be able to create an account for free';
+
+  @override
+  String get ubuntuProMagicPrompt =>
+      'Log in with your Ubuntu One account, or create one for free.';
+
+  @override
+  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+
+  @override
+  String ubuntuProMagicDescription(String attachLink, String attachCode) {
+    return 'You can also log in at $attachLink and enter the code $attachCode';
+  }
+
+  @override
+  String get ubuntuProMagicError =>
+      'Unable to enable Ubuntu Pro, please try again';
+
+  @override
+  String get ubuntuProEnableToken => 'Enable with a token';
+
+  @override
+  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+
+  @override
+  String ubuntuProEnableTokenSubtitle(String proLink) {
+    return 'From your IT admin or from $proLink';
+  }
+
+  @override
+  String ubuntuProTokenPrompt(String proLink) {
+    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+  }
+
+  @override
+  String get ubuntuProTokenLabel => 'Token';
+
+  @override
+  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+
+  @override
+  String get ubuntuProDisable => 'Disable';
+
+  @override
+  String get ubuntuProDisablePrompt =>
+      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+
+  @override
+  String get ubuntuProEnable => 'Enable';
+
+  @override
+  String get ubuntuProCancel => 'Cancel';
+
+  @override
+  String get ubuntuProFeatureEnableError =>
+      'Could not enable the feature, please try again.';
+
+  @override
+  String get ubuntuProFeatureDisableError =>
+      'Could not disable the feature, please try again.';
+
+  @override
+  String get ubuntuProCompliance => 'Compliance and hardening';
+
+  @override
+  String get ubuntuProComplianceDisclaimer =>
+      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+
+  @override
+  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+
+  @override
+  String get ubuntuProComplianceUSGDescription =>
+      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+
+  @override
+  String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
+
+  @override
+  String get ubuntuProComplianceFIPSDescription =>
+      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+
+  @override
+  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+
+  @override
+  String get ubuntuProComplianceFIPSDisclaimer =>
+      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+
+  @override
+  String get ubuntuProComplianceFIPSPrompt =>
+      'Choose your preferred FIPS option';
+
+  @override
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+
+  @override
+  String get ubuntuProComplianceFIPSUpdatesDescription =>
+      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+
+  @override
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+
+  @override
+  String get ubuntuProComplianceFIPSNoUpdatesDescription =>
+      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+
+  @override
+  String get ubuntuProComplianceDocumentation =>
+      'Security compliance documentation';
+
+  @override
+  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+
+  @override
+  String get ubuntuProESMDescription =>
+      'ESM provides 10 years of security patches for 25,000+ open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.';
+
+  @override
+  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+
+  @override
+  String ubuntuProESMMainDescription(int year) {
+    return 'Security updates for 2,300 Ubuntu Main package until $year';
+  }
+
+  @override
+  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+
+  @override
+  String ubuntuProESMUniverseDescription(int year) {
+    return 'Additional security updates for over 23,000 Ubuntu Universe packages until $year';
+  }
+
+  @override
+  String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
+
+  @override
+  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+
+  @override
+  String get ubuntuProLivepatchEnableDescription =>
+      'Apply kernel security updates while the system runs';
+
+  @override
+  String get ubuntuProLivepatchShowTitle =>
+      'Show Livepatch status in the top bar';
 }

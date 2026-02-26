@@ -47,6 +47,12 @@ class FeatureService {
     return _hasGreaterSnapdVersion(snapdVersion, '2.75');
   }
 
+  bool get supportsProControl {
+    if (isDryRun) return true;
+
+    return _hasGreaterSnapdVersion(snapdVersion, '2.74.1');
+  }
+
   bool _hasStorageEncryptedManaged() {
     final result = _runProcess('snapctl', ['system-mode']);
     if (result.exitCode != 0) {

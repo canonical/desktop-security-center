@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:csv/csv.dart';
 import 'package:dbus/dbus.dart';
 import 'package:file/file.dart';
@@ -11,11 +12,8 @@ import 'package:snapd/snapd.dart';
 part 'ubuntu_pro_dbus_service.freezed.dart';
 
 enum UbuntuProFeatureType {
-  anboxCloud,
   fips,
   fipsUpdates,
-  realtimeKernel,
-  landscape,
   esmInfra,
   esmApps,
   livepatch,
@@ -50,7 +48,7 @@ class UbuntuProFeatureDetails with _$UbuntuProFeatureDetails {
 class UbuntuProFeature with _$UbuntuProFeature {
   factory UbuntuProFeature({
     required DBusRemoteObject object,
-    required UbuntuProFeatureType type,
+    required UbuntuProFeatureType? type,
     required String path,
     required String name,
     required bool entitled,
@@ -71,7 +69,7 @@ class UbuntuProFeature with _$UbuntuProFeature {
       entitled: dbusMap['Entitled']!.asString() == 'yes',
       status: dbusMap['Status']!.asString(),
       type: UbuntuProFeatureType.values
-          .firstWhere((f) => f.name.toKebabCase() == name),
+          .firstWhereOrNull((f) => f.name.toKebabCase() == name),
     );
   }
 
@@ -193,7 +191,9 @@ class UbuntuProFeatureService {
     if (signal.changedProperties['Status'] == null) return;
 
     final feature = _featureMap.entries
-        .firstWhere((f) => f.value.data.path == signal.path.value);
+        .firstWhereOrNull((f) => f.value.data.path == signal.path.value);
+    if (feature == null) return;
+
     _featureMap.update(
       feature.key,
       (v) => v.copyWith(
@@ -230,7 +230,9 @@ class UbuntuProFeatureService {
     }
 
     final feature = _featureMap.entries
-        .firstWhere((f) => f.value.data.path == signal.changedPath.value);
+        .firstWhereOrNull((f) => f.value.data.path == signal.changedPath.value);
+    if (feature == null) return;
+
     await _removeFeature(feature.key);
   }
 
@@ -244,8 +246,11 @@ class UbuntuProFeatureService {
       dbusMap,
       _objectFactory!(path),
     );
+
+    if (featureObj.type == null) return;
+
     _featureMap.update(
-      featureObj.type,
+      featureObj.type!,
       (details) => details.copyWith(data: featureObj),
       ifAbsent: () => UbuntuProFeatureDetails(
         data: featureObj,
@@ -253,7 +258,7 @@ class UbuntuProFeatureService {
             featureObj.object.propertiesChanged.listen(_onPropertiesChanged),
       ),
     );
-    _stream.add(featureObj.type);
+    _stream.add(featureObj.type!);
   }
 
   /// Remove a feature from being tracked internally.

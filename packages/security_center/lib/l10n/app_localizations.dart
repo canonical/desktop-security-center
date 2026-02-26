@@ -1081,6 +1081,312 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong'**
   String get recoveryKeySomethingWentWrongHeader;
+
+  /// No description provided for @ubuntuProPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Pro'**
+  String get ubuntuProPageTitle;
+
+  /// No description provided for @ubuntuProNotSupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Pro is not available for this Ubuntu version'**
+  String get ubuntuProNotSupported;
+
+  /// No description provided for @ubuntuProNotSupportedDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Pro requires an LTS release'**
+  String get ubuntuProNotSupportedDetails;
+
+  /// No description provided for @ubuntuProNotSupportedSnapd.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Pro is not supported by this snapd version'**
+  String get ubuntuProNotSupportedSnapd;
+
+  /// No description provided for @ubuntuProNotSupportedSnapdDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Update snapd to manage Ubuntu Pro'**
+  String get ubuntuProNotSupportedSnapdDetails;
+
+  /// No description provided for @ubuntuProEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Pro is enabled'**
+  String get ubuntuProEnabled;
+
+  /// No description provided for @ubuntuProDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Enterprise-grade security and compliance for your computer. Always free for personal use. {learnMoreLink}'**
+  String ubuntuProDisabled(String learnMoreLink);
+
+  /// No description provided for @ubuntuProLearnMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn about Ubuntu Pro'**
+  String get ubuntuProLearnMore;
+
+  /// No description provided for @ubuntuProEnablePro.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Ubuntu Pro'**
+  String get ubuntuProEnablePro;
+
+  /// No description provided for @ubuntuProEnableMagic.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable with Ubuntu One account'**
+  String get ubuntuProEnableMagic;
+
+  /// No description provided for @ubuntuProEnableMagicSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You will be able to create an account for free'**
+  String get ubuntuProEnableMagicSubtitle;
+
+  /// No description provided for @ubuntuProMagicPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Log in with your Ubuntu One account, or create one for free.'**
+  String get ubuntuProMagicPrompt;
+
+  /// No description provided for @ubuntuProMagicContinueInBrowser.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue in browser'**
+  String get ubuntuProMagicContinueInBrowser;
+
+  /// No description provided for @ubuntuProMagicDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You can also log in at {attachLink} and enter the code {attachCode}'**
+  String ubuntuProMagicDescription(String attachLink, String attachCode);
+
+  /// No description provided for @ubuntuProMagicError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to enable Ubuntu Pro, please try again'**
+  String get ubuntuProMagicError;
+
+  /// No description provided for @ubuntuProEnableToken.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable with a token'**
+  String get ubuntuProEnableToken;
+
+  /// No description provided for @ubuntuProEnableTokenError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to enable Ubuntu Pro'**
+  String get ubuntuProEnableTokenError;
+
+  /// No description provided for @ubuntuProEnableTokenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'From your IT admin or from {proLink}'**
+  String ubuntuProEnableTokenSubtitle(String proLink);
+
+  /// No description provided for @ubuntuProTokenPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Get an Ubuntu Pro token from your administrator or from {proLink}'**
+  String ubuntuProTokenPrompt(String proLink);
+
+  /// No description provided for @ubuntuProTokenLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Token'**
+  String get ubuntuProTokenLabel;
+
+  /// No description provided for @ubuntuProDisablePro.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable Ubuntu Pro'**
+  String get ubuntuProDisablePro;
+
+  /// No description provided for @ubuntuProDisable.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable'**
+  String get ubuntuProDisable;
+
+  /// No description provided for @ubuntuProDisablePrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?'**
+  String get ubuntuProDisablePrompt;
+
+  /// No description provided for @ubuntuProEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable'**
+  String get ubuntuProEnable;
+
+  /// No description provided for @ubuntuProCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get ubuntuProCancel;
+
+  /// No description provided for @ubuntuProFeatureEnableError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not enable the feature, please try again.'**
+  String get ubuntuProFeatureEnableError;
+
+  /// No description provided for @ubuntuProFeatureDisableError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not disable the feature, please try again.'**
+  String get ubuntuProFeatureDisableError;
+
+  /// No description provided for @ubuntuProCompliance.
+  ///
+  /// In en, this message translates to:
+  /// **'Compliance and hardening'**
+  String get ubuntuProCompliance;
+
+  /// No description provided for @ubuntuProComplianceDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.'**
+  String get ubuntuProComplianceDisclaimer;
+
+  /// No description provided for @ubuntuProComplianceUSGTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ubuntu Security Guide (USG)'**
+  String get ubuntuProComplianceUSGTitle;
+
+  /// No description provided for @ubuntuProComplianceUSGDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.'**
+  String get ubuntuProComplianceUSGDescription;
+
+  /// No description provided for @ubuntuProComplianceFIPSTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'FIPS 140-2'**
+  String get ubuntuProComplianceFIPSTitle;
+
+  /// No description provided for @ubuntuProComplianceFIPSDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.'**
+  String get ubuntuProComplianceFIPSDescription;
+
+  /// No description provided for @ubuntuProComplianceFIPSEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable FIPS'**
+  String get ubuntuProComplianceFIPSEnable;
+
+  /// No description provided for @ubuntuProComplianceFIPSDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.'**
+  String get ubuntuProComplianceFIPSDisclaimer;
+
+  /// No description provided for @ubuntuProComplianceFIPSPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your preferred FIPS option'**
+  String get ubuntuProComplianceFIPSPrompt;
+
+  /// No description provided for @ubuntuProComplianceFIPSUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'FIPS with updates'**
+  String get ubuntuProComplianceFIPSUpdates;
+
+  /// No description provided for @ubuntuProComplianceFIPSUpdatesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Installs FIPS 140-2 validated packages and allows for regular security updates.'**
+  String get ubuntuProComplianceFIPSUpdatesDescription;
+
+  /// No description provided for @ubuntuProComplianceFIPSNoUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'FIPS without updates'**
+  String get ubuntuProComplianceFIPSNoUpdates;
+
+  /// No description provided for @ubuntuProComplianceFIPSNoUpdatesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.'**
+  String get ubuntuProComplianceFIPSNoUpdatesDescription;
+
+  /// No description provided for @ubuntuProComplianceDocumentation.
+  ///
+  /// In en, this message translates to:
+  /// **'Security compliance documentation'**
+  String get ubuntuProComplianceDocumentation;
+
+  /// No description provided for @ubuntuProESMTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Expanded Security Maintenance (ESM)'**
+  String get ubuntuProESMTitle;
+
+  /// No description provided for @ubuntuProESMDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'ESM provides 10 years of security patches for 25,000+ open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.'**
+  String get ubuntuProESMDescription;
+
+  /// No description provided for @ubuntuProESMMainTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Main packages (esm-infra)'**
+  String get ubuntuProESMMainTitle;
+
+  /// No description provided for @ubuntuProESMMainDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Security updates for 2,300 Ubuntu Main package until {year}'**
+  String ubuntuProESMMainDescription(int year);
+
+  /// No description provided for @ubuntuProESMUniverseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Universe packages (esm-apps)'**
+  String get ubuntuProESMUniverseTitle;
+
+  /// No description provided for @ubuntuProESMUniverseDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional security updates for over 23,000 Ubuntu Universe packages until {year}'**
+  String ubuntuProESMUniverseDescription(int year);
+
+  /// No description provided for @ubuntuProLivepatchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Kernel Livepatch'**
+  String get ubuntuProLivepatchTitle;
+
+  /// No description provided for @ubuntuProLivepatchEnableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Livepatch'**
+  String get ubuntuProLivepatchEnableTitle;
+
+  /// No description provided for @ubuntuProLivepatchEnableDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply kernel security updates while the system runs'**
+  String get ubuntuProLivepatchEnableDescription;
+
+  /// No description provided for @ubuntuProLivepatchShowTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Livepatch status in the top bar'**
+  String get ubuntuProLivepatchShowTitle;
 }
 
 class _AppLocalizationsDelegate

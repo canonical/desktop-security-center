@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:dbus/dbus.dart';
 import 'package:file/memory.dart';
@@ -6,13 +8,214 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
+import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:snapd/snapd.dart';
+import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'ubuntu_pro_utils.mocks.dart';
 
-MemoryFileSystem mockOSRelease({
+Future<HttpServer> mockMagicAttachServer({
+  required String token,
+  String? contractToken,
+  bool expireToken = false,
+}) async {
+  final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+  addTearDown(server.close);
+
+  final listener = server.listen((request) async {
+    final method = request.method;
+    final path = request.uri.path;
+    final now = DateTime.now();
+
+    switch (method) {
+      case 'GET':
+        switch (path) {
+          case '/v1/magic-attach':
+            if (expireToken) {
+              request.response.statusCode = 401;
+            } else {
+              request.response.write(
+                jsonEncode(
+                  MagicAttachResponse(
+                    expires: now.copyWith(minute: now.minute + 10),
+                    expiresIn: 10,
+                    token: token,
+                    userCode: 'abc',
+                    contractID: 'def',
+                    contractToken: contractToken,
+                  ).toJson(),
+                ),
+              );
+            }
+            await request.response.close();
+            break;
+          default:
+            throw Exception('Unhandled HTTP request path');
+        }
+        break;
+      case 'POST':
+        switch (path) {
+          case '/v1/magic-attach':
+            request.response.write(
+              jsonEncode(
+                MagicAttachResponse(
+                  expires: now.copyWith(minute: now.minute + 10),
+                  expiresIn: 10,
+                  token: token,
+                  userCode: 'abc',
+                ).toJson(),
+              ),
+            );
+            await request.response.close();
+            break;
+          default:
+            throw Exception('Unhandled HTTP request path');
+        }
+        break;
+      default:
+        throw Exception('Unhandled HTTP method');
+    }
+  });
+  addTearDown(listener.cancel);
+
+  return server;
+}
+
+@GenerateMocks([GSettingsIconService])
+GSettingsIconService registerMockGSettingsIconService() {
+  final service = MockGSettingsIconService();
+  final stream = StreamController<List<String>>.broadcast();
+  var showIcon = false;
+
+  when(service.stream).thenAnswer((_) => stream.stream);
+  when(service.getStatusIcon()).thenAnswer((_) async {
+    return showIcon;
+  });
+  when(service.toggleStatusIcon(any)).thenAnswer((inv) async {
+    showIcon = inv.positionalArguments.first as bool;
+    stream.add(['show-livepatch-status-icon']);
+  });
+
+  registerMockService<GSettingsIconService>(service);
+  addTearDown(unregisterService<GSettingsIconService>);
+  addTearDown(stream.close);
+  return service;
+}
+
+@GenerateMocks([MagicAttachService])
+MagicAttachService registerMockMagicAttachService() {
+  final service = MockMagicAttachService();
+
+  when(service.newToken()).thenAnswer(
+    (_) async => MagicAttachResponse(
+      expires: DateTime.now(),
+      expiresIn: 0,
+      token: 'token',
+      userCode: 'userCode',
+    ),
+  );
+  when(service.getContractToken('token')).thenAnswer(
+    (_) async => MagicAttachResponse(
+      expires: DateTime.now(),
+      expiresIn: 0,
+      token: 'token',
+      userCode: 'userCode',
+      contractID: 'contractID',
+      contractToken: validToken,
+    ),
+  );
+
+  registerMockService<MagicAttachService>(service);
+  addTearDown(unregisterService<MagicAttachService>);
+  return service;
+}
+
+@GenerateMocks([UbuntuProManagerService])
+UbuntuProManagerService registerMockUbuntuProManagerService({
+  bool attached = true,
+  bool available = true,
+}) {
+  final service = MockUbuntuProManagerService();
+  final stream = StreamController<UbuntuProManagerData>.broadcast();
+  final data = UbuntuProManagerData(
+    attached: attached,
+    available: available,
+    eolDate: DateTime.now(),
+  );
+
+  when(service.data).thenReturn(data);
+  when(service.stream).thenAnswer((_) => stream.stream);
+  when(service.detach()).thenAnswer((_) async {
+    stream.add(
+      data.copyWith(attached: false),
+    );
+  });
+  when(service.attach(validToken)).thenAnswer((_) async {
+    stream.add(
+      data.copyWith(attached: true),
+    );
+  });
+  when(service.attach(invalidToken)).thenThrow(
+    DBusMethodResponseException(DBusMethodErrorResponse('Invalid token')),
+  );
+  stream.add(data);
+
+  registerMockService<UbuntuProManagerService>(service);
+  addTearDown(unregisterService<UbuntuProManagerService>);
+  addTearDown(stream.close);
+  return service;
+}
+
+@GenerateMocks([UbuntuProFeatureService])
+UbuntuProFeatureService registerMockUbuntuProFeatureService({
+  bool featuresEnabled = true,
+  bool featuresEntitled = true,
+}) {
+  final service = MockUbuntuProFeatureService();
+  final stream = StreamController<UbuntuProFeatureType>.broadcast();
+  final featureMap = <UbuntuProFeatureType, UbuntuProFeature>{};
+
+  when(service.stream).thenAnswer((_) => stream.stream);
+
+  for (final featureType in UbuntuProFeatureType.values) {
+    final feature = UbuntuProFeature(
+      object: MockDBusRemoteObject(),
+      type: featureType,
+      path:
+          '/com/canonical/UbuntuAdvantage/Services/${featureType.toPathPart()}',
+      name: featureType.name.toKebabCase(),
+      entitled: featuresEntitled,
+      status: featuresEnabled ? 'enabled' : 'disabled',
+    );
+    featureMap.putIfAbsent(featureType, () => feature);
+
+    when(service.getFeature(featureType))
+        .thenAnswer((_) => featureMap[featureType]);
+    when(service.isEnabled(featureType))
+        .thenAnswer((_) => featureMap[featureType]!.enabled);
+    when(service.enableFeature(featureType)).thenAnswer((_) async {
+      featureMap[featureType] =
+          featureMap[featureType]!.copyWith(status: 'enabled');
+      stream.add(featureType);
+    });
+    when(service.disableFeature(featureType)).thenAnswer((_) async {
+      featureMap[featureType] =
+          featureMap[featureType]!.copyWith(status: 'disabled');
+      stream.add(featureType);
+    });
+  }
+
+  registerMockService<UbuntuProFeatureService>(service);
+  addTearDown(unregisterService<UbuntuProFeatureService>);
+  addTearDown(stream.close);
+  return service;
+}
+
+/// Create relevant files that are usually needed to manage Ubuntu Pro.
+MemoryFileSystem mockProFilesystem({
   required String osRelease,
   required String ubuntuCsv,
+  String? uaclientConf,
 }) {
   final mockFs = MemoryFileSystem.test();
   mockFs.file('/var/lib/snapd/hostfs/etc/os-release')
@@ -21,16 +224,23 @@ MemoryFileSystem mockOSRelease({
   mockFs.file('/etc/os-release')
     ..createSync(recursive: true)
     ..writeAsStringSync(osRelease);
+
   mockFs.file('/usr/share/distro-info/ubuntu.csv')
     ..createSync(recursive: true)
     ..writeAsStringSync(ubuntuCsv);
+
+  if (uaclientConf != null) {
+    mockFs.file('/etc/ubuntu-advantage/uaclient.conf')
+      ..createSync(recursive: true)
+      ..writeAsStringSync(uaclientConf);
+  }
 
   return mockFs;
 }
 
 @GenerateMocks([DBusRemoteObject])
 MockDBusRemoteObject mockFeatureObject({
-  UbuntuProFeatureType type = UbuntuProFeatureType.anboxCloud,
+  UbuntuProFeatureType type = UbuntuProFeatureType.esmApps,
   bool attached = false,
 }) {
   final object = MockDBusRemoteObject();
@@ -301,6 +511,11 @@ version,codename,series,created,release,eol,eol-server,eol-esm
 25.04,Plucky Puffin,plucky,2024-10-10,2025-04-17,2026-01-15
 25.10,Questing Quokka,questing,2025-04-17,2025-10-09,2026-07-09
 26.04 LTS,Resolute Raccoon,resolute,2025-10-09,2026-04-23,2031-05-29,2031-05-29,2036-04-23
+''';
+
+String mockUaclientConf(int port) => '''
+contract_url: http://localhost:$port
+log_level: debug
 ''';
 
 Map<DBusObjectPath, Map<String, Map<String, DBusValue>>> attachedManagedObjects(

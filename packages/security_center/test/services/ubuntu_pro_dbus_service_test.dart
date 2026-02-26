@@ -68,7 +68,7 @@ void main() {
 
     for (final testCase in testCases) {
       test(testCase.name, () async {
-        final mockFs = mockOSRelease(
+        final mockFs = mockProFilesystem(
           osRelease: testCase.osRelease,
           ubuntuCsv: ubuntuCsv,
         );

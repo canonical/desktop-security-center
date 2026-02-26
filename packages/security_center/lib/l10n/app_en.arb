@@ -200,7 +200,7 @@
     "recoveryKeyTPMExplanationLearnMore": "Learn more about hardware-backed encryption",
     "recoveryKeyPassphraseEnabled": "Encryption passphrase is enabled",
     "recoveryKeyPassphraseHeader": "Change passphrase",
-    "recoveryKeyPassphraseBody": "You need to enter your passphrase every time your computer starts.", 
+    "recoveryKeyPassphraseBody": "You need to enter your passphrase every time your computer starts.",
     "recoveryKeyPassphraseButton": "Change passphrase...",
     "recoveryKeyPassphraseCurrent": "Current passphrase",
     "recoveryKeyPassphraseNew": "New passphrase",
@@ -233,5 +233,102 @@
     "recoveryKeyPinEntropyBelowMin": "Weak PIN, make it longer or less predictable",
     "recoveryKeyPinEntropyBelowOptimal": "Fair PIN, make it longer or less predictable for better security",
     "recoveryKeyPinEntropyOptimal": "PIN is long enough",
-    "recoveryKeySomethingWentWrongHeader": "Something went wrong"
+    "recoveryKeySomethingWentWrongHeader": "Something went wrong",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro is not available for this Ubuntu version",
+
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro requires an LTS release",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro is not supported by this snapd version",
+    "ubuntuProNotSupportedSnapdDetails": "Update snapd to manage Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro is enabled",
+    "ubuntuProDisabled": "Enterprise-grade security and compliance for your computer. Always free for personal use. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Learn about Ubuntu Pro",
+    "ubuntuProEnablePro": "Enable Ubuntu Pro",
+    "ubuntuProEnableMagic": "Enable with Ubuntu One account",
+    "ubuntuProEnableMagicSubtitle": "You will be able to create an account for free",
+    "ubuntuProMagicPrompt": "Log in with your Ubuntu One account, or create one for free.",
+    "ubuntuProMagicContinueInBrowser": "Continue in browser",
+    "ubuntuProMagicDescription": "You can also log in at {attachLink} and enter the code {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Unable to enable Ubuntu Pro, please try again",
+    "ubuntuProEnableToken": "Enable with a token",
+    "ubuntuProEnableTokenError": "Unable to enable Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "From your IT admin or from {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Get an Ubuntu Pro token from your administrator or from {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Disable Ubuntu Pro",
+    "ubuntuProDisable": "Disable",
+    "ubuntuProDisablePrompt": "Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?",
+    "ubuntuProEnable": "Enable",
+    "ubuntuProCancel": "Cancel",
+    "ubuntuProFeatureEnableError": "Could not enable the feature, please try again.",
+    "ubuntuProFeatureDisableError": "Could not disable the feature, please try again.",
+    "ubuntuProCompliance": "Compliance and hardening",
+    "ubuntuProComplianceDisclaimer": "Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu Security Guide (USG)",
+    "ubuntuProComplianceUSGDescription": "Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.",
+    "ubuntuProComplianceFIPSEnable": "Enable FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.",
+    "ubuntuProComplianceFIPSPrompt": "Choose your preferred FIPS option",
+    "ubuntuProComplianceFIPSUpdates": "FIPS with updates",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Installs FIPS 140-2 validated packages and allows for regular security updates.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS without updates",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.",
+    "ubuntuProComplianceDocumentation": "Security compliance documentation",
+    "ubuntuProESMTitle": "Expanded Security Maintenance (ESM)",
+    "ubuntuProESMDescription": "ESM provides 10 years of security patches for 25,000+ open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.",
+    "ubuntuProESMMainTitle": "Main packages (esm-infra)",
+    "ubuntuProESMMainDescription": "Security updates for 2,300 Ubuntu Main package until {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Universe packages (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Additional security updates for over 23,000 Ubuntu Universe packages until {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Enable Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Apply kernel security updates while the system runs",
+    "ubuntuProLivepatchShowTitle": "Show Livepatch status in the top bar"
 }

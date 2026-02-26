@@ -96,76 +96,97 @@ factory: true
   group('Snapd version', () {
     for (final testCase in [
       (
-        name: 'snapd version < 2.75, no microphone interface',
+        name: 'snapd version < 2.74.1, no microphone or pro interfaces',
         snapdVersion: '2.74',
         isDryRun: false,
-        expectedResult: false,
+        wantMicrophone: false,
+        wantPro: false,
       ),
       (
-        name: 'snapd version == 2.75, microphone interface supported',
+        name: 'snapd version == 2.74.1, no microphone support, pro supported',
+        snapdVersion: '2.74.1',
+        isDryRun: false,
+        wantMicrophone: false,
+        wantPro: true,
+      ),
+      (
+        name: 'snapd version == 2.75, microphone and pro interface supported',
         snapdVersion: '2.75',
         isDryRun: false,
-        expectedResult: true,
+        wantMicrophone: true,
+        wantPro: true,
       ),
       (
-        name: 'snapd version > 2.75, microphone interface supported',
+        name: 'snapd version > 2.75, microphone and pro interface supported',
         snapdVersion: '2.76',
         isDryRun: false,
-        expectedResult: true,
+        wantMicrophone: true,
+        wantPro: true,
       ),
       (
-        name: 'snapd version with v prefix, microphone interface supported',
+        name:
+            'snapd version with v prefix, microphone and pro interface supported',
         snapdVersion: 'v2.75',
         isDryRun: false,
-        expectedResult: true,
+        wantMicrophone: true,
+        wantPro: true,
       ),
       (
-        name: 'snapd version with v prefix, no microphone interface supported',
+        name:
+            'snapd version with v prefix, no microphone or pro interface supported',
         snapdVersion: 'v2.74',
         isDryRun: false,
-        expectedResult: false,
+        wantMicrophone: false,
+        wantPro: false,
       ),
       (
         name: 'snapd version with dev hash suffix',
         snapdVersion: '2.75+g137.7313916',
         isDryRun: false,
-        expectedResult: true,
+        wantMicrophone: true,
+        wantPro: true,
       ),
       (
         name: 'snapd version 2.74.1',
         snapdVersion: '2.74.1',
         isDryRun: false,
-        expectedResult: false,
+        wantMicrophone: false,
+        wantPro: true,
       ),
       (
         name: 'snapd version 2.75.0',
         snapdVersion: '2.75.0',
         isDryRun: false,
-        expectedResult: true,
+        wantMicrophone: true,
+        wantPro: true,
       ),
       (
         name: 'snapd version 2.75.1',
         snapdVersion: '2.75.1',
         isDryRun: false,
-        expectedResult: true,
+        wantMicrophone: true,
+        wantPro: true,
       ),
       (
-        name: 'snapd version null, no microphone interface',
+        name: 'snapd version null, no microphone or pro interface',
         snapdVersion: null,
         isDryRun: false,
-        expectedResult: false,
+        wantMicrophone: false,
+        wantPro: false,
       ),
       (
         name: 'dry run mode always returns true',
         snapdVersion: '2.74',
         isDryRun: true,
-        expectedResult: true,
+        wantMicrophone: true,
+        wantPro: true,
       ),
       (
         name: 'dry run mode with null version returns true',
         snapdVersion: null,
         isDryRun: true,
-        expectedResult: true,
+        wantMicrophone: true,
+        wantPro: true,
       ),
     ]) {
       test(testCase.name, () {
@@ -176,7 +197,11 @@ factory: true
 
         expect(
           service.supportsMicrophone,
-          equals(testCase.expectedResult),
+          equals(testCase.wantMicrophone),
+        );
+        expect(
+          service.supportsProControl,
+          equals(testCase.wantPro),
         );
       });
     }

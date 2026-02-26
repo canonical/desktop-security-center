@@ -6,6 +6,7 @@ import 'package:security_center/app_permissions/snaps_page.dart';
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:security_center/ubuntu_pro/ubuntu_pro_page.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -25,6 +26,12 @@ enum Routes {
     builder: _diskEncryptionBuilder,
     title: _diskEncryptionTitle,
     icon: _diskEncryptionIcon,
+  ),
+  ubuntuPro(
+    route: '/ubuntu_pro',
+    builder: _ubuntuProBuilder,
+    title: _ubuntuProTitle,
+    icon: _ubuntuProIcon,
   );
 
   const Routes({
@@ -95,6 +102,22 @@ enum Routes {
   static IconData _diskEncryptionIcon(bool selected) =>
       selected ? YaruIcons.drive_harddisk_filled : YaruIcons.drive_harddisk;
 
+  // Ubuntu Pro
+  static Widget _ubuntuProBuilder(
+    BuildContext context, [
+    Map<String, String> queryParameters = const {},
+  ]) =>
+      const UbuntuProPage();
+
+  static String _ubuntuProTitle(
+    AppLocalizations l10n, [
+    Map<String, String> queryParameters = const {},
+  ]) =>
+      l10n.ubuntuProPageTitle;
+
+  static IconData _ubuntuProIcon(bool selected) =>
+      selected ? YaruIcons.ubuntu_logo_simple : YaruIcons.drive_harddisk;
+
   static (String route, Map<String, String> queryParameters) _parseName(
     String name,
   ) {
@@ -134,7 +157,7 @@ class AvailableRoutes {
   static List<Routes> get routes => _routes;
 
   static Future<void> init() async {
-    final routes = <Routes>[Routes.appPermissions];
+    final routes = <Routes>[Routes.ubuntuPro, Routes.appPermissions];
 
     // FIXME: this should live in the feature service
     // Only include disk encryption if status is not inactive
