@@ -29,16 +29,17 @@ void main() {
 
     for (final testCase in testCases) {
       test(testCase.name, () async {
-        final fs = mockProFilesystem(
-          osRelease: osReleaseLTS,
-          ubuntuCsv: ubuntuCsv,
-          uaclientConf: mockUaclientConf,
-        );
-        await mockMagicAttachServer(
+        final server = await mockMagicAttachServer(
           token: testCase.wantToken,
           contractToken: testCase.wantContractToken,
           expireToken: testCase.expireToken,
         );
+        final fs = mockProFilesystem(
+          osRelease: osReleaseLTS,
+          ubuntuCsv: ubuntuCsv,
+          uaclientConf: mockUaclientConf(server.port),
+        );
+
         final service = MagicAttachService(
           fs: fs,
         );

@@ -14,12 +14,12 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'ubuntu_pro_utils.mocks.dart';
 
-Future<void> mockMagicAttachServer({
+Future<HttpServer> mockMagicAttachServer({
   required String token,
   String? contractToken,
   bool expireToken = false,
 }) async {
-  final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 8080);
+  final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
   addTearDown(server.close);
 
   final listener = server.listen((request) async {
@@ -77,6 +77,8 @@ Future<void> mockMagicAttachServer({
     }
   });
   addTearDown(listener.cancel);
+
+  return server;
 }
 
 @GenerateMocks([GSettingsIconService])
@@ -511,8 +513,8 @@ version,codename,series,created,release,eol,eol-server,eol-esm
 26.04 LTS,Resolute Raccoon,resolute,2025-10-09,2026-04-23,2031-05-29,2031-05-29,2036-04-23
 ''';
 
-const mockUaclientConf = '''
-contract_url: http://localhost:8080
+String mockUaclientConf(int port) => '''
+contract_url: http://localhost:$port
 log_level: debug
 ''';
 
