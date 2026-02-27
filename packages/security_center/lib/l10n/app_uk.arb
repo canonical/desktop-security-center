@@ -169,5 +169,101 @@
     "diskEncryptionPageRemovingPin": "Видалення PIN-коду, це може тривати кілька секунд...",
     "diskEncryptionPageRemovingPassphrase": "Видалення парольної фрази, це може тривати кілька секунд...",
     "microphoneInterfacePageTitle": "Мікрофон",
-    "microphoneInterfacePageDescription": "Дозволити застосункам отримувати доступ до вашого мікрофону."
+    "microphoneInterfacePageDescription": "Дозволити застосункам отримувати доступ до вашого мікрофону.",
+    "ubuntuProEnabled": "Ubuntu Pro увімкнено",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro недоступний для цієї версії Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro вимагає випуску LTS",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro не підтримується цією версією snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Оновіть snapd для керування Ubuntu Pro",
+    "ubuntuProDisabled": "Безпека та відповідність корпоративного рівня для вашого комп'ютера. Завжди безкоштовно для особистого використання. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Дізнайтеся про Ubuntu Pro",
+    "ubuntuProEnablePro": "Увімкнути Ubuntu Pro",
+    "ubuntuProEnableMagic": "Увімкнути за допомогою облікового запису Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Ви зможете створити обліковий запис безкоштовно",
+    "ubuntuProMagicPrompt": "Увійдіть, використовуючи свій обліковий запис Ubuntu One, або створіть його безкоштовно.",
+    "ubuntuProMagicContinueInBrowser": "Продовжіть у браузері",
+    "ubuntuProMagicDescription": "Ви також можете увійти за адресою {attachLink} та ввести код {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Не вдалося ввімкнути Ubuntu Pro, спробуйте ще раз",
+    "ubuntuProEnableToken": "Увімкнути за допомогою токена",
+    "ubuntuProEnableTokenError": "Не вдається ввімкнути Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Від вашого ІТ-адміністратора або з {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Отримайте токен Ubuntu Pro у свого адміністратора або на сайті {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Токен",
+    "ubuntuProDisablePro": "Вимкнути Ubuntu Pro",
+    "ubuntuProDisable": "Вимкнути",
+    "ubuntuProDisablePrompt": "Вимкнення Ubuntu Pro від'єднає вашу підписку від цього комп’ютера. Продовжити?",
+    "ubuntuProEnable": "Увімкнути",
+    "ubuntuProCancel": "Скасувати",
+    "ubuntuProFeatureEnableError": "Не вдалося ввімкнути функцію, спробуйте ще раз.",
+    "ubuntuProFeatureDisableError": "Не вдалося вимкнути функцію, спробуйте ще раз.",
+    "ubuntuProCompliance": "Відповідність та посилення захисту",
+    "ubuntuProComplianceDisclaimer": "Рекомендовано лише для допомоги з FedRAMP, HIPAA та іншими вимогами щодо відповідності та посилення безпеки.",
+    "ubuntuProComplianceUSGTitle": "Посібник з безпеки Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Автоматизує посилення захисту та аудит за допомогою бенчмарків CIS та профілів DISA-STIG, водночас дозволяючи налаштування відповідно до середовища.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Сертифікація криптографічного модуля уряду США та Канади на відповідність стандарту захисту даних FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Увімкнути FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Увімкнення FIPS не можна скасувати, і Livepatch буде назавжди вимкнено.",
+    "ubuntuProComplianceFIPSPrompt": "Виберіть бажаний варіант FIPS",
+    "ubuntuProComplianceFIPSUpdates": "FIPS з оновленнями",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Встановлює перевірені пакети FIPS 140-2 та дозволяє регулярні оновлення безпеки.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS без оновлень",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Встановлює перевірені пакети FIPS 140-2. Вони не будуть оновлені до наступної пересертифікації.",
+    "ubuntuProComplianceDocumentation": "Документація щодо відповідності вимогам безпеки",
+    "ubuntuProESMTitle": "Розширене обслуговування безпеки (ESM)",
+    "ubuntuProESMDescription": "ESM надає 10 років виправлень безпеки для понад 25 000 пакетів з відкритим кодом. Отримайте безперервне керування вразливостями для критичних, високо- та середнього рівня CVE.",
+    "ubuntuProESMMainTitle": "Основні пакети (esm-infra)",
+    "ubuntuProESMMainDescription": "Оновлення безпеки для 2300 основних пакетів Ubuntu до {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Пакети Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Додаткові оновлення безпеки для понад 23 000 пакетів Ubuntu Universe до {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Livepatch для ядра",
+    "ubuntuProLivepatchEnableTitle": "Увімкнути Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Застосовуйте оновлення безпеки ядра під час роботи системи",
+    "ubuntuProLivepatchShowTitle": "Показати стан Livepatch у верхній панелі"
 }
