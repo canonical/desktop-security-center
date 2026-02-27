@@ -169,5 +169,39 @@
     "recoveryKeyPinEntropyOptimal": "Luzera egokiko PINa",
     "recoveryKeySomethingWentWrongHeader": "Zerbaitek huts egin du",
     "recoveryKeyPassphraseBody": "Pasaesaldia sartu beharko duzu ordenagailua abiarazten den bakoitzean.",
-    "recoveryKeyPinBody": "PINa sartu beharko duzu ordenagailua abiarazten den bakoitzean."
+    "recoveryKeyPinBody": "PINa sartu beharko duzu ordenagailua abiarazten den bakoitzean.",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro ez dago erabilgarri Ubunturen bertsio honentzat",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro-k LTS bertsio bat behar du",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro-k ez du sostengurik snapd bertsio honetan",
+    "ubuntuProNotSupportedSnapdDetails": "Eguneratu snapd Ubuntu Pro kudeatzeko",
+    "ubuntuProEnabled": "Ubuntu Pro gaituta dago",
+    "ubuntuProDisabled": "Enpresa mailako segurtasuna eta betetzea zure ordenagailurako. Doakoa betiko erabilera pertsonalerako. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Informazio gehiago Ubuntu Pro-ri buruz",
+    "ubuntuProEnablePro": "Gaitu Ubuntu Pro",
+    "ubuntuProEnableMagic": "Gaitu Ubuntu One kontuarekin",
+    "ubuntuProEnableMagicSubtitle": "Doako kontu bat sortu ahalko duzu",
+    "ubuntuProMagicPrompt": "Hasi saioa zure Ubuntu One kontuarekin, edo sortu bat dohainik.",
+    "ubuntuProMagicContinueInBrowser": "Jarraitu nabigatzailean",
+    "ubuntuProMagicDescription": "Saioa {attachLink} helbidean ere has dezakezu, eta bertan sartu {attachCode} kodea",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Ezin izan da Ubuntu Pro gaitu, saiatu berriz",
+    "ubuntuProEnableToken": "Gaitu token batekin",
+    "ubuntuProEnableTokenError": "Ezin izan da Ubuntu Pro gaitu"
 }
