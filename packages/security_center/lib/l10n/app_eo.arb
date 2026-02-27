@@ -169,5 +169,101 @@
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Se vi forgesos vian pasfrazon, vi povos reatingi la diskon per la restaŭra ŝlosilo.",
     "diskEncryptionPageAdditionalSecurityBody": "Vi povas starigi pasfrazon aŭ PIN por plia sekureco. Vi devos tajpi ĝin ĉiun fojon, kiam via komputilo startos.",
     "microphoneInterfacePageTitle": "Mikrofono",
-    "microphoneInterfacePageDescription": "Permesi al programoj atingi vian mikrofonon."
+    "microphoneInterfacePageDescription": "Permesi al programoj atingi vian mikrofonon.",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro ne estas disponebla por ĉi tiu versio de Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro postulas daŭre subtenatan version (LTS)",
+    "ubuntuProLearnMore": "Lernu pli pri Ubuntu Pro",
+    "ubuntuProEnablePro": "Ŝalti Ubuntu Pro",
+    "ubuntuProEnableMagic": "Ŝalti per konto Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "vi povos krei konton senkoste",
+    "ubuntuProTokenLabel": "Ĵetono",
+    "ubuntuProEnabled": "Ubuntu Pro estas ŝaltita",
+    "ubuntuProDisable": "Malŝalti",
+    "ubuntuProEnable": "Ŝalti",
+    "ubuntuProCancel": "Nuligi",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSEnable": "Ŝalti FIPS",
+    "ubuntuProESMMainTitle": "Ĉefaj pakoj (esm-infra)",
+    "ubuntuProESMUniverseTitle": "Universaj pakoj (esm-apps)",
+    "ubuntuProComplianceFIPSPrompt": "Elektu vian preferatan opcion pri FIPS",
+    "ubuntuProComplianceFIPSUpdates": "FIPS kun ĝisdatigoj",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS sen ĝisdatigoj",
+    "ubuntuProFeatureEnableError": "Malsukcesis ŝalti funkcion, bonvolu reprovi.",
+    "ubuntuProFeatureDisableError": "Malsukcesis malŝalti funkcion, bonvolu reprovi.",
+    "ubuntuProEnableToken": "Ŝalti per ĵetono",
+    "ubuntuProDisablePro": "Malŝalti Ubuntu Pro",
+    "ubuntuProESMMainDescription": "Sekurigaj ĝisdatigoj por 2300 ĉefaj pakoj de Ubuntu ĝis {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseDescription": "Pliaj sekurigaj ĝisdatigoj por pli ol 23 000 universaj pakoj de Ubuntu ĝis {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProEnableTokenError": "Malsukcesis ŝalti Ubuntu Pro",
+    "ubuntuProMagicError": "Malsukcesis ŝalti Ubuntu Pro, bonvolu reprovi",
+    "ubuntuProNotSupportedSnapd": "Ĉi tiu versio de snapd ne subtenas Ubuntu Pro",
+    "ubuntuProNotSupportedSnapdDetails": "Ĝisdatigu snapd por administri Ubuntu Pro",
+    "ubuntuProMagicPrompt": "Salutu per via konto Ubuntu One, aŭ kreu konton senkoste.",
+    "ubuntuProComplianceFIPSDisclaimer": "Ŝaltado de FIPS ne estas malfarebla; Livepatch estos porĉiame malŝaltita.",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Instali pakojn validajn por FIPS 140-2, kun regulaj ĝisdatigoj pri sekureco.",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Instali pakojn validajn por FIPS 140-2. Tiuj ne estos ĝisdatigitaj ĝis la sekva validecokontrolo.",
+    "ubuntuProLivepatchTitle": "Livepatch por kerno",
+    "ubuntuProLivepatchEnableTitle": "Ŝalti Livepatch",
+    "ubuntuProLivepatchShowTitle": "Montri staton de Livepatch en la supra breto",
+    "ubuntuProMagicContinueInBrowser": "Daŭri en TTT-legilo",
+    "ubuntuProMagicDescription": "Vi ankaŭ povas saluti ĉe {attachLink}, tajpante la kodon {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProComplianceDisclaimer": "Nur por helpi plenumi postulojn pri konformiĝo kaj malmoligo laŭ FedRAMP, HIPAA, kaj similaj normoj.",
+    "ubuntuProTokenPrompt": "Akiru ĵetonon por Ubuntu Pro el via administranto aŭ el {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProCompliance": "Konformiĝo kaj malmoligo",
+    "ubuntuProComplianceUSGTitle": "Gvidilo pri Sekureco de Ubuntu (USG)",
+    "ubuntuProEnableTokenSubtitle": "El via teĥnika administranto aŭ el {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProDisablePrompt": "Malŝaltante Ubuntu Pro, vi dekroĉos vian abonon de ĉi tiu komputilo. Ĉu daŭrigi?",
+    "ubuntuProESMTitle": "Etendita Sekureca Mastrumado (ESM)",
+    "ubuntuProESMDescription": "ESM provizas 10 jarojn da sekurigaj ĝisdatigoj por pli ol 25 000 malfermitkodaj pakoj. Ĝuu daŭran mastrumadon kontraŭ vundeblaĵoj de kriza, alta, kaj meza CVE-niveloj.",
+    "ubuntuProLivepatchEnableDescription": "Efektivigi kernajn sekurigajn ĝisdatigojn dum la sistemo ruliĝas",
+    "ubuntuProComplianceDocumentation": "Dokumentaro pri konformiĝo al sekurecaj normoj",
+    "ubuntuProDisabled": "Entrepreno-nivelaj sekureco kaj konformiĝo por via komputilo. Ĉiam senkosta por persona uzado. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProComplianceUSGDescription": "Aŭtomatigi malmoligon kaj ekzamenadon per testado CIS kaj profiloj DISA-STIG, permesante medio-specifajn adaptojn.",
+    "ubuntuProComplianceFIPSDescription": "Atestado de konformeco de ĉifraj moduloj al la datenprotekta normo FIPS 140-2 de la Usona kaj Kanada registaroj."
 }
