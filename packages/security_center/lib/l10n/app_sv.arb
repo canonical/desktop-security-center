@@ -169,5 +169,101 @@
     "diskEncryptionPageRemovingPin": "Tar bort PIN, detta kan ta ett par sekunder...",
     "diskEncryptionPageRemovingPassphrase": "Tar bort lösenfras, detta kan ta ett par sekunder...",
     "microphoneInterfacePageDescription": "Tillåt appar att komma åt din mikrofon.",
-    "microphoneInterfacePageTitle": "Mikrofon"
+    "microphoneInterfacePageTitle": "Mikrofon",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro är inte tillgängligt för den här versionen av Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro kräver en LTS-utgåva",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro stöds inte av den här versionen av snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Uppdatera snapd för att hantera Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro är aktiverat",
+    "ubuntuProDisabled": "Industrianpassad säkerhet och regelefterlevnad för din dator. Alltid gratis för privat bruk. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Läs mer om Ubuntu Pro",
+    "ubuntuProEnablePro": "Aktivera Ubuntu Pro",
+    "ubuntuProEnableMagic": "Aktivera med Ubuntu One-konto",
+    "ubuntuProEnableMagicSubtitle": "Du kommer att kunna skapa ett kostnadsfritt konto",
+    "ubuntuProMagicPrompt": "Logga in med ditt Ubuntu One-konto, eller skapa ett kostnadsfritt konto.",
+    "ubuntuProMagicContinueInBrowser": "Fortsätt i webbläsare",
+    "ubuntuProMagicDescription": "Du kan också logga in på {attachLink} och ange koden {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Kunde inte aktivera Ubuntu Pro, försök igen",
+    "ubuntuProEnableToken": "Aktivera med token",
+    "ubuntuProEnableTokenError": "Kunde inte aktivera Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Från din IT-administratör eller från {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Skaffa en Ubuntu Pro-token från din administratör eller från {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Avaktivera Ubuntu Pro",
+    "ubuntuProDisable": "Avaktivera",
+    "ubuntuProDisablePrompt": "Att avaktivera Ubuntu Pro kommer att koppla bort din prenumeration från den här datorn. Vill du fortsätta?",
+    "ubuntuProEnable": "Aktivera",
+    "ubuntuProCancel": "Avbryt",
+    "ubuntuProFeatureEnableError": "Kunde inte aktivera funktionen, försök igen.",
+    "ubuntuProFeatureDisableError": "Kunde inte avaktivera funktionen, försök igen.",
+    "ubuntuProCompliance": "Regelefterlevnad och ökat skydd",
+    "ubuntuProComplianceDisclaimer": "Rekommenderas endast för att bistå med FedRAMP, HIPAA, och andra efterlevnads- och skyddskrav.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu Säkerhetsguide (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatiserar ökat skydd och granskning med CIS benchmark och DISA-STIG-profiler medan miljöspecifika anpassningar tillåts.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "En statligt godkänd kryptografisk modulcertifiering från USA och Kanada för efterlevnad med dataskyddsstandarden FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Aktivera FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Att aktivera FIPS kan inte rullas tillbaka, och Livepatch kommer att avaktiveras permanent.",
+    "ubuntuProComplianceFIPSPrompt": "Välj ett lämpligt FIPS-alternativ",
+    "ubuntuProComplianceFIPSUpdates": "FIPS med uppdateringar",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Installerar FIPS 140-2-validerade paket, och tillåter regelbundna säkerhetsuppdateringar.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS utan uppdateringar",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Installerar FIPS 140-2-validerade paket. Dessa kommer inte att uppdateras förrän vid nästa omcertifiering.",
+    "ubuntuProComplianceDocumentation": "Dokumentation för säkerhetsefterlevnad",
+    "ubuntuProESMTitle": "Expanderat säkerhetsunderhåll (ESM)",
+    "ubuntuProESMDescription": "ESM ger 10 år av säkerhetsfixar för 25000+ öppna programpaket. Få kontinuerlig sårbarhetshantering för kritiska, höga och mellanhöga CVE-notiser.",
+    "ubuntuProESMMainTitle": "Main-paket (esm-infra)",
+    "ubuntuProESMMainDescription": "Säkerhetsuppdateringar för 2300 Ubuntu Main-paket fram till {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Universe-paket (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Ytterligare säkerhetsuppdateringar för över 23000 Ubuntu Universe-paket fram till {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Livepatch för kärnan",
+    "ubuntuProLivepatchEnableTitle": "Aktivera Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Tillämpa säkerhetsuppdateringar för kärnprogrammet medan systemet körs",
+    "ubuntuProLivepatchShowTitle": "Visa Livepatch-status i övre fältet"
 }
