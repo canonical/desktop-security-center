@@ -169,5 +169,101 @@
     "diskEncryptionPageRemovingPin": "Odebírám PIN kód, toto může pár sekund trvat...",
     "diskEncryptionPageRemovingPassphrase": "Odebírám heslo, toto může pár sekund trvat...",
     "microphoneInterfacePageTitle": "Mikrofon",
-    "microphoneInterfacePageDescription": "Umožnit aplikacím přistupovat k vašemu mikrofonu."
+    "microphoneInterfacePageDescription": "Umožnit aplikacím přistupovat k vašemu mikrofonu.",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro není dostupné pro tuto verzi Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro vyžaduje LTS vydání",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro není podporováno touto verzí snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Pro správu Ubuntu Pro aktualizujte snapd",
+    "ubuntuProEnabled": "Ubuntu Pro je povoleno",
+    "ubuntuProDisabled": "Zabezpečení a shoda na podnikové úrovni pro váš počítač. Vždy zdarma pro osobní použití. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Zjistěte více o Ubuntu Pro",
+    "ubuntuProEnablePro": "Povolit Ubuntu Pro",
+    "ubuntuProEnableMagic": "Povolit s účtem Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Účet si budete moci vytvořit zdarma",
+    "ubuntuProMagicPrompt": "Přihlaste se pomocí svého účtu Ubuntu One nebo si jej zdarma vytvořte.",
+    "ubuntuProMagicContinueInBrowser": "Pokračovat v prohlížeči",
+    "ubuntuProMagicDescription": "Můžete se také přihlásit na {attachLink} a zadat kód {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Nelze povolit Ubuntu Pro, zkuste to prosím znovu",
+    "ubuntuProEnableToken": "Povolit pomocí tokenu",
+    "ubuntuProEnableTokenError": "Nelze povolit Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Od vašeho IT administrátora nebo z {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Získejte token Ubuntu Pro od svého administrátora nebo z {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Zakázat Ubuntu Pro",
+    "ubuntuProDisable": "Zakázat",
+    "ubuntuProDisablePrompt": "Zakázáním Ubuntu Pro se vaše předplatné odpojí od tohoto počítače. Chcete pokračovat?",
+    "ubuntuProEnable": "Povolit",
+    "ubuntuProCancel": "Zrušit",
+    "ubuntuProFeatureEnableError": "Funkci se nepodařilo aktivovat, zkuste to prosím znovu.",
+    "ubuntuProFeatureDisableError": "Funkci se nepodařilo zakázat, zkuste to prosím znovu.",
+    "ubuntuProCompliance": "Zabezpečení a shoda",
+    "ubuntuProComplianceDisclaimer": "Doporučeno pouze pro pomoc s FedRAMP, HIPAA a dalšími požadavky na zabezpečení a shodu.",
+    "ubuntuProComplianceUSGTitle": "Průvodce zabezpečením Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatizuje zabezpečení a audit pomocí benchmarků CIS a profilů DISA-STIG a zároveň umožňuje přizpůsobení specifickým prostředím.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Certifikace kryptografického modulu vlády USA a Kanady o shodě se standardem ochrany dat FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Povolit FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Povolení FIPS nelze vrátit zpět a Livepatch bude trvale zakázán.",
+    "ubuntuProComplianceFIPSPrompt": "Vyberte si preferovanou možnost FIPS",
+    "ubuntuProComplianceFIPSUpdates": "FIPS s aktualizacemi",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Nainstaluje balíčky ověřené dle standardu FIPS 140-2 a umožňuje pravidelné aktualizace zabezpečení.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS bez aktualizací",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Nainstaluje balíčky ověřené dle standardu FIPS 140-2. Tyto balíčky nebudou aktualizovány až do další recertifikace.",
+    "ubuntuProComplianceDocumentation": "Dokumentace o bezpečnostní shodě",
+    "ubuntuProESMTitle": "Rozšířená údržba zabezpečení (ESM)",
+    "ubuntuProESMDescription": "ESM poskytuje bezpečnostní záplaty na 10 let pro více než 25 000 balíčků s otevřeným zdrojovým kódem. Získejte nepřetržitou správu zranitelností pro kritické, vysoce rizikové a střední CVE.",
+    "ubuntuProESMMainTitle": "Balíčky Main (esm-infra)",
+    "ubuntuProESMMainDescription": "Aktualizace zabezpečení pro 2 300 hlavních balíčků Ubuntu Main do {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Balíčky Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Další bezpečnostní aktualizace pro více než 23 000 balíčků Ubuntu Universe do {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Povolit Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Aplikovat aktualizace zabezpečení jádra za chodu systému",
+    "ubuntuProLivepatchShowTitle": "Zobrazit stav Livepatch v horní liště"
 }
