@@ -169,5 +169,100 @@
     "diskEncryptionPageRemovingPin": "Retire le code PIN, cela peut prendre quelques secondes...",
     "diskEncryptionPageRemovingPassphrase": "Retire la phrase de passe, cela peut prendre quelques secondes...",
     "microphoneInterfacePageTitle": "Microphone",
-    "microphoneInterfacePageDescription": "Autoriser les apps à accéder à votre microphone."
+    "microphoneInterfacePageDescription": "Autoriser les apps à accéder à votre microphone.",
+    "ubuntuProNotSupported": "Ubuntu Pro n’est pas disponible pour cette version d’Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro nécessite une version LTS",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro n’est pas pris en charge par cette version de Snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Mettre à jour Snapd pour gérer Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro est activé",
+    "ubuntuProDisabled": "Sécurité et conformité de niveau entreprise pour votre ordinateur. Toujours gratuit pour un usage personnel. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Découvrez Ubuntu Pro",
+    "ubuntuProEnablePro": "Activer Ubuntu Pro",
+    "ubuntuProEnableMagic": "Activer avec un compte Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Vous pourrez créer un compte gratuitement",
+    "ubuntuProMagicPrompt": "Connectez-vous avec votre compte Ubuntu One, ou créez-en un gratuitement.",
+    "ubuntuProMagicContinueInBrowser": "Continuer dans le navigateur",
+    "ubuntuProMagicDescription": "Vous pouvez également vous connecter sur {attachLink} et entrer le code {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Impossible d’activer Ubuntu Pro, veuillez réessayer",
+    "ubuntuProEnableToken": "Activer avec un jeton",
+    "ubuntuProEnableTokenError": "Incapable d’activer Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Depuis votre administrateur informatique ou depuis {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Obtenez un jeton Ubuntu Pro depuis votre administrateur ou depuis {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Jeton",
+    "ubuntuProDisablePro": "Désactiver Ubuntu Pro",
+    "ubuntuProDisable": "Désactiver",
+    "ubuntuProDisablePrompt": "Désactiver Ubuntu Pro détachera votre abonnement de cette machine. Voulez-vous continuer ?",
+    "ubuntuProEnable": "Activer",
+    "ubuntuProCancel": "Annuler",
+    "ubuntuProFeatureEnableError": "Impossible d’activer la fonctionnalité, veuillez réessayer.",
+    "ubuntuProFeatureDisableError": "Impossible de désactiver la fonctionnalité, veuillez réessayer.",
+    "ubuntuProCompliance": "Conformité et durcissement",
+    "ubuntuProComplianceDisclaimer": "Seulement recommandé pour aider avec FedRAMP, HIPAA et d’autres exigences de conformité et de durcissement.",
+    "ubuntuProComplianceUSGTitle": "Guide de sécurité Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatise le durcissement et l’audit avec les profils de référence CIS et DISA-STIG tout en permettant des personnalisations spécifiques à l’environnement.",
+    "ubuntuProComplianceFIPSDescription": "Une certification de module cryptographique des gouvernements américain et canadien en conformité avec la norme de protection des données FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Activer FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "L’activation de FIPS ne peut pas être inversée et Livepatch sera définitivement désactivé.",
+    "ubuntuProComplianceFIPSPrompt": "Choisissez votre option FIPS préférée",
+    "ubuntuProComplianceFIPSUpdates": "FIPS avec mises à jour",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Installe des paquetages validés FIPS 140-2 et permet des mises à jour de sécurité régulières.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS sans mises à jour",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Installe des paquets validés FIPS 140-2. Ceux-ci ne seront pas mis à jour avant la prochaine recertification.",
+    "ubuntuProComplianceDocumentation": "Documentation de conformité à la sécurité",
+    "ubuntuProESMTitle": "Maintenance de sécurité étendue (ESM)",
+    "ubuntuProLivepatchEnableTitle": "Activer Livepatch",
+    "ubuntuProLivepatchShowTitle": "Afficher le statut de Livepatch dans la barre supérieure",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProESMMainTitle": "Principaux paquetages (esm-infra)",
+    "ubuntuProESMMainDescription": "Mises à jour de sécurité pour 2 300 paquetages Ubuntu Main jusqu’en {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Paquetages d'Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Mises à jour de sécurité supplémentaires pour plus de 23 000 paquetages Ubuntu Universe jusqu’en {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchEnableDescription": "Appliquer les mises à jour de sécurité du noyau pendant que le système s’exécute",
+    "ubuntuProESMDescription": "ESM fournit 10 ans de correctifs de sécurité pour plus de 25 000 paquetages open source. Obtenez la gestion continue des vulnérabilités pour les CVE critiques, élevées et moyennes.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2"
 }
