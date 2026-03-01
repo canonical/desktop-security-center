@@ -203,5 +203,39 @@
     },
     "ubuntuProMagicError": "Ezin izan da Ubuntu Pro gaitu, saiatu berriz",
     "ubuntuProEnableToken": "Gaitu token batekin",
-    "ubuntuProEnableTokenError": "Ezin izan da Ubuntu Pro gaitu"
+    "ubuntuProEnableTokenError": "Ezin izan da Ubuntu Pro gaitu",
+    "ubuntuProEnableTokenSubtitle": "IT administratzailegandik edo hemendik: {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Eskuratu Ubuntu Pro token bat zure administratzaileagandik edo hemendik: {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Tokena",
+    "ubuntuProDisablePro": "Ezgaitu Ubuntu Pro",
+    "ubuntuProDisable": "Ezgaitu",
+    "ubuntuProDisablePrompt": "Ubuntu Pro ezgaitzen baduzu, makina hau harpidetzatik askatuko du. Jarraitu nahi duzu?",
+    "ubuntuProEnable": "Gaitu",
+    "ubuntuProCancel": "Utzi",
+    "ubuntuProFeatureEnableError": "Ezin izan da eginbidea gaitu, saiatu berriz.",
+    "ubuntuProFeatureDisableError": "Ezin izan da eginbidea ezgaitu, saiatu berriz.",
+    "ubuntuProCompliance": "Betetzea eta sendotzea",
+    "ubuntuProComplianceDisclaimer": "FedRAM, HIPAA eta bestelako betetze eta sendotze eskakizunekin laguntzeko soilik gomendatua.",
+    "ubuntuProComplianceUSGTitle": "Ubunturen Segurtasun Gida (USG)",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSEnable": "Gaitu FIPS",
+    "ubuntuProComplianceFIPSPrompt": "Hautatu gogokoen duzun FIPS aukera",
+    "ubuntuProComplianceFIPSUpdates": "FIPS eguneratzeekin",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS eguneratze gabe",
+    "ubuntuProComplianceDocumentation": "Segurtasun-betetzearen dokumentazioa",
+    "ubuntuProESMMainTitle": "Pakete nagusiak (esm-infra)"
 }
