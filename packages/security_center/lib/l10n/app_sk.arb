@@ -212,7 +212,7 @@
             }
         }
     },
-    "ubuntuProTokenPrompt": "Získajte token Ubuntu Pro od administrátora alebo z {proLink}",
+    "ubuntuProTokenPrompt": "Získajte token Ubuntu Pro od vášho administrátora alebo z {proLink}",
     "@ubuntuProTokenPrompt": {
         "placeholders": {
             "proLink": {
@@ -238,7 +238,7 @@
     "ubuntuProComplianceFIPSDisclaimer": "Aktivovanie FIPS je nevratné a Livepatch bude natrvalo vypnutý.",
     "ubuntuProComplianceFIPSPrompt": "Vyberte preferovanú možnosť FIPS",
     "ubuntuProComplianceFIPSUpdates": "FIPS s aktualizáciami",
-    "ubuntuProComplianceFIPSUpdatesDescription": "Nainštaluje balíky validované podľa FIPS 140‑2 umožní to pravidelné bezpečnostné aktualizácie.",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Nainštaluje balíky validované podľa FIPS 140‑2 a umožní pravidelné bezpečnostné aktualizácie.",
     "ubuntuProComplianceFIPSNoUpdates": "FIPS bez aktualizácií",
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Nainštaluje balíky validované podľa FIPS 140‑2, ktoré sa nebudú aktualizovať až do ďalšej recertifikácie.",
     "ubuntuProComplianceDocumentation": "Dokumentácia k bezpečnostným štandardom",
