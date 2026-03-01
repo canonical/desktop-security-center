@@ -1,77 +1,269 @@
 {
-  "snapdRuleCategorySessionDenied": "Zamítnout do odhlášení",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapPermissionsEnableTitle": "Vyžadovat, aby aplikace žádaly o systémová oprávnění",
-  "@snapPermissionsEnableTitle": {},
-  "snapPermissionsDisablingLabel": "Deaktivuje se, může to trvat několik sekund…",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsEnablingLabel": "Aktivuje se, může to trvat několik sekund…",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsOtherDescription": "Další oprávnění můžete spravovat v Nastavení › Aplikace.",
-  "@snapPermissionsOtherDescription": {},
-  "snapRulesCount": "{n, plural, =0{žádná pravidla} =1{1 pravidlo} other{{n} pravidel}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesRemoveAll": "Odstranit všechna pravidla",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "Domovská složka",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Spravujte oprávnění pro přístup k souborům ve vaší domovské složce.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageLinkLearnMore": "Dozvědět se více",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "Poskytnout zpětnou vazbu",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "Nahlásit problémy",
-  "@interfacePageLinkReportIssues": {},
-  "appTitle": "Centrum zabezpečení",
-  "@appTitle": {},
-  "snapPermissionsEnableWarning": "Toto je experimentální funkce pro řízení přístupu ke zdrojům vašeho systému.",
-  "@snapPermissionsEnableWarning": {},
-  "snapdRuleCategorySessionAllowed": "Povolit do odhlášení",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategoryForeverAllowed": "Vždy povolit",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapPermissionReadLabel": "Čtení",
-  "@snapPermissionReadLabel": {},
-  "snapdRuleCategoryForeverDenied": "Vždy zamítnout",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionWriteLabel": "Zápis",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Spouštění",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsExperimentalLabel": "Experimentální",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsPageTitle": "Oprávnění aplikací",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesPageEmptyTileLabel": "Zatím žádná pravidla",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesPageDescription": "Spravujte oprávnění {interface} pro {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "interfacePageTitle": "Spravovat oprávnění",
-  "@interfacePageTitle": {},
-  "interfacePageDescription": "Přísně omezené aplikace se vás před přístupem k souborům a složkám zeptají. Tato funkce je experimentální a podléhá změnám.",
-  "@interfacePageDescription": {},
-  "interfaceSnapCount": "{n, plural, =0{žádné aplikace} =1{1 aplikace} other {{n} aplikací}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  }
+    "snapdRuleCategorySessionDenied": "Zamítnout do odhlášení",
+    "snapPermissionsEnableTitle": "Vyžadovat, aby aplikace žádaly o oprávnění pro přístupy v systému",
+    "snapPermissionsDisablingLabel": "Deaktivuje se – může to trvat několik sekund…",
+    "snapPermissionsEnablingLabel": "Aktivuje se – může to trvat několik sekund…",
+    "snapPermissionsOtherDescription": "Další oprávnění můžete spravovat v Nastavení › Aplikace.",
+    "snapRulesCount": "{n, plural, =0{žádná pravidla} =1{1 pravidlo} other{{n} pravidel}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesRemoveAll": "Odstranit všechna pravidla",
+    "homeInterfacePageTitle": "Domovská složka",
+    "homeInterfacePageDescription": "Spravujte oprávnění pro přístup k souborům ve své domovské složce.",
+    "interfacePageLinkLearnMore": "Dozvědět se více",
+    "interfacePageLinkGiveFeedback": "Poskytnout zpětnou vazbu",
+    "interfacePageLinkReportIssues": "Nahlásit problémy",
+    "appTitle": "Centrum zabezpečení",
+    "snapPermissionsEnableWarning": "Toto je experimentální funkce pro řízení přístupu k prostředkům vašeho systému.",
+    "snapdRuleCategorySessionAllowed": "Povolit do odhlášení",
+    "snapdRuleCategoryForeverAllowed": "Vždy povolit",
+    "snapPermissionReadLabel": "Čtení",
+    "snapdRuleCategoryForeverDenied": "Vždy zamítnout",
+    "snapPermissionWriteLabel": "Zápis",
+    "snapPermissionExecuteLabel": "Spouštění",
+    "snapPermissionsExperimentalLabel": "Experimentální",
+    "snapPermissionsPageTitle": "Oprávnění aplikací",
+    "snapRulesPageEmptyTileLabel": "Zatím žádná pravidla",
+    "snapRulesPageDescription": "Spravujte oprávnění {interface} pro {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "interfacePageTitle": "Spravovat oprávnění",
+    "interfacePageDescription": "Přísně omezené aplikace se vás před přístupem k souborům a složkám zeptají. Tato funkce je experimentální a podléhá změnám.",
+    "interfaceSnapCount": "{n, plural, =0{žádné aplikace} =1{1 aplikace} other {{n} aplikací}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageReplaceDialogShowQR": "Zobrazit QR kód",
+    "diskEncryptionPageReplaceDialogSave": "Uložit do souboru",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Uložil/a jsem si svůj záchranný klíč někam bezpečně (mimo počítač)",
+    "diskEncryptionPageReplaceDialogReplace": "Nahradit",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Záchranný klíč nahrazen",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Pamatujte na to uchovávat ho někde bezpečně (mimo počítač).",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Nahrazení záchranného klíče se nezdařilo",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop – záchranný klíč k šifrování",
+    "diskEncryptionPageClipboardNotification": "Zkopírováno do schránky",
+    "recoveryKeyExceptionFileSystemTitle": "Soubor se záchranným klíčem neuložen",
+    "recoveryKeyExceptionFileSystemBody": "Nemáte oprávnění zapisovat do této složky. Zkuste jiné umístění nebo použijte jinou metodu.",
+    "recoveryKeyExceptionDisallowedPathBody": "Zkuste jiné umístění, jako například vyjímatelný disk, nebo použijte jinou metodu.",
+    "recoveryKeyFilePickerTitle": "Uložit soubor se záchranným klíčem",
+    "recoveryKeyFilePickerFilter": "Textové soubory",
+    "recoveryKeyExceptionDisallowedPathTitle": "Soubor se záchranným klíčem nebylo možné uložit do dočasného umístění",
+    "diskEncryptionPageReplaceDialogQRBody": "Naskenujte QR kód a zkopírujte si tak záchranný klíč někam bezpečně, například do správce hesel (mimo počítač). Je také možné si ho alespoň vyfotit.",
+    "recoveryKeyExceptionUnknownTitle": "Neznámá chyba",
+    "diskEncryptionPageReplaceDialogDiscard": "Zahodit",
+    "diskEncryptionPageReplaceButton": "Nahradit záchranný klíč…",
+    "diskEncryptionPageReplaceDialogBody": "Uložte si nový záchranný klíč někde bezpečně (mimo počítač). Původní klíč je od tohoto okamžiku už k ničemu.",
+    "diskEncryptionPageReplaceDialogErrorBody": "Při nahrazování vašeho záchranného klíče se něco pokazilo – původní klíč proto zůstává v platnosti.",
+    "diskEncryptionPageReplaceDialogHeader": "Nahradit záchranný klíč",
+    "diskEncryptionPageTitle": "Šifrování disku",
+    "diskEncryptionPageRecoveryKey": "Záchranný klíč",
+    "diskEncryptionPageStoreYourKey": "Obnovovací klíč vám umožní získat zpět přístup k vašim datům v případě, že se nebude dařit je rozšifrovat před spouštěním systému. Uložte si ho někam bezpečně (mimo počítač).",
+    "diskEncryptionPageLearnMore": "Zjistěte více o šifrování jištěné hardwarem",
+    "diskEncryptionPageCheckKey": "Zkontrolovat záchranný klíč…",
+    "diskEncryptionPageDialogHeaderCheckKey": "Zkontrolovat záchranný klíč",
+    "diskEncryptionPageCheck": "Zkontrolovat",
+    "diskEncryptionPageValidKey": "Platný klíč",
+    "diskEncryptionPageInvalidKey": "Neplatný klíč",
+    "diskEncryptionPageEnterKey": "Zadejte svůj záchranný klíč",
+    "diskEncryptionPageKeyWorks": "Záchranný klíč funguje",
+    "diskEncryptionPageKeyWorksBody": "Pamatujte na to, uchovávat ho někde bezpečně (mimo počítač).",
+    "diskEncryptionPageKeyDoesntWork": "Záchranný klíč nefunguje",
+    "diskEncryptionPageKeyDoesntWorkBody": "Zkontrolovat klíč nebo ho nahradit novým.",
+    "diskEncryptionPageError": "Chyba",
+    "diskEncryptionPageCopySemanticLabel": "Zkopírovat",
+    "recoveryKeyTPMEnabled": "Šifrování obsluhované pomocí hardware je zapnuté",
+    "recoveryKeyPassphraseEnabled": "Šifrovací heslová fráze je zapnutá",
+    "recoveryKeyPassphraseHeader": "Změnit heslovou frázi",
+    "recoveryKeyPassphraseBody": "Svou heslovou frázi budete zadávat při každém spouštění systému (kvůli odemykání disku).",
+    "recoveryKeyPassphraseButton": "Změnit heslovou frázi…",
+    "recoveryKeyPassphraseCurrent": "Stávající heslová fráze",
+    "recoveryKeyPassphraseNew": "Nová heslová fráze",
+    "recoveryKeyPassphraseConfirm": "Potvrzení zadání heslové fráze",
+    "recoveryKeyPassphraseCurrentError": "Nesprávná heslová fráze – zkuste to znovu",
+    "recoveryKeyPassphraseNewError": "Je třeba, aby bylo dlouhé alespoň 4 znaky",
+    "recoveryKeyPassphraseConfirmError": "Zadání heslové fráze se neshodují – zkuste to znovu",
+    "recoveryKeyPassphraseDialogHeader": "Změnit heslovou frázi",
+    "recoveryKeyPinEnabled": "PIN k šifrování je zapnutý",
+    "recoveryKeyPinHeader": "PIN k šifrování",
+    "recoveryKeyPinBody": "Svůj PIN budete zadávat při každém spouštění systému (kvůli odemykání disku).",
+    "recoveryKeyPinButton": "Změnit PIN…",
+    "recoveryKeyPinCurrent": "Stávající PIN",
+    "recoveryKeyPinNew": "Nový PIN",
+    "recoveryKeyPinConfirm": "Potvrzení zadání PIN",
+    "recoveryKeyPinCurrentError": "Nesprávný PIN – zkuste to znovu",
+    "recoveryKeyPinConfirmError": "Zadání PIN kódů se neshodují – zkuste to znovu",
+    "recoveryKeyPinDialogHeader": "Změnit PIN",
+    "recoveryKeyPassphraseShow": "Zobrazit",
+    "recoveryKeyPassphraseHide": "Skrýt",
+    "recoveryKeyPassphraseChange": "Změnit",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN zaktualizován",
+    "recoveryKeyPassphrasePinSuccessBody": "Váš PIN byl úspěšně zaktualizován.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Heslová fráze zaktualizována",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Vaše heslová fráze byla úspěšně zaktualizována.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Snadno prolomitelná heslová fráze – použijte delší a/nebo komplexnější",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Ucházející heslová fráze – zlepšete zabezpečení jejím prodloužením a/nebo přidáním komplexity",
+    "recoveryKeyPassphraseEntropyOptimal": "Odolná heslová fráze",
+    "recoveryKeyPinEntropyBelowMin": "Snadno prolomitelný PIN – přidejte mu na délce a/nebo ho změňte tak, aby bylo těžší ho uhodnout",
+    "recoveryKeyPinEntropyBelowOptimal": "Ucházející PIN – prodlužte jeho délku a/nebo ho změňte tak, aby bylo těžší ho uhodnout",
+    "recoveryKeyPinEntropyOptimal": "PIN je dostatečně dlouhý",
+    "recoveryKeySomethingWentWrongHeader": "Něco se pokazilo",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Vámi používaná verze snapd není podporována",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Zkontrolovat, že Centrum zabezpečení a snapd jsou aktuální.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Centru zabezpečení se nepodařilo připojit k rozhraní snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Opravíte to spuštěním tohoto příkazu v terminálu:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "recoveryKeyExceptionFilePermissionTitle": "Nepodařilo se uložit váš záchranný klíč do souboru",
+    "recoveryKeyExceptionFilePermissionBody": "Nemáte oprávnění zapisovat do tohoto umístění souboru.",
+    "recoveryKeyTPMExplanationBody": "Šifrovací klíče jsou uchovávány v modulu důvěryhodné platformy (TPM) počítače.",
+    "recoveryKeyTPMExplanationLearnMore": "Zjistit víc o šifrování obsluhovaném hardwarem",
+    "recoveryKeyEncrpytionPassphraseHeader": "Šifrovací heslová fráze",
+    "diskEncryptionPageStoreYourKeyWithLink": "Obnovovací klíč vám umožní získat zpět přístup ke svým datům v případě, že se disk nepodaří odemknout při startu systému. Uložte si ho na bezpečné místo. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Nastavení šifrování není k dispozici",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Nepodařilo se získat stav šifrování tohoto počítače.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "Nastavení TPM počítače se nenachází v podporovaném stavu.",
+    "snapPermissionAccessLabel": "Přístup",
+    "cameraRulesPageEmptyTileLabel": "Žádné aplikace zatím nežádaly o přístup",
+    "snapRulesResetAllPermissions": "Vráti veškerá oprávnění na výchozí hodnoty",
+    "cameraInterfacePageTitle": "Kamera",
+    "cameraInterfacePageDescription": "Umožnit aplikacím přistupovat k vašim kamerám.",
+    "diskEncryptionPageAddPinButton": "Přidat kód PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Přidat heslo....",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Přidat heslo",
+    "diskEncryptionPageAddPinDialogHeading": "Přidat kód PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "Kód PIN budete muset zadávat vždy při zapínaní počítače. Tento PIN je odlišný od uživatelského hesla.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Pokud zapomenete svůj kód PIN, budete ho moci obnovit díky obnovovacímu klíči.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Budete muset zadávat vaše heslo při každém zapínaní počítače. Toto heslo je odlišné od uživatelského hesla.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Pokud zapomenete své heslo, budete moci obnovit přístup k disku díky obnovovacímu klíči.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Pokročilé zabezpečení",
+    "diskEncryptionPageAdditionalSecurityBody": "Můžete nastavit PIN kód nebo heslo pro pokročilé zabezpečení. Budete ho muset zadávat při každém zapínaní vašeho zařízení.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Zjistit více",
+    "diskEncryptionPageAddPinDialogSaveButton": "Přidat",
+    "diskEncryptionPageRemovePinButton": "Odstranit PIN kód...",
+    "diskEncryptionPageRemovePassphraseButton": "Odstranit heslo...",
+    "diskEncryptionPageAddingPin": "Nastavuje se nový PIN kód, může to trvat pár sekund...",
+    "diskEncryptionPageAddingPassphrase": "Nastavuje se nové heslo k disku, toto může pár sekund trvat...",
+    "diskEncryptionPageRemovingPin": "Odebírám PIN kód, toto může pár sekund trvat...",
+    "diskEncryptionPageRemovingPassphrase": "Odebírám heslo, toto může pár sekund trvat...",
+    "microphoneInterfacePageTitle": "Mikrofon",
+    "microphoneInterfacePageDescription": "Umožnit aplikacím přistupovat k vašemu mikrofonu.",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro není dostupné pro tuto verzi Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro vyžaduje LTS vydání",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro není podporováno touto verzí snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Pro správu Ubuntu Pro aktualizujte snapd",
+    "ubuntuProEnabled": "Ubuntu Pro je povoleno",
+    "ubuntuProDisabled": "Zabezpečení a shoda na podnikové úrovni pro váš počítač. Vždy zdarma pro osobní použití. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Zjistěte více o Ubuntu Pro",
+    "ubuntuProEnablePro": "Povolit Ubuntu Pro",
+    "ubuntuProEnableMagic": "Povolit s účtem Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Účet si budete moci vytvořit zdarma",
+    "ubuntuProMagicPrompt": "Přihlaste se pomocí svého účtu Ubuntu One nebo si jej zdarma vytvořte.",
+    "ubuntuProMagicContinueInBrowser": "Pokračovat v prohlížeči",
+    "ubuntuProMagicDescription": "Můžete se také přihlásit na {attachLink} a zadat kód {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Nelze povolit Ubuntu Pro, zkuste to prosím znovu",
+    "ubuntuProEnableToken": "Povolit pomocí tokenu",
+    "ubuntuProEnableTokenError": "Nelze povolit Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Od vašeho IT administrátora nebo z {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Získejte token Ubuntu Pro od svého administrátora nebo z {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Zakázat Ubuntu Pro",
+    "ubuntuProDisable": "Zakázat",
+    "ubuntuProDisablePrompt": "Zakázáním Ubuntu Pro se vaše předplatné odpojí od tohoto počítače. Chcete pokračovat?",
+    "ubuntuProEnable": "Povolit",
+    "ubuntuProCancel": "Zrušit",
+    "ubuntuProFeatureEnableError": "Funkci se nepodařilo aktivovat, zkuste to prosím znovu.",
+    "ubuntuProFeatureDisableError": "Funkci se nepodařilo zakázat, zkuste to prosím znovu.",
+    "ubuntuProCompliance": "Zabezpečení a shoda",
+    "ubuntuProComplianceDisclaimer": "Doporučeno pouze pro pomoc s FedRAMP, HIPAA a dalšími požadavky na zabezpečení a shodu.",
+    "ubuntuProComplianceUSGTitle": "Průvodce zabezpečením Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatizuje zabezpečení a audit pomocí benchmarků CIS a profilů DISA-STIG a zároveň umožňuje přizpůsobení specifickým prostředím.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Certifikace kryptografického modulu vlády USA a Kanady o shodě se standardem ochrany dat FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Povolit FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Povolení FIPS nelze vrátit zpět a Livepatch bude trvale zakázán.",
+    "ubuntuProComplianceFIPSPrompt": "Vyberte si preferovanou možnost FIPS",
+    "ubuntuProComplianceFIPSUpdates": "FIPS s aktualizacemi",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Nainstaluje balíčky ověřené dle standardu FIPS 140-2 a umožňuje pravidelné aktualizace zabezpečení.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS bez aktualizací",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Nainstaluje balíčky ověřené dle standardu FIPS 140-2. Tyto balíčky nebudou aktualizovány až do další recertifikace.",
+    "ubuntuProComplianceDocumentation": "Dokumentace o bezpečnostní shodě",
+    "ubuntuProESMTitle": "Rozšířená údržba zabezpečení (ESM)",
+    "ubuntuProESMDescription": "ESM poskytuje bezpečnostní záplaty na 10 let pro více než 25 000 balíčků s otevřeným zdrojovým kódem. Získejte nepřetržitou správu zranitelností pro kritické, vysoce rizikové a střední CVE.",
+    "ubuntuProESMMainTitle": "Balíčky Main (esm-infra)",
+    "ubuntuProESMMainDescription": "Aktualizace zabezpečení pro 2 300 hlavních balíčků Ubuntu Main do {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Balíčky Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Další bezpečnostní aktualizace pro více než 23 000 balíčků Ubuntu Universe do {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Povolit Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Aplikovat aktualizace zabezpečení jádra za chodu systému",
+    "ubuntuProLivepatchShowTitle": "Zobrazit stav Livepatch v horní liště"
 }

@@ -1,77 +1,174 @@
 {
-  "appTitle": "Centre de seguretat",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "Autorizar fins la desconnexion",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "Refusar fins la desconnexion",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverAllowed": "Totjorn autorizar",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "Totjorn refusar",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "Lectura",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "Escritura",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Executar",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsExperimentalLabel": "Experimental",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsPageTitle": "Permissions de l’aplicacion",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesPageDescription": "Gestion de las autorizacions {interface} per {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "Cap de règlas pel moment",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Levar totas las règlas",
-  "@snapRulesRemoveAll": {},
-  "snapRulesCount": "{n, plural, =0{cap de règlas} =1{1 règla} other{{n} règlas}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "interfacePageTitle": "Gerir las permissions",
-  "@interfacePageTitle": {},
-  "interfacePageLinkLearnMore": "Ne saber mai",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "Far un retorn",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "Senhalar de problèmas",
-  "@interfacePageLinkReportIssues": {},
-  "homeInterfacePageTitle": "Repertòri personal",
-  "@homeInterfacePageTitle": {},
-  "snapPermissionsEnableWarning": "Es una foncionalitat experimentala per contrarotlar l’accès a las ressorsas de vòstre ordenador.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "Activacion, aquò pòt trigar...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "Desactivacion, aquò pòt trigar...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsOtherDescription": "Podètz gerir d’autras autorizacions dins Paramètres › Aplicacions.",
-  "@snapPermissionsOtherDescription": {},
-  "homeInterfacePageDescription": "Gerir las autorizacions d’accès als fichièrs dins vòstre repertòri personal.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageDescription": "Las aplicacions estrictament limitadas vos demandaràn abans d’accedir als archius e dossièrs. Aquesta foncionalitat es experimentala e portada a modificacion.",
-  "@interfacePageDescription": {},
-  "interfaceSnapCount": "{n, plural, =0{cap d’aplicacions} =1{1 aplicacion} other {{n} aplicacions}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsEnableTitle": "Exigir que las aplicacions demanden d’autorizacions al sistèma",
-  "@snapPermissionsEnableTitle": {}
+    "appTitle": "Centre de seguretat",
+    "snapdRuleCategorySessionAllowed": "Autorizar fins la desconnexion",
+    "snapdRuleCategorySessionDenied": "Refusar fins la desconnexion",
+    "snapdRuleCategoryForeverAllowed": "Totjorn autorizar",
+    "snapdRuleCategoryForeverDenied": "Totjorn refusar",
+    "snapPermissionReadLabel": "Lectura",
+    "snapPermissionWriteLabel": "Escritura",
+    "snapPermissionExecuteLabel": "Execucion",
+    "snapPermissionsExperimentalLabel": "Experimental",
+    "snapPermissionsPageTitle": "Autorizacions de l’aplicacion",
+    "snapRulesPageDescription": "Gerir las autorizacions {interface} per {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Cap de règlas pel moment",
+    "snapRulesRemoveAll": "Levar totas las règlas",
+    "snapRulesCount": "{n, plural, =0{cap de règlas} =1{1 règla} other{{n} règlas}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "interfacePageTitle": "Gerir las autorizacions",
+    "interfacePageLinkLearnMore": "Ne saber mai",
+    "interfacePageLinkGiveFeedback": "Donatz vòstre opinion",
+    "interfacePageLinkReportIssues": "Senhalar de problèmas",
+    "homeInterfacePageTitle": "Repertòri personal",
+    "snapPermissionsEnableWarning": "Es una foncionalitat experimentala per contrarotlar l’accès a las ressorsas de vòstre ordenador.",
+    "snapPermissionsEnablingLabel": "Activacion, aquò pòt trigar...",
+    "snapPermissionsDisablingLabel": "Desactivacion, aquò pòt trigar...",
+    "snapPermissionsOtherDescription": "Podètz gerir d’autras autorizacions dins Paramètres › Aplicacions.",
+    "homeInterfacePageDescription": "Gerir las autorizacions d’accès als fichièrs dins vòstre repertòri personal.",
+    "interfacePageDescription": "Las aplicacions estrictament limitadas vos demandaràn abans d’accedir als archius e dossièrs. Aquesta foncionalitat es experimentala e portada a modificacion.",
+    "interfaceSnapCount": "{n, plural, =0{cap d’aplicacions} =1{1 aplicacion} other {{n} aplicacions}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsEnableTitle": "Exigir que las aplicacions demanden d’autorizacions al sistèma",
+    "diskEncryptionPageTitle": "Chiframent de disc",
+    "diskEncryptionPageRecoveryKey": "Clau de recuperacion",
+    "diskEncryptionPageCheck": "Verificar",
+    "diskEncryptionPageInvalidKey": "Clau invalida",
+    "diskEncryptionPageValidKey": "Clau valida",
+    "diskEncryptionPageError": "Error",
+    "diskEncryptionPageCopySemanticLabel": "Copiar",
+    "recoveryKeyFilePickerFilter": "Fichièr tèxt",
+    "recoveryKeyExceptionUnknownTitle": "Error desconeguda",
+    "diskEncryptionPageReplaceDialogDiscard": "Ignorar",
+    "diskEncryptionPageLearnMore": "Ne saber mai tocan lo chiframent material",
+    "diskEncryptionPageDialogHeaderCheckKey": "Verificar la clau de recuperacion",
+    "diskEncryptionPageEnterKey": "Picatz la clau de recuperacion",
+    "diskEncryptionPageKeyWorks": "La clau de recuperacion fonciona",
+    "diskEncryptionPageKeyWorksBody": "Remembratz-vos de la gardar en luòc segur.",
+    "diskEncryptionPageKeyDoesntWork": "La clau de recuperacion fonciona pas",
+    "diskEncryptionPageReplaceDialogShowQR": "Mostrar lo còdi QR",
+    "diskEncryptionPageReplaceDialogSave": "Salvar dins un fichièr",
+    "diskEncryptionPageReplaceDialogReplace": "Remplaçar",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Clau de recuperacion remplaçada",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Paramètres de chiframent non disponible ms",
+    "recoveryKeyPassphraseHeader": "Cambiar la frasa secrèta",
+    "recoveryKeyPassphraseButton": "Cambiar la frasa secrèta...",
+    "recoveryKeyPassphraseCurrent": "Frasa secrèta actuala",
+    "recoveryKeyPassphraseNew": "Frasa secrèta novèla",
+    "recoveryKeyPassphraseConfirm": "Confirmar la frasa secrèta",
+    "recoveryKeyPassphraseDialogHeader": "Cambiar la frasa secrèta",
+    "recoveryKeyPinEnabled": "Lo PIN de chiframent es activat",
+    "recoveryKeyPinHeader": "PIN de chiframent",
+    "recoveryKeyEncrpytionPassphraseHeader": "Frasa secrèta de chiframent",
+    "recoveryKeyPinButton": "Cambiar lo PIN...",
+    "recoveryKeyPinCurrent": "PIN actual",
+    "recoveryKeyPinNew": "PIN novèl",
+    "recoveryKeyPinConfirm": "Confirmar lo PIN",
+    "recoveryKeyPinCurrentError": "PIN incorrècte, tornatz ensajar",
+    "recoveryKeyPinDialogHeader": "Cambiar lo PIN",
+    "recoveryKeyPassphraseHide": "Amagar",
+    "recoveryKeyPassphraseShow": "Mostrar",
+    "recoveryKeyPassphraseChange": "Cambiar",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN actualizat",
+    "recoveryKeySomethingWentWrongHeader": "Quicòm a trucat",
+    "recoveryKeyFilePickerTitle": "Salvar lo fichièr de clau de recuperacion",
+    "cameraInterfacePageTitle": "Camèra",
+    "cameraInterfacePageDescription": "Autorizar l’accès a las camèras.",
+    "snapPermissionAccessLabel": "Accès",
+    "snapRulesResetAllPermissions": "Reïnicializar totas las autorizacions",
+    "cameraRulesPageEmptyTileLabel": "Cap d’aplicacion demandèt pas encara l’accès",
+    "diskEncryptionPageCheckKey": "Verificacion de la clau de recuperacion...",
+    "diskEncryptionPageKeyDoesntWorkBody": "Verificar o remplaçar una clau amb una nòva.",
+    "diskEncryptionPageReplaceButton": "Remplaçar la clau de recuperacion...",
+    "diskEncryptionPageReplaceDialogHeader": "Remplaçar la clau de recuperacion",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Ai salvagarda la clau de recuperacion en luòc segur",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Remembratz-vos de la gardar en luòc segur.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Fracàs del remplaçament de la clau de recuperacion",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Clau de recuperacion de chiframent",
+    "diskEncryptionPageClipboardNotification": "Copiat al quichapapièrs",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "La version de snapd es pas presa en carga",
+    "diskEncryptionPageStoreYourKey": "La clau de recuperacion vos permet de retrobar l’accès a vòstras donadas se lo disc capita pas a se desverrolhar a l’aviada. Gardatz-la en luòc segur.",
+    "diskEncryptionPageStoreYourKeyWithLink": "La clau de recuperacion vos permet de retrobar l’accès a vòstras donadas se lo disc capita pas a se desverrolhar a l’aviada. Gardatz-la en luòc segur. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageReplaceDialogBody": "Gardatz la nòva clau de recuperacion en luòc segur. Un còp que la remplaçatz, poiriatz pas mai l’utilizar l’anciana clau.",
+    "diskEncryptionPageReplaceDialogErrorBody": "Quicòm a trucat en remplaçant la clau de recuperacion, l’anciana clau demorarà valida.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Per resòlver aquò, executatz aquesta comanda dins lo termina :",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "recoveryKeyExceptionFileSystemTitle": "Fichièr de clau de recuperacion non salvagardat",
+    "recoveryKeyExceptionDisallowedPathTitle": "Lo fichièr de clau de recuperacion se pòt pas enregistrar dins un emplaçament temporari",
+    "recoveryKeyExceptionFilePermissionTitle": "Fracàs de l’enregistrament de la clau de recuperacion dins lo fichièr",
+    "recoveryKeyExceptionFilePermissionBody": "Avètz pas l’autorizacion d’escriure dins aqueste emplaçament de fichièr.",
+    "recoveryKeyExceptionFileSystemBody": "Avètz pas l’autorizacion d’escriure dins aqueste dossièr. Ensajatz un luòc diferent o un autre metòde.",
+    "recoveryKeyExceptionDisallowedPathBody": "Ensajatz un emplaçament diferent, coma un lector amovible o un utilizatz un autre metòde.",
+    "recoveryKeyTPMEnabled": "Lo chiframent material es activat",
+    "recoveryKeyTPMExplanationBody": "Las claus de chiframent son gardadas dins lo modul TPM (Trusted Platform Moduleà de l’ordenador.",
+    "recoveryKeyTPMExplanationLearnMore": "Ne saber mai sul chiframent material",
+    "recoveryKeyPassphraseEnabled": "La frasa secrèta de chiframent es activada",
+    "recoveryKeyPassphraseBody": "Devètz picar la frasa secrèta cada còp que l'ordenador amòda.",
+    "recoveryKeyPassphraseCurrentError": "Frasa secrèta incorrècta, tronatz ensajar",
+    "recoveryKeyPassphraseNewError": "Deu comportar almens 4 caractèrs",
+    "recoveryKeyPassphraseConfirmError": "Las frasas secrètas correspodon pas, tornatz ensajar",
+    "recoveryKeyPinBody": "Devètz picar lo PIN cada còp que l'ordenador amòda.",
+    "recoveryKeyPinConfirmError": "Los PIN correspondon pas, tornatz ensajar",
+    "recoveryKeyPassphrasePinSuccessBody": "Vòstre PIN es estat corrèctament actualizat.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Frasa secrèta actualizada",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "La frasa secrèta es estada corrèctament actualizada.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Frasa secrèta febla, alongatz-la o mai complèxa",
+    "diskEncryptionPageReplaceDialogQRBody": "Numerizatz lo còdi QR per copiar la clau de recuperacion e la salvar en luòc segur, coma dins un gestionari de senhals. Podètz prendre una fòto per utilizacion futura.",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Fracàs de la recuperacion de l’estat de chiframent d’aqueste ordenador.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "La configuracion TPM de vòstre ordenador es pas presa en carga.",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Verificatz que lo Centre de seguretat e snapd son a jorn.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Lo Centre de seguretat se pòt pas connectar a l’interfàcia snapd",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Frasa secrèta sufisenta, fasètz-la venir mai longa o complèxa per una melhora seguretat",
+    "recoveryKeyPassphraseEntropyOptimal": "Frasa secrèta fòrta",
+    "recoveryKeyPinEntropyBelowMin": "PIN feble, fasètz-lo mai long o mens previsible",
+    "recoveryKeyPinEntropyBelowOptimal": "PIN sufisent, fasètz-lo venir mai long o mens previsible per una melhora seguretat",
+    "recoveryKeyPinEntropyOptimal": "Lo PIN es sufisentament long",
+    "diskEncryptionPageAddPinButton": "Apondre PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Apondre frasa secrèta...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Apondre frasa secrèta",
+    "diskEncryptionPageAddPinDialogHeading": "Apondre PIN",
+    "diskEncryptionPageAdditionalSecurityHeader": "Seguretat suplementària",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Ne saber mai",
+    "diskEncryptionPageAddPinDialogSaveButton": "Apondre",
+    "diskEncryptionPageRemovePinButton": "Suprimir PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Suprimir frasa secrèta...",
+    "microphoneInterfacePageTitle": "Microfòn",
+    "microphoneInterfacePageDescription": "Permetre a las aplicacions d’accedir al microfòn.",
+    "diskEncryptionPageAddPinDialogBodyMain": "Deuretz picar lo còdi PIN cada còp que l’ordenador s’avia. Aqueste còdi PIN es diferent del senhal utilizaire.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "S'oblidetz lo còdi PIN, podètz recuperar l’accès al disc en utilizant la clau de recuperacion.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Deuretz picar la frasa secrèta cada còp que l’ordenador s’avia. Aquesta frasa secrèta es diferenta del senhal utilizaire.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "S’oblidetz vòstra frasa secrèta, podètz recuperar l’accès al disc en utilizant la clau de recuperacion.",
+    "diskEncryptionPageAddingPin": "Apondon del PIN, aquò pòt tardar unas segondas...",
+    "diskEncryptionPageAddingPassphrase": "Apondon de la frasa secrèta, aquò pòt tardar unas segondas...",
+    "diskEncryptionPageRemovingPin": "Retirament del PIN, aquò pòt tardar unas segondas...",
+    "diskEncryptionPageRemovingPassphrase": "Retirament de la frasa secrèta, aquò pòt tardar unas segondas...",
+    "diskEncryptionPageAdditionalSecurityBody": "Podètz definir una frasa secrèta o un PIN per mai de seguretat. O deuretz picar cada còp que l’ordenador amòda.",
+    "ubuntuProPageTitle": "Ubuntu Pro"
 }

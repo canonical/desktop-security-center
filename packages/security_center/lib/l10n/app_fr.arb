@@ -1,77 +1,268 @@
 {
-  "snapPermissionWriteLabel": "Écrire",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Exécuter",
-  "@snapPermissionExecuteLabel": {},
-  "interfacePageLinkGiveFeedback": "Donnez votre avis",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "Signaler un problème",
-  "@interfacePageLinkReportIssues": {},
-  "snapPermissionReadLabel": "Lire",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionsExperimentalLabel": "Expérimental",
-  "@snapPermissionsExperimentalLabel": {},
-  "interfacePageLinkLearnMore": "En savoir plus",
-  "@interfacePageLinkLearnMore": {},
-  "snapdRuleCategoryForeverAllowed": "Autoriser toujours",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "Refuser toujours",
-  "@snapdRuleCategoryForeverDenied": {},
-  "appTitle": "Centre de sécurité",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "Autoriser jusqu’à fermeture de session",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "Refuser jusqu’à fermeture de session",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapPermissionsEnableTitle": "Exiger que les apps demandent des autorisations système",
-  "@snapPermissionsEnableTitle": {},
-  "snapPermissionsEnableWarning": "Il s’agit d’une fonctionnalité expérimentale pour contrôler l’accès aux ressources de votre système.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "Activation, cela peut prendre quelques secondes...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "Désactivation, cela peut prendre quelques secondes...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsOtherDescription": "Vous pouvez gérer d’autres autorisations dans Paramètres › Applications.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsPageTitle": "Permissions d'app",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesPageEmptyTileLabel": "Pas encore de règles",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Supprimer toutes les règles",
-  "@snapRulesRemoveAll": {},
-  "interfacePageTitle": "Gérer permissions",
-  "@interfacePageTitle": {},
-  "interfacePageDescription": "Les applications limitées strictement vous demanderont avant d’accéder aux fichiers et dossiers. Cette fonctionnalité est expérimentale et sujète à modifications.",
-  "@interfacePageDescription": {},
-  "snapRulesPageDescription": "Gérer autorisations {interface} pour {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesCount": "{n, plural, =0{aucune règle} =1{1 règle} other{{n} règles}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "homeInterfacePageTitle": "Dossier d’accueil",
-  "@homeInterfacePageTitle": {},
-  "interfaceSnapCount": "{n, plural, =0{aucune app} =1{1 app} other {{n} apps}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "homeInterfacePageDescription": "Gérer les autorisations d’accès aux fichiers dans votre dossier personnel.",
-  "@homeInterfacePageDescription": {}
+    "snapPermissionWriteLabel": "Écrire",
+    "snapPermissionExecuteLabel": "Exécution",
+    "interfacePageLinkGiveFeedback": "Donner votre avis",
+    "interfacePageLinkReportIssues": "Signaler un problème",
+    "snapPermissionReadLabel": "Lecture",
+    "snapPermissionsExperimentalLabel": "Expérimental",
+    "interfacePageLinkLearnMore": "En savoir plus",
+    "snapdRuleCategoryForeverAllowed": "Autoriser toujours",
+    "snapdRuleCategoryForeverDenied": "Refuser toujours",
+    "appTitle": "Centre de sécurité",
+    "snapdRuleCategorySessionAllowed": "Autoriser jusqu’à fermeture de session",
+    "snapdRuleCategorySessionDenied": "Refuser jusqu’à fermeture de session",
+    "snapPermissionsEnableTitle": "Exiger que les apps demandent des autorisations système",
+    "snapPermissionsEnableWarning": "Il s’agit d’une fonctionnalité expérimentale pour contrôler l’accès aux ressources de votre système.",
+    "snapPermissionsEnablingLabel": "Activation, cela pourrait prendre quelques secondes...",
+    "snapPermissionsDisablingLabel": "Désactivation, cela pourrait prendre quelques secondes...",
+    "snapPermissionsOtherDescription": "Vous pouvez gérer d’autres autorisations dans Paramètres › Applications.",
+    "snapPermissionsPageTitle": "Permissions d'app",
+    "snapRulesPageEmptyTileLabel": "Pas encore de règles",
+    "snapRulesRemoveAll": "Supprimer toutes les règles",
+    "interfacePageTitle": "Gérer permissions",
+    "interfacePageDescription": "Les applications limitées strictement vous demanderont avant d’accéder aux fichiers et dossiers. Cette fonctionnalité est expérimentale et sujète à modifications.",
+    "snapRulesPageDescription": "Gérer autorisations {interface} pour {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesCount": "{n, plural, =0{aucune règle} =1{1 règle} other{{n} règles}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "homeInterfacePageTitle": "Dossier d’accueil",
+    "interfaceSnapCount": "{n, plural, =0{aucune app} =1{1 app} other {{n} apps}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "homeInterfacePageDescription": "Gérer les autorisations d’accès aux fichiers dans votre dossier personnel.",
+    "diskEncryptionPageTitle": "Chiffrement disque",
+    "diskEncryptionPageLearnMore": "En savoir plus sur le chiffrement assisté par matériel",
+    "diskEncryptionPageCheckKey": "Vérification clé de secours...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Vérifier clé de secours",
+    "diskEncryptionPageCheck": "Vérifier",
+    "diskEncryptionPageValidKey": "Clé valide",
+    "diskEncryptionPageInvalidKey": "Clé invalide",
+    "diskEncryptionPageEnterKey": "Entrez votre clé de secours",
+    "diskEncryptionPageKeyWorks": "Clé de secours fonctionne",
+    "diskEncryptionPageKeyWorksBody": "N’oubliez pas de la garder en lieu sûr.",
+    "diskEncryptionPageKeyDoesntWork": "Clé de secours ne fonctionne pas",
+    "diskEncryptionPageKeyDoesntWorkBody": "Vérifiez la clé ou la remplacer par une nouvelle.",
+    "diskEncryptionPageError": "Erreur",
+    "diskEncryptionPageStoreYourKey": "La clé de secours vous permet de récupérer l’accès à vos données si le disque ne parvient pas à se déverrouiller au démarrage. Enregistrez-la dans un endroit sûr.",
+    "diskEncryptionPageRecoveryKey": "Clé de secours",
+    "diskEncryptionPageCopySemanticLabel": "Copier",
+    "recoveryKeyExceptionFileSystemTitle": "Fichier clé de secours non sauvegardé",
+    "recoveryKeyExceptionDisallowedPathTitle": "Le fichier de clé de secours ne peut pas être enregistré dans un emplacement temporaire",
+    "recoveryKeyExceptionFileSystemBody": "Vous n’avez pas l’autorisation d’écrire dans ce dossier. Essayez un emplacement différent ou utilisez une autre méthode.",
+    "recoveryKeyExceptionDisallowedPathBody": "Essayez un emplacement différent, tel qu'un lecteur amovible, ou utilisez une autre méthode.",
+    "recoveryKeyFilePickerFilter": "Fichiers texte",
+    "diskEncryptionPageReplaceDialogHeader": "Remplacer clé de secours",
+    "diskEncryptionPageReplaceDialogSave": "Sauvegarde vers fichier",
+    "diskEncryptionPageReplaceDialogReplace": "Remplacer",
+    "diskEncryptionPageReplaceDialogDiscard": "Rejeter",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Clé de secours remplacée",
+    "diskEncryptionPageReplaceDialogSuccessBody": "N’oubliez pas de la garder quelque part en sécurité.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Échec du remplacement de la clé de secours",
+    "diskEncryptionPageReplaceDialogErrorBody": "Quelque chose s’est mal passé en remplaçant votre clé de secours, votre ancienne clé restera valide.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Clé de secours de chiffrement",
+    "diskEncryptionPageClipboardNotification": "Copié dans le presse-papiers",
+    "recoveryKeyFilePickerTitle": "Sauvegarder fichier clé de secours",
+    "recoveryKeyExceptionUnknownTitle": "Erreur inconnue",
+    "diskEncryptionPageReplaceDialogAcknowledge": "J’ai sauvegardé(e) ma clé de secours dans un endroit sûr",
+    "diskEncryptionPageReplaceButton": "Remplacement clé de secours...",
+    "diskEncryptionPageReplaceDialogShowQR": "Afficher code QR",
+    "diskEncryptionPageReplaceDialogQRBody": "Scannez le code QR pour copier la clé de secours et l’enregistrer dans un endroit sûr, tel qu'un gestionnaire de mots de passe. Vous pouvez également prendre une photo pour une utilisation ultérieure.",
+    "diskEncryptionPageReplaceDialogBody": "Sauvegardez la nouvelle clé de secours dans un endroit sûr. Une fois que vous l’avez remplacée, vous ne pourrez plus utiliser l’ancienne clé.",
+    "recoveryKeyTPMEnabled": "Le chiffrement matériel est activé",
+    "recoveryKeyPassphraseEnabled": "Phrase de passe de chiffrement activée",
+    "recoveryKeyPinHeader": "PIN de chiffrement",
+    "recoveryKeyPinCurrentError": "PIN incorrect, réessayez",
+    "recoveryKeyPassphraseDialogHeader": "Changer phrase de passe",
+    "recoveryKeyPinNew": "Nouveau PIN",
+    "recoveryKeyPinButton": "Changer PIN...",
+    "recoveryKeyPassphraseHeader": "Changer phrase de passe",
+    "recoveryKeyPassphraseCurrent": "Phrase de passe actuelle",
+    "recoveryKeyPassphrasePinSuccessBody": "Votre PIN a été mis à jour avec succès.",
+    "recoveryKeyPassphraseHide": "Cacher",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN mis à jour",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Phrases de passe mise à jour",
+    "recoveryKeyPassphraseChange": "Changer",
+    "recoveryKeyPassphraseButton": "Changer phrase de passe...",
+    "recoveryKeyPinEnabled": "Le PIN de chiffrement est activé",
+    "recoveryKeyPassphraseConfirmError": "Les phrases de passe ne correspondent pas, réessayez",
+    "recoveryKeyPassphraseNew": "Nouvelle phrase de passe",
+    "recoveryKeyPinBody": "Vous devez entrer votre code PIN chaque fois que votre ordinateur démarre.",
+    "recoveryKeyPinConfirm": "Confirmer PIN",
+    "recoveryKeyPassphraseBody": "Vous devez entrer votre phrase de passe chaque fois que votre ordinateur démarre.",
+    "recoveryKeyPinConfirmError": "Les PIN ne correspondent pas, réessayez",
+    "recoveryKeyPinDialogHeader": "Changer PIN",
+    "recoveryKeyPassphraseShow": "Montrer",
+    "recoveryKeyPassphraseConfirm": "Confirmer phrase de passe",
+    "recoveryKeyPassphraseCurrentError": "Phrase de passe incorrecte, réessayez",
+    "recoveryKeyPassphraseNewError": "Doit comporter au moins 4 caractères de long",
+    "recoveryKeyPinCurrent": "PIN actuel",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Votre phrase de passe a été mise à jour avec succès.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Phrase de passe faible, faites-la plus longue ou plus complexe",
+    "recoveryKeyPinEntropyBelowMin": "Code PIN faible, rendez-le plus long ou moins prévisible",
+    "recoveryKeyPinEntropyBelowOptimal": "PIN acceptable, le rendre plus long ou moins prévisible pour une meilleure sécurité",
+    "recoveryKeyPinEntropyOptimal": "Le PIN est suffisamment long",
+    "recoveryKeySomethingWentWrongHeader": "Quelque chose a mal tourné",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Phrase de passe suffisante, rendez-la plus longue ou plus complexe pour une meilleure sécurité",
+    "recoveryKeyPassphraseEntropyOptimal": "Phrase de passe forte",
+    "diskEncryptionPageStoreYourKeyWithLink": "La clé de récupération (de secours) vous permet de retrouver l’accès à vos données si le disque ne parvient pas à se déverrouiller pendant le démarrage. Enregistrez-la dans un endroit sûr. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Paramètres de chiffrement non disponibles",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Échec de la récupération du statut de chiffrement de cet ordinateur.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "La configuration du TPM de votre ordinateur n’est pas dans un état pris en charge.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Votre version Snapd n’est pas prise en charge",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Vérifiez que le centre de sécurité et Snapd sont à jour.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Le centre de sécurité ne parvient pas à se connecter à l’interface Snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Pour résoudre ceci, exécutez cette commande dans le terminal :",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "recoveryKeyExceptionFilePermissionTitle": "Échec d'enregistrement de votre clé de récupération dans le fichier",
+    "recoveryKeyExceptionFilePermissionBody": "Vous n’avez pas la permission d’écrire dans cet emplacement de fichier.",
+    "recoveryKeyTPMExplanationBody": "Les clés de chiffrement sont stockées dans le module TPM (Trusted Platform Module) de votre ordinateur.",
+    "recoveryKeyTPMExplanationLearnMore": "En savoir plus sur le chiffrement matériel",
+    "recoveryKeyEncrpytionPassphraseHeader": "Phrase de passe de chiffrement",
+    "snapPermissionAccessLabel": "Accès",
+    "cameraRulesPageEmptyTileLabel": "Aucune app n’a encore demandé l’accès",
+    "snapRulesResetAllPermissions": "Réinitialiser toutes autorisations",
+    "cameraInterfacePageTitle": "Caméra",
+    "cameraInterfacePageDescription": "Autorise les apps à accéder à vos caméras.",
+    "diskEncryptionPageAddPinButton": "Ajout PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Ajout phrase de passe...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Ajouter phrase de passe",
+    "diskEncryptionPageAddPinDialogHeading": "Ajouter PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "Vous devrez entrer votre code PIN chaque fois que votre ordinateur démarre. Ce code PIN est différent de votre mot de passe utilisateur.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Si vous oubliez votre code PIN, vous pouvez récupérer l’accès au disque en utilisant la clé de récupération.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Vous devrez entrer votre phrase de passe chaque fois que votre ordinateur démarre. Cette phrase de passe est différente de votre mot de passe utilisateur.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Si vous oubliez votre phrase de passe, vous pouvez récupérer l’accès au disque en utilisant la clé de récupération.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Sécurité supplémentaire",
+    "diskEncryptionPageAdditionalSecurityBody": "Vous pouvez définir une phrase de passe ou un code PIN pour une sécurité supplémentaire. Vous devrez l’entrer chaque fois que votre ordinateur démarre.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "En apprendre davantage",
+    "diskEncryptionPageRemovePinButton": "Retire PIN...",
+    "diskEncryptionPageAddPinDialogSaveButton": "Ajout",
+    "diskEncryptionPageRemovePassphraseButton": "Retire phrase de passe...",
+    "diskEncryptionPageAddingPin": "Ajout de PIN, cela peut prendre quelques secondes...",
+    "diskEncryptionPageAddingPassphrase": "Ajout d’une phrase de passe, cela peut prendre quelques secondes...",
+    "diskEncryptionPageRemovingPin": "Retire le code PIN, cela peut prendre quelques secondes...",
+    "diskEncryptionPageRemovingPassphrase": "Retire la phrase de passe, cela peut prendre quelques secondes...",
+    "microphoneInterfacePageTitle": "Microphone",
+    "microphoneInterfacePageDescription": "Autoriser les apps à accéder à votre microphone.",
+    "ubuntuProNotSupported": "Ubuntu Pro n’est pas disponible pour cette version d’Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro nécessite une version LTS",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro n’est pas pris en charge par cette version de Snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Mettre à jour Snapd pour gérer Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro est activé",
+    "ubuntuProDisabled": "Sécurité et conformité de niveau entreprise pour votre ordinateur. Toujours gratuit pour un usage personnel. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Découvrez Ubuntu Pro",
+    "ubuntuProEnablePro": "Activer Ubuntu Pro",
+    "ubuntuProEnableMagic": "Activer avec un compte Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Vous pourrez créer un compte gratuitement",
+    "ubuntuProMagicPrompt": "Connectez-vous avec votre compte Ubuntu One, ou créez-en un gratuitement.",
+    "ubuntuProMagicContinueInBrowser": "Continuer dans le navigateur",
+    "ubuntuProMagicDescription": "Vous pouvez également vous connecter sur {attachLink} et entrer le code {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Impossible d’activer Ubuntu Pro, veuillez réessayer",
+    "ubuntuProEnableToken": "Activer avec un jeton",
+    "ubuntuProEnableTokenError": "Incapable d’activer Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Depuis votre administrateur informatique ou depuis {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Obtenez un jeton Ubuntu Pro depuis votre administrateur ou depuis {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Jeton",
+    "ubuntuProDisablePro": "Désactiver Ubuntu Pro",
+    "ubuntuProDisable": "Désactiver",
+    "ubuntuProDisablePrompt": "Désactiver Ubuntu Pro détachera votre abonnement de cette machine. Voulez-vous continuer ?",
+    "ubuntuProEnable": "Activer",
+    "ubuntuProCancel": "Annuler",
+    "ubuntuProFeatureEnableError": "Impossible d’activer la fonctionnalité, veuillez réessayer.",
+    "ubuntuProFeatureDisableError": "Impossible de désactiver la fonctionnalité, veuillez réessayer.",
+    "ubuntuProCompliance": "Conformité et durcissement",
+    "ubuntuProComplianceDisclaimer": "Seulement recommandé pour aider avec FedRAMP, HIPAA et d’autres exigences de conformité et de durcissement.",
+    "ubuntuProComplianceUSGTitle": "Guide de sécurité Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatise le durcissement et l’audit avec les profils de référence CIS et DISA-STIG tout en permettant des personnalisations spécifiques à l’environnement.",
+    "ubuntuProComplianceFIPSDescription": "Une certification de module cryptographique des gouvernements américain et canadien en conformité avec la norme de protection des données FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Activer FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "L’activation de FIPS ne peut pas être inversée et Livepatch sera définitivement désactivé.",
+    "ubuntuProComplianceFIPSPrompt": "Choisissez votre option FIPS préférée",
+    "ubuntuProComplianceFIPSUpdates": "FIPS avec mises à jour",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Installe des paquetages validés FIPS 140-2 et permet des mises à jour de sécurité régulières.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS sans mises à jour",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Installe des paquets validés FIPS 140-2. Ceux-ci ne seront pas mis à jour avant la prochaine recertification.",
+    "ubuntuProComplianceDocumentation": "Documentation de conformité à la sécurité",
+    "ubuntuProESMTitle": "Maintenance de sécurité étendue (ESM)",
+    "ubuntuProLivepatchEnableTitle": "Activer Livepatch",
+    "ubuntuProLivepatchShowTitle": "Afficher le statut de Livepatch dans la barre supérieure",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProESMMainTitle": "Principaux paquetages (esm-infra)",
+    "ubuntuProESMMainDescription": "Mises à jour de sécurité pour 2 300 paquetages Ubuntu Main jusqu’en {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Paquetages d'Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Mises à jour de sécurité supplémentaires pour plus de 23 000 paquetages Ubuntu Universe jusqu’en {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchEnableDescription": "Appliquer les mises à jour de sécurité du noyau pendant que le système s’exécute",
+    "ubuntuProESMDescription": "ESM fournit 10 ans de correctifs de sécurité pour plus de 25 000 paquetages open source. Obtenez la gestion continue des vulnérabilités pour les CVE critiques, élevées et moyennes.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2"
 }

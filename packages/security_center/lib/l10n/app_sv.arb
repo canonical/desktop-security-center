@@ -1,77 +1,269 @@
 {
-  "snapdRuleCategoryForeverAllowed": "Tillåt alltid",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "Neka alltid",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "Läs",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionExecuteLabel": "Exekvera",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsEnableTitle": "Kräv program att be om systembehörigheter",
-  "@snapPermissionsEnableTitle": {},
-  "snapPermissionsEnableWarning": "Det här är en experimentell funktion för att kontrollera åtkomst till ditt systems resurser.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsDisablingLabel": "Inaktiverar, det kan ta några sekunder...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsPageTitle": "Program behörigheter",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesPageEmptyTileLabel": "Inga regler ännu",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Ta bort alla regler",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "Hemkatalog",
-  "@homeInterfacePageTitle": {},
-  "interfacePageTitle": "Hantera behörigheter",
-  "@interfacePageTitle": {},
-  "interfacePageLinkLearnMore": "Läs mer",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "Ge feedback",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfaceSnapCount": "{n, plural, =0{inga program} =1{1 program} other {{n} flera program}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "appTitle": "Säkerhetscenter",
-  "@appTitle": {},
-  "snapdRuleCategorySessionDenied": "Neka tills utloggning",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategorySessionAllowed": "Tillåt tills utloggning",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapPermissionWriteLabel": "Skriv",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionsExperimentalLabel": "Experimentell",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapRulesCount": "{n, plural, =0{inga regler} =1{1 regel} other{{n} regler}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsOtherDescription": "Du kan hantera andra behörigheter i Inställningar › Program.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsEnablingLabel": "Aktiverar, det kan ta några sekunder...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapRulesPageDescription": "Hantera {interface} behörigheter för {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "homeInterfacePageDescription": "Hantera behörigheter för att komma åt filer i din hemkatalog.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageDescription": "Strikt begränsade program kommer att fråga dig innan du kommer åt filer och mappar. Den här funktionen är experimentell och kan ändras.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkReportIssues": "Rapportera problem",
-  "@interfacePageLinkReportIssues": {}
+    "snapdRuleCategoryForeverAllowed": "Tillåt alltid",
+    "snapdRuleCategoryForeverDenied": "Neka alltid",
+    "snapPermissionReadLabel": "Läs",
+    "snapPermissionExecuteLabel": "Exekvera",
+    "snapPermissionsEnableTitle": "Kräv program att be om systembehörigheter",
+    "snapPermissionsEnableWarning": "Det här är en experimentell funktion för att kontrollera åtkomst till ditt systems resurser.",
+    "snapPermissionsDisablingLabel": "Inaktiverar, detta kan ta några sekunder...",
+    "snapPermissionsPageTitle": "Programbehörigheter",
+    "snapRulesPageEmptyTileLabel": "Inga regler ännu",
+    "snapRulesRemoveAll": "Ta bort alla regler",
+    "homeInterfacePageTitle": "Hemkatalog",
+    "interfacePageTitle": "Hantera behörigheter",
+    "interfacePageLinkLearnMore": "Läs mer",
+    "interfacePageLinkGiveFeedback": "Ge återkoppling",
+    "interfaceSnapCount": "{n, plural, =0{inga program} =1{1 program} other {{n} flera program}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "appTitle": "Säkerhetscenter",
+    "snapdRuleCategorySessionDenied": "Neka tills utloggning",
+    "snapdRuleCategorySessionAllowed": "Tillåt tills utloggning",
+    "snapPermissionWriteLabel": "Skriv",
+    "snapPermissionsExperimentalLabel": "Experimentell",
+    "snapRulesCount": "{n, plural, =0{inga regler} =1{1 regel} other{{n} regler}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsOtherDescription": "Du kan hantera andra behörigheter i Inställningar › Program.",
+    "snapPermissionsEnablingLabel": "Aktiverar, detta kan ta några sekunder...",
+    "snapRulesPageDescription": "Hantera {interface}-behörigheter för {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "homeInterfacePageDescription": "Hantera behörigheter för att komma åt filer i din hemkatalog.",
+    "interfacePageDescription": "Strikt begränsade program kommer att fråga dig innan du kommer åt filer och mappar. Den här funktionen är experimentell och kan ändras.",
+    "interfacePageLinkReportIssues": "Rapportera problem",
+    "diskEncryptionPageCopySemanticLabel": "Kopiera",
+    "recoveryKeyExceptionDisallowedPathTitle": "Återställningsnyckelfilen kan inte sparas på en temporär plats",
+    "diskEncryptionPageReplaceDialogSave": "Spara till fil",
+    "recoveryKeyExceptionDisallowedPathBody": "Försök med en annan plats, till exempel en flyttbar enhet, eller använd en annan metod.",
+    "recoveryKeyFilePickerTitle": "Spara återställningsnyckelfil",
+    "diskEncryptionPageClipboardNotification": "Kopierad till urklipp",
+    "diskEncryptionPageReplaceDialogDiscard": "Kasta bort",
+    "recoveryKeyExceptionFileSystemBody": "Du har inte behörighet att skriva till den mappen. Försök med en annan plats eller använd en annan metod.",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Återställningsnyckeln ersatt",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Kom ihåg att förvara den någonstans säkert.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Ersättning av återställningsnyckel misslyckades",
+    "diskEncryptionPageReplaceDialogErrorBody": "Något gick fel när din återställningsnyckel skulle ersättas. Din gamla nyckel kommer att förbli giltig.",
+    "diskEncryptionPageReplaceDialogQRBody": "Skanna QR-koden för att kopiera återställningsnyckeln och spara den på ett säkert ställe, till exempel i en lösenordshanterare. Du kan också ta ett foto för senare användning.",
+    "recoveryKeyFilePickerFilter": "Textfiler",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu skrivbord - Krypteringsåterställningsnyckel",
+    "recoveryKeyExceptionFileSystemTitle": "Återställningsnyckelfilen sparades inte",
+    "diskEncryptionPageReplaceButton": "Ersätt återställningsnyckel...",
+    "diskEncryptionPageReplaceDialogHeader": "Ersätt återställningsnyckel",
+    "diskEncryptionPageReplaceDialogBody": "Spara den nya återställningsnyckeln på ett säkert ställe. När du har ersatt den kommer du inte längre att kunna använda den gamla nyckeln.",
+    "diskEncryptionPageReplaceDialogShowQR": "Visa QR-kod",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Jag har sparat min återställningsnyckel någonstans säkert",
+    "diskEncryptionPageReplaceDialogReplace": "Ersätt",
+    "recoveryKeyExceptionUnknownTitle": "Okänt fel",
+    "diskEncryptionPageDialogHeaderCheckKey": "Kontrollera återställningsnyckel",
+    "diskEncryptionPageCheck": "Kontrollera",
+    "diskEncryptionPageTitle": "Diskkryptering",
+    "diskEncryptionPageValidKey": "Giltig nyckel",
+    "diskEncryptionPageInvalidKey": "Ogiltig nyckel",
+    "diskEncryptionPageEnterKey": "Ange din återställningsnyckel",
+    "diskEncryptionPageRecoveryKey": "Återställningsnyckel",
+    "diskEncryptionPageStoreYourKey": "Återställningsnyckeln låter dig återfå åtkomst till dina data om disken inte låses upp under uppstart. Spara den på ett säkert ställe.",
+    "diskEncryptionPageLearnMore": "Läs mer om hårdvarubaserad kryptering",
+    "diskEncryptionPageCheckKey": "Kontrollera återställningsnyckel...",
+    "diskEncryptionPageKeyWorks": "Återställningsnyckeln fungerar",
+    "diskEncryptionPageKeyWorksBody": "Kom ihåg att förvara den någonstans säkert.",
+    "diskEncryptionPageKeyDoesntWork": "Återställningsnyckeln fungerar inte",
+    "diskEncryptionPageKeyDoesntWorkBody": "Kontrollera nyckeln eller ersätt den mot en ny.",
+    "diskEncryptionPageError": "Fel",
+    "recoveryKeyTPMEnabled": "Hårdvarustödd kryptering är aktiverad",
+    "recoveryKeyPassphraseEnabled": "Krypteringslösenfras är aktiverad",
+    "recoveryKeyPassphraseHeader": "Ändra lösenfras",
+    "recoveryKeyPassphraseBody": "Du måste ange din lösenfras varje gång din dator startas.",
+    "recoveryKeyPassphraseButton": "Ändra lösenfras...",
+    "recoveryKeyPassphraseCurrent": "Nuvarande lösenfras",
+    "recoveryKeyPassphraseNew": "Ny lösenfras",
+    "recoveryKeyPassphraseConfirm": "Bekräfta lösenfras",
+    "recoveryKeyPassphraseCurrentError": "Felaktig lösenfras, försök igen",
+    "recoveryKeyPassphraseNewError": "Måste vara minst 4 tecken lång",
+    "recoveryKeyPassphraseConfirmError": "Lösenfraser matchar inte, försök igen",
+    "recoveryKeyPassphraseDialogHeader": "Ändra lösenfras",
+    "recoveryKeyPinEnabled": "Krypterings-PIN är aktiverad",
+    "recoveryKeyPinHeader": "Krypterings-PIN",
+    "recoveryKeyPinButton": "Ändra PIN-kod...",
+    "recoveryKeyPinCurrent": "Nuvarande PIN-kod",
+    "recoveryKeyPinNew": "Ny PIN-kod",
+    "recoveryKeyPinCurrentError": "Felaktig PIN-kod, försök igen",
+    "recoveryKeyPinConfirmError": "PIN-koderna matchar inte, försök igen",
+    "recoveryKeyPassphraseShow": "Visa",
+    "recoveryKeyPassphraseHide": "Dölj",
+    "recoveryKeyPassphraseChange": "Ändra",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN-kod uppdaterad",
+    "recoveryKeyPassphrasePinSuccessBody": "Din PIN-kod uppdaterades.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Lösenfras uppdaterad",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Din lösenfras uppdaterades.",
+    "recoveryKeyPassphraseEntropyOptimal": "Stark lösenfras",
+    "recoveryKeyPinEntropyBelowMin": "Svag PIN-kod, gör den längre eller mindre förutsägbar",
+    "recoveryKeyPinEntropyOptimal": "PIN-koden är tillräckligt lång",
+    "recoveryKeyPassphraseEntropyBelowMin": "Svag lösenfras, gör den längre eller mer komplex",
+    "recoveryKeyPinDialogHeader": "Ändra PIN-kod",
+    "recoveryKeyPinConfirm": "Bekräfta PIN-kod",
+    "recoveryKeyPinEntropyBelowOptimal": "Helt ok PIN-kod, gör den längre eller mindre förutsägbar för bättre säkerhet",
+    "recoveryKeyPinBody": "Du måste ange din PIN-kod varje gång din dator startas.",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Helt ok lösenfras, gör den längre eller mer komplex för bättre säkerhet",
+    "recoveryKeySomethingWentWrongHeader": "Något gick fel",
+    "diskEncryptionPageStoreYourKeyWithLink": "Återställningsnyckeln låter dig återfå åtkomst till din data om disken inte låses upp under uppstart. Spara den på ett säkert ställe. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Krypteringsinställningar är inte tillgängliga",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Misslyckades att hämta krypteringsstatus för denna dator.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "Datorns TPM-konfiguration är inte i ett tillstånd som stöds.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Din snapd-version stöds inte",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Kontrollera att säkerhetscentret och snapd är uppdaterade.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Säkerhetscentret kan inte ansluta till snapd-gränssnitt",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "För att åtgärda detta, kör följande kommando i terminalen:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "recoveryKeyExceptionFilePermissionTitle": "Misslyckades med att spara din återställningsnyckel till fil",
+    "recoveryKeyExceptionFilePermissionBody": "Du har inte behörighet att skriva till den filplatsen.",
+    "recoveryKeyTPMExplanationBody": "Krypteringsnycklarna lagras i din dators Trusted Platform Module (TPM).",
+    "recoveryKeyTPMExplanationLearnMore": "Lär dig mer om hårdvarustödd kryptering",
+    "recoveryKeyEncrpytionPassphraseHeader": "Lösenfras för kryptering",
+    "snapPermissionAccessLabel": "Åtkomst",
+    "cameraRulesPageEmptyTileLabel": "Inga appar har begärt åtkomst än",
+    "snapRulesResetAllPermissions": "Återställ alla rättigheter",
+    "cameraInterfacePageTitle": "Kamera",
+    "cameraInterfacePageDescription": "Tillåt appar att komma åt dina kameror.",
+    "diskEncryptionPageAddPinButton": "Lägg till PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Lägg till lösenfras...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Lägg till lösenfras",
+    "diskEncryptionPageAddPinDialogHeading": "Lägg till PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "Du kommer att behöva ange ditt PIN varje gång datorn startas. PIN-koden är inte samma sak som ditt användarlösenord.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Om du glömmer ditt PIN kan du få tillbaka åtkomst till disken genom att använda återställningsnyckeln.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Du kommer att behöva ange din lösenfras varje gång din dator startas. Lösenfrasen är inte samma sak som ditt användarlösenord.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Om du glömmer din lösenfras kan du få tillbaka åtkomst till disken genom att använda återställningsnyckeln.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Ytterligare säkerhet",
+    "diskEncryptionPageAdditionalSecurityBody": "Du kan ange en lösenfras eller ett PIN för ytterligare säkerhet. Du kommer att behöva ange dem varje gång din dator startas.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Läs mer",
+    "diskEncryptionPageAddPinDialogSaveButton": "Lägg till",
+    "diskEncryptionPageRemovePinButton": "Ta bort PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Ta bort lösenfras...",
+    "diskEncryptionPageAddingPin": "Lägger till PIN, detta kan ta ett par sekunder...",
+    "diskEncryptionPageAddingPassphrase": "Lägger till lösenfras, detta kan ta ett par sekunder...",
+    "diskEncryptionPageRemovingPin": "Tar bort PIN, detta kan ta ett par sekunder...",
+    "diskEncryptionPageRemovingPassphrase": "Tar bort lösenfras, detta kan ta ett par sekunder...",
+    "microphoneInterfacePageDescription": "Tillåt appar att komma åt din mikrofon.",
+    "microphoneInterfacePageTitle": "Mikrofon",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro är inte tillgängligt för den här versionen av Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro kräver en LTS-utgåva",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro stöds inte av den här versionen av snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Uppdatera snapd för att hantera Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro är aktiverat",
+    "ubuntuProDisabled": "Industrianpassad säkerhet och regelefterlevnad för din dator. Alltid gratis för privat bruk. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Läs mer om Ubuntu Pro",
+    "ubuntuProEnablePro": "Aktivera Ubuntu Pro",
+    "ubuntuProEnableMagic": "Aktivera med Ubuntu One-konto",
+    "ubuntuProEnableMagicSubtitle": "Du kommer att kunna skapa ett kostnadsfritt konto",
+    "ubuntuProMagicPrompt": "Logga in med ditt Ubuntu One-konto, eller skapa ett kostnadsfritt konto.",
+    "ubuntuProMagicContinueInBrowser": "Fortsätt i webbläsare",
+    "ubuntuProMagicDescription": "Du kan också logga in på {attachLink} och ange koden {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Kunde inte aktivera Ubuntu Pro, försök igen",
+    "ubuntuProEnableToken": "Aktivera med token",
+    "ubuntuProEnableTokenError": "Kunde inte aktivera Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Från din IT-administratör eller från {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Skaffa en Ubuntu Pro-token från din administratör eller från {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Avaktivera Ubuntu Pro",
+    "ubuntuProDisable": "Avaktivera",
+    "ubuntuProDisablePrompt": "Att avaktivera Ubuntu Pro kommer att koppla bort din prenumeration från den här datorn. Vill du fortsätta?",
+    "ubuntuProEnable": "Aktivera",
+    "ubuntuProCancel": "Avbryt",
+    "ubuntuProFeatureEnableError": "Kunde inte aktivera funktionen, försök igen.",
+    "ubuntuProFeatureDisableError": "Kunde inte avaktivera funktionen, försök igen.",
+    "ubuntuProCompliance": "Regelefterlevnad och ökat skydd",
+    "ubuntuProComplianceDisclaimer": "Rekommenderas endast för att bistå med FedRAMP, HIPAA, och andra efterlevnads- och skyddskrav.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu Säkerhetsguide (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatiserar ökat skydd och granskning med CIS benchmark och DISA-STIG-profiler medan miljöspecifika anpassningar tillåts.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "En statligt godkänd kryptografisk modulcertifiering från USA och Kanada för efterlevnad med dataskyddsstandarden FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Aktivera FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Att aktivera FIPS kan inte rullas tillbaka, och Livepatch kommer att avaktiveras permanent.",
+    "ubuntuProComplianceFIPSPrompt": "Välj ett lämpligt FIPS-alternativ",
+    "ubuntuProComplianceFIPSUpdates": "FIPS med uppdateringar",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Installerar FIPS 140-2-validerade paket, och tillåter regelbundna säkerhetsuppdateringar.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS utan uppdateringar",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Installerar FIPS 140-2-validerade paket. Dessa kommer inte att uppdateras förrän vid nästa omcertifiering.",
+    "ubuntuProComplianceDocumentation": "Dokumentation för säkerhetsefterlevnad",
+    "ubuntuProESMTitle": "Expanderat säkerhetsunderhåll (ESM)",
+    "ubuntuProESMDescription": "ESM ger 10 år av säkerhetsfixar för 25000+ öppna programpaket. Få kontinuerlig sårbarhetshantering för kritiska, höga och mellanhöga CVE-notiser.",
+    "ubuntuProESMMainTitle": "Main-paket (esm-infra)",
+    "ubuntuProESMMainDescription": "Säkerhetsuppdateringar för 2300 Ubuntu Main-paket fram till {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Universe-paket (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Ytterligare säkerhetsuppdateringar för över 23000 Ubuntu Universe-paket fram till {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Livepatch för kärnan",
+    "ubuntuProLivepatchEnableTitle": "Aktivera Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Tillämpa säkerhetsuppdateringar för kärnprogrammet medan systemet körs",
+    "ubuntuProLivepatchShowTitle": "Visa Livepatch-status i övre fältet"
 }

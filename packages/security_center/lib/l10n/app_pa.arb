@@ -1,1 +1,6 @@
-{}
+{
+    "appTitle": "ਸੁਰੱਖਿਆ ਕੇਂਦਰ",
+    "snapdRuleCategorySessionAllowed": "ਲਾਗ-ਆਉਟ ਕਰਨ ਤੱਕ ਮਨਜ਼ੂਰ",
+    "recoveryKeyExceptionUnknownTitle": "ਅਣਪਛਾਤੀ ਗਲਤੀ",
+    "recoveryKeyFilePickerFilter": "ਲਿਖਤ ਫ਼ਾਇਲਾਂ"
+}

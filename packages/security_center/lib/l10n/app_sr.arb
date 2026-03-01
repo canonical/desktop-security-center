@@ -1,77 +1,77 @@
 {
-  "interfaceSnapCount": "{n, plural, =0{нема апликација} =1{1 апликација} other {{n} апликација}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "homeInterfacePageTitle": "Почетни фолдер",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Управљај дозволама за приступ фајловима у вашем Почетном фолдеру.",
-  "@homeInterfacePageDescription": {},
-  "snapPermissionWriteLabel": "Писање",
-  "@snapPermissionWriteLabel": {},
-  "snapRulesCount": "{n, plural, =0{нема правила} =1{1 правило} other{{n} правила}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "Још увек нема правила",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapdRuleCategoryForeverDenied": "Увек одбиј",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionsExperimentalLabel": "Експериментално",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapdRuleCategorySessionAllowed": "Дозволи до одјаве",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "Одбиј до одјаве",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverAllowed": "Увек дозволи",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapPermissionReadLabel": "Читање",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionExecuteLabel": "Извршавање",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsEnableWarning": "Ово је експериментална функција за контролу приступа ресурсима вашег Система.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "Омогућавање, може потрајати неколико секунди...",
-  "@snapPermissionsEnablingLabel": {},
-  "appTitle": "Центар за безбедност",
-  "@appTitle": {},
-  "snapPermissionsEnableTitle": "Захтевај да апликације траже дозволе за приступ системским ресурсима",
-  "@snapPermissionsEnableTitle": {},
-  "snapPermissionsDisablingLabel": "Онемогућавање, може потрајати неколико секунди...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsOtherDescription": "Можете управљати другим дозволама у Подешавања › Апликације.",
-  "@snapPermissionsOtherDescription": {},
-  "snapRulesPageDescription": "Управљај дозволама за {interface} за {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapPermissionsPageTitle": "Дозволе апликација",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesRemoveAll": "Уклони сва правила",
-  "@snapRulesRemoveAll": {},
-  "interfacePageTitle": "Управљај дозволама",
-  "@interfacePageTitle": {},
-  "interfacePageDescription": "Строго ограничене апликације ће вас питати пре приступа фајловима и фолдерима. Ова функција је експериментална и подложна променама.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkLearnMore": "Сазнајте више",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "Дајте повратне информације",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "Пријавите проблеме",
-  "@interfacePageLinkReportIssues": {}
+    "interfaceSnapCount": "{n, plural, =0{нема апликација} =1{1 апликација} other {{n} апликација}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "homeInterfacePageTitle": "Почетни фолдер",
+    "@homeInterfacePageTitle": {},
+    "homeInterfacePageDescription": "Управљај дозволама за приступ фајловима у вашем Почетном фолдеру.",
+    "@homeInterfacePageDescription": {},
+    "snapPermissionWriteLabel": "Писање",
+    "@snapPermissionWriteLabel": {},
+    "snapRulesCount": "{n, plural, =0{нема правила} =1{1 правило} other{{n} правила}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Још увек нема правила",
+    "@snapRulesPageEmptyTileLabel": {},
+    "snapdRuleCategoryForeverDenied": "Увек одбиј",
+    "@snapdRuleCategoryForeverDenied": {},
+    "snapPermissionsExperimentalLabel": "Експериментално",
+    "@snapPermissionsExperimentalLabel": {},
+    "snapdRuleCategorySessionAllowed": "Дозволи до одјаве",
+    "@snapdRuleCategorySessionAllowed": {},
+    "snapdRuleCategorySessionDenied": "Одбиј до одјаве",
+    "@snapdRuleCategorySessionDenied": {},
+    "snapdRuleCategoryForeverAllowed": "Увек дозволи",
+    "@snapdRuleCategoryForeverAllowed": {},
+    "snapPermissionReadLabel": "Читање",
+    "@snapPermissionReadLabel": {},
+    "snapPermissionExecuteLabel": "Извршавање",
+    "@snapPermissionExecuteLabel": {},
+    "snapPermissionsEnableWarning": "Ово је експериментална функција за контролу приступа ресурсима вашег Система.",
+    "@snapPermissionsEnableWarning": {},
+    "snapPermissionsEnablingLabel": "Омогућавање, може потрајати неколико секунди...",
+    "@snapPermissionsEnablingLabel": {},
+    "appTitle": "Центар за безбедност",
+    "@appTitle": {},
+    "snapPermissionsEnableTitle": "Захтевај да апликације траже дозволе за приступ системским ресурсима",
+    "@snapPermissionsEnableTitle": {},
+    "snapPermissionsDisablingLabel": "Онемогућавање, може потрајати неколико секунди...",
+    "@snapPermissionsDisablingLabel": {},
+    "snapPermissionsOtherDescription": "Можете управљати другим дозволама у Подешавања › Апликације.",
+    "@snapPermissionsOtherDescription": {},
+    "snapRulesPageDescription": "Управљај дозволама за {interface} за {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapPermissionsPageTitle": "Дозволе апликација",
+    "@snapPermissionsPageTitle": {},
+    "snapRulesRemoveAll": "Уклони сва правила",
+    "@snapRulesRemoveAll": {},
+    "interfacePageTitle": "Управљај дозволама",
+    "@interfacePageTitle": {},
+    "interfacePageDescription": "Строго ограничене апликације ће вас питати пре приступа фајловима и фолдерима. Ова функција је експериментална и подложна променама.",
+    "@interfacePageDescription": {},
+    "interfacePageLinkLearnMore": "Сазнајте више",
+    "@interfacePageLinkLearnMore": {},
+    "interfacePageLinkGiveFeedback": "Дајте повратне информације",
+    "@interfacePageLinkGiveFeedback": {},
+    "interfacePageLinkReportIssues": "Пријавите проблеме",
+    "@interfacePageLinkReportIssues": {}
 }

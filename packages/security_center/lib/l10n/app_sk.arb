@@ -1,77 +1,269 @@
 {
-  "appTitle": "Centrum zabezpečenia",
-  "@appTitle": {},
-  "snapPermissionsEnablingLabel": "Aktivuje sa, môže to trvať niekoľko sekúnd...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "Deaktivuje sa, môže to trvať niekoľko sekúnd...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsPageTitle": "Práva aplikácie",
-  "@snapPermissionsPageTitle": {},
-  "interfacePageLinkReportIssues": "Nahlásiť problémy",
-  "@interfacePageLinkReportIssues": {},
-  "snapPermissionsExperimentalLabel": "Experimentálne",
-  "@snapPermissionsExperimentalLabel": {},
-  "interfacePageLinkGiveFeedback": "Poskytnúť spätnú väzbu",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkLearnMore": "Zistiť viac",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageTitle": "Spravovať oprávnenia",
-  "@interfacePageTitle": {},
-  "snapPermissionsOtherDescription": "Ďalšie oprávnenia môžete spravovať v časti Nastavenia › Aplikácie.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsEnableWarning": "Táto experimentálna funkcia slúži na kontrolu prístupu k častiam vášho systému.",
-  "@snapPermissionsEnableWarning": {},
-  "snapdRuleCategorySessionAllowed": "Povolené do ukončenia",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategoryForeverAllowed": "Vždy povolené",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapPermissionReadLabel": "Čítanie",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionExecuteLabel": "Spúšťanie",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionWriteLabel": "Zápis",
-  "@snapPermissionWriteLabel": {},
-  "snapRulesCount": "{n, plural, =0{žiadne pravidlá} =1{pravidlo (1)} other{pravidlá ({n})}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "Zatiaľ žiadne pravidlá",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Odstrániť všetky pravidlá",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "Priečinok domov",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Spravujte práva pre prístup k súborom vo vašom priečinku domov.",
-  "@homeInterfacePageDescription": {},
-  "interfaceSnapCount": "{n, plural, =0{žiadne aplikácie} =1{aplikácia (1)} other {aplikácie ({n})}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapdRuleCategoryForeverDenied": "Vždy odmietnuté",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapdRuleCategorySessionDenied": "Odmietnuté do ukončenia",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapPermissionsEnableTitle": "Donútiť aplikácie požiadať o oprávnenia",
-  "@snapPermissionsEnableTitle": {},
-  "snapRulesPageDescription": "Spravujte práva k rozhraniu {interface} pre {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "interfacePageDescription": "Aplikácie s prísnymi obmedzeniami budú žiadať o povolenie pred prístupom k súborom a priečinkom. Táto funkcia je experimentálna a môže sa meniť.",
-  "@interfacePageDescription": {}
+    "appTitle": "Centrum zabezpečenia",
+    "snapPermissionsEnablingLabel": "Aktivuje sa, môže to trvať niekoľko sekúnd...",
+    "snapPermissionsDisablingLabel": "Deaktivuje sa, môže to trvať niekoľko sekúnd...",
+    "snapPermissionsPageTitle": "Oprávnenia",
+    "interfacePageLinkReportIssues": "Nahlásiť problémy",
+    "snapPermissionsExperimentalLabel": "Experimentálne",
+    "interfacePageLinkGiveFeedback": "Poskytnúť spätnú väzbu",
+    "interfacePageLinkLearnMore": "Zistiť viac",
+    "interfacePageTitle": "Spravovať oprávnenia",
+    "snapPermissionsOtherDescription": "Ďalšie oprávnenia môžete spravovať v časti Nastavenia › Aplikácie.",
+    "snapPermissionsEnableWarning": "Táto experimentálna funkcia slúži na kontrolu prístupu k zdrojom vášho systému.",
+    "snapdRuleCategorySessionAllowed": "Povolené do odhlásenia",
+    "snapdRuleCategoryForeverAllowed": "Vždy povolené",
+    "snapPermissionReadLabel": "Čítanie",
+    "snapPermissionExecuteLabel": "Spúšťanie",
+    "snapPermissionWriteLabel": "Zápis",
+    "snapRulesCount": "{n, plural, =0{žiadne pravidlá} =1{pravidlo (1)} other{pravidlá ({n})}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Zatiaľ žiadne pravidlá",
+    "snapRulesRemoveAll": "Odstrániť všetky pravidlá",
+    "homeInterfacePageTitle": "Domovský priečinok",
+    "homeInterfacePageDescription": "Spravujte oprávnenia na prístup k súborom v domovskom priečinku.",
+    "interfaceSnapCount": "{n, plural, =0{žiadne aplikácie} =1{aplikácia (1)} other {aplikácie ({n})}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapdRuleCategoryForeverDenied": "Vždy odmietnuté",
+    "snapdRuleCategorySessionDenied": "Odmietnuté do odhlásenia",
+    "snapPermissionsEnableTitle": "Vyžadovať oprávnenia od aplikácií",
+    "snapRulesPageDescription": "Spravujte oprávnenia k {interface} pre {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "interfacePageDescription": "Aplikácie s prísnymi obmedzeniami budú žiadať o povolenie pred prístupom k súborom a priečinkom. Táto funkcia je experimentálna a môže sa meniť.",
+    "diskEncryptionPageRecoveryKey": "Obnovovací kľúč",
+    "diskEncryptionPageLearnMore": "Zistiť viac o šifrovaní podporovanom hardvérom",
+    "diskEncryptionPageValidKey": "Platný kľúč",
+    "diskEncryptionPageInvalidKey": "Neplatný kľúč",
+    "diskEncryptionPageCheckKey": "Skontrolovať obnovovací kľúč...",
+    "diskEncryptionPageCheck": "Skontrolovať",
+    "diskEncryptionPageEnterKey": "Zadajte svoj obnovovací kľúč",
+    "diskEncryptionPageDialogHeaderCheckKey": "Kontrola obnovovacieho kľúča",
+    "diskEncryptionPageKeyDoesntWorkBody": "Skontrolujte kľúč alebo ho nahraďte novým.",
+    "diskEncryptionPageError": "Chyba",
+    "diskEncryptionPageKeyWorksBody": "Nezabudnite ho uložiť na bezpečné miesto.",
+    "diskEncryptionPageTitle": "Šifrovanie disku",
+    "diskEncryptionPageStoreYourKey": "Obnovovací kľúč vám umožní znovu získať prístup k vašim údajom, ak sa disk počas spustenia nepodarí odomknúť. Uložte ho na bezpečné miesto.",
+    "diskEncryptionPageKeyDoesntWork": "Obnovovací kľúč nefunguje",
+    "diskEncryptionPageKeyWorks": "Obnovovací kľúč funguje",
+    "diskEncryptionPageReplaceDialogHeader": "Vymeniť obnovovací kľúč",
+    "diskEncryptionPageReplaceDialogBody": "Uložte nový obnovovací kľúč na bezpečné miesto. Po jeho výmene už nebudete môcť používať starý kľúč.",
+    "diskEncryptionPageReplaceDialogShowQR": "Zobraziť QR kód",
+    "diskEncryptionPageReplaceDialogSave": "Uložiť do súboru",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Uložil(a) som svoj obnovovací kľúč na bezpečné miesto",
+    "diskEncryptionPageReplaceDialogReplace": "Nahradiť",
+    "diskEncryptionPageReplaceDialogDiscard": "Zahodiť",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Obnovovací kľúč bol vymenený",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Nepodarilo sa vymeniť obnovovací kľúč",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop – obnovovací kľúč pre šifrovanie",
+    "diskEncryptionPageClipboardNotification": "Skopírované do schránky",
+    "recoveryKeyExceptionUnknownTitle": "Neznáma chyba",
+    "recoveryKeyExceptionFileSystemBody": "Nemáte oprávnenie zapisovať do tohto priečinka. Skúste iné umiestnenie alebo použite inú metódu.",
+    "recoveryKeyFilePickerTitle": "Uložiť súbor obnovovacieho kľúča",
+    "recoveryKeyFilePickerFilter": "Textové súbory",
+    "recoveryKeyExceptionDisallowedPathTitle": "Súbor s obnovovacím kľúčom sa nedá uložiť do dočasného priečinka",
+    "recoveryKeyExceptionDisallowedPathBody": "Skúste iné umiestnenie, napríklad vymeniteľnú jednotku, alebo použite inú metódu.",
+    "diskEncryptionPageReplaceButton": "Vymeniť obnovovací kľúč...",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Nezabudnite ho uložiť na bezpečné miesto.",
+    "diskEncryptionPageReplaceDialogErrorBody": "Pri výmene obnovovacieho kľúča nastala chyba, váš starý kľúč zostáva platný.",
+    "diskEncryptionPageReplaceDialogQRBody": "Naskenujte QR kód na skopírovanie obnovovacieho kľúča a uložte ho na bezpečné miesto, napríklad do správcu hesiel. Môžete si tiež vytvoriť fotku obrazovky na neskoršie použitie.",
+    "recoveryKeyExceptionFileSystemTitle": "Súbor s obnovovacím kľúčom nebol uložený",
+    "diskEncryptionPageCopySemanticLabel": "Kopírovať",
+    "recoveryKeyPassphraseEnabled": "Šifrovanie prístupovou frázou je zapnuté",
+    "recoveryKeyPassphraseHeader": "Zmena prístupovej frázy",
+    "recoveryKeyPassphraseButton": "Zmeniť prístupovú frázu...",
+    "recoveryKeyPassphraseCurrent": "Aktuálna prístupová fráza",
+    "recoveryKeyPassphraseNew": "Nová prístupová fráza",
+    "recoveryKeyPassphraseConfirm": "Potvrďte prístupovú frázu",
+    "recoveryKeyPassphraseCurrentError": "Nesprávna prístupová fráza, skúste to znova",
+    "recoveryKeyPassphraseNewError": "Musí mať najmenej 4 znaky",
+    "recoveryKeyPassphraseConfirmError": "Prístupové frázy sa nezhodujú, skúste to znova",
+    "recoveryKeyPassphraseDialogHeader": "Zmena prístupovej frázy",
+    "recoveryKeyPinHeader": "Šifrovací PIN",
+    "recoveryKeyPinCurrent": "Aktuálny PIN",
+    "recoveryKeyPinNew": "Nový PIN",
+    "recoveryKeyPinConfirm": "Potvrďte PIN",
+    "recoveryKeyPinConfirmError": "PINy sa nezhodujú, skúste to znova",
+    "recoveryKeyPinDialogHeader": "Zmena PIN",
+    "recoveryKeyPassphraseShow": "Zobraziť",
+    "recoveryKeyPassphraseHide": "Skryť",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN aktualizovaný",
+    "recoveryKeyPassphrasePinSuccessBody": "Váš PIN bol úspešne aktualizovaný.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Prístupová fráza aktualizovaná",
+    "recoveryKeyPassphraseChange": "Zmeniť",
+    "recoveryKeyPassphraseBody": "Prístupovú frázu budete musieť zadať pri každom spustení počítača.",
+    "recoveryKeyTPMEnabled": "Hardvérom podporované šifrovanie je zapnuté",
+    "recoveryKeyPinEnabled": "Šifrovací PIN je zapnutý",
+    "recoveryKeyPinButton": "Zmeniť PIN...",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Vaša prístupová fráza bola úspešne aktualizovaná.",
+    "recoveryKeyPinBody": "PIN budete musieť zadať pri každom spustení počítača.",
+    "recoveryKeyPinCurrentError": "Nesprávny PIN, skúste to znova",
+    "recoveryKeyPassphraseEntropyOptimal": "Silná prístupová fráza",
+    "recoveryKeyPinEntropyBelowMin": "Slabý PIN, vytvorte ho dlhší alebo menej predvídateľný",
+    "recoveryKeyPinEntropyBelowOptimal": "Priemerný PIN, vytvorte ho dlhší alebo menej predvídateľný pre lepšiu bezpečnosť",
+    "recoveryKeyPinEntropyOptimal": "PIN je dostatočne dlhý",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Priemerná prístupová fráza, vytvorte ju dlhšiu alebo zložitejšiu kvôli vyššej bezpečnosti",
+    "recoveryKeyPassphraseEntropyBelowMin": "Slabá prístupová fráza, vytvorte ju dlhšiu alebo zložitejšiu",
+    "recoveryKeySomethingWentWrongHeader": "Niečo sa pokazilo",
+    "diskEncryptionPageStoreYourKeyWithLink": "Obnovovací kľúč vám umožní znovu získať prístup k údajom, ak sa disk nepodarí odomknúť pri spustení. Uložte ho na bezpečné miesto. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Nastavenia šifrovania nie sú k dispozícii",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Nepodarilo sa získať stav šifrovania tohto počítača.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "Konfigurácia TPM vášho počítača nie je v podporovanom stave.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Vaša verzia snapd nie je podporovaná",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Skontrolujte, či je Centrum zabezpečenia a snapd aktualizované.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Centrum zabezpečenia sa nemôže pripojiť k rozhraniu snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Aby ste to opravili, spustite tento príkaz v termináli:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "recoveryKeyExceptionFilePermissionTitle": "Nepodarilo sa uložiť obnovovací kľúč do súboru",
+    "recoveryKeyExceptionFilePermissionBody": "Nemáte oprávnenie zapisovať do tohto umiestnenia súboru.",
+    "recoveryKeyTPMExplanationBody": "Šifrovacie kľúče sú uložené v Trusted Platform Module (TPM) vášho počítača.",
+    "recoveryKeyTPMExplanationLearnMore": "Zistite viac o šifrovaní podporovanom hardvérom",
+    "recoveryKeyEncrpytionPassphraseHeader": "Šifrovacia prístupová fráza",
+    "cameraRulesPageEmptyTileLabel": "Žiadne aplikácie zatiaľ nepožiadali o prístup",
+    "snapRulesResetAllPermissions": "Obnoviť všetky povolenia",
+    "cameraInterfacePageTitle": "Kamera",
+    "cameraInterfacePageDescription": "Povoliť aplikáciám prístup ku kamere.",
+    "snapPermissionAccessLabel": "Prístup",
+    "diskEncryptionPageAddPinButton": "Pridať PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Pridať prístupovú frázu...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Pridať prístupovú frázu",
+    "diskEncryptionPageAddPinDialogHeading": "Pridať PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "PIN budete musieť zadať pri každom spustení počítača. Tento PIN sa líši od vášho používateľského hesla.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Ak zabudnete svoj PIN, môžete znovu získať prístup k disku pomocou obnovovacieho kľúča.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Prístupovú frázu budete musieť zadať pri každom spustení počítača. Táto prístupová fráza sa líši od vášho používateľského hesla.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Ak zabudnete svoju prístupovú frázu, môžete znovu získať prístup k disku pomocou obnovovacieho kľúča.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Dodatočné zabezpečenie",
+    "diskEncryptionPageAdditionalSecurityBody": "Pre zvýšenie zabezpečenia si môžete nastaviť prístupovú frázu alebo PIN. Budete ju musieť zadať pri každom spustení počítača.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Zistiť viac",
+    "diskEncryptionPageAddPinDialogSaveButton": "Pridať",
+    "diskEncryptionPageRemovePinButton": "Odstrániť PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Odstrániť prístupovú frázu...",
+    "diskEncryptionPageAddingPin": "Pridáva sa PIN, môže to trvať niekoľko sekúnd...",
+    "diskEncryptionPageAddingPassphrase": "Pridáva sa prístupová fráza, môže to trvať niekoľko sekúnd...",
+    "diskEncryptionPageRemovingPin": "Odstraňuje sa PIN, môže to trvať niekoľko sekúnd...",
+    "diskEncryptionPageRemovingPassphrase": "Odstraňuje sa prístupová fráza, môže to trvať niekoľko sekúnd...",
+    "microphoneInterfacePageTitle": "Mikrofón",
+    "microphoneInterfacePageDescription": "Povoliť aplikáciám prístup k mikrofónu.",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro nie je dostupné pre túto verziu Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro vyžaduje LTS vydanie",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro nie je podporované touto verziou snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Aktualizujte snapd, aby bolo možné spravovať Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro je aktivované",
+    "ubuntuProDisabled": "Podnikové zabezpečenie a dodržiavanie štandardov pre váš počítač. Vždy zadarmo na osobné použitie. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Zistiť viac o Ubuntu Pro",
+    "ubuntuProEnablePro": "Aktivovať Ubuntu Pro",
+    "ubuntuProEnableMagic": "Aktivovať pomocou účtu Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Účet si môžete vytvoriť zadarmo",
+    "ubuntuProMagicPrompt": "Prihláste sa pomocou účtu Ubuntu One alebo si ho zadarmo vytvorte.",
+    "ubuntuProMagicContinueInBrowser": "Pokračovať v prehliadači",
+    "ubuntuProMagicDescription": "Môžete sa tiež prihlásiť na {attachLink} a zadať kód {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Nepodarilo sa aktivovať Ubuntu Pro, skúste to znova",
+    "ubuntuProEnableToken": "Aktivovať pomocou tokenu",
+    "ubuntuProEnableTokenError": "Nepodarilo sa aktivovať Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Od vášho IT administrátora alebo z {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Získajte token Ubuntu Pro od vášho administrátora alebo z {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Deaktivovať Ubuntu Pro",
+    "ubuntuProDisable": "Deaktivovať",
+    "ubuntuProDisablePrompt": "Deaktivovaním Ubuntu Pro sa toto zariadenie odpojí od vášho predplatného. Chcete pokračovať?",
+    "ubuntuProEnable": "Aktivovať",
+    "ubuntuProCancel": "Zrušiť",
+    "ubuntuProFeatureEnableError": "Funkciu sa nepodarilo aktivovať, skúste to znova.",
+    "ubuntuProFeatureDisableError": "Funkciu sa nepodarilo deaktivovať, skúste to znova.",
+    "ubuntuProCompliance": "Dodržiavanie štandardov a hardening",
+    "ubuntuProComplianceDisclaimer": "Odporúča sa iba na podporu požiadaviek FedRAMP, HIPAA a ďalších štandardov a hardeningu.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu Security Guide (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatizuje hardening a audit pomocou profilov CIS Benchmark a DISA‑STIG s možnosťou prispôsobenia pre konkrétne prostredie.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140‑2",
+    "ubuntuProComplianceFIPSDescription": "Certifikácia kryptografických modulov podľa štandardu FIPS 140‑2 používaná vládami USA a Kanady.",
+    "ubuntuProComplianceFIPSEnable": "Aktivovať FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Aktivovanie FIPS je nevratné a Livepatch bude natrvalo vypnutý.",
+    "ubuntuProComplianceFIPSPrompt": "Vyberte preferovanú možnosť FIPS",
+    "ubuntuProComplianceFIPSUpdates": "FIPS s aktualizáciami",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Nainštaluje balíky validované podľa FIPS 140‑2 a umožní pravidelné bezpečnostné aktualizácie.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS bez aktualizácií",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Nainštaluje balíky validované podľa FIPS 140‑2, ktoré sa nebudú aktualizovať až do ďalšej recertifikácie.",
+    "ubuntuProComplianceDocumentation": "Dokumentácia k bezpečnostným štandardom",
+    "ubuntuProESMTitle": "Expanded Security Maintenance (ESM)",
+    "ubuntuProESMDescription": "ESM poskytuje 10 rokov bezpečnostných aktualizácií pre viac než 25 000 open‑source balíkov a priebežnú správu zraniteľností pre kritické, vysoké a stredné CVE.",
+    "ubuntuProESMMainTitle": "Hlavné balíky (esm‑infra)",
+    "ubuntuProESMMainDescription": "Bezpečnostné aktualizácie pre 2 300 balíkov z Ubuntu Main do roku {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Balíky Universe (esm‑apps)",
+    "ubuntuProESMUniverseDescription": "Dodatočné bezpečnostné aktualizácie pre viac než 23 000 balíkov z Ubuntu Universe do roku {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Aktivovať Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Použiť bezpečnostné aktualizácie jadra počas chodu systému",
+    "ubuntuProLivepatchShowTitle": "Zobraziť stav Livepatch v hornej lište"
 }

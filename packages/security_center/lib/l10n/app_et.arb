@@ -1,77 +1,173 @@
 {
-  "snapdRuleCategorySessionDenied": "Keela kuni väljalogimiseni",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverDenied": "Keela alati",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapdRuleCategoryForeverAllowed": "Luba alati",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "appTitle": "Andmeturbekeskus",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "Luba kuni väljalogimiseni",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapPermissionReadLabel": "Lugemine",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "Kirjutamine",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Käivitamine",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsEnableWarning": "See on katseline funktsionaalsus, mis võimaldab kontrollida ligipääsu süsteemiressurssidele.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "Lülitame sisse, selleks kulub mõni sekund...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsExperimentalLabel": "Katseline",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsOtherDescription": "Muid õigusi saad hallata valikust „Sätted › Rakendused“.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsPageTitle": "Rakenduste õigused",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesPageDescription": "Halda „{snap}“ paketi õigusi „{interface}“ liidese kasutamisel.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "Reeglid on veel määratlemata",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Eemalda kõik reeglid",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "Kodukaust",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Halda failide ligipääsuõigusi kodukaustas.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageTitle": "Halda õigusi",
-  "@interfacePageTitle": {},
-  "interfacePageLinkLearnMore": "Loe lisaks",
-  "@interfacePageLinkLearnMore": {},
-  "interfaceSnapCount": "{n, plural, =0{ühtegi rakendust pole seadistatud} =1{1 rakendus} other {{n} rakendust}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsEnableTitle": "Eelda, et rakendused küsivad operatsioonisüsteemilt õigusi",
-  "@snapPermissionsEnableTitle": {},
-  "snapRulesCount": "{n, plural, =0{reeglid on määratlemata} =1{1 reegel} other{{n} reeglit}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "interfacePageDescription": "Kui rakendus töötab rangelt seadistatud eraldatud konteineris, siis ta peab sult enne failide ja kaustade avamist luba küsima. See funktsionaalsus on veel katsejärgus ning selles võib tekkida muudatusi.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkGiveFeedback": "Jaga tagasisidet",
-  "@interfacePageLinkGiveFeedback": {},
-  "snapPermissionsDisablingLabel": "Lülitame välja, selleks kulub mõni sekund...",
-  "@snapPermissionsDisablingLabel": {},
-  "interfacePageLinkReportIssues": "Teata veast või problemist",
-  "@interfacePageLinkReportIssues": {}
+    "snapdRuleCategorySessionDenied": "Keela kuni väljalogimiseni",
+    "snapdRuleCategoryForeverDenied": "Keela alati",
+    "snapdRuleCategoryForeverAllowed": "Luba alati",
+    "appTitle": "Andmeturbekeskus",
+    "snapdRuleCategorySessionAllowed": "Luba kuni väljalogimiseni",
+    "snapPermissionReadLabel": "Lugemine",
+    "snapPermissionWriteLabel": "Kirjutamine",
+    "snapPermissionExecuteLabel": "Käivitamine",
+    "snapPermissionsEnableWarning": "See on katseline funktsionaalsus, mis võimaldab kontrollida ligipääsu süsteemiressurssidele.",
+    "snapPermissionsEnablingLabel": "Lülitan sisse, selleks võib kuluda mõni sekund...",
+    "snapPermissionsExperimentalLabel": "Katseline",
+    "snapPermissionsOtherDescription": "Muid õigusi saad hallata valikust „Sätted › Rakendused“.",
+    "snapPermissionsPageTitle": "Rakenduste õigused",
+    "snapRulesPageDescription": "Halda „{snap}“ paketi õigusi „{interface}“ liidese kasutamisel.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Reeglid on veel määratlemata",
+    "snapRulesRemoveAll": "Eemalda kõik reeglid",
+    "homeInterfacePageTitle": "Kodukaust",
+    "homeInterfacePageDescription": "Halda failide ligipääsuõigusi kodukaustas.",
+    "interfacePageTitle": "Halda õigusi",
+    "interfacePageLinkLearnMore": "Loe lisaks",
+    "interfaceSnapCount": "{n, plural, =0{ühtegi rakendust pole seadistatud} =1{1 rakendus} other {{n} rakendust}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsEnableTitle": "Eelda, et rakendused küsivad operatsioonisüsteemilt õigusi",
+    "snapRulesCount": "{n, plural, =0{reeglid on määratlemata} =1{1 reegel} other{{n} reeglit}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "interfacePageDescription": "Kui rakendus töötab rangelt seadistatud eraldatud konteineris, siis ta peab sult enne failide ja kaustade avamist luba küsima. See funktsionaalsus on veel katsejärgus ning selles võib tekkida muudatusi.",
+    "interfacePageLinkGiveFeedback": "Jaga tagasisidet",
+    "snapPermissionsDisablingLabel": "Lülitan välja, selleks võib kuluda mõni sekund...",
+    "interfacePageLinkReportIssues": "Teata veast või problemist",
+    "diskEncryptionPageTitle": "Andmekandja krüptimine",
+    "diskEncryptionPageRecoveryKey": "Taastevõti",
+    "diskEncryptionPageStoreYourKey": "Kui andmekandja dekrüptimine käivitamisel ei õnnestu, siis selle taastevõtmega saad taastada ligipääsu oma andmetele. Hoia taastevõtit turvaliselt kas moodsas digitaalses salasõnalaekas või vana kooli seifis.",
+    "diskEncryptionPageLearnMore": "Lisateave raudvaralise krüptimise kohta",
+    "diskEncryptionPageCheckKey": "Kontrolli taastevõtit...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Kontrolli taastevõtit",
+    "diskEncryptionPageCheck": "Kontrolli",
+    "diskEncryptionPageValidKey": "Kehtiv võti",
+    "diskEncryptionPageInvalidKey": "Vigane võti",
+    "diskEncryptionPageEnterKey": "Palun sisesta oma taastevõti",
+    "diskEncryptionPageKeyWorks": "Taastevõti on kasutatav",
+    "diskEncryptionPageKeyWorksBody": "Hoia taastevõtit turvaliselt kas moodsas digitaalses salasõnalaekas või vana kooli seifis.",
+    "diskEncryptionPageKeyDoesntWork": "Taastevõti ei ole kasutatav",
+    "diskEncryptionPageKeyDoesntWorkBody": "Kontrolli võtme õigsust või asenda ta uuega.",
+    "diskEncryptionPageError": "Viga",
+    "diskEncryptionPageCopySemanticLabel": "Kopeeri",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Ma olen oma taastevõtme turvaliselt salvestanud",
+    "recoveryKeyExceptionDisallowedPathTitle": "Taastevõtit ei saa salvestada ajutisse asukohta",
+    "recoveryKeyExceptionFileSystemBody": "Sul puuduvad õigused sellesse kausta kirjutamiseks. Proovi muud asukohta või kasuta muud meetodit.",
+    "recoveryKeyFilePickerTitle": "Salvesta taastevõti failina",
+    "diskEncryptionPageReplaceDialogReplace": "Asenda",
+    "recoveryKeyFilePickerFilter": "Tekstifailid",
+    "diskEncryptionPageReplaceDialogDiscard": "Loobu",
+    "recoveryKeyExceptionDisallowedPathBody": "Proovi kasutada muud asukohta, näiteks eemaldatavat andmekandjat või muud meetodit.",
+    "diskEncryptionPageReplaceDialogSave": "Salvesta failina",
+    "recoveryKeyExceptionFileSystemTitle": "Taastevõtme fail pole salvestatud",
+    "recoveryKeyExceptionUnknownTitle": "Tundmatu viga",
+    "diskEncryptionPageReplaceButton": "Asenda taastevõti...",
+    "diskEncryptionPageReplaceDialogHeader": "Asenda taastevõti",
+    "diskEncryptionPageReplaceDialogBody": "Palun salvesta uus taastevõti turvaliselt kas digitaalses salasõnalaekas või vana kooli seifis. Peale muutmist sa ei saa vana taastevõtit enam kasutada.",
+    "diskEncryptionPageReplaceDialogShowQR": "Näita QR-koodi",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Taastevõti on asendatud",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Hoia taastevõtit turvaliselt kas moodsas digitaalses salasõnalaekas või vana kooli seifis.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Taastevõtme asendamine ei õnnestunud",
+    "diskEncryptionPageReplaceDialogErrorBody": "Taastevõtme asendamisel läks midagi valesti ja sinu vana võti on jätkuvalt kehtiv.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Töölaud - Krüptimise taastevõti",
+    "diskEncryptionPageReplaceDialogQRBody": "Taastevõtme kopeerimiseks ja turvaliseks talletamiseks skaneeri seda QR-koodi. Turvaliseks salvestamiseks sobib digitaalne salasõnahaldur. Hilisemaks töötlemiseks võid teda pildistada.",
+    "diskEncryptionPageClipboardNotification": "Kopeerisin lõikelauale",
+    "recoveryKeyPassphraseEnabled": "Kasutusel on krüptimise salafraas",
+    "recoveryKeyPassphraseHeader": "Muuda salafraasi",
+    "recoveryKeyPassphraseButton": "Muuda salafraasi...",
+    "recoveryKeyPassphraseCurrent": "Senine salafraas",
+    "recoveryKeyPassphraseNew": "Uus salafraas",
+    "recoveryKeyPassphraseConfirm": "Korda salafraasi",
+    "recoveryKeyPassphraseCurrentError": "Vigane salafraas, palun proovi uuesti",
+    "recoveryKeyPassphraseNewError": "Peab olema vähemalt 4 tähemärki pikk",
+    "recoveryKeyPassphraseConfirmError": "Salafraasid ei klapi omavahel, palun proovi uuesti",
+    "recoveryKeyPassphraseBody": "Andmekandja dekrüptimiseks pead oma arvuti käivitamisel alati sisestama salafraasi.",
+    "recoveryKeyPinHeader": "Krüptimise PIN-kood",
+    "recoveryKeyPinButton": "Muuda PIN-koodi...",
+    "recoveryKeyPinCurrent": "Senine PIN-kood",
+    "recoveryKeyPinNew": "Uus PIN-kood",
+    "recoveryKeyPinCurrentError": "Vigane PIN-kood, palun proovi uuesti",
+    "recoveryKeyPinConfirmError": "PIN-koodid ei klapi omavahel, palun proovi uuesti",
+    "recoveryKeyPinDialogHeader": "Muuda PIN-koodi",
+    "recoveryKeyPassphraseDialogHeader": "Muuda salafraasi",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN-kood on uuendatud",
+    "recoveryKeyPassphrasePinSuccessBody": "Sinu PIN-koodi muutmine õnnestus.",
+    "recoveryKeyTPMEnabled": "Kasutusel on raudvarapõhine krüptimine",
+    "recoveryKeyPinEnabled": "Kasutusel on krüptimise PIN-kood",
+    "recoveryKeyPinConfirm": "Korda PIN-koodi",
+    "recoveryKeyPassphraseShow": "Näita",
+    "recoveryKeyPinBody": "Andmekandja dekrüptimiseks pead oma arvuti käivitamisel alati sisestama oma PIN-koodi.",
+    "recoveryKeyPassphraseHide": "Peida",
+    "recoveryKeyPassphraseChange": "Muuda",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Salafraas on uuendatud",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Sinu salafraasi muutmine õnnestus.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Salafraas on kehv, palun muuda ta pikemaks ja keerukamaks",
+    "recoveryKeyPassphraseEntropyOptimal": "Salafraas on korralik",
+    "recoveryKeyPinEntropyBelowMin": "PIN-kood on kehv, palun muuda ta pikemaks ja vähem ennustatavaks",
+    "recoveryKeyPinEntropyOptimal": "PIN-kood on piisavalt pikk",
+    "recoveryKeyPinEntropyBelowOptimal": "PIN-kood on juba täitsa hea, parema turvalisuse nimel palun muuda ta pikemaks ja vähem ennustatavaks",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Salafraas on juba täitsa hea, parema turvalisuse nimel palun muuda ta pikemaks ja keerukamaks",
+    "recoveryKeySomethingWentWrongHeader": "Midagi läks valesti",
+    "recoveryKeyEncrpytionPassphraseHeader": "Krüptimise salafraas",
+    "recoveryKeyTPMExplanationLearnMore": "Lisateave riistvarapõhise krüptimise kohta",
+    "recoveryKeyExceptionFilePermissionBody": "Sul pole õigusi sellesse asukohta kirjutamiseks.",
+    "recoveryKeyExceptionFilePermissionTitle": "Taastevõtme salvestamine faili ei õnnestunud",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Vea parandamiseks käivita terminalis järgnev käsk:",
+    "diskEncryptionPageStoreYourKeyWithLink": "Taastevõti võimaldab sul tagada ligipääsu oma andmetele, kui andmekandja lukustuse eemaldamine arvuti käivitamisel ei toimi. Salvesta ta turvaliselt kas digitaalses salasõnalaekas või vana kooli seifis. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Krüptimise seadistused pole saadaval",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Selle arvuti krüptimise oleku tuvastamine ei õnnestunud.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "Sinu arvuti raudavara TPM-i mooduli seadistus on mittetoetatud olekus.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Sinu arvuti snapd versioon pole toetatud",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Palun kontrolli, et Andmeturbekeskus ja snapd oleks uuendatud.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Andmeturbekeskus ei suuda luua ühendust snapd teenuse liidesega",
+    "recoveryKeyTPMExplanationBody": "Krüptovõtmed on salvestatud sinu arvuti TPM-is (Trusted Platform Module).",
+    "snapPermissionAccessLabel": "Õigused",
+    "cameraRulesPageEmptyTileLabel": "Ainsamgi rakendus pole veel luba küsinud",
+    "snapRulesResetAllPermissions": "Nulli kõik õigused",
+    "cameraInterfacePageTitle": "Kaamera",
+    "cameraInterfacePageDescription": "Luba rakendustel kasutada arvuti/nutiseadme kaameraid.",
+    "diskEncryptionPageAddPinButton": "Lisa PIN-kood...",
+    "diskEncryptionPageAddPassphraseButton": "Lisa salafraas...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Lisa salafraas",
+    "diskEncryptionPageAddPinDialogHeading": "Lisa PIN-kood",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Kui unustad oma PIN-koodi, siis taastevõtme abil saad taastada ligipääsu oma andmekandjale.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Kui unustad oma salafraasi, siis taastevõtme abil saad taastada ligipääsu oma andmekandjale.",
+    "diskEncryptionPageAddPinDialogBodyMain": "Andmekandja dekrüptimiseks pead oma arvuti käivitamisel alati sisestama oma PIN-koodi. See PIN-kood on erinev sinu kasutaja salasõnast.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Andmekandja dekrüptimiseks pead oma arvuti käivitamisel alati sisestama oma salafraasi. See salafraas on erinev sinu kasutaja salasõnast.",
+    "diskEncryptionPageAdditionalSecurityBody": "Täiendava turvalisuse huvides võis lisada salafraasi või PIN-koodi. Andmekandja dekrüptimiseks pead oma arvuti käivitamisel selle alati sisestama.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Täiendav turvalisus",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Lisateave",
+    "diskEncryptionPageAddPinDialogSaveButton": "Lisa",
+    "diskEncryptionPageRemovePinButton": "Eemalda PIN-kood...",
+    "diskEncryptionPageRemovePassphraseButton": "Eemalda salafraas...",
+    "diskEncryptionPageAddingPin": "Lisan PIN-koodi, selleks võib kuluda mõni sekund...",
+    "diskEncryptionPageAddingPassphrase": "Lisan salafraasi, selleks võib kuluda mõni sekund...",
+    "diskEncryptionPageRemovingPin": "Eemaldan PIN-koodi, selleks võib kuluda mõni sekund...",
+    "diskEncryptionPageRemovingPassphrase": "Eemaldan salafraasi, selleks võib kuluda mõni sekund...",
+    "microphoneInterfacePageTitle": "Mikrofon",
+    "microphoneInterfacePageDescription": "Luba rakendustel kasutada arvuti/nutiseadme mikrofone."
 }

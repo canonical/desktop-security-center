@@ -1,77 +1,269 @@
 {
-  "snapPermissionsDisablingLabel": "Wyłączanie, może to potrwać kilka sekund...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsPageTitle": "Uprawnienia programów",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesPageDescription": "Zarządzaj uprawnieniami {interface} dla {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesRemoveAll": "Usuń wszystkie reguły",
-  "@snapRulesRemoveAll": {},
-  "interfacePageTitle": "Zarządzaj uprawnieniami",
-  "@interfacePageTitle": {},
-  "interfacePageDescription": "Ściśle ograniczone programy będą pytać przed uzyskaniem dostępu do plików i katalogów. Ta funkcja jest eksperymentalna i może ulec zmianie.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkLearnMore": "Dowiedz się więcej",
-  "@interfacePageLinkLearnMore": {},
-  "snapPermissionsExperimentalLabel": "Eksperymentalne",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsOtherDescription": "Możesz zarządzać pozostałymi uprawnieniami w Ustawienia › Programy.",
-  "@snapPermissionsOtherDescription": {},
-  "snapRulesCount": "{n, plural, =0{bez reguł} =1{1 reguła} few{{n} reguły} many{{n} reguł} other{{n} reguł}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "Brak reguł",
-  "@snapRulesPageEmptyTileLabel": {},
-  "homeInterfacePageTitle": "Katalog domowy",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Zarządzaj uprawnieniami dostępu do plików w katalogu domowym.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageLinkGiveFeedback": "Przekaż opinię",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "Zgłoś problemy",
-  "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, plural, =0{bez programów} =1{1 program} few{{n} programy} many{{n} programów} other{{n} programów}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsEnableTitle": "Wymagaj, aby programy prosiły o uprawnienia systemowe",
-  "@snapPermissionsEnableTitle": {},
-  "appTitle": "Centrum zabezpieczeń",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "Zezwalaj do momentu wylogowania",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapPermissionExecuteLabel": "Wykonywanie",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsEnableWarning": "Jest to funkcja eksperymentalna, która ma na celu kontrolowanie dostępu do zasobów systemu.",
-  "@snapPermissionsEnableWarning": {},
-  "snapdRuleCategorySessionDenied": "Odmawiaj do momentu wylogowania",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverAllowed": "Zezwalaj zawsze",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "Odmawiaj zawsze",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "Odczyt",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "Zapis",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionsEnablingLabel": "Włączanie, może to potrwać kilka sekund...",
-  "@snapPermissionsEnablingLabel": {}
+    "snapPermissionsDisablingLabel": "Wyłączanie, może to potrwać kilka sekund...",
+    "snapPermissionsPageTitle": "Uprawnienia programów",
+    "snapRulesPageDescription": "Zarządzaj uprawnieniami {interface} dla {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesRemoveAll": "Usuń wszystkie reguły",
+    "interfacePageTitle": "Zarządzaj uprawnieniami",
+    "interfacePageDescription": "Ściśle ograniczone programy będą pytać przed uzyskaniem dostępu do plików i katalogów. Ta funkcja jest eksperymentalna i może ulec zmianie.",
+    "interfacePageLinkLearnMore": "Dowiedz się więcej",
+    "snapPermissionsExperimentalLabel": "Eksperymentalne",
+    "snapPermissionsOtherDescription": "Możesz zarządzać pozostałymi uprawnieniami w Ustawienia › Programy.",
+    "snapRulesCount": "{n, plural, =0{bez reguł} =1{1 reguła} few{{n} reguły} many{{n} reguł} other{{n} reguł}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Brak reguł",
+    "homeInterfacePageTitle": "Katalog domowy",
+    "homeInterfacePageDescription": "Zarządzaj uprawnieniami dostępu do plików w katalogu domowym.",
+    "interfacePageLinkGiveFeedback": "Przekaż opinię",
+    "interfacePageLinkReportIssues": "Zgłoś problemy",
+    "interfaceSnapCount": "{n, plural, =0{bez programów} =1{1 program} few{{n} programy} many{{n} programów} other{{n} programów}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsEnableTitle": "Wymagaj, aby programy prosiły o uprawnienia systemowe",
+    "appTitle": "Centrum zabezpieczeń",
+    "snapdRuleCategorySessionAllowed": "Zezwalaj do momentu wylogowania",
+    "snapPermissionExecuteLabel": "Wykonywanie",
+    "snapPermissionsEnableWarning": "Jest to funkcja eksperymentalna, która ma na celu kontrolowanie dostępu do zasobów systemu.",
+    "snapdRuleCategorySessionDenied": "Odmawiaj do momentu wylogowania",
+    "snapdRuleCategoryForeverAllowed": "Zezwalaj zawsze",
+    "snapdRuleCategoryForeverDenied": "Odmawiaj zawsze",
+    "snapPermissionReadLabel": "Odczyt",
+    "snapPermissionWriteLabel": "Zapis",
+    "snapPermissionsEnablingLabel": "Włączanie, może to potrwać kilka sekund...",
+    "diskEncryptionPageTitle": "Szyfrowanie dysku",
+    "diskEncryptionPageRecoveryKey": "Klucz odzyskiwania",
+    "diskEncryptionPageStoreYourKey": "Klucz odzyskiwania pozwala odzyskać dostęp do danych, jeśli dysk nie zostanie odblokowany podczas uruchamiania. Zapisz go w bezpiecznym miejscu.",
+    "diskEncryptionPageLearnMore": "Dowiedz się więcej o szyfrowaniu sprzętowym",
+    "diskEncryptionPageCheckKey": "Sprawdź klucz odzyskiwania...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Sprawdź klucz odzyskiwania",
+    "diskEncryptionPageCheck": "Sprawdź",
+    "diskEncryptionPageValidKey": "Klucz ważny",
+    "diskEncryptionPageInvalidKey": "Klucz nieważny",
+    "diskEncryptionPageEnterKey": "Wpisz klucz odzyskiwania",
+    "diskEncryptionPageKeyWorks": "Klucz odzyskiwania działa",
+    "diskEncryptionPageKeyWorksBody": "Pamiętaj, żeby przechowywać go w bezpiecznym miejscu.",
+    "diskEncryptionPageKeyDoesntWork": "Klucz odzyskiwania nie działa",
+    "diskEncryptionPageKeyDoesntWorkBody": "Sprawdź klucz lub wymień go na nowy.",
+    "diskEncryptionPageError": "Błąd",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Mam zapisany klucz odzyskiwania w bezpiecznym miejscu",
+    "diskEncryptionPageReplaceDialogDiscard": "Odrzuć",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Pamiętaj, żeby przechowywać go w bezpiecznym miejscu.",
+    "diskEncryptionPageReplaceDialogReplace": "Wymień",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Wymiana klucza odzyskiwania się nie powiodła",
+    "diskEncryptionPageReplaceDialogErrorBody": "Wystąpił błąd podczas wymiany klucza odzyskiwania. Stary klucz pozostanie ważny.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Klucz odzyskiwania szyfrowania",
+    "diskEncryptionPageClipboardNotification": "Skopiowano do schowka",
+    "recoveryKeyExceptionFileSystemTitle": "Plik klucza odzyskiwania nie został zapisany",
+    "recoveryKeyExceptionDisallowedPathTitle": "Pliku klucza odzyskiwania nie można zapisać w lokalizacji tymczasowej",
+    "recoveryKeyExceptionUnknownTitle": "Nieznany błąd",
+    "recoveryKeyFilePickerTitle": "Zapisz plik klucza odzyskiwania",
+    "recoveryKeyFilePickerFilter": "Pliki tekstowe",
+    "diskEncryptionPageReplaceButton": "Wymień klucz odzyskiwania...",
+    "diskEncryptionPageReplaceDialogShowQR": "Pokaż kod QR",
+    "diskEncryptionPageReplaceDialogHeader": "Wymień klucz odzyskiwania",
+    "diskEncryptionPageReplaceDialogSave": "Zapisz do pliku",
+    "recoveryKeyExceptionDisallowedPathBody": "Spróbuj innej lokalizacji, np. dysku wymiennego, lub użyj innej metody.",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Klucz odzyskiwania wymieniony",
+    "diskEncryptionPageReplaceDialogQRBody": "Zeskanuj kod QR, aby skopiować klucz odzyskiwania i zapisać go w bezpiecznym miejscu, np. w menedżerze haseł. Możesz również zrobić zdjęcie do późniejszego wykorzystania.",
+    "recoveryKeyExceptionFileSystemBody": "Nie masz uprawnień do zapisu w tym folderze. Spróbuj innej lokalizacji lub użyj innej metody.",
+    "diskEncryptionPageReplaceDialogBody": "Zapisz nowy klucz odzyskiwania w bezpiecznym miejscu. Po jego wymianie nie będzie można używać starego klucza.",
+    "diskEncryptionPageCopySemanticLabel": "Skopiuj",
+    "recoveryKeyPassphraseNew": "Nowe hasło",
+    "recoveryKeyPassphraseNewError": "Musi mieć co najmniej 4 znaki",
+    "recoveryKeyPinConfirm": "Potwierdź kod PIN",
+    "recoveryKeyPassphraseHeader": "Zmień hasło",
+    "recoveryKeyPassphraseButton": "Zmień hasło...",
+    "recoveryKeyPassphraseCurrent": "Bieżące hasło",
+    "recoveryKeyPassphraseConfirm": "Potwierdź hasło",
+    "recoveryKeyPassphraseConfirmError": "Hasła nie pasują, spróbuj ponownie",
+    "recoveryKeyPinEnabled": "Kod PIN szyfrowania jest włączony",
+    "recoveryKeyPinHeader": "Kod PIN szyfrowania",
+    "recoveryKeyPinButton": "Zmień kod PIN...",
+    "recoveryKeyPinCurrent": "Bieżący kod PIN",
+    "recoveryKeyPinNew": "Nowy kod PIN",
+    "recoveryKeyPinCurrentError": "Nieprawidłowy kod PIN, spróbuj ponownie",
+    "recoveryKeyPinDialogHeader": "Zmień kod PIN",
+    "recoveryKeyPassphraseShow": "Pokaż",
+    "recoveryKeyPassphraseHide": "Ukryj",
+    "recoveryKeyPassphrasePinSuccessHeader": "Kod PIN zaktualizowany",
+    "recoveryKeyTPMEnabled": "Szyfrowanie sprzętowe jest włączone",
+    "recoveryKeyPassphraseBody": "Musisz wprowadzać hasło przy każdym uruchomieniu komputera.",
+    "recoveryKeyPassphraseCurrentError": "Nieprawidłowe hasło, spróbuj ponownie",
+    "recoveryKeyPassphraseEnabled": "Hasło szyfrowania jest włączone",
+    "recoveryKeyPinConfirmError": "Kody PIN nie pasują, spróbuj ponownie",
+    "recoveryKeyPassphraseDialogHeader": "Zmień hasło",
+    "recoveryKeyPinBody": "Musisz wprowadzać kod PIN przy każdym uruchomieniu komputera.",
+    "recoveryKeyPassphraseChange": "Zmień",
+    "recoveryKeyPassphrasePinSuccessBody": "Twój kod PIN został pomyślnie zaktualizowany.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Hasło zaktualizowane",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Twoje hasło zostało pomyślnie zaktualizowane.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Słabe hasło, wydłuż je lub zwiększ złożoność",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Wystarczające hasło, wydłuż je lub zwiększ złożoność, aby zwiększyć bezpieczeństwo",
+    "recoveryKeyPassphraseEntropyOptimal": "Silne hasło",
+    "recoveryKeyPinEntropyOptimal": "Kod PIN jest wystarczająco długi",
+    "recoveryKeyPinEntropyBelowMin": "Słaby kod PIN, wydłuż go lub uczyń mniej przewidywalnym",
+    "recoveryKeyPinEntropyBelowOptimal": "Wystarczający kod PIN, uczyń go dłuższym lub mniej przewidywalnym, aby zapewnić większe bezpieczeństwo",
+    "recoveryKeySomethingWentWrongHeader": "Wystąpił problem",
+    "diskEncryptionPageErrorUnsupportedStateBody": "Konfiguracja modułu TPM na tym komputerze nie jest obsługiwana.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Zainstalowana wersja snapd nie jest obsługiwana",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Sprawdź, czy Centrum zabezpieczeń i snapd są aktualne.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Centrum zabezpieczeń nie może połączyć się z interfejsem snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "W celu naprawy uruchom to polecenie w terminalu:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "diskEncryptionPageStoreYourKeyWithLink": "Klucz odzyskiwania umożliwia odzyskanie dostępu do danych, jeśli dysk nie zostanie odblokowany podczas uruchamiania. Zapisz go w bezpiecznym miejscu. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Ustawienia szyfrowania niedostępne",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Nie udało się pobrać stanu szyfrowania tego komputera.",
+    "recoveryKeyExceptionFilePermissionTitle": "Nie udało się zapisać klucza odzyskiwania do pliku",
+    "recoveryKeyExceptionFilePermissionBody": "Nie masz uprawnień do zapisu w tej lokalizacji pliku.",
+    "recoveryKeyTPMExplanationBody": "Klucze szyfrujące przechowywane są w module Trusted Platform Module (TPM) tego komputera.",
+    "recoveryKeyTPMExplanationLearnMore": "Dowiedz się więcej o szyfrowaniu sprzętowym",
+    "recoveryKeyEncrpytionPassphraseHeader": "Hasło szyfrowania",
+    "snapRulesResetAllPermissions": "Zresetuj wszystkie uprawnienia",
+    "snapPermissionAccessLabel": "Dostęp",
+    "cameraRulesPageEmptyTileLabel": "Żaden program nie zażądał jeszcze dostępu",
+    "cameraInterfacePageTitle": "Kamera",
+    "cameraInterfacePageDescription": "Zezwól programom na dostęp do kamer.",
+    "diskEncryptionPageAddPinButton": "Dodaj kod PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Dodaj hasło...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Dodaj hasło",
+    "diskEncryptionPageAddPinDialogHeading": "Dodaj kod PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "Przy każdym uruchomieniu komputera będzie trzeba podawać kod PIN. Ten kod PIN różni się od hasła użytkownika.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Jeśli zapomnisz kodu PIN, możesz odzyskać dostęp do dysku za pomocą klucza odzyskiwania.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Będzie trzeba wprowadzać hasło przy każdym uruchomieniu komputera. To hasło różni się od hasła użytkownika.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Jeśli zapomnisz hasła, możesz odzyskać dostęp do dysku za pomocą klucza odzyskiwania.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Dodatkowe zabezpieczenia",
+    "diskEncryptionPageAdditionalSecurityBody": "Możesz ustawić hasło lub kod PIN dla dodatkowego bezpieczeństwa. Będzie trzeba je wprowadzać przy każdym uruchomieniu komputera.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Dowiedz się więcej",
+    "diskEncryptionPageAddPinDialogSaveButton": "Dodaj",
+    "diskEncryptionPageRemovePinButton": "Usuń kod PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Usuń hasło...",
+    "diskEncryptionPageAddingPin": "Dodawanie kodu PIN, może to potrwać kilka sekund...",
+    "diskEncryptionPageAddingPassphrase": "Dodawanie hasła, może to potrwać kilka sekund...",
+    "diskEncryptionPageRemovingPin": "Usuwanie kodu PIN, może to potrwać kilka sekund...",
+    "diskEncryptionPageRemovingPassphrase": "Usuwanie hasła, może to potrwać kilka sekund...",
+    "microphoneInterfacePageDescription": "Zezwól programom na dostęp do mikrofonu.",
+    "microphoneInterfacePageTitle": "Mikrofon",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Brak dostępności Ubuntu Pro w tej wersji Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro wymaga wydania LTS",
+    "ubuntuProNotSupportedSnapd": "Brak obsługi Ubuntu Pro przez tę wersję snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Zaktualizuj snapd w celu zarządzania Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro włączono",
+    "ubuntuProLearnMore": "Dowiedz się więcej o Ubuntu Pro",
+    "ubuntuProEnablePro": "Włącz Ubuntu Pro",
+    "ubuntuProEnableMagic": "Włącz za pomocą konta Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Będzie można założyć konto za darmo",
+    "ubuntuProMagicPrompt": "Zaloguj się na swoje konto Ubuntu One lub utwórz je bezpłatnie.",
+    "ubuntuProMagicContinueInBrowser": "Kontynuuj w przeglądarce",
+    "ubuntuProMagicDescription": "Możesz również zalogować się pod adresem {attachLink} i wpisać kod {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Nie można włączyć Ubuntu Pro, spróbuj ponownie",
+    "ubuntuProEnableToken": "Włącz za pomocą tokena",
+    "ubuntuProEnableTokenError": "Nie można włączyć Ubuntu Pro",
+    "ubuntuProTokenPrompt": "Uzyskaj token Ubuntu Pro od swojego administratora lub z {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Wyłącz Ubuntu Pro",
+    "ubuntuProDisable": "Wyłącz",
+    "ubuntuProDisablePrompt": "Wyłączenie Ubuntu Pro spowoduje odłączenie Twojej subskrypcji od tego komputera. Czy chcesz kontynuować?",
+    "ubuntuProEnable": "Włącz",
+    "ubuntuProCancel": "Anuluj",
+    "ubuntuProFeatureEnableError": "Nie można włączyć tej funkcji, spróbuj ponownie.",
+    "ubuntuProFeatureDisableError": "Nie można wyłączyć tej funkcji, spróbuj ponownie.",
+    "ubuntuProCompliance": "Zgodność i hartowanie",
+    "ubuntuProDisabled": "Bezpieczeństwo i zgodność klasy korporacyjnej dla tego komputera. Zawsze za darmo do użytku osobistego. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProEnableTokenSubtitle": "Od administratora IT lub z {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProComplianceDisclaimer": "Zalecane tylko do wspomagania FedRAMP, HIPAA i innych wymagań dotyczących zgodności i hartowania.",
+    "ubuntuProComplianceUSGTitle": "Przewodnik bezpieczeństwa Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatyzuje hartowanie i audyty za pomocą testów porównawczych CIS i profili DISA-STIG, umożliwiając jednocześnie dostosowywanie do wymagań środowiska.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Certyfikat zgodności modułu kryptograficznego rządów USA i Kanady ze standardem ochrony danych FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Włącz FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Włączenie FIPS nie może zostać cofnięte, a usługa Livepatch zostanie trwale wyłączona.",
+    "ubuntuProComplianceFIPSPrompt": "Wybierz preferowaną opcję FIPS",
+    "ubuntuProComplianceFIPSUpdates": "FIPS z aktualizacjami",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Instaluje pakiety zatwierdzone w standardzie FIPS 140-2 i umożliwia regularne aktualizacje zabezpieczeń.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS bez aktualizacji",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Instaluje pakiety zatwierdzone w standardzie FIPS 140-2. Nie będą one aktualizowane do czasu następnej recertyfikacji.",
+    "ubuntuProComplianceDocumentation": "Dokumentacja zgodności z wymogami bezpieczeństwa",
+    "ubuntuProESMTitle": "Przedłużone utrzymanie bezpieczeństwa (ESM)",
+    "ubuntuProESMDescription": "ESM zapewnia 10 lat poprawek zabezpieczeń dla ponad 25 000 pakietów typu open source. Uzyskaj ciągłe zarządzanie lukami bezpieczeństwa dla krytycznych, wysokich i średnich CVE.",
+    "ubuntuProESMMainTitle": "Pakiety główne (esm-infra)",
+    "ubuntuProESMMainDescription": "Aktualizacje zabezpieczeń dla ponad 2300 pakietów Main systemu Ubuntu do {year} roku",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Pakiety Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Dodatkowe aktualizacje zabezpieczeń dla ponad 23 000 pakietów Universe systemu Ubuntu do {year} roku",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Livepatch jądra",
+    "ubuntuProLivepatchEnableTitle": "Włącz Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Stosuj aktualizacje zabezpieczeń jądra podczas działania systemu",
+    "ubuntuProLivepatchShowTitle": "Pokazuj status Livepatch na górnym pasku"
 }
