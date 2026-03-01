@@ -169,5 +169,101 @@
     "diskEncryptionPageRemovingPin": "Ag baint an UAP, d'fhéadfadh sé seo cúpla soicind a thógáil...",
     "diskEncryptionPageRemovingPassphrase": "Ag baint an phasfhocail, d'fhéadfadh sé seo cúpla soicind a thógáil...",
     "microphoneInterfacePageTitle": "Micreafón",
-    "microphoneInterfacePageDescription": "Lig d’aipeanna rochtain a fháil ar do mhicreafón."
+    "microphoneInterfacePageDescription": "Lig d’aipeanna rochtain a fháil ar do mhicreafón.",
+    "ubuntuProNotSupported": "Níl Ubuntu Pro ar fáil don leagan seo de Ubuntu",
+    "ubuntuProNotSupportedDetails": "Éilíonn Ubuntu Pro scaoileadh LTS",
+    "ubuntuProNotSupportedSnapd": "Ní thacaíonn an leagan snapd seo le Ubuntu Pro",
+    "ubuntuProNotSupportedSnapdDetails": "Nuashonraigh snapd chun Ubuntu Pro a bhainistiú",
+    "ubuntuProEnabled": "Tá Ubuntu Pro cumasaithe",
+    "ubuntuProDisabled": "Slándáil agus comhlíonadh den scoth chun do ríomhaire. Saor in aisce i gcónaí le haghaidh úsáide pearsanta. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Foghlaim faoi Ubuntu Pro",
+    "ubuntuProEnablePro": "Cumasaigh Ubuntu Pro",
+    "ubuntuProEnableMagic": "Cumasaigh le cuntas Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Beidh tú in ann cuntas a chruthú saor in aisce",
+    "ubuntuProMagicPrompt": "Logáil isteach le do chuntas Ubuntu One, nó cruthaigh ceann saor in aisce.",
+    "ubuntuProMagicContinueInBrowser": "Lean ar aghaidh sa bhrabhsálaí",
+    "ubuntuProMagicDescription": "Is féidir leat logáil isteach ag {attachLink} agus an cód {attachCode} a iontráil freisin",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Ní féidir Ubuntu Pro a chumasú, déan iarracht arís",
+    "ubuntuProEnableToken": "Cumasaigh le comhartha",
+    "ubuntuProEnableTokenError": "Ní féidir Ubuntu Pro a chumasú",
+    "ubuntuProEnableTokenSubtitle": "Ó do riarthóir TF nó ó {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Faigh comhartha Ubuntu Pro ó do riarthóir nó ó {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Comhartha",
+    "ubuntuProDisablePro": "Díchumasaigh Ubuntu Pro",
+    "ubuntuProDisable": "Díchumasaigh",
+    "ubuntuProDisablePrompt": "Má dhíchumasaíonn tú Ubuntu Pro, bainfear do shíntiús ón meaisín seo. Ar mhaith leat dul ar aghaidh?",
+    "ubuntuProEnable": "Cumasaigh",
+    "ubuntuProCancel": "Cealaigh",
+    "ubuntuProFeatureEnableError": "Níorbh fhéidir an ghné a chumasú, déan iarracht arís.",
+    "ubuntuProFeatureDisableError": "Níorbh fhéidir an ghné a dhíchumasú, déan iarracht arís.",
+    "ubuntuProCompliance": "Comhlíonadh agus cruaiteadh",
+    "ubuntuProComplianceDisclaimer": "Ní mholtar ach chun cabhrú le FedRAMP, HIPAA agus ceanglais chomhlíonta agus cruaite eile.",
+    "ubuntuProComplianceUSGTitle": "Treoir Slándála Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Uathoibríonn sé cruaite agus iniúchadh le próifílí tagarmhairc CIS agus DISA-STIG agus ceadaíonn sé saincheaptha timpeallacht-shonracha.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Deimhniú modúil chripteagrafaíochta ó rialtas SAM agus Cheanada a léiríonn comhlíonadh leis an gcaighdeán cosanta sonraí FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Cumasaigh FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Ní féidir cumasú FIPS a aisiompú agus díchumasófar Livepatch go buan.",
+    "ubuntuProComplianceFIPSPrompt": "Roghnaigh do rogha FIPS is fearr leat",
+    "ubuntuProComplianceFIPSUpdates": "FIPS le nuashonruithe",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Suiteálann sé pacáistí bailíochtaithe FIPS 140-2 agus ceadaíonn sé nuashonruithe slándála rialta.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS gan nuashonruithe",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Suiteálann sé pacáistí bailíochtaithe FIPS 140-2. Ní dhéanfar iad seo a nuashonrú go dtí an chéad athdheimhniú eile.",
+    "ubuntuProComplianceDocumentation": "Doiciméadú comhlíontachta slándála",
+    "ubuntuProESMTitle": "Cothabháil Slándála Leathnaithe (ESM)",
+    "ubuntuProESMDescription": "Soláthraíonn ESM paistí slándála 10 mbliana do bhreis is 25,000 pacáiste foinse oscailte. Faigh bainistíocht leanúnach leochaileachta do CVEanna criticiúla, arda agus meánacha.",
+    "ubuntuProESMMainTitle": "Príomhphacáistí (esm-infra)",
+    "ubuntuProESMMainDescription": "Nuashonruithe slándála do phríomhphacáiste 2,300 Ubuntu go dtí {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Pacáistí Cruinne (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Nuashonruithe slándála breise do bhreis is 23,000 pacáiste Ubuntu Universe go dtí {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Paiste Beo na hEithne",
+    "ubuntuProLivepatchEnableTitle": "Cumasaigh Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Cuir nuashonruithe slándála eithne i bhfeidhm agus an córas ag rith",
+    "ubuntuProLivepatchShowTitle": "Taispeáin stádas Livepatch sa bharra barr",
+    "ubuntuProPageTitle": "Ubuntu Pro"
 }
