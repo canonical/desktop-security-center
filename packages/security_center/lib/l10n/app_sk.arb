@@ -201,7 +201,7 @@
             }
         }
     },
-    "ubuntuProMagicError": "Nepodarilo sa aktivovať Ubuntu Pro, skúste to znova",
+    "ubuntuProMagicError": "Nepodarilo sa aktivovať Ubuntu Pro, prosím, skúste to znova",
     "ubuntuProEnableToken": "Aktivovať pomocou tokenu",
     "ubuntuProEnableTokenError": "Nepodarilo sa aktivovať Ubuntu Pro",
     "ubuntuProEnableTokenSubtitle": "Od vášho IT administrátora alebo z {proLink}",
@@ -226,8 +226,8 @@
     "ubuntuProDisablePrompt": "Deaktivovaním Ubuntu Pro sa toto zariadenie odpojí od vášho predplatného. Chcete pokračovať?",
     "ubuntuProEnable": "Aktivovať",
     "ubuntuProCancel": "Zrušiť",
-    "ubuntuProFeatureEnableError": "Funkciu sa nepodarilo aktivovať, skúste to znova.",
-    "ubuntuProFeatureDisableError": "Funkciu sa nepodarilo deaktivovať, skúste to znova.",
+    "ubuntuProFeatureEnableError": "Funkciu sa nepodarilo aktivovať, prosím, skúste to znova.",
+    "ubuntuProFeatureDisableError": "Funkciu sa nepodarilo deaktivovať, prosím, skúste to znova.",
     "ubuntuProCompliance": "Dodržiavanie štandardov a hardening",
     "ubuntuProComplianceDisclaimer": "Odporúča sa iba na podporu požiadaviek FedRAMP, HIPAA a ďalších štandardov a hardeningu.",
     "ubuntuProComplianceUSGTitle": "Ubuntu Security Guide (USG)",
