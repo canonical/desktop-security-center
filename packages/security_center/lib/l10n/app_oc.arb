@@ -170,5 +170,74 @@
     "diskEncryptionPageRemovingPin": "Retirament del PIN, aquò pòt tardar unas segondas...",
     "diskEncryptionPageRemovingPassphrase": "Retirament de la frasa secrèta, aquò pòt tardar unas segondas...",
     "diskEncryptionPageAdditionalSecurityBody": "Podètz definir una frasa secrèta o un PIN per mai de seguretat. O deuretz picar cada còp que l’ordenador amòda.",
-    "ubuntuProPageTitle": "Ubuntu Pro"
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro es pas disponible per aquesta version d’Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro requerís una version LTS",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro es pas pres en carga per aquesta version de snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Actualizar snapd per gerir Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro es activat",
+    "ubuntuProDisabled": "Seguretat e conformitat de qualitat professionala per vòstre ordenador. Totjorn gratuit per un usatge personal. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Descobrissètz Ubuntu Pro",
+    "ubuntuProEnablePro": "Activar Ubuntu Pro",
+    "ubuntuProEnableMagic": "Activar amb un compte Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Poiretz crear un compte gratuitament",
+    "ubuntuProMagicPrompt": "Connectatz-vos amb un compte Ubuntu One o creatz-ne gratuitament.",
+    "ubuntuProMagicContinueInBrowser": "Contunhar dins lo navegador",
+    "ubuntuProMagicDescription": "Vos podètz tanben connectar a {attachLink} e dintrar lo còdi {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Activacion d'Ubuntu Pro impossibla, mercés de tornar ensajar",
+    "ubuntuProEnableToken": "Activar amb un geton",
+    "ubuntuProEnableTokenError": "Activacion d'Ubuntu Pro impossibla",
+    "ubuntuProTokenLabel": "Geton",
+    "ubuntuProDisablePro": "Desactivar Ubuntu Pro",
+    "ubuntuProDisable": "Desactivar",
+    "ubuntuProEnable": "Activar",
+    "ubuntuProCancel": "Anullar",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSEnable": "Activar FIPS",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS sens mesas a jorn",
+    "ubuntuProComplianceDocumentation": "Documentacion de conformitat a la seguretat",
+    "ubuntuProLivepatchEnableTitle": "Activar Livepatch",
+    "ubuntuProLivepatchTitle": "Livepatch pel nuclèu",
+    "ubuntuProTokenPrompt": "Obtenètz un geton alprèp de l'administrator o dempuèi {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProFeatureEnableError": "Impossible d'activar la foncionalitat, mercés de tornar ensajar.",
+    "ubuntuProFeatureDisableError": "Impossible de desactivar la foncionalitat, mercés de tornar ensajar.",
+    "ubuntuProComplianceUSGTitle": "Guida de seguretat Ubuntu (USG)",
+    "ubuntuProComplianceFIPSPrompt": "Causissètz vòstra opcion FIPS preferida",
+    "ubuntuProComplianceFIPSUpdates": "FIPS amb mesas a jorn",
+    "ubuntuProLivepatchShowTitle": "Afichar l'estatut de Livepatch dins la barra superiora",
+    "ubuntuProEnableTokenSubtitle": "Alprèp de l'administrator informatic o a partir de {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProComplianceFIPSDescription": "Una certificacion de modul criptografic dels govèrns dels EUA e delbCanadà per la conformitat amb la nòrma de proteccion de donadas FIPS 140-2.",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Installa de paquets validats FIPS 140-2 e permet de mesas a jorn de seguretat regularas.",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Installa los paquets validats FIPS 140-2. Aqueles seràn pas meses a jorn fins a la recertificacion venenta."
 }
