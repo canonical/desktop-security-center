@@ -167,5 +167,7 @@
     "diskEncryptionPageAddingPin": "PIN-kód hozzáadása, ez eltarthat néhány másodpercig…",
     "diskEncryptionPageAddingPassphrase": "Jelmondat hozzáadása, ez eltarthat néhány másodpercig…",
     "diskEncryptionPageRemovingPin": "PIN-kód eltávolítása, ez eltarthat néhány másodpercig…",
-    "diskEncryptionPageRemovingPassphrase": "Jelmondat eltávolítása, ez eltarthat néhány másodpercig…"
+    "diskEncryptionPageRemovingPassphrase": "Jelmondat eltávolítása, ez eltarthat néhány másodpercig…",
+    "microphoneInterfacePageTitle": "Mikrofon",
+    "microphoneInterfacePageDescription": "Mikrofon hozzáférés engedélyezése az alkalamzások felé."
 }
