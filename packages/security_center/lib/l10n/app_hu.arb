@@ -169,5 +169,101 @@
     "diskEncryptionPageRemovingPin": "PIN-kód eltávolítása, ez eltarthat néhány másodpercig…",
     "diskEncryptionPageRemovingPassphrase": "Jelmondat eltávolítása, ez eltarthat néhány másodpercig…",
     "microphoneInterfacePageTitle": "Mikrofon",
-    "microphoneInterfacePageDescription": "Mikrofon hozzáférés engedélyezése az alkalamzások felé."
+    "microphoneInterfacePageDescription": "Engedélyezés az alkalmazások számára, hogy hozzáférjenek a mikrofonhoz.",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Az Ubuntu Pro nem érhető el ehhez az Ubuntu verzióhoz",
+    "ubuntuProNotSupportedDetails": "Az Ubuntu Pro LTS-kiadást igényel",
+    "ubuntuProNotSupportedSnapd": "Ez a snapd verzió nem támogatja az Ubuntu Pro szolgáltatást",
+    "ubuntuProNotSupportedSnapdDetails": "Frissítse a snapd csomagot az Ubuntu Pro kezeléséhez",
+    "ubuntuProEnabled": "Az Ubuntu Pro engedélyezve van",
+    "ubuntuProDisabled": "Vállalati szintű biztonság és megfelelőség a számítógépén. Személyes használatra mindig ingyenes. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Tudjon meg többet az Ubuntu Pro szolgáltatásról",
+    "ubuntuProEnablePro": "Az Ubuntu Pro engedélyezése",
+    "ubuntuProEnableMagic": "Engedélyezés Ubuntu One fiókkal",
+    "ubuntuProEnableMagicSubtitle": "Ingyenesen létre tud hozni egy fiókot",
+    "ubuntuProMagicPrompt": "Jelentkezzen be az Ubuntu One fiókjával, vagy hozzon létre egyet ingyen.",
+    "ubuntuProMagicContinueInBrowser": "Folytatás a böngészőben",
+    "ubuntuProMagicDescription": "Bejelentkezhet a(Z) {attachLink} használatával is, és megadhatja a(z) {attachCode} kódot",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Nem lehet engedélyezni az Ubuntu Pro szolgáltatást, próbálja meg újra",
+    "ubuntuProEnableToken": "Engedélyezés tokennel",
+    "ubuntuProEnableTokenError": "Nem lehet engedélyezni az Ubuntu Pro szolgáltatást",
+    "ubuntuProEnableTokenSubtitle": "Az informatikai rendszergazdájától vagy innen: {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Szerezzen Ubuntu Pro tokent a rendszergazdájától vagy innen: {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Az Ubuntu Pro letiltása",
+    "ubuntuProDisable": "Letiltás",
+    "ubuntuProDisablePrompt": "Az Ubuntu Pro letiltása leválasztja az előfizetését erről a számítógépről. Szeretné folytatni?",
+    "ubuntuProEnable": "Engedélyezés",
+    "ubuntuProCancel": "Mégse",
+    "ubuntuProFeatureEnableError": "Nem sikerült engedélyezni a funkciót, próbálja meg újra.",
+    "ubuntuProFeatureDisableError": "Nem sikerült letiltani a funkciót, próbálja meg újra.",
+    "ubuntuProCompliance": "Megfelelés és megerősítés",
+    "ubuntuProComplianceDisclaimer": "Csak a FedRAMP, HIPAA és egyéb megfelelőségi és megerősítési követelmények támogatásához ajánlott.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu biztonsági útmutató (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatizálja a megerősítést és az ellenőrzést a CIS-mérőszám és a DISA-STIG-profilokkal, miközben lehetővé teszi a környezetre vonatkozó személyre szabást.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Az Egyesült Államok és Kanada kormánya kriptográfiai moduljának a FIPS 140-2 adatvédelmi szabvánnyal való megfelelőségi tanúsítványa.",
+    "ubuntuProComplianceFIPSEnable": "A FIPS engedélyezése",
+    "ubuntuProComplianceFIPSDisclaimer": "A FIPS engedélyezését nem lehet visszavonni, és a Livepatch véglegesen le lesz tiltva.",
+    "ubuntuProComplianceFIPSPrompt": "Az előnyben részesített FIPS-lehetőség kiválasztása",
+    "ubuntuProComplianceFIPSUpdates": "FIPS, frissítésekkel",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Telepíti a FIPS 140-2 által ellenőrzött csomagokat, és lehetővé teszi a rendszeres biztonsági frissítéseket.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS, frissítések nélkül",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Telepíti a FIPS 140-2 által ellenőrzött csomagokat. Ezek nem lesznek frissítve a következő újratanúsításig.",
+    "ubuntuProComplianceDocumentation": "Biztonsági megfelelőségi dokumentáció",
+    "ubuntuProESMTitle": "Kiterjesztett biztonsági karbantartás (ESM)",
+    "ubuntuProESMDescription": "Az ESM 10 évig biztosít biztonsági javításokat több mint 25 000 nyílt forráskódú csomaghoz. Folyamatos sebezhetőségkezelést kap a kritikus, magas és közepes CVE-khez.",
+    "ubuntuProESMMainTitle": "Főcsomagok (esm-infra)",
+    "ubuntuProESMMainDescription": "Biztonsági frissítések 2300 Ubuntu főcsomaghoz {year}-ig",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Univerzumcsomagok (esm-apps)",
+    "ubuntuProESMUniverseDescription": "További biztonsági frissítések több mint 23 000 Ubuntu univerzumcsomaghoz {year}-ig",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Rendszermag Livepatch",
+    "ubuntuProLivepatchEnableTitle": "A Livepatch engedélyezése",
+    "ubuntuProLivepatchEnableDescription": "A rendszermag biztonsági frissítéseinek telepítése a rendszer futása közben",
+    "ubuntuProLivepatchShowTitle": "Livepatch-állapot megjelenítése a felső sávon"
 }
