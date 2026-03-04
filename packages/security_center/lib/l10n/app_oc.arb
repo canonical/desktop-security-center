@@ -240,7 +240,7 @@
     "ubuntuProComplianceFIPSDescription": "Una certificacion de modul criptografic dels govèrns dels EUA e delbCanadà per la conformitat amb la nòrma de proteccion de donadas FIPS 140-2.",
     "ubuntuProComplianceFIPSUpdatesDescription": "Installa de paquets validats FIPS 140-2 e permet de mesas a jorn de seguretat regularas.",
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Installa los paquets validats FIPS 140-2. Aqueles seràn pas meses a jorn fins a la recertificacion venenta.",
-    "ubuntuProDisablePrompt": "Desactivar Ubuntu Pro destacarà vòstre abonament d'aquesta maquina. Volètz contunhar ?",
+    "ubuntuProDisablePrompt": "Desactivar Ubuntu Pro destacarà vòstre abonament d'aquesta maquina. Volètz contunhar ?",
     "ubuntuProCompliance": "Conformitat e endureciment",
     "ubuntuProComplianceDisclaimer": "Recomandat sonque per ajudar amb FedRAMP, HIPAA e d'autras exigéncias de conformitat e de securizacion.",
     "ubuntuProComplianceUSGDescription": "Automatiza lo refortiment e l'audit amb los perfils de referéncia CIS e DISA-STIG tot permetent d'adaptacions especificas a l'environament.",
