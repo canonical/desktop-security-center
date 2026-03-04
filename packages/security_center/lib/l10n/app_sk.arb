@@ -9,7 +9,7 @@
     "interfacePageLinkLearnMore": "Zistiť viac",
     "interfacePageTitle": "Spravovať oprávnenia",
     "snapPermissionsOtherDescription": "Ďalšie oprávnenia môžete spravovať v časti Nastavenia › Aplikácie.",
-    "snapPermissionsEnableWarning": "Táto experimentálna funkcia slúži na kontrolu prístupu k zdrojom vášho systému.",
+    "snapPermissionsEnableWarning": "Táto experimentálna funkcia slúži na riadenie prístupu k systémovým zdrojom.",
     "snapdRuleCategorySessionAllowed": "Povolené do odhlásenia",
     "snapdRuleCategoryForeverAllowed": "Vždy povolené",
     "snapPermissionReadLabel": "Čítanie",
@@ -37,7 +37,7 @@
     },
     "snapdRuleCategoryForeverDenied": "Vždy odmietnuté",
     "snapdRuleCategorySessionDenied": "Odmietnuté do odhlásenia",
-    "snapPermissionsEnableTitle": "Vyžadovať oprávnenia od aplikácií",
+    "snapPermissionsEnableTitle": "Vyžadovať systémové oprávnenia",
     "snapRulesPageDescription": "Spravujte oprávnenia k {interface} pre {snap}.",
     "@snapRulesPageDescription": {
         "placeholders": {
@@ -136,17 +136,17 @@
     "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Nepodarilo sa získať stav šifrovania tohto počítača.",
     "diskEncryptionPageErrorUnsupportedStateBody": "Konfigurácia TPM vášho počítača nie je v podporovanom stave.",
     "diskEncryptionPageErrorUnsupportedSnapdHeader": "Vaša verzia snapd nie je podporovaná",
-    "diskEncryptionPageErrorUnsupportedSnapdBody": "Skontrolujte, či je Centrum zabezpečenia a snapd aktualizované.",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Skontrolujte, či sú Centrum zabezpečenia a snapd aktualizované.",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Centrum zabezpečenia sa nemôže pripojiť k rozhraniu snapd",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Aby ste to opravili, spustite tento príkaz v termináli:",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
     "recoveryKeyExceptionFilePermissionTitle": "Nepodarilo sa uložiť obnovovací kľúč do súboru",
     "recoveryKeyExceptionFilePermissionBody": "Nemáte oprávnenie zapisovať do tohto umiestnenia súboru.",
     "recoveryKeyTPMExplanationBody": "Šifrovacie kľúče sú uložené v Trusted Platform Module (TPM) vášho počítača.",
-    "recoveryKeyTPMExplanationLearnMore": "Zistite viac o šifrovaní podporovanom hardvérom",
+    "recoveryKeyTPMExplanationLearnMore": "Zistiť viac o šifrovaní podporovanom hardvérom",
     "recoveryKeyEncrpytionPassphraseHeader": "Šifrovacia prístupová fráza",
     "cameraRulesPageEmptyTileLabel": "Žiadne aplikácie zatiaľ nepožiadali o prístup",
-    "snapRulesResetAllPermissions": "Obnoviť všetky povolenia",
+    "snapRulesResetAllPermissions": "Obnoviť všetky oprávnenia",
     "cameraInterfacePageTitle": "Kamera",
     "cameraInterfacePageDescription": "Povoliť aplikáciám prístup ku kamere.",
     "snapPermissionAccessLabel": "Prístup",
@@ -176,7 +176,7 @@
     "ubuntuProNotSupportedSnapd": "Ubuntu Pro nie je podporované touto verziou snapd",
     "ubuntuProNotSupportedSnapdDetails": "Aktualizujte snapd, aby bolo možné spravovať Ubuntu Pro",
     "ubuntuProEnabled": "Ubuntu Pro je aktivované",
-    "ubuntuProDisabled": "Podnikové zabezpečenie a dodržiavanie štandardov pre váš počítač. Vždy zadarmo na osobné použitie. {learnMoreLink}",
+    "ubuntuProDisabled": "Zabezpečenie podnikovej úrovne a dodržiavanie štandardov pre váš počítač. Vždy zadarmo na osobné použitie. {learnMoreLink}",
     "@ubuntuProDisabled": {
         "placeholders": {
             "learnMoreLink": {
@@ -235,7 +235,7 @@
     "ubuntuProComplianceFIPSTitle": "FIPS 140‑2",
     "ubuntuProComplianceFIPSDescription": "Certifikácia kryptografických modulov podľa štandardu FIPS 140‑2 používaná vládami USA a Kanady.",
     "ubuntuProComplianceFIPSEnable": "Aktivovať FIPS",
-    "ubuntuProComplianceFIPSDisclaimer": "Aktivovanie FIPS je nevratné a Livepatch bude natrvalo vypnutý.",
+    "ubuntuProComplianceFIPSDisclaimer": "Aktivácia FIPS je nevratná a Livepatch bude natrvalo vypnutý.",
     "ubuntuProComplianceFIPSPrompt": "Vyberte preferovanú možnosť FIPS",
     "ubuntuProComplianceFIPSUpdates": "FIPS s aktualizáciami",
     "ubuntuProComplianceFIPSUpdatesDescription": "Nainštaluje balíky validované podľa FIPS 140‑2 a umožní pravidelné bezpečnostné aktualizácie.",
@@ -264,6 +264,6 @@
     },
     "ubuntuProLivepatchTitle": "Kernel Livepatch",
     "ubuntuProLivepatchEnableTitle": "Aktivovať Livepatch",
-    "ubuntuProLivepatchEnableDescription": "Použiť bezpečnostné aktualizácie jadra počas chodu systému",
+    "ubuntuProLivepatchEnableDescription": "Aplikovať bezpečnostné aktualizácie jadra počas behu systému",
     "ubuntuProLivepatchShowTitle": "Zobraziť stav Livepatch v hornej lište"
 }
