@@ -169,5 +169,20 @@
     "diskEncryptionPageRemovingPin": "Eemaldan PIN-koodi, selleks võib kuluda mõni sekund...",
     "diskEncryptionPageRemovingPassphrase": "Eemaldan salafraasi, selleks võib kuluda mõni sekund...",
     "microphoneInterfacePageTitle": "Mikrofon",
-    "microphoneInterfacePageDescription": "Luba rakendustel kasutada arvuti/nutiseadme mikrofone."
+    "microphoneInterfacePageDescription": "Luba rakendustel kasutada arvuti/nutiseadme mikrofone.",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro pole selle Ubuntu versiooni jaoks saadaval",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro eeldab, et kasutusel on LTS-versioon",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro pole selle snapd versiooni puhul toetatud",
+    "ubuntuProNotSupportedSnapdDetails": "Ubuntu Pro halldamiseks uuenda snapd teenust",
+    "ubuntuProEnabled": "Ubuntu Pro on kasutusel",
+    "ubuntuProLearnMore": "Lisateave Ubuntu Pro kohta",
+    "ubuntuProEnablePro": "Võta Ubuntu Pro kasutusele",
+    "ubuntuProEnable": "Lülita sisse",
+    "ubuntuProCancel": "Katkesta",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProDisablePro": "Eemalda Ubuntu Pro kasutuselt",
+    "ubuntuProDisable": "Eemalda kasutuselt",
+    "ubuntuProDisablePrompt": "Ubuntu Pro kasutuselt eemaldamisel eemaldatakse sellest masinast ka vastav tellimus. Kas sa soovid jätkata?",
+    "ubuntuProMagicContinueInBrowser": "Jätka veebibrauseris"
 }
