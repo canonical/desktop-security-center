@@ -169,5 +169,101 @@
     "diskEncryptionPageRemovingPin": "Удаление PIN-кода, это может занять несколько секунд...",
     "diskEncryptionPageRemovingPassphrase": "Удаление парольной фразы, это может занять несколько секунд...",
     "microphoneInterfacePageTitle": "Микрофон",
-    "microphoneInterfacePageDescription": "Разрешить приложениям доступ к микрофону."
+    "microphoneInterfacePageDescription": "Разрешить приложениям доступ к микрофону.",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Сервис Ubuntu Pro недоступен для этой версии Ubuntu",
+    "ubuntuProNotSupportedDetails": "Для Ubuntu Pro требуется версия LTS",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro не поддерживается этой версией snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Обновите snapd для настройки сервиса Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro включён",
+    "ubuntuProDisabled": "Безопасность и соответствие стандартам корпоративного уровня для Вашего компьютера. Бесплатно для личного использования. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Подробнее об Ubuntu Pro",
+    "ubuntuProEnablePro": "Включить Ubuntu Pro",
+    "ubuntuProEnableMagic": "Включите с помощью уч. записи Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Вы можете создать учётную запись бесплатно",
+    "ubuntuProMagicPrompt": "Войдите в свою учётную запись Ubuntu One или создайте её бесплатно.",
+    "ubuntuProMagicContinueInBrowser": "Продолжить в браузере",
+    "ubuntuProMagicDescription": "Вы также можете войти на сайт {attachLink} и ввести код: {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Не удается включить Ubuntu Pro, повторите попытку",
+    "ubuntuProEnableToken": "Включить с помощью токена",
+    "ubuntuProEnableTokenError": "Не удается включить Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "От вашего ИТ-администратора или на сайте {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Получите токен Ubuntu Pro у своего администратора или на сайте {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Токен",
+    "ubuntuProDisablePro": "Отключить Ubuntu Pro",
+    "ubuntuProDisable": "Отключить",
+    "ubuntuProDisablePrompt": "Отключение Ubuntu Pro отменит привязку подписки к этому компьютеру. Хотите продолжить?",
+    "ubuntuProEnable": "Включить",
+    "ubuntuProCancel": "Отмена",
+    "ubuntuProFeatureEnableError": "Не удалось включить функцию, повторите попытку.",
+    "ubuntuProFeatureDisableError": "Не удалось отключить функцию, повторите попытку.",
+    "ubuntuProCompliance": "Соответствие стандартам и защита",
+    "ubuntuProComplianceDisclaimer": "Рекомендуется использовать только для помощи в соблюдении требований FedRAMP, HIPAA и других стандартов соответствия и усиления защиты.",
+    "ubuntuProComplianceUSGTitle": "Руководство по безопасности Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Автоматизирует защиту и аудит с использованием профилей CIS Benchmark и DISA-STIG, при этом позволяя настраивать параметры под конкретную среду.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Сертификация криптографического модуля на соответствие стандарту защиты данных FIPS 140-2 правительствами США и Канады.",
+    "ubuntuProComplianceFIPSEnable": "Включить FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Включение FIPS не может быть отменено, и Livepatch будет навсегда отключён.",
+    "ubuntuProComplianceFIPSPrompt": "Выберите предпочтительный вариант FIPS",
+    "ubuntuProComplianceFIPSUpdates": "FIPS с обновлениями",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Устанавливает пакеты, сертифицированные по стандарту FIPS 140-2, и позволяет регулярно обновлять систему безопасности.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS без обновлений",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Устанавливает пакеты, сертифицированные по стандарту FIPS 140-2. Они не будут обновляться до следующей повторной сертификации.",
+    "ubuntuProComplianceDocumentation": "Документация по соблюдению требований безопасности",
+    "ubuntuProESMTitle": "Расширенное обслуживание безопасности (ESM)",
+    "ubuntuProESMDescription": "ESM предоставляет 10 лет обновлений безопасности для более чем 25000 пакетов с открытым исходным кодом. Обеспечивает постоянное управление уязвимостями для критических, высоких и средних CVE.",
+    "ubuntuProESMMainTitle": "Пакеты Main (esm-infra)",
+    "ubuntuProESMMainDescription": "Обновления безопасности для 2300 пакетов Ubuntu Main до {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Пакеты Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Дополнительные обновления безопасности для более чем 23000 пакетов Ubuntu Universe до {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Livepatch ядра",
+    "ubuntuProLivepatchEnableTitle": "Включить Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Применять обновления безопасности ядра во время работы системы",
+    "ubuntuProLivepatchShowTitle": "Показывать состояние Livepatch в верхней панели"
 }
