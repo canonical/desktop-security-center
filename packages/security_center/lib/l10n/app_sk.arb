@@ -235,7 +235,7 @@
     "ubuntuProComplianceFIPSTitle": "FIPS 140‑2",
     "ubuntuProComplianceFIPSDescription": "Certifikácia kryptografických modulov podľa štandardu FIPS 140‑2 používaná vládami USA a Kanady.",
     "ubuntuProComplianceFIPSEnable": "Aktivovať FIPS",
-    "ubuntuProComplianceFIPSDisclaimer": "Aktivácia FIPS je nevratná a Livepatch bude natrvalo vypnutý.",
+    "ubuntuProComplianceFIPSDisclaimer": "Aktivácia FIPS je nevratná a Livepatch bude natrvalo deaktivovaný.",
     "ubuntuProComplianceFIPSPrompt": "Vyberte preferovanú možnosť FIPS",
     "ubuntuProComplianceFIPSUpdates": "FIPS s aktualizáciami",
     "ubuntuProComplianceFIPSUpdatesDescription": "Nainštaluje balíky validované podľa FIPS 140‑2 a umožní pravidelné bezpečnostné aktualizácie.",
