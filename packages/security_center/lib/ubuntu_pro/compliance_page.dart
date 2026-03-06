@@ -5,8 +5,8 @@ import 'package:security_center/l10n.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/ubuntu_pro/fips_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
+import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/iterable_extensions.dart';
-import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
@@ -100,9 +100,9 @@ class ComplianceHardeningPage extends ConsumerWidget {
             ),
           ],
         ),
-        MarkdownText(
-          l10n.ubuntuProComplianceDocumentation
-              .link('https://ubuntu.com/security/certifications/docs'),
+        Hyperlink(
+          text: l10n.ubuntuProComplianceDocumentation,
+          url: 'https://ubuntu.com/security/certifications/docs',
         ),
       ].separatedBy(const SizedBox(height: kPageSectionGap)),
     );
