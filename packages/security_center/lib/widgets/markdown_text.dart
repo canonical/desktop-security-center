@@ -28,7 +28,6 @@ class MarkdownText extends StatelessWidget {
         a: TextStyle(
           color: Theme.of(context).colorScheme.primary,
           decoration: TextDecoration.underline,
-          fontWeight: FontWeight.bold,
         ),
       ),
       onTapLink: (text, href, title) {

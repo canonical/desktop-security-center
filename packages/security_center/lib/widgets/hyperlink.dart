@@ -23,7 +23,6 @@ class Hyperlink extends StatelessWidget {
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             decoration: TextDecoration.underline,
-            fontWeight: FontWeight.bold,
           ),
         ),
       ),
