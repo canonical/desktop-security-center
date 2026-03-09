@@ -169,5 +169,73 @@
     "diskEncryptionPageRemovingPin": "מתבצעת הסרה של הקוד האישי (PIN), הפעולה הזאת עלולה לארוך מספר שניות…",
     "diskEncryptionPageRemovingPassphrase": "מתבצעת הסרה של מילת הצופן, הפעולה הזאת עלולה לארוך מספר שניות…",
     "microphoneInterfacePageTitle": "מיקרופון",
-    "microphoneInterfacePageDescription": "לאפשר ליישומים לגשת למיקרופון שלך."
+    "microphoneInterfacePageDescription": "לאפשר ליישומים לגשת למיקרופון שלך.",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro לא זמין לגרסה הזאת של אובונטו",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro דורש מהדורת LTS (תמיכה לטווח ארוך)",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro לא נתמך על ידי הגרסה הזאת של snapd",
+    "ubuntuProNotSupportedSnapdDetails": "יש לעדכן את snapd כדי לנהל Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro פעיל",
+    "ubuntuProLearnMore": "מידע נוסף על Ubuntu Pro",
+    "ubuntuProEnablePro": "הפעלת Ubuntu Pro",
+    "ubuntuProEnableMagic": "הפעלה עם חשבון Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "אפשר ליצור חשבון בחינם",
+    "ubuntuProMagicPrompt": "יש להיכנס עם חשבון Ubuntu One או ליצור אחד בחינם.",
+    "ubuntuProMagicContinueInBrowser": "להמשיך בדפדפן",
+    "ubuntuProMagicDescription": "אפשר גם להיכנס דרך {attachLink} ולמלא את הקוד {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "לא ניתן להפעיל את Ubuntu Pro, נא לנסות שוב",
+    "ubuntuProEnableToken": "הפעלה עם אסימון",
+    "ubuntuProEnableTokenError": "לא ניתן להפעיל את Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "מהנהלת ה־IT שלך או מתוך {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProComplianceFIPSUpdates": "FIPS עם עדכונים",
+    "ubuntuProComplianceFIPSUpdatesDescription": "התקנת חבילות מוסמכות FIPS 140-2 ומתן האפשרות לעדכוני אבטחת מידע שוטפים.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS ללא עדכונים",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "התקנת חבילות מוסמכות FIPS 140-2. הן לא תעודכנה עד להסמכה הבאה מחדש.",
+    "ubuntuProComplianceDocumentation": "תיעוד עמידה בתקני אבטחה",
+    "ubuntuProTokenLabel": "אסימון",
+    "ubuntuProDisablePro": "השבתת Ubuntu Pro",
+    "ubuntuProDisable": "השבתה",
+    "ubuntuProEnable": "הפעלה",
+    "ubuntuProCancel": "ביטול",
+    "ubuntuProFeatureEnableError": "לא ניתן להפעיל את היכולת, נא לנסות שוב.",
+    "ubuntuProFeatureDisableError": "לא ניתן להשבית את היכולת, נא לנסות שוב.",
+    "ubuntuProCompliance": "תקינת אבטחה והקשחה",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSEnable": "הפעלת FIPS",
+    "ubuntuProComplianceFIPSPrompt": "נא לבחור את אפשרות ה־FIPS המועדפת עליך",
+    "ubuntuProESMMainTitle": "חבילות עיקריות (esm-infra)",
+    "ubuntuProDisabled": "אבטחה ברמת תאגיד ועמידה בתקנים למחשב שלך. תמיד חינמי לשימוש פרטי. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "אפשר לקבל אסימון Ubuntu Pro מהנהלת המחשוב שלך או דרך {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProDisablePrompt": "השבתת Ubuntu Pro תנתק את המינוי שלך מהמכונה הזאת. להמשיך?"
 }
