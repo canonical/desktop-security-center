@@ -237,5 +237,11 @@
             }
         }
     },
-    "ubuntuProDisablePrompt": "השבתת Ubuntu Pro תנתק את המינוי שלך מהמכונה הזאת. להמשיך?"
+    "ubuntuProDisablePrompt": "השבתת Ubuntu Pro תנתק את המינוי שלך מהמכונה הזאת. להמשיך?",
+    "ubuntuProComplianceFIPSDisclaimer": "אי אפשר לחזור בך מהפעלת FIPS והטלאה חיה תושבת לצמיתות.",
+    "ubuntuProComplianceDisclaimer": "מומלץ רק לעזרה עם FedRAMP,‏ HIPAA ודרישות תקינת אבטחה והקשחה.",
+    "ubuntuProLivepatchTitle": "הטלאה חיה של הליבה",
+    "ubuntuProLivepatchEnableTitle": "הפעלת הטלאה חיה",
+    "ubuntuProLivepatchEnableDescription": "החלת עדכוני אבטחה של הליבה בזמן שהמערכת פעילה",
+    "ubuntuProLivepatchShowTitle": "הצגת מצב ההטלאה החיה בסרגל העליון"
 }
