@@ -184,5 +184,50 @@
     "ubuntuProDisablePro": "Eemalda Ubuntu Pro kasutuselt",
     "ubuntuProDisable": "Eemalda kasutuselt",
     "ubuntuProDisablePrompt": "Ubuntu Pro kasutuselt eemaldamisel eemaldatakse sellest masinast ka vastav tellimus. Kas sa soovid jätkata?",
-    "ubuntuProMagicContinueInBrowser": "Jätka veebibrauseris"
+    "ubuntuProMagicContinueInBrowser": "Jätka veebibrauseris",
+    "ubuntuProDisabled": "Suurettevõtte tasemel turvalisus ja vastavus sinu arvutile. Isiklikuks kasutuseks alatiseks tasuta saadaval. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProEnableMagic": "Kasuta Ubuntu One konto alusel",
+    "ubuntuProEnableMagicSubtitle": "Sa saad lisada tasuta kasutajakonto",
+    "ubuntuProMagicPrompt": "Logi sisse oma Ubuntu One kasutajakontoga või lisa tasuta konto ja liitu selle teenusega.",
+    "ubuntuProMagicDescription": "Sa võid ka siin {attachLink} logida sisse ja sisestada {attachCode} koodi",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Ubuntu Pro kasutuselevõtmine ei õnnestu, palun proovi uuesti",
+    "ubuntuProEnableToken": "Võta kasutusele tunnusloa abil",
+    "ubuntuProEnableTokenError": "Võta Ubuntu Pro kasutusele või eemalda kasutuselt",
+    "ubuntuProEnableTokenSubtitle": "Kas oma IT-haldurilt või siit {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Küsi Ubuntu Pro tunnusluba (token) oma IT-haldurilt või siit {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Tunnusluba",
+    "ubuntuProFeatureEnableError": "Funktsionaalsuse sisselülitamine ei õnnestunud, palun proovi uuesti.",
+    "ubuntuProFeatureDisableError": "Funktsionaalsuse väljalülitamine ei õnnestunud, palun proovi uuesti.",
+    "ubuntuProCompliance": "Vastavusreeglid ja süsteemi tugevdamine"
 }
