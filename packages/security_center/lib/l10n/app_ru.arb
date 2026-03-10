@@ -186,7 +186,7 @@
     },
     "ubuntuProLearnMore": "Подробнее об Ubuntu Pro",
     "ubuntuProEnablePro": "Включить Ubuntu Pro",
-    "ubuntuProEnableMagic": "Включите с помощью уч. записи Ubuntu One",
+    "ubuntuProEnableMagic": "Включить с уч. записью Ubuntu One",
     "ubuntuProEnableMagicSubtitle": "Вы можете создать учётную запись бесплатно",
     "ubuntuProMagicPrompt": "Войдите в свою учётную запись Ubuntu One или создайте её бесплатно.",
     "ubuntuProMagicContinueInBrowser": "Продолжить в браузере",
@@ -245,7 +245,7 @@
     "ubuntuProESMTitle": "Расширенное обслуживание безопасности (ESM)",
     "ubuntuProESMDescription": "ESM предоставляет 10 лет обновлений безопасности для более чем 25000 пакетов с открытым исходным кодом. Обеспечивает постоянное управление уязвимостями для критических, высоких и средних CVE.",
     "ubuntuProESMMainTitle": "Пакеты Main (esm-infra)",
-    "ubuntuProESMMainDescription": "Обновления безопасности для 2300 пакетов Ubuntu Main до {year}",
+    "ubuntuProESMMainDescription": "Обновления безопасности для 2300 пакетов Ubuntu Main до {year} года",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -254,7 +254,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Пакеты Universe (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Дополнительные обновления безопасности для более чем 23000 пакетов Ubuntu Universe до {year}",
+    "ubuntuProESMUniverseDescription": "Дополнительные обновления безопасности для более чем 23000 пакетов Ubuntu Universe до {year} года",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
