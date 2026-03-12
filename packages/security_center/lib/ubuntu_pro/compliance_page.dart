@@ -25,10 +25,7 @@ class ComplianceHardeningPage extends ConsumerWidget {
       children: [
         YaruInfoBox(
           yaruInfoType: YaruInfoType.warning,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(l10n.ubuntuProComplianceDisclaimer),
-          ),
+          child: Text(l10n.ubuntuProComplianceDisclaimer),
         ),
         YaruTileList(
           children: [

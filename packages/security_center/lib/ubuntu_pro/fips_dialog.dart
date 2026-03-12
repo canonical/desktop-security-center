@@ -50,10 +50,7 @@ class FIPSDialog extends ConsumerWidget {
           children: [
             YaruInfoBox(
               yaruInfoType: YaruInfoType.warning,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text(l10n.ubuntuProComplianceFIPSDisclaimer),
-              ),
+              child: Text(l10n.ubuntuProComplianceFIPSDisclaimer),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
