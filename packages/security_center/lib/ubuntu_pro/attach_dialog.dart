@@ -51,7 +51,7 @@ class _AttachDialogContent extends StatelessWidget {
                     ),
                     titleText: l10n.ubuntuProEnableMagic,
                     subtitle: Text(l10n.ubuntuProEnableMagicSubtitle),
-                    trailing: Icon(YaruIcons.pan_end),
+                    trailing: Icon(YaruIcons.go_next),
                   ),
                   const Divider(),
                   YaruListTile(
@@ -66,7 +66,7 @@ class _AttachDialogContent extends StatelessWidget {
                         'ubuntu.com/pro/dashboard',
                       ),
                     ),
-                    trailing: Icon(YaruIcons.pan_end),
+                    trailing: Icon(YaruIcons.go_next),
                   ),
                 ],
               ),

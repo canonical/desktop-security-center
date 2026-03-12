@@ -94,7 +94,7 @@ class _UbuntuProBody extends ConsumerWidget {
             children: [
               YaruListTile(
                 titleText: l10n.ubuntuProCompliance,
-                trailing: Icon(YaruIcons.pan_end),
+                trailing: Icon(YaruIcons.go_next),
                 onTap: () {
                   navigator.push(
                     MaterialPageRoute(
