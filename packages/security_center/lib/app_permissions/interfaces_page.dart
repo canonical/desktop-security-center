@@ -6,7 +6,6 @@ import 'package:security_center/l10n.dart';
 import 'package:security_center/navigator.dart';
 import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
-import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:yaru/yaru.dart';
 
 class InterfacesPage extends ConsumerWidget {
@@ -141,8 +140,8 @@ class _PromptingSwitch extends ConsumerWidget {
           if (promptingStatus is AppPermissionsServiceStatusEnabling ||
               promptingStatus is AppPermissionsServiceStatusDisabling) ...[
             const Divider(),
-            SecurityCenterListTile(
-              title: switch (promptingStatus) {
+            YaruListTile(
+              titleText: switch (promptingStatus) {
                 AppPermissionsServiceStatusDisabling() =>
                   l10n.snapPermissionsDisablingLabel,
                 AppPermissionsServiceStatusEnabling() =>
@@ -168,9 +167,9 @@ class _InterfaceList extends ConsumerWidget {
             final l10n = AppLocalizations.of(context);
             final tiles = interfaceSnapCounts.entries
                 .map(
-                  (interfaceSnapCount) => SecurityCenterListTile(
+                  (interfaceSnapCount) => YaruListTile(
                     leading: Icon(interfaceSnapCount.key.icon, size: 32),
-                    title: interfaceSnapCount.key.localizedTitle(l10n),
+                    titleText: interfaceSnapCount.key.localizedTitle(l10n),
                     subtitle: Text(
                       interfaceSnapCount.value > 0
                           ? l10n.interfaceSnapCount(interfaceSnapCount.value)

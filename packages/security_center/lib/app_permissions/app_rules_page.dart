@@ -9,7 +9,6 @@ import 'package:security_center/l10n.dart';
 import 'package:security_center/widgets/app_icon.dart';
 import 'package:security_center/widgets/empty_rules_tile.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
-import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:yaru/yaru.dart';
 
 class AppRulesPage extends ConsumerWidget {
@@ -172,8 +171,8 @@ class RuleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return SecurityCenterListTile(
-      title: ruleFragment.pathPattern,
+    return YaruListTile(
+      titleText: ruleFragment.pathPattern,
       subtitle: Text(
         ruleFragment.permissions
             .map((permission) => permission.localize(l10n))

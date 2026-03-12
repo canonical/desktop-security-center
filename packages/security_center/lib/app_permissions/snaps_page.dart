@@ -8,7 +8,6 @@ import 'package:security_center/navigator.dart';
 import 'package:security_center/widgets/app_icon.dart';
 import 'package:security_center/widgets/empty_rules_tile.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
-import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:yaru/yaru.dart';
 
@@ -221,11 +220,11 @@ class _HomeInterfaceAppTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    return SecurityCenterListTile(
+    return YaruListTile(
       leading: AppIcon(
         snapIcon: ref.watch(snapIconProvider(snapName)),
       ),
-      title: ref.watch(snapTitleOrNameProvider(snapName)),
+      titleText: ref.watch(snapTitleOrNameProvider(snapName)),
       subtitle: Text(l10n.snapRulesCount(ruleCount)),
       trailing: const Icon(YaruIcons.pan_end),
       onTap: onTap,
@@ -291,11 +290,11 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
       skipLoadingOnReload: true,
     );
 
-    return SecurityCenterListTile(
+    return YaruListTile(
       leading: AppIcon(
         snapIcon: ref.watch(snapIconProvider(snapName)),
       ),
-      title: ref.watch(snapTitleOrNameProvider(snapName)),
+      titleText: ref.watch(snapTitleOrNameProvider(snapName)),
       subtitle: subtitle != null ? Text(subtitle) : null,
       trailing: Switch(
         value: isOn,
@@ -372,11 +371,11 @@ class _MicrophoneInterfaceAppTile extends ConsumerWidget {
       skipLoadingOnReload: true,
     );
 
-    return SecurityCenterListTile(
+    return YaruListTile(
       leading: AppIcon(
         snapIcon: ref.watch(snapIconProvider(snapName)),
       ),
-      title: ref.watch(snapTitleOrNameProvider(snapName)),
+      titleText: ref.watch(snapTitleOrNameProvider(snapName)),
       subtitle: subtitle != null ? Text(subtitle) : null,
       trailing: Switch(
         value: isOn,
