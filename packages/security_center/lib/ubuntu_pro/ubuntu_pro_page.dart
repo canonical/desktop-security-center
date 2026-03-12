@@ -12,7 +12,6 @@ import 'package:security_center/ubuntu_pro/detach_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
-import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
@@ -93,8 +92,8 @@ class _UbuntuProBody extends ConsumerWidget {
           const _LivepatchSection(),
           YaruTileList(
             children: [
-              SecurityCenterListTile(
-                title: l10n.ubuntuProCompliance,
+              YaruListTile(
+                titleText: l10n.ubuntuProCompliance,
                 trailing: Icon(YaruIcons.pan_end),
                 onTap: () {
                   navigator.push(
@@ -176,9 +175,9 @@ class _UbuntuProStatus extends ConsumerWidget {
               const SizedBox(height: kPageSectionGap),
               YaruTileList(
                 children: [
-                  SecurityCenterListTile(
+                  YaruListTile(
                     leading: const Icon(YaruIcons.checkmark, size: kIconSize),
-                    title: l10n.ubuntuProEnabled,
+                    titleText: l10n.ubuntuProEnabled,
                   ),
                 ],
               ),
