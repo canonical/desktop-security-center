@@ -4,7 +4,6 @@ import 'package:security_center/constants.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
-import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/security_center_list_tile.dart';

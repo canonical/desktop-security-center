@@ -7,11 +7,9 @@ import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/hyperlink.dart';
-import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/security_center_list_tile.dart';
-import 'package:security_center/widgets/tile_list.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
 
@@ -936,7 +934,7 @@ class _AuthStatusTileList extends StatelessWidget {
       };
     }
 
-    return TileList(
+    return YaruTileList(
       children: [
         SecurityCenterListTile(
           leading: const Icon(YaruIcons.lock, size: 24),

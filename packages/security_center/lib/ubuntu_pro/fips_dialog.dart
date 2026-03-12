@@ -4,9 +4,7 @@ import 'package:security_center/constants.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
-import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
-import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
 class FIPSDialog extends ConsumerWidget {
@@ -97,7 +95,7 @@ class _FIPSOptionsState extends ConsumerState<_FIPSOptions> {
         .watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.fipsUpdates))
         .canToggle;
 
-    return TileList(
+    return YaruTileList(
       children: [
         YaruRadioListTile(
           title: Text(l10n.ubuntuProComplianceFIPSUpdates),

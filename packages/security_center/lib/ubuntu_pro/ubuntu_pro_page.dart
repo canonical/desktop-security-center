@@ -10,11 +10,9 @@ import 'package:security_center/ubuntu_pro/attach_dialog.dart';
 import 'package:security_center/ubuntu_pro/compliance_page.dart';
 import 'package:security_center/ubuntu_pro/detach_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
-import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/security_center_list_tile.dart';
-import 'package:security_center/widgets/tile_list.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
@@ -93,7 +91,7 @@ class _UbuntuProBody extends ConsumerWidget {
         if (provider.whenOrNull(data: (data) => data.available) ?? false) ...[
           const _ESMSection(),
           const _LivepatchSection(),
-          TileList(
+          YaruTileList(
             children: [
               SecurityCenterListTile(
                 title: l10n.ubuntuProCompliance,
@@ -176,7 +174,7 @@ class _UbuntuProStatus extends ConsumerWidget {
         ? Column(
             children: [
               const SizedBox(height: kPageSectionGap),
-              TileList(
+              YaruTileList(
                 children: [
                   SecurityCenterListTile(
                     leading: const Icon(YaruIcons.checkmark, size: kIconSize),
@@ -232,7 +230,7 @@ class _ESMSection extends ConsumerWidget {
               theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
         ),
         Text(l10n.ubuntuProESMDescription),
-        TileList(
+        YaruTileList(
           children: [
             YaruSwitchListTile(
               contentPadding: const EdgeInsets.symmetric(
@@ -346,7 +344,7 @@ class _LivepatchSection extends ConsumerWidget {
           style:
               theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
         ),
-        TileList(
+        YaruTileList(
           children: [
             YaruSwitchListTile(
               contentPadding: const EdgeInsets.symmetric(

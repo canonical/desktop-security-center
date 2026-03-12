@@ -10,7 +10,6 @@ import 'package:security_center/widgets/app_icon.dart';
 import 'package:security_center/widgets/empty_rules_tile.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/security_center_list_tile.dart';
-import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
 class AppRulesPage extends ConsumerWidget {
@@ -74,7 +73,7 @@ class _HomeBody extends ConsumerWidget {
         ),
         const SizedBox(height: 32),
         if (ruleFragments.isEmpty) ...[
-          const TileList(
+          const YaruTileList(
             children: [
               EmptyRulesTile(),
             ],
@@ -138,7 +137,7 @@ class _HomeRuleSection extends ConsumerWidget {
   }
 }
 
-class _RuleList extends TileList {
+class _RuleList extends YaruTileList {
   _RuleList({
     required List<SnapdHomeRuleFragment> ruleFragments,
     required void Function(String id) onRemoveRule,

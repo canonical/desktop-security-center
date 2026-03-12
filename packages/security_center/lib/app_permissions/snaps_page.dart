@@ -9,7 +9,6 @@ import 'package:security_center/widgets/app_icon.dart';
 import 'package:security_center/widgets/empty_rules_tile.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/security_center_list_tile.dart';
-import 'package:security_center/widgets/tile_list.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:yaru/yaru.dart';
 
@@ -87,7 +86,7 @@ class _HomeInterfaceBody extends ConsumerWidget {
       children: [
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
-        TileList(
+        YaruTileList(
           children:
               tiles.isEmpty ? [EmptyRulesTile(interface: interface)] : tiles,
         ),
@@ -125,7 +124,7 @@ class _CameraInterfaceBody extends ConsumerWidget {
         const SizedBox(height: 12),
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
-        TileList(
+        YaruTileList(
           children: appTiles.isEmpty
               ? [EmptyRulesTile(interface: interface)]
               : appTiles,
@@ -181,7 +180,7 @@ class _MicrophoneInterfaceBody extends ConsumerWidget {
         const SizedBox(height: 12),
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
-        TileList(
+        YaruTileList(
           children: appTiles.isEmpty
               ? [EmptyRulesTile(interface: interface)]
               : appTiles,

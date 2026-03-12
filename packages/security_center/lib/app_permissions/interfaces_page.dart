@@ -5,10 +5,8 @@ import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/navigator.dart';
 import 'package:security_center/widgets/hyperlink.dart';
-import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:security_center/widgets/security_center_list_tile.dart';
-import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
 class InterfacesPage extends ConsumerWidget {
@@ -187,7 +185,7 @@ class _InterfaceList extends ConsumerWidget {
                   ),
                 )
                 .toList();
-            return TileList(children: tiles);
+            return YaruTileList(children: tiles);
           },
           error: (error, _) => ErrorWidget(error),
           loading: () => const Center(child: YaruCircularProgressIndicator()),
