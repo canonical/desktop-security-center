@@ -4,10 +4,8 @@ import 'package:security_center/constants.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/ubuntu_pro_service.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
-import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/markdown_text.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
-import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:yaru/yaru.dart';
 
@@ -45,30 +43,30 @@ class _AttachDialogContent extends StatelessWidget {
             YaruBorderContainer(
               child: Column(
                 children: [
-                  SecurityCenterListTile(
+                  YaruListTile(
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const _MagicLinkDialog(),
                       ),
                     ),
-                    title: l10n.ubuntuProEnableMagic,
+                    titleText: l10n.ubuntuProEnableMagic,
                     subtitle: Text(l10n.ubuntuProEnableMagicSubtitle),
-                    trailing: Icon(YaruIcons.pan_end),
+                    trailing: Icon(YaruIcons.go_next),
                   ),
                   const Divider(),
-                  SecurityCenterListTile(
+                  YaruListTile(
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const _TokenDialog(),
                       ),
                     ),
-                    title: l10n.ubuntuProEnableToken,
+                    titleText: l10n.ubuntuProEnableToken,
                     subtitle: MarkdownText(
                       l10n.ubuntuProEnableTokenSubtitle(
                         'ubuntu.com/pro/dashboard',
                       ),
                     ),
-                    trailing: Icon(YaruIcons.pan_end),
+                    trailing: Icon(YaruIcons.go_next),
                   ),
                 ],
               ),

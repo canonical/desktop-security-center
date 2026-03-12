@@ -5,7 +5,6 @@ import 'package:security_center/app_permissions/interfaces_page.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
-import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:yaru/yaru.dart';
 
 import '../test_utils.dart';
@@ -37,7 +36,7 @@ void main() {
 
     final homeInterfaceTile = find.ancestor(
       of: find.text(SnapdInterface.home.localizedTitle(tester.l10n)),
-      matching: find.byType(SecurityCenterListTile),
+      matching: find.byType(YaruListTile),
     );
     expect(homeInterfaceTile, findsOneWidget);
     expect(
@@ -50,7 +49,7 @@ void main() {
 
     final cameraInterfaceTile = find.ancestor(
       of: find.text(SnapdInterface.camera.localizedTitle(tester.l10n)),
-      matching: find.byType(SecurityCenterListTile),
+      matching: find.byType(YaruListTile),
     );
     expect(cameraInterfaceTile, findsOneWidget);
     expect(
@@ -108,14 +107,14 @@ void main() {
         // Home interface should still be visible
         final homeInterfaceTile = find.ancestor(
           of: find.text(SnapdInterface.home.localizedTitle(tester.l10n)),
-          matching: find.byType(SecurityCenterListTile),
+          matching: find.byType(YaruListTile),
         );
         expect(homeInterfaceTile, findsOneWidget);
 
         // Microphone interface visibility should match expected behavior
         final microphoneInterfaceTile = find.ancestor(
           of: find.text(SnapdInterface.microphone.localizedTitle(tester.l10n)),
-          matching: find.byType(SecurityCenterListTile),
+          matching: find.byType(YaruListTile),
         );
         expect(microphoneInterfaceTile, testCase.expected);
       });

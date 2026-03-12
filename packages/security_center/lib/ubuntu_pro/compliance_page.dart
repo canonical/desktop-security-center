@@ -6,9 +6,7 @@ import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/ubuntu_pro/fips_dialog.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:security_center/widgets/hyperlink.dart';
-import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
-import 'package:security_center/widgets/tile_list.dart';
 import 'package:yaru/yaru.dart';
 
 class ComplianceHardeningPage extends ConsumerWidget {
@@ -27,12 +25,9 @@ class ComplianceHardeningPage extends ConsumerWidget {
       children: [
         YaruInfoBox(
           yaruInfoType: YaruInfoType.warning,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(l10n.ubuntuProComplianceDisclaimer),
-          ),
+          child: Text(l10n.ubuntuProComplianceDisclaimer),
         ),
-        TileList(
+        YaruTileList(
           children: [
             YaruSwitchListTile(
               contentPadding: const EdgeInsets.symmetric(

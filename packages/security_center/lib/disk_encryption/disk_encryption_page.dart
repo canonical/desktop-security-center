@@ -7,11 +7,8 @@ import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/hyperlink.dart';
-import 'package:security_center/widgets/iterable_extensions.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
-import 'package:security_center/widgets/security_center_list_tile.dart';
-import 'package:security_center/widgets/tile_list.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
 
@@ -486,8 +483,7 @@ class ChangeAuthDialog extends ConsumerWidget {
       titlePadding: EdgeInsets.zero,
       content: SizedBox(
         width: 460,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ScrollablePage(
           children: [
             CurrentPassphraseFormField(authMode: authMode),
             PassphraseFormField(authMode: authMode),
@@ -596,8 +592,7 @@ class ChangeAuthModeDialog extends ConsumerWidget {
           const EdgeInsets.symmetric(horizontal: 40.0, vertical: 16.0),
       content: SizedBox(
         width: 460,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ScrollablePage(
           children: [
             Text(bodyMainText),
             Text(bodyRecoveryText),
@@ -936,25 +931,25 @@ class _AuthStatusTileList extends StatelessWidget {
       };
     }
 
-    return TileList(
+    return YaruTileList(
       children: [
-        SecurityCenterListTile(
+        YaruListTile(
           leading: const Icon(YaruIcons.lock, size: 24),
-          title: l10n.recoveryKeyTPMEnabled,
+          titleText: l10n.recoveryKeyTPMEnabled,
         ),
         // Show enabled status row when not loading and has auth enabled
         if (currentMode != AuthMode.none && pendingOperation == null) ...[
-          SecurityCenterListTile(
+          YaruListTile(
             leading: const Icon(YaruIcons.ok_simple, size: 24),
-            title: currentMode == AuthMode.pin
+            titleText: currentMode == AuthMode.pin
                 ? l10n.recoveryKeyPinEnabled
                 : l10n.recoveryKeyPassphraseEnabled,
           ),
         ],
         // Show loading indicator if an operation is in progress
         if (loadingMessage != null) ...[
-          SecurityCenterListTile(
-            title: loadingMessage,
+          YaruListTile(
+            titleText: loadingMessage,
             subtitle: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
