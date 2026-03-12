@@ -483,8 +483,7 @@ class ChangeAuthDialog extends ConsumerWidget {
       titlePadding: EdgeInsets.zero,
       content: SizedBox(
         width: 460,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ScrollablePage(
           children: [
             CurrentPassphraseFormField(authMode: authMode),
             PassphraseFormField(authMode: authMode),
@@ -593,8 +592,7 @@ class ChangeAuthModeDialog extends ConsumerWidget {
           const EdgeInsets.symmetric(horizontal: 40.0, vertical: 16.0),
       content: SizedBox(
         width: 460,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ScrollablePage(
           children: [
             Text(bodyMainText),
             Text(bodyRecoveryText),
