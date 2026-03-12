@@ -9,7 +9,6 @@ import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
-import 'package:security_center/widgets/security_center_list_tile.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
 
@@ -936,23 +935,23 @@ class _AuthStatusTileList extends StatelessWidget {
 
     return YaruTileList(
       children: [
-        SecurityCenterListTile(
+        YaruListTile(
           leading: const Icon(YaruIcons.lock, size: 24),
-          title: l10n.recoveryKeyTPMEnabled,
+          titleText: l10n.recoveryKeyTPMEnabled,
         ),
         // Show enabled status row when not loading and has auth enabled
         if (currentMode != AuthMode.none && pendingOperation == null) ...[
-          SecurityCenterListTile(
+          YaruListTile(
             leading: const Icon(YaruIcons.ok_simple, size: 24),
-            title: currentMode == AuthMode.pin
+            titleText: currentMode == AuthMode.pin
                 ? l10n.recoveryKeyPinEnabled
                 : l10n.recoveryKeyPassphraseEnabled,
           ),
         ],
         // Show loading indicator if an operation is in progress
         if (loadingMessage != null) ...[
-          SecurityCenterListTile(
-            title: loadingMessage,
+          YaruListTile(
+            titleText: loadingMessage,
             subtitle: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
