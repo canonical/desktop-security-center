@@ -39,6 +39,7 @@ class UbuntuProManagerData with _$UbuntuProManagerData {
 class UbuntuProFeatureDetails with _$UbuntuProFeatureDetails {
   factory UbuntuProFeatureDetails({
     required UbuntuProFeature data,
+    required DBusRemoteObject object,
     required StreamSubscription<DBusPropertiesChangedSignal>
         propertiesChangedStream,
   }) = _UbuntuProFeatureDetails;
@@ -47,7 +48,6 @@ class UbuntuProFeatureDetails with _$UbuntuProFeatureDetails {
 @freezed
 class UbuntuProFeature with _$UbuntuProFeature {
   factory UbuntuProFeature({
-    required DBusRemoteObject object,
     required UbuntuProFeatureType? type,
     required String path,
     required String name,
@@ -58,12 +58,10 @@ class UbuntuProFeature with _$UbuntuProFeature {
   factory UbuntuProFeature.fromMap(
     String path,
     Map<String, DBusValue> dbusMap,
-    DBusRemoteObject object,
   ) {
     final name = dbusMap['Name']!.asString();
 
     return UbuntuProFeature(
-      object: object,
       path: path,
       name: name,
       entitled: dbusMap['Entitled']!.asString() == 'yes',
@@ -163,8 +161,8 @@ class UbuntuProFeatureService {
 
   /// Enable a Pro feature over D-Bus.
   Future<void> enableFeature(UbuntuProFeatureType feature) async {
-    final featureData = getFeature(feature);
-    await featureData?.object.callMethod(
+    final featureDetails = _featureMap[feature];
+    await featureDetails?.object.callMethod(
       'com.canonical.UbuntuAdvantage.Service',
       'Enable',
       [],
@@ -173,8 +171,8 @@ class UbuntuProFeatureService {
 
   /// Disable a Pro feature over D-Bus.
   Future<void> disableFeature(UbuntuProFeatureType feature) async {
-    final featureData = getFeature(feature);
-    await featureData?.object.callMethod(
+    final featureDetails = _featureMap[feature];
+    await featureDetails?.object.callMethod(
       'com.canonical.UbuntuAdvantage.Service',
       'Disable',
       [],
@@ -244,18 +242,19 @@ class UbuntuProFeatureService {
     final featureObj = UbuntuProFeature.fromMap(
       path,
       dbusMap,
-      _objectFactory!(path),
     );
 
     if (featureObj.type == null) return;
 
+    final dbusObj = _objectFactory!(path);
     _featureMap.update(
       featureObj.type!,
       (details) => details.copyWith(data: featureObj),
       ifAbsent: () => UbuntuProFeatureDetails(
         data: featureObj,
         propertiesChangedStream:
-            featureObj.object.propertiesChanged.listen(_onPropertiesChanged),
+            dbusObj.propertiesChanged.listen(_onPropertiesChanged),
+        object: dbusObj,
       ),
     );
     _stream.add(featureObj.type!);
