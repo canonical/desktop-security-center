@@ -1,1 +1,269 @@
-{}
+{
+    "appTitle": "Centro de seguranza",
+    "snapdRuleCategorySessionAllowed": "Permitir ata pechar sesión",
+    "snapdRuleCategorySessionDenied": "Negar ate pechar sesión",
+    "snapdRuleCategoryForeverAllowed": "Permitir sempre",
+    "snapdRuleCategoryForeverDenied": "Negar sempre",
+    "snapPermissionReadLabel": "Ler",
+    "snapPermissionWriteLabel": "Escribir",
+    "snapPermissionExecuteLabel": "Executar",
+    "snapPermissionAccessLabel": "Acceso",
+    "snapPermissionsEnableTitle": "Requirir ás aplicacións que pidan permisos do sistema",
+    "snapPermissionsEnableWarning": "Isto é unha característica experimental para controlar o acceso aos recursos do teu sistema.",
+    "snapPermissionsEnablingLabel": "Habilitando, isto pode tardar uns segundos...",
+    "snapPermissionsDisablingLabel": "Inhabilitando, isto pode tardar uns segundos...",
+    "snapPermissionsExperimentalLabel": "Experimental",
+    "snapPermissionsOtherDescription": "Podes administrar outros permisos en Preferencias › Aplicacións.",
+    "snapPermissionsPageTitle": "Permisos da aplicación",
+    "snapRulesCount": "{n, plural, =0{sen regras} =1{1 regra} other{{n} regras}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "Xestionar os permisos de {interface} para {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Ainda non hai regras",
+    "cameraRulesPageEmptyTileLabel": "Ningunha aplicación pediu acceso aínda",
+    "snapRulesRemoveAll": "Eliminar todas as regras",
+    "snapRulesResetAllPermissions": "Restablecer todos os permisos",
+    "homeInterfacePageTitle": "Cartafol persoal",
+    "homeInterfacePageDescription": "Xestiona os permisos para acceder aos ficheiros do Cartafol persoal.",
+    "cameraInterfacePageTitle": "Cámara",
+    "cameraInterfacePageDescription": "Permitir ás aplicacións acceder ás túas cámaras.",
+    "microphoneInterfacePageTitle": "Micrófono",
+    "microphoneInterfacePageDescription": "Permite que as aplicacións accedan ao teu micrófono.",
+    "interfacePageTitle": "Xestionar permisos",
+    "interfacePageDescription": "As aplicacións limitadas estrictamente preguntaranche antes de acceder a ficheiros e cartafoles. Esta función é experimental e está suxeita a cambios.",
+    "interfacePageLinkLearnMore": "Saber máis",
+    "interfacePageLinkGiveFeedback": "Dá retroalimentación",
+    "interfacePageLinkReportIssues": "Informar de problemas",
+    "interfaceSnapCount": "{n, plural, =0{sen aplicacións} =1{1 aplicación} other {{n} aplicacións}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageTitle": "Cifrado de disco",
+    "diskEncryptionPageRecoveryKey": "Chave de recuperación",
+    "diskEncryptionPageStoreYourKey": "A chave de recuperación permíteche recuperar o acceso aos teus datos se o disco non se desbloquea durante o inicio. Gardáa nun lugar seguro.",
+    "diskEncryptionPageStoreYourKeyWithLink": "A chave de recuperación permíteche recuperar o acceso aos teus datos se o disco non se desbloquea durante o inicio. Gardáa nun lugar seguro. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "Aprende máis sobre o cifrado con respaldo de hardware",
+    "diskEncryptionPageCheckKey": "Comprobar a chave de recuperación...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Comprobar a chave de recuperación",
+    "diskEncryptionPageCheck": "Comprobar",
+    "diskEncryptionPageValidKey": "Chave válida",
+    "diskEncryptionPageInvalidKey": "Chave non válida",
+    "diskEncryptionPageEnterKey": "Introduza a chave de recuperación",
+    "diskEncryptionPageKeyWorks": "A chave de recuperación funciona",
+    "diskEncryptionPageKeyWorksBody": "Lembra mantela nun lugar seguro.",
+    "diskEncryptionPageKeyDoesntWork": "A chave de recuperación non funciona",
+    "diskEncryptionPageKeyDoesntWorkBody": "Comproba a chave ou sustitúaa por unha nova.",
+    "diskEncryptionPageError": "Erro",
+    "diskEncryptionPageReplaceButton": "Sustituir a chave de recuperación...",
+    "diskEncryptionPageReplaceDialogHeader": "Substituir a chave de recuperación",
+    "diskEncryptionPageReplaceDialogBody": "Garde a nova chave de recuperación nun lugar seguro. Unha vez reemplazada, xa non poderá usar a chave vella.",
+    "diskEncryptionPageReplaceDialogShowQR": "Mostrar código QR",
+    "diskEncryptionPageReplaceDialogSave": "Gardar nun arquivo",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Gardei a miña chave de recuperación nun lugar seguro",
+    "diskEncryptionPageReplaceDialogReplace": "Substituír",
+    "diskEncryptionPageReplaceDialogDiscard": "Descartar",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Chave de recuperación substituída",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Lembra gardala nun lugar seguro.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Faiou a substitución da chave de recuperación",
+    "diskEncryptionPageReplaceDialogErrorBody": "Algo foi mal substituíndo a chave de recuperación, a túa chave antiga seguirá sendo válida.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Escritorio de Ubuntu - Chave de recuperación de cifrado",
+    "diskEncryptionPageReplaceDialogQRBody": "Escanee o código QR para copiar a chave de recuperación e gardala nun lugar seguro, como un xestor de contrasinais. Tamén podes tomar unha foto para usala máis tarde.",
+    "diskEncryptionPageClipboardNotification": "Copiado no portapapeis",
+    "diskEncryptionPageCopySemanticLabel": "Copiar",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "A configuración do cifrado non está dispoñíbel",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Faiou a comprobación do estado do cifrado deste ordenador.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "A configuración do TPM do seu ordenador non está nun estado compatible.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "A súa versión de snapd non ten soporte",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Comprobe que o Centro de seguranza e snapd están actualizados.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "O centro de seguranza non pode conectarse á interface de snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Para arranxar isto, execute este comando no terminal:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "",
+    "diskEncryptionPageAddPinButton": "Engadir PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Engadir frase de paso...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Engadir frase de paso",
+    "diskEncryptionPageAddPinDialogHeading": "Engadir PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "Terás que introducir o teu PIN cada vez que se inicie o ordenador. Este PIN é diferente da contrasinal do usuario.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Se esqueces o teu PIN, podes recuperar o acceso ao disco usando a chave de recuperación.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Terás que introducir a frase de paso cada vez que se inicie o ordenador. Esta frase de paso é diferente do teu contrasinal de usuario.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Se esqueces a túa frase de paso, podes recuperar o acceso ao disco usando a chave de recuperación.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Seguranza adicional",
+    "diskEncryptionPageAdditionalSecurityBody": "Podes definir unha frase de paso ou un PIN para maior seguridade. Terás que introducilo cada vez que se inicie o ordenador.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Saber máis",
+    "diskEncryptionPageAddPinDialogSaveButton": "Engadir",
+    "diskEncryptionPageRemovePinButton": "Retirar PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Retirar frase de paso...",
+    "diskEncryptionPageAddingPin": "Engadindo PIN, esto pode tomar uns segundos...",
+    "diskEncryptionPageAddingPassphrase": "Engadindo frase de paso, esto pode tomar uns segundos...",
+    "diskEncryptionPageRemovingPin": "Retirando PIN, esto pode tomar uns segundos...",
+    "diskEncryptionPageRemovingPassphrase": "Retirando frase de paso, esto pode tomar uns segundos...",
+    "recoveryKeyExceptionFileSystemTitle": "Non se gardou o ficheiro da chave de recuperación",
+    "recoveryKeyExceptionDisallowedPathTitle": "Non se pode gardar o ficheiro da chave de recuperación nunha localización temporal",
+    "recoveryKeyExceptionUnknownTitle": "Erro descoñecido",
+    "recoveryKeyExceptionFilePermissionTitle": "Erro no gardado da chave de recuperación a un ficheiro",
+    "recoveryKeyExceptionFilePermissionBody": "Non tes permiso para escribir nesa localización do ficheiro.",
+    "recoveryKeyExceptionFileSystemBody": "Non tes permiso para escribir nese cartafol. Proba cunha localización diferente ou usa outro método.",
+    "recoveryKeyExceptionDisallowedPathBody": "Proba cunha localización diferente, como unha unidade extraíble, ou usa outro método.",
+    "recoveryKeyFilePickerTitle": "Gardar ficheiro de chave de recuperación",
+    "recoveryKeyFilePickerFilter": "Ficheiros de texto",
+    "recoveryKeyTPMEnabled": "O cifrado con respaldo de hardware está activado",
+    "recoveryKeyTPMExplanationBody": "As chaves de cifrado almacénanse no módulo de plataforma fiable (TPM) do teu ordenador.",
+    "recoveryKeyTPMExplanationLearnMore": "Saber máis do cifrado con respaldo de hardware",
+    "recoveryKeyPassphraseEnabled": "A frase de paso cifrada está activada",
+    "recoveryKeyPassphraseHeader": "Cambiar a frase de paso",
+    "recoveryKeyPassphraseBody": "Necesita introducir a frase de paso cada vez que arranque o ordenador.",
+    "recoveryKeyPassphraseButton": "Cambiar a frase de paso...",
+    "recoveryKeyPassphraseCurrent": "Frase de paso actual",
+    "recoveryKeyPassphraseNew": "Nova frase de paso",
+    "recoveryKeyPassphraseConfirm": "Confirmar frase de paso",
+    "recoveryKeyPassphraseCurrentError": "Frase de paso incorrecta, téntao de novo",
+    "recoveryKeyPassphraseNewError": "Debe ter un mínimo de 4 caracteres",
+    "recoveryKeyPassphraseConfirmError": "As frases de paso non coinciden, téntao de novo",
+    "recoveryKeyPassphraseDialogHeader": "Cambiar frase de paso",
+    "recoveryKeyPinEnabled": "O PIN de cifrado está activado",
+    "recoveryKeyPinHeader": "PIN de cifrado",
+    "recoveryKeyEncrpytionPassphraseHeader": "Frase de paso de cifrado",
+    "recoveryKeyPinBody": "Necesitas introducir o teu PIN cada vez que se inicie o ordenador.",
+    "recoveryKeyPinButton": "Cambiar PIN...",
+    "recoveryKeyPinCurrent": "PIN actual",
+    "recoveryKeyPinNew": "Novo PIN",
+    "recoveryKeyPinConfirm": "Confirmar o PIN",
+    "recoveryKeyPinCurrentError": "PIN incorrecto, téntao de novo",
+    "recoveryKeyPinConfirmError": "Os PINs non coinciden, téntao de novo",
+    "recoveryKeyPinDialogHeader": "Cambiar PIN",
+    "recoveryKeyPassphraseShow": "Amosar",
+    "recoveryKeyPassphraseHide": "Agochar",
+    "recoveryKeyPassphraseChange": "Cambiar",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN actualizado",
+    "recoveryKeyPassphrasePinSuccessBody": "O teu PIN actualizouse correctamente.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Frase de paso actualizada",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "A túa frase de paso actualizouse con éxito.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Frase de paso feble, faina máis longa ou máis complexa",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Frase de paso xusta, faina máis longa ou máis complexa para unha mellor seguranza",
+    "recoveryKeyPassphraseEntropyOptimal": "Frase de paso forte",
+    "recoveryKeyPinEntropyBelowMin": "PIN feble, faino máis longo ou menos previsíbel",
+    "recoveryKeyPinEntropyBelowOptimal": "PIN xusto, faino máis longo ou menos previsíbel para unha mellor seguranza",
+    "recoveryKeyPinEntropyOptimal": "O PIN é o suficientemente longo",
+    "recoveryKeySomethingWentWrongHeader": "Algo fallou",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro non está dispoñíbel para esta versión de Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro require unha versión LTS",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro non é compatíbel con esta versión de snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Actualiza snapd para xestionar Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro está activado",
+    "ubuntuProDisabled": "Seguranza e cumprimento de normas empresariais para o teu ordenador. Sempre gratuíto para uso persoal. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Saber máis sobre Ubuntu Pro",
+    "ubuntuProEnablePro": "Activar Ubuntu Pro",
+    "ubuntuProEnableMagic": "Activar con unha conta Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Poderás crear unha conta de balde",
+    "ubuntuProMagicPrompt": "Inicia sesión coa túa conta de Ubuntu One ou crea unha de balde.",
+    "ubuntuProMagicContinueInBrowser": "Continúa no navegador",
+    "ubuntuProMagicDescription": "Tamén podes iniciar sesión en {attachLink} e introducir o código {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Non se puido activar Ubuntu Pro. Téntao de novo",
+    "ubuntuProEnableToken": "Activar cun token",
+    "ubuntuProEnableTokenError": "Non se pode activar Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Do teu administrador informático ou de {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Obtén un token de Ubuntu Pro do teu administrador ou de {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Desactivar Ubuntu Pro",
+    "ubuntuProDisable": "Desactivar",
+    "ubuntuProDisablePrompt": "Desactivar Ubuntu Pro desvinculará a túa subscrición desta máquina. Queres continuar?",
+    "ubuntuProEnable": "Activar",
+    "ubuntuProCancel": "Cancelar",
+    "ubuntuProFeatureEnableError": "Non se puido activar a funcionalidade. Téntao de novo.",
+    "ubuntuProFeatureDisableError": "Non se puido desactivar a funcionalidade. Téntao de novo.",
+    "ubuntuProCompliance": "Conformidade e endurecemento",
+    "ubuntuProComplianceDisclaimer": "Só recomendado para axudar con FedRAMP, HIPAA e outros requisitos de cumprimento e endurecemento.",
+    "ubuntuProComplianceUSGTitle": "Guía de seguranza de Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatiza o endurecemento e a auditoría con perfís de referencia CIS e DISA-STIG, ao tempo que permite personalizacións específicas do ambiente.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Unha certificación de módulo criptográfico dos gobernos dos Estados Unidos e do Canadá que garante o cumprimento do estándar de protección de datos FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Activar FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "A activación de FIPS non se pode reverter e Livepatch desactivarase permanentemente.",
+    "ubuntuProComplianceFIPSPrompt": "Escolla a súa opción FIPS preferida",
+    "ubuntuProComplianceFIPSUpdates": "FIPS con actualizacións",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Instala paquetes validados segundo FIPS 140-2 e permite actualizacións de seguranza regulares.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS sen actualizacións",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Instala paquetes validados segundo FIPS 140-2. Estes non se actualizarán ata a próxima recertificación.",
+    "ubuntuProComplianceDocumentation": "Documentación de conformidade da seguranza",
+    "ubuntuProESMTitle": "Mantemento de seguranza extendido (ESM)",
+    "ubuntuProESMDescription": "ESM ofrece 10 anos de parches de seguranza para máis de 25.000 paquetes de código aberto. Obtén unha xestión continua de vulnerabilidades para CVE críticos, altos e medios.",
+    "ubuntuProESMMainTitle": "Paquetes principais (esm-infra)",
+    "ubuntuProESMMainDescription": "Actualizacións de seguranza para 2.300 paquetes principais de Ubuntu ata {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Paquetes Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Actualizacións adicionais de seguranza para máis de 23.000 paquetes Ubuntu Universe ata {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Activar Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Aplicar as actualizacións de seguranza do kernel mentres o sistema se executa",
+    "ubuntuProLivepatchShowTitle": "Mostrar o estado de Livepatch na barra superior"
+}
