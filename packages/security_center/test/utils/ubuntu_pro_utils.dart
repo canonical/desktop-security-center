@@ -179,7 +179,6 @@ UbuntuProFeatureService registerMockUbuntuProFeatureService({
 
   for (final featureType in UbuntuProFeatureType.values) {
     final feature = UbuntuProFeature(
-      object: MockDBusRemoteObject(),
       type: featureType,
       path:
           '/com/canonical/UbuntuAdvantage/Services/${featureType.toPathPart()}',
