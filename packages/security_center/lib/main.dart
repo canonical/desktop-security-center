@@ -10,6 +10,8 @@ import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/fake_app_permissions_service.dart';
 import 'package:security_center/services/fake_disk_encryption_service.dart';
+import 'package:security_center/services/fake_ubuntu_pro_dbus_service.dart';
+import 'package:security_center/services/fake_ubuntu_pro_service.dart';
 import 'package:security_center/services/feature_service.dart';
 import 'package:security_center/services/snapd_app_permissions_service.dart';
 import 'package:security_center/services/snapd_disk_encryption_service.dart';
@@ -93,19 +95,36 @@ Future<void> main(List<String> args) async {
     );
   }
 
-  registerService<UbuntuProFeatureService>(
-    () => UbuntuProFeatureService()..init(),
-    dispose: (service) => service.dispose(),
-  );
-  registerService<UbuntuProManagerService>(
-    () => UbuntuProManagerService()..init(),
-    dispose: (service) => service.dispose(),
-  );
-  registerService<MagicAttachService>(MagicAttachService.new);
-  registerService<GSettingsIconService>(
-    () => GSettingsIconService()..init(),
-    dispose: (service) => service.dispose(),
-  );
+  // Register Ubuntu Pro services
+  if (featureService.isDryRun) {
+    registerService<UbuntuProFeatureService>(
+      () => FakeUbuntuProFeatureService()..init(),
+      dispose: (service) => service.dispose(),
+    );
+    registerService<UbuntuProManagerService>(
+      () => FakeUbuntuProManagerService()..init(),
+      dispose: (service) => service.dispose(),
+    );
+    registerService<MagicAttachService>(FakeMagicAttachService.new);
+    registerService<GSettingsIconService>(
+      () => FakeGSettingsIconService()..init(),
+      dispose: (service) => service.dispose(),
+    );
+  } else {
+    registerService<UbuntuProFeatureService>(
+      () => UbuntuProFeatureService()..init(),
+      dispose: (service) => service.dispose(),
+    );
+    registerService<UbuntuProManagerService>(
+      () => UbuntuProManagerService()..init(),
+      dispose: (service) => service.dispose(),
+    );
+    registerService<MagicAttachService>(MagicAttachService.new);
+    registerService<GSettingsIconService>(
+      () => GSettingsIconService()..init(),
+      dispose: (service) => service.dispose(),
+    );
+  }
 
   // Initialize available routes
   await AvailableRoutes.init();
