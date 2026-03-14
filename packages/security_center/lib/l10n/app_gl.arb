@@ -68,7 +68,7 @@
             }
         }
     },
-    "diskEncryptionPageLearnMore": "Aprende máis sobre o cifrado con respaldo de hardware",
+    "diskEncryptionPageLearnMore": "Saber máis do cifrado con respaldo de hardware",
     "diskEncryptionPageCheckKey": "Comprobar a chave de recuperación...",
     "diskEncryptionPageDialogHeaderCheckKey": "Comprobar a chave de recuperación",
     "diskEncryptionPageCheck": "Comprobar",
@@ -84,7 +84,7 @@
     "diskEncryptionPageReplaceDialogHeader": "Substituir a chave de recuperación",
     "diskEncryptionPageReplaceDialogBody": "Garde a nova chave de recuperación nun lugar seguro. Unha vez reemplazada, xa non poderá usar a chave vella.",
     "diskEncryptionPageReplaceDialogShowQR": "Mostrar código QR",
-    "diskEncryptionPageReplaceDialogSave": "Gardar nun arquivo",
+    "diskEncryptionPageReplaceDialogSave": "Gardar nun ficheiro",
     "diskEncryptionPageReplaceDialogAcknowledge": "Gardei a miña chave de recuperación nun lugar seguro",
     "diskEncryptionPageReplaceDialogReplace": "Substituír",
     "diskEncryptionPageReplaceDialogDiscard": "Descartar",
@@ -103,7 +103,7 @@
     "diskEncryptionPageErrorUnsupportedSnapdBody": "Comprobe que o Centro de seguranza e snapd están actualizados.",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "O centro de seguranza non pode conectarse á interface de snapd",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Para arranxar isto, execute este comando no terminal:",
-    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
     "diskEncryptionPageAddPinButton": "Engadir PIN...",
     "diskEncryptionPageAddPassphraseButton": "Engadir frase de paso...",
     "diskEncryptionPageAddPassphraseDialogHeading": "Engadir frase de paso",
