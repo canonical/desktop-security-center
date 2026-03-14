@@ -1,77 +1,269 @@
 {
-  "snapdRuleCategoryForeverDenied": "Diúltaigh i gcónaí",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionWriteLabel": "Scríobh",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionReadLabel": "Léigh",
-  "@snapPermissionReadLabel": {},
-  "appTitle": "Ionad Slándála",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "Ceadaigh go dtí go logáil amach",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "Diúltaigh go dtí logáil amach",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverAllowed": "Ceadaigh i gcónaí",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapPermissionExecuteLabel": "Rith",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsEnableTitle": "Éilíonn aipeanna ceadanna córais a iarraidh",
-  "@snapPermissionsEnableTitle": {},
-  "snapPermissionsEnableWarning": "Is gné thurgnamhach é seo chun rochtain ar acmhainní do chórais a rialú.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsDisablingLabel": "Á dhíchumasú, seans go dtógfaidh sé cúpla soicind...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsExperimentalLabel": "Turgnamhach",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsOtherDescription": "Is féidir leat ceadanna eile a bhainistiú i Socruithe › Feidhmchláir.",
-  "@snapPermissionsOtherDescription": {},
-  "snapRulesPageEmptyTileLabel": "Níl aon rialacha fós",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Bain na rialacha go léir",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "Fillteán baile",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Bainistigh ceadanna chun comhaid a rochtain i d'fhillteán Baile.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageTitle": "Bainistigh ceadanna",
-  "@interfacePageTitle": {},
-  "interfacePageLinkGiveFeedback": "Tabhair aiseolas",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfaceSnapCount": "{n, plural, =0{gan aipeanna} =1{1 aip} other{{n} aipeanna}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesCount": "{n, plural, =0{gan rialacha} =1{1 riail} other{{n} rialacha}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesPageDescription": "Bainistigh ceadanna {interface} le haghaidh {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "interfacePageDescription": "Iarrfaidh aipeanna atá teoranta go docht ort roimh rochtain a fháil ar chomhaid agus ar fhillteáin. Tá an ghné seo turgnamhach agus faoi réir athruithe.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkLearnMore": "Foghlaim níos mó",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkReportIssues": "Saincheisteanna a thuairisciú",
-  "@interfacePageLinkReportIssues": {},
-  "snapPermissionsEnablingLabel": "Á chumasú, seans go dtógfaidh sé cúpla soicind...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsPageTitle": "Ceadanna Aip",
-  "@snapPermissionsPageTitle": {}
+    "snapdRuleCategoryForeverDenied": "Diúltaigh i gcónaí",
+    "snapPermissionWriteLabel": "Scríobh",
+    "snapPermissionReadLabel": "Léigh",
+    "appTitle": "Ionad Slándála",
+    "snapdRuleCategorySessionAllowed": "Ceadaigh go dtí go logáil amach",
+    "snapdRuleCategorySessionDenied": "Diúltaigh go dtí logáil amach",
+    "snapdRuleCategoryForeverAllowed": "Ceadaigh i gcónaí",
+    "snapPermissionExecuteLabel": "Rith",
+    "snapPermissionsEnableTitle": "Éilíonn aipeanna ceadanna córais a iarraidh",
+    "snapPermissionsEnableWarning": "Is gné thurgnamhach é seo chun rochtain ar acmhainní do chórais a rialú.",
+    "snapPermissionsDisablingLabel": "Ag díchumasú, d'fhéadfadh sé seo cúpla soicind a thógáil...",
+    "snapPermissionsExperimentalLabel": "Turgnamhach",
+    "snapPermissionsOtherDescription": "Is féidir leat ceadanna eile a bhainistiú i Socruithe › Feidhmchláir.",
+    "snapRulesPageEmptyTileLabel": "Níl aon rialacha fós",
+    "snapRulesRemoveAll": "Bain na rialacha go léir",
+    "homeInterfacePageTitle": "Fillteán baile",
+    "homeInterfacePageDescription": "Bainistigh ceadanna chun comhaid a rochtain i d'fhillteán Baile.",
+    "interfacePageTitle": "Bainistigh ceadanna",
+    "interfacePageLinkGiveFeedback": "Tabhair aiseolas",
+    "interfaceSnapCount": "{n, plural, =0{gan aipeanna} =1{1 aip} other{{n} aipeanna}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesCount": "{n, plural, =0{gan rialacha} =1{1 riail} other{{n} rialacha}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "Bainistigh ceadanna {interface} le haghaidh {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "interfacePageDescription": "Iarrfaidh aipeanna atá teoranta go docht ort roimh rochtain a fháil ar chomhaid agus ar fhillteáin. Tá an ghné seo turgnamhach agus faoi réir athruithe.",
+    "interfacePageLinkLearnMore": "Foghlaim níos mó",
+    "interfacePageLinkReportIssues": "Saincheisteanna a thuairisciú",
+    "snapPermissionsEnablingLabel": "Ag cumasú, d’fhéadfadh sé seo cúpla soicind a thógáil...",
+    "snapPermissionsPageTitle": "Ceadanna Aip",
+    "diskEncryptionPageRecoveryKey": "Eochair aisghabhála",
+    "diskEncryptionPageStoreYourKey": "Ligeann an eochair aisghabhála duit rochtain a fháil ar do shonraí arís mura ndíghlasálann an diosca le linn an tosaithe. Sábháil in áit shábháilte í.",
+    "diskEncryptionPageLearnMore": "Foghlaim tuilleadh faoi chriptiú atá bunaithe ar chrua-earraí",
+    "diskEncryptionPageTitle": "Criptiú Diosca",
+    "diskEncryptionPageCheckKey": "Seiceáil eochair aisghabhála...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Seiceáil an Eochair Aisghabhála",
+    "diskEncryptionPageCheck": "Seiceáil",
+    "diskEncryptionPageValidKey": "Eochair bhailí",
+    "diskEncryptionPageInvalidKey": "Eochair neamhbhailí",
+    "diskEncryptionPageEnterKey": "Cuir isteach d'eochair aisghabhála",
+    "diskEncryptionPageKeyWorks": "Oibríonn eochair aisghabhála",
+    "diskEncryptionPageKeyWorksBody": "Cuimhnigh é a choinneáil in áit shábháilte.",
+    "diskEncryptionPageKeyDoesntWork": "Ní oibríonn an eochair aisghabhála",
+    "diskEncryptionPageKeyDoesntWorkBody": "Seiceáil an eochair nó cuir ceann nua ina háit.",
+    "diskEncryptionPageError": "Earráid",
+    "diskEncryptionPageReplaceDialogShowQR": "Taispeáin cód QR",
+    "diskEncryptionPageReplaceDialogSave": "Sábháil chuig comhad",
+    "diskEncryptionPageReplaceDialogReplace": "Athsholáthair",
+    "diskEncryptionPageReplaceDialogDiscard": "Caith amach",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Eochair aisghabhála athsholáthraithe",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Cuimhnigh é a choinneáil in áit shábháilte.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Theip ar athsholáthar eochrach aisghabhála",
+    "diskEncryptionPageReplaceDialogErrorBody": "Tharla fadhb agus d’eochair aisghabhála á cur isteach, fanfaidh d’eochair shean bailí.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Deasc Ubuntu - Eochair aisghabhála criptithe",
+    "diskEncryptionPageReplaceDialogQRBody": "Scan an cód QR chun an eochair aisghabhála a chóipeáil agus í a shábháil in áit shábháilte, amhail bainisteoir pasfhocal. Is féidir leat grianghraf a thógáil freisin lena úsáid níos déanaí.",
+    "diskEncryptionPageClipboardNotification": "Cóipeáilte chuig an ghearrthaisce",
+    "recoveryKeyExceptionFileSystemTitle": "Níor sábháladh comhad eochrach aisghabhála",
+    "recoveryKeyExceptionDisallowedPathTitle": "Ní féidir comhad eochrach aisghabhála a shábháil in áit shealadach",
+    "recoveryKeyExceptionUnknownTitle": "Earráid anaithnid",
+    "recoveryKeyFilePickerTitle": "Sábháil comhad eochrach aisghabhála",
+    "recoveryKeyFilePickerFilter": "Comhaid téacs",
+    "diskEncryptionPageReplaceDialogHeader": "Athsholáthar eochair aisghabhála",
+    "recoveryKeyExceptionFileSystemBody": "Níl cead agat scríobh chuig an bhfillteán sin. Bain triail as suíomh difriúil nó bain úsáid as modh eile.",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Shábháil mé m'eochair aisghabhála in áit shábháilte",
+    "diskEncryptionPageReplaceButton": "Athraigh eochair aisghabhála...",
+    "diskEncryptionPageReplaceDialogBody": "Sábháil an eochair athshlánaithe nua in áit shábháilte. Nuair a chuirfidh tú ceann eile ina háit, ní bheidh tú in ann an seaneochair a úsáid a thuilleadh.",
+    "recoveryKeyExceptionDisallowedPathBody": "Bain triail as suíomh difriúil, amhail tiomántán inbhainte, nó bain úsáid as modh eile.",
+    "diskEncryptionPageCopySemanticLabel": "Cóipeáil",
+    "recoveryKeyPassphraseHeader": "Athraigh an frása faire",
+    "recoveryKeyPassphraseBody": "Ní mór duit do phasfhocal a iontráil gach uair a thosaíonn do ríomhaire.",
+    "recoveryKeyPassphraseButton": "Athraigh an focal faire...",
+    "recoveryKeyPassphraseNew": "Pasfrása nua",
+    "recoveryKeyPassphraseCurrentError": "Pasfrása mícheart, déan iarracht arís",
+    "recoveryKeyPassphraseNewError": "Ní mór ceithre charachtar ar a laghad a bheith ann",
+    "recoveryKeyPassphraseConfirmError": "Ní hionann na frásaí faire, déan iarracht arís",
+    "recoveryKeyPassphraseDialogHeader": "Athraigh an Pasfrása",
+    "recoveryKeyPinEnabled": "Tá UAP criptithe cumasaithe",
+    "recoveryKeyPinHeader": "UAP criptithe",
+    "recoveryKeyPinBody": "Ní mór duit do PIN a iontráil gach uair a thosaíonn do ríomhaire.",
+    "recoveryKeyPinButton": "Athraigh UAP...",
+    "recoveryKeyPinNew": "UAP nua",
+    "recoveryKeyPinCurrentError": "UAP mícheart, déan iarracht arís",
+    "recoveryKeyPinConfirmError": "Ní hionann na UAPanna, déan iarracht arís",
+    "recoveryKeyPassphraseShow": "Taispeáin",
+    "recoveryKeyPassphraseHide": "Folaigh",
+    "recoveryKeyPassphraseChange": "Athraigh",
+    "recoveryKeyPassphrasePinSuccessHeader": "UAP nuashonraithe",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Pasfrása nuashonraithe",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Nuashonraíodh d’fhrása faire go rathúil.",
+    "recoveryKeyPassphraseEnabled": "Tá frása faire criptithe cumasaithe",
+    "recoveryKeyPassphraseConfirm": "Deimhnigh an frása faire",
+    "recoveryKeyPassphrasePinSuccessBody": "Nuashonraíodh do UAP go rathúil.",
+    "recoveryKeyPassphraseCurrent": "Pasfrása reatha",
+    "recoveryKeyPinCurrent": "UAP reatha",
+    "recoveryKeyPinConfirm": "Deimhnigh an UAP",
+    "recoveryKeyPinDialogHeader": "Athraigh an UAP",
+    "recoveryKeyTPMEnabled": "Tá criptiú crua-earraí cumasaithe",
+    "recoveryKeyPassphraseEntropyOptimal": "Pasfrása láidir",
+    "recoveryKeyPassphraseEntropyBelowMin": "Pasfrása lag, déan níos faide nó níos casta é",
+    "recoveryKeyPinEntropyBelowMin": "UAP lag, déan níos faide nó níos lú intuartha é",
+    "recoveryKeyPinEntropyOptimal": "Tá an UAP fada go leor",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Pasfrása cothrom, déan níos faide nó níos casta é le haghaidh slándála níos fearr",
+    "recoveryKeyPinEntropyBelowOptimal": "UAP cothrom, déan é níos faide nó níos lú intuartha le haghaidh slándála níos fearr",
+    "recoveryKeySomethingWentWrongHeader": "Chuaigh rud éigin mícheart",
+    "diskEncryptionPageStoreYourKeyWithLink": "Ligeann an eochair aisghabhála duit rochtain a fháil ar do shonraí arís mura ndíghlasálann an diosca le linn an tosaithe. Sábháil é in áit shábháilte. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Níl socruithe criptithe ar fáil",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Theip ar stádas criptithe an ríomhaire seo a aisghabháil.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "Níl cumraíocht TPM do ríomhaire i riocht a bhfuil tacaíocht ann dó.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Ní thacaítear le do leagan snapd",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Seiceáil an bhfuil an tIonad Slándála agus snapd cothrom le dáta.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Ní féidir leis an Ionad Slándála ceangal leis an gcomhéadan snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Chun é seo a shocrú, rith an t-ordú seo sa teirminéal:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect ionad-slándála-deisce: snap-fde-control",
+    "recoveryKeyExceptionFilePermissionTitle": "Theip ar d’eochair aisghabhála a shábháil chuig an gcomhad",
+    "recoveryKeyExceptionFilePermissionBody": "Níl cead agat scríobh chuig an suíomh comhaid sin.",
+    "recoveryKeyTPMExplanationBody": "Stóráiltear na heochracha criptithe i Modúl Ardáin Iontaofa (TPM) do ríomhaire.",
+    "recoveryKeyTPMExplanationLearnMore": "Foghlaim tuilleadh faoi chriptiú atá bunaithe ar chrua-earraí",
+    "recoveryKeyEncrpytionPassphraseHeader": "Pasfrása criptithe",
+    "snapPermissionAccessLabel": "Rochtain",
+    "cameraRulesPageEmptyTileLabel": "Níl aon aipeanna tar éis rochtain a iarraidh go fóill",
+    "snapRulesResetAllPermissions": "Athshocraigh na ceadanna go léir",
+    "cameraInterfacePageTitle": "Ceamara",
+    "cameraInterfacePageDescription": "Lig d’aipeanna rochtain a fháil ar do cheamaraí.",
+    "diskEncryptionPageAddPinButton": "Cuir PIN leis...",
+    "diskEncryptionPageAddPassphraseButton": "Cuir frása faire leis...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Cuir frása faire leis",
+    "diskEncryptionPageAddPinDialogHeading": "Cuir PIN leis",
+    "diskEncryptionPageAddPinDialogBodyMain": "Beidh ort do PIN a iontráil gach uair a thosaíonn do ríomhaire. Tá an PIN seo difriúil ó do phasfhocal úsáideora.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Má dhéanann tú dearmad ar do PIN, is féidir leat rochtain a fháil ar an diosca arís trí úsáid a bhaint as an eochair aisghabhála.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Beidh ort do phasfhocal a iontráil gach uair a thosaíonn do ríomhaire. Tá an pasfhocal seo difriúil ó do phasfhocal úsáideora.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Má dhéanann tú dearmad ar do phasfrása, is féidir leat rochtain a fháil ar an diosca arís trí úsáid a bhaint as an eochair aisghabhála.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Slándáil bhreise",
+    "diskEncryptionPageAdditionalSecurityBody": "Is féidir leat frása faire nó PIN a shocrú le haghaidh slándála breise. Beidh ort é a iontráil gach uair a thosaíonn do ríomhaire.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Foghlaim níos mó",
+    "diskEncryptionPageAddPinDialogSaveButton": "Cuir leis",
+    "diskEncryptionPageRemovePinButton": "Bain an PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Bain an focal faire...",
+    "diskEncryptionPageAddingPin": "Ag cur PIN leis, d'fhéadfadh sé seo cúpla soicind a thógáil...",
+    "diskEncryptionPageAddingPassphrase": "Ag cur frása faire leis, d’fhéadfadh sé seo cúpla soicind a thógáil...",
+    "diskEncryptionPageRemovingPin": "Ag baint an UAP, d'fhéadfadh sé seo cúpla soicind a thógáil...",
+    "diskEncryptionPageRemovingPassphrase": "Ag baint an phasfhocail, d'fhéadfadh sé seo cúpla soicind a thógáil...",
+    "microphoneInterfacePageTitle": "Micreafón",
+    "microphoneInterfacePageDescription": "Lig d’aipeanna rochtain a fháil ar do mhicreafón.",
+    "ubuntuProNotSupported": "Níl Ubuntu Pro ar fáil don leagan seo de Ubuntu",
+    "ubuntuProNotSupportedDetails": "Éilíonn Ubuntu Pro scaoileadh LTS",
+    "ubuntuProNotSupportedSnapd": "Ní thacaíonn an leagan snapd seo le Ubuntu Pro",
+    "ubuntuProNotSupportedSnapdDetails": "Nuashonraigh snapd chun Ubuntu Pro a bhainistiú",
+    "ubuntuProEnabled": "Tá Ubuntu Pro cumasaithe",
+    "ubuntuProDisabled": "Slándáil agus comhlíonadh den scoth chun do ríomhaire. Saor in aisce i gcónaí le haghaidh úsáide pearsanta. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Foghlaim faoi Ubuntu Pro",
+    "ubuntuProEnablePro": "Cumasaigh Ubuntu Pro",
+    "ubuntuProEnableMagic": "Cumasaigh le cuntas Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Beidh tú in ann cuntas a chruthú saor in aisce",
+    "ubuntuProMagicPrompt": "Logáil isteach le do chuntas Ubuntu One, nó cruthaigh ceann saor in aisce.",
+    "ubuntuProMagicContinueInBrowser": "Lean ar aghaidh sa bhrabhsálaí",
+    "ubuntuProMagicDescription": "Is féidir leat logáil isteach ag {attachLink} agus an cód {attachCode} a iontráil freisin",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Ní féidir Ubuntu Pro a chumasú, déan iarracht arís",
+    "ubuntuProEnableToken": "Cumasaigh le comhartha",
+    "ubuntuProEnableTokenError": "Ní féidir Ubuntu Pro a chumasú",
+    "ubuntuProEnableTokenSubtitle": "Ó do riarthóir TF nó ó {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Faigh comhartha Ubuntu Pro ó do riarthóir nó ó {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Comhartha",
+    "ubuntuProDisablePro": "Díchumasaigh Ubuntu Pro",
+    "ubuntuProDisable": "Díchumasaigh",
+    "ubuntuProDisablePrompt": "Má dhíchumasaíonn tú Ubuntu Pro, bainfear do shíntiús ón meaisín seo. Ar mhaith leat dul ar aghaidh?",
+    "ubuntuProEnable": "Cumasaigh",
+    "ubuntuProCancel": "Cealaigh",
+    "ubuntuProFeatureEnableError": "Níorbh fhéidir an ghné a chumasú, déan iarracht arís.",
+    "ubuntuProFeatureDisableError": "Níorbh fhéidir an ghné a dhíchumasú, déan iarracht arís.",
+    "ubuntuProCompliance": "Comhlíonadh agus cruaiteadh",
+    "ubuntuProComplianceDisclaimer": "Ní mholtar ach chun cabhrú le FedRAMP, HIPAA agus ceanglais chomhlíonta agus cruaite eile.",
+    "ubuntuProComplianceUSGTitle": "Treoir Slándála Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Uathoibríonn sé cruaite agus iniúchadh le próifílí tagarmhairc CIS agus DISA-STIG agus ceadaíonn sé saincheaptha timpeallacht-shonracha.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Deimhniú modúil chripteagrafaíochta ó rialtas SAM agus Cheanada a léiríonn comhlíonadh leis an gcaighdeán cosanta sonraí FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Cumasaigh FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Ní féidir cumasú FIPS a aisiompú agus díchumasófar Livepatch go buan.",
+    "ubuntuProComplianceFIPSPrompt": "Roghnaigh do rogha FIPS is fearr leat",
+    "ubuntuProComplianceFIPSUpdates": "FIPS le nuashonruithe",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Suiteálann sé pacáistí bailíochtaithe FIPS 140-2 agus ceadaíonn sé nuashonruithe slándála rialta.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS gan nuashonruithe",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Suiteálann sé pacáistí bailíochtaithe FIPS 140-2. Ní dhéanfar iad seo a nuashonrú go dtí an chéad athdheimhniú eile.",
+    "ubuntuProComplianceDocumentation": "Doiciméadú comhlíontachta slándála",
+    "ubuntuProESMTitle": "Cothabháil Slándála Leathnaithe (ESM)",
+    "ubuntuProESMDescription": "Soláthraíonn ESM paistí slándála 10 mbliana do bhreis is 25,000 pacáiste foinse oscailte. Faigh bainistíocht leanúnach leochaileachta do CVEanna criticiúla, arda agus meánacha.",
+    "ubuntuProESMMainTitle": "Príomhphacáistí (esm-infra)",
+    "ubuntuProESMMainDescription": "Nuashonruithe slándála do phríomhphacáiste 2,300 Ubuntu go dtí {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Pacáistí Cruinne (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Nuashonruithe slándála breise do bhreis is 23,000 pacáiste Ubuntu Universe go dtí {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Paiste Beo na hEithne",
+    "ubuntuProLivepatchEnableTitle": "Cumasaigh Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Cuir nuashonruithe slándála eithne i bhfeidhm agus an córas ag rith",
+    "ubuntuProLivepatchShowTitle": "Taispeáin stádas Livepatch sa bharra barr",
+    "ubuntuProPageTitle": "Ubuntu Pro"
 }
