@@ -175,7 +175,7 @@
     "ubuntuProNotSupportedDetails": "Для Ubuntu Pro требуется версия LTS",
     "ubuntuProNotSupportedSnapd": "Ubuntu Pro не поддерживается этой версией snapd",
     "ubuntuProNotSupportedSnapdDetails": "Обновите snapd для настройки сервиса Ubuntu Pro",
-    "ubuntuProEnabled": "Ubuntu Pro включён",
+    "ubuntuProEnabled": "Сервис Ubuntu Pro активирован",
     "ubuntuProDisabled": "Безопасность и соответствие стандартам корпоративного уровня для Вашего компьютера. Бесплатно для личного использования. {learnMoreLink}",
     "@ubuntuProDisabled": {
         "placeholders": {
@@ -185,7 +185,7 @@
         }
     },
     "ubuntuProLearnMore": "Подробнее об Ubuntu Pro",
-    "ubuntuProEnablePro": "Включить Ubuntu Pro",
+    "ubuntuProEnablePro": "Активировать Ubuntu Pro",
     "ubuntuProEnableMagic": "Включить с уч. записью Ubuntu One",
     "ubuntuProEnableMagicSubtitle": "Вы можете создать учётную запись бесплатно",
     "ubuntuProMagicPrompt": "Войдите в свою учётную запись Ubuntu One или создайте её бесплатно.",
@@ -201,9 +201,9 @@
             }
         }
     },
-    "ubuntuProMagicError": "Не удается включить Ubuntu Pro, повторите попытку",
+    "ubuntuProMagicError": "Не удается активировать Ubuntu Pro, повторите попытку",
     "ubuntuProEnableToken": "Включить с помощью токена",
-    "ubuntuProEnableTokenError": "Не удается включить Ubuntu Pro",
+    "ubuntuProEnableTokenError": "Не удается активировать Ubuntu Pro",
     "ubuntuProEnableTokenSubtitle": "От вашего ИТ-администратора или на сайте {proLink}",
     "@ubuntuProEnableTokenSubtitle": {
         "placeholders": {
