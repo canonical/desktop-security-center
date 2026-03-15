@@ -229,5 +229,7 @@
     "ubuntuProTokenLabel": "Tunnusluba",
     "ubuntuProFeatureEnableError": "Funktsionaalsuse sisselülitamine ei õnnestunud, palun proovi uuesti.",
     "ubuntuProFeatureDisableError": "Funktsionaalsuse väljalülitamine ei õnnestunud, palun proovi uuesti.",
-    "ubuntuProCompliance": "Vastavusreeglid ja süsteemi tugevdamine"
+    "ubuntuProCompliance": "Vastavusreeglid ja süsteemi tugevdamine",
+    "ubuntuProComplianceDisclaimer": "Soovitatud kasutamiseks FedRAMP-i, HIPAA või muude sarnaste tugevdus- ja vastavusnõuete puhul.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu turvajuhend (Ubuntu Security Guide - USG)"
 }
