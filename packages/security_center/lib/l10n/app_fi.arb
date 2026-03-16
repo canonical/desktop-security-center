@@ -167,5 +167,6 @@
     "diskEncryptionPageAddingPin": "Lisätään PIN, tämä kestää hetken...",
     "diskEncryptionPageAddingPassphrase": "Lisätään tunnuslausetta, tämä kestää hetken...",
     "diskEncryptionPageRemovingPin": "Poistetaan PIN, tämä kestää hetken...",
-    "diskEncryptionPageRemovingPassphrase": "Poistetaan tunnuslause, tämä kestää hetken..."
+    "diskEncryptionPageRemovingPassphrase": "Poistetaan tunnuslause, tämä kestää hetken...",
+    "microphoneInterfacePageTitle": "Mikrofoni"
 }
