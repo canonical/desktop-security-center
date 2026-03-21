@@ -148,7 +148,7 @@
     "cameraRulesPageEmptyTileLabel": "Žiadne aplikácie zatiaľ nepožiadali o prístup",
     "snapRulesResetAllPermissions": "Obnoviť všetky oprávnenia",
     "cameraInterfacePageTitle": "Kamera",
-    "cameraInterfacePageDescription": "Povoliť aplikáciám prístup ku kamere.",
+    "cameraInterfacePageDescription": "Povoliť aplikáciám prístup ku kamerám.",
     "snapPermissionAccessLabel": "Prístup",
     "diskEncryptionPageAddPinButton": "Pridať PIN...",
     "diskEncryptionPageAddPassphraseButton": "Pridať prístupovú frázu...",
