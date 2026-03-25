@@ -96,22 +96,22 @@ factory: true
   group('Snapd version', () {
     for (final testCase in [
       (
-        name: 'snapd version < 2.74.1, no microphone or pro interfaces',
-        snapdVersion: '2.74',
+        name: 'snapd version < 2.75, no microphone or pro interfaces',
+        snapdVersion: '2.74.1',
         isDryRun: false,
         wantMicrophone: false,
         wantPro: false,
       ),
       (
-        name: 'snapd version == 2.74.1, no microphone support, pro supported',
-        snapdVersion: '2.74.1',
+        name: 'snapd version == 2.75, microphone support, no pro supported',
+        snapdVersion: '2.75',
         isDryRun: false,
-        wantMicrophone: false,
-        wantPro: true,
+        wantMicrophone: true,
+        wantPro: false,
       ),
       (
-        name: 'snapd version == 2.75, microphone and pro interface supported',
-        snapdVersion: '2.75',
+        name: 'snapd version == 2.75.1, microphone and pro interface supported',
+        snapdVersion: '2.75.1',
         isDryRun: false,
         wantMicrophone: true,
         wantPro: true,
@@ -126,7 +126,7 @@ factory: true
       (
         name:
             'snapd version with v prefix, microphone and pro interface supported',
-        snapdVersion: 'v2.75',
+        snapdVersion: 'v2.75.1',
         isDryRun: false,
         wantMicrophone: true,
         wantPro: true,
@@ -141,7 +141,7 @@ factory: true
       ),
       (
         name: 'snapd version with dev hash suffix',
-        snapdVersion: '2.75+g137.7313916',
+        snapdVersion: '2.75.1+g137.7313916',
         isDryRun: false,
         wantMicrophone: true,
         wantPro: true,
@@ -151,14 +151,14 @@ factory: true
         snapdVersion: '2.74.1',
         isDryRun: false,
         wantMicrophone: false,
-        wantPro: true,
+        wantPro: false,
       ),
       (
         name: 'snapd version 2.75.0',
         snapdVersion: '2.75.0',
         isDryRun: false,
         wantMicrophone: true,
-        wantPro: true,
+        wantPro: false,
       ),
       (
         name: 'snapd version 2.75.1',

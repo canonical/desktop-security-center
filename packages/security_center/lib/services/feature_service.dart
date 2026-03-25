@@ -50,7 +50,7 @@ class FeatureService {
   bool get supportsProControl {
     if (isDryRun) return true;
 
-    return _hasGreaterSnapdVersion(snapdVersion, '2.74.1');
+    return _hasGreaterSnapdVersion(snapdVersion, '2.75.1');
   }
 
   bool _hasStorageEncryptedManaged() {
