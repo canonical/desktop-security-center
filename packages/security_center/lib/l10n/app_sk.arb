@@ -2,7 +2,7 @@
     "appTitle": "Centrum zabezpečenia",
     "snapPermissionsEnablingLabel": "Aktivuje sa, môže to trvať niekoľko sekúnd...",
     "snapPermissionsDisablingLabel": "Deaktivuje sa, môže to trvať niekoľko sekúnd...",
-    "snapPermissionsPageTitle": "Oprávnenia",
+    "snapPermissionsPageTitle": "Oprávnenia aplikácie",
     "interfacePageLinkReportIssues": "Nahlásiť problémy",
     "snapPermissionsExperimentalLabel": "Experimentálne",
     "interfacePageLinkGiveFeedback": "Poskytnúť spätnú väzbu",
@@ -23,7 +23,7 @@
             }
         }
     },
-    "snapRulesPageEmptyTileLabel": "Zatiaľ žiadne pravidlá",
+    "snapRulesPageEmptyTileLabel": "Zatiaľ nie sú žiadne pravidlá",
     "snapRulesRemoveAll": "Odstrániť všetky pravidlá",
     "homeInterfacePageTitle": "Domovský priečinok",
     "homeInterfacePageDescription": "Spravujte oprávnenia na prístup k súborom v domovskom priečinku.",
