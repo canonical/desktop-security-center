@@ -168,5 +168,92 @@
     "diskEncryptionPageAddingPassphrase": "Lisätään tunnuslausetta, tämä kestää hetken...",
     "diskEncryptionPageRemovingPin": "Poistetaan PIN, tämä kestää hetken...",
     "diskEncryptionPageRemovingPassphrase": "Poistetaan tunnuslause, tämä kestää hetken...",
-    "microphoneInterfacePageTitle": "Mikrofoni"
+    "microphoneInterfacePageTitle": "Mikrofoni",
+    "microphoneInterfacePageDescription": "Salli sovellusten käyttää mikrofonia.",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro ei ole saatavilla tälle Ubuntu-versiolle",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro vaatii LTS-julkaisun",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro ei ole tuettu tämän snapd-version toimesta",
+    "ubuntuProNotSupportedSnapdDetails": "Päivitä snapd hallitaksesi Ubuntu Pro:ta",
+    "ubuntuProEnabled": "Ubuntu Pro on käytössä",
+    "ubuntuProDisabled": "Yritystason tietoturvaa ja vaatimustenmukaisuutta tietokoneellesi. Aina ilmainen henkilökohtaiseen käyttöön. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Lue lisää Ubuntu Pro:sta",
+    "ubuntuProEnablePro": "Ota Ubuntu Pro käyttöön",
+    "ubuntuProEnableMagic": "Ota käyttöön Ubuntu One -tilillä",
+    "ubuntuProEnableMagicSubtitle": "Voit luoda tilin veloituksetta",
+    "ubuntuProMagicPrompt": "Kirjaudu Ubuntu One -tilillä, tai luo tili veloituksetta.",
+    "ubuntuProMagicContinueInBrowser": "Jatka selaimessa",
+    "ubuntuProMagicDescription": "Voit myös kirjautua osoitteessa {attachLink} ja kirjoittaa koodin {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Ubuntu Pro -käyttöönotto epäonnistui, yritä uudelleen",
+    "ubuntuProEnableToken": "Ota käyttöön poletilla",
+    "ubuntuProEnableTokenError": "Ubuntu Pro -käyttöönotto ei onnistunut",
+    "ubuntuProTokenPrompt": "Hanki Ubuntu Pro -poletti ylläpitäjältäsi tai osoittesta {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Poletti",
+    "ubuntuProDisablePro": "Poista Ubuntu Pro käytöstä",
+    "ubuntuProDisable": "Poista käytöstä",
+    "ubuntuProDisablePrompt": "Ubuntun Pro:n poistaminen käytöstä irrottaa tilauksesi tästä koneesta. Haluatko jatkaa?",
+    "ubuntuProEnable": "Ota käyttöön",
+    "ubuntuProCancel": "Peru",
+    "ubuntuProFeatureEnableError": "Ominaisuutta ei voitu ottaa käyttöön, yritä uudelleen.",
+    "ubuntuProFeatureDisableError": "Ominaisuutta ei voitu poistaa käytöstä, yritä uudelleen.",
+    "ubuntuProCompliance": "Vaatimustenmukaisuutta ja koventamista",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSEnable": "Ota FIPS käyttöön",
+    "ubuntuProComplianceFIPSDisclaimer": "FIPS:in käyttöönottoa ei voi kumota, ja Livepatch poistetaan pysyvästi käytöstä.",
+    "ubuntuProComplianceFIPSPrompt": "Valitse ensisijainen FIPS-asetus",
+    "ubuntuProComplianceFIPSUpdates": "FIPS päivityksillä",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Asentaa FIPS 140-2 -validoidut paketit ja sallii tavalliset tietoturvapäivitykset.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS ilman päivityksiä",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Asentaa FIPS 140-2 -validoidut paketit. Näitä ei päivitetä ennen seuraavaa uudelleensertifiointia.",
+    "ubuntuProComplianceDocumentation": "Tietoturvan vaatimustenmukaisuuden dokumentaatio",
+    "ubuntuProLivepatchEnableTitle": "Ota Livepatch käyttöön",
+    "ubuntuProLivepatchEnableDescription": "Toteuta ytimen tietoturvapäivitykset järjestelmän ollessa käynnissä",
+    "ubuntuProLivepatchShowTitle": "Näytä Livepatchin tila yläpalkissa",
+    "ubuntuProComplianceDisclaimer": "Suositeltu käytettäväksi vain FedRAMP-, HIPAA- ja muiden vaatimustenmukaisuus- ja koventamisvaatimusten avustamiseen.",
+    "ubuntuProComplianceUSGDescription": "Automatisoi koventamista ja auditoimista CIS-mittausta ja DISA-STIG-profiileja vasten samalla sallien ympäristökohtaisia mukautuksia.",
+    "ubuntuProComplianceFIPSDescription": "Yhdysvaltain ja Kanadan valtionhallinnon salakirjoitusmoduulin sertifiointi FIPS 140-2 -datasuojaustandardin vaatimustenmukaisuutta vasten.",
+    "ubuntuProESMDescription": "ESM tarjoaa 10 vuoden tietoturvatuen yli 25 000:lle avoimen lähdekoodin paketille. Saat jatkuvan haavoittuvuushallinnan kriittisille, suurille ja keskitason CVE:ille.",
+    "ubuntuProESMMainTitle": "Main-paketit (esm-infra)",
+    "ubuntuProESMMainDescription": "Tietoturvapäivitykset 2300:lle Ubuntun Main-paketille vuoteen {year} asti",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Universe-paketit (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Tietoturvan lisäpäivitykset 23 000:lle Ubuntun Universe-paketille vuoteen {year} asti",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Ytimen Livepatch"
 }
