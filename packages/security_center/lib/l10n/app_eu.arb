@@ -237,5 +237,33 @@
     "ubuntuProComplianceFIPSUpdates": "FIPS eguneratzeekin",
     "ubuntuProComplianceFIPSNoUpdates": "FIPS eguneratze gabe",
     "ubuntuProComplianceDocumentation": "Segurtasun-betetzearen dokumentazioa",
-    "ubuntuProESMMainTitle": "Pakete nagusiak (esm-infra)"
+    "ubuntuProESMMainTitle": "Pakete nagusiak (esm-infra)",
+    "ubuntuProESMTitle": "Segurtasunerako mantentze hedatua (ESM)",
+    "ubuntuProESMDescription": "ESMk 10 urterako segurtasun-adabakiak eskaintzen ditu 25.000 kode irekiko pakete baino gehiagorentzat. Lortu zaurgarritasunen kudeaketa etengabea, maila kritiko, goren eta ertaineko CVE-entzat.",
+    "ubuntuProESMMainDescription": "Segurtasun-eguneratzeak 2.300 Ubuntuko pakete nagusirentzat {year} urtera arte",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Universe paketeak (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Segurtasun-eguneratze gehigarriak 23.000 Ubuntu Universe pakete baino gehiagorentzat {year} urtera arte",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Gaitu Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Aplikatu kernelaren segurtasun-eguneratzeak sistema martxan dagoela",
+    "ubuntuProLivepatchShowTitle": "Erakutsi Livepatch egoera goiko barran",
+    "ubuntuProComplianceUSGDescription": "Sendotzea eta ikuskapena automatizatzen du CIS ebaluazioarekin eta DISA-STIG profilekin, inguruneari lotutako pertsonalizazioak onartuz.",
+    "ubuntuProComplianceFIPSDescription": "AEB eta Kanadako gobernuen modulu kriptografikoentzako betetze-ziurtapena, FIPS 140-2 datuen babeserako estandarrarekin.",
+    "ubuntuProComplianceFIPSDisclaimer": "FIPS gaitzea ezin da desegin, eta Livepatch betiko ezgaituko da.",
+    "ubuntuProComplianceFIPSUpdatesDescription": "FIPS 140-2k balioztatutako paketeak instalatzen ditu, eta aldian aldiko segurtasun-eguneratzeak ahalbidetzen ditu.",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "FIPS 140-2k balioztatutako paketeak instalatzen ditu. Hauek ez dira eguneratuko hurrengo berziurtapenera arte."
 }
