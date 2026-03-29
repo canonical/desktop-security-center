@@ -167,5 +167,103 @@
     "diskEncryptionPageAddingPin": "ກຳລັງເພີ່ມ PIN, ອາດຈະໃຊ້ເວລາສອງສາມວິນາທີ...",
     "diskEncryptionPageAddingPassphrase": "ກຳລັງເພີ່ມວະລີຜ່ານ, ອາດຈະໃຊ້ເວລາສອງສາມວິນາທີ...",
     "diskEncryptionPageRemovingPin": "ກຳລັງລຶບ PIN, ອາດຈະໃຊ້ເວລາສອງສາມວິນາທີ...",
-    "diskEncryptionPageRemovingPassphrase": "ກຳລັງລຶບວະລີຜ່ານ, ອາດຈະໃຊ້ເວລາສອງສາມວິນາທີ..."
+    "diskEncryptionPageRemovingPassphrase": "ກຳລັງລຶບວະລີຜ່ານ, ອາດຈະໃຊ້ເວລາສອງສາມວິນາທີ...",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "microphoneInterfacePageTitle": "ໄມໂຄຣໂຟນ",
+    "microphoneInterfacePageDescription": "ອະນຸຍາດໃຫ້ແອັບເຂົ້າເຖິງໄມໂຄຣໂຟນຂອງທ່ານ.",
+    "ubuntuProNotSupported": "Ubuntu Pro ບໍ່ພ້ອມໃຊ້ງານສຳລັບ Ubuntu ເວີຊັນນີ້",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro ຈຳເປັນຕ້ອງໃຊ້ເວີຊັນ LTS",
+    "ubuntuProNotSupportedSnapd": "ບໍ່ຮອງຮັບ Ubuntu Pro ໃນ snapd ເວີຊັນນີ້",
+    "ubuntuProNotSupportedSnapdDetails": "ອັບເດດ snapd ເພື່ອຈັດການ Ubuntu Pro",
+    "ubuntuProEnabled": "ເປີດໃຊ້ງານ Ubuntu Pro ແລ້ວ",
+    "ubuntuProDisabled": "ລະບົບຄວາມປອດໄພ ແລະ ການປະຕິບັດຕາມມາດຕະຖານລະດັບອົງກອນສຳລັບຄອມພິວເຕີຂອງທ່ານ. ຟຣີສະເໝີສຳລັບການໃຊ້ງານສ່ວນຕົວ. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "ຮຽນຮູ້ກ່ຽວກັບ Ubuntu Pro",
+    "ubuntuProEnablePro": "ເປີດໃຊ້ງານ Ubuntu Pro",
+    "ubuntuProEnableMagic": "ເປີດໃຊ້ງານດ້ວຍບັນຊີ Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "ທ່ານສາມາດສ້າງບັນຊີໄດ້ຟຣີ",
+    "ubuntuProMagicPrompt": "ເຂົ້າສູ່ລະບົບດ້ວຍບັນຊີ Ubuntu One ຂອງທ່ານ ຫຼື ສ້າງບັນຊີໃໝ່ໄດ້ຟຣີ.",
+    "ubuntuProMagicContinueInBrowser": "ດຳເນີນການຕໍ່ໃນບຣາວເຊີ",
+    "ubuntuProMagicDescription": "ທ່ານຍັງສາມາດເຂົ້າສູ່ລະບົບໄດ້ທີ່ {attachLink} ແລະ ປ້ອນລະຫັດ {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "ບໍ່ສາມາດເປີດໃຊ້ງານ Ubuntu Pro ໄດ້, ກະລຸນາລອງໃໝ່ອີກຄັ້ງ",
+    "ubuntuProEnableToken": "ເປີດໃຊ້ງານດ້ວຍໂທເຄັນ",
+    "ubuntuProEnableTokenError": "ບໍ່ສາມາດເປີດໃຊ້ງານ Ubuntu Pro ໄດ້",
+    "ubuntuProEnableTokenSubtitle": "ຈາກຜູ້ດູແລລະບົບ IT ຂອງທ່ານ ຫຼື ຈາກ {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "ຮັບໂທເຄັນ Ubuntu Pro ຈາກຜູ້ດູແລລະບົບຂອງທ່ານ ຫຼື ຈາກ {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "ໂທເຄັນ",
+    "ubuntuProDisablePro": "ປິດໃຊ້ງານ Ubuntu Pro",
+    "ubuntuProDisable": "ປິດໃຊ້ງານ",
+    "ubuntuProDisablePrompt": "ການປິດໃຊ້ງານ Ubuntu Pro ຈະເປັນການຍົກເລີກການເຊື່ອມຕໍ່ການສະໝັກໃຊ້ຈາກເຄື່ອງນີ້. ທ່ານຕ້ອງການດຳເນີນການຕໍ່ຫຼືບໍ່?",
+    "ubuntuProEnable": "ເປີດໃຊ້ງານ",
+    "ubuntuProCancel": "ຍົກເລີກ",
+    "ubuntuProFeatureEnableError": "ບໍ່ສາມາດເປີດໃຊ້ງານຟີເຈີນີ້ໄດ້, ກະລຸນາລອງໃໝ່ອີກຄັ້ງ.",
+    "ubuntuProFeatureDisableError": "ບໍ່ສາມາດປິດໃຊ້ງານຟີເຈີນີ້ໄດ້, ກະລຸນາລອງໃໝ່ອີກຄັ້ງ.",
+    "ubuntuProCompliance": "ການປະຕິບັດຕາມມາດຕະຖານ ແລະ ການເພີ່ມຄວາມເຂັ້ມງວດ",
+    "ubuntuProComplianceDisclaimer": "ແນະນຳສະເພາະສຳລັບການຊ່ວຍເຫຼືອໃນດ້ານ FedRAMP, HIPAA ແລະ ຂໍ້ກຳນົດການປະຕິບັດຕາມມາດຕະຖານ ຫຼື ການເພີ່ມຄວາມເຂັ້ມງວດອື່ນໆ.",
+    "ubuntuProComplianceUSGTitle": "ຄູ່ມືຄວາມປອດໄພ Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "ເຮັດໃຫ້ການເພີ່ມຄວາມເຂັ້ມງວດ ແລະ ການກວດສອບເປັນແບບອັດຕະໂນມັດດ້ວຍໂປຣໄຟລ໌ CIS benchmark ແລະ DISA-STIG ພ້ອມທັງຮອງຮັບການປັບແຕ່ງສະເພາະຕາມສະພາບແວດລ້ອມ.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "ການຮັບຮອງໂມດູນການເຂົ້າລະຫັດລັບຂອງລັດຖະບານ ສະຫະລັດ ແລະ ແຄນາດາ ທີ່ສອດຄ່ອງກັບມາດຕະຖານການປົກປ້ອງຂໍ້ມູນ FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "ເປີດໃຊ້ງານ FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "ເມື່ອເປີດໃຊ້ງານ FIPS ແລ້ວຈະບໍ່ສາມາດຍົກເລີກໄດ້ ແລະ Livepatch ຈະຖືກປິດໃຊ້ງານແບບຖາວອນ.",
+    "ubuntuProComplianceFIPSPrompt": "ເລືອກຕົວເລືອກ FIPS ທີ່ທ່ານຕ້ອງການ",
+    "ubuntuProComplianceFIPSUpdates": "FIPS ແບບມີການອັບເດດ",
+    "ubuntuProComplianceFIPSUpdatesDescription": "ຕິດຕັ້ງແພັກເກັດທີ່ຜ່ານການກວດສອບ FIPS 140-2 ແລະ ອະນຸຍາດໃຫ້ມີການອັບເດດຄວາມປອດໄພຕາມປົກກະຕິ.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS ແບບບໍ່ມີການອັບເດດ",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "ຕິດຕັ້ງແພັກເກັດທີ່ຜ່ານການກວດສອບ FIPS 140-2. ເຊິ່ງຈະບໍ່ໄດ້ຮັບການອັບເດດຈົນກວ່າຈະມີການຮັບຮອງຄືນໃໝ່ໃນຄັ້ງຕໍ່ໄປ.",
+    "ubuntuProComplianceDocumentation": "ເອກະສານການປະຕິບັດຕາມມາດຕະຖານຄວາມປອດໄພ",
+    "ubuntuProESMTitle": "ການບຳລຸງຮັກສາຄວາມປອດໄພແບບຂະຫຍາຍ (ESM)",
+    "ubuntuProESMDescription": "ESM ໃຫ້ບໍລິການແພັດຄວາມປອດໄພເປັນເວລາ 10 ປີ ສຳລັບແພັກເກັດໂອເພນຊອດຫຼາຍກວ່າ 25,000 ແພັກເກັດ. ໄດ້ຮັບການຈັດການຊ່ອງໂຫວ່ແບບຕໍ່ເນື່ອງສຳລັບ CVE ລະດັບວິກິດ, ສູງ ແລະ ກາງ.",
+    "ubuntuProESMMainTitle": "ແພັກເກັດຫຼັກ (esm-infra)",
+    "ubuntuProESMMainDescription": "ການອັບເດດຄວາມປອດໄພສຳລັບ 2,300 ແພັກເກັດ Ubuntu Main ຈົນເຖິງປີ {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "ແພັກເກັດ Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "ການອັບເດດຄວາມປອດໄພເພີ່ມເຕີມສຳລັບແພັກເກັດ Ubuntu Universe ຫຼາຍກວ່າ 23,000 ແພັກເກັດ ຈົນເຖິງປີ {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "ubuntuProLivepatchEnableTitle": "ເປີດໃຊ້ງານ Livepatch",
+    "ubuntuProLivepatchEnableDescription": "ປັບໃຊ້ການອັບເດດຄວາມປອດໄພຂອງເຄີເນີນໃນຂະນະທີ່ລະບົບກຳລັງເຮັດວຽກ",
+    "ubuntuProLivepatchShowTitle": "ສະແດງສະຖານະ Livepatch ຢູ່ແຖບດ້ານເທິງ"
 }
