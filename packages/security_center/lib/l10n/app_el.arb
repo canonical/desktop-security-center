@@ -1,7 +1,7 @@
 {
     "appTitle": "Κέντρο Ασφαλείας",
-    "snapPermissionReadLabel": "Διάβασε",
-    "snapPermissionWriteLabel": "Γράψε",
+    "snapPermissionReadLabel": "Ανάγνωση",
+    "snapPermissionWriteLabel": "Εγγραφή",
     "snapPermissionExecuteLabel": "Εκτέλεση",
     "snapPermissionsDisablingLabel": "Απενεργοποιώ,μπορεί να πάρει κάποια δευτερόλεπτα...",
     "snapPermissionsExperimentalLabel": "Πειραματικά",
@@ -23,14 +23,14 @@
     "homeInterfacePageTitle": "Αρχικός φάκελος",
     "homeInterfacePageDescription": "Διαχείριση αδειών για να έχετε πρόσβαση για αρχεία στον Αρχικό φάκελο.",
     "interfacePageTitle": "Διαχείριση Αδειών",
-    "snapPermissionsEnablingLabel": "Ενεργοποιώ,μπορεί να πάρει κάποια δευτερόλεπτα...",
-    "snapdRuleCategorySessionAllowed": "Επιτρέψτε μέχρι να αποσυνδεθείτε",
-    "snapdRuleCategorySessionDenied": "Απορρίψτε μέχρι να αποσυνδεθείτε",
-    "snapdRuleCategoryForeverDenied": "Απορρίπτω πάντα",
+    "snapPermissionsEnablingLabel": "Ενεργοποιείται, μπορεί να χρειαστεί μερικά δευτερόλεπτα...",
+    "snapdRuleCategorySessionAllowed": "Να επιτρέπεται μέχρι να αποσυνδεθείτε",
+    "snapdRuleCategorySessionDenied": "Να απορρίπτεται μέχρι να αποσυνδεθείτε",
+    "snapdRuleCategoryForeverDenied": "Να απορρίπτεται πάντα",
     "snapPermissionsEnableWarning": "Αυτή είναι μια δοκιμαστική λειτουργία για να έχετε πρόσβαση στις πηγές του συστήματός σας.",
     "interfacePageLinkLearnMore": "Μάθετε περισσότερα",
     "interfacePageLinkReportIssues": "Αναφορά προβλήματος",
-    "snapdRuleCategoryForeverAllowed": "Επιτρέπω πάντα",
+    "snapdRuleCategoryForeverAllowed": "Να επιτρέπεται πάντα",
     "recoveryKeyExceptionFileSystemTitle": "Το αρχείο κλειδιού ανάκτησης δεν αποθηκεύτηκε",
     "recoveryKeyExceptionDisallowedPathTitle": "Το αρχείο κλειδιού ανάκτησης δεν μπορεί να αποθηκευτεί σε προσωρινή τοποθεσία",
     "recoveryKeyExceptionUnknownTitle": "Άγνωστο σφάλμα",
@@ -38,5 +38,6 @@
     "recoveryKeyExceptionDisallowedPathBody": "Δοκιμάστε μια διαφορετική τοποθεσία, όπως μια αφαιρούμενη μονάδα δίσκου, ή χρησιμοποιήστε μια άλλη μέθοδο.",
     "recoveryKeyFilePickerTitle": "Αποθήκευση αρχείου κλειδιού ανάκτησης",
     "recoveryKeyFilePickerFilter": "Αρχεία κειμένου",
-    "ubuntuProPageTitle": "Ubuntu Pro"
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "snapPermissionAccessLabel": "Πρόσβαση"
 }
