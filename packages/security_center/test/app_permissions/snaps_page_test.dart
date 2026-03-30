@@ -371,7 +371,7 @@ void main() {
             id: 'microphoneRule1',
             timestamp: DateTime(2024),
             snap: 'firefox',
-            interface: 'microphone',
+            interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
                 'access': {
@@ -385,7 +385,7 @@ void main() {
             id: 'microphoneRule2',
             timestamp: DateTime(2024),
             snap: 'cheese',
-            interface: 'microphone',
+            interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
                 'access': {
@@ -453,14 +453,14 @@ void main() {
             id: 'microphoneRule1',
             timestamp: DateTime(2024),
             snap: 'firefox',
-            interface: 'microphone',
+            interface: SnapdInterface.microphone.interfaceName,
             constraints: {},
           ),
           SnapdRule(
             id: 'microphoneRule2',
             timestamp: DateTime(2024),
             snap: 'cheese',
-            interface: 'microphone',
+            interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
                 'access': {
@@ -504,13 +504,17 @@ void main() {
       await tester.tap(firefoxSwitch);
       await tester.pumpAndSettle();
 
-      verify(service.removeAllRules(snap: 'firefox', interface: 'microphone'))
-          .called(1);
+      verify(
+        service.removeAllRules(
+          snap: 'firefox',
+          interface: SnapdInterface.microphone.interfaceName,
+        ),
+      ).called(1);
       verify(
         service.addRule(
           SnapdRuleMask(
             snap: 'firefox',
-            interface: 'microphone',
+            interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
                 'access': {
@@ -538,13 +542,17 @@ void main() {
       await tester.tap(cheeseSwitch);
       await tester.pumpAndSettle();
 
-      verify(service.removeAllRules(snap: 'cheese', interface: 'microphone'))
-          .called(1);
+      verify(
+        service.removeAllRules(
+          snap: 'cheese',
+          interface: SnapdInterface.microphone.interfaceName,
+        ),
+      ).called(1);
       verify(
         service.addRule(
           SnapdRuleMask(
             snap: 'cheese',
-            interface: 'microphone',
+            interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
                 'access': {
@@ -568,7 +576,7 @@ void main() {
             id: 'microphoneRule1',
             timestamp: DateTime(2024),
             snap: 'firefox',
-            interface: 'microphone',
+            interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
                 'access': {
@@ -582,7 +590,7 @@ void main() {
             id: 'microphoneRule2',
             timestamp: DateTime(2024),
             snap: 'cheese',
-            interface: 'microphone',
+            interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
                 'access': {
@@ -596,7 +604,7 @@ void main() {
             id: 'microphoneRule3',
             timestamp: DateTime(2024),
             snap: 'obs-studio',
-            interface: 'microphone',
+            interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
                 'access': {
@@ -629,12 +637,23 @@ void main() {
       await tester.tap(resetButton);
       await tester.pumpAndSettle();
 
-      verify(service.removeAllRules(snap: 'firefox', interface: 'microphone'))
-          .called(1);
-      verify(service.removeAllRules(snap: 'cheese', interface: 'microphone'))
-          .called(1);
       verify(
-        service.removeAllRules(snap: 'obs-studio', interface: 'microphone'),
+        service.removeAllRules(
+          snap: 'firefox',
+          interface: SnapdInterface.microphone.interfaceName,
+        ),
+      ).called(1);
+      verify(
+        service.removeAllRules(
+          snap: 'cheese',
+          interface: SnapdInterface.microphone.interfaceName,
+        ),
+      ).called(1);
+      verify(
+        service.removeAllRules(
+          snap: 'obs-studio',
+          interface: SnapdInterface.microphone.interfaceName,
+        ),
       ).called(1);
     });
   });

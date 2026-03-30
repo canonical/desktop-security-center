@@ -103,10 +103,10 @@ class FakeAppPermissionsService implements AppPermissionsService {
 
   @override
   Future<List<String>> getSnapsWithInterface(String interface) async {
-    if (interface == 'camera') {
+    if (interface == SnapdInterface.camera.interfaceName) {
       return ['firefox', 'thunderbird', 'cheese'];
     }
-    if (interface == 'microphone') {
+    if (interface == SnapdInterface.microphone.interfaceName) {
       return ['firefox', 'obs-studio'];
     }
     return [];

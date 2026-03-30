@@ -39,13 +39,13 @@ Future<List<SnapdRule>> rules(Ref ref) async =>
 @riverpod
 Future<List<String>> cameraSnaps(Ref ref) async {
   final service = getService<AppPermissionsService>();
-  return service.getSnapsWithInterface('camera');
+  return service.getSnapsWithInterface(SnapdInterface.camera.interfaceName);
 }
 
 @riverpod
 Future<List<String>> microphoneSnaps(Ref ref) async {
   final service = getService<AppPermissionsService>();
-  return service.getSnapsWithInterface('microphone');
+  return service.getSnapsWithInterface(SnapdInterface.microphone.interfaceName);
 }
 
 @riverpod
@@ -84,18 +84,18 @@ Future<Map<String, int>> snapRuleCounts(
   return switch (interface) {
     SnapdInterface.camera => _buildSnapCountsMap(
         rules,
-        interface.name,
+        interface.interfaceName,
         await ref.watch(cameraSnapsProvider.future),
       ),
     SnapdInterface.microphone => _buildSnapCountsMap(
         rules,
-        interface.name,
+        interface.interfaceName,
         await ref.watch(microphoneSnapsProvider.future),
       ),
     _ => rules.fold<Map<String, int>>(
         {},
         (counts, rule) {
-          if (rule.interface == interface.name) {
+          if (rule.interface == interface.interfaceName) {
             counts[rule.snap] = (counts[rule.snap] ?? 0) + 1;
           }
           return counts;
@@ -130,7 +130,10 @@ class SnapRulesModel extends _$SnapRulesModel {
   }) async {
     final rules = await ref.watch(rulesProvider.future);
     return rules
-        .where((rule) => rule.snap == snap && rule.interface == interface.name)
+        .where(
+          (rule) =>
+              rule.snap == snap && rule.interface == interface.interfaceName,
+        )
         .toList();
   }
 
@@ -144,7 +147,7 @@ class SnapRulesModel extends _$SnapRulesModel {
     final service = getService<AppPermissionsService>();
     await service.removeAllRules(
       snap: snap,
-      interface: interface.name,
+      interface: interface.interfaceName,
     );
     ref.invalidate(rulesProvider);
   }
@@ -189,7 +192,7 @@ class SnapHomeRulesModel extends _$SnapHomeRulesModel {
     final service = getService<AppPermissionsService>();
     await service.removeAllRules(
       snap: snap,
-      interface: SnapdInterface.home.name,
+      interface: SnapdInterface.home.interfaceName,
     );
     ref.invalidate(rulesProvider);
   }
@@ -235,7 +238,7 @@ class SnapCameraRulesModel extends _$SnapCameraRulesModel {
 
     final rule = SnapdRuleMask(
       snap: snap,
-      interface: SnapdInterface.camera.name,
+      interface: SnapdInterface.camera.interfaceName,
       constraints: constraints.toJson(),
     );
 
@@ -248,7 +251,7 @@ class SnapCameraRulesModel extends _$SnapCameraRulesModel {
     final service = getService<AppPermissionsService>();
     await service.removeAllRules(
       snap: snap,
-      interface: SnapdInterface.camera.name,
+      interface: SnapdInterface.camera.interfaceName,
     );
     ref.invalidate(rulesProvider);
   }
@@ -294,7 +297,7 @@ class SnapMicrophoneRulesModel extends _$SnapMicrophoneRulesModel {
 
     final rule = SnapdRuleMask(
       snap: snap,
-      interface: SnapdInterface.microphone.name,
+      interface: SnapdInterface.microphone.interfaceName,
       constraints: constraints.toJson(),
     );
 
@@ -307,7 +310,7 @@ class SnapMicrophoneRulesModel extends _$SnapMicrophoneRulesModel {
     final service = getService<AppPermissionsService>();
     await service.removeAllRules(
       snap: snap,
-      interface: SnapdInterface.microphone.name,
+      interface: SnapdInterface.microphone.interfaceName,
     );
     ref.invalidate(rulesProvider);
   }
