@@ -15,7 +15,7 @@ enum SnapdInterface {
   static SnapdInterface fromString(String? name) => switch (name) {
         'home' => home,
         'camera' => camera,
-        'microphone' => microphone,
+        'audio-record' => microphone,
         _ => throw ArgumentError('Unknown interface: $name'),
       };
 
@@ -34,6 +34,12 @@ enum SnapdInterface {
         home => YaruIcons.folder,
         camera => YaruIcons.camera_photo,
         microphone => YaruIcons.microphone
+      };
+
+  String get interfaceName => switch (this) {
+        home => 'home',
+        camera => 'camera',
+        microphone => 'audio-record',
       };
 }
 
