@@ -2,11 +2,11 @@
     "snapdRuleCategoryForeverAllowed": "Permitir siempre",
     "snapdRuleCategoryForeverDenied": "Rechazar siempre",
     "snapPermissionReadLabel": "Leer",
-    "snapPermissionsEnableWarning": "Esta es una función experimental para controlar el acceso a los recursos de tu sistema.",
-    "snapPermissionsEnablingLabel": "Habilitándolo, esto puede tardar unos pocos segundos...",
-    "snapPermissionsDisablingLabel": "Inhabilitado, esto puede tomas unos pocos segundos…",
+    "snapPermissionsEnableWarning": "Esta es una función experimental para controlar el acceso a los recursos del sistema.",
+    "snapPermissionsEnablingLabel": "Activando, esto puede tardar unos pocos segundos...",
+    "snapPermissionsDisablingLabel": "Desactivando, esto puede tomar unos pocos segundos…",
     "snapPermissionsExperimentalLabel": "Experimental",
-    "snapPermissionsOtherDescription": "Puedes administrar otros permisos en Configuración › Aplicaciones.",
+    "snapPermissionsOtherDescription": "Puede gestionar otros permisos en Configuración ▸ Aplicaciones.",
     "snapPermissionsPageTitle": "Permisos de la aplicación",
     "snapRulesCount": "{n, plural, =0{sin reglas} =1{1 regla} other{{n} reglas}}",
     "@snapRulesCount": {
@@ -16,9 +16,9 @@
             }
         }
     },
-    "interfacePageDescription": "Las aplicaciones estrictamente limitadas te preguntarán antes de acceder a archivos y carpetas. Esta característica es experimental y está sujeta a cambios.",
-    "interfacePageLinkLearnMore": "Aprender más",
-    "interfacePageLinkGiveFeedback": "Dar tu opinión",
+    "interfacePageDescription": "Las aplicaciones estrictamente confinadas le preguntarán antes de acceder a archivos y carpetas. Esta funcionalidad es experimental y está sujeta a cambios.",
+    "interfacePageLinkLearnMore": "Más información",
+    "interfacePageLinkGiveFeedback": "Dar su opinión",
     "interfacePageLinkReportIssues": "Informar de problemas",
     "interfaceSnapCount": "{n, plural, =0{sin aplicaciones} =1{1 aplicación} other {{n} aplicaciones}}",
     "@interfaceSnapCount": {
@@ -34,7 +34,7 @@
     "snapPermissionsEnableTitle": "Exigir a las aplicaciones que pidan permisos al sistema",
     "snapPermissionWriteLabel": "Escribir",
     "snapPermissionExecuteLabel": "Ejecutar",
-    "snapRulesPageDescription": "Administrar los permisos de {interface} para {snap} .",
+    "snapRulesPageDescription": "Gestionar permisos de {interface} para {snap} .",
     "@snapRulesPageDescription": {
         "placeholders": {
             "interface": {
@@ -49,15 +49,15 @@
     "snapRulesRemoveAll": "Eliminar todas las reglas",
     "homeInterfacePageTitle": "Carpeta de usuario",
     "homeInterfacePageDescription": "Administrar los permisos para acceder a los archivos en la carpeta del usuario.",
-    "interfacePageTitle": "Administrar permisos",
+    "interfacePageTitle": "Gestionar permisos",
     "cameraRulesPageEmptyTileLabel": "Ninguna aplicación ha solicitado acceso aún",
-    "snapRulesResetAllPermissions": "Reiniciar todos los permisos",
+    "snapRulesResetAllPermissions": "Restablecer todos los permisos",
     "cameraInterfacePageTitle": "Cámara",
-    "cameraInterfacePageDescription": "Permite a las aplicaciones acceder a tus cámaras.",
-    "diskEncryptionPageTitle": "Encriptación de disco",
+    "cameraInterfacePageDescription": "Permita a las aplicaciones acceder a sus cámaras.",
+    "diskEncryptionPageTitle": "Cifrado de disco",
     "diskEncryptionPageRecoveryKey": "Clave de recuperación",
-    "diskEncryptionPageStoreYourKey": "La clave de recuperación le permite recuperar el acceso a sus datos si el disco no se desbloquea durante el arranque. Guárdelo en un lugar seguro.",
-    "diskEncryptionPageStoreYourKeyWithLink": "La clave de recuperación le permite recuperar el acceso a sus datos si el disco no se desbloquea durante el arranque. Guárdelo en un lugar seguro.{learnMoreLink}",
+    "diskEncryptionPageStoreYourKey": "La clave de recuperación le permite recuperar el acceso a sus datos si el disco no se desbloquea durante el arranque. Guárdela en un lugar seguro.",
+    "diskEncryptionPageStoreYourKeyWithLink": "La clave de recuperación le permite recuperar el acceso a sus datos si el disco no se desbloquea durante el arranque. Guárdela en un lugar seguro.{learnMoreLink}",
     "@diskEncryptionPageStoreYourKeyWithLink": {
         "placeholders": {
             "learnMoreLink": {
@@ -65,11 +65,11 @@
             }
         }
     },
-    "diskEncryptionPageLearnMore": "Aprenda más sobre cifrado basado en hardware en segundo plano",
+    "diskEncryptionPageLearnMore": "Aprenda más sobre cifrado por hardware",
     "diskEncryptionPageCheckKey": "Comprobar la clave de recuperación...",
     "diskEncryptionPageCheck": "Comprobar",
     "diskEncryptionPageValidKey": "Clave válida",
-    "diskEncryptionPageInvalidKey": "Clave inválida",
+    "diskEncryptionPageInvalidKey": "Clave no válida",
     "diskEncryptionPageEnterKey": "Introduzca la clave de recuperación",
     "diskEncryptionPageKeyWorks": "La clave de recuperación funciona",
     "diskEncryptionPageKeyWorksBody": "Recuerde mantenerla en un lugar seguro.",
@@ -83,11 +83,11 @@
     "diskEncryptionPageReplaceDialogSave": "Guardar como archivo",
     "diskEncryptionPageReplaceDialogReplace": "Reemplazar",
     "diskEncryptionPageReplaceDialogAcknowledge": "He guardado mi clave de recuperación en un lugar seguro",
-    "diskEncryptionPageReplaceDialogDiscard": "Borrar",
+    "diskEncryptionPageReplaceDialogDiscard": "Descartar",
     "diskEncryptionPageReplaceDialogSuccessHeader": "Se ha reemplazado la clave de recuperación",
     "diskEncryptionPageReplaceDialogErrorHeader": "Ha fallado el reemplazo de clave de seguridad",
     "diskEncryptionPageReplaceDialogErrorBody": "Ha habido un error al reemplazar su clave de recuperación. Su vieja clave seguirá siendo válida.",
-    "diskEncryptionPageClipboardNotification": "Copiado al portapapeles",
+    "diskEncryptionPageClipboardNotification": "Se copió en el portapapeles",
     "diskEncryptionPageCopySemanticLabel": "Copiar",
     "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "La configuración de la encriptación no está disponible",
     "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Ha fallado la comprobación del estado de encriptado de este equipo.",
@@ -104,7 +104,7 @@
     "snapPermissionAccessLabel": "Acceder",
     "diskEncryptionPageDialogHeaderCheckKey": "Comprobar clave de recuperación",
     "diskEncryptionPageReplaceDialogSuccessBody": "Recuerde guardarla en un lugar seguro.",
-    "diskEncryptionPageReplaceDialogQRHeader": "Escritorio de Ubuntu - Clave de recuperación de encriptado",
+    "diskEncryptionPageReplaceDialogQRHeader": "Escritorio de Ubuntu - Clave de recuperación de cifrado",
     "recoveryKeyExceptionFilePermissionTitle": "Hubo un error al guardar su clave de recuperación a un archivo",
     "recoveryKeyExceptionFilePermissionBody": "No tiene permisos de escritura en esa ruta de archivos.",
     "recoveryKeyExceptionFileSystemBody": "No tiene permisos de escritura en esa carpeta. Inténtelo en otra ruta o use otro método.",
@@ -157,7 +157,7 @@
     "diskEncryptionPageAddPinDialogBodyMain": "Necesitará introducir su PIN cada vez que inicie su equipo. Este PIN es diferente de su contraseña de usuario.",
     "diskEncryptionPageAddPinDialogBodyRecovery": "Si olvida su PIN, puede obtener acceso al disco utilizando la clave de recuperación.",
     "microphoneInterfacePageTitle": "Micrófono",
-    "microphoneInterfacePageDescription": "Concede a las apps para acceder a su micrófono.",
+    "microphoneInterfacePageDescription": "Permita a las aplicaciones acceder a su micrófono.",
     "diskEncryptionPageAddPassphraseDialogBodyMain": "Necesitará introducir su frase de acceso cada vez que su equipo arranque. Esta frase de paso es diferente desde su contraseña de usuario.",
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Si olvida su frase de paso, puede obtener acceso al disco utilizando la llave de recuperación.",
     "diskEncryptionPageAdditionalSecurityHeader": "Seguridad adicional",
@@ -169,5 +169,81 @@
     "diskEncryptionPageAddingPin": "Añadir PIN, esto puede tomar unos pocos segundos...",
     "diskEncryptionPageAddingPassphrase": "Añadir frase de paso, esta puede tomar unos pocos segundos...",
     "diskEncryptionPageRemovingPin": "Retirar PIN, esto puede tomar unos pocos segundos...",
-    "diskEncryptionPageRemovingPassphrase": "Retirar frase de paso, esto puede tomar unos pocos segundos..."
+    "diskEncryptionPageRemovingPassphrase": "Retirar frase de paso, esto puede tomar unos pocos segundos...",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro no está disponible en esta versión de Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro requiere una versión LTS",
+    "ubuntuProNotSupportedSnapd": "Esta versión de snapd no admite Ubuntu Pro",
+    "ubuntuProNotSupportedSnapdDetails": "Actualice snapd para gestionar Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro está activado",
+    "ubuntuProLearnMore": "Conozca Ubuntu Pro",
+    "ubuntuProEnablePro": "Activar Ubuntu Pro",
+    "ubuntuProEnableMagic": "Activar con cuenta de Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Podrá crearse una cuenta gratuitamente",
+    "ubuntuProMagicPrompt": "Acceda a su cuenta de Ubuntu One o cree una gratis.",
+    "ubuntuProMagicContinueInBrowser": "Continuar en el navegador",
+    "ubuntuProMagicDescription": "También puede acceder en {attachLink} e introducir el código {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "No se pudo activar Ubuntu Pro; inténtelo de nuevo",
+    "ubuntuProEnableToken": "Activar mediante ficha",
+    "ubuntuProEnableTokenError": "No se pudo activar Ubuntu Pro",
+    "ubuntuProTokenLabel": "Ficha",
+    "ubuntuProDisablePro": "Desactivar Ubuntu Pro",
+    "ubuntuProDisable": "Desactivar",
+    "ubuntuProDisablePrompt": "Si desactiva Ubuntu Pro, su suscripción dejará de estar asociada a este equipo. ¿Quiere continuar?",
+    "ubuntuProEnable": "Activar",
+    "ubuntuProCancel": "Cancelar",
+    "ubuntuProFeatureEnableError": "No se pudo activar la funcionalidad; inténtelo de nuevo.",
+    "ubuntuProFeatureDisableError": "No se pudo desactivar la funcionalidad; inténtelo de nuevo.",
+    "ubuntuProComplianceUSGTitle": "Guía de seguridad de Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatiza el robustecimiento y la auditoría mediante el punto de referencia CIS y los perfiles DISA-STIG, al tiempo que permite efectuar personalizaciones específicas al entorno.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSEnable": "Activar FIPS",
+    "ubuntuProComplianceFIPSUpdates": "FIPS con actualizaciones",
+    "ubuntuProCompliance": "Conformidad y robustecimiento",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS sin actualizaciones",
+    "ubuntuProESMTitle": "Mantenimiento de seguridad expandido (ESM)",
+    "ubuntuProESMMainTitle": "Paquetes principales (esm-infra)",
+    "ubuntuProLivepatchTitle": "Livepatch para el núcleo",
+    "ubuntuProLivepatchEnableDescription": "Aplicar actualizaciones de seguridad al núcleo mientras se ejecuta el sistema",
+    "ubuntuProLivepatchShowTitle": "Mostrar estado de Livepatch en la barra superior",
+    "ubuntuProLivepatchEnableTitle": "Activar Livepatch",
+    "ubuntuProComplianceDocumentation": "Documentación sobre la conformidad de seguridad",
+    "ubuntuProComplianceFIPSPrompt": "Elija su opción preferida de FIPS",
+    "ubuntuProDisabled": "Seguridad y conformidad normativa de nivel empresarial para su equipo. Siempre gratis para uso personal. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProComplianceFIPSDisclaimer": "No es posible revertir la activación de FIPS y Livepatch se desactivará permanentemente.",
+    "ubuntuProESMUniverseTitle": "Paquetes del universo (esm-apps)",
+    "ubuntuProESMDescription": "ESM ofrece 10 años de parches de seguridad para más de 25 000 paquetes de código abierto. Disfrute de una gestión continua de vulnerabilidades para CVE de gravedad crítica, alta y media.",
+    "ubuntuProESMMainDescription": "Actualizaciones de seguridad para 2300 paquetes de Ubuntu Main hasta el {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseDescription": "Actualizaciones de seguridad adicionales para más de 23 000 paquetes de Ubuntu Universe hasta el {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    }
 }
