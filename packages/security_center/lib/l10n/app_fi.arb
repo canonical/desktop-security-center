@@ -204,7 +204,7 @@
     "ubuntuProMagicError": "Ubuntu Pro -käyttöönotto epäonnistui, yritä uudelleen",
     "ubuntuProEnableToken": "Ota käyttöön poletilla",
     "ubuntuProEnableTokenError": "Ubuntu Pro -käyttöönotto ei onnistunut",
-    "ubuntuProTokenPrompt": "Hanki Ubuntu Pro -poletti ylläpitäjältäsi tai osoittesta {proLink}",
+    "ubuntuProTokenPrompt": "Hanki Ubuntu Pro -poletti ylläpitäjältäsi tai osoitteesta {proLink}",
     "@ubuntuProTokenPrompt": {
         "placeholders": {
             "proLink": {
