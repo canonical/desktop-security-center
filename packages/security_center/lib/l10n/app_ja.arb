@@ -129,5 +129,125 @@
     "ubuntuProEnable": "有効",
     "ubuntuProCancel": "キャンセル",
     "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "暗号化設定が利用できません",
-    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "このコンピューターの暗号化状態を取得するのに失敗しました。"
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "このコンピューターの暗号化状態を取得するのに失敗しました。",
+    "diskEncryptionPageStoreYourKey": "リカバリーキーは起動時にディスクのロック解除に失敗した場合、再びアクセスできるようにするために必要なものです。どこか安全なところに保存してください。",
+    "diskEncryptionPageStoreYourKeyWithLink": "リカバリーキーは起動時にディスクのロック解除に失敗した場合、再びアクセスできるようにするために必要なものです。どこか安全なところに保存してください。{learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "ハードウェアベースの暗号化についての詳細",
+    "diskEncryptionPageKeyWorks": "リカバリーキーは動作しています",
+    "diskEncryptionPageKeyWorksBody": "どこか安全なところに保存してください。",
+    "diskEncryptionPageKeyDoesntWork": "リカバリーキーが動作していません",
+    "diskEncryptionPageKeyDoesntWorkBody": "キーを確認するか、新しいものに置き換えてください。",
+    "diskEncryptionPageReplaceDialogAcknowledge": "リカバリーキーを安全なところに保存しました",
+    "diskEncryptionPageReplaceDialogSuccessBody": "忘れずにどこか安全なところに保存してください。",
+    "diskEncryptionPageReplaceDialogErrorHeader": "リカバリーキーの置き換えに失敗しました",
+    "diskEncryptionPageReplaceDialogErrorBody": "何らかの理由でリカバリーキーの置き換えに失敗しました。古いキーが有効です。",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntuデスクトップ - 暗号化リカバリーキー",
+    "diskEncryptionPageReplaceDialogQRBody": "QRコードをスキャンしてリカバリーキーを保存し、パスワードマネージャーなどの安全なところに保存してください。後の利用のため、写真を撮ってください。",
+    "diskEncryptionPageClipboardNotification": "クリップボードにコピー",
+    "diskEncryptionPageCopySemanticLabel": "コピー",
+    "diskEncryptionPageErrorUnsupportedStateBody": "このコンピューターのTPM設定がサポートされている状態になっていません。",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "このsnapdバージョンはサポートされていません",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "セキュリティセンターとsnapdがアップデートされているか確認してください。",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "セキュリティセンターがsnapdインターフェースに接続できません",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "修正するには次のコマンドを実行します:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "diskEncryptionPageAddPinDialogBodyMain": "PINはコンピューターを起動するたびに入力する必要があります。PINはユーザーパスワードとは異なります。",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "PINを忘れた場合、リカバリーキーを使用してディスクへのアクセスを取り戻します。",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "パスワードを忘れた場合、リカバリーキーを使用してディスクへのアクセスを取り戻します。",
+    "diskEncryptionPageAdditionalSecurityHeader": "追加のセキュリティ",
+    "diskEncryptionPageAdditionalSecurityBody": "追加のセキュリティとしてパスフレーズまたはPINを設定できます。コンピューターを起動するたびに入力する必要があります。",
+    "recoveryKeyTPMEnabled": "ハードウェアベース暗号化は有効です",
+    "recoveryKeyTPMExplanationBody": "暗号化キーはこのコンピューターのTrusted Platform Module (TPM)に保存されています。",
+    "recoveryKeyTPMExplanationLearnMore": "ハードウェアベース暗号化についての詳細",
+    "recoveryKeyPassphraseEnabled": "暗号化パスワードは有効です",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "パスフレーズを更新しました",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "パスフレーズのアップデートに成功しました。",
+    "recoveryKeyPassphraseEntropyBelowMin": "弱いパスフレーズなので長くするかもっと複雑にしてください",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "適切なパスフレーズにするため、もっと長くするかもっと複雑にするかでよりよいセキュリティにしてください",
+    "recoveryKeyPinEntropyBelowMin": "弱いPINなのでもっと長くするか、簡単に予想できないものにしてください",
+    "recoveryKeyPinEntropyBelowOptimal": "適切なPINにするため、もっと長くするか簡単に予想できないものにしてよりよりセキュリティにしてください",
+    "recoveryKeyPinEntropyOptimal": "充分な強度のPINです",
+    "ubuntuProEnableMagic": "Ubuntu Oneアカウントで有効にする",
+    "ubuntuProEnableMagicSubtitle": "アカウント作成は無料です",
+    "ubuntuProMagicPrompt": "Ubuntu Oneアカウントでログインするか、無料で作成してください。",
+    "ubuntuProMagicContinueInBrowser": "ブラウザーで継続",
+    "ubuntuProMagicDescription": "{attachLink} からログインし、コード {attachCode} を入力してください",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Ubuntu Proを有効にできません。やり直してください",
+    "ubuntuProEnableToken": "トークンで有効化",
+    "ubuntuProEnableTokenError": "Ubuntu Proを有効にできません",
+    "ubuntuProEnableTokenSubtitle": "IT管理者か {proLink} より",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "管理者か {proLink} からUbuntu Proのトークンを取得してください",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProDisablePro": "Ubuntu Proを無効にする",
+    "ubuntuProDisablePrompt": "Ubuntu Proを無効にするとこのマシンをサブスクリプションから除外することになります。継続しますか？",
+    "ubuntuProFeatureEnableError": "機能を有効にできません。やり直してください。",
+    "ubuntuProFeatureDisableError": "機能を無効にできません。やり直してください。",
+    "ubuntuProCompliance": "コンプライアンスとハードニング",
+    "ubuntuProComplianceDisclaimer": "FedRAMP、HIPAA、その他のコンプライアンスおよびセキュリティ要件への対応でのみ推奨されます。",
+    "ubuntuProComplianceUSGTitle": "Ubuntuセキュリティガイド (USG)",
+    "ubuntuProComplianceUSGDescription": "CISベンチマークおよびDISA-STIGプロファイルを使用して、環境固有のカスタマイズを行いつつ、セキュリティ強化と監査を自動化します。",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "FIPS 140-2データ保護標準に準拠する、米国およびカナダ政府の暗号化モジュール認証。",
+    "ubuntuProComplianceFIPSEnable": "FIPSを有効化",
+    "ubuntuProComplianceFIPSDisclaimer": "FIPSを有効にすると元に戻せず、Livepatchは永久に無効になります。",
+    "ubuntuProComplianceFIPSPrompt": "FIPSオプションを選択してください",
+    "ubuntuProComplianceFIPSUpdates": "アップデートありFIPS",
+    "ubuntuProComplianceFIPSUpdatesDescription": "FIPS 140-2適合パッケージをインストールし、通常のセキュリティアップデートを許可します。",
+    "ubuntuProComplianceFIPSNoUpdates": "アップデートなしFIPS",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "FIPS 140-2適合パッケージをインストールします。次の再認証までアップデートされません。",
+    "ubuntuProComplianceDocumentation": "セキュリティコンプライアンスのドキュメント",
+    "ubuntuProESMTitle": "拡張セキュリティメンテンナンス(ESM)",
+    "ubuntuProESMDescription": "ESMは25000を超えるオープンソースパッケージのセキュリティパッチを提供します。CVEの緊急、重要、警告に対する継続した脆弱性管理を獲得できます。",
+    "ubuntuProESMMainTitle": "Mainパッケージ(esm-infra)",
+    "ubuntuProESMMainDescription": "{year} までの2300に渡るUbuntu Mainパッケージのセキュリティアップデート",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Universeパッケージ(esm-apps)",
+    "ubuntuProESMUniverseDescription": "{year} までの23000に渡るUbuntu Universeパッケージの追加セキュリティアップデート",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "カーネルLivepatch",
+    "ubuntuProLivepatchEnableTitle": "Livepatchを有効化",
+    "ubuntuProLivepatchEnableDescription": "システムの実行中にカーネルのセキュリティアップデートを適用",
+    "ubuntuProLivepatchShowTitle": "Livepatchステータスをトップバーに表示"
 }
