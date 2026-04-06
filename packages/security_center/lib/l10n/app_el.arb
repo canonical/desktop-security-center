@@ -145,5 +145,125 @@
     "recoveryKeyPassphraseCurrentError": "Μη έγκυρη συνθηματική φράση, δοκιμάστε ξανά",
     "recoveryKeyPassphraseNewError": "Πρέπει να έχει μήκος τουλάχιστον 4 χαρακτήρων",
     "recoveryKeyPassphraseConfirmError": "Οι συνθηματικές φράσεις δεν ταιριάζουν, δοκιμάστε ξανά",
-    "recoveryKeyPassphraseDialogHeader": "Αλλαγή Συνθηματικής Φράσης"
+    "recoveryKeyPassphraseDialogHeader": "Αλλαγή Συνθηματικής Φράσης",
+    "recoveryKeyPinEnabled": "Το PIN κρυπτογράφησης είναι ενεργοποιημένο",
+    "recoveryKeyPinHeader": "PIN κρυπτογράφησης",
+    "recoveryKeyEncrpytionPassphraseHeader": "Συνθηματική φράση κρυπτογράφησης",
+    "recoveryKeyPinBody": "Πρέπει να εισαγάγετε το PIN σας κάθε φορά που ξεκινά ο υπολογιστής σας.",
+    "recoveryKeyPinButton": "Αλλαγή PIN...",
+    "recoveryKeyPinCurrent": "Τρέχον PIN",
+    "recoveryKeyPinNew": "Νέο PIN",
+    "recoveryKeyPinConfirm": "Επιβεβαίωση PIN",
+    "recoveryKeyPinCurrentError": "Μη έγκυρο PIN, δοκιμάστε ξανά",
+    "recoveryKeyPinConfirmError": "Τα PIN δεν ταιριάζουν, δοκιμάστε ξανά",
+    "recoveryKeyPinDialogHeader": "Αλλαγή PIN",
+    "recoveryKeyPassphraseShow": "Εμφάνιση",
+    "recoveryKeyPassphraseHide": "Απόκρυψη",
+    "recoveryKeyPassphraseChange": "Αλλαγή",
+    "recoveryKeyPassphrasePinSuccessHeader": "Το PIN ενημερώθηκε",
+    "recoveryKeyPassphrasePinSuccessBody": "Το PIN σας ενημερώθηκε με επιτυχία.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Η συνθηματική φράση ενημερώθηκε",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Η συνθηματική σας φράση ενημερώθηκε με επιτυχία.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Ασθενής συνθηματική φράση, κάντε την μεγαλύτερη ή πιο σύνθετη",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Μέτρια συνθηματική φράση, κάντε την μεγαλύτερη ή πιο σύνθετη για καλύτερη ασφάλεια",
+    "recoveryKeyPassphraseEntropyOptimal": "Ισχυρή συνθηματική φράση",
+    "recoveryKeyPinEntropyBelowMin": "Ασθενές PIN, κάντε το μεγαλύτερο ή λιγότερο προβλέψιμο",
+    "recoveryKeyPinEntropyBelowOptimal": "Μέτριο PIN, κάντε το μεγαλύτερο ή λιγότερο προβλέψιμο για καλύτερη ασφάλεια",
+    "recoveryKeyPinEntropyOptimal": "Το PIN είναι αρκετά μεγάλο",
+    "recoveryKeySomethingWentWrongHeader": "Κάτι πήγε στραβά",
+    "ubuntuProNotSupported": "Το Ubuntu Pro δεν είναι διαθέσιμο για αυτήν την έκδοση του Ubuntu",
+    "ubuntuProNotSupportedDetails": "Το Ubuntu Pro απαιτεί μια έκδοση LTS",
+    "ubuntuProNotSupportedSnapd": "Το Ubuntu Pro δεν υποστηρίζεται από αυτήν την έκδοση του snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Ενημερώστε το snapd για τη διαχείριση του Ubuntu Pro",
+    "ubuntuProEnabled": "Το Ubuntu Pro είναι ενεργοποιημένο",
+    "ubuntuProDisabled": "Ασφάλεια και συμμόρφωση επιπέδου επιχείρησης για τον υπολογιστή σας. Πάντα δωρεάν για προσωπική χρήση. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Μάθετε περισσότερα για το Ubuntu Pro",
+    "ubuntuProEnablePro": "Ενεργοποίηση του Ubuntu Pro",
+    "ubuntuProEnableMagic": "Ενεργοποίηση με λογαριασμό Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Θα μπορέσετε να δημιουργήσετε έναν λογαριασμό δωρεάν",
+    "ubuntuProMagicPrompt": "Συνδεθείτε με τον λογαριασμό σας στο Ubuntu One ή δημιουργήστε έναν δωρεάν.",
+    "ubuntuProMagicContinueInBrowser": "Συνέχεια στο πρόγραμμα περιήγησης",
+    "ubuntuProMagicDescription": "Μπορείτε επίσης να συνδεθείτε στη διεύθυνση {attachLink} και να εισαγάγετε τον κωδικό {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Αδυναμία ενεργοποίησης του Ubuntu Pro, δοκιμάστε ξανά",
+    "ubuntuProEnableToken": "Ενεργοποίηση με διακριτικό (token)",
+    "ubuntuProEnableTokenError": "Αδυναμία ενεργοποίησης του Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Από τον διαχειριστή IT σας ή από το {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Λάβετε ένα διακριτικό (token) Ubuntu Pro από τον διαχειριστή σας ή από το {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Διακριτικό",
+    "ubuntuProDisablePro": "Απενεργοποίηση του Ubuntu Pro",
+    "ubuntuProDisable": "Απενεργοποίηση",
+    "ubuntuProDisablePrompt": "Η απενεργοποίηση του Ubuntu Pro θα αποσυνδέσει τη συνδρομή σας από αυτό το μηχάνημα. Θέλετε να συνεχίσετε;",
+    "ubuntuProEnable": "Ενεργοποίηση",
+    "ubuntuProCancel": "Ακύρωση",
+    "ubuntuProFeatureEnableError": "Αδυναμία ενεργοποίησης της λειτουργίας, δοκιμάστε ξανά.",
+    "ubuntuProFeatureDisableError": "Αδυναμία απενεργοποίησης της λειτουργίας, δοκιμάστε ξανά.",
+    "ubuntuProCompliance": "Συμμόρφωση και θωράκιση",
+    "ubuntuProComplianceDisclaimer": "Συνιστάται μόνο για υποστήριξη σε απαιτήσεις FedRAMP, HIPAA και άλλες ανάγκες συμμόρφωσης και θωράκισης.",
+    "ubuntuProComplianceUSGTitle": "Οδηγός Ασφάλειας Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Αυτοματοποιεί τη θωράκιση και τον έλεγχο με προφίλ συμμόρφωσης CIS benchmark και DISA-STIG, επιτρέποντας παράλληλα προσαρμογές ανάλογα με το περιβάλλον.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Μια πιστοποίηση κρυπτογραφικών μονάδων των κυβερνήσεων των ΗΠΑ και του Καναδά για τη συμμόρφωση με το πρότυπο προστασίας δεδομένων FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Ενεργοποίηση FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Η ενεργοποίηση του FIPS δεν μπορεί να αναιρεθεί και το Livepatch θα απενεργοποιηθεί μόνιμα.",
+    "ubuntuProComplianceFIPSPrompt": "Επιλέξτε την επιθυμητή επιλογή FIPS",
+    "ubuntuProComplianceFIPSUpdates": "FIPS με ενημερώσεις",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Εγκαθιστά πακέτα επικυρωμένα κατά FIPS 140-2 και επιτρέπει τακτικές ενημερώσεις ασφαλείας.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS χωρίς ενημερώσεις",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Εγκαθιστά πακέτα επικυρωμένα κατά FIPS 140-2. Αυτά δεν θα ενημερωθούν μέχρι την επόμενη επαναπιστοποίηση.",
+    "ubuntuProComplianceDocumentation": "Τεκμηρίωση συμμόρφωσης ασφαλείας",
+    "ubuntuProESMTitle": "Διευρυμένη Συντήρηση Ασφαλείας (ESM)",
+    "ubuntuProESMDescription": "Το ESM παρέχει 10 χρόνια διορθώσεων ασφαλείας για περισσότερα από 25.000 πακέτα ανοιχτού κώδικα. Λάβετε συνεχή διαχείριση ευπαθειών για κρίσιμα, υψηλά και μεσαίας προτεραιότητας CVE.",
+    "ubuntuProESMMainTitle": "Κύρια πακέτα (esm-infra)",
+    "ubuntuProESMMainDescription": "Ενημερώσεις ασφαλείας για 2.300 πακέτα του Ubuntu Main μέχρι το {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Πακέτα Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Πρόσθετες ενημερώσεις ασφαλείας για πάνω από 23.000 πακέτα του Ubuntu Universe μέχρι το {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Livepatch για τον πυρήνα",
+    "ubuntuProLivepatchEnableTitle": "Ενεργοποίηση του Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Εφαρμογή των ενημερώσεων ασφαλείας του πυρήνα ενώ το σύστημα βρίσκεται σε λειτουργία",
+    "ubuntuProLivepatchShowTitle": "Εμφάνιση της κατάστασης του Livepatch στην πάνω μπάρα"
 }
