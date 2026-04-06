@@ -255,5 +255,15 @@
             }
         }
     },
-    "ubuntuProLivepatchTitle": "Ytimen Livepatch"
+    "ubuntuProLivepatchTitle": "Ytimen Livepatch",
+    "ubuntuProEnableTokenSubtitle": "Järjestelmänvalvojalta tai osoitteesta {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProComplianceUSGTitle": "Ubuntun tietoturvaohje (USG)",
+    "ubuntuProESMTitle": "Laajennettu tietoturvan ylläpito (ESM)"
 }
