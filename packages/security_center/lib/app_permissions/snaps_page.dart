@@ -116,11 +116,6 @@ class _CameraInterfaceBody extends ConsumerWidget {
 
     return ScrollablePage(
       children: [
-        Text(
-          interface.localizedTitle(l10n),
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        const SizedBox(height: 12),
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
         YaruTileList(
@@ -172,11 +167,6 @@ class _MicrophoneInterfaceBody extends ConsumerWidget {
 
     return ScrollablePage(
       children: [
-        Text(
-          interface.localizedTitle(l10n),
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        const SizedBox(height: 12),
         Text(interface.localizedDescription(l10n)),
         const SizedBox(height: 24),
         YaruTileList(
