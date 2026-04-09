@@ -177,7 +177,7 @@ class _InterfaceList extends ConsumerWidget {
                               ? l10n.cameraRulesPageEmptyTileLabel
                               : l10n.snapRulesPageEmptyTileLabel),
                     ),
-                    trailing: const Icon(YaruIcons.pan_end),
+                    trailing: const Icon(YaruIcons.go_next),
                     onTap: () => Navigator.of(context).pushSnapPermissions(
                       interface: interfaceSnapCount.key,
                     ),

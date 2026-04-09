@@ -209,7 +209,7 @@ class _HomeInterfaceAppTile extends ConsumerWidget {
       ),
       titleText: ref.watch(snapTitleOrNameProvider(snapName)),
       subtitle: Text(l10n.snapRulesCount(ruleCount)),
-      trailing: const Icon(YaruIcons.pan_end),
+      trailing: const Icon(YaruIcons.go_next),
       onTap: onTap,
     );
   }
