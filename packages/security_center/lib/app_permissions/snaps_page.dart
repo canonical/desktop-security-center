@@ -279,7 +279,7 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
       ),
       titleText: ref.watch(snapTitleOrNameProvider(snapName)),
       subtitle: subtitle != null ? Text(subtitle) : null,
-      trailing: Switch(
+      trailing: YaruSwitch(
         value: isOn,
         onChanged: (value) async {
           await notifier.removeAll();
@@ -360,7 +360,7 @@ class _MicrophoneInterfaceAppTile extends ConsumerWidget {
       ),
       titleText: ref.watch(snapTitleOrNameProvider(snapName)),
       subtitle: subtitle != null ? Text(subtitle) : null,
-      trailing: Switch(
+      trailing: YaruSwitch(
         value: isOn,
         onChanged: (value) async {
           await notifier.removeAll();
