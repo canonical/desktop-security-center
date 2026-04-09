@@ -143,6 +143,7 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
           children: [
             TextField(
               autofocus: true,
+              style: Theme.of(context).textTheme.bodyMedium,
               decoration: InputDecoration(
                 labelText: l10n.diskEncryptionPageRecoveryKey,
                 hintText: 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
@@ -248,6 +249,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   YaruLinearProgressIndicator()
                 else if (recoveryKey is AsyncData)
                   TextFormField(
+                    style: Theme.of(context).textTheme.bodyMedium,
                     onTap: () => saveToClipboard(
                       context,
                       recoveryKey.value!.recoveryKey,
