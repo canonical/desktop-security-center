@@ -24,12 +24,6 @@ enum SnapdInterface {
         camera => l10n.cameraInterfacePageTitle,
         microphone => l10n.microphoneInterfacePageTitle,
       };
-  String localizedDescription(AppLocalizations l10n) => switch (this) {
-        home => l10n.homeInterfacePageDescription,
-        camera => l10n.cameraInterfacePageDescription,
-        microphone => l10n.microphoneInterfacePageDescription,
-      };
-
   IconData get icon => switch (this) {
         home => YaruIcons.folder,
         camera => YaruIcons.camera_photo,

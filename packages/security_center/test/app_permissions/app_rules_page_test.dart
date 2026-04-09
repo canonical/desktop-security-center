@@ -93,8 +93,6 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('firefox'), findsOneWidget);
-
     await tester.tap(
       find.descendant(
         of: find.byWidgetPredicate(
@@ -114,7 +112,6 @@ void main() {
         },
       ),
     ).called(1);
-    expect(find.text('firefox'), findsOneWidget);
 
     final removeAll = find.text(tester.l10n.snapRulesRemoveAll);
     await tester.ensureVisible(removeAll);
@@ -138,7 +135,6 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('firefox'), findsOneWidget);
     expect(find.text(tester.l10n.snapRulesPageEmptyTileLabel), findsOneWidget);
   });
 }
@@ -160,8 +156,6 @@ Future<void> displayAndDeleteRulesTest({
     ),
   );
   await tester.pump();
-
-  expect(find.text('firefox'), findsOneWidget);
 
   await tester.tap(
     find.descendant(

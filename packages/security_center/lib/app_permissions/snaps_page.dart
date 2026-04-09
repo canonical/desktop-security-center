@@ -68,7 +68,6 @@ class _HomeInterfaceBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
     final tiles = snapRuleCounts.entries
         .map(
           (e) => _HomeInterfaceAppTile(
@@ -83,8 +82,6 @@ class _HomeInterfaceBody extends ConsumerWidget {
         .toList();
     return ScrollablePage(
       children: [
-        Text(interface.localizedDescription(l10n)),
-        const SizedBox(height: 24),
         YaruTileList(
           children:
               tiles.isEmpty ? [EmptyRulesTile(interface: interface)] : tiles,
@@ -116,8 +113,6 @@ class _CameraInterfaceBody extends ConsumerWidget {
 
     return ScrollablePage(
       children: [
-        Text(interface.localizedDescription(l10n)),
-        const SizedBox(height: 24),
         YaruTileList(
           children: appTiles.isEmpty
               ? [EmptyRulesTile(interface: interface)]
@@ -167,8 +162,6 @@ class _MicrophoneInterfaceBody extends ConsumerWidget {
 
     return ScrollablePage(
       children: [
-        Text(interface.localizedDescription(l10n)),
-        const SizedBox(height: 24),
         YaruTileList(
           children: appTiles.isEmpty
               ? [EmptyRulesTile(interface: interface)]

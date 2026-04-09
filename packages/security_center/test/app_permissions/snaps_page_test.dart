@@ -129,15 +129,6 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(
-        find.text(SnapdInterface.camera.localizedTitle(tester.l10n)),
-        findsOneWidget,
-      );
-      expect(
-        find.text(SnapdInterface.camera.localizedDescription(tester.l10n)),
-        findsOneWidget,
-      );
-
       expect(find.text('firefox'), findsOneWidget);
       expect(find.text('cheese'), findsOneWidget);
       expect(find.text('obs-studio'), findsOneWidget);
@@ -408,15 +399,6 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-
-      expect(
-        find.text(tester.l10n.microphoneInterfacePageTitle),
-        findsOneWidget,
-      );
-      expect(
-        find.text(tester.l10n.microphoneInterfacePageDescription),
-        findsOneWidget,
-      );
 
       final firefoxTile = find.ancestor(
         of: find.text('firefox'),
