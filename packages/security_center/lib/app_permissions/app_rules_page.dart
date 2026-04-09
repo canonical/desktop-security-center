@@ -3,10 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/app_permissions/home_interface.dart';
 import 'package:security_center/app_permissions/rules_category.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
-import 'package:security_center/app_permissions/snap_metadata_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/l10n.dart';
-import 'package:security_center/widgets/app_icon.dart';
 import 'package:security_center/widgets/empty_rules_tile.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:yaru/yaru.dart';
@@ -49,28 +47,9 @@ class _HomeBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(snapHomeRulesModelProvider(snap: snap).notifier);
     final l10n = AppLocalizations.of(context);
-    final textTheme = Theme.of(context).textTheme;
 
     return ScrollablePage(
       children: [
-        Row(
-          children: [
-            AppIcon(snapIcon: ref.watch(snapIconProvider(snap))),
-            const SizedBox(width: 10),
-            Text(
-              ref.watch(snapTitleOrNameProvider(snap)),
-              style: textTheme.titleLarge,
-            ),
-          ],
-        ),
-        const SizedBox(height: 10),
-        Text(
-          l10n.snapRulesPageDescription(
-            SnapdInterface.home.localizedTitle(l10n),
-            snap,
-          ),
-        ),
-        const SizedBox(height: 32),
         if (ruleFragments.isEmpty) ...[
           const YaruTileList(
             children: [

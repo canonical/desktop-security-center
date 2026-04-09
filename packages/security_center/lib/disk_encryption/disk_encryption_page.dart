@@ -143,36 +143,10 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
           children: [
             TextField(
               autofocus: true,
-              style: TextStyle(
-                inherit: false,
-                fontFamily: 'Ubuntu Mono',
-                fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
-                textBaseline: TextBaseline.alphabetic,
-                color: Theme.of(context).colorScheme.onSurface,
-                height: 1.5,
-                letterSpacing: 0,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
               decoration: InputDecoration(
                 labelText: l10n.diskEncryptionPageRecoveryKey,
                 hintText: 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
-                labelStyle: TextStyle(
-                  inherit: false,
-                  fontFamily: 'Ubuntu Mono',
-                  fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
-                  textBaseline: TextBaseline.alphabetic,
-                  color: Theme.of(context).colorScheme.onSurface,
-                  height: 1.5,
-                  letterSpacing: 0,
-                ),
-                hintStyle: TextStyle(
-                  inherit: false,
-                  fontFamily: 'Ubuntu Mono',
-                  fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
-                  textBaseline: TextBaseline.alphabetic,
-                  color: Theme.of(context).colorScheme.onSurface,
-                  height: 1.5,
-                  letterSpacing: 0,
-                ),
               ),
               onChanged: notifier.setKeyToCheck,
             ),
@@ -275,6 +249,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   YaruLinearProgressIndicator()
                 else if (recoveryKey is AsyncData)
                   TextFormField(
+                    style: Theme.of(context).textTheme.bodyMedium,
                     onTap: () => saveToClipboard(
                       context,
                       recoveryKey.value!.recoveryKey,
@@ -303,15 +278,6 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                     readOnly: true,
                     minLines: 1,
                     maxLines: 2,
-                    style: TextStyle(
-                      inherit: false,
-                      fontFamily: 'Ubuntu Mono',
-                      fontSize:
-                          Theme.of(context).textTheme.bodyMedium!.fontSize,
-                      textBaseline: TextBaseline.alphabetic,
-                      color: Theme.of(context).colorScheme.onSurface,
-                      letterSpacing: 0,
-                    ),
                   ),
                 Row(
                   children: [
@@ -660,17 +626,7 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
               width: 200,
               height: 200,
             ),
-            Text(
-              recoveryKey,
-              style: TextStyle(
-                inherit: false,
-                fontFamily: 'Ubuntu Mono',
-                fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
-                textBaseline: TextBaseline.alphabetic,
-                color: Theme.of(context).colorScheme.onSurface,
-                letterSpacing: 0,
-              ),
-            ),
+            Text(recoveryKey),
           ],
         ),
       ),

@@ -129,15 +129,6 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(
-        find.text(SnapdInterface.camera.localizedTitle(tester.l10n)),
-        findsOneWidget,
-      );
-      expect(
-        find.text(SnapdInterface.camera.localizedDescription(tester.l10n)),
-        findsOneWidget,
-      );
-
       expect(find.text('firefox'), findsOneWidget);
       expect(find.text('cheese'), findsOneWidget);
       expect(find.text('obs-studio'), findsOneWidget);
@@ -208,7 +199,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final switchWidgets = find.byType(Switch);
+      final switchWidgets = find.byType(YaruSwitch);
       expect(switchWidgets, findsNWidgets(2));
 
       // Find firefox's switch
@@ -218,10 +209,10 @@ void main() {
       );
       final firefoxSwitch = find.descendant(
         of: firefoxTile,
-        matching: find.byType(Switch),
+        matching: find.byType(YaruSwitch),
       );
 
-      final firefoxSwitchValue = tester.widget<Switch>(firefoxSwitch).value;
+      final firefoxSwitchValue = tester.widget<YaruSwitch>(firefoxSwitch).value;
       expect(firefoxSwitchValue, false);
 
       // Toggle firefox on
@@ -255,7 +246,7 @@ void main() {
       );
       final cheeseSwitch = find.descendant(
         of: cheeseTile,
-        matching: find.byType(Switch),
+        matching: find.byType(YaruSwitch),
       );
 
       // Toggle cheese off
@@ -409,15 +400,6 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(
-        find.text(tester.l10n.microphoneInterfacePageTitle),
-        findsOneWidget,
-      );
-      expect(
-        find.text(tester.l10n.microphoneInterfacePageDescription),
-        findsOneWidget,
-      );
-
       final firefoxTile = find.ancestor(
         of: find.text('firefox'),
         matching: find.byType(YaruListTile),
@@ -484,7 +466,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final switchWidgets = find.byType(Switch);
+      final switchWidgets = find.byType(YaruSwitch);
       expect(switchWidgets, findsNWidgets(2));
 
       // Find firefox's switch
@@ -494,10 +476,10 @@ void main() {
       );
       final firefoxSwitch = find.descendant(
         of: firefoxTile,
-        matching: find.byType(Switch),
+        matching: find.byType(YaruSwitch),
       );
 
-      final firefoxSwitchValue = tester.widget<Switch>(firefoxSwitch).value;
+      final firefoxSwitchValue = tester.widget<YaruSwitch>(firefoxSwitch).value;
       expect(firefoxSwitchValue, false);
 
       // Toggle firefox on
@@ -535,7 +517,7 @@ void main() {
       );
       final cheeseSwitch = find.descendant(
         of: cheeseTile,
-        matching: find.byType(Switch),
+        matching: find.byType(YaruSwitch),
       );
 
       // Toggle cheese off

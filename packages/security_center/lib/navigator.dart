@@ -47,7 +47,7 @@ extension AppNavigatorState on NavigatorState {
     final route = Uri(
       path: Routes.appPermissions.route,
       queryParameters: {
-        if (interface != null) 'interface': interface.name,
+        if (interface != null) 'interface': interface.interfaceName,
         if (snap != null) 'snap': snap,
       },
     ).toString();

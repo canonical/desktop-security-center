@@ -68,7 +68,6 @@ class _HomeInterfaceBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
     final tiles = snapRuleCounts.entries
         .map(
           (e) => _HomeInterfaceAppTile(
@@ -83,8 +82,6 @@ class _HomeInterfaceBody extends ConsumerWidget {
         .toList();
     return ScrollablePage(
       children: [
-        Text(interface.localizedDescription(l10n)),
-        const SizedBox(height: 24),
         YaruTileList(
           children:
               tiles.isEmpty ? [EmptyRulesTile(interface: interface)] : tiles,
@@ -116,13 +113,6 @@ class _CameraInterfaceBody extends ConsumerWidget {
 
     return ScrollablePage(
       children: [
-        Text(
-          interface.localizedTitle(l10n),
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        const SizedBox(height: 12),
-        Text(interface.localizedDescription(l10n)),
-        const SizedBox(height: 24),
         YaruTileList(
           children: appTiles.isEmpty
               ? [EmptyRulesTile(interface: interface)]
@@ -172,13 +162,6 @@ class _MicrophoneInterfaceBody extends ConsumerWidget {
 
     return ScrollablePage(
       children: [
-        Text(
-          interface.localizedTitle(l10n),
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        const SizedBox(height: 12),
-        Text(interface.localizedDescription(l10n)),
-        const SizedBox(height: 24),
         YaruTileList(
           children: appTiles.isEmpty
               ? [EmptyRulesTile(interface: interface)]
@@ -226,7 +209,7 @@ class _HomeInterfaceAppTile extends ConsumerWidget {
       ),
       titleText: ref.watch(snapTitleOrNameProvider(snapName)),
       subtitle: Text(l10n.snapRulesCount(ruleCount)),
-      trailing: const Icon(YaruIcons.pan_end),
+      trailing: const Icon(YaruIcons.go_next),
       onTap: onTap,
     );
   }
@@ -296,7 +279,7 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
       ),
       titleText: ref.watch(snapTitleOrNameProvider(snapName)),
       subtitle: subtitle != null ? Text(subtitle) : null,
-      trailing: Switch(
+      trailing: YaruSwitch(
         value: isOn,
         onChanged: (value) async {
           await notifier.removeAll();
@@ -377,7 +360,7 @@ class _MicrophoneInterfaceAppTile extends ConsumerWidget {
       ),
       titleText: ref.watch(snapTitleOrNameProvider(snapName)),
       subtitle: subtitle != null ? Text(subtitle) : null,
-      trailing: Switch(
+      trailing: YaruSwitch(
         value: isOn,
         onChanged: (value) async {
           await notifier.removeAll();
