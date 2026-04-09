@@ -231,5 +231,39 @@
     "ubuntuProFeatureDisableError": "Funktsionaalsuse väljalülitamine ei õnnestunud, palun proovi uuesti.",
     "ubuntuProCompliance": "Vastavusreeglid ja süsteemi tugevdamine",
     "ubuntuProComplianceDisclaimer": "Soovitatud kasutamiseks FedRAMP-i, HIPAA või muude sarnaste tugevdus- ja vastavusnõuete puhul.",
-    "ubuntuProComplianceUSGTitle": "Ubuntu turvajuhend (Ubuntu Security Guide - USG)"
+    "ubuntuProComplianceUSGTitle": "Ubuntu turvajuhend (Ubuntu Security Guide - USG)",
+    "ubuntuProESMUniverseTitle": "Universe'i paketid (esm-rakendused)",
+    "ubuntuProESMUniverseDescription": "23000 Ubuntu Universe'i paketi täiendavad turvauuendused kuni {year}. aastani",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMMainDescription": "2300 Ubuntu Main'i paketi täiendavad turvauuendused kuni {year}. aastani",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMMainTitle": "Main'i paketid (esm-rakendused)",
+    "ubuntuProLivepatchTitle": "Kerneli Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Võta Livepatch kasutusele",
+    "ubuntuProLivepatchEnableDescription": "Paigalda süsteemi kerneli turvauuendused töö ajal (i.e. ilma taaskäivitamata)",
+    "ubuntuProLivepatchShowTitle": "Näita Livepatchi olekut ülaribal",
+    "ubuntuProESMDescription": "ESM tagab 10 aastat turvaparandusi enam kui 25000-le avatud lähtekoodiga paketile. Saad oma arvutile pidevat haavatavuste haldamist kriitilise, kõrge ja keskmise riskitasemega CVE-de jaoks.",
+    "ubuntuProESMTitle": "Laiemad turvaparandused (Expanded Security Maintenance - ESM)",
+    "ubuntuProComplianceDocumentation": "Turvalisuse vastavusnõuete dokumentatsioon",
+    "ubuntuProComplianceUSGDescription": "Automatiseerib turvalisuse tugevdamist ja auditeerimist CIS-i võrdlusaluste ja DISA-STIG-profiilide abil, võimaldades samal ajal süsteemi keskkonnapõhiseid kohandusi.",
+    "ubuntuProComplianceFIPSDescription": "USA ja Kanada valitsuse poolt väljastatud krüptograafilise mooduli sertifikaat, mis tõendab vastavust andmekaitse standardile FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Võta FIPS kasutusele",
+    "ubuntuProComplianceFIPSDisclaimer": "Kui võtad FIPS'i kasutusele, siis seda ei saa tagasi pöörata ja Livepatch lülitatakse jäädavalt välja.",
+    "ubuntuProComplianceFIPSPrompt": "Vali oma soovitud FIPS-i eelistused",
+    "ubuntuProComplianceFIPSUpdates": "Uuendustega FIPS",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Paigaldab FIPS 140-2 vastavusega paketid ja võimaldab regulaarselt turvauuendusi teha.",
+    "ubuntuProComplianceFIPSNoUpdates": "Ilma uuendusteta FIPS",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Paigaldab FIPS 140-2 vastavusega paketid, aga neid ei uuendata kuni järgmise kordussertifitseerimiseni."
 }
