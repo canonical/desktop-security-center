@@ -141,7 +141,7 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk Encryption';
+  String get diskEncryptionPageTitle => 'Disk encryption';
 
   @override
   String get diskEncryptionPageRecoveryKey => 'Recovery key';
@@ -163,7 +163,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get diskEncryptionPageCheckKey => 'Check recovery key...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check Recovery Key';
+  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
 
   @override
   String get diskEncryptionPageCheck => 'Check';
@@ -425,7 +425,7 @@ class AppLocalizationsHu extends AppLocalizations {
       'Passphrases do not match, try again';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change Passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
 
   @override
   String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';

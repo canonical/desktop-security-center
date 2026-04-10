@@ -30,7 +30,7 @@
     "@snapPermissionsExperimentalLabel": {},
     "snapPermissionsOtherDescription": "You can manage other permissions in Settings › Applications.",
     "@snapPermissionsOtherDescription": {},
-    "snapPermissionsPageTitle": "App Permissions",
+    "snapPermissionsPageTitle": "App permissions",
     "@snapPermissionsPageTitle": {},
     "snapRulesCount": "{n, plural, =0{no rules} =1{1 rule} other{{n} rules}}",
     "@snapRulesCount": {
@@ -89,7 +89,7 @@
             }
         }
     },
-    "diskEncryptionPageTitle": "Disk Encryption",
+    "diskEncryptionPageTitle": "Disk encryption",
     "@diskEncryptionPageTitle": {},
     "diskEncryptionPageRecoveryKey": "Recovery key",
     "@diskEncryptionPageRecoveryKey": {},
@@ -107,7 +107,7 @@
     "@diskEncryptionPageStoreLearnMore": {},
     "diskEncryptionPageCheckKey": "Check recovery key...",
     "@diskEncryptionPageCheckKey": {},
-    "diskEncryptionPageDialogHeaderCheckKey": "Check Recovery Key",
+    "diskEncryptionPageDialogHeaderCheckKey": "Check recovery key",
     "@diskEncryptionPageDialogHeaderCheckKey": {},
     "diskEncryptionPageCheck": "Check",
     "@diskEncryptionPageCheck": {},
@@ -208,7 +208,7 @@
     "recoveryKeyPassphraseCurrentError": "Incorrect passphrase, try again",
     "recoveryKeyPassphraseNewError": "Must be at least 4 characters long",
     "recoveryKeyPassphraseConfirmError": "Passphrases do not match, try again",
-    "recoveryKeyPassphraseDialogHeader": "Change Passphrase",
+    "recoveryKeyPassphraseDialogHeader": "Change passphrase",
     "recoveryKeyPinEnabled": "Encryption PIN is enabled",
     "recoveryKeyPinHeader": "Encryption PIN",
     "recoveryKeyEncrpytionPassphraseHeader": "Encryption passphrase",

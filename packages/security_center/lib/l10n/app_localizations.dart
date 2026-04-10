@@ -335,7 +335,7 @@ abstract class AppLocalizations {
   /// No description provided for @snapPermissionsPageTitle.
   ///
   /// In en, this message translates to:
-  /// **'App Permissions'**
+  /// **'App permissions'**
   String get snapPermissionsPageTitle;
 
   /// No description provided for @snapRulesCount.
@@ -449,7 +449,7 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageTitle.
   ///
   /// In en, this message translates to:
-  /// **'Disk Encryption'**
+  /// **'Disk encryption'**
   String get diskEncryptionPageTitle;
 
   /// No description provided for @diskEncryptionPageRecoveryKey.
@@ -485,7 +485,7 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageDialogHeaderCheckKey.
   ///
   /// In en, this message translates to:
-  /// **'Check Recovery Key'**
+  /// **'Check recovery key'**
   String get diskEncryptionPageDialogHeaderCheckKey;
 
   /// No description provided for @diskEncryptionPageCheck.
@@ -929,7 +929,7 @@ abstract class AppLocalizations {
   /// No description provided for @recoveryKeyPassphraseDialogHeader.
   ///
   /// In en, this message translates to:
-  /// **'Change Passphrase'**
+  /// **'Change passphrase'**
   String get recoveryKeyPassphraseDialogHeader;
 
   /// No description provided for @recoveryKeyPinEnabled.
