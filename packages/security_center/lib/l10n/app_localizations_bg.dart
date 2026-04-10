@@ -59,7 +59,7 @@ class AppLocalizationsBg extends AppLocalizations {
       'You can manage other permissions in Settings › Applications.';
 
   @override
-  String get snapPermissionsPageTitle => 'App Permissions';
+  String get snapPermissionsPageTitle => 'App permissions';
 
   @override
   String snapRulesCount(int n) {
@@ -140,7 +140,7 @@ class AppLocalizationsBg extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk Encryption';
+  String get diskEncryptionPageTitle => 'Disk encryption';
 
   @override
   String get diskEncryptionPageRecoveryKey => 'Recovery key';
@@ -162,7 +162,7 @@ class AppLocalizationsBg extends AppLocalizations {
   String get diskEncryptionPageCheckKey => 'Check recovery key...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check Recovery Key';
+  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
 
   @override
   String get diskEncryptionPageCheck => 'Check';
@@ -424,7 +424,7 @@ class AppLocalizationsBg extends AppLocalizations {
       'Passphrases do not match, try again';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change Passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
 
   @override
   String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
