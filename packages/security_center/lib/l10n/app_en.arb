@@ -290,6 +290,7 @@
     "ubuntuProDisablePro": "Disable Ubuntu Pro",
     "ubuntuProDisable": "Disable",
     "ubuntuProDisablePrompt": "Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?",
+    "ubuntuProDisableError": "Could not disable Ubuntu Pro. Please try again.",
     "ubuntuProEnable": "Enable",
     "ubuntuProCancel": "Cancel",
     "ubuntuProFeatureEnableError": "Could not enable the feature, please try again.",

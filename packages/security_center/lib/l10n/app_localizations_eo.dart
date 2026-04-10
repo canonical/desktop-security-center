@@ -599,6 +599,10 @@ class AppLocalizationsEo extends AppLocalizations {
       'Malŝaltante Ubuntu Pro, vi dekroĉos vian abonon de ĉi tiu komputilo. Ĉu daŭrigi?';
 
   @override
+  String get ubuntuProDisableError =>
+      'Could not disable Ubuntu Pro. Please try again.';
+
+  @override
   String get ubuntuProEnable => 'Ŝalti';
 
   @override
