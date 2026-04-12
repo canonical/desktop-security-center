@@ -65,7 +65,7 @@
             }
         }
     },
-    "diskEncryptionPageTitle": "Κρυπτογράφηση Δίσκου",
+    "diskEncryptionPageTitle": "Κρυπτογράφηση δίσκου",
     "diskEncryptionPageRecoveryKey": "Κλειδί ανάκτησης",
     "diskEncryptionPageStoreYourKey": "Το κλειδί ανάκτησης σάς επιτρέπει να ανακτήσετε την πρόσβαση στα δεδομένα σας εάν το ξεκλείδωμα του δίσκου αποτύχει κατά την εκκίνηση. Αποθηκεύστε το σε ασφαλές μέρος.",
     "diskEncryptionPageStoreYourKeyWithLink": "Το κλειδί ανάκτησης σάς επιτρέπει να ανακτήσετε την πρόσβαση στα δεδομένα σας εάν το ξεκλείδωμα του δίσκου αποτύχει κατά την εκκίνηση. Αποθηκεύστε το σε ασφαλές μέρος. {learnMoreLink}",
@@ -145,7 +145,7 @@
     "recoveryKeyPassphraseCurrentError": "Μη έγκυρη συνθηματική φράση, δοκιμάστε ξανά",
     "recoveryKeyPassphraseNewError": "Πρέπει να έχει μήκος τουλάχιστον 4 χαρακτήρων",
     "recoveryKeyPassphraseConfirmError": "Οι συνθηματικές φράσεις δεν ταιριάζουν, δοκιμάστε ξανά",
-    "recoveryKeyPassphraseDialogHeader": "Αλλαγή Συνθηματικής Φράσης",
+    "recoveryKeyPassphraseDialogHeader": "Αλλαγή συνθηματικής φράσης",
     "recoveryKeyPinEnabled": "Το PIN κρυπτογράφησης είναι ενεργοποιημένο",
     "recoveryKeyPinHeader": "PIN κρυπτογράφησης",
     "recoveryKeyEncrpytionPassphraseHeader": "Συνθηματική φράση κρυπτογράφησης",
