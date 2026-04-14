@@ -50,7 +50,7 @@
         }
     },
     "homeInterfacePageDescription": "Gérer les autorisations d’accès aux fichiers dans votre dossier personnel.",
-    "diskEncryptionPageTitle": "Chiffrement disque",
+    "diskEncryptionPageTitle": "Chiffrement du disque",
     "diskEncryptionPageLearnMore": "En savoir plus sur le chiffrement assisté par matériel",
     "diskEncryptionPageCheckKey": "Vérification clé de secours...",
     "diskEncryptionPageDialogHeaderCheckKey": "Vérifier clé de secours",
