@@ -164,12 +164,13 @@ class SnapdAppPermissionsService implements AppPermissionsService {
       await for (final change in _snapd.watchChange(changeId)) {
         _log.debug('Change: $change');
         if (change.ready) {
-          break;
-        } else if (change.err != null) {
-          _log.error(
-            'Snapd change $changeId completed with an error: ${change.err}',
-          );
-          _emitStatus(AppPermissionsServiceStatus.error(change.err!));
+          // Changes which result in an error become "ready" when error is set
+          if (change.err != null) {
+            _log.error(
+              'Snapd change $changeId completed with an error: ${change.err}',
+            );
+            _emitStatus(AppPermissionsServiceStatus.error(change.err!));
+          }
           break;
         }
         _emitStatus(progressState(change.progress));
