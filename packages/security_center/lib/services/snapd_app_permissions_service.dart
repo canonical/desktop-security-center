@@ -170,6 +170,7 @@ class SnapdAppPermissionsService implements AppPermissionsService {
               'Snapd change $changeId completed with an error: ${change.err}',
             );
             _emitStatus(AppPermissionsServiceStatus.error(change.err!));
+            return;
           }
           break;
         }

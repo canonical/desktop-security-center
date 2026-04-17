@@ -135,6 +135,7 @@ void main() {
       bool enabled,
       Future<void> Function(AppPermissionsService) callback,
       bool authCancelled,
+      String? changeErr,
       List<AppPermissionsServiceStatus> expectedStatuses
     })>[
       // The mock service doesn't have a mutable state, so it will return the
@@ -146,6 +147,7 @@ void main() {
         enabled: true,
         callback: (service) => service.enable(),
         authCancelled: false,
+        changeErr: null,
         expectedStatuses: [
           AppPermissionsServiceStatus.enabled([]),
           AppPermissionsServiceStatus.waitingForAuth(),
@@ -159,6 +161,7 @@ void main() {
         enabled: false,
         callback: (service) => service.disable(),
         authCancelled: false,
+        changeErr: null,
         expectedStatuses: [
           AppPermissionsServiceStatus.disabled(),
           AppPermissionsServiceStatus.waitingForAuth(),
@@ -172,10 +175,25 @@ void main() {
         enabled: false,
         callback: (service) => service.enable(),
         authCancelled: true,
+        changeErr: null,
         expectedStatuses: [
           AppPermissionsServiceStatus.disabled(),
           AppPermissionsServiceStatus.waitingForAuth(),
           AppPermissionsServiceStatus.disabled(),
+        ],
+      ),
+      (
+        name: 'error when enabling',
+        enabled: false,
+        callback: (service) => service.enable(),
+        authCancelled: false,
+        changeErr: 'snapd change error',
+        expectedStatuses: [
+          AppPermissionsServiceStatus.disabled(),
+          AppPermissionsServiceStatus.waitingForAuth(),
+          AppPermissionsServiceStatus.enabling(0.0),
+          AppPermissionsServiceStatus.enabling(0.5),
+          AppPermissionsServiceStatus.error('snapd change error'),
         ],
       ),
     ];
@@ -186,7 +204,7 @@ void main() {
           registerMockSnapdService(
             promptingEnabled: testCase.enabled,
             changeId: 'changeId',
-            changes: const [
+            changes: [
               SnapdChange(
                 id: 'changeId',
                 tasks: [
@@ -205,6 +223,7 @@ void main() {
                     progress: SnapdTaskProgress(done: 2, total: 2),
                   ),
                 ],
+                err: testCase.changeErr,
               ),
             ],
             authCancelled: testCase.authCancelled,
