@@ -1220,6 +1220,12 @@ abstract class AppLocalizations {
   /// **'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?'**
   String get ubuntuProDisablePrompt;
 
+  /// No description provided for @ubuntuProDisableError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not disable Ubuntu Pro. Please try again.'**
+  String get ubuntuProDisableError;
+
   /// No description provided for @ubuntuProEnable.
   ///
   /// In en, this message translates to:
