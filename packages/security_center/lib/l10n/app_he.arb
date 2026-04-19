@@ -243,5 +243,21 @@
     "ubuntuProLivepatchTitle": "הטלאה חיה של הליבה",
     "ubuntuProLivepatchEnableTitle": "הפעלת הטלאה חיה",
     "ubuntuProLivepatchEnableDescription": "החלת עדכוני אבטחה של הליבה בזמן שהמערכת פעילה",
-    "ubuntuProLivepatchShowTitle": "הצגת מצב ההטלאה החיה בסרגל העליון"
+    "ubuntuProLivepatchShowTitle": "הצגת מצב ההטלאה החיה בסרגל העליון",
+    "ubuntuProESMMainDescription": "עדכוני אבטחה לכ־2,300 חבילות עיקריות של אובונטו עד {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseDescription": "עדכוני אבטחה נוספים ליותר מ־23,000 חבילות יוניברס באובונטו עד {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    }
 }
