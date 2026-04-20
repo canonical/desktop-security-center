@@ -1,77 +1,269 @@
 {
-  "appTitle": "Центр безпеки",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "Дозволити до виходу з системи",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "Заборонити до виходу з системи",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverAllowed": "Завжди дозволяти",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapPermissionReadLabel": "Читання",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "Запис",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionsEnableWarning": "Це експериментальна можливість контролю доступу до ресурсів системи.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "Увімкнення може тривати кілька секунд...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsExperimentalLabel": "Експериментально",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsPageTitle": "Дозволи застосунків",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, plural, =0{немає правил} =1{1 правило} few{{n} правила} many{{n} правил} other{{n} правило}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "Ще немає правил",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Вилучити всі правила",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "Домашня тека",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Керувати дозволами на доступ до файлів у теці «Домівка».",
-  "@homeInterfacePageDescription": {},
-  "interfacePageTitle": "Керувати дозволами",
-  "@interfacePageTitle": {},
-  "interfacePageDescription": "Суворо обмежені застосунки запитуватимуть вас перед доступом до файлів і тек. Ця функція експериментальна і може бути змінена.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkLearnMore": "Докладніше",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "Надіслати відгук",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "Повідомити про проблеми",
-  "@interfacePageLinkReportIssues": {},
-  "snapdRuleCategoryForeverDenied": "Завжди забороняти",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionExecuteLabel": "Виконання",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsDisablingLabel": "Вимкнення може тривати кілька секунд...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsOtherDescription": "Ви можете керувати іншими дозволами в Налаштуваннях › Програми.",
-  "@snapPermissionsOtherDescription": {},
-  "snapRulesPageDescription": "Керувати дозволами {interface} для {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "interfaceSnapCount": "{n, plural, =0{немає застосунків} =1{1 застосунок} few{{n} застосунки} many{{n} застосунків} other {{n} застосунок}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsEnableTitle": "Вимагати від застосунків запитувати про системні дозволи",
-  "@snapPermissionsEnableTitle": {}
+    "appTitle": "Центр безпеки",
+    "snapdRuleCategorySessionAllowed": "Дозволити до виходу з системи",
+    "snapdRuleCategorySessionDenied": "Заборонити до виходу з системи",
+    "snapdRuleCategoryForeverAllowed": "Завжди дозволяти",
+    "snapPermissionReadLabel": "Читання",
+    "snapPermissionWriteLabel": "Запис",
+    "snapPermissionsEnableWarning": "Це експериментальна можливість контролю доступу до ресурсів системи.",
+    "snapPermissionsEnablingLabel": "Увімкнення, це може тривати кілька секунд...",
+    "snapPermissionsExperimentalLabel": "Експериментально",
+    "snapPermissionsPageTitle": "Дозволи застосунків",
+    "snapRulesCount": "{n, plural, =0{немає правил} =1{1 правило} few{{n} правила} many{{n} правил} other{{n} правило}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Ще немає правил",
+    "snapRulesRemoveAll": "Вилучити всі правила",
+    "homeInterfacePageTitle": "Домашня тека",
+    "homeInterfacePageDescription": "Керувати дозволами на доступ до файлів у теці «Домівка».",
+    "interfacePageTitle": "Керувати дозволами",
+    "interfacePageDescription": "Суворо обмежені застосунки запитуватимуть вас перед доступом до файлів і тек. Ця функція експериментальна і може бути змінена.",
+    "interfacePageLinkLearnMore": "Докладніше",
+    "interfacePageLinkGiveFeedback": "Надіслати відгук",
+    "interfacePageLinkReportIssues": "Повідомити про проблеми",
+    "snapdRuleCategoryForeverDenied": "Завжди забороняти",
+    "snapPermissionExecuteLabel": "Виконання",
+    "snapPermissionsDisablingLabel": "Вимкнення, це може тривати кілька секунд...",
+    "snapPermissionsOtherDescription": "Ви можете керувати іншими дозволами в Налаштуваннях › Програми.",
+    "snapRulesPageDescription": "Керувати дозволами {interface} для {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "interfaceSnapCount": "{n, plural, =0{немає застосунків} =1{1 застосунок} few{{n} застосунки} many{{n} застосунків} other {{n} застосунок}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsEnableTitle": "Вимагати від застосунків запитувати про системні дозволи",
+    "diskEncryptionPageTitle": "Шифрування диска",
+    "diskEncryptionPageRecoveryKey": "Ключ відновлення",
+    "diskEncryptionPageStoreYourKey": "Ключ відновлення дає змогу відновити доступ до ваших даних, якщо диск не вдасться розблокувати під час завантаження. Збережіть його в безпечному місці.",
+    "diskEncryptionPageLearnMore": "Докладніше про апаратне шифрування",
+    "diskEncryptionPageCheckKey": "Перевірити ключ відновлення...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Перевірити ключ відновлення",
+    "diskEncryptionPageCheck": "Перевірити",
+    "diskEncryptionPageValidKey": "Дійсний ключ",
+    "diskEncryptionPageInvalidKey": "Недійсний ключ",
+    "diskEncryptionPageEnterKey": "Введіть свій ключ відновлення",
+    "diskEncryptionPageKeyWorks": "Ключ відновлення працює",
+    "diskEncryptionPageKeyWorksBody": "Не забудьте зберегти його в безпечному місці.",
+    "diskEncryptionPageKeyDoesntWork": "Ключ відновлення не працює",
+    "diskEncryptionPageKeyDoesntWorkBody": "Перевірте ключ або замініть його новим.",
+    "diskEncryptionPageError": "Помилка",
+    "diskEncryptionPageReplaceButton": "Замініть ключ відновлення...",
+    "diskEncryptionPageReplaceDialogHeader": "Замініть ключ відновлення",
+    "diskEncryptionPageReplaceDialogBody": "Збережіть новий ключ відновлення в безпечному місці. Після його заміни ви більше не зможете використовувати старий ключ.",
+    "diskEncryptionPageReplaceDialogShowQR": "Показати QR код",
+    "diskEncryptionPageReplaceDialogSave": "Зберегти у файл",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Ключ відновлення збережено в надійному місці",
+    "diskEncryptionPageReplaceDialogReplace": "Замінити",
+    "diskEncryptionPageReplaceDialogDiscard": "Відхилити",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Ключ відновлення замінено",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Не забудьте зберегти його в безпечному місці.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Не вдалося замінити ключ відновлення",
+    "diskEncryptionPageReplaceDialogErrorBody": "Сталася помилка під час заміни ключа відновлення, ваш старий ключ залишиться дійсним.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Ключ відновлення шифрування",
+    "diskEncryptionPageReplaceDialogQRBody": "Відскануйте QR-код, щоб скопіювати ключ відновлення, і збережіть його в безпечному місці, наприклад у менеджері паролів. Ви також можете зробити фото для подальшого використання.",
+    "diskEncryptionPageClipboardNotification": "Скопійовано в буфер обміну",
+    "diskEncryptionPageCopySemanticLabel": "Копіювати",
+    "recoveryKeyExceptionFileSystemTitle": "Файл ключа відновлення не збережено",
+    "recoveryKeyExceptionDisallowedPathTitle": "Файл ключа відновлення не можна зберегти у тимчасовому розташуванні",
+    "recoveryKeyExceptionUnknownTitle": "Невідома помилка",
+    "recoveryKeyExceptionFileSystemBody": "У вас немає дозволу на запис до цієї теки. Спробуйте інше розташування або використайте інший спосіб.",
+    "recoveryKeyExceptionDisallowedPathBody": "Спробуйте інше розташування, наприклад, змінний диск, або використайте інший метод.",
+    "recoveryKeyFilePickerTitle": "Зберегти файл ключа відновлення",
+    "recoveryKeyFilePickerFilter": "Текстовий файл",
+    "recoveryKeyTPMEnabled": "Апаратне шифрування ввімкнено",
+    "recoveryKeyPassphraseEnabled": "Парольна фраза шифрування увімкнена",
+    "recoveryKeyPassphraseHeader": "Змінити парольну фразу",
+    "recoveryKeyPassphraseBody": "Вам потрібно вводити свою парольну фразу щоразу, коли комп'ютер запускається.",
+    "recoveryKeyPassphraseButton": "Змінити парольну фразу...",
+    "recoveryKeyPassphraseCurrent": "Поточна парольна фраза",
+    "recoveryKeyPassphraseNew": "Нова парольна фраза",
+    "recoveryKeyPassphraseConfirm": "Підтвердити парольну фразу",
+    "recoveryKeyPassphraseCurrentError": "Неправильна парольна фраза, спробуйте ще раз",
+    "recoveryKeyPassphraseNewError": "Має містити щонайменше 4 символи",
+    "recoveryKeyPassphraseConfirmError": "Парольні фрази не збігаються, спробуйте ще раз",
+    "recoveryKeyPassphraseDialogHeader": "Змінити парольну фразу",
+    "recoveryKeyPinEnabled": "PIN-код для шифрування увімкнено",
+    "recoveryKeyPinHeader": "PIN-код шифрування",
+    "recoveryKeyPinBody": "Вам потрібно вводити свій PIN-код щоразу, коли комп'ютер запускається.",
+    "recoveryKeyPinButton": "Змінити PIN-код...",
+    "recoveryKeyPinCurrent": "Поточний PIN-код",
+    "recoveryKeyPinNew": "Новий PIN-код",
+    "recoveryKeyPinConfirm": "Підтвердьте PIN-код",
+    "recoveryKeyPinCurrentError": "Неправильний PIN-код, спробуйте ще раз",
+    "recoveryKeyPinConfirmError": "PIN-коди не збігаються, спробуйте ще раз",
+    "recoveryKeyPinDialogHeader": "Змінити PIN-код",
+    "recoveryKeyPassphraseShow": "Показати",
+    "recoveryKeyPassphraseHide": "Сховати",
+    "recoveryKeyPassphraseChange": "Змінити",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN-код оновлено",
+    "recoveryKeyPassphrasePinSuccessBody": "Ваш PIN-код успішно оновлено.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Парольну фразу оновлено",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Ваша парольна фраза успішно оновлена.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Слабка парольна фраза, зробіть її довшою і складнішою",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Достатня парольна фраза, зробіть її довшою або складнішою для кращої безпеки",
+    "recoveryKeyPassphraseEntropyOptimal": "Надійна парольна фраза",
+    "recoveryKeyPinEntropyBelowMin": "Слабкий PIN-код, зробіть його довшим або менш передбачуваним",
+    "recoveryKeyPinEntropyBelowOptimal": "Достатній PIN-код, зробіть його довшим або менш передбачуваним для кращої безпеки",
+    "recoveryKeyPinEntropyOptimal": "PIN-код достатньо довгий",
+    "recoveryKeySomethingWentWrongHeader": "Щось пішло не так",
+    "diskEncryptionPageStoreYourKeyWithLink": "Ключ відновлення дає вам змогу відновити доступ до ваших даних, якщо диск не розблокується під час запуску. Збережіть його в безпечному місці. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Налаштування шифрування недоступні",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Не вдалося отримати стан шифрування цього комп'ютера.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Ваша версія Snapd не підтримується",
+    "recoveryKeyExceptionFilePermissionBody": "У вас немає дозволу на запис у це місце розташування файлу.",
+    "snapPermissionAccessLabel": "Доступ",
+    "cameraRulesPageEmptyTileLabel": "Жодні застосунки ще не запитували доступ",
+    "snapRulesResetAllPermissions": "Скинути всі дозволи",
+    "cameraInterfacePageTitle": "Камера",
+    "cameraInterfacePageDescription": "Дозволити застосункам отримувати доступ до ваших камер.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "Конфігурація TPM вашого комп'ютера не підтримується.",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Перевірте, чи оновлені Security Center та snapd.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Security Center не може підключитися до інтерфейсу snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Щоб виправити це, виконайте цю команду в терміналі:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "recoveryKeyExceptionFilePermissionTitle": "Не вдалося зберегти ключ відновлення у файл",
+    "recoveryKeyTPMExplanationBody": "Ключі шифрування зберігаються в модулі Trusted Platform Module (TPM) вашого комп'ютера.",
+    "recoveryKeyTPMExplanationLearnMore": "Дізнайтеся більше про шифрування з апаратним забезпеченням",
+    "recoveryKeyEncrpytionPassphraseHeader": "Пароль шифрування",
+    "diskEncryptionPageAddPinButton": "Додати PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Додати парольну фразу...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Додати парольну фразу",
+    "diskEncryptionPageAddPinDialogHeading": "Додати PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "Вам потрібно буде вводити свій PIN-код щоразу, коли комп'ютер запускається. Цей PIN-код відрізняється від вашого пароля користувача.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Якщо ви забудете свій PIN-код, ви можете відновити доступ до диска за допомогою ключа відновлення.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Вам потрібно буде вводити свою парольну фразу щоразу під час запуску комп'ютера. Ця парольна фраза відрізняється від вашого пароля користувача.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Якщо ви забудете свою парольну фразу, ви можете відновити доступ до диска за допомогою ключа відновлення.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Додаткова безпека",
+    "diskEncryptionPageAdditionalSecurityBody": "Ви можете встановити парольну фразу або PIN-код для додаткової безпеки. Вам потрібно буде вводити це щоразу під час запуску комп'ютера.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Дізнатися більше",
+    "diskEncryptionPageAddPinDialogSaveButton": "Додати",
+    "diskEncryptionPageRemovePinButton": "Видалити PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Видалити парольну фразу...",
+    "diskEncryptionPageAddingPin": "Додавання PIN-коду, це може тривати кілька секунд...",
+    "diskEncryptionPageAddingPassphrase": "Додавання парольної фрази, це може тривати кілька секунд...",
+    "diskEncryptionPageRemovingPin": "Видалення PIN-коду, це може тривати кілька секунд...",
+    "diskEncryptionPageRemovingPassphrase": "Видалення парольної фрази, це може тривати кілька секунд...",
+    "microphoneInterfacePageTitle": "Мікрофон",
+    "microphoneInterfacePageDescription": "Дозволити застосункам отримувати доступ до вашого мікрофону.",
+    "ubuntuProEnabled": "Ubuntu Pro увімкнено",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro недоступний для цієї версії Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro вимагає випуску LTS",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro не підтримується цією версією snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Оновіть snapd для керування Ubuntu Pro",
+    "ubuntuProDisabled": "Безпека та відповідність корпоративного рівня для вашого комп'ютера. Завжди безкоштовно для особистого використання. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Дізнайтеся про Ubuntu Pro",
+    "ubuntuProEnablePro": "Увімкнути Ubuntu Pro",
+    "ubuntuProEnableMagic": "Увімкнути за допомогою облікового запису Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Ви зможете створити обліковий запис безкоштовно",
+    "ubuntuProMagicPrompt": "Увійдіть, використовуючи свій обліковий запис Ubuntu One, або створіть його безкоштовно.",
+    "ubuntuProMagicContinueInBrowser": "Продовжіть у браузері",
+    "ubuntuProMagicDescription": "Ви також можете увійти за адресою {attachLink} та ввести код {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Не вдалося ввімкнути Ubuntu Pro, спробуйте ще раз",
+    "ubuntuProEnableToken": "Увімкнути за допомогою токена",
+    "ubuntuProEnableTokenError": "Не вдається ввімкнути Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Від вашого ІТ-адміністратора або з {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Отримайте токен Ubuntu Pro у свого адміністратора або на сайті {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Токен",
+    "ubuntuProDisablePro": "Вимкнути Ubuntu Pro",
+    "ubuntuProDisable": "Вимкнути",
+    "ubuntuProDisablePrompt": "Вимкнення Ubuntu Pro від'єднає вашу підписку від цього комп’ютера. Продовжити?",
+    "ubuntuProEnable": "Увімкнути",
+    "ubuntuProCancel": "Скасувати",
+    "ubuntuProFeatureEnableError": "Не вдалося ввімкнути функцію, спробуйте ще раз.",
+    "ubuntuProFeatureDisableError": "Не вдалося вимкнути функцію, спробуйте ще раз.",
+    "ubuntuProCompliance": "Відповідність та посилення захисту",
+    "ubuntuProComplianceDisclaimer": "Рекомендовано лише для допомоги з FedRAMP, HIPAA та іншими вимогами щодо відповідності та посилення безпеки.",
+    "ubuntuProComplianceUSGTitle": "Посібник з безпеки Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Автоматизує посилення захисту та аудит за допомогою бенчмарків CIS та профілів DISA-STIG, водночас дозволяючи налаштування відповідно до середовища.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Сертифікація криптографічного модуля уряду США та Канади на відповідність стандарту захисту даних FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Увімкнути FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Увімкнення FIPS не можна скасувати, і Livepatch буде назавжди вимкнено.",
+    "ubuntuProComplianceFIPSPrompt": "Виберіть бажаний варіант FIPS",
+    "ubuntuProComplianceFIPSUpdates": "FIPS з оновленнями",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Встановлює перевірені пакети FIPS 140-2 та дозволяє регулярні оновлення безпеки.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS без оновлень",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Встановлює перевірені пакети FIPS 140-2. Вони не будуть оновлені до наступної пересертифікації.",
+    "ubuntuProComplianceDocumentation": "Документація щодо відповідності вимогам безпеки",
+    "ubuntuProESMTitle": "Розширене обслуговування безпеки (ESM)",
+    "ubuntuProESMDescription": "ESM надає 10 років виправлень безпеки для понад 25 000 пакетів з відкритим кодом. Отримайте безперервне керування вразливостями для критичних, високо- та середнього рівня CVE.",
+    "ubuntuProESMMainTitle": "Основні пакети (esm-infra)",
+    "ubuntuProESMMainDescription": "Оновлення безпеки для 2300 основних пакетів Ubuntu до {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Пакети Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Додаткові оновлення безпеки для понад 23 000 пакетів Ubuntu Universe до {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Livepatch для ядра",
+    "ubuntuProLivepatchEnableTitle": "Увімкнути Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Застосовуйте оновлення безпеки ядра під час роботи системи",
+    "ubuntuProLivepatchShowTitle": "Показати стан Livepatch у верхній панелі"
 }

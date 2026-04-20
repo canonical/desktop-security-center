@@ -1,1 +1,234 @@
-{}
+{
+    "appTitle": "بىخەتەرلىك مەركىزى",
+    "snapdRuleCategorySessionAllowed": "تىزىمدىن چىققۇچە يول قويىدۇ",
+    "snapdRuleCategorySessionDenied": "تىزىمدىن چىققۇچە رەت قىلىدۇ",
+    "snapdRuleCategoryForeverAllowed": "ھەمىشە يول قويىدۇ",
+    "snapdRuleCategoryForeverDenied": "ھەمىشە رەت قىلىدۇ",
+    "snapPermissionReadLabel": "ئوقۇش",
+    "snapPermissionWriteLabel": "يېزىش",
+    "snapPermissionExecuteLabel": "ئىجرا قىلىش",
+    "snapPermissionAccessLabel": "زىيارەت",
+    "snapPermissionsEnableTitle": "ئەپ سىستېما ئىجازىتى ئىلتىماس قىلىشى زۆرۈر",
+    "snapPermissionsEnableWarning": "بۇ سىستېما مەنبەسىنى زىيارەت قىلىشنى تىزگىنلەيدىغان تەجرىبە خاراكتېرلىك ئىقتىدار.",
+    "snapPermissionsEnablingLabel": "قوزغىتىۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…",
+    "snapPermissionsDisablingLabel": "چەكلەۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…",
+    "snapPermissionsExperimentalLabel": "تەجرىبە",
+    "snapPermissionsOtherDescription": "باشقا ئىجازەتنى تەڭشەك › ئەپتە باشقۇرالايسىز.",
+    "snapPermissionsPageTitle": "ئەپ ئىجازىتى",
+    "snapRulesCount": "{n, plural, =0{قائىدە يوق} =1{1 rule} other{{n} قائىدە}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "{snap} نىڭ {interface} ئىجازىتىنى باشقۇرىدۇ.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "تېخى قائىدە يوق",
+    "cameraRulesPageEmptyTileLabel": "تېخى ھېچقانداق ئەپ زىيارەت ئىلتىماسى تەلەپ قىلمىدى",
+    "snapRulesRemoveAll": "ھەممە قائىدىنى چىقىرىۋەت",
+    "snapRulesResetAllPermissions": "ھەممە ئىجازەتنى ئەسلىگە قايتۇر",
+    "homeInterfacePageTitle": "باش مۇندەرىجە",
+    "homeInterfacePageDescription": "باش قىسقۇچىڭىزدىكى ھۆججەتنى زىيارەت قىلىش ئىجازىتىنى باشقۇرىدۇ.",
+    "cameraInterfacePageTitle": "كامېرا",
+    "cameraInterfacePageDescription": "ئەپنىڭ كامېرايىڭىزنى زىيارەت قىلىشىغا يول قويىدۇ.",
+    "interfacePageTitle": "ئىجازەت باشقۇرۇش",
+    "interfacePageDescription": "ئىجازىتى چەكلەنگەن ئەپ ھۆججەت ۋە قىسقۇچىڭىزنى زىيارەت قىلىشتىن ئىلگىرى سورايدۇ. بۇ ئىقتىدار تەجرىبە باسقۇچىدا بولۇپ، ئۆزگىرىشى مۇمكىن.",
+    "interfacePageLinkLearnMore": "مول بىلىم",
+    "interfacePageLinkGiveFeedback": "پىكىر بېرىڭ",
+    "interfacePageLinkReportIssues": "مەسىلە مەلۇم قىلىڭ",
+    "interfaceSnapCount": "{n, plural, =0{ئەپ يوق} =1{1 ئەپ} other {{n} ئەپ}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageTitle": "دىسكا شىفىرلاش",
+    "diskEncryptionPageRecoveryKey": "ئەسلىگە كەلتۈرۈش ئاچقۇچى",
+    "diskEncryptionPageStoreYourKey": "ئەگەر قوزغالغاندا دىسكىڭىزنىڭ قۇلۇپىنى ئاچالمىسا ئەسلىگە كەلتۈرۈش ئاچقۇچى سانلىق مەلۇماتلىرىڭىزنى زىيارەت قىلىشىڭىزغا يول قويىدۇ. ئۇنى بىخەتەر بىر جايغا ساقلاڭ.",
+    "diskEncryptionPageStoreYourKeyWithLink": "ئەگەر قوزغالغاندا دىسكىڭىزنىڭ قۇلۇپىنى ئاچالمىسا ئەسلىگە كەلتۈرۈش ئاچقۇچى سانلىق مەلۇماتلىرىڭىزنى زىيارەت قىلىشىڭىزغا يول قويىدۇ. ئۇنى بىخەتەر بىر جايغا ساقلاڭ. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "قاتتىق دېتال قوللايدىغان شىفىرلاش ھەققىدىكى تەپسىلات",
+    "diskEncryptionPageCheckKey": "ئەسلىگە كەلتۈرۈش ئاچقۇچىنى تەكشۈر…",
+    "diskEncryptionPageDialogHeaderCheckKey": "ئەسلىگە كەلتۈرۈش ئاچقۇچىنى تەكشۈر",
+    "diskEncryptionPageCheck": "تەكشۈر",
+    "diskEncryptionPageValidKey": "ئىناۋەتلىك ئاچقۇچ",
+    "diskEncryptionPageInvalidKey": "ئىناۋەتسىز ئاچقۇچ",
+    "diskEncryptionPageEnterKey": "ئەسلىگە كەلتۈرۈش ئاچقۇچىڭىزنى كىرگۈزۈڭ",
+    "diskEncryptionPageKeyWorks": "ئەسلىگە كەلتۈرۈش ئاچقۇچى ئىشلىدى",
+    "diskEncryptionPageKeyWorksBody": "ئۇنى بىرەر بىخەتەر جايدا ساقلاشنى ئۇنتۇماڭ.",
+    "diskEncryptionPageKeyDoesntWork": "ئەسلىگە كەلتۈرۈش ئاچقۇچى ئىشلىمىدى",
+    "diskEncryptionPageKeyDoesntWorkBody": "ئاچقۇچ تەكشۈرۈلىدۇ ياكى ئۇ يېڭىسىغا ئالماشتۇرۇلىدۇ.",
+    "diskEncryptionPageError": "خاتالىق",
+    "diskEncryptionPageReplaceButton": "ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ئالماشتۇر…",
+    "diskEncryptionPageReplaceDialogHeader": "ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ئالماشتۇر",
+    "diskEncryptionPageReplaceDialogBody": "يېڭى ئەسلىگە كەلتۈرۈش ئاچقۇچىنى بىرەر بىخەتەر جايغا ساقلاڭ. ئۇنى ئالماشتۇرسىڭىز، كونا ئاچقۇچنى ئەمدى ئىشلىتەلمەيسىز.",
+    "diskEncryptionPageReplaceDialogShowQR": "QR كودىنى كۆرسەت",
+    "diskEncryptionPageReplaceDialogSave": "ھۆججەتكە ساقلا",
+    "diskEncryptionPageReplaceDialogAcknowledge": "ئەسلىگە كەلتۈرۈش ئاچقۇچىنى بىخەتەر جايغا ساقلىدىم",
+    "diskEncryptionPageReplaceDialogReplace": "ئالماشتۇر",
+    "diskEncryptionPageReplaceDialogDiscard": "تاشلىۋەت",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "ئەسلىگە كەلتۈرۈش ئاچقۇچى ئالماشتۇرۇلدى",
+    "diskEncryptionPageReplaceDialogSuccessBody": "ئۇنى بىرەر بىخەتەر جايدا ساقلاشنى ئۇنتۇماڭ.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "ئەسلىگە كەلتۈرۈش ئاچقۇچى ئالماشتۇرالمىدى",
+    "diskEncryptionPageReplaceDialogErrorBody": "ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ئالماشتۇرۇۋاتقاندا خاتالىق كۆرۈلدى، كونا ئاچقۇچىڭىز ئىناۋەتلىك پېتى قالىدۇ.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu ئۈستەلئۈستى - شىفىرلانغان ئەسلىگە كەلتۈرۈش ئاچقۇچى",
+    "diskEncryptionPageReplaceDialogQRBody": "QR كودىنى تاراپ ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ئىم باشقۇرغۇچقا ئوخشاش بىرەر بىخەتەر جايدا ساقلاڭ. كېيىن ئىشلىتىش ئۈچۈن ئۇنى سۈرەتكە تارتسىڭىزمۇ بولىدۇ.",
+    "diskEncryptionPageClipboardNotification": "چاپلاش تاختىسىغا كۆچۈرۈلدى",
+    "diskEncryptionPageCopySemanticLabel": "كۆچۈر",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "شىفىرلاش تەڭشىكىنى ئىشلەتكىلى بولمايدۇ",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "بۇ كومپيۇتېرنىڭ شىفىرلاش ھالىتىگە ئېرىشەلمىدى.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "كومپيۇتېرىڭىزنىڭ TPM سەپلىمىسى قوللايدىغان ھالەتتە ئەمەس.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "سىزنىڭ snapd نەشرىڭىزنى قوللىمايدۇ",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "بىخەتەرلىك مەركىزىنى تەكشۈرۈپ ئاندىن snapd نىڭ ئەڭ يېڭى نەشرى ئىكەنلىكىنى جەزملەڭ.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "بىخەتەرلىك مەركىزى snapd ئارايۈزىگە باغلىنالمايدۇ",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "بۇنى ئوڭشاش ئۈچۈن، تۆۋەندىكى بۇيرۇق تېرمىنالدا ئىجرا قىلىنىدۇ:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snapd ئۈستەلئۈستى بىخەتەرلىك مەركىزىگە باغلاندى: snap-fde-control",
+    "diskEncryptionPageAddPinButton": "PIN قوش…",
+    "diskEncryptionPageAddPassphraseButton": "ئىم ئىبارە قوش…",
+    "diskEncryptionPageAddPassphraseDialogHeading": "ئىم ئىبارە قوش",
+    "diskEncryptionPageAddPinDialogHeading": "PIN قوش",
+    "diskEncryptionPageAddPinDialogBodyMain": "كومپيۇتېرىڭىز ھەر قېتىم قوزغالغاندا PIN كىرگۈزۈشىڭىز كېرەك. بۇ PIN ئىشلەتكۈچى ئىمدىن پەرقلىق.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "ئەگەر PIN نى ئۇنتۇپ قالسىڭىز، ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ئىشلىتىپ دىسكىنى زىيارەت قىلىش ئىجازىتىگە قايتا ئېرىشەلەيسىز.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "كومپيۇتېرىڭىز ھەر قېتىم قوزغالغاندا ئىم ئىبارە كىرگۈزۈشىڭىز كېرەك. بۇ ئىم ئىبارە ئىشلەتكۈچى ئىمدىن پەرقلىق.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "ئەگەر ئىم ئىبارىنى ئۇنتۇپ قالسىڭىز، ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ئىشلىتىپ دىسكىنى زىيارەت قىلىش ئىجازىتىگە قايتا ئېرىشەلەيسىز.",
+    "diskEncryptionPageAdditionalSecurityHeader": "قوشۇمچە بىخەتەرلىك",
+    "diskEncryptionPageAdditionalSecurityBody": "قوشۇمچە بىخەتەرلىك ئۈچۈن ئىم ئىبارە ياكى PIN تەڭشىيەلەيسىز. كومپيۇتېرىڭىز ھەر قېتىم قوزغالغاندا ئۇنى كىرگۈزۈشىڭىز كېرەك.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "مول بىلىم",
+    "diskEncryptionPageAddPinDialogSaveButton": "قوش",
+    "diskEncryptionPageRemovePinButton": "PIN نى چىقىرىۋەت…",
+    "diskEncryptionPageRemovePassphraseButton": "ئىم ئىبارىنى چىقىرىۋەت…",
+    "diskEncryptionPageAddingPin": "PIN قوشۇۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…",
+    "diskEncryptionPageAddingPassphrase": "ئىم ئىبارە قوشۇۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…",
+    "diskEncryptionPageRemovingPin": "PIN چىقىرىۋېتىۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…",
+    "diskEncryptionPageRemovingPassphrase": "ئىم ئىبارە چىقىرىۋېتىۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…",
+    "recoveryKeyExceptionFileSystemTitle": "ئەسلىگە كەلتۈرۈش ئاچقۇچى ساقلانمىدى",
+    "recoveryKeyExceptionDisallowedPathTitle": "ئەسلىگە كەلتۈرۈش ئاچقۇچ ھۆججىتىنى ۋاقىتلىق ئورۇنغا ساقلىيالمايدۇ",
+    "recoveryKeyExceptionUnknownTitle": "يوچۇن خاتالىق",
+    "recoveryKeyExceptionFilePermissionTitle": "ئەسلىگە كەلتۈرۈش ئاچقۇچىڭىزنى ھۆججەتكە ساقلىيالمىدى",
+    "recoveryKeyExceptionFilePermissionBody": "ئۇ ھۆججەت ئورنىغا يېزىش ئىجازىتىڭىز يوق.",
+    "recoveryKeyExceptionFileSystemBody": "ئۇ قىسقۇچ ئورنىغا يېزىش ئىجازىتىڭىز يوق. پەرقلىق ئورۇننى سىناڭ ياكى باشقا ئۇسۇلنى ئىشلىتىڭ.",
+    "recoveryKeyExceptionDisallowedPathBody": "كۆچمە دىسكىغا ئوخشاش پەرقلىق ئورۇننى سىناڭ ياكى باشقا ئۇسۇلنى ئىشلىتىڭ.",
+    "recoveryKeyFilePickerTitle": "ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ساقلايدۇ",
+    "recoveryKeyFilePickerFilter": "تېكىست ھۆججەت",
+    "recoveryKeyTPMEnabled": "قاتتىق دېتال قوللايدىغان شىفىرلاش قوزغىتىلدى",
+    "recoveryKeyTPMExplanationBody": "شىفىرلىق ئاچقۇچ كومپيۇتېرىڭىزنىڭ ئىشەنچلىك سۇپا مودېلى (TPM) غا ساقلاندى.",
+    "recoveryKeyTPMExplanationLearnMore": "قاتتىق دېتال قوللايدىغان شىفىرلاش ھەققىدىكى تەپسىلات",
+    "recoveryKeyPassphraseEnabled": "شىفىرلانغان ئىم ئىبارە قوزغىتىلدى",
+    "recoveryKeyPassphraseHeader": "ئىم ئىبارە ئۆزگەرت",
+    "recoveryKeyPassphraseBody": "كومپيۇتېرىڭىز ھەر قېتىم قوزغالغاندا ئىم ئىبارە كىرگۈزۈشىڭىز كېرەك.",
+    "recoveryKeyPassphraseButton": "ئىم ئىبارە ئۆزگەرت…",
+    "recoveryKeyPassphraseCurrent": "نۆۋەتتىكى ئىم ئىبارە",
+    "recoveryKeyPassphraseNew": "يېڭى ئىم ئىبارە",
+    "recoveryKeyPassphraseConfirm": "جەزملەش ئىم ئىبارە",
+    "recoveryKeyPassphraseCurrentError": "ئىم ئىبارە توغرا ئەمەس، قايتا سىناڭ",
+    "recoveryKeyPassphraseNewError": "ئەڭ ئاز دېگەندە 4 ھەرپ بولۇشى كېرەك",
+    "recoveryKeyPassphraseConfirmError": "ئىم ئىبارە ماس كەلمىدى. قايتا سىناڭ",
+    "recoveryKeyPassphraseDialogHeader": "ئىم ئىبارە ئۆزگەرت",
+    "recoveryKeyPinEnabled": "شىفىرلانغان PIN قوزغىتىلدى",
+    "recoveryKeyPinHeader": "شىفىرلانغان PIN",
+    "recoveryKeyEncrpytionPassphraseHeader": "شىفىرلانغان ئىم ئىبارە",
+    "recoveryKeyPinBody": "كومپيۇتېرىڭىز ھەر قېتىم قوزغالغاندا PIN كىرگۈزۈشىڭىز كېرەك.",
+    "recoveryKeyPinButton": "PIN ئۆزگەرت…",
+    "recoveryKeyPinCurrent": "نۆۋەتتىكى PIN",
+    "recoveryKeyPinNew": "يېڭى PIN",
+    "recoveryKeyPinConfirm": "جەزملەش PIN",
+    "recoveryKeyPinCurrentError": "PIN خاتا، قايتا سىناڭ",
+    "recoveryKeyPinConfirmError": "PIN ماس كەلمىدى. قايتا سىناڭ",
+    "recoveryKeyPinDialogHeader": "PIN ئۆزگەرت",
+    "recoveryKeyPassphraseShow": "كۆرسەت",
+    "recoveryKeyPassphraseHide": "يوشۇر",
+    "recoveryKeyPassphraseChange": "ئۆزگەرت",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN يېڭىلاندى",
+    "recoveryKeyPassphrasePinSuccessBody": "PIN مۇۋەپپەقىيەتلىك يېڭىلاندى.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "ئىم ئىبارە يېڭىلاندى",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "ئىم ئىبارە مۇۋەپپەقىيەتلىك يېڭىلاندى.",
+    "recoveryKeyPassphraseEntropyBelowMin": "ئاجىز ئىم ئىبارە، ئۇزۇنراق ياكى تېخىمۇ مۇرەككەپ قىلىڭ",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "ياخشى ئىم ئىبار، تېخىمۇ بىخەتەر بولۇشى ئۈچۈن ئۇزۇنراق ياكى تېخىمۇ مۇرەككەپ قىلىڭ",
+    "recoveryKeyPassphraseEntropyOptimal": "كۈچلۈك ئىم ئىبارە",
+    "recoveryKeyPinEntropyBelowMin": "ئاجىز PIN، ئۇزۇنراق ياكى مۆلچەرلەشنى تەسلەشتۈرۈڭ",
+    "recoveryKeyPinEntropyBelowOptimal": "ياخشى PIN، تېخىمۇ بىخەتەر بولۇشى ئۈچۈن ئۇزۇنراق ياكى مۆلچەرلەشنى تەسلەشتۈرۈڭ",
+    "recoveryKeyPinEntropyOptimal": "PIN يېتەرلىك ئۇزۇن",
+    "recoveryKeySomethingWentWrongHeader": "كاشىلا كۆرۈلدى",
+    "microphoneInterfacePageTitle": "مىكروفون",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "بۇ Ubuntu نەشرىدە Ubuntu Pro نى ئىشلەتكىلى بولمايدۇ",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro ئۈچۈن LTS نەشرى زۆرۈر",
+    "ubuntuProNotSupportedSnapd": "بۇ snapd نەشرى Ubuntu Pro نى قوللىمايدۇ",
+    "ubuntuProNotSupportedSnapdDetails": "Ubuntu Pro نى باشقۇرۇش ئۈچۈن snapd نەشرىنى يېڭىلايدۇ",
+    "ubuntuProEnabled": "Ubuntu Pro قوزغىتىلغان",
+    "microphoneInterfacePageDescription": "ئەپنىڭ مىكروفونىڭىزنى زىيارەت قىلىشىغا يول قويىدۇ.",
+    "ubuntuProDisabled": "كومپيۇتېردا كارخانا دەرىجىسىدىكى بىخەتەرلىك ۋە ماسلىشىشچانلىقنى ئىشلىتىش شەخسلەر ئۈچۈن ھەمىشە ھەقسىز. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Ubuntu Pro ھەققىدىكى مول بىلىم",
+    "ubuntuProEnablePro": "Ubuntu Pro نى قوزغات",
+    "ubuntuProEnableMagic": "Ubuntu One ھېسابتا قوزغات",
+    "ubuntuProEnableMagicSubtitle": "ھېسابنى ھەقسىز قۇرالايسىز",
+    "ubuntuProMagicPrompt": "Ubuntu One ھېسابتا تىزىمغا كىرىڭ ياكى بىر ھەقسىز قۇرۇڭ.",
+    "ubuntuProMagicContinueInBrowser": "تور كۆرگۈدە داۋاملاشتۇر",
+    "ubuntuProMagicDescription": "سىز {attachLink} تىزىمغا كىرىپ ۋە {attachCode} نى كىرگۈزەلەيسىز",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Ubuntu Pro نى قوزغىتالمايدۇ، قايتا سىناڭ",
+    "ubuntuProEnableToken": "پەرمان تاختىدا قوزغىتىدۇ",
+    "ubuntuProEnableTokenError": "Ubuntu Pro نى قوزغىتالمايدۇ",
+    "ubuntuProEnableTokenSubtitle": "ئۇچۇر تېخنىكا باشقۇرغۇچى ياكى {proLink} دىن",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Ubuntu Pro پەرمان تاختىسىنى باشقۇرغۇچىڭىز ياكى {proLink} دىن ئېرىشىڭ",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "پەرمان تاختا",
+    "ubuntuProDisablePro": "Ubuntu Pro چەكلە",
+    "ubuntuProDisable": "چەكلە",
+    "ubuntuProDisablePrompt": "Ubuntu Pro نى چەكلىسىڭىز بۇ كومپيۇتېردىكى مۇشتەرىلىكىڭىز توختايدۇ. داۋاملاشتۇرامسىز؟",
+    "ubuntuProEnable": "قوزغات",
+    "ubuntuProCancel": "ۋاز كەچ",
+    "ubuntuProFeatureEnableError": "بۇ ئىقتىدارنى قوزغىتالمايدۇ، قايتا سىناڭ.",
+    "ubuntuProFeatureDisableError": "بۇ ئىقتىدارنى چەكلىيەلمەيدۇ، قايتا سىناڭ.",
+    "ubuntuProCompliance": "ماسلاشتۇرۇش ۋە كۈچەيتىش",
+    "ubuntuProComplianceDisclaimer": "پەقەت FedRAMP، HIPAA ۋە باشقا ماسلىشىش ۋە كۈچەيتىش تەلەپلىرى ئارقىلىق ياردەم بېرىش تەۋسىيە قىلىنىدۇ.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu بىخەتەرلىك قوللانمىسى (USG)"
+}

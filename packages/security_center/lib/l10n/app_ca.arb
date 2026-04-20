@@ -1,1 +1,148 @@
-{}
+{
+    "appTitle": "Centre de seguretat",
+    "snapdRuleCategorySessionAllowed": "Permet fins que es tanqui la sessió",
+    "snapdRuleCategorySessionDenied": "Denega fins que es tanqui la sessió",
+    "snapdRuleCategoryForeverAllowed": "Permet sempre",
+    "snapdRuleCategoryForeverDenied": "Rebutja sempre",
+    "snapPermissionWriteLabel": "Escriptura",
+    "snapPermissionReadLabel": "Lectura",
+    "snapPermissionExecuteLabel": "Execució",
+    "snapPermissionsEnableWarning": "Aquesta és una funció experimental per controlar l'accés als recursos del vostre sistema.",
+    "snapPermissionsEnablingLabel": "S'està habilitant, pot trigar uns segons...",
+    "snapPermissionsDisablingLabel": "S'està desactivant, pot trigar uns segons...",
+    "snapPermissionsExperimentalLabel": "Experimental",
+    "snapPermissionsOtherDescription": "Podeu administrar altres permisos a Configuració › Aplicacions.",
+    "snapPermissionsPageTitle": "Permisos de l'aplicació",
+    "snapRulesCount": "{n, plural, =0{sense regles} =1{1 regla} other{{n} regles}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "Administrar els permisos de {interface} per a {snap} .",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesRemoveAll": "Elimina totes les regles",
+    "homeInterfacePageTitle": "Carpeta d'usuari",
+    "homeInterfacePageDescription": "Administra els permisos per accedir als fitxers a la carpeta d'usuari.",
+    "interfacePageTitle": "Administra els permisos",
+    "interfacePageDescription": "Les aplicacions confinades estrictament us demanaran abans d'accedir a fitxers i carpetes. Aquesta característica és experimental i està subjecta a canvis.",
+    "interfacePageLinkLearnMore": "Apreneu més",
+    "interfacePageLinkGiveFeedback": "Doneu retroacció",
+    "interfacePageLinkReportIssues": "Informeu els problemes",
+    "interfaceSnapCount": "{n, plural, =0{sense aplicacions} =1{1 aplicació} other {{n} aplicacions}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsEnableTitle": "Exigeix a les aplicacions que demanin permisos al sistema",
+    "snapRulesPageEmptyTileLabel": "Encara no hi ha regles",
+    "diskEncryptionPageTitle": "Encriptació de disc",
+    "diskEncryptionPageRecoveryKey": "Clau de recuperació",
+    "diskEncryptionPageStoreYourKey": "La clau de recuperació et permet recuperar l'accés a les teves dades si el teu disc no es desbloqueja durant l'arrencada. Deseu-lo en un lloc segur.",
+    "diskEncryptionPageStoreYourKeyWithLink": "La clau de recuperació et permet recuperar l'accés a les teves dades si el teu disc no es desbloqueja durant l'arrencada. Deseu-lo en un lloc segur. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "Més informació sobre les claus de recuperació",
+    "diskEncryptionPageCheckKey": "Comproveu la clau de recuperació ...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Comproveu la recuperació Clau",
+    "diskEncryptionPageCheck": "Comproveu",
+    "diskEncryptionPageValidKey": "Clau vàlida",
+    "diskEncryptionPageInvalidKey": "Clau invàlida",
+    "diskEncryptionPageEnterKey": "Introduïu la clau de recuperació",
+    "diskEncryptionPageKeyWorks": "La clau de recuperació funciona",
+    "diskEncryptionPageKeyWorksBody": "Recordeu mantenir-la en algun lloc segur.",
+    "diskEncryptionPageKeyDoesntWork": "La clau de recuperació no funciona",
+    "diskEncryptionPageKeyDoesntWorkBody": "Comprova la clau o substitueix-la per una nova.",
+    "diskEncryptionPageError": "Error",
+    "diskEncryptionPageReplaceButton": "Canvia la clau de recuperació ...",
+    "diskEncryptionPageReplaceDialogHeader": "Canvia la clau de recuperació",
+    "diskEncryptionPageReplaceDialogBody": "Deseu la nova clau de recuperació en algun lloc segur. Un cop la substituïu, no podreu pas més utilitzar la clau vella.",
+    "diskEncryptionPageReplaceDialogShowQR": "Mostra el codi QR",
+    "diskEncryptionPageReplaceDialogSave": "Desa a un fitxer",
+    "diskEncryptionPageReplaceDialogAcknowledge": "He desat la meva clau de recuperació en algun lloc segur",
+    "diskEncryptionPageReplaceDialogReplace": "Canvia",
+    "diskEncryptionPageReplaceDialogDiscard": "Esborra",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "S'ha canviat la clau de recuperació",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Recurdeu mantenir-la en algun lloc segur.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Ha fallat el canvi de clau de recuperació",
+    "diskEncryptionPageReplaceDialogErrorBody": "Ha fallat alguna cosa quan es canviava la clau de recuperació, la vostra antiga clau de recuperació es mantindrà vàlida.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Escriptori de l'Ubuntu - Clau de recuperació de l'encriptació",
+    "diskEncryptionPageReplaceDialogQRBody": "Escanegeu el codi QR per copiar la clau de recuperació i desar-la en algun lloc segur, com ara un gestor de contrasenyes. També podeu fer una foto per a un ús futur.",
+    "diskEncryptionPageClipboardNotification": "Copiat al portaretalls",
+    "diskEncryptionPageCopySemanticLabel": "Copia",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "La configuració de l'Encriptació no està disponible",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Ha fallat la recuperació de l'estat d'encriptació d'aquest ordinador.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "La configuració TPM del vostre ordinador no està en un estat suportat.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "La versió de snapd no té suport",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Comproveu que el Centre de Seguretat i snapd estan actualitzats.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "El Centre de Seguretat no pot connectar-se a la interfície snpad",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Per solucionar això, executeu aquesta ordre al terminal:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "recoveryKeyExceptionFileSystemTitle": "No s'ha desat la clau de recuperació",
+    "recoveryKeyExceptionDisallowedPathTitle": "El fitxer clau de recuperació no es pot desar en una ubicació temporal",
+    "recoveryKeyExceptionUnknownTitle": "Error desconegut",
+    "recoveryKeyExceptionFilePermissionTitle": "Ha fallat quan es desava la clau de recuperació a un fitxer",
+    "recoveryKeyExceptionFilePermissionBody": "No teniu permís per escriure a aquesta ubicació del fitxer.",
+    "recoveryKeyExceptionFileSystemBody": "No teniu permís per escriure a aquesta carpeta. Proveu un lloc diferent o un altre mètode.",
+    "recoveryKeyExceptionDisallowedPathBody": "Proveu una ubicació diferent, com ara una unitat extraïble o utilitzeu un altre mètode.",
+    "recoveryKeyFilePickerTitle": "Desa el fitxer de clau de recuperació",
+    "recoveryKeyFilePickerFilter": "Fitxers de text",
+    "recoveryKeyTPMEnabled": "Està habilitada l'encriptació amb suport de maquinari",
+    "recoveryKeyTPMExplanationBody": "Les claus d'encriptació s'emmagatzemen al mòdul de plataforma de confiança (TMP) de l'ordinador.",
+    "recoveryKeyTPMExplanationLearnMore": "Més informació sobre l'encriptació amb suport de maquinari",
+    "recoveryKeyPassphraseEnabled": "La contrasenya de l'Encriptació està activada",
+    "recoveryKeyPassphraseHeader": "Canvia la contrasenya",
+    "recoveryKeyPassphraseBody": "Heu d'introduir la contrasenya duran l'arrencada per desbloquejar el disc. Podeu canviar la contrasenya però no desactivar-la.",
+    "recoveryKeyPassphraseButton": "Canvia la contrasenya...",
+    "recoveryKeyPassphraseCurrent": "Contrasenya actual",
+    "recoveryKeyPassphraseNew": "Contrasenya nova",
+    "recoveryKeyPassphraseConfirm": "Confirmeu la contrasenya",
+    "recoveryKeyPassphraseCurrentError": "Contrasenya incorrecta, torneu a provar",
+    "recoveryKeyPassphraseNewError": "Ha de ser com a mínim de 4 caràcters",
+    "recoveryKeyPassphraseConfirmError": "Les contrasenyes no concorden, torneu a provar",
+    "recoveryKeyPassphraseDialogHeader": "Canvia la contrasenya",
+    "recoveryKeyPinEnabled": "S'ha activat el PIN de l'Encriptació",
+    "recoveryKeyPinHeader": "PIN de l'encriptació",
+    "recoveryKeyEncrpytionPassphraseHeader": "Contrasenya de l'Encriptació",
+    "recoveryKeyPinBody": "Heu d'introduir el PIN durant l'arrencada per desbloquejar el disc. Podeu canviar el PIN però no desactivar-lo.",
+    "recoveryKeyPinButton": "Canvia el PIN...",
+    "recoveryKeyPinCurrent": "PIN actual",
+    "recoveryKeyPinNew": "PIN nou",
+    "recoveryKeyPinConfirm": "Confirmeu el PIN",
+    "recoveryKeyPinCurrentError": "PIN incorrecte, torneu a provar",
+    "recoveryKeyPinConfirmError": "Els PIN no concorden, torneu a provar",
+    "recoveryKeyPinDialogHeader": "Canvia el PIN",
+    "recoveryKeyPassphraseShow": "Mostra",
+    "recoveryKeyPassphraseHide": "Oculta",
+    "recoveryKeyPassphraseChange": "Canvia",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN actualitzat",
+    "recoveryKeyPassphrasePinSuccessBody": "El vostre PIN s'ha actualitzat correctament.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Contrasenya actualitzada",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "La contrasenya s'ha actualitzat correctament.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Contrasenya feble, feu-la més llarga o més complexa",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Contrasenya suficient, feu-la més llarga o més complexa per a una millor seguretat",
+    "recoveryKeyPassphraseEntropyOptimal": "Contrasenya forta",
+    "recoveryKeyPinEntropyBelowMin": "PIN feble, feu-lo més llarg o menys predictible",
+    "recoveryKeyPinEntropyBelowOptimal": "PIN suficient, feu-lo més fort o menys predictible per a una millor seguretat",
+    "recoveryKeyPinEntropyOptimal": "El PIN és suficientment llarg",
+    "recoveryKeySomethingWentWrongHeader": "Alguna cosa ha fallat"
+}

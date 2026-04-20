@@ -1,4 +1,148 @@
 {
-  "appTitle": "Central de segurança",
-  "@appTitle": {}
+    "appTitle": "Centro de Segurança",
+    "snapdRuleCategorySessionAllowed": "Permitir até terminar a sessão",
+    "snapdRuleCategorySessionDenied": "Negar até terminar a sessão",
+    "snapdRuleCategoryForeverAllowed": "Permitir sempre",
+    "snapdRuleCategoryForeverDenied": "Negar sempre",
+    "snapPermissionReadLabel": "Ler",
+    "snapPermissionWriteLabel": "Gravar",
+    "snapPermissionExecuteLabel": "Executar",
+    "snapPermissionsEnableTitle": "Requer aplicações para solicitar por permissões do sistema",
+    "snapPermissionsEnableWarning": "É uma funcionalidade experimental para controlar o acesso aos recursos do seu sistema.",
+    "snapPermissionsEnablingLabel": "A ativar, pode demorar uns segundos...",
+    "snapPermissionsDisablingLabel": "A desativar, pode demorar uns segundos...",
+    "snapPermissionsExperimentalLabel": "Experimental",
+    "snapPermissionsOtherDescription": "Pode gerir outras permissões em Definições > Aplicações.",
+    "snapPermissionsPageTitle": "Permissões de Aplicação",
+    "snapRulesCount": "{n, plural, =0{no rules} =1{1 regra} other{{n} regras}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "Gerir permissões de {interface} para {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Ainda sem regras",
+    "snapRulesRemoveAll": "Remover todas as regras",
+    "homeInterfacePageTitle": "Pasta de Início",
+    "homeInterfacePageDescription": "Gerir permissões para aceder aos ficheiros na sua pasta de Início.",
+    "interfacePageTitle": "Gerir permissões",
+    "interfacePageLinkLearnMore": "Saber mais",
+    "interfacePageLinkGiveFeedback": "Dar opinião",
+    "interfacePageLinkReportIssues": "Reportar problemas",
+    "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 aplicação} other {{n} aplicações}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageTitle": "Encriptação de Disco",
+    "diskEncryptionPageRecoveryKey": "Código de recuperação",
+    "diskEncryptionPageLearnMore": "Saiba mais sobre criptografia com suporte de hardware",
+    "diskEncryptionPageCheckKey": "Verificar código de recuperação...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Verificar Código de Recuperação",
+    "diskEncryptionPageCheck": "Verificar",
+    "diskEncryptionPageValidKey": "Código válido",
+    "diskEncryptionPageInvalidKey": "Código inválido",
+    "diskEncryptionPageEnterKey": "Insira o seu código de recuperação",
+    "diskEncryptionPageKeyWorks": "Código de recuperação funciona",
+    "diskEncryptionPageKeyWorksBody": "Lembre-se de o manter num local seguro.",
+    "diskEncryptionPageKeyDoesntWork": "Código de recuperação não funciona",
+    "diskEncryptionPageKeyDoesntWorkBody": "Verifique o código ou substitua-o por um novo.",
+    "diskEncryptionPageError": "Erro",
+    "diskEncryptionPageReplaceButton": "Substituir o código de recuperação...",
+    "diskEncryptionPageReplaceDialogHeader": "Substituir código de recuperação",
+    "diskEncryptionPageReplaceDialogShowQR": "Mostrar código QR",
+    "diskEncryptionPageReplaceDialogSave": "Guardar em ficheiro",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Eu guardei o meu código de recuperação num local seguro",
+    "diskEncryptionPageReplaceDialogReplace": "Substituir",
+    "diskEncryptionPageReplaceDialogDiscard": "Rejeitar",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Código de recuperação substituído",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Lembre-se de o manter num local seguro.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Substituição do código de recuperação falhou",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Encriptação do código de recuperação",
+    "diskEncryptionPageClipboardNotification": "Copiado para a área de transferência",
+    "diskEncryptionPageCopySemanticLabel": "Copiar",
+    "recoveryKeyExceptionFileSystemTitle": "Ficheiro do código de recuperação não guardado",
+    "recoveryKeyExceptionDisallowedPathTitle": "O ficheiro do código de recuperação não pode ser guardado numa localização temporária",
+    "recoveryKeyExceptionUnknownTitle": "Erro desconhecido",
+    "recoveryKeyFilePickerTitle": "Guardar ficheiro do código de recuperação",
+    "recoveryKeyFilePickerFilter": "Ficheiros de texto",
+    "recoveryKeyTPMEnabled": "A encriptação suportada por hardware está ativada",
+    "recoveryKeyPassphraseEnabled": "A frase passe de encriptação está ativada",
+    "recoveryKeyPassphraseHeader": "Alterar frase passe",
+    "recoveryKeyPassphraseButton": "Alterar frase passe...",
+    "recoveryKeyPassphraseCurrent": "Frase passe atual",
+    "recoveryKeyPassphraseNew": "Nova frase passe",
+    "recoveryKeyPassphraseConfirm": "Confirmar frase passe",
+    "recoveryKeyPassphraseCurrentError": "Frase passe incorreta, tente novamente",
+    "recoveryKeyPassphraseNewError": "Deve ter pelo menos 4 carateres",
+    "recoveryKeyPassphraseConfirmError": "As frases passe não coincidem, tente novamente",
+    "recoveryKeyPassphraseDialogHeader": "Alterar Frase Passe",
+    "recoveryKeyPinEnabled": "O CÓDIGO de encripção está ativado",
+    "recoveryKeyPinHeader": "CÓDIGO de Encriptação",
+    "recoveryKeyPinButton": "Alterar CÓDIGO...",
+    "recoveryKeyPinCurrent": "CÓDIGO Atual",
+    "recoveryKeyPinNew": "Novo CÓDIGO",
+    "recoveryKeyPinConfirm": "Confirmar CÓDIGO",
+    "recoveryKeyPinCurrentError": "CÓDIGO incorreto, tente novamente",
+    "recoveryKeyPinConfirmError": "Os CÓDIGOS não coincidem, tente novamente",
+    "recoveryKeyPinDialogHeader": "Alterar CÓDIGO",
+    "recoveryKeyPassphraseShow": "Mostrar",
+    "recoveryKeyPassphraseHide": "Ocultar",
+    "recoveryKeyPassphraseChange": "Alterar",
+    "recoveryKeyPassphrasePinSuccessHeader": "CÓDIGO atualizado",
+    "recoveryKeyPassphrasePinSuccessBody": "O seu CÓDIGO foi atualizado com sucesso.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Frase passe atualizada",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "A sua frase passe foi atualizada com sucesso.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Frase passe fraca, torne-a mais longa ou mais complexa",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Frase passe razoável, torne-a mais longa ou mais complexa para melhor segurança",
+    "recoveryKeyPassphraseEntropyOptimal": "Frase passe forte",
+    "recoveryKeyPinEntropyBelowMin": "CÓDIGO fraco, torne-o mais longo ou menos previsível",
+    "recoveryKeyPinEntropyBelowOptimal": "CÓDIGO razoável, torne-o mais longo ou menos previsível para melhor segurança",
+    "recoveryKeyPinEntropyOptimal": "CÓDIGO é longo o suficiente",
+    "recoveryKeySomethingWentWrongHeader": "Ocorreu algo de errado",
+    "interfacePageDescription": "Aplicações estritamente confinadas irão perguntar-lhe antes de aceder aos ficheiros e pastas. Esta funcionalidade é experimental e está sujeita a alterações.",
+    "diskEncryptionPageStoreYourKey": "O código de recuperação permite-lhe recuperar o acesso aos seus dados se o disco falhar para desbloquear durante o arranque. Guarde-o num local seguro.",
+    "diskEncryptionPageReplaceDialogBody": "Guarde o código de recuperação num local seguro. Depois de substituí-lo, não poderá utilizar mais o código antigo.",
+    "diskEncryptionPageReplaceDialogErrorBody": "Ocorreu algo de errado ao substituir o seu código de recuperação, o seu código antigo permanecerá válido.",
+    "diskEncryptionPageReplaceDialogQRBody": "Digitalize o código QR para copiar o código de recuperação e guardá-lo num local seguro, tal como um gestor de palavras-passe. Também pode fotografá-lo para utilizar mais tarde.",
+    "recoveryKeyExceptionFileSystemBody": "Não tem permissão para gravar nessa pasta. Tente uma localização diferente ou utilize outro método.",
+    "recoveryKeyExceptionDisallowedPathBody": "Tente uma localização diferente, tal como uma unidade removível, ou utilize outro método.",
+    "recoveryKeyPassphraseBody": "Tem de inserir a sua frase passe durante o arranque para desbloquear o disco. Pode-a alterar, mas não desativá-la.",
+    "recoveryKeyPinBody": "Tem de inserir o seu CÓDIGO durante o arranque para desbloquear o disco. Pode alterá-lo, mas não desativá-lo.",
+    "snapPermissionAccessLabel": "Acesso",
+    "cameraRulesPageEmptyTileLabel": "Nenhum aplicativo solicitou acesso ainda",
+    "snapRulesResetAllPermissions": "Redefinir todas as permissões",
+    "cameraInterfacePageTitle": "Câmera",
+    "cameraInterfacePageDescription": "Permita que os aplicativos acessem suas câmeras.",
+    "diskEncryptionPageStoreYourKeyWithLink": "A chave de recuperação permite que você recupere o acesso aos seus dados caso o disco não desbloqueie durante a inicialização. Guarde-a em um local seguro. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Configurações de criptografia não disponíveis",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Não foi possível recuperar o estado de criptografia deste computador.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "A configuração do TPM do seu computador não está em um estado compatível.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Sua versão do snapd não é compatível",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Verifique se o Centro de Segurança e o snapd estão atualizados.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "O Centro de Segurança não consegue se conectar à interface snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Para corrigir isso, execute o seguinte comando no terminal:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control"
 }

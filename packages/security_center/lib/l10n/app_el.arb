@@ -1,1 +1,269 @@
-{}
+{
+    "appTitle": "Κέντρο Ασφαλείας",
+    "snapPermissionReadLabel": "Ανάγνωση",
+    "snapPermissionWriteLabel": "Εγγραφή",
+    "snapPermissionExecuteLabel": "Εκτέλεση",
+    "snapPermissionsDisablingLabel": "Απενεργοποίηση, αυτό μπορεί να διαρκέσει λίγα δευτερόλεπτα...",
+    "snapPermissionsExperimentalLabel": "Πειραματικά",
+    "snapPermissionsOtherDescription": "Μπορείτε να διαχειριστείτε άλλες άδειες στις Ρυθμίσεις › Εφαρμογές.",
+    "snapPermissionsPageTitle": "Άδειες Εφαρμογής",
+    "snapRulesPageDescription": "Διαχείριση αδειών του {interface} για το πακέτο {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Κανένας κανόνας ακόμα",
+    "snapRulesRemoveAll": "Αφαίρεση όλων των κανόνων",
+    "homeInterfacePageTitle": "Προσωπικός φάκελος",
+    "homeInterfacePageDescription": "Διαχείριση αδειών για πρόσβαση σε αρχεία στον Προσωπικό σας φάκελο.",
+    "interfacePageTitle": "Διαχείριση αδειών",
+    "snapPermissionsEnablingLabel": "Ενεργοποίηση, αυτό μπορεί να διαρκέσει λίγα δευτερόλεπτα...",
+    "snapdRuleCategorySessionAllowed": "Να επιτρέπεται μέχρι να αποσυνδεθείτε",
+    "snapdRuleCategorySessionDenied": "Να απορρίπτεται μέχρι να αποσυνδεθείτε",
+    "snapdRuleCategoryForeverDenied": "Να απορρίπτεται πάντα",
+    "snapPermissionsEnableWarning": "Αυτή είναι μια πειραματική λειτουργία για τον έλεγχο της πρόσβασης στους πόρους του συστήματός σας.",
+    "interfacePageLinkLearnMore": "Μάθετε περισσότερα",
+    "interfacePageLinkReportIssues": "Αναφορά προβλήματος",
+    "snapdRuleCategoryForeverAllowed": "Να επιτρέπεται πάντα",
+    "recoveryKeyExceptionFileSystemTitle": "Το αρχείο κλειδιού ανάκτησης δεν αποθηκεύτηκε",
+    "recoveryKeyExceptionDisallowedPathTitle": "Το αρχείο κλειδιού ανάκτησης δεν μπορεί να αποθηκευτεί σε προσωρινή τοποθεσία",
+    "recoveryKeyExceptionUnknownTitle": "Άγνωστο σφάλμα",
+    "recoveryKeyExceptionFileSystemBody": "Δεν έχετε δικαίωμα εγγραφής σε αυτόν τον φάκελο. Δοκιμάστε μια διαφορετική τοποθεσία ή χρησιμοποιήστε μια άλλη μέθοδο.",
+    "recoveryKeyExceptionDisallowedPathBody": "Δοκιμάστε μια διαφορετική τοποθεσία, όπως μια αφαιρούμενη μονάδα δίσκου, ή χρησιμοποιήστε μια άλλη μέθοδο.",
+    "recoveryKeyFilePickerTitle": "Αποθήκευση αρχείου κλειδιού ανάκτησης",
+    "recoveryKeyFilePickerFilter": "Αρχεία κειμένου",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "snapPermissionAccessLabel": "Πρόσβαση",
+    "snapPermissionsEnableTitle": "Να απαιτείται από τις εφαρμογές να ζητούν άδειες συστήματος",
+    "snapRulesCount": "{n, plural, =0{κανένας κανόνας} =1{1 κανόνας} other{{n} κανόνες}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "cameraRulesPageEmptyTileLabel": "Καμία εφαρμογή δεν έχει ζητήσει πρόσβαση ακόμα",
+    "snapRulesResetAllPermissions": "Επαναφορά όλων των αδειών",
+    "cameraInterfacePageTitle": "Κάμερα",
+    "cameraInterfacePageDescription": "Να επιτρέπεται στις εφαρμογές να έχουν πρόσβαση στις κάμερές σας.",
+    "microphoneInterfacePageTitle": "Μικρόφωνο",
+    "microphoneInterfacePageDescription": "Να επιτρέπεται στις εφαρμογές να έχουν πρόσβαση στο μικρόφωνό σας.",
+    "interfacePageDescription": "Οι εφαρμογές με αυστηρό περιορισμό θα σας ζητούν άδεια πριν αποκτήσουν πρόσβαση σε αρχεία και φακέλους. Αυτή η λειτουργία είναι πειραματική και υπόκειται σε αλλαγές.",
+    "interfacePageLinkGiveFeedback": "Υποβολή σχολίων",
+    "interfaceSnapCount": "{n, plural, =0{καμία εφαρμογή} =1{1 εφαρμογή} other{{n} εφαρμογές}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageTitle": "Κρυπτογράφηση δίσκου",
+    "diskEncryptionPageRecoveryKey": "Κλειδί ανάκτησης",
+    "diskEncryptionPageStoreYourKey": "Το κλειδί ανάκτησης σάς επιτρέπει να ανακτήσετε την πρόσβαση στα δεδομένα σας εάν το ξεκλείδωμα του δίσκου αποτύχει κατά την εκκίνηση. Αποθηκεύστε το σε ασφαλές μέρος.",
+    "diskEncryptionPageStoreYourKeyWithLink": "Το κλειδί ανάκτησης σάς επιτρέπει να ανακτήσετε την πρόσβαση στα δεδομένα σας εάν το ξεκλείδωμα του δίσκου αποτύχει κατά την εκκίνηση. Αποθηκεύστε το σε ασφαλές μέρος. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "Μάθετε περισσότερα για την κρυπτογράφηση με υποστήριξη υλικού",
+    "diskEncryptionPageCheckKey": "Έλεγχος κλειδιού ανάκτησης...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Έλεγχος κλειδιού ανάκτησης",
+    "diskEncryptionPageCheck": "Έλεγχος",
+    "diskEncryptionPageValidKey": "Έγκυρο κλειδί",
+    "diskEncryptionPageInvalidKey": "Μη έγκυρο κλειδί",
+    "diskEncryptionPageEnterKey": "Εισαγάγετε το κλειδί ανάκτησης",
+    "diskEncryptionPageKeyWorks": "Το κλειδί ανάκτησης είναι έγκυρο",
+    "diskEncryptionPageKeyWorksBody": "Θυμηθείτε να το φυλάξετε σε ασφαλές μέρος.",
+    "diskEncryptionPageKeyDoesntWork": "Το κλειδί ανάκτησης δεν είναι έγκυρο",
+    "diskEncryptionPageKeyDoesntWorkBody": "Ελέγξτε το κλειδί ή αντικαταστήστε το με ένα νέο.",
+    "diskEncryptionPageError": "Σφάλμα",
+    "diskEncryptionPageReplaceButton": "Αντικατάσταση κλειδιού ανάκτησης...",
+    "diskEncryptionPageReplaceDialogHeader": "Αντικατάσταση κλειδιού ανάκτησης",
+    "diskEncryptionPageReplaceDialogBody": "Αποθηκεύστε το νέο κλειδί ανάκτησης σε ασφαλές μέρος. Μόλις το αντικαταστήσετε, δεν θα μπορείτε πλέον να χρησιμοποιήσετε το παλιό κλειδί.",
+    "diskEncryptionPageReplaceDialogShowQR": "Εμφάνιση κώδικα QR",
+    "diskEncryptionPageReplaceDialogSave": "Αποθήκευση σε αρχείο",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Αποθήκευσα το κλειδί ανάκτησης σε ασφαλές μέρος",
+    "diskEncryptionPageReplaceDialogReplace": "Αντικατάσταση",
+    "diskEncryptionPageReplaceDialogDiscard": "Απόρριψη",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Το κλειδί ανάκτησης αντικαταστάθηκε",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Θυμηθείτε να το φυλάξετε σε ασφαλές μέρος.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Απέτυχε η αντικατάσταση του κλειδιού ανάκτησης",
+    "diskEncryptionPageReplaceDialogErrorBody": "Παρουσιάστηκε ένα σφάλμα κατά την αντικατάσταση του κλειδιού ανάκτησης· το παλιό σας κλειδί παραμένει σε ισχύ.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Κλειδί ανάκτησης κρυπτογράφησης",
+    "diskEncryptionPageReplaceDialogQRBody": "Σαρώστε τον κώδικα QR για να αντιγράψετε το κλειδί ανάκτησης και αποθηκεύστε το σε ένα ασφαλές μέρος, όπως ένας διαχειριστής κωδικών πρόσβασης. Μπορείτε επίσης να το βγάλετε φωτογραφία για μελλοντική χρήση.",
+    "diskEncryptionPageClipboardNotification": "Αντιγράφηκε στο πρόχειρο",
+    "diskEncryptionPageCopySemanticLabel": "Αντιγραφή",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Οι ρυθμίσεις κρυπτογράφησης δεν είναι διαθέσιμες",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Αποτυχία ανάκτησης της κατάστασης κρυπτογράφησης αυτού του υπολογιστή.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "Η διαμόρφωση του TPM του υπολογιστή σας δεν βρίσκεται σε υποστηριζόμενη κατάσταση.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Η έκδοση του snapd που διαθέτετε δεν υποστηρίζεται",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Βεβαιωθείτε ότι το Κέντρο Ασφαλείας και το snapd είναι ενημερωμένα.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Το Κέντρο Ασφαλείας δεν μπορεί να συνδεθεί στη διεπαφή του snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Για να το διορθώσετε αυτό, εκτελέστε την εξής εντολή στο τερματικό:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "diskEncryptionPageAddPinButton": "Προσθήκη PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Προσθήκη συνθηματικής φράσης...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Προσθήκη συνθηματικής φράσης",
+    "diskEncryptionPageAddPinDialogHeading": "Προσθήκη PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "Θα χρειαστεί να εισάγετε το PIN σας κάθε φορά που εκκινείται ο υπολογιστής σας. Αυτό το PIN είναι διαφορετικό από τον κωδικό πρόσβασης του χρήστη σας.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Αν ξεχάσετε το PIN σας, μπορείτε να αποκτήσετε ξανά πρόσβαση στον δίσκο χρησιμοποιώντας το κλειδί ανάκτησης.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Θα χρειαστεί να εισάγετε τη συνθηματική σας φράση κάθε φορά που εκκινείται ο υπολογιστής σας. Αυτή η συνθηματική φράση είναι διαφορετικό από τον κωδικό πρόσβασης του χρήστη σας.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Αν ξεχάσετε τη συνθηματική φράση σας, μπορείτε να αποκτήσετε ξανά πρόσβαση στον δίσκο χρησιμοποιώντας το κλειδί ανάκτησης.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Πρόσθετη ασφάλεια",
+    "diskEncryptionPageAdditionalSecurityBody": "Μπορείτε να ορίσετε μια συνθηματική φράση ή ένα PIN για πρόσθετη ασφάλεια. Θα χρειαστεί να το εισάγετε κάθε φορά που εκκινείται ο υπολογιστής σας.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Μάθετε περισσότερα",
+    "diskEncryptionPageAddPinDialogSaveButton": "Προσθήκη",
+    "diskEncryptionPageRemovePinButton": "Αφαίρεση PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Αφαίρεση συνθηματικής φράσης...",
+    "diskEncryptionPageAddingPin": "Γίνεται προσθήκη PIN, αυτό μπορεί να διαρκέσει μερικά δευτερόλεπτα...",
+    "diskEncryptionPageAddingPassphrase": "Γίνεται προσθήκη συνθηματικής φράσης, αυτό μπορεί να διαρκέσει μερικά δευτερόλεπτα...",
+    "diskEncryptionPageRemovingPin": "Γίνεται αφαίρεση του PIN, αυτό μπορεί να διαρκέσει μερικά δευτερόλεπτα...",
+    "diskEncryptionPageRemovingPassphrase": "Γίνεται αφαίρεση της συνθηματικής φράσης, αυτό μπορεί να διαρκέσει μερικά δευτερόλεπτα...",
+    "recoveryKeyExceptionFilePermissionTitle": "Αποτυχία αποθήκευσης του κλειδιού ανάκτησης σε αρχείο",
+    "recoveryKeyExceptionFilePermissionBody": "Δεν έχετε δικαίωμα εγγραφής σε αυτή τη θέση αρχείου.",
+    "recoveryKeyTPMEnabled": "Η κρυπτογράφηση με υποστήριξη υλικού είναι ενεργοποιημένη",
+    "recoveryKeyTPMExplanationBody": "Τα κλειδιά κρυπτογράφησης είναι αποθηκευμένα στη Μονάδα Έμπιστης Πλατφόρμας (TPM) του υπολογιστή σας.",
+    "recoveryKeyTPMExplanationLearnMore": "Μάθετε περισσότερα για την κρυπτογράφηση με υποστήριξη υλικού",
+    "recoveryKeyPassphraseEnabled": "Η συνθηματική φράση κρυπτογράφησης είναι ενεργοποιημένη",
+    "recoveryKeyPassphraseHeader": "Αλλαγή συνθηματικής φράσης",
+    "recoveryKeyPassphraseBody": "Θα χρειαστεί να εισάγετε τη συνθηματική φράση σας κάθε φορά που εκκινείται ο υπολογιστής σας.",
+    "recoveryKeyPassphraseButton": "Αλλαγή συνθηματικής φράσης...",
+    "recoveryKeyPassphraseCurrent": "Τρέχουσα συνθηματική φράση",
+    "recoveryKeyPassphraseNew": "Νέα συνθηματική φράση",
+    "recoveryKeyPassphraseConfirm": "Επιβεβαίωση συνθηματικής φράσης",
+    "recoveryKeyPassphraseCurrentError": "Μη έγκυρη συνθηματική φράση, δοκιμάστε ξανά",
+    "recoveryKeyPassphraseNewError": "Πρέπει να έχει μήκος τουλάχιστον 4 χαρακτήρων",
+    "recoveryKeyPassphraseConfirmError": "Οι συνθηματικές φράσεις δεν ταιριάζουν, δοκιμάστε ξανά",
+    "recoveryKeyPassphraseDialogHeader": "Αλλαγή συνθηματικής φράσης",
+    "recoveryKeyPinEnabled": "Το PIN κρυπτογράφησης είναι ενεργοποιημένο",
+    "recoveryKeyPinHeader": "PIN κρυπτογράφησης",
+    "recoveryKeyEncrpytionPassphraseHeader": "Συνθηματική φράση κρυπτογράφησης",
+    "recoveryKeyPinBody": "Πρέπει να εισαγάγετε το PIN σας κάθε φορά που ξεκινά ο υπολογιστής σας.",
+    "recoveryKeyPinButton": "Αλλαγή PIN...",
+    "recoveryKeyPinCurrent": "Τρέχον PIN",
+    "recoveryKeyPinNew": "Νέο PIN",
+    "recoveryKeyPinConfirm": "Επιβεβαίωση PIN",
+    "recoveryKeyPinCurrentError": "Μη έγκυρο PIN, δοκιμάστε ξανά",
+    "recoveryKeyPinConfirmError": "Τα PIN δεν ταιριάζουν, δοκιμάστε ξανά",
+    "recoveryKeyPinDialogHeader": "Αλλαγή PIN",
+    "recoveryKeyPassphraseShow": "Εμφάνιση",
+    "recoveryKeyPassphraseHide": "Απόκρυψη",
+    "recoveryKeyPassphraseChange": "Αλλαγή",
+    "recoveryKeyPassphrasePinSuccessHeader": "Το PIN ενημερώθηκε",
+    "recoveryKeyPassphrasePinSuccessBody": "Το PIN σας ενημερώθηκε με επιτυχία.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Η συνθηματική φράση ενημερώθηκε",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Η συνθηματική σας φράση ενημερώθηκε με επιτυχία.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Ασθενής συνθηματική φράση, κάντε την μεγαλύτερη ή πιο σύνθετη",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Μέτρια συνθηματική φράση, κάντε την μεγαλύτερη ή πιο σύνθετη για καλύτερη ασφάλεια",
+    "recoveryKeyPassphraseEntropyOptimal": "Ισχυρή συνθηματική φράση",
+    "recoveryKeyPinEntropyBelowMin": "Ασθενές PIN, κάντε το μεγαλύτερο ή λιγότερο προβλέψιμο",
+    "recoveryKeyPinEntropyBelowOptimal": "Μέτριο PIN, κάντε το μεγαλύτερο ή λιγότερο προβλέψιμο για καλύτερη ασφάλεια",
+    "recoveryKeyPinEntropyOptimal": "Το PIN είναι αρκετά μεγάλο",
+    "recoveryKeySomethingWentWrongHeader": "Κάτι πήγε στραβά",
+    "ubuntuProNotSupported": "Το Ubuntu Pro δεν είναι διαθέσιμο για αυτήν την έκδοση του Ubuntu",
+    "ubuntuProNotSupportedDetails": "Το Ubuntu Pro απαιτεί μια έκδοση LTS",
+    "ubuntuProNotSupportedSnapd": "Το Ubuntu Pro δεν υποστηρίζεται από αυτήν την έκδοση του snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Ενημερώστε το snapd για τη διαχείριση του Ubuntu Pro",
+    "ubuntuProEnabled": "Το Ubuntu Pro είναι ενεργοποιημένο",
+    "ubuntuProDisabled": "Ασφάλεια και συμμόρφωση επιπέδου επιχείρησης για τον υπολογιστή σας. Πάντα δωρεάν για προσωπική χρήση. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Μάθετε περισσότερα για το Ubuntu Pro",
+    "ubuntuProEnablePro": "Ενεργοποίηση του Ubuntu Pro",
+    "ubuntuProEnableMagic": "Ενεργοποίηση με λογαριασμό Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Θα μπορέσετε να δημιουργήσετε έναν λογαριασμό δωρεάν",
+    "ubuntuProMagicPrompt": "Συνδεθείτε με τον λογαριασμό σας στο Ubuntu One ή δημιουργήστε έναν δωρεάν.",
+    "ubuntuProMagicContinueInBrowser": "Συνέχεια στο πρόγραμμα περιήγησης",
+    "ubuntuProMagicDescription": "Μπορείτε επίσης να συνδεθείτε στη διεύθυνση {attachLink} και να εισαγάγετε τον κωδικό {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Αδυναμία ενεργοποίησης του Ubuntu Pro, δοκιμάστε ξανά",
+    "ubuntuProEnableToken": "Ενεργοποίηση με διακριτικό (token)",
+    "ubuntuProEnableTokenError": "Αδυναμία ενεργοποίησης του Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Από τον διαχειριστή IT σας ή από το {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Λάβετε ένα διακριτικό (token) Ubuntu Pro από τον διαχειριστή σας ή από το {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Διακριτικό",
+    "ubuntuProDisablePro": "Απενεργοποίηση του Ubuntu Pro",
+    "ubuntuProDisable": "Απενεργοποίηση",
+    "ubuntuProDisablePrompt": "Η απενεργοποίηση του Ubuntu Pro θα αποσυνδέσει τη συνδρομή σας από αυτό το μηχάνημα. Θέλετε να συνεχίσετε;",
+    "ubuntuProEnable": "Ενεργοποίηση",
+    "ubuntuProCancel": "Ακύρωση",
+    "ubuntuProFeatureEnableError": "Αδυναμία ενεργοποίησης της λειτουργίας, δοκιμάστε ξανά.",
+    "ubuntuProFeatureDisableError": "Αδυναμία απενεργοποίησης της λειτουργίας, δοκιμάστε ξανά.",
+    "ubuntuProCompliance": "Συμμόρφωση και θωράκιση",
+    "ubuntuProComplianceDisclaimer": "Συνιστάται μόνο για υποστήριξη σε απαιτήσεις FedRAMP, HIPAA και άλλες ανάγκες συμμόρφωσης και θωράκισης.",
+    "ubuntuProComplianceUSGTitle": "Οδηγός Ασφάλειας Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Αυτοματοποιεί τη θωράκιση και τον έλεγχο με προφίλ συμμόρφωσης CIS benchmark και DISA-STIG, επιτρέποντας παράλληλα προσαρμογές ανάλογα με το περιβάλλον.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Μια πιστοποίηση κρυπτογραφικών μονάδων των κυβερνήσεων των ΗΠΑ και του Καναδά για τη συμμόρφωση με το πρότυπο προστασίας δεδομένων FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Ενεργοποίηση FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Η ενεργοποίηση του FIPS δεν μπορεί να αναιρεθεί και το Livepatch θα απενεργοποιηθεί μόνιμα.",
+    "ubuntuProComplianceFIPSPrompt": "Επιλέξτε την επιθυμητή επιλογή FIPS",
+    "ubuntuProComplianceFIPSUpdates": "FIPS με ενημερώσεις",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Εγκαθιστά πακέτα επικυρωμένα κατά FIPS 140-2 και επιτρέπει τακτικές ενημερώσεις ασφαλείας.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS χωρίς ενημερώσεις",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Εγκαθιστά πακέτα επικυρωμένα κατά FIPS 140-2. Αυτά δεν θα ενημερωθούν μέχρι την επόμενη επαναπιστοποίηση.",
+    "ubuntuProComplianceDocumentation": "Τεκμηρίωση συμμόρφωσης ασφαλείας",
+    "ubuntuProESMTitle": "Διευρυμένη Συντήρηση Ασφαλείας (ESM)",
+    "ubuntuProESMDescription": "Το ESM παρέχει 10 χρόνια διορθώσεων ασφαλείας για περισσότερα από 25.000 πακέτα ανοιχτού κώδικα. Λάβετε συνεχή διαχείριση ευπαθειών για κρίσιμα, υψηλά και μεσαίας προτεραιότητας CVE.",
+    "ubuntuProESMMainTitle": "Κύρια πακέτα (esm-infra)",
+    "ubuntuProESMMainDescription": "Ενημερώσεις ασφαλείας για 2.300 πακέτα του Ubuntu Main μέχρι το {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Πακέτα Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Πρόσθετες ενημερώσεις ασφαλείας για πάνω από 23.000 πακέτα του Ubuntu Universe μέχρι το {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Livepatch για τον πυρήνα",
+    "ubuntuProLivepatchEnableTitle": "Ενεργοποίηση του Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Εφαρμογή των ενημερώσεων ασφαλείας του πυρήνα ενώ το σύστημα βρίσκεται σε λειτουργία",
+    "ubuntuProLivepatchShowTitle": "Εμφάνιση της κατάστασης του Livepatch στην πάνω μπάρα"
+}
