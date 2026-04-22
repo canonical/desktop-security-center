@@ -680,12 +680,6 @@ abstract class AppLocalizations {
   /// **'To fix this, run this command in the terminal:'**
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody;
 
-  /// No description provided for @diskEncryptionPageErrorUnconnectedSnapInterfaceCommand.
-  ///
-  /// In en, this message translates to:
-  /// **'snap connect desktop-security-center:snap-fde-control'**
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand;
-
   /// No description provided for @diskEncryptionPageAddPinButton.
   ///
   /// In en, this message translates to:

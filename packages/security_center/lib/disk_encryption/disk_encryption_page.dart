@@ -98,7 +98,11 @@ class EncryptionPageBody extends ConsumerWidget {
     SnapdStateException error,
     AppLocalizations l10n,
   ) {
-    final command = error.localizedCommand(l10n);
+    final command = switch (error) {
+      SnapdStateExceptionUnsupportedSnapdVersion() => null,
+      SnapdStateExceptionUnconnectedSnapInterface() =>
+        'snap connect desktop-security-center:snap-fde-control',
+    };
     if (command != null) {
       return RichText(
         text: TextSpan(
