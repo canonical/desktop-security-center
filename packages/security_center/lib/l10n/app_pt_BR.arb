@@ -15,7 +15,7 @@
     "snapPermissionsExperimentalLabel": "Experimental",
     "snapPermissionsOtherDescription": "Você pode gerenciar outras permissões em Configurações › Aplicativos.",
     "snapPermissionsPageTitle": "Permissões do aplicativo",
-    "snapRulesCount": "{n, plural, =0{sem regras} =1{1 regra} outras{{n} regras}}",
+    "snapRulesCount": "{n, plural, =0{sem regras} =1{1 regra} other{{n} regras}}",
     "@snapRulesCount": {
         "placeholders": {
             "n": {
@@ -47,7 +47,7 @@
     "interfacePageLinkLearnMore": "Saber mais",
     "interfacePageLinkGiveFeedback": "Dê seu feedback",
     "interfacePageLinkReportIssues": "Reportar problemas",
-    "interfaceSnapCount": "{n, plural, =0{nenhum aplicativo} =1{1 aplicativo} outros {{n} aplicativos}}",
+    "interfaceSnapCount": "{n, plural, =0{nenhum aplicativo} =1{1 aplicativo} other {{n} aplicativos}}",
     "@interfaceSnapCount": {
         "placeholders": {
             "n": {
