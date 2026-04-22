@@ -10,7 +10,7 @@
     "snapPermissionsExperimentalLabel": "ಪ್ರಾಯೋಗಿಕ",
     "snapPermissionsOtherDescription": "ನೀವು ಸೆಟ್ಟಿಂಗ್‌ಗಳು › ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ ಇತರ ಅನುಮತಿಗಳನ್ನು ನಿರ್ವಹಿಸಬಹುದು.",
     "snapPermissionsPageTitle": "ಅಪ್ಲಿಕೇಶನ್ ಅನುಮತಿಗಳು",
-    "snapRulesCount": "{n, ಬಹುವಚನ, =0{ನಿಯಮಗಳಿಲ್ಲ} =1{1 ನಿಯಮ} ಇತರೆ{{n} ನಿಯಮಗಳು}}{n, ಬಹುವಚನ, =0{ನಿಯಮಗಳಿಲ್ಲ} =1{1 ನಿಯಮ} ಇತರೆ{{n} ನಿಯಮಗಳು}}",
+    "snapRulesCount": "{n, plural, =0{no rules} =1{1 rule} other{{n} rules}}",
     "@snapRulesCount": {
         "placeholders": {
             "n": {
@@ -47,7 +47,7 @@
     "interfacePageLinkLearnMore": "ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ",
     "interfacePageLinkGiveFeedback": "ಪ್ರತಿಕ್ರಿಯೆ ನೀಡಿ",
     "interfacePageLinkReportIssues": "ಸಮಸ್ಯೆಗಳನ್ನು ವರದಿ ಮಾಡಿ",
-    "interfaceSnapCount": "{n, ಬಹುವಚನ, =0{ಯಾವುದೇ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಲ್ಲ} =1{1 ಅಪ್ಲಿಕೇಶನ್} ಇತರ {{n} ಅಪ್ಲಿಕೇಶನ್‌ಗಳು}}{n, ಬಹುವಚನ, =0{ಯಾವುದೇ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಲ್ಲ} =1{1 ಅಪ್ಲಿಕೇಶನ್} ಇತರ {{n} ಅಪ್ಲಿಕೇಶನ್‌ಗಳು}}",
+    "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 app} other {{n} apps}}",
     "@interfaceSnapCount": {
         "placeholders": {
             "n": {
