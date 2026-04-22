@@ -37,11 +37,6 @@ extension SnapdStateExceptionL10n on SnapdStateException {
         SnapdStateExceptionUnconnectedSnapInterface() =>
           l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceBody,
       };
-  String? localizedCommand(AppLocalizations l10n) => switch (this) {
-        SnapdStateExceptionUnsupportedSnapdVersion() => null,
-        SnapdStateExceptionUnconnectedSnapInterface() =>
-          l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceCommand,
-      };
 }
 
 extension TpmStateExceptionL10n on TpmStateException {

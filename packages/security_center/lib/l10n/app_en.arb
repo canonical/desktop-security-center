@@ -166,7 +166,6 @@
     "diskEncryptionPageErrorUnsupportedSnapdBody": "Check the Security Center and snapd are up to date.",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Security Center cannot connect to the snapd interface",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "To fix this, run this command in the terminal:",
-    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
     "diskEncryptionPageAddPinButton": "Add PIN...",
     "diskEncryptionPageAddPassphraseButton": "Add passphrase...",
     "diskEncryptionPageAddPassphraseDialogHeading": "Add passphrase",
