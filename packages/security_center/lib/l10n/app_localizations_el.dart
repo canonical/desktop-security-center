@@ -9,689 +9,708 @@ class AppLocalizationsEl extends AppLocalizations {
   AppLocalizationsEl([String locale = 'el']) : super(locale);
 
   @override
-  String get appTitle => 'Security Center';
+  String get appTitle => 'Κέντρο Ασφαλείας';
 
   @override
-  String get snapdRuleCategorySessionAllowed => 'Allow until logout';
+  String get snapdRuleCategorySessionAllowed =>
+      'Να επιτρέπεται μέχρι να αποσυνδεθείτε';
 
   @override
-  String get snapdRuleCategorySessionDenied => 'Deny until logout';
+  String get snapdRuleCategorySessionDenied =>
+      'Να απορρίπτεται μέχρι να αποσυνδεθείτε';
 
   @override
-  String get snapdRuleCategoryForeverAllowed => 'Allow always';
+  String get snapdRuleCategoryForeverAllowed => 'Να επιτρέπεται πάντα';
 
   @override
-  String get snapdRuleCategoryForeverDenied => 'Deny always';
+  String get snapdRuleCategoryForeverDenied => 'Να απορρίπτεται πάντα';
 
   @override
-  String get snapPermissionReadLabel => 'Read';
+  String get snapPermissionReadLabel => 'Ανάγνωση';
 
   @override
-  String get snapPermissionWriteLabel => 'Write';
+  String get snapPermissionWriteLabel => 'Εγγραφή';
 
   @override
-  String get snapPermissionExecuteLabel => 'Execute';
+  String get snapPermissionExecuteLabel => 'Εκτέλεση';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'Πρόσβαση';
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Require apps to ask for system permissions';
+      'Να απαιτείται από τις εφαρμογές να ζητούν άδειες συστήματος';
 
   @override
   String get snapPermissionsEnableWarning =>
-      'This is an experimental feature for controlling access to your system’s resources.';
+      'Αυτή είναι μια πειραματική λειτουργία για τον έλεγχο της πρόσβασης στους πόρους του συστήματός σας.';
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Enabling, this may take a few seconds...';
+      'Ενεργοποίηση, αυτό μπορεί να διαρκέσει λίγα δευτερόλεπτα...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Disabling, this may take a few seconds...';
+      'Απενεργοποίηση, αυτό μπορεί να διαρκέσει λίγα δευτερόλεπτα...';
 
   @override
-  String get snapPermissionsExperimentalLabel => 'Experimental';
+  String get snapPermissionsExperimentalLabel => 'Πειραματικά';
 
   @override
   String get snapPermissionsOtherDescription =>
-      'You can manage other permissions in Settings › Applications.';
+      'Μπορείτε να διαχειριστείτε άλλες άδειες στις Ρυθμίσεις › Εφαρμογές.';
 
   @override
-  String get snapPermissionsPageTitle => 'App permissions';
+  String get snapPermissionsPageTitle => 'Άδειες Εφαρμογής';
 
   @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n rules',
-      one: '1 rule',
-      zero: 'no rules',
+      other: '$n κανόνες',
+      one: '1 κανόνας',
+      zero: 'κανένας κανόνας',
     );
     return '$_temp0';
   }
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Manage $interface permissions for $snap.';
+    return 'Διαχείριση αδειών του $interface για το πακέτο $snap.';
   }
 
   @override
-  String get snapRulesPageEmptyTileLabel => 'No rules yet';
+  String get snapRulesPageEmptyTileLabel => 'Κανένας κανόνας ακόμα';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel =>
+      'Καμία εφαρμογή δεν έχει ζητήσει πρόσβαση ακόμα';
 
   @override
-  String get snapRulesRemoveAll => 'Remove all rules';
+  String get snapRulesRemoveAll => 'Αφαίρεση όλων των κανόνων';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => 'Επαναφορά όλων των αδειών';
 
   @override
-  String get homeInterfacePageTitle => 'Home folder';
+  String get homeInterfacePageTitle => 'Προσωπικός φάκελος';
 
   @override
   String get homeInterfacePageDescription =>
-      'Manage permissions to access files in your Home folder.';
+      'Διαχείριση αδειών για πρόσβαση σε αρχεία στον Προσωπικό σας φάκελο.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'Κάμερα';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+      'Να επιτρέπεται στις εφαρμογές να έχουν πρόσβαση στις κάμερές σας.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'Μικρόφωνο';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'Να επιτρέπεται στις εφαρμογές να έχουν πρόσβαση στο μικρόφωνό σας.';
 
   @override
-  String get interfacePageTitle => 'Manage permissions';
+  String get interfacePageTitle => 'Διαχείριση αδειών';
 
   @override
   String get interfacePageDescription =>
-      'Strictly confined apps will ask you before accessing files and folders. This feature is experimental and subject to changes.';
+      'Οι εφαρμογές με αυστηρό περιορισμό θα σας ζητούν άδεια πριν αποκτήσουν πρόσβαση σε αρχεία και φακέλους. Αυτή η λειτουργία είναι πειραματική και υπόκειται σε αλλαγές.';
 
   @override
-  String get interfacePageLinkLearnMore => 'Learn more';
+  String get interfacePageLinkLearnMore => 'Μάθετε περισσότερα';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Give feedback';
+  String get interfacePageLinkGiveFeedback => 'Υποβολή σχολίων';
 
   @override
-  String get interfacePageLinkReportIssues => 'Report issues';
+  String get interfacePageLinkReportIssues => 'Αναφορά προβλήματος';
 
   @override
   String interfaceSnapCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n apps',
-      one: '1 app',
-      zero: 'no apps',
+      other: '$n εφαρμογές',
+      one: '1 εφαρμογή',
+      zero: 'καμία εφαρμογή',
     );
     return '$_temp0';
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'Κρυπτογράφηση δίσκου';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'Κλειδί ανάκτησης';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'Το κλειδί ανάκτησης σάς επιτρέπει να ανακτήσετε την πρόσβαση στα δεδομένα σας εάν το ξεκλείδωμα του δίσκου αποτύχει κατά την εκκίνηση. Αποθηκεύστε το σε ασφαλές μέρος.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'Το κλειδί ανάκτησης σάς επιτρέπει να ανακτήσετε την πρόσβαση στα δεδομένα σας εάν το ξεκλείδωμα του δίσκου αποτύχει κατά την εκκίνηση. Αποθηκεύστε το σε ασφαλές μέρος. $learnMoreLink';
   }
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'Μάθετε περισσότερα για την κρυπτογράφηση με υποστήριξη υλικού';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => 'Έλεγχος κλειδιού ανάκτησης...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey =>
+      'Έλεγχος κλειδιού ανάκτησης';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'Έλεγχος';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => 'Έγκυρο κλειδί';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => 'Μη έγκυρο κλειδί';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => 'Εισαγάγετε το κλειδί ανάκτησης';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => 'Το κλειδί ανάκτησης είναι έγκυρο';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+      'Θυμηθείτε να το φυλάξετε σε ασφαλές μέρος.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork =>
+      'Το κλειδί ανάκτησης δεν είναι έγκυρο';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+      'Ελέγξτε το κλειδί ή αντικαταστήστε το με ένα νέο.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'Σφάλμα';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton =>
+      'Αντικατάσταση κλειδιού ανάκτησης...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader =>
+      'Αντικατάσταση κλειδιού ανάκτησης';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      'Αποθηκεύστε το νέο κλειδί ανάκτησης σε ασφαλές μέρος. Μόλις το αντικαταστήσετε, δεν θα μπορείτε πλέον να χρησιμοποιήσετε το παλιό κλειδί.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'Εμφάνιση κώδικα QR';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'Αποθήκευση σε αρχείο';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      'Αποθήκευσα το κλειδί ανάκτησης σε ασφαλές μέρος';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => 'Αντικατάσταση';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => 'Απόρριψη';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+      'Το κλειδί ανάκτησης αντικαταστάθηκε';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      'Θυμηθείτε να το φυλάξετε σε ασφαλές μέρος.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'Απέτυχε η αντικατάσταση του κλειδιού ανάκτησης';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      'Παρουσιάστηκε ένα σφάλμα κατά την αντικατάσταση του κλειδιού ανάκτησης· το παλιό σας κλειδί παραμένει σε ισχύ.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+      'Ubuntu Desktop - Κλειδί ανάκτησης κρυπτογράφησης';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'Σαρώστε τον κώδικα QR για να αντιγράψετε το κλειδί ανάκτησης και αποθηκεύστε το σε ένα ασφαλές μέρος, όπως ένας διαχειριστής κωδικών πρόσβασης. Μπορείτε επίσης να το βγάλετε φωτογραφία για μελλοντική χρήση.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification =>
+      'Αντιγράφηκε στο πρόχειρο';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'Αντιγραφή';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      'Οι ρυθμίσεις κρυπτογράφησης δεν είναι διαθέσιμες';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      'Αποτυχία ανάκτησης της κατάστασης κρυπτογράφησης αυτού του υπολογιστή.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      'Η διαμόρφωση του TPM του υπολογιστή σας δεν βρίσκεται σε υποστηριζόμενη κατάσταση.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'Η έκδοση του snapd που διαθέτετε δεν υποστηρίζεται';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      'Βεβαιωθείτε ότι το Κέντρο Ασφαλείας και το snapd είναι ενημερωμένα.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      'Το Κέντρο Ασφαλείας δεν μπορεί να συνδεθεί στη διεπαφή του snapd';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      'Για να το διορθώσετε αυτό, εκτελέστε την εξής εντολή στο τερματικό:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'Προσθήκη PIN...';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton =>
+      'Προσθήκη συνθηματικής φράσης...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading =>
+      'Προσθήκη συνθηματικής φράσης';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'Προσθήκη PIN';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'Θα χρειαστεί να εισάγετε το PIN σας κάθε φορά που εκκινείται ο υπολογιστής σας. Αυτό το PIN είναι διαφορετικό από τον κωδικό πρόσβασης του χρήστη σας.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'Αν ξεχάσετε το PIN σας, μπορείτε να αποκτήσετε ξανά πρόσβαση στον δίσκο χρησιμοποιώντας το κλειδί ανάκτησης.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'Θα χρειαστεί να εισάγετε τη συνθηματική σας φράση κάθε φορά που εκκινείται ο υπολογιστής σας. Αυτή η συνθηματική φράση είναι διαφορετικό από τον κωδικό πρόσβασης του χρήστη σας.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'Αν ξεχάσετε τη συνθηματική φράση σας, μπορείτε να αποκτήσετε ξανά πρόσβαση στον δίσκο χρησιμοποιώντας το κλειδί ανάκτησης.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+  String get diskEncryptionPageAdditionalSecurityHeader => 'Πρόσθετη ασφάλεια';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'Μπορείτε να ορίσετε μια συνθηματική φράση ή ένα PIN για πρόσθετη ασφάλεια. Θα χρειαστεί να το εισάγετε κάθε φορά που εκκινείται ο υπολογιστής σας.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore =>
+      'Μάθετε περισσότερα';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'Προσθήκη';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'Αφαίρεση PIN...';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton =>
+      'Αφαίρεση συνθηματικής φράσης...';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'Γίνεται προσθήκη PIN, αυτό μπορεί να διαρκέσει μερικά δευτερόλεπτα...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'Γίνεται προσθήκη συνθηματικής φράσης, αυτό μπορεί να διαρκέσει μερικά δευτερόλεπτα...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'Γίνεται αφαίρεση του PIN, αυτό μπορεί να διαρκέσει μερικά δευτερόλεπτα...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'Γίνεται αφαίρεση της συνθηματικής φράσης, αυτό μπορεί να διαρκέσει μερικά δευτερόλεπτα...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+      'Το αρχείο κλειδιού ανάκτησης δεν αποθηκεύτηκε';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'Το αρχείο κλειδιού ανάκτησης δεν μπορεί να αποθηκευτεί σε προσωρινή τοποθεσία';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'Άγνωστο σφάλμα';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+      'Αποτυχία αποθήκευσης του κλειδιού ανάκτησης σε αρχείο';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+      'Δεν έχετε δικαίωμα εγγραφής σε αυτή τη θέση αρχείου.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      'Δεν έχετε δικαίωμα εγγραφής σε αυτόν τον φάκελο. Δοκιμάστε μια διαφορετική τοποθεσία ή χρησιμοποιήστε μια άλλη μέθοδο.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      'Δοκιμάστε μια διαφορετική τοποθεσία, όπως μια αφαιρούμενη μονάδα δίσκου, ή χρησιμοποιήστε μια άλλη μέθοδο.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle =>
+      'Αποθήκευση αρχείου κλειδιού ανάκτησης';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'Αρχεία κειμένου';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled =>
+      'Η κρυπτογράφηση με υποστήριξη υλικού είναι ενεργοποιημένη';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+      'Τα κλειδιά κρυπτογράφησης είναι αποθηκευμένα στη Μονάδα Έμπιστης Πλατφόρμας (TPM) του υπολογιστή σας.';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'Μάθετε περισσότερα για την κρυπτογράφηση με υποστήριξη υλικού';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled =>
+      'Η συνθηματική φράση κρυπτογράφησης είναι ενεργοποιημένη';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'Αλλαγή συνθηματικής φράσης';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      'Θα χρειαστεί να εισάγετε τη συνθηματική φράση σας κάθε φορά που εκκινείται ο υπολογιστής σας.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'Αλλαγή συνθηματικής φράσης...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => 'Τρέχουσα συνθηματική φράση';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => 'Νέα συνθηματική φράση';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => 'Επιβεβαίωση συνθηματικής φράσης';
 
   @override
   String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+      'Μη έγκυρη συνθηματική φράση, δοκιμάστε ξανά';
 
   @override
   String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+      'Πρέπει να έχει μήκος τουλάχιστον 4 χαρακτήρων';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+      'Οι συνθηματικές φράσεις δεν ταιριάζουν, δοκιμάστε ξανά';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'Αλλαγή συνθηματικής φράσης';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled =>
+      'Το PIN κρυπτογράφησης είναι ενεργοποιημένο';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => 'PIN κρυπτογράφησης';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader =>
+      'Συνθηματική φράση κρυπτογράφησης';
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      'Πρέπει να εισαγάγετε το PIN σας κάθε φορά που ξεκινά ο υπολογιστής σας.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'Αλλαγή PIN...';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'Τρέχον PIN';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => 'Νέο PIN';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'Επιβεβαίωση PIN';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => 'Μη έγκυρο PIN, δοκιμάστε ξανά';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError =>
+      'Τα PIN δεν ταιριάζουν, δοκιμάστε ξανά';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'Αλλαγή PIN';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => 'Εμφάνιση';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => 'Απόκρυψη';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => 'Αλλαγή';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'Το PIN ενημερώθηκε';
 
   @override
   String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+      'Το PIN σας ενημερώθηκε με επιτυχία.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+      'Η συνθηματική φράση ενημερώθηκε';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      'Η συνθηματική σας φράση ενημερώθηκε με επιτυχία.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      'Ασθενής συνθηματική φράση, κάντε την μεγαλύτερη ή πιο σύνθετη';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      'Μέτρια συνθηματική φράση, κάντε την μεγαλύτερη ή πιο σύνθετη για καλύτερη ασφάλεια';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => 'Ισχυρή συνθηματική φράση';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+      'Ασθενές PIN, κάντε το μεγαλύτερο ή λιγότερο προβλέψιμο';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      'Μέτριο PIN, κάντε το μεγαλύτερο ή λιγότερο προβλέψιμο για καλύτερη ασφάλεια';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => 'Το PIN είναι αρκετά μεγάλο';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => 'Κάτι πήγε στραβά';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+      'Το Ubuntu Pro δεν είναι διαθέσιμο για αυτήν την έκδοση του Ubuntu';
 
   @override
   String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+      'Το Ubuntu Pro απαιτεί μια έκδοση LTS';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'Το Ubuntu Pro δεν υποστηρίζεται από αυτήν την έκδοση του snapd';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'Ενημερώστε το snapd για τη διαχείριση του Ubuntu Pro';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Το Ubuntu Pro είναι ενεργοποιημένο';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'Ασφάλεια και συμμόρφωση επιπέδου επιχείρησης για τον υπολογιστή σας. Πάντα δωρεάν για προσωπική χρήση. $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore => 'Μάθετε περισσότερα για το Ubuntu Pro';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Ενεργοποίηση του Ubuntu Pro';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'Ενεργοποίηση με λογαριασμό Ubuntu One';
 
   @override
   String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+      'Θα μπορέσετε να δημιουργήσετε έναν λογαριασμό δωρεάν';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+      'Συνδεθείτε με τον λογαριασμό σας στο Ubuntu One ή δημιουργήστε έναν δωρεάν.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser =>
+      'Συνέχεια στο πρόγραμμα περιήγησης';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return 'Μπορείτε επίσης να συνδεθείτε στη διεύθυνση $attachLink και να εισαγάγετε τον κωδικό $attachCode';
   }
 
   @override
   String get ubuntuProMagicError =>
-      'Unable to enable Ubuntu Pro, please try again';
+      'Αδυναμία ενεργοποίησης του Ubuntu Pro, δοκιμάστε ξανά';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'Ενεργοποίηση με διακριτικό (token)';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError =>
+      'Αδυναμία ενεργοποίησης του Ubuntu Pro';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'Από τον διαχειριστή IT σας ή από το $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'Λάβετε ένα διακριτικό (token) Ubuntu Pro από τον διαχειριστή σας ή από το $proLink';
   }
 
   @override
-  String get ubuntuProTokenLabel => 'Token';
+  String get ubuntuProTokenLabel => 'Διακριτικό';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Απενεργοποίηση του Ubuntu Pro';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => 'Απενεργοποίηση';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Η απενεργοποίηση του Ubuntu Pro θα αποσυνδέσει τη συνδρομή σας από αυτό το μηχάνημα. Θέλετε να συνεχίσετε;';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => 'Ενεργοποίηση';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'Ακύρωση';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, please try again.';
+      'Αδυναμία ενεργοποίησης της λειτουργίας, δοκιμάστε ξανά.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, please try again.';
+      'Αδυναμία απενεργοποίησης της λειτουργίας, δοκιμάστε ξανά.';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance => 'Συμμόρφωση και θωράκιση';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'Συνιστάται μόνο για υποστήριξη σε απαιτήσεις FedRAMP, HIPAA και άλλες ανάγκες συμμόρφωσης και θωράκισης.';
 
   @override
-  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+  String get ubuntuProComplianceUSGTitle => 'Οδηγός Ασφάλειας Ubuntu (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'Αυτοματοποιεί τη θωράκιση και τον έλεγχο με προφίλ συμμόρφωσης CIS benchmark και DISA-STIG, επιτρέποντας παράλληλα προσαρμογές ανάλογα με το περιβάλλον.';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'Μια πιστοποίηση κρυπτογραφικών μονάδων των κυβερνήσεων των ΗΠΑ και του Καναδά για τη συμμόρφωση με το πρότυπο προστασίας δεδομένων FIPS 140-2.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'Ενεργοποίηση FIPS';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'Η ενεργοποίηση του FIPS δεν μπορεί να αναιρεθεί και το Livepatch θα απενεργοποιηθεί μόνιμα.';
 
   @override
   String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+      'Επιλέξτε την επιθυμητή επιλογή FIPS';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS με ενημερώσεις';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'Εγκαθιστά πακέτα επικυρωμένα κατά FIPS 140-2 και επιτρέπει τακτικές ενημερώσεις ασφαλείας.';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS χωρίς ενημερώσεις';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'Εγκαθιστά πακέτα επικυρωμένα κατά FIPS 140-2. Αυτά δεν θα ενημερωθούν μέχρι την επόμενη επαναπιστοποίηση.';
 
   @override
   String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+      'Τεκμηρίωση συμμόρφωσης ασφαλείας';
 
   @override
-  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+  String get ubuntuProESMTitle => 'Διευρυμένη Συντήρηση Ασφαλείας (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for 25,000+ open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.';
+      'Το ESM παρέχει 10 χρόνια διορθώσεων ασφαλείας για περισσότερα από 25.000 πακέτα ανοιχτού κώδικα. Λάβετε συνεχή διαχείριση ευπαθειών για κρίσιμα, υψηλά και μεσαίας προτεραιότητας CVE.';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'Κύρια πακέτα (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for 2,300 Ubuntu Main package until $year';
+    return 'Ενημερώσεις ασφαλείας για 2.300 πακέτα του Ubuntu Main μέχρι το $year';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'Πακέτα Universe (esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for over 23,000 Ubuntu Universe packages until $year';
+    return 'Πρόσθετες ενημερώσεις ασφαλείας για πάνω από 23.000 πακέτα του Ubuntu Universe μέχρι το $year';
   }
 
   @override
-  String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
+  String get ubuntuProLivepatchTitle => 'Livepatch για τον πυρήνα';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'Ενεργοποίηση του Livepatch';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'Εφαρμογή των ενημερώσεων ασφαλείας του πυρήνα ενώ το σύστημα βρίσκεται σε λειτουργία';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+      'Εμφάνιση της κατάστασης του Livepatch στην πάνω μπάρα';
 }

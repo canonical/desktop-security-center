@@ -9,614 +9,622 @@ class AppLocalizationsUg extends AppLocalizations {
   AppLocalizationsUg([String locale = 'ug']) : super(locale);
 
   @override
-  String get appTitle => 'Security Center';
+  String get appTitle => 'بىخەتەرلىك مەركىزى';
 
   @override
-  String get snapdRuleCategorySessionAllowed => 'Allow until logout';
+  String get snapdRuleCategorySessionAllowed => 'تىزىمدىن چىققۇچە يول قويىدۇ';
 
   @override
-  String get snapdRuleCategorySessionDenied => 'Deny until logout';
+  String get snapdRuleCategorySessionDenied => 'تىزىمدىن چىققۇچە رەت قىلىدۇ';
 
   @override
-  String get snapdRuleCategoryForeverAllowed => 'Allow always';
+  String get snapdRuleCategoryForeverAllowed => 'ھەمىشە يول قويىدۇ';
 
   @override
-  String get snapdRuleCategoryForeverDenied => 'Deny always';
+  String get snapdRuleCategoryForeverDenied => 'ھەمىشە رەت قىلىدۇ';
 
   @override
-  String get snapPermissionReadLabel => 'Read';
+  String get snapPermissionReadLabel => 'ئوقۇش';
 
   @override
-  String get snapPermissionWriteLabel => 'Write';
+  String get snapPermissionWriteLabel => 'يېزىش';
 
   @override
-  String get snapPermissionExecuteLabel => 'Execute';
+  String get snapPermissionExecuteLabel => 'ئىجرا قىلىش';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'زىيارەت';
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Require apps to ask for system permissions';
+      'ئەپ سىستېما ئىجازىتى ئىلتىماس قىلىشى زۆرۈر';
 
   @override
   String get snapPermissionsEnableWarning =>
-      'This is an experimental feature for controlling access to your system’s resources.';
+      'بۇ سىستېما مەنبەسىنى زىيارەت قىلىشنى تىزگىنلەيدىغان تەجرىبە خاراكتېرلىك ئىقتىدار.';
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Enabling, this may take a few seconds...';
+      'قوزغىتىۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Disabling, this may take a few seconds...';
+      'چەكلەۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…';
 
   @override
-  String get snapPermissionsExperimentalLabel => 'Experimental';
+  String get snapPermissionsExperimentalLabel => 'تەجرىبە';
 
   @override
   String get snapPermissionsOtherDescription =>
-      'You can manage other permissions in Settings › Applications.';
+      'باشقا ئىجازەتنى تەڭشەك › ئەپتە باشقۇرالايسىز.';
 
   @override
-  String get snapPermissionsPageTitle => 'App permissions';
+  String get snapPermissionsPageTitle => 'ئەپ ئىجازىتى';
 
   @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n rules',
+      other: '$n قائىدە',
       one: '1 rule',
-      zero: 'no rules',
+      zero: 'قائىدە يوق',
     );
     return '$_temp0';
   }
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Manage $interface permissions for $snap.';
+    return '$snap نىڭ $interface ئىجازىتىنى باشقۇرىدۇ.';
   }
 
   @override
-  String get snapRulesPageEmptyTileLabel => 'No rules yet';
+  String get snapRulesPageEmptyTileLabel => 'تېخى قائىدە يوق';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel =>
+      'تېخى ھېچقانداق ئەپ زىيارەت ئىلتىماسى تەلەپ قىلمىدى';
 
   @override
-  String get snapRulesRemoveAll => 'Remove all rules';
+  String get snapRulesRemoveAll => 'ھەممە قائىدىنى چىقىرىۋەت';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => 'ھەممە ئىجازەتنى ئەسلىگە قايتۇر';
 
   @override
-  String get homeInterfacePageTitle => 'Home folder';
+  String get homeInterfacePageTitle => 'باش مۇندەرىجە';
 
   @override
   String get homeInterfacePageDescription =>
-      'Manage permissions to access files in your Home folder.';
+      'باش قىسقۇچىڭىزدىكى ھۆججەتنى زىيارەت قىلىش ئىجازىتىنى باشقۇرىدۇ.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'كامېرا';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+      'ئەپنىڭ كامېرايىڭىزنى زىيارەت قىلىشىغا يول قويىدۇ.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'مىكروفون';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'ئەپنىڭ مىكروفونىڭىزنى زىيارەت قىلىشىغا يول قويىدۇ.';
 
   @override
-  String get interfacePageTitle => 'Manage permissions';
+  String get interfacePageTitle => 'ئىجازەت باشقۇرۇش';
 
   @override
   String get interfacePageDescription =>
-      'Strictly confined apps will ask you before accessing files and folders. This feature is experimental and subject to changes.';
+      'ئىجازىتى چەكلەنگەن ئەپ ھۆججەت ۋە قىسقۇچىڭىزنى زىيارەت قىلىشتىن ئىلگىرى سورايدۇ. بۇ ئىقتىدار تەجرىبە باسقۇچىدا بولۇپ، ئۆزگىرىشى مۇمكىن.';
 
   @override
-  String get interfacePageLinkLearnMore => 'Learn more';
+  String get interfacePageLinkLearnMore => 'مول بىلىم';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Give feedback';
+  String get interfacePageLinkGiveFeedback => 'پىكىر بېرىڭ';
 
   @override
-  String get interfacePageLinkReportIssues => 'Report issues';
+  String get interfacePageLinkReportIssues => 'مەسىلە مەلۇم قىلىڭ';
 
   @override
   String interfaceSnapCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n apps',
-      one: '1 app',
-      zero: 'no apps',
+      other: '$n ئەپ',
+      one: '1 ئەپ',
+      zero: 'ئەپ يوق',
     );
     return '$_temp0';
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'دىسكا شىفىرلاش';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'ئەسلىگە كەلتۈرۈش ئاچقۇچى';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'ئەگەر قوزغالغاندا دىسكىڭىزنىڭ قۇلۇپىنى ئاچالمىسا ئەسلىگە كەلتۈرۈش ئاچقۇچى سانلىق مەلۇماتلىرىڭىزنى زىيارەت قىلىشىڭىزغا يول قويىدۇ. ئۇنى بىخەتەر بىر جايغا ساقلاڭ.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'ئەگەر قوزغالغاندا دىسكىڭىزنىڭ قۇلۇپىنى ئاچالمىسا ئەسلىگە كەلتۈرۈش ئاچقۇچى سانلىق مەلۇماتلىرىڭىزنى زىيارەت قىلىشىڭىزغا يول قويىدۇ. ئۇنى بىخەتەر بىر جايغا ساقلاڭ. $learnMoreLink';
   }
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'قاتتىق دېتال قوللايدىغان شىفىرلاش ھەققىدىكى تەپسىلات';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => 'ئەسلىگە كەلتۈرۈش ئاچقۇچىنى تەكشۈر…';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey =>
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچىنى تەكشۈر';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'تەكشۈر';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => 'ئىناۋەتلىك ئاچقۇچ';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => 'ئىناۋەتسىز ئاچقۇچ';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey =>
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچىڭىزنى كىرگۈزۈڭ';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => 'ئەسلىگە كەلتۈرۈش ئاچقۇچى ئىشلىدى';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+      'ئۇنى بىرەر بىخەتەر جايدا ساقلاشنى ئۇنتۇماڭ.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork =>
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچى ئىشلىمىدى';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+      'ئاچقۇچ تەكشۈرۈلىدۇ ياكى ئۇ يېڭىسىغا ئالماشتۇرۇلىدۇ.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'خاتالىق';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton =>
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ئالماشتۇر…';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader =>
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ئالماشتۇر';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      'يېڭى ئەسلىگە كەلتۈرۈش ئاچقۇچىنى بىرەر بىخەتەر جايغا ساقلاڭ. ئۇنى ئالماشتۇرسىڭىز، كونا ئاچقۇچنى ئەمدى ئىشلىتەلمەيسىز.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'QR كودىنى كۆرسەت';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'ھۆججەتكە ساقلا';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچىنى بىخەتەر جايغا ساقلىدىم';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => 'ئالماشتۇر';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => 'تاشلىۋەت';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچى ئالماشتۇرۇلدى';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      'ئۇنى بىرەر بىخەتەر جايدا ساقلاشنى ئۇنتۇماڭ.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچى ئالماشتۇرالمىدى';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ئالماشتۇرۇۋاتقاندا خاتالىق كۆرۈلدى، كونا ئاچقۇچىڭىز ئىناۋەتلىك پېتى قالىدۇ.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+      'Ubuntu ئۈستەلئۈستى - شىفىرلانغان ئەسلىگە كەلتۈرۈش ئاچقۇچى';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'QR كودىنى تاراپ ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ئىم باشقۇرغۇچقا ئوخشاش بىرەر بىخەتەر جايدا ساقلاڭ. كېيىن ئىشلىتىش ئۈچۈن ئۇنى سۈرەتكە تارتسىڭىزمۇ بولىدۇ.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification =>
+      'چاپلاش تاختىسىغا كۆچۈرۈلدى';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'كۆچۈر';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      'شىفىرلاش تەڭشىكىنى ئىشلەتكىلى بولمايدۇ';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      'بۇ كومپيۇتېرنىڭ شىفىرلاش ھالىتىگە ئېرىشەلمىدى.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      'كومپيۇتېرىڭىزنىڭ TPM سەپلىمىسى قوللايدىغان ھالەتتە ئەمەس.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'سىزنىڭ snapd نەشرىڭىزنى قوللىمايدۇ';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      'بىخەتەرلىك مەركىزىنى تەكشۈرۈپ ئاندىن snapd نىڭ ئەڭ يېڭى نەشرى ئىكەنلىكىنى جەزملەڭ.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      'بىخەتەرلىك مەركىزى snapd ئارايۈزىگە باغلىنالمايدۇ';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      'بۇنى ئوڭشاش ئۈچۈن، تۆۋەندىكى بۇيرۇق تېرمىنالدا ئىجرا قىلىنىدۇ:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
+      'snapd ئۈستەلئۈستى بىخەتەرلىك مەركىزىگە باغلاندى: snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'PIN قوش…';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton => 'ئىم ئىبارە قوش…';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading => 'ئىم ئىبارە قوش';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'PIN قوش';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'كومپيۇتېرىڭىز ھەر قېتىم قوزغالغاندا PIN كىرگۈزۈشىڭىز كېرەك. بۇ PIN ئىشلەتكۈچى ئىمدىن پەرقلىق.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'ئەگەر PIN نى ئۇنتۇپ قالسىڭىز، ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ئىشلىتىپ دىسكىنى زىيارەت قىلىش ئىجازىتىگە قايتا ئېرىشەلەيسىز.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'كومپيۇتېرىڭىز ھەر قېتىم قوزغالغاندا ئىم ئىبارە كىرگۈزۈشىڭىز كېرەك. بۇ ئىم ئىبارە ئىشلەتكۈچى ئىمدىن پەرقلىق.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'ئەگەر ئىم ئىبارىنى ئۇنتۇپ قالسىڭىز، ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ئىشلىتىپ دىسكىنى زىيارەت قىلىش ئىجازىتىگە قايتا ئېرىشەلەيسىز.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+  String get diskEncryptionPageAdditionalSecurityHeader => 'قوشۇمچە بىخەتەرلىك';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'قوشۇمچە بىخەتەرلىك ئۈچۈن ئىم ئىبارە ياكى PIN تەڭشىيەلەيسىز. كومپيۇتېرىڭىز ھەر قېتىم قوزغالغاندا ئۇنى كىرگۈزۈشىڭىز كېرەك.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore => 'مول بىلىم';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'قوش';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'PIN نى چىقىرىۋەت…';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton =>
+      'ئىم ئىبارىنى چىقىرىۋەت…';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'PIN قوشۇۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'ئىم ئىبارە قوشۇۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'PIN چىقىرىۋېتىۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'ئىم ئىبارە چىقىرىۋېتىۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچى ساقلانمىدى';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچ ھۆججىتىنى ۋاقىتلىق ئورۇنغا ساقلىيالمايدۇ';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'يوچۇن خاتالىق';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچىڭىزنى ھۆججەتكە ساقلىيالمىدى';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+      'ئۇ ھۆججەت ئورنىغا يېزىش ئىجازىتىڭىز يوق.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      'ئۇ قىسقۇچ ئورنىغا يېزىش ئىجازىتىڭىز يوق. پەرقلىق ئورۇننى سىناڭ ياكى باشقا ئۇسۇلنى ئىشلىتىڭ.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      'كۆچمە دىسكىغا ئوخشاش پەرقلىق ئورۇننى سىناڭ ياكى باشقا ئۇسۇلنى ئىشلىتىڭ.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle =>
+      'ئەسلىگە كەلتۈرۈش ئاچقۇچىنى ساقلايدۇ';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'تېكىست ھۆججەت';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled =>
+      'قاتتىق دېتال قوللايدىغان شىفىرلاش قوزغىتىلدى';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+      'شىفىرلىق ئاچقۇچ كومپيۇتېرىڭىزنىڭ ئىشەنچلىك سۇپا مودېلى (TPM) غا ساقلاندى.';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'قاتتىق دېتال قوللايدىغان شىفىرلاش ھەققىدىكى تەپسىلات';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled =>
+      'شىفىرلانغان ئىم ئىبارە قوزغىتىلدى';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'ئىم ئىبارە ئۆزگەرت';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      'كومپيۇتېرىڭىز ھەر قېتىم قوزغالغاندا ئىم ئىبارە كىرگۈزۈشىڭىز كېرەك.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'ئىم ئىبارە ئۆزگەرت…';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => 'نۆۋەتتىكى ئىم ئىبارە';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => 'يېڭى ئىم ئىبارە';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => 'جەزملەش ئىم ئىبارە';
 
   @override
   String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+      'ئىم ئىبارە توغرا ئەمەس، قايتا سىناڭ';
 
   @override
   String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+      'ئەڭ ئاز دېگەندە 4 ھەرپ بولۇشى كېرەك';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+      'ئىم ئىبارە ماس كەلمىدى. قايتا سىناڭ';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'ئىم ئىبارە ئۆزگەرت';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => 'شىفىرلانغان PIN قوزغىتىلدى';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => 'شىفىرلانغان PIN';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader => 'شىفىرلانغان ئىم ئىبارە';
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      'كومپيۇتېرىڭىز ھەر قېتىم قوزغالغاندا PIN كىرگۈزۈشىڭىز كېرەك.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'PIN ئۆزگەرت…';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'نۆۋەتتىكى PIN';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => 'يېڭى PIN';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'جەزملەش PIN';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => 'PIN خاتا، قايتا سىناڭ';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError => 'PIN ماس كەلمىدى. قايتا سىناڭ';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'PIN ئۆزگەرت';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => 'كۆرسەت';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => 'يوشۇر';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => 'ئۆزگەرت';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN يېڭىلاندى';
 
   @override
   String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+      'PIN مۇۋەپپەقىيەتلىك يېڭىلاندى.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+      'ئىم ئىبارە يېڭىلاندى';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      'ئىم ئىبارە مۇۋەپپەقىيەتلىك يېڭىلاندى.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      'ئاجىز ئىم ئىبارە، ئۇزۇنراق ياكى تېخىمۇ مۇرەككەپ قىلىڭ';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      'ياخشى ئىم ئىبار، تېخىمۇ بىخەتەر بولۇشى ئۈچۈن ئۇزۇنراق ياكى تېخىمۇ مۇرەككەپ قىلىڭ';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => 'كۈچلۈك ئىم ئىبارە';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+      'ئاجىز PIN، ئۇزۇنراق ياكى مۆلچەرلەشنى تەسلەشتۈرۈڭ';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      'ياخشى PIN، تېخىمۇ بىخەتەر بولۇشى ئۈچۈن ئۇزۇنراق ياكى مۆلچەرلەشنى تەسلەشتۈرۈڭ';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => 'PIN يېتەرلىك ئۇزۇن';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => 'كاشىلا كۆرۈلدى';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+      'بۇ Ubuntu نەشرىدە Ubuntu Pro نى ئىشلەتكىلى بولمايدۇ';
 
   @override
-  String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+  String get ubuntuProNotSupportedDetails => 'Ubuntu Pro ئۈچۈن LTS نەشرى زۆرۈر';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'بۇ snapd نەشرى Ubuntu Pro نى قوللىمايدۇ';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'Ubuntu Pro نى باشقۇرۇش ئۈچۈن snapd نەشرىنى يېڭىلايدۇ';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Ubuntu Pro قوزغىتىلغان';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'كومپيۇتېردا كارخانا دەرىجىسىدىكى بىخەتەرلىك ۋە ماسلىشىشچانلىقنى ئىشلىتىش شەخسلەر ئۈچۈن ھەمىشە ھەقسىز. $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore => 'Ubuntu Pro ھەققىدىكى مول بىلىم';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Ubuntu Pro نى قوزغات';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'Ubuntu One ھېسابتا قوزغات';
 
   @override
-  String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+  String get ubuntuProEnableMagicSubtitle => 'ھېسابنى ھەقسىز قۇرالايسىز';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+      'Ubuntu One ھېسابتا تىزىمغا كىرىڭ ياكى بىر ھەقسىز قۇرۇڭ.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => 'تور كۆرگۈدە داۋاملاشتۇر';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return 'سىز $attachLink تىزىمغا كىرىپ ۋە $attachCode نى كىرگۈزەلەيسىز';
   }
 
   @override
-  String get ubuntuProMagicError =>
-      'Unable to enable Ubuntu Pro, please try again';
+  String get ubuntuProMagicError => 'Ubuntu Pro نى قوزغىتالمايدۇ، قايتا سىناڭ';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'پەرمان تاختىدا قوزغىتىدۇ';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError => 'Ubuntu Pro نى قوزغىتالمايدۇ';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'ئۇچۇر تېخنىكا باشقۇرغۇچى ياكى $proLink دىن';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'Ubuntu Pro پەرمان تاختىسىنى باشقۇرغۇچىڭىز ياكى $proLink دىن ئېرىشىڭ';
   }
 
   @override
-  String get ubuntuProTokenLabel => 'Token';
+  String get ubuntuProTokenLabel => 'پەرمان تاختا';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Ubuntu Pro چەكلە';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => 'چەكلە';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Ubuntu Pro نى چەكلىسىڭىز بۇ كومپيۇتېردىكى مۇشتەرىلىكىڭىز توختايدۇ. داۋاملاشتۇرامسىز؟';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => 'قوزغات';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'ۋاز كەچ';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, please try again.';
+      'بۇ ئىقتىدارنى قوزغىتالمايدۇ، قايتا سىناڭ.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, please try again.';
+      'بۇ ئىقتىدارنى چەكلىيەلمەيدۇ، قايتا سىناڭ.';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance => 'ماسلاشتۇرۇش ۋە كۈچەيتىش';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'پەقەت FedRAMP، HIPAA ۋە باشقا ماسلىشىش ۋە كۈچەيتىش تەلەپلىرى ئارقىلىق ياردەم بېرىش تەۋسىيە قىلىنىدۇ.';
 
   @override
-  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+  String get ubuntuProComplianceUSGTitle =>
+      'Ubuntu بىخەتەرلىك قوللانمىسى (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>

@@ -30,10 +30,10 @@ class AppLocalizationsKa extends AppLocalizations {
   String get snapPermissionWriteLabel => 'ჩაწერა';
 
   @override
-  String get snapPermissionExecuteLabel => 'გაშვება';
+  String get snapPermissionExecuteLabel => 'შესრულება';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'წვდომა';
 
   @override
   String get snapPermissionsEnableTitle =>
@@ -45,18 +45,18 @@ class AppLocalizationsKa extends AppLocalizations {
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'მიმდინარეობს ჩართვა. ამას რამდენიმე წამი დასჭირდება...';
+      'მიმდინარეობს ჩართვა. ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'მიმდინარეობს გათიშვა. ამას რამდენიმე წამი დასჭირდება...';
+      'ითიშება. ამას, შეიძლება რამდენიმე წამი დასჭირდეს...';
 
   @override
   String get snapPermissionsExperimentalLabel => 'ექსპერიმენტული';
 
   @override
   String get snapPermissionsOtherDescription =>
-      'სხვა წვდომების მართვა შეგუძლიათ მენიუში მორგება > აპლიკაციები.';
+      'სხვა წვდომების მართვა შეგიძლიათ მენიუში მორგება > აპლიკაციები.';
 
   @override
   String get snapPermissionsPageTitle => 'აპის წვდომები';
@@ -82,27 +82,27 @@ class AppLocalizationsKa extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'ჯერ წესები არაა';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel => 'ჯერ აპებს წვდომა არ მოუთხოვიათ';
 
   @override
   String get snapRulesRemoveAll => 'ყველა წესის წაშლა';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => 'ყველა წვდომის ჩამოყრა';
 
   @override
   String get homeInterfacePageTitle => 'საწყისის საქაღალდე';
 
   @override
   String get homeInterfacePageDescription =>
-      'მართეთ წვდომები თქენს საწყის საქაღალდეში ფაილებთან წვდომისთვის.';
+      'მართეთ წვდომები თქვენს საწყის საქაღალდეში ფაილებთან წვდომისთვის.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'კამერა';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+      'აპებისთვის კამერაზე წვდომის უფლების მიცემა.';
 
   @override
   String get microphoneInterfacePageTitle => 'Microphone';
@@ -140,374 +140,384 @@ class AppLocalizationsKa extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'დისკის დაშიფვრა';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'აღდგენის გასაღები';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'აღდგენის გასაღები საშუალებას გაძლევთ, დაიბრუნოთ წვდომა თქვენს მონაცემებზე, თუ სისტემის ჩატვირთვისას დისკის გაშიფვრას ვერ შეძლებთ. შეინახეთ ის სადმე უსაფრთხო ადგილას.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'აღდგენის გასაღები საშუალებას გაძლევთ, დაიბრუნოთ წვდომა თქვენს მონაცემებზე, თუ სისტემის ჩატვირთვისას დისკის გაშიფვრას ვერ შეძლებთ. შეინახეთ ის სადმე უსაფრთხო ადგილას. $learnMoreLink';
   }
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'გაიგეთ მეტი აპარატურით მხარდაჭერილი დაშიფვრის შესახებ';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => 'აღდგენის გასაღების შემოწმება...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey =>
+      'აღდგენის გასაღების შემოწმება';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'შემოწმება';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => 'სწორი გასაღები';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => 'არასწორი გასაღები';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => 'შეიყვანეთ თქვენი აღდგენის გასაღები';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => 'აღდგენის გასაღები მუშაობს';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+      'დაიმახსოვრეთ, ის სადმე უსაფრთხო ადგილას უნდა შეინახოთ.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork => 'აღდგენის გასაღები არ მუშაობს';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+      'შეამოწმეთ გასაღები, ან ჩაანაცვლეთ ის ახლით.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'შეცდომა';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton =>
+      'აღდგენის გასაღების ჩანაცვლება...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader =>
+      'აღდგენის გასაღების შეცვლა';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      'შეინახეთ ახალი აღდგენის გასაღები სადმე უსაფრთხო ადგილას. თუ მას შეცვლით, ძველ გასაღებს ვეღარ გამოიყენებთ.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'QR კოდის ჩვენება';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'შენახვა ფაილში';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      'მე შევინახე ჩემი აღდგენის გასაღები უსაფრთხო ადგილას';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => 'ჩანაცვლება';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => 'მოცილება';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+      'აღდგენის გასაღები შეიცვალა';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      'დაიმახსოვრეთ, რომ ის სადმე უსაფრთხო ადგილას უნდა შეინახოთ.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'აღდგენის გასაღების შეცვლა ჩავარდა';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      'რაღაც არასწორად წავიდა თქვენი აღდგენის გასაღების შენახვისას. თქვენი ძველი გასაღები გამოყენებადი დარჩა.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+      'Ubuntu Desktop - დაშიფვრის აღდგენის გასაღები';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'დაასკანერეთ QR კოდი, რომ დააკოპიროთ აღდგენის გასაღები და შეინახეთ ის სადმე უსაფრთხო ადგილას, მაგალითად, პაროლების მმართველში. ასევე შეგიძლიათ, მისი სურათი გადაიღოთ.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification => 'დაკოპირდა ბუფერში';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'კოპირება';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      'დაშიფვრის პარამეტრები ხელმისაწვდომი არაა';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      'ამ კომპიუტერის დაშიფვრის სტატუსის მიღება ჩავარდა.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      'თქვენი კომპიუტერის TPM-ის კონფიგურაცია მხარდაჭერილ მდგომარეობაში არაა.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'თქვენი snapd-ის ვერსია მხარდაჭერილი არაა';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      'შეამოწმეთ, არის თუ არა უსაფრთხოების ცენტრი და snapd უკანასკნელი ვერსიის.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      'უსაფრთხოების ცენტრი ვერ დაუკავშირდა spand-ის ინტერფეისს';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      'რომ გაასწოროთ, ტერმინალში ეს ბრძანება გაუშვით:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'PIN-კოდის დამატება...';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton =>
+      'საკვანზო ფრაზის დამატება...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading =>
+      'საკვანძო ფრაზის დამატება';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'PIN-კოდის დამატება';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'PIN-კოდის შეყვანა ყოველ ჯერზე დაგჭირდებათ, როცა კომპიუტერს ჩართავთ. ეს PIN-კოდი მომხმარებლის პაროლისგან განსხვავდება.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'თუ PIN-კოდი დაგავიწყდებათ, დისკთან წვდომის დაბრუნება აღდგენის გასაღებით შეგეძლებათ.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'საკვანძო ფრაზის შეყვანა დაგჭირდებათ ყოველ ჯერზე, როცა კომპიუტერს ჩართავთ. ეს საკვანძო ფრაზა განსხვავდება თქვენი მომხმარებლის პაროლისგან.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'თუ თქვენი საკვანძო ფრაზა დაგავიწყდათ, დისკთან წვდომის დაბრუნება აღდგენის გასაღებით შეგიზლიათ.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+      'დამატებითი უსაფრთხოება';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'დამატებითი უსაფრთხოებისთვის შეგიძლიათ, საკვანძო ფრაზა, ან PIN-კოდი დააყენოთ. მათი შეყვანა ყოველ ჯერზე დაგჭირდებათ, როცა კომპიუტერს ჩართავთ.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore => 'გაიგეთ მეტი';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'დამატება';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'PIN-კოდის მოცილება...';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton =>
+      'საკვანძო ფრაზის მოცილება...';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'მიმდინარეობს PIN-კოდის დამატება. ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'მიმდინარეობს საკვაძო ფრაზის დამატება. ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'მიმდინარეობს PIN-კოდის წაშლა. ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'მიმდინარეობს საკვანძო ფრაზის წაშლა. ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+      'აღდგენის გასაღების ფაილი შენახული არაა';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'აღდგენის გასაღების ფაილს დროებით ადგილას ვერ შეინახავთ';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'უცნობი შეცდომა';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+      'თქვენი აღდგენის გასაღების ფაილში შენახვა ჩავარდა';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+      'თქვენ არ გაქვთ ამ ფაილის მდებარეობაზე ჩაწერის უფლება.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      'თქვენ არ გაქვთ იმ საქაღალდეში ჩაწერის უფლება. სცადეთ სხვა მდებარეობა, ან გამოიყენეთ სხვა მეთოდი.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      'სცადეთ სხვა მდებარეობა. მაგალითად: მოხსნადი დისკი, ან გამოიყენეთ სხვა მეთოდი.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle => 'აღდგენის გასაღების ფაილის შენახვა';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'ტექსტური ფაილები';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled =>
+      'აპარატურით მხარდაჭერილი დაშიფვრა ჩართულია';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+      'დაშიფვრის გასაღებები დამახსოვრებული თქვენი კომპიუტერის სანდო პლატფორმის მოდულში (TPM).';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'გაიგეთ მეტი აპარატურით მხარდაჭერილი დაშიფვრის შესახებ';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled =>
+      'დაშიფვრის საკვანძო ფრაზა ჩართულია';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'საკვანძო ფრაზის შეცვლა';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      'საკვანძო ფრაზა უნდა შეიყვანოთ ყოველ ჯერზე, როცა კომპიუტერი გაეშვება.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'საკვანძო ფრაზის შეცვლა...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => 'მიმდინარე საკვანძო ფრაზა';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => 'ახალი საკვანძო ფრაზა';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => 'საკვანძო ფრაზის დადასტურება';
 
   @override
   String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+      'არასწორი საკვანძო ფრაზა. თავიდან სცადეთ';
 
   @override
   String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+      'უნდა შეიცავდეს, სულ ცოტა, 4 სიმბოლოს';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+      'საკვანძო ფრაზები არ ემთხვევა. თავიდან სცადეთ';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'საკვანძო ფრაზის შეცვლა';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => 'დაშიფვრის PIN-კოდი ჩართულია';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => 'დაშიფვრის PIN';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader =>
+      'დაშიფვრის საკვანძო ფრაზა';
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      'PIN-კოდის შეყვანა ყოველ ჯერზეა საჭირო, როცა თქვენი კომპიუტერი გაეშვება.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'PIN-ის შეცვლა...';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'მიმდინარე PIN-კოდი';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => 'ახალი PIN-კოდი';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'დაადასტურეთ PIN-კოდი';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => 'არასწორი PIN-კოდი. თავიდან სცადეთ';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError =>
+      'PIN-კოდები არ ემთხვევა. თავიდან სცადეთ';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'PIN-კოდის შეცვლა';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => 'ჩვენება';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => 'დამალვა';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => 'შეცვლა';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN-კოდი განახლდა';
 
   @override
   String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+      'თქვენი PIN-კოდი წარმატებით განახლდა.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+      'საკვანძო ფრაზა განახლდა';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      'თქვენი საკვანძო ფრაზა წარმატებით განახლდა.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      'საკვანძო ფრაზა სუსტია. დააგრძელეთ, ან გაართულეთ ის';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      'საკვანძო ფრაზა დამაკმაყოფილებელია. უკეთესი უსაფრთხოებისთვის დააგრძელეთ, ან გაართულეთ ის';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => 'ძლიერი საკვანძო ფრაზა';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+      'სუსტი PIN-კოდი. დააგრძელეთ, ან გაართულეთ ის';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      'PIN-კოდი დამაკმაყოფილებელია. უკეთესი უსაფრთხოებისთვის დააგრძელეთ, ან ნაკლებად ადვილად გამოსაცნობი გახადეთ ის';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => 'PIN-კოდი საკმარისად გრძელია';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => 'რაღაც არასწორია';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
@@ -529,7 +539,7 @@ class AppLocalizationsKa extends AppLocalizations {
       'Update snapd to manage Ubuntu Pro';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Ubuntu Pro ჩართულია';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {

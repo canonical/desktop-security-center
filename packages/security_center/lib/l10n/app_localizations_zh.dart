@@ -134,142 +134,132 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => '磁盘加密';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => '恢复密钥';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      '恢复密钥让您恢复访问您的数据当您的磁盘在启动时无法解锁。请在一些安全的地方保存。';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return '恢复密钥让您恢复访问您的数据当您的磁盘在启动时无法解锁。请在一些安全的地方保存。$learnMoreLink';
   }
 
   @override
-  String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+  String get diskEncryptionPageLearnMore => '了解更多关于恢复密钥';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => '检查恢复密钥...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey => '检查恢复密钥';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => '检查';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => '有效密钥';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => '无效密钥';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => '输入您的恢复密钥';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => '恢复密钥有效';
 
   @override
-  String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+  String get diskEncryptionPageKeyWorksBody => '记得把它存在安全的地方。';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork => '恢复密钥不起作用';
 
   @override
-  String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+  String get diskEncryptionPageKeyDoesntWorkBody => '检查您的密钥或者用一个新的密钥替代它。';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => '错误';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton => '更换恢复密钥...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader => '更换恢复密钥';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      '在某个安全的位置保存新的恢复密钥。在您替换之后，您将不能在用老密钥。';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => '显示二维码';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => '保存到文件';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      '我已经在某个安全的位置保存了我的恢复密钥';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => '更换';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => '舍弃';
 
   @override
-  String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+  String get diskEncryptionPageReplaceDialogSuccessHeader => '恢复密钥已更换';
 
   @override
-  String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+  String get diskEncryptionPageReplaceDialogSuccessBody => '记得把它放到一个安全的地方。';
 
   @override
-  String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+  String get diskEncryptionPageReplaceDialogErrorHeader => '恢复密钥更换失败';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      '在替换您的恢复密钥时发生了一些错误，您的老密钥将会保持有效。';
 
   @override
-  String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+  String get diskEncryptionPageReplaceDialogQRHeader => 'Ubuntu 桌面 — 加密恢复密钥';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      '扫描这个二维码以复制恢复密钥并且保存到某个安全的位置，例如密码管理器。您也可以拍照方便后期使用。';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification => '已复制到粘贴板';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => '复制';
 
   @override
-  String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+  String get diskEncryptionPageErrorFailedToRetrieveStatusHeader => '加密设置不可用';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      '在返回您的电脑的加密状况时出现错误。';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      '您的电脑的TPM配置不在一个受支持的状态。';
 
   @override
-  String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+  String get diskEncryptionPageErrorUnsupportedSnapdHeader => '您的snapd版本不受支持';
 
   @override
-  String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+  String get diskEncryptionPageErrorUnsupportedSnapdBody => '检查安全中心与snap保持最新。';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      '安全中心不能连接到snapd界面';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      '要修复这个，在终端中输入：';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
@@ -340,168 +330,152 @@ class AppLocalizationsZh extends AppLocalizations {
       'Removing passphrase, this may take a few seconds...';
 
   @override
-  String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+  String get recoveryKeyExceptionFileSystemTitle => '恢复密钥文件未保存';
 
   @override
-  String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+  String get recoveryKeyExceptionDisallowedPathTitle => '恢复密钥文件不能保存到临时位置';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => '未知错误';
 
   @override
-  String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+  String get recoveryKeyExceptionFilePermissionTitle => '无法保存恢复密钥到文件';
 
   @override
-  String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+  String get recoveryKeyExceptionFilePermissionBody => '您没有权以写到那个文件位置中。';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      '您没有写入该文件夹的权限，请尝试其他位置或使用其他方法。';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      '尝试一个不同的地址，例如可移动磁盘，或者用其他的方式。';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle => '保存恢复密钥文件';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => '文本文件';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled => '硬件返回加密已启用';
 
   @override
-  String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+  String get recoveryKeyTPMExplanationBody => '加密密钥已经储存到您的电脑的信任平台模块（TPM）。';
 
   @override
-  String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+  String get recoveryKeyTPMExplanationLearnMore => '了解更多关于硬件返回加密';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled => '密码加密已启用';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => '修改密码';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      '您需要在开机的时候输入您的密码以解锁磁盘。您可以修改密码但是不能禁用它。';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => '修改密码...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => '当前密码';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => '新密码';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => '确认密码';
 
   @override
-  String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+  String get recoveryKeyPassphraseCurrentError => '错误的密码，请重试';
 
   @override
-  String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+  String get recoveryKeyPassphraseNewError => '必须至少4个字符长';
 
   @override
-  String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+  String get recoveryKeyPassphraseConfirmError => '密码不匹配，请重试';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => '修改密码';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => '加密PIN已启用';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => '加密PIN';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader => '加密密码';
 
   @override
-  String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+  String get recoveryKeyPinBody => '您需要在开机的时候输入PIN以解锁此磁盘。您可以修改PIN但是不能禁用它。';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => '改变PIN...';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => '当前PIN';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => '新的PIN';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => '确认PIN';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => '错误的PIN，请重试';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError => 'PIN不匹配，请重试';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => '更改PIN';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => '显示';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => '隐藏';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => '修改';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN已更新';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+  String get recoveryKeyPassphrasePinSuccessBody => '您的PIN成功更新。';
 
   @override
-  String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+  String get recoveryKeyPassphrasePassphraseSuccessHeader => '密码已更新';
 
   @override
-  String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+  String get recoveryKeyPassphrasePassphraseSuccessBody => '您的密码已成功更新。';
 
   @override
-  String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+  String get recoveryKeyPassphraseEntropyBelowMin => '弱密码，请使它更长或者更复杂';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      '短的密码，请确保它更长或者更复杂以更好的安全';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => '强密码';
 
   @override
-  String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+  String get recoveryKeyPinEntropyBelowMin => '弱PIN，请让它更长或者更难以预测';
 
   @override
-  String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+  String get recoveryKeyPinEntropyBelowOptimal => '可猜测PIN，请使它变得更长或者更难以预测以变得更安全';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => 'PIN足够长';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => '发生了一些错误';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
@@ -719,16 +693,19 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get snapPermissionExecuteLabel => '執行';
 
   @override
+  String get snapPermissionAccessLabel => '存取';
+
+  @override
   String get snapPermissionsEnableTitle => '要求應用程式請求系統權限';
 
   @override
   String get snapPermissionsEnableWarning => '這是一項實驗性功能，用於控制對系統資源的存取。';
 
   @override
-  String get snapPermissionsEnablingLabel => '啟用中，可能需要幾秒鐘...';
+  String get snapPermissionsEnablingLabel => '啟用中，此過程可能需要數秒鐘...';
 
   @override
-  String get snapPermissionsDisablingLabel => '停用中，可能需要幾秒鐘...';
+  String get snapPermissionsDisablingLabel => '停用中，此過程可能需要數秒鐘...';
 
   @override
   String get snapPermissionsExperimentalLabel => '實驗性的';
@@ -760,13 +737,31 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get snapRulesPageEmptyTileLabel => '還沒有規則';
 
   @override
+  String get cameraRulesPageEmptyTileLabel => '目前尚無應用程式要求存取權限';
+
+  @override
   String get snapRulesRemoveAll => '移除所有規則';
+
+  @override
+  String get snapRulesResetAllPermissions => '重設所有權限';
 
   @override
   String get homeInterfacePageTitle => '家目錄';
 
   @override
   String get homeInterfacePageDescription => '管理存取您家目錄中檔案的權限。';
+
+  @override
+  String get cameraInterfacePageTitle => '相機';
+
+  @override
+  String get cameraInterfacePageDescription => '允許應用程式存取您的相機。';
+
+  @override
+  String get microphoneInterfacePageTitle => '麥克風';
+
+  @override
+  String get microphoneInterfacePageDescription => '允許應用程式存取您的麥克風。';
 
   @override
   String get interfacePageTitle => '管理權限';
@@ -795,4 +790,514 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
     );
     return '$_temp0';
   }
+
+  @override
+  String get diskEncryptionPageTitle => '磁碟加密';
+
+  @override
+  String get diskEncryptionPageRecoveryKey => '復原金鑰';
+
+  @override
+  String get diskEncryptionPageStoreYourKey =>
+      '如果磁碟在啟動期間無法解鎖，復原金鑰可讓您重新取得資料。請將它保存在安全的地方。';
+
+  @override
+  String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
+    return '如果磁碟在啟動時無法解鎖，復原金鑰可讓您重新取得資料。將它保存在安全的地方。$learnMoreLink';
+  }
+
+  @override
+  String get diskEncryptionPageLearnMore => '深入了解硬體支援的加密技術';
+
+  @override
+  String get diskEncryptionPageCheckKey => '檢查復原金鑰...';
+
+  @override
+  String get diskEncryptionPageDialogHeaderCheckKey => '檢查復原金鑰';
+
+  @override
+  String get diskEncryptionPageCheck => '檢查';
+
+  @override
+  String get diskEncryptionPageValidKey => '有效金鑰';
+
+  @override
+  String get diskEncryptionPageInvalidKey => '無效金鑰';
+
+  @override
+  String get diskEncryptionPageEnterKey => '輸入您的復原金鑰';
+
+  @override
+  String get diskEncryptionPageKeyWorks => '復原金鑰有效';
+
+  @override
+  String get diskEncryptionPageKeyWorksBody => '記住把它放在安全的地方。';
+
+  @override
+  String get diskEncryptionPageKeyDoesntWork => '復原金鑰不起作用';
+
+  @override
+  String get diskEncryptionPageKeyDoesntWorkBody => '檢查金鑰或更換新的。';
+
+  @override
+  String get diskEncryptionPageError => '錯誤';
+
+  @override
+  String get diskEncryptionPageReplaceButton => '更換復原金鑰...';
+
+  @override
+  String get diskEncryptionPageReplaceDialogHeader => '更換復原金鑰';
+
+  @override
+  String get diskEncryptionPageReplaceDialogBody =>
+      '將新的復原金鑰保存在安全的地方。一旦更換，您將無法再使用舊金鑰。';
+
+  @override
+  String get diskEncryptionPageReplaceDialogShowQR => '顯示 QR code';
+
+  @override
+  String get diskEncryptionPageReplaceDialogSave => '儲存至檔案';
+
+  @override
+  String get diskEncryptionPageReplaceDialogAcknowledge => '我將我的復原金鑰保存在安全的地方';
+
+  @override
+  String get diskEncryptionPageReplaceDialogReplace => '更換';
+
+  @override
+  String get diskEncryptionPageReplaceDialogDiscard => '捨棄';
+
+  @override
+  String get diskEncryptionPageReplaceDialogSuccessHeader => '已更換復原金鑰';
+
+  @override
+  String get diskEncryptionPageReplaceDialogSuccessBody => '記住把它放在安全的地方。';
+
+  @override
+  String get diskEncryptionPageReplaceDialogErrorHeader => '復原金鑰更換失敗';
+
+  @override
+  String get diskEncryptionPageReplaceDialogErrorBody =>
+      '更換您的復原金鑰時出錯了，您的舊金鑰仍然有效。';
+
+  @override
+  String get diskEncryptionPageReplaceDialogQRHeader => 'Ubuntu 桌面 - 加密復原金鑰';
+
+  @override
+  String get diskEncryptionPageReplaceDialogQRBody =>
+      '掃描 QR code 以複製復原金鑰，並將其保存到安全的地方，例如密碼管理器。您也可以拍張照片以供日後使用。';
+
+  @override
+  String get diskEncryptionPageClipboardNotification => '已複製到剪貼簿';
+
+  @override
+  String get diskEncryptionPageCopySemanticLabel => '複製';
+
+  @override
+  String get diskEncryptionPageErrorFailedToRetrieveStatusHeader => '加密設定不可用';
+
+  @override
+  String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
+      '擷取這台電腦的加密狀態失敗。';
+
+  @override
+  String get diskEncryptionPageErrorUnsupportedStateBody =>
+      '您的電腦 TPM 配置處於不受支持的狀態。';
+
+  @override
+  String get diskEncryptionPageErrorUnsupportedSnapdHeader => '您的 snapd 版本不受支援';
+
+  @override
+  String get diskEncryptionPageErrorUnsupportedSnapdBody =>
+      '請確認安全中心與 snapd 已更新至最新版。';
+
+  @override
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
+      '安全中心無法連接到 snapd 介面';
+
+  @override
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
+      '為了解決此問題, 請於終端機中執行下列指令:';
+
+  @override
+  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
+      'snap connect desktop-security-center:snap-fde-control';
+
+  @override
+  String get diskEncryptionPageAddPinButton => '加入 PIN...';
+
+  @override
+  String get diskEncryptionPageAddPassphraseButton => '加入密碼短語...';
+
+  @override
+  String get diskEncryptionPageAddPassphraseDialogHeading => '加入密碼短語';
+
+  @override
+  String get diskEncryptionPageAddPinDialogHeading => '加入 PIN 碼';
+
+  @override
+  String get diskEncryptionPageAddPinDialogBodyMain =>
+      '每次電腦啟動時，您都需輸入 PIN 碼。此識別碼與您的使用者密碼不同。';
+
+  @override
+  String get diskEncryptionPageAddPinDialogBodyRecovery =>
+      '若您忘記 PIN 碼，可使用復原金鑰重新取得磁碟存取權。';
+
+  @override
+  String get diskEncryptionPageAddPassphraseDialogBodyMain =>
+      '每次電腦啟動時，您都需輸入您的密碼短語。此密碼短語與您的使用者密碼不同。';
+
+  @override
+  String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
+      '若您忘記密碼短語，可透過使用復原金鑰重新取得磁碟存取權限。';
+
+  @override
+  String get diskEncryptionPageAdditionalSecurityHeader => '額外的安全措施';
+
+  @override
+  String get diskEncryptionPageAdditionalSecurityBody =>
+      '您可以設定密碼短語或 PIN 碼以加強安全性。每次電腦啟動時，您都需輸入此密碼。';
+
+  @override
+  String get diskEncryptionPageAdditionalSecurityLearnMore => '了解更多';
+
+  @override
+  String get diskEncryptionPageAddPinDialogSaveButton => '新增';
+
+  @override
+  String get diskEncryptionPageRemovePinButton => '移除 PIN...';
+
+  @override
+  String get diskEncryptionPageRemovePassphraseButton => '移除密碼短語...';
+
+  @override
+  String get diskEncryptionPageAddingPin => '正在新增 PIN 碼，此過程可能需要數秒鐘...';
+
+  @override
+  String get diskEncryptionPageAddingPassphrase => '正在新增密碼短語，此過程可能需要數秒鐘...';
+
+  @override
+  String get diskEncryptionPageRemovingPin => '正在移除 PIN 碼，此過程可能需要數秒鐘...';
+
+  @override
+  String get diskEncryptionPageRemovingPassphrase => '正在移除密碼短語，此過程可能需要數秒鐘...';
+
+  @override
+  String get recoveryKeyExceptionFileSystemTitle => '未儲存復原金鑰檔案';
+
+  @override
+  String get recoveryKeyExceptionDisallowedPathTitle => '復原金鑰檔案無法儲存於暫存位置';
+
+  @override
+  String get recoveryKeyExceptionUnknownTitle => '未知錯誤';
+
+  @override
+  String get recoveryKeyExceptionFilePermissionTitle => '無法將您的復原金鑰儲存至檔案';
+
+  @override
+  String get recoveryKeyExceptionFilePermissionBody => '您沒有寫入該檔案位置的權限。';
+
+  @override
+  String get recoveryKeyExceptionFileSystemBody =>
+      '您沒有寫入該資料夾的權限。請嘗試不同的位置或使用其他方法。';
+
+  @override
+  String get recoveryKeyExceptionDisallowedPathBody =>
+      '嘗試不同的位置，例如卸除式磁碟機，或使用其他方法。';
+
+  @override
+  String get recoveryKeyFilePickerTitle => '儲存復原金鑰檔案';
+
+  @override
+  String get recoveryKeyFilePickerFilter => '文字檔';
+
+  @override
+  String get recoveryKeyTPMEnabled => '已啟用硬體支援加密';
+
+  @override
+  String get recoveryKeyTPMExplanationBody => '加密金鑰儲存在電腦的可信賴平台模組 (TPM) 中。';
+
+  @override
+  String get recoveryKeyTPMExplanationLearnMore => '進一步了解硬體支援的加密';
+
+  @override
+  String get recoveryKeyPassphraseEnabled => '已啟用加密密碼';
+
+  @override
+  String get recoveryKeyPassphraseHeader => '變更密碼';
+
+  @override
+  String get recoveryKeyPassphraseBody => '每次電腦啟動時，您都需要輸入您的密碼短語。';
+
+  @override
+  String get recoveryKeyPassphraseButton => '變更密碼...';
+
+  @override
+  String get recoveryKeyPassphraseCurrent => '目前的密碼';
+
+  @override
+  String get recoveryKeyPassphraseNew => '新密碼';
+
+  @override
+  String get recoveryKeyPassphraseConfirm => '確認密碼';
+
+  @override
+  String get recoveryKeyPassphraseCurrentError => '密碼不正確，請重試';
+
+  @override
+  String get recoveryKeyPassphraseNewError => '必須至少有 4 個字元';
+
+  @override
+  String get recoveryKeyPassphraseConfirmError => '密碼不符，請重試';
+
+  @override
+  String get recoveryKeyPassphraseDialogHeader => '變更密碼';
+
+  @override
+  String get recoveryKeyPinEnabled => '加密 PIN 碼已啟用';
+
+  @override
+  String get recoveryKeyPinHeader => '加密 PIN 碼';
+
+  @override
+  String get recoveryKeyEncrpytionPassphraseHeader => '加密密碼';
+
+  @override
+  String get recoveryKeyPinBody => '每次電腦啟動時，您都需要輸入您的 PIN 碼。';
+
+  @override
+  String get recoveryKeyPinButton => '變更 PIN 碼...';
+
+  @override
+  String get recoveryKeyPinCurrent => '目前 PIN 碼';
+
+  @override
+  String get recoveryKeyPinNew => '新 PIN 碼';
+
+  @override
+  String get recoveryKeyPinConfirm => '確認 PIN 碼';
+
+  @override
+  String get recoveryKeyPinCurrentError => 'PIN 碼不正確，請重試';
+
+  @override
+  String get recoveryKeyPinConfirmError => 'PIN 碼不符，請重試';
+
+  @override
+  String get recoveryKeyPinDialogHeader => '變更 PIN 碼';
+
+  @override
+  String get recoveryKeyPassphraseShow => '顯示';
+
+  @override
+  String get recoveryKeyPassphraseHide => '隱藏';
+
+  @override
+  String get recoveryKeyPassphraseChange => '變更';
+
+  @override
+  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN 碼已更新';
+
+  @override
+  String get recoveryKeyPassphrasePinSuccessBody => '您的 PIN 碼已成功更新。';
+
+  @override
+  String get recoveryKeyPassphrasePassphraseSuccessHeader => '密碼已更新';
+
+  @override
+  String get recoveryKeyPassphrasePassphraseSuccessBody => '您的密碼已成功更新。';
+
+  @override
+  String get recoveryKeyPassphraseEntropyBelowMin => '密碼太弱，請將它設得更長或更複雜';
+
+  @override
+  String get recoveryKeyPassphraseEntropyBelowOptimal =>
+      '公平的密碼，將它變得更長或更複雜，以提高安全性';
+
+  @override
+  String get recoveryKeyPassphraseEntropyOptimal => '強大的密碼';
+
+  @override
+  String get recoveryKeyPinEntropyBelowMin => '較弱的 PIN 碼，使其更長或更難預測';
+
+  @override
+  String get recoveryKeyPinEntropyBelowOptimal => '公平的 PIN 碼，使其更長或更不易預測，以提高安全性';
+
+  @override
+  String get recoveryKeyPinEntropyOptimal => 'PIN 碼夠長';
+
+  @override
+  String get recoveryKeySomethingWentWrongHeader => '出了問題';
+
+  @override
+  String get ubuntuProPageTitle => 'Ubuntu Pro';
+
+  @override
+  String get ubuntuProNotSupported => '此 Ubuntu 版本不提供 Ubuntu Pro';
+
+  @override
+  String get ubuntuProNotSupportedDetails => 'Ubuntu Pro 需要 LTS 版本';
+
+  @override
+  String get ubuntuProNotSupportedSnapd => '此 snapd 版本不支援 Ubuntu Pro';
+
+  @override
+  String get ubuntuProNotSupportedSnapdDetails => '更新 snapd 以管理 Ubuntu Pro';
+
+  @override
+  String get ubuntuProEnabled => '已啟用 Ubuntu Pro';
+
+  @override
+  String ubuntuProDisabled(String learnMoreLink) {
+    return '為您的電腦提供企業級的安全防護與合規性。個人使用始終免費。$learnMoreLink';
+  }
+
+  @override
+  String get ubuntuProLearnMore => '了解 Ubuntu Pro';
+
+  @override
+  String get ubuntuProEnablePro => '啟用 Ubuntu Pro';
+
+  @override
+  String get ubuntuProEnableMagic => '使用 Ubuntu One 帳戶啟用';
+
+  @override
+  String get ubuntuProEnableMagicSubtitle => '您將能夠免費建立一個帳戶';
+
+  @override
+  String get ubuntuProMagicPrompt => '請使用您的 Ubuntu One 帳戶登入，或免費建立一個帳戶。';
+
+  @override
+  String get ubuntuProMagicContinueInBrowser => '在瀏覽器中繼續';
+
+  @override
+  String ubuntuProMagicDescription(String attachLink, String attachCode) {
+    return '您也可以透過 $attachLink 登入，並輸入驗證碼 $attachCode';
+  }
+
+  @override
+  String get ubuntuProMagicError => '無法啟用 Ubuntu Pro，請重試';
+
+  @override
+  String get ubuntuProEnableToken => '使用 token 啟用';
+
+  @override
+  String get ubuntuProEnableTokenError => '無法啟用 Ubuntu Pro';
+
+  @override
+  String ubuntuProEnableTokenSubtitle(String proLink) {
+    return '來自您的 IT 管理員，或來自 $proLink';
+  }
+
+  @override
+  String ubuntuProTokenPrompt(String proLink) {
+    return '請向您的系統管理員索取 Ubuntu Pro token，或前往 $proLink 取得';
+  }
+
+  @override
+  String get ubuntuProTokenLabel => 'Token';
+
+  @override
+  String get ubuntuProDisablePro => '停用 Ubuntu Pro';
+
+  @override
+  String get ubuntuProDisable => '停用';
+
+  @override
+  String get ubuntuProDisablePrompt => '停用 Ubuntu Pro 將解除您在此台電腦上的訂閱。您要繼續嗎？';
+
+  @override
+  String get ubuntuProEnable => '啟用';
+
+  @override
+  String get ubuntuProCancel => '取消';
+
+  @override
+  String get ubuntuProFeatureEnableError => '無法啟用此功能，請重試。';
+
+  @override
+  String get ubuntuProFeatureDisableError => '無法停用此功能，請重試。';
+
+  @override
+  String get ubuntuProCompliance => '合規性與系統強化';
+
+  @override
+  String get ubuntuProComplianceDisclaimer =>
+      '僅建議用於協助符合 FedRAMP、HIPAA 及其他合規與強化安全措施的要求。';
+
+  @override
+  String get ubuntuProComplianceUSGTitle => 'Ubuntu 安全指南 (USG)';
+
+  @override
+  String get ubuntuProComplianceUSGDescription =>
+      '透過 CIS 基準與 DISA-STIG 設定檔，自動化執行系統強化與稽核作業，同時支援針對特定環境的客製化調整。';
+
+  @override
+  String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
+
+  @override
+  String get ubuntuProComplianceFIPSDescription =>
+      '美國與加拿大政府針對符合 FIPS 140-2 資料保護標準所頒發的加密模組合規認證。';
+
+  @override
+  String get ubuntuProComplianceFIPSEnable => '啟用 FIPS';
+
+  @override
+  String get ubuntuProComplianceFIPSDisclaimer =>
+      '啟用 FIPS 後無法撤銷，且 Livepatch 將永久停用。';
+
+  @override
+  String get ubuntuProComplianceFIPSPrompt => '請選擇您偏好的 FIPS 選項';
+
+  @override
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS 及其更新';
+
+  @override
+  String get ubuntuProComplianceFIPSUpdatesDescription =>
+      '安裝通過 FIPS 140-2 驗證的軟體包，並允許定期進行安全性更新。';
+
+  @override
+  String get ubuntuProComplianceFIPSNoUpdates => '未更新版本的 FIPS';
+
+  @override
+  String get ubuntuProComplianceFIPSNoUpdatesDescription =>
+      '安裝通過 FIPS 140-2 驗證的軟體包。這些軟體包將不會更新，直至下次重新認證為止。';
+
+  @override
+  String get ubuntuProComplianceDocumentation => '資安合規文件';
+
+  @override
+  String get ubuntuProESMTitle => '擴展安全維護 (ESM)';
+
+  @override
+  String get ubuntuProESMDescription =>
+      'ESM 為 25,000 多個開源軟體包提供長達 10 年的安全性修補程式。針對關鍵、高風險及中風險的 CVE，提供持續性的漏洞管理服務。';
+
+  @override
+  String get ubuntuProESMMainTitle => '主要軟體包 (esm-infra)';
+
+  @override
+  String ubuntuProESMMainDescription(int year) {
+    return '2,300 個 Ubuntu Main 軟體包的安全更新，直至 $year';
+  }
+
+  @override
+  String get ubuntuProESMUniverseTitle => 'Universe 軟體包 (esm-apps)';
+
+  @override
+  String ubuntuProESMUniverseDescription(int year) {
+    return '針對超過 23,000 個 Ubuntu Universe 軟體包的額外安全性更新，有效期至 $year';
+  }
+
+  @override
+  String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
+
+  @override
+  String get ubuntuProLivepatchEnableTitle => '啟用 Livepatch';
+
+  @override
+  String get ubuntuProLivepatchEnableDescription => '在系統運行時套用核心安全性更新';
+
+  @override
+  String get ubuntuProLivepatchShowTitle => '在頂端列顯示 Livepatch 狀態';
 }

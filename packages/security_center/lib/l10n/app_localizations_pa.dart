@@ -9,10 +9,10 @@ class AppLocalizationsPa extends AppLocalizations {
   AppLocalizationsPa([String locale = 'pa']) : super(locale);
 
   @override
-  String get appTitle => 'Security Center';
+  String get appTitle => 'ਸੁਰੱਖਿਆ ਕੇਂਦਰ';
 
   @override
-  String get snapdRuleCategorySessionAllowed => 'Allow until logout';
+  String get snapdRuleCategorySessionAllowed => 'ਲਾਗ-ਆਉਟ ਕਰਨ ਤੱਕ ਮਨਜ਼ੂਰ';
 
   @override
   String get snapdRuleCategorySessionDenied => 'Deny until logout';
@@ -354,7 +354,7 @@ class AppLocalizationsPa extends AppLocalizations {
       'Recovery key file cannot be saved in a temporary location';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'ਅਣਪਛਾਤੀ ਗਲਤੀ';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
@@ -376,7 +376,7 @@ class AppLocalizationsPa extends AppLocalizations {
   String get recoveryKeyFilePickerTitle => 'Save recovery key file';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'ਲਿਖਤ ਫ਼ਾਇਲਾਂ';
 
   @override
   String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';

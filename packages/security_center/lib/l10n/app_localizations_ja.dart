@@ -12,54 +12,50 @@ class AppLocalizationsJa extends AppLocalizations {
   String get appTitle => 'セキュリティセンター';
 
   @override
-  String get snapdRuleCategorySessionAllowed => 'Allow until logout';
+  String get snapdRuleCategorySessionAllowed => 'ログアウトまで許可';
 
   @override
-  String get snapdRuleCategorySessionDenied => 'Deny until logout';
+  String get snapdRuleCategorySessionDenied => 'ログアウトまで拒否';
 
   @override
-  String get snapdRuleCategoryForeverAllowed => 'Allow always';
+  String get snapdRuleCategoryForeverAllowed => '常に許可';
 
   @override
-  String get snapdRuleCategoryForeverDenied => 'Deny always';
+  String get snapdRuleCategoryForeverDenied => '常に拒否';
 
   @override
-  String get snapPermissionReadLabel => 'Read';
+  String get snapPermissionReadLabel => '読み取り';
 
   @override
-  String get snapPermissionWriteLabel => 'Write';
+  String get snapPermissionWriteLabel => '書き込み';
 
   @override
-  String get snapPermissionExecuteLabel => 'Execute';
+  String get snapPermissionExecuteLabel => '実行';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'アクセス';
 
   @override
-  String get snapPermissionsEnableTitle =>
-      'Require apps to ask for system permissions';
+  String get snapPermissionsEnableTitle => 'システムのパーミッションを求めるようアプリに要求する';
 
   @override
   String get snapPermissionsEnableWarning =>
-      'This is an experimental feature for controlling access to your system’s resources.';
+      'これはコンピューターのリソースへのアクセスを制御するための実験的な機能です。';
 
   @override
-  String get snapPermissionsEnablingLabel =>
-      'Enabling, this may take a few seconds...';
+  String get snapPermissionsEnablingLabel => '有効にしています。数秒かかることがあります...';
 
   @override
-  String get snapPermissionsDisablingLabel =>
-      'Disabling, this may take a few seconds...';
+  String get snapPermissionsDisablingLabel => '無効にしています。数秒かかることがあります...';
 
   @override
   String get snapPermissionsExperimentalLabel => '実験的';
 
   @override
-  String get snapPermissionsOtherDescription =>
-      'You can manage other permissions in Settings › Applications.';
+  String get snapPermissionsOtherDescription => '他のパーミッションは設定 › アプリで管理できます。';
 
   @override
-  String get snapPermissionsPageTitle => 'App permissions';
+  String get snapPermissionsPageTitle => 'アプリのパーミッション';
 
   @override
   String snapRulesCount(int n) {
@@ -75,57 +71,55 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Manage $interface permissions for $snap.';
+    return '$snap向けの$interfaceパーミッションを管理します。';
   }
 
   @override
-  String get snapRulesPageEmptyTileLabel => 'No rules yet';
+  String get snapRulesPageEmptyTileLabel => 'ルールなし';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel => 'アクセスをリクエストしたアプリはまだありません';
 
   @override
-  String get snapRulesRemoveAll => 'Remove all rules';
+  String get snapRulesRemoveAll => 'すべてのルールを削除';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => 'すべてのパーミッションをリセット';
 
   @override
-  String get homeInterfacePageTitle => 'Home folder';
+  String get homeInterfacePageTitle => 'ホームフォルダー';
 
   @override
   String get homeInterfacePageDescription =>
-      'Manage permissions to access files in your Home folder.';
+      'ホームフォルダーにあるファイルにアクセスするパーミッションを管理します。';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'カメラ';
 
   @override
-  String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+  String get cameraInterfacePageDescription => 'アプリにカメラへのアクセスを許可する。';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'マイク';
 
   @override
-  String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+  String get microphoneInterfacePageDescription => 'アプリにマイクへのアクセスを許可する。';
 
   @override
-  String get interfacePageTitle => 'Manage permissions';
+  String get interfacePageTitle => 'パーミッションを管理';
 
   @override
   String get interfacePageDescription =>
-      'Strictly confined apps will ask you before accessing files and folders. This feature is experimental and subject to changes.';
+      '完全に閉じ込められたアプリはファイルやフォルダーにアクセスする前にあなたに尋ねます。この機能は実験的で変更される可能性があります。';
 
   @override
-  String get interfacePageLinkLearnMore => 'Learn more';
+  String get interfacePageLinkLearnMore => '詳しく知る';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Give feedback';
+  String get interfacePageLinkGiveFeedback => 'フィードバック';
 
   @override
-  String get interfacePageLinkReportIssues => 'Report issues';
+  String get interfacePageLinkReportIssues => '問題を報告';
 
   @override
   String interfaceSnapCount(int n) {
@@ -140,558 +134,532 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'ディスク暗号化';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'リカバリーキー';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'リカバリーキーは起動時にディスクのロック解除に失敗した場合、再びアクセスできるようにするために必要なものです。どこか安全なところに保存してください。';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'リカバリーキーは起動時にディスクのロック解除に失敗した場合、再びアクセスできるようにするために必要なものです。どこか安全なところに保存してください。$learnMoreLink';
   }
 
   @override
-  String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+  String get diskEncryptionPageLearnMore => 'ハードウェアベースの暗号化についての詳細';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => 'リカバリーキーをチェック...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey => 'リカバリーキーをチェック';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'チェック';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => '有効なキー';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => '無効なキー';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => 'リカバリーキーを入力';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => 'リカバリーキーは動作しています';
 
   @override
-  String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+  String get diskEncryptionPageKeyWorksBody => 'どこか安全なところに保存してください。';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork => 'リカバリーキーが動作していません';
 
   @override
-  String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+  String get diskEncryptionPageKeyDoesntWorkBody => 'キーを確認するか、新しいものに置き換えてください。';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'エラー';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton => 'リカバリーキーを置き換える...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader => 'リカバリーキーを置き換える';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      '新しいリカバリーキーをどこか安全な場所に保存します。いったん置き換えると、古いキーはもう使えなくなります。';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'QRコードを表示';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'ファイルに保存';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      'リカバリーキーを安全なところに保存しました';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => '置き換える';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => '破棄する';
 
   @override
-  String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+  String get diskEncryptionPageReplaceDialogSuccessHeader => 'リカバリーキーを置き換えました';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      '忘れずにどこか安全なところに保存してください。';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'リカバリーキーの置き換えに失敗しました';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      '何らかの理由でリカバリーキーの置き換えに失敗しました。古いキーが有効です。';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+      'Ubuntuデスクトップ - 暗号化リカバリーキー';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'QRコードをスキャンしてリカバリーキーを保存し、パスワードマネージャーなどの安全なところに保存してください。後の利用のため、写真を撮ってください。';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification => 'クリップボードにコピー';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'コピー';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      '暗号化設定が利用できません';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      'このコンピューターの暗号化状態を取得するのに失敗しました。';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      'このコンピューターのTPM設定がサポートされている状態になっていません。';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'このsnapdバージョンはサポートされていません';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      'セキュリティセンターとsnapdがアップデートされているか確認してください。';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      'セキュリティセンターがsnapdインターフェースに接続できません';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      '修正するには次のコマンドを実行します:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'PINを追加...';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton => 'パスフレーズを追加...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading => 'パスフレーズを追加';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'PINを追加';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'PINはコンピューターを起動するたびに入力する必要があります。PINはユーザーパスワードとは異なります。';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'PINを忘れた場合、リカバリーキーを使用してディスクへのアクセスを取り戻します。';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'コンピューター起動時に毎回パスフレーズを入力する必要があります。このパスフレーズはユーザーパスワードとは異なります。';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'パスワードを忘れた場合、リカバリーキーを使用してディスクへのアクセスを取り戻します。';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+  String get diskEncryptionPageAdditionalSecurityHeader => '追加のセキュリティ';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      '追加のセキュリティとしてパスフレーズまたはPINを設定できます。コンピューターを起動するたびに入力する必要があります。';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore => '詳しく知る';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => '追加';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'PINを削除...';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton => 'パスフレーズを削除...';
 
   @override
-  String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+  String get diskEncryptionPageAddingPin => 'PINを追加しています。数秒かかることがあります...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'パスフレーズを追加しています。数秒かかることがあります...';
 
   @override
-  String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+  String get diskEncryptionPageRemovingPin => 'PINを削除しています。数秒かかることがあります...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'パスフレーズを削除しています。数秒かかることがあります...';
 
   @override
-  String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+  String get recoveryKeyExceptionFileSystemTitle => 'リカバリーキーファイルが保存できませんでした';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'リカバリーキーファイルが一時場所に保存できませんでした';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => '不明なエラー';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+      'リカバリーキーをファイルに保存するのに失敗しました';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+      'そのファイルの場所に書き込めるパーミッションがありません。';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      'フォルダーに保存する権限がありません。別の場所にするか、他の方法にしてください。';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      'USBメモリーなど別の場所に保存するか、他の方法にしてください。';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle => 'リカバリーキーファイルの保存';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'テキストファイル';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled => 'ハードウェアベース暗号化は有効です';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+      '暗号化キーはこのコンピューターのTrusted Platform Module (TPM)に保存されています。';
 
   @override
-  String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+  String get recoveryKeyTPMExplanationLearnMore => 'ハードウェアベース暗号化についての詳細';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled => '暗号化パスワードは有効です';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'パスフレーズを変更';
 
   @override
-  String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+  String get recoveryKeyPassphraseBody => 'コンピューターを起動する際に毎回パスフレーズを入力する必要があります。';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'パスフレーズを変更...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => '現在のパスフレーズ';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => '新しいパスフレーズ';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => 'パスフレーズを確認';
 
   @override
-  String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+  String get recoveryKeyPassphraseCurrentError => 'パスフレーズが間違っています。もう一度試してください';
 
   @override
-  String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+  String get recoveryKeyPassphraseNewError => '最低4文字以上である必要があります';
 
   @override
-  String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+  String get recoveryKeyPassphraseConfirmError => 'パスフレーズが一致しません。もう一度試してください';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'パスフレーズを変更';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => '暗号化PINは有効です';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => '暗号化PIN';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader => '暗号化パスフレーズ';
 
   @override
-  String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+  String get recoveryKeyPinBody => 'コンピューターを起動する際に毎回PINを入力する必要があります。';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'PINを変更...';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => '現在のPIN';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => '新しいPIN';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'PINを確認';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => 'PINが間違っています。もう一度試してください';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError => 'PINが一致しません。もう一度試してください';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'PINを変更';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => '表示';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => '隠す';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => '変更';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'PINを更新しました';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+  String get recoveryKeyPassphrasePinSuccessBody => 'PINを更新するのに成功しました。';
 
   @override
-  String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+  String get recoveryKeyPassphrasePassphraseSuccessHeader => 'パスフレーズを更新しました';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      'パスフレーズのアップデートに成功しました。';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      '弱いパスフレーズなので長くするかもっと複雑にしてください';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      '適切なパスフレーズにするため、もっと長くするかもっと複雑にするかでよりよいセキュリティにしてください';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => '強いパスフレーズ';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+      '弱いPINなのでもっと長くするか、簡単に予想できないものにしてください';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      '適切なPINにするため、もっと長くするか簡単に予想できないものにしてよりよりセキュリティにしてください';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => '充分な強度のPINです';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => '何かがおかしいです';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
 
   @override
-  String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+  String get ubuntuProNotSupported => 'このバージョンのUbuntuではUbuntu Proは利用できません';
 
   @override
-  String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+  String get ubuntuProNotSupportedDetails => 'Ubuntu ProはLTSリリースである必要があります';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'Ubuntu Proはこのsnapdバージョンではサポートされていません';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'Ubuntu Proを管理するにはsnapdをアップデートしてください';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Ubuntu Proは有効です';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'コンピューターにエンタープライズグレードのセキュリティとコンプライアンスを提供します。個人利用の場合は常に無料です。 $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore => 'Ubuntu Proを詳しく知る';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Ubuntu Proを有効にする';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'Ubuntu Oneアカウントで有効にする';
 
   @override
-  String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+  String get ubuntuProEnableMagicSubtitle => 'アカウント作成は無料です';
 
   @override
-  String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+  String get ubuntuProMagicPrompt => 'Ubuntu Oneアカウントでログインするか、無料で作成してください。';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => 'ブラウザーで継続';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return '$attachLink からログインし、コード $attachCode を入力してください';
   }
 
   @override
-  String get ubuntuProMagicError =>
-      'Unable to enable Ubuntu Pro, please try again';
+  String get ubuntuProMagicError => 'Ubuntu Proを有効にできません。やり直してください';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'トークンで有効化';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError => 'Ubuntu Proを有効にできません';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'IT管理者か $proLink より';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return '管理者か $proLink からUbuntu Proのトークンを取得してください';
   }
 
   @override
-  String get ubuntuProTokenLabel => 'Token';
+  String get ubuntuProTokenLabel => 'トークン';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Ubuntu Proを無効にする';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => '無効';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Ubuntu Proを無効にするとこのマシンをサブスクリプションから除外することになります。継続しますか？';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => '有効';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'キャンセル';
 
   @override
-  String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, please try again.';
+  String get ubuntuProFeatureEnableError => '機能を有効にできません。やり直してください。';
 
   @override
-  String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, please try again.';
+  String get ubuntuProFeatureDisableError => '機能を無効にできません。やり直してください。';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance => 'コンプライアンスとハードニング';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'FedRAMP、HIPAA、その他のコンプライアンスおよびセキュリティ要件への対応でのみ推奨されます。';
 
   @override
-  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+  String get ubuntuProComplianceUSGTitle => 'Ubuntuセキュリティガイド (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'CISベンチマークおよびDISA-STIGプロファイルを使用して、環境固有のカスタマイズを行いつつ、セキュリティ強化と監査を自動化します。';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'FIPS 140-2データ保護標準に準拠する、米国およびカナダ政府の暗号化モジュール認証。';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'FIPSを有効化';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'FIPSを有効にすると元に戻せず、Livepatchは永久に無効になります。';
 
   @override
-  String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+  String get ubuntuProComplianceFIPSPrompt => 'FIPSオプションを選択してください';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'アップデートありFIPS';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'FIPS 140-2適合パッケージをインストールし、通常のセキュリティアップデートを許可します。';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'アップデートなしFIPS';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'FIPS 140-2適合パッケージをインストールします。次の再認証までアップデートされません。';
 
   @override
-  String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+  String get ubuntuProComplianceDocumentation => 'セキュリティコンプライアンスのドキュメント';
 
   @override
-  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+  String get ubuntuProESMTitle => '拡張セキュリティメンテンナンス(ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for 25,000+ open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.';
+      'ESMは25000を超えるオープンソースパッケージのセキュリティパッチを提供します。CVEの緊急、重要、警告に対する継続した脆弱性管理を獲得できます。';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'Mainパッケージ(esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for 2,300 Ubuntu Main package until $year';
+    return '$year までの2300に渡るUbuntu Mainパッケージのセキュリティアップデート';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'Universeパッケージ(esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for over 23,000 Ubuntu Universe packages until $year';
+    return '$year までの23000に渡るUbuntu Universeパッケージの追加セキュリティアップデート';
   }
 
   @override
-  String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
+  String get ubuntuProLivepatchTitle => 'カーネルLivepatch';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'Livepatchを有効化';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'システムの実行中にカーネルのセキュリティアップデートを適用';
 
   @override
-  String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+  String get ubuntuProLivepatchShowTitle => 'Livepatchステータスをトップバーに表示';
 }

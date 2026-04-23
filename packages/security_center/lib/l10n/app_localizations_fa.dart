@@ -33,7 +33,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'اجرا';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'دسترسی';
 
   @override
   String get snapPermissionsEnableTitle =>
@@ -87,7 +87,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get snapRulesRemoveAll => 'برداشتن همهٔ قاعده‌ها';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => 'بازنشانی همهٔ اجازه‌ها';
 
   @override
   String get homeInterfacePageTitle => 'شاخهٔ خانه';
@@ -97,11 +97,11 @@ class AppLocalizationsFa extends AppLocalizations {
       'مدیریت اجازه‌ها برای دسترسی به پرونده‌ها در شاخهٔ خانگیتان.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'دوربین';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+      'اجازه به کاره‌ها برای دسترسی به دوربینتان.';
 
   @override
   String get microphoneInterfacePageTitle => 'Microphone';
@@ -138,10 +138,10 @@ class AppLocalizationsFa extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'رمزنگاری دیسک';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'کلید بازیابی';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
@@ -157,25 +157,25 @@ class AppLocalizationsFa extends AppLocalizations {
       'Learn more about hardware-backed encryption';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => 'بررسی کلید بازیابی…';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey => 'بررسی کلید بازیابی';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'بررسی';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => 'کلید معتبر';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => 'کلید نامعتبر';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => 'ورود کلید بازیابیتان';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => 'کلید بازیابی کار می‌کند';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
@@ -189,37 +189,37 @@ class AppLocalizationsFa extends AppLocalizations {
       'Check the key or replace it with a new one.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'خطا';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton => 'جایگزینی کلید بازیابی…';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader => 'جایگزینی کلید بازیابی';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
       'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'نمایش کد پاس';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'ذخیره در پرونده';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
       'I saved my recovery key somewhere safe';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => 'جایگزینی';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => 'دور انداختن';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+      'کلید بازیابی جایگزین شد';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
@@ -227,7 +227,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'جایگزینی کلید بازیابی شکست خورد';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
@@ -242,10 +242,11 @@ class AppLocalizationsFa extends AppLocalizations {
       'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification =>
+      'در تخته‌گیره رونوشت شد';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'رونوشت';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
@@ -345,14 +346,14 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+      'پروندهٔ کلید بازیابی ذخیره نشد';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'کلید بازیابی نتوانست در مکان موقّتی ذخیره شود';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'خطای ناشناخته';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
@@ -371,13 +372,13 @@ class AppLocalizationsFa extends AppLocalizations {
       'Try a different location, such as a removable drive, or use another method.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle => 'ذخیرهٔ پروندهٔ کلید بازیابی';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'پرونده‌های متنی';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled => 'کلید رمزنگاری سخت‌افزاری به کار افتاده';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
@@ -388,30 +389,31 @@ class AppLocalizationsFa extends AppLocalizations {
       'Learn more about hardware-backed encryption';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled =>
+      'عبارت عبور رمزنگاری به کار افتاده';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'تغییر عبارت عبور';
 
   @override
   String get recoveryKeyPassphraseBody =>
       'You need to enter your passphrase every time your computer starts.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'تغییر عبارت عبور…';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => 'عبارت عبور کنونی';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => 'عبارت عبور جدید';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => 'تأیید عبارت عبور';
 
   @override
   String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+      'عبارت عبور نادرست. تلاش دوباره';
 
   @override
   String get recoveryKeyPassphraseNewError =>
@@ -422,53 +424,53 @@ class AppLocalizationsFa extends AppLocalizations {
       'Passphrases do not match, try again';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'تغییر عبارت عبور';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => 'پین رمزنگاری به کار افتاده';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => 'پین رمزنگاری';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader => 'عبارت عبور رمزنگاری';
 
   @override
   String get recoveryKeyPinBody =>
       'You need to enter your PIN every time your computer starts.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'تغییر پین…';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'پین کنونی';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => 'پین جدید';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'تأیید پین';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => 'پین نادرست. تلاش دوباره';
 
   @override
   String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'تغییر پین';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => 'نمایش';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => 'نهفتن';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => 'تغییر';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'پین به‌روز شد';
 
   @override
   String get recoveryKeyPassphrasePinSuccessBody =>
@@ -476,7 +478,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+      'عبارت عبور به‌روز شد';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
@@ -491,7 +493,7 @@ class AppLocalizationsFa extends AppLocalizations {
       'Fair passphrase, make it longer or more complex for better security';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => 'عبارت عبور قوی';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
@@ -505,7 +507,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => 'چیزی اشتباه پیش رفت';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';

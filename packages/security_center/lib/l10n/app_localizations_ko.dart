@@ -33,7 +33,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get snapPermissionExecuteLabel => '실행';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => '접근';
 
   @override
   String get snapPermissionsEnableTitle => '각 앱이 시스템 권한을 요청하도록 하기';
@@ -78,13 +78,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => '정책 없음';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel => '아직 접근을 요청한 앱이 없습니다';
 
   @override
   String get snapRulesRemoveAll => '모든 정책 삭제';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => '모든 권한 재설정';
 
   @override
   String get homeInterfacePageTitle => '홈 폴더';
@@ -93,11 +93,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get homeInterfacePageDescription => '사용자의 홈 폴더의 파일에 접근하는 권한을 관리합니다.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => '카메라';
 
   @override
-  String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+  String get cameraInterfacePageDescription => '앱이 카메라에 접근할 수 있게 승인합니다.';
 
   @override
   String get microphoneInterfacePageTitle => 'Microphone';
@@ -135,142 +134,137 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => '디스크 암호화';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => '복구 키';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      '복구 키는 시작 중에 디스크 잠금 해제가 실패했을 경우 데이터에 다시 접근하기 위해 필요합니다. 다른 안전한 장소에 보관해 두십시오.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return '복구 키는 시작 중에 디스크 잠금 해제가 실패했을 경우 데이터에 다시 접근하기 위해 필요합니다. 다른 안전한 장소에 보관해 두십시오. $learnMoreLink';
   }
 
   @override
-  String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+  String get diskEncryptionPageLearnMore => '복구 키에 대해 더 알아보기';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => '복구 키 검증...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey => '복구 키 검증';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => '검증';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => '유효한 키';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => '유효하지 않은 키';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => '복구 키를 입력하세요';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => '복구 키가 정상 작동함';
 
   @override
-  String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+  String get diskEncryptionPageKeyWorksBody => '다른 안전한 장소에 보관해 두십시오.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork => '복구 키가 동작하지 않음';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+      '키를 다시 확인하거나 새로운 키로 교체하십시오.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => '오류';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton => '복구 키 교체하기...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader => '복구 키 교체하기';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      '새로운 복구 키를 다른 안전한 장소에 보관해 두십시오. 키를 교체하면 이전 키는 더 이상 사용할 수 없습니다.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'QR 코드 보이기';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => '파일로 저장';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      '복구 키를 다른 안전한 곳에 저장했습니다';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => '교체';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => '폐기';
 
   @override
-  String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+  String get diskEncryptionPageReplaceDialogSuccessHeader => '복구 키 교체됨';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      '다른 안전한 곳에 보관해 두십시오.';
 
   @override
-  String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+  String get diskEncryptionPageReplaceDialogErrorHeader => '복구 키 교체 실패';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      '복구 키를 교체하는 데 문제가 발생했습니다. 기존 키는 그대로 사용 가능합니다.';
 
   @override
-  String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+  String get diskEncryptionPageReplaceDialogQRHeader => '우분투 데스크톱 - 암호화 복구 키';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'QR 코드를 스캔하여 복구 키를 복사하고 암호 관리자 등의 다른 안전한 장소에 보관해 두십시오. 나중에 사용하기 위해 사진을 찍어 보관할 수도 있습니다.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification => '클립보드에 복사됨';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => '복사';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      '암호화 설정 사용 불가';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      '이 컴퓨터의 암호화 상태를 가져올 수 없습니다.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      '이 컴퓨터의 TPM 설정이 지원되지 않는 상태입니다.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'snapd 버전이 지원되지 않습니다';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      '보안 센터와 snapd가 업데이트되었는지 확인하세요.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      '보안 센터가 snapd 인터페이스에 연결할 수 없습니다';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      '이 문제를 해결하려면 터미널에서 다음 명령어를 실행하세요:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
@@ -341,15 +335,14 @@ class AppLocalizationsKo extends AppLocalizations {
       'Removing passphrase, this may take a few seconds...';
 
   @override
-  String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+  String get recoveryKeyExceptionFileSystemTitle => '복구 키 파일 저장되지 않음';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      '복구 키 파일을 임시 경로에 저장할 수 없음';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => '알 수 없는 오류';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
@@ -361,20 +354,20 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      '해당 폴더에 쓰기 권한이 없습니다. 다른 경로를 사용하거나 다른 방법을 시도해 보십시오.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      '이동식 저장소 등의 다른 경로를 지정하거나 다른 방법을 이용하십시오.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle => '복구 키 파일 저장';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => '텍스트 파일';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled => '하드웨어 기반 암호화 활성화됨';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
@@ -385,124 +378,118 @@ class AppLocalizationsKo extends AppLocalizations {
       'Learn more about hardware-backed encryption';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled => '암호화 비밀번호 활성화됨';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => '비밀번호 변경';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      '시작할 때 비밀번호를 입력하여 디스크를 잠금 해제해야 합니다. 비밀번호를 바꿀 수는 있지만 해제할 수는 없습니다.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => '비밀번호 변경...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => '현재 비밀번호';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => '새로운 비밀번호';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => '비밀번호 확인';
 
   @override
-  String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+  String get recoveryKeyPassphraseCurrentError => '비밀번호가 틀렸습니다. 다시 시도해 보세요';
 
   @override
-  String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+  String get recoveryKeyPassphraseNewError => '4글자 이상이어야 합니다';
 
   @override
-  String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+  String get recoveryKeyPassphraseConfirmError => '비밀번호가 일치하지 않습니다. 다시 시도하세요';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => '비밀번호 변경';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => '암호화 PIN 활성화됨';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => '암호화 PIN';
 
   @override
   String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      '시작할 때 PIN을 입력하여 디스크를 잠금 해제해야 합니다. PIN을 바꿀 수는 있지만 해제할 수는 없습니다.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'PIN 변경...';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => '현재 PIN';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => '새로운 PIN';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'PIN 확인';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => 'PIN이 틀렸습니다. 다시 시도해 보세요';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError => 'PIN이 일치하지 않습니다. 다시 시도하세요';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'PIN 변경';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => '보이기';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => '숨기기';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => '변경';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN 업데이트됨';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+  String get recoveryKeyPassphrasePinSuccessBody => 'PIN이 업데이트 완료되었습니다.';
 
   @override
-  String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+  String get recoveryKeyPassphrasePassphraseSuccessHeader => '비밀번호 업데이트됨';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      '비밀번호가 업데이트 완료되었습니다.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      '약한 비밀번호입니다. 더 길거나 복잡하게 만드세요';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      '적당한 비밀번호입니다. 더 길거나 복잡하게 만들어 더욱 안전한 비밀번호를 만드세요';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => '강력한 비밀번호';
 
   @override
-  String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+  String get recoveryKeyPinEntropyBelowMin => '약한 PIN입니다. 더 길거나 예측하기 힘들게 만드세요';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      '적당한 PIN입니다. 더 길거나 예측하기 힘들게 만들어 더욱 안전힌 PIN을 만드세요';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => 'PIN이 충분히 깁니다';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => '문제가 발생했습니다';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
