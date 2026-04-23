@@ -1,77 +1,269 @@
 {
-  "snapdRuleCategoryForeverDenied": "Malpermesi ĉiam",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "Legi",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "Skribi",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Ruli",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsEnableTitle": "Igi programojn peti por sistemaj permesoj",
-  "@snapPermissionsEnableTitle": {},
-  "snapPermissionsEnableWarning": "Jen eksperimenta funkcio por kontroli uzojn de sistemaĵoj.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsExperimentalLabel": "Eksperimente",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsPageTitle": "Programaj permesoj",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, plural, =0{neniu regulo} =1{1 regulo} other{{n} reguloj}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsEnablingLabel": "Ŝaltante, tio eble daŭros kelkajn sekundojn…",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "Malŝaltante, tio eble daŭros kelkajn sekundojn…",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsOtherDescription": "Vi povas administri aliajn permesojn ĉe «Agordoj › Aplikoj».",
-  "@snapPermissionsOtherDescription": {},
-  "interfacePageLinkLearnMore": "Lerni plu",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkReportIssues": "Raporti problemojn",
-  "@interfacePageLinkReportIssues": {},
-  "homeInterfacePageTitle": "Hejmdosierujo",
-  "@homeInterfacePageTitle": {},
-  "snapRulesPageEmptyTileLabel": "Neniu regulo ankoraŭ",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Forigi ĉiujn regulojn",
-  "@snapRulesRemoveAll": {},
-  "interfacePageTitle": "Administri permesojn",
-  "@interfacePageTitle": {},
-  "interfacePageLinkGiveFeedback": "Recenzi",
-  "@interfacePageLinkGiveFeedback": {},
-  "snapRulesPageDescription": "Administri permesojn de {snap} pri {interface}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "homeInterfacePageDescription": "Administri permesojn uzi dosierojn en via hejma dosierujo.",
-  "@homeInterfacePageDescription": {},
-  "snapdRuleCategorySessionDenied": "Malpermesi ĝis adiaŭo",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategorySessionAllowed": "Permesi ĝis adiaŭo",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategoryForeverAllowed": "Permesi ĉiam",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "interfaceSnapCount": "{n, plural, =0{neniu programo} =1{1 programo} other {{n} programoj}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "interfacePageDescription": "Strikte enfermitaj programoj petos vin antaŭ ol uzi dosierojn kaj dosierujojn. Tiu funkcio estas eksperimenta kaj eble modifota.",
-  "@interfacePageDescription": {},
-  "appTitle": "Sekureca Centro",
-  "@appTitle": {}
+    "snapdRuleCategoryForeverDenied": "Malpermesi ĉiam",
+    "snapPermissionReadLabel": "Legi",
+    "snapPermissionWriteLabel": "Skribi",
+    "snapPermissionExecuteLabel": "Ruli",
+    "snapPermissionsEnableTitle": "Igi programojn peti por sistemaj permesoj",
+    "snapPermissionsEnableWarning": "Jen eksperimenta funkcio por kontroli uzojn de sistemaĵoj.",
+    "snapPermissionsExperimentalLabel": "Eksperimente",
+    "snapPermissionsPageTitle": "Programaj permesoj",
+    "snapRulesCount": "{n, plural, =0{neniu regulo} =1{1 regulo} other{{n} reguloj}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsEnablingLabel": "Ŝaltante, tio eble daŭros kelkajn sekundojn…",
+    "snapPermissionsDisablingLabel": "Malŝaltante, tio eble daŭros kelkajn sekundojn…",
+    "snapPermissionsOtherDescription": "Vi povas administri aliajn permesojn ĉe «Agordoj › Aplikoj».",
+    "interfacePageLinkLearnMore": "Lerni plu",
+    "interfacePageLinkReportIssues": "Raporti problemojn",
+    "homeInterfacePageTitle": "Hejmdosierujo",
+    "snapRulesPageEmptyTileLabel": "Neniu regulo ankoraŭ",
+    "snapRulesRemoveAll": "Forigi ĉiujn regulojn",
+    "interfacePageTitle": "Administri permesojn",
+    "interfacePageLinkGiveFeedback": "Recenzi",
+    "snapRulesPageDescription": "Administri permesojn de {snap} pri {interface}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "homeInterfacePageDescription": "Administri permesojn uzi dosierojn en via hejma dosierujo.",
+    "snapdRuleCategorySessionDenied": "Malpermesi ĝis adiaŭo",
+    "snapdRuleCategorySessionAllowed": "Permesi ĝis adiaŭo",
+    "snapdRuleCategoryForeverAllowed": "Permesi ĉiam",
+    "interfaceSnapCount": "{n, plural, =0{neniu programo} =1{1 programo} other {{n} programoj}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "interfacePageDescription": "Strikte enfermitaj programoj petos vin antaŭ ol uzi dosierojn kaj dosierujojn. Tiu funkcio estas eksperimenta kaj eble modifota.",
+    "appTitle": "Sekureca Centro",
+    "diskEncryptionPageCopySemanticLabel": "Kopii",
+    "recoveryKeyExceptionUnknownTitle": "Nekonata eraro",
+    "recoveryKeyFilePickerFilter": "Tekstaj dosieroj",
+    "diskEncryptionPageReplaceDialogShowQR": "Montri QR-kodon",
+    "diskEncryptionPageReplaceDialogSave": "Konservi en dosieron",
+    "diskEncryptionPageReplaceDialogReplace": "Anstataŭigi",
+    "diskEncryptionPageReplaceDialogDiscard": "Forĵeti",
+    "recoveryKeyPassphraseButton": "Ŝanĝi pasfrazon…",
+    "recoveryKeyPassphraseCurrent": "Aktuala pasfrazo",
+    "recoveryKeyPassphraseNew": "Nova pasfrazo",
+    "recoveryKeyPassphraseConfirm": "Konfirmu pasfrazon",
+    "recoveryKeyPassphraseHeader": "Ŝanĝi pasfrazon",
+    "recoveryKeyPassphraseShow": "Malkaŝi",
+    "recoveryKeyPassphraseChange": "Ŝanĝi",
+    "diskEncryptionPageTitle": "Diska ĉifrado",
+    "diskEncryptionPageError": "Eraro",
+    "diskEncryptionPageCheck": "Kontroli",
+    "diskEncryptionPageValidKey": "Valida ŝlosilo",
+    "diskEncryptionPageInvalidKey": "Nevalida ŝlosilo",
+    "recoveryKeyPassphraseHide": "Kaŝi",
+    "recoveryKeyFilePickerTitle": "Konservi dosieron de restaŭra ŝlosilo",
+    "recoveryKeyExceptionFileSystemTitle": "Dosiero de restaŭra ŝlosilo ne konserviĝis",
+    "recoveryKeyExceptionDisallowedPathTitle": "Oni ne konservu la dosieron de restaŭra ŝlosilo en provizoran lokon",
+    "recoveryKeyExceptionDisallowedPathBody": "Provu alian lokon, ekzemple poŝmemorilon, aŭ uzu alian metodon.",
+    "recoveryKeyExceptionFileSystemBody": "Vi ne rajtas skribi en tiun dosierujon. Provu alian lokon, aŭ uzu alian metodon.",
+    "diskEncryptionPageReplaceButton": "Anstataŭigi restaŭran ŝlosilon…",
+    "diskEncryptionPageReplaceDialogHeader": "Anstataŭigi restaŭran ŝlosilon",
+    "diskEncryptionPageReplaceDialogBody": "Konservu la novan restaŭran ŝlosilon en sekura loko. Post anstataŭigo, vi ne plu povos uzi la malnovan ŝlosilon.",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Restaŭra ŝlosilo anstataŭiĝis",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Mi konservis mian restaŭran ŝlosilon en sekura loko",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Konservu ĝin en sekura loko.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Malsukcesis anstataŭigi restaŭran ŝlosilon",
+    "diskEncryptionPageClipboardNotification": "Kopiite en tondujon",
+    "diskEncryptionPageReplaceDialogErrorBody": "Io fiaskis dum anstataŭigado de via restaŭra ŝlosilo. Via malnova ŝlosilo restas valida.",
+    "diskEncryptionPageReplaceDialogQRBody": "Skanu la QR-kodon por kopii la restaŭran ŝlosilon kaj konservu ĝin en sekura loko kiel ekzemple pasvortadministrilo. Vi ankaŭ povas foti ĝin por posta uzado.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop – Ĉifra restaŭra ŝlosilo",
+    "recoveryKeyPassphraseEnabled": "Ĉifra pasfrazo estas ŝaltita",
+    "recoveryKeyPassphraseBody": "Vi devas tajpi vian pasfrazon ĉiun fojon, kiam via komputilo startas.",
+    "recoveryKeyPassphraseCurrentError": "Pasfrazo ne ĝustas; reprovu",
+    "recoveryKeyTPMEnabled": "Aparato-baza ĉifrado estas ŝaltita",
+    "recoveryKeyPinHeader": "Ĉifra PIN",
+    "recoveryKeyPinEnabled": "Ĉifra PIN estas ŝaltita",
+    "recoveryKeyPinButton": "Ŝanĝi PIN…",
+    "recoveryKeyPinBody": "Vi devas tajpi vian PIN ĉiun fojon, kiam via komputilo startas.",
+    "recoveryKeyPinCurrentError": "PIN ne estas ĝusta; reprovu",
+    "recoveryKeyPinConfirmError": "PIN-oj ne kongruas; reprovu",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Pasfrazo ŝanĝiĝis",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN ŝanĝiĝis",
+    "recoveryKeyPassphrasePinSuccessBody": "Via PIN estis sukcese ŝanĝita.",
+    "diskEncryptionPageRecoveryKey": "Restaŭra ŝlosilo",
+    "diskEncryptionPageCheckKey": "Kontroli restaŭran ŝlosilon…",
+    "diskEncryptionPageDialogHeaderCheckKey": "Kontroli restaŭran ŝlosilon",
+    "diskEncryptionPageEnterKey": "Tajpu vian restaŭran ŝlosilon",
+    "diskEncryptionPageKeyWorksBody": "Konservu ĝin en sekura loko.",
+    "diskEncryptionPageKeyDoesntWork": "Restaŭra ŝlosilo ne funkcias",
+    "diskEncryptionPageKeyWorks": "Restaŭra ŝlosilo funkcias",
+    "diskEncryptionPageLearnMore": "Lerni plu pri aparato-baza ĉifrado",
+    "diskEncryptionPageKeyDoesntWorkBody": "Kontrolu la ŝlosilon aŭ anstataŭigu ĝin per alia.",
+    "recoveryKeyPinEntropyBelowMin": "PIN estas malforta; plilongigu aŭ kompliku ĝin",
+    "recoveryKeyPinEntropyOptimal": "PIN esta sufiĉe longa",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Via pasfrazo estis sukcese ŝanĝita.",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "La pasfrazo estas malforteta; por pli da sekureco, plilongigu aŭ kompliku ĝin",
+    "recoveryKeyPinDialogHeader": "Ŝanĝi PIN",
+    "recoveryKeyPinConfirm": "Konfirmi PIN",
+    "recoveryKeyPinNew": "Nova PIN",
+    "recoveryKeyPassphraseEntropyBelowMin": "La pasfrazo estas tro malforta; plilongigu aŭ kompliku ĝin",
+    "recoveryKeyPassphraseEntropyOptimal": "Forta pasfrazo",
+    "recoveryKeyPassphraseDialogHeader": "Ŝanĝi pasfrazon",
+    "recoveryKeyPinEntropyBelowOptimal": "PIN estas malforteta; por pli da sekureco, plilongigu aŭ kompliku ĝin",
+    "recoveryKeyPassphraseNewError": "Pasfrazo enhavu almenaŭ 4 skribsignojn",
+    "recoveryKeyPinCurrent": "Aktuala PIN",
+    "recoveryKeyPassphraseConfirmError": "Pasfrazoj ne kongruas; reprovu",
+    "diskEncryptionPageStoreYourKey": "La restaŭra ŝlosilo ebligas al vi reakiri viajn datenojn, se vi ne povas malŝlosi la diskon dum starto. Konservu ĝin en sekura loko.",
+    "recoveryKeySomethingWentWrongHeader": "Io fiaskis",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Via versio de snapd ne estas subtenata",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Kontrolu, ĉu la Sekureca Centro kaj snapd estas ĝisdataj.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Ne povas konekti Sekurecan Centron al la interfaco de snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Por ripari tion, rulu la jenan komandon en la terminalo:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "recoveryKeyEncrpytionPassphraseHeader": "Ĉifra pasfrazo",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Ĉifraj agordoj ne disponeblas",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Malsukcesis akiri la staton de ĉifrado de ĉi tiu komputilo.",
+    "recoveryKeyTPMExplanationLearnMore": "Lernu plu pri aparato-baza ĉifrado",
+    "diskEncryptionPageStoreYourKeyWithLink": "La restaŭra ŝlosilo ebligas reatingi viajn datenojn, se oni malsukcesas malŝlosi la diskon dum starto. Konservu ĝin en sekura loko. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "recoveryKeyExceptionFilePermissionTitle": "Malsukcesis konservi vian restaŭran ŝlosilon al dosiero",
+    "recoveryKeyExceptionFilePermissionBody": "Vi ne rajtas skribi al tiu dosierloko.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "La Fidata Platforma Modulo (TPM) de via komputilo ne estas en subtenata stato.",
+    "recoveryKeyTPMExplanationBody": "La ĉifraj ŝlosiloj konserviĝas en la Fidata Platforma Modulo (TPM) de via komputilo.",
+    "snapPermissionAccessLabel": "Atingi",
+    "cameraRulesPageEmptyTileLabel": "Neniu programo petis atingon ankoraŭ",
+    "cameraInterfacePageTitle": "Kamerao",
+    "cameraInterfacePageDescription": "Permesi al programoj atingi viajn kamerojn.",
+    "snapRulesResetAllPermissions": "Apriorigi ĉiujn permesojn",
+    "diskEncryptionPageAddPinDialogSaveButton": "Aldoni",
+    "diskEncryptionPageAddPinButton": "Aldoni PIN…",
+    "diskEncryptionPageAddPassphraseButton": "Aldoni pasfrazon…",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Aldoni pasfrazon",
+    "diskEncryptionPageAddPinDialogHeading": "Aldoni PIN",
+    "diskEncryptionPageAdditionalSecurityHeader": "Plia sekureco",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Lerni plu",
+    "diskEncryptionPageRemovePinButton": "Forigi PIN…",
+    "diskEncryptionPageRemovePassphraseButton": "Forigi pasfrazon…",
+    "diskEncryptionPageAddingPin": "Aldonante PIN, tio eble daŭros kelkajn sekundojn…",
+    "diskEncryptionPageAddingPassphrase": "Aldonante pasfrazon, tio eble daŭros kelkajn sekundojn…",
+    "diskEncryptionPageRemovingPin": "Forigante PIN, tio eble daŭros kelkajn sekundojn…",
+    "diskEncryptionPageRemovingPassphrase": "Forigante pasfrazon, tio eble daŭros kelkajn sekundojn…",
+    "diskEncryptionPageAddPinDialogBodyMain": "Vi devas tajpi vian PIN ĉiun fojon, kiam via komputilo startas. Ĉi tiu PIN diferencas de via uzanto-pasvorto.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Vi devas tajpi vian pasfrazon ĉiun fojon, kiam via komputilo startas. Ĉi tiu pasfrazo diferencas de via uzanto-pasvorto.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Se vi forgesos vian PIN, vi povos reatingi la diskon per la restaŭra ŝlosilo.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Se vi forgesos vian pasfrazon, vi povos reatingi la diskon per la restaŭra ŝlosilo.",
+    "diskEncryptionPageAdditionalSecurityBody": "Vi povas starigi pasfrazon aŭ PIN por plia sekureco. Vi devos tajpi ĝin ĉiun fojon, kiam via komputilo startos.",
+    "microphoneInterfacePageTitle": "Mikrofono",
+    "microphoneInterfacePageDescription": "Permesi al programoj atingi vian mikrofonon.",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro ne estas disponebla por ĉi tiu versio de Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro postulas daŭre subtenatan version (LTS)",
+    "ubuntuProLearnMore": "Lernu pli pri Ubuntu Pro",
+    "ubuntuProEnablePro": "Ŝalti Ubuntu Pro",
+    "ubuntuProEnableMagic": "Ŝalti per konto Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "vi povos krei konton senkoste",
+    "ubuntuProTokenLabel": "Ĵetono",
+    "ubuntuProEnabled": "Ubuntu Pro estas ŝaltita",
+    "ubuntuProDisable": "Malŝalti",
+    "ubuntuProEnable": "Ŝalti",
+    "ubuntuProCancel": "Nuligi",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSEnable": "Ŝalti FIPS",
+    "ubuntuProESMMainTitle": "Ĉefaj pakoj (esm-infra)",
+    "ubuntuProESMUniverseTitle": "Universaj pakoj (esm-apps)",
+    "ubuntuProComplianceFIPSPrompt": "Elektu vian preferatan opcion pri FIPS",
+    "ubuntuProComplianceFIPSUpdates": "FIPS kun ĝisdatigoj",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS sen ĝisdatigoj",
+    "ubuntuProFeatureEnableError": "Malsukcesis ŝalti funkcion, bonvolu reprovi.",
+    "ubuntuProFeatureDisableError": "Malsukcesis malŝalti funkcion, bonvolu reprovi.",
+    "ubuntuProEnableToken": "Ŝalti per ĵetono",
+    "ubuntuProDisablePro": "Malŝalti Ubuntu Pro",
+    "ubuntuProESMMainDescription": "Sekurigaj ĝisdatigoj por 2300 ĉefaj pakoj de Ubuntu ĝis {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseDescription": "Pliaj sekurigaj ĝisdatigoj por pli ol 23 000 universaj pakoj de Ubuntu ĝis {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProEnableTokenError": "Malsukcesis ŝalti Ubuntu Pro",
+    "ubuntuProMagicError": "Malsukcesis ŝalti Ubuntu Pro, bonvolu reprovi",
+    "ubuntuProNotSupportedSnapd": "Ĉi tiu versio de snapd ne subtenas Ubuntu Pro",
+    "ubuntuProNotSupportedSnapdDetails": "Ĝisdatigu snapd por administri Ubuntu Pro",
+    "ubuntuProMagicPrompt": "Salutu per via konto Ubuntu One, aŭ kreu konton senkoste.",
+    "ubuntuProComplianceFIPSDisclaimer": "Ŝaltado de FIPS ne estas malfarebla; Livepatch estos porĉiame malŝaltita.",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Instali pakojn validajn por FIPS 140-2, kun regulaj ĝisdatigoj pri sekureco.",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Instali pakojn validajn por FIPS 140-2. Tiuj ne estos ĝisdatigitaj ĝis la sekva validecokontrolo.",
+    "ubuntuProLivepatchTitle": "Livepatch por kerno",
+    "ubuntuProLivepatchEnableTitle": "Ŝalti Livepatch",
+    "ubuntuProLivepatchShowTitle": "Montri staton de Livepatch en la supra breto",
+    "ubuntuProMagicContinueInBrowser": "Daŭri en TTT-legilo",
+    "ubuntuProMagicDescription": "Vi ankaŭ povas saluti ĉe {attachLink}, tajpante la kodon {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProComplianceDisclaimer": "Nur por helpi plenumi postulojn pri konformiĝo kaj malmoligo laŭ FedRAMP, HIPAA, kaj similaj normoj.",
+    "ubuntuProTokenPrompt": "Akiru ĵetonon por Ubuntu Pro el via administranto aŭ el {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProCompliance": "Konformiĝo kaj malmoligo",
+    "ubuntuProComplianceUSGTitle": "Gvidilo pri Sekureco de Ubuntu (USG)",
+    "ubuntuProEnableTokenSubtitle": "El via teĥnika administranto aŭ el {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProDisablePrompt": "Malŝaltante Ubuntu Pro, vi dekroĉos vian abonon de ĉi tiu komputilo. Ĉu daŭrigi?",
+    "ubuntuProESMTitle": "Etendita Sekureca Mastrumado (ESM)",
+    "ubuntuProESMDescription": "ESM provizas 10 jarojn da sekurigaj ĝisdatigoj por pli ol 25 000 malfermitkodaj pakoj. Ĝuu daŭran mastrumadon kontraŭ vundeblaĵoj de kriza, alta, kaj meza CVE-niveloj.",
+    "ubuntuProLivepatchEnableDescription": "Efektivigi kernajn sekurigajn ĝisdatigojn dum la sistemo ruliĝas",
+    "ubuntuProComplianceDocumentation": "Dokumentaro pri konformiĝo al sekurecaj normoj",
+    "ubuntuProDisabled": "Entrepreno-nivelaj sekureco kaj konformiĝo por via komputilo. Ĉiam senkosta por persona uzado. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProComplianceUSGDescription": "Aŭtomatigi malmoligon kaj ekzamenadon per testado CIS kaj profiloj DISA-STIG, permesante medio-specifajn adaptojn.",
+    "ubuntuProComplianceFIPSDescription": "Atestado de konformeco de ĉifraj moduloj al la datenprotekta normo FIPS 140-2 de la Usona kaj Kanada registaroj."
 }

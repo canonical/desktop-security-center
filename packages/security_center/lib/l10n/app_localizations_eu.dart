@@ -9,689 +9,700 @@ class AppLocalizationsEu extends AppLocalizations {
   AppLocalizationsEu([String locale = 'eu']) : super(locale);
 
   @override
-  String get appTitle => 'Security Center';
+  String get appTitle => 'Segurtasun zentroa';
 
   @override
-  String get snapdRuleCategorySessionAllowed => 'Allow until logout';
+  String get snapdRuleCategorySessionAllowed => 'Baimendu saioa amaitu arte';
 
   @override
-  String get snapdRuleCategorySessionDenied => 'Deny until logout';
+  String get snapdRuleCategorySessionDenied => 'Ukatu saioa amaitu arte';
 
   @override
-  String get snapdRuleCategoryForeverAllowed => 'Allow always';
+  String get snapdRuleCategoryForeverAllowed => 'Baimendu beti';
 
   @override
-  String get snapdRuleCategoryForeverDenied => 'Deny always';
+  String get snapdRuleCategoryForeverDenied => 'Ukatu beti';
 
   @override
-  String get snapPermissionReadLabel => 'Read';
+  String get snapPermissionReadLabel => 'Irakurri';
 
   @override
-  String get snapPermissionWriteLabel => 'Write';
+  String get snapPermissionWriteLabel => 'Idatzi';
 
   @override
-  String get snapPermissionExecuteLabel => 'Execute';
+  String get snapPermissionExecuteLabel => 'Exekutatu';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'Atzitzea';
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Require apps to ask for system permissions';
+      'Behartu aplikazioak sistemako baimenak eskatzera';
 
   @override
   String get snapPermissionsEnableWarning =>
-      'This is an experimental feature for controlling access to your system’s resources.';
+      'Hau eginbide esperimentala da, sistemako baliabideetara sarbidea kontrolatzeko.';
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Enabling, this may take a few seconds...';
+      'Gaitzen, honek segundo batzuk beharko ditu...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Disabling, this may take a few seconds...';
+      'Ezgaitzen, honek segundo batzuk beharko ditu...';
 
   @override
-  String get snapPermissionsExperimentalLabel => 'Experimental';
+  String get snapPermissionsExperimentalLabel => 'Esperimentala';
 
   @override
   String get snapPermissionsOtherDescription =>
-      'You can manage other permissions in Settings › Applications.';
+      'Beste baimenak hemendik kudea ditzakezu: Ezarpenak > Aplikazioak.';
 
   @override
-  String get snapPermissionsPageTitle => 'App permissions';
+  String get snapPermissionsPageTitle => 'Aplikazioaren baimenak';
 
   @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n rules',
-      one: '1 rule',
-      zero: 'no rules',
+      other: '$n arau',
+      one: 'arau 1',
+      zero: 'araurik ez',
     );
     return '$_temp0';
   }
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Manage $interface permissions for $snap.';
+    return 'Kudeatu $interface baimenak $snap aplikazioarentzat.';
   }
 
   @override
-  String get snapRulesPageEmptyTileLabel => 'No rules yet';
+  String get snapRulesPageEmptyTileLabel => 'Araurik ez oraingoz';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel =>
+      'Oraingoz aplikazio batek ere ez du sarbidea eskatu';
 
   @override
-  String get snapRulesRemoveAll => 'Remove all rules';
+  String get snapRulesRemoveAll => 'Kendu arau guztiak';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => 'Berrezarri baimen guztiak';
 
   @override
-  String get homeInterfacePageTitle => 'Home folder';
+  String get homeInterfacePageTitle => 'Karpeta nagusia';
 
   @override
   String get homeInterfacePageDescription =>
-      'Manage permissions to access files in your Home folder.';
+      'Kudeatu karpeta nagusiko fitxategiak atzitzeko baimenak.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'Kamera';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+      'Baimendu aplikazioei kamerak atzitzea.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'Mikrofonoa';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'Baimendu aplikazioei mikrofonoa atzitzea.';
 
   @override
-  String get interfacePageTitle => 'Manage permissions';
+  String get interfacePageTitle => 'Kudeatu baimenak';
 
   @override
   String get interfacePageDescription =>
-      'Strictly confined apps will ask you before accessing files and folders. This feature is experimental and subject to changes.';
+      'Zorrozki konfinatutako aplikazioek baimena eskatuko dizute fitxategi eta karpetak atzitu baino lehen. Eginbide hau esperimentala da, eta baliteke aldatzea.';
 
   @override
-  String get interfacePageLinkLearnMore => 'Learn more';
+  String get interfacePageLinkLearnMore => 'Informazio gehiago';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Give feedback';
+  String get interfacePageLinkGiveFeedback => 'Eman iritzia';
 
   @override
-  String get interfacePageLinkReportIssues => 'Report issues';
+  String get interfacePageLinkReportIssues => 'Eman arazoen berri';
 
   @override
   String interfaceSnapCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n apps',
-      one: '1 app',
-      zero: 'no apps',
+      other: '$n aplikazio',
+      one: 'aplikazio 1',
+      zero: 'aplikaziorik ez',
     );
     return '$_temp0';
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'Diskoaren zifratzea';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'Berreskuratze gakoa';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'Berreskuratze gakoak zure datuetara sarbidea berreskuratzeko aukera ematen dizu diskoa abioan desblokeatzeak huts egiten badu. Gorde leku seguruan.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'Berreskuratze gakoak zure datuetara sarbidea berreskuratzeko aukera ematen dizu diskoa abioan desblokeatzeak huts egiten badu. Gorde leku seguruan. $learnMoreLink';
   }
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'Informazio gehiago hardware bidezko zifratzeari buruz';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => 'Egiaztatu berreskuratze gakoa...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey =>
+      'Egiaztatu berreskuratze gakoa';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'Egiaztatu';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => 'Baliozko gakoa';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => 'Gako baliogabea';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => 'Sartu berreskuratze gakoa';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks =>
+      'Berreskuratze gakoak funtzionatzen du';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+      'Ez ahaztu leku seguruan gordetzeaz.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork =>
+      'Berreskuratze gakoak ez du funtzionatzen';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+      'Egiaztatu gakoa edo ordezkatu berri batekin.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'Errorea';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton =>
+      'Ordezkatu berreskuratze gakoa...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader =>
+      'Ordezkatu berreskuratze gakoa';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      'Gorde berreskuratze gako berria leku seguruan. Ordezkatzen duzun unetik aurrera ezingo duzu gako zaharra berriro erabili.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'Erakutsi QR kodea';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'Gorde fitxategian';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      'Berreskuratze gakoa leku seguruan gorde dut';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => 'Ordezkatu';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => 'Baztertu';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+      'Berreskuratze gakoa ordezkatu da';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      'Gogoratu leku seguruan gordetzeaz.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'Berreskuratze gakoa ordezkatzeak huts egin du';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      'Arazoren bat egon da berreskuratze gakoa ordezkatzean, gako zaharrak baliozko izaten jarraituko du.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+      'Ubuntu mahaigaina - Zifratzearen berreskuratze gakoa';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'Eskaneatu QR kodea berreskuratze gakoa kopiatzeko eta gorde leku seguruan, esaterako pasahitz kudeatzaile batean. Argazki bat ere egin diezaiokezu geroago erabiltzeko.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification => 'Arbelera kopiatu da';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'Kopiatu';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      'Zifratze ezarpenak ez daude erabilgarri';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      'Huts egin du ordenagailuko zifratze egoera eskuratzeak.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      'Ordenagailuaren TPM konfigurazioa ez dago onartutako egoera batean.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'Zure snapd bertsioak ez du sostengurik';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      'Egiaztatu Segurtasun zentroa eta snapd egunean daudela.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      'Segurtasun zentroa ezin da snapd interfazera konektatu';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      'Hau konpontzeko, exekutatu komando hau terminalean:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'Gehitu PINa...';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton => 'Gehitu pasaesaldia...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading =>
+      'Gehitu pasaesaldia';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'Gehitu PINa';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'PINa sartu beharko duzu ordenagailua abiarazten den bakoitzean. PINa eta erabiltzaile-pasahitza ez dira gauza bera.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'PINa ahazten baduzu, diskora sarbidea berreskuratzeko aukera izango duzu berreskuratze gakoa erabiliz.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'Pasaesaldia sartu beharko duzu ordenagailua abiarazten den bakoitzean. Pasaesaldia eta erabiltzailea-pasahitza ez dira gauza bera.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'Pasaesaldia ahazten baduzu, diskora sarbidea berreskuratzeko aukera izango duzu berreskuratze gakoa erabiliz.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+      'Segurtasun gehigarria';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'Pasaesaldi edo PIN bat ezar dezakezu segurtasun gehiagorako. Ordenagailua abiarazten den bakoitzean sartu beharko duzu.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore =>
+      'Informazio gehiago';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'Gehitu';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'Kendu PINa...';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton => 'Kendu pasaesaldia...';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'PINa gehitzen, honek segundo batzuk beharko ditu...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'Pasaesaldia gehitzen, honek segundo batzuk beharko ditu...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'PINa kentzen, honek segundo batzuk beharko ditu...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'Pasaesaldia kentzen, honek segundo batzuk beharko ditu...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+      'Berreskuratze gakoaren fitxategia ez da gorde';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'Berreskuratze gakoaren fitxategia ezin izan da gorde aldi baterako kokalekuan';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'Errore ezezaguna';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+      'Huts egin du berreskuratze gakoa fitxategian gordetzeak';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+      'Ez duzu baimenik fitxategiaren kokalekuan idazteko.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      'Ez duzu karpeta horretan idazteko baimenik. Saiatu beste kokaleku batean edo erabili bestelako metodo bat.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      'Saiatu beste kokaleku batekin, esaterako unitate aldagarri bat, edo erabili bestelako metodo bat.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle =>
+      'Gorde berreskuratze gakoaren fitxategia';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'Testu-fitxategiak';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled => 'Hardware bidezko zifratzea gaituta dago';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+      'Zifratze gakoak ordenagailuaren Konfiantzazko Plataforma Moduluan (TPM) gordetzen dira.';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'Informazio gehiago hardware bidezko zifratzeari buruz';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled =>
+      'Zifratzearen pasaesaldia gaituta dago';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'Aldatu pasaesaldia';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      'Pasaesaldia sartu beharko duzu ordenagailua abiarazten den bakoitzean.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'Aldatu pasaesaldia...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => 'Uneko pasaesaldia';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => 'Pasaesaldi berria';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => 'Berretsi pasaesaldia';
 
   @override
   String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+      'Okerreko pasaesaldia, saiatu berriz';
 
   @override
   String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+      'Gutxienez 4 karaktere izan behar ditu';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+      'Pasaesaldiak ez datoz bat, saiatu berriz';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'Aldatu pasaesaldia';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => 'Zifratzearen PINa gaituta dago';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => 'Zifratzearen PINa';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader =>
+      'Zifratzearen pasaesaldia';
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      'PINa sartu beharko duzu ordenagailua abiarazten den bakoitzean.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'Aldatu PINa...';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'Uneko PINa';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => 'PIN berria';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'Berretsi PINa';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => 'Okerreko PINa, saiatu berriz';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError => 'PINak ez datoz bat, saiatu berriz';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'Aldatu PINa';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => 'Erakutsi';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => 'Ezkutatu';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => 'Aldatu';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'PINa eguneratu da';
 
   @override
   String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+      'PINa behar bezala eguneratu da.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+      'Pasaesaldia eguneratu da';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      'Pasaesaldia behar bezala eguneratu da.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      'Pasaesaldi ahula, egizu luzeagoa edo konplexuagoa';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      'Baleko pasaesaldia, egizu luzeagoa edo konplexuagoa segurtasuna areagotzeko';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => 'Pasaesaldi sendoa';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+      'PIN ahula, egizu luzeagoa edo asmatzeko zailagoa';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      'Baleko PINa, egizu luzeagoa edo asmatzeko zailagoa segurtasuna areagotzeko';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => 'Luzera egokiko PINa';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => 'Zerbaitek huts egin du';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+      'Ubuntu Pro ez dago erabilgarri Ubunturen bertsio honentzat';
 
   @override
   String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+      'Ubuntu Pro-k LTS bertsio bat behar du';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'Ubuntu Pro-k ez du sostengurik snapd bertsio honetan';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'Eguneratu snapd Ubuntu Pro kudeatzeko';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Ubuntu Pro gaituta dago';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'Enpresa mailako segurtasuna eta betetzea zure ordenagailurako. Doakoa betiko erabilera pertsonalerako. $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore => 'Informazio gehiago Ubuntu Pro-ri buruz';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Gaitu Ubuntu Pro';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'Gaitu Ubuntu One kontuarekin';
 
   @override
   String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+      'Doako kontu bat sortu ahalko duzu';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+      'Hasi saioa zure Ubuntu One kontuarekin, edo sortu bat dohainik.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => 'Jarraitu nabigatzailean';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return 'Saioa $attachLink helbidean ere has dezakezu, eta bertan sartu $attachCode kodea';
   }
 
   @override
   String get ubuntuProMagicError =>
-      'Unable to enable Ubuntu Pro, please try again';
+      'Ezin izan da Ubuntu Pro gaitu, saiatu berriz';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'Gaitu token batekin';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError => 'Ezin izan da Ubuntu Pro gaitu';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'IT administratzailegandik edo hemendik: $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'Eskuratu Ubuntu Pro token bat zure administratzaileagandik edo hemendik: $proLink';
   }
 
   @override
-  String get ubuntuProTokenLabel => 'Token';
+  String get ubuntuProTokenLabel => 'Tokena';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Ezgaitu Ubuntu Pro';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => 'Ezgaitu';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Ubuntu Pro ezgaitzen baduzu, makina hau harpidetzatik askatuko du. Jarraitu nahi duzu?';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => 'Gaitu';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'Utzi';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, please try again.';
+      'Ezin izan da eginbidea gaitu, saiatu berriz.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, please try again.';
+      'Ezin izan da eginbidea ezgaitu, saiatu berriz.';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance => 'Betetzea eta sendotzea';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'FedRAM, HIPAA eta bestelako betetze eta sendotze eskakizunekin laguntzeko soilik gomendatua.';
 
   @override
-  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+  String get ubuntuProComplianceUSGTitle => 'Ubunturen Segurtasun Gida (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'Sendotzea eta ikuskapena automatizatzen du CIS ebaluazioarekin eta DISA-STIG profilekin, inguruneari lotutako pertsonalizazioak onartuz.';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'AEB eta Kanadako gobernuen modulu kriptografikoentzako betetze-ziurtapena, FIPS 140-2 datuen babeserako estandarrarekin.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'Gaitu FIPS';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'FIPS gaitzea ezin da desegin, eta Livepatch betiko ezgaituko da.';
 
   @override
   String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+      'Hautatu gogokoen duzun FIPS aukera';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS eguneratzeekin';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'FIPS 140-2k balioztatutako paketeak instalatzen ditu, eta aldian aldiko segurtasun-eguneratzeak ahalbidetzen ditu.';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS eguneratze gabe';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'FIPS 140-2k balioztatutako paketeak instalatzen ditu. Hauek ez dira eguneratuko hurrengo berziurtapenera arte.';
 
   @override
   String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+      'Segurtasun-betetzearen dokumentazioa';
 
   @override
-  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+  String get ubuntuProESMTitle => 'Segurtasunerako mantentze hedatua (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for 25,000+ open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.';
+      'ESMk 10 urterako segurtasun-adabakiak eskaintzen ditu 25.000 kode irekiko pakete baino gehiagorentzat. Lortu zaurgarritasunen kudeaketa etengabea, maila kritiko, goren eta ertaineko CVE-entzat.';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'Pakete nagusiak (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for 2,300 Ubuntu Main package until $year';
+    return 'Segurtasun-eguneratzeak 2.300 Ubuntuko pakete nagusirentzat $year urtera arte';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'Universe paketeak (esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for over 23,000 Ubuntu Universe packages until $year';
+    return 'Segurtasun-eguneratze gehigarriak 23.000 Ubuntu Universe pakete baino gehiagorentzat $year urtera arte';
   }
 
   @override
   String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'Gaitu Livepatch';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'Aplikatu kernelaren segurtasun-eguneratzeak sistema martxan dagoela';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+      'Erakutsi Livepatch egoera goiko barran';
 }

@@ -1,77 +1,153 @@
 {
-  "interfacePageDescription": "Strikt beperkte apps zullen toestemming vragen voordat ze toegang krijgen tot bestanden en mappen. Deze functie is experimenteel en onderhevig aan wijzigingen.",
-  "@interfacePageDescription": {},
-  "appTitle": "Beveiligingscentrum",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "Toestaan tot afmelding",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "Weigeren tot afmelding",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverAllowed": "Altijd toestaan",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "Altijd weigeren",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "Lezen",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "Schrijven",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Uitvoeren",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsEnableWarning": "Dit is een experimentele functie voor het toegangsbeheer tot de systeembronnen.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "Inschakelen, een ogenblik geduld…",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "Uitschakelen, een ogenblik geduld…",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsExperimentalLabel": "Experimenteel",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsOtherDescription": "Je kunt andere machtigingen beheren in Instellingen › Toepassingen.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsPageTitle": "App-machtigingen",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesPageDescription": "{interface}-machtigingen beheren voor {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "Nog geen regels",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "Alle regels verwijderen",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "Thuismap",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Machtigingen beheren voor toegang tot bestanden in je thuismap.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageTitle": "Machtigingen beheren",
-  "@interfacePageTitle": {},
-  "interfacePageLinkLearnMore": "Meer informatie",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "Reacties geven",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "Problemen melden",
-  "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, plural, =0{geen apps} =1{1 app} other {{n} apps}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsEnableTitle": "Apps moeten om systeemmachtigingen vragen",
-  "@snapPermissionsEnableTitle": {},
-  "snapRulesCount": "{n, plural, =0{geen regel} =1{1 regel} other{{n} regels}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  }
+    "interfacePageDescription": "Strikt beperkte apps zullen toestemming vragen voordat ze toegang krijgen tot bestanden en mappen. Deze functie is experimenteel en onderhevig aan wijzigingen.",
+    "appTitle": "Beveiligingscentrum",
+    "snapdRuleCategorySessionAllowed": "Toestaan tot afmelding",
+    "snapdRuleCategorySessionDenied": "Weigeren tot afmelding",
+    "snapdRuleCategoryForeverAllowed": "Altijd toestaan",
+    "snapdRuleCategoryForeverDenied": "Altijd weigeren",
+    "snapPermissionReadLabel": "Lezen",
+    "snapPermissionWriteLabel": "Schrijven",
+    "snapPermissionExecuteLabel": "Uitvoeren",
+    "snapPermissionsEnableWarning": "Dit is een experimentele functie voor het toegangsbeheer tot de systeembronnen.",
+    "snapPermissionsEnablingLabel": "Inschakelen, een ogenblik geduld…",
+    "snapPermissionsDisablingLabel": "Uitschakelen, een ogenblik geduld…",
+    "snapPermissionsExperimentalLabel": "Experimenteel",
+    "snapPermissionsOtherDescription": "Je kunt andere machtigingen beheren in Instellingen › Toepassingen.",
+    "snapPermissionsPageTitle": "App-machtigingen",
+    "snapRulesPageDescription": "{interface}-machtigingen beheren voor {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Nog geen regels",
+    "snapRulesRemoveAll": "Alle regels verwijderen",
+    "homeInterfacePageTitle": "Thuismap",
+    "homeInterfacePageDescription": "Machtigingen beheren voor toegang tot bestanden in uw thuismap.",
+    "interfacePageTitle": "Machtigingen beheren",
+    "interfacePageLinkLearnMore": "Meer informatie",
+    "interfacePageLinkGiveFeedback": "Reacties geven",
+    "interfacePageLinkReportIssues": "Problemen melden",
+    "interfaceSnapCount": "{n, plural, =0{geen apps} =1{1 app} other {{n} apps}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsEnableTitle": "Apps moeten om systeemmachtigingen vragen",
+    "snapRulesCount": "{n, plural, =0{geen regel} =1{1 regel} other{{n} regels}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageRecoveryKey": "Herstelcode",
+    "diskEncryptionPageStoreYourKey": "Met de herstelcode kunt u weer toegang krijgen tot uw gegevens als uw schijf niet kan worden ontgrendeld tijdens het opstarten. Bewaar deze op een veilige plek.",
+    "diskEncryptionPageLearnMore": "Met informatie over herstelcodes",
+    "diskEncryptionPageCheckKey": "Herstelcode controleren…",
+    "diskEncryptionPageDialogHeaderCheckKey": "Herstelcode controleren",
+    "diskEncryptionPageCheck": "Controleren",
+    "diskEncryptionPageValidKey": "Geldige code",
+    "diskEncryptionPageInvalidKey": "Ongeldige code",
+    "diskEncryptionPageEnterKey": "Voert uw herstelcode in",
+    "diskEncryptionPageKeyWorks": "Herstelcode functioneert",
+    "diskEncryptionPageKeyWorksBody": "Vergeet niet om het op een veilige plek te bewaren.",
+    "diskEncryptionPageKeyDoesntWork": "De herstelcode werkt niet",
+    "diskEncryptionPageKeyDoesntWorkBody": "Controleer de code of vervang hem voor een nieuwe.",
+    "diskEncryptionPageError": "Fout",
+    "diskEncryptionPageTitle": "Schijfversleuteling",
+    "diskEncryptionPageReplaceDialogHeader": "Herstelcode vervangen",
+    "diskEncryptionPageReplaceDialogShowQR": "QR-code weergeven",
+    "diskEncryptionPageReplaceDialogSave": "Opslaan naar bestand",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Ik heb mijn herstelcode ergens veilig opgeslagen",
+    "diskEncryptionPageReplaceDialogReplace": "Vervangen",
+    "diskEncryptionPageReplaceDialogDiscard": "Weggooien",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Herstelcode vervangen",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Vergeet niet om het ergens veilig op te slaan.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Vervanging van herstelcode mislukt",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Herstelcode voor versleuteling",
+    "diskEncryptionPageClipboardNotification": "Gekopieerd naar klembord",
+    "recoveryKeyExceptionFileSystemTitle": "Herstelcode niet opgeslagen",
+    "recoveryKeyExceptionDisallowedPathTitle": "Herstelcodebestand kan niet op een tijdelijke locatie worden opgeslagen",
+    "recoveryKeyExceptionUnknownTitle": "Onbekende fout",
+    "recoveryKeyExceptionDisallowedPathBody": "Probeer een andere locatie, zoals een verwijderbare schijf of gebruik een andere methode.",
+    "recoveryKeyFilePickerTitle": "Herstelcodebestand opslaan",
+    "recoveryKeyFilePickerFilter": "Tekstbestanden",
+    "recoveryKeyExceptionFileSystemBody": "U bent niet gemachtigd om naar die map te schrijven. Probeer een andere locatie of gebruik een andere methode.",
+    "diskEncryptionPageReplaceDialogErrorBody": "Er is iets misgegaan met het vervangen van de herstelcode, uw oude code blijft van toepassing.",
+    "diskEncryptionPageReplaceButton": "Herstelcode vervangen…",
+    "diskEncryptionPageReplaceDialogQRBody": "Scan de QR-code om de herstelcode te kopiëren en deze ergens veilig op te slaan, zoals een wachtwoordbeheerder. U kunt ook een foto maken voor later gebruik.",
+    "diskEncryptionPageReplaceDialogBody": "Sla de nieuwe herstelcode ergens veilig op. Eenmaal vervangen, kan de oude sleutel niet meer gebruikt worden.",
+    "diskEncryptionPageCopySemanticLabel": "Kopiëren",
+    "recoveryKeyPassphraseEnabled": "Versleuteling met wachtwoordzin is ingeschakeld",
+    "recoveryKeyPassphraseHeader": "Wachtwoordzin wijzigen",
+    "recoveryKeyPassphraseButton": "Wachtwoordzin wijzigen…",
+    "recoveryKeyPassphraseCurrent": "Huidige wachtwoordzin",
+    "recoveryKeyPassphraseNew": "Nieuwe wachtwoordzin",
+    "recoveryKeyPassphraseConfirm": "Wachtwoordzin bevestigen",
+    "recoveryKeyPassphraseCurrentError": "Onjuiste wachtwoordzin, probeer het opnieuw",
+    "recoveryKeyPassphraseConfirmError": "Wachtwoordzinnen komen niet overeen, probeer het opnieuw",
+    "recoveryKeyPassphraseDialogHeader": "Wachtwoordzin wijzigen",
+    "recoveryKeyPinBody": "U moet uw pincode invoeren tijdens het opstarten om de schijf te ontgrendelen. U kunt de pincode wijzigen, maar niet uitschakelen.",
+    "recoveryKeyPinButton": "Pincode wijzigen…",
+    "recoveryKeyPinCurrent": "Huidige pincode",
+    "recoveryKeyPinNew": "Nieuwe pincode",
+    "recoveryKeyPinConfirm": "Pincode bevestigen",
+    "recoveryKeyPinHeader": "Versleutelingspincode",
+    "recoveryKeyPinEnabled": "Versleuteling met pincode is ingeschakeld",
+    "recoveryKeyPinCurrentError": "Onjuiste pincode, probeer het opnieuw",
+    "recoveryKeyPinDialogHeader": "Pincode wijzigen",
+    "recoveryKeyPassphraseShow": "Weergeven",
+    "recoveryKeyPassphraseHide": "Verbergen",
+    "recoveryKeyPassphraseChange": "Wijzigen",
+    "recoveryKeyPassphrasePinSuccessHeader": "Pincode bijgewerkt",
+    "recoveryKeyPassphrasePinSuccessBody": "Uw pincode is met success bijgewerkt.",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Uw wachtwoordzin is met success bijgewerkt.",
+    "recoveryKeyPinConfirmError": "Pincodes komen niet overeen, probeer het opnieuw",
+    "recoveryKeyTPMEnabled": "Hardware-ondersteunde versleuteling ingeschakeld",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Wachtwoordzin bijgewerkt",
+    "recoveryKeyPassphraseNewError": "Moet minimaal 4 tekens lang zijn",
+    "recoveryKeyPassphraseBody": "U moet uw wachtwoord tijdens het opstarten invoeren om de schijf te ontgrendelen. U kunt de wachtwoordzin wijzigen, maar niet uitschakelen.",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Redelijke wachtwoordzin, maak het langer of complexer voor een betere beveiliging",
+    "recoveryKeyPassphraseEntropyOptimal": "Sterke wachtwoordzin",
+    "recoveryKeyPinEntropyOptimal": "Pincode is lang genoeg",
+    "recoveryKeyPinEntropyBelowOptimal": "Redelijke pincode, maak hem langer of minder voorspelbaar voor een betere beveiliging",
+    "recoveryKeyPassphraseEntropyBelowMin": "Zwakke wachtwoordzin, maak het langer of complexer",
+    "recoveryKeyPinEntropyBelowMin": "Zwakke pincode, maak hem langer of minder voorspelbaar",
+    "recoveryKeySomethingWentWrongHeader": "Er ging iets mis",
+    "diskEncryptionPageStoreYourKeyWithLink": "De herstelcode stelt je in staat om weer toegang te krijgen tot je gegevens als je schijf tijdens het opstarten niet ontgrendeld kan worden. Bewaar het op een veilige plaats. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Versleutelingsinstellingen niet beschikbaar",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Ophalen van de versleutelingsstatus van deze computer is mislukt.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "De TPM-configuratie van uw computer bevindt zich niet in een ondersteunde staat.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Uw snapd-versie wordt niet ondersteund",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Controleer of het Beveiligingscentrum en snapd up-to-date zijn.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Beveiligingscentrum kan geen verbinding maken met de snapd-interface",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Om dit te verhelpen, voer deze opdracht uit in de terminal:",
+    "recoveryKeyExceptionFilePermissionTitle": "Herstelcode opslaan in bestand is niet gelukt",
+    "recoveryKeyExceptionFilePermissionBody": "U heeft geen toestemming om naar die bestandslocatie te schrijven.",
+    "recoveryKeyTPMExplanationBody": "De versleutelingscodes zijn opgeslagen in de Trusted Platform Module (TPM) van uw computer.",
+    "recoveryKeyTPMExplanationLearnMore": "Meer informatie over hardwareondersteunde versleuteling",
+    "recoveryKeyEncrpytionPassphraseHeader": "Versleutelingswachtwoordzin",
+    "snapPermissionAccessLabel": "Toegang",
+    "cameraRulesPageEmptyTileLabel": "Nog geen apps die toegang hebben gevraagd",
+    "snapRulesResetAllPermissions": "Alle machtigingen opnieuw instellen",
+    "cameraInterfacePageTitle": "Camera",
+    "cameraInterfacePageDescription": "Apps toegang geven tot uw camera's."
 }

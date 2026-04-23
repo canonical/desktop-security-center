@@ -1,77 +1,147 @@
 {
-  "snapPermissionsEnableTitle": "각 앱이 시스템 권한을 요청하도록 하기",
-  "@snapPermissionsEnableTitle": {},
-  "appTitle": "보안 센터",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "로그아웃 전까지 허용",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "로그아웃 전까지 거부",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverAllowed": "항상 허용",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "항상 거부",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "읽기",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "쓰기",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "실행",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsEnableWarning": "이 기능은 시스템 리소스 접근을 제어하기 위한 실험적 기능입니다.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "켜는 중, 몇 초 걸릴 수 있습니다...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "끄는 중, 몇 초 걸릴 수 있습니다...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsExperimentalLabel": "실험적 기능",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsOtherDescription": "다른 권한은 설정 > 앱에서 관리 가능합니다.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsPageTitle": "앱 권한",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, plural, =0{정책 없음} =1{1개 정책} other{{n}개 정책}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesPageDescription": "{snap}에 대한 {interface} 권한을 관리합니다.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "정책 없음",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "모든 정책 삭제",
-  "@snapRulesRemoveAll": {},
-  "homeInterfacePageTitle": "홈 폴더",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "사용자의 홈 폴더의 파일에 접근하는 권한을 관리합니다.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageTitle": "권한 관리",
-  "@interfacePageTitle": {},
-  "interfacePageLinkLearnMore": "더 알아보기",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "피드백 작성",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "이슈 보고",
-  "@interfacePageLinkReportIssues": {},
-  "interfacePageDescription": "엄격하게 제한된 앱은 파일과 폴더에 액세스하기 전에 사용자에게 묻습니다. 이 기능은 실험적이며 추후 변경될 수 있습니다.",
-  "@interfacePageDescription": {},
-  "interfaceSnapCount": "{n, plural, =0{앱 없음} =1{1개의 앱} other {{n}개의 앱}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  }
+    "snapPermissionsEnableTitle": "각 앱이 시스템 권한을 요청하도록 하기",
+    "appTitle": "보안 센터",
+    "snapdRuleCategorySessionAllowed": "로그아웃 전까지 허용",
+    "snapdRuleCategorySessionDenied": "로그아웃 전까지 거부",
+    "snapdRuleCategoryForeverAllowed": "항상 허용",
+    "snapdRuleCategoryForeverDenied": "항상 거부",
+    "snapPermissionReadLabel": "읽기",
+    "snapPermissionWriteLabel": "쓰기",
+    "snapPermissionExecuteLabel": "실행",
+    "snapPermissionsEnableWarning": "이 기능은 시스템 리소스 접근을 제어하기 위한 실험적 기능입니다.",
+    "snapPermissionsEnablingLabel": "켜는 중, 몇 초 걸릴 수 있습니다...",
+    "snapPermissionsDisablingLabel": "끄는 중, 몇 초 걸릴 수 있습니다...",
+    "snapPermissionsExperimentalLabel": "실험적 기능",
+    "snapPermissionsOtherDescription": "다른 권한은 설정 > 앱에서 관리 가능합니다.",
+    "snapPermissionsPageTitle": "앱 권한",
+    "snapRulesCount": "{n, plural, =0{정책 없음} =1{1개 정책} other{{n}개 정책}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "{snap}에 대한 {interface} 권한을 관리합니다.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "정책 없음",
+    "snapRulesRemoveAll": "모든 정책 삭제",
+    "homeInterfacePageTitle": "홈 폴더",
+    "homeInterfacePageDescription": "사용자의 홈 폴더의 파일에 접근하는 권한을 관리합니다.",
+    "interfacePageTitle": "권한 관리",
+    "interfacePageLinkLearnMore": "더 알아보기",
+    "interfacePageLinkGiveFeedback": "피드백 작성",
+    "interfacePageLinkReportIssues": "이슈 보고",
+    "interfacePageDescription": "엄격하게 제한된 앱은 파일과 폴더에 액세스하기 전에 사용자에게 묻습니다. 이 기능은 실험적이며 추후 변경될 수 있습니다.",
+    "interfaceSnapCount": "{n, plural, =0{앱 없음} =1{1개의 앱} other {{n}개의 앱}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageTitle": "디스크 암호화",
+    "diskEncryptionPageRecoveryKey": "복구 키",
+    "diskEncryptionPageStoreYourKey": "복구 키는 시작 중에 디스크 잠금 해제가 실패했을 경우 데이터에 다시 접근하기 위해 필요합니다. 다른 안전한 장소에 보관해 두십시오.",
+    "diskEncryptionPageLearnMore": "복구 키에 대해 더 알아보기",
+    "diskEncryptionPageCheckKey": "복구 키 검증...",
+    "diskEncryptionPageDialogHeaderCheckKey": "복구 키 검증",
+    "diskEncryptionPageCheck": "검증",
+    "diskEncryptionPageValidKey": "유효한 키",
+    "diskEncryptionPageInvalidKey": "유효하지 않은 키",
+    "diskEncryptionPageEnterKey": "복구 키를 입력하세요",
+    "diskEncryptionPageKeyWorks": "복구 키가 정상 작동함",
+    "diskEncryptionPageKeyWorksBody": "다른 안전한 장소에 보관해 두십시오.",
+    "diskEncryptionPageKeyDoesntWork": "복구 키가 동작하지 않음",
+    "diskEncryptionPageKeyDoesntWorkBody": "키를 다시 확인하거나 새로운 키로 교체하십시오.",
+    "diskEncryptionPageError": "오류",
+    "diskEncryptionPageReplaceButton": "복구 키 교체하기...",
+    "diskEncryptionPageReplaceDialogHeader": "복구 키 교체하기",
+    "diskEncryptionPageReplaceDialogBody": "새로운 복구 키를 다른 안전한 장소에 보관해 두십시오. 키를 교체하면 이전 키는 더 이상 사용할 수 없습니다.",
+    "diskEncryptionPageReplaceDialogShowQR": "QR 코드 보이기",
+    "diskEncryptionPageReplaceDialogSave": "파일로 저장",
+    "diskEncryptionPageReplaceDialogAcknowledge": "복구 키를 다른 안전한 곳에 저장했습니다",
+    "diskEncryptionPageReplaceDialogReplace": "교체",
+    "diskEncryptionPageReplaceDialogDiscard": "폐기",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "복구 키 교체됨",
+    "diskEncryptionPageReplaceDialogSuccessBody": "다른 안전한 곳에 보관해 두십시오.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "복구 키 교체 실패",
+    "diskEncryptionPageReplaceDialogErrorBody": "복구 키를 교체하는 데 문제가 발생했습니다. 기존 키는 그대로 사용 가능합니다.",
+    "diskEncryptionPageReplaceDialogQRHeader": "우분투 데스크톱 - 암호화 복구 키",
+    "diskEncryptionPageReplaceDialogQRBody": "QR 코드를 스캔하여 복구 키를 복사하고 암호 관리자 등의 다른 안전한 장소에 보관해 두십시오. 나중에 사용하기 위해 사진을 찍어 보관할 수도 있습니다.",
+    "diskEncryptionPageClipboardNotification": "클립보드에 복사됨",
+    "diskEncryptionPageCopySemanticLabel": "복사",
+    "recoveryKeyExceptionFileSystemTitle": "복구 키 파일 저장되지 않음",
+    "recoveryKeyExceptionDisallowedPathTitle": "복구 키 파일을 임시 경로에 저장할 수 없음",
+    "recoveryKeyExceptionUnknownTitle": "알 수 없는 오류",
+    "recoveryKeyExceptionFileSystemBody": "해당 폴더에 쓰기 권한이 없습니다. 다른 경로를 사용하거나 다른 방법을 시도해 보십시오.",
+    "recoveryKeyExceptionDisallowedPathBody": "이동식 저장소 등의 다른 경로를 지정하거나 다른 방법을 이용하십시오.",
+    "recoveryKeyFilePickerTitle": "복구 키 파일 저장",
+    "recoveryKeyFilePickerFilter": "텍스트 파일",
+    "recoveryKeyTPMEnabled": "하드웨어 기반 암호화 활성화됨",
+    "recoveryKeyPassphraseEnabled": "암호화 비밀번호 활성화됨",
+    "recoveryKeyPassphraseHeader": "비밀번호 변경",
+    "recoveryKeyPassphraseBody": "시작할 때 비밀번호를 입력하여 디스크를 잠금 해제해야 합니다. 비밀번호를 바꿀 수는 있지만 해제할 수는 없습니다.",
+    "recoveryKeyPassphraseButton": "비밀번호 변경...",
+    "recoveryKeyPassphraseCurrent": "현재 비밀번호",
+    "recoveryKeyPassphraseNew": "새로운 비밀번호",
+    "recoveryKeyPassphraseConfirm": "비밀번호 확인",
+    "recoveryKeyPassphraseCurrentError": "비밀번호가 틀렸습니다. 다시 시도해 보세요",
+    "recoveryKeyPassphraseNewError": "4글자 이상이어야 합니다",
+    "recoveryKeyPassphraseConfirmError": "비밀번호가 일치하지 않습니다. 다시 시도하세요",
+    "recoveryKeyPassphraseDialogHeader": "비밀번호 변경",
+    "recoveryKeyPinEnabled": "암호화 PIN 활성화됨",
+    "recoveryKeyPinHeader": "암호화 PIN",
+    "recoveryKeyPinBody": "시작할 때 PIN을 입력하여 디스크를 잠금 해제해야 합니다. PIN을 바꿀 수는 있지만 해제할 수는 없습니다.",
+    "recoveryKeyPinButton": "PIN 변경...",
+    "recoveryKeyPinCurrent": "현재 PIN",
+    "recoveryKeyPinNew": "새로운 PIN",
+    "recoveryKeyPinConfirm": "PIN 확인",
+    "recoveryKeyPinCurrentError": "PIN이 틀렸습니다. 다시 시도해 보세요",
+    "recoveryKeyPinConfirmError": "PIN이 일치하지 않습니다. 다시 시도하세요",
+    "recoveryKeyPinDialogHeader": "PIN 변경",
+    "recoveryKeyPassphraseShow": "보이기",
+    "recoveryKeyPassphraseHide": "숨기기",
+    "recoveryKeyPassphraseChange": "변경",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN 업데이트됨",
+    "recoveryKeyPassphrasePinSuccessBody": "PIN이 업데이트 완료되었습니다.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "비밀번호 업데이트됨",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "비밀번호가 업데이트 완료되었습니다.",
+    "recoveryKeyPassphraseEntropyBelowMin": "약한 비밀번호입니다. 더 길거나 복잡하게 만드세요",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "적당한 비밀번호입니다. 더 길거나 복잡하게 만들어 더욱 안전한 비밀번호를 만드세요",
+    "recoveryKeyPassphraseEntropyOptimal": "강력한 비밀번호",
+    "recoveryKeyPinEntropyBelowMin": "약한 PIN입니다. 더 길거나 예측하기 힘들게 만드세요",
+    "recoveryKeyPinEntropyBelowOptimal": "적당한 PIN입니다. 더 길거나 예측하기 힘들게 만들어 더욱 안전힌 PIN을 만드세요",
+    "recoveryKeyPinEntropyOptimal": "PIN이 충분히 깁니다",
+    "recoveryKeySomethingWentWrongHeader": "문제가 발생했습니다",
+    "snapPermissionAccessLabel": "접근",
+    "snapRulesResetAllPermissions": "모든 권한 재설정",
+    "cameraInterfacePageTitle": "카메라",
+    "cameraInterfacePageDescription": "앱이 카메라에 접근할 수 있게 승인합니다.",
+    "cameraRulesPageEmptyTileLabel": "아직 접근을 요청한 앱이 없습니다",
+    "diskEncryptionPageStoreYourKeyWithLink": "복구 키는 시작 중에 디스크 잠금 해제가 실패했을 경우 데이터에 다시 접근하기 위해 필요합니다. 다른 안전한 장소에 보관해 두십시오. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "암호화 설정 사용 불가",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "이 컴퓨터의 암호화 상태를 가져올 수 없습니다.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "이 컴퓨터의 TPM 설정이 지원되지 않는 상태입니다.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "snapd 버전이 지원되지 않습니다",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "보안 센터와 snapd가 업데이트되었는지 확인하세요.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "보안 센터가 snapd 인터페이스에 연결할 수 없습니다",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "이 문제를 해결하려면 터미널에서 다음 명령어를 실행하세요:"
 }

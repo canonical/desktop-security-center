@@ -33,7 +33,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Exekvera';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'Åtkomst';
 
   @override
   String get snapPermissionsEnableTitle =>
@@ -45,11 +45,11 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Aktiverar, det kan ta några sekunder...';
+      'Aktiverar, detta kan ta några sekunder...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Inaktiverar, det kan ta några sekunder...';
+      'Inaktiverar, detta kan ta några sekunder...';
 
   @override
   String get snapPermissionsExperimentalLabel => 'Experimentell';
@@ -59,7 +59,7 @@ class AppLocalizationsSv extends AppLocalizations {
       'Du kan hantera andra behörigheter i Inställningar › Program.';
 
   @override
-  String get snapPermissionsPageTitle => 'Program behörigheter';
+  String get snapPermissionsPageTitle => 'Programbehörigheter';
 
   @override
   String snapRulesCount(int n) {
@@ -75,20 +75,21 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Hantera $interface behörigheter för $snap.';
+    return 'Hantera $interface-behörigheter för $snap.';
   }
 
   @override
   String get snapRulesPageEmptyTileLabel => 'Inga regler ännu';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel =>
+      'Inga appar har begärt åtkomst än';
 
   @override
   String get snapRulesRemoveAll => 'Ta bort alla regler';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => 'Återställ alla rättigheter';
 
   @override
   String get homeInterfacePageTitle => 'Hemkatalog';
@@ -98,18 +99,18 @@ class AppLocalizationsSv extends AppLocalizations {
       'Hantera behörigheter för att komma åt filer i din hemkatalog.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'Kamera';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+      'Tillåt appar att komma åt dina kameror.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'Mikrofon';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'Tillåt appar att komma åt din mikrofon.';
 
   @override
   String get interfacePageTitle => 'Hantera behörigheter';
@@ -122,7 +123,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Läs mer';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Ge feedback';
+  String get interfacePageLinkGiveFeedback => 'Ge återkoppling';
 
   @override
   String get interfacePageLinkReportIssues => 'Rapportera problem';
@@ -140,558 +141,564 @@ class AppLocalizationsSv extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'Diskkryptering';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'Återställningsnyckel';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'Återställningsnyckeln låter dig återfå åtkomst till dina data om disken inte låses upp under uppstart. Spara den på ett säkert ställe.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'Återställningsnyckeln låter dig återfå åtkomst till din data om disken inte låses upp under uppstart. Spara den på ett säkert ställe. $learnMoreLink';
   }
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'Läs mer om hårdvarubaserad kryptering';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey =>
+      'Kontrollera återställningsnyckel...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey =>
+      'Kontrollera återställningsnyckel';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'Kontrollera';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => 'Giltig nyckel';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => 'Ogiltig nyckel';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => 'Ange din återställningsnyckel';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => 'Återställningsnyckeln fungerar';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+      'Kom ihåg att förvara den någonstans säkert.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork =>
+      'Återställningsnyckeln fungerar inte';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+      'Kontrollera nyckeln eller ersätt den mot en ny.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'Fel';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton =>
+      'Ersätt återställningsnyckel...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader =>
+      'Ersätt återställningsnyckel';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      'Spara den nya återställningsnyckeln på ett säkert ställe. När du har ersatt den kommer du inte längre att kunna använda den gamla nyckeln.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'Visa QR-kod';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'Spara till fil';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      'Jag har sparat min återställningsnyckel någonstans säkert';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => 'Ersätt';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => 'Kasta bort';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+      'Återställningsnyckeln ersatt';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      'Kom ihåg att förvara den någonstans säkert.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'Ersättning av återställningsnyckel misslyckades';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      'Något gick fel när din återställningsnyckel skulle ersättas. Din gamla nyckel kommer att förbli giltig.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+      'Ubuntu skrivbord - Krypteringsåterställningsnyckel';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'Skanna QR-koden för att kopiera återställningsnyckeln och spara den på ett säkert ställe, till exempel i en lösenordshanterare. Du kan också ta ett foto för senare användning.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification => 'Kopierad till urklipp';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'Kopiera';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      'Krypteringsinställningar är inte tillgängliga';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      'Misslyckades att hämta krypteringsstatus för denna dator.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      'Datorns TPM-konfiguration är inte i ett tillstånd som stöds.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'Din snapd-version stöds inte';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      'Kontrollera att säkerhetscentret och snapd är uppdaterade.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      'Säkerhetscentret kan inte ansluta till snapd-gränssnitt';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      'För att åtgärda detta, kör följande kommando i terminalen:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'Lägg till PIN...';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton => 'Lägg till lösenfras...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading =>
+      'Lägg till lösenfras';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'Lägg till PIN';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'Du kommer att behöva ange ditt PIN varje gång datorn startas. PIN-koden är inte samma sak som ditt användarlösenord.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'Om du glömmer ditt PIN kan du få tillbaka åtkomst till disken genom att använda återställningsnyckeln.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'Du kommer att behöva ange din lösenfras varje gång din dator startas. Lösenfrasen är inte samma sak som ditt användarlösenord.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'Om du glömmer din lösenfras kan du få tillbaka åtkomst till disken genom att använda återställningsnyckeln.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+      'Ytterligare säkerhet';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'Du kan ange en lösenfras eller ett PIN för ytterligare säkerhet. Du kommer att behöva ange dem varje gång din dator startas.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Läs mer';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'Lägg till';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'Ta bort PIN...';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton => 'Ta bort lösenfras...';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'Lägger till PIN, detta kan ta ett par sekunder...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'Lägger till lösenfras, detta kan ta ett par sekunder...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'Tar bort PIN, detta kan ta ett par sekunder...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'Tar bort lösenfras, detta kan ta ett par sekunder...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+      'Återställningsnyckelfilen sparades inte';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'Återställningsnyckelfilen kan inte sparas på en temporär plats';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'Okänt fel';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+      'Misslyckades med att spara din återställningsnyckel till fil';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+      'Du har inte behörighet att skriva till den filplatsen.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      'Du har inte behörighet att skriva till den mappen. Försök med en annan plats eller använd en annan metod.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      'Försök med en annan plats, till exempel en flyttbar enhet, eller använd en annan metod.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle => 'Spara återställningsnyckelfil';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'Textfiler';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled => 'Hårdvarustödd kryptering är aktiverad';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+      'Krypteringsnycklarna lagras i din dators Trusted Platform Module (TPM).';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'Lär dig mer om hårdvarustödd kryptering';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled =>
+      'Krypteringslösenfras är aktiverad';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'Ändra lösenfras';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      'Du måste ange din lösenfras varje gång din dator startas.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'Ändra lösenfras...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => 'Nuvarande lösenfras';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => 'Ny lösenfras';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => 'Bekräfta lösenfras';
 
   @override
   String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+      'Felaktig lösenfras, försök igen';
 
   @override
-  String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+  String get recoveryKeyPassphraseNewError => 'Måste vara minst 4 tecken lång';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+      'Lösenfraser matchar inte, försök igen';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'Ändra lösenfras';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => 'Krypterings-PIN är aktiverad';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => 'Krypterings-PIN';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader =>
+      'Lösenfras för kryptering';
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      'Du måste ange din PIN-kod varje gång din dator startas.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'Ändra PIN-kod...';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'Nuvarande PIN-kod';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => 'Ny PIN-kod';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'Bekräfta PIN-kod';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => 'Felaktig PIN-kod, försök igen';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError =>
+      'PIN-koderna matchar inte, försök igen';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'Ändra PIN-kod';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => 'Visa';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => 'Dölj';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => 'Ändra';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN-kod uppdaterad';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+  String get recoveryKeyPassphrasePinSuccessBody => 'Din PIN-kod uppdaterades.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+      'Lösenfras uppdaterad';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      'Din lösenfras uppdaterades.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      'Svag lösenfras, gör den längre eller mer komplex';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      'Helt ok lösenfras, gör den längre eller mer komplex för bättre säkerhet';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => 'Stark lösenfras';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+      'Svag PIN-kod, gör den längre eller mindre förutsägbar';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      'Helt ok PIN-kod, gör den längre eller mindre förutsägbar för bättre säkerhet';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => 'PIN-koden är tillräckligt lång';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => 'Något gick fel';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+      'Ubuntu Pro är inte tillgängligt för den här versionen av Ubuntu';
 
   @override
-  String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+  String get ubuntuProNotSupportedDetails => 'Ubuntu Pro kräver en LTS-utgåva';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'Ubuntu Pro stöds inte av den här versionen av snapd';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'Uppdatera snapd för att hantera Ubuntu Pro';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Ubuntu Pro är aktiverat';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'Säkerhet och efterlevnad i företagsklass för din dator. Alltid gratis för privat bruk. $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore => 'Läs mer om Ubuntu Pro';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Aktivera Ubuntu Pro';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'Aktivera med Ubuntu One-konto';
 
   @override
   String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+      'Du kommer att kunna skapa ett kostnadsfritt konto';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+      'Logga in med ditt Ubuntu One-konto, eller skapa ett kostnadsfritt konto.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => 'Fortsätt i webbläsare';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return 'Du kan också logga in på $attachLink och ange koden $attachCode';
   }
 
   @override
   String get ubuntuProMagicError =>
-      'Unable to enable Ubuntu Pro, please try again';
+      'Kunde inte aktivera Ubuntu Pro, försök igen';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'Aktivera med en token';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError => 'Kunde inte aktivera Ubuntu Pro';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'Från din IT-administratör eller från $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'Skaffa en Ubuntu Pro-token från din administratör eller från $proLink';
   }
 
   @override
   String get ubuntuProTokenLabel => 'Token';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Inaktivera Ubuntu Pro';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => 'Inaktivera';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Att inaktivera Ubuntu Pro kommer att koppla bort din prenumeration från den här datorn. Vill du fortsätta?';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => 'Aktivera';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'Avbryt';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, please try again.';
+      'Kunde inte aktivera funktionen, försök igen.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, please try again.';
+      'Kunde inte inaktivera funktionen, försök igen.';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance => 'Efterlevnad och härdning';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'Endast rekommenderat som hjälp för FedRAMP, HIPAA och andra krav på efterlevnad och härdning.';
 
   @override
-  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+  String get ubuntuProComplianceUSGTitle => 'Ubuntu Säkerhetsguide (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'Automatiserar härdning och granskning med CIS-benchmark och DISA-STIG-profiler samtidigt som det möjliggör miljöanpassade anpassningar.';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'En kryptografisk modulcertifiering från USA:s och Kanadas regeringar som visar efterlevnad med dataskyddsstandarden FIPS 140-2.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'Aktivera FIPS';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'Aktivering av FIPS kan inte återställas och Livepatch kommer att inaktiveras permanent.';
 
   @override
   String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+      'Välj ditt föredragna FIPS-alternativ';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS med uppdateringar';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'Installerar FIPS 140-2-validerade paket, och tillåter regelbundna säkerhetsuppdateringar.';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS utan uppdateringar';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'Installerar FIPS 140-2-validerade paket. Dessa kommer inte att uppdateras förrän vid nästa omcertifiering.';
 
   @override
   String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+      'Dokumentation om säkerhetsefterlevnad';
 
   @override
-  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+  String get ubuntuProESMTitle => 'Expanderat säkerhetsunderhåll (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for 25,000+ open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.';
+      'ESM ger 10 år av säkerhetsfixar för 25 000+ öppna programvarupaket. Få kontinuerlig sårbarhetshantering för kritiska, höga och mellanhöga CVE:er.';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'Main-paket (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for 2,300 Ubuntu Main package until $year';
+    return 'Säkerhetsuppdateringar för 2 300 Ubuntu Main-paket fram till $year';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'Universe-paket (esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for over 23,000 Ubuntu Universe packages until $year';
+    return 'Ytterligare säkerhetsuppdateringar för över 23000 Ubuntu Universe-paket fram till $year';
   }
 
   @override
-  String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
+  String get ubuntuProLivepatchTitle => 'Livepatch för kärnan';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'Aktivera Livepatch';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'Tillämpa säkerhetsuppdateringar för kärnan medan systemet körs';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+      'Visa Livepatch-status i övre fältet';
 }

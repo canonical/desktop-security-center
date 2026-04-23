@@ -33,7 +33,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Suorita';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'Pääsyoikeudet';
 
   @override
   String get snapPermissionsEnableTitle =>
@@ -45,11 +45,11 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Otetaan käyttöön, tämä saattaa kestää hetken...';
+      'Otetaan käyttöön, tämä kestää hetken...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Poistetaa käytöstä, tämä saattaa kestään hetken...';
+      'Poistetaan käytöstä, tämä kestää hetken...';
 
   @override
   String get snapPermissionsExperimentalLabel => 'Kokeellinen';
@@ -75,48 +75,50 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Manage $interface permissions for $snap.';
+    return 'Hallitse rajapinnan $interface oikeuksia snap-paketille $snap.';
   }
 
   @override
   String get snapRulesPageEmptyTileLabel => 'Ei vielä sääntöjä';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel =>
+      'Yksikään sovellus ei ole pyytänyt pääsyoikeuksia';
 
   @override
   String get snapRulesRemoveAll => 'Poista kaikki säännöt';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions =>
+      'Palauta kaikki oikeudet oletuksiin';
 
   @override
   String get homeInterfacePageTitle => 'Kotikansio';
 
   @override
   String get homeInterfacePageDescription =>
-      'Hallitse oikeuksia kotikansiossa olevie tiedostojen käytön suhteen.';
+      'Hallitse oikeuksia kotikansiossa olevien tiedostojen käytön suhteen.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'Kamera';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+      'Salli sovellusten käyttää kameroita.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'Mikrofoni';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'Salli sovellusten käyttää mikrofonia.';
 
   @override
   String get interfacePageTitle => 'Hallitse oikeuksia';
 
   @override
   String get interfacePageDescription =>
-      'Strictly confined apps will ask you before accessing files and folders. This feature is experimental and subject to changes.';
+      'Tiukasti rajoitetut sovellukset kysyvät lupaa ennen tiedostojen tai kansioiden käsittelyä. Tämä ominaisuus on kokeellinen ja saattaa muuttua.';
 
   @override
   String get interfacePageLinkLearnMore => 'Lue lisää';
@@ -140,558 +142,562 @@ class AppLocalizationsFi extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'Levyn salaus';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'Palautusavain';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'Palautusavain mahdollistaa tietoihin pääsyn, jos levyn lukituksen avaus ei onnistu käynnistettäessä. Tallenna se turvalliseen paikkaan.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'Palautusavain mahdollistaa tietoihin pääsyn, jos levyn lukituksen avaus ei onnistu käynnistettäessä. Tallenna se turvalliseen paikkaan. $learnMoreLink';
   }
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'Lue lisää laitevarmennetusta salauksesta';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => 'Tarkista palautusavain...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey => 'Tarkista palautusavain';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'Tarkista';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => 'Kelvollinen avain';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => 'Virheellinen avain';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => 'Syötä palautusavain';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => 'Palautusavain toimii';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+      'Muista säilyttää se turvallisessa paikassa.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork => 'Palautusavain ei toimi';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+      'Tarkista avain tai vaihda se uuteen.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'Virhe';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton => 'Vaihda palautusavain...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader => 'Vaihda palautusavain';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      'Tallenna palautusavain turvalliseen paikkaan. Kun se on vaihdettu, vanhaa palautusavainta ei voi enää käyttää.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'Näytä QR-koodi';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'Tallenna tiedostoon';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      'Olen tallentanut avain turvalliseen paikkaan';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => 'Vaihda';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => 'Hylkää';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+      'Palautusavain vaihdettu';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      'Muista säilyttää sitä turvallisessa paikassa.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'Palautusavaimen vaihto epäonnistui';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      'Palautusavainta vaihdettaessa tapahtui virhe, vanha avaimesi on edelleen voimassa.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+      'Ubuntu-työpöytä - Salauksen palautusavain';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'Skannaa QR-koodi kopioidaksesi salausavaimen ja tallentaaksesi sen turvalliseen paikkaan kuten salasanojen hallintasovellukseen. Voit myös ottta siitä kuvan myöhempää käyttöä varten.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification =>
+      'Kopioitu leikepöydälle';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'Kopioi';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      'Salausasetuksia ei ole saatavilla';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      'Tietokoneen salaustilanteen nouto epäonnistui.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      'Tietokoneen TPM-asetukset eivät ole tuetussa tilassa.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'snapd-versio ei ole tuettu';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      'Tarkista että Tietoturvakeskus ja snapd ovat ajan tasalla.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      'Tietoturvakeskus ei voi yhdistää snapd-liitäntään';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      'Korjataksesi tämän, suorita seuraava komento päätteessä:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'Lisää PIN...';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton => 'Lisää tunnuslause...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading =>
+      'Lisää tunnuslause';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'Lisää PIN';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'PIN-koodi tulee syöttää joka kerta tietokonetta käynnistettäessä. PIN-koodi on eri kuin käyttäjän salasana.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'Jos unohdat PIN-koodin, voit päästä käsiksi levyn tietoihin käyttämällä palautusavainta.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'Tunnuslause tulee syöttää joka kerta tietokonetta käynnistettäessä. Tunnuslause on eri kuin käyttäjän salasana.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'Jos unohdat tunnuslauseen, voit päästä käsiksi levyn tietoihin käyttämällä palautusavainta.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+  String get diskEncryptionPageAdditionalSecurityHeader => 'Lisäturva';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'Voit asettaa tunnuslauseen tai PIN-koodin lisäturvaksi. Se tulee syöttää joka kerta tietokonetta käynnistettäessä.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Lue lisää';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'Lisää';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'Poista PIN...';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton =>
+      'Poista tunnuslause...';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'Lisätään PIN, tämä kestää hetken...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'Lisätään tunnuslausetta, tämä kestää hetken...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'Poistetaan PIN, tämä kestää hetken...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'Poistetaan tunnuslause, tämä kestää hetken...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+      'Palautusavainta ei tallennettu';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'Palautusavainta ei voi tallentaa väliaikaiseen sijaintiin';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'Tuntematon virhe';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+      'Palautusavaimen tallentaminen tiedostoon epäonnistui';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+      'Tähän sijaintiin ei ole oikeutta kirjoittaa.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      'Tähän kansioon ei ole oikeutta kirjoittaa. Yritä toista sijaintia tai käytä toista tapaa.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      'Käytä toista sijaintia kuten irrotettavaa asemaa, tai käytä toista tapaa.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle => 'Tallenna palautusavaimen tiedosto';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'Tekstitiedostot';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled => 'Laitteiston tukema salaus on käytössä';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+      'Salausavaimet ovat tallennettu tietokoneen TPM-moduuliin (Trusted Platform Module).';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'Lue lisää laitteiston tukemasta salauksesta';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled =>
+      'Salauksen tunnuslause on käytössä';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'Muuta tunnuslausetta';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      'Tunnuslause tulee syöttää joka kerta tietokonetta käynnistettäessä.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'Vaihda tunnuslause...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => 'Nykyinen tunnuslause';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => 'Uusi tunnuslause';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => 'Vahvista tunnuslause';
 
   @override
   String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+      'Virheellinen tunnuslause, yritä uudelleen';
 
   @override
   String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+      'Tulee olla vähintään 4 merkkiä pitkä';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+      'Tunnuslauseet eivät täsmää, yritä uudelleen';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'Vaihda tunnuslause';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => 'Salauksen PIN-koodi on käytössä';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => 'Salauksen PIN-koodi';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader => 'Salauksen tunnuslause';
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      'PIN-koodi tulee syöttää joka kerta tietokonetta käynnistettäessä.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'Vaihda PIN...';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'Nykyinen PIN';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => 'Uusi PIN';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'Vahvista PIN';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError =>
+      'Virheellinen PIN-koodi, yritä uudelleen';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError =>
+      'PIN-koodit eivät täsmää, yritä uudelleen';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'Vaihda PIN';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => 'Näytä';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => 'Piilota';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => 'Muuta';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN-koodi päivitetty';
 
   @override
   String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+      'PIN-koodi päivitettiin onnistuneesti.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+      'Tunnuslause päivitetty';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      'Tunnuslause päivitettiin onnistuneesti.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      'Heikko tunnuslause, muuta pidemmäksi tai tee siitä monimutkaisempi';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      'Kohtuullinen tunnuslause, muuta pidemmäksi tai tee siitä monimutkaisempi parantaaksesi turvallisuutta';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => 'Vahva tunnuslause';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+      'Heikko PIN-koodi, tee siitä pidempi tai vähemmän ennustettava';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      'Kohtuullinen PIN-koodi, tee siitä pidempi tai vähemmän ennustettava turvallisuuden lisäämiseksi';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => 'PIN-koodi ei ole riittävän pitkä';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => 'Tapahtui virhe';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+      'Ubuntu Pro ei ole saatavilla tälle Ubuntu-versiolle';
 
   @override
-  String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+  String get ubuntuProNotSupportedDetails => 'Ubuntu Pro vaatii LTS-julkaisun';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'Ubuntu Pro ei ole tuettu tämän snapd-version toimesta';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'Päivitä snapd hallitaksesi Ubuntu Pro:ta';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Ubuntu Pro on käytössä';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'Yritystason tietoturvaa ja vaatimustenmukaisuutta tietokoneellesi. Aina ilmainen henkilökohtaiseen käyttöön. $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore => 'Lue lisää Ubuntu Pro:sta';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Ota Ubuntu Pro käyttöön';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'Ota käyttöön Ubuntu One -tilillä';
 
   @override
-  String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+  String get ubuntuProEnableMagicSubtitle => 'Voit luoda tilin veloituksetta';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+      'Kirjaudu Ubuntu One -tilillä, tai luo tili veloituksetta.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => 'Jatka selaimessa';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return 'Voit myös kirjautua osoitteessa $attachLink ja kirjoittaa koodin $attachCode';
   }
 
   @override
   String get ubuntuProMagicError =>
-      'Unable to enable Ubuntu Pro, please try again';
+      'Ubuntu Pro -käyttöönotto epäonnistui, yritä uudelleen';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'Ota käyttöön poletilla';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError =>
+      'Ubuntu Pro -käyttöönotto ei onnistunut';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'Järjestelmänvalvojalta tai osoitteesta $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'Hanki Ubuntu Pro -poletti ylläpitäjältäsi tai osoitteesta $proLink';
   }
 
   @override
-  String get ubuntuProTokenLabel => 'Token';
+  String get ubuntuProTokenLabel => 'Poletti';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Poista Ubuntu Pro käytöstä';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => 'Poista käytöstä';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Ubuntun Pro:n poistaminen käytöstä irrottaa tilauksesi tästä koneesta. Haluatko jatkaa?';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => 'Ota käyttöön';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'Peru';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, please try again.';
+      'Ominaisuutta ei voitu ottaa käyttöön, yritä uudelleen.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, please try again.';
+      'Ominaisuutta ei voitu poistaa käytöstä, yritä uudelleen.';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance => 'Vaatimustenmukaisuutta ja koventamista';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'Suositeltu käytettäväksi vain FedRAMP-, HIPAA- ja muiden vaatimustenmukaisuus- ja koventamisvaatimusten avustamiseen.';
 
   @override
-  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+  String get ubuntuProComplianceUSGTitle => 'Ubuntun tietoturvaohje (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'Automatisoi koventamista ja auditoimista CIS-mittausta ja DISA-STIG-profiileja vasten samalla sallien ympäristökohtaisia mukautuksia.';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'Yhdysvaltain ja Kanadan valtionhallinnon salakirjoitusmoduulin sertifiointi FIPS 140-2 -datasuojaustandardin vaatimustenmukaisuutta vasten.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'Ota FIPS käyttöön';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'FIPS:in käyttöönottoa ei voi kumota, ja Livepatch poistetaan pysyvästi käytöstä.';
 
   @override
   String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+      'Valitse ensisijainen FIPS-asetus';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS päivityksillä';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'Asentaa FIPS 140-2 -validoidut paketit ja sallii tavalliset tietoturvapäivitykset.';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS ilman päivityksiä';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'Asentaa FIPS 140-2 -validoidut paketit. Näitä ei päivitetä ennen seuraavaa uudelleensertifiointia.';
 
   @override
   String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+      'Tietoturvan vaatimustenmukaisuuden dokumentaatio';
 
   @override
-  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+  String get ubuntuProESMTitle => 'Laajennettu tietoturvan ylläpito (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for 25,000+ open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.';
+      'ESM tarjoaa 10 vuoden tietoturvatuen yli 25 000:lle avoimen lähdekoodin paketille. Saat jatkuvan haavoittuvuushallinnan kriittisille, suurille ja keskitason CVE:ille.';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'Main-paketit (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for 2,300 Ubuntu Main package until $year';
+    return 'Tietoturvapäivitykset 2300:lle Ubuntun Main-paketille vuoteen $year asti';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'Universe-paketit (esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for over 23,000 Ubuntu Universe packages until $year';
+    return 'Tietoturvan lisäpäivitykset 23 000:lle Ubuntun Universe-paketille vuoteen $year asti';
   }
 
   @override
-  String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
+  String get ubuntuProLivepatchTitle => 'Ytimen Livepatch';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'Ota Livepatch käyttöön';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'Toteuta ytimen tietoturvapäivitykset järjestelmän ollessa käynnissä';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+      'Näytä Livepatchin tila yläpalkissa';
 }

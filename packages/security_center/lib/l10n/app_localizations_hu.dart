@@ -34,7 +34,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Végrehajtás';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'Hozzáférés';
 
   @override
   String get snapPermissionsEnableTitle =>
@@ -83,13 +83,15 @@ class AppLocalizationsHu extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Még nincsenek szabályok';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel =>
+      'Még egyetlen alkalmazás sem kért hozzáférést';
 
   @override
   String get snapRulesRemoveAll => 'Összes szabály eltávolítása';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions =>
+      'Összes jogosultság visszaállítása';
 
   @override
   String get homeInterfacePageTitle => 'Saját mappa';
@@ -99,18 +101,18 @@ class AppLocalizationsHu extends AppLocalizations {
       'A saját mappában lévő fájlok hozzáféréséhez való jogosultságok kezelése.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'Kamera';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+      'Engedélyezés az alkalmazások számára, hogy hozzáférjenek a kamerákhoz.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'Mikrofon';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'Engedélyezés az alkalmazások számára, hogy hozzáférjenek a mikrofonhoz.';
 
   @override
   String get interfacePageTitle => 'Jogosultságok kezelése';
@@ -141,558 +143,570 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'Lemeztitkosítás';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'Helyreállítási kulcs';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'A helyreállítási kulcs segítségével szerezheti vissza az adatokhoz való hozzáférést, ha a lemezt nem sikerül feloldani az indítás során. Mentse el biztonságos helyre.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'A helyreállítási kulcs segítségével szerezheti vissza az adatokhoz való hozzáférést, ha a lemezt nem sikerül feloldani az indítás során. Mentse el biztonságos helyre. $learnMoreLink';
   }
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'Tudjon meg többet a hardveresen támogatott titkosításról';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => 'Helyreállítási kulcs ellenőrzése…';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey =>
+      'Helyreállítási kulcs ellenőrzése';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'Ellenőrzés';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => 'Érvényes kulcs';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => 'Érvénytelen kulcs';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => 'Helyreállítási kulcs megadása';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => 'A helyreállítási kulcs működik';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+      'Ne felejtse el biztonságos helyen tartani.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork =>
+      'A helyreállítási kulcs nem működik';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+      'Ellenőrizze a kulcsot, vagy cserélje ki egy másikra.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'Hiba';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton => 'Helyreállítási kulcs cseréje…';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader =>
+      'Helyreállítási kulcs cseréje';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      'Mentse el az új helyreállítási kulcsot egy biztonságos helyre. Miután lecserélte, többé már nem tudja használni a régi kulcsot.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'QR-kód megjelenítése';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'Mentés fájlba';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      'Elmentettem a helyreállítási kulcsomat egy biztonságos helyre';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => 'Csere';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => 'Elvetés';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+      'A helyreállítási kulcs lecserélve';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      'Ne felejtse el biztonságos helyen tartani.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'A helyreállítási kulcs cseréje nem sikerült';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      'Valami probléma történt a helyreállítási kulcs cseréje során, a régi kulcs továbbra is érvényes marad.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+      'Ubuntu asztal – titkosítás helyreállítási kulcsa';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'Olvassa be a QR-kódot a helyreállítási kulcs másolásához, és mentse el biztonságos helyre, például jelszókezelőbe. Fényképet is készíthet a későbbi használathoz.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification => 'Vágólapra másolva';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'Másolás';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      'Titkosítási beállítások nem érhetők el';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      'Nem sikerült lekérni a számítógép titkosítási állapotát.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      'A számítógép TPM-konfigurációja nem támogatott állapotban van.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'A snapd verziója nem támogatott';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      'Ellenőrizze, hogy a biztonsági központ és a snapd naprakészek-e.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      'A biztonsági központ nem tud kapcsolódni a snapd csatolójához';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      'Ennek javításához futtassa ezt a parancsot a terminálban:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'PIN-kód hozzáadása…';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton => 'Jelmondat hozzáadása…';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading =>
+      'Jelmondat hozzáadása';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'PIN-kód hozzáadása';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'Meg kell adnia a PIN-kódot minden alkalommal, amikor a számítógép elindul. Ez a PIN-kód eltér a felhasználói jelszavától.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'Ha elfelejti a PIN-kódot, akkor a helyreállítási kulccsal szerezheti vissza a hozzáférést a lemezhez.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'Meg kell adnia a jelmondatot minden alkalommal, amikor a számítógép elindul. Ez a jelmondat eltér a felhasználói jelszavától.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'Ha elfelejti a jelmondatot, akkor a helyreállítási kulccsal szerezheti vissza a hozzáférést a lemezhez.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+  String get diskEncryptionPageAdditionalSecurityHeader => 'További biztonság';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'Beállíthat jelmondatot vagy PIN-kódot a biztonság növelése érdekében. Ezt minden alkalommal meg kell adnia, amikor a számítógép elindul.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore =>
+      'Tudjon meg többet';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'Hozzáadás';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'PIN-kód eltávolítása…';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton =>
+      'Jelmondat eltávolítása…';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'PIN-kód hozzáadása, ez eltarthat néhány másodpercig…';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'Jelmondat hozzáadása, ez eltarthat néhány másodpercig…';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'PIN-kód eltávolítása, ez eltarthat néhány másodpercig…';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'Jelmondat eltávolítása, ez eltarthat néhány másodpercig…';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+      'A helyreállítási kulcs fájlja nincs elmentve';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'A helyreállítási kulcs fájlját nem lehet ideiglenes helyre menteni';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'Ismeretlen hiba';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+      'Nem sikerült a helyreállítási kulcsot fájlba menteni';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+      'Nincs jogosultsága az adott fájlhelyre írni.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      'Nincs jogosultsága az adott mappába való íráshoz. Próbáljon egy másik helyet, vagy használjon más módszert.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      'Próbáljon egy másik helyet, például egy cserélhető meghajtót, vagy használjon más módszert.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle =>
+      'Helyreállítási kulcs fájljának mentése';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'Szövegfájlok';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled =>
+      'A hardveresen támogatott titkosítás engedélyezve';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+      'A titkosítási kulcsok a számítógép platformmegbízhatósági moduljában (TPM) vannak tárolva.';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'Tudjon meg többet a hardveresen támogatott titkosításról';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled =>
+      'A titkosítási jelmondat engedélyezve';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'Jelmondat megváltoztatása';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      'Meg kell adnia a jelmondatot minden alkalommal, amikor a számítógép elindul.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'Jelmondat megváltoztatása…';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => 'Jelenlegi jelmondat';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => 'Új jelmondat';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => 'Jelmondat megerősítése';
 
   @override
   String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+      'Helytelen jelmondat, próbálja meg újra';
 
   @override
   String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+      'Legalább 4 karakter hosszú kell legyen';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+      'A jelmondatok nem egyeznek, próbálja meg újra';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'Jelmondat megváltoztatása';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => 'A titkosítási PIN-kód engedélyezve';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => 'Titkosítási PIN-kód';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader => 'Titkosítási jelmondat';
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      'Meg kell adnia a PIN-kódot minden alkalommal, amikor a számítógép elindul.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'PIN-kód megváltoztatása…';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'Jelenlegi PIN-kód';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => 'Új PIN-kód';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'PIN-kód megerősítése';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError =>
+      'Helytelen PIN-kód, próbálja meg újra';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError =>
+      'A PIN-kódok nem egyeznek, próbálja meg újra';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'PIN-kód megváltoztatása';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => 'Megjelenítés';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => 'Elrejtés';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => 'Megváltoztatás';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'A PIN-kód frissítve';
 
   @override
   String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+      'A PIN-kódja sikeresen frissítve lett.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+      'A jelmondat frissítve';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      'A jelmondata sikeresen frissítve lett.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      'Gyenge jelmondat, növelje meg a hosszát vagy tegye bonyolultabbá';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      'Megfelelő jelmondat, de a nagyobb biztonság érdekében növelje meg a hosszát vagy tegye bonyolultabbá';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => 'Erős jelmondat';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+      'Gyenge PIN-kód, növelje meg a hosszát vagy tegye kevésbé kiszámíthatóvá';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      'Megfelelő PIN-kód, de a nagyobb biztonság érdekében növelje meg a hosszát vagy tegye kevésbé kiszámíthatóvá';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => 'A PIN-kód elég hosszú';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => 'Valami probléma történt';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+      'Az Ubuntu Pro nem érhető el ehhez az Ubuntu verzióhoz';
 
   @override
   String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+      'Az Ubuntu Pro LTS-kiadást igényel';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'Ez a snapd verzió nem támogatja az Ubuntu Pro szolgáltatást';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'Frissítse a snapd csomagot az Ubuntu Pro kezeléséhez';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Az Ubuntu Pro engedélyezve van';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'Vállalati szintű biztonság és megfelelőség a számítógépén. Személyes használatra mindig ingyenes. $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore =>
+      'Tudjon meg többet az Ubuntu Pro szolgáltatásról';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Az Ubuntu Pro engedélyezése';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'Engedélyezés Ubuntu One fiókkal';
 
   @override
   String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+      'Ingyenesen létre tud hozni egy fiókot';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+      'Jelentkezzen be az Ubuntu One fiókjával, vagy hozzon létre egyet ingyen.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => 'Folytatás a böngészőben';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return 'Bejelentkezhet a(Z) $attachLink használatával is, és megadhatja a(z) $attachCode kódot';
   }
 
   @override
   String get ubuntuProMagicError =>
-      'Unable to enable Ubuntu Pro, please try again';
+      'Nem lehet engedélyezni az Ubuntu Pro szolgáltatást, próbálja meg újra';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'Engedélyezés tokennel';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError =>
+      'Nem lehet engedélyezni az Ubuntu Pro szolgáltatást';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'Az informatikai rendszergazdájától vagy innen: $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'Szerezzen Ubuntu Pro tokent a rendszergazdájától vagy innen: $proLink';
   }
 
   @override
   String get ubuntuProTokenLabel => 'Token';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Az Ubuntu Pro letiltása';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => 'Letiltás';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Az Ubuntu Pro letiltása leválasztja az előfizetését erről a számítógépről. Szeretné folytatni?';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => 'Engedélyezés';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'Mégse';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, please try again.';
+      'Nem sikerült engedélyezni a funkciót, próbálja meg újra.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, please try again.';
+      'Nem sikerült letiltani a funkciót, próbálja meg újra.';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance => 'Megfelelés és megerősítés';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'Csak a FedRAMP, HIPAA és egyéb megfelelőségi és megerősítési követelmények támogatásához ajánlott.';
 
   @override
-  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+  String get ubuntuProComplianceUSGTitle => 'Ubuntu biztonsági útmutató (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'Automatizálja a megerősítést és az ellenőrzést a CIS-mérőszám és a DISA-STIG-profilokkal, miközben lehetővé teszi a környezetre vonatkozó személyre szabást.';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'Az Egyesült Államok és Kanada kormánya kriptográfiai moduljának a FIPS 140-2 adatvédelmi szabvánnyal való megfelelőségi tanúsítványa.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'A FIPS engedélyezése';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'A FIPS engedélyezését nem lehet visszavonni, és a Livepatch véglegesen le lesz tiltva.';
 
   @override
   String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+      'Az előnyben részesített FIPS-lehetőség kiválasztása';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS, frissítésekkel';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'Telepíti a FIPS 140-2 által ellenőrzött csomagokat, és lehetővé teszi a rendszeres biztonsági frissítéseket.';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS, frissítések nélkül';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'Telepíti a FIPS 140-2 által ellenőrzött csomagokat. Ezek nem lesznek frissítve a következő újratanúsításig.';
 
   @override
   String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+      'Biztonsági megfelelőségi dokumentáció';
 
   @override
-  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+  String get ubuntuProESMTitle => 'Kiterjesztett biztonsági karbantartás (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for 25,000+ open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.';
+      'Az ESM 10 évig biztosít biztonsági javításokat több mint 25 000 nyílt forráskódú csomaghoz. Folyamatos sebezhetőségkezelést kap a kritikus, magas és közepes CVE-khez.';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'Főcsomagok (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for 2,300 Ubuntu Main package until $year';
+    return 'Biztonsági frissítések 2300 Ubuntu főcsomaghoz $year-ig';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'Univerzumcsomagok (esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for over 23,000 Ubuntu Universe packages until $year';
+    return 'További biztonsági frissítések több mint 23 000 Ubuntu univerzumcsomaghoz $year-ig';
   }
 
   @override
-  String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
+  String get ubuntuProLivepatchTitle => 'Rendszermag Livepatch';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'A Livepatch engedélyezése';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'A rendszermag biztonsági frissítéseinek telepítése a rendszer futása közben';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+      'Livepatch-állapot megjelenítése a felső sávon';
 }

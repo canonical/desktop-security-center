@@ -1,77 +1,153 @@
 {
-  "snapRulesRemoveAll": "Hapus semua aturan",
-  "@snapRulesRemoveAll": {},
-  "interfacePageTitle": "Kelola izin",
-  "@interfacePageTitle": {},
-  "interfacePageLinkReportIssues": "Laporkan masalah",
-  "@interfacePageLinkReportIssues": {},
-  "appTitle": "Pusat Keamanan",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "Izinkan sampai log keluar",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "Tolak sampai log keluar",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverAllowed": "Selalu izinkan",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "Selalu tolak",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "Baca",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "Tulis",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "Jalankan",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsEnableWarning": "Ini adalah fitur eksperimental untuk mengendalikan akses ke sumber daya sistem Anda.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsEnablingLabel": "Memfungsikan, itu mungkin perlu waktu beberapa detik ...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsDisablingLabel": "Menonaktifkan, itu mungkin perlu waktu beberapa detik ...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsExperimentalLabel": "Eksperimental",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsOtherDescription": "Anda dapat mengelola izin lain dalam Pengaturan › Aplikasi.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsPageTitle": "Izin Aplikasi",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, plural, =0{tidak ada aturan} =1{1 aturan} other{{n} aturan}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesPageDescription": "Kelola izin {interface} untuk {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "Belum ada aturan",
-  "@snapRulesPageEmptyTileLabel": {},
-  "homeInterfacePageTitle": "Folder rumah",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "Kelola izin untuk mengakses berkas di folder Rumah Anda.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageDescription": "Aplikasi yang ketat dibatasi akan bertanya sebelum mengakses berkas dan folder. Fitur ini eksperimen dan mungkin berubah.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkLearnMore": "Pelajari selengkapnya",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "Berikan umpan balik",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfaceSnapCount": "{n, plural, =0{tidak ada aplikasi} =1{1 aplikasi} other {{n} aplikasi}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsEnableTitle": "Membutuhkan aplikasi untuk meminta izin sistem",
-  "@snapPermissionsEnableTitle": {}
+    "snapRulesRemoveAll": "Hapus semua aturan",
+    "interfacePageTitle": "Kelola izin",
+    "interfacePageLinkReportIssues": "Laporkan masalah",
+    "appTitle": "Pusat Keamanan",
+    "snapdRuleCategorySessionAllowed": "Izinkan sampai log keluar",
+    "snapdRuleCategorySessionDenied": "Tolak sampai log keluar",
+    "snapdRuleCategoryForeverAllowed": "Selalu izinkan",
+    "snapdRuleCategoryForeverDenied": "Selalu tolak",
+    "snapPermissionReadLabel": "Baca",
+    "snapPermissionWriteLabel": "Tulis",
+    "snapPermissionExecuteLabel": "Jalankan",
+    "snapPermissionsEnableWarning": "Ini adalah fitur eksperimental untuk mengendalikan akses ke sumber daya sistem Anda.",
+    "snapPermissionsEnablingLabel": "Memfungsikan, itu mungkin perlu waktu beberapa detik ...",
+    "snapPermissionsDisablingLabel": "Menonaktifkan, itu mungkin perlu waktu beberapa detik ...",
+    "snapPermissionsExperimentalLabel": "Eksperimental",
+    "snapPermissionsOtherDescription": "Anda dapat mengelola izin lain dalam Pengaturan › Aplikasi.",
+    "snapPermissionsPageTitle": "Izin Aplikasi",
+    "snapRulesCount": "{n, plural, =0{tidak ada aturan} =1{1 aturan} other{{n} aturan}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "Kelola izin {interface} untuk {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Belum ada aturan",
+    "homeInterfacePageTitle": "Folder rumah",
+    "homeInterfacePageDescription": "Kelola izin untuk mengakses berkas di folder Rumah Anda.",
+    "interfacePageDescription": "Aplikasi yang ketat dibatasi akan bertanya sebelum mengakses berkas dan folder. Fitur ini eksperimen dan mungkin berubah.",
+    "interfacePageLinkLearnMore": "Pelajari selengkapnya",
+    "interfacePageLinkGiveFeedback": "Berikan umpan balik",
+    "interfaceSnapCount": "{n, plural, =0{tidak ada aplikasi} =1{1 aplikasi} other {{n} aplikasi}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsEnableTitle": "Membutuhkan aplikasi untuk meminta izin sistem",
+    "diskEncryptionPageTitle": "Enkripsi Disk",
+    "diskEncryptionPageRecoveryKey": "Kunci pemulihan",
+    "diskEncryptionPageStoreYourKey": "Kunci pemulihan memungkinkan Anda mendapatkan akses ke data Anda jika disk Anda gagal untuk dibuka kuncinya selama awal mula. Simpan di suatu tempat aman.",
+    "diskEncryptionPageLearnMore": "Pelajari lebih lanjut tentang kunci pemulihan",
+    "diskEncryptionPageCheckKey": "Periksa kunci pemulihan...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Periksa Kunci Pemulihan",
+    "diskEncryptionPageCheck": "Periksa",
+    "diskEncryptionPageValidKey": "Kunci yang valid",
+    "diskEncryptionPageKeyWorks": "Kunci pemulihan bekerja",
+    "diskEncryptionPageKeyWorksBody": "Ingat untuk menjaganya di suatu tempat aman.",
+    "diskEncryptionPageKeyDoesntWork": "Kunci pemulihan tidak bekerja",
+    "diskEncryptionPageKeyDoesntWorkBody": "Periksa kunci atau menggantinya dengan yang baru.",
+    "diskEncryptionPageError": "Galat",
+    "diskEncryptionPageEnterKey": "Masukkan kunci pemulihan Anda",
+    "diskEncryptionPageInvalidKey": "Kunci tidak valid",
+    "diskEncryptionPageReplaceButton": "Mengganti kunci pemulihan ...",
+    "diskEncryptionPageReplaceDialogHeader": "Mengganti kunci pemulihan",
+    "recoveryKeySomethingWentWrongHeader": "Ada yang salah",
+    "diskEncryptionPageReplaceDialogBody": "Simpan kunci pemulihan baru di suatu tempat aman. Sekali Anda menggantinya, Anda tidak akan dapat menggunakan kunci lama lagi.",
+    "diskEncryptionPageReplaceDialogShowQR": "Tampilkan kode QR",
+    "diskEncryptionPageReplaceDialogSave": "Simpan ke berkas",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Saya menyimpan kunci pemulihan saya di suatu tempat aman",
+    "diskEncryptionPageReplaceDialogReplace": "Gantikan",
+    "diskEncryptionPageReplaceDialogDiscard": "Singkirkan",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Kunci pemulihan diganti",
+    "diskEncryptionPageStoreYourKeyWithLink": "Kunci pemulihan memungkinkan Anda mendapatkan kembali akses ke data Anda jika disk Anda gagal dibuka saat startup. Simpan di tempat yang aman. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageReplaceDialogSuccessBody": "Ingatlah untuk menyimpannya di tempat yang aman.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Penggantian kunci pemulihan gagal",
+    "diskEncryptionPageReplaceDialogErrorBody": "Terjadi kesalahan saat mengganti kunci pemulihan Anda, kunci lama Anda akan tetap berlaku.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Desktop Ubuntu - Kunci pemulihan enkripsi",
+    "diskEncryptionPageReplaceDialogQRBody": "Pindai kode QR untuk menyalin kunci pemulihan dan simpan di tempat yang aman, seperti pengelola kata sandi. Anda juga dapat mengambil foto untuk digunakan nanti.",
+    "diskEncryptionPageClipboardNotification": "Disalin ke papan klip",
+    "diskEncryptionPageCopySemanticLabel": "Salin",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Pengaturan enkripsi tidak tersedia",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Gagal mengambil status enkripsi komputer ini.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "Konfigurasi TPM komputer Anda tidak dalam kondisi yang didukung.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Versi snapd Anda tidak didukung",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Periksa Pusat Keamanan dan snapd apakah mutakhir.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Pusat Keamanan tidak dapat terhubung ke antarmuka snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Untuk memperbaikinya, jalankan perintah ini di terminal:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "recoveryKeyExceptionFileSystemTitle": "Berkas kunci pemulihan tidak disimpan",
+    "recoveryKeyExceptionDisallowedPathTitle": "Berkas kunci pemulihan tidak dapat disimpan di lokasi sementara",
+    "recoveryKeyExceptionUnknownTitle": "Galat tak dikenal",
+    "recoveryKeyExceptionFilePermissionTitle": "Gagal menyimpan kunci pemulihan Anda ke berkas",
+    "recoveryKeyExceptionFilePermissionBody": "Anda tidak memiliki izin untuk menulis ke lokasi berkas tersebut.",
+    "recoveryKeyExceptionFileSystemBody": "Anda tidak memiliki izin untuk menulis ke folder tersebut. Coba lokasi lain atau gunakan metode lain.",
+    "recoveryKeyExceptionDisallowedPathBody": "Cobalah lokasi lain, seperti drive lepas pasang, atau gunakan metode lain.",
+    "recoveryKeyFilePickerTitle": "Simpan berkas kunci pemulihan",
+    "recoveryKeyFilePickerFilter": "Berkas teks",
+    "recoveryKeyTPMEnabled": "Enkripsi yang didukung perangkat keras diaktifkan",
+    "recoveryKeyTPMExplanationBody": "Kunci enkripsi disimpan dalam Trusted Platform Module (TPM) komputer Anda.",
+    "recoveryKeyTPMExplanationLearnMore": "Pelajari lebih lanjut tentang enkripsi yang didukung perangkat keras",
+    "recoveryKeyPassphraseEnabled": "Frasa sandi enkripsi diaktifkan",
+    "recoveryKeyPassphraseHeader": "Ubah frasa sandi",
+    "recoveryKeyPassphraseBody": "Anda perlu memasukkan kata sandi saat memulai untuk membuka kunci disk. Anda dapat mengubah kata sandi, tetapi tidak dapat menonaktifkannya.",
+    "recoveryKeyPassphraseButton": "Ubah frasa sandi...",
+    "recoveryKeyPassphraseCurrent": "Frasa sandi saat ini",
+    "recoveryKeyPassphraseNew": "Frasa sandi baru",
+    "recoveryKeyPassphraseConfirm": "Konfirmasi frasa sandi",
+    "recoveryKeyPassphraseCurrentError": "Frasa sandi salah, coba lagi",
+    "recoveryKeyPassphraseNewError": "Harus minimal 4 karakter panjangnya",
+    "recoveryKeyPassphraseConfirmError": "Frasa sandi tidak cocok, coba lagi",
+    "recoveryKeyPassphraseDialogHeader": "Ubah Frasa Sandi",
+    "recoveryKeyPinEnabled": "PIN enkripsi diaktifkan",
+    "recoveryKeyPinHeader": "PIN Enkripsi",
+    "recoveryKeyEncrpytionPassphraseHeader": "Frasa sandi enkripsi",
+    "recoveryKeyPinBody": "Anda perlu memasukkan PIN saat memulai untuk membuka kunci disk. Anda dapat mengubah PIN, tetapi tidak dapat menonaktifkannya.",
+    "recoveryKeyPinButton": "Ubah PIN...",
+    "recoveryKeyPinCurrent": "PIN kini",
+    "recoveryKeyPinNew": "PIN baru",
+    "recoveryKeyPinConfirm": "Konfirmasi PIN",
+    "recoveryKeyPinCurrentError": "PIN salah, coba lagi",
+    "recoveryKeyPinConfirmError": "PIN tidak cocok, coba lagi",
+    "recoveryKeyPinDialogHeader": "Ubah PIN",
+    "recoveryKeyPassphraseShow": "Tampilkan",
+    "recoveryKeyPassphraseHide": "Sembunyikan",
+    "recoveryKeyPassphraseChange": "Ubah",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN diperbarui",
+    "recoveryKeyPassphrasePinSuccessBody": "PIN Anda berhasil diperbarui.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Frasa sandi diperbarui",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "Frasa sandi Anda berhasil diperbarui.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Frasa sandi lemah, jadikan lebih panjang atau lebih rumit",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Frasa sandi yang lumayan, jadikan lebih panjang atau lebih rumit untuk keamanan yang lebih baik",
+    "recoveryKeyPassphraseEntropyOptimal": "Frasa sandi yang kuat",
+    "recoveryKeyPinEntropyBelowMin": "PIN lemah, jadikan lebih panjang atau lebih sulit ditebak",
+    "recoveryKeyPinEntropyBelowOptimal": "PIN yang lumayan, jadikan lebih panjang atau lebih sulit ditebak untuk keamanan yang lebih baik",
+    "recoveryKeyPinEntropyOptimal": "PIN cukup panjang",
+    "snapPermissionAccessLabel": "Akses",
+    "cameraRulesPageEmptyTileLabel": "Belum ada aplikasi yang meminta akses",
+    "snapRulesResetAllPermissions": "Atur ulang semua izin",
+    "cameraInterfacePageTitle": "Kamera",
+    "cameraInterfacePageDescription": "Izinkan aplikasi untuk mengakses kamera Anda."
 }

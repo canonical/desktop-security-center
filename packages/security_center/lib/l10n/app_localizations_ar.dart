@@ -9,93 +9,93 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get appTitle => 'Security Center';
+  String get appTitle => 'مركز الأمان';
 
   @override
-  String get snapdRuleCategorySessionAllowed => 'Allow until logout';
+  String get snapdRuleCategorySessionAllowed => 'السماح حتى تسجيل الخروج';
 
   @override
-  String get snapdRuleCategorySessionDenied => 'Deny until logout';
+  String get snapdRuleCategorySessionDenied => 'رفض حتى تسجيل الخروج';
 
   @override
-  String get snapdRuleCategoryForeverAllowed => 'Allow always';
+  String get snapdRuleCategoryForeverAllowed => 'السماح دائما';
 
   @override
-  String get snapdRuleCategoryForeverDenied => 'Deny always';
+  String get snapdRuleCategoryForeverDenied => 'الرفض دائما';
 
   @override
-  String get snapPermissionReadLabel => 'Read';
+  String get snapPermissionReadLabel => 'قراءة';
 
   @override
-  String get snapPermissionWriteLabel => 'Write';
+  String get snapPermissionWriteLabel => 'كتابة';
 
   @override
-  String get snapPermissionExecuteLabel => 'Execute';
+  String get snapPermissionExecuteLabel => 'تنفيذ';
 
   @override
   String get snapPermissionAccessLabel => 'Access';
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Require apps to ask for system permissions';
+      'يتطلب من التطبيقات طلب أذونات النظام';
 
   @override
   String get snapPermissionsEnableWarning =>
-      'This is an experimental feature for controlling access to your system’s resources.';
+      'هذه ميزة تجريبية للتحكم في الوصول إلى موارد نظامك.';
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Enabling, this may take a few seconds...';
+      'جاري التفعيل، قد يستغرق الأمر بضع ثوانٍ...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Disabling, this may take a few seconds...';
+      'جاري التعطيل، قد يستغرق الأمر بضع ثوانٍ...';
 
   @override
-  String get snapPermissionsExperimentalLabel => 'Experimental';
+  String get snapPermissionsExperimentalLabel => 'تجريبي';
 
   @override
   String get snapPermissionsOtherDescription =>
-      'You can manage other permissions in Settings › Applications.';
+      'يمكنك إدارة الأذونات الأخرى في الإعدادات › التطبيقات.';
 
   @override
-  String get snapPermissionsPageTitle => 'App permissions';
+  String get snapPermissionsPageTitle => 'أذونات التطبيق';
 
   @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n rules',
-      one: '1 rule',
-      zero: 'no rules',
+      other: '$n قواعد',
+      one: 'قاعدة واحدة',
+      zero: 'لا توجد قواعد',
     );
     return '$_temp0';
   }
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Manage $interface permissions for $snap.';
+    return 'إدارة أذونات $interface لـ $snap.';
   }
 
   @override
-  String get snapRulesPageEmptyTileLabel => 'No rules yet';
+  String get snapRulesPageEmptyTileLabel => 'لا توجد قواعد حتى الآن';
 
   @override
   String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
 
   @override
-  String get snapRulesRemoveAll => 'Remove all rules';
+  String get snapRulesRemoveAll => 'إزالة جميع القواعد';
 
   @override
   String get snapRulesResetAllPermissions => 'Reset all permissions';
 
   @override
-  String get homeInterfacePageTitle => 'Home folder';
+  String get homeInterfacePageTitle => 'المجلد الرئيسي';
 
   @override
   String get homeInterfacePageDescription =>
-      'Manage permissions to access files in your Home folder.';
+      'إدارة الأذونات للوصول إلى الملفات الموجودة في المجلد الرئيسي الخاص بك.';
 
   @override
   String get cameraInterfacePageTitle => 'Camera';
@@ -112,170 +112,171 @@ class AppLocalizationsAr extends AppLocalizations {
       'Allow apps to access your microphone.';
 
   @override
-  String get interfacePageTitle => 'Manage permissions';
+  String get interfacePageTitle => 'إدارة الأذونات';
 
   @override
   String get interfacePageDescription =>
-      'Strictly confined apps will ask you before accessing files and folders. This feature is experimental and subject to changes.';
+      'ستطلب منك التطبيقات ذات القيود الصارمة قبل الوصول إلى الملفات والمجلدات. هذه الميزة تجريبية وقابلة للتغيير.';
 
   @override
-  String get interfacePageLinkLearnMore => 'Learn more';
+  String get interfacePageLinkLearnMore => 'التعرف على المزيد';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Give feedback';
+  String get interfacePageLinkGiveFeedback => 'تقديم ملاحظات';
 
   @override
-  String get interfacePageLinkReportIssues => 'Report issues';
+  String get interfacePageLinkReportIssues => 'الإبلاغ عن المشكلات';
 
   @override
   String interfaceSnapCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n apps',
-      one: '1 app',
-      zero: 'no apps',
+      other: '$n تطبيقات',
+      one: 'تطبيق واحد',
+      zero: 'لا توجد تطبيقات',
     );
     return '$_temp0';
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'تشفير القرص';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'مفتاح الاسترداد';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'يتيح لك مفتاح الاسترداد استعادة الوصول إلى بياناتك في حال تعذّر فتح القرص أثناء بدء التشغيل. احفظه في مكان آمن.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'يتيح لك مفتاح الاسترداد استعادة الوصول إلى بياناتك في حال تعذّر فتح القرص أثناء بدء التشغيل. احفظه في مكان آمن. $learnMoreLink';
   }
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'تعرف على المزيد حول مفاتيح الاسترداد';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => 'التحقق من مفتاح الاسترداد...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey =>
+      'التحقق من مفتاح الاسترداد';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'فحص';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => 'مفتاح صالح';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => 'مفتاح غير صالح';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => 'أدخل مفتاح الاسترداد الخاص بك';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => 'مفتاح الاسترداد يعمل';
 
   @override
-  String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+  String get diskEncryptionPageKeyWorksBody => 'تذكر أن تحتفظ به في مكان آمن.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork => 'مفتاح الاسترداد لا يعمل';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+      'تحقق من المفتاح أو استبدله بمفتاح جديد.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'خطأ';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton => 'استبدال مفتاح الاسترداد...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader => 'استبدال مفتاح الاسترداد';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      'احفظ مفتاح الاسترداد الجديد في مكان آمن. بمجرد استبداله ، لن تتمكن من استخدام المفتاح القديم بعد الآن.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR =>
+      'إظهار رمز الاستجابة السريعة';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'حفظ في الملف';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      'لقد حفظت مفتاح الاسترداد الخاص بي في مكان آمن';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => 'استبدال';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => 'تجاهل';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+      'تم استبدال مفتاح الاسترداد';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      'تذكر أن تحتفظ به في مكان آمن.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'فشل استبدال مفتاح الاسترداد';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      'حدث خطأ ما عند استبدال مفتاح الاسترداد الخاص بك ، سيظل مفتاحك القديم صالحًا.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+      'سطح مكتب أوبونتو - مفتاح استرداد التشفير';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'امسح رمز الاستجابة السريعة لنسخ مفتاح الاسترداد وحفظه في مكان آمن، مثل مدير كلمات المرور. يمكنك أيضًا التقاط صورة لاستخدامها لاحقًا.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification => 'تم نسخها إلى الحافظة';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'نسخ';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      'إعدادات التشفير غير متوفرة';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      'فشل استرداد حالة التشفير لهذا الكمبيوتر.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      'تكوين TPM للكمبيوتر الخاص بك ليس في حالة مدعومة.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'إصدار snapd الخاص بك غير مدعوم';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      'تأكد من تحديث مركز الأمان و snapd.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      'لم يتمكن مركز الأمان من الاتصال بواجهة snapd';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      'لإصلاح هذه المشكلة، قم بتشغيل هذا الأمر في الطرفية:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
@@ -347,167 +348,171 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+      'لم يتم حفظ ملف مفتاح الاسترداد';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'لا يمكن حفظ ملف مفتاح الاسترداد في موقع مؤقت';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'خطأ غير معروف';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+      'فشل في حفظ مفتاح الاسترداد الخاص بك في الملف';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+      'ليس لديك إذن للكتابة إلى موقع الملف هذا.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      'ليس لديك إذن للكتابة إلى هذا المجلد. جرب موقعا مختلفا أو استخدم طريقة أخرى.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      'حاول استخدام موقع مختلف، مثل محرك أقراص قابل للإزالة، أو استخدم طريقة أخرى.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle => 'حفظ ملف مفتاح الاسترداد';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'ملفات نصية';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled => 'تم تمكين التشفير المدعوم بالأجهزة';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+      'يتم تخزين مفاتيح التشفير في وحدة النظام الأساسي الموثوق بها (TPM) الموجودة على جهاز الكمبيوتر الخاص بك.';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'تعرف على المزيد حول التشفير المدعوم بالأجهزة';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled => 'تم تمكين عبارة مرور التشفير';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'تغيير عبارة المرور';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      'تحتاج إلى إدخال عبارة المرور الخاصة بك أثناء بدء التشغيل لإلغاء قفل القرص. يمكنك تغيير عبارة المرور ولكن لا يمكنك تعطيلها.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'تغيير عبارة المرور...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => 'عبارة المرور الحالية';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => 'عبارة مرور جديدة';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => 'تأكيد عبارة المرور';
 
   @override
   String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+      'عبارة مرور غير صحيحة، حاول مرة أخرى';
 
   @override
   String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+      'يجب أن يكون طوله 4 أحرف على الأقل';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+      'عبارات المرور غير متطابقة، حاول مرة أخرى';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'تغيير عبارة المرور';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => 'تم تمكين رقم التعريف الشخصي للتشفير';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => 'رقم التعريف الشخصي للتشفير';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader => 'عبارة مرور التشفير';
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      'يجب إدخال رقم التعريف الشخصي (PIN) أثناء بدء التشغيل لفتح قفل القرص. يمكنك تغيير رقم التعريف الشخصي (PIN) ولكن لا يمكنك تعطيله.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'تغيير رقم التعريف الشخصي...';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'رقم التعريف الشخصي الحالي';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => 'رقم التعريف الشخصي الجديد';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'تأكيد رقم التعريف الشخصي';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError =>
+      'رقم التعريف الشخصي غير صحيح، حاول مرة أخرى';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError =>
+      'أرقام التعريف الشخصية غير متطابقة، حاول مرة أخرى';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'تغيير رقم التعريف الشخصي';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => 'عرض';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => 'أخفى';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => 'تغيير';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader =>
+      'تم تحديث رقم التعريف الشخصي';
 
   @override
   String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+      'تم تحديث رقم التعريف الشخصي الخاص بك بنجاح.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+      'تم تحديث عبارة المرور';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      'تم تحديث عبارة المرور الخاصة بك بنجاح.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      'عبارة مرور ضعيفة ، اجعلها أطول أو أكثر تعقيدا';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      'عبارة مرور عادية ، اجعلها أطول أو أكثر تعقيدا لتحسين الأمان';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => 'عبارة مرور قوية';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+      'رقم تعريف شخصي ضعيف ، اجعله أطول أو أقل قابلية للتنبؤ به';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      'رقم تعريف شخصي عادي ، اجعله أطول أو أقل قابلية للتنبؤ به للحصول على أمان أفضل';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal =>
+      'رقم التعريف الشخصي طويل بما فيه الكفاية';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => 'حدث خطأ ما';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';

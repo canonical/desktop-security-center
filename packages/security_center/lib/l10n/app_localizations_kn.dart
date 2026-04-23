@@ -9,57 +9,57 @@ class AppLocalizationsKn extends AppLocalizations {
   AppLocalizationsKn([String locale = 'kn']) : super(locale);
 
   @override
-  String get appTitle => 'Security Center';
+  String get appTitle => 'ಭದ್ರತಾ ಕೇಂದ್ರ';
 
   @override
-  String get snapdRuleCategorySessionAllowed => 'Allow until logout';
+  String get snapdRuleCategorySessionAllowed => 'ಲಾಗ್‌ಔಟ್ ಆಗುವವರೆಗೆ ಅನುಮತಿಸಿ';
 
   @override
-  String get snapdRuleCategorySessionDenied => 'Deny until logout';
+  String get snapdRuleCategorySessionDenied => 'ಲಾಗ್‌ಔಟ್ ಆಗುವವರೆಗೆ ನಿರಾಕರಿಸಿ';
 
   @override
-  String get snapdRuleCategoryForeverAllowed => 'Allow always';
+  String get snapdRuleCategoryForeverAllowed => 'ಯಾವಾಗಲೂ ಅನುಮತಿಸಿ';
 
   @override
-  String get snapdRuleCategoryForeverDenied => 'Deny always';
+  String get snapdRuleCategoryForeverDenied => 'ಯಾವಾಗಲೂ ನಿರಾಕರಿಸು';
 
   @override
-  String get snapPermissionReadLabel => 'Read';
+  String get snapPermissionReadLabel => 'ಓದು';
 
   @override
-  String get snapPermissionWriteLabel => 'Write';
+  String get snapPermissionWriteLabel => 'ಬರೆಯಿರಿ';
 
   @override
-  String get snapPermissionExecuteLabel => 'Execute';
+  String get snapPermissionExecuteLabel => 'ಕಾರ್ಯಗತಗೊಳಿಸಿ';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'ಪ್ರವೇಶ';
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Require apps to ask for system permissions';
+      'ಸಿಸ್ಟಮ್ ಅನುಮತಿಗಳನ್ನು ಕೇಳಲು ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಅಗತ್ಯವಿದೆ';
 
   @override
   String get snapPermissionsEnableWarning =>
-      'This is an experimental feature for controlling access to your system’s resources.';
+      'ನಿಮ್ಮ ಸಿಸ್ಟಂನ ಸಂಪನ್ಮೂಲಗಳಿಗೆ ಪ್ರವೇಶವನ್ನು ನಿಯಂತ್ರಿಸಲು ಇದು ಪ್ರಾಯೋಗಿಕ ವೈಶಿಷ್ಟ್ಯವಾಗಿದೆ.';
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Enabling, this may take a few seconds...';
+      'ಸಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತಿದೆ, ಇದು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಬಹುದು...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Disabling, this may take a few seconds...';
+      'ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತಿದೆ, ಇದು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಬಹುದು...';
 
   @override
-  String get snapPermissionsExperimentalLabel => 'Experimental';
+  String get snapPermissionsExperimentalLabel => 'ಪ್ರಾಯೋಗಿಕ';
 
   @override
   String get snapPermissionsOtherDescription =>
-      'You can manage other permissions in Settings › Applications.';
+      'ನೀವು ಸೆಟ್ಟಿಂಗ್‌ಗಳು › ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ ಇತರ ಅನುಮತಿಗಳನ್ನು ನಿರ್ವಹಿಸಬಹುದು.';
 
   @override
-  String get snapPermissionsPageTitle => 'App permissions';
+  String get snapPermissionsPageTitle => 'ಅಪ್ಲಿಕೇಶನ್ ಅನುಮತಿಗಳು';
 
   @override
   String snapRulesCount(int n) {
@@ -75,34 +75,35 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Manage $interface permissions for $snap.';
+    return '$snap ಗಾಗಿ $interface ಅನುಮತಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ.';
   }
 
   @override
-  String get snapRulesPageEmptyTileLabel => 'No rules yet';
+  String get snapRulesPageEmptyTileLabel => 'ಇನ್ನೂ ಯಾವುದೇ ನಿಯಮಗಳಿಲ್ಲ';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel =>
+      'ಯಾವುದೇ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಇನ್ನೂ ಪ್ರವೇಶವನ್ನು ವಿನಂತಿಸಿಲ್ಲ';
 
   @override
-  String get snapRulesRemoveAll => 'Remove all rules';
+  String get snapRulesRemoveAll => 'ಎಲ್ಲಾ ನಿಯಮಗಳನ್ನು ತೆಗೆದುಹಾಕಿ';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => 'ಎಲ್ಲಾ ಅನುಮತಿಗಳನ್ನು ಮರುಹೊಂದಿಸಿ';
 
   @override
-  String get homeInterfacePageTitle => 'Home folder';
+  String get homeInterfacePageTitle => 'ಹೋಮ್ ಫೋಲ್ಡರ್';
 
   @override
   String get homeInterfacePageDescription =>
-      'Manage permissions to access files in your Home folder.';
+      'ನಿಮ್ಮ ಹೋಮ್ ಫೋಲ್ಡರ್‌ನಲ್ಲಿ ಫೈಲ್‌ಗಳನ್ನು ಪ್ರವೇಶಿಸಲು ಅನುಮತಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'ಕ್ಯಾಮೆರಾ';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+      'ನಿಮ್ಮ ಕ್ಯಾಮರಾಗಳನ್ನು ಪ್ರವೇಶಿಸಲು ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಅನುಮತಿಸಿ.';
 
   @override
   String get microphoneInterfacePageTitle => 'Microphone';
@@ -112,20 +113,20 @@ class AppLocalizationsKn extends AppLocalizations {
       'Allow apps to access your microphone.';
 
   @override
-  String get interfacePageTitle => 'Manage permissions';
+  String get interfacePageTitle => 'ಅನುಮತಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ';
 
   @override
   String get interfacePageDescription =>
-      'Strictly confined apps will ask you before accessing files and folders. This feature is experimental and subject to changes.';
+      'ಫೈಲ್‌ಗಳು ಮತ್ತು ಫೋಲ್ಡರ್‌ಗಳನ್ನು ಪ್ರವೇಶಿಸುವ ಮೊದಲು ಕಟ್ಟುನಿಟ್ಟಾಗಿ ಸೀಮಿತವಾದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ನಿಮ್ಮನ್ನು ಕೇಳುತ್ತವೆ. ಈ ವೈಶಿಷ್ಟ್ಯವು ಪ್ರಾಯೋಗಿಕ ಮತ್ತು ಬದಲಾವಣೆಗಳಿಗೆ ಒಳಪಟ್ಟಿರುತ್ತದೆ.';
 
   @override
-  String get interfacePageLinkLearnMore => 'Learn more';
+  String get interfacePageLinkLearnMore => 'ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Give feedback';
+  String get interfacePageLinkGiveFeedback => 'ಪ್ರತಿಕ್ರಿಯೆ ನೀಡಿ';
 
   @override
-  String get interfacePageLinkReportIssues => 'Report issues';
+  String get interfacePageLinkReportIssues => 'ಸಮಸ್ಯೆಗಳನ್ನು ವರದಿ ಮಾಡಿ';
 
   @override
   String interfaceSnapCount(int n) {
@@ -140,374 +141,383 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'ಡಿಸ್ಕ್ ಎನ್ಕ್ರಿಪ್ಶನ್';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'ರಿಕವರಿ ಕೀ';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'ಪ್ರಾರಂಭದ ಸಮಯದಲ್ಲಿ ಡಿಸ್ಕ್ ಅನ್‌ಲಾಕ್ ಮಾಡಲು ವಿಫಲವಾದಲ್ಲಿ ನಿಮ್ಮ ಡೇಟಾಗೆ ಪ್ರವೇಶವನ್ನು ಮರಳಿ ಪಡೆಯಲು ಮರುಪ್ರಾಪ್ತಿ ಕೀ ನಿಮಗೆ ಅನುಮತಿಸುತ್ತದೆ. ಎಲ್ಲೋ ಸುರಕ್ಷಿತವಾಗಿ ಉಳಿಸಿ.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'ಪ್ರಾರಂಭದ ಸಮಯದಲ್ಲಿ ಡಿಸ್ಕ್ ಅನ್‌ಲಾಕ್ ಮಾಡಲು ವಿಫಲವಾದಲ್ಲಿ ನಿಮ್ಮ ಡೇಟಾಗೆ ಪ್ರವೇಶವನ್ನು ಮರಳಿ ಪಡೆಯಲು ಮರುಪ್ರಾಪ್ತಿ ಕೀ ನಿಮಗೆ ಅನುಮತಿಸುತ್ತದೆ. ಎಲ್ಲೋ ಸುರಕ್ಷಿತವಾಗಿ ಉಳಿಸಿ. $learnMoreLink';
   }
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'ಹಾರ್ಡ್‌ವೇರ್-ಬೆಂಬಲಿತ ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಕುರಿತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => 'ಮರುಪ್ರಾಪ್ತಿ ಕೀಯನ್ನು ಪರಿಶೀಲಿಸಿ...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey => 'ರಿಕವರಿ ಕೀ ಪರಿಶೀಲಿಸಿ';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'ಪರಿಶೀಲಿಸಿ';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => 'ಮಾನ್ಯ ಕೀ';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => 'ಅಮಾನ್ಯ ಕೀ';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => 'ನಿಮ್ಮ ಮರುಪ್ರಾಪ್ತಿ ಕೀಯನ್ನು ನಮೂದಿಸಿ';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => 'ರಿಕವರಿ ಕೀ ಕೆಲಸ';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+      'ಎಲ್ಲೋ ಸುರಕ್ಷಿತವಾಗಿ ಇರಿಸಲು ಮರೆಯದಿರಿ.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork => 'ರಿಕವರಿ ಕೀ ಕೆಲಸ ಮಾಡುವುದಿಲ್ಲ';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+      'ಕೀಲಿಯನ್ನು ಪರಿಶೀಲಿಸಿ ಅಥವಾ ಅದನ್ನು ಹೊಸದರೊಂದಿಗೆ ಬದಲಾಯಿಸಿ.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'ದೋಷ';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton => 'ಮರುಪ್ರಾಪ್ತಿ ಕೀ ಬದಲಾಯಿಸಿ...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader =>
+      'ಚೇತರಿಕೆ ಕೀಲಿಯನ್ನು ಬದಲಾಯಿಸಿ';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      'ಹೊಸ ಮರುಪ್ರಾಪ್ತಿ ಕೀಯನ್ನು ಎಲ್ಲೋ ಸುರಕ್ಷಿತವಾಗಿ ಉಳಿಸಿ. ಒಮ್ಮೆ ನೀವು ಅದನ್ನು ಬದಲಾಯಿಸಿದರೆ, ನೀವು ಇನ್ನು ಮುಂದೆ ಹಳೆಯ ಕೀಲಿಯನ್ನು ಬಳಸಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'QR ಕೋಡ್ ತೋರಿಸಿ';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'ಫೈಲ್‌ಗೆ ಉಳಿಸಿ';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      'ನಾನು ನನ್ನ ಮರುಪ್ರಾಪ್ತಿ ಕೀಲಿಯನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ಎಲ್ಲೋ ಉಳಿಸಿದ್ದೇನೆ';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => 'ಬದಲಾಯಿಸಿ';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => 'ತಿರಸ್ಕರಿಸು';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+      'ಮರುಪ್ರಾಪ್ತಿ ಕೀ ಬದಲಾಯಿಸಲಾಗಿದೆ';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      'ಎಲ್ಲೋ ಸುರಕ್ಷಿತವಾಗಿ ಇರಿಸಲು ಮರೆಯದಿರಿ.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'ಮರುಪ್ರಾಪ್ತಿ ಕೀ ಬದಲಿ ವಿಫಲವಾಗಿದೆ';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      'ನಿಮ್ಮ ಮರುಪ್ರಾಪ್ತಿ ಕೀಯನ್ನು ಬದಲಿಸುವಲ್ಲಿ ಏನೋ ತಪ್ಪಾಗಿದೆ, ನಿಮ್ಮ ಹಳೆಯ ಕೀಯು ನಿರರ್ಥಕವಾಗಿ ಉಳಿಯುತ್ತದೆ.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+      'ಉಬುಂಟು ಡೆಸ್ಕ್‌ಟಾಪ್ - ಎನ್‌ಕ್ರಿಪ್ಶನ್ ರಿಕವರಿ ಕೀ';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'ಮರುಪ್ರಾಪ್ತಿ ಕೀಲಿಯನ್ನು ನಕಲಿಸಲು QR ಕೋಡ್ ಅನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಿ ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್ ನಿರ್ವಾಹಕದಂತಹ ಸುರಕ್ಷಿತ ಸ್ಥಳದಲ್ಲಿ ಅದನ್ನು ಉಳಿಸಿ. ನಂತರದ ಬಳಕೆಗಾಗಿ ನೀವು ಫೋಟೋವನ್ನು ಸಹ ತೆಗೆದುಕೊಳ್ಳಬಹುದು.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification =>
+      'ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಲಾಗಿದೆ';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'ನಕಲು ಮಾಡಿ';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      'ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಲಭ್ಯವಿಲ್ಲ';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      'ಈ ಕಂಪ್ಯೂಟರ್‌ನ ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಸ್ಥಿತಿಯನ್ನು ಹಿಂಪಡೆಯಲು ವಿಫಲವಾಗಿದೆ.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      'ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್‌ನ TPM ಕಾನ್ಫಿಗರೇಶನ್ ಬೆಂಬಲಿತ ಸ್ಥಿತಿಯಲ್ಲಿಲ್ಲ.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'ನಿಮ್ಮ snapd ಆವೃತ್ತಿಯು ಬೆಂಬಲಿತವಾಗಿಲ್ಲ';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      'ಭದ್ರತಾ ಕೇಂದ್ರವನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು snapd ನವೀಕೃತವಾಗಿದೆ.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      'ಭದ್ರತಾ ಕೇಂದ್ರವು snapd ಇಂಟರ್ಫೇಸ್‌ಗೆ ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      'ಇದನ್ನು ಸರಿಪಡಿಸಲು, ಟರ್ಮಿನಲ್‌ನಲ್ಲಿ ಈ ಆಜ್ಞೆಯನ್ನು ಚಲಾಯಿಸಿ:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
+      'ಇತರ ಆಯ್ಕೆಗಳುಸ್ನ್ಯಾಪ್ ಕನೆಕ್ಟ್ ಡೆಸ್ಕ್‌ಟಾಪ್-ಸೆಕ್ಯುರಿಟಿ-ಸೆಂಟರ್:ಸ್ನ್ಯಾಪ್-ಎಫ್‌ಡಿ-ಕಂಟ್ರೋಲ್';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'ಪಿನ್ ಸೇರಿಸಿ...';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton => 'ಪಾಸ್‌ಫ್ರೇಸ್ ಸೇರಿಸಿ...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading =>
+      'ಪಾಸ್‌ಫ್ರೇಸ್ ಸೇರಿಸಿ';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'ಪಿನ್ ಸೇರಿಸಿ';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್ ಪ್ರಾರಂಭವಾದಾಗಲೆಲ್ಲಾ ನೀವು ನಿಮ್ಮ ಪಿನ್ ಅನ್ನು ನಮೂದಿಸಬೇಕಾಗುತ್ತದೆ. ಈ ಪಿನ್ ನಿಮ್ಮ ಬಳಕೆದಾರ ಪಾಸ್‌ವರ್ಡ್‌ಗಿಂತ ಭಿನ್ನವಾಗಿದೆ.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'ನಿಮ್ಮ ಪಿನ್ ಅನ್ನು ನೀವು ಮರೆತರೆ, ಮರುಪ್ರಾಪ್ತಿ ಕೀಯನ್ನು ಬಳಸಿಕೊಂಡು ನೀವು ಡಿಸ್ಕ್‌ಗೆ ಪ್ರವೇಶವನ್ನು ಮರಳಿ ಪಡೆಯಬಹುದು.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್ ಪ್ರಾರಂಭವಾದಾಗಲೆಲ್ಲಾ ನಿಮ್ಮ ಪಾಸ್‌ಫ್ರೇಸ್ ಅನ್ನು ನೀವು ನಮೂದಿಸಬೇಕಾಗುತ್ತದೆ. ಈ ಪಾಸ್‌ಫ್ರೇಸ್ ನಿಮ್ಮ ಬಳಕೆದಾರ ಪಾಸ್‌ವರ್ಡ್‌ಗಿಂತ ಭಿನ್ನವಾಗಿದೆ.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'ನಿಮ್ಮ ಪಾಸ್‌ಫ್ರೇಸ್ ಅನ್ನು ನೀವು ಮರೆತರೆ, ಮರುಪಡೆಯುವಿಕೆ ಕೀಲಿಯನ್ನು ಬಳಸಿಕೊಂಡು ನೀವು ಡಿಸ್ಕ್‌ಗೆ ಪ್ರವೇಶವನ್ನು ಮರಳಿ ಪಡೆಯಬಹುದು.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+  String get diskEncryptionPageAdditionalSecurityHeader => 'ಹೆಚ್ಚುವರಿ ಭದ್ರತೆ';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'ಹೆಚ್ಚುವರಿ ಭದ್ರತೆಗಾಗಿ ನೀವು ಪಾಸ್‌ಫ್ರೇಸ್ ಅಥವಾ ಪಿನ್ ಅನ್ನು ಹೊಂದಿಸಬಹುದು. ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್ ಪ್ರಾರಂಭವಾದಾಗಲೆಲ್ಲಾ ನೀವು ಅದನ್ನು ನಮೂದಿಸಬೇಕಾಗುತ್ತದೆ.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore =>
+      'ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'ಸೇರಿಸಿ';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'ಪಿನ್ ತೆಗೆದುಹಾಕಿ...';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton =>
+      'ಪಾಸ್‌ಫ್ರೇಸ್ ತೆಗೆದುಹಾಕಿ...';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'ಪಿನ್ ಸೇರಿಸಲಾಗುತ್ತಿದೆ, ಇದು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಬಹುದು...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'ಪಾಸ್‌ಫ್ರೇಸ್ ಸೇರಿಸಲಾಗುತ್ತಿದೆ, ಇದು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಬಹುದು...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'ಪಿನ್ ತೆಗೆದುಹಾಕಲಾಗುತ್ತಿದೆ, ಇದು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಬಹುದು...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'ಪಾಸ್‌ಫ್ರೇಸ್ ಅನ್ನು ತೆಗೆದುಹಾಕಲಾಗುತ್ತಿದೆ, ಇದು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಬಹುದು...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+      'ಮರುಪ್ರಾಪ್ತಿ ಕೀ ಫೈಲ್ ಅನ್ನು ಉಳಿಸಲಾಗಿಲ್ಲ';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'ಮರುಪ್ರಾಪ್ತಿ ಕೀ ಫೈಲ್ ಅನ್ನು ತಾತ್ಕಾಲಿಕ ಸ್ಥಳದಲ್ಲಿ ಉಳಿಸಲಾಗುವುದಿಲ್ಲ';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'ಅಜ್ಞಾತ ದೋಷ';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+      'ನಿಮ್ಮ ಮರುಪ್ರಾಪ್ತಿ ಕೀಯನ್ನು ಫೈಲ್‌ಗೆ ಉಳಿಸಲು ವಿಫಲವಾಗಿದೆ';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+      'ಆ ಫೈಲ್ ಸ್ಥಳಕ್ಕೆ ಬರೆಯಲು ನೀವು ಅನುಮತಿಯನ್ನು ಹೊಂದಿಲ್ಲ.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      'ಆ ಫೋಲ್ಡರ್‌ಗೆ ಬರೆಯಲು ನೀವು ಅನುಮತಿಯನ್ನು ಹೊಂದಿಲ್ಲ. ಬೇರೆ ಸ್ಥಳವನ್ನು ಪ್ರಯತ್ನಿಸಿ ಅಥವಾ ಇನ್ನೊಂದು ವಿಧಾನವನ್ನು ಬಳಸಿ.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      'ತೆಗೆಯಬಹುದಾದ ಡ್ರೈವ್‌ನಂತಹ ಬೇರೆ ಸ್ಥಳವನ್ನು ಪ್ರಯತ್ನಿಸಿ ಅಥವಾ ಇನ್ನೊಂದು ವಿಧಾನವನ್ನು ಬಳಸಿ.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle => 'ಮರುಪ್ರಾಪ್ತಿ ಕೀ ಫೈಲ್ ಅನ್ನು ಉಳಿಸಿ';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'ಪಠ್ಯ ಫೈಲ್ಗಳು';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled =>
+      'ಹಾರ್ಡ್‌ವೇರ್-ಬೆಂಬಲಿತ ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+      'ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಕೀಗಳನ್ನು ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್‌ನ ಟ್ರಸ್ಟೆಡ್ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ ಮಾಡ್ಯೂಲ್ (TPM) ನಲ್ಲಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ.';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'ಹಾರ್ಡ್‌ವೇರ್-ಬೆಂಬಲಿತ ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಕುರಿತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled =>
+      'ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಪಾಸ್‌ಫ್ರೇಸ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'ಪಾಸ್‌ಫ್ರೇಸ್ ಬದಲಾಯಿಸಿ';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      'ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್ ಪ್ರಾರಂಭವಾದಾಗಲೆಲ್ಲಾ ನಿಮ್ಮ ಪಾಸ್‌ಫ್ರೇಸ್ ಅನ್ನು ನೀವು ನಮೂದಿಸಬೇಕಾಗುತ್ತದೆ.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'ಪಾಸ್‌ಫ್ರೇಸ್ ಬದಲಾಯಿಸಿ...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => 'ಪ್ರಸ್ತುತ ಪಾಸ್‌ಫ್ರೇಸ್';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => 'ಹೊಸ ಪಾಸ್‌ಫ್ರೇಸ್';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm =>
+      'ಬಲವಾದ ಪಾಸ್‌ಫ್ರೇಸ್ಪಾಸ್‌ಫ್ರೇಸ್ ಅನ್ನು ದೃಢೀಕರಿಸಿ';
 
   @override
   String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+      'ತಪ್ಪಾದ ಪಾಸ್‌ಫ್ರೇಸ್, ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ';
 
   @override
-  String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+  String get recoveryKeyPassphraseNewError => 'ಕನಿಷ್ಠ 4 ಅಕ್ಷರಗಳ ಉದ್ದವಿರಬೇಕು';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+      'ಪಾಸ್‌ಫ್ರೇಸ್‌ಗಳು ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ, ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'ಪಾಸ್‌ಫ್ರೇಸ್ ಬದಲಾಯಿಸಿ';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled =>
+      'ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಪಿನ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => 'ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಪಿನ್';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader =>
+      'ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಪಾಸ್‌ಫ್ರೇಸ್';
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      'ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್ ಪ್ರಾರಂಭವಾದಾಗಲೆಲ್ಲಾ ನೀವು ನಿಮ್ಮ ಪಿನ್ ಅನ್ನು ನಮೂದಿಸಬೇಕಾಗುತ್ತದೆ.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'ಪಿನ್ ಬದಲಾಯಿಸಿ...';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'ಪ್ರಸ್ತುತ ಪಿನ್';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => 'ಹೊಸ ಪಿನ್';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'ಪಿನ್ ಅನ್ನು ದೃಢೀಕರಿಸಿ';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => 'ತಪ್ಪಾದ ಪಿನ್, ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError =>
+      'ಪಿನ್‌ಗಳು ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ, ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'ಪಿನ್ ಬದಲಾಯಿಸಿ';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => 'ತೋರಿಸು';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => 'ಮರೆಮಾಡಿ';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => 'ಬದಲಾವಣೆ';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'ಪಿನ್ ನವೀಕರಿಸಲಾಗಿದೆ';
 
   @override
   String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+      'ನಿಮ್ಮ ಪಿನ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+      'ಪಾಸ್‌ಫ್ರೇಸ್ ಅನ್ನು ನವೀಕರಿಸಲಾಗಿದೆ';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      'ನಿಮ್ಮ ಪಾಸ್‌ಫ್ರೇಸ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      'ದುರ್ಬಲ ಪಾಸ್‌ಫ್ರೇಸ್, ಅದನ್ನು ಉದ್ದ ಅಥವಾ ಹೆಚ್ಚು ಸಂಕೀರ್ಣಗೊಳಿಸಿ';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      'ನ್ಯಾಯೋಚಿತ ಪಾಸ್‌ಫ್ರೇಸ್, ಉತ್ತಮ ಭದ್ರತೆಗಾಗಿ ಅದನ್ನು ದೀರ್ಘ ಅಥವಾ ಹೆಚ್ಚು ಸಂಕೀರ್ಣಗೊಳಿಸಿ';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => 'ಬಲವಾದ ಪಾಸ್‌ಫ್ರೇಸ್';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+      'ದುರ್ಬಲವಾದ ಪಿನ್, ಅದನ್ನು ಉದ್ದ ಅಥವಾ ಕಡಿಮೆ ಊಹಿಸಬಹುದಾದಂತೆ ಮಾಡಿ';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      'ನ್ಯಾಯೋಚಿತ ಪಿನ್, ಉತ್ತಮ ಭದ್ರತೆಗಾಗಿ ದೀರ್ಘ ಅಥವಾ ಕಡಿಮೆ ಊಹಿಸಬಹುದಾದಂತೆ ಮಾಡಿ';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => 'ಪಿನ್ ಸಾಕಷ್ಟು ಉದ್ದವಾಗಿದೆ';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => 'ಏನೋ ತಪ್ಪಾಗಿದೆ';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';

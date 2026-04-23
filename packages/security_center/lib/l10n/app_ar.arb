@@ -1,1 +1,148 @@
-{}
+{
+    "appTitle": "مركز الأمان",
+    "snapdRuleCategorySessionAllowed": "السماح حتى تسجيل الخروج",
+    "snapdRuleCategorySessionDenied": "رفض حتى تسجيل الخروج",
+    "snapdRuleCategoryForeverAllowed": "السماح دائما",
+    "snapdRuleCategoryForeverDenied": "الرفض دائما",
+    "snapPermissionReadLabel": "قراءة",
+    "snapPermissionWriteLabel": "كتابة",
+    "snapPermissionExecuteLabel": "تنفيذ",
+    "snapPermissionsEnableTitle": "يتطلب من التطبيقات طلب أذونات النظام",
+    "snapPermissionsEnableWarning": "هذه ميزة تجريبية للتحكم في الوصول إلى موارد نظامك.",
+    "snapPermissionsEnablingLabel": "جاري التفعيل، قد يستغرق الأمر بضع ثوانٍ...",
+    "snapPermissionsDisablingLabel": "جاري التعطيل، قد يستغرق الأمر بضع ثوانٍ...",
+    "snapPermissionsExperimentalLabel": "تجريبي",
+    "snapPermissionsOtherDescription": "يمكنك إدارة الأذونات الأخرى في الإعدادات › التطبيقات.",
+    "snapPermissionsPageTitle": "أذونات التطبيق",
+    "snapRulesCount": "{n, plural, =0{لا توجد قواعد} =1{قاعدة واحدة} other{{n} قواعد}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "إدارة أذونات {interface} لـ {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "لا توجد قواعد حتى الآن",
+    "snapRulesRemoveAll": "إزالة جميع القواعد",
+    "homeInterfacePageTitle": "المجلد الرئيسي",
+    "homeInterfacePageDescription": "إدارة الأذونات للوصول إلى الملفات الموجودة في المجلد الرئيسي الخاص بك.",
+    "interfacePageTitle": "إدارة الأذونات",
+    "interfacePageDescription": "ستطلب منك التطبيقات ذات القيود الصارمة قبل الوصول إلى الملفات والمجلدات. هذه الميزة تجريبية وقابلة للتغيير.",
+    "interfacePageLinkLearnMore": "التعرف على المزيد",
+    "interfacePageLinkGiveFeedback": "تقديم ملاحظات",
+    "interfacePageLinkReportIssues": "الإبلاغ عن المشكلات",
+    "interfaceSnapCount": "{n, plural, =0{لا توجد تطبيقات} =1{تطبيق واحد} other {{n} تطبيقات}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageTitle": "تشفير القرص",
+    "diskEncryptionPageRecoveryKey": "مفتاح الاسترداد",
+    "diskEncryptionPageStoreYourKey": "يتيح لك مفتاح الاسترداد استعادة الوصول إلى بياناتك في حال تعذّر فتح القرص أثناء بدء التشغيل. احفظه في مكان آمن.",
+    "diskEncryptionPageStoreYourKeyWithLink": "يتيح لك مفتاح الاسترداد استعادة الوصول إلى بياناتك في حال تعذّر فتح القرص أثناء بدء التشغيل. احفظه في مكان آمن. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "تعرف على المزيد حول مفاتيح الاسترداد",
+    "diskEncryptionPageCheckKey": "التحقق من مفتاح الاسترداد...",
+    "diskEncryptionPageDialogHeaderCheckKey": "التحقق من مفتاح الاسترداد",
+    "diskEncryptionPageCheck": "فحص",
+    "diskEncryptionPageValidKey": "مفتاح صالح",
+    "diskEncryptionPageInvalidKey": "مفتاح غير صالح",
+    "diskEncryptionPageEnterKey": "أدخل مفتاح الاسترداد الخاص بك",
+    "diskEncryptionPageKeyWorks": "مفتاح الاسترداد يعمل",
+    "diskEncryptionPageKeyWorksBody": "تذكر أن تحتفظ به في مكان آمن.",
+    "diskEncryptionPageKeyDoesntWork": "مفتاح الاسترداد لا يعمل",
+    "diskEncryptionPageKeyDoesntWorkBody": "تحقق من المفتاح أو استبدله بمفتاح جديد.",
+    "diskEncryptionPageError": "خطأ",
+    "diskEncryptionPageReplaceButton": "استبدال مفتاح الاسترداد...",
+    "diskEncryptionPageReplaceDialogHeader": "استبدال مفتاح الاسترداد",
+    "diskEncryptionPageReplaceDialogBody": "احفظ مفتاح الاسترداد الجديد في مكان آمن. بمجرد استبداله ، لن تتمكن من استخدام المفتاح القديم بعد الآن.",
+    "diskEncryptionPageReplaceDialogShowQR": "إظهار رمز الاستجابة السريعة",
+    "diskEncryptionPageReplaceDialogSave": "حفظ في الملف",
+    "diskEncryptionPageReplaceDialogAcknowledge": "لقد حفظت مفتاح الاسترداد الخاص بي في مكان آمن",
+    "diskEncryptionPageReplaceDialogReplace": "استبدال",
+    "diskEncryptionPageReplaceDialogDiscard": "تجاهل",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "تم استبدال مفتاح الاسترداد",
+    "diskEncryptionPageReplaceDialogSuccessBody": "تذكر أن تحتفظ به في مكان آمن.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "فشل استبدال مفتاح الاسترداد",
+    "diskEncryptionPageReplaceDialogErrorBody": "حدث خطأ ما عند استبدال مفتاح الاسترداد الخاص بك ، سيظل مفتاحك القديم صالحًا.",
+    "diskEncryptionPageReplaceDialogQRHeader": "سطح مكتب أوبونتو - مفتاح استرداد التشفير",
+    "diskEncryptionPageReplaceDialogQRBody": "امسح رمز الاستجابة السريعة لنسخ مفتاح الاسترداد وحفظه في مكان آمن، مثل مدير كلمات المرور. يمكنك أيضًا التقاط صورة لاستخدامها لاحقًا.",
+    "diskEncryptionPageClipboardNotification": "تم نسخها إلى الحافظة",
+    "diskEncryptionPageCopySemanticLabel": "نسخ",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "إعدادات التشفير غير متوفرة",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "فشل استرداد حالة التشفير لهذا الكمبيوتر.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "تكوين TPM للكمبيوتر الخاص بك ليس في حالة مدعومة.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "إصدار snapd الخاص بك غير مدعوم",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "تأكد من تحديث مركز الأمان و snapd.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "لم يتمكن مركز الأمان من الاتصال بواجهة snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "لإصلاح هذه المشكلة، قم بتشغيل هذا الأمر في الطرفية:",
+    "recoveryKeyExceptionFileSystemTitle": "لم يتم حفظ ملف مفتاح الاسترداد",
+    "recoveryKeyExceptionDisallowedPathTitle": "لا يمكن حفظ ملف مفتاح الاسترداد في موقع مؤقت",
+    "recoveryKeyExceptionUnknownTitle": "خطأ غير معروف",
+    "recoveryKeyExceptionFilePermissionTitle": "فشل في حفظ مفتاح الاسترداد الخاص بك في الملف",
+    "recoveryKeyExceptionFilePermissionBody": "ليس لديك إذن للكتابة إلى موقع الملف هذا.",
+    "recoveryKeyExceptionFileSystemBody": "ليس لديك إذن للكتابة إلى هذا المجلد. جرب موقعا مختلفا أو استخدم طريقة أخرى.",
+    "recoveryKeyExceptionDisallowedPathBody": "حاول استخدام موقع مختلف، مثل محرك أقراص قابل للإزالة، أو استخدم طريقة أخرى.",
+    "recoveryKeyFilePickerTitle": "حفظ ملف مفتاح الاسترداد",
+    "recoveryKeyFilePickerFilter": "ملفات نصية",
+    "recoveryKeyTPMEnabled": "تم تمكين التشفير المدعوم بالأجهزة",
+    "recoveryKeyTPMExplanationBody": "يتم تخزين مفاتيح التشفير في وحدة النظام الأساسي الموثوق بها (TPM) الموجودة على جهاز الكمبيوتر الخاص بك.",
+    "recoveryKeyTPMExplanationLearnMore": "تعرف على المزيد حول التشفير المدعوم بالأجهزة",
+    "recoveryKeyPassphraseEnabled": "تم تمكين عبارة مرور التشفير",
+    "recoveryKeyPassphraseHeader": "تغيير عبارة المرور",
+    "recoveryKeyPassphraseBody": "تحتاج إلى إدخال عبارة المرور الخاصة بك أثناء بدء التشغيل لإلغاء قفل القرص. يمكنك تغيير عبارة المرور ولكن لا يمكنك تعطيلها.",
+    "recoveryKeyPassphraseButton": "تغيير عبارة المرور...",
+    "recoveryKeyPassphraseCurrent": "عبارة المرور الحالية",
+    "recoveryKeyPassphraseNew": "عبارة مرور جديدة",
+    "recoveryKeyPassphraseConfirm": "تأكيد عبارة المرور",
+    "recoveryKeyPassphraseCurrentError": "عبارة مرور غير صحيحة، حاول مرة أخرى",
+    "recoveryKeyPassphraseNewError": "يجب أن يكون طوله 4 أحرف على الأقل",
+    "recoveryKeyPassphraseConfirmError": "عبارات المرور غير متطابقة، حاول مرة أخرى",
+    "recoveryKeyPassphraseDialogHeader": "تغيير عبارة المرور",
+    "recoveryKeyPinEnabled": "تم تمكين رقم التعريف الشخصي للتشفير",
+    "recoveryKeyPinHeader": "رقم التعريف الشخصي للتشفير",
+    "recoveryKeyEncrpytionPassphraseHeader": "عبارة مرور التشفير",
+    "recoveryKeyPinBody": "يجب إدخال رقم التعريف الشخصي (PIN) أثناء بدء التشغيل لفتح قفل القرص. يمكنك تغيير رقم التعريف الشخصي (PIN) ولكن لا يمكنك تعطيله.",
+    "recoveryKeyPinButton": "تغيير رقم التعريف الشخصي...",
+    "recoveryKeyPinCurrent": "رقم التعريف الشخصي الحالي",
+    "recoveryKeyPinNew": "رقم التعريف الشخصي الجديد",
+    "recoveryKeyPinConfirm": "تأكيد رقم التعريف الشخصي",
+    "recoveryKeyPinCurrentError": "رقم التعريف الشخصي غير صحيح، حاول مرة أخرى",
+    "recoveryKeyPinConfirmError": "أرقام التعريف الشخصية غير متطابقة، حاول مرة أخرى",
+    "recoveryKeyPinDialogHeader": "تغيير رقم التعريف الشخصي",
+    "recoveryKeyPassphraseShow": "عرض",
+    "recoveryKeyPassphraseHide": "أخفى",
+    "recoveryKeyPassphraseChange": "تغيير",
+    "recoveryKeyPassphrasePinSuccessHeader": "تم تحديث رقم التعريف الشخصي",
+    "recoveryKeyPassphrasePinSuccessBody": "تم تحديث رقم التعريف الشخصي الخاص بك بنجاح.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "تم تحديث عبارة المرور",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "تم تحديث عبارة المرور الخاصة بك بنجاح.",
+    "recoveryKeyPassphraseEntropyBelowMin": "عبارة مرور ضعيفة ، اجعلها أطول أو أكثر تعقيدا",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "عبارة مرور عادية ، اجعلها أطول أو أكثر تعقيدا لتحسين الأمان",
+    "recoveryKeyPassphraseEntropyOptimal": "عبارة مرور قوية",
+    "recoveryKeyPinEntropyBelowMin": "رقم تعريف شخصي ضعيف ، اجعله أطول أو أقل قابلية للتنبؤ به",
+    "recoveryKeyPinEntropyBelowOptimal": "رقم تعريف شخصي عادي ، اجعله أطول أو أقل قابلية للتنبؤ به للحصول على أمان أفضل",
+    "recoveryKeyPinEntropyOptimal": "رقم التعريف الشخصي طويل بما فيه الكفاية",
+    "recoveryKeySomethingWentWrongHeader": "حدث خطأ ما",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control"
+}

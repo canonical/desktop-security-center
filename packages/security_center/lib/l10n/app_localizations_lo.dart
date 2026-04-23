@@ -9,689 +9,687 @@ class AppLocalizationsLo extends AppLocalizations {
   AppLocalizationsLo([String locale = 'lo']) : super(locale);
 
   @override
-  String get appTitle => 'Security Center';
+  String get appTitle => 'ສູນຄວາມປອດໄພ';
 
   @override
-  String get snapdRuleCategorySessionAllowed => 'Allow until logout';
+  String get snapdRuleCategorySessionAllowed => 'ອະນຸຍາດຈົນກວ່າຈະອອກຈາກລະບົບ';
 
   @override
-  String get snapdRuleCategorySessionDenied => 'Deny until logout';
+  String get snapdRuleCategorySessionDenied => 'ປະຕິເສດຈົນກວ່າຈະອອກຈາກລະບົບ';
 
   @override
-  String get snapdRuleCategoryForeverAllowed => 'Allow always';
+  String get snapdRuleCategoryForeverAllowed => 'ອະນຸຍາດຕະຫຼອດ';
 
   @override
-  String get snapdRuleCategoryForeverDenied => 'Deny always';
+  String get snapdRuleCategoryForeverDenied => 'ປະຕິເສດຕະຫຼອດ';
 
   @override
-  String get snapPermissionReadLabel => 'Read';
+  String get snapPermissionReadLabel => 'ອ່ານ';
 
   @override
-  String get snapPermissionWriteLabel => 'Write';
+  String get snapPermissionWriteLabel => 'ຂຽນ';
 
   @override
-  String get snapPermissionExecuteLabel => 'Execute';
+  String get snapPermissionExecuteLabel => 'ດຳເນີນການ';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'ເຂົ້າເຖິງ';
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Require apps to ask for system permissions';
+      'ບັງຄັບໃຫ້ແອັບຂໍອະນຸຍາດເຂົ້າເຖິງລະບົບ';
 
   @override
   String get snapPermissionsEnableWarning =>
-      'This is an experimental feature for controlling access to your system’s resources.';
+      'ນີ້ແມ່ນຟີເຈີທົດລອງສຳລັບການຄວບຄຸມການເຂົ້າເຖິງຊັບພະຍາກອນຂອງລະບົບ.';
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Enabling, this may take a few seconds...';
+      'ກຳລັງເປີດໃຊ້ງານ, ອາດຈະໃຊ້ເວລາສອງສາມວິນາທີ...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Disabling, this may take a few seconds...';
+      'ກຳລັງປິດໃຊ້ງານ, ອາດຈະໃຊ້ເວລາສອງສາມວິນາທີ...';
 
   @override
-  String get snapPermissionsExperimentalLabel => 'Experimental';
+  String get snapPermissionsExperimentalLabel => 'ທົດລອງ';
 
   @override
   String get snapPermissionsOtherDescription =>
-      'You can manage other permissions in Settings › Applications.';
+      'ທ່ານສາມາດຈັດການການອະນຸຍາດອື່ນໆໄດ້ໃນ ການຕັ້ງຄ່າ › ແອັບພລິເຄຊັນ.';
 
   @override
-  String get snapPermissionsPageTitle => 'App permissions';
+  String get snapPermissionsPageTitle => 'ການອະນຸຍາດແອັບ';
 
   @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n rules',
-      one: '1 rule',
-      zero: 'no rules',
+      other: '$n ກົດ',
+      one: '1 ກົດ',
+      zero: 'ບໍ່ມີກົດ',
     );
     return '$_temp0';
   }
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Manage $interface permissions for $snap.';
+    return 'ຈັດການການອະນຸຍາດ $interface ສຳລັບ $snap.';
   }
 
   @override
-  String get snapRulesPageEmptyTileLabel => 'No rules yet';
+  String get snapRulesPageEmptyTileLabel => 'ຍັງບໍ່ມີກົດເທື່ອ';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel => 'ຍັງບໍ່ມີແອັບໃດຂໍເຂົ້າເຖິງເທື່ອ';
 
   @override
-  String get snapRulesRemoveAll => 'Remove all rules';
+  String get snapRulesRemoveAll => 'ລຶບກົດທັງໝົດ';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => 'ຣີເຊັດການອະນຸຍາດທັງໝົດ';
 
   @override
-  String get homeInterfacePageTitle => 'Home folder';
+  String get homeInterfacePageTitle => 'ໂຟນເດີຫຼັກ';
 
   @override
   String get homeInterfacePageDescription =>
-      'Manage permissions to access files in your Home folder.';
+      'ຈັດການການອະນຸຍາດເພື່ອເຂົ້າເຖິງໄຟລ໌ໃນໂຟນເດີຫຼັກຂອງທ່ານ.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'ກ້ອງ';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+      'ອະນຸຍາດໃຫ້ແອັບເຂົ້າເຖິງກ້ອງຂອງທ່ານ.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'ໄມໂຄຣໂຟນ';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'ອະນຸຍາດໃຫ້ແອັບເຂົ້າເຖິງໄມໂຄຣໂຟນຂອງທ່ານ.';
 
   @override
-  String get interfacePageTitle => 'Manage permissions';
+  String get interfacePageTitle => 'ຈັດການການອະນຸຍາດ';
 
   @override
   String get interfacePageDescription =>
-      'Strictly confined apps will ask you before accessing files and folders. This feature is experimental and subject to changes.';
+      'ແອັບທີ່ຖືກຈຳກັດຢ່າງເຂັ້ມງວດຈະຖາມທ່ານກ່ອນເຂົ້າເຖິງໄຟລ໌ ແລະ ໂຟນເດີ. ຟີເຈີນີ້ແມ່ນຢູ່ໃນຂັ້ນທົດລອງ ແລະ ອາດມີການປ່ຽນແປງ.';
 
   @override
-  String get interfacePageLinkLearnMore => 'Learn more';
+  String get interfacePageLinkLearnMore => 'ຮຽນຮູ້ເພີ່ມເຕີມ';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Give feedback';
+  String get interfacePageLinkGiveFeedback => 'ໃຫ້ຄຳຕິຊົມ';
 
   @override
-  String get interfacePageLinkReportIssues => 'Report issues';
+  String get interfacePageLinkReportIssues => 'ລາຍງານບັນຫາ';
 
   @override
   String interfaceSnapCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n apps',
-      one: '1 app',
-      zero: 'no apps',
+      other: '$n ແອັບ',
+      one: '1 ແອັບ',
+      zero: 'ບໍ່ມີແອັບ',
     );
     return '$_temp0';
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'ການເຂົ້າລະຫັດດິດ';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'ຄີກູ້ຄືນ';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'ຄີກູ້ຄືນຊ່ວຍໃຫ້ທ່ານກັບມາເຂົ້າເຖິງຂໍ້ມູນຂອງທ່ານໄດ້ ຫາກດິດຂອງທ່ານປົດລັອກບໍ່ໄດ້ໃນລະຫວ່າງການເປີດເຄື່ອງ. ໃຫ້ບັນທຶກມັນໄວ້ໃນບ່ອນທີ່ປອດໄພ.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'ຄີກູ້ຄືນຊ່ວຍໃຫ້ທ່ານກັບມາເຂົ້າເຖິງຂໍ້ມູນຂອງທ່ານໄດ້ ຫາກດິດຂອງທ່ານປົດລັອກບໍ່ໄດ້ໃນລະຫວ່າງການເປີດເຄື່ອງ. ໃຫ້ບັນທຶກມັນໄວ້ໃນບ່ອນທີ່ປອດໄພ. $learnMoreLink';
   }
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'ຮຽນຮູ້ເພີ່ມເຕີມກ່ຽວກັບການເຂົ້າລະຫັດດ້ວຍຮາດແວ';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey => 'ກວດສອບຄີກູ້ຄືນ...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey => 'ກວດສອບຄີກູ້ຄືນ';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'ກວດສອບ';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => 'ຄີຖືກຕ້ອງ';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => 'ຄີບໍ່ຖືກຕ້ອງ';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey => 'ປ້ອນຄີກູ້ຄືນຂອງທ່ານ';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => 'ຄີກູ້ຄືນໃຊ້ງານໄດ້';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+      'ຢ່າລືມເກັບຮັກສາມັນໄວ້ໃນບ່ອນທີ່ປອດໄພ.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork => 'ຄີກູ້ຄືນໃຊ້ງານບໍ່ໄດ້';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+      'ກວດສອບຄີ ຫຼື ປ່ຽນແທນດ້ວຍຄີໃໝ່.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'ຜິດພາດ';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton => 'ປ່ຽນແທນຄີກູ້ຄືນ...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader => 'ປ່ຽນແທນຄີກູ້ຄືນ';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      'ບັນທຶກຄີກູ້ຄືນໃໝ່ໄວ້ໃນບ່ອນທີ່ປອດໄພ. ເມື່ອທ່ານປ່ຽນແທນມັນແລ້ວ, ທ່ານຈະບໍ່ສາມາດໃຊ້ຄີເກົ່າໄດ້ອີກຕໍ່ໄປ.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'ສະແດງ QR code';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'ບັນທຶກລົງໄຟລ໌';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      'ຂ້ອຍໄດ້ບັນທຶກຄີກູ້ຄືນໄວ້ໃນບ່ອນທີ່ປອດໄພແລ້ວ';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => 'ປ່ຽນແທນ';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => 'ຍົກເລີກ';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+      'ປ່ຽນແທນຄີກູ້ຄືນສຳເລັດແລ້ວ';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      'ຢ່າລືມເກັບຮັກສາມັນໄວ້ໃນບ່ອນທີ່ປອດໄພ.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'ການປ່ຽນແທນຄີກູ້ຄືນລົ້ມເຫຼວ';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      'ເກີດຂໍ້ຜິດພາດບາງຢ່າງຂະນະປ່ຽນແທນຄີກູ້ຄືນຂອງທ່ານ, ຄີເກົ່າຂອງທ່ານຈະຍັງໃຊ້ໄດ້ຄືເກົ່າ.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+      'Ubuntu Desktop - ຄີກູ້ຄືນການເຂົ້າລະຫັດ';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'ສະແກນ QR code ເພື່ອສຳເນົາຄີກູ້ຄືນ ແລະ ບັນທຶກໄວ້ໃນບ່ອນທີ່ປອດໄພ, ເຊັ່ນ: ຕົວຈັດການລະຫັດຜ່ານ. ທ່ານຍັງສາມາດຖ່າຍຮູບໄວ້ເພື່ອໃຊ້ພາຍຫຼັງໄດ້.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification =>
+      'ສຳເນົາໄປທີ່ຄລິບບອດແລ້ວ';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'ສຳເນົາ';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      'ການຕັ້ງຄ່າການເຂົ້າລະຫັດບໍ່ພ້ອມໃຊ້ງານ';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      'ບໍ່ສາມາດດຶງສະຖານະການເຂົ້າລະຫັດຂອງຄອມພິວເຕີເຄື່ອງນີ້ໄດ້.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      'ການຕັ້ງຄ່າ TPM ຂອງຄອມພິວເຕີຂອງທ່ານບໍ່ຢູ່ໃນສະຖານະທີ່ຮອງຮັບ.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'ບໍ່ຮອງຮັບ snapd ເວີຊັນຂອງທ່ານ';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      'ກວດສອບໃຫ້ແນ່ໃຈວ່າ ສູນຄວາມປອດໄພ ແລະ snapd ເປັນເວີຊັນຫຼ້າສຸດ.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      'ສູນຄວາມປອດໄພບໍ່ສາມາດເຊື່ອມຕໍ່ກັບ snapd interface ໄດ້';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      'ເພື່ອແກ້ໄຂບັນຫານີ້, ໃຫ້ລັນຄຳສັ່ງນີ້ໃນ terminal:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'ເພີ່ມ PIN...';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton => 'ເພີ່ມວະລີຜ່ານ...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading => 'ເພີ່ມວະລີຜ່ານ';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'ເພີ່ມ PIN';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'ທ່ານຈຳເປັນຕ້ອງປ້ອນ PIN ຂອງທ່ານທຸກຄັ້ງທີ່ເປີດຄອມພິວເຕີ. PIN ນີ້ຈະຕ່າງຈາກລະຫັດຜ່ານຜູ້ໃຊ້ຂອງທ່ານ.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'ຫາກທ່ານລືມ PIN, ທ່ານສາມາດກັບມາເຂົ້າເຖິງດິດໄດ້ໂດຍການໃຊ້ຄີກູ້ຄືນ.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'ທ່ານຈຳເປັນຕ້ອງປ້ອນວະລີຜ່ານຂອງທ່ານທຸກຄັ້ງທີ່ເປີດຄອມພິວເຕີ. ວະລີຜ່ານນີ້ຈະຕ່າງຈາກລະຫັດຜ່ານຜູ້ໃຊ້ຂອງທ່ານ.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'ຫາກທ່ານລືມວະລີຜ່ານ, ທ່ານສາມາດກັບມາເຂົ້າເຖິງດິດໄດ້ໂດຍການໃຊ້ຄີກູ້ຄືນ.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+  String get diskEncryptionPageAdditionalSecurityHeader => 'ຄວາມປອດໄພເພີ່ມເຕີມ';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'ທ່ານສາມາດຕັ້ງວະລີຜ່ານ ຫຼື PIN ເພື່ອຄວາມປອດໄພເພີ່ມເຕີມ. ທ່ານຈຳເປັນຕ້ອງປ້ອນມັນທຸກຄັ້ງທີ່ເປີດຄອມພິວເຕີ.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore => 'ຮຽນຮູ້ເພີ່ມເຕີມ';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'ເພີ່ມ';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'ລຶບ PIN...';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton => 'ລຶບວະລີຜ່ານ...';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'ກຳລັງເພີ່ມ PIN, ອາດຈະໃຊ້ເວລາສອງສາມວິນາທີ...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'ກຳລັງເພີ່ມວະລີຜ່ານ, ອາດຈະໃຊ້ເວລາສອງສາມວິນາທີ...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'ກຳລັງລຶບ PIN, ອາດຈະໃຊ້ເວລາສອງສາມວິນາທີ...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'ກຳລັງລຶບວະລີຜ່ານ, ອາດຈະໃຊ້ເວລາສອງສາມວິນາທີ...';
 
   @override
-  String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+  String get recoveryKeyExceptionFileSystemTitle => 'ບໍ່ໄດ້ບັນທຶກໄຟລ໌ຄີກູ້ຄືນ';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'ບໍ່ສາມາດບັນທຶກໄຟລ໌ຄີກູ້ຄືນໃນບ່ອນຊົ່ວຄາວໄດ້';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'ຂໍ້ຜິດພາດທີ່ບໍ່ຮູ້ຈັກ';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+      'ບັນທຶກຄີກູ້ຄືນຂອງທ່ານລົງໄຟລ໌ບໍ່ສຳເລັດ';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+      'ທ່ານບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ຂຽນລົງໃນທີ່ຕັ້ງໄຟລ໌ນັ້ນ.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      'ທ່ານບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ຂຽນລົງໃນໂຟນເດີນັ້ນ. ລອງປ່ຽນບ່ອນໃໝ່ ຫຼື ໃຊ້ອີກວິທີໜຶ່ງ.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      'ລອງປ່ຽນບ່ອນໃໝ່, ເຊັ່ນ: ໄດຣຟ໌ທີ່ຖອດໄດ້, ຫຼື ໃຊ້ອີກວິທີໜຶ່ງ.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle => 'ບັນທຶກໄຟລ໌ຄີກູ້ຄືນ';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'ໄຟລ໌ຂໍ້ຄວາມ';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled => 'ເປີດໃຊ້ການເຂົ້າລະຫັດດ້ວຍຮາດແວແລ້ວ';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+      'ຄີການເຂົ້າລະຫັດຖືກເກັບໄວ້ໃນ Trusted Platform Module (TPM) ຂອງຄອມພິວເຕີຂອງທ່ານ.';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'ຮຽນຮູ້ເພີ່ມເຕີມກ່ຽວກັບການເຂົ້າລະຫັດດ້ວຍຮາດແວ';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled => 'ເປີດໃຊ້ວະລີຜ່ານການເຂົ້າລະຫັດແລ້ວ';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'ປ່ຽນວະລີຜ່ານ';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      'ທ່ານຈຳເປັນຕ້ອງປ້ອນວະລີຜ່ານຂອງທ່ານທຸກຄັ້ງທີ່ເປີດຄອມພິວເຕີ.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'ປ່ຽນວະລີຜ່ານ...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => 'ວະລີຜ່ານປັດຈຸບັນ';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => 'ວະລີຜ່ານໃໝ່';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => 'ຢືນຢັນວະລີຜ່ານ';
 
   @override
   String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+      'ວະລີຜ່ານບໍ່ຖືກຕ້ອງ, ລອງໃໝ່ອີກຄັ້ງ';
 
   @override
-  String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+  String get recoveryKeyPassphraseNewError => 'ຕ້ອງຍາວຢ່າງໜ້ອຍ 4 ຕົວອັກສອນ';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+      'ວະລີຜ່ານບໍ່ກົງກັນ, ລອງໃໝ່ອີກຄັ້ງ';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'ປ່ຽນວະລີຜ່ານ';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => 'ເປີດໃຊ້ PIN ການເຂົ້າລະຫັດແລ້ວ';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => 'PIN ການເຂົ້າລະຫັດ';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader => 'ວະລີຜ່ານການເຂົ້າລະຫັດ';
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      'ທ່ານຈຳເປັນຕ້ອງປ້ອນ PIN ຂອງທ່ານທຸກຄັ້ງທີ່ເປີດຄອມພິວເຕີ.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'ປ່ຽນ PIN...';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'PIN ປັດຈຸບັນ';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => 'PIN ໃໝ່';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'ຢືນຢັນ PIN';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => 'PIN ບໍ່ຖືກຕ້ອງ, ລອງໃໝ່ອີກຄັ້ງ';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError => 'PIN ບໍ່ກົງກັນ, ລອງໃໝ່ອີກຄັ້ງ';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'ປ່ຽນ PIN';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => 'ສະແດງ';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => 'ເຊື່ອງ';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => 'ປ່ຽນ';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'ອັບເດດ PIN ແລ້ວ';
 
   @override
   String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+      'ອັບເດດ PIN ຂອງທ່ານສຳເລັດແລ້ວ.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+      'ອັບເດດວະລີຜ່ານແລ້ວ';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      'ອັບເດດວະລີຜ່ານຂອງທ່ານສຳເລັດແລ້ວ.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      'ວະລີຜ່ານບໍ່ປອດໄພ, ໃຫ້ຕັ້ງຍາວກວ່ານີ້ ຫຼື ຊັບຊ້ອນກວ່ານີ້';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      'ວະລີຜ່ານພໍໃຊ້ໄດ້, ໃຫ້ຕັ້ງຍາວກວ່ານີ້ ຫຼື ຊັບຊ້ອນກວ່ານີ້ເພື່ອຄວາມປອດໄພທີ່ດີກວ່າ';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => 'ວະລີຜ່ານທີ່ແຂງແກ່ນ';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+      'PIN ບໍ່ປອດໄພ, ໃຫ້ຕັ້ງຍາວກວ່ານີ້ ຫຼື ຄາດເດົາໄດ້ຍາກຂຶ້ນ';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      'PIN ພໍໃຊ້ໄດ້, ໃຫ້ຕັ້ງຍາວກວ່ານີ້ ຫຼື ຄາດເດົາໄດ້ຍາກຂຶ້ນເພື່ອຄວາມປອດໄພທີ່ດີກວ່າ';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => 'PIN ຍາວພຽງພໍແລ້ວ';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => 'ມີບາງຢ່າງຜິດພາດ';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+      'Ubuntu Pro ບໍ່ພ້ອມໃຊ້ງານສຳລັບ Ubuntu ເວີຊັນນີ້';
 
   @override
   String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+      'Ubuntu Pro ຈຳເປັນຕ້ອງໃຊ້ເວີຊັນ LTS';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'ບໍ່ຮອງຮັບ Ubuntu Pro ໃນ snapd ເວີຊັນນີ້';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'ອັບເດດ snapd ເພື່ອຈັດການ Ubuntu Pro';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'ເປີດໃຊ້ງານ Ubuntu Pro ແລ້ວ';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'ລະບົບຄວາມປອດໄພ ແລະ ການປະຕິບັດຕາມມາດຕະຖານລະດັບອົງກອນສຳລັບຄອມພິວເຕີຂອງທ່ານ. ຟຣີສະເໝີສຳລັບການໃຊ້ງານສ່ວນຕົວ. $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore => 'ຮຽນຮູ້ກ່ຽວກັບ Ubuntu Pro';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'ເປີດໃຊ້ງານ Ubuntu Pro';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'ເປີດໃຊ້ງານດ້ວຍບັນຊີ Ubuntu One';
 
   @override
-  String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+  String get ubuntuProEnableMagicSubtitle => 'ທ່ານສາມາດສ້າງບັນຊີໄດ້ຟຣີ';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+      'ເຂົ້າສູ່ລະບົບດ້ວຍບັນຊີ Ubuntu One ຂອງທ່ານ ຫຼື ສ້າງບັນຊີໃໝ່ໄດ້ຟຣີ.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => 'ດຳເນີນການຕໍ່ໃນບຣາວເຊີ';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return 'ທ່ານຍັງສາມາດເຂົ້າສູ່ລະບົບໄດ້ທີ່ $attachLink ແລະ ປ້ອນລະຫັດ $attachCode';
   }
 
   @override
   String get ubuntuProMagicError =>
-      'Unable to enable Ubuntu Pro, please try again';
+      'ບໍ່ສາມາດເປີດໃຊ້ງານ Ubuntu Pro ໄດ້, ກະລຸນາລອງໃໝ່ອີກຄັ້ງ';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'ເປີດໃຊ້ງານດ້ວຍໂທເຄັນ';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError => 'ບໍ່ສາມາດເປີດໃຊ້ງານ Ubuntu Pro ໄດ້';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'ຈາກຜູ້ດູແລລະບົບ IT ຂອງທ່ານ ຫຼື ຈາກ $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'ຮັບໂທເຄັນ Ubuntu Pro ຈາກຜູ້ດູແລລະບົບຂອງທ່ານ ຫຼື ຈາກ $proLink';
   }
 
   @override
-  String get ubuntuProTokenLabel => 'Token';
+  String get ubuntuProTokenLabel => 'ໂທເຄັນ';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'ປິດໃຊ້ງານ Ubuntu Pro';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => 'ປິດໃຊ້ງານ';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'ການປິດໃຊ້ງານ Ubuntu Pro ຈະເປັນການຍົກເລີກການເຊື່ອມຕໍ່ການສະໝັກໃຊ້ຈາກເຄື່ອງນີ້. ທ່ານຕ້ອງການດຳເນີນການຕໍ່ຫຼືບໍ່?';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => 'ເປີດໃຊ້ງານ';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'ຍົກເລີກ';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, please try again.';
+      'ບໍ່ສາມາດເປີດໃຊ້ງານຟີເຈີນີ້ໄດ້, ກະລຸນາລອງໃໝ່ອີກຄັ້ງ.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, please try again.';
+      'ບໍ່ສາມາດປິດໃຊ້ງານຟີເຈີນີ້ໄດ້, ກະລຸນາລອງໃໝ່ອີກຄັ້ງ.';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance =>
+      'ການປະຕິບັດຕາມມາດຕະຖານ ແລະ ການເພີ່ມຄວາມເຂັ້ມງວດ';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'ແນະນຳສະເພາະສຳລັບການຊ່ວຍເຫຼືອໃນດ້ານ FedRAMP, HIPAA ແລະ ຂໍ້ກຳນົດການປະຕິບັດຕາມມາດຕະຖານ ຫຼື ການເພີ່ມຄວາມເຂັ້ມງວດອື່ນໆ.';
 
   @override
-  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+  String get ubuntuProComplianceUSGTitle => 'ຄູ່ມືຄວາມປອດໄພ Ubuntu (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'ເຮັດໃຫ້ການເພີ່ມຄວາມເຂັ້ມງວດ ແລະ ການກວດສອບເປັນແບບອັດຕະໂນມັດດ້ວຍໂປຣໄຟລ໌ CIS benchmark ແລະ DISA-STIG ພ້ອມທັງຮອງຮັບການປັບແຕ່ງສະເພາະຕາມສະພາບແວດລ້ອມ.';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'ການຮັບຮອງໂມດູນການເຂົ້າລະຫັດລັບຂອງລັດຖະບານ ສະຫະລັດ ແລະ ແຄນາດາ ທີ່ສອດຄ່ອງກັບມາດຕະຖານການປົກປ້ອງຂໍ້ມູນ FIPS 140-2.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'ເປີດໃຊ້ງານ FIPS';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'ເມື່ອເປີດໃຊ້ງານ FIPS ແລ້ວຈະບໍ່ສາມາດຍົກເລີກໄດ້ ແລະ Livepatch ຈະຖືກປິດໃຊ້ງານແບບຖາວອນ.';
 
   @override
   String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+      'ເລືອກຕົວເລືອກ FIPS ທີ່ທ່ານຕ້ອງການ';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS ແບບມີການອັບເດດ';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'ຕິດຕັ້ງແພັກເກັດທີ່ຜ່ານການກວດສອບ FIPS 140-2 ແລະ ອະນຸຍາດໃຫ້ມີການອັບເດດຄວາມປອດໄພຕາມປົກກະຕິ.';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS ແບບບໍ່ມີການອັບເດດ';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'ຕິດຕັ້ງແພັກເກັດທີ່ຜ່ານການກວດສອບ FIPS 140-2. ເຊິ່ງຈະບໍ່ໄດ້ຮັບການອັບເດດຈົນກວ່າຈະມີການຮັບຮອງຄືນໃໝ່ໃນຄັ້ງຕໍ່ໄປ.';
 
   @override
   String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+      'ເອກະສານການປະຕິບັດຕາມມາດຕະຖານຄວາມປອດໄພ';
 
   @override
-  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+  String get ubuntuProESMTitle => 'ການບຳລຸງຮັກສາຄວາມປອດໄພແບບຂະຫຍາຍ (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for 25,000+ open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.';
+      'ESM ໃຫ້ບໍລິການແພັດຄວາມປອດໄພເປັນເວລາ 10 ປີ ສຳລັບແພັກເກັດໂອເພນຊອດຫຼາຍກວ່າ 25,000 ແພັກເກັດ. ໄດ້ຮັບການຈັດການຊ່ອງໂຫວ່ແບບຕໍ່ເນື່ອງສຳລັບ CVE ລະດັບວິກິດ, ສູງ ແລະ ກາງ.';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'ແພັກເກັດຫຼັກ (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for 2,300 Ubuntu Main package until $year';
+    return 'ການອັບເດດຄວາມປອດໄພສຳລັບ 2,300 ແພັກເກັດ Ubuntu Main ຈົນເຖິງປີ $year';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'ແພັກເກັດ Universe (esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for over 23,000 Ubuntu Universe packages until $year';
+    return 'ການອັບເດດຄວາມປອດໄພເພີ່ມເຕີມສຳລັບແພັກເກັດ Ubuntu Universe ຫຼາຍກວ່າ 23,000 ແພັກເກັດ ຈົນເຖິງປີ $year';
   }
 
   @override
   String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'ເປີດໃຊ້ງານ Livepatch';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'ປັບໃຊ້ການອັບເດດຄວາມປອດໄພຂອງເຄີເນີນໃນຂະນະທີ່ລະບົບກຳລັງເຮັດວຽກ';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+      'ສະແດງສະຖານະ Livepatch ຢູ່ແຖບດ້ານເທິງ';
 }

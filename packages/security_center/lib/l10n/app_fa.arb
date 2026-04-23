@@ -1,75 +1,106 @@
 {
-  "snapPermissionWriteLabel": "نوشتن",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "اجرا",
-  "@snapPermissionExecuteLabel": {},
-  "interfacePageLinkReportIssues": "گزارش اشکال‌ها",
-  "@interfacePageLinkReportIssues": {},
-  "interfacePageLinkLearnMore": "دانستن بیش‌تر",
-  "@interfacePageLinkLearnMore": {},
-  "interfaceSnapCount": "{n, plural, =0{بدون کاره} other {{n} کاره}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsDisablingLabel": "از کار انداختن. ممکن است چند ثانیه زمان ببرد…",
-  "@snapPermissionsDisablingLabel": {},
-  "appTitle": "مرکز امنیت",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "اجازه تا خروج",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapPermissionReadLabel": "خواندن",
-  "@snapPermissionReadLabel": {},
-  "snapdRuleCategoryForeverAllowed": "اجازه برای همیشه",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "رد کردن برای همیشه",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapdRuleCategorySessionDenied": "رد تا خروج",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapPermissionsEnablingLabel": "به کار انداختن. ممکن است چند ثانیه زمان ببرد…",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsEnableWarning": "این یک ویژگی آزمایشی برای واپایش دسترسی به منابع سامانه‌تان است.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsExperimentalLabel": "آزمایشی",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsPageTitle": "اجازه‌های کاره",
-  "@snapPermissionsPageTitle": {},
-  "homeInterfacePageTitle": "شاخهٔ خانه",
-  "@homeInterfacePageTitle": {},
-  "interfacePageTitle": "مدیریت اجازه‌ها",
-  "@interfacePageTitle": {},
-  "interfacePageLinkGiveFeedback": "دادن بازخورد",
-  "@interfacePageLinkGiveFeedback": {},
-  "snapRulesPageEmptyTileLabel": "هنوز بدون قاعده",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapRulesRemoveAll": "برداشتن همهٔ قاعده‌ها",
-  "@snapRulesRemoveAll": {},
-  "snapRulesPageDescription": "مدیریت اجازه‌های {interface} برای {snap}.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesCount": "{n, plural, =0{بدون قاعده} other{{n} قاعده}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsOtherDescription": "مدیریت دیگر اجازه‌ها در تنظمیات › برنامه‌ها.",
-  "@snapPermissionsOtherDescription": {},
-  "homeInterfacePageDescription": "مدیریت اجازه‌ها برای دسترسی به پرونده‌ها در شاخهٔ خانگیتان.",
-  "@homeInterfacePageDescription": {},
-  "snapPermissionsEnableTitle": "نیازمند درخواست اجازهٔ سامانه‌ای از سوی کاره",
-  "@snapPermissionsEnableTitle": {}
+    "snapPermissionWriteLabel": "نوشتن",
+    "snapPermissionExecuteLabel": "اجرا",
+    "interfacePageLinkReportIssues": "گزارش اشکال‌ها",
+    "interfacePageLinkLearnMore": "دانستن بیش‌تر",
+    "interfaceSnapCount": "{n, plural, =0{بدون کاره} other {{n} کاره}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsDisablingLabel": "از کار انداختن. ممکن است چند ثانیه زمان ببرد…",
+    "appTitle": "مرکز امنیت",
+    "snapdRuleCategorySessionAllowed": "اجازه تا خروج",
+    "snapPermissionReadLabel": "خواندن",
+    "snapdRuleCategoryForeverAllowed": "اجازه برای همیشه",
+    "snapdRuleCategoryForeverDenied": "رد کردن برای همیشه",
+    "snapdRuleCategorySessionDenied": "رد تا خروج",
+    "snapPermissionsEnablingLabel": "به کار انداختن. ممکن است چند ثانیه زمان ببرد…",
+    "snapPermissionsEnableWarning": "این یک ویژگی آزمایشی برای واپایش دسترسی به منابع سامانه‌تان است.",
+    "snapPermissionsExperimentalLabel": "آزمایشی",
+    "snapPermissionsPageTitle": "اجازه‌های کاره",
+    "homeInterfacePageTitle": "شاخهٔ خانه",
+    "interfacePageTitle": "مدیریت اجازه‌ها",
+    "interfacePageLinkGiveFeedback": "دادن بازخورد",
+    "snapRulesPageEmptyTileLabel": "هنوز بدون قاعده",
+    "snapRulesRemoveAll": "برداشتن همهٔ قاعده‌ها",
+    "snapRulesPageDescription": "مدیریت اجازه‌های {interface} برای {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesCount": "{n, plural, =0{بدون قاعده} other{{n} قاعده}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsOtherDescription": "مدیریت دیگر اجازه‌ها در تنظمیات › برنامه‌ها.",
+    "homeInterfacePageDescription": "مدیریت اجازه‌ها برای دسترسی به پرونده‌ها در شاخهٔ خانگیتان.",
+    "snapPermissionsEnableTitle": "نیازمند درخواست اجازهٔ سامانه‌ای از سوی کاره",
+    "recoveryKeyExceptionUnknownTitle": "خطای ناشناخته",
+    "recoveryKeyFilePickerFilter": "پرونده‌های متنی",
+    "recoveryKeyFilePickerTitle": "ذخیرهٔ پروندهٔ کلید بازیابی",
+    "recoveryKeyExceptionFileSystemTitle": "پروندهٔ کلید بازیابی ذخیره نشد",
+    "recoveryKeyExceptionDisallowedPathTitle": "کلید بازیابی نتوانست در مکان موقّتی ذخیره شود",
+    "cameraInterfacePageDescription": "اجازه به کاره‌ها برای دسترسی به دوربینتان.",
+    "diskEncryptionPageCheck": "بررسی",
+    "diskEncryptionPageError": "خطا",
+    "diskEncryptionPageReplaceDialogReplace": "جایگزینی",
+    "diskEncryptionPageReplaceDialogDiscard": "دور انداختن",
+    "diskEncryptionPageCopySemanticLabel": "رونوشت",
+    "recoveryKeyPassphraseShow": "نمایش",
+    "recoveryKeyPassphraseHide": "نهفتن",
+    "recoveryKeyPassphraseChange": "تغییر",
+    "snapPermissionAccessLabel": "دسترسی",
+    "cameraInterfacePageTitle": "دوربین",
+    "diskEncryptionPageTitle": "رمزنگاری دیسک",
+    "diskEncryptionPageRecoveryKey": "کلید بازیابی",
+    "diskEncryptionPageValidKey": "کلید معتبر",
+    "diskEncryptionPageInvalidKey": "کلید نامعتبر",
+    "recoveryKeyPassphraseHeader": "تغییر عبارت عبور",
+    "recoveryKeyPassphraseButton": "تغییر عبارت عبور…",
+    "recoveryKeyPassphraseCurrent": "عبارت عبور کنونی",
+    "recoveryKeyPassphraseNew": "عبارت عبور جدید",
+    "recoveryKeyPassphraseConfirm": "تأیید عبارت عبور",
+    "recoveryKeyPassphraseDialogHeader": "تغییر عبارت عبور",
+    "recoveryKeyPinHeader": "پین رمزنگاری",
+    "recoveryKeyPinButton": "تغییر پین…",
+    "recoveryKeyPinCurrent": "پین کنونی",
+    "recoveryKeyPinNew": "پین جدید",
+    "recoveryKeyPinConfirm": "تأیید پین",
+    "recoveryKeyPinDialogHeader": "تغییر پین",
+    "recoveryKeyPassphrasePinSuccessHeader": "پین به‌روز شد",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "عبارت عبور به‌روز شد",
+    "recoveryKeyPassphraseEntropyOptimal": "عبارت عبور قوی",
+    "recoveryKeyEncrpytionPassphraseHeader": "عبارت عبور رمزنگاری",
+    "diskEncryptionPageCheckKey": "بررسی کلید بازیابی…",
+    "diskEncryptionPageDialogHeaderCheckKey": "بررسی کلید بازیابی",
+    "diskEncryptionPageKeyWorks": "کلید بازیابی کار می‌کند",
+    "diskEncryptionPageReplaceButton": "جایگزینی کلید بازیابی…",
+    "diskEncryptionPageReplaceDialogHeader": "جایگزینی کلید بازیابی",
+    "diskEncryptionPageReplaceDialogShowQR": "نمایش کد پاس",
+    "diskEncryptionPageReplaceDialogSave": "ذخیره در پرونده",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "کلید بازیابی جایگزین شد",
+    "diskEncryptionPageClipboardNotification": "در تخته‌گیره رونوشت شد",
+    "recoveryKeySomethingWentWrongHeader": "چیزی اشتباه پیش رفت",
+    "snapRulesResetAllPermissions": "بازنشانی همهٔ اجازه‌ها",
+    "diskEncryptionPageEnterKey": "ورود کلید بازیابیتان",
+    "diskEncryptionPageReplaceDialogErrorHeader": "جایگزینی کلید بازیابی شکست خورد",
+    "recoveryKeyTPMEnabled": "کلید رمزنگاری سخت‌افزاری به کار افتاده",
+    "recoveryKeyPassphraseEnabled": "عبارت عبور رمزنگاری به کار افتاده",
+    "recoveryKeyPassphraseCurrentError": "عبارت عبور نادرست. تلاش دوباره",
+    "recoveryKeyPinEnabled": "پین رمزنگاری به کار افتاده",
+    "recoveryKeyPinCurrentError": "پین نادرست. تلاش دوباره"
 }

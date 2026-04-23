@@ -9,7 +9,7 @@ class AppLocalizationsVi extends AppLocalizations {
   AppLocalizationsVi([String locale = 'vi']) : super(locale);
 
   @override
-  String get appTitle => 'Security Center';
+  String get appTitle => 'Trung tâm bảo mật';
 
   @override
   String get snapdRuleCategorySessionAllowed => 'Allow until logout';

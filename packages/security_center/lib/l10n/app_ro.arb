@@ -1,1 +1,12 @@
-{}
+{
+    "appTitle": "Centrul de Securitate",
+    "snapdRuleCategorySessionAllowed": "Permiteți până la deconectare",
+    "snapdRuleCategorySessionDenied": "Refuză până la deconectare",
+    "snapdRuleCategoryForeverAllowed": "Permite întotdeauna",
+    "snapdRuleCategoryForeverDenied": "Nu permite întotdeauna",
+    "snapPermissionReadLabel": "Citește",
+    "snapPermissionWriteLabel": "Scrie",
+    "snapPermissionExecuteLabel": "Execută",
+    "snapPermissionAccessLabel": "Acces",
+    "snapPermissionsEnableTitle": "Solicitarea aplicațiilor să ceară permisiuni de sistem"
+}

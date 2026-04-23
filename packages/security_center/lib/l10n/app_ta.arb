@@ -1,77 +1,171 @@
 {
-  "snapPermissionsEnableWarning": "உங்கள் கணினியின் வளங்களுக்கான அணுகலைக் கட்டுப்படுத்த இது ஒரு சோதனை நற்பண்பாகும்.",
-  "@snapPermissionsEnableWarning": {},
-  "snapPermissionsDisablingLabel": "முடக்குதல், இதற்குச் சில நொடிகள் ஆகலாம் ...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapRulesPageEmptyTileLabel": "இன்னும் விதிகள் இல்லை",
-  "@snapRulesPageEmptyTileLabel": {},
-  "snapPermissionsEnablingLabel": "செயல்படுத்த, இது சில நொடிகள் ஆகலாம் ...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapRulesRemoveAll": "எல்லா விதிகளையும் அகற்று",
-  "@snapRulesRemoveAll": {},
-  "appTitle": "பாதுகாப்பு நடுவண்",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "வெளியேறும் வரை இசைவு",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "வெளியேறும் வரை மறு",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverAllowed": "எப்போதும் இசைவு",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "எப்போதும் மறு",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "படி",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "எழுது",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "இயக்கு",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsExperimentalLabel": "சோதனை",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsOtherDescription": "பிற இசைவுகளை நீங்கள் நிர்வகிக்கலாம் அமைப்புகள்›பயன்பாடுகள்.",
-  "@snapPermissionsOtherDescription": {},
-  "snapPermissionsPageTitle": "பயன்பாட்டு இசைவுகள்",
-  "@snapPermissionsPageTitle": {},
-  "snapRulesCount": "{n, plural, =0{விதிகள் இல்லை} =1{1 விதி} other {{n} விதிகள்}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesPageDescription": "{snap}க்கான {interface} இசைவுகளை நிர்வகி.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "homeInterfacePageTitle": "வீட்டு கோப்புறை",
-  "@homeInterfacePageTitle": {},
-  "homeInterfacePageDescription": "உங்கள் வீட்டு கோப்புறையில் கோப்புகளை அணுக இசைவுகளை நிர்வகி.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageTitle": "இசைவுகளை நிர்வகி",
-  "@interfacePageTitle": {},
-  "interfacePageDescription": "கோப்புகள் மற்றும் கோப்புறைகளை அணுகுவதற்கு முன் கண்டிப்பாக வரையறுக்கப்பட்ட பயன்பாடுகள் உங்களிடம் கேட்கும். இந்த நற்பொருத்தம் சோதனை மற்றும் மாற்றங்களுக்கு உட்பட்டது.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkLearnMore": "மேலும் அறிக",
-  "@interfacePageLinkLearnMore": {},
-  "interfacePageLinkGiveFeedback": "கருத்து தெரிவி",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "சிக்கல்களைப் புகாரளி",
-  "@interfacePageLinkReportIssues": {},
-  "interfaceSnapCount": "{n, plural, =0 {பயன்பாடுகள் இல்லை} =1 {1 பயன்பாடு} other {{n} பயன்பாடுகள்}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapPermissionsEnableTitle": "கணினி இசைவுகளைக் கேட்கப் பயன்பாடுகள் தேவை",
-  "@snapPermissionsEnableTitle": {}
+    "snapPermissionsEnableWarning": "உங்கள் கணினியின் வளங்களுக்கான அணுகலைக் கட்டுப்படுத்த இது ஒரு சோதனை நற்பண்பாகும்.",
+    "snapPermissionsDisablingLabel": "முடக்குகிறது, இதற்கு சில வினாடிகள் ஆகலாம்...",
+    "snapRulesPageEmptyTileLabel": "இன்னும் விதிகள் இல்லை",
+    "snapPermissionsEnablingLabel": "இயக்குகிறது, இதற்கு சில வினாடிகள் ஆகலாம்...",
+    "snapRulesRemoveAll": "எல்லா விதிகளையும் அகற்று",
+    "appTitle": "பாதுகாப்பு நடுவண்",
+    "snapdRuleCategorySessionAllowed": "வெளியேறும் வரை இசைவு",
+    "snapdRuleCategorySessionDenied": "வெளியேறும் வரை மறு",
+    "snapdRuleCategoryForeverAllowed": "எப்போதும் இசைவு",
+    "snapdRuleCategoryForeverDenied": "எப்போதும் மறு",
+    "snapPermissionReadLabel": "படி",
+    "snapPermissionWriteLabel": "எழுது",
+    "snapPermissionExecuteLabel": "இயக்கு",
+    "snapPermissionsExperimentalLabel": "சோதனை",
+    "snapPermissionsOtherDescription": "பிற இசைவுகளை நீங்கள் நிர்வகிக்கலாம் அமைப்புகள்›பயன்பாடுகள்.",
+    "snapPermissionsPageTitle": "பயன்பாட்டு இசைவுகள்",
+    "snapRulesCount": "{n, plural, =0{விதிகள் இல்லை} =1{1 விதி} other {{n} விதிகள்}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "{snap}க்கான {interface} இசைவுகளை நிர்வகி.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "homeInterfacePageTitle": "வீட்டு கோப்புறை",
+    "homeInterfacePageDescription": "உங்கள் வீட்டு கோப்புறையில் கோப்புகளை அணுக இசைவுகளை நிர்வகி.",
+    "interfacePageTitle": "இசைவுகளை நிர்வகி",
+    "interfacePageDescription": "கோப்புகள் மற்றும் கோப்புறைகளை அணுகுவதற்கு முன் கண்டிப்பாக வரையறுக்கப்பட்ட பயன்பாடுகள் உங்களிடம் கேட்கும். இந்த நற்பொருத்தம் சோதனை மற்றும் மாற்றங்களுக்கு உட்பட்டது.",
+    "interfacePageLinkLearnMore": "மேலும் அறிக",
+    "interfacePageLinkGiveFeedback": "கருத்து தெரிவி",
+    "interfacePageLinkReportIssues": "சிக்கல்களைப் புகாரளி",
+    "interfaceSnapCount": "{n, plural, =0 {பயன்பாடுகள் இல்லை} =1 {1 பயன்பாடு} other {{n} பயன்பாடுகள்}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionsEnableTitle": "கணினி இசைவுகளைக் கேட்கப் பயன்பாடுகள் தேவை",
+    "recoveryKeyExceptionFileSystemTitle": "மீட்பு விசை கோப்பு சேமிக்கப்படவில்லை",
+    "recoveryKeyExceptionDisallowedPathTitle": "மீட்பு முக்கிய கோப்பை தற்காலிக இடத்தில் சேமிக்க முடியாது",
+    "recoveryKeyExceptionUnknownTitle": "தெரியாத பிழை",
+    "recoveryKeyExceptionFileSystemBody": "அந்த கோப்புறையில் எழுத உங்களுக்கு இசைவு இல்லை. வேறு இடத்தை முயற்சிக்கவும் அல்லது மற்றொரு முறையைப் பயன்படுத்தவும்.",
+    "recoveryKeyExceptionDisallowedPathBody": "நீக்கக்கூடிய இயக்கி போன்ற வேறு இடத்தை முயற்சிக்கவும் அல்லது மற்றொரு முறையைப் பயன்படுத்தவும்.",
+    "recoveryKeyFilePickerTitle": "மீட்பு விசை கோப்பை சேமிக்கவும்",
+    "recoveryKeyFilePickerFilter": "உரை கோப்புகள்",
+    "diskEncryptionPageTitle": "வட்டு குறியாக்கம்",
+    "diskEncryptionPageRecoveryKey": "மீட்பு விசை",
+    "diskEncryptionPageStoreYourKey": "தொடக்கத்தின் போது வட்டு திறக்கத் தவறினால், மீட்பு விசை உங்கள் தரவை மீண்டும் அணுக உதவுகிறது. பாதுகாப்பான இடத்தில் சேமிக்கவும்.",
+    "diskEncryptionPageStoreYourKeyWithLink": "தொடக்கத்தின் போது வட்டு திறக்கத் தவறினால், மீட்பு விசை உங்கள் தரவை மீண்டும் அணுக உதவுகிறது. பாதுகாப்பான இடத்தில் சேமிக்கவும். {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "வன்பொருள் உதவி குறியாக்கத்தைப் பற்றி மேலும் அறிக",
+    "diskEncryptionPageCheckKey": "மீட்பு விசையை சரிபார்க்கவும் ...",
+    "diskEncryptionPageDialogHeaderCheckKey": "மீட்பு விசையை சரிபார்க்கவும்",
+    "diskEncryptionPageCheck": "சரிபார்",
+    "diskEncryptionPageValidKey": "செல்லுபடியாகும் விசை",
+    "diskEncryptionPageInvalidKey": "தவறான விசை",
+    "diskEncryptionPageEnterKey": "உங்கள் மீட்பு விசையை உள்ளிடவும்",
+    "diskEncryptionPageKeyWorks": "மீட்பு விசை படைப்புகள்",
+    "diskEncryptionPageKeyWorksBody": "அதை எங்காவது பாதுகாப்பாக வைத்திருக்க நினைவில் கொள்ளுங்கள்.",
+    "diskEncryptionPageKeyDoesntWork": "மீட்பு விசை வேலை செய்யாது",
+    "diskEncryptionPageKeyDoesntWorkBody": "விசையை சரிபார்க்கவும் அல்லது புதிய ஒன்றை மாற்றவும்.",
+    "diskEncryptionPageError": "பிழை",
+    "diskEncryptionPageReplaceButton": "மீட்பு விசையை மாற்றவும் ...",
+    "diskEncryptionPageReplaceDialogHeader": "மீட்பு விசையை மாற்றவும்",
+    "diskEncryptionPageReplaceDialogBody": "புதிய மீட்பு விசையை எங்காவது பாதுகாப்பாக சேமிக்கவும். நீங்கள் அதை மாற்றியதும், நீங்கள் இனி பழைய விசையைப் பயன்படுத்த முடியாது.",
+    "diskEncryptionPageReplaceDialogShowQR": "QR குறியீட்டைக் காட்டு",
+    "diskEncryptionPageReplaceDialogSave": "கோப்பில் சேமிக்கவும்",
+    "diskEncryptionPageReplaceDialogAcknowledge": "எனது மீட்பு விசையை எங்காவது பாதுகாப்பாக சேமித்தேன்",
+    "diskEncryptionPageReplaceDialogReplace": "மாற்றவும்",
+    "diskEncryptionPageReplaceDialogDiscard": "நிராகரிக்கவும்",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "மீட்பு விசை மாற்றப்பட்டது",
+    "diskEncryptionPageReplaceDialogSuccessBody": "அதை எங்காவது பாதுகாப்பாக வைத்திருக்க நினைவில் கொள்ளுங்கள்.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "மீட்பு விசை மாற்று தோல்வியுற்றது",
+    "diskEncryptionPageReplaceDialogErrorBody": "உங்கள் மீட்பு விசையை மாற்றுவதில் ஏதோ தவறு ஏற்பட்டது, உங்கள் பழைய விசை செல்லுபடியாகும்.",
+    "diskEncryptionPageReplaceDialogQRHeader": "உபுண்டு டெச்க்டாப் - குறியாக்க மீட்பு விசை",
+    "diskEncryptionPageReplaceDialogQRBody": "மீட்பு விசையை நகலெடுக்க QR குறியீட்டை வருடு செய்து கடவுச்சொல் நிர்வாகி போன்ற எங்காவது பாதுகாப்பாக சேமிக்கவும். பின்னர் பயன்படுத்த நீங்கள் ஒரு புகைப்படத்தையும் எடுக்கலாம்.",
+    "diskEncryptionPageClipboardNotification": "இடைநிலைப்பலகைக்கு நகலெடுக்கப்பட்டது",
+    "diskEncryptionPageCopySemanticLabel": "நகலெடு",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "குறியாக்க அமைப்புகள் கிடைக்கவில்லை",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "இந்த கணினியின் குறியாக்க நிலையை மீட்டெடுப்பதில் தோல்வி.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "உங்கள் கணினியின் டிபிஎம் உள்ளமைவு ஆதரிக்கப்படும் நிலையில் இல்லை.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "உங்கள் SNAPD பதிப்பு ஆதரிக்கப்படவில்லை",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "பாதுகாப்பு மையத்தை சரிபார்க்கவும், SNAPD புதுப்பித்த நிலையில் உள்ளது.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "பாதுகாப்பு மையத்தால் ச்னாப் இடைமுகத்துடன் இணைக்க முடியாது",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "இதை சரிசெய்ய, இந்த கட்டளையை முனையத்தில் இயக்கவும்:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap இணை desktop-security-center:snap-fde-control",
+    "recoveryKeyExceptionFilePermissionTitle": "கோப்புக்கு உங்கள் மீட்பு விசையை சேமிப்பதில் தோல்வி",
+    "recoveryKeyExceptionFilePermissionBody": "அந்த கோப்பு இருப்பிடத்திற்கு எழுத உங்களுக்கு இசைவு இல்லை.",
+    "recoveryKeyTPMEnabled": "வன்பொருள் உதவி குறியாக்கம் இயக்கப்பட்டது",
+    "recoveryKeyTPMExplanationBody": "குறியாக்க விசைகள் உங்கள் கணினியின் நம்பகமான இயங்குதள தொகுதிகளில் (டிபிஎம்) சேமிக்கப்படுகின்றன.",
+    "recoveryKeyTPMExplanationLearnMore": "வன்பொருள் உதவி குறியாக்கம் பற்றி மேலும் அறிக",
+    "recoveryKeyPassphraseEnabled": "குறியாக்க பாச்ஃபிரச் இயக்கப்பட்டது",
+    "recoveryKeyPassphraseHeader": "கடவுச்சொற்றொடரை மாற்றவும்",
+    "recoveryKeyPassphraseBody": "உங்கள் கணினி தொடங்கும் ஒவ்வொரு முறையும் உங்கள் கடவுச்சொற்றொடரை உள்ளிட வேண்டும்.",
+    "recoveryKeyPassphraseButton": "கடவுச்சொற்றொடரை மாற்றவும் ...",
+    "recoveryKeyPassphraseCurrent": "தற்போதைய கடவுச்சொல்",
+    "recoveryKeyPassphraseNew": "புதிய கடவுச்சொல்",
+    "recoveryKeyPassphraseConfirm": "பாச்ஃபிரேசை உறுதிப்படுத்தவும்",
+    "recoveryKeyPassphraseCurrentError": "தவறான கடவுச்சொல், மீண்டும் முயற்சிக்கவும்",
+    "recoveryKeyPassphraseNewError": "குறைந்தது 4 எழுத்துக்கள் நீளமாக இருக்க வேண்டும்",
+    "recoveryKeyPassphraseConfirmError": "கடவுச்சொற்கள் பொருந்தவில்லை, மீண்டும் முயற்சிக்கவும்",
+    "recoveryKeyPassphraseDialogHeader": "கடவுச்சொற்றொடரை மாற்றவும்",
+    "recoveryKeyPinEnabled": "குறியாக்க முள் இயக்கப்பட்டது",
+    "recoveryKeyPinHeader": "குறியாக்க முள்",
+    "recoveryKeyEncrpytionPassphraseHeader": "குறியாக்க பாச்ஃபிரச்",
+    "recoveryKeyPinBody": "உங்கள் கணினி தொடங்கும் ஒவ்வொரு முறையும் உங்கள் பின்னை உள்ளிட வேண்டும்.",
+    "recoveryKeyPinButton": "முள் மாற்றவும் ...",
+    "recoveryKeyPinCurrent": "தற்போதைய முள்",
+    "recoveryKeyPinNew": "புதிய முள்",
+    "recoveryKeyPinConfirm": "முள் உறுதிப்படுத்தவும்",
+    "recoveryKeyPinCurrentError": "தவறான முள், மீண்டும் முயற்சிக்கவும்",
+    "recoveryKeyPinConfirmError": "ஊசிகள் பொருந்தவில்லை, மீண்டும் முயற்சிக்கவும்",
+    "recoveryKeyPinDialogHeader": "முள் மாற்றவும்",
+    "recoveryKeyPassphraseShow": "காட்டு",
+    "recoveryKeyPassphraseHide": "மறை",
+    "recoveryKeyPassphraseChange": "மாற்றம்",
+    "recoveryKeyPassphrasePinSuccessHeader": "முள் புதுப்பிக்கப்பட்டது",
+    "recoveryKeyPassphrasePinSuccessBody": "நீங்கள் முள் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "கடவுச்சொல் புதுப்பிக்கப்பட்டது",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "நீங்கள் கடவுச்சொல் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.",
+    "recoveryKeyPassphraseEntropyBelowMin": "பலவீனமான கடவுச்சொல், அதை நீண்டதாகவோ அல்லது சிக்கலானதாகவோ செய்யுங்கள்",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "நியாயமான பாச்ஃபிரேச், சிறந்த பாதுகாப்பிற்காக நீண்ட அல்லது மிகவும் சிக்கலானதாக மாற்றவும்",
+    "recoveryKeyPassphraseEntropyOptimal": "வலுவான கடவுச்சொற்றொடர்",
+    "recoveryKeyPinEntropyBelowMin": "பலவீனமான முள், நீண்டதாகவோ அல்லது குறைவாகவோ கணிக்கக்கூடியதாக மாற்றவும்",
+    "recoveryKeyPinEntropyBelowOptimal": "நியாயமான முள், சிறந்த பாதுகாப்பிற்கு நீண்டதாகவோ அல்லது குறைவாகவோ கணிக்கக்கூடியதாக மாற்றவும்",
+    "recoveryKeyPinEntropyOptimal": "முள் நீண்டது",
+    "recoveryKeySomethingWentWrongHeader": "ஏதோ தவறு நடந்தது",
+    "snapPermissionAccessLabel": "அணுகல்",
+    "cameraRulesPageEmptyTileLabel": "இதுவரை எந்த ஆப்சும் அணுகலைக் கோரவில்லை",
+    "snapRulesResetAllPermissions": "அனைத்து அனுமதிகளையும் மீட்டமைக்கவும்",
+    "cameraInterfacePageTitle": "கேமரா",
+    "cameraInterfacePageDescription": "உங்கள் கேமராக்களை அணுக ஆப்சை அனுமதிக்கவும்.",
+    "diskEncryptionPageAddPinButton": "பின்னைச் சேர்...",
+    "diskEncryptionPageAddPassphraseButton": "கடவுச்சொற்றொடரைச் சேர்...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "கடவுச்சொற்றொடரைச் சேர்க்கவும்",
+    "diskEncryptionPageAddPinDialogHeading": "பின்னைச் சேர்க்கவும்",
+    "diskEncryptionPageAddPinDialogBodyMain": "உங்கள் கணினி தொடங்கும் ஒவ்வொரு முறையும் உங்கள் பின்னை உள்ளிட வேண்டும். இந்த பின் உங்கள் பயனர் கடவுச்சொல்லிலிருந்து வேறுபட்டது.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "உங்கள் பின்னை மறந்துவிட்டால், மீட்டெடுப்பு விசையைப் பயன்படுத்தி வட்டுக்கான அணுகலை மீண்டும் பெறலாம்.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "உங்கள் கணினி தொடங்கும் ஒவ்வொரு முறையும் உங்கள் கடவுச்சொற்றொடரை உள்ளிட வேண்டும். இந்த கடவுச்சொற்றொடரை உங்கள் பயனர் கடவுச்சொல்லில் இருந்து வேறுபட்டது.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "உங்கள் கடவுச்சொற்றொடரை மறந்துவிட்டால், மீட்டெடுப்பு விசையைப் பயன்படுத்தி வட்டுக்கான அணுகலை மீண்டும் பெறலாம்.",
+    "diskEncryptionPageAdditionalSecurityHeader": "கூடுதல் பாதுகாப்பு",
+    "diskEncryptionPageAdditionalSecurityBody": "கூடுதல் பாதுகாப்பிற்காக நீங்கள் கடவுச்சொற்றொடரை அல்லது பின்னை அமைக்கலாம். உங்கள் கணினி தொடங்கும் ஒவ்வொரு முறையும் நீங்கள் அதை உள்ளிட வேண்டும்.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "மேலும் அறிக",
+    "diskEncryptionPageAddPinDialogSaveButton": "கூட்டு",
+    "diskEncryptionPageRemovePinButton": "பின்னை அகற்று...",
+    "diskEncryptionPageRemovePassphraseButton": "கடவுச்சொற்றொடரை அகற்று...",
+    "diskEncryptionPageAddingPin": "பின்னைச் சேர்க்கிறது, இதற்குச் சில வினாடிகள் ஆகலாம்...",
+    "diskEncryptionPageAddingPassphrase": "கடவுச்சொற்றொடரைச் சேர்க்கிறது, இதற்கு சில வினாடிகள் ஆகலாம்...",
+    "diskEncryptionPageRemovingPin": "பின்னை அகற்றுகிறது, இதற்கு சில வினாடிகள் ஆகலாம்...",
+    "diskEncryptionPageRemovingPassphrase": "கடவுச்சொற்றொடரை அகற்றுகிறது, இதற்கு சில வினாடிகள் ஆகலாம்..."
 }

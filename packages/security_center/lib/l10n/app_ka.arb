@@ -1,77 +1,173 @@
 {
-  "appTitle": "უსაფრთხოების ცენტრი",
-  "@appTitle": {},
-  "snapdRuleCategorySessionAllowed": "დაშვება გასვლამდე",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategorySessionDenied": "აკრძალვა გასვლამდე",
-  "@snapdRuleCategorySessionDenied": {},
-  "snapdRuleCategoryForeverAllowed": "ყოველთვის დაშვება",
-  "@snapdRuleCategoryForeverAllowed": {},
-  "snapdRuleCategoryForeverDenied": "ყოველთვის აკრძალვა",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "წაკითხვა",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "ჩაწერა",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionExecuteLabel": "გაშვება",
-  "@snapPermissionExecuteLabel": {},
-  "snapPermissionsEnableWarning": "ეს ექსპერიმენტული ფუნქციაა თქვენი სისტემის რესურსებთან წვდომის მართვისთვის.",
-  "@snapPermissionsEnableWarning": {},
-  "homeInterfacePageTitle": "საწყისის საქაღალდე",
-  "@homeInterfacePageTitle": {},
-  "snapPermissionsEnablingLabel": "მიმდინარეობს ჩართვა. ამას რამდენიმე წამი დასჭირდება...",
-  "@snapPermissionsEnablingLabel": {},
-  "snapPermissionsExperimentalLabel": "ექსპერიმენტული",
-  "@snapPermissionsExperimentalLabel": {},
-  "snapPermissionsPageTitle": "აპის წვდომები",
-  "@snapPermissionsPageTitle": {},
-  "interfacePageTitle": "წვდომების მართვა",
-  "@interfacePageTitle": {},
-  "snapRulesRemoveAll": "ყველა წესის წაშლა",
-  "@snapRulesRemoveAll": {},
-  "interfacePageLinkLearnMore": "გაიგეთ მეტი",
-  "@interfacePageLinkLearnMore": {},
-  "snapPermissionsEnableTitle": "აპებისთვის სისტემური უფლებების მოთხოვნის აუცილებლობა",
-  "@snapPermissionsEnableTitle": {},
-  "homeInterfacePageDescription": "მართეთ წვდომები თქენს საწყის საქაღალდეში ფაილებთან წვდომისთვის.",
-  "@homeInterfacePageDescription": {},
-  "interfacePageDescription": "მკაცრად შეზღუდული აპები თქვენს დადასტურებას მოითხოვენ ფაილებთან და საქაღალდეებთან წვდომამდე. ეს ფუნქცია ექსპერიმენტულია და მუდმივად იცვლება.",
-  "@interfacePageDescription": {},
-  "interfacePageLinkGiveFeedback": "უკუკავშირი",
-  "@interfacePageLinkGiveFeedback": {},
-  "interfacePageLinkReportIssues": "პრობლემების ანგარიში",
-  "@interfacePageLinkReportIssues": {},
-  "snapPermissionsDisablingLabel": "მიმდინარეობს გათიშვა. ამას რამდენიმე წამი დასჭირდება...",
-  "@snapPermissionsDisablingLabel": {},
-  "snapPermissionsOtherDescription": "სხვა წვდომების მართვა შეგუძლიათ მენიუში მორგება > აპლიკაციები.",
-  "@snapPermissionsOtherDescription": {},
-  "snapRulesCount": "{n, plural, =0{წესების გარეშე} =1{1 წესი} other{{n} წესი}}",
-  "@snapRulesCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  },
-  "snapRulesPageDescription": "{interface}-ის წვდომების მართვა {snap}-სთვის.",
-  "@snapRulesPageDescription": {
-    "placeholders": {
-      "interface": {
-        "type": "String"
-      },
-      "snap": {
-        "type": "String"
-      }
-    }
-  },
-  "snapRulesPageEmptyTileLabel": "ჯერ წესები არაა",
-  "@snapRulesPageEmptyTileLabel": {},
-  "interfaceSnapCount": "{n, plural, =0{აპების გარეშე} =1{1 აპი} other {{n} აპი}}",
-  "@interfaceSnapCount": {
-    "placeholders": {
-      "n": {
-        "type": "int"
-      }
-    }
-  }
+    "appTitle": "უსაფრთხოების ცენტრი",
+    "snapdRuleCategorySessionAllowed": "დაშვება გასვლამდე",
+    "snapdRuleCategorySessionDenied": "აკრძალვა გასვლამდე",
+    "snapdRuleCategoryForeverAllowed": "ყოველთვის დაშვება",
+    "snapdRuleCategoryForeverDenied": "ყოველთვის აკრძალვა",
+    "snapPermissionReadLabel": "წაკითხვა",
+    "snapPermissionWriteLabel": "ჩაწერა",
+    "snapPermissionExecuteLabel": "შესრულება",
+    "snapPermissionsEnableWarning": "ეს ექსპერიმენტული ფუნქციაა თქვენი სისტემის რესურსებთან წვდომის მართვისთვის.",
+    "homeInterfacePageTitle": "საწყისის საქაღალდე",
+    "snapPermissionsEnablingLabel": "მიმდინარეობს ჩართვა. ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...",
+    "snapPermissionsExperimentalLabel": "ექსპერიმენტული",
+    "snapPermissionsPageTitle": "აპის წვდომები",
+    "interfacePageTitle": "წვდომების მართვა",
+    "snapRulesRemoveAll": "ყველა წესის წაშლა",
+    "interfacePageLinkLearnMore": "გაიგეთ მეტი",
+    "snapPermissionsEnableTitle": "აპებისთვის სისტემური უფლებების მოთხოვნის აუცილებლობა",
+    "homeInterfacePageDescription": "მართეთ წვდომები თქვენს საწყის საქაღალდეში ფაილებთან წვდომისთვის.",
+    "interfacePageDescription": "მკაცრად შეზღუდული აპები თქვენს დადასტურებას მოითხოვენ ფაილებთან და საქაღალდეებთან წვდომამდე. ეს ფუნქცია ექსპერიმენტულია და მუდმივად იცვლება.",
+    "interfacePageLinkGiveFeedback": "უკუკავშირი",
+    "interfacePageLinkReportIssues": "პრობლემების ანგარიში",
+    "snapPermissionsDisablingLabel": "ითიშება. ამას, შეიძლება რამდენიმე წამი დასჭირდეს...",
+    "snapPermissionsOtherDescription": "სხვა წვდომების მართვა შეგიძლიათ მენიუში მორგება > აპლიკაციები.",
+    "snapRulesCount": "{n, plural, =0{წესების გარეშე} =1{1 წესი} other{{n} წესი}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "{interface}-ის წვდომების მართვა {snap}-სთვის.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "ჯერ წესები არაა",
+    "interfaceSnapCount": "{n, plural, =0{აპების გარეშე} =1{1 აპი} other {{n} აპი}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionAccessLabel": "წვდომა",
+    "cameraRulesPageEmptyTileLabel": "ჯერ აპებს წვდომა არ მოუთხოვიათ",
+    "snapRulesResetAllPermissions": "ყველა წვდომის ჩამოყრა",
+    "cameraInterfacePageTitle": "კამერა",
+    "cameraInterfacePageDescription": "აპებისთვის კამერაზე წვდომის უფლების მიცემა.",
+    "diskEncryptionPageTitle": "დისკის დაშიფვრა",
+    "diskEncryptionPageRecoveryKey": "აღდგენის გასაღები",
+    "diskEncryptionPageStoreYourKey": "აღდგენის გასაღები საშუალებას გაძლევთ, დაიბრუნოთ წვდომა თქვენს მონაცემებზე, თუ სისტემის ჩატვირთვისას დისკის გაშიფვრას ვერ შეძლებთ. შეინახეთ ის სადმე უსაფრთხო ადგილას.",
+    "diskEncryptionPageStoreYourKeyWithLink": "აღდგენის გასაღები საშუალებას გაძლევთ, დაიბრუნოთ წვდომა თქვენს მონაცემებზე, თუ სისტემის ჩატვირთვისას დისკის გაშიფვრას ვერ შეძლებთ. შეინახეთ ის სადმე უსაფრთხო ადგილას. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "გაიგეთ მეტი აპარატურით მხარდაჭერილი დაშიფვრის შესახებ",
+    "diskEncryptionPageCheckKey": "აღდგენის გასაღების შემოწმება...",
+    "diskEncryptionPageDialogHeaderCheckKey": "აღდგენის გასაღების შემოწმება",
+    "diskEncryptionPageCheck": "შემოწმება",
+    "diskEncryptionPageValidKey": "სწორი გასაღები",
+    "diskEncryptionPageInvalidKey": "არასწორი გასაღები",
+    "diskEncryptionPageEnterKey": "შეიყვანეთ თქვენი აღდგენის გასაღები",
+    "diskEncryptionPageKeyWorks": "აღდგენის გასაღები მუშაობს",
+    "diskEncryptionPageKeyWorksBody": "დაიმახსოვრეთ, ის სადმე უსაფრთხო ადგილას უნდა შეინახოთ.",
+    "diskEncryptionPageKeyDoesntWork": "აღდგენის გასაღები არ მუშაობს",
+    "diskEncryptionPageKeyDoesntWorkBody": "შეამოწმეთ გასაღები, ან ჩაანაცვლეთ ის ახლით.",
+    "diskEncryptionPageError": "შეცდომა",
+    "diskEncryptionPageReplaceButton": "აღდგენის გასაღების ჩანაცვლება...",
+    "diskEncryptionPageReplaceDialogReplace": "ჩანაცვლება",
+    "diskEncryptionPageReplaceDialogDiscard": "მოცილება",
+    "diskEncryptionPageCopySemanticLabel": "კოპირება",
+    "recoveryKeyPassphraseShow": "ჩვენება",
+    "recoveryKeyPassphraseHide": "დამალვა",
+    "recoveryKeyPassphraseChange": "შეცვლა",
+    "recoveryKeyExceptionUnknownTitle": "უცნობი შეცდომა",
+    "recoveryKeyFilePickerFilter": "ტექსტური ფაილები",
+    "recoveryKeyPassphraseHeader": "საკვანძო ფრაზის შეცვლა",
+    "recoveryKeyPassphraseButton": "საკვანძო ფრაზის შეცვლა...",
+    "recoveryKeyPassphraseCurrent": "მიმდინარე საკვანძო ფრაზა",
+    "recoveryKeyPassphraseConfirm": "საკვანძო ფრაზის დადასტურება",
+    "recoveryKeyPassphraseDialogHeader": "საკვანძო ფრაზის შეცვლა",
+    "recoveryKeyPinHeader": "დაშიფვრის PIN",
+    "recoveryKeyPinButton": "PIN-ის შეცვლა...",
+    "recoveryKeyPinCurrent": "მიმდინარე PIN-კოდი",
+    "recoveryKeyPinNew": "ახალი PIN-კოდი",
+    "recoveryKeyPinConfirm": "დაადასტურეთ PIN-კოდი",
+    "recoveryKeyPinDialogHeader": "PIN-კოდის შეცვლა",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN-კოდი განახლდა",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "საკვანძო ფრაზა განახლდა",
+    "recoveryKeyPassphraseEntropyOptimal": "ძლიერი საკვანძო ფრაზა",
+    "recoveryKeyEncrpytionPassphraseHeader": "დაშიფვრის საკვანძო ფრაზა",
+    "recoveryKeyPassphraseNew": "ახალი საკვანძო ფრაზა",
+    "diskEncryptionPageReplaceDialogHeader": "აღდგენის გასაღების შეცვლა",
+    "diskEncryptionPageReplaceDialogShowQR": "QR კოდის ჩვენება",
+    "diskEncryptionPageReplaceDialogSave": "შენახვა ფაილში",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "აღდგენის გასაღები შეიცვალა",
+    "diskEncryptionPageClipboardNotification": "დაკოპირდა ბუფერში",
+    "recoveryKeySomethingWentWrongHeader": "რაღაც არასწორია",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "diskEncryptionPageReplaceDialogErrorHeader": "აღდგენის გასაღების შეცვლა ჩავარდა",
+    "recoveryKeyFilePickerTitle": "აღდგენის გასაღების ფაილის შენახვა",
+    "recoveryKeyTPMEnabled": "აპარატურით მხარდაჭერილი დაშიფვრა ჩართულია",
+    "recoveryKeyPassphraseEnabled": "დაშიფვრის საკვანძო ფრაზა ჩართულია",
+    "recoveryKeyPassphraseCurrentError": "არასწორი საკვანძო ფრაზა. თავიდან სცადეთ",
+    "recoveryKeyPinEnabled": "დაშიფვრის PIN-კოდი ჩართულია",
+    "recoveryKeyPinCurrentError": "არასწორი PIN-კოდი. თავიდან სცადეთ",
+    "recoveryKeyPinEntropyOptimal": "PIN-კოდი საკმარისად გრძელია",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "დაშიფვრის პარამეტრები ხელმისაწვდომი არაა",
+    "recoveryKeyExceptionFileSystemTitle": "აღდგენის გასაღების ფაილი შენახული არაა",
+    "recoveryKeyPassphrasePinSuccessBody": "თქვენი PIN-კოდი წარმატებით განახლდა.",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "თქვენი საკვანძო ფრაზა წარმატებით განახლდა.",
+    "recoveryKeyTPMExplanationLearnMore": "გაიგეთ მეტი აპარატურით მხარდაჭერილი დაშიფვრის შესახებ",
+    "diskEncryptionPageReplaceDialogSuccessBody": "დაიმახსოვრეთ, რომ ის სადმე უსაფრთხო ადგილას უნდა შეინახოთ.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - დაშიფვრის აღდგენის გასაღები",
+    "recoveryKeyPassphraseConfirmError": "საკვანძო ფრაზები არ ემთხვევა. თავიდან სცადეთ",
+    "recoveryKeyPinConfirmError": "PIN-კოდები არ ემთხვევა. თავიდან სცადეთ",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "თქვენი snapd-ის ვერსია მხარდაჭერილი არაა",
+    "diskEncryptionPageReplaceDialogAcknowledge": "მე შევინახე ჩემი აღდგენის გასაღები უსაფრთხო ადგილას",
+    "recoveryKeyPassphraseNewError": "უნდა შეიცავდეს, სულ ცოტა, 4 სიმბოლოს",
+    "recoveryKeyPassphraseEntropyBelowMin": "საკვანძო ფრაზა სუსტია. დააგრძელეთ, ან გაართულეთ ის",
+    "recoveryKeyPinEntropyBelowMin": "სუსტი PIN-კოდი. დააგრძელეთ, ან გაართულეთ ის",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "უსაფრთხოების ცენტრი ვერ დაუკავშირდა spand-ის ინტერფეისს",
+    "recoveryKeyExceptionFilePermissionTitle": "თქვენი აღდგენის გასაღების ფაილში შენახვა ჩავარდა",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "ამ კომპიუტერის დაშიფვრის სტატუსის მიღება ჩავარდა.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "რომ გაასწოროთ, ტერმინალში ეს ბრძანება გაუშვით:",
+    "recoveryKeyExceptionDisallowedPathTitle": "აღდგენის გასაღების ფაილს დროებით ადგილას ვერ შეინახავთ",
+    "diskEncryptionPageErrorUnsupportedStateBody": "თქვენი კომპიუტერის TPM-ის კონფიგურაცია მხარდაჭერილ მდგომარეობაში არაა.",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "შეამოწმეთ, არის თუ არა უსაფრთხოების ცენტრი და snapd უკანასკნელი ვერსიის.",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "საკვანძო ფრაზა დამაკმაყოფილებელია. უკეთესი უსაფრთხოებისთვის დააგრძელეთ, ან გაართულეთ ის",
+    "recoveryKeyPinEntropyBelowOptimal": "PIN-კოდი დამაკმაყოფილებელია. უკეთესი უსაფრთხოებისთვის დააგრძელეთ, ან ნაკლებად ადვილად გამოსაცნობი გახადეთ ის",
+    "recoveryKeyExceptionFilePermissionBody": "თქვენ არ გაქვთ ამ ფაილის მდებარეობაზე ჩაწერის უფლება.",
+    "recoveryKeyTPMExplanationBody": "დაშიფვრის გასაღებები დამახსოვრებული თქვენი კომპიუტერის სანდო პლატფორმის მოდულში (TPM).",
+    "diskEncryptionPageReplaceDialogErrorBody": "რაღაც არასწორად წავიდა თქვენი აღდგენის გასაღების შენახვისას. თქვენი ძველი გასაღები გამოყენებადი დარჩა.",
+    "recoveryKeyExceptionDisallowedPathBody": "სცადეთ სხვა მდებარეობა. მაგალითად: მოხსნადი დისკი, ან გამოიყენეთ სხვა მეთოდი.",
+    "recoveryKeyExceptionFileSystemBody": "თქვენ არ გაქვთ იმ საქაღალდეში ჩაწერის უფლება. სცადეთ სხვა მდებარეობა, ან გამოიყენეთ სხვა მეთოდი.",
+    "recoveryKeyPassphraseBody": "საკვანძო ფრაზა უნდა შეიყვანოთ ყოველ ჯერზე, როცა კომპიუტერი გაეშვება.",
+    "recoveryKeyPinBody": "PIN-კოდის შეყვანა ყოველ ჯერზეა საჭირო, როცა თქვენი კომპიუტერი გაეშვება.",
+    "diskEncryptionPageReplaceDialogBody": "შეინახეთ ახალი აღდგენის გასაღები სადმე უსაფრთხო ადგილას. თუ მას შეცვლით, ძველ გასაღებს ვეღარ გამოიყენებთ.",
+    "diskEncryptionPageReplaceDialogQRBody": "დაასკანერეთ QR კოდი, რომ დააკოპიროთ აღდგენის გასაღები და შეინახეთ ის სადმე უსაფრთხო ადგილას, მაგალითად, პაროლების მმართველში. ასევე შეგიძლიათ, მისი სურათი გადაიღოთ.",
+    "diskEncryptionPageAddPinDialogSaveButton": "დამატება",
+    "diskEncryptionPageAddPinButton": "PIN-კოდის დამატება...",
+    "diskEncryptionPageAddPassphraseButton": "საკვანზო ფრაზის დამატება...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "საკვანძო ფრაზის დამატება",
+    "diskEncryptionPageAddPinDialogHeading": "PIN-კოდის დამატება",
+    "diskEncryptionPageAdditionalSecurityHeader": "დამატებითი უსაფრთხოება",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "გაიგეთ მეტი",
+    "diskEncryptionPageRemovePinButton": "PIN-კოდის მოცილება...",
+    "diskEncryptionPageRemovePassphraseButton": "საკვანძო ფრაზის მოცილება...",
+    "diskEncryptionPageAddingPin": "მიმდინარეობს PIN-კოდის დამატება. ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...",
+    "diskEncryptionPageAddingPassphrase": "მიმდინარეობს საკვაძო ფრაზის დამატება. ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...",
+    "diskEncryptionPageRemovingPin": "მიმდინარეობს PIN-კოდის წაშლა. ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...",
+    "diskEncryptionPageRemovingPassphrase": "მიმდინარეობს საკვანძო ფრაზის წაშლა. ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...",
+    "diskEncryptionPageAddPinDialogBodyMain": "PIN-კოდის შეყვანა ყოველ ჯერზე დაგჭირდებათ, როცა კომპიუტერს ჩართავთ. ეს PIN-კოდი მომხმარებლის პაროლისგან განსხვავდება.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "თუ PIN-კოდი დაგავიწყდებათ, დისკთან წვდომის დაბრუნება აღდგენის გასაღებით შეგეძლებათ.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "საკვანძო ფრაზის შეყვანა დაგჭირდებათ ყოველ ჯერზე, როცა კომპიუტერს ჩართავთ. ეს საკვანძო ფრაზა განსხვავდება თქვენი მომხმარებლის პაროლისგან.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "თუ თქვენი საკვანძო ფრაზა დაგავიწყდათ, დისკთან წვდომის დაბრუნება აღდგენის გასაღებით შეგიზლიათ.",
+    "diskEncryptionPageAdditionalSecurityBody": "დამატებითი უსაფრთხოებისთვის შეგიძლიათ, საკვანძო ფრაზა, ან PIN-კოდი დააყენოთ. მათი შეყვანა ყოველ ჯერზე დაგჭირდებათ, როცა კომპიუტერს ჩართავთ.",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro ჩართულია"
 }
