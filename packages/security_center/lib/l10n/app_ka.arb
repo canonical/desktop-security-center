@@ -169,5 +169,101 @@
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "თუ თქვენი საკვანძო ფრაზა დაგავიწყდათ, დისკთან წვდომის დაბრუნება აღდგენის გასაღებით შეგიზლიათ.",
     "diskEncryptionPageAdditionalSecurityBody": "დამატებითი უსაფრთხოებისთვის შეგიძლიათ, საკვანძო ფრაზა, ან PIN-კოდი დააყენოთ. მათი შეყვანა ყოველ ჯერზე დაგჭირდებათ, როცა კომპიუტერს ჩართავთ.",
     "ubuntuProPageTitle": "Ubuntu Pro",
-    "ubuntuProEnabled": "Ubuntu Pro ჩართულია"
+    "ubuntuProEnabled": "Ubuntu Pro ჩართულია",
+    "ubuntuProTokenLabel": "ტოკენი",
+    "ubuntuProDisable": "გამორთვა",
+    "ubuntuProEnable": "ჩართვა",
+    "ubuntuProCancel": "გაუქმება",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSEnable": "FIPS-ის ჩართვა",
+    "ubuntuProLivepatchTitle": "ბირთვის Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Livepatch-ის ჩართვა",
+    "ubuntuProEnablePro": "Ubuntu Pro-ის ჩართვა",
+    "ubuntuProMagicContinueInBrowser": "ბრაუზერში გაგრძელება",
+    "ubuntuProDisablePro": "Ubuntu Pro-ის გამორთვა",
+    "ubuntuProCompliance": "თავსებადობა და გაძლიერება",
+    "ubuntuProComplianceFIPSUpdates": "FIPS განახლებებით",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS განახლებების გარეშე",
+    "ubuntuProComplianceDocumentation": "უსაფრთხოების თავსებადობის დოკუმენტაცია",
+    "ubuntuProESMMainTitle": "მთავარი პაკეტები (esm-infra)",
+    "ubuntuProESMUniverseTitle": "უნივერსალური პაკეტები (esm-apps)",
+    "microphoneInterfacePageTitle": "მიკროფონი",
+    "ubuntuProLearnMore": "გაიგეთ მეტი Ubunu Pro-ის შესახებ",
+    "ubuntuProEnableToken": "ჩართვა ტოკენით",
+    "ubuntuProComplianceUSGTitle": "Ubuntu-ის უსაფრთხოების სახელმძღვანელო (USG)",
+    "ubuntuProESMTitle": "გაფართოებული უსაფრთხოების რემონტი (ESM)",
+    "ubuntuProEnableMagic": "ჩართვა Ubuntu One ანგარიშთან ერთად",
+    "ubuntuProEnableTokenError": "Ubuntu Pro-ის ჩართვა შეუძლებელია",
+    "ubuntuProComplianceFIPSPrompt": "აირჩიეთ სასურველი FIPS არჩევანი",
+    "microphoneInterfacePageDescription": "აპებისთვის თქვენს მიკროფონთან წვდომის მიცემა.",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro ითხოვს LTS გამოცემას",
+    "ubuntuProNotSupportedSnapdDetails": "Ubuntu Pro-ის სამართავად განაახლეთ snapd",
+    "ubuntuProEnableTokenSubtitle": "თქვენი IT ადმინისტრატორისგან, ან ბმულიდან {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLivepatchShowTitle": "Livepatch-ის სტატუსის ჩვენება ზედა პანელზე",
+    "ubuntuProMagicError": "Ubuntu Pro-ის ჩართვა შეუძლებელია. კიდევ სცადეთ",
+    "ubuntuProFeatureEnableError": "ამ ფუნქციის ჩართვა შეუძლებელია. კიდევ სცადეთ.",
+    "ubuntuProFeatureDisableError": "ამ ფუნქციის გამორთვა შეუძლებელია. კიდევ სცადეთ.",
+    "ubuntuProLivepatchEnableDescription": "ბირთვის უსაფრთხოების განახლებების გადატარება სისტემის გამორთვის გარეშე",
+    "ubuntuProNotSupported": "Ubuntu-ის ამ ვერსიისთვის Ubuntu ხელმისაწვდომი არაა",
+    "ubuntuProNotSupportedSnapd": "snapd-ის ამ ვერსიას Ubuntu Pro-ის მხარდაჭერა არ გააჩნია",
+    "ubuntuProESMMainDescription": "უსაფრთხოების განახლებები 2300 Ubuntu-ის მთავარი პაკეტისთვის {year}-მდე",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProEnableMagicSubtitle": "ანგარიშის შექმნა უფასოდ შეგეძლებათ",
+    "ubuntuProTokenPrompt": "მიიღეთ Ubuntu Pro-ის ტოკენი თქვენი ადმინისტრატორისგან, ან ბმულიდან {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProComplianceFIPSDisclaimer": "FIPS-ის ჩართვა შეუქცევადია და Livepatch სამუდამოდ გაითიშება.",
+    "ubuntuProComplianceFIPSUpdatesDescription": "დააყენებს FIPS 140-2-ით გადამოწმებულ პაკეტებს და საშუალებას იძლევა, უსაფრთხოება რეგულარულად განახლდეს.",
+    "ubuntuProESMUniverseDescription": "დამატებითი უსაფრთხოების განახლებები 23000-ზე მეტი Ubuntu Universe-ის პაკეტებისთვის {year}-მდე",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProDisabled": "საწარმოო დონის უსაფრთხოება და სტანდარტებთან თავსებადობა თქვენი კომპიუტერისთვის. ყოველთვის უფასო პირადი გამოყენებისთვის. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicPrompt": "შედით თქვენი Ubuntu One-ის ანგარიშით, ან შექმენით ის უფასოდ.",
+    "ubuntuProMagicDescription": "შეგიძლიათ, შეხვიდეთ მისამართზე {attachLink} და შეიყვანოთ კოდი {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProDisablePrompt": "Ubuntu Pro-ის გამორთვა გააუქმებს ამ მანქანის გამოწერას. გააგრძელებთ?",
+    "ubuntuProComplianceDisclaimer": "მხოლოდ, რეკომენდებულია, FedRAMP, HIPAA და სხვა სტანდარტებთან თავსებადობისა და უსაფრთხოების გაძლიერების მოთხოვნებისთვის.",
+    "ubuntuProComplianceUSGDescription": "ახდენს უსაფრთხოების გაძლიერებისა და აუდიტის ავტომატიზაციას CIS წარმადობის შემოწმებითა და DISA-STIG პროფილით გარემოზე დამოკიდებული ცვლილებების შეტანის საშუალებით.",
+    "ubuntuProComplianceFIPSDescription": "აშშ-ისა და კანადის მთავრობების კრიპტოგრაფიული მოდულის სერტიფიკაცია FIPS 140-2 მონაცემების დაცვის სტანდარტებთან თავსებადობის შესახებ.",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "დააყენებს FIPS 140-2-ით გადამოწმებულ პაკეტებს. ესენი არ განახლდება შემდეგ რესერტიფიკაციამდე.",
+    "ubuntuProESMDescription": "ESM მოგაწვდით 10-წლიან უსაფრთხოების პაჩებს 25000+ ღია კოდის მქონე პაკეტისტვის. მიიღეთ უწყვეტი მოწყვლადობის მართვა კრიტიკული, მაღალი და საშუალო CVE-ებისთვის."
 }
