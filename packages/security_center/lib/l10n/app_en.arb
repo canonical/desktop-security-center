@@ -32,6 +32,7 @@
     "@snapPermissionsOtherDescription": {},
     "snapPermissionsPageTitle": "App permissions",
     "@snapPermissionsPageTitle": {},
+    "snapPermissionsErrorTitle": "Something went wrong",
     "snapRulesCount": "{n, plural, =0{no rules} =1{1 rule} other{{n} rules}}",
     "@snapRulesCount": {
         "placeholders": {

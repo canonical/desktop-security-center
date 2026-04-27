@@ -338,6 +338,12 @@ abstract class AppLocalizations {
   /// **'App permissions'**
   String get snapPermissionsPageTitle;
 
+  /// No description provided for @snapPermissionsErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get snapPermissionsErrorTitle;
+
   /// No description provided for @snapRulesCount.
   ///
   /// In en, this message translates to:

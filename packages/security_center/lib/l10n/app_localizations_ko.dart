@@ -58,6 +58,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get snapPermissionsPageTitle => '앱 권한';
 
   @override
+  String get snapPermissionsErrorTitle => 'Something went wrong';
+
+  @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,

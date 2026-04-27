@@ -62,6 +62,9 @@ class AppLocalizationsUg extends AppLocalizations {
   String get snapPermissionsPageTitle => 'ئەپ ئىجازىتى';
 
   @override
+  String get snapPermissionsErrorTitle => 'Something went wrong';
+
+  @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,

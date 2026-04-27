@@ -62,6 +62,9 @@ class AppLocalizationsLo extends AppLocalizations {
   String get snapPermissionsPageTitle => 'ການອະນຸຍາດແອັບ';
 
   @override
+  String get snapPermissionsErrorTitle => 'Something went wrong';
+
+  @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
