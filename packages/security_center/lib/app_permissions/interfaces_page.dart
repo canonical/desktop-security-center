@@ -34,6 +34,13 @@ class _Body extends StatelessWidget {
       children: [
         ...[
           _PromptingSwitch(promptingStatus: promptingStatus),
+          if (promptingStatus
+              case AppPermissionsServiceStatusError(error: final error))
+            YaruInfoBox(
+              yaruInfoType: YaruInfoType.danger,
+              title: Text(l10n.snapPermissionsErrorTitle),
+              child: Text(error.toString()),
+            ),
           Text(l10n.interfacePageDescription),
           const _Links(),
         ].separatedBy(const SizedBox(height: 8)),
@@ -131,6 +138,7 @@ class _PromptingSwitch extends ConsumerWidget {
             ),
             value: promptingStatus.isEnabled || promptingStatus.isEnabling,
             onChanged: switch (promptingStatus) {
+              AppPermissionsServiceStatusError() ||
               AppPermissionsServiceStatusDisabled() ||
               AppPermissionsServiceStatusEnabled() =>
                 (value) => value ? notifier.enable() : notifier.disable(),

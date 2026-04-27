@@ -217,5 +217,27 @@ void main() {
         });
       }
     });
+    testWidgets('error state', (tester) async {
+      final container = createContainer();
+      registerMockAppPermissionsService();
+      await tester.pumpApp(
+        (_) => UncontrolledProviderScope(
+          container: container,
+          child: const InterfacesPage(),
+        ),
+      );
+      container.read(promptingStatusModelProvider.notifier).state =
+          AsyncData(AppPermissionsServiceStatusError('snapd error'));
+      await tester.pump();
+
+      expect(
+        find.text('snapd error'),
+        findsOneWidget,
+      );
+      expect(
+        find.text(tester.l10n.snapPermissionsErrorTitle),
+        findsOneWidget,
+      );
+    });
   });
 }
