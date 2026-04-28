@@ -265,5 +265,6 @@
     "ubuntuProLivepatchTitle": "Livepatch jądra",
     "ubuntuProLivepatchEnableTitle": "Włącz Livepatch",
     "ubuntuProLivepatchEnableDescription": "Stosuj aktualizacje zabezpieczeń jądra podczas działania systemu",
-    "ubuntuProLivepatchShowTitle": "Pokazuj status Livepatch na górnym pasku"
+    "ubuntuProLivepatchShowTitle": "Pokazuj status Livepatch na górnym pasku",
+    "snapPermissionsErrorTitle": "Wystąpił problem"
 }
