@@ -57,6 +57,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get snapPermissionsPageTitle => '应用程序权限';
 
   @override
+  String get snapPermissionsErrorTitle => 'Something went wrong';
+
+  @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,

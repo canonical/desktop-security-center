@@ -64,6 +64,9 @@ class AppLocalizationsCa extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Permisos de l\'aplicació';
 
   @override
+  String get snapPermissionsErrorTitle => 'Something went wrong';
+
+  @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,

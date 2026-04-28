@@ -63,6 +63,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Alkalmazás jogosultságai';
 
   @override
+  String get snapPermissionsErrorTitle => 'Something went wrong';
+
+  @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
