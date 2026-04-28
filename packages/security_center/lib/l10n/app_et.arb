@@ -265,5 +265,6 @@
     "ubuntuProComplianceFIPSUpdates": "Uuendustega FIPS",
     "ubuntuProComplianceFIPSUpdatesDescription": "Paigaldab FIPS 140-2 vastavusega paketid ja võimaldab regulaarselt turvauuendusi teha.",
     "ubuntuProComplianceFIPSNoUpdates": "Ilma uuendusteta FIPS",
-    "ubuntuProComplianceFIPSNoUpdatesDescription": "Paigaldab FIPS 140-2 vastavusega paketid, aga neid ei uuendata kuni järgmise kordussertifitseerimiseni."
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Paigaldab FIPS 140-2 vastavusega paketid, aga neid ei uuendata kuni järgmise kordussertifitseerimiseni.",
+    "snapPermissionsErrorTitle": "Midagi läks valesti"
 }
