@@ -264,5 +264,6 @@
     "ubuntuProLivepatchTitle": "Kernel-Livepatch",
     "ubuntuProLivepatchEnableTitle": "Livepatch aktivieren",
     "ubuntuProLivepatchEnableDescription": "Kernel-Sicherheitsaktualisierungen während des laufenden Systems anwenden",
-    "ubuntuProLivepatchShowTitle": "Livepatch-Status in der oberen Leiste anzeigen"
+    "ubuntuProLivepatchShowTitle": "Livepatch-Status in der oberen Leiste anzeigen",
+    "snapPermissionsErrorTitle": "Irgendetwas ist schiefgelaufen"
 }
