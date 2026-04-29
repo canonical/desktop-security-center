@@ -265,5 +265,6 @@
     "ubuntuProLivepatchTitle": "Livepatch ядра",
     "ubuntuProLivepatchEnableTitle": "Включить Livepatch",
     "ubuntuProLivepatchEnableDescription": "Применять обновления безопасности ядра во время работы системы",
-    "ubuntuProLivepatchShowTitle": "Показывать состояние Livepatch в верхней панели"
+    "ubuntuProLivepatchShowTitle": "Показывать состояние Livepatch в верхней панели",
+    "snapPermissionsErrorTitle": "Что-то пошло не так"
 }
