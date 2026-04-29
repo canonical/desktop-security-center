@@ -265,5 +265,6 @@
     "ubuntuProLivepatchTitle": "Livepatch för kärnan",
     "ubuntuProLivepatchEnableTitle": "Aktivera Livepatch",
     "ubuntuProLivepatchEnableDescription": "Tillämpa säkerhetsuppdateringar för kärnan medan systemet körs",
-    "ubuntuProLivepatchShowTitle": "Visa Livepatch-status i övre fältet"
+    "ubuntuProLivepatchShowTitle": "Visa Livepatch-status i övre fältet",
+    "snapPermissionsErrorTitle": "Något blev fel"
 }
