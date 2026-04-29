@@ -265,5 +265,6 @@
     "ubuntuProComplianceFIPSDescription": "AEB eta Kanadako gobernuen modulu kriptografikoentzako betetze-ziurtapena, FIPS 140-2 datuen babeserako estandarrarekin.",
     "ubuntuProComplianceFIPSDisclaimer": "FIPS gaitzea ezin da desegin, eta Livepatch betiko ezgaituko da.",
     "ubuntuProComplianceFIPSUpdatesDescription": "FIPS 140-2k balioztatutako paketeak instalatzen ditu, eta aldian aldiko segurtasun-eguneratzeak ahalbidetzen ditu.",
-    "ubuntuProComplianceFIPSNoUpdatesDescription": "FIPS 140-2k balioztatutako paketeak instalatzen ditu. Hauek ez dira eguneratuko hurrengo berziurtapenera arte."
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "FIPS 140-2k balioztatutako paketeak instalatzen ditu. Hauek ez dira eguneratuko hurrengo berziurtapenera arte.",
+    "snapPermissionsErrorTitle": "Arazoren bat egon da"
 }
