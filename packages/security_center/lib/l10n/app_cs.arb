@@ -265,5 +265,6 @@
     "ubuntuProLivepatchTitle": "Kernel Livepatch",
     "ubuntuProLivepatchEnableTitle": "Povolit Livepatch",
     "ubuntuProLivepatchEnableDescription": "Aplikovat aktualizace zabezpečení jádra za chodu systému",
-    "ubuntuProLivepatchShowTitle": "Zobrazit stav Livepatch v horní liště"
+    "ubuntuProLivepatchShowTitle": "Zobrazit stav Livepatch v horní liště",
+    "snapPermissionsErrorTitle": "Něco se nepovedlo"
 }
