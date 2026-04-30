@@ -265,5 +265,6 @@
         }
     },
     "ubuntuProComplianceUSGDescription": "Aŭtomatigi malmoligon kaj ekzamenadon per testado CIS kaj profiloj DISA-STIG, permesante medio-specifajn adaptojn.",
-    "ubuntuProComplianceFIPSDescription": "Atestado de konformeco de ĉifraj moduloj al la datenprotekta normo FIPS 140-2 de la Usona kaj Kanada registaroj."
+    "ubuntuProComplianceFIPSDescription": "Atestado de konformeco de ĉifraj moduloj al la datenprotekta normo FIPS 140-2 de la Usona kaj Kanada registaroj.",
+    "snapPermissionsErrorTitle": "Io fiaskis"
 }
