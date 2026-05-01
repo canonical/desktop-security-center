@@ -101,7 +101,7 @@
     "diskEncryptionPageErrorUnsupportedSnapdBody": "ກວດສອບໃຫ້ແນ່ໃຈວ່າ ສູນຄວາມປອດໄພ ແລະ snapd ເປັນເວີຊັນຫຼ້າສຸດ.",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "ສູນຄວາມປອດໄພບໍ່ສາມາດເຊື່ອມຕໍ່ກັບ snapd interface ໄດ້",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "ເພື່ອແກ້ໄຂບັນຫານີ້, ໃຫ້ລັນຄຳສັ່ງນີ້ໃນ terminal:",
-    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "ເຊື່ອມຕໍ່ desktop-security-center:snap-fde-control ຂອງ snap",
     "recoveryKeyExceptionFileSystemTitle": "ບໍ່ໄດ້ບັນທຶກໄຟລ໌ຄີກູ້ຄືນ",
     "recoveryKeyExceptionDisallowedPathTitle": "ບໍ່ສາມາດບັນທຶກໄຟລ໌ຄີກູ້ຄືນໃນບ່ອນຊົ່ວຄາວໄດ້",
     "recoveryKeyExceptionUnknownTitle": "ຂໍ້ຜິດພາດທີ່ບໍ່ຮູ້ຈັກ",
@@ -265,5 +265,6 @@
     "ubuntuProLivepatchTitle": "Kernel Livepatch",
     "ubuntuProLivepatchEnableTitle": "ເປີດໃຊ້ງານ Livepatch",
     "ubuntuProLivepatchEnableDescription": "ປັບໃຊ້ການອັບເດດຄວາມປອດໄພຂອງເຄີເນີນໃນຂະນະທີ່ລະບົບກຳລັງເຮັດວຽກ",
-    "ubuntuProLivepatchShowTitle": "ສະແດງສະຖານະ Livepatch ຢູ່ແຖບດ້ານເທິງ"
+    "ubuntuProLivepatchShowTitle": "ສະແດງສະຖານະ Livepatch ຢູ່ແຖບດ້ານເທິງ",
+    "snapPermissionsErrorTitle": "ມີບາງຢ່າງຜິດພາດ"
 }
