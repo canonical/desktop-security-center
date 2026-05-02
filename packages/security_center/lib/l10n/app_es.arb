@@ -1,7 +1,7 @@
 {
     "snapdRuleCategoryForeverAllowed": "Permitir siempre",
-    "snapdRuleCategoryForeverDenied": "Rechazar siempre",
-    "snapPermissionReadLabel": "Leer",
+    "snapdRuleCategoryForeverDenied": "Denegar siempre",
+    "snapPermissionReadLabel": "Lectura",
     "snapPermissionsEnableWarning": "Esta es una función experimental para controlar el acceso a los recursos del sistema.",
     "snapPermissionsEnablingLabel": "Activando, esto puede tardar unos pocos segundos...",
     "snapPermissionsDisablingLabel": "Desactivando, esto puede tomar unos pocos segundos…",
@@ -32,8 +32,8 @@
     "appTitle": "Centro de seguridad",
     "snapdRuleCategorySessionDenied": "Denegar hasta cerrar sesión",
     "snapPermissionsEnableTitle": "Exigir a las aplicaciones que pidan permisos al sistema",
-    "snapPermissionWriteLabel": "Escribir",
-    "snapPermissionExecuteLabel": "Ejecutar",
+    "snapPermissionWriteLabel": "Escritura",
+    "snapPermissionExecuteLabel": "Ejecución",
     "snapRulesPageDescription": "Gestionar permisos de {interface} para {snap} .",
     "@snapRulesPageDescription": {
         "placeholders": {
@@ -101,7 +101,7 @@
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Para solucionar esto, ejecute este comando en la terminal:",
     "recoveryKeyExceptionDisallowedPathTitle": "El archivo de clave de recuperación no se puede guardar en una ubicación temporal",
     "recoveryKeyExceptionUnknownTitle": "Error desconocido",
-    "snapPermissionAccessLabel": "Acceder",
+    "snapPermissionAccessLabel": "Acceso",
     "diskEncryptionPageDialogHeaderCheckKey": "Comprobar clave de recuperación",
     "diskEncryptionPageReplaceDialogSuccessBody": "Recuerde guardarla en un lugar seguro.",
     "diskEncryptionPageReplaceDialogQRHeader": "Escritorio de Ubuntu - Clave de recuperación de cifrado",
@@ -248,5 +248,23 @@
     },
     "snapPermissionsErrorTitle": "Ocurrió un problema",
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Instala paquetes validados ante FIPS 140-2. No se actualizarán hasta la próxima recertificación.",
-    "ubuntuProComplianceFIPSUpdatesDescription": "Instala paquetes validados ante FIPS 140-2 y permite actualizaciones de seguridad periódicas."
+    "ubuntuProComplianceFIPSUpdatesDescription": "Instala paquetes validados ante FIPS 140-2 y permite actualizaciones de seguridad periódicas.",
+    "ubuntuProEnableTokenSubtitle": "Desde su administrador de TI o desde {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Obtenga un token de Ubuntu Pro desde su administrador o desde {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProComplianceDisclaimer": "Solo se recomienda para asistir con requisitos de FedRAMP, HIPAA y otros estándares de cumplimiento y seguridad.",
+    "ubuntuProComplianceFIPSDescription": "Certificación de módulos criptográficos de los gobiernos de EE. UU. y Canadá sobre el cumplimiento del estándar de protección de datos FIPS 140-2."
 }
