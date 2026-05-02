@@ -265,5 +265,6 @@
             }
         }
     },
-    "ubuntuProLivepatchEnableDescription": "Aplicar las mesas a jorn de seguretat del nuclèu mentre que lo sistèma fonciona"
+    "ubuntuProLivepatchEnableDescription": "Aplicar las mesas a jorn de seguretat del nuclèu mentre que lo sistèma fonciona",
+    "snapPermissionsErrorTitle": "Quicòm a fracassat"
 }
