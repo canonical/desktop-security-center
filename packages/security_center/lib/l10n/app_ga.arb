@@ -265,5 +265,6 @@
     "ubuntuProLivepatchEnableTitle": "Cumasaigh Livepatch",
     "ubuntuProLivepatchEnableDescription": "Cuir nuashonruithe slándála eithne i bhfeidhm agus an córas ag rith",
     "ubuntuProLivepatchShowTitle": "Taispeáin stádas Livepatch sa bharra barr",
-    "ubuntuProPageTitle": "Ubuntu Pro"
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "snapPermissionsErrorTitle": "Chuaigh rud éigin mícheart"
 }
