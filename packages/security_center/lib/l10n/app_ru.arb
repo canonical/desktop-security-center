@@ -242,9 +242,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Устанавливает пакеты, сертифицированные по стандарту FIPS 140-2. Они не будут обновляться до следующей повторной сертификации.",
     "ubuntuProComplianceDocumentation": "Документация по соблюдению требований безопасности",
     "ubuntuProESMTitle": "Расширенное обслуживание безопасности (ESM)",
-    "ubuntuProESMDescription": "ESM предоставляет 10 лет обновлений безопасности для более чем 25000 пакетов с открытым исходным кодом. Обеспечивает постоянное управление уязвимостями для критических, высоких и средних CVE.",
+    "ubuntuProESMDescription": "ESM предоставляет 10 лет обновлений безопасности для всего архива Ubuntu. Получайте непрерывное управление уязвимостями для критических, высоких и выбранных уязвимостей среднего уровня (CVE).",
     "ubuntuProESMMainTitle": "Пакеты Main (esm-infra)",
-    "ubuntuProESMMainDescription": "Обновления безопасности для 2300 пакетов Ubuntu Main до {year} года",
+    "ubuntuProESMMainDescription": "Обновления безопасности для пакетов Ubuntu Main до {year} года",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -253,7 +253,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Пакеты Universe (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Дополнительные обновления безопасности для более чем 23000 пакетов Ubuntu Universe до {year} года",
+    "ubuntuProESMUniverseDescription": "Дополнительные обновления безопасности для пакетов Ubuntu Universe до {year} года",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
