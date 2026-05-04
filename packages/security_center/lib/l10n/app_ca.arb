@@ -8,8 +8,8 @@
     "snapPermissionReadLabel": "Lectura",
     "snapPermissionExecuteLabel": "Execució",
     "snapPermissionsEnableWarning": "Aquesta és una funció experimental per controlar l'accés als recursos del vostre sistema.",
-    "snapPermissionsEnablingLabel": "S'està habilitant, pot trigar uns segons...",
-    "snapPermissionsDisablingLabel": "S'està desactivant, pot trigar uns segons...",
+    "snapPermissionsEnablingLabel": "S'està activant; pot trigar uns segons…",
+    "snapPermissionsDisablingLabel": "S'està desactivant; pot trigar uns segons…",
     "snapPermissionsExperimentalLabel": "Experimental",
     "snapPermissionsOtherDescription": "Podeu administrar altres permisos a Configuració › Aplicacions.",
     "snapPermissionsPageTitle": "Permisos de l'aplicació",
@@ -21,7 +21,7 @@
             }
         }
     },
-    "snapRulesPageDescription": "Administrar els permisos de {interface} per a {snap} .",
+    "snapRulesPageDescription": "Gestiona els permisos de {interface} per a {snap} .",
     "@snapRulesPageDescription": {
         "placeholders": {
             "interface": {
@@ -50,10 +50,10 @@
     },
     "snapPermissionsEnableTitle": "Exigeix a les aplicacions que demanin permisos al sistema",
     "snapRulesPageEmptyTileLabel": "Encara no hi ha regles",
-    "diskEncryptionPageTitle": "Encriptació de disc",
+    "diskEncryptionPageTitle": "Xifratge del disc",
     "diskEncryptionPageRecoveryKey": "Clau de recuperació",
-    "diskEncryptionPageStoreYourKey": "La clau de recuperació et permet recuperar l'accés a les teves dades si el teu disc no es desbloqueja durant l'arrencada. Deseu-lo en un lloc segur.",
-    "diskEncryptionPageStoreYourKeyWithLink": "La clau de recuperació et permet recuperar l'accés a les teves dades si el teu disc no es desbloqueja durant l'arrencada. Deseu-lo en un lloc segur. {learnMoreLink}",
+    "diskEncryptionPageStoreYourKey": "La clau de recuperació us permet recuperar l'accés a les vostres dades si el disc no es desbloca durant l'arrencada. Deseu-la en un lloc segur.",
+    "diskEncryptionPageStoreYourKeyWithLink": "La clau de recuperació us permet recuperar l'accés a les vostres dades si el disc no es desbloca durant l'arrencada. Deseu-la en un lloc segur. {learnMoreLink}",
     "@diskEncryptionPageStoreYourKeyWithLink": {
         "placeholders": {
             "learnMoreLink": {
@@ -63,7 +63,7 @@
     },
     "diskEncryptionPageLearnMore": "Més informació sobre les claus de recuperació",
     "diskEncryptionPageCheckKey": "Comproveu la clau de recuperació ...",
-    "diskEncryptionPageDialogHeaderCheckKey": "Comproveu la recuperació Clau",
+    "diskEncryptionPageDialogHeaderCheckKey": "Comproveu la clau de recuperació",
     "diskEncryptionPageCheck": "Comproveu",
     "diskEncryptionPageValidKey": "Clau vàlida",
     "diskEncryptionPageInvalidKey": "Clau invàlida",
@@ -89,8 +89,8 @@
     "diskEncryptionPageReplaceDialogQRBody": "Escanegeu el codi QR per copiar la clau de recuperació i desar-la en algun lloc segur, com ara un gestor de contrasenyes. També podeu fer una foto per a un ús futur.",
     "diskEncryptionPageClipboardNotification": "Copiat al portaretalls",
     "diskEncryptionPageCopySemanticLabel": "Copia",
-    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "La configuració de l'Encriptació no està disponible",
-    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Ha fallat la recuperació de l'estat d'encriptació d'aquest ordinador.",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Els paràmetres de xifratge no estan disponibles",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Ha fallat la recuperació de l'estat de xifratge d'aquest ordinador.",
     "diskEncryptionPageErrorUnsupportedStateBody": "La configuració TPM del vostre ordinador no està en un estat suportat.",
     "diskEncryptionPageErrorUnsupportedSnapdHeader": "La versió de snapd no té suport",
     "diskEncryptionPageErrorUnsupportedSnapdBody": "Comproveu que el Centre de Seguretat i snapd estan actualitzats.",
@@ -144,5 +144,21 @@
     "recoveryKeyPinEntropyBelowMin": "PIN feble, feu-lo més llarg o menys predictible",
     "recoveryKeyPinEntropyBelowOptimal": "PIN suficient, feu-lo més fort o menys predictible per a una millor seguretat",
     "recoveryKeyPinEntropyOptimal": "El PIN és suficientment llarg",
-    "recoveryKeySomethingWentWrongHeader": "Alguna cosa ha fallat"
+    "recoveryKeySomethingWentWrongHeader": "Alguna cosa ha fallat",
+    "snapPermissionAccessLabel": "Accés",
+    "snapPermissionsErrorTitle": "Ha fallat alguna cosa",
+    "cameraRulesPageEmptyTileLabel": "Cap aplicació ha sol·licitat accés encara",
+    "snapRulesResetAllPermissions": "Reinicialitza tots els permisos",
+    "ubuntuProLivepatchShowTitle": "Mostra l'estat del Livepatch a la barra superior",
+    "ubuntuProLivepatchEnableTitle": "Activa el Livepatch",
+    "ubuntuProLivepatchTitle": "Livepatch per al nucli",
+    "ubuntuProLivepatchEnableDescription": "Apliqueu les actualitzacions de seguretat del nucli mentre el sistema està en funcionament",
+    "cameraInterfacePageTitle": "Càmera",
+    "diskEncryptionPageAddPinDialogSaveButton": "Afegeix",
+    "microphoneInterfacePageTitle": "Micròfon",
+    "ubuntuProTokenLabel": "Testimoni",
+    "ubuntuProDisable": "Desactiva",
+    "ubuntuProEnable": "Activa",
+    "ubuntuProCancel": "Cancel·la",
+    "ubuntuProESMDescription": "ESM proporciona 10 anys de pegats de seguretat per a més de 25.000 paquets de codi obert. Obtingueu una gestió contínua de vulnerabilitats per a CVE crítics, alts i mitjans."
 }

@@ -1,7 +1,7 @@
 {
     "snapdRuleCategoryForeverAllowed": "Permitir siempre",
-    "snapdRuleCategoryForeverDenied": "Rechazar siempre",
-    "snapPermissionReadLabel": "Leer",
+    "snapdRuleCategoryForeverDenied": "Denegar siempre",
+    "snapPermissionReadLabel": "Lectura",
     "snapPermissionsEnableWarning": "Esta es una función experimental para controlar el acceso a los recursos del sistema.",
     "snapPermissionsEnablingLabel": "Activando, esto puede tardar unos pocos segundos...",
     "snapPermissionsDisablingLabel": "Desactivando, esto puede tomar unos pocos segundos…",
@@ -32,8 +32,8 @@
     "appTitle": "Centro de seguridad",
     "snapdRuleCategorySessionDenied": "Denegar hasta cerrar sesión",
     "snapPermissionsEnableTitle": "Exigir a las aplicaciones que pidan permisos al sistema",
-    "snapPermissionWriteLabel": "Escribir",
-    "snapPermissionExecuteLabel": "Ejecutar",
+    "snapPermissionWriteLabel": "Escritura",
+    "snapPermissionExecuteLabel": "Ejecución",
     "snapRulesPageDescription": "Gestionar permisos de {interface} para {snap} .",
     "@snapRulesPageDescription": {
         "placeholders": {
@@ -89,8 +89,8 @@
     "diskEncryptionPageReplaceDialogErrorBody": "Ha habido un error al reemplazar su clave de recuperación. Su vieja clave seguirá siendo válida.",
     "diskEncryptionPageClipboardNotification": "Se copió en el portapapeles",
     "diskEncryptionPageCopySemanticLabel": "Copiar",
-    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "La configuración de la encriptación no está disponible",
-    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Ha fallado la comprobación del estado de encriptado de este equipo.",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "La configuración del cifrado no está disponible",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "No se pudo recuperar el estado de cifrado de este equipo.",
     "diskEncryptionPageErrorUnsupportedStateBody": "La configuración TPM de su equipo no está en un estado soportado.",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "El centro de seguridad no pudo conectarse a la interfaz de snapd",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
@@ -101,7 +101,7 @@
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Para solucionar esto, ejecute este comando en la terminal:",
     "recoveryKeyExceptionDisallowedPathTitle": "El archivo de clave de recuperación no se puede guardar en una ubicación temporal",
     "recoveryKeyExceptionUnknownTitle": "Error desconocido",
-    "snapPermissionAccessLabel": "Acceder",
+    "snapPermissionAccessLabel": "Acceso",
     "diskEncryptionPageDialogHeaderCheckKey": "Comprobar clave de recuperación",
     "diskEncryptionPageReplaceDialogSuccessBody": "Recuerde guardarla en un lugar seguro.",
     "diskEncryptionPageReplaceDialogQRHeader": "Escritorio de Ubuntu - Clave de recuperación de cifrado",
@@ -110,7 +110,7 @@
     "recoveryKeyExceptionFileSystemBody": "No tiene permisos de escritura en esa carpeta. Inténtelo en otra ruta o use otro método.",
     "recoveryKeyFilePickerFilter": "Archivos de texto",
     "recoveryKeyFilePickerTitle": "Guardar archivo de clave de recuperación",
-    "recoveryKeyTPMEnabled": "Está habilitada la encriptación con soporte de hardware",
+    "recoveryKeyTPMEnabled": "El cifrado mecamático está activado",
     "recoveryKeyPassphraseHeader": "Cambiar la contraseña",
     "recoveryKeyPassphraseButton": "Cambiar la contraseña...",
     "recoveryKeyPassphraseCurrent": "Contraseña actual",
@@ -143,8 +143,8 @@
     "recoveryKeyPinEntropyOptimal": "La longitud del PIN es suficiente",
     "recoveryKeySomethingWentWrongHeader": "Ha habido algún error",
     "recoveryKeyExceptionDisallowedPathBody": "Pruebe una ubicación diferente, como una unidad extraíble, o use otro método.",
-    "recoveryKeyTPMExplanationBody": "Las claves de encriptación se almacenan en el módulo de plataforma de confianza (TPM) del ordenador.",
-    "recoveryKeyTPMExplanationLearnMore": "Más información sobre la encriptación con soporte de hardware",
+    "recoveryKeyTPMExplanationBody": "Las claves de cifrado se almacenan en el módulo de plataforma seguro (TPM) del equipo.",
+    "recoveryKeyTPMExplanationLearnMore": "Más información sobre el cifrado mecamático",
     "recoveryKeyPassphraseEnabled": "La contraseña de encriptación está activada",
     "recoveryKeyPassphraseBody": "Necesita introducir su frase de paso cada vez que su equipo arranque.",
     "recoveryKeyPinBody": "Necesita introducir su PIN cada vez que su equipo inicie.",
@@ -245,5 +245,26 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "snapPermissionsErrorTitle": "Ocurrió un problema",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Instala paquetes validados ante FIPS 140-2. No se actualizarán hasta la próxima recertificación.",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Instala paquetes validados ante FIPS 140-2 y permite actualizaciones de seguridad periódicas.",
+    "ubuntuProEnableTokenSubtitle": "Desde su administrador de TI o desde {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Obtenga un token de Ubuntu Pro desde su administrador o desde {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProComplianceDisclaimer": "Solo se recomienda para asistir con requisitos de FedRAMP, HIPAA y otros estándares de cumplimiento y seguridad.",
+    "ubuntuProComplianceFIPSDescription": "Certificación de módulos criptográficos de los gobiernos de EE. UU. y Canadá sobre el cumplimiento del estándar de protección de datos FIPS 140-2."
 }

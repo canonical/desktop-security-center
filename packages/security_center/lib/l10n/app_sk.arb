@@ -15,7 +15,7 @@
     "snapPermissionReadLabel": "Čítanie",
     "snapPermissionExecuteLabel": "Spúšťanie",
     "snapPermissionWriteLabel": "Zápis",
-    "snapRulesCount": "{n, plural, =0{žiadne pravidlá} =1{pravidlo (1)} other{pravidlá ({n})}}",
+    "snapRulesCount": "{n, plural, =0{žiadne pravidlá} =1{1 pravidlo} few{{n} pravidlá} other{{n} pravidiel}}",
     "@snapRulesCount": {
         "placeholders": {
             "n": {
@@ -27,7 +27,7 @@
     "snapRulesRemoveAll": "Odstrániť všetky pravidlá",
     "homeInterfacePageTitle": "Domovský priečinok",
     "homeInterfacePageDescription": "Spravujte oprávnenia na prístup k súborom v domovskom priečinku.",
-    "interfaceSnapCount": "{n, plural, =0{žiadne aplikácie} =1{aplikácia (1)} other {aplikácie ({n})}}",
+    "interfaceSnapCount": "{n, plural, =0 {žiadne aplikácie} =1 {1 aplikácia} few {{n} aplikácie} other {{n} aplikácií}}",
     "@interfaceSnapCount": {
         "placeholders": {
             "n": {
@@ -77,16 +77,16 @@
     "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop – obnovovací kľúč pre šifrovanie",
     "diskEncryptionPageClipboardNotification": "Skopírované do schránky",
     "recoveryKeyExceptionUnknownTitle": "Neznáma chyba",
-    "recoveryKeyExceptionFileSystemBody": "Nemáte oprávnenie zapisovať do tohto priečinka. Skúste iné umiestnenie alebo použite inú metódu.",
-    "recoveryKeyFilePickerTitle": "Uložiť súbor obnovovacieho kľúča",
+    "recoveryKeyExceptionFileSystemBody": "Nemáte oprávnenie na zápis do tohto priečinka. Skúste iné umiestnenie alebo použite inú metódu.",
+    "recoveryKeyFilePickerTitle": "Uložiť súbor kľúča na obnovenie",
     "recoveryKeyFilePickerFilter": "Textové súbory",
-    "recoveryKeyExceptionDisallowedPathTitle": "Súbor s obnovovacím kľúčom sa nedá uložiť do dočasného priečinka",
-    "recoveryKeyExceptionDisallowedPathBody": "Skúste iné umiestnenie, napríklad vymeniteľnú jednotku, alebo použite inú metódu.",
+    "recoveryKeyExceptionDisallowedPathTitle": "Súbor kľúča na obnovenie nemožno uložiť do dočasného umiestnenia",
+    "recoveryKeyExceptionDisallowedPathBody": "Skúste iné umiestnenie, napríklad vymeniteľný disk, alebo použite inú metódu.",
     "diskEncryptionPageReplaceButton": "Vymeniť obnovovací kľúč...",
     "diskEncryptionPageReplaceDialogSuccessBody": "Nezabudnite ho uložiť na bezpečné miesto.",
     "diskEncryptionPageReplaceDialogErrorBody": "Pri výmene obnovovacieho kľúča nastala chyba, váš starý kľúč zostáva platný.",
     "diskEncryptionPageReplaceDialogQRBody": "Naskenujte QR kód na skopírovanie obnovovacieho kľúča a uložte ho na bezpečné miesto, napríklad do správcu hesiel. Môžete si tiež vytvoriť fotku obrazovky na neskoršie použitie.",
-    "recoveryKeyExceptionFileSystemTitle": "Súbor s obnovovacím kľúčom nebol uložený",
+    "recoveryKeyExceptionFileSystemTitle": "Súbor kľúča na obnovenie nebol uložený",
     "diskEncryptionPageCopySemanticLabel": "Kopírovať",
     "recoveryKeyPassphraseEnabled": "Šifrovanie prístupovou frázou je zapnuté",
     "recoveryKeyPassphraseHeader": "Zmena prístupovej frázy",
@@ -265,5 +265,6 @@
     "ubuntuProLivepatchTitle": "Kernel Livepatch",
     "ubuntuProLivepatchEnableTitle": "Aktivovať Livepatch",
     "ubuntuProLivepatchEnableDescription": "Aplikovať bezpečnostné aktualizácie jadra počas behu systému",
-    "ubuntuProLivepatchShowTitle": "Zobraziť stav Livepatch v hornej lište"
+    "ubuntuProLivepatchShowTitle": "Zobraziť stav Livepatch v hornej lište",
+    "snapPermissionsErrorTitle": "Niečo sa pokazilo"
 }
