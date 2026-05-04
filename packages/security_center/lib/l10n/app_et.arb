@@ -233,7 +233,7 @@
     "ubuntuProComplianceDisclaimer": "Soovitatud kasutamiseks FedRAMP-i, HIPAA või muude sarnaste tugevdus- ja vastavusnõuete puhul.",
     "ubuntuProComplianceUSGTitle": "Ubuntu turvajuhend (Ubuntu Security Guide - USG)",
     "ubuntuProESMUniverseTitle": "Universe'i paketid (esm-rakendused)",
-    "ubuntuProESMUniverseDescription": "23000 Ubuntu Universe'i paketi täiendavad turvauuendused kuni {year}. aastani",
+    "ubuntuProESMUniverseDescription": "Ubuntu Universe'i pakettide täiendavad turvauuendused kuni {year}. aastani",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
@@ -241,7 +241,7 @@
             }
         }
     },
-    "ubuntuProESMMainDescription": "2300 Ubuntu Main'i paketi täiendavad turvauuendused kuni {year}. aastani",
+    "ubuntuProESMMainDescription": "Ubuntu Main'i pakettide turvauuendused kuni {year}. aastani",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -254,7 +254,7 @@
     "ubuntuProLivepatchEnableTitle": "Võta Livepatch kasutusele",
     "ubuntuProLivepatchEnableDescription": "Paigalda süsteemi kerneli turvauuendused töö ajal (i.e. ilma taaskäivitamata)",
     "ubuntuProLivepatchShowTitle": "Näita Livepatchi olekut ülaribal",
-    "ubuntuProESMDescription": "ESM tagab 10 aastat turvaparandusi enam kui 25000-le avatud lähtekoodiga paketile. Saad oma arvutile pidevat haavatavuste haldamist kriitilise, kõrge ja keskmise riskitasemega CVE-de jaoks.",
+    "ubuntuProESMDescription": "ESM tagab 10 aastat turvaparandusi kogu Ubuntu Arhiivile. Saad oma arvutile pidevat haavatavuste haldamist kriitilise, kõrge ja valitud keskmise riskitasemega CVE-de jaoks.",
     "ubuntuProESMTitle": "Laiemad turvaparandused (Expanded Security Maintenance - ESM)",
     "ubuntuProComplianceDocumentation": "Turvalisuse vastavusnõuete dokumentatsioon",
     "ubuntuProComplianceUSGDescription": "Automatiseerib turvalisuse tugevdamist ja auditeerimist CIS-i võrdlusaluste ja DISA-STIG-profiilide abil, võimaldades samal ajal süsteemi keskkonnapõhiseid kohandusi.",
