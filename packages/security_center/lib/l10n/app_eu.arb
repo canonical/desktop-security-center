@@ -239,8 +239,8 @@
     "ubuntuProComplianceDocumentation": "Segurtasun-betetzearen dokumentazioa",
     "ubuntuProESMMainTitle": "Pakete nagusiak (esm-infra)",
     "ubuntuProESMTitle": "Segurtasunerako mantentze hedatua (ESM)",
-    "ubuntuProESMDescription": "ESMk 10 urterako segurtasun-adabakiak eskaintzen ditu 25.000 kode irekiko pakete baino gehiagorentzat. Lortu zaurgarritasunen kudeaketa etengabea, maila kritiko, goren eta ertaineko CVE-entzat.",
-    "ubuntuProESMMainDescription": "Segurtasun-eguneratzeak 2.300 Ubuntuko pakete nagusirentzat {year} urtera arte",
+    "ubuntuProESMDescription": "ESMk 10 urterako segurtasun-adabakiak eskaintzen ditu Ubunturen artxibo osoarentzat. Lortu zaurgarritasunen kudeaketa etengabea, maila kritiko edo goreneko eta zenbait maila ertaineko CVE-entzat.",
+    "ubuntuProESMMainDescription": "Segurtasun-eguneratzeak Ubuntuko pakete nagusientzat {year} urtera arte",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -249,7 +249,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Universe paketeak (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Segurtasun-eguneratze gehigarriak 23.000 Ubuntu Universe pakete baino gehiagorentzat {year} urtera arte",
+    "ubuntuProESMUniverseDescription": "Segurtasun-eguneratze gehigarriak Ubuntu Universe paketeentzat {year} urtera arte",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
