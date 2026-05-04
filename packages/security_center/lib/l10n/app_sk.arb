@@ -243,9 +243,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Nainštaluje balíky validované podľa FIPS 140‑2, ktoré sa nebudú aktualizovať až do ďalšej recertifikácie.",
     "ubuntuProComplianceDocumentation": "Dokumentácia k bezpečnostným štandardom",
     "ubuntuProESMTitle": "Rozšírená údržba zabezpečenia (ESM)",
-    "ubuntuProESMDescription": "ESM poskytuje 10 rokov bezpečnostných aktualizácií pre viac než 25 000 open‑source balíkov a priebežnú správu zraniteľností pre kritické, vysoké a stredné CVE.",
+    "ubuntuProESMDescription": "ESM poskytuje bezpečnostné opravy na 10 rokov pre celý Archív Ubuntu. Získajte nepretržité riadenie zraniteľností pre kritické, vysoké a vybrané stredné CVE.",
     "ubuntuProESMMainTitle": "Hlavné balíky (esm‑infra)",
-    "ubuntuProESMMainDescription": "Bezpečnostné aktualizácie pre 2 300 balíkov z Ubuntu Main do roku {year}",
+    "ubuntuProESMMainDescription": "Bezpečnostné aktualizácie pre balíky Ubuntu Main do roku {year}",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -254,7 +254,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Balíky Universe (esm‑apps)",
-    "ubuntuProESMUniverseDescription": "Dodatočné bezpečnostné aktualizácie pre viac než 23 000 balíkov z Ubuntu Universe do roku {year}",
+    "ubuntuProESMUniverseDescription": "Dodatočné bezpečnostné aktualizácie pre balíky Ubuntu Universe do roku {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
