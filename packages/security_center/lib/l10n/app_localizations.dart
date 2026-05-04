@@ -1343,7 +1343,7 @@ abstract class AppLocalizations {
   /// No description provided for @ubuntuProESMDescription.
   ///
   /// In en, this message translates to:
-  /// **'ESM provides 10 years of security patches for 25,000+ open source packages. Get continuous vulnerability management for critical, high, and medium CVEs.'**
+  /// **'ESM provides 10 years of security patches for the entire Ubuntu Archive. Get continuous vulnerability management for critical, high and selected medium CVEs.'**
   String get ubuntuProESMDescription;
 
   /// No description provided for @ubuntuProESMMainTitle.
@@ -1355,7 +1355,7 @@ abstract class AppLocalizations {
   /// No description provided for @ubuntuProESMMainDescription.
   ///
   /// In en, this message translates to:
-  /// **'Security updates for 2,300 Ubuntu Main package until {year}'**
+  /// **'Security updates for Ubuntu Main packages until {year}'**
   String ubuntuProESMMainDescription(int year);
 
   /// No description provided for @ubuntuProESMUniverseTitle.
@@ -1367,7 +1367,7 @@ abstract class AppLocalizations {
   /// No description provided for @ubuntuProESMUniverseDescription.
   ///
   /// In en, this message translates to:
-  /// **'Additional security updates for over 23,000 Ubuntu Universe packages until {year}'**
+  /// **'Additional security updates for Ubuntu Universe packages until {year}'**
   String ubuntuProESMUniverseDescription(int year);
 
   /// No description provided for @ubuntuProLivepatchTitle.
