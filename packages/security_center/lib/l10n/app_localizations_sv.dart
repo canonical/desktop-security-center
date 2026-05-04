@@ -605,6 +605,10 @@ class AppLocalizationsSv extends AppLocalizations {
       'Att inaktivera Ubuntu Pro kommer att koppla bort din prenumeration från den här datorn. Vill du fortsätta?';
 
   @override
+  String get ubuntuProDisableError =>
+      'Could not disable Ubuntu Pro. Please try again.';
+
+  @override
   String get ubuntuProEnable => 'Aktivera';
 
   @override

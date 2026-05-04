@@ -60,6 +60,13 @@ class DetachDialog extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(l10n.ubuntuProDisablePrompt),
+            if (provider.state is UbuntuProAttachStateError) ...[
+              const SizedBox(height: 8),
+              YaruInfoBox(
+                subtitle: Text(l10n.ubuntuProDisableError),
+                yaruInfoType: YaruInfoType.danger,
+              ),
+            ],
           ],
         ),
       ),

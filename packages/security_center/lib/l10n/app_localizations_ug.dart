@@ -605,6 +605,10 @@ class AppLocalizationsUg extends AppLocalizations {
       'Ubuntu Pro نى چەكلىسىڭىز بۇ كومپيۇتېردىكى مۇشتەرىلىكىڭىز توختايدۇ. داۋاملاشتۇرامسىز؟';
 
   @override
+  String get ubuntuProDisableError =>
+      'Could not disable Ubuntu Pro. Please try again.';
+
+  @override
   String get ubuntuProEnable => 'قوزغات';
 
   @override
