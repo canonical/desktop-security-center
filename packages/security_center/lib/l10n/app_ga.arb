@@ -241,9 +241,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Suiteálann sé pacáistí bailíochtaithe FIPS 140-2. Ní dhéanfar iad seo a nuashonrú go dtí an chéad athdheimhniú eile.",
     "ubuntuProComplianceDocumentation": "Doiciméadú comhlíontachta slándála",
     "ubuntuProESMTitle": "Cothabháil Slándála Leathnaithe (ESM)",
-    "ubuntuProESMDescription": "Soláthraíonn ESM paistí slándála 10 mbliana do bhreis is 25,000 pacáiste foinse oscailte. Faigh bainistíocht leanúnach leochaileachta do CVEanna criticiúla, arda agus meánacha.",
+    "ubuntuProESMDescription": "Soláthraíonn ESM paistí slándála 10 mbliana do Chartlann Ubuntu ar fad. Faigh bainistíocht leanúnach leochaileachta do CVEanna criticiúla, arda agus meánmhéide roghnaithe.",
     "ubuntuProESMMainTitle": "Príomhphacáistí (esm-infra)",
-    "ubuntuProESMMainDescription": "Nuashonruithe slándála do phríomhphacáiste 2,300 Ubuntu go dtí {year}",
+    "ubuntuProESMMainDescription": "Nuashonruithe slándála do phacáistí príomhúla Ubuntu go dtí {year}",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -252,7 +252,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Pacáistí Cruinne (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Nuashonruithe slándála breise do bhreis is 23,000 pacáiste Ubuntu Universe go dtí {year}",
+    "ubuntuProESMUniverseDescription": "Nuashonruithe slándála breise do phacáistí Ubuntu Universe go dtí {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
