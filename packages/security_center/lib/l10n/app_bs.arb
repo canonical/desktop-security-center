@@ -115,5 +115,19 @@
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Ako zaboravite lozinku, možete ponovo dobiti pristup disku pomoću ključa za oporavak.",
     "diskEncryptionPageAdditionalSecurityHeader": "Dodatna sigurnost",
     "diskEncryptionPageAdditionalSecurityBody": "Možete postaviti lozinku ili PIN za dodatnu sigurnost. Morat ćete ga unijeti svaki put kada se računar pokrene.",
-    "diskEncryptionPageAdditionalSecurityLearnMore": "Saznaj više"
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Saznaj više",
+    "diskEncryptionPageAddPinDialogSaveButton": "Dodaj",
+    "diskEncryptionPageRemovePinButton": "Ukloni PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Ukloni frazu lozinke...",
+    "diskEncryptionPageAddingPin": "Dodavanje PIN-a, ovo može potrajati nekoliko sekundi...",
+    "diskEncryptionPageAddingPassphrase": "Dodavanje fraze lozinke, ovo može potrajati nekoliko sekundi...",
+    "diskEncryptionPageRemovingPin": "Uklanjanje PIN-a, ovo može potrajati nekoliko sekundi...",
+    "diskEncryptionPageRemovingPassphrase": "Uklanjanje fraze lozinke, ovo može potrajati nekoliko sekundi...",
+    "recoveryKeyExceptionFileSystemTitle": "Datoteka ključa za oporavak nije sačuvana",
+    "recoveryKeyExceptionDisallowedPathTitle": "Datoteka ključa za oporavak ne može se spremiti na privremenu lokaciju",
+    "recoveryKeyExceptionUnknownTitle": "Nepoznata greška",
+    "recoveryKeyExceptionFilePermissionTitle": "Nije uspjelo spremanje ključa za oporavak u datoteku",
+    "recoveryKeyExceptionFilePermissionBody": "Nemate dozvolu za pisanje na tu lokaciju datoteke.",
+    "recoveryKeyExceptionFileSystemBody": "Nemate dozvolu za pisanje u tu mapu. Pokušajte s drugom lokacijom ili koristite drugu metodu.",
+    "recoveryKeyExceptionDisallowedPathBody": "Pokušajte s drugom lokacijom, kao što je prenosivi disk, ili koristite drugu metodu."
 }
