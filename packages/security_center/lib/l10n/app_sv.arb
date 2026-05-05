@@ -243,9 +243,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Installerar FIPS 140-2-validerade paket. Dessa kommer inte att uppdateras förrän vid nästa omcertifiering.",
     "ubuntuProComplianceDocumentation": "Dokumentation om säkerhetsefterlevnad",
     "ubuntuProESMTitle": "Expanderat säkerhetsunderhåll (ESM)",
-    "ubuntuProESMDescription": "ESM ger 10 år av säkerhetsfixar för 25 000+ öppna programvarupaket. Få kontinuerlig sårbarhetshantering för kritiska, höga och mellanhöga CVE:er.",
+    "ubuntuProESMDescription": "ESM ger 10 år av säkerhetsfixar för Ubuntus hela arkiv. Få kontinuerlig sårbarhetshantering för kritiska, höga och utvalda mellanhöga CVE:er.",
     "ubuntuProESMMainTitle": "Main-paket (esm-infra)",
-    "ubuntuProESMMainDescription": "Säkerhetsuppdateringar för 2 300 Ubuntu Main-paket fram till {year}",
+    "ubuntuProESMMainDescription": "Säkerhetsuppdateringar för Ubuntu Main-paket fram till {year}",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -254,7 +254,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Universe-paket (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Ytterligare säkerhetsuppdateringar för över 23000 Ubuntu Universe-paket fram till {year}",
+    "ubuntuProESMUniverseDescription": "Ytterligare säkerhetsuppdateringar för Ubuntu Universe-paket fram till {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
