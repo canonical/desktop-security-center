@@ -241,9 +241,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Installiert FIPS 140-2-validierte Pakete. Diese werden bis zur nächsten Rezertifizierung nicht aktualisiert.",
     "ubuntuProComplianceDocumentation": "Dokumentation zur Einhaltung von Sicherheitsvorschriften",
     "ubuntuProESMTitle": "Erweiterte Sicherheitswartung (ESM)",
-    "ubuntuProESMDescription": "ESM bietet 10 Jahre lang Sicherheitspatches für über 25.000 Open-Source-Pakete. Profitieren Sie von kontinuierlichem Schwachstellenmanagement für kritische, hohe und mittlere CVEs.",
+    "ubuntuProESMDescription": "ESM stellt 10 Jahre lang Sicherheitspatches für das gesamte Ubuntu-Archiv bereit. Profitieren Sie von einem kontinuierlichen Schwachstellenmanagement für kritische, hohe und ausgewählte mittlere CVEs.",
     "ubuntuProESMMainTitle": "Hauptpakete (esm-infra)",
-    "ubuntuProESMMainDescription": "Sicherheitsaktualisierungen für 2300 Ubuntu-Hauptpakete bis {year}",
+    "ubuntuProESMMainDescription": "Sicherheitsaktualisierungen für Ubuntu-Hauptpakete bis {year}",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -252,7 +252,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Universe-Pakete (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Zusätzliche Sicherheitsaktualisierungen für über 23.000 Ubuntu-Universe-Pakete bis {year}",
+    "ubuntuProESMUniverseDescription": "Zusätzliche Sicherheitsaktualisierungen für Ubuntu-Universe-Pakete bis {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
