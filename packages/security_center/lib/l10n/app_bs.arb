@@ -16,7 +16,7 @@
     "snapPermissionsOtherDescription": "Ostalim dozvolama možete upravljati u Postavke › Aplikacije.",
     "snapPermissionsPageTitle": "Dozvole aplikacije",
     "snapPermissionsErrorTitle": "Nešto je pošlo po zlu",
-    "snapRulesCount": "{n, plural, =0{no rules} =1{1 rule} ostalo{{n} rules}}",
+    "snapRulesCount": "{n, plural, =0{no rules} =1{1 rule} other{{n} rules}}",
     "@snapRulesCount": {
         "placeholders": {
             "n": {
