@@ -264,5 +264,6 @@
     "ubuntuProLivepatchTitle": "Kernel Livepatch",
     "ubuntuProLivepatchEnableTitle": "Activar Livepatch",
     "ubuntuProLivepatchEnableDescription": "Aplicar as actualizacións de seguranza do kernel mentres o sistema se executa",
-    "ubuntuProLivepatchShowTitle": "Mostrar o estado de Livepatch na barra superior"
+    "ubuntuProLivepatchShowTitle": "Mostrar o estado de Livepatch na barra superior",
+    "snapPermissionsErrorTitle": "Algo fallou"
 }
