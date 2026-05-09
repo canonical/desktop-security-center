@@ -212,7 +212,7 @@
     "ubuntuProLivepatchEnableDescription": "ბირთვის უსაფრთხოების განახლებების გადატარება სისტემის გამორთვის გარეშე",
     "ubuntuProNotSupported": "Ubuntu-ის ამ ვერსიისთვის Ubuntu ხელმისაწვდომი არაა",
     "ubuntuProNotSupportedSnapd": "snapd-ის ამ ვერსიას Ubuntu Pro-ის მხარდაჭერა არ გააჩნია",
-    "ubuntuProESMMainDescription": "უსაფრთხოების განახლებები 2300 Ubuntu-ის მთავარი პაკეტისთვის {year}-მდე",
+    "ubuntuProESMMainDescription": "უსაფრთხოების განახლებები Ubuntu-ის მთავარი პაკეტებისთვის {year}-მდე",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -231,7 +231,7 @@
     },
     "ubuntuProComplianceFIPSDisclaimer": "FIPS-ის ჩართვა შეუქცევადია და Livepatch სამუდამოდ გაითიშება.",
     "ubuntuProComplianceFIPSUpdatesDescription": "დააყენებს FIPS 140-2-ით გადამოწმებულ პაკეტებს და საშუალებას იძლევა, უსაფრთხოება რეგულარულად განახლდეს.",
-    "ubuntuProESMUniverseDescription": "დამატებითი უსაფრთხოების განახლებები 23000-ზე მეტი Ubuntu Universe-ის პაკეტებისთვის {year}-მდე",
+    "ubuntuProESMUniverseDescription": "დამატებითი უსაფრთხოების განახლებები Ubuntu Universe-ის პაკეტებისთვის {year}-მდე",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
@@ -264,5 +264,6 @@
     "ubuntuProComplianceUSGDescription": "ახდენს უსაფრთხოების გაძლიერებისა და აუდიტის ავტომატიზაციას CIS წარმადობის შემოწმებითა და DISA-STIG პროფილით გარემოზე დამოკიდებული ცვლილებების შეტანის საშუალებით.",
     "ubuntuProComplianceFIPSDescription": "აშშ-ისა და კანადის მთავრობების კრიპტოგრაფიული მოდულის სერტიფიკაცია FIPS 140-2 მონაცემების დაცვის სტანდარტებთან თავსებადობის შესახებ.",
     "ubuntuProComplianceFIPSNoUpdatesDescription": "დააყენებს FIPS 140-2-ით გადამოწმებულ პაკეტებს. ესენი არ განახლდება შემდეგ რესერტიფიკაციამდე.",
-    "ubuntuProESMDescription": "ESM მოგაწვდით 10-წლიან უსაფრთხოების პაჩებს 25000+ ღია კოდის მქონე პაკეტისტვის. მიიღეთ უწყვეტი მოწყვლადობის მართვა კრიტიკული, მაღალი და საშუალო CVE-ებისთვის."
+    "ubuntuProESMDescription": "ESM მოგაწვდით 10-წლიან უსაფრთხოების Ubuntu-ის სრული არქივისთვის. მიიღეთ უწყვეტი მოწყვლადობის მართვა კრიტიკული, მაღალი და საშუალო CVE-ებისთვის.",
+    "snapPermissionsErrorTitle": "რაღაც არასწორია"
 }
