@@ -604,6 +604,10 @@ class AppLocalizationsEt extends AppLocalizations {
       'Ubuntu Pro kasutuselt eemaldamisel eemaldatakse sellest masinast ka vastav tellimus. Kas sa soovid jätkata?';
 
   @override
+  String get ubuntuProDisableError =>
+      'Could not disable Ubuntu Pro. Please try again.';
+
+  @override
   String get ubuntuProEnable => 'Lülita sisse';
 
   @override

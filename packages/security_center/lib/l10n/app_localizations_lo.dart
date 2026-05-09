@@ -595,6 +595,10 @@ class AppLocalizationsLo extends AppLocalizations {
       'ການປິດໃຊ້ງານ Ubuntu Pro ຈະເປັນການຍົກເລີກການເຊື່ອມຕໍ່ການສະໝັກໃຊ້ຈາກເຄື່ອງນີ້. ທ່ານຕ້ອງການດຳເນີນການຕໍ່ຫຼືບໍ່?';
 
   @override
+  String get ubuntuProDisableError =>
+      'Could not disable Ubuntu Pro. Please try again.';
+
+  @override
   String get ubuntuProEnable => 'ເປີດໃຊ້ງານ';
 
   @override

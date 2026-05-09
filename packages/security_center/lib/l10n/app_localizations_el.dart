@@ -617,6 +617,10 @@ class AppLocalizationsEl extends AppLocalizations {
       'Η απενεργοποίηση του Ubuntu Pro θα αποσυνδέσει τη συνδρομή σας από αυτό το μηχάνημα. Θέλετε να συνεχίσετε;';
 
   @override
+  String get ubuntuProDisableError =>
+      'Could not disable Ubuntu Pro. Please try again.';
+
+  @override
   String get ubuntuProEnable => 'Ενεργοποίηση';
 
   @override

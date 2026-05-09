@@ -609,6 +609,10 @@ class AppLocalizationsEu extends AppLocalizations {
       'Ubuntu Pro ezgaitzen baduzu, makina hau harpidetzatik askatuko du. Jarraitu nahi duzu?';
 
   @override
+  String get ubuntuProDisableError =>
+      'Could not disable Ubuntu Pro. Please try again.';
+
+  @override
   String get ubuntuProEnable => 'Gaitu';
 
   @override
