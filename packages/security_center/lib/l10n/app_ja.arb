@@ -249,5 +249,22 @@
     "ubuntuProLivepatchTitle": "カーネルLivepatch",
     "ubuntuProLivepatchEnableTitle": "Livepatchを有効化",
     "ubuntuProLivepatchEnableDescription": "システムの実行中にカーネルのセキュリティアップデートを適用",
-    "ubuntuProLivepatchShowTitle": "Livepatchステータスをトップバーに表示"
+    "ubuntuProLivepatchShowTitle": "Livepatchステータスをトップバーに表示",
+    "snapPermissionsErrorTitle": "何らかの問題が発生しました",
+    "interfaceSnapCount": "{n, plural, =0{アプリなし} =1{1個のアプリ} other {{n}個のアプリ}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesCount": "{n, plural, =0{ルールなし} =1{1個のルール} other{{n}個のルール}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    }
 }
