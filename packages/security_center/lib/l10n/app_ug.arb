@@ -229,5 +229,6 @@
     "ubuntuProFeatureDisableError": "بۇ ئىقتىدارنى چەكلىيەلمەيدۇ، قايتا سىناڭ.",
     "ubuntuProCompliance": "ماسلاشتۇرۇش ۋە كۈچەيتىش",
     "ubuntuProComplianceDisclaimer": "پەقەت FedRAMP، HIPAA ۋە باشقا ماسلىشىش ۋە كۈچەيتىش تەلەپلىرى ئارقىلىق ياردەم بېرىش تەۋسىيە قىلىنىدۇ.",
-    "ubuntuProComplianceUSGTitle": "Ubuntu بىخەتەرلىك قوللانمىسى (USG)"
+    "ubuntuProComplianceUSGTitle": "Ubuntu بىخەتەرلىك قوللانمىسى (USG)",
+    "snapPermissionsErrorTitle": "خاتالىق كۆرۈلدى"
 }
