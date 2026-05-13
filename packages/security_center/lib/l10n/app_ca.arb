@@ -159,5 +159,111 @@
     "ubuntuProDisable": "Desactiva",
     "ubuntuProEnable": "Activa",
     "ubuntuProCancel": "Cancel·la",
-    "ubuntuProESMDescription": "ESM proporciona 10 anys de pegats de seguretat per a més de 25.000 paquets de codi obert. Obtingueu una gestió contínua de vulnerabilitats per a CVE crítics, alts i mitjans."
+    "ubuntuProESMDescription": "ESM proporciona 10 anys de pegats de seguretat per a més de 25.000 paquets de codi obert. Obtingueu una gestió contínua de vulnerabilitats per a CVE crítics, alts i mitjans.",
+    "cameraInterfacePageDescription": "Permet que les apps accedeixin a les teves càmeres.",
+    "microphoneInterfacePageDescription": "Permet que les aplicacions accedeixin al micròfon.",
+    "diskEncryptionPageAddPinButton": "Afegeix un PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Afegeix una contrasenya...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Afegeix una contrasenya",
+    "diskEncryptionPageAddPinDialogHeading": "Afegeix un PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "Hauràs d'introduir el teu PIN cada vegada que comenci el teu ordinador. Aquest PIN és diferent de la contrasenya d'usuari.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Si oblideu el PIN, podeu recuperar l'accés al disc utilitzant la clau de recuperació.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Haureu d'introduir la contrasenya cada vegada que s'iniciï l'ordinador. Aquesta contrasenya és diferent de la contrasenya d'usuari.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Si oblideu la contrasenya, podeu recuperar l'accés al disc utilitzant la clau de recuperació.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Seguretat addicional",
+    "diskEncryptionPageAdditionalSecurityBody": "Podeu establir una contrasenya o un PIN per a seguretat addicional. Haureu d'introduir-lo cada vegada que comenci l'ordinador.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Més informació",
+    "diskEncryptionPageRemovePinButton": "Elimina el PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Elimina la contrasenya...",
+    "diskEncryptionPageAddingPin": "Afegint PIN, això pot trigar uns segons...",
+    "diskEncryptionPageAddingPassphrase": "S'està afegint una contrasenya, això pot trigar uns segons...",
+    "diskEncryptionPageRemovingPin": "S'està suprimint el PIN, això pot trigar uns segons...",
+    "diskEncryptionPageRemovingPassphrase": "S'està suprimint la contrasenya, això pot trigar uns segons...",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro no està disponible per a aquesta versió d'Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro requereix un llançament LTS",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro no és compatible amb aquesta versió ajustada",
+    "ubuntuProNotSupportedSnapdDetails": "Actualització ajustada per gestionar l'Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro està habilitat",
+    "ubuntuProDisabled": "Seguretat de grau empresarial i compliment per al seu ordinador. Sempre lliure per a ús personal. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Més informació sobre Ubuntu Pro",
+    "ubuntuProEnablePro": "Habilita l'Ubuntu Pro",
+    "ubuntuProEnableMagic": "Habilita amb el compte d'Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Podràs crear un compte de forma gratuïta",
+    "ubuntuProMagicPrompt": "Inicieu sessió amb el vostre compte d'Ubuntu One o creeu-ne un de forma gratuïta.",
+    "ubuntuProMagicContinueInBrowser": "Continua en el navegador",
+    "ubuntuProMagicDescription": "També podeu iniciar sessió a {attachLink} i introduir el codi {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "No s'ha pogut habilitar l'Ubuntu Pro, torneu-ho a provar",
+    "ubuntuProEnableToken": "Habilita amb un testimoni",
+    "ubuntuProEnableTokenError": "No s'ha pogut habilitar l'Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Des de l'administrador de TI o des de {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Obteniu un testimoni d'Ubuntu Pro del vostre administrador o de {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProDisablePro": "Desactiva Ubuntu Pro",
+    "ubuntuProDisablePrompt": "Desactivant Ubuntu Pro se separarà la vostra subscripció d'aquesta màquina. Voleu continuar?",
+    "ubuntuProFeatureEnableError": "No s'ha pogut habilitar la característica. Torneu-ho a provar.",
+    "ubuntuProFeatureDisableError": "No s'ha pogut desactivar la funció. Torneu-ho a provar.",
+    "ubuntuProCompliance": "Compliment i enduriment",
+    "ubuntuProComplianceDisclaimer": "Només es recomana ajudar amb FedRAMP, HIPAA i altres requisits de compliment i enduriment.",
+    "ubuntuProComplianceUSGTitle": "Guia de seguretat de l'Ubuntu (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatitza l'enduriment i l'auditoria amb perfils de referència CIS i DISA-STIG, alhora que permet personalitzar el medi ambient.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Una certificació del mòdul criptogràfic del govern dels EUA i Canadà de compliment de la norma de protecció de dades FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Habilita els FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "No es pot invertir l'habilitació del FIPS i el Livepatch es desactivarà permanentment.",
+    "ubuntuProComplianceFIPSPrompt": "Trieu la vostra opció FIPS preferida",
+    "ubuntuProComplianceFIPSUpdates": "FIPS amb actualitzacions",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Instal·la paquets validats FIPS 140-2 i permet actualitzacions de seguretat regulars.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS sense actualitzacions",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Instal·la paquets validats FIPS 140-2. Aquestes no s'actualitzaran fins a la següent recertificació.",
+    "ubuntuProComplianceDocumentation": "Documentació de compliment de seguretat",
+    "ubuntuProESMTitle": "Manteniment de Seguretat Ampliada (ESM)",
+    "ubuntuProESMMainTitle": "Paquets principals (esm-infra)",
+    "ubuntuProESMMainDescription": "Actualitzacions de seguretat per als paquets Ubuntu Main fins a {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Paquets d'univers (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Actualitzacions de seguretat addicionals per als paquets Ubuntu Universe fins a {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    }
 }
