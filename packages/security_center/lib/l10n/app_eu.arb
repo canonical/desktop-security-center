@@ -21,7 +21,7 @@
     "snapPermissionsDisablingLabel": "Ezgaitzen, honek segundo batzuk beharko ditu...",
     "snapPermissionsExperimentalLabel": "Esperimentala",
     "snapPermissionsOtherDescription": "Beste baimenak hemendik kudea ditzakezu: Ezarpenak > Aplikazioak.",
-    "snapPermissionsPageTitle": "Aplikazioaren baimenak",
+    "snapPermissionsPageTitle": "Aplikazioen baimenak",
     "snapRulesCount": "{n, plural, =0{araurik ez} =1{arau 1} other{{n} arau}}",
     "@snapRulesCount": {
         "placeholders": {
