@@ -243,9 +243,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Встановлює перевірені пакети FIPS 140-2. Вони не будуть оновлені до наступної пересертифікації.",
     "ubuntuProComplianceDocumentation": "Документація щодо відповідності вимогам безпеки",
     "ubuntuProESMTitle": "Розширене обслуговування безпеки (ESM)",
-    "ubuntuProESMDescription": "ESM надає 10 років виправлень безпеки для понад 25 000 пакетів з відкритим кодом. Отримайте безперервне керування вразливостями для критичних, високо- та середнього рівня CVE.",
+    "ubuntuProESMDescription": "ESM забезпечує 10 років випуску патчів безпеки для всього архіву Ubuntu. Отримайте можливість безперервного управління вразливостями для критичних, високих та окремих середніх CVE.",
     "ubuntuProESMMainTitle": "Основні пакети (esm-infra)",
-    "ubuntuProESMMainDescription": "Оновлення безпеки для 2300 основних пакетів Ubuntu до {year}",
+    "ubuntuProESMMainDescription": "Оновлення безпеки для пакетів Ubuntu Main до {year}",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -254,7 +254,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Пакети Universe (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Додаткові оновлення безпеки для понад 23 000 пакетів Ubuntu Universe до {year}",
+    "ubuntuProESMUniverseDescription": "Додаткові оновлення безпеки для пакетів Ubuntu Universe до {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
@@ -265,5 +265,6 @@
     "ubuntuProLivepatchTitle": "Livepatch для ядра",
     "ubuntuProLivepatchEnableTitle": "Увімкнути Livepatch",
     "ubuntuProLivepatchEnableDescription": "Застосовуйте оновлення безпеки ядра під час роботи системи",
-    "ubuntuProLivepatchShowTitle": "Показати стан Livepatch у верхній панелі"
+    "ubuntuProLivepatchShowTitle": "Показати стан Livepatch у верхній панелі",
+    "snapPermissionsErrorTitle": "Щось пішло не так"
 }

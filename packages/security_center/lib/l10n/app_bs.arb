@@ -1,1 +1,133 @@
-{}
+{
+    "appTitle": "Centar za sigurnost",
+    "snapdRuleCategorySessionAllowed": "Dozvoli do odjave",
+    "snapdRuleCategorySessionDenied": "Zabrani do odjave",
+    "snapdRuleCategoryForeverAllowed": "Dozvoli uvijek",
+    "snapdRuleCategoryForeverDenied": "Uvijek odbij",
+    "snapPermissionReadLabel": "Čitaj",
+    "snapPermissionWriteLabel": "Piši",
+    "snapPermissionExecuteLabel": "Izvrši",
+    "snapPermissionAccessLabel": "Pristup",
+    "snapPermissionsEnableTitle": "Zahtijevaj aplikacije da traže sistemske dozvole",
+    "snapPermissionsEnableWarning": "Ovo je eksperimentalna funkcija za kontrolu pristupa resursima vašeg sistema.",
+    "snapPermissionsEnablingLabel": "Omogućavam, ovo može potrajati nekoliko sekundi...",
+    "snapPermissionsDisablingLabel": "Onemogućujem, ovo može potrajati nekoliko sekundi...",
+    "snapPermissionsExperimentalLabel": "Probno",
+    "snapPermissionsOtherDescription": "Ostalim dozvolama možete upravljati u Postavke › Aplikacije.",
+    "snapPermissionsPageTitle": "Dozvole aplikacije",
+    "snapPermissionsErrorTitle": "Nešto je pošlo po zlu",
+    "snapRulesCount": "{n, plural, =0{no rules} =1{1 rule} other{{n} rules}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "Upravljajte {interface} dozvolama za {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "Još nema pravila",
+    "cameraRulesPageEmptyTileLabel": "Nijedna aplikacija još nije zatražila pristup",
+    "snapRulesRemoveAll": "Ukloni sva pravila",
+    "snapRulesResetAllPermissions": "Poništi sva dopuštenja",
+    "homeInterfacePageTitle": "Početna mapa",
+    "homeInterfacePageDescription": "Upravljajte dozvolama za pristup datotekama u vašoj početnoj mapi.",
+    "cameraInterfacePageTitle": "Kamera",
+    "cameraInterfacePageDescription": "Dozvolite aplikacijama pristup vašim kamerama.",
+    "microphoneInterfacePageTitle": "Mikrofon",
+    "microphoneInterfacePageDescription": "Dozvolite aplikacijama pristup vašem mikrofonu.",
+    "interfacePageTitle": "Upravljaj dozvolama",
+    "interfacePageDescription": "Strogo ograničene aplikacije će vas pitati prije pristupa datotekama i mapama. Ova funkcija je eksperimentalna i podložna promjenama.",
+    "interfacePageLinkLearnMore": "Saznajte više",
+    "interfacePageLinkGiveFeedback": "Dajte povratne informacije",
+    "interfacePageLinkReportIssues": "Prijavi probleme",
+    "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 app} other {{n} apps}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageTitle": "Šifriranje diska",
+    "diskEncryptionPageRecoveryKey": "Ključ za oporavak",
+    "diskEncryptionPageStoreYourKey": "Ključ za oporavak vam omogućava da ponovo pristupite svojim podacima ako se disk ne otključa tokom pokretanja. Sačuvajte ga na sigurnom mjestu.",
+    "diskEncryptionPageStoreYourKeyWithLink": "Ključ za oporavak vam omogućava da ponovo pristupite svojim podacima ako se disk ne otključa tokom pokretanja. Sačuvajte ga na sigurnom mjestu. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "Saznajte više o šifriranju podržanom hardverom",
+    "diskEncryptionPageCheckKey": "Provjerite ključ za oporavak...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Provjerite ključ za oporavak",
+    "diskEncryptionPageCheck": "Provjeri",
+    "diskEncryptionPageValidKey": "Važeći ključ",
+    "diskEncryptionPageInvalidKey": "Nevažeći ključ",
+    "diskEncryptionPageEnterKey": "Unesite svoj ključ za oporavak",
+    "diskEncryptionPageKeyWorks": "Ključ za oporavak radi",
+    "diskEncryptionPageKeyWorksBody": "Zapamtite da ga čuvate na sigurnom mjestu.",
+    "diskEncryptionPageKeyDoesntWork": "Ključ za oporavak ne radi",
+    "diskEncryptionPageKeyDoesntWorkBody": "Provjerite ključ ili ga zamijenite novim.",
+    "diskEncryptionPageError": "Greška",
+    "diskEncryptionPageReplaceButton": "Zamijenite ključ za oporavak...",
+    "diskEncryptionPageReplaceDialogHeader": "Zamijenite ključ za oporavak",
+    "diskEncryptionPageReplaceDialogBody": "Sačuvajte novi ključ za oporavak na sigurnom mjestu. Nakon što ga zamijenite, više nećete moći koristiti stari ključ.",
+    "diskEncryptionPageReplaceDialogShowQR": "Prikaži QR kod",
+    "diskEncryptionPageReplaceDialogSave": "Sačuvaj u datoteku",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Sačuvao/la sam svoj ključ za oporavak na sigurnom mjestu",
+    "diskEncryptionPageReplaceDialogReplace": "Zamijeni",
+    "diskEncryptionPageReplaceDialogDiscard": "Odbaci",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Ključ za oporavak zamijenjen",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Zapamtite da ga čuvate na sigurnom mjestu.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Zamjena ključa za oporavak nije uspjela",
+    "diskEncryptionPageReplaceDialogErrorBody": "Došlo je do greške prilikom postavljanja vašeg ključa za oporavak, vaš stari ključ će ostati važeći.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Ključ za oporavak enkripcije",
+    "diskEncryptionPageReplaceDialogQRBody": "Skenirajte QR kod da biste kopirali ključ za oporavak i sačuvali ga na sigurnom mjestu, kao što je upravitelj lozinki. Također možete snimiti fotografiju za kasniju upotrebu.",
+    "diskEncryptionPageClipboardNotification": "Kopirano u međuspremnik",
+    "diskEncryptionPageCopySemanticLabel": "Kopiraj",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Postavke šifriranja nisu dostupne",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Nije uspjelo preuzeti status šifriranja ovog računara.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "TPM konfiguracija vašeg računara nije u podržanom stanju.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Vaša verzija SnapD-a nije podržana",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Provjerite jesu li Centar za sigurnost i Snapd ažurirani.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Centar za sigurnost ne može se povezati sa Snapd interfejsom",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Da biste ovo popravili, pokrenite ovu naredbu u terminalu:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "diskEncryptionPageAddPinButton": "Dodaj PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Dodaj frazu lozinke...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Dodaj frazu lozinke",
+    "diskEncryptionPageAddPinDialogHeading": "Dodaj PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "Morat ćete unijeti svoj PIN svaki put kada se računar pokrene. Ovaj PIN se razlikuje od vaše korisničke lozinke.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Ako zaboravite PIN, možete ponovo dobiti pristup disku pomoću ključa za oporavak.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Morat ćete unijeti svoju lozinku svaki put kada se računar pokrene. Ova lozinka se razlikuje od vaše korisničke lozinke.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Ako zaboravite lozinku, možete ponovo dobiti pristup disku pomoću ključa za oporavak.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Dodatna sigurnost",
+    "diskEncryptionPageAdditionalSecurityBody": "Možete postaviti lozinku ili PIN za dodatnu sigurnost. Morat ćete ga unijeti svaki put kada se računar pokrene.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Saznaj više",
+    "diskEncryptionPageAddPinDialogSaveButton": "Dodaj",
+    "diskEncryptionPageRemovePinButton": "Ukloni PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Ukloni frazu lozinke...",
+    "diskEncryptionPageAddingPin": "Dodavanje PIN-a, ovo može potrajati nekoliko sekundi...",
+    "diskEncryptionPageAddingPassphrase": "Dodavanje fraze lozinke, ovo može potrajati nekoliko sekundi...",
+    "diskEncryptionPageRemovingPin": "Uklanjanje PIN-a, ovo može potrajati nekoliko sekundi...",
+    "diskEncryptionPageRemovingPassphrase": "Uklanjanje fraze lozinke, ovo može potrajati nekoliko sekundi...",
+    "recoveryKeyExceptionFileSystemTitle": "Datoteka ključa za oporavak nije sačuvana",
+    "recoveryKeyExceptionDisallowedPathTitle": "Datoteka ključa za oporavak ne može se spremiti na privremenu lokaciju",
+    "recoveryKeyExceptionUnknownTitle": "Nepoznata greška",
+    "recoveryKeyExceptionFilePermissionTitle": "Nije uspjelo spremanje ključa za oporavak u datoteku",
+    "recoveryKeyExceptionFilePermissionBody": "Nemate dozvolu za pisanje na tu lokaciju datoteke.",
+    "recoveryKeyExceptionFileSystemBody": "Nemate dozvolu za pisanje u tu mapu. Pokušajte s drugom lokacijom ili koristite drugu metodu.",
+    "recoveryKeyExceptionDisallowedPathBody": "Pokušajte s drugom lokacijom, kao što je prenosivi disk, ili koristite drugu metodu."
+}

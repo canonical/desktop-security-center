@@ -50,7 +50,7 @@
         }
     },
     "homeInterfacePageDescription": "Gérer les autorisations d’accès aux fichiers dans votre dossier personnel.",
-    "diskEncryptionPageTitle": "Chiffrement du disque",
+    "diskEncryptionPageTitle": "Chiffrement disque",
     "diskEncryptionPageLearnMore": "En savoir plus sur le chiffrement assisté par matériel",
     "diskEncryptionPageCheckKey": "Vérification clé de secours...",
     "diskEncryptionPageDialogHeaderCheckKey": "Vérifier clé de secours",
@@ -245,7 +245,7 @@
     "ubuntuProLivepatchShowTitle": "Afficher le statut de Livepatch dans la barre supérieure",
     "ubuntuProPageTitle": "Ubuntu Pro",
     "ubuntuProESMMainTitle": "Principaux paquetages (esm-infra)",
-    "ubuntuProESMMainDescription": "Mises à jour de sécurité pour 2 300 paquetages Ubuntu Main jusqu’en {year}",
+    "ubuntuProESMMainDescription": "Mises à jour de sécurité pour les paquetages Ubuntu Main jusqu’en {year}",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -254,7 +254,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Paquetages d'Universe (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Mises à jour de sécurité supplémentaires pour plus de 23 000 paquetages Ubuntu Universe jusqu’en {year}",
+    "ubuntuProESMUniverseDescription": "Mises à jour de sécurité supplémentaires pour Ubuntu Universe jusqu’en {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
@@ -263,6 +263,7 @@
         }
     },
     "ubuntuProLivepatchEnableDescription": "Appliquer les mises à jour de sécurité du noyau pendant que le système s’exécute",
-    "ubuntuProESMDescription": "ESM fournit 10 ans de correctifs de sécurité pour plus de 25 000 paquetages open source. Obtenez la gestion continue des vulnérabilités pour les CVE critiques, élevées et moyennes.",
-    "ubuntuProComplianceFIPSTitle": "FIPS 140-2"
+    "ubuntuProESMDescription": "ESM fournit 10 ans de correctifs de sécurité pour l'archive Ubuntu entière. Obtenez la gestion continue des vulnérabilités pour les CVEs critiques, élevées et moyennes sélectionnées.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "snapPermissionsErrorTitle": "Quelque chose a mal tourné"
 }

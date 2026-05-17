@@ -56,19 +56,19 @@
     "snapRulesRemoveAll": "すべてのルールを削除",
     "snapRulesResetAllPermissions": "すべてのパーミッションをリセット",
     "diskEncryptionPageCheckKey": "リカバリーキーをチェック...",
-    "diskEncryptionPageDialogHeaderCheckKey": "リカバリーキーをチェック",
+    "diskEncryptionPageDialogHeaderCheckKey": "リカバリーキーのチェック",
     "diskEncryptionPageCheck": "チェック",
     "diskEncryptionPageValidKey": "有効なキー",
     "diskEncryptionPageInvalidKey": "無効なキー",
     "diskEncryptionPageEnterKey": "リカバリーキーを入力",
     "diskEncryptionPageError": "エラー",
-    "diskEncryptionPageReplaceButton": "リカバリーキーを置き換える...",
-    "diskEncryptionPageReplaceDialogHeader": "リカバリーキーを置き換える",
+    "diskEncryptionPageReplaceButton": "リカバリーキーを置き換え...",
+    "diskEncryptionPageReplaceDialogHeader": "リカバリーキーの置き換え",
     "diskEncryptionPageReplaceDialogBody": "新しいリカバリーキーをどこか安全な場所に保存します。いったん置き換えると、古いキーはもう使えなくなります。",
     "diskEncryptionPageReplaceDialogShowQR": "QRコードを表示",
     "diskEncryptionPageReplaceDialogSave": "ファイルに保存",
     "diskEncryptionPageReplaceDialogReplace": "置き換える",
-    "diskEncryptionPageReplaceDialogDiscard": "破棄する",
+    "diskEncryptionPageReplaceDialogDiscard": "取り消す",
     "diskEncryptionPageReplaceDialogSuccessHeader": "リカバリーキーを置き換えました",
     "diskEncryptionPageAddPinButton": "PINを追加...",
     "diskEncryptionPageAddPassphraseButton": "パスフレーズを追加...",
@@ -227,9 +227,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "FIPS 140-2適合パッケージをインストールします。次の再認証までアップデートされません。",
     "ubuntuProComplianceDocumentation": "セキュリティコンプライアンスのドキュメント",
     "ubuntuProESMTitle": "拡張セキュリティメンテンナンス(ESM)",
-    "ubuntuProESMDescription": "ESMは25000を超えるオープンソースパッケージのセキュリティパッチを提供します。CVEの緊急、重要、警告に対する継続した脆弱性管理を獲得できます。",
+    "ubuntuProESMDescription": "ESMはUbuntuアーカイブ全体のセキュリティパッチを提供します。緊急、重要、選ばれた警告レベルのCVEに対して継続的に脆弱性管理を行います。",
     "ubuntuProESMMainTitle": "Mainパッケージ(esm-infra)",
-    "ubuntuProESMMainDescription": "{year} までの2300に渡るUbuntu Mainパッケージのセキュリティアップデート",
+    "ubuntuProESMMainDescription": "{year}年までのUbuntu Mainパッケージのセキュリティアップデート",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -238,7 +238,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Universeパッケージ(esm-apps)",
-    "ubuntuProESMUniverseDescription": "{year} までの23000に渡るUbuntu Universeパッケージの追加セキュリティアップデート",
+    "ubuntuProESMUniverseDescription": "{year}年までのUbuntu Universeパッケージの追加セキュリティアップデート",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
@@ -249,5 +249,22 @@
     "ubuntuProLivepatchTitle": "カーネルLivepatch",
     "ubuntuProLivepatchEnableTitle": "Livepatchを有効化",
     "ubuntuProLivepatchEnableDescription": "システムの実行中にカーネルのセキュリティアップデートを適用",
-    "ubuntuProLivepatchShowTitle": "Livepatchステータスをトップバーに表示"
+    "ubuntuProLivepatchShowTitle": "Livepatchステータスをトップバーに表示",
+    "snapPermissionsErrorTitle": "何らかの問題が発生しました",
+    "interfaceSnapCount": "{n, plural, =0{アプリなし} =1{1個のアプリ} other {{n}個のアプリ}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesCount": "{n, plural, =0{ルールなし} =1{1個のルール} other{{n}個のルール}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    }
 }
