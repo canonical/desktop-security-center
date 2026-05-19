@@ -309,9 +309,14 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   late final _service = getService<DiskEncryptionService>();
+
+  @visibleForTesting
+  static Duration maxRetryDuration = const Duration(minutes: 2);
+  @visibleForTesting
+  static Duration initialRetryDelay = const Duration(seconds: 2);
 
   @override
   Future<TpmAuthState> build() async {
@@ -321,10 +326,25 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
   Future<AuthMode> _fetchCurrentAuthMode() async {
     try {
-      // Check TPM-backed FDE status
-      final storageStatus = await _service.getStorageEncrypted();
+      // Check TPM-backed FDE status with exponential backoff retry
+      // for indeterminate state (see LP#2147606)
+      final stopwatch = Stopwatch()..start();
+      var delay = initialRetryDelay;
+      var storageStatus = await _service.getStorageEncrypted();
+      while (
+          storageStatus.status == SnapdStorageEncryptionStatus.indeterminate &&
+              stopwatch.elapsed < maxRetryDuration) {
+        _log.info(
+          'Storage encryption state is indeterminate, '
+          'retrying in ${delay.inSeconds}s '
+          '(elapsed: ${stopwatch.elapsed.inSeconds}s)...',
+        );
+        final remaining = maxRetryDuration - stopwatch.elapsed;
+        await Future.delayed(delay < remaining ? delay : remaining);
+        delay *= 2;
+        storageStatus = await _service.getStorageEncrypted();
+      }
 
-      // Treat inactive and failed as error cases
       switch (storageStatus.status) {
         case SnapdStorageEncryptionStatus.inactive:
           _log.error(
@@ -337,14 +357,14 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
           );
           throw TpmStateExceptionFailed();
         case SnapdStorageEncryptionStatus.indeterminate:
-          _log.info(
-            'Storage encryption state returned: ${storageStatus.status}',
+          _log.warning(
+            'Storage encryption remained indeterminate after '
+            '${stopwatch.elapsed.inSeconds}s',
           );
-          break;
+          throw TpmStateExceptionFailed();
         case SnapdStorageEncryptionStatus.active:
         case SnapdStorageEncryptionStatus.degraded:
         case SnapdStorageEncryptionStatus.recovery:
-          // Success cases - continue to fetch auth mode
           break;
       }
 

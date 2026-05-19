@@ -11,6 +11,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     required this.checkError,
     Map<String, String>? initialRecoveryKeys,
     this.storageEncryptionStatus = SnapdStorageEncryptionStatus.active,
+    this.indeterminateCallCount = 0,
   }) : _recoveryKeys = initialRecoveryKeys ?? {};
 
   /// Load initial system volumes from a JSON file.
@@ -19,6 +20,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     bool checkError = false,
     SnapdStorageEncryptionStatus storageEncryptionStatus =
         SnapdStorageEncryptionStatus.active,
+    int indeterminateCallCount = 0,
   }) {
     final raw = File(path).readAsStringSync();
     final json = jsonDecode(raw) as Map<String, dynamic>;
@@ -29,6 +31,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       initialRecoveryKeys: {'default-recovery': '1234'},
       checkError: checkError,
       storageEncryptionStatus: storageEncryptionStatus,
+      indeterminateCallCount: indeterminateCallCount,
     );
   }
 
@@ -37,6 +40,13 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   final Map<String, String> _recoveryKeys;
   final bool checkError;
   final SnapdStorageEncryptionStatus storageEncryptionStatus;
+
+  /// Number of times [getStorageEncrypted] will return
+  /// [SnapdStorageEncryptionStatus.indeterminate] before returning
+  /// [storageEncryptionStatus]. Set to 0 to skip the indeterminate phase.
+  final int indeterminateCallCount;
+  int _storageEncryptedCalls = 0;
+
   String _auth = '12345';
 
   /// Generates a fake recovery key and key ID.
@@ -195,6 +205,12 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
   @override
   Future<SnapdStorageEncryptedResponse> getStorageEncrypted() async {
+    if (_storageEncryptedCalls < indeterminateCallCount) {
+      _storageEncryptedCalls++;
+      return SnapdStorageEncryptedResponse(
+        status: SnapdStorageEncryptionStatus.indeterminate,
+      );
+    }
     return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
   }
 }
