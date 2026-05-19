@@ -41,9 +41,9 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   final bool checkError;
   final SnapdStorageEncryptionStatus storageEncryptionStatus;
 
-  /// Number of times [getStorageEncrypted] will return [indeterminate] before
-  /// returning [storageEncryptionStatus]. Set to 0 to skip the indeterminate
-  /// phase.
+  /// Number of times [getStorageEncrypted] will return
+  /// [SnapdStorageEncryptionStatus.indeterminate] before returning
+  /// [storageEncryptionStatus]. Set to 0 to skip the indeterminate phase.
   final int indeterminateCallCount;
   int _storageEncryptedCalls = 0;
 

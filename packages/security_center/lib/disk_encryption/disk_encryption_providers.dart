@@ -334,9 +334,9 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
       final stopwatch = Stopwatch()..start();
       var delay = initialRetryDelay;
       var storageStatus = await _service.getStorageEncrypted();
-      while (storageStatus.status ==
-              SnapdStorageEncryptionStatus.indeterminate &&
-          stopwatch.elapsed < maxRetryDuration) {
+      while (
+          storageStatus.status == SnapdStorageEncryptionStatus.indeterminate &&
+              stopwatch.elapsed < maxRetryDuration) {
         _log.info(
           'Storage encryption state is indeterminate, '
           'retrying in ${delay.inSeconds}s '

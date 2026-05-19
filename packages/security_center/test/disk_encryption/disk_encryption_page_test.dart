@@ -1109,10 +1109,8 @@ void main() {
         TpmAuthenticationModel.maxRetryDuration = Duration.zero;
         TpmAuthenticationModel.initialRetryDelay = Duration.zero;
         addTearDown(() {
-          TpmAuthenticationModel.maxRetryDuration =
-              const Duration(minutes: 2);
-          TpmAuthenticationModel.initialRetryDelay =
-              const Duration(seconds: 2);
+          TpmAuthenticationModel.maxRetryDuration = const Duration(minutes: 2);
+          TpmAuthenticationModel.initialRetryDelay = const Duration(seconds: 2);
         });
         final container = createContainer();
         registerMockDiskEncryptionService(
