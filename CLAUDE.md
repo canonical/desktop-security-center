@@ -22,16 +22,7 @@ Single test: `cd packages/security_center && fvm flutter test test/path/to/test.
 
 ## Architecture
 
-Flutter desktop app (Ubuntu Security Center) distributed as a snap. Three feature areas:
-- App permissions (snapd interfaces): @packages/security_center/lib/app_permissions
-- Disk encryption: @packages/security_center/lib/disk_encryption
-- Ubuntu Pro: @packages/security_center/lib/ubuntu_pro
-
-Service layer with real/fake implementations: @packages/security_center/lib/services
-
-Route management and conditional route availability: @packages/security_center/lib/routes.dart
-
-Uses Riverpod for state, Yaru for UI, `ubuntu_service` for service location.
+Flutter desktop app (Ubuntu Security Center) distributed as a snap. Single package at @packages/security_center. Uses Riverpod for state, Yaru for UI, `ubuntu_service` for service location.
 
 `--dry-run` flag swaps real snapd/D-Bus services for fakes — no system dependencies needed for local dev.
 
