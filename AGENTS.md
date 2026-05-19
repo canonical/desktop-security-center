@@ -1,8 +1,4 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## Commands
+# Commands
 
 Melos monorepo using fvm for Flutter version management. All commands run from repo root.
 
@@ -20,22 +16,22 @@ melos integration_test   # run integration tests
 
 Single test: `cd packages/security_center && fvm flutter test test/path/to/test.dart`
 
-## Architecture
+# Architecture
 
 Flutter desktop app (Ubuntu Security Center) distributed as a snap. Single package at @packages/security_center. Uses Riverpod for state, Yaru for UI, `ubuntu_service` for service location.
 
 `--dry-run` flag swaps real snapd/D-Bus services for fakes — no system dependencies needed for local dev.
 
-## Code generation
+# Code generation
 
 Run `melos generate` after changing any `@freezed`, `@JsonSerializable`, `@riverpod`, or `@GenerateMocks` annotated code. Generated files: `*.freezed.dart`, `*.g.dart`, `*.mocks.dart`.
 
 json_serializable is configured with `field_rename: kebab` — all JSON keys use kebab-case. See @packages/security_center/build.yaml.
 
-## Linting
+# Linting
 
 Uses `ubuntu_lints` — see @packages/security_center/analysis_options.yaml
 
-## Snap packaging
+# Snap packaging
 
 Built via `snap/snapcraft.yaml`. To clean snap build state: `snapcraft clean`.

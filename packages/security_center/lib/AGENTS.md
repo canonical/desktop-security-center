@@ -1,6 +1,4 @@
-# CLAUDE.md — Feature pages & providers
-
-## Page pattern
+# Page pattern
 
 All pages are `ConsumerWidget`. Async state uses `.when()` for data/error/loading:
 
@@ -20,7 +18,7 @@ class MyPage extends ConsumerWidget {
 - `ref.watch()` for reactive reads in build methods
 - `ref.read(...notifier)` for one-shot calls in callbacks
 
-## Services are NOT Riverpod providers
+# Services are NOT Riverpod providers
 
 Services live in the `ubuntu_service` locator and are accessed via `getService<T>()` directly inside provider code. Do not wrap services as Riverpod providers — Riverpod manages derived/computed state, the service locator manages external dependencies.
 
@@ -34,13 +32,13 @@ class MyModel extends _$MyModel {
 }
 ```
 
-## Provider conventions
+# Provider conventions
 
 Providers use `riverpod_generator` annotations (`@riverpod`). Stateful providers that expose mutation methods use the class syntax (`extends _$ModelName`). Simple read-only providers use the function syntax.
 
 Parameterized providers pass arguments via the `build` method (e.g., `build({required String snap, required SnapdInterface interface})`).
 
-## Navigation
+# Navigation
 
 Sub-page navigation uses query parameters on route URIs. See @packages/security_center/lib/routes.dart for the route builder and @packages/security_center/lib/navigator.dart for the `pushSnapPermissions()` extension.
 
