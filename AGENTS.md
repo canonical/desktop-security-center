@@ -20,6 +20,16 @@ Run app locally: `cd packages/security_center && fvm flutter run --dry-run`
 
 Analyze: `cd packages/security_center && fvm flutter analyze`
 
+# Before committing
+
+Always run these from the repo root before committing to avoid CI failures:
+
+```bash
+melos run format:exclude   # format check
+cd packages/security_center && fvm flutter analyze   # lint check
+melos test                 # run all tests
+```
+
 # Architecture
 
 Flutter desktop app (Ubuntu Security Center) distributed as a snap. Single package at @packages/security_center. Uses Riverpod for state, Yaru for UI, `ubuntu_service` for service location.
