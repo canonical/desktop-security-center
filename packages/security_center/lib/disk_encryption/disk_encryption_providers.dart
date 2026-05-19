@@ -313,13 +313,10 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
 class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   late final _service = getService<DiskEncryptionService>();
 
-  static const _defaultMaxRetryDuration = Duration(minutes: 2);
-  static const _defaultInitialRetryDelay = Duration(seconds: 2);
-
   @visibleForTesting
-  static Duration maxRetryDuration = _defaultMaxRetryDuration;
+  static Duration maxRetryDuration = const Duration(minutes: 2);
   @visibleForTesting
-  static Duration initialRetryDelay = _defaultInitialRetryDelay;
+  static Duration initialRetryDelay = const Duration(seconds: 2);
 
   @override
   Future<TpmAuthState> build() async {
