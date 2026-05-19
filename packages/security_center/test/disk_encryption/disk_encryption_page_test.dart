@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as p;
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
+import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:snapd/snapd.dart';
 import 'package:yaru/yaru.dart';
@@ -1068,6 +1069,17 @@ void main() {
         storageEncryptionStatus: SnapdStorageEncryptionStatus.recovery,
       ),
       (
+        name: 'storage encryption status indeterminate - error after retries',
+        authMode: AuthMode.pin,
+        enumerateKeySlots404Error: false,
+        enumerateKeySlots403Error: false,
+        enumerateKeySlotsFailure: false,
+        missingDefaultKeySlot: false,
+        invalidTpmPlatformName: false,
+        authModeMismatch: false,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.indeterminate,
+      ),
+      (
         name:
             '403 error from enumerate keyslots API (snap-fde-control interface)',
         authMode: AuthMode.pin,
@@ -1094,6 +1106,14 @@ void main() {
 
     for (final tc in cases) {
       testWidgets(tc.name, (tester) async {
+        TpmAuthenticationModel.maxRetryDuration = Duration.zero;
+        TpmAuthenticationModel.initialRetryDelay = Duration.zero;
+        addTearDown(() {
+          TpmAuthenticationModel.maxRetryDuration =
+              const Duration(minutes: 2);
+          TpmAuthenticationModel.initialRetryDelay =
+              const Duration(seconds: 2);
+        });
         final container = createContainer();
         registerMockDiskEncryptionService(
           enumerateKeySlots404Error: tc.enumerateKeySlots404Error,
@@ -1118,7 +1138,9 @@ void main() {
             !tc.missingDefaultKeySlot &&
             tc.storageEncryptionStatus !=
                 SnapdStorageEncryptionStatus.inactive &&
-            tc.storageEncryptionStatus != SnapdStorageEncryptionStatus.failed;
+            tc.storageEncryptionStatus != SnapdStorageEncryptionStatus.failed &&
+            tc.storageEncryptionStatus !=
+                SnapdStorageEncryptionStatus.indeterminate;
 
         if (isHappyPath) {
           // Verify TPM enabled message is always shown in happy path
@@ -1193,7 +1215,9 @@ void main() {
               tc.storageEncryptionStatus ==
                   SnapdStorageEncryptionStatus.inactive ||
               tc.storageEncryptionStatus ==
-                  SnapdStorageEncryptionStatus.failed) {
+                  SnapdStorageEncryptionStatus.failed ||
+              tc.storageEncryptionStatus ==
+                  SnapdStorageEncryptionStatus.indeterminate) {
             expect(
               find.text(
                 tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
