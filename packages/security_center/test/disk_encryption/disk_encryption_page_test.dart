@@ -2,6 +2,7 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:file/memory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:path/path.dart' as p;
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
@@ -1106,11 +1107,13 @@ void main() {
 
     for (final tc in cases) {
       testWidgets(tc.name, (tester) async {
+        final prevMaxRetry = TpmAuthenticationModel.maxRetryDuration;
+        final prevInitialDelay = TpmAuthenticationModel.initialRetryDelay;
         TpmAuthenticationModel.maxRetryDuration = Duration.zero;
         TpmAuthenticationModel.initialRetryDelay = Duration.zero;
         addTearDown(() {
-          TpmAuthenticationModel.maxRetryDuration = const Duration(minutes: 2);
-          TpmAuthenticationModel.initialRetryDelay = const Duration(seconds: 2);
+          TpmAuthenticationModel.maxRetryDuration = prevMaxRetry;
+          TpmAuthenticationModel.initialRetryDelay = prevInitialDelay;
         });
         final container = createContainer();
         registerMockDiskEncryptionService(
@@ -1728,6 +1731,56 @@ void main() {
             findsNothing,
           );
         }
+      });
+    }
+  });
+
+  group('TpmAuthenticationModel retry logic', () {
+    final cases = [
+      (
+        name: 'retries on indeterminate status and resolves when active',
+        indeterminateCallCount: 3,
+        maxRetryDuration: const Duration(minutes: 2),
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.active,
+        expectError: false,
+      ),
+      (
+        name: 'fails after maxRetryDuration with persistent indeterminate',
+        indeterminateCallCount: 0,
+        maxRetryDuration: Duration.zero,
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.indeterminate,
+        expectError: true,
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        final prevMaxRetry = TpmAuthenticationModel.maxRetryDuration;
+        final prevInitialDelay = TpmAuthenticationModel.initialRetryDelay;
+        TpmAuthenticationModel.maxRetryDuration = tc.maxRetryDuration;
+        TpmAuthenticationModel.initialRetryDelay = Duration.zero;
+        addTearDown(() {
+          TpmAuthenticationModel.maxRetryDuration = prevMaxRetry;
+          TpmAuthenticationModel.initialRetryDelay = prevInitialDelay;
+        });
+
+        final service = registerMockDiskEncryptionService(
+          storageEncryptionStatus: tc.storageEncryptionStatus,
+          indeterminateCallCount: tc.indeterminateCallCount,
+        );
+
+        final container = createContainer();
+        if (tc.expectError) {
+          await expectLater(
+            container.read(tpmAuthenticationModelProvider.future),
+            throwsA(isA<TpmStateExceptionFailed>()),
+          );
+        } else {
+          await container.read(tpmAuthenticationModelProvider.future);
+        }
+
+        verify(service.getStorageEncrypted())
+            .called(tc.indeterminateCallCount + 1);
       });
     }
   });

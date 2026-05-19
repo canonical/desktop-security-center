@@ -40,3 +40,13 @@ Pure unit tests — instantiate the service directly with mock dependencies (e.g
 `test_utils.dart` provides parameterized mock factories for each service (e.g., `registerMockDiskEncryptionService(checkRecoveryKey:, checkError:, ...)`). These pre-stub common return values so tests only configure what they care about.
 
 Ubuntu Pro tests have additional factories in `test/utils/ubuntu_pro_utils.dart` covering D-Bus mocking, HTTP mock servers, and filesystem fixtures.
+
+# Testing provider/model logic directly
+
+Widget tests verify UI state transitions but can hide untested business logic — especially when test setup neutralises the behavior (e.g. zeroing retry delays). When a provider or model gains non-trivial logic (retry loops, backoff, polling, conditional branching), add a dedicated unit test that exercises that logic via `ProviderContainer` with a mocked service. Verify the service is called the expected number of times and that both the happy path and the boundary (e.g. max duration reached) are covered. For time-dependent logic, use `package:fake_async` to control the clock so tests are fast and deterministic.
+
+# Always use mock factories and table-driven tests
+
+Always use the `registerMock*Service(...)` factories from `test_utils.dart` to set up mocks — never instantiate `Mock*` classes directly or hand-build response objects inline. If a new test dimension is needed (e.g. transient indeterminate responses), extend the factory with a new parameter rather than bypassing it.
+
+When adding multiple related test cases, use the existing table-driven pattern: define a list of Dart record cases and iterate with `for (final tc in cases)`. See existing groups in the page test files for the pattern.

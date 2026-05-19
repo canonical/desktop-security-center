@@ -339,7 +339,8 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
           'retrying in ${delay.inSeconds}s '
           '(elapsed: ${stopwatch.elapsed.inSeconds}s)...',
         );
-        await Future.delayed(delay);
+        final remaining = maxRetryDuration - stopwatch.elapsed;
+        await Future.delayed(delay < remaining ? delay : remaining);
         delay *= 2;
         storageStatus = await _service.getStorageEncrypted();
       }

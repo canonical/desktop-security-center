@@ -150,12 +150,20 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool authModeMismatch = false,
   SnapdStorageEncryptionStatus storageEncryptionStatus =
       SnapdStorageEncryptionStatus.active,
+  int indeterminateCallCount = 0,
 }) {
   final service = MockDiskEncryptionService();
 
-  when(service.getStorageEncrypted()).thenAnswer(
-    (_) async => SnapdStorageEncryptedResponse(status: storageEncryptionStatus),
-  );
+  var storageEncryptedCalls = 0;
+  when(service.getStorageEncrypted()).thenAnswer((_) async {
+    if (storageEncryptedCalls < indeterminateCallCount) {
+      storageEncryptedCalls++;
+      return SnapdStorageEncryptedResponse(
+        status: SnapdStorageEncryptionStatus.indeterminate,
+      );
+    }
+    return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
+  });
 
   when(service.enumerateKeySlots()).thenAnswer((_) async {
     if (enumerateKeySlots404Error) {
