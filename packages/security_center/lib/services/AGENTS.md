@@ -26,6 +26,8 @@ getService<AppPermissionsService>()
 
 The `--dry-run` flag conditionally registers fake implementations instead of real ones.
 
+When adding new behavior or parameters to a service, always update the corresponding `Fake*Service` too — `--dry-run` mode must be able to exercise new features locally.
+
 # Lifecycle
 
 Services that manage ongoing state use `init()` / `dispose()` with `StreamController`:
