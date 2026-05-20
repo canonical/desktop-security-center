@@ -230,5 +230,40 @@
     "ubuntuProCompliance": "ماسلاشتۇرۇش ۋە كۈچەيتىش",
     "ubuntuProComplianceDisclaimer": "پەقەت FedRAMP، HIPAA ۋە باشقا ماسلىشىش ۋە كۈچەيتىش تەلەپلىرى ئارقىلىق ياردەم بېرىش تەۋسىيە قىلىنىدۇ.",
     "ubuntuProComplianceUSGTitle": "Ubuntu بىخەتەرلىك قوللانمىسى (USG)",
-    "snapPermissionsErrorTitle": "خاتالىق كۆرۈلدى"
+    "snapPermissionsErrorTitle": "خاتالىق كۆرۈلدى",
+    "ubuntuProComplianceUSGDescription": "CIS ئۆلچەك ۋە DISA-STIG سەپلىمە ھۆججەت ئارقىلىق ئۆزلۈكىدىن ئىجرا قىلىش سىستېمىسىنى كۈچەيتىش ۋە تەكشۈرۈشنى ئاپتوماتلاشتۇرىدۇ، شۇنىڭ بىلەن بىللە مۇھىم ئۆزگەرگۈچىسىنى ئالاھىدە خاسلاشتۇرۇشقا يول قويىدۇ.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "ئامېرىكا ۋە كانادا ھۆكۈمىتىنىڭ FIPS 140-2 سانلىق مەلۇمات قوغداش ئۆلچىمىگە ماس كېلىدىغان شىفىرلاش مودېلىغا تارقاتقان گۇۋاھنامىسى.",
+    "ubuntuProComplianceFIPSEnable": "FIPS نى قوزغات",
+    "ubuntuProComplianceFIPSDisclaimer": "FIPS قوزغىتىلغاندىن كېيىن كەينىگە ياندۇرغىلى بولمايدۇ، Livepatch مەڭگۈلۈك چەكلىنىدۇ.",
+    "ubuntuProComplianceFIPSPrompt": "FIPS تاللانمىسىنىڭ مايىللىقى تاللىنىدۇ",
+    "ubuntuProComplianceFIPSUpdates": "FIPS ۋە يېڭىلاش",
+    "ubuntuProComplianceFIPSUpdatesDescription": "FIPS 140-2 دەلىللەشتىن ئۆتكەن بوغچىنى ئورنىتىپ قەرەللىك ھالدا بىخەتەرلىك يېڭىلىنىشى ئورنىتىشقا يول قويىدۇ.",
+    "ubuntuProComplianceFIPSNoUpdates": "يېڭىلانمىغان FIPS",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "FIPS 140-2 دەلىللەشتىن ئۆتكەن بوغچىنى ئورنىتىدۇ. بۇلار كېيىنكى قېتىم قايتىدىن گۇۋاھنامە دەلىللەنمىگۈچە يېڭىلانمايدۇ.",
+    "ubuntuProComplianceDocumentation": "بىخەتەرلىككە ئۇيغۇن قوللانما",
+    "ubuntuProESMTitle": "كېڭەيتىلگەن بىخەتەرلىك ئاسراش (ESM)",
+    "ubuntuProESMDescription": "كېڭەيتىلگەن بىخەتەرلىك ئاسراش (ESM) پۈتكۈل Ubuntu ئارخىپىغا 10 يىل بىخەتەرلىك يامىقى تەمىنلەيدۇ. خەتەرلىك، يۇقىرى ۋە ئوتتۇرىھال دەرىجىدىكى كۆپ كۆرۈلىدىغان ئاجىزلىق باھالاش سىستېمىسىدىكى نومۇرىغا ئاساسەن ئۈزلۈكسىز ئاجىزلىق باشقۇرۇش مۇلازىمىتىگە ئېرىشىڭ.",
+    "ubuntuProESMMainTitle": "ئاساسىي بوغچا (esm-infra)",
+    "ubuntuProESMMainDescription": "Ubuntu ئاساسىي بوغچىسى ئۈچۈن {year} غىچە بىخەتەرلىك يېڭىلىنىشى",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Universe بوغچا (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Ubuntu Universe بوغچىغا {year} غىچە قوشۇمچە بىخەتەرلىك يېڭىلىنىشى",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "يادرو شۇئان ياماق",
+    "ubuntuProLivepatchEnableTitle": "شۇئان ياماقنى قوزغات",
+    "ubuntuProLivepatchEnableDescription": "سىستېما ئىجرا قىلىنىۋاتقاندا يادرونىڭ بىخەتەرلىك يېڭىلىنىشىنى قوللىنىدۇ",
+    "ubuntuProLivepatchShowTitle": "شۇئان ياماق ھالىتىنى چوققا بالداقتا كۆرسىتىدۇ"
 }
