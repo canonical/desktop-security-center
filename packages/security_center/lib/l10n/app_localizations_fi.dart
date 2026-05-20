@@ -21,7 +21,19 @@ class AppLocalizationsFi extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Salli aina';
 
   @override
+  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+
+  @override
   String get snapdRuleCategoryForeverDenied => 'Estä aina';
+
+  @override
+  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+
+  @override
+  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+
+  @override
+  String get snapdRuleCategoryAskAlways => 'Ask always';
 
   @override
   String get snapPermissionReadLabel => 'Lue';

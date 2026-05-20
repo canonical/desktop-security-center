@@ -21,7 +21,19 @@ class AppLocalizationsTa extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'எப்போதும் இசைவு';
 
   @override
+  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+
+  @override
   String get snapdRuleCategoryForeverDenied => 'எப்போதும் மறு';
+
+  @override
+  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+
+  @override
+  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+
+  @override
+  String get snapdRuleCategoryAskAlways => 'Ask always';
 
   @override
   String get snapPermissionReadLabel => 'படி';

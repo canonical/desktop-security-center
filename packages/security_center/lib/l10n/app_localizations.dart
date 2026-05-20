@@ -267,11 +267,35 @@ abstract class AppLocalizations {
   /// **'Allow always'**
   String get snapdRuleCategoryForeverAllowed;
 
+  /// No description provided for @permissionRulePopupMenuSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Permissions'**
+  String get permissionRulePopupMenuSemanticLabel;
+
   /// No description provided for @snapdRuleCategoryForeverDenied.
   ///
   /// In en, this message translates to:
   /// **'Deny always'**
   String get snapdRuleCategoryForeverDenied;
+
+  /// No description provided for @snapdRuleCategoryTemporarilyAllowed.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow temporarily'**
+  String get snapdRuleCategoryTemporarilyAllowed;
+
+  /// No description provided for @snapdRuleCategoryTemporarilyDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Deny temporarily'**
+  String get snapdRuleCategoryTemporarilyDenied;
+
+  /// No description provided for @snapdRuleCategoryAskAlways.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask always'**
+  String get snapdRuleCategoryAskAlways;
 
   /// No description provided for @snapPermissionReadLabel.
   ///
