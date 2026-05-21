@@ -58,7 +58,7 @@ class _HomeBody extends ConsumerWidget {
           ),
           const SizedBox(height: 32),
         ],
-        for (final category in SnapdRuleCategory.values)
+        for (final category in SnapdRuleAction.values)
           _HomeRuleSection(
             title: category.localizedTitle(l10n),
             ruleFragments: ruleFragments.filterByCategory(category).toList(),
