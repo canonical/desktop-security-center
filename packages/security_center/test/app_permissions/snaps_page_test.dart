@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:security_center/app_permissions/rules_category.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
 import 'package:security_center/app_permissions/snaps_page.dart';
 import 'package:security_center/services/app_permissions_service.dart';
+import 'package:security_center/widgets/yaru_popup_menu_item.dart';
 import 'package:snapd/snapd.dart';
 import 'package:yaru/yaru.dart';
 
 import '../test_utils.dart';
+import '../test_utils.mocks.dart';
 
 void main() {
   testWidgets('display snaps', (tester) async {
@@ -199,24 +202,38 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final switchWidgets = find.byType(YaruSwitch);
-      expect(switchWidgets, findsNWidgets(2));
+      final permissionMenuWidgets =
+          find.byType(YaruPopupMenuButton<SnapdRuleAction>);
+      expect(permissionMenuWidgets, findsNWidgets(2));
 
       // Find firefox's switch
       final firefoxTile = find.ancestor(
         of: find.text('firefox'),
         matching: find.byType(YaruListTile),
       );
-      final firefoxSwitch = find.descendant(
+      final firefoxPermissionsMenuButton = find.descendant(
         of: firefoxTile,
-        matching: find.byType(YaruSwitch),
+        matching: find.byType(YaruPopupMenuButton<SnapdRuleAction>),
       );
 
-      final firefoxSwitchValue = tester.widget<YaruSwitch>(firefoxSwitch).value;
-      expect(firefoxSwitchValue, false);
+      final firefoxPermissionValue = tester
+          .widget<YaruPopupMenuButton<SnapdRuleAction>>(
+            firefoxPermissionsMenuButton,
+          )
+          .initialValue;
+      expect(firefoxPermissionValue, SnapdRuleAction.askAlways);
 
-      // Toggle firefox on
-      await tester.tap(firefoxSwitch);
+      // Open the permission menu for firefox
+      await tester.tap(firefoxPermissionsMenuButton);
+      await tester.pumpAndSettle();
+
+      // Select "Always allowed" option for firefox
+      await tester.tap(
+        find.descendant(
+          of: find.byType(YaruPopupMenuItem<SnapdRuleAction>),
+          matching: find.text(tester.l10n.snapdRuleCategoryForeverAllowed),
+        ),
+      );
       await tester.pumpAndSettle();
 
       verify(service.removeAllRules(snap: 'firefox', interface: 'camera'))
@@ -239,18 +256,27 @@ void main() {
         ),
       ).called(1);
 
-      // Find cheese's switch
+      // Find cheese's menu button
       final cheeseTile = find.ancestor(
         of: find.text('cheese'),
         matching: find.byType(YaruListTile),
       );
-      final cheeseSwitch = find.descendant(
+      final cheesePermissionsMenuButton = find.descendant(
         of: cheeseTile,
-        matching: find.byType(YaruSwitch),
+        matching: find.byType(YaruPopupMenuButton<SnapdRuleAction>),
       );
 
-      // Toggle cheese off
-      await tester.tap(cheeseSwitch);
+      // Toggle cheese menu
+      await tester.tap(cheesePermissionsMenuButton);
+      await tester.pumpAndSettle();
+
+      // Select "Always denied" option for cheese
+      await tester.tap(
+        find.descendant(
+          of: find.byType(YaruPopupMenuItem<SnapdRuleAction>),
+          matching: find.text(tester.l10n.snapdRuleCategoryForeverDenied),
+        ),
+      );
       await tester.pumpAndSettle();
 
       verify(service.removeAllRules(snap: 'cheese', interface: 'camera'))
@@ -272,6 +298,24 @@ void main() {
           ),
         ),
       ).called(1);
+
+      clearInteractions(service);
+
+      // Select "Ask always" option for cheese
+      await tester.tap(cheesePermissionsMenuButton);
+      await tester.pumpAndSettle();
+
+      await tester.tap(
+        find.descendant(
+          of: find.byType(YaruPopupMenuItem<SnapdRuleAction>),
+          matching: find.text(tester.l10n.snapdRuleCategoryAskAlways),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      verify(service.removeAllRules(snap: 'cheese', interface: 'camera'))
+          .called(1);
+      verifyNever((service as MockAppPermissionsService).addRule(any));
     });
 
     testWidgets('reset button calls removeAllRules for each snap',
@@ -466,7 +510,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final switchWidgets = find.byType(YaruSwitch);
+      final switchWidgets = find.byType(YaruPopupMenuButton<SnapdRuleAction>);
       expect(switchWidgets, findsNWidgets(2));
 
       // Find firefox's switch
@@ -474,16 +518,28 @@ void main() {
         of: find.text('firefox'),
         matching: find.byType(YaruListTile),
       );
-      final firefoxSwitch = find.descendant(
+      final firefoxPermissionsMenuButton = find.descendant(
         of: firefoxTile,
-        matching: find.byType(YaruSwitch),
+        matching: find.byType(YaruPopupMenuButton<SnapdRuleAction>),
       );
 
-      final firefoxSwitchValue = tester.widget<YaruSwitch>(firefoxSwitch).value;
-      expect(firefoxSwitchValue, false);
+      final firefoxPermissionValue = tester
+          .widget<YaruPopupMenuButton<SnapdRuleAction>>(
+            firefoxPermissionsMenuButton,
+          )
+          .initialValue;
+      expect(firefoxPermissionValue, SnapdRuleAction.askAlways);
 
-      // Toggle firefox on
-      await tester.tap(firefoxSwitch);
+      // Open firefox's permission menu
+      await tester.tap(firefoxPermissionsMenuButton);
+      await tester.pumpAndSettle();
+
+      // Select "always allowed" option for firefox
+      final allowAlwaysButton = find.descendant(
+        of: find.byType(YaruPopupMenuItem<SnapdRuleAction>),
+        matching: find.text(tester.l10n.snapdRuleCategoryForeverAllowed),
+      );
+      await tester.tap(allowAlwaysButton);
       await tester.pumpAndSettle();
 
       verify(
@@ -515,13 +571,29 @@ void main() {
         of: find.text('cheese'),
         matching: find.byType(YaruListTile),
       );
-      final cheeseSwitch = find.descendant(
+      final cheesePermissionsMenuButton = find.descendant(
         of: cheeseTile,
-        matching: find.byType(YaruSwitch),
+        matching: find.byType(YaruPopupMenuButton<SnapdRuleAction>),
       );
 
-      // Toggle cheese off
-      await tester.tap(cheeseSwitch);
+      // Ensure cheese's menu shows "Always allowed" as initial value
+      final cheesePermissionValue = tester
+          .widget<YaruPopupMenuButton<SnapdRuleAction>>(
+            cheesePermissionsMenuButton,
+          )
+          .initialValue;
+      expect(cheesePermissionValue, SnapdRuleAction.foreverAllowed);
+
+      // Open Cheese's permission menu
+      await tester.tap(cheesePermissionsMenuButton);
+      await tester.pumpAndSettle();
+
+      // Select "Always denied" option for cheese
+      final denyAlwaysButton = find.descendant(
+        of: find.byType(YaruPopupMenuItem<SnapdRuleAction>),
+        matching: find.text(tester.l10n.snapdRuleCategoryForeverDenied),
+      );
+      await tester.tap(denyAlwaysButton);
       await tester.pumpAndSettle();
 
       verify(
@@ -547,6 +619,27 @@ void main() {
           ),
         ),
       ).called(1);
+
+      clearInteractions(service);
+
+      // Select "Ask always" option for cheese
+      await tester.tap(cheesePermissionsMenuButton);
+      await tester.pumpAndSettle();
+
+      final askAlwaysButton = find.descendant(
+        of: find.byType(YaruPopupMenuItem<SnapdRuleAction>),
+        matching: find.text(tester.l10n.snapdRuleCategoryAskAlways),
+      );
+      await tester.tap(askAlwaysButton);
+      await tester.pumpAndSettle();
+
+      verify(
+        service.removeAllRules(
+          snap: 'cheese',
+          interface: SnapdInterface.microphone.interfaceName,
+        ),
+      ).called(1);
+      verifyNever((service as MockAppPermissionsService).addRule(any));
     });
 
     testWidgets('reset button calls removeAllRules for each snap',
