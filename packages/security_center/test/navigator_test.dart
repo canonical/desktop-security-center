@@ -73,7 +73,7 @@ void main() {
       });
     }
   });
-  testWidgets('navigator observer', (tester) async {
+  testWidgets('navigator observer ignores non-page routes', (tester) async {
     final container = createContainer();
     await tester.pumpWidget(
       UncontrolledProviderScope(
@@ -84,7 +84,6 @@ void main() {
               home: const Scaffold(),
               routes: {
                 '/foo': (_) => const SizedBox(),
-                '/bar': (_) => const SizedBox(),
               },
               navigatorObservers: [AppNavigatorObserver(ref)],
             );
@@ -108,7 +107,12 @@ void main() {
       ),
     );
 
-    unawaited(Navigator.of(tester.context).pushNamed('/bar'));
+    unawaited(
+      showDialog<void>(
+        context: tester.context,
+        builder: (_) => const SizedBox(),
+      ),
+    );
     await tester.pump();
 
     expect(
@@ -116,7 +120,7 @@ void main() {
       isA<RouteSettings>().having(
         (settings) => settings.name,
         'name',
-        '/bar',
+        '/foo',
       ),
     );
 
@@ -131,8 +135,34 @@ void main() {
         '/foo',
       ),
     );
+  });
 
-    unawaited(Navigator.of(tester.context).pushReplacementNamed('/bar'));
+  testWidgets('navigator observer restores unnamed page routes',
+      (tester) async {
+    final container = createContainer();
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: Consumer(
+          builder: (context, ref, _) {
+            return MaterialApp(
+              home: const Scaffold(),
+              routes: {
+                '/foo': (_) => const SizedBox(),
+              },
+              navigatorObservers: [AppNavigatorObserver(ref)],
+            );
+          },
+        ),
+      ),
+    );
+    await tester.pump();
+
+    unawaited(
+      Navigator.of(tester.context).push(
+        MaterialPageRoute<void>(builder: (_) => const SizedBox()),
+      ),
+    );
     await tester.pump();
 
     expect(
@@ -140,7 +170,31 @@ void main() {
       isA<RouteSettings>().having(
         (settings) => settings.name,
         'name',
-        '/bar',
+        isNull,
+      ),
+    );
+
+    unawaited(Navigator.of(tester.context).pushNamed('/foo'));
+    await tester.pump();
+
+    expect(
+      container.read(routeSettingsProvider),
+      isA<RouteSettings>().having(
+        (settings) => settings.name,
+        'name',
+        '/foo',
+      ),
+    );
+
+    Navigator.of(tester.context).pop();
+    await tester.pump();
+
+    expect(
+      container.read(routeSettingsProvider),
+      isA<RouteSettings>().having(
+        (settings) => settings.name,
+        'name',
+        isNull,
       ),
     );
   });
