@@ -242,9 +242,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Instala paquetes validados segundo FIPS 140-2. Estes non se actualizarán ata a próxima recertificación.",
     "ubuntuProComplianceDocumentation": "Documentación de conformidade da seguranza",
     "ubuntuProESMTitle": "Mantemento de seguranza extendido (ESM)",
-    "ubuntuProESMDescription": "ESM ofrece 10 anos de parches de seguranza para máis de 25.000 paquetes de código aberto. Obtén unha xestión continua de vulnerabilidades para CVE críticos, altos e medios.",
+    "ubuntuProESMDescription": "ESM ofrece 10 anos de parches de seguranza para todo o arquivo de Ubuntu. Obtén unha xestión continua de vulnerabilidades para CVE críticos, altos e medios seleccionados.",
     "ubuntuProESMMainTitle": "Paquetes principais (esm-infra)",
-    "ubuntuProESMMainDescription": "Actualizacións de seguranza para 2.300 paquetes principais de Ubuntu ata {year}",
+    "ubuntuProESMMainDescription": "Actualizacións de seguranza para os paquetes principais de Ubuntu ata {year}",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -253,7 +253,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Paquetes Universe (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Actualizacións adicionais de seguranza para máis de 23.000 paquetes Ubuntu Universe ata {year}",
+    "ubuntuProESMUniverseDescription": "Actualizacións de seguranza adicionais para os paquetes de Ubuntu Universe ata {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
