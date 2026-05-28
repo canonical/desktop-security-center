@@ -46,7 +46,6 @@
             }
         }
     },
-    "interfacePageDescription": "Kui rakendus töötab rangelt seadistatud eraldatud konteineris, siis ta peab sult enne failide ja kaustade avamist luba küsima. See funktsionaalsus on veel katsejärgus ning selles võib tekkida muudatusi.",
     "interfacePageLinkGiveFeedback": "Jaga tagasisidet",
     "snapPermissionsDisablingLabel": "Lülitan välja, selleks võib kuluda mõni sekund...",
     "interfacePageLinkReportIssues": "Teata veast või problemist",

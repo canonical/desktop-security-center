@@ -119,10 +119,6 @@ class AppLocalizationsKn extends AppLocalizations {
   String get interfacePageTitle => 'ಅನುಮತಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ';
 
   @override
-  String get interfacePageDescription =>
-      'ಫೈಲ್‌ಗಳು ಮತ್ತು ಫೋಲ್ಡರ್‌ಗಳನ್ನು ಪ್ರವೇಶಿಸುವ ಮೊದಲು ಕಟ್ಟುನಿಟ್ಟಾಗಿ ಸೀಮಿತವಾದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ನಿಮ್ಮನ್ನು ಕೇಳುತ್ತವೆ. ಈ ವೈಶಿಷ್ಟ್ಯವು ಪ್ರಾಯೋಗಿಕ ಮತ್ತು ಬದಲಾವಣೆಗಳಿಗೆ ಒಳಪಟ್ಟಿರುತ್ತದೆ.';
-
-  @override
   String get interfacePageLinkLearnMore => 'ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ';
 
   @override
@@ -605,7 +601,7 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
 
   @override
   String get ubuntuProEnable => 'Enable';

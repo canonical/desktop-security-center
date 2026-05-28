@@ -118,10 +118,6 @@ class AppLocalizationsLo extends AppLocalizations {
   String get interfacePageTitle => 'ຈັດການການອະນຸຍາດ';
 
   @override
-  String get interfacePageDescription =>
-      'ແອັບທີ່ຖືກຈຳກັດຢ່າງເຂັ້ມງວດຈະຖາມທ່ານກ່ອນເຂົ້າເຖິງໄຟລ໌ ແລະ ໂຟນເດີ. ຟີເຈີນີ້ແມ່ນຢູ່ໃນຂັ້ນທົດລອງ ແລະ ອາດມີການປ່ຽນແປງ.';
-
-  @override
   String get interfacePageLinkLearnMore => 'ຮຽນຮູ້ເພີ່ມເຕີມ';
 
   @override

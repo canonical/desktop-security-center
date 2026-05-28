@@ -119,10 +119,6 @@ class AppLocalizationsUg extends AppLocalizations {
   String get interfacePageTitle => 'ئىجازەت باشقۇرۇش';
 
   @override
-  String get interfacePageDescription =>
-      'ئىجازىتى چەكلەنگەن ئەپ ھۆججەت ۋە قىسقۇچىڭىزنى زىيارەت قىلىشتىن ئىلگىرى سورايدۇ. بۇ ئىقتىدار تەجرىبە باسقۇچىدا بولۇپ، ئۆزگىرىشى مۇمكىن.';
-
-  @override
   String get interfacePageLinkLearnMore => 'مول بىلىم';
 
   @override

@@ -112,10 +112,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get interfacePageTitle => '권한 관리';
 
   @override
-  String get interfacePageDescription =>
-      '엄격하게 제한된 앱은 파일과 폴더에 액세스하기 전에 사용자에게 묻습니다. 이 기능은 실험적이며 추후 변경될 수 있습니다.';
-
-  @override
   String get interfacePageLinkLearnMore => '더 알아보기';
 
   @override
@@ -577,7 +573,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
 
   @override
   String get ubuntuProEnable => 'Enable';

@@ -120,10 +120,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get interfacePageTitle => 'Hallitse oikeuksia';
 
   @override
-  String get interfacePageDescription =>
-      'Tiukasti rajoitetut sovellukset kysyvät lupaa ennen tiedostojen tai kansioiden käsittelyä. Tämä ominaisuus on kokeellinen ja saattaa muuttua.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Lue lisää';
 
   @override

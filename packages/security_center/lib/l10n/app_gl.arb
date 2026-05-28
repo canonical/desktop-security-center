@@ -45,7 +45,6 @@
     "microphoneInterfacePageTitle": "Micrófono",
     "microphoneInterfacePageDescription": "Permite que as aplicacións accedan ao teu micrófono.",
     "interfacePageTitle": "Xestionar permisos",
-    "interfacePageDescription": "As aplicacións limitadas estrictamente preguntaranche antes de acceder a ficheiros e cartafoles. Esta función é experimental e está suxeita a cambios.",
     "interfacePageLinkLearnMore": "Saber máis",
     "interfacePageLinkGiveFeedback": "Dá retroalimentación",
     "interfacePageLinkReportIssues": "Informar de problemas",

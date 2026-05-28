@@ -28,7 +28,6 @@
     "snapRulesPageEmptyTileLabel": "Ancora nessuna regola",
     "snapRulesRemoveAll": "Rimuovi tutte le regole",
     "interfacePageTitle": "Gestione permessi",
-    "interfacePageDescription": "Le applicazioni strettamente confinate chiederanno all'utente di accedere a file e cartelle. Questa funzione è sperimentale e soggetta a modifiche.",
     "interfacePageLinkLearnMore": "Per saperne di più",
     "interfacePageLinkReportIssues": "Segnala errori",
     "snapPermissionsEnableTitle": "Impone alle app di richiedere i permessi di sistema",

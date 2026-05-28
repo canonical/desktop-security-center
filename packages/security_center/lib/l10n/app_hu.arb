@@ -47,7 +47,6 @@
     "homeInterfacePageTitle": "Saját mappa",
     "homeInterfacePageDescription": "A saját mappában lévő fájlok hozzáféréséhez való jogosultságok kezelése.",
     "interfacePageTitle": "Jogosultságok kezelése",
-    "interfacePageDescription": "A szigorúan korlátozott alkalmazások megkérdezik Önt, mielőtt hozzáférnének a fájlokhoz és a mappákhoz. Ez a funkció kísérleti és változhat a jövőben.",
     "interfacePageLinkLearnMore": "Tudjon meg többet",
     "interfacePageLinkGiveFeedback": "Visszajelzés küldése",
     "diskEncryptionPageLearnMore": "Tudjon meg többet a hardveresen támogatott titkosításról",

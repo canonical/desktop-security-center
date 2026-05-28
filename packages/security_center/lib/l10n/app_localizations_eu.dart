@@ -119,10 +119,6 @@ class AppLocalizationsEu extends AppLocalizations {
   String get interfacePageTitle => 'Kudeatu baimenak';
 
   @override
-  String get interfacePageDescription =>
-      'Zorrozki konfinatutako aplikazioek baimena eskatuko dizute fitxategi eta karpetak atzitu baino lehen. Eginbide hau esperimentala da, eta baliteke aldatzea.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Informazio gehiago';
 
   @override

@@ -119,10 +119,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get interfacePageTitle => 'Gestionar permisos';
 
   @override
-  String get interfacePageDescription =>
-      'Las aplicaciones estrictamente confinadas le preguntarán antes de acceder a archivos y carpetas. Esta funcionalidad es experimental y está sujeta a cambios.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Más información';
 
   @override

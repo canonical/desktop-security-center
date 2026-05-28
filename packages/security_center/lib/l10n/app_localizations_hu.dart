@@ -121,10 +121,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get interfacePageTitle => 'Jogosultságok kezelése';
 
   @override
-  String get interfacePageDescription =>
-      'A szigorúan korlátozott alkalmazások megkérdezik Önt, mielőtt hozzáférnének a fájlokhoz és a mappákhoz. Ez a funkció kísérleti és változhat a jövőben.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Tudjon meg többet';
 
   @override

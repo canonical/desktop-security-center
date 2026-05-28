@@ -120,10 +120,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get interfacePageTitle => 'இசைவுகளை நிர்வகி';
 
   @override
-  String get interfacePageDescription =>
-      'கோப்புகள் மற்றும் கோப்புறைகளை அணுகுவதற்கு முன் கண்டிப்பாக வரையறுக்கப்பட்ட பயன்பாடுகள் உங்களிடம் கேட்கும். இந்த நற்பொருத்தம் சோதனை மற்றும் மாற்றங்களுக்கு உட்பட்டது.';
-
-  @override
   String get interfacePageLinkLearnMore => 'மேலும் அறிக';
 
   @override
@@ -606,7 +602,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
 
   @override
   String get ubuntuProEnable => 'Enable';

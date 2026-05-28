@@ -48,7 +48,6 @@
         }
     },
     "homeInterfacePageDescription": "Hantera behörigheter för att komma åt filer i din hemkatalog.",
-    "interfacePageDescription": "Strikt begränsade program kommer att fråga dig innan du kommer åt filer och mappar. Den här funktionen är experimentell och kan ändras.",
     "interfacePageLinkReportIssues": "Rapportera problem",
     "diskEncryptionPageCopySemanticLabel": "Kopiera",
     "recoveryKeyExceptionDisallowedPathTitle": "Återställningsnyckelfilen kan inte sparas på en temporär plats",

@@ -115,7 +115,6 @@
     "recoveryKeyPinEntropyBelowOptimal": "CÓDIGO razoável, torne-o mais longo ou menos previsível para melhor segurança",
     "recoveryKeyPinEntropyOptimal": "CÓDIGO é longo o suficiente",
     "recoveryKeySomethingWentWrongHeader": "Ocorreu algo de errado",
-    "interfacePageDescription": "Aplicações estritamente confinadas irão perguntar-lhe antes de aceder aos ficheiros e pastas. Esta funcionalidade é experimental e está sujeita a alterações.",
     "diskEncryptionPageStoreYourKey": "O código de recuperação permite-lhe recuperar o acesso aos seus dados se o disco falhar para desbloquear durante o arranque. Guarde-o num local seguro.",
     "diskEncryptionPageReplaceDialogBody": "Guarde o código de recuperação num local seguro. Depois de substituí-lo, não poderá utilizar mais o código antigo.",
     "diskEncryptionPageReplaceDialogErrorBody": "Ocorreu algo de errado ao substituir o seu código de recuperação, o seu código antigo permanecerá válido.",

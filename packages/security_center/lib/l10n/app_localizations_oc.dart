@@ -120,10 +120,6 @@ class AppLocalizationsOc extends AppLocalizations {
   String get interfacePageTitle => 'Gerir las autorizacions';
 
   @override
-  String get interfacePageDescription =>
-      'Las aplicacions estrictament limitadas vos demandaràn abans d’accedir als archius e dossièrs. Aquesta foncionalitat es experimentala e portada a modificacion.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Ne saber mai';
 
   @override

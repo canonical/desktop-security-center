@@ -41,7 +41,6 @@
     "interfacePageLinkLearnMore": "더 알아보기",
     "interfacePageLinkGiveFeedback": "피드백 작성",
     "interfacePageLinkReportIssues": "이슈 보고",
-    "interfacePageDescription": "엄격하게 제한된 앱은 파일과 폴더에 액세스하기 전에 사용자에게 묻습니다. 이 기능은 실험적이며 추후 변경될 수 있습니다.",
     "interfaceSnapCount": "{n, plural, =0{앱 없음} =1{1개의 앱} other {{n}개의 앱}}",
     "@interfaceSnapCount": {
         "placeholders": {

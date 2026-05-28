@@ -49,7 +49,6 @@
             }
         }
     },
-    "interfacePageDescription": "Tiukasti rajoitetut sovellukset kysyvät lupaa ennen tiedostojen tai kansioiden käsittelyä. Tämä ominaisuus on kokeellinen ja saattaa muuttua.",
     "snapPermissionAccessLabel": "Pääsyoikeudet",
     "cameraRulesPageEmptyTileLabel": "Yksikään sovellus ei ole pyytänyt pääsyoikeuksia",
     "snapRulesResetAllPermissions": "Palauta kaikki oikeudet oletuksiin",

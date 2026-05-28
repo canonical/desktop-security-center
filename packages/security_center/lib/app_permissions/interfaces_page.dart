@@ -41,7 +41,6 @@ class _Body extends StatelessWidget {
               title: Text(l10n.snapPermissionsErrorTitle),
               child: Text(error.toString()),
             ),
-          Text(l10n.interfacePageDescription),
           const _Links(),
         ].separatedBy(const SizedBox(height: 8)),
         if (promptingStatus.isEnabled) ...[

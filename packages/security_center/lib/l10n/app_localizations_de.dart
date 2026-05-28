@@ -119,10 +119,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get interfacePageTitle => 'Berechtigungen verwalten';
 
   @override
-  String get interfacePageDescription =>
-      'Streng begrenzte Apps werden Sie fragen, bevor sie auf Dateien und Ordner zugreifen. Diese Funktion ist experimentell und kann sich noch ändern.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Mehr erfahren';
 
   @override

@@ -120,10 +120,6 @@ class AppLocalizationsGa extends AppLocalizations {
   String get interfacePageTitle => 'Bainistigh ceadanna';
 
   @override
-  String get interfacePageDescription =>
-      'Iarrfaidh aipeanna atá teoranta go docht ort roimh rochtain a fháil ar chomhaid agus ar fhillteáin. Tá an ghné seo turgnamhach agus faoi réir athruithe.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Foghlaim níos mó';
 
   @override

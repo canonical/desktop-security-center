@@ -20,7 +20,6 @@
     "snapRulesPageEmptyTileLabel": "Pas encore de règles",
     "snapRulesRemoveAll": "Supprimer toutes les règles",
     "interfacePageTitle": "Gérer permissions",
-    "interfacePageDescription": "Les applications limitées strictement vous demanderont avant d’accéder aux fichiers et dossiers. Cette fonctionnalité est expérimentale et sujète à modifications.",
     "snapRulesPageDescription": "Gérer autorisations {interface} pour {snap}.",
     "@snapRulesPageDescription": {
         "placeholders": {

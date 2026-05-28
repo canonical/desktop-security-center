@@ -118,10 +118,6 @@ class AppLocalizationsSk extends AppLocalizations {
   String get interfacePageTitle => 'Spravovať oprávnenia';
 
   @override
-  String get interfacePageDescription =>
-      'Aplikácie s prísnymi obmedzeniami budú žiadať o povolenie pred prístupom k súborom a priečinkom. Táto funkcia je experimentálna a môže sa meniť.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Zistiť viac';
 
   @override

@@ -121,10 +121,6 @@ class AppLocalizationsUk extends AppLocalizations {
   String get interfacePageTitle => 'Керувати дозволами';
 
   @override
-  String get interfacePageDescription =>
-      'Суворо обмежені застосунки запитуватимуть вас перед доступом до файлів і тек. Ця функція експериментальна і може бути змінена.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Докладніше';
 
   @override

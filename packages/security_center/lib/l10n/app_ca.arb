@@ -36,7 +36,6 @@
     "homeInterfacePageTitle": "Carpeta d'usuari",
     "homeInterfacePageDescription": "Administra els permisos per accedir als fitxers a la carpeta d'usuari.",
     "interfacePageTitle": "Administra els permisos",
-    "interfacePageDescription": "Les aplicacions confinades estrictament us demanaran abans d'accedir a fitxers i carpetes. Aquesta característica és experimental i està subjecta a canvis.",
     "interfacePageLinkLearnMore": "Apreneu més",
     "interfacePageLinkGiveFeedback": "Doneu retroacció",
     "interfacePageLinkReportIssues": "Informeu els problemes",

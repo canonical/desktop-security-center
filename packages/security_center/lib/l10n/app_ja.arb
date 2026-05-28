@@ -17,7 +17,6 @@
     "microphoneInterfacePageTitle": "マイク",
     "microphoneInterfacePageDescription": "アプリにマイクへのアクセスを許可する。",
     "interfacePageTitle": "パーミッションを管理",
-    "interfacePageDescription": "完全に閉じ込められたアプリはファイルやフォルダーにアクセスする前にあなたに尋ねます。この機能は実験的で変更される可能性があります。",
     "interfacePageLinkLearnMore": "詳しく知る",
     "interfacePageLinkGiveFeedback": "フィードバック",
     "interfacePageLinkReportIssues": "問題を報告",
