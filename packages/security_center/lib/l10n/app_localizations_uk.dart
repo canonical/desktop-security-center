@@ -608,8 +608,7 @@ class AppLocalizationsUk extends AppLocalizations {
       'Вимкнення Ubuntu Pro від\'єднає вашу підписку від цього комп’ютера. Продовжити?';
 
   @override
-  String get ubuntuProDisableError =>
-      'Could not disable Ubuntu Pro. Please try again.';
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
 
   @override
   String get ubuntuProEnable => 'Увімкнути';

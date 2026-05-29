@@ -611,8 +611,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Désactiver Ubuntu Pro détachera votre abonnement de cette machine. Voulez-vous continuer ?';
 
   @override
-  String get ubuntuProDisableError =>
-      'Could not disable Ubuntu Pro. Please try again.';
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
 
   @override
   String get ubuntuProEnable => 'Activer';

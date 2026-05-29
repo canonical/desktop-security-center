@@ -604,8 +604,7 @@ class AppLocalizationsPl extends AppLocalizations {
       'Wyłączenie Ubuntu Pro spowoduje odłączenie Twojej subskrypcji od tego komputera. Czy chcesz kontynuować?';
 
   @override
-  String get ubuntuProDisableError =>
-      'Could not disable Ubuntu Pro. Please try again.';
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
 
   @override
   String get ubuntuProEnable => 'Włącz';

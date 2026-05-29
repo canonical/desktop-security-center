@@ -603,8 +603,7 @@ class AppLocalizationsKa extends AppLocalizations {
       'Ubuntu Pro-ის გამორთვა გააუქმებს ამ მანქანის გამოწერას. გააგრძელებთ?';
 
   @override
-  String get ubuntuProDisableError =>
-      'Could not disable Ubuntu Pro. Please try again.';
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
 
   @override
   String get ubuntuProEnable => 'ჩართვა';

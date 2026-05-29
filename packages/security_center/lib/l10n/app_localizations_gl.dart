@@ -609,8 +609,7 @@ class AppLocalizationsGl extends AppLocalizations {
       'Desactivar Ubuntu Pro desvinculará a túa subscrición desta máquina. Queres continuar?';
 
   @override
-  String get ubuntuProDisableError =>
-      'Could not disable Ubuntu Pro. Please try again.';
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
 
   @override
   String get ubuntuProEnable => 'Activar';

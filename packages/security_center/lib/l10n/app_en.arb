@@ -265,7 +265,7 @@
             }
         }
     },
-    "ubuntuProMagicError": "Unable to enable Ubuntu Pro, please try again",
+    "ubuntuProMagicError": "Unable to enable Ubuntu Pro, try again",
     "ubuntuProEnableToken": "Enable with a token",
     "ubuntuProEnableTokenError": "Unable to enable Ubuntu Pro",
     "ubuntuProEnableTokenSubtitle": "From your IT admin or from {proLink}",
@@ -288,11 +288,11 @@
     "ubuntuProDisablePro": "Disable Ubuntu Pro",
     "ubuntuProDisable": "Disable",
     "ubuntuProDisablePrompt": "Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?",
-    "ubuntuProDisableError": "Could not disable Ubuntu Pro. Please try again.",
+    "ubuntuProDisableError": "Could not disable Ubuntu Pro, try again",
     "ubuntuProEnable": "Enable",
     "ubuntuProCancel": "Cancel",
-    "ubuntuProFeatureEnableError": "Could not enable the feature, please try again.",
-    "ubuntuProFeatureDisableError": "Could not disable the feature, please try again.",
+    "ubuntuProFeatureEnableError": "Could not enable the feature, try again.",
+    "ubuntuProFeatureDisableError": "Could not disable the feature, try again.",
     "ubuntuProCompliance": "Compliance and hardening",
     "ubuntuProComplianceDisclaimer": "Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.",
     "ubuntuProComplianceUSGTitle": "Ubuntu Security Guide (USG)",

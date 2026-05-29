@@ -598,8 +598,7 @@ class AppLocalizationsId extends AppLocalizations {
       'Menonaktifkan Ubuntu Pro akan melepaskan langganan Anda dari mesin ini. Apakah Anda ingin melanjutkan?';
 
   @override
-  String get ubuntuProDisableError =>
-      'Could not disable Ubuntu Pro. Please try again.';
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
 
   @override
   String get ubuntuProEnable => 'Aktifkan';

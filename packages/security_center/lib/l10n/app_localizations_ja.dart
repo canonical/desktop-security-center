@@ -567,8 +567,7 @@ class AppLocalizationsJa extends AppLocalizations {
       'Ubuntu Proを無効にするとこのマシンをサブスクリプションから除外することになります。継続しますか？';
 
   @override
-  String get ubuntuProDisableError =>
-      'Could not disable Ubuntu Pro. Please try again.';
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
 
   @override
   String get ubuntuProEnable => '有効';
