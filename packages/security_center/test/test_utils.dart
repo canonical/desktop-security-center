@@ -264,7 +264,22 @@ DiskEncryptionService registerMockDiskEncryptionService({
     }
     return;
   });
-  when(service.changePinPassphrase(any, any, any)).thenAnswer((_) async {
+  when(service.changePinPassphrase(any, any, any))
+      .thenAnswer((invocation) async {
+    final authMode = invocation.positionalArguments[0] as AuthMode;
+    final oldPass = invocation.positionalArguments[1] as String;
+    final newPass = invocation.positionalArguments[2] as String;
+
+    if (authMode == AuthMode.none) {
+      throw UnimplementedError();
+    }
+
+    if (oldPass.isEmpty || newPass.isEmpty) {
+      throw Exception(
+        'Mock change PIN/passphrase error: missing old or new value',
+      );
+    }
+
     if (changePinPassphraseError) {
       throw Exception('Mock change PIN/passphrase error');
     }
@@ -275,7 +290,26 @@ DiskEncryptionService registerMockDiskEncryptionService({
       passphrase: anyNamed('passphrase'),
       pin: anyNamed('pin'),
     ),
-  ).thenAnswer((_) async {
+  ).thenAnswer((invocation) async {
+    final authMode = invocation.namedArguments[#authMode] as AuthMode;
+    final passphrase = invocation.namedArguments[#passphrase] as String?;
+    final pin = invocation.namedArguments[#pin] as String?;
+
+    if (authMode == AuthMode.none && (pin != null || passphrase != null)) {
+      throw Exception(
+        'Mock replace platform key error: PIN or passphrase passed when removing auth (AuthMode.none)',
+      );
+    }
+
+    if (authMode == AuthMode.pin && (pin == null || pin.isEmpty)) {
+      throw Exception('Mock replace platform key error: missing PIN');
+    }
+
+    if (authMode == AuthMode.passphrase &&
+        (passphrase == null || passphrase.isEmpty)) {
+      throw Exception('Mock replace platform key error: missing passphrase');
+    }
+
     if (replacePlatformKeyError) {
       throw Exception('Mock replace platform key error');
     }
@@ -285,7 +319,15 @@ DiskEncryptionService registerMockDiskEncryptionService({
     if (entropyCheckError) {
       throw Exception('Mock entropy check error');
     }
+
+    final authMode = invocation.positionalArguments[0] as AuthMode;
     final newPass = invocation.positionalArguments[1] as String;
+    if (authMode == AuthMode.none) {
+      throw UnimplementedError();
+    }
+    if (newPass.isEmpty) {
+      throw Exception('Mock entropy check error: missing new PIN/passphrase');
+    }
     if (entropyResponseBuilder != null) {
       return entropyResponseBuilder(newPass);
     }
