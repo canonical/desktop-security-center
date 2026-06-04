@@ -119,10 +119,6 @@ class AppLocalizationsSv extends AppLocalizations {
   String get interfacePageTitle => 'Hantera behörigheter';
 
   @override
-  String get interfacePageDescription =>
-      'Strikt begränsade program kommer att fråga dig innan du kommer åt filer och mappar. Den här funktionen är experimentell och kan ändras.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Läs mer';
 
   @override

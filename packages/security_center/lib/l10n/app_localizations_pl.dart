@@ -123,10 +123,6 @@ class AppLocalizationsPl extends AppLocalizations {
   String get interfacePageTitle => 'Zarządzaj uprawnieniami';
 
   @override
-  String get interfacePageDescription =>
-      'Ściśle ograniczone programy będą pytać przed uzyskaniem dostępu do plików i katalogów. Ta funkcja jest eksperymentalna i może ulec zmianie.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Dowiedz się więcej';
 
   @override

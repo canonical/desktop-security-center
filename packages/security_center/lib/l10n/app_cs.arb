@@ -41,7 +41,6 @@
         }
     },
     "interfacePageTitle": "Spravovat oprávnění",
-    "interfacePageDescription": "Přísně omezené aplikace se vás před přístupem k souborům a složkám zeptají. Tato funkce je experimentální a podléhá změnám.",
     "interfaceSnapCount": "{n, plural, =0{žádné aplikace} =1{1 aplikace} other {{n} aplikací}}",
     "@interfaceSnapCount": {
         "placeholders": {

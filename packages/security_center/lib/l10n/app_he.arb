@@ -38,7 +38,6 @@
     "homeInterfacePageTitle": "תיקיית הבית",
     "interfacePageTitle": "ניהול הרשאות",
     "interfacePageLinkLearnMore": "מידע נוסף",
-    "interfacePageDescription": "יישומים מוגבלים באופן הדוק יבקשו ממך הרשאה בטרם גישה לקבצים ולתיקיות. היכולת הזאת ניסיונית ועלולה להשתנות.",
     "interfacePageLinkGiveFeedback": "שליחת משוב",
     "interfacePageLinkReportIssues": "דיווח על תקלות",
     "interfaceSnapCount": "{n, plural, =0{אין יישומים} =1{יישום אחד} other {{n} יישומים}}",

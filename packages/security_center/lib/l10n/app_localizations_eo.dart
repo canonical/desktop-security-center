@@ -119,10 +119,6 @@ class AppLocalizationsEo extends AppLocalizations {
   String get interfacePageTitle => 'Administri permesojn';
 
   @override
-  String get interfacePageDescription =>
-      'Strikte enfermitaj programoj petos vin antaŭ ol uzi dosierojn kaj dosierujojn. Tiu funkcio estas eksperimenta kaj eble modifota.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Lerni plu';
 
   @override

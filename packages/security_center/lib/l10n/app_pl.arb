@@ -14,7 +14,6 @@
     },
     "snapRulesRemoveAll": "Usuń wszystkie reguły",
     "interfacePageTitle": "Zarządzaj uprawnieniami",
-    "interfacePageDescription": "Ściśle ograniczone programy będą pytać przed uzyskaniem dostępu do plików i katalogów. Ta funkcja jest eksperymentalna i może ulec zmianie.",
     "interfacePageLinkLearnMore": "Dowiedz się więcej",
     "snapPermissionsExperimentalLabel": "Eksperymentalne",
     "snapPermissionsOtherDescription": "Możesz zarządzać pozostałymi uprawnieniami w Ustawienia › Programy.",

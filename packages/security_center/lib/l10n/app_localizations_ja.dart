@@ -112,10 +112,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get interfacePageTitle => 'パーミッションを管理';
 
   @override
-  String get interfacePageDescription =>
-      '完全に閉じ込められたアプリはファイルやフォルダーにアクセスする前にあなたに尋ねます。この機能は実験的で変更される可能性があります。';
-
-  @override
   String get interfacePageLinkLearnMore => '詳しく知る';
 
   @override

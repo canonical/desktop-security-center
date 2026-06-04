@@ -120,10 +120,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get interfacePageTitle => 'Gerir permissões';
 
   @override
-  String get interfacePageDescription =>
-      'Aplicações estritamente confinadas irão perguntar-lhe antes de aceder aos ficheiros e pastas. Esta funcionalidade é experimental e está sujeita a alterações.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Saber mais';
 
   @override
@@ -605,7 +601,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
 
   @override
   String get ubuntuProEnable => 'Enable';
@@ -813,10 +809,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get interfacePageTitle => 'Gerenciar permissões';
-
-  @override
-  String get interfacePageDescription =>
-      'Aplicativos com acesso restrito solicitarão sua permissão antes de acessar arquivos e pastas. Este recurso é experimental e está sujeito a alterações.';
 
   @override
   String get interfacePageLinkLearnMore => 'Saber mais';

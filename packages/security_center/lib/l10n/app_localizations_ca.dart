@@ -120,10 +120,6 @@ class AppLocalizationsCa extends AppLocalizations {
   String get interfacePageTitle => 'Administra els permisos';
 
   @override
-  String get interfacePageDescription =>
-      'Les aplicacions confinades estrictament us demanaran abans d\'accedir a fitxers i carpetes. Aquesta característica és experimental i està subjecta a canvis.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Apreneu més';
 
   @override
@@ -608,7 +604,7 @@ class AppLocalizationsCa extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
 
   @override
   String get ubuntuProEnable => 'Enable';

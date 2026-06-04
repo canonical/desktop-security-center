@@ -117,10 +117,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get interfacePageTitle => 'ניהול הרשאות';
 
   @override
-  String get interfacePageDescription =>
-      'יישומים מוגבלים באופן הדוק יבקשו ממך הרשאה בטרם גישה לקבצים ולתיקיות. היכולת הזאת ניסיונית ועלולה להשתנות.';
-
-  @override
   String get interfacePageLinkLearnMore => 'מידע נוסף';
 
   @override

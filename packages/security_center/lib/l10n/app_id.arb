@@ -38,7 +38,6 @@
     "snapRulesPageEmptyTileLabel": "Belum ada aturan",
     "homeInterfacePageTitle": "Folder rumah",
     "homeInterfacePageDescription": "Kelola izin untuk mengakses berkas di folder Rumah Anda.",
-    "interfacePageDescription": "Aplikasi yang ketat dibatasi akan bertanya sebelum mengakses berkas dan folder. Fitur ini eksperimen dan mungkin berubah.",
     "interfacePageLinkLearnMore": "Pelajari selengkapnya",
     "interfacePageLinkGiveFeedback": "Berikan umpan balik",
     "interfaceSnapCount": "{n, plural, =0{tidak ada aplikasi} =1{1 aplikasi} other {{n} aplikasi}}",

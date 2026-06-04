@@ -37,7 +37,6 @@
     "homeInterfacePageTitle": "Hjemmemappe",
     "homeInterfacePageDescription": "Håndtér rettigheder for filadgang i din hjemmemappe.",
     "interfacePageTitle": "Håndtér rettigheder",
-    "interfacePageDescription": "Strengt isolerede programmer vil spørge dig, før de får adgang til filer og mapper. Denne funktion er eksperimentel og kan ændres.",
     "interfacePageLinkLearnMore": "Læs mere",
     "interfacePageLinkGiveFeedback": "Giv feedback",
     "interfacePageLinkReportIssues": "Rapportér problemer",

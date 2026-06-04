@@ -119,10 +119,6 @@ class AppLocalizationsGl extends AppLocalizations {
   String get interfacePageTitle => 'Xestionar permisos';
 
   @override
-  String get interfacePageDescription =>
-      'As aplicacións limitadas estrictamente preguntaranche antes de acceder a ficheiros e cartafoles. Esta función é experimental e está suxeita a cambios.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Saber máis';
 
   @override

@@ -119,10 +119,6 @@ class AppLocalizationsEt extends AppLocalizations {
   String get interfacePageTitle => 'Halda õigusi';
 
   @override
-  String get interfacePageDescription =>
-      'Kui rakendus töötab rangelt seadistatud eraldatud konteineris, siis ta peab sult enne failide ja kaustade avamist luba küsima. See funktsionaalsus on veel katsejärgus ning selles võib tekkida muudatusi.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Loe lisaks';
 
   @override

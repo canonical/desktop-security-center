@@ -43,7 +43,6 @@
     "cameraInterfacePageTitle": "Câmera",
     "cameraInterfacePageDescription": "Permita que os aplicativos acessem suas câmeras.",
     "interfacePageTitle": "Gerenciar permissões",
-    "interfacePageDescription": "Aplicativos com acesso restrito solicitarão sua permissão antes de acessar arquivos e pastas. Este recurso é experimental e está sujeito a alterações.",
     "interfacePageLinkLearnMore": "Saber mais",
     "interfacePageLinkGiveFeedback": "Dê seu feedback",
     "interfacePageLinkReportIssues": "Reportar problemas",

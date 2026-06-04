@@ -119,10 +119,6 @@ class AppLocalizationsId extends AppLocalizations {
   String get interfacePageTitle => 'Kelola izin';
 
   @override
-  String get interfacePageDescription =>
-      'Aplikasi yang ketat dibatasi akan bertanya sebelum mengakses berkas dan folder. Fitur ini eksperimen dan mungkin berubah.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Pelajari selengkapnya';
 
   @override
@@ -599,7 +595,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
 
   @override
   String get ubuntuProEnable => 'Enable';

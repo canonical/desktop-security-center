@@ -299,7 +299,7 @@ abstract class AppLocalizations {
   /// No description provided for @snapPermissionsEnableTitle.
   ///
   /// In en, this message translates to:
-  /// **'Require apps to ask for system permissions'**
+  /// **'Require sandboxed apps to ask for permissions'**
   String get snapPermissionsEnableTitle;
 
   /// No description provided for @snapPermissionsEnableWarning.
@@ -329,7 +329,7 @@ abstract class AppLocalizations {
   /// No description provided for @snapPermissionsOtherDescription.
   ///
   /// In en, this message translates to:
-  /// **'You can manage other permissions in Settings › Applications.'**
+  /// **'You can manage other permissions in Settings › Apps.'**
   String get snapPermissionsOtherDescription;
 
   /// No description provided for @snapPermissionsPageTitle.
@@ -421,12 +421,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Manage permissions'**
   String get interfacePageTitle;
-
-  /// No description provided for @interfacePageDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Strictly confined apps will ask you before accessing files and folders. This feature is experimental and subject to changes.'**
-  String get interfacePageDescription;
 
   /// No description provided for @interfacePageLinkLearnMore.
   ///
@@ -1223,7 +1217,7 @@ abstract class AppLocalizations {
   /// No description provided for @ubuntuProDisablePrompt.
   ///
   /// In en, this message translates to:
-  /// **'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?'**
+  /// **'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?'**
   String get ubuntuProDisablePrompt;
 
   /// No description provided for @ubuntuProEnable.

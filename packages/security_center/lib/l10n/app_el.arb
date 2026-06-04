@@ -55,7 +55,6 @@
     "cameraInterfacePageDescription": "Να επιτρέπεται στις εφαρμογές να έχουν πρόσβαση στις κάμερές σας.",
     "microphoneInterfacePageTitle": "Μικρόφωνο",
     "microphoneInterfacePageDescription": "Να επιτρέπεται στις εφαρμογές να έχουν πρόσβαση στο μικρόφωνό σας.",
-    "interfacePageDescription": "Οι εφαρμογές με αυστηρό περιορισμό θα σας ζητούν άδεια πριν αποκτήσουν πρόσβαση σε αρχεία και φακέλους. Αυτή η λειτουργία είναι πειραματική και υπόκειται σε αλλαγές.",
     "interfacePageLinkGiveFeedback": "Υποβολή σχολίων",
     "interfaceSnapCount": "{n, plural, =0{καμία εφαρμογή} =1{1 εφαρμογή} other{{n} εφαρμογές}}",
     "@interfaceSnapCount": {

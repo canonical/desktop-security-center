@@ -22,7 +22,6 @@
     "homeInterfacePageTitle": "Домашня тека",
     "homeInterfacePageDescription": "Керувати дозволами на доступ до файлів у теці «Домівка».",
     "interfacePageTitle": "Керувати дозволами",
-    "interfacePageDescription": "Суворо обмежені застосунки запитуватимуть вас перед доступом до файлів і тек. Ця функція експериментальна і може бути змінена.",
     "interfacePageLinkLearnMore": "Докладніше",
     "interfacePageLinkGiveFeedback": "Надіслати відгук",
     "interfacePageLinkReportIssues": "Повідомити про проблеми",

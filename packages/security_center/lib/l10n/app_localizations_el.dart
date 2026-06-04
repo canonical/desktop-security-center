@@ -121,10 +121,6 @@ class AppLocalizationsEl extends AppLocalizations {
   String get interfacePageTitle => 'Διαχείριση αδειών';
 
   @override
-  String get interfacePageDescription =>
-      'Οι εφαρμογές με αυστηρό περιορισμό θα σας ζητούν άδεια πριν αποκτήσουν πρόσβαση σε αρχεία και φακέλους. Αυτή η λειτουργία είναι πειραματική και υπόκειται σε αλλαγές.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Μάθετε περισσότερα';
 
   @override

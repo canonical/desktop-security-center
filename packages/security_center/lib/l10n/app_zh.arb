@@ -23,7 +23,6 @@
     "homeInterfacePageTitle": "主文件夹",
     "homeInterfacePageDescription": "管理访问您主文件夹中文件的权限。",
     "interfacePageTitle": "管理权限",
-    "interfacePageDescription": "严格受限的应用将会在访问文件和文件夹前询问您的授权。此功能系实验性功能且可能会在日后更改。",
     "interfacePageLinkLearnMore": "了解更多",
     "interfacePageLinkGiveFeedback": "意见反馈",
     "interfacePageLinkReportIssues": "报告问题",

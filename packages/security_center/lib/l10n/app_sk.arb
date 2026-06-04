@@ -49,7 +49,6 @@
             }
         }
     },
-    "interfacePageDescription": "Aplikácie s prísnymi obmedzeniami budú žiadať o povolenie pred prístupom k súborom a priečinkom. Táto funkcia je experimentálna a môže sa meniť.",
     "diskEncryptionPageRecoveryKey": "Obnovovací kľúč",
     "diskEncryptionPageLearnMore": "Zistiť viac o šifrovaní podporovanom hardvérom",
     "diskEncryptionPageValidKey": "Platný kľúč",

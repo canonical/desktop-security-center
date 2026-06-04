@@ -38,7 +38,6 @@
     },
     "snapPermissionWriteLabel": "Schreiben",
     "snapPermissionsEnableWarning": "Dies ist eine experimentelle Funktion zur Kontrolle des Zugriffs auf die Ressourcen Ihres Systems.",
-    "interfacePageDescription": "Streng begrenzte Apps werden Sie fragen, bevor sie auf Dateien und Ordner zugreifen. Diese Funktion ist experimentell und kann sich noch ändern.",
     "snapPermissionsEnablingLabel": "Wird aktiviert, dies kann einige Sekunden dauern ...",
     "snapPermissionsOtherDescription": "Sie können andere Berechtigungen unter Einstellungen › Anwendungen verwalten.",
     "snapRulesCount": "{n, plural, =0{keine Regeln} =1{1 Regel} other{{n} Regeln}}",

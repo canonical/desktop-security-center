@@ -121,10 +121,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get interfacePageTitle => 'Управление разрешениями';
 
   @override
-  String get interfacePageDescription =>
-      'Строго ограниченные приложения будут спрашивать Вас, прежде чем получить доступ к файлам и папкам. Эта функция является экспериментальной и может быть изменена.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Подробнее';
 
   @override

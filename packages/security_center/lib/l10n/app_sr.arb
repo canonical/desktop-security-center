@@ -46,7 +46,6 @@
     "snapPermissionsPageTitle": "Дозволе апликација",
     "snapRulesRemoveAll": "Уклони сва правила",
     "interfacePageTitle": "Управљај дозволама",
-    "interfacePageDescription": "Строго ограничене апликације ће вас питати пре приступа фајловима и фолдерима. Ова функција је експериментална и подложна променама.",
     "interfacePageLinkLearnMore": "Сазнајте више",
     "interfacePageLinkGiveFeedback": "Дајте повратне информације",
     "interfacePageLinkReportIssues": "Пријавите проблеме"

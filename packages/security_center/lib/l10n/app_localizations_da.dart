@@ -118,10 +118,6 @@ class AppLocalizationsDa extends AppLocalizations {
   String get interfacePageTitle => 'Håndtér rettigheder';
 
   @override
-  String get interfacePageDescription =>
-      'Strengt isolerede programmer vil spørge dig, før de får adgang til filer og mapper. Denne funktion er eksperimentel og kan ændres.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Læs mere';
 
   @override
@@ -595,7 +591,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
 
   @override
   String get ubuntuProEnable => 'Enable';

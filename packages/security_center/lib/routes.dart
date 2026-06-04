@@ -84,7 +84,7 @@ enum Routes {
         _ => l10n.snapPermissionsPageTitle,
       };
   static IconData _appPermissionsIcon(bool selected) =>
-      selected ? YaruIcons.key_filled : YaruIcons.key;
+      selected ? YaruIcons.app_grid : YaruIcons.app_grid;
 
   // Disk Encryption
   static Widget _diskEncryptionBuilder(
@@ -100,7 +100,7 @@ enum Routes {
       l10n.diskEncryptionPageTitle;
 
   static IconData _diskEncryptionIcon(bool selected) =>
-      selected ? YaruIcons.drive_harddisk_filled : YaruIcons.drive_harddisk;
+      selected ? YaruIcons.lock_filled : YaruIcons.lock;
 
   // Ubuntu Pro
   static Widget _ubuntuProBuilder(
@@ -116,7 +116,7 @@ enum Routes {
       l10n.ubuntuProPageTitle;
 
   static IconData _ubuntuProIcon(bool selected) =>
-      selected ? YaruIcons.ubuntu_logo_simple : YaruIcons.drive_harddisk;
+      selected ? YaruIcons.ubuntu_logo_simple : YaruIcons.ubuntu_logo_simple;
 
   static (String route, Map<String, String> queryParameters) _parseName(
     String name,
@@ -139,8 +139,13 @@ enum Routes {
     return Routes.fromRoute(route).title(l10n, queryParameters);
   }
 
-  static YaruMasterTileBuilder get tileBuilder =>
-      (context, index, selected, availableWidth) => YaruMasterTile(
+  static YaruMasterTileBuilder get tileBuilder => (
+        context,
+        index,
+        selected,
+        availableWidth,
+      ) =>
+          YaruMasterTile(
             leading: Icon(availableRoutes[index].icon?.call(selected)),
             title: Text(
               availableRoutes[index].title(AppLocalizations.of(context)),

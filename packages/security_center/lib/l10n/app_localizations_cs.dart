@@ -120,10 +120,6 @@ class AppLocalizationsCs extends AppLocalizations {
   String get interfacePageTitle => 'Spravovat oprávnění';
 
   @override
-  String get interfacePageDescription =>
-      'Přísně omezené aplikace se vás před přístupem k souborům a složkám zeptají. Tato funkce je experimentální a podléhá změnám.';
-
-  @override
   String get interfacePageLinkLearnMore => 'Dozvědět se více';
 
   @override

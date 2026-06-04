@@ -122,10 +122,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get interfacePageTitle => 'Gérer permissions';
 
   @override
-  String get interfacePageDescription =>
-      'Les applications limitées strictement vous demanderont avant d’accéder aux fichiers et dossiers. Cette fonctionnalité est expérimentale et sujète à modifications.';
-
-  @override
   String get interfacePageLinkLearnMore => 'En savoir plus';
 
   @override

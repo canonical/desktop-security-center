@@ -16,7 +16,6 @@
             }
         }
     },
-    "interfacePageDescription": "Las aplicaciones estrictamente confinadas le preguntarán antes de acceder a archivos y carpetas. Esta funcionalidad es experimental y está sujeta a cambios.",
     "interfacePageLinkLearnMore": "Más información",
     "interfacePageLinkGiveFeedback": "Dar su opinión",
     "interfacePageLinkReportIssues": "Informar de problemas",

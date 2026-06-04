@@ -118,10 +118,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get interfacePageTitle => 'إدارة الأذونات';
 
   @override
-  String get interfacePageDescription =>
-      'ستطلب منك التطبيقات ذات القيود الصارمة قبل الوصول إلى الملفات والمجلدات. هذه الميزة تجريبية وقابلة للتغيير.';
-
-  @override
   String get interfacePageLinkLearnMore => 'التعرف على المزيد';
 
   @override
@@ -600,7 +596,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
 
   @override
   String get ubuntuProEnable => 'Enable';

@@ -112,10 +112,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get interfacePageTitle => '管理权限';
 
   @override
-  String get interfacePageDescription =>
-      '严格受限的应用将会在访问文件和文件夹前询问您的授权。此功能系实验性功能且可能会在日后更改。';
-
-  @override
   String get interfacePageLinkLearnMore => '了解更多';
 
   @override
@@ -563,7 +559,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?';
+      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
 
   @override
   String get ubuntuProEnable => 'Enable';
@@ -768,10 +764,6 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get interfacePageTitle => '管理權限';
-
-  @override
-  String get interfacePageDescription =>
-      '受嚴格限制的應用程式會在存取檔案和資料夾之前詢問您。此功能是實驗性的，可能會改變。';
 
   @override
   String get interfacePageLinkLearnMore => '了解更多';

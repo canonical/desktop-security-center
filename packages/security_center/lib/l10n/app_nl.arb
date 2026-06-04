@@ -1,5 +1,4 @@
 {
-    "interfacePageDescription": "Strikt beperkte apps zullen toestemming vragen voordat ze toegang krijgen tot bestanden en mappen. Deze functie is experimenteel en onderhevig aan wijzigingen.",
     "appTitle": "Beveiligingscentrum",
     "snapdRuleCategorySessionAllowed": "Toestaan tot afmelding",
     "snapdRuleCategorySessionDenied": "Weigeren tot afmelding",
