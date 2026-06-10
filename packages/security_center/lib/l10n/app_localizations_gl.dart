@@ -62,7 +62,7 @@ class AppLocalizationsGl extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Permisos da aplicación';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Algo fallou';
 
   @override
   String snapRulesCount(int n) {
@@ -261,11 +261,11 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Faiou a comprobación do estado do cifrado deste ordenador.';
+      'Faiou a comprobación do estado do cifrado deste computador.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'A configuración do TPM do seu ordenador non está nun estado compatible.';
+      'A configuración do TPM do seu computador non está nun estado compatible.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
@@ -303,7 +303,7 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'Terás que introducir o teu PIN cada vez que se inicie o ordenador. Este PIN é diferente da contrasinal do usuario.';
+      'Terás que introducir o teu PIN cada vez que se inicie o computador. Este PIN é diferente da contrasinal do usuario.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
@@ -311,7 +311,7 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'Terás que introducir a frase de paso cada vez que se inicie o ordenador. Esta frase de paso é diferente do teu contrasinal de usuario.';
+      'Terás que introducir a frase de paso cada vez que se inicie o computador. Esta frase de paso é diferente do teu contrasinal de usuario.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
@@ -323,7 +323,7 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'Podes definir unha frase de paso ou un PIN para maior seguridade. Terás que introducilo cada vez que se inicie o ordenador.';
+      'Podes definir unha frase de paso ou un PIN para maior seguridade. Terás que introducilo cada vez que se inicie o computador.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityLearnMore => 'Saber máis';
@@ -394,7 +394,7 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'As chaves de cifrado almacénanse no módulo de plataforma fiable (TPM) do teu ordenador.';
+      'As chaves de cifrado almacénanse no módulo de plataforma fiable (TPM) do teu computador.';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
@@ -409,7 +409,7 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'Necesita introducir a frase de paso cada vez que arranque o ordenador.';
+      'Necesita introducir a frase de paso cada vez que arranque o computador.';
 
   @override
   String get recoveryKeyPassphraseButton => 'Cambiar a frase de paso...';
@@ -450,7 +450,7 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get recoveryKeyPinBody =>
-      'Necesitas introducir o teu PIN cada vez que se inicie o ordenador.';
+      'Necesitas introducir o teu PIN cada vez que se inicie o computador.';
 
   @override
   String get recoveryKeyPinButton => 'Cambiar PIN...';
@@ -547,7 +547,7 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Seguranza e cumprimento de normas empresariais para o teu ordenador. Sempre gratuíto para uso persoal. $learnMoreLink';
+    return 'Seguranza e cumprimento de normas empresariais para o teu computador. Sempre gratuíto para uso persoal. $learnMoreLink';
   }
 
   @override
@@ -677,14 +677,14 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM ofrece 10 anos de parches de seguranza para máis de 25.000 paquetes de código aberto. Obtén unha xestión continua de vulnerabilidades para CVE críticos, altos e medios.';
+      'ESM ofrece 10 anos de parches de seguranza para todo o arquivo de Ubuntu. Obtén unha xestión continua de vulnerabilidades para CVE críticos, altos e medios seleccionados.';
 
   @override
   String get ubuntuProESMMainTitle => 'Paquetes principais (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Actualizacións de seguranza para 2.300 paquetes principais de Ubuntu ata $year';
+    return 'Actualizacións de seguranza para os paquetes principais de Ubuntu ata $year';
   }
 
   @override
@@ -692,7 +692,7 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Actualizacións adicionais de seguranza para máis de 23.000 paquetes Ubuntu Universe ata $year';
+    return 'Actualizacións de seguranza adicionais para os paquetes de Ubuntu Universe ata $year';
   }
 
   @override

@@ -21,19 +21,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Permitir siempre';
 
   @override
-  String get snapdRuleCategoryForeverDenied => 'Rechazar siempre';
+  String get snapdRuleCategoryForeverDenied => 'Denegar siempre';
 
   @override
-  String get snapPermissionReadLabel => 'Leer';
+  String get snapPermissionReadLabel => 'Lectura';
 
   @override
-  String get snapPermissionWriteLabel => 'Escribir';
+  String get snapPermissionWriteLabel => 'Escritura';
 
   @override
-  String get snapPermissionExecuteLabel => 'Ejecutar';
+  String get snapPermissionExecuteLabel => 'Ejecución';
 
   @override
-  String get snapPermissionAccessLabel => 'Acceder';
+  String get snapPermissionAccessLabel => 'Acceso';
 
   @override
   String get snapPermissionsEnableTitle =>
@@ -62,7 +62,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Permisos de la aplicación';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Ocurrió un problema';
 
   @override
   String snapRulesCount(int n) {
@@ -258,11 +258,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'La configuración de la encriptación no está disponible';
+      'La configuración del cifrado no está disponible';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Ha fallado la comprobación del estado de encriptado de este equipo.';
+      'No se pudo recuperar el estado de cifrado de este equipo.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
@@ -390,16 +390,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get recoveryKeyFilePickerFilter => 'Archivos de texto';
 
   @override
-  String get recoveryKeyTPMEnabled =>
-      'Está habilitada la encriptación con soporte de hardware';
+  String get recoveryKeyTPMEnabled => 'El cifrado mecamático está activado';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'Las claves de encriptación se almacenan en el módulo de plataforma de confianza (TPM) del ordenador.';
+      'Las claves de cifrado se almacenan en el módulo de plataforma seguro (TPM) del equipo.';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Más información sobre la encriptación con soporte de hardware';
+      'Más información sobre el cifrado mecamático';
 
   @override
   String get recoveryKeyPassphraseEnabled =>
@@ -589,12 +588,12 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'Desde su administrador de TI o desde $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'Obtenga un token de Ubuntu Pro desde su administrador o desde $proLink';
   }
 
   @override
@@ -629,7 +628,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'Solo se recomienda para asistir con requisitos de FedRAMP, HIPAA y otros estándares de cumplimiento y seguridad.';
 
   @override
   String get ubuntuProComplianceUSGTitle => 'Guía de seguridad de Ubuntu (USG)';
@@ -643,7 +642,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'Certificación de módulos criptográficos de los gobiernos de EE. UU. y Canadá sobre el cumplimiento del estándar de protección de datos FIPS 140-2.';
 
   @override
   String get ubuntuProComplianceFIPSEnable => 'Activar FIPS';
@@ -661,14 +660,14 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'Instala paquetes validados ante FIPS 140-2 y permite actualizaciones de seguridad periódicas.';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdates => 'FIPS sin actualizaciones';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'Instala paquetes validados ante FIPS 140-2. No se actualizarán hasta la próxima recertificación.';
 
   @override
   String get ubuntuProComplianceDocumentation =>

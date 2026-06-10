@@ -694,3 +694,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ubuntuProLivepatchShowTitle =>
       'Show Livepatch status in the top bar';
 }
+
+/// The translations for English, as used in the United Kingdom (`en_GB`).
+class AppLocalizationsEnGb extends AppLocalizationsEn {
+  AppLocalizationsEnGb() : super('en_GB');
+}

@@ -62,7 +62,7 @@ class AppLocalizationsKa extends AppLocalizations {
   String get snapPermissionsPageTitle => 'აპის წვდომები';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'რაღაც არასწორია';
 
   @override
   String snapRulesCount(int n) {
@@ -108,11 +108,11 @@ class AppLocalizationsKa extends AppLocalizations {
       'აპებისთვის კამერაზე წვდომის უფლების მიცემა.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'მიკროფონი';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'აპებისთვის თქვენს მიკროფონთან წვდომის მიცემა.';
 
   @override
   String get interfacePageTitle => 'წვდომების მართვა';
@@ -523,184 +523,183 @@ class AppLocalizationsKa extends AppLocalizations {
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+      'Ubuntu-ის ამ ვერსიისთვის Ubuntu ხელმისაწვდომი არაა';
 
   @override
-  String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+  String get ubuntuProNotSupportedDetails => 'Ubuntu Pro ითხოვს LTS გამოცემას';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'snapd-ის ამ ვერსიას Ubuntu Pro-ის მხარდაჭერა არ გააჩნია';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'Ubuntu Pro-ის სამართავად განაახლეთ snapd';
 
   @override
   String get ubuntuProEnabled => 'Ubuntu Pro ჩართულია';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'საწარმოო დონის უსაფრთხოება და სტანდარტებთან თავსებადობა თქვენი კომპიუტერისთვის. ყოველთვის უფასო პირადი გამოყენებისთვის. $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore => 'გაიგეთ მეტი Ubunu Pro-ის შესახებ';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Ubuntu Pro-ის ჩართვა';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'ჩართვა Ubuntu One ანგარიშთან ერთად';
 
   @override
   String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+      'ანგარიშის შექმნა უფასოდ შეგეძლებათ';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+      'შედით თქვენი Ubuntu One-ის ანგარიშით, ან შექმენით ის უფასოდ.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => 'ბრაუზერში გაგრძელება';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return 'შეგიძლიათ, შეხვიდეთ მისამართზე $attachLink და შეიყვანოთ კოდი $attachCode';
   }
 
   @override
   String get ubuntuProMagicError =>
-      'Unable to enable Ubuntu Pro, please try again';
+      'Ubuntu Pro-ის ჩართვა შეუძლებელია. კიდევ სცადეთ';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'ჩართვა ტოკენით';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError => 'Ubuntu Pro-ის ჩართვა შეუძლებელია';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'თქვენი IT ადმინისტრატორისგან, ან ბმულიდან $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'მიიღეთ Ubuntu Pro-ის ტოკენი თქვენი ადმინისტრატორისგან, ან ბმულიდან $proLink';
   }
 
   @override
-  String get ubuntuProTokenLabel => 'Token';
+  String get ubuntuProTokenLabel => 'ტოკენი';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Ubuntu Pro-ის გამორთვა';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => 'გამორთვა';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
+      'Ubuntu Pro-ის გამორთვა გააუქმებს ამ მანქანის გამოწერას. გააგრძელებთ?';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => 'ჩართვა';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'გაუქმება';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, please try again.';
+      'ამ ფუნქციის ჩართვა შეუძლებელია. კიდევ სცადეთ.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, please try again.';
+      'ამ ფუნქციის გამორთვა შეუძლებელია. კიდევ სცადეთ.';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance => 'თავსებადობა და გაძლიერება';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'მხოლოდ, რეკომენდებულია, FedRAMP, HIPAA და სხვა სტანდარტებთან თავსებადობისა და უსაფრთხოების გაძლიერების მოთხოვნებისთვის.';
 
   @override
-  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+  String get ubuntuProComplianceUSGTitle =>
+      'Ubuntu-ის უსაფრთხოების სახელმძღვანელო (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'ახდენს უსაფრთხოების გაძლიერებისა და აუდიტის ავტომატიზაციას CIS წარმადობის შემოწმებითა და DISA-STIG პროფილით გარემოზე დამოკიდებული ცვლილებების შეტანის საშუალებით.';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'აშშ-ისა და კანადის მთავრობების კრიპტოგრაფიული მოდულის სერტიფიკაცია FIPS 140-2 მონაცემების დაცვის სტანდარტებთან თავსებადობის შესახებ.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'FIPS-ის ჩართვა';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'FIPS-ის ჩართვა შეუქცევადია და Livepatch სამუდამოდ გაითიშება.';
 
   @override
-  String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+  String get ubuntuProComplianceFIPSPrompt => 'აირჩიეთ სასურველი FIPS არჩევანი';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS განახლებებით';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'დააყენებს FIPS 140-2-ით გადამოწმებულ პაკეტებს და საშუალებას იძლევა, უსაფრთხოება რეგულარულად განახლდეს.';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS განახლებების გარეშე';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'დააყენებს FIPS 140-2-ით გადამოწმებულ პაკეტებს. ესენი არ განახლდება შემდეგ რესერტიფიკაციამდე.';
 
   @override
   String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+      'უსაფრთხოების თავსებადობის დოკუმენტაცია';
 
   @override
-  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+  String get ubuntuProESMTitle => 'გაფართოებული უსაფრთხოების რემონტი (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for the entire Ubuntu Archive. Get continuous vulnerability management for critical, high and selected medium CVEs.';
+      'ESM მოგაწვდით 10-წლიან უსაფრთხოების Ubuntu-ის სრული არქივისთვის. მიიღეთ უწყვეტი მოწყვლადობის მართვა კრიტიკული, მაღალი და საშუალო CVE-ებისთვის.';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'მთავარი პაკეტები (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for Ubuntu Main packages until $year';
+    return 'უსაფრთხოების განახლებები Ubuntu-ის მთავარი პაკეტებისთვის $year-მდე';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'უნივერსალური პაკეტები (esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for Ubuntu Universe packages until $year';
+    return 'დამატებითი უსაფრთხოების განახლებები Ubuntu Universe-ის პაკეტებისთვის $year-მდე';
   }
 
   @override
-  String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
+  String get ubuntuProLivepatchTitle => 'ბირთვის Livepatch';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'Livepatch-ის ჩართვა';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'ბირთვის უსაფრთხოების განახლებების გადატარება სისტემის გამორთვის გარეშე';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+      'Livepatch-ის სტატუსის ჩვენება ზედა პანელზე';
 }

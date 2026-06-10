@@ -61,15 +61,16 @@ class AppLocalizationsSk extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Oprávnenia aplikácie';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Niečo sa pokazilo';
 
   @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: 'pravidlá ($n)',
-      one: 'pravidlo (1)',
+      other: '$n pravidiel',
+      few: '$n pravidlá',
+      one: '1 pravidlo',
       zero: 'žiadne pravidlá',
     );
     return '$_temp0';
@@ -131,8 +132,9 @@ class AppLocalizationsSk extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: 'aplikácie ($n)',
-      one: 'aplikácia (1)',
+      other: '$n aplikácií',
+      few: '$n aplikácie',
+      one: '1 aplikácia',
       zero: 'žiadne aplikácie',
     );
     return '$_temp0';
@@ -351,11 +353,11 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Súbor s obnovovacím kľúčom nebol uložený';
+      'Súbor kľúča na obnovenie nebol uložený';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Súbor s obnovovacím kľúčom sa nedá uložiť do dočasného priečinka';
+      'Súbor kľúča na obnovenie nemožno uložiť do dočasného umiestnenia';
 
   @override
   String get recoveryKeyExceptionUnknownTitle => 'Neznáma chyba';
@@ -370,14 +372,14 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'Nemáte oprávnenie zapisovať do tohto priečinka. Skúste iné umiestnenie alebo použite inú metódu.';
+      'Nemáte oprávnenie na zápis do tohto priečinka. Skúste iné umiestnenie alebo použite inú metódu.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Skúste iné umiestnenie, napríklad vymeniteľnú jednotku, alebo použite inú metódu.';
+      'Skúste iné umiestnenie, napríklad vymeniteľný disk, alebo použite inú metódu.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Uložiť súbor obnovovacieho kľúča';
+  String get recoveryKeyFilePickerTitle => 'Uložiť súbor kľúča na obnovenie';
 
   @override
   String get recoveryKeyFilePickerFilter => 'Textové súbory';
@@ -668,14 +670,14 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM poskytuje 10 rokov bezpečnostných aktualizácií pre viac než 25 000 open‑source balíkov a priebežnú správu zraniteľností pre kritické, vysoké a stredné CVE.';
+      'ESM poskytuje bezpečnostné opravy na 10 rokov pre celý Archív Ubuntu. Získajte nepretržité riadenie zraniteľností pre kritické, vysoké a vybrané stredné CVE.';
 
   @override
   String get ubuntuProESMMainTitle => 'Hlavné balíky (esm‑infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Bezpečnostné aktualizácie pre 2 300 balíkov z Ubuntu Main do roku $year';
+    return 'Bezpečnostné aktualizácie pre balíky Ubuntu Main do roku $year';
   }
 
   @override
@@ -683,7 +685,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Dodatočné bezpečnostné aktualizácie pre viac než 23 000 balíkov z Ubuntu Universe do roku $year';
+    return 'Dodatočné bezpečnostné aktualizácie pre balíky Ubuntu Universe do roku $year';
   }
 
   @override

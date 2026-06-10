@@ -62,7 +62,7 @@ class AppLocalizationsUg extends AppLocalizations {
   String get snapPermissionsPageTitle => 'ئەپ ئىجازىتى';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'خاتالىق كۆرۈلدى';
 
   @override
   String snapRulesCount(int n) {
@@ -627,78 +627,77 @@ class AppLocalizationsUg extends AppLocalizations {
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'CIS ئۆلچەك ۋە DISA-STIG سەپلىمە ھۆججەت ئارقىلىق ئۆزلۈكىدىن ئىجرا قىلىش سىستېمىسىنى كۈچەيتىش ۋە تەكشۈرۈشنى ئاپتوماتلاشتۇرىدۇ، شۇنىڭ بىلەن بىللە مۇھىم ئۆزگەرگۈچىسىنى ئالاھىدە خاسلاشتۇرۇشقا يول قويىدۇ.';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'ئامېرىكا ۋە كانادا ھۆكۈمىتىنىڭ FIPS 140-2 سانلىق مەلۇمات قوغداش ئۆلچىمىگە ماس كېلىدىغان شىفىرلاش مودېلىغا تارقاتقان گۇۋاھنامىسى.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'FIPS نى قوزغات';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'FIPS قوزغىتىلغاندىن كېيىن كەينىگە ياندۇرغىلى بولمايدۇ، Livepatch مەڭگۈلۈك چەكلىنىدۇ.';
 
   @override
   String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+      'FIPS تاللانمىسىنىڭ مايىللىقى تاللىنىدۇ';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS ۋە يېڭىلاش';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'FIPS 140-2 دەلىللەشتىن ئۆتكەن بوغچىنى ئورنىتىپ قەرەللىك ھالدا بىخەتەرلىك يېڭىلىنىشى ئورنىتىشقا يول قويىدۇ.';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'يېڭىلانمىغان FIPS';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'FIPS 140-2 دەلىللەشتىن ئۆتكەن بوغچىنى ئورنىتىدۇ. بۇلار كېيىنكى قېتىم قايتىدىن گۇۋاھنامە دەلىللەنمىگۈچە يېڭىلانمايدۇ.';
 
   @override
-  String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+  String get ubuntuProComplianceDocumentation => 'بىخەتەرلىككە ئۇيغۇن قوللانما';
 
   @override
-  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+  String get ubuntuProESMTitle => 'كېڭەيتىلگەن بىخەتەرلىك ئاسراش (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for the entire Ubuntu Archive. Get continuous vulnerability management for critical, high and selected medium CVEs.';
+      'كېڭەيتىلگەن بىخەتەرلىك ئاسراش (ESM) پۈتكۈل Ubuntu ئارخىپىغا 10 يىل بىخەتەرلىك يامىقى تەمىنلەيدۇ. خەتەرلىك، يۇقىرى ۋە ئوتتۇرىھال دەرىجىدىكى كۆپ كۆرۈلىدىغان ئاجىزلىق باھالاش سىستېمىسىدىكى نومۇرىغا ئاساسەن ئۈزلۈكسىز ئاجىزلىق باشقۇرۇش مۇلازىمىتىگە ئېرىشىڭ.';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'ئاساسىي بوغچا (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for Ubuntu Main packages until $year';
+    return 'Ubuntu ئاساسىي بوغچىسى ئۈچۈن $year غىچە بىخەتەرلىك يېڭىلىنىشى';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'Universe بوغچا (esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for Ubuntu Universe packages until $year';
+    return 'Ubuntu Universe بوغچىغا $year غىچە قوشۇمچە بىخەتەرلىك يېڭىلىنىشى';
   }
 
   @override
-  String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
+  String get ubuntuProLivepatchTitle => 'يادرو شۇئان ياماق';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'شۇئان ياماقنى قوزغات';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'سىستېما ئىجرا قىلىنىۋاتقاندا يادرونىڭ بىخەتەرلىك يېڭىلىنىشىنى قوللىنىدۇ';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+      'شۇئان ياماق ھالىتىنى چوققا بالداقتا كۆرسىتىدۇ';
 }

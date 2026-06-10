@@ -61,7 +61,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get snapPermissionsPageTitle => 'הרשאות יישום';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'משהו השתבש';
 
   @override
   String snapRulesCount(int n) {
@@ -663,7 +663,7 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'עדכוני אבטחה לכ־2,300 חבילות עיקריות של אובונטו עד $year';
+    return 'עדכוני אבטחה לחבילות עיקריות של אובונטו עד $year';
   }
 
   @override
@@ -671,7 +671,7 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'עדכוני אבטחה נוספים ליותר מ־23,000 חבילות יוניברס באובונטו עד $year';
+    return 'עדכוני אבטחה נוספים לחבילות יוניברס באובונטו עד $year';
   }
 
   @override

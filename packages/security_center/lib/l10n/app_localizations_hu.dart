@@ -60,10 +60,10 @@ class AppLocalizationsHu extends AppLocalizations {
       'Az egyéb jogosultságokat a Beállítások › Alkalmazások lapon kezelheti.';
 
   @override
-  String get snapPermissionsPageTitle => 'Alkalmazás jogosultságai';
+  String get snapPermissionsPageTitle => 'Alkalmazásjogosultságok';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Valami probléma történt';
 
   @override
   String snapRulesCount(int n) {
@@ -384,7 +384,7 @@ class AppLocalizationsHu extends AppLocalizations {
       'Helyreállítási kulcs fájljának mentése';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Szövegfájlok';
+  String get recoveryKeyFilePickerFilter => 'Szöveges fájlok';
 
   @override
   String get recoveryKeyTPMEnabled =>
@@ -677,14 +677,14 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'Az ESM 10 évig biztosít biztonsági javításokat több mint 25 000 nyílt forráskódú csomaghoz. Folyamatos sebezhetőségkezelést kap a kritikus, magas és közepes CVE-khez.';
+      'Az ESM 10 évig biztosít biztonsági javításokat a teljes Ubuntu archívumhoz. Folyamatos sebezhetőségkezelést kap a kritikus, a magas és a kiválasztott közepes CVE-khez.';
 
   @override
   String get ubuntuProESMMainTitle => 'Főcsomagok (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Biztonsági frissítések 2300 Ubuntu főcsomaghoz $year-ig';
+    return 'Biztonsági frissítések az Ubuntu főcsomagokhoz $year-ig';
   }
 
   @override
@@ -692,7 +692,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'További biztonsági frissítések több mint 23 000 Ubuntu univerzumcsomaghoz $year-ig';
+    return 'További biztonsági frissítések az Ubuntu univerzumcsomagokhoz $year-ig';
   }
 
   @override

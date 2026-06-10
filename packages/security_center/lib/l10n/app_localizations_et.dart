@@ -62,7 +62,7 @@ class AppLocalizationsEt extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Rakenduste õigused';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Midagi läks valesti';
 
   @override
   String snapRulesCount(int n) {
@@ -670,14 +670,14 @@ class AppLocalizationsEt extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM tagab 10 aastat turvaparandusi enam kui 25000-le avatud lähtekoodiga paketile. Saad oma arvutile pidevat haavatavuste haldamist kriitilise, kõrge ja keskmise riskitasemega CVE-de jaoks.';
+      'ESM tagab 10 aastat turvaparandusi kogu Ubuntu Arhiivile. Saad oma arvutile pidevat haavatavuste haldamist kriitilise, kõrge ja valitud keskmise riskitasemega CVE-de jaoks.';
 
   @override
   String get ubuntuProESMMainTitle => 'Main\'i paketid (esm-rakendused)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return '2300 Ubuntu Main\'i paketi täiendavad turvauuendused kuni $year. aastani';
+    return 'Ubuntu Main\'i pakettide turvauuendused kuni $year. aastani';
   }
 
   @override
@@ -686,7 +686,7 @@ class AppLocalizationsEt extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return '23000 Ubuntu Universe\'i paketi täiendavad turvauuendused kuni $year. aastani';
+    return 'Ubuntu Universe\'i pakettide täiendavad turvauuendused kuni $year. aastani';
   }
 
   @override
