@@ -136,8 +136,12 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool generateError = false,
   bool generateAuthCancelled = false,
   bool changePinPassphraseError = false,
+  SnapdAuthErrorKind? changePinPassphraseSnapdAuthErrorKind,
+  String? changePinPassphraseSnapdErrorKind,
   bool entropyCheckError = false,
   bool replacePlatformKeyError = false,
+  SnapdAuthErrorKind? replacePlatformKeySnapdAuthErrorKind,
+  String? replacePlatformKeySnapdErrorKind,
   AuthMode authMode = AuthMode.pin,
   EntropyResponse Function(String)? entropyResponseBuilder,
   bool enumerateKeySlots404Error = false,
@@ -153,6 +157,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
   int indeterminateCallCount = 0,
 }) {
   final service = MockDiskEncryptionService();
+  var currentAuthMode = authMode;
 
   var storageEncryptedCalls = 0;
   when(service.getStorageEncrypted()).thenAnswer((_) async {
@@ -186,7 +191,7 @@ DiskEncryptionService registerMockDiskEncryptionService({
 
     final platformName = invalidTpmPlatformName ? 'not-tpm2' : 'tpm2';
     final keySlotAuthMode = SnapdSystemVolumeAuthMode.values.firstWhere(
-      (mode) => mode.name == authMode.name,
+      (mode) => mode.name == currentAuthMode.name,
       orElse: () => SnapdSystemVolumeAuthMode.pin,
     );
 
@@ -283,6 +288,18 @@ DiskEncryptionService registerMockDiskEncryptionService({
     if (changePinPassphraseError) {
       throw Exception('Mock change PIN/passphrase error');
     }
+    if (changePinPassphraseSnapdAuthErrorKind != null) {
+      throw SnapdException(
+        message: 'Mock change PIN/passphrase auth error',
+        kind: changePinPassphraseSnapdAuthErrorKind.snapdKind,
+      );
+    }
+    if (changePinPassphraseSnapdErrorKind != null) {
+      throw SnapdException(
+        message: 'Mock change PIN/passphrase snapd error',
+        kind: changePinPassphraseSnapdErrorKind,
+      );
+    }
   });
   when(
     service.replacePlatformKey(
@@ -291,21 +308,22 @@ DiskEncryptionService registerMockDiskEncryptionService({
       pin: anyNamed('pin'),
     ),
   ).thenAnswer((invocation) async {
-    final authMode = invocation.namedArguments[#authMode] as AuthMode;
+    final requestedAuthMode = invocation.namedArguments[#authMode] as AuthMode;
     final passphrase = invocation.namedArguments[#passphrase] as String?;
     final pin = invocation.namedArguments[#pin] as String?;
 
-    if (authMode == AuthMode.none && (pin != null || passphrase != null)) {
+    if (requestedAuthMode == AuthMode.none &&
+        (pin != null || passphrase != null)) {
       throw Exception(
         'Mock replace platform key error: PIN or passphrase passed when removing auth (AuthMode.none)',
       );
     }
 
-    if (authMode == AuthMode.pin && (pin == null || pin.isEmpty)) {
+    if (requestedAuthMode == AuthMode.pin && (pin == null || pin.isEmpty)) {
       throw Exception('Mock replace platform key error: missing PIN');
     }
 
-    if (authMode == AuthMode.passphrase &&
+    if (requestedAuthMode == AuthMode.passphrase &&
         (passphrase == null || passphrase.isEmpty)) {
       throw Exception('Mock replace platform key error: missing passphrase');
     }
@@ -313,6 +331,19 @@ DiskEncryptionService registerMockDiskEncryptionService({
     if (replacePlatformKeyError) {
       throw Exception('Mock replace platform key error');
     }
+    if (replacePlatformKeySnapdAuthErrorKind != null) {
+      throw SnapdException(
+        message: 'Mock replace platform key auth error',
+        kind: replacePlatformKeySnapdAuthErrorKind.snapdKind,
+      );
+    }
+    if (replacePlatformKeySnapdErrorKind != null) {
+      throw SnapdException(
+        message: 'Mock replace platform key snapd error',
+        kind: replacePlatformKeySnapdErrorKind,
+      );
+    }
+    currentAuthMode = requestedAuthMode;
   });
   when(service.pinPassphraseEntropyCheck(any, any))
       .thenAnswer((invocation) async {
