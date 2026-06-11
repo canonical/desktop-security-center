@@ -44,6 +44,14 @@ extension SnapdStateExceptionL10n on SnapdStateException {
       };
 }
 
+extension TpmFdeOperationExceptionMessage on TpmFdeOperationException {
+  String causeByMessage() => switch (this) {
+        TpmFdeOperationSnapdAuthException(:final cause) => cause.message,
+        TpmFdeOperationSnapdException(:final cause) => cause.message,
+        TpmFdeOperationUnknownException(:final cause) => cause.toString(),
+      };
+}
+
 extension TpmStateExceptionL10n on TpmStateException {
   String localizedHeader(AppLocalizations l10n) => switch (this) {
         TpmStateExceptionFailed() =>
