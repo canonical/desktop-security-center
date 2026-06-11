@@ -242,9 +242,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Instaluje pakiety zatwierdzone w standardzie FIPS 140-2. Nie będą one aktualizowane do czasu następnej recertyfikacji.",
     "ubuntuProComplianceDocumentation": "Dokumentacja zgodności z wymogami bezpieczeństwa",
     "ubuntuProESMTitle": "Przedłużone utrzymanie bezpieczeństwa (ESM)",
-    "ubuntuProESMDescription": "ESM zapewnia 10 lat poprawek zabezpieczeń dla ponad 25 000 pakietów typu open source. Uzyskaj ciągłe zarządzanie lukami bezpieczeństwa dla krytycznych, wysokich i średnich CVE.",
+    "ubuntuProESMDescription": "ESM zapewnia 10 lat poprawek zabezpieczeń dla całego archiwum Ubuntu. Uzyskaj ciągłe zarządzanie lukami bezpieczeństwa dla krytycznych, wysokich i wybranych średnich CVE.",
     "ubuntuProESMMainTitle": "Pakiety główne (esm-infra)",
-    "ubuntuProESMMainDescription": "Aktualizacje zabezpieczeń dla ponad 2300 pakietów Main systemu Ubuntu do {year} roku",
+    "ubuntuProESMMainDescription": "Aktualizacje zabezpieczeń dla pakietów Main systemu Ubuntu do {year} roku",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -253,7 +253,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Pakiety Universe (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Dodatkowe aktualizacje zabezpieczeń dla ponad 23 000 pakietów Universe systemu Ubuntu do {year} roku",
+    "ubuntuProESMUniverseDescription": "Dodatkowe aktualizacje zabezpieczeń dla pakietów Universe systemu Ubuntu do {year} roku",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
@@ -264,5 +264,6 @@
     "ubuntuProLivepatchTitle": "Livepatch jądra",
     "ubuntuProLivepatchEnableTitle": "Włącz Livepatch",
     "ubuntuProLivepatchEnableDescription": "Stosuj aktualizacje zabezpieczeń jądra podczas działania systemu",
-    "ubuntuProLivepatchShowTitle": "Pokazuj status Livepatch na górnym pasku"
+    "ubuntuProLivepatchShowTitle": "Pokazuj status Livepatch na górnym pasku",
+    "snapPermissionsErrorTitle": "Wystąpił problem"
 }

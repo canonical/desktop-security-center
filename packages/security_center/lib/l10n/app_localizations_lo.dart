@@ -62,7 +62,7 @@ class AppLocalizationsLo extends AppLocalizations {
   String get snapPermissionsPageTitle => 'ການອະນຸຍາດແອັບ';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'ມີບາງຢ່າງຜິດພາດ';
 
   @override
   String snapRulesCount(int n) {
@@ -279,7 +279,7 @@ class AppLocalizationsLo extends AppLocalizations {
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
+      'ເຊື່ອມຕໍ່ desktop-security-center:snap-fde-control ຂອງ snap';
 
   @override
   String get diskEncryptionPageAddPinButton => 'ເພີ່ມ PIN...';

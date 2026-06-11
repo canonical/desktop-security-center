@@ -22,7 +22,7 @@
     "snapPermissionWriteLabel": "Írás",
     "snapPermissionExecuteLabel": "Végrehajtás",
     "snapPermissionsOtherDescription": "Az egyéb jogosultságokat a Beállítások › Alkalmazások lapon kezelheti.",
-    "snapPermissionsPageTitle": "Alkalmazás jogosultságai",
+    "snapPermissionsPageTitle": "Alkalmazásjogosultságok",
     "snapRulesCount": "{n, plural, =0{nincsenek szabályok} =1{1 szabály} other{{n} szabály}}",
     "@snapRulesCount": {
         "placeholders": {
@@ -104,7 +104,7 @@
     "recoveryKeyExceptionFileSystemBody": "Nincs jogosultsága az adott mappába való íráshoz. Próbáljon egy másik helyet, vagy használjon más módszert.",
     "recoveryKeyExceptionDisallowedPathBody": "Próbáljon egy másik helyet, például egy cserélhető meghajtót, vagy használjon más módszert.",
     "recoveryKeyFilePickerTitle": "Helyreállítási kulcs fájljának mentése",
-    "recoveryKeyFilePickerFilter": "Szövegfájlok",
+    "recoveryKeyFilePickerFilter": "Szöveges fájlok",
     "recoveryKeyTPMEnabled": "A hardveresen támogatott titkosítás engedélyezve",
     "recoveryKeyTPMExplanationBody": "A titkosítási kulcsok a számítógép platformmegbízhatósági moduljában (TPM) vannak tárolva.",
     "recoveryKeyTPMExplanationLearnMore": "Tudjon meg többet a hardveresen támogatott titkosításról",
@@ -242,9 +242,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Telepíti a FIPS 140-2 által ellenőrzött csomagokat. Ezek nem lesznek frissítve a következő újratanúsításig.",
     "ubuntuProComplianceDocumentation": "Biztonsági megfelelőségi dokumentáció",
     "ubuntuProESMTitle": "Kiterjesztett biztonsági karbantartás (ESM)",
-    "ubuntuProESMDescription": "Az ESM 10 évig biztosít biztonsági javításokat több mint 25 000 nyílt forráskódú csomaghoz. Folyamatos sebezhetőségkezelést kap a kritikus, magas és közepes CVE-khez.",
+    "ubuntuProESMDescription": "Az ESM 10 évig biztosít biztonsági javításokat a teljes Ubuntu archívumhoz. Folyamatos sebezhetőségkezelést kap a kritikus, a magas és a kiválasztott közepes CVE-khez.",
     "ubuntuProESMMainTitle": "Főcsomagok (esm-infra)",
-    "ubuntuProESMMainDescription": "Biztonsági frissítések 2300 Ubuntu főcsomaghoz {year}-ig",
+    "ubuntuProESMMainDescription": "Biztonsági frissítések az Ubuntu főcsomagokhoz {year}-ig",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -253,7 +253,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Univerzumcsomagok (esm-apps)",
-    "ubuntuProESMUniverseDescription": "További biztonsági frissítések több mint 23 000 Ubuntu univerzumcsomaghoz {year}-ig",
+    "ubuntuProESMUniverseDescription": "További biztonsági frissítések az Ubuntu univerzumcsomagokhoz {year}-ig",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
@@ -264,5 +264,6 @@
     "ubuntuProLivepatchTitle": "Rendszermag Livepatch",
     "ubuntuProLivepatchEnableTitle": "A Livepatch engedélyezése",
     "ubuntuProLivepatchEnableDescription": "A rendszermag biztonsági frissítéseinek telepítése a rendszer futása közben",
-    "ubuntuProLivepatchShowTitle": "Livepatch-állapot megjelenítése a felső sávon"
+    "ubuntuProLivepatchShowTitle": "Livepatch-állapot megjelenítése a felső sávon",
+    "snapPermissionsErrorTitle": "Valami probléma történt"
 }

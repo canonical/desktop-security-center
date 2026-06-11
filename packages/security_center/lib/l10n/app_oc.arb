@@ -69,7 +69,7 @@
     "diskEncryptionPageReplaceDialogSave": "Salvar dins un fichièr",
     "diskEncryptionPageReplaceDialogReplace": "Remplaçar",
     "diskEncryptionPageReplaceDialogSuccessHeader": "Clau de recuperacion remplaçada",
-    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Paramètres de chiframent non disponible ms",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Paramètres de chiframent non disponibles",
     "recoveryKeyPassphraseHeader": "Cambiar la frasa secrèta",
     "recoveryKeyPassphraseButton": "Cambiar la frasa secrèta...",
     "recoveryKeyPassphraseCurrent": "Frasa secrèta actuala",
@@ -245,9 +245,9 @@
     "ubuntuProComplianceUSGDescription": "Automatiza lo refortiment e l'audit amb los perfils de referéncia CIS e DISA-STIG tot permetent d'adaptacions especificas a l'environament.",
     "ubuntuProComplianceFIPSDisclaimer": "L'activacion de FIPS se pòt pas anullar e Livepatch serà desactivat de fòrma permanenta.",
     "ubuntuProESMTitle": "Mantenença de seguretat espandida (ESM)",
-    "ubuntuProESMDescription": "L'ESM provesís 10 ans de correctius de seguretat per mai de 25 000 paquets open source. Beneficiatz d'una gestion de vulnerabilitat continua per las CVE criticas, nautas e mejanas.",
+    "ubuntuProESMDescription": "L'ESM provesís 10 ans de correctius de seguretat per tot l'archiu Ubuntu. Beneficiatz d'una gestion de vulnerabilitat continua per las CVE criticas, nautas e mejanas seleccionada.",
     "ubuntuProESMMainTitle": "Principals paquetatges (esm-infra)",
-    "ubuntuProESMMainDescription": "Mesas a jorn de seguretat per 2 300 paquets Ubuntu Main fins a {year}",
+    "ubuntuProESMMainDescription": "Mesas a jorn de seguretat pels paquets Ubuntu Main fins a {year}",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -256,7 +256,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Paquetatges universala (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Mesas a jorn de seguretat suplementàrias per mai de 23 000 paquets Ubuntu Universe fins a l'an {year}",
+    "ubuntuProESMUniverseDescription": "Mesas a jorn de seguretat suplementàrias pels paquets Ubuntu Universe fins a l'an {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
@@ -264,5 +264,6 @@
             }
         }
     },
-    "ubuntuProLivepatchEnableDescription": "Aplicar las mesas a jorn de seguretat del nuclèu mentre que lo sistèma fonciona"
+    "ubuntuProLivepatchEnableDescription": "Aplicar las mesas a jorn de seguretat del nuclèu mentre que lo sistèma fonciona",
+    "snapPermissionsErrorTitle": "Quicòm a fracassat"
 }

@@ -242,9 +242,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Nainstaluje balíčky ověřené dle standardu FIPS 140-2. Tyto balíčky nebudou aktualizovány až do další recertifikace.",
     "ubuntuProComplianceDocumentation": "Dokumentace o bezpečnostní shodě",
     "ubuntuProESMTitle": "Rozšířená údržba zabezpečení (ESM)",
-    "ubuntuProESMDescription": "ESM poskytuje bezpečnostní záplaty na 10 let pro více než 25 000 balíčků s otevřeným zdrojovým kódem. Získejte nepřetržitou správu zranitelností pro kritické, vysoce rizikové a střední CVE.",
+    "ubuntuProESMDescription": "ESM poskytuje bezpečnostní záplaty na 10 let pro celý archiv Ubuntu. Získejte nepřetržitou správu zranitelností pro kritické, vysoce rizikové a vybrané střední CVE.",
     "ubuntuProESMMainTitle": "Balíčky Main (esm-infra)",
-    "ubuntuProESMMainDescription": "Aktualizace zabezpečení pro 2 300 hlavních balíčků Ubuntu Main do {year}",
+    "ubuntuProESMMainDescription": "Aktualizace zabezpečení pro balíčky Ubuntu Main do {year}",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -253,7 +253,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Balíčky Universe (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Další bezpečnostní aktualizace pro více než 23 000 balíčků Ubuntu Universe do {year}",
+    "ubuntuProESMUniverseDescription": "Další bezpečnostní aktualizace pro balíčky Ubuntu Universe do {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
@@ -264,5 +264,6 @@
     "ubuntuProLivepatchTitle": "Kernel Livepatch",
     "ubuntuProLivepatchEnableTitle": "Povolit Livepatch",
     "ubuntuProLivepatchEnableDescription": "Aplikovat aktualizace zabezpečení jádra za chodu systému",
-    "ubuntuProLivepatchShowTitle": "Zobrazit stav Livepatch v horní liště"
+    "ubuntuProLivepatchShowTitle": "Zobrazit stav Livepatch v horní liště",
+    "snapPermissionsErrorTitle": "Něco se nepovedlo"
 }

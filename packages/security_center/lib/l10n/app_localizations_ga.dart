@@ -63,7 +63,7 @@ class AppLocalizationsGa extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Ceadanna aipeanna';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Chuaigh rud éigin mícheart';
 
   @override
   String snapRulesCount(int n) {
@@ -678,14 +678,14 @@ class AppLocalizationsGa extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'Soláthraíonn ESM paistí slándála 10 mbliana do bhreis is 25,000 pacáiste foinse oscailte. Faigh bainistíocht leanúnach leochaileachta do CVEanna criticiúla, arda agus meánacha.';
+      'Soláthraíonn ESM paistí slándála 10 mbliana do Chartlann Ubuntu ar fad. Faigh bainistíocht leanúnach leochaileachta do CVEanna criticiúla, arda agus meánmhéide roghnaithe.';
 
   @override
   String get ubuntuProESMMainTitle => 'Príomhphacáistí (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Nuashonruithe slándála do phríomhphacáiste 2,300 Ubuntu go dtí $year';
+    return 'Nuashonruithe slándála do phacáistí príomhúla Ubuntu go dtí $year';
   }
 
   @override
@@ -693,7 +693,7 @@ class AppLocalizationsGa extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Nuashonruithe slándála breise do bhreis is 23,000 pacáiste Ubuntu Universe go dtí $year';
+    return 'Nuashonruithe slándála breise do phacáistí Ubuntu Universe go dtí $year';
   }
 
   @override

@@ -62,7 +62,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Oprávnění aplikací';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Něco se nepovedlo';
 
   @override
   String snapRulesCount(int n) {
@@ -669,14 +669,14 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM poskytuje bezpečnostní záplaty na 10 let pro více než 25 000 balíčků s otevřeným zdrojovým kódem. Získejte nepřetržitou správu zranitelností pro kritické, vysoce rizikové a střední CVE.';
+      'ESM poskytuje bezpečnostní záplaty na 10 let pro celý archiv Ubuntu. Získejte nepřetržitou správu zranitelností pro kritické, vysoce rizikové a vybrané střední CVE.';
 
   @override
   String get ubuntuProESMMainTitle => 'Balíčky Main (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Aktualizace zabezpečení pro 2 300 hlavních balíčků Ubuntu Main do $year';
+    return 'Aktualizace zabezpečení pro balíčky Ubuntu Main do $year';
   }
 
   @override
@@ -684,7 +684,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Další bezpečnostní aktualizace pro více než 23 000 balíčků Ubuntu Universe do $year';
+    return 'Další bezpečnostní aktualizace pro balíčky Ubuntu Universe do $year';
   }
 
   @override

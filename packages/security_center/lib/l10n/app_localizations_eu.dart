@@ -59,10 +59,10 @@ class AppLocalizationsEu extends AppLocalizations {
       'Beste baimenak hemendik kudea ditzakezu: Ezarpenak > Aplikazioak.';
 
   @override
-  String get snapPermissionsPageTitle => 'Aplikazioaren baimenak';
+  String get snapPermissionsPageTitle => 'Aplikazioen baimenak';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Arazoren bat egon da';
 
   @override
   String snapRulesCount(int n) {
@@ -673,14 +673,14 @@ class AppLocalizationsEu extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESMk 10 urterako segurtasun-adabakiak eskaintzen ditu 25.000 kode irekiko pakete baino gehiagorentzat. Lortu zaurgarritasunen kudeaketa etengabea, maila kritiko, goren eta ertaineko CVE-entzat.';
+      'ESMk 10 urterako segurtasun-adabakiak eskaintzen ditu Ubunturen artxibo osoarentzat. Lortu zaurgarritasunen kudeaketa etengabea, maila kritiko edo goreneko eta zenbait maila ertaineko CVE-entzat.';
 
   @override
   String get ubuntuProESMMainTitle => 'Pakete nagusiak (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Segurtasun-eguneratzeak 2.300 Ubuntuko pakete nagusirentzat $year urtera arte';
+    return 'Segurtasun-eguneratzeak Ubuntuko pakete nagusientzat $year urtera arte';
   }
 
   @override
@@ -688,7 +688,7 @@ class AppLocalizationsEu extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Segurtasun-eguneratze gehigarriak 23.000 Ubuntu Universe pakete baino gehiagorentzat $year urtera arte';
+    return 'Segurtasun-eguneratze gehigarriak Ubuntu Universe paketeentzat $year urtera arte';
   }
 
   @override

@@ -12,10 +12,10 @@ class AppLocalizationsId extends AppLocalizations {
   String get appTitle => 'Pusat Keamanan';
 
   @override
-  String get snapdRuleCategorySessionAllowed => 'Izinkan sampai log keluar';
+  String get snapdRuleCategorySessionAllowed => 'Izinkan hingga keluar';
 
   @override
-  String get snapdRuleCategorySessionDenied => 'Tolak sampai log keluar';
+  String get snapdRuleCategorySessionDenied => 'Tolak hingga keluar';
 
   @override
   String get snapdRuleCategoryForeverAllowed => 'Selalu izinkan';
@@ -37,32 +37,32 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Membutuhkan aplikasi untuk meminta izin sistem';
+      'Wajibkan aplikasi meminta izin sistem';
 
   @override
   String get snapPermissionsEnableWarning =>
-      'Ini adalah fitur eksperimental untuk mengendalikan akses ke sumber daya sistem Anda.';
+      'Ini adalah fitur eksperimental untuk mengontrol akses ke sumber daya sistem Anda.';
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Memfungsikan, itu mungkin perlu waktu beberapa detik ...';
+      'Mengaktifkan, ini mungkin membutuhkan beberapa detik...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Menonaktifkan, itu mungkin perlu waktu beberapa detik ...';
+      'Menonaktifkan, ini mungkin membutuhkan beberapa detik...';
 
   @override
   String get snapPermissionsExperimentalLabel => 'Eksperimental';
 
   @override
   String get snapPermissionsOtherDescription =>
-      'Anda dapat mengelola izin lain dalam Pengaturan › Aplikasi.';
+      'Anda dapat mengelola izin lainnya di Pengaturan › Aplikasi.';
 
   @override
-  String get snapPermissionsPageTitle => 'Izin Aplikasi';
+  String get snapPermissionsPageTitle => 'Izin aplikasi';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Terjadi kesalahan';
 
   @override
   String snapRulesCount(int n) {
@@ -95,25 +95,25 @@ class AppLocalizationsId extends AppLocalizations {
   String get snapRulesResetAllPermissions => 'Atur ulang semua izin';
 
   @override
-  String get homeInterfacePageTitle => 'Folder rumah';
+  String get homeInterfacePageTitle => 'Folder Beranda';
 
   @override
   String get homeInterfacePageDescription =>
-      'Kelola izin untuk mengakses berkas di folder Rumah Anda.';
+      'Kelola izin untuk mengakses file di folder Beranda Anda.';
 
   @override
   String get cameraInterfacePageTitle => 'Kamera';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Izinkan aplikasi untuk mengakses kamera Anda.';
+      'Izinkan aplikasi mengakses kamera Anda.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'Mikrofon';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'Izinkan aplikasi mengakses mikrofon Anda.';
 
   @override
   String get interfacePageTitle => 'Kelola izin';
@@ -122,7 +122,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Pelajari selengkapnya';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Berikan umpan balik';
+  String get interfacePageLinkGiveFeedback => 'Beri masukan';
 
   @override
   String get interfacePageLinkReportIssues => 'Laporkan masalah';
@@ -140,36 +140,36 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Enkripsi Disk';
+  String get diskEncryptionPageTitle => 'Enkripsi disk';
 
   @override
   String get diskEncryptionPageRecoveryKey => 'Kunci pemulihan';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'Kunci pemulihan memungkinkan Anda mendapatkan akses ke data Anda jika disk Anda gagal untuk dibuka kuncinya selama awal mula. Simpan di suatu tempat aman.';
+      'Kunci pemulihan memungkinkan Anda mendapatkan kembali akses ke data Anda jika disk gagal dibuka kuncinya saat startup. Simpan di tempat yang aman.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'Kunci pemulihan memungkinkan Anda mendapatkan kembali akses ke data Anda jika disk Anda gagal dibuka saat startup. Simpan di tempat yang aman. $learnMoreLink';
+    return 'Kunci pemulihan memungkinkan Anda mendapatkan kembali akses ke data Anda jika disk gagal dibuka kuncinya saat startup. Simpan di tempat yang aman. $learnMoreLink';
   }
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Pelajari lebih lanjut tentang kunci pemulihan';
+      'Pelajari selengkapnya tentang enkripsi berbasis perangkat keras';
 
   @override
   String get diskEncryptionPageCheckKey => 'Periksa kunci pemulihan...';
 
   @override
   String get diskEncryptionPageDialogHeaderCheckKey =>
-      'Periksa Kunci Pemulihan';
+      'Periksa kunci pemulihan';
 
   @override
   String get diskEncryptionPageCheck => 'Periksa';
 
   @override
-  String get diskEncryptionPageValidKey => 'Kunci yang valid';
+  String get diskEncryptionPageValidKey => 'Kunci valid';
 
   @override
   String get diskEncryptionPageInvalidKey => 'Kunci tidak valid';
@@ -178,56 +178,56 @@ class AppLocalizationsId extends AppLocalizations {
   String get diskEncryptionPageEnterKey => 'Masukkan kunci pemulihan Anda';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Kunci pemulihan bekerja';
+  String get diskEncryptionPageKeyWorks => 'Kunci pemulihan berfungsi';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
-      'Ingat untuk menjaganya di suatu tempat aman.';
+      'Ingat untuk menyimpannya di tempat yang aman.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Kunci pemulihan tidak bekerja';
+  String get diskEncryptionPageKeyDoesntWork =>
+      'Kunci pemulihan tidak berfungsi';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Periksa kunci atau menggantinya dengan yang baru.';
+      'Periksa kuncinya atau ganti dengan yang baru.';
 
   @override
-  String get diskEncryptionPageError => 'Galat';
+  String get diskEncryptionPageError => 'Kesalahan';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Mengganti kunci pemulihan ...';
+  String get diskEncryptionPageReplaceButton => 'Ganti kunci pemulihan...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader =>
-      'Mengganti kunci pemulihan';
+  String get diskEncryptionPageReplaceDialogHeader => 'Ganti kunci pemulihan';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Simpan kunci pemulihan baru di suatu tempat aman. Sekali Anda menggantinya, Anda tidak akan dapat menggunakan kunci lama lagi.';
+      'Simpan kunci pemulihan baru di tempat yang aman. Setelah Anda menggantinya, Anda tidak akan dapat menggunakan kunci lama lagi.';
 
   @override
   String get diskEncryptionPageReplaceDialogShowQR => 'Tampilkan kode QR';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Simpan ke berkas';
+  String get diskEncryptionPageReplaceDialogSave => 'Simpan ke file';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'Saya menyimpan kunci pemulihan saya di suatu tempat aman';
+      'Saya telah menyimpan kunci pemulihan di tempat yang aman';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Gantikan';
+  String get diskEncryptionPageReplaceDialogReplace => 'Ganti';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Singkirkan';
+  String get diskEncryptionPageReplaceDialogDiscard => 'Buang';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Kunci pemulihan diganti';
+      'Kunci pemulihan berhasil diganti';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Ingatlah untuk menyimpannya di tempat yang aman.';
+      'Ingat untuk menyimpannya di tempat yang aman.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
@@ -239,7 +239,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Desktop Ubuntu - Kunci pemulihan enkripsi';
+      'Ubuntu Desktop - Kunci pemulihan enkripsi';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
@@ -261,7 +261,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Konfigurasi TPM komputer Anda tidak dalam kondisi yang didukung.';
+      'Konfigurasi TPM komputer Anda tidak dalam keadaan yang didukung.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
@@ -269,7 +269,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Periksa Pusat Keamanan dan snapd apakah mutakhir.';
+      'Periksa apakah Pusat Keamanan dan snapd sudah diperbarui.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
@@ -284,87 +284,89 @@ class AppLocalizationsId extends AppLocalizations {
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'Tambahkan PIN...';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton =>
+      'Tambahkan frasa sandi...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading =>
+      'Tambahkan frasa sandi';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'Tambahkan PIN';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'Anda perlu memasukkan PIN setiap kali komputer Anda menyala. PIN ini berbeda dari kata sandi pengguna Anda.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'Jika Anda lupa PIN, Anda dapat mendapatkan kembali akses ke disk dengan menggunakan kunci pemulihan.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'Anda perlu memasukkan frasa sandi setiap kali komputer Anda menyala. Frasa sandi ini berbeda dari kata sandi pengguna Anda.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'Jika Anda lupa frasa sandi, Anda dapat mendapatkan kembali akses ke disk dengan menggunakan kunci pemulihan.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+  String get diskEncryptionPageAdditionalSecurityHeader => 'Keamanan tambahan';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'Anda dapat mengatur frasa sandi atau PIN untuk keamanan tambahan. Anda perlu memasukkannya setiap kali komputer Anda menyala.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore =>
+      'Pelajari selengkapnya';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'Tambah';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'Hapus PIN...';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton => 'Hapus frasa sandi...';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'Menambahkan PIN, ini mungkin membutuhkan beberapa detik...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'Menambahkan frasa sandi, ini mungkin membutuhkan beberapa detik...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'Menghapus PIN, ini mungkin membutuhkan beberapa detik...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'Menghapus frasa sandi, ini mungkin membutuhkan beberapa detik...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Berkas kunci pemulihan tidak disimpan';
+      'File kunci pemulihan tidak tersimpan';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Berkas kunci pemulihan tidak dapat disimpan di lokasi sementara';
+      'File kunci pemulihan tidak dapat disimpan di lokasi sementara';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Galat tak dikenal';
+  String get recoveryKeyExceptionUnknownTitle => 'Kesalahan tidak diketahui';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Gagal menyimpan kunci pemulihan Anda ke berkas';
+      'Gagal menyimpan kunci pemulihan ke file';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'Anda tidak memiliki izin untuk menulis ke lokasi berkas tersebut.';
+      'Anda tidak memiliki izin untuk menulis ke lokasi file tersebut.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
@@ -372,25 +374,25 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Cobalah lokasi lain, seperti drive lepas pasang, atau gunakan metode lain.';
+      'Coba lokasi lain, seperti drive yang dapat dilepas, atau gunakan metode lain.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Simpan berkas kunci pemulihan';
+  String get recoveryKeyFilePickerTitle => 'Simpan file kunci pemulihan';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Berkas teks';
+  String get recoveryKeyFilePickerFilter => 'File teks';
 
   @override
   String get recoveryKeyTPMEnabled =>
-      'Enkripsi yang didukung perangkat keras diaktifkan';
+      'Enkripsi berbasis perangkat keras diaktifkan';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'Kunci enkripsi disimpan dalam Trusted Platform Module (TPM) komputer Anda.';
+      'Kunci enkripsi disimpan di Trusted Platform Module (TPM) komputer Anda.';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Pelajari lebih lanjut tentang enkripsi yang didukung perangkat keras';
+      'Pelajari selengkapnya tentang enkripsi berbasis perangkat keras';
 
   @override
   String get recoveryKeyPassphraseEnabled => 'Frasa sandi enkripsi diaktifkan';
@@ -400,7 +402,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'Anda perlu memasukkan kata sandi saat memulai untuk membuka kunci disk. Anda dapat mengubah kata sandi, tetapi tidak dapat menonaktifkannya.';
+      'Anda perlu memasukkan frasa sandi setiap kali komputer Anda menyala.';
 
   @override
   String get recoveryKeyPassphraseButton => 'Ubah frasa sandi...';
@@ -419,34 +421,33 @@ class AppLocalizationsId extends AppLocalizations {
       'Frasa sandi salah, coba lagi';
 
   @override
-  String get recoveryKeyPassphraseNewError =>
-      'Harus minimal 4 karakter panjangnya';
+  String get recoveryKeyPassphraseNewError => 'Harus minimal 4 karakter';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
       'Frasa sandi tidak cocok, coba lagi';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Ubah Frasa Sandi';
+  String get recoveryKeyPassphraseDialogHeader => 'Ubah frasa sandi';
 
   @override
   String get recoveryKeyPinEnabled => 'PIN enkripsi diaktifkan';
 
   @override
-  String get recoveryKeyPinHeader => 'PIN Enkripsi';
+  String get recoveryKeyPinHeader => 'PIN enkripsi';
 
   @override
   String get recoveryKeyEncrpytionPassphraseHeader => 'Frasa sandi enkripsi';
 
   @override
   String get recoveryKeyPinBody =>
-      'Anda perlu memasukkan PIN saat memulai untuk membuka kunci disk. Anda dapat mengubah PIN, tetapi tidak dapat menonaktifkannya.';
+      'Anda perlu memasukkan PIN setiap kali komputer Anda menyala.';
 
   @override
   String get recoveryKeyPinButton => 'Ubah PIN...';
 
   @override
-  String get recoveryKeyPinCurrent => 'PIN kini';
+  String get recoveryKeyPinCurrent => 'PIN saat ini';
 
   @override
   String get recoveryKeyPinNew => 'PIN baru';
@@ -489,212 +490,211 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Frasa sandi lemah, jadikan lebih panjang atau lebih rumit';
+      'Frasa sandi lemah, buat lebih panjang atau lebih kompleks';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Frasa sandi yang lumayan, jadikan lebih panjang atau lebih rumit untuk keamanan yang lebih baik';
+      'Frasa sandi cukup, buat lebih panjang atau lebih kompleks untuk keamanan yang lebih baik';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Frasa sandi yang kuat';
+  String get recoveryKeyPassphraseEntropyOptimal => 'Frasa sandi kuat';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'PIN lemah, jadikan lebih panjang atau lebih sulit ditebak';
+      'PIN lemah, buat lebih panjang atau kurang mudah ditebak';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'PIN yang lumayan, jadikan lebih panjang atau lebih sulit ditebak untuk keamanan yang lebih baik';
+      'PIN cukup, buat lebih panjang atau kurang mudah ditebak untuk keamanan yang lebih baik';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN cukup panjang';
+  String get recoveryKeyPinEntropyOptimal => 'PIN sudah cukup panjang';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Ada yang salah';
+  String get recoveryKeySomethingWentWrongHeader => 'Terjadi kesalahan';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+      'Ubuntu Pro tidak tersedia untuk versi Ubuntu ini';
 
   @override
-  String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+  String get ubuntuProNotSupportedDetails => 'Ubuntu Pro memerlukan rilis LTS';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'Ubuntu Pro tidak didukung oleh versi snapd ini';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'Perbarui snapd untuk mengelola Ubuntu Pro';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Ubuntu Pro diaktifkan';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'Keamanan dan kepatuhan tingkat enterprise untuk komputer Anda. Selalu gratis untuk penggunaan pribadi. $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore => 'Pelajari tentang Ubuntu Pro';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Aktifkan Ubuntu Pro';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'Aktifkan dengan akun Ubuntu One';
 
   @override
   String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+      'Anda akan dapat membuat akun secara gratis';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+      'Masuk dengan akun Ubuntu One Anda, atau buat akun secara gratis.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => 'Lanjutkan di browser';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return 'Anda juga dapat masuk di $attachLink dan memasukkan kode $attachCode';
   }
 
   @override
   String get ubuntuProMagicError =>
-      'Unable to enable Ubuntu Pro, please try again';
+      'Tidak dapat mengaktifkan Ubuntu Pro, silakan coba lagi';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'Aktifkan dengan token';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError => 'Tidak dapat mengaktifkan Ubuntu Pro';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'Dari admin IT Anda atau dari $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'Dapatkan token Ubuntu Pro dari administrator Anda atau dari $proLink';
   }
 
   @override
   String get ubuntuProTokenLabel => 'Token';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Nonaktifkan Ubuntu Pro';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => 'Nonaktifkan';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
+      'Menonaktifkan Ubuntu Pro akan melepaskan langganan Anda dari mesin ini. Apakah Anda ingin melanjutkan?';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => 'Aktifkan';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'Batal';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, please try again.';
+      'Tidak dapat mengaktifkan fitur ini, silakan coba lagi.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, please try again.';
+      'Tidak dapat menonaktifkan fitur ini, silakan coba lagi.';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance => 'Kepatuhan dan pengerasan';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'Hanya disarankan untuk membantu persyaratan kepatuhan dan pengerasan FedRAMP, HIPAA, dan lainnya.';
 
   @override
   String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'Mengotomatiskan pengerasan dan audit dengan profil tolok ukur CIS dan DISA-STIG sekaligus memungkinkan penyesuaian khusus lingkungan.';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'Sertifikasi kepatuhan modul kriptografi pemerintah AS dan Kanada terhadap standar perlindungan data FIPS 140-2.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'Aktifkan FIPS';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'Mengaktifkan FIPS tidak dapat dibatalkan dan Livepatch akan dinonaktifkan secara permanen.';
 
   @override
   String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+      'Pilih opsi FIPS yang Anda inginkan';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS dengan pembaruan';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'Memasang paket tervalidasi FIPS 140-2 dan mengizinkan pembaruan keamanan rutin.';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS tanpa pembaruan';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'Memasang paket tervalidasi FIPS 140-2. Paket ini tidak akan diperbarui hingga sertifikasi ulang berikutnya.';
 
   @override
   String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+      'Dokumentasi kepatuhan keamanan';
 
   @override
-  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+  String get ubuntuProESMTitle => 'Pemeliharaan Keamanan yang Diperluas (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for the entire Ubuntu Archive. Get continuous vulnerability management for critical, high and selected medium CVEs.';
+      'ESM menyediakan 10 tahun patch keamanan untuk seluruh Arsip Ubuntu. Dapatkan manajemen kerentanan berkelanjutan untuk CVE kritis, tinggi, dan menengah yang dipilih.';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'Paket utama (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for Ubuntu Main packages until $year';
+    return 'Pembaruan keamanan untuk paket Ubuntu Main hingga $year';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'Paket universe (esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for Ubuntu Universe packages until $year';
+    return 'Pembaruan keamanan tambahan untuk paket Ubuntu Universe hingga $year';
   }
 
   @override
   String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'Aktifkan Livepatch';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'Terapkan pembaruan keamanan kernel saat sistem berjalan';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+      'Tampilkan status Livepatch di bilah atas';
 }

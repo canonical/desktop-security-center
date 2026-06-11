@@ -64,7 +64,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Permissions d\'app';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Quelque chose a mal tourné';
 
   @override
   String snapRulesCount(int n) {
@@ -143,7 +143,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Chiffrement du disque';
+  String get diskEncryptionPageTitle => 'Chiffrement disque';
 
   @override
   String get diskEncryptionPageRecoveryKey => 'Clé de secours';
@@ -679,14 +679,14 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM fournit 10 ans de correctifs de sécurité pour plus de 25 000 paquetages open source. Obtenez la gestion continue des vulnérabilités pour les CVE critiques, élevées et moyennes.';
+      'ESM fournit 10 ans de correctifs de sécurité pour l\'archive Ubuntu entière. Obtenez la gestion continue des vulnérabilités pour les CVEs critiques, élevées et moyennes sélectionnées.';
 
   @override
   String get ubuntuProESMMainTitle => 'Principaux paquetages (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Mises à jour de sécurité pour 2 300 paquetages Ubuntu Main jusqu’en $year';
+    return 'Mises à jour de sécurité pour les paquetages Ubuntu Main jusqu’en $year';
   }
 
   @override
@@ -694,7 +694,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Mises à jour de sécurité supplémentaires pour plus de 23 000 paquetages Ubuntu Universe jusqu’en $year';
+    return 'Mises à jour de sécurité supplémentaires pour Ubuntu Universe jusqu’en $year';
   }
 
   @override

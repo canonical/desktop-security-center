@@ -62,7 +62,7 @@ class AppLocalizationsEo extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Programaj permesoj';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Io fiaskis';
 
   @override
   String snapRulesCount(int n) {
@@ -664,14 +664,14 @@ class AppLocalizationsEo extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provizas 10 jarojn da sekurigaj ĝisdatigoj por pli ol 25 000 malfermitkodaj pakoj. Ĝuu daŭran mastrumadon kontraŭ vundeblaĵoj de kriza, alta, kaj meza CVE-niveloj.';
+      'ESM provizas 10 jarojn da sekurigaj ĝisdatigoj por la tuta pakarĥivo de Ubuntu. Ĝuu daŭran mastrumadon kontraŭ ĉiuj vundeblaĵoj de kriza kaj alta CVE-niveloj kaj elektitaj vundeblaĵoj de meza CVE-nivelo.';
 
   @override
   String get ubuntuProESMMainTitle => 'Ĉefaj pakoj (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Sekurigaj ĝisdatigoj por 2300 ĉefaj pakoj de Ubuntu ĝis $year';
+    return 'Sekurigaj ĝisdatigoj por ĉefaj pakoj de Ubuntu ĝis $year';
   }
 
   @override
@@ -679,7 +679,7 @@ class AppLocalizationsEo extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Pliaj sekurigaj ĝisdatigoj por pli ol 23 000 universaj pakoj de Ubuntu ĝis $year';
+    return 'Pliaj sekurigaj ĝisdatigoj por universaj pakoj de Ubuntu ĝis $year';
   }
 
   @override

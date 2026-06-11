@@ -8,6 +8,7 @@ Categories=System;Utility;Permissions;Settings;Security;
 Keywords=Ubuntu;Permissions;Snaps;Security;Pro;
 Name=Security Center
 Name[ar]=مركز الأمان
+Name[bs]=Centar za sigurnost
 Name[ca]=Centre de seguretat
 Name[cs]=Centrum zabezpečení
 Name[da]=Sikkerhedscenter

@@ -35,7 +35,7 @@ class AppLocalizationsCa extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Execució';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'Accés';
 
   @override
   String get snapPermissionsEnableTitle =>
@@ -47,11 +47,11 @@ class AppLocalizationsCa extends AppLocalizations {
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'S\'està habilitant, pot trigar uns segons...';
+      'S\'està activant; pot trigar uns segons…';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'S\'està desactivant, pot trigar uns segons...';
+      'S\'està desactivant; pot trigar uns segons…';
 
   @override
   String get snapPermissionsExperimentalLabel => 'Experimental';
@@ -64,7 +64,7 @@ class AppLocalizationsCa extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Permisos de l\'aplicació';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Ha fallat alguna cosa';
 
   @override
   String snapRulesCount(int n) {
@@ -80,20 +80,21 @@ class AppLocalizationsCa extends AppLocalizations {
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Administrar els permisos de $interface per a $snap .';
+    return 'Gestiona els permisos de $interface per a $snap .';
   }
 
   @override
   String get snapRulesPageEmptyTileLabel => 'Encara no hi ha regles';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel =>
+      'Cap aplicació ha sol·licitat accés encara';
 
   @override
   String get snapRulesRemoveAll => 'Elimina totes les regles';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => 'Reinicialitza tots els permisos';
 
   @override
   String get homeInterfacePageTitle => 'Carpeta d\'usuari';
@@ -103,18 +104,18 @@ class AppLocalizationsCa extends AppLocalizations {
       'Administra els permisos per accedir als fitxers a la carpeta d\'usuari.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'Càmera';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+      'Permet que les apps accedeixin a les teves càmeres.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'Micròfon';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'Permet que les aplicacions accedeixin al micròfon.';
 
   @override
   String get interfacePageTitle => 'Administra els permisos';
@@ -141,18 +142,18 @@ class AppLocalizationsCa extends AppLocalizations {
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Encriptació de disc';
+  String get diskEncryptionPageTitle => 'Xifratge del disc';
 
   @override
   String get diskEncryptionPageRecoveryKey => 'Clau de recuperació';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'La clau de recuperació et permet recuperar l\'accés a les teves dades si el teu disc no es desbloqueja durant l\'arrencada. Deseu-lo en un lloc segur.';
+      'La clau de recuperació us permet recuperar l\'accés a les vostres dades si el disc no es desbloca durant l\'arrencada. Deseu-la en un lloc segur.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'La clau de recuperació et permet recuperar l\'accés a les teves dades si el teu disc no es desbloqueja durant l\'arrencada. Deseu-lo en un lloc segur. $learnMoreLink';
+    return 'La clau de recuperació us permet recuperar l\'accés a les vostres dades si el disc no es desbloca durant l\'arrencada. Deseu-la en un lloc segur. $learnMoreLink';
   }
 
   @override
@@ -165,7 +166,7 @@ class AppLocalizationsCa extends AppLocalizations {
 
   @override
   String get diskEncryptionPageDialogHeaderCheckKey =>
-      'Comproveu la recuperació Clau';
+      'Comproveu la clau de recuperació';
 
   @override
   String get diskEncryptionPageCheck => 'Comproveu';
@@ -258,11 +259,11 @@ class AppLocalizationsCa extends AppLocalizations {
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'La configuració de l\'Encriptació no està disponible';
+      'Els paràmetres de xifratge no estan disponibles';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Ha fallat la recuperació de l\'estat d\'encriptació d\'aquest ordinador.';
+      'Ha fallat la recuperació de l\'estat de xifratge d\'aquest ordinador.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
@@ -289,68 +290,71 @@ class AppLocalizationsCa extends AppLocalizations {
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'Afegeix un PIN...';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton =>
+      'Afegeix una contrasenya...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading =>
+      'Afegeix una contrasenya';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'Afegeix un PIN';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'Hauràs d\'introduir el teu PIN cada vegada que comenci el teu ordinador. Aquest PIN és diferent de la contrasenya d\'usuari.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'Si oblideu el PIN, podeu recuperar l\'accés al disc utilitzant la clau de recuperació.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'Haureu d\'introduir la contrasenya cada vegada que s\'iniciï l\'ordinador. Aquesta contrasenya és diferent de la contrasenya d\'usuari.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'Si oblideu la contrasenya, podeu recuperar l\'accés al disc utilitzant la clau de recuperació.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+      'Seguretat addicional';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'Podeu establir una contrasenya o un PIN per a seguretat addicional. Haureu d\'introduir-lo cada vegada que comenci l\'ordinador.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Més informació';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'Afegeix';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'Elimina el PIN...';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton =>
+      'Elimina la contrasenya...';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'Afegint PIN, això pot trigar uns segons...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'S\'està afegint una contrasenya, això pot trigar uns segons...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'S\'està suprimint el PIN, això pot trigar uns segons...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'S\'està suprimint la contrasenya, això pot trigar uns segons...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
@@ -526,184 +530,186 @@ class AppLocalizationsCa extends AppLocalizations {
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+      'Ubuntu Pro no està disponible per a aquesta versió d\'Ubuntu';
 
   @override
   String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+      'Ubuntu Pro requereix un llançament LTS';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'Ubuntu Pro no és compatible amb aquesta versió ajustada';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'Actualització ajustada per gestionar l\'Ubuntu Pro';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Ubuntu Pro està habilitat';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'Seguretat de grau empresarial i compliment per al seu ordinador. Sempre lliure per a ús personal. $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore => 'Més informació sobre Ubuntu Pro';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Habilita l\'Ubuntu Pro';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'Habilita amb el compte d\'Ubuntu One';
 
   @override
   String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+      'Podràs crear un compte de forma gratuïta';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+      'Inicieu sessió amb el vostre compte d\'Ubuntu One o creeu-ne un de forma gratuïta.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => 'Continua en el navegador';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return 'També podeu iniciar sessió a $attachLink i introduir el codi $attachCode';
   }
 
   @override
   String get ubuntuProMagicError =>
-      'Unable to enable Ubuntu Pro, please try again';
+      'No s\'ha pogut habilitar l\'Ubuntu Pro, torneu-ho a provar';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'Habilita amb un testimoni';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError =>
+      'No s\'ha pogut habilitar l\'Ubuntu Pro';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'Des de l\'administrador de TI o des de $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'Obteniu un testimoni d\'Ubuntu Pro del vostre administrador o de $proLink';
   }
 
   @override
-  String get ubuntuProTokenLabel => 'Token';
+  String get ubuntuProTokenLabel => 'Testimoni';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Desactiva Ubuntu Pro';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => 'Desactiva';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
+      'Desactivant Ubuntu Pro se separarà la vostra subscripció d\'aquesta màquina. Voleu continuar?';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => 'Activa';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'Cancel·la';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, please try again.';
+      'No s\'ha pogut habilitar la característica. Torneu-ho a provar.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, please try again.';
+      'No s\'ha pogut desactivar la funció. Torneu-ho a provar.';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance => 'Compliment i enduriment';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'Només es recomana ajudar amb FedRAMP, HIPAA i altres requisits de compliment i enduriment.';
 
   @override
-  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+  String get ubuntuProComplianceUSGTitle =>
+      'Guia de seguretat de l\'Ubuntu (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'Automatitza l\'enduriment i l\'auditoria amb perfils de referència CIS i DISA-STIG, alhora que permet personalitzar el medi ambient.';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'Una certificació del mòdul criptogràfic del govern dels EUA i Canadà de compliment de la norma de protecció de dades FIPS 140-2.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'Habilita els FIPS';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'No es pot invertir l\'habilitació del FIPS i el Livepatch es desactivarà permanentment.';
 
   @override
   String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+      'Trieu la vostra opció FIPS preferida';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS amb actualitzacions';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'Instal·la paquets validats FIPS 140-2 i permet actualitzacions de seguretat regulars.';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS sense actualitzacions';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'Instal·la paquets validats FIPS 140-2. Aquestes no s\'actualitzaran fins a la següent recertificació.';
 
   @override
   String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+      'Documentació de compliment de seguretat';
 
   @override
-  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+  String get ubuntuProESMTitle => 'Manteniment de Seguretat Ampliada (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for the entire Ubuntu Archive. Get continuous vulnerability management for critical, high and selected medium CVEs.';
+      'ESM proporciona 10 anys de pegats de seguretat per a més de 25.000 paquets de codi obert. Obtingueu una gestió contínua de vulnerabilitats per a CVE crítics, alts i mitjans.';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'Paquets principals (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for Ubuntu Main packages until $year';
+    return 'Actualitzacions de seguretat per als paquets Ubuntu Main fins a $year';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'Paquets d\'univers (esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for Ubuntu Universe packages until $year';
+    return 'Actualitzacions de seguretat addicionals per als paquets Ubuntu Universe fins a $year';
   }
 
   @override
-  String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
+  String get ubuntuProLivepatchTitle => 'Livepatch per al nucli';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'Activa el Livepatch';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'Apliqueu les actualitzacions de seguretat del nucli mentre el sistema està en funcionament';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+      'Mostra l\'estat del Livepatch a la barra superior';
 }

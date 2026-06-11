@@ -58,16 +58,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get snapPermissionsPageTitle => 'アプリのパーミッション';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => '何らかの問題が発生しました';
 
   @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n rules',
-      one: '1 rule',
-      zero: 'no rules',
+      other: '$n個のルール',
+      one: '1個のルール',
+      zero: 'ルールなし',
     );
     return '$_temp0';
   }
@@ -125,9 +125,9 @@ class AppLocalizationsJa extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n apps',
-      one: '1 app',
-      zero: 'no apps',
+      other: '$n個のアプリ',
+      one: '1個のアプリ',
+      zero: 'アプリなし',
     );
     return '$_temp0';
   }
@@ -154,7 +154,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get diskEncryptionPageCheckKey => 'リカバリーキーをチェック...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'リカバリーキーをチェック';
+  String get diskEncryptionPageDialogHeaderCheckKey => 'リカバリーキーのチェック';
 
   @override
   String get diskEncryptionPageCheck => 'チェック';
@@ -184,10 +184,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get diskEncryptionPageError => 'エラー';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'リカバリーキーを置き換える...';
+  String get diskEncryptionPageReplaceButton => 'リカバリーキーを置き換え...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'リカバリーキーを置き換える';
+  String get diskEncryptionPageReplaceDialogHeader => 'リカバリーキーの置き換え';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
@@ -207,7 +207,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get diskEncryptionPageReplaceDialogReplace => '置き換える';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => '破棄する';
+  String get diskEncryptionPageReplaceDialogDiscard => '取り消す';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader => 'リカバリーキーを置き換えました';
@@ -631,14 +631,14 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESMは25000を超えるオープンソースパッケージのセキュリティパッチを提供します。CVEの緊急、重要、警告に対する継続した脆弱性管理を獲得できます。';
+      'ESMはUbuntuアーカイブ全体のセキュリティパッチを提供します。緊急、重要、選ばれた警告レベルのCVEに対して継続的に脆弱性管理を行います。';
 
   @override
   String get ubuntuProESMMainTitle => 'Mainパッケージ(esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return '$year までの2300に渡るUbuntu Mainパッケージのセキュリティアップデート';
+    return '$year年までのUbuntu Mainパッケージのセキュリティアップデート';
   }
 
   @override
@@ -646,7 +646,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return '$year までの23000に渡るUbuntu Universeパッケージの追加セキュリティアップデート';
+    return '$year年までのUbuntu Universeパッケージの追加セキュリティアップデート';
   }
 
   @override

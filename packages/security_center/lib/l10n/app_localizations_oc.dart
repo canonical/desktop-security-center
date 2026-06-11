@@ -62,7 +62,7 @@ class AppLocalizationsOc extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Autorizacions de l’aplicacion';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Quicòm a fracassat';
 
   @override
   String snapRulesCount(int n) {
@@ -258,7 +258,7 @@ class AppLocalizationsOc extends AppLocalizations {
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Paramètres de chiframent non disponible ms';
+      'Paramètres de chiframent non disponibles';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
@@ -677,14 +677,14 @@ class AppLocalizationsOc extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'L\'ESM provesís 10 ans de correctius de seguretat per mai de 25 000 paquets open source. Beneficiatz d\'una gestion de vulnerabilitat continua per las CVE criticas, nautas e mejanas.';
+      'L\'ESM provesís 10 ans de correctius de seguretat per tot l\'archiu Ubuntu. Beneficiatz d\'una gestion de vulnerabilitat continua per las CVE criticas, nautas e mejanas seleccionada.';
 
   @override
   String get ubuntuProESMMainTitle => 'Principals paquetatges (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Mesas a jorn de seguretat per 2 300 paquets Ubuntu Main fins a $year';
+    return 'Mesas a jorn de seguretat pels paquets Ubuntu Main fins a $year';
   }
 
   @override
@@ -692,7 +692,7 @@ class AppLocalizationsOc extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Mesas a jorn de seguretat suplementàrias per mai de 23 000 paquets Ubuntu Universe fins a l\'an $year';
+    return 'Mesas a jorn de seguretat suplementàrias pels paquets Ubuntu Universe fins a l\'an $year';
   }
 
   @override

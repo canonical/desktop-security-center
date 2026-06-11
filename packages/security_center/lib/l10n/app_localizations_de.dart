@@ -62,7 +62,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get snapPermissionsPageTitle => 'App-Berechtigungen';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Irgendetwas ist schiefgelaufen';
 
   @override
   String snapRulesCount(int n) {
@@ -160,7 +160,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get diskEncryptionPageCheckKey =>
-      'Prüfe Wiederherstellungsschlüssel …';
+      'Wiederherstellungsschlüssel wird geprüft ...';
 
   @override
   String get diskEncryptionPageDialogHeaderCheckKey =>
@@ -200,7 +200,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get diskEncryptionPageReplaceButton =>
-      'Wiederherstellungsschlüssel ersetzen...';
+      'Wiederherstellungsschlüssel ersetzen ...';
 
   @override
   String get diskEncryptionPageReplaceDialogHeader =>
@@ -682,14 +682,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM bietet 10 Jahre lang Sicherheitspatches für über 25.000 Open-Source-Pakete. Profitieren Sie von kontinuierlichem Schwachstellenmanagement für kritische, hohe und mittlere CVEs.';
+      'ESM stellt 10 Jahre lang Sicherheitspatches für das gesamte Ubuntu-Archiv bereit. Profitieren Sie von einem kontinuierlichen Schwachstellenmanagement für kritische, hohe und ausgewählte mittlere CVEs.';
 
   @override
   String get ubuntuProESMMainTitle => 'Hauptpakete (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Sicherheitsaktualisierungen für 2300 Ubuntu-Hauptpakete bis $year';
+    return 'Sicherheitsaktualisierungen für Ubuntu-Hauptpakete bis $year';
   }
 
   @override
@@ -697,7 +697,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Zusätzliche Sicherheitsaktualisierungen für über 23.000 Ubuntu-Universe-Pakete bis $year';
+    return 'Zusätzliche Sicherheitsaktualisierungen für Ubuntu-Universe-Pakete bis $year';
   }
 
   @override
