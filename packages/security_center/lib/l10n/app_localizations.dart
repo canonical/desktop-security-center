@@ -1170,7 +1170,7 @@ abstract class AppLocalizations {
   /// No description provided for @ubuntuProMagicError.
   ///
   /// In en, this message translates to:
-  /// **'Unable to enable Ubuntu Pro, please try again'**
+  /// **'Unable to enable Ubuntu Pro, try again'**
   String get ubuntuProMagicError;
 
   /// No description provided for @ubuntuProEnableToken.
@@ -1221,6 +1221,12 @@ abstract class AppLocalizations {
   /// **'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?'**
   String get ubuntuProDisablePrompt;
 
+  /// No description provided for @ubuntuProDisableError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not disable Ubuntu Pro, try again'**
+  String get ubuntuProDisableError;
+
   /// No description provided for @ubuntuProEnable.
   ///
   /// In en, this message translates to:
@@ -1236,13 +1242,13 @@ abstract class AppLocalizations {
   /// No description provided for @ubuntuProFeatureEnableError.
   ///
   /// In en, this message translates to:
-  /// **'Could not enable the feature, please try again.'**
+  /// **'Could not enable the feature, try again.'**
   String get ubuntuProFeatureEnableError;
 
   /// No description provided for @ubuntuProFeatureDisableError.
   ///
   /// In en, this message translates to:
-  /// **'Could not disable the feature, please try again.'**
+  /// **'Could not disable the feature, try again.'**
   String get ubuntuProFeatureDisableError;
 
   /// No description provided for @ubuntuProCompliance.
