@@ -265,5 +265,6 @@
     "ubuntuProLivepatchEnableDescription": "Appliquer les mises à jour de sécurité du noyau pendant que le système s’exécute",
     "ubuntuProESMDescription": "ESM fournit 10 ans de correctifs de sécurité pour l'archive Ubuntu entière. Obtenez la gestion continue des vulnérabilités pour les CVEs critiques, élevées et moyennes sélectionnées.",
     "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
-    "snapPermissionsErrorTitle": "Quelque chose a mal tourné"
+    "snapPermissionsErrorTitle": "Quelque chose a mal tourné",
+    "ubuntuProLivepatchTitle": "Livepatch pour le noyau"
 }
