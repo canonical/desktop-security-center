@@ -512,6 +512,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   Future<void> changeAuthMode(
     AuthMode newMode, {
     String? passphrase,
+    void Function()? onAuthorized,
   }) async {
     assert(state.hasValue, 'State must be loaded before changing auth mode');
 
@@ -532,6 +533,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         authMode: newMode,
         passphrase: newMode == AuthMode.passphrase ? passphrase : null,
         pin: newMode == AuthMode.pin ? passphrase : null,
+        onAuthorized: onAuthorized,
       );
 
       // Refresh current mode
@@ -554,8 +556,8 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
     }
   }
 
-  Future<void> removeAuthMode() async {
-    await changeAuthMode(AuthMode.none);
+  Future<void> removeAuthMode({void Function()? onAuthorized}) async {
+    await changeAuthMode(AuthMode.none, onAuthorized: onAuthorized);
 
     switch (state.valueOrNull?.operationError) {
       case TpmFdeOperationSnapdAuthException(
@@ -760,13 +762,17 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
     );
   }
 
-  Future<ChangeAuthModeDialogState> replaceAuthMode() async {
+  Future<void> replaceAuthMode({
+    void Function()? onAuthorized,
+  }) async {
     assert(state.dialogState is ChangeAuthModeDialogStateInput);
     try {
       state = state.copyWith(dialogState: ChangeAuthModeDialogState.loading());
-      await ref
-          .read(tpmAuthenticationModelProvider.notifier)
-          .changeAuthMode(state.newAuthMode, passphrase: state.newPass);
+      await ref.read(tpmAuthenticationModelProvider.notifier).changeAuthMode(
+            state.newAuthMode,
+            passphrase: state.newPass,
+            onAuthorized: onAuthorized,
+          );
       final tpmState = ref.read(tpmAuthenticationModelProvider).valueOrNull;
       switch (tpmState?.operationError) {
         case null:
@@ -800,7 +806,6 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
         dialogState: ChangeAuthModeDialogState.error(e, false),
       );
     }
-    return state.dialogState;
   }
 
   void toggleShowPassphrase() {
