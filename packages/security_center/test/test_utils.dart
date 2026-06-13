@@ -306,11 +306,14 @@ DiskEncryptionService registerMockDiskEncryptionService({
       authMode: anyNamed('authMode'),
       passphrase: anyNamed('passphrase'),
       pin: anyNamed('pin'),
+      onAuthorized: anyNamed('onAuthorized'),
     ),
   ).thenAnswer((invocation) async {
     final requestedAuthMode = invocation.namedArguments[#authMode] as AuthMode;
     final passphrase = invocation.namedArguments[#passphrase] as String?;
     final pin = invocation.namedArguments[#pin] as String?;
+    final onAuthorized =
+        invocation.namedArguments[#onAuthorized] as void Function()?;
 
     if (requestedAuthMode == AuthMode.none &&
         (pin != null || passphrase != null)) {
@@ -328,14 +331,22 @@ DiskEncryptionService registerMockDiskEncryptionService({
       throw Exception('Mock replace platform key error: missing passphrase');
     }
 
-    if (replacePlatformKeyError) {
-      throw Exception('Mock replace platform key error');
-    }
+    // Auth-related errors happen during the polkit prompt itself, before
+    // the snapd RPC is accepted — so onAuthorized must NOT fire in this path.
     if (replacePlatformKeySnapdAuthErrorKind != null) {
       throw SnapdException(
         message: 'Mock replace platform key auth error',
         kind: replacePlatformKeySnapdAuthErrorKind.snapdKind,
       );
+    }
+
+    // Mirror the real snapd impl: once polkit authorizes the request and
+    // snapd accepts it (returning a changeId), onAuthorized fires. Any
+    // subsequent failure happens while watching the change.
+    onAuthorized?.call();
+
+    if (replacePlatformKeyError) {
+      throw Exception('Mock replace platform key error');
     }
     if (replacePlatformKeySnapdErrorKind != null) {
       throw SnapdException(
