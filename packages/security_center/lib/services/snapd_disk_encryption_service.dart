@@ -114,6 +114,7 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   @override
   Future<void> replacePlatformKey({
     required AuthMode authMode,
+    void Function()? onAuthorized,
     String? passphrase,
     String? pin,
   }) async {
@@ -128,6 +129,8 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
       passphrase: passphrase,
       pin: pin,
     );
+
+    onAuthorized?.call();
 
     final result =
         await _snapd.watchChange(changeId).firstWhere((change) => change.ready);

@@ -561,21 +561,11 @@ class ChangeAuthModeDialog extends ConsumerWidget {
 
     Future<void> handleSubmit() async {
       final navigator = Navigator.of(context);
-      final operation = notifier.replaceAuthMode();
-      navigator.pop();
-
-      final dialogState = await operation;
-      if (!navigator.mounted) return;
-
-      switch (dialogState) {
-        case ChangeAuthModeDialogStateInput():
-          await showDialog<void>(
-            context: navigator.context,
-            builder: (_) => ChangeAuthModeDialog(authMode: authMode),
-          );
-        case _:
-          break;
-      }
+      await notifier.replaceAuthMode(
+        onAuthorized: () {
+          if (navigator.mounted) navigator.pop();
+        },
+      );
     }
 
     return AlertDialog(
