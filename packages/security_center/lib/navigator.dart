@@ -34,6 +34,7 @@ class AppNavigatorObserver extends NavigatorObserver {
 
   void _updateRouteSettingsProvider(Route<void>? route) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (route != null && route is! PageRoute) return;
       ref.read(routeSettingsProvider.notifier).state = route?.settings;
     });
   }
