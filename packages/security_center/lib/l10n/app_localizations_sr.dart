@@ -21,7 +21,19 @@ class AppLocalizationsSr extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Увек дозволи';
 
   @override
+  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+
+  @override
   String get snapdRuleCategoryForeverDenied => 'Увек одбиј';
+
+  @override
+  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+
+  @override
+  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+
+  @override
+  String get snapdRuleCategoryAskAlways => 'Ask always';
 
   @override
   String get snapPermissionReadLabel => 'Читање';

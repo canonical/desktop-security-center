@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/app_permissions/rules_category.dart';
+import 'package:security_center/app_permissions/rules_popup_menu.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snap_metadata_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
@@ -224,51 +226,31 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
     final notifier =
         ref.read(snapCameraRulesModelProvider(snap: snapName).notifier);
     final cameraRules = ref.watch(snapCameraRulesModelProvider(snap: snapName));
 
-    final (isOn, subtitle) = cameraRules.when(
+    final activeAction = cameraRules.when(
       data: (rules) {
-        if (rules.isEmpty) return (false, null);
+        if (rules.isEmpty) return SnapdRuleAction.askAlways;
 
         if (rules.length > 1) {
           _log.warning(
             'Snap $snapName has ${rules.length} camera rules, expected 0 or 1',
           );
-          return (false, null);
+          return SnapdRuleAction.askAlways;
         }
 
         final rule = rules.first;
-        return switch ((rule.outcome, rule.lifespan)) {
-          (SnapdRequestOutcome.allow, SnapdRequestLifespan.forever) => (
-              true,
-              null
-            ),
-          (SnapdRequestOutcome.allow, SnapdRequestLifespan.session) => (
-              true,
-              l10n.snapdRuleCategorySessionAllowed
-            ),
-          (SnapdRequestOutcome.deny, SnapdRequestLifespan.forever) => (
-              false,
-              null
-            ),
-          _ => (
-              false,
-              () {
-                _log.warning(
-                  'Snap $snapName has unexpected camera rule: outcome=${rule.outcome}, lifespan=${rule.lifespan}',
-                );
-                return null;
-              }()
-            ),
-        };
+        return SnapdRuleAction.fromOutcomeAndLifespan(
+          outcome: rule.outcome,
+          lifespan: rule.lifespan,
+        );
       },
-      loading: () => (false, null),
+      loading: () => SnapdRuleAction.askAlways,
       error: (error, _) {
         _log.error('Failed to load camera rules for snap $snapName: $error');
-        return (false, null);
+        return SnapdRuleAction.askAlways;
       },
       skipLoadingOnReload: true,
     );
@@ -278,15 +260,18 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
         snapIcon: ref.watch(snapIconProvider(snapName)),
       ),
       titleText: ref.watch(snapTitleOrNameProvider(snapName)),
-      subtitle: subtitle != null ? Text(subtitle) : null,
-      trailing: YaruSwitch(
-        value: isOn,
-        onChanged: (value) async {
+      trailing: PermissionRulePopupMenu(
+        selectedAction: activeAction,
+        onSelected: (value) async {
+          final updatedRuleInfo = value.toOutcomeAndLifespan();
           await notifier.removeAll();
-          await notifier.createAccessRule(
-            outcome:
-                value ? SnapdRequestOutcome.allow : SnapdRequestOutcome.deny,
-          );
+
+          if (updatedRuleInfo != null) {
+            await notifier.createAccessRule(
+              outcome: updatedRuleInfo.outcome,
+              lifespan: updatedRuleInfo.lifespan,
+            );
+          }
         },
       ),
     );
@@ -302,54 +287,34 @@ class _MicrophoneInterfaceAppTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
     final notifier =
         ref.read(snapMicrophoneRulesModelProvider(snap: snapName).notifier);
     final microphoneRules =
         ref.watch(snapMicrophoneRulesModelProvider(snap: snapName));
 
-    final (isOn, subtitle) = microphoneRules.when(
+    final activeAction = microphoneRules.when(
       data: (rules) {
-        if (rules.isEmpty) return (false, null);
+        if (rules.isEmpty) return SnapdRuleAction.askAlways;
 
         if (rules.length > 1) {
           _log.warning(
             'Snap $snapName has ${rules.length} microphone rules, expected 0 or 1',
           );
-          return (false, null);
+          return SnapdRuleAction.askAlways;
         }
 
         final rule = rules.first;
-        return switch ((rule.outcome, rule.lifespan)) {
-          (SnapdRequestOutcome.allow, SnapdRequestLifespan.forever) => (
-              true,
-              null
-            ),
-          (SnapdRequestOutcome.allow, SnapdRequestLifespan.session) => (
-              true,
-              l10n.snapdRuleCategorySessionAllowed
-            ),
-          (SnapdRequestOutcome.deny, SnapdRequestLifespan.forever) => (
-              false,
-              null
-            ),
-          _ => (
-              false,
-              () {
-                _log.warning(
-                  'Snap $snapName has unexpected microphone rule: outcome=${rule.outcome}, lifespan=${rule.lifespan}',
-                );
-                return null;
-              }()
-            ),
-        };
+        return SnapdRuleAction.fromOutcomeAndLifespan(
+          outcome: rule.outcome,
+          lifespan: rule.lifespan,
+        );
       },
-      loading: () => (false, null),
+      loading: () => SnapdRuleAction.askAlways,
       error: (error, _) {
         _log.error(
           'Failed to load microphone rules for snap $snapName: $error',
         );
-        return (false, null);
+        return SnapdRuleAction.askAlways;
       },
       skipLoadingOnReload: true,
     );
@@ -359,15 +324,18 @@ class _MicrophoneInterfaceAppTile extends ConsumerWidget {
         snapIcon: ref.watch(snapIconProvider(snapName)),
       ),
       titleText: ref.watch(snapTitleOrNameProvider(snapName)),
-      subtitle: subtitle != null ? Text(subtitle) : null,
-      trailing: YaruSwitch(
-        value: isOn,
-        onChanged: (value) async {
+      trailing: PermissionRulePopupMenu(
+        selectedAction: activeAction,
+        onSelected: (value) async {
+          final updatedRuleInfo = value.toOutcomeAndLifespan();
           await notifier.removeAll();
-          await notifier.createAccessRule(
-            outcome:
-                value ? SnapdRequestOutcome.allow : SnapdRequestOutcome.deny,
-          );
+
+          if (updatedRuleInfo != null) {
+            await notifier.createAccessRule(
+              outcome: updatedRuleInfo.outcome,
+              lifespan: updatedRuleInfo.lifespan,
+            );
+          }
         },
       ),
     );
