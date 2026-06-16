@@ -582,8 +582,7 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get ubuntuProMagicError =>
-      'Unable to enable Ubuntu Pro, please try again';
+  String get ubuntuProMagicError => 'Unable to enable Ubuntu Pro, try again';
 
   @override
   String get ubuntuProEnableToken => 'Enable with a token';
@@ -615,6 +614,9 @@ class AppLocalizationsNl extends AppLocalizations {
       'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
 
   @override
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+
+  @override
   String get ubuntuProEnable => 'Enable';
 
   @override
@@ -622,11 +624,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, please try again.';
+      'Could not enable the feature, try again.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, please try again.';
+      'Could not disable the feature, try again.';
 
   @override
   String get ubuntuProCompliance => 'Compliance and hardening';

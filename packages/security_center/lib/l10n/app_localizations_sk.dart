@@ -613,6 +613,9 @@ class AppLocalizationsSk extends AppLocalizations {
       'Deaktivovaním Ubuntu Pro sa toto zariadenie odpojí od vášho predplatného. Chcete pokračovať?';
 
   @override
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+
+  @override
   String get ubuntuProEnable => 'Aktivovať';
 
   @override

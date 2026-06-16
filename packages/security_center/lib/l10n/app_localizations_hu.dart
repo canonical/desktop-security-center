@@ -621,6 +621,9 @@ class AppLocalizationsHu extends AppLocalizations {
       'Az Ubuntu Pro letiltása leválasztja az előfizetését erről a számítógépről. Szeretné folytatni?';
 
   @override
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+
+  @override
   String get ubuntuProEnable => 'Engedélyezés';
 
   @override

@@ -601,6 +601,9 @@ class AppLocalizationsHe extends AppLocalizations {
       'השבתת Ubuntu Pro תנתק את המינוי שלך מהמכונה הזאת. להמשיך?';
 
   @override
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+
+  @override
   String get ubuntuProEnable => 'הפעלה';
 
   @override

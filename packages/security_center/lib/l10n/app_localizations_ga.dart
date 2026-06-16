@@ -622,6 +622,9 @@ class AppLocalizationsGa extends AppLocalizations {
       'Má dhíchumasaíonn tú Ubuntu Pro, bainfear do shíntiús ón meaisín seo. Ar mhaith leat dul ar aghaidh?';
 
   @override
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+
+  @override
   String get ubuntuProEnable => 'Cumasaigh';
 
   @override

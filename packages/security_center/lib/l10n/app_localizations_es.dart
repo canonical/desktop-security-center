@@ -622,6 +622,9 @@ class AppLocalizationsEs extends AppLocalizations {
       'Si desactiva Ubuntu Pro, su suscripción dejará de estar asociada a este equipo. ¿Quiere continuar?';
 
   @override
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+
+  @override
   String get ubuntuProEnable => 'Activar';
 
   @override

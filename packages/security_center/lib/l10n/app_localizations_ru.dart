@@ -623,6 +623,9 @@ class AppLocalizationsRu extends AppLocalizations {
       'Отключение Ubuntu Pro отменит привязку подписки к этому компьютеру. Хотите продолжить?';
 
   @override
+  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+
+  @override
   String get ubuntuProEnable => 'Включить';
 
   @override
