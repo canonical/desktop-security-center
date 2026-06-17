@@ -1,1 +1,270 @@
-{}
+{
+    "appTitle": "Security Centre",
+    "snapdRuleCategorySessionAllowed": "Allow until logout",
+    "snapdRuleCategorySessionDenied": "Deny until logout",
+    "snapdRuleCategoryForeverAllowed": "Allow always",
+    "snapdRuleCategoryForeverDenied": "Deny always",
+    "snapPermissionReadLabel": "Read",
+    "snapPermissionWriteLabel": "Write",
+    "snapPermissionExecuteLabel": "Execute",
+    "snapPermissionAccessLabel": "Access",
+    "snapPermissionsEnableTitle": "Require apps to ask for system permissions",
+    "snapPermissionsEnableWarning": "This is an experimental feature for controlling access to your system’s resources.",
+    "snapPermissionsEnablingLabel": "Enabling, this may take a few seconds...",
+    "snapPermissionsDisablingLabel": "Disabling, this may take a few seconds...",
+    "snapPermissionsExperimentalLabel": "Experimental",
+    "snapPermissionsOtherDescription": "You can manage other permissions in Settings › Applications.",
+    "snapPermissionsPageTitle": "App permissions",
+    "snapPermissionsErrorTitle": "Something went wrong",
+    "snapRulesCount": "{n, plural, =0{no rules} =1{1 rule} other{{n} rules}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "Manage {interface} permissions for {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "No rules yet",
+    "cameraRulesPageEmptyTileLabel": "No apps requested access yet",
+    "snapRulesRemoveAll": "Remove all rules",
+    "snapRulesResetAllPermissions": "Reset all permissions",
+    "homeInterfacePageTitle": "Home folder",
+    "homeInterfacePageDescription": "Manage permissions to access files in your Home folder.",
+    "cameraInterfacePageTitle": "Camera",
+    "cameraInterfacePageDescription": "Allow apps to access your cameras.",
+    "microphoneInterfacePageTitle": "Microphone",
+    "microphoneInterfacePageDescription": "Allow apps to access your microphone.",
+    "interfacePageTitle": "Manage permissions",
+    "interfacePageDescription": "Strictly confined apps will ask you before accessing files and folders. This feature is experimental and subject to changes.",
+    "interfacePageLinkLearnMore": "Learn more",
+    "interfacePageLinkGiveFeedback": "Give feedback",
+    "interfacePageLinkReportIssues": "Report issues",
+    "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 app} other {{n} apps}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageTitle": "Disk encryption",
+    "diskEncryptionPageRecoveryKey": "Recovery key",
+    "diskEncryptionPageStoreYourKey": "The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.",
+    "diskEncryptionPageStoreYourKeyWithLink": "The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "Learn more about hardware-backed encryption",
+    "diskEncryptionPageCheckKey": "Check recovery key...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Check recovery key",
+    "diskEncryptionPageCheck": "Check",
+    "diskEncryptionPageValidKey": "Valid key",
+    "diskEncryptionPageInvalidKey": "Invalid key",
+    "diskEncryptionPageEnterKey": "Enter your recovery key",
+    "diskEncryptionPageKeyWorks": "Recovery key works",
+    "diskEncryptionPageKeyWorksBody": "Remember to keep it somewhere safe.",
+    "diskEncryptionPageKeyDoesntWork": "Recovery key does not work",
+    "diskEncryptionPageKeyDoesntWorkBody": "Check the key or replace it with a new one.",
+    "diskEncryptionPageError": "Error",
+    "diskEncryptionPageReplaceButton": "Replace recovery key...",
+    "diskEncryptionPageReplaceDialogHeader": "Replace recovery key",
+    "diskEncryptionPageReplaceDialogBody": "Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key any more.",
+    "diskEncryptionPageReplaceDialogShowQR": "Show QR code",
+    "diskEncryptionPageReplaceDialogSave": "Save to file",
+    "diskEncryptionPageReplaceDialogAcknowledge": "I saved my recovery key somewhere safe",
+    "diskEncryptionPageReplaceDialogReplace": "Replace",
+    "diskEncryptionPageReplaceDialogDiscard": "Discard",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Recovery key replaced",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Remember to keep it somewhere safe.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Recovery key replacement failed",
+    "diskEncryptionPageReplaceDialogErrorBody": "Something went wrong replacing your recovery key, your old key will remain valid.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Encryption recovery key",
+    "diskEncryptionPageReplaceDialogQRBody": "Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.",
+    "diskEncryptionPageClipboardNotification": "Copied to clipboard",
+    "diskEncryptionPageCopySemanticLabel": "Copy",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Encryption settings not available",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Failed to retrieve the encryption status of this computer.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "Your computer's TPM configuration is not in a supported state.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Your snapd version is not supported",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Check the Security Centre and snapd are up to date.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Security Centre cannot connect to the snapd interface",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "To fix this, run this command in the terminal:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "diskEncryptionPageAddPinButton": "Add PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Add passphrase...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Add passphrase",
+    "diskEncryptionPageAddPinDialogHeading": "Add PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "You will need to enter your PIN every time your computer starts. This PIN is different from your user password.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "If you forget your PIN, you can regain access to the disk by using the recovery key.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "If you forget your passphrase, you can regain access to the disk by using the recovery key.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Additional security",
+    "diskEncryptionPageAdditionalSecurityBody": "You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Learn more",
+    "diskEncryptionPageAddPinDialogSaveButton": "Add",
+    "diskEncryptionPageRemovePinButton": "Remove PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Remove passphrase...",
+    "diskEncryptionPageAddingPin": "Adding PIN, this may take a few seconds...",
+    "diskEncryptionPageAddingPassphrase": "Adding passphrase, this may take a few seconds...",
+    "diskEncryptionPageRemovingPin": "Removing PIN, this may take a few seconds...",
+    "diskEncryptionPageRemovingPassphrase": "Removing passphrase, this may take a few seconds...",
+    "recoveryKeyExceptionFileSystemTitle": "Recovery key file not saved",
+    "recoveryKeyExceptionDisallowedPathTitle": "Recovery key file cannot be saved in a temporary location",
+    "recoveryKeyExceptionUnknownTitle": "Unknown error",
+    "recoveryKeyExceptionFilePermissionTitle": "Failed to save your recovery key to file",
+    "recoveryKeyExceptionFilePermissionBody": "You do not have permission to write to that file location.",
+    "recoveryKeyExceptionFileSystemBody": "You do not have permission to write to that folder. Try a different location or use another method.",
+    "recoveryKeyExceptionDisallowedPathBody": "Try a different location, such as a removable drive, or use another method.",
+    "recoveryKeyFilePickerTitle": "Save recovery key file",
+    "recoveryKeyFilePickerFilter": "Text files",
+    "recoveryKeyTPMEnabled": "Hardware-backed encryption is enabled",
+    "recoveryKeyTPMExplanationBody": "The encryption keys are stored in your computer's Trusted Platform Module (TPM).",
+    "recoveryKeyTPMExplanationLearnMore": "Learn more about hardware-backed encryption",
+    "recoveryKeyPassphraseEnabled": "Encryption passphrase is enabled",
+    "recoveryKeyPassphraseHeader": "Change passphrase",
+    "recoveryKeyPassphraseBody": "You need to enter your passphrase every time your computer starts.",
+    "recoveryKeyPassphraseButton": "Change passphrase...",
+    "recoveryKeyPassphraseCurrent": "Current passphrase",
+    "recoveryKeyPassphraseNew": "New passphrase",
+    "recoveryKeyPassphraseConfirm": "Confirm passphrase",
+    "recoveryKeyPassphraseCurrentError": "Incorrect passphrase, try again",
+    "recoveryKeyPassphraseNewError": "Must be at least 4 characters long",
+    "recoveryKeyPassphraseConfirmError": "Passphrases do not match, try again",
+    "recoveryKeyPassphraseDialogHeader": "Change passphrase",
+    "recoveryKeyPinEnabled": "Encryption PIN is enabled",
+    "recoveryKeyPinHeader": "Encryption PIN",
+    "recoveryKeyEncrpytionPassphraseHeader": "Encryption passphrase",
+    "recoveryKeyPinBody": "You need to enter your PIN every time your computer starts.",
+    "recoveryKeyPinButton": "Change PIN...",
+    "recoveryKeyPinCurrent": "Current PIN",
+    "recoveryKeyPinNew": "New PIN",
+    "recoveryKeyPinConfirm": "Confirm PIN",
+    "recoveryKeyPinCurrentError": "Incorrect PIN, try again",
+    "recoveryKeyPinConfirmError": "PINs do not match, try again",
+    "recoveryKeyPinDialogHeader": "Change PIN",
+    "recoveryKeyPassphraseShow": "Show",
+    "recoveryKeyPassphraseHide": "Hide",
+    "recoveryKeyPassphraseChange": "Change",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN updated",
+    "recoveryKeyPassphrasePinSuccessBody": "You PIN was successfully updated.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Passphrase updated",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "You passphrase was successfully updated.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Weak passphrase, make it longer or more complex",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Fair passphrase, make it longer or more complex for better security",
+    "recoveryKeyPassphraseEntropyOptimal": "Strong passphrase",
+    "recoveryKeyPinEntropyBelowMin": "Weak PIN, make it longer or less predictable",
+    "recoveryKeyPinEntropyBelowOptimal": "Fair PIN, make it longer or less predictable for better security",
+    "recoveryKeyPinEntropyOptimal": "PIN is long enough",
+    "recoveryKeySomethingWentWrongHeader": "Something went wrong",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro is not available for this Ubuntu version",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro requires an LTS release",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro is not supported by this snapd version",
+    "ubuntuProNotSupportedSnapdDetails": "Update snapd to manage Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro is enabled",
+    "ubuntuProDisabled": "Enterprise-grade security and compliance for your computer. Always free for personal use. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Learn about Ubuntu Pro",
+    "ubuntuProEnablePro": "Enable Ubuntu Pro",
+    "ubuntuProEnableMagic": "Enable with Ubuntu One account",
+    "ubuntuProEnableMagicSubtitle": "You will be able to create an account for free",
+    "ubuntuProMagicPrompt": "Log in with your Ubuntu One account, or create one for free.",
+    "ubuntuProMagicContinueInBrowser": "Continue in browser",
+    "ubuntuProMagicDescription": "You can also log in at {attachLink} and enter the code {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Unable to enable Ubuntu Pro, please try again",
+    "ubuntuProEnableToken": "Enable with a token",
+    "ubuntuProEnableTokenError": "Unable to enable Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "From your IT admin or from {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Get an Ubuntu Pro token from your administrator or from {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Disable Ubuntu Pro",
+    "ubuntuProDisable": "Disable",
+    "ubuntuProDisablePrompt": "Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?",
+    "ubuntuProEnable": "Enable",
+    "ubuntuProCancel": "Cancel",
+    "ubuntuProFeatureEnableError": "Could not enable the feature, please try again.",
+    "ubuntuProFeatureDisableError": "Could not disable the feature, please try again.",
+    "ubuntuProCompliance": "Compliance and hardening",
+    "ubuntuProComplianceDisclaimer": "Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu Security Guide (USG)",
+    "ubuntuProComplianceUSGDescription": "Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customisations.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "A US and Canadian government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.",
+    "ubuntuProComplianceFIPSEnable": "Enable FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.",
+    "ubuntuProComplianceFIPSPrompt": "Choose your preferred FIPS option",
+    "ubuntuProComplianceFIPSUpdates": "FIPS with updates",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Installs FIPS 140-2 validated packages and allows for regular security updates.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS without updates",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.",
+    "ubuntuProComplianceDocumentation": "Security compliance documentation",
+    "ubuntuProESMTitle": "Expanded Security Maintenance (ESM)",
+    "ubuntuProESMDescription": "ESM provides 10 years of security patches for the entire Ubuntu Archive. Get continuous vulnerability management for critical, high and selected medium CVEs.",
+    "ubuntuProESMMainTitle": "Main packages (esm-infra)",
+    "ubuntuProESMMainDescription": "Security updates for Ubuntu Main packages until {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Universe packages (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Additional security updates for Ubuntu Universe packages until {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Enable Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Apply kernel security updates while the system runs",
+    "ubuntuProLivepatchShowTitle": "Show Livepatch status in the top bar"
+}
