@@ -128,6 +128,9 @@ class FakeUbuntuProManagerService implements UbuntuProManagerService {
   }
 
   @override
+  Future<void> preAuthorize() async {}
+
+  @override
   Future<void> attach(String token) async {
     _stream.add(_data.copyWith(attached: true));
   }

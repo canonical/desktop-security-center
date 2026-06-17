@@ -331,6 +331,15 @@ class UbuntuProManagerService {
     await _stream.close();
   }
 
+  /// Pre-authorize the attach flow by calling Attach with an empty token.
+  Future<void> preAuthorize() async {
+    await _objectManager!.callMethod(
+      'com.canonical.UbuntuAdvantage.Manager',
+      'Attach',
+      [DBusString('')],
+    );
+  }
+
   /// Attach the machine over D-Bus.
   Future<void> attach(String token) async {
     await _objectManager!.callMethod(

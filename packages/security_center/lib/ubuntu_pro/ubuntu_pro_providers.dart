@@ -45,6 +45,14 @@ class UbuntuProAttachModel extends _$UbuntuProAttachModel {
     );
   }
 
+  Future<void> preAuthorize() async {
+    try {
+      await _service.preAuthorize();
+    } on DBusMethodResponseException catch (error) {
+      _log.error('Unable to pre-authorize Pro', error);
+    }
+  }
+
   Future<void> attach() async {
     try {
       state = state.copyWith(state: UbuntuProAttachState.loading());

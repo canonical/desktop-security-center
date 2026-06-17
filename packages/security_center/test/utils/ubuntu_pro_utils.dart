@@ -145,6 +145,7 @@ UbuntuProManagerService registerMockUbuntuProManagerService({
 
   when(service.data).thenReturn(data);
   when(service.stream).thenAnswer((_) => stream.stream);
+  when(service.preAuthorize()).thenAnswer((_) async {});
   when(service.detach()).thenAnswer((_) async {
     stream.add(
       data.copyWith(attached: false),

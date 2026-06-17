@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -193,10 +195,18 @@ class _UbuntuProStatus extends ConsumerWidget {
               ),
               const SizedBox(height: kPageSectionGap),
               ElevatedButton(
-                onPressed: () => showDialog(
-                  context: context,
-                  builder: (_) => const AttachDialog(),
-                ),
+                onPressed: () async {
+                  await ref
+                      .read(ubuntuProAttachModelProvider.notifier)
+                      .preAuthorize();
+                  if (!context.mounted) return;
+                  unawaited(
+                    showDialog(
+                      context: context,
+                      builder: (_) => const AttachDialog(),
+                    ),
+                  );
+                },
                 child: Text(l10n.ubuntuProEnablePro),
               ),
               const SizedBox(height: kPageSectionGap),
