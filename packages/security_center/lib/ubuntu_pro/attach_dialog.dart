@@ -87,12 +87,6 @@ class _MagicLinkDialog extends ConsumerWidget {
     final theme = Theme.of(context);
     final magicAttachProvider = ref.watch(magicAttachModelProvider);
 
-    if (magicAttachProvider.value?.state is UbuntuProAttachStateSuccess) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.of(context, rootNavigator: true).pop();
-      });
-    }
-
     return AlertDialog(
       title: YaruDialogTitleBar(
         titleSpacing: 0,
@@ -120,20 +114,13 @@ class _MagicLinkDialog extends ConsumerWidget {
         data: (data) => data.validContract
             ? [
                 ElevatedButton(
-                  onPressed: magicAttachProvider.value?.state
-                          is UbuntuProAttachStateLoading
-                      ? null
-                      : () =>
-                          ref.read(magicAttachModelProvider.notifier).attach(),
-                  child: magicAttachProvider.value?.state
-                          is UbuntuProAttachStateLoading
-                      ? SizedBox.square(
-                          dimension: theme.textTheme.bodyMedium?.fontSize,
-                          child: YaruCircularProgressIndicator(
-                            strokeWidth: 2,
-                          ),
-                        )
-                      : Text(l10n.ubuntuProEnable),
+                  onPressed: () {
+                    ref.read(ubuntuProPageModelProvider.notifier).attach(
+                          data.response.contractToken!,
+                        );
+                    Navigator.of(context, rootNavigator: true).pop();
+                  },
+                  child: Text(l10n.ubuntuProEnable),
                 ),
               ]
             : null,
@@ -182,16 +169,6 @@ class _MagicLinkDialog extends ConsumerWidget {
                     ),
                   ],
                 ),
-                if (magicAttachProvider.asData?.value.state
-                    is UbuntuProAttachStateError) ...[
-                  SizedBox(height: 8),
-                  Text(
-                    l10n.ubuntuProEnableTokenError,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.error,
-                    ),
-                  ),
-                ],
               ],
             ),
             if (magicAttachProvider.asData?.value.validContract == false)
@@ -223,16 +200,9 @@ class _TokenDialog extends ConsumerStatefulWidget {
 class _TokenDialogState extends ConsumerState<_TokenDialog> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
 
     final provider = ref.watch(ubuntuProAttachModelProvider);
-
-    if (provider.state is UbuntuProAttachStateSuccess) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.of(context, rootNavigator: true).pop();
-      });
-    }
 
     return AlertDialog(
       title: YaruDialogTitleBar(
@@ -259,18 +229,15 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
       contentPadding: EdgeInsets.zero,
       actions: [
         ElevatedButton(
-          onPressed: !provider.validToken ||
-                  provider.state is UbuntuProAttachStateLoading
+          onPressed: !provider.validToken
               ? null
-              : () => ref.read(ubuntuProAttachModelProvider.notifier).attach(),
-          child: provider.state is UbuntuProAttachStateLoading
-              ? SizedBox.square(
-                  dimension: theme.textTheme.bodyMedium?.fontSize,
-                  child: YaruCircularProgressIndicator(
-                    strokeWidth: 2,
-                  ),
-                )
-              : Text(l10n.ubuntuProEnable),
+              : () {
+                  ref
+                      .read(ubuntuProPageModelProvider.notifier)
+                      .attach(provider.token);
+                  Navigator.of(context, rootNavigator: true).pop();
+                },
+          child: Text(l10n.ubuntuProEnable),
         ),
       ],
       content: Container(
@@ -284,12 +251,8 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
               ),
             ),
             TextField(
-              enabled: provider.state is! UbuntuProAttachStateLoading,
               decoration: InputDecoration(
                 labelText: l10n.ubuntuProTokenLabel,
-                errorText: provider.state is UbuntuProAttachStateError
-                    ? l10n.ubuntuProEnableTokenError
-                    : null,
               ),
               onChanged: (value) => ref
                   .read(ubuntuProAttachModelProvider.notifier)
