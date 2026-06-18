@@ -107,13 +107,6 @@ void main() {
 
       expect(tester.widget<ElevatedButton>(enableFinder).enabled, isFalse);
 
-      await tester.enterText(tokenInput, invalidToken);
-      await tester.pumpAndSettle();
-      await tester.tap(enableFinder);
-      await tester.pumpAndSettle();
-
-      expect(find.text(tester.l10n.ubuntuProEnableTokenError), findsOne);
-
       await tester.enterText(tokenInput, validToken);
       await tester.pumpAndSettle();
       await tester.tap(enableFinder);
@@ -128,6 +121,67 @@ void main() {
         ),
         findsOne,
       );
+    });
+
+    testWidgets('token attach error shows inline error box', (tester) async {
+      registerMockUbuntuProManagerService(attached: false);
+      registerMockUbuntuProFeatureService(featuresEntitled: false);
+      await _pumpUbuntuProPage(tester);
+
+      final enableProFinder = find.widgetWithText(
+        ElevatedButton,
+        tester.l10n.ubuntuProEnablePro,
+      );
+      await tester.tap(enableProFinder);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text(tester.l10n.ubuntuProEnableToken));
+      await tester.pumpAndSettle();
+
+      final tokenInput = find.byType(TextField);
+      await tester.enterText(tokenInput, invalidToken);
+      await tester.pumpAndSettle();
+
+      await tester.tap(
+        find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProEnable),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(AlertDialog), findsNothing);
+      expect(find.text(tester.l10n.ubuntuProEnableTokenError), findsOne);
+      expect(
+        find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProEnablePro),
+        findsOne,
+      );
+    });
+
+    testWidgets('error clears when dialog reopened', (tester) async {
+      registerMockUbuntuProManagerService(attached: false);
+      registerMockUbuntuProFeatureService(featuresEntitled: false);
+      await _pumpUbuntuProPage(tester);
+
+      final enableProFinder = find.widgetWithText(
+        ElevatedButton,
+        tester.l10n.ubuntuProEnablePro,
+      );
+
+      await tester.tap(enableProFinder);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(tester.l10n.ubuntuProEnableToken));
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextField), invalidToken);
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProEnable),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text(tester.l10n.ubuntuProEnableTokenError), findsOne);
+
+      await tester.tap(enableProFinder);
+      await tester.pumpAndSettle();
+
+      expect(find.text(tester.l10n.ubuntuProEnableTokenError), findsNothing);
     });
 
     testWidgets('enable-able via magic link', (tester) async {
@@ -175,6 +229,52 @@ void main() {
           tester.l10n.ubuntuProDisablePro,
         ),
         findsOne,
+      );
+    });
+
+    testWidgets('attaching state shows progress row', (tester) async {
+      registerMockUbuntuProManagerService(attached: false);
+      registerMockUbuntuProFeatureService(featuresEntitled: false);
+      final container = createContainer(
+        overrides: [
+          ubuntuProPageModelProvider.overrideWith(_AttachingPageModel.new),
+        ],
+      );
+
+      await tester.pumpAppWithProviders(
+        (_) => const UbuntuProPage(),
+        container,
+      );
+      await tester.pump();
+
+      expect(find.text(tester.l10n.ubuntuProAttachingLabel), findsOne);
+      expect(
+        find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProEnablePro),
+        findsNothing,
+      );
+    });
+
+    testWidgets('feature switches disabled while attaching', (tester) async {
+      registerMockGSettingsIconService();
+      registerMockUbuntuProManagerService(attached: false);
+      registerMockUbuntuProFeatureService();
+      final container = createContainer(
+        overrides: [
+          ubuntuProPageModelProvider.overrideWith(_AttachingPageModel.new),
+        ],
+      );
+
+      await tester.pumpAppWithProviders(
+        (_) => const UbuntuProPage(),
+        container,
+      );
+      await tester.pump();
+
+      expect(
+        tester
+            .widgetList<YaruSwitchListTile>(find.byType(YaruSwitchListTile))
+            .every((w) => w.onChanged == null),
+        isTrue,
       );
     });
   });
@@ -325,4 +425,19 @@ Future<void> _pumpUbuntuProPage(WidgetTester tester) async {
     container,
   );
   await tester.pumpAndSettle();
+}
+
+// Provider override that permanently returns the attaching state.
+class _AttachingPageModel extends UbuntuProPageModel {
+  @override
+  UbuntuProPageState build() => UbuntuProPageState.attaching();
+
+  @override
+  Future<void> attach(String token) async {}
+
+  @override
+  Future<void> detach() async {}
+
+  @override
+  void clearError() {}
 }

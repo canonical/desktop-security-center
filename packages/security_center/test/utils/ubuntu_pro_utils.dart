@@ -134,6 +134,7 @@ MagicAttachService registerMockMagicAttachService() {
 UbuntuProManagerService registerMockUbuntuProManagerService({
   bool attached = true,
   bool available = true,
+  bool detachThrows = false,
 }) {
   final service = MockUbuntuProManagerService();
   final stream = StreamController<UbuntuProManagerData>.broadcast();
@@ -145,11 +146,17 @@ UbuntuProManagerService registerMockUbuntuProManagerService({
 
   when(service.data).thenReturn(data);
   when(service.stream).thenAnswer((_) => stream.stream);
-  when(service.detach()).thenAnswer((_) async {
-    stream.add(
-      data.copyWith(attached: false),
+  if (detachThrows) {
+    when(service.detach()).thenThrow(
+      DBusMethodResponseException(DBusMethodErrorResponse('Detach failed')),
     );
-  });
+  } else {
+    when(service.detach()).thenAnswer((_) async {
+      stream.add(
+        data.copyWith(attached: false),
+      );
+    });
+  }
   when(service.attach(validToken)).thenAnswer((_) async {
     stream.add(
       data.copyWith(attached: true),
