@@ -549,6 +549,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro on käytössä';
 
   @override
+  String get ubuntuProAttachingLabel => 'This may take a few seconds...';
+
+  @override
   String ubuntuProDisabled(String learnMoreLink) {
     return 'Yritystason tietoturvaa ja vaatimustenmukaisuutta tietokoneellesi. Aina ilmainen henkilökohtaiseen käyttöön. $learnMoreLink';
   }

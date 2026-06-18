@@ -551,6 +551,9 @@ class AppLocalizationsSk extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro je aktivované';
 
   @override
+  String get ubuntuProAttachingLabel => 'This may take a few seconds...';
+
+  @override
   String ubuntuProDisabled(String learnMoreLink) {
     return 'Zabezpečenie podnikovej úrovne a dodržiavanie štandardov pre váš počítač. Vždy zadarmo na osobné použitie. $learnMoreLink';
   }

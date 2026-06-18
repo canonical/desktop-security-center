@@ -519,6 +519,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Proは有効です';
 
   @override
+  String get ubuntuProAttachingLabel => 'This may take a few seconds...';
+
+  @override
   String ubuntuProDisabled(String learnMoreLink) {
     return 'コンピューターにエンタープライズグレードのセキュリティとコンプライアンスを提供します。個人利用の場合は常に無料です。 $learnMoreLink';
   }

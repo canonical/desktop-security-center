@@ -556,6 +556,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get ubuntuProEnabled => 'Az Ubuntu Pro engedélyezve van';
 
   @override
+  String get ubuntuProAttachingLabel => 'This may take a few seconds...';
+
+  @override
   String ubuntuProDisabled(String learnMoreLink) {
     return 'Vállalati szintű biztonság és megfelelőség a számítógépén. Személyes használatra mindig ingyenes. $learnMoreLink';
   }

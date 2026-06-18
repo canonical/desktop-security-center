@@ -1143,6 +1143,12 @@ abstract class AppLocalizations {
   /// **'Ubuntu Pro is enabled'**
   String get ubuntuProEnabled;
 
+  /// No description provided for @ubuntuProAttachingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'This may take a few seconds...'**
+  String get ubuntuProAttachingLabel;
+
   /// No description provided for @ubuntuProDisabled.
   ///
   /// In en, this message translates to:

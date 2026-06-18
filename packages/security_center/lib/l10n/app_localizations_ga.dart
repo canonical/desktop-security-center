@@ -558,6 +558,9 @@ class AppLocalizationsGa extends AppLocalizations {
   String get ubuntuProEnabled => 'Tá Ubuntu Pro cumasaithe';
 
   @override
+  String get ubuntuProAttachingLabel => 'This may take a few seconds...';
+
+  @override
   String ubuntuProDisabled(String learnMoreLink) {
     return 'Slándáil agus comhlíonadh den scoth chun do ríomhaire. Saor in aisce i gcónaí le haghaidh úsáide pearsanta. $learnMoreLink';
   }
