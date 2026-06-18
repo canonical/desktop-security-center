@@ -18,9 +18,15 @@ class ScrollablePage extends StatelessWidget {
     return SingleChildScrollView(
       child: Padding(
         padding: padding ?? const EdgeInsets.all(kPagePadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: children,
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 574),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: children,
+            ),
+          ),
         ),
       ),
     );

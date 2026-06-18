@@ -84,7 +84,8 @@ class _Links extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
+      spacing: 16,
       children: _Link.values
           .map(
             (link) => Hyperlink(
@@ -92,8 +93,7 @@ class _Links extends StatelessWidget {
               url: link.url,
             ),
           )
-          .toList()
-          .separatedBy(const SizedBox(width: 16)),
+          .toList(),
     );
   }
 }
