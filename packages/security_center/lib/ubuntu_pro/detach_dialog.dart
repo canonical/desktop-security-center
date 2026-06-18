@@ -5,20 +5,20 @@ import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:yaru/yaru.dart';
 
-class DetachDialog extends ConsumerWidget {
+class DetachDialog extends ConsumerStatefulWidget {
   const DetachDialog({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DetachDialog> createState() => _DetachDialogState();
+}
+
+class _DetachDialogState extends ConsumerState<DetachDialog> {
+  bool _loading = false;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
-    final provider = ref.watch(ubuntuProAttachModelProvider);
-
-    if (provider.state is UbuntuProAttachStateSuccess) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.of(context, rootNavigator: true).pop();
-      });
-    }
 
     return AlertDialog(
       title: YaruDialogTitleBar(
@@ -27,28 +27,26 @@ class DetachDialog extends ConsumerWidget {
       titlePadding: EdgeInsets.zero,
       actions: [
         OutlinedButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: _loading ? null : Navigator.of(context).pop,
           child: Text(l10n.ubuntuProCancel),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: theme.colorScheme.error,
           ),
-          onPressed: provider.state is UbuntuProAttachStateLoading
+          onPressed: _loading
               ? null
               : () async {
-                  await ref
-                      .read(ubuntuProAttachModelProvider.notifier)
-                      .detach();
+                  setState(() => _loading = true);
+                  await ref.read(ubuntuProPageModelProvider.notifier).detach();
+                  if (context.mounted) {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  }
                 },
-          child: provider.state is UbuntuProAttachStateLoading
+          child: _loading
               ? SizedBox.square(
                   dimension: theme.textTheme.bodyMedium?.fontSize,
-                  child: YaruCircularProgressIndicator(
-                    strokeWidth: 2,
-                  ),
+                  child: const YaruCircularProgressIndicator(strokeWidth: 2),
                 )
               : Text(l10n.ubuntuProDisable),
         ),
@@ -60,13 +58,6 @@ class DetachDialog extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(l10n.ubuntuProDisablePrompt),
-            if (provider.state is UbuntuProAttachStateError) ...[
-              const SizedBox(height: 8),
-              YaruInfoBox(
-                subtitle: Text(l10n.ubuntuProDisableError),
-                yaruInfoType: YaruInfoType.danger,
-              ),
-            ],
           ],
         ),
       ),
