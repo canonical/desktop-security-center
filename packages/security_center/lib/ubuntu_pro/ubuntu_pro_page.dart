@@ -226,7 +226,7 @@ class _UbuntuProStatus extends ConsumerWidget {
               const SizedBox(height: kPageSubsectionGap),
               YaruInfoBox(
                 yaruInfoType: YaruInfoType.danger,
-                title: Text(l10n.ubuntuProEnableTokenError),
+                child: Text(l10n.ubuntuProEnableTokenError),
               ),
             ],
             const SizedBox(height: kPageSectionGap),
