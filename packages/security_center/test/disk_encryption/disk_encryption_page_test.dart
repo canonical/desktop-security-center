@@ -142,7 +142,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      find.text(tester.l10n.diskEncryptionPageError),
+      find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
       findsNothing,
     );
 
@@ -890,7 +890,7 @@ void main() {
         if (tc.changePinPassphraseError) {
           // Should show error message
           expect(
-            find.text(tester.l10n.diskEncryptionPageError),
+            find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
             findsOneWidget,
           );
           expect(
@@ -955,7 +955,10 @@ void main() {
     );
     await tester.pumpAndSettle(debounceDelay);
 
-    expect(find.text(tester.l10n.diskEncryptionPageError), findsNothing);
+    expect(
+      find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
+      findsNothing,
+    );
     expect(find.byType(TextField), findsNWidgets(3));
     expect(tester.widget<TextField>(textFields.at(0)).controller?.text, '1234');
     expect(tester.widget<TextField>(textFields.at(1)).controller?.text, '5678');
@@ -1661,7 +1664,7 @@ void main() {
         // Check the result based on success/failure
         if (tc.replacePlatformKeyError) {
           expect(
-            find.text(tester.l10n.diskEncryptionPageError),
+            find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
             findsOneWidget,
           );
           expect(
@@ -1681,7 +1684,7 @@ void main() {
           expect(tester.widget<OutlinedButton>(addButton).enabled, isTrue);
         } else {
           expect(
-            find.text(tester.l10n.diskEncryptionPageError),
+            find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
             findsNothing,
           );
         }
@@ -1718,7 +1721,10 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text(tester.l10n.diskEncryptionPageError), findsNothing);
+    expect(
+      find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
+      findsNothing,
+    );
     expect(find.byType(TextField), findsNWidgets(2));
     expect(tester.widget<TextField>(textFields.at(0)).controller?.text, '5678');
     expect(tester.widget<TextField>(textFields.at(1)).controller?.text, '5678');
@@ -1864,7 +1870,7 @@ void main() {
         if (tc.replacePlatformKeyError) {
           // On error, verify error box appears on main page
           expect(
-            find.text(tester.l10n.diskEncryptionPageError),
+            find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
             findsOneWidget,
           );
           // Button should still be visible and re-enabled
@@ -1880,7 +1886,7 @@ void main() {
           expect(find.text(statusText), findsOneWidget);
         } else {
           expect(
-            find.text(tester.l10n.diskEncryptionPageError),
+            find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
             findsNothing,
           );
         }
@@ -1903,7 +1909,10 @@ void main() {
     await tester.tap(find.text(tester.l10n.diskEncryptionPageRemovePinButton));
     await tester.pumpAndSettle();
 
-    expect(find.text(tester.l10n.diskEncryptionPageError), findsNothing);
+    expect(
+      find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
+      findsNothing,
+    );
     expect(find.text(tester.l10n.recoveryKeyPinEnabled), findsOneWidget);
     final removeButton = find.widgetWithText(
       OutlinedButton,
