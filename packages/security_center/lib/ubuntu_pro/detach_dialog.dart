@@ -38,8 +38,10 @@ class _DetachDialogState extends ConsumerState<DetachDialog> {
               ? null
               : () async {
                   setState(() => _loading = true);
-                  await ref.read(ubuntuProPageModelProvider.notifier).detach();
-                  if (context.mounted) {
+                  final success = await ref
+                      .read(ubuntuProPageModelProvider.notifier)
+                      .detach();
+                  if (context.mounted && success) {
                     Navigator.of(context, rootNavigator: true).pop();
                   }
                 },

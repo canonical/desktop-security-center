@@ -436,7 +436,9 @@ class _AttachingPageModel extends UbuntuProPageModel {
   Future<void> attach(String token) async {}
 
   @override
-  Future<void> detach() async {}
+  Future<bool> detach() async {
+    return true;
+  }
 
   @override
   void clearError() {}

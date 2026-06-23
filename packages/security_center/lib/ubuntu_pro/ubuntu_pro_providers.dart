@@ -61,11 +61,13 @@ class UbuntuProPageModel extends _$UbuntuProPageModel {
     }
   }
 
-  Future<void> detach() async {
+  Future<bool> detach() async {
     try {
       await _service.detach();
+      return true;
     } on DBusMethodResponseException catch (error) {
       _log.error('Unable to detach Pro', error);
+      return false;
     }
   }
 }
