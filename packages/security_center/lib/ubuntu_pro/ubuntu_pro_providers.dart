@@ -167,7 +167,8 @@ class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
   UbuntuProFeatureData build(UbuntuProFeatureType featureType) {
     final feature = _service.getFeature(featureType);
 
-    ref.onDispose(() => state.stream.cancel());
+    final subscription = _service.stream.listen(_featureUpdated);
+    ref.onDispose(subscription.cancel);
     return UbuntuProFeatureData(
       state: feature == null
           ? UbuntuProFeatureState.unavailable()
@@ -175,7 +176,7 @@ class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
               ? UbuntuProFeatureState.enabled()
               : UbuntuProFeatureState.disabled(),
       data: feature,
-      stream: _service.stream.listen(_featureUpdated),
+      stream: subscription,
     );
   }
 
