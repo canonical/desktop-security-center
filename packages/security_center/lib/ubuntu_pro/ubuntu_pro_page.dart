@@ -15,16 +15,30 @@ import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
-class UbuntuProPage extends ConsumerWidget {
+class UbuntuProPage extends ConsumerStatefulWidget {
   const UbuntuProPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<UbuntuProPage> createState() => _UbuntuProPageState();
+}
+
+class _UbuntuProPageState extends ConsumerState<UbuntuProPage> {
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
     final featureService = tryGetService<FeatureService>();
 
     return ScrollablePage(
+      controller: _scrollController,
       children: [
         Center(
           child: Row(
@@ -44,7 +58,7 @@ class UbuntuProPage extends ConsumerWidget {
           ),
         ),
         if (featureService?.supportsProControl ?? true)
-          _UbuntuProBody()
+          _UbuntuProBody(scrollController: _scrollController)
         else
           Column(
             children: [
@@ -76,6 +90,10 @@ class UbuntuProPage extends ConsumerWidget {
 }
 
 class _UbuntuProBody extends ConsumerWidget {
+  const _UbuntuProBody({required this.scrollController});
+
+  final ScrollController scrollController;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
@@ -117,10 +135,14 @@ class _UbuntuProBody extends ConsumerWidget {
                 ref
                     .read(ubuntuProPageModelProvider.notifier)
                     .clearDetachError();
-                showDialog(
+                showDialog<bool>(
                   context: context,
                   builder: (_) => const DetachDialog(),
-                );
+                ).then((confirmed) {
+                  if ((confirmed ?? false) && scrollController.hasClients) {
+                    scrollController.jumpTo(0);
+                  }
+                });
               },
               child: Text(l10n.ubuntuProDisablePro),
             ),

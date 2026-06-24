@@ -29,7 +29,7 @@ class DetachDialog extends ConsumerWidget {
           ),
           onPressed: () {
             ref.read(ubuntuProPageModelProvider.notifier).detach();
-            Navigator.of(context, rootNavigator: true).pop();
+            Navigator.of(context, rootNavigator: true).pop(true);
           },
           child: Text(l10n.ubuntuProDisable),
         ),

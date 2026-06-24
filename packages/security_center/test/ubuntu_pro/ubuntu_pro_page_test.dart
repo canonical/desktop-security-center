@@ -281,6 +281,51 @@ void main() {
       );
     });
 
+    testWidgets('scrolls to top after detach dialog closes', (tester) async {
+      registerMockUbuntuProManagerService();
+      registerMockUbuntuProFeatureService();
+
+      // Use a small height so the page content is scrollable.
+      await tester.binding.setSurfaceSize(const Size(800, 300));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      await _pumpUbuntuProPage(tester);
+
+      final scrollable = tester.widget<SingleChildScrollView>(
+        find.byType(SingleChildScrollView),
+      );
+      final scrollController = scrollable.controller!;
+
+      final disableProFinder = find.widgetWithText(
+        ElevatedButton,
+        tester.l10n.ubuntuProDisablePro,
+      );
+      await tester.ensureVisible(disableProFinder);
+      await tester.pumpAndSettle();
+
+      final scrolledOffset = scrollController.offset;
+      expect(scrolledOffset, greaterThan(0));
+
+      await tester.tap(disableProFinder);
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.widgetWithText(OutlinedButton, tester.l10n.ubuntuProCancel),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byType(AlertDialog), findsNothing);
+      expect(scrollController.offset, scrolledOffset);
+
+      await tester.tap(disableProFinder);
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProDisable),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(AlertDialog), findsNothing);
+      expect(scrollController.offset, 0);
+    });
+
     testWidgets('attaching state shows progress row', (tester) async {
       registerMockUbuntuProManagerService(attached: false);
       registerMockUbuntuProFeatureService(featuresEntitled: false);
