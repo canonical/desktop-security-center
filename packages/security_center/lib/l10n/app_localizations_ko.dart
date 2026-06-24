@@ -525,7 +525,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
 
   @override
-  String get ubuntuProAttachingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {

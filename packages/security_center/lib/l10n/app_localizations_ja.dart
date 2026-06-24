@@ -519,7 +519,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Proは有効です';
 
   @override
-  String get ubuntuProAttachingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {

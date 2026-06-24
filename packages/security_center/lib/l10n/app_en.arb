@@ -248,7 +248,7 @@
     "ubuntuProNotSupportedSnapd": "Ubuntu Pro is not supported by this snapd version",
     "ubuntuProNotSupportedSnapdDetails": "Update snapd to manage Ubuntu Pro",
     "ubuntuProEnabled": "Ubuntu Pro is enabled",
-    "ubuntuProAttachingLabel": "This may take a few seconds...",
+    "ubuntuProLoadingLabel": "This may take a few seconds...",
     "ubuntuProDisabled": "Enterprise-grade security and compliance for your computer. Always free for personal use. {learnMoreLink}",
     "@ubuntuProDisabled": {
         "placeholders": {

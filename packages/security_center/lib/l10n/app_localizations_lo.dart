@@ -541,7 +541,7 @@ class AppLocalizationsLo extends AppLocalizations {
   String get ubuntuProEnabled => 'ເປີດໃຊ້ງານ Ubuntu Pro ແລ້ວ';
 
   @override
-  String get ubuntuProAttachingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
