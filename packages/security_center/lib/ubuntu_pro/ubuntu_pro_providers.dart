@@ -19,7 +19,9 @@ sealed class UbuntuProPageState with _$UbuntuProPageState {
   factory UbuntuProPageState.detached() = UbuntuProPageStateDetached;
   factory UbuntuProPageState.attaching() = UbuntuProPageStateAttaching;
   factory UbuntuProPageState.attached() = UbuntuProPageStateAttached;
-  factory UbuntuProPageState.error() = UbuntuProPageStateError;
+  factory UbuntuProPageState.detaching() = UbuntuProPageStateDetaching;
+  factory UbuntuProPageState.attachError() = UbuntuProPageStateAttachError;
+  factory UbuntuProPageState.detachError() = UbuntuProPageStateDetachError;
 }
 
 @riverpod
@@ -48,26 +50,37 @@ class UbuntuProPageModel extends _$UbuntuProPageModel {
       state = UbuntuProPageState.attached();
     } on DBusMethodResponseException catch (error) {
       _log.error('Unable to attach Pro', error);
-      state = UbuntuProPageState.error();
+      state = UbuntuProPageState.attachError();
     } finally {
       _keepAliveLink?.close();
       _keepAliveLink = null;
     }
   }
 
-  void clearError() {
-    if (state is UbuntuProPageStateError) {
+  void clearAttachError() {
+    if (state is UbuntuProPageStateAttachError) {
       state = UbuntuProPageState.detached();
     }
   }
 
-  Future<bool> detach() async {
+  Future<void> detach() async {
+    _keepAliveLink = ref.keepAlive();
+    state = UbuntuProPageState.detaching();
     try {
       await _service.detach();
-      return true;
+      state = UbuntuProPageState.detached();
     } on DBusMethodResponseException catch (error) {
       _log.error('Unable to detach Pro', error);
-      return false;
+      state = UbuntuProPageState.detachError();
+    } finally {
+      _keepAliveLink?.close();
+      _keepAliveLink = null;
+    }
+  }
+
+  void clearDetachError() {
+    if (state is UbuntuProPageStateDetachError) {
+      state = UbuntuProPageState.attached();
     }
   }
 }

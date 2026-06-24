@@ -82,6 +82,8 @@ class _UbuntuProBody extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final navigator = Navigator.of(context);
     final provider = ref.watch(ubuntuProStatusProvider);
+    final pageState = ref.watch(ubuntuProPageModelProvider);
+    final detaching = pageState is UbuntuProPageStateDetaching;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,12 +107,16 @@ class _UbuntuProBody extends ConsumerWidget {
               ),
             ],
           ),
-          if (provider.whenOrNull(data: (data) => data.attached) ?? false)
+          if ((provider.whenOrNull(data: (data) => data.attached) ?? false) &&
+              !detaching)
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: theme.colorScheme.error,
               ),
               onPressed: () {
+                ref
+                    .read(ubuntuProPageModelProvider.notifier)
+                    .clearDetachError();
                 showDialog(
                   context: context,
                   builder: (_) => const DetachDialog(),
@@ -170,7 +176,7 @@ class _UbuntuProStatus extends ConsumerWidget {
     final pageState = ref.watch(ubuntuProPageModelProvider);
 
     return switch (pageState) {
-      UbuntuProPageStateAttached() => Column(
+      UbuntuProPageStateAttached() || UbuntuProPageStateDetachError() => Column(
           children: [
             const SizedBox(height: kPageSectionGap),
             YaruTileList(
@@ -181,6 +187,13 @@ class _UbuntuProStatus extends ConsumerWidget {
                 ),
               ],
             ),
+            if (pageState is UbuntuProPageStateDetachError) ...[
+              const SizedBox(height: kPageSubsectionGap),
+              YaruInfoBox(
+                yaruInfoType: YaruInfoType.danger,
+                child: Text(l10n.ubuntuProDisableError),
+              ),
+            ],
           ],
         ),
       UbuntuProPageStateAttaching() => Column(
@@ -189,7 +202,7 @@ class _UbuntuProStatus extends ConsumerWidget {
             YaruTileList(
               children: [
                 YaruListTile(
-                  titleText: l10n.ubuntuProAttachingLabel,
+                  titleText: l10n.ubuntuProLoadingLabel,
                   subtitle: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -203,7 +216,27 @@ class _UbuntuProStatus extends ConsumerWidget {
             ),
           ],
         ),
-      UbuntuProPageStateDetached() || UbuntuProPageStateError() => Column(
+      UbuntuProPageStateDetaching() => Column(
+          children: [
+            const SizedBox(height: kPageSectionGap),
+            YaruTileList(
+              children: [
+                YaruListTile(
+                  titleText: l10n.ubuntuProLoadingLabel,
+                  subtitle: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(height: 8),
+                      YaruLinearProgressIndicator(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      UbuntuProPageStateDetached() || UbuntuProPageStateAttachError() => Column(
           children: [
             MarkdownText(
               l10n.ubuntuProDisabled(
@@ -214,7 +247,9 @@ class _UbuntuProStatus extends ConsumerWidget {
             const SizedBox(height: kPageSectionGap),
             ElevatedButton(
               onPressed: () {
-                ref.read(ubuntuProPageModelProvider.notifier).clearError();
+                ref
+                    .read(ubuntuProPageModelProvider.notifier)
+                    .clearAttachError();
                 showDialog(
                   context: context,
                   builder: (_) => const AttachDialog(),
@@ -222,7 +257,7 @@ class _UbuntuProStatus extends ConsumerWidget {
               },
               child: Text(l10n.ubuntuProEnablePro),
             ),
-            if (pageState is UbuntuProPageStateError) ...[
+            if (pageState is UbuntuProPageStateAttachError) ...[
               const SizedBox(height: kPageSubsectionGap),
               YaruInfoBox(
                 yaruInfoType: YaruInfoType.danger,
@@ -453,7 +488,7 @@ class _LoadingText extends StatelessWidget {
 
     return Row(
       children: [
-        Text(text),
+        Flexible(child: Text(text)),
         if (isLoading) ...[
           const SizedBox(width: 8),
           SizedBox.square(

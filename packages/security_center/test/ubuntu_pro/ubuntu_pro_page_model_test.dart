@@ -96,7 +96,7 @@ void main() {
 
       expect(
         container.read(ubuntuProPageModelProvider),
-        isA<UbuntuProPageStateError>(),
+        isA<UbuntuProPageStateAttachError>(),
       );
     });
 
@@ -118,10 +118,10 @@ void main() {
 
       expect(
         container.read(ubuntuProPageModelProvider),
-        isA<UbuntuProPageStateError>(),
+        isA<UbuntuProPageStateAttachError>(),
       );
 
-      container.read(ubuntuProPageModelProvider.notifier).clearError();
+      container.read(ubuntuProPageModelProvider.notifier).clearAttachError();
       await tester.pumpAndSettle();
 
       expect(
@@ -162,7 +162,41 @@ void main() {
       );
     });
 
-    testWidgets('detach error is swallowed and service handles state',
+    testWidgets('detach success: attached -> detaching -> detached',
+        (tester) async {
+      registerMockUbuntuProManagerService();
+      registerMockUbuntuProFeatureService();
+      final container = createContainer();
+
+      await tester.pumpAppWithProviders(
+        (_) => const UbuntuProPage(),
+        container,
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        container.read(ubuntuProPageModelProvider),
+        isA<UbuntuProPageStateAttached>(),
+      );
+
+      final detachFuture =
+          container.read(ubuntuProPageModelProvider.notifier).detach();
+
+      expect(
+        container.read(ubuntuProPageModelProvider),
+        isA<UbuntuProPageStateDetaching>(),
+      );
+
+      await detachFuture;
+      await tester.pumpAndSettle();
+
+      expect(
+        container.read(ubuntuProPageModelProvider),
+        isA<UbuntuProPageStateDetached>(),
+      );
+    });
+
+    testWidgets('detach failure: attached -> detaching -> detachError',
         (tester) async {
       registerMockUbuntuProManagerService(detachThrows: true);
       registerMockUbuntuProFeatureService();
@@ -174,10 +208,40 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      // Detach throwing should not propagate — the provider swallows the error.
-      await expectLater(
-        container.read(ubuntuProPageModelProvider.notifier).detach(),
-        completes,
+      await container.read(ubuntuProPageModelProvider.notifier).detach();
+      await tester.pumpAndSettle();
+
+      expect(
+        container.read(ubuntuProPageModelProvider),
+        isA<UbuntuProPageStateDetachError>(),
+      );
+    });
+
+    testWidgets('clearDetachError resets to attached', (tester) async {
+      registerMockUbuntuProManagerService(detachThrows: true);
+      registerMockUbuntuProFeatureService();
+      final container = createContainer();
+
+      await tester.pumpAppWithProviders(
+        (_) => const UbuntuProPage(),
+        container,
+      );
+      await tester.pumpAndSettle();
+
+      await container.read(ubuntuProPageModelProvider.notifier).detach();
+      await tester.pumpAndSettle();
+
+      expect(
+        container.read(ubuntuProPageModelProvider),
+        isA<UbuntuProPageStateDetachError>(),
+      );
+
+      container.read(ubuntuProPageModelProvider.notifier).clearDetachError();
+      await tester.pumpAndSettle();
+
+      expect(
+        container.read(ubuntuProPageModelProvider),
+        isA<UbuntuProPageStateAttached>(),
       );
     });
   });

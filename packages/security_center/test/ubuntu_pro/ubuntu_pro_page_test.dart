@@ -68,6 +68,55 @@ void main() {
       );
     });
 
+    testWidgets('detaching state shows progress row', (tester) async {
+      registerMockUbuntuProManagerService();
+      registerMockUbuntuProFeatureService();
+      final container = createContainer(
+        overrides: [
+          ubuntuProPageModelProvider.overrideWith(_DetachingPageModel.new),
+        ],
+      );
+
+      await tester.pumpAppWithProviders(
+        (_) => const UbuntuProPage(),
+        container,
+      );
+      await tester.pump();
+
+      expect(find.text(tester.l10n.ubuntuProLoadingLabel), findsOne);
+      expect(
+        find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProDisablePro),
+        findsNothing,
+      );
+    });
+
+    testWidgets('detach error shows inline error box', (tester) async {
+      registerMockUbuntuProManagerService(detachThrows: true);
+      registerMockUbuntuProFeatureService();
+      await _pumpUbuntuProPage(tester);
+
+      final disableProFinder = find.widgetWithText(
+        ElevatedButton,
+        tester.l10n.ubuntuProDisablePro,
+      );
+      await tester.ensureVisible(disableProFinder);
+      await tester.tap(disableProFinder);
+      await tester.pumpAndSettle();
+
+      await tester.tap(
+        find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProDisable),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(AlertDialog), findsNothing);
+      expect(find.text(tester.l10n.ubuntuProDisableError), findsOne);
+      expect(find.text(tester.l10n.ubuntuProEnabled), findsOne);
+      expect(
+        find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProDisablePro),
+        findsOne,
+      );
+    });
+
     testWidgets('enable-able with token', (tester) async {
       registerMockUbuntuProManagerService(attached: false);
       registerMockUbuntuProFeatureService(featuresEntitled: false);
@@ -247,7 +296,7 @@ void main() {
       );
       await tester.pump();
 
-      expect(find.text(tester.l10n.ubuntuProAttachingLabel), findsOne);
+      expect(find.text(tester.l10n.ubuntuProLoadingLabel), findsOne);
       expect(
         find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProEnablePro),
         findsNothing,
@@ -436,10 +485,23 @@ class _AttachingPageModel extends UbuntuProPageModel {
   Future<void> attach(String token) async {}
 
   @override
-  Future<bool> detach() async {
-    return true;
-  }
+  Future<void> detach() async {}
 
   @override
-  void clearError() {}
+  void clearAttachError() {}
+}
+
+// Provider override that permanently returns the detaching state.
+class _DetachingPageModel extends UbuntuProPageModel {
+  @override
+  UbuntuProPageState build() => UbuntuProPageState.detaching();
+
+  @override
+  Future<void> attach(String token) async {}
+
+  @override
+  Future<void> detach() async {}
+
+  @override
+  void clearAttachError() {}
 }

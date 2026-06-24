@@ -5,18 +5,11 @@ import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/ubuntu_pro/ubuntu_pro_providers.dart';
 import 'package:yaru/yaru.dart';
 
-class DetachDialog extends ConsumerStatefulWidget {
+class DetachDialog extends ConsumerWidget {
   const DetachDialog({super.key});
 
   @override
-  ConsumerState<DetachDialog> createState() => _DetachDialogState();
-}
-
-class _DetachDialogState extends ConsumerState<DetachDialog> {
-  bool _loading = false;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
 
@@ -27,30 +20,18 @@ class _DetachDialogState extends ConsumerState<DetachDialog> {
       titlePadding: EdgeInsets.zero,
       actions: [
         OutlinedButton(
-          onPressed: _loading ? null : Navigator.of(context).pop,
+          onPressed: Navigator.of(context).pop,
           child: Text(l10n.ubuntuProCancel),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: theme.colorScheme.error,
           ),
-          onPressed: _loading
-              ? null
-              : () async {
-                  setState(() => _loading = true);
-                  final success = await ref
-                      .read(ubuntuProPageModelProvider.notifier)
-                      .detach();
-                  if (context.mounted && success) {
-                    Navigator.of(context, rootNavigator: true).pop();
-                  }
-                },
-          child: _loading
-              ? SizedBox.square(
-                  dimension: theme.textTheme.bodyMedium?.fontSize,
-                  child: const YaruCircularProgressIndicator(strokeWidth: 2),
-                )
-              : Text(l10n.ubuntuProDisable),
+          onPressed: () {
+            ref.read(ubuntuProPageModelProvider.notifier).detach();
+            Navigator.of(context, rootNavigator: true).pop();
+          },
+          child: Text(l10n.ubuntuProDisable),
         ),
       ],
       content: Container(
