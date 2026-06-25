@@ -34,9 +34,6 @@ class UbuntuProPageModel extends _$UbuntuProPageModel {
     final status = ref.watch(ubuntuProStatusProvider);
     final attached = status.whenOrNull(data: (d) => d.attached) ?? false;
 
-    // Do not override transient states driven by an in-flight attach call.
-    if (_keepAliveLink != null) return state;
-
     return attached
         ? UbuntuProPageState.attached()
         : UbuntuProPageState.detached();
