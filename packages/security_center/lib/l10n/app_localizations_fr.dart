@@ -560,6 +560,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro est activé';
 
   @override
+  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+
+  @override
   String ubuntuProDisabled(String learnMoreLink) {
     return 'Sécurité et conformité de niveau entreprise pour votre ordinateur. Toujours gratuit pour un usage personnel. $learnMoreLink';
   }

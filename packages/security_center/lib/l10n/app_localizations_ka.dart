@@ -552,6 +552,9 @@ class AppLocalizationsKa extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro ჩართულია';
 
   @override
+  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+
+  @override
   String ubuntuProDisabled(String learnMoreLink) {
     return 'საწარმოო დონის უსაფრთხოება და სტანდარტებთან თავსებადობა თქვენი კომპიუტერისთვის. ყოველთვის უფასო პირადი გამოყენებისთვის. $learnMoreLink';
   }

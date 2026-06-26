@@ -552,6 +552,9 @@ class AppLocalizationsUg extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro قوزغىتىلغان';
 
   @override
+  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+
+  @override
   String ubuntuProDisabled(String learnMoreLink) {
     return 'كومپيۇتېردا كارخانا دەرىجىسىدىكى بىخەتەرلىك ۋە ماسلىشىشچانلىقنى ئىشلىتىش شەخسلەر ئۈچۈن ھەمىشە ھەقسىز. $learnMoreLink';
   }

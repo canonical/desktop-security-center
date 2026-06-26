@@ -545,6 +545,9 @@ class AppLocalizationsEo extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro estas ŝaltita';
 
   @override
+  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+
+  @override
   String ubuntuProDisabled(String learnMoreLink) {
     return 'Entrepreno-nivelaj sekureco kaj konformiĝo por via komputilo. Ĉiam senkosta por persona uzado. $learnMoreLink';
   }

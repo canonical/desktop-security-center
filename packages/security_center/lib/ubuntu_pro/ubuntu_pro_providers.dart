@@ -15,17 +15,76 @@ part 'ubuntu_pro_providers.freezed.dart';
 final _log = Logger('ubuntu_pro_providers');
 
 @freezed
-sealed class UbuntuProAttachState with _$UbuntuProAttachState {
-  factory UbuntuProAttachState.input() = UbuntuProAttachStateInput;
-  factory UbuntuProAttachState.loading() = UbuntuProAttachStateLoading;
-  factory UbuntuProAttachState.error() = UbuntuProAttachStateError;
-  factory UbuntuProAttachState.success() = UbuntuProAttachStateSuccess;
+sealed class UbuntuProPageState with _$UbuntuProPageState {
+  factory UbuntuProPageState.detached() = UbuntuProPageStateDetached;
+  factory UbuntuProPageState.attaching() = UbuntuProPageStateAttaching;
+  factory UbuntuProPageState.attached() = UbuntuProPageStateAttached;
+  factory UbuntuProPageState.detaching() = UbuntuProPageStateDetaching;
+  factory UbuntuProPageState.attachError() = UbuntuProPageStateAttachError;
+  factory UbuntuProPageState.detachError() = UbuntuProPageStateDetachError;
+}
+
+@riverpod
+class UbuntuProPageModel extends _$UbuntuProPageModel {
+  final _service = getService<UbuntuProManagerService>();
+  KeepAliveLink? _keepAliveLink;
+
+  @override
+  UbuntuProPageState build() {
+    final status = ref.watch(ubuntuProStatusProvider);
+    final attached = status.whenOrNull(data: (d) => d.attached) ?? false;
+
+    return attached
+        ? UbuntuProPageState.attached()
+        : UbuntuProPageState.detached();
+  }
+
+  Future<void> attach(String token) async {
+    _keepAliveLink = ref.keepAlive();
+    state = UbuntuProPageState.attaching();
+    try {
+      await _service.attach(token);
+      state = UbuntuProPageState.attached();
+    } on DBusMethodResponseException catch (error) {
+      _log.error('Unable to attach Pro', error);
+      state = UbuntuProPageState.attachError();
+    } finally {
+      _keepAliveLink?.close();
+      _keepAliveLink = null;
+    }
+  }
+
+  void clearAttachError() {
+    if (state is UbuntuProPageStateAttachError) {
+      state = UbuntuProPageState.detached();
+    }
+  }
+
+  Future<void> detach() async {
+    _keepAliveLink = ref.keepAlive();
+    state = UbuntuProPageState.detaching();
+    try {
+      await _service.detach();
+      state = UbuntuProPageState.detached();
+    } on DBusMethodResponseException catch (error) {
+      _log.error('Unable to detach Pro', error);
+      state = UbuntuProPageState.detachError();
+    } finally {
+      _keepAliveLink?.close();
+      _keepAliveLink = null;
+    }
+  }
+
+  void clearDetachError() {
+    if (state is UbuntuProPageStateDetachError) {
+      state = UbuntuProPageState.attached();
+    }
+  }
 }
 
 @freezed
 class UbuntuProData with _$UbuntuProData {
   factory UbuntuProData({
-    required UbuntuProAttachState state,
     @Default('') String token,
   }) = _UbuntuProData;
 
@@ -36,41 +95,10 @@ class UbuntuProData with _$UbuntuProData {
 
 @riverpod
 class UbuntuProAttachModel extends _$UbuntuProAttachModel {
-  final _service = getService<UbuntuProManagerService>();
-
   @override
-  UbuntuProData build() {
-    return UbuntuProData(
-      state: UbuntuProAttachState.input(),
-    );
-  }
-
-  Future<void> attach() async {
-    try {
-      state = state.copyWith(state: UbuntuProAttachState.loading());
-      await _service.attach(state.token);
-      state = state.copyWith(state: UbuntuProAttachState.success());
-    } on DBusMethodResponseException catch (error) {
-      _log.error('Unable to attach Pro', error);
-      state = state.copyWith(state: UbuntuProAttachState.error());
-    }
-  }
-
-  Future<void> detach() async {
-    try {
-      state = state.copyWith(state: UbuntuProAttachState.loading());
-      await _service.detach();
-      state = state.copyWith(state: UbuntuProAttachState.success());
-    } on DBusMethodResponseException catch (error) {
-      _log.error('Unable to detach Pro', error);
-      state = state.copyWith(state: UbuntuProAttachState.error());
-    }
-  }
+  UbuntuProData build() => UbuntuProData();
 
   void setToken(String token) {
-    if (state.state is UbuntuProAttachStateError) {
-      state = state.copyWith(state: UbuntuProAttachState.input());
-    }
     state = state.copyWith(token: token);
   }
 }
@@ -149,7 +177,8 @@ class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
   UbuntuProFeatureData build(UbuntuProFeatureType featureType) {
     final feature = _service.getFeature(featureType);
 
-    ref.onDispose(() => state.stream.cancel());
+    final subscription = _service.stream.listen(_featureUpdated);
+    ref.onDispose(subscription.cancel);
     return UbuntuProFeatureData(
       state: feature == null
           ? UbuntuProFeatureState.unavailable()
@@ -157,7 +186,7 @@ class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
               ? UbuntuProFeatureState.enabled()
               : UbuntuProFeatureState.disabled(),
       data: feature,
-      stream: _service.stream.listen(_featureUpdated),
+      stream: subscription,
     );
   }
 
@@ -264,7 +293,6 @@ class FIPSModel extends _$FIPSModel {
 @freezed
 class MagicAttachData with _$MagicAttachData {
   factory MagicAttachData({
-    required UbuntuProAttachState state,
     required MagicAttachResponse response,
   }) = _MagicAttachData;
 
@@ -278,7 +306,6 @@ class MagicAttachModel extends _$MagicAttachModel {
   static const refreshDuration = Duration(seconds: 10);
 
   final _service = getService<MagicAttachService>();
-  final _proService = getService<UbuntuProManagerService>();
   late final Timer _timer;
 
   @override
@@ -292,7 +319,6 @@ class MagicAttachModel extends _$MagicAttachModel {
 
     return MagicAttachData(
       response: response,
-      state: UbuntuProAttachState.input(),
     );
   }
 
@@ -305,23 +331,6 @@ class MagicAttachModel extends _$MagicAttachModel {
 
     if (state.value!.validContract) {
       _timer.cancel();
-    }
-  }
-
-  Future<void> attach() async {
-    try {
-      state = AsyncData(
-        state.value!.copyWith(state: UbuntuProAttachState.loading()),
-      );
-      await _proService.attach(state.value!.response.contractToken!);
-      state = AsyncData(
-        state.value!.copyWith(state: UbuntuProAttachState.success()),
-      );
-    } on DBusMethodResponseException catch (error) {
-      _log.error('Unable to attach Pro via magic link', error);
-      state = AsyncData(
-        state.value!.copyWith(state: UbuntuProAttachState.error()),
-      );
     }
   }
 }

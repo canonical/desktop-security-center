@@ -539,6 +539,9 @@ class AppLocalizationsHe extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro פעיל';
 
   @override
+  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+
+  @override
   String ubuntuProDisabled(String learnMoreLink) {
     return 'אבטחה ברמת תאגיד ועמידה בתקנים למחשב שלך. תמיד חינמי לשימוש פרטי. $learnMoreLink';
   }

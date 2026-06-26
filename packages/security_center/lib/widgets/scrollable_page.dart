@@ -6,6 +6,7 @@ class ScrollablePage extends StatelessWidget {
   const ScrollablePage({
     required this.children,
     this.padding,
+    this.controller,
     super.key,
   });
 
@@ -13,9 +14,12 @@ class ScrollablePage extends StatelessWidget {
 
   final EdgeInsetsGeometry? padding;
 
+  final ScrollController? controller;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: controller,
       child: Padding(
         padding: padding ?? const EdgeInsets.all(kPagePadding),
         child: Align(

@@ -553,6 +553,9 @@ class AppLocalizationsKn extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
 
   @override
+  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+
+  @override
   String ubuntuProDisabled(String learnMoreLink) {
     return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
   }

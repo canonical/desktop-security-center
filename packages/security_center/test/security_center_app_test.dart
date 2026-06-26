@@ -9,6 +9,7 @@ import 'package:snapd/snapd.dart';
 import 'package:yaru/yaru.dart';
 
 import 'test_utils.dart';
+import 'utils/ubuntu_pro_utils.dart';
 
 void main() {
   group('app routes', () {
@@ -32,6 +33,8 @@ void main() {
           registerMockDiskEncryptionService(
             storageEncryptionStatus: tc.storageEncryptionStatus,
           );
+          registerMockUbuntuProManagerService();
+          registerMockUbuntuProFeatureService();
           await AvailableRoutes.init();
 
           final container = createContainer();
