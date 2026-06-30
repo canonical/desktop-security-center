@@ -243,9 +243,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "安裝通過 FIPS 140-2 驗證的軟體包。這些軟體包將不會更新，直至下次重新認證為止。",
     "ubuntuProComplianceDocumentation": "資安合規文件",
     "ubuntuProESMTitle": "擴展安全維護 (ESM)",
-    "ubuntuProESMDescription": "ESM 為 25,000 多個開源軟體包提供長達 10 年的安全性修補程式。針對關鍵、高風險及中風險的 CVE，提供持續性的漏洞管理服務。",
+    "ubuntuProESMDescription": "ESM 為整個 Ubuntu 軟體庫提供長達 10 年的安全性修補程式。針對關鍵級、高風險級以及部分中風險級的 CVE，提供持續性的漏洞管理服務。",
     "ubuntuProESMMainTitle": "主要軟體包 (esm-infra)",
-    "ubuntuProESMMainDescription": "2,300 個 Ubuntu Main 軟體包的安全更新，直至 {year}",
+    "ubuntuProESMMainDescription": "Ubuntu Main 軟體包的安全更新將持續至 {year}",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -254,7 +254,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Universe 軟體包 (esm-apps)",
-    "ubuntuProESMUniverseDescription": "針對超過 23,000 個 Ubuntu Universe 軟體包的額外安全性更新，有效期至 {year}",
+    "ubuntuProESMUniverseDescription": "針對 Ubuntu Universe 軟體包的額外安全性更新，有效期至 {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
@@ -265,5 +265,6 @@
     "ubuntuProLivepatchTitle": "Kernel Livepatch",
     "ubuntuProLivepatchEnableTitle": "啟用 Livepatch",
     "ubuntuProLivepatchEnableDescription": "在系統運行時套用核心安全性更新",
-    "ubuntuProLivepatchShowTitle": "在頂端列顯示 Livepatch 狀態"
+    "ubuntuProLivepatchShowTitle": "在頂端列顯示 Livepatch 狀態",
+    "snapPermissionsErrorTitle": "發生了錯誤"
 }
