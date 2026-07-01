@@ -144,5 +144,6 @@
     "recoveryKeyPinEntropyBelowOptimal": "رقم تعريف شخصي عادي ، اجعله أطول أو أقل قابلية للتنبؤ به للحصول على أمان أفضل",
     "recoveryKeyPinEntropyOptimal": "رقم التعريف الشخصي طويل بما فيه الكفاية",
     "recoveryKeySomethingWentWrongHeader": "حدث خطأ ما",
-    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control"
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "snapPermissionAccessLabel": "وصول"
 }
