@@ -142,7 +142,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      find.text(tester.l10n.diskEncryptionPageError),
+      find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
       findsNothing,
     );
 
@@ -890,8 +890,16 @@ void main() {
         if (tc.changePinPassphraseError) {
           // Should show error message
           expect(
-            find.text(tester.l10n.diskEncryptionPageError),
+            find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
             findsOneWidget,
+          );
+          expect(
+            find.text('Exception: Mock change PIN/passphrase error'),
+            findsOneWidget,
+          );
+          expect(
+            find.textContaining('TpmFdeOperationException'),
+            findsNothing,
           );
 
           // Fields should remain enabled on error (so user can retry)
@@ -916,6 +924,45 @@ void main() {
         expect(tester.widget<ElevatedButton>(changeButton).enabled, isFalse);
       });
     }
+  });
+
+  testWidgets('change auth - auth cancelled preserves input with no error',
+      (tester) async {
+    final container = createContainer();
+    registerMockDiskEncryptionService(
+      changePinPassphraseSnapdAuthErrorKind: SnapdAuthErrorKind.authCancelled,
+    );
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text(tester.l10n.recoveryKeyPinButton));
+    await tester.pumpAndSettle();
+
+    final textFields = find.byType(TextField);
+    await tester.enterText(textFields.at(0), '1234');
+    await tester.enterText(textFields.at(1), '5678');
+    await tester.enterText(textFields.at(2), '5678');
+    await tester.pumpAndSettle(debounceDelay);
+
+    await tester.tap(
+      find.widgetWithText(
+        ElevatedButton,
+        tester.l10n.recoveryKeyPassphraseChange,
+      ),
+    );
+    await tester.pumpAndSettle(debounceDelay);
+
+    expect(
+      find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
+      findsNothing,
+    );
+    expect(find.byType(TextField), findsNWidgets(3));
+    expect(tester.widget<TextField>(textFields.at(0)).controller?.text, '1234');
+    expect(tester.widget<TextField>(textFields.at(1)).controller?.text, '5678');
+    expect(tester.widget<TextField>(textFields.at(2)).controller?.text, '5678');
   });
 
   group('change auth - input filtering validation', () {
@@ -1592,8 +1639,16 @@ void main() {
         // Check the result based on success/failure
         if (tc.replacePlatformKeyError) {
           expect(
-            find.text(tester.l10n.diskEncryptionPageError),
+            find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
             findsOneWidget,
+          );
+          expect(
+            find.text('Exception: Mock replace platform key error'),
+            findsOneWidget,
+          );
+          expect(
+            find.textContaining('TpmFdeOperationException'),
+            findsNothing,
           );
 
           // Add buttons should be re-enabled after error
@@ -1604,12 +1659,91 @@ void main() {
           expect(tester.widget<OutlinedButton>(addButton).enabled, isTrue);
         } else {
           expect(
-            find.text(tester.l10n.diskEncryptionPageError),
+            find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
             findsNothing,
           );
         }
       });
     }
+  });
+
+  testWidgets('add auth mode - auth cancelled preserves input with no error',
+      (tester) async {
+    final container = createContainer();
+    registerMockDiskEncryptionService(
+      authMode: AuthMode.none,
+      replacePlatformKeySnapdAuthErrorKind: SnapdAuthErrorKind.authCancelled,
+    );
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageAddPinButton));
+    await tester.pumpAndSettle();
+
+    final textFields = find.byType(TextField);
+    await tester.enterText(textFields.at(0), '5678');
+    await tester.enterText(textFields.at(1), '5678');
+    await tester.pumpAndSettle(debounceDelay);
+
+    await tester.tap(
+      find.widgetWithText(
+        ElevatedButton,
+        tester.l10n.diskEncryptionPageAddPinDialogSaveButton,
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
+      findsNothing,
+    );
+    expect(find.byType(TextField), findsNWidgets(2));
+    expect(tester.widget<TextField>(textFields.at(0)).controller?.text, '5678');
+    expect(tester.widget<TextField>(textFields.at(1)).controller?.text, '5678');
+  });
+
+  testWidgets('add auth mode - generic snapd error shows cause message',
+      (tester) async {
+    const snapdKind = 'some-other-snapd-error';
+    final container = createContainer();
+    registerMockDiskEncryptionService(
+      authMode: AuthMode.none,
+      replacePlatformKeySnapdErrorKind: snapdKind,
+    );
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageAddPinButton));
+    await tester.pumpAndSettle();
+
+    final textFields = find.byType(TextField);
+    await tester.enterText(textFields.at(0), '5678');
+    await tester.enterText(textFields.at(1), '5678');
+    await tester.pumpAndSettle(debounceDelay);
+
+    await tester.tap(
+      find.widgetWithText(
+        ElevatedButton,
+        tester.l10n.diskEncryptionPageAddPinDialogSaveButton,
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text('Mock replace platform key snapd error'),
+      findsOneWidget,
+    );
+    expect(
+      find.textContaining('SnapdException(kind: $snapdKind'),
+      findsNothing,
+    );
+    expect(find.textContaining('TpmFdeOperationException'), findsNothing);
   });
 
   group('add auth mode - input filtering validation', () {
@@ -1711,7 +1845,7 @@ void main() {
         if (tc.replacePlatformKeyError) {
           // On error, verify error box appears on main page
           expect(
-            find.text(tester.l10n.diskEncryptionPageError),
+            find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
             findsOneWidget,
           );
           // Button should still be visible and re-enabled
@@ -1727,12 +1861,40 @@ void main() {
           expect(find.text(statusText), findsOneWidget);
         } else {
           expect(
-            find.text(tester.l10n.diskEncryptionPageError),
+            find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
             findsNothing,
           );
         }
       });
     }
+  });
+
+  testWidgets('remove auth mode - auth cancelled leaves state unchanged',
+      (tester) async {
+    final container = createContainer();
+    registerMockDiskEncryptionService(
+      replacePlatformKeySnapdAuthErrorKind: SnapdAuthErrorKind.authCancelled,
+    );
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageRemovePinButton));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(tester.l10n.recoveryKeySomethingWentWrongHeader),
+      findsNothing,
+    );
+    expect(find.text(tester.l10n.recoveryKeyPinEnabled), findsOneWidget);
+    final removeButton = find.widgetWithText(
+      OutlinedButton,
+      tester.l10n.diskEncryptionPageRemovePinButton,
+    );
+    expect(removeButton, findsOneWidget);
+    expect(tester.widget<OutlinedButton>(removeButton).enabled, isTrue);
   });
 
   group('TpmAuthenticationModel retry logic', () {

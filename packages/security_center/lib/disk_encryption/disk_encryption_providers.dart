@@ -69,6 +69,97 @@ sealed class SnapdStateException
       SnapdStateExceptionUnconnectedSnapInterface;
 }
 
+// Refer to https://github.com/canonical/snapd/blob/master/client/errors.go#L34-L200
+// for a full catalogue of snapd error kinds. The enum contains a subset of errors that
+// may be returned by snapd during TPM FDE operations that require polkit authentication
+enum SnapdAuthErrorKind {
+  authCancelled('auth-cancelled'),
+  authLoginRequired('auth-login-required');
+
+  const SnapdAuthErrorKind(this.snapdKind);
+
+  final String snapdKind;
+
+  static SnapdAuthErrorKind? fromKind(String? kind) => switch (kind) {
+        'auth-cancelled' => SnapdAuthErrorKind.authCancelled,
+        'auth-login-required' => SnapdAuthErrorKind.authLoginRequired,
+        _ => null,
+      };
+}
+
+enum TpmFdeOperation {
+  addPin,
+  addPassphrase,
+  changePin,
+  changePassphrase,
+  removePin,
+  removePassphrase;
+
+  factory TpmFdeOperation.adding(AuthMode mode) => switch (mode) {
+        AuthMode.pin => TpmFdeOperation.addPin,
+        AuthMode.passphrase => TpmFdeOperation.addPassphrase,
+        AuthMode.none => throw ArgumentError.value(mode),
+      };
+
+  factory TpmFdeOperation.changing(AuthMode mode) => switch (mode) {
+        AuthMode.pin => TpmFdeOperation.changePin,
+        AuthMode.passphrase => TpmFdeOperation.changePassphrase,
+        AuthMode.none => throw ArgumentError.value(mode),
+      };
+
+  factory TpmFdeOperation.removing(AuthMode mode) => switch (mode) {
+        AuthMode.pin => TpmFdeOperation.removePin,
+        AuthMode.passphrase => TpmFdeOperation.removePassphrase,
+        AuthMode.none => throw ArgumentError.value(mode),
+      };
+}
+
+@freezed
+sealed class TpmFdeOperationException
+    with _$TpmFdeOperationException
+    implements Exception {
+  const factory TpmFdeOperationException.snapdAuth({
+    required SnapdAuthErrorKind kind,
+    required TpmFdeOperation operation,
+    required SnapdException cause,
+  }) = TpmFdeOperationSnapdAuthException;
+
+  const factory TpmFdeOperationException.snapd({
+    required SnapdException cause,
+    required TpmFdeOperation operation,
+  }) = TpmFdeOperationSnapdException;
+
+  const factory TpmFdeOperationException.unknown({
+    required Exception cause,
+    required TpmFdeOperation operation,
+  }) = TpmFdeOperationUnknownException;
+
+  factory TpmFdeOperationException.from(
+    Exception exception,
+    TpmFdeOperation operation,
+  ) {
+    if (exception is SnapdException) {
+      final kind = SnapdAuthErrorKind.fromKind(exception.kind);
+      if (kind == null) {
+        return TpmFdeOperationException.snapd(
+          cause: exception,
+          operation: operation,
+        );
+      }
+      return TpmFdeOperationException.snapdAuth(
+        kind: kind,
+        operation: operation,
+        cause: exception,
+      );
+    }
+
+    return TpmFdeOperationException.unknown(
+      cause: exception,
+      operation: operation,
+    );
+  }
+}
+
 @freezed
 sealed class TpmStateException with _$TpmStateException implements Exception {
   factory TpmStateException.failed() = TpmStateExceptionFailed;
@@ -98,20 +189,13 @@ sealed class ChangeAuthModeDialogState with _$ChangeAuthModeDialogState {
       ChangeAuthModeDialogStateError;
 }
 
-/// Represents an ongoing operation to replace a platform key.
-@freezed
-sealed class AuthOperation with _$AuthOperation {
-  const factory AuthOperation.adding(AuthMode mode) = AuthOperationAdding;
-  const factory AuthOperation.removing(AuthMode mode) = AuthOperationRemoving;
-}
-
 /// State for TPM authentication mode, including pending operations to change current platform key.
 @freezed
 class TpmAuthState with _$TpmAuthState {
   const factory TpmAuthState({
     required AuthMode currentAuthMode,
-    AuthOperation? pendingOperation,
-    Exception? operationError,
+    TpmFdeOperation? pendingOperation,
+    TpmFdeOperationException? operationError,
   }) = _TpmAuthState;
 
   const TpmAuthState._();
@@ -211,10 +295,25 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
         dialogState: ChangeAuthDialogState.success(),
         showPassphrase: false,
       );
+      ref.read(tpmAuthenticationModelProvider.notifier).dismissOperationError();
     } on Exception catch (e) {
-      state = state.copyWith(
-        dialogState: ChangeAuthDialogState.error(e, false),
+      final exception = TpmFdeOperationException.from(
+        e,
+        TpmFdeOperation.changing(state.authMode),
       );
+      switch (exception) {
+        case TpmFdeOperationSnapdAuthException(
+            kind: SnapdAuthErrorKind.authCancelled,
+          ):
+          state = state.copyWith(dialogState: ChangeAuthDialogState.input());
+        case _:
+          state = state.copyWith(
+            dialogState: ChangeAuthDialogState.error(
+              exception,
+              false,
+            ),
+          );
+      }
     }
   }
 
@@ -410,13 +509,17 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
     }
   }
 
-  Future<void> changeAuthMode(AuthMode newMode, {String? passphrase}) async {
+  Future<void> changeAuthMode(
+    AuthMode newMode, {
+    String? passphrase,
+    void Function()? onAuthorized,
+  }) async {
     assert(state.hasValue, 'State must be loaded before changing auth mode');
 
     final currentMode = state.value!.currentAuthMode;
     final operation = newMode == AuthMode.none
-        ? AuthOperation.removing(currentMode)
-        : AuthOperation.adding(newMode);
+        ? TpmFdeOperation.removing(currentMode)
+        : TpmFdeOperation.adding(newMode);
 
     state = AsyncData(
       state.value!.copyWith(
@@ -430,19 +533,46 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         authMode: newMode,
         passphrase: newMode == AuthMode.passphrase ? passphrase : null,
         pin: newMode == AuthMode.pin ? passphrase : null,
+        onAuthorized: onAuthorized,
       );
 
       // Refresh current mode
       final updatedMode = await _fetchCurrentAuthMode();
       state = AsyncData(
-        TpmAuthState(currentAuthMode: updatedMode),
+        state.value!.copyWith(
+          currentAuthMode: updatedMode,
+          pendingOperation: null,
+          operationError: null,
+        ),
       );
     } on Exception catch (e) {
+      final exception = TpmFdeOperationException.from(e, operation);
       state = AsyncData(
         state.value!.copyWith(
           pendingOperation: null,
-          operationError: e,
+          operationError: exception,
         ),
+      );
+    }
+  }
+
+  Future<void> removeAuthMode({void Function()? onAuthorized}) async {
+    await changeAuthMode(AuthMode.none, onAuthorized: onAuthorized);
+
+    switch (state.valueOrNull?.operationError) {
+      case TpmFdeOperationSnapdAuthException(
+          kind: SnapdAuthErrorKind.authCancelled
+        ):
+        dismissOperationError();
+      case _:
+        break;
+    }
+  }
+
+  void dismissOperationError() {
+    if (state.hasValue) {
+      state = AsyncData(
+        state.value!.copyWith(operationError: null),
       );
     }
   }
@@ -621,6 +751,7 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
       newAuthMode != AuthMode.none,
       'ChangeAuthModeDialogModel does not handle removal (AuthMode.none)',
     );
+    ref.keepAlive();
     ref.onDispose(() {
       _newPassTimer?.cancel();
       _confirmTimer?.cancel();
@@ -631,17 +762,45 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
     );
   }
 
-  Future<void> replaceAuthMode() async {
+  Future<void> replaceAuthMode({
+    void Function()? onAuthorized,
+  }) async {
     assert(state.dialogState is ChangeAuthModeDialogStateInput);
-    state = state.copyWith(dialogState: ChangeAuthModeDialogState.loading());
     try {
-      await ref
-          .read(tpmAuthenticationModelProvider.notifier)
-          .changeAuthMode(state.newAuthMode, passphrase: state.newPass);
-      state = state.copyWith(
-        dialogState: ChangeAuthModeDialogState.success(),
-        showPassphrase: false,
-      );
+      state = state.copyWith(dialogState: ChangeAuthModeDialogState.loading());
+      await ref.read(tpmAuthenticationModelProvider.notifier).changeAuthMode(
+            state.newAuthMode,
+            passphrase: state.newPass,
+            onAuthorized: onAuthorized,
+          );
+      final tpmState = ref.read(tpmAuthenticationModelProvider).valueOrNull;
+      switch (tpmState?.operationError) {
+        case null:
+          state = state.copyWith(
+            dialogState: ChangeAuthModeDialogState.success(),
+            showPassphrase: false,
+          );
+          break;
+
+        case TpmFdeOperationSnapdAuthException(
+            kind: SnapdAuthErrorKind.authCancelled
+          ):
+          state =
+              state.copyWith(dialogState: ChangeAuthModeDialogState.input());
+          ref
+              .read(tpmAuthenticationModelProvider.notifier)
+              .dismissOperationError();
+          break;
+
+        case final exception:
+          state = state.copyWith(
+            dialogState: ChangeAuthModeDialogState.error(
+              exception,
+              false,
+            ),
+          );
+          break;
+      }
     } on Exception catch (e) {
       state = state.copyWith(
         dialogState: ChangeAuthModeDialogState.error(e, false),

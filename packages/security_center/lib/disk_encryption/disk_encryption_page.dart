@@ -18,6 +18,11 @@ const defaultRecoveryKeyFileName = 'recovery-key.txt';
 
 const yaruProgressSize = 20.0;
 
+String _dialogErrorMessage(Exception e) => switch (e) {
+      final TpmFdeOperationException e => e.causeByMessage(),
+      _ => e.toString(),
+    };
+
 class DiskEncryptionPage extends ConsumerWidget {
   const DiskEncryptionPage({super.key});
 
@@ -84,7 +89,7 @@ class EncryptionPageBody extends ConsumerWidget {
             yaruInfoType: YaruInfoType.danger,
           ),
         _ => YaruInfoBox(
-            title: Text(l10n.diskEncryptionPageError),
+            title: Text(l10n.recoveryKeySomethingWentWrongHeader),
             subtitle: Text(e.toString()),
             yaruInfoType: YaruInfoType.danger,
           ),
@@ -447,9 +452,11 @@ class ChangeAuthDialog extends ConsumerWidget {
     return AlertDialog(
       title: YaruDialogTitleBar(title: Text(title)),
       titlePadding: EdgeInsets.zero,
+      contentPadding: EdgeInsets.zero,
       content: SizedBox(
         width: 460,
         child: ScrollablePage(
+          padding: const EdgeInsets.all(24),
           children: [
             CurrentPassphraseFormField(authMode: authMode),
             PassphraseFormField(authMode: authMode),
@@ -489,13 +496,11 @@ class ChangeAuthDialog extends ConsumerWidget {
               ),
             if (model.dialogState is ChangeAuthDialogStateError)
               YaruInfoBox(
-                title: (model.dialogState as ChangeAuthDialogStateError).fatal
-                    ? Text(l10n.recoveryKeySomethingWentWrongHeader)
-                    : Text(l10n.diskEncryptionPageError),
+                title: Text(l10n.recoveryKeySomethingWentWrongHeader),
                 subtitle: Text(
-                  (model.dialogState as ChangeAuthDialogStateError)
-                      .e
-                      .toString(),
+                  _dialogErrorMessage(
+                    (model.dialogState as ChangeAuthDialogStateError).e,
+                  ),
                 ),
                 yaruInfoType: YaruInfoType.danger,
               ),
@@ -551,14 +556,28 @@ class ChangeAuthModeDialog extends ConsumerWidget {
       _ => '',
     };
 
+    final canSave =
+        model.dialogState is ChangeAuthModeDialogStateInput && notifier.isValid;
+
+    Future<void> handleSubmit() async {
+      final navigator = Navigator.of(context);
+      await notifier.replaceAuthMode(
+        onAuthorized: () {
+          if (navigator.mounted) navigator.pop();
+        },
+      );
+    }
+
     return AlertDialog(
       title: YaruDialogTitleBar(title: Text(title)),
       titlePadding: EdgeInsets.zero,
+      contentPadding: EdgeInsets.zero,
       insetPadding:
           const EdgeInsets.symmetric(horizontal: 40.0, vertical: 16.0),
       content: SizedBox(
         width: 460,
         child: ScrollablePage(
+          padding: const EdgeInsets.all(24),
           children: [
             Text(bodyMainText),
             Text(bodyRecoveryText),
@@ -568,28 +587,15 @@ class ChangeAuthModeDialog extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
-                  onPressed:
-                      model.dialogState is ChangeAuthModeDialogStateInput &&
-                              notifier.isValid
-                          ? () {
-                              Navigator.of(context).pop();
-                              notifier.replaceAuthMode();
-                            }
-                          : null,
+                  onPressed: canSave ? handleSubmit : null,
                   child: Text(l10n.diskEncryptionPageAddPinDialogSaveButton),
                 ),
               ],
             ),
-            // Show fatal errors in dialog (like entropy check failures)
-            if (model.dialogState is ChangeAuthModeDialogStateError &&
-                (model.dialogState as ChangeAuthModeDialogStateError).fatal)
+            if (model.dialogState case ChangeAuthModeDialogStateError(:final e))
               YaruInfoBox(
                 title: Text(l10n.recoveryKeySomethingWentWrongHeader),
-                subtitle: Text(
-                  (model.dialogState as ChangeAuthModeDialogStateError)
-                      .e
-                      .toString(),
-                ),
+                subtitle: Text(_dialogErrorMessage(e)),
                 yaruInfoType: YaruInfoType.danger,
               ),
           ].separatedBy(const SizedBox(height: 16)),
@@ -642,7 +648,10 @@ class _NoneAuthenticationActions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final isAdding = tpmState.pendingOperation is AuthOperationAdding;
+    final isAdding = switch (tpmState.pendingOperation) {
+      TpmFdeOperation.addPin || TpmFdeOperation.addPassphrase => true,
+      _ => false,
+    };
     final hasError = tpmState.operationError != null;
 
     return Column(
@@ -692,8 +701,10 @@ class _NoneAuthenticationActions extends ConsumerWidget {
         if (hasError) ...[
           const SizedBox(height: 8),
           YaruInfoBox(
-            title: Text(l10n.diskEncryptionPageError),
-            subtitle: Text(tpmState.operationError.toString()),
+            title: Text(l10n.recoveryKeySomethingWentWrongHeader),
+            subtitle: Text(
+              tpmState.operationError!.causeByMessage(),
+            ),
             yaruInfoType: YaruInfoType.danger,
           ),
         ],
@@ -710,7 +721,10 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final isRemoving = tpmState.pendingOperation is AuthOperationRemoving;
+    final isRemoving = switch (tpmState.pendingOperation) {
+      TpmFdeOperation.removePin || TpmFdeOperation.removePassphrase => true,
+      _ => false,
+    };
     final hasError = tpmState.operationError != null;
 
     return Column(
@@ -743,7 +757,7 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
                   : () {
                       ref
                           .read(tpmAuthenticationModelProvider.notifier)
-                          .changeAuthMode(AuthMode.none);
+                          .removeAuthMode();
                     },
               child: Text(
                 l10n.diskEncryptionPageRemovePassphraseButton,
@@ -754,8 +768,10 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
         if (hasError) ...[
           const SizedBox(height: 8),
           YaruInfoBox(
-            title: Text(l10n.diskEncryptionPageError),
-            subtitle: Text(tpmState.operationError.toString()),
+            title: Text(l10n.recoveryKeySomethingWentWrongHeader),
+            subtitle: Text(
+              tpmState.operationError!.causeByMessage(),
+            ),
             yaruInfoType: YaruInfoType.danger,
           ),
         ],
@@ -772,7 +788,10 @@ class _PinAuthenticationActions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final isRemoving = tpmState.pendingOperation is AuthOperationRemoving;
+    final isRemoving = switch (tpmState.pendingOperation) {
+      TpmFdeOperation.removePin || TpmFdeOperation.removePassphrase => true,
+      _ => false,
+    };
     final hasError = tpmState.operationError != null;
 
     return Column(
@@ -802,7 +821,7 @@ class _PinAuthenticationActions extends ConsumerWidget {
                   : () {
                       ref
                           .read(tpmAuthenticationModelProvider.notifier)
-                          .changeAuthMode(AuthMode.none);
+                          .removeAuthMode();
                     },
               child: Text(l10n.diskEncryptionPageRemovePinButton),
             ),
@@ -811,8 +830,10 @@ class _PinAuthenticationActions extends ConsumerWidget {
         if (hasError) ...[
           const SizedBox(height: 8),
           YaruInfoBox(
-            title: Text(l10n.diskEncryptionPageError),
-            subtitle: Text(tpmState.operationError.toString()),
+            title: Text(l10n.recoveryKeySomethingWentWrongHeader),
+            subtitle: Text(
+              tpmState.operationError!.causeByMessage(),
+            ),
             yaruInfoType: YaruInfoType.danger,
           ),
         ],
@@ -875,13 +896,11 @@ class _AuthStatusTileList extends StatelessWidget {
     String? loadingMessage;
     if (pendingOperation != null) {
       loadingMessage = switch (pendingOperation) {
-        AuthOperationRemoving(mode: AuthMode.pin) =>
-          l10n.diskEncryptionPageRemovingPin,
-        AuthOperationRemoving(mode: AuthMode.passphrase) =>
+        TpmFdeOperation.removePin => l10n.diskEncryptionPageRemovingPin,
+        TpmFdeOperation.removePassphrase =>
           l10n.diskEncryptionPageRemovingPassphrase,
-        AuthOperationAdding(mode: AuthMode.pin) =>
-          l10n.diskEncryptionPageAddingPin,
-        AuthOperationAdding(mode: AuthMode.passphrase) =>
+        TpmFdeOperation.addPin => l10n.diskEncryptionPageAddingPin,
+        TpmFdeOperation.addPassphrase =>
           l10n.diskEncryptionPageAddingPassphrase,
         _ => null,
       };

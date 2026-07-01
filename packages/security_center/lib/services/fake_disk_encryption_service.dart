@@ -136,6 +136,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     required AuthMode authMode,
     String? passphrase,
     String? pin,
+    void Function()? onAuthorized,
   }) async {
     await Future.delayed(const Duration(seconds: 2));
 
@@ -154,6 +155,9 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       case AuthMode.none:
         _auth = '';
     }
+
+    // Call the onAuthorized hook to indicate authorization is complete and the platform key can be replaced
+    onAuthorized?.call();
 
     // Update the authMode in all platform key slots in systemVolumes
     final updatedVolumes = <String, SnapdSystemVolume>{};
