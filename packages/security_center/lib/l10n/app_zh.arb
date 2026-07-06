@@ -126,7 +126,7 @@
     "recoveryKeyPassphraseEntropyBelowMin": "弱密码，请使它更长或者更复杂",
     "recoveryKeyPassphraseEntropyOptimal": "强密码",
     "recoveryKeyPinEntropyOptimal": "PIN足够长",
-    "recoveryKeySomethingWentWrongHeader": "发生了一些错误",
+    "recoveryKeySomethingWentWrongHeader": "出现了一些问题",
     "recoveryKeyPassphraseButton": "修改密码...",
     "recoveryKeyPassphraseCurrent": "当前密码",
     "recoveryKeyPassphraseNew": "新密码",
@@ -144,5 +144,10 @@
     "recoveryKeyPassphraseHeader": "修改密码",
     "recoveryKeyExceptionDisallowedPathBody": "尝试一个不同的地址，例如可移动磁盘，或者用其他的方式。",
     "recoveryKeyPinEntropyBelowMin": "弱PIN，请让它更长或者更难以预测",
-    "recoveryKeyPinEntropyBelowOptimal": "可猜测PIN，请使它变得更长或者更难以预测以变得更安全"
+    "recoveryKeyPinEntropyBelowOptimal": "可猜测PIN，请使它变得更长或者更难以预测以变得更安全",
+    "snapPermissionAccessLabel": "访问",
+    "snapPermissionsErrorTitle": "出现了一些问题",
+    "microphoneInterfacePageTitle": "麦克风",
+    "cameraInterfacePageTitle": "摄像头",
+    "ubuntuProEnabled": "Ubuntu Pro 已启用"
 }
