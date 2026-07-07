@@ -140,7 +140,14 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<SnapdStorageEncryptedResponse> getStorageEncrypted() {
-    return _snapd.getStorageEncrypted();
+  Future<SnapdStorageEncryptedResponse> getStorageEncrypted() async {
+    try {
+      return await _snapd.getStorageEncrypted();
+    } on ArgumentError catch (e) {
+      _log.error('Failed to parse storage encryption status: $e');
+      return SnapdStorageEncryptedResponse(
+        status: SnapdStorageEncryptionStatus.failed,
+      );
+    }
   }
 }

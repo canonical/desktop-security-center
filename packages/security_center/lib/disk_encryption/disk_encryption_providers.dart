@@ -330,7 +330,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
       // for indeterminate state (see LP#2147606)
       final stopwatch = Stopwatch()..start();
       var delay = initialRetryDelay;
-      var storageStatus = await _service.getStorageEncrypted();
+      var storageStatus = await _getStorageEncrypted();
       while (
           storageStatus.status == SnapdStorageEncryptionStatus.indeterminate &&
               stopwatch.elapsed < maxRetryDuration) {
@@ -342,7 +342,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         final remaining = maxRetryDuration - stopwatch.elapsed;
         await Future.delayed(delay < remaining ? delay : remaining);
         delay *= 2;
-        storageStatus = await _service.getStorageEncrypted();
+        storageStatus = await _getStorageEncrypted();
       }
 
       switch (storageStatus.status) {
@@ -406,6 +406,17 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
       if (e.statusCode == 403) {
         throw SnapdStateExceptionUnconnectedSnapInterface();
       }
+      throw TpmStateExceptionFailed();
+    }
+  }
+
+  Future<SnapdStorageEncryptedResponse> _getStorageEncrypted() async {
+    try {
+      return await _service.getStorageEncrypted();
+    } on SnapdException {
+      rethrow;
+    } on ArgumentError catch (e) {
+      _log.error('Failed to parse storage encryption status: $e');
       throw TpmStateExceptionFailed();
     }
   }
