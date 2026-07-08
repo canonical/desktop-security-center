@@ -172,6 +172,11 @@ class AvailableRoutes {
       if (status.status != SnapdStorageEncryptionStatus.inactive) {
         routes.add(Routes.diskEncryption);
       }
+    } on ArgumentError catch (e) {
+      // If the API call fails, don't show the disk encryption route
+      _log.error(
+        'Failed to get storage encryption status, skipping page registration: $e',
+      );
     } on Exception catch (e) {
       // If the API call fails, don't show the disk encryption route
       _log.error(

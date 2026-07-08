@@ -969,6 +969,31 @@ void main() {
   });
 
   group('TPM authentication error handling', () {
+    testWidgets('storage encryption status parse error', (tester) async {
+      final container = createContainer();
+      registerMockDiskEncryptionService(
+        storageEncryptionError: ArgumentError('Unknown enum value'),
+      );
+      await tester.pumpAppWithProviders(
+        (_) => const DiskEncryptionPage(),
+        container,
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.text(
+          tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusHeader,
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.text(
+          tester.l10n.diskEncryptionPageErrorFailedToRetrieveStatusBody,
+        ),
+        findsOneWidget,
+      );
+    });
+
     final cases = [
       (
         name: '404 error from enumerate keyslots API',

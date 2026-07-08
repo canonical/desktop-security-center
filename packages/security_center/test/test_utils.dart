@@ -151,11 +151,15 @@ DiskEncryptionService registerMockDiskEncryptionService({
   SnapdStorageEncryptionStatus storageEncryptionStatus =
       SnapdStorageEncryptionStatus.active,
   int indeterminateCallCount = 0,
+  Object? storageEncryptionError,
 }) {
   final service = MockDiskEncryptionService();
 
   var storageEncryptedCalls = 0;
   when(service.getStorageEncrypted()).thenAnswer((_) async {
+    if (storageEncryptionError != null) {
+      throw storageEncryptionError;
+    }
     if (storageEncryptedCalls < indeterminateCallCount) {
       storageEncryptedCalls++;
       return SnapdStorageEncryptedResponse(
