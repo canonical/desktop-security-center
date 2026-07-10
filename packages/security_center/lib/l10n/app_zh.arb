@@ -52,7 +52,7 @@
     "snapRulesRemoveAll": "删除所有规则",
     "diskEncryptionPageTitle": "磁盘加密",
     "diskEncryptionPageRecoveryKey": "恢复密钥",
-    "diskEncryptionPageLearnMore": "了解更多关于恢复密钥",
+    "diskEncryptionPageLearnMore": "了解更多关于硬件支持的加密",
     "diskEncryptionPageCheckKey": "检查恢复密钥...",
     "diskEncryptionPageDialogHeaderCheckKey": "检查恢复密钥",
     "diskEncryptionPageCheck": "检查",
@@ -81,8 +81,8 @@
     "recoveryKeyExceptionFileSystemBody": "您没有写入该文件夹的权限，请尝试其他位置或使用其他方法。",
     "recoveryKeyFilePickerTitle": "保存恢复密钥文件",
     "recoveryKeyFilePickerFilter": "文本文件",
-    "diskEncryptionPageStoreYourKey": "恢复密钥让您恢复访问您的数据当您的磁盘在启动时无法解锁。请在一些安全的地方保存。",
-    "diskEncryptionPageStoreYourKeyWithLink": "恢复密钥让您恢复访问您的数据当您的磁盘在启动时无法解锁。请在一些安全的地方保存。{learnMoreLink}",
+    "diskEncryptionPageStoreYourKey": "恢复密钥让您恢复访问您的数据当磁盘在启动时无法解锁。请在一些安全的地方保存。",
+    "diskEncryptionPageStoreYourKeyWithLink": "恢复密钥让您恢复访问您的数据当磁盘在启动时无法解锁。请在一些安全的地方保存。{learnMoreLink}",
     "@diskEncryptionPageStoreYourKeyWithLink": {
         "placeholders": {
             "learnMoreLink": {
@@ -149,5 +149,13 @@
     "snapPermissionsErrorTitle": "出现了一些问题",
     "microphoneInterfacePageTitle": "麦克风",
     "cameraInterfacePageTitle": "摄像头",
-    "ubuntuProEnabled": "Ubuntu Pro 已启用"
+    "ubuntuProEnabled": "Ubuntu Pro 已启用",
+    "cameraRulesPageEmptyTileLabel": "当前没有应用请求访问权限",
+    "snapRulesResetAllPermissions": "重置所有权限",
+    "cameraInterfacePageDescription": "允许应用访问您的相机。",
+    "microphoneInterfacePageDescription": "允许应用访问您的麦克风。",
+    "diskEncryptionPageAddPinButton": "添加 PIN…",
+    "diskEncryptionPageAddPassphraseButton": "添加密码…",
+    "diskEncryptionPageAddPassphraseDialogHeading": "添加密码",
+    "diskEncryptionPageAddPinDialogHeading": "添加 PIN"
 }
