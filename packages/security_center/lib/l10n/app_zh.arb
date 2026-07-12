@@ -157,5 +157,6 @@
     "diskEncryptionPageAddPinButton": "添加 PIN…",
     "diskEncryptionPageAddPassphraseButton": "添加密码…",
     "diskEncryptionPageAddPassphraseDialogHeading": "添加密码",
-    "diskEncryptionPageAddPinDialogHeading": "添加 PIN"
+    "diskEncryptionPageAddPinDialogHeading": "添加 PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "每次启动电脑时，您需要输入 PIN 码。此 PIN 码与您的用户密码不同。"
 }
