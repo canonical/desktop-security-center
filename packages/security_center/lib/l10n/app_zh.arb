@@ -100,7 +100,7 @@
     "diskEncryptionPageErrorUnsupportedSnapdHeader": "您的snapd版本不受支持",
     "diskEncryptionPageErrorUnsupportedSnapdBody": "检查安全中心与snap保持最新。",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "安全中心不能连接到snapd界面",
-    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "要修复这个，在终端中输入：",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "为了修复此问题，在终端中输入以下指令：",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
     "diskEncryptionPageReplaceDialogQRBody": "扫描这个二维码以复制恢复密钥并且保存到某个安全的位置，例如密码管理器。您也可以拍照方便后期使用。",
     "recoveryKeyExceptionFilePermissionTitle": "无法保存恢复密钥到文件",
