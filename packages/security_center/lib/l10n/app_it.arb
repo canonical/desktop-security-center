@@ -9,11 +9,11 @@
     "snapPermissionWriteLabel": "Scrittura",
     "snapPermissionExecuteLabel": "Eseguibile",
     "snapPermissionsEnableWarning": "Questa è una funzionalità sperimentale per controllare l'accesso alle tue risorse di sistema.",
-    "snapPermissionsEnablingLabel": "L'attivazione potrebbe richiedere alcuni secondi...",
-    "snapPermissionsDisablingLabel": "La disabilitazione potrebbe richiedere alcuni secondi...",
+    "snapPermissionsEnablingLabel": "Attivazione in corso, potrebbero essere necessari alcuni secondi...",
+    "snapPermissionsDisablingLabel": "Disabilitazione in corso, potrebbero essere necessari alcuni secondi...",
     "snapPermissionsExperimentalLabel": "Sperimentale",
     "snapPermissionsOtherDescription": "Puoi gestire gli altri permessi in Impostazioni › Applicazioni.",
-    "snapPermissionsPageTitle": "Permessi delle app",
+    "snapPermissionsPageTitle": "Permessi delle applicazioni",
     "snapRulesPageDescription": "Gestisci i permessi di {interface} per {snap}.",
     "@snapRulesPageDescription": {
         "placeholders": {
@@ -33,5 +33,238 @@
     "interfacePageLinkReportIssues": "Segnala errori",
     "snapPermissionsEnableTitle": "Impone alle app di richiedere i permessi di sistema",
     "homeInterfacePageTitle": "Cartella Home",
-    "homeInterfacePageDescription": "Gestisci i permessi per accedere ai file della tua cartella Home."
+    "homeInterfacePageDescription": "Gestisci i permessi per accedere ai file della tua cartella Home.",
+    "snapPermissionAccessLabel": "Accesso",
+    "snapPermissionsErrorTitle": "Qualcosa è andato storto",
+    "snapRulesCount": "{n, plural,=0{nessuna regola}=1{1 regola}other{{n} regole}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "cameraRulesPageEmptyTileLabel": "Nessuna app ha ancora richiesto l'accesso",
+    "snapRulesResetAllPermissions": "Reimposta tutti i permessi",
+    "cameraInterfacePageTitle": "Fotocamera",
+    "cameraInterfacePageDescription": "Consenti alle app di accedere alle tue fotocamere.",
+    "microphoneInterfacePageTitle": "Microfono",
+    "microphoneInterfacePageDescription": "Consenti alle app di accedere al tuo microfono.",
+    "interfaceSnapCount": "{n, plural, =0{nessuna app} =1{1 app} other {{n} app}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageTitle": "Crittografia del disco",
+    "diskEncryptionPageRecoveryKey": "Chiave di ripristino",
+    "diskEncryptionPageStoreYourKey": "La chiave di ripristino ti consente di riottenere l'accesso ai tuoi dati se il disco non riesce a sbloccarsi durante l'avvio. Salvala in un luogo sicuro.",
+    "diskEncryptionPageStoreYourKeyWithLink": "La chiave di ripristino ti consente di riottenere l'accesso ai tuoi dati se il disco non riesce a sbloccarsi durante l'avvio. Salvala in un luogo sicuro. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageLearnMore": "Scopri di più sulla crittografia basata sull'hardware",
+    "diskEncryptionPageCheckKey": "Verifica la chiave di ripristino...",
+    "diskEncryptionPageDialogHeaderCheckKey": "Verifica la chiave di ripristino",
+    "diskEncryptionPageCheck": "Verifica",
+    "diskEncryptionPageValidKey": "Chiave valida",
+    "diskEncryptionPageInvalidKey": "Chiave non valida",
+    "diskEncryptionPageEnterKey": "Inserisci la tua chiave di ripristino",
+    "diskEncryptionPageKeyWorks": "La chiave di ripristino funziona",
+    "diskEncryptionPageKeyWorksBody": "Ricorda di conservarla in un luogo sicuro.",
+    "diskEncryptionPageKeyDoesntWork": "La chiave di ripristino non funziona",
+    "diskEncryptionPageKeyDoesntWorkBody": "Verifica la chiave o sostituiscila con una nuova.",
+    "diskEncryptionPageError": "Errore",
+    "diskEncryptionPageReplaceButton": "Sostituisci la chiave di ripristino...",
+    "diskEncryptionPageReplaceDialogHeader": "Sostituisci la chiave di ripristino",
+    "diskEncryptionPageReplaceDialogBody": "Salva la nuova chiave di ripristino in un luogo sicuro. Una volta sostituita, non potrai più utilizzare la vecchia chiave.",
+    "diskEncryptionPageReplaceDialogShowQR": "Mostra codice QR",
+    "diskEncryptionPageReplaceDialogSave": "Salva su file",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Ho salvato la mia chiave di ripristino in un luogo sicuro",
+    "diskEncryptionPageReplaceDialogReplace": "Sostituisci",
+    "diskEncryptionPageReplaceDialogDiscard": "Scarta",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Chiave di ripristino sostituita",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Ricorda di conservarla in un luogo sicuro.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Sostituzione della chiave di ripristino non riuscita",
+    "diskEncryptionPageReplaceDialogErrorBody": "Si è verificato un errore durante la sostituzione della chiave di ripristino. La vecchia chiave rimarrà valida.",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Chiave di ripristino della crittografia",
+    "diskEncryptionPageReplaceDialogQRBody": "Scansiona il codice QR per copiare la chiave di ripristino e salvarla in un luogo sicuro, ad esempio in un gestore di password. Puoi anche scattare una foto per utilizzarla in seguito.",
+    "diskEncryptionPageClipboardNotification": "Copiato negli appunti",
+    "diskEncryptionPageCopySemanticLabel": "Copia",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Impostazioni di crittografia non disponibili",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Impossibile recuperare lo stato della crittografia di questo computer.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "La configurazione TPM del computer non è in uno stato supportato.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "La tua versione di snapd non è supportata",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Verifica che Security Center e snapd siano aggiornati.",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Security Center non può connettersi all'interfaccia snapd",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Per risolvere il problema, esegui questo comando nel terminale:",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "diskEncryptionPageAddPinButton": "Aggiungi PIN...",
+    "diskEncryptionPageAddPassphraseButton": "Aggiungi passphrase...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Aggiungi passphrase",
+    "diskEncryptionPageAddPinDialogHeading": "Aggiungi PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "Dovrai inserire il tuo PIN ogni volta che avvii il computer. Questo PIN è diverso dalla password del tuo utente.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Se dimentichi il PIN, puoi riottenere l'accesso al disco utilizzando la chiave di ripristino.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Dovrai inserire la tua passphrase ogni volta che avvii il computer. Questa passphrase è diversa dalla password del tuo utente.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Se dimentichi la passphrase, puoi riottenere l'accesso al disco utilizzando la chiave di ripristino.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Sicurezza aggiuntiva",
+    "diskEncryptionPageAdditionalSecurityBody": "Puoi impostare una passphrase o un PIN per una maggiore sicurezza. Dovrai inserirlo ogni volta che avvii il computer.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Scopri di più",
+    "diskEncryptionPageAddPinDialogSaveButton": "Aggiungi",
+    "diskEncryptionPageRemovePinButton": "Rimuovi PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Rimuovi passphrase...",
+    "diskEncryptionPageAddingPin": "Aggiunta del PIN in corso, potrebbero essere necessari alcuni secondi...",
+    "diskEncryptionPageAddingPassphrase": "Aggiunta della passphrase in corso, potrebbero essere necessari alcuni secondi...",
+    "diskEncryptionPageRemovingPin": "Rimozione del PIN in corso, potrebbero essere necessari alcuni secondi...",
+    "diskEncryptionPageRemovingPassphrase": "Rimozione della passphrase in corso, potrebbero essere necessari alcuni secondi...",
+    "recoveryKeyExceptionFileSystemTitle": "File della chiave di ripristino non salvato",
+    "recoveryKeyExceptionDisallowedPathTitle": "Impossibile salvare il file della chiave di ripristino in una posizione temporanea",
+    "recoveryKeyExceptionUnknownTitle": "Errore sconosciuto",
+    "recoveryKeyExceptionFilePermissionTitle": "Impossibile salvare la chiave di ripristino nel file",
+    "recoveryKeyExceptionFilePermissionBody": "Non hai i permessi per scrivere in quella posizione del file.",
+    "recoveryKeyExceptionFileSystemBody": "Non hai i permessi per scrivere in quella cartella. Prova a scegliere una posizione diversa o usa un altro metodo.",
+    "recoveryKeyExceptionDisallowedPathBody": "Prova una posizione diversa, ad esempio un'unità rimovibile, oppure usa un altro metodo.",
+    "recoveryKeyFilePickerTitle": "Salva il file della chiave di ripristino",
+    "recoveryKeyFilePickerFilter": "File di testo",
+    "recoveryKeyTPMEnabled": "La crittografia con supporto hardware è attiva",
+    "recoveryKeyTPMExplanationBody": "Le chiavi di crittografia sono archiviate nel Trusted Platform Module (TPM) del tuo computer.",
+    "recoveryKeyTPMExplanationLearnMore": "Scopri di più sulla crittografia con supporto hardware",
+    "recoveryKeyPassphraseEnabled": "La passphrase di crittografia è attiva",
+    "recoveryKeyPassphraseHeader": "Modifica passphrase",
+    "recoveryKeyPassphraseBody": "Devi inserire la tua passphrase ogni volta che avvii il computer.",
+    "recoveryKeyPassphraseButton": "Modifica passphrase...",
+    "recoveryKeyPassphraseCurrent": "Passphrase attuale",
+    "recoveryKeyPassphraseNew": "Nuova passphrase",
+    "recoveryKeyPassphraseConfirm": "Conferma passphrase",
+    "recoveryKeyPassphraseCurrentError": "Passphrase errata, riprova",
+    "recoveryKeyPassphraseNewError": "Deve contenere almeno 4 caratteri",
+    "recoveryKeyPassphraseConfirmError": "Le passphrase non corrispondono, riprova",
+    "recoveryKeyPassphraseDialogHeader": "Modifica passphrase",
+    "recoveryKeyPinEnabled": "Il PIN di crittografia è attivo",
+    "recoveryKeyPinHeader": "PIN di crittografia",
+    "recoveryKeyEncrpytionPassphraseHeader": "Passphrase di crittografia",
+    "recoveryKeyPinBody": "Dovrai inserire il PIN ogni volta che avvii il computer.",
+    "recoveryKeyPinButton": "Modifica PIN...",
+    "recoveryKeyPinCurrent": "PIN attuale",
+    "recoveryKeyPinNew": "Nuovo PIN",
+    "recoveryKeyPinConfirm": "Conferma PIN",
+    "recoveryKeyPinCurrentError": "PIN errato, riprova",
+    "recoveryKeyPinConfirmError": "I PIN non corrispondono, riprova",
+    "recoveryKeyPinDialogHeader": "Modifica PIN",
+    "recoveryKeyPassphraseShow": "Mostra",
+    "recoveryKeyPassphraseHide": "Nascondi",
+    "recoveryKeyPassphraseChange": "Modifica",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN aggiornato",
+    "recoveryKeyPassphrasePinSuccessBody": "Il PIN è stato aggiornato correttamente.",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Passphrase aggiornata",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "La passphrase è stata aggiornata correttamente.",
+    "recoveryKeyPassphraseEntropyBelowMin": "Passphrase debole, rendila più lunga o complessa",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Passphrase discreta, rendila più lunga o complessa per una maggiore sicurezza",
+    "recoveryKeyPassphraseEntropyOptimal": "Passphrase sicura",
+    "recoveryKeyPinEntropyBelowMin": "PIN debole, rendilo più lungo o meno prevedibile",
+    "recoveryKeyPinEntropyBelowOptimal": "PIN discreto, rendilo più lungo o meno prevedibile per una maggiore sicurezza",
+    "recoveryKeyPinEntropyOptimal": "Il PIN è abbastanza lungo",
+    "recoveryKeySomethingWentWrongHeader": "Si è verificato un errore",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro non è disponibile per questa versione di Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro richiede una versione LTS",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro non è supportato da questa versione di snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Aggiorna snapd per gestire Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro è abilitato",
+    "ubuntuProDisabled": "Sicurezza e conformità di livello aziendale per il tuo computer. Sempre gratuito per uso personale. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Scopri Ubuntu Pro",
+    "ubuntuProEnablePro": "Abilita Ubuntu Pro",
+    "ubuntuProEnableMagic": "Abilita con l'account Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Potrai creare un account gratuitamente",
+    "ubuntuProMagicPrompt": "Accedi con il tuo account Ubuntu One o creane uno gratuitamente.",
+    "ubuntuProMagicContinueInBrowser": "Continua nel browser",
+    "ubuntuProMagicDescription": "Puoi anche accedere a {attachLink} e inserire il codice{attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Impossibile abilitare Ubuntu Pro, riprova",
+    "ubuntuProEnableToken": "Abilita con un token",
+    "ubuntuProEnableTokenError": "Impossibile abilitare Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Dal tuo amministratore IT o da {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Ottieni un token Ubuntu Pro dal tuo amministratore o da {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Disabilita Ubuntu Pro",
+    "ubuntuProDisable": "Disabilita",
+    "ubuntuProDisablePrompt": "La disabilitazione di Ubuntu Pro scollegherà il tuo abbonamento da questa macchina. Vuoi procedere?",
+    "ubuntuProEnable": "Abilita",
+    "ubuntuProCancel": "Annulla",
+    "ubuntuProFeatureEnableError": "Impossibile abilitare la funzionalità, riprova.",
+    "ubuntuProFeatureDisableError": "Impossibile disabilitare la funzionalità, riprova.",
+    "ubuntuProCompliance": "Conformità e hardening",
+    "ubuntuProComplianceDisclaimer": "Consigliato solo per supportare FedRAMP, HIPAA e altri requisiti di conformità e hardening.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu Security Guide (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatizza l'hardening e l'auditing con benchmark CIS e profili DISA-STIG, consentendo personalizzazioni specifiche per l'ambiente.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Una certificazione dei moduli crittografici dei governi di Stati Uniti e Canada per la conformità allo standard di protezione dei dati FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Abilita FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "L'abilitazione di FIPS non può essere annullata e Livepatch verrà disabilitato in modo permanente.",
+    "ubuntuProComplianceFIPSPrompt": "Scegli l'opzione FIPS preferita",
+    "ubuntuProComplianceFIPSUpdates": "FIPS con aggiornamenti",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Installa pacchetti convalidati FIPS 140-2 e consente normali aggiornamenti di sicurezza.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS senza aggiornamenti",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Installa pacchetti convalidati FIPS 140-2. Questi non verranno aggiornati fino alla prossima ricertificazione.",
+    "ubuntuProComplianceDocumentation": "Documentazione sulla conformità alla sicurezza",
+    "ubuntuProESMTitle": "Expanded Security Maintenance (ESM)",
+    "ubuntuProESMDescription": "ESM fornisce 10 anni di patch di sicurezza per l'intero archivio Ubuntu. Ottieni una gestione continua delle vulnerabilità per CVE critiche, elevate e alcune CVE di gravità media selezionate.",
+    "ubuntuProESMMainTitle": "Pacchetti principali (esm-infra)",
+    "ubuntuProESMMainDescription": "Aggiornamenti di sicurezza per i pacchetti Main di Ubuntu fino al {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Pacchetti Universe (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Aggiornamenti di sicurezza aggiuntivi per i pacchetti Universe di Ubuntu fino al {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Abilita Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Applica aggiornamenti di sicurezza del kernel mentre il sistema è in esecuzione",
+    "ubuntuProLivepatchShowTitle": "Mostra lo stato di Livepatch nella barra superiore"
 }
