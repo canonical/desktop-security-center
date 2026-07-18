@@ -243,9 +243,9 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "ຕິດຕັ້ງແພັກເກັດທີ່ຜ່ານການກວດສອບ FIPS 140-2. ເຊິ່ງຈະບໍ່ໄດ້ຮັບການອັບເດດຈົນກວ່າຈະມີການຮັບຮອງຄືນໃໝ່ໃນຄັ້ງຕໍ່ໄປ.",
     "ubuntuProComplianceDocumentation": "ເອກະສານການປະຕິບັດຕາມມາດຕະຖານຄວາມປອດໄພ",
     "ubuntuProESMTitle": "ການບຳລຸງຮັກສາຄວາມປອດໄພແບບຂະຫຍາຍ (ESM)",
-    "ubuntuProESMDescription": "ESM ໃຫ້ບໍລິການແພັດຄວາມປອດໄພເປັນເວລາ 10 ປີ ສຳລັບແພັກເກັດໂອເພນຊອດຫຼາຍກວ່າ 25,000 ແພັກເກັດ. ໄດ້ຮັບການຈັດການຊ່ອງໂຫວ່ແບບຕໍ່ເນື່ອງສຳລັບ CVE ລະດັບວິກິດ, ສູງ ແລະ ກາງ.",
+    "ubuntuProESMDescription": "ESM ໃຫ້ການປັບປຸງຄວາມປອດໄພເປັນເວລາ 10 ປີ ສຳລັບຄັງເກັບຂໍ້ມູນ Ubuntu ທັງໝົດ. ຮັບການຈັດການຈຸດອ່ອນແບບຕໍ່ເນື່ອງ ສຳລັບ CVEs ໃນລະດັບວິກິດ, ສູງ ແລະ ລະດັບປານກາງທີ່ຖືກຄັດເລືອກ.",
     "ubuntuProESMMainTitle": "ແພັກເກັດຫຼັກ (esm-infra)",
-    "ubuntuProESMMainDescription": "ການອັບເດດຄວາມປອດໄພສຳລັບ 2,300 ແພັກເກັດ Ubuntu Main ຈົນເຖິງປີ {year}",
+    "ubuntuProESMMainDescription": "ການອັບເດດຄວາມປອດໄພສຳລັບແພັກເກດ Ubuntu Main ຈົນເຖິງປີ {year}",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -254,7 +254,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "ແພັກເກັດ Universe (esm-apps)",
-    "ubuntuProESMUniverseDescription": "ການອັບເດດຄວາມປອດໄພເພີ່ມເຕີມສຳລັບແພັກເກັດ Ubuntu Universe ຫຼາຍກວ່າ 23,000 ແພັກເກັດ ຈົນເຖິງປີ {year}",
+    "ubuntuProESMUniverseDescription": "ການອັບເດດຄວາມປອດໄພເພີ່ມເຕີມສຳລັບແພັກເກດ Ubuntu Universe ຈົນເຖິງປີ {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
