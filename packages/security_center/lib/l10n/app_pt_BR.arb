@@ -167,5 +167,67 @@
     "recoveryKeyPinEntropyBelowMin": "PIN fraco, torna-o mais longo ou menos previsível",
     "recoveryKeyPinEntropyBelowOptimal": "PIN justo, torne-o mais longo ou menos previsível para maior segurança",
     "recoveryKeyPinEntropyOptimal": "O PIN é longo o suficiente",
-    "recoveryKeySomethingWentWrongHeader": "Algo deu errado"
+    "recoveryKeySomethingWentWrongHeader": "Algo deu errado",
+    "snapPermissionsErrorTitle": "Algo errado aconteceu",
+    "microphoneInterfacePageTitle": "Microfone",
+    "microphoneInterfacePageDescription": "Permite aplicativos acessarem seu microfone.",
+    "ubuntuProNotSupported": "Ubuntu Pro não está disponível para essa versão do Ubuntu",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro requer uma versão LTS",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro não é suportado por essa versão snapd",
+    "ubuntuProNotSupportedSnapdDetails": "Atualize snapd para gerenciar o Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro está habilitado",
+    "ubuntuProDisabled": "Segurança de nível empresarial e conformidade para seu computador. Gratuito para uso pessoal. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Aprenda sobre Ubuntu Pro",
+    "ubuntuProEnablePro": "Habilite Ubuntu Pro",
+    "ubuntuProEnableMagic": "Habilite com uma conta Ubuntu One",
+    "ubuntuProEnableMagicSubtitle": "Você poderá criar uma conta gratuitamente",
+    "ubuntuProMagicPrompt": "Conecte-se com sua conta Ubuntu One, ou crie uma gratuitamente.",
+    "ubuntuProMagicContinueInBrowser": "Continue no navegador",
+    "ubuntuProMagicDescription": "Você também pode se conectar em {attachLink} e inserir o código {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Não foi possível habilitar o Ubuntu Pro, por favor, tente novamente",
+    "ubuntuProEnableToken": "Habilite com um token",
+    "ubuntuProEnableTokenError": "Não foi possível habilitar o Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Do seu administrador de TI ou de {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Obtenha um token do Ubuntu Pro do seu administrador ou {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProDisablePro": "Desabilitar Ubuntu Pro",
+    "ubuntuProDisable": "Desabilitar",
+    "ubuntuProDisablePrompt": "Desabilitar o Ubuntu Pro desconectará sua assinatura dessa máquina. Você quer continuar?",
+    "ubuntuProEnable": "Habilitar",
+    "ubuntuProCancel": "Cancelar",
+    "ubuntuProFeatureEnableError": "Não foi possível habilitar esse recurso, por favor, tente novamente.",
+    "ubuntuProFeatureDisableError": "Não foi possível desabilitar esse recurso, por favor, tente novamente.",
+    "ubuntuProCompliance": "Conformidade e melhora da segurança",
+    "ubuntuProComplianceDisclaimer": "Recomendado apenas para auxiliar no atendimento a requisitos de FedRAMP, HIPAA e outros requisitos de conformidade e endurecimento de segurança (*hardening*).",
+    "ubuntuProComplianceUSGTitle": "Guia de segurança Ubuntu (GSU)"
 }
