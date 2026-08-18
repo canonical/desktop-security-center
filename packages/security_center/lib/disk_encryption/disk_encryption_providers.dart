@@ -74,7 +74,7 @@ sealed class SnapdStateException
 // may be returned by snapd during TPM FDE operations that require polkit authentication
 enum SnapdAuthErrorKind {
   authCancelled('auth-cancelled'),
-  authLoginRequired('auth-login-required');
+  authLoginRequired('login-required');
 
   const SnapdAuthErrorKind(this.snapdKind);
 
@@ -82,7 +82,7 @@ enum SnapdAuthErrorKind {
 
   static SnapdAuthErrorKind? fromKind(String? kind) => switch (kind) {
         'auth-cancelled' => SnapdAuthErrorKind.authCancelled,
-        'auth-login-required' => SnapdAuthErrorKind.authLoginRequired,
+        'login-required' => SnapdAuthErrorKind.authLoginRequired,
         _ => null,
       };
 }
