@@ -51,8 +51,8 @@
         }
     },
     "diskEncryptionPageRecoveryKey": "Herstelcode",
-    "diskEncryptionPageStoreYourKey": "Met de herstelcode kunt u weer toegang krijgen tot uw gegevens als uw schijf niet kan worden ontgrendeld tijdens het opstarten. Bewaar deze op een veilige plek.",
-    "diskEncryptionPageLearnMore": "Met informatie over herstelcodes",
+    "diskEncryptionPageStoreYourKey": "Met de herstelcode kunt u weer toegang krijgen tot uw gegevens als de schijf niet kan worden ontgrendeld tijdens het opstarten. Bewaar deze op een veilige plek.",
+    "diskEncryptionPageLearnMore": "Meer informatie over hardwarematige versleutelingen",
     "diskEncryptionPageCheckKey": "Herstelcode controleren…",
     "diskEncryptionPageDialogHeaderCheckKey": "Herstelcode controleren",
     "diskEncryptionPageCheck": "Controleren",
@@ -97,7 +97,7 @@
     "recoveryKeyPassphraseCurrentError": "Onjuiste wachtwoordzin, probeer het opnieuw",
     "recoveryKeyPassphraseConfirmError": "Wachtwoordzinnen komen niet overeen, probeer het opnieuw",
     "recoveryKeyPassphraseDialogHeader": "Wachtwoordzin wijzigen",
-    "recoveryKeyPinBody": "U moet uw pincode invoeren tijdens het opstarten om de schijf te ontgrendelen. U kunt de pincode wijzigen, maar niet uitschakelen.",
+    "recoveryKeyPinBody": "U moet uw pincode invoeren tijdens het opstarten om de schijf te ontgrendelen.",
     "recoveryKeyPinButton": "Pincode wijzigen…",
     "recoveryKeyPinCurrent": "Huidige pincode",
     "recoveryKeyPinNew": "Nieuwe pincode",
@@ -116,7 +116,7 @@
     "recoveryKeyTPMEnabled": "Hardware-ondersteunde versleuteling ingeschakeld",
     "recoveryKeyPassphrasePassphraseSuccessHeader": "Wachtwoordzin bijgewerkt",
     "recoveryKeyPassphraseNewError": "Moet minimaal 4 tekens lang zijn",
-    "recoveryKeyPassphraseBody": "U moet uw wachtwoord tijdens het opstarten invoeren om de schijf te ontgrendelen. U kunt de wachtwoordzin wijzigen, maar niet uitschakelen.",
+    "recoveryKeyPassphraseBody": "Het wachtwoord moet ingevoerd worden telkens de computer wordt heropgestart.",
     "recoveryKeyPassphraseEntropyBelowOptimal": "Redelijke wachtwoordzin, maak het langer of complexer voor een betere beveiliging",
     "recoveryKeyPassphraseEntropyOptimal": "Sterke wachtwoordzin",
     "recoveryKeyPinEntropyOptimal": "Pincode is lang genoeg",
@@ -124,7 +124,7 @@
     "recoveryKeyPassphraseEntropyBelowMin": "Zwakke wachtwoordzin, maak het langer of complexer",
     "recoveryKeyPinEntropyBelowMin": "Zwakke pincode, maak hem langer of minder voorspelbaar",
     "recoveryKeySomethingWentWrongHeader": "Er ging iets mis",
-    "diskEncryptionPageStoreYourKeyWithLink": "De herstelcode stelt je in staat om weer toegang te krijgen tot je gegevens als je schijf tijdens het opstarten niet ontgrendeld kan worden. Bewaar het op een veilige plaats. {learnMoreLink}",
+    "diskEncryptionPageStoreYourKeyWithLink": "De herstelcode stelt je in staat om weer toegang te krijgen tot je gegevens als de schijf tijdens het opstarten niet ontgrendeld kan worden. Bewaar het op een veilige plaats. {learnMoreLink}",
     "@diskEncryptionPageStoreYourKeyWithLink": {
         "placeholders": {
             "learnMoreLink": {
@@ -149,5 +149,122 @@
     "cameraRulesPageEmptyTileLabel": "Nog geen apps die toegang hebben gevraagd",
     "snapRulesResetAllPermissions": "Alle machtigingen opnieuw instellen",
     "cameraInterfacePageTitle": "Camera",
-    "cameraInterfacePageDescription": "Apps toegang geven tot uw camera's."
+    "cameraInterfacePageDescription": "Apps toegang geven tot uw camera's.",
+    "snapPermissionsErrorTitle": "Er ging iets fout",
+    "microphoneInterfacePageTitle": "Microfoon",
+    "microphoneInterfacePageDescription": "Applicaties toegang geven tot de microfoon.",
+    "diskEncryptionPageAddPinButton": "Voeg PIN toe...",
+    "diskEncryptionPageAddPassphraseButton": "Voeg wachtwoord toe...",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Voeg wachtwoord toe",
+    "diskEncryptionPageAddPinDialogHeading": "Voeg PIN toe",
+    "diskEncryptionPageAddPinDialogBodyMain": "De PIN is nodig elke keer de computer wordt heropgestart. De PIN kan verschillen van het gebruikerswachtwoord.",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Als de PIN vergeten wordt, kan de schijf nogsteeds ontgrendeld worden met de herstelcode.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Dit wachtwoord is nodig elke keer de computer wordt heropgestart. Dit wachtwoord kan verschillen van het gebruikerswachtwoord.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Bij verlies van dit wachtwoord kan de schijf ontgrendeld worden met de herstelcode.",
+    "diskEncryptionPageAdditionalSecurityHeader": "Extra beveiliging",
+    "diskEncryptionPageAdditionalSecurityBody": "Een PIN of wachtwoord kan worden ingesteld voor extra beveiliging. Deze moet worden ingevoerd telkens de computer wordt heropgestart.",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Meer info",
+    "diskEncryptionPageAddPinDialogSaveButton": "Toevoegen",
+    "diskEncryptionPageRemovePinButton": "Verwijder PIN...",
+    "diskEncryptionPageRemovePassphraseButton": "Verwijder wachtwoord...",
+    "diskEncryptionPageAddingPin": "PIN aan het toevoegen, dit kan even duren...",
+    "diskEncryptionPageAddingPassphrase": "Wachtwoord aan het toevoegen, dit kan even duren...",
+    "diskEncryptionPageRemovingPin": "PIN aan het verwijderen, dit kan even duren...",
+    "diskEncryptionPageRemovingPassphrase": "Wachtwoord aan het verwijderen, dit kan even duren...",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProNotSupported": "Ubuntu Pro is niet beschikbaar voor deze Ubuntu-versie",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro werkt alleen met LTS-versies",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro wordt niet ondersteund door de huidige snapd-versie",
+    "ubuntuProNotSupportedSnapdDetails": "Update snapd om Ubuntu Pro te beheren",
+    "ubuntuProEnabled": "Ubuntu Pro staat uit",
+    "ubuntuProDisabled": "Professionele beveiliging en compliance voor uw computer. Altijd gratis voor persoonlijk gebruik.{learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Meer info over Ubuntu Pro",
+    "ubuntuProEnablePro": "Ubuntu Pro inschakelen",
+    "ubuntuProEnableMagic": "Inschakelen met Ubuntu One-account",
+    "ubuntuProEnableMagicSubtitle": "Accounts aanmaken is gratis",
+    "ubuntuProMagicPrompt": "Log in met een Ubuntu One-account, of maak er gratis een aan.",
+    "ubuntuProMagicContinueInBrowser": "Verdergaan in browser",
+    "ubuntuProMagicDescription": "Of log in op {attachLink} en vul de code {attachCode} in",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicError": "Er ging iets fout bij het inschakelen van Ubuntu Pro, probeer het opnieuw",
+    "ubuntuProEnableToken": "Inschakelen met behulp van een token",
+    "ubuntuProEnableTokenError": "Er ging iets fout bij het inschakelen van Ubuntu Pro",
+    "ubuntuProEnableTokenSubtitle": "Van uw IT-administrator of van {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenPrompt": "Krijg een Ubuntu Pro-token van uw administrator of van {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisablePro": "Ubuntu Pro Uitzetten",
+    "ubuntuProDisable": "Uitschakelen",
+    "ubuntuProDisablePrompt": "Ubuntu Pro uitschakelen verbreekt de verbinding tussen uw abonnement en dit apparaat. Wilt u verdergaan?",
+    "ubuntuProEnable": "Inschakelen",
+    "ubuntuProCancel": "Annuleren",
+    "ubuntuProFeatureEnableError": "Kon de functie niet inschakelen, probeer het opnieuw.",
+    "ubuntuProFeatureDisableError": "Kon de functie niet uitschakelen, probeer het opnieuw.",
+    "ubuntuProCompliance": "Compliance en verharding",
+    "ubuntuProComplianceDisclaimer": "Enkel aanbevolen om te assisteren bij FedRAMP, HIPAA en andere compliance- en verhardingseisen.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu Beveiligingshandboek (USG)",
+    "ubuntuProComplianceUSGDescription": "Automatiseert verharding en controles met het CIS benchmark en DISA-STIG profielen terwijl het omgevingsspecifieke aanpassingen mogelijk houdt.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Een cryptografische modulecertificaat of compliance met de FIPS 140-2 gegevensbeschermingsstandaard uitgegeven door de Amerikaanse en Canadese overheden.",
+    "ubuntuProComplianceFIPSEnable": "FIPS Inschakelen",
+    "ubuntuProComplianceFIPSDisclaimer": "FIPS inschakelen kan niet worden teruggedraaid en Livepatch wordt permanent uitgeschakeld.",
+    "ubuntuProComplianceFIPSPrompt": "Kies je lievelings-FIPS-optie",
+    "ubuntuProComplianceFIPSUpdates": "FIPS met updates",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Installeert FIPS 140-2 gevalideerde pakketten en staat normale beveiligingsupdates toe.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS zonder updates",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Installeert FIPS 140-2 gevalideerde pakketten. Deze worden niet geüpdatet tot de volgende certificatie.",
+    "ubuntuProComplianceDocumentation": "Beveiligingscompliance documentatie",
+    "ubuntuProESMTitle": "Uitgebreid Beveiligingsonderhoud (ESM)",
+    "ubuntuProESMDescription": "Met ESM krijgt het gehele Ubuntu-archief gedurende 10 jaar beveiligingsupdates. Krijf continu kwetsbaarheidsbeheer voor kritieke, hoge en geselecteerde middelgrote CVE's.",
+    "ubuntuProESMMainTitle": "Hoofdpakketten (esm-infra)",
+    "ubuntuProESMMainDescription": "Beveiligingsupdates voor Ubuntu hoofdpakketten tot {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Universumpakketten (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Extra beveiligingsupdates voor Ubuntu Universumpakketten tot {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Livepatch Inschakelen",
+    "ubuntuProLivepatchEnableDescription": "Pas kernelbeveiligingsupdates toe terwijl het systeem opstaat",
+    "ubuntuProLivepatchShowTitle": "Toon Livepatch-status in de balk bovenaan"
 }
