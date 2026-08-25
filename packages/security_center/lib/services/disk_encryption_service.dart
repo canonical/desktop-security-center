@@ -121,6 +121,7 @@ abstract class DiskEncryptionService {
     required AuthMode authMode,
     String? passphrase,
     String? pin,
+    void Function()? onAuthorized,
   });
 
   /// Gets the TPM backed FDE status from snapd.
