@@ -1,1 +1,53 @@
-{}
+{
+    "appTitle": "ศูนย์ความปลอดภัย",
+    "snapdRuleCategorySessionAllowed": "อนุญาตจนกว่าจะออกจากระบบ",
+    "snapdRuleCategorySessionDenied": "ปฏิเสธจนกว่าจะออกจากระบบ",
+    "snapdRuleCategoryForeverAllowed": "อนุญาตเสมอ",
+    "snapdRuleCategoryForeverDenied": "ปฏิเสธเสมอ",
+    "snapPermissionReadLabel": "อ่าน",
+    "snapPermissionWriteLabel": "เขียน",
+    "snapPermissionExecuteLabel": "ปฏิบัติการ",
+    "snapPermissionAccessLabel": "เข้าถึง",
+    "snapPermissionsEnableTitle": "กำหนดให้แอปต้องขออนุญาตเข้าถึงระบบ",
+    "snapPermissionsEnableWarning": "นี่คือฟีเจอร์ทดลองสำหรับควบคุมการเข้าถึงทรัพยากรต่างๆ ของระบบคุณ",
+    "snapPermissionsEnablingLabel": "กำลังเปิดใช้งาน อาจใช้เวลาสักครู่...",
+    "snapPermissionsDisablingLabel": "กำลังปิดใช้งาน อาจใช้เวลาสักครู่...",
+    "snapPermissionsExperimentalLabel": "ทดลอง",
+    "snapPermissionsOtherDescription": "คุณสามารถจัดการการกำหนดสิทธิ์อื่นๆ ได้ใน การตั้งค่า › แอปพลิเคชัน",
+    "snapPermissionsPageTitle": "การกำหนดสิทธิ์ของแอป",
+    "snapPermissionsErrorTitle": "มีบางอย่างผิดพลาด",
+    "snapRulesCount": "{n, plural, =0{ไม่มีกฎ} =1{กฎ 1 ข้อ} other{กฎ {n} ข้อ}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapRulesPageDescription": "จัดการการกำหนดสิทธิ์ {interface} สำหรับ {snap}",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "snapRulesPageEmptyTileLabel": "ยังไม่มีกฎ",
+    "cameraRulesPageEmptyTileLabel": "ยังไม่มีแอปใดขอสิทธิ์เข้าถึง",
+    "snapRulesRemoveAll": "ลบกฎทั้งหมด",
+    "snapRulesResetAllPermissions": "ตั้งค่าการกำหนดสิทธิ์ทั้งหมดใหม่",
+    "homeInterfacePageTitle": "โฟลเดอร์บ้าน",
+    "homeInterfacePageDescription": "จัดการสิทธิ์การเข้าถึงไฟล์ในโฟลเดอร์บ้านของคุณ",
+    "cameraInterfacePageTitle": "กล้อง",
+    "cameraInterfacePageDescription": "อนุญาตให้แอปเข้าถึงกล้องของคุณ",
+    "microphoneInterfacePageTitle": "ไมโครโฟน",
+    "microphoneInterfacePageDescription": "อนุญาตให้แอปเข้าถึงไมโครโฟนของคุณ",
+    "interfacePageTitle": "จัดการการกำหนดสิทธิ์",
+    "interfacePageDescription": "แอปที่ถูกจำกัดสิทธิ์อย่างเข้มงวดจะถามคุณก่อนเข้าถึงไฟล์และโฟลเดอร์ ฟีเจอร์นี้ยังเป็นแบบทดลองและอาจมีการเปลี่ยนแปลง",
+    "interfacePageLinkLearnMore": "เรียนรู้เพิ่มเติม",
+    "interfacePageLinkGiveFeedback": "ให้คำติชม",
+    "interfacePageLinkReportIssues": "รายงานปัญหา"
+}
