@@ -61,20 +61,16 @@ class _Body extends StatelessWidget {
 
 enum _Link {
   learnMore,
-  giveFeedback,
   reportIssues;
 
   String get url => switch (this) {
         learnMore =>
           'https://discourse.ubuntu.com/t/ubuntu-desktop-s-24-10-dev-cycle-part-5-introducing-permissions-prompting/47963',
-        giveFeedback =>
-          'https://t.maze.co/266411709?guerilla=true&source=securitycenter',
         reportIssues =>
           'https://github.com/canonical/desktop-security-center/issues/new/choose',
       };
   String localize(AppLocalizations l10n) => switch (this) {
         learnMore => l10n.interfacePageLinkLearnMore,
-        giveFeedback => l10n.interfacePageLinkGiveFeedback,
         reportIssues => l10n.interfacePageLinkReportIssues,
       };
 }

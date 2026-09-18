@@ -31,7 +31,6 @@
     "interfacePageTitle": "管理權限",
     "interfacePageLinkLearnMore": "了解更多",
     "interfacePageLinkReportIssues": "回報問題",
-    "interfacePageLinkGiveFeedback": "意見回饋",
     "snapPermissionsEnableTitle": "要求應用程式請求系統權限",
     "snapRulesCount": "{n, plural, =0{沒有規則} =1{1 條規則} other{{n} 條規則}}",
     "@snapRulesCount": {

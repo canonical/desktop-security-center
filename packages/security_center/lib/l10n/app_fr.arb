@@ -1,7 +1,6 @@
 {
     "snapPermissionWriteLabel": "Écrire",
     "snapPermissionExecuteLabel": "Exécution",
-    "interfacePageLinkGiveFeedback": "Donner votre avis",
     "interfacePageLinkReportIssues": "Signaler un problème",
     "snapPermissionReadLabel": "Lecture",
     "snapPermissionsExperimentalLabel": "Expérimental",

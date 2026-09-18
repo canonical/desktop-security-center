@@ -136,9 +136,6 @@ class AppLocalizationsCa extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Apreneu més';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Doneu retroacció';
-
-  @override
   String get interfacePageLinkReportIssues => 'Informeu els problemes';
 
   @override

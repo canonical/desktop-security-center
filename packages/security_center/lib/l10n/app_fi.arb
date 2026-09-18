@@ -36,7 +36,6 @@
     "homeInterfacePageTitle": "Kotikansio",
     "homeInterfacePageDescription": "Hallitse oikeuksia kotikansiossa olevien tiedostojen käytön suhteen.",
     "interfacePageTitle": "Hallitse oikeuksia",
-    "interfacePageLinkGiveFeedback": "Anna palautetta",
     "interfacePageLinkReportIssues": "Ilmoita ongelmista",
     "snapRulesPageDescription": "Hallitse rajapinnan {interface} oikeuksia snap-paketille {snap}.",
     "@snapRulesPageDescription": {

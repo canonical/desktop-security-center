@@ -136,9 +136,6 @@ class AppLocalizationsUk extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Докладніше';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Надіслати відгук';
-
-  @override
   String get interfacePageLinkReportIssues => 'Повідомити про проблеми';
 
   @override

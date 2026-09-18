@@ -134,9 +134,6 @@ class AppLocalizationsId extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Pelajari selengkapnya';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Beri masukan';
-
-  @override
   String get interfacePageLinkReportIssues => 'Laporkan masalah';
 
   @override

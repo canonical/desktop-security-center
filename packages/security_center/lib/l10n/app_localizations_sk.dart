@@ -134,9 +134,6 @@ class AppLocalizationsSk extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Zistiť viac';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Poskytnúť spätnú väzbu';
-
-  @override
   String get interfacePageLinkReportIssues => 'Nahlásiť problémy';
 
   @override

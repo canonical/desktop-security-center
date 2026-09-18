@@ -136,9 +136,6 @@ class AppLocalizationsEl extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Μάθετε περισσότερα';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Υποβολή σχολίων';
-
-  @override
   String get interfacePageLinkReportIssues => 'Αναφορά προβλήματος';
 
   @override

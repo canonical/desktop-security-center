@@ -133,9 +133,6 @@ class AppLocalizationsLo extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'ຮຽນຮູ້ເພີ່ມເຕີມ';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'ໃຫ້ຄຳຕິຊົມ';
-
-  @override
   String get interfacePageLinkReportIssues => 'ລາຍງານບັນຫາ';
 
   @override

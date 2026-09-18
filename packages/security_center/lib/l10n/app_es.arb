@@ -17,7 +17,6 @@
         }
     },
     "interfacePageLinkLearnMore": "Más información",
-    "interfacePageLinkGiveFeedback": "Dar su opinión",
     "interfacePageLinkReportIssues": "Informar de problemas",
     "interfaceSnapCount": "{n, plural, =0{sin aplicaciones} =1{1 aplicación} other {{n} aplicaciones}}",
     "@interfaceSnapCount": {

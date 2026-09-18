@@ -27,7 +27,6 @@
     "homeInterfacePageTitle": "Benutzerordner",
     "homeInterfacePageDescription": "Berechtigungen für den Zugriff auf Dateien in Ihrem Benutzerordner verwalten.",
     "interfacePageLinkLearnMore": "Mehr erfahren",
-    "interfacePageLinkGiveFeedback": "Rückmeldung geben",
     "interfaceSnapCount": "{n, plural, =0{keine Apps} =1{1 App} other {{n} Apps}}",
     "@interfaceSnapCount": {
         "placeholders": {

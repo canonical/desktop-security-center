@@ -38,7 +38,6 @@
     "homeInterfacePageDescription": "Håndtér rettigheder for filadgang i din hjemmemappe.",
     "interfacePageTitle": "Håndtér rettigheder",
     "interfacePageLinkLearnMore": "Læs mere",
-    "interfacePageLinkGiveFeedback": "Giv feedback",
     "interfacePageLinkReportIssues": "Rapportér problemer",
     "interfaceSnapCount": "{n, plural, =0{ingen programmer} =1{1 program} other {{n} programmer}}",
     "@interfaceSnapCount": {

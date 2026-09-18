@@ -48,7 +48,6 @@
     "homeInterfacePageDescription": "A saját mappában lévő fájlok hozzáféréséhez való jogosultságok kezelése.",
     "interfacePageTitle": "Jogosultságok kezelése",
     "interfacePageLinkLearnMore": "Tudjon meg többet",
-    "interfacePageLinkGiveFeedback": "Visszajelzés küldése",
     "diskEncryptionPageLearnMore": "Tudjon meg többet a hardveresen támogatott titkosításról",
     "diskEncryptionPageKeyDoesntWorkBody": "Ellenőrizze a kulcsot, vagy cserélje ki egy másikra.",
     "diskEncryptionPageTitle": "Lemeztitkosítás",

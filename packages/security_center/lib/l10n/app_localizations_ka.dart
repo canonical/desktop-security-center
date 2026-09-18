@@ -133,9 +133,6 @@ class AppLocalizationsKa extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'გაიგეთ მეტი';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'უკუკავშირი';
-
-  @override
   String get interfacePageLinkReportIssues => 'პრობლემების ანგარიში';
 
   @override

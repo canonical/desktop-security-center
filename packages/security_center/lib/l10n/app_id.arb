@@ -39,7 +39,6 @@
     "homeInterfacePageTitle": "Folder Beranda",
     "homeInterfacePageDescription": "Kelola izin untuk mengakses file di folder Beranda Anda.",
     "interfacePageLinkLearnMore": "Pelajari selengkapnya",
-    "interfacePageLinkGiveFeedback": "Beri masukan",
     "interfaceSnapCount": "{n, plural, =0{tidak ada aplikasi} =1{1 aplikasi} other {{n} aplikasi}}",
     "@interfaceSnapCount": {
         "placeholders": {

@@ -127,9 +127,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get interfacePageLinkLearnMore => '了解更多';
 
   @override
-  String get interfacePageLinkGiveFeedback => '意见反馈';
-
-  @override
   String get interfacePageLinkReportIssues => '报告问题';
 
   @override
@@ -784,9 +781,6 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get interfacePageLinkLearnMore => '了解更多';
-
-  @override
-  String get interfacePageLinkGiveFeedback => '意見回饋';
 
   @override
   String get interfacePageLinkReportIssues => '回報問題';

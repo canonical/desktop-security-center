@@ -133,9 +133,6 @@ class AppLocalizationsSr extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Сазнајте више';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Дајте повратне информације';
-
-  @override
   String get interfacePageLinkReportIssues => 'Пријавите проблеме';
 
   @override

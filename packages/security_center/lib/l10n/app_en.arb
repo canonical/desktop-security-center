@@ -84,8 +84,6 @@
     "@interfacePageTitle": {},
     "interfacePageLinkLearnMore": "Learn more",
     "@interfacePageLinkLearnMore": {},
-    "interfacePageLinkGiveFeedback": "Give feedback",
-    "@interfacePageLinkGiveFeedback": {},
     "interfacePageLinkReportIssues": "Report issues",
     "@interfacePageLinkReportIssues": {},
     "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 app} other {{n} apps}}",

@@ -134,9 +134,6 @@ class AppLocalizationsEo extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Lerni plu';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Recenzi';
-
-  @override
   String get interfacePageLinkReportIssues => 'Raporti problemojn';
 
   @override

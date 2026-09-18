@@ -30,7 +30,6 @@
     "homeInterfacePageDescription": "Machtigingen beheren voor toegang tot bestanden in uw thuismap.",
     "interfacePageTitle": "Machtigingen beheren",
     "interfacePageLinkLearnMore": "Meer informatie",
-    "interfacePageLinkGiveFeedback": "Reacties geven",
     "interfacePageLinkReportIssues": "Problemen melden",
     "interfaceSnapCount": "{n, plural, =0{geen apps} =1{1 app} other {{n} apps}}",
     "@interfaceSnapCount": {

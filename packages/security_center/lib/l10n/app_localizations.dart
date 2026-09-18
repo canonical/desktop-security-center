@@ -453,12 +453,6 @@ abstract class AppLocalizations {
   /// **'Learn more'**
   String get interfacePageLinkLearnMore;
 
-  /// No description provided for @interfacePageLinkGiveFeedback.
-  ///
-  /// In en, this message translates to:
-  /// **'Give feedback'**
-  String get interfacePageLinkGiveFeedback;
-
   /// No description provided for @interfacePageLinkReportIssues.
   ///
   /// In en, this message translates to:

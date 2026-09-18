@@ -37,7 +37,6 @@
     "homeInterfacePageDescription": "Управление разрешениями для доступа к файлам в Домашней папке.",
     "interfacePageTitle": "Управление разрешениями",
     "interfacePageLinkLearnMore": "Подробнее",
-    "interfacePageLinkGiveFeedback": "Отправить отзыв",
     "interfacePageLinkReportIssues": "Сообщить о проблеме",
     "interfaceSnapCount": "{n, plural, =0{нет приложений} =1{1 приложение} =2{2 приложения} other {{n} приложений}}",
     "@interfaceSnapCount": {

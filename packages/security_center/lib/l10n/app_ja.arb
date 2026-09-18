@@ -18,7 +18,6 @@
     "microphoneInterfacePageDescription": "アプリにマイクへのアクセスを許可する。",
     "interfacePageTitle": "パーミッションを管理",
     "interfacePageLinkLearnMore": "詳しく知る",
-    "interfacePageLinkGiveFeedback": "フィードバック",
     "interfacePageLinkReportIssues": "問題を報告",
     "snapPermissionWriteLabel": "書き込み",
     "snapPermissionExecuteLabel": "実行",

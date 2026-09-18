@@ -48,7 +48,6 @@
     "interfacePageTitle": "Upravljaj dozvolama",
     "interfacePageDescription": "Strogo ograničene aplikacije će vas pitati prije pristupa datotekama i mapama. Ova funkcija je eksperimentalna i podložna promjenama.",
     "interfacePageLinkLearnMore": "Saznajte više",
-    "interfacePageLinkGiveFeedback": "Dajte povratne informacije",
     "interfacePageLinkReportIssues": "Prijavi probleme",
     "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 app} other {{n} apps}}",
     "@interfaceSnapCount": {
