@@ -68,7 +68,7 @@ enum _Link {
         learnMore =>
           'https://discourse.ubuntu.com/t/ubuntu-desktop-s-24-10-dev-cycle-part-5-introducing-permissions-prompting/47963',
         giveFeedback =>
-          'https://t.maze.co/266411709?guerilla=true&source=securitycenter',
+          '',
         reportIssues =>
           'https://github.com/canonical/desktop-security-center/issues/new/choose',
       };
@@ -87,6 +87,8 @@ class _Links extends StatelessWidget {
     return Wrap(
       spacing: 16,
       children: _Link.values
+          // Hidden for now; keep translation in case it's needed again.
+          .where((link) => link != _Link.giveFeedback)
           .map(
             (link) => Hyperlink(
               text: link.localize(AppLocalizations.of(context)),
