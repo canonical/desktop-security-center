@@ -133,9 +133,6 @@ class AppLocalizationsNn extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Learn more';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Give feedback';
-
-  @override
   String get interfacePageLinkReportIssues => 'Report issues';
 
   @override

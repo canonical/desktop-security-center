@@ -135,9 +135,6 @@ class AppLocalizationsOc extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Ne saber mai';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Donatz vòstre opinion';
-
-  @override
   String get interfacePageLinkReportIssues => 'Senhalar de problèmas';
 
   @override

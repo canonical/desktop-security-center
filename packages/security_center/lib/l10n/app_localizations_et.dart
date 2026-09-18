@@ -134,9 +134,6 @@ class AppLocalizationsEt extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Loe lisaks';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Jaga tagasisidet';
-
-  @override
   String get interfacePageLinkReportIssues => 'Teata veast või problemist';
 
   @override

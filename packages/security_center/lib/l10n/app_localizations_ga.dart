@@ -135,9 +135,6 @@ class AppLocalizationsGa extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Foghlaim níos mó';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Tabhair aiseolas';
-
-  @override
   String get interfacePageLinkReportIssues => 'Saincheisteanna a thuairisciú';
 
   @override

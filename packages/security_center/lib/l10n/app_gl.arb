@@ -46,7 +46,6 @@
     "microphoneInterfacePageDescription": "Permite que as aplicacións accedan ao teu micrófono.",
     "interfacePageTitle": "Xestionar permisos",
     "interfacePageLinkLearnMore": "Saber máis",
-    "interfacePageLinkGiveFeedback": "Dá retroalimentación",
     "interfacePageLinkReportIssues": "Informar de problemas",
     "interfaceSnapCount": "{n, plural, =0{sen aplicacións} =1{1 aplicación} other {{n} aplicacións}}",
     "@interfaceSnapCount": {

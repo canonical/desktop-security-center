@@ -135,9 +135,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'மேலும் அறிக';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'கருத்து தெரிவி';
-
-  @override
   String get interfacePageLinkReportIssues => 'சிக்கல்களைப் புகாரளி';
 
   @override

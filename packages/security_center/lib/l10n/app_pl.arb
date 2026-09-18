@@ -28,7 +28,6 @@
     "snapRulesPageEmptyTileLabel": "Brak reguł",
     "homeInterfacePageTitle": "Katalog domowy",
     "homeInterfacePageDescription": "Zarządzaj uprawnieniami dostępu do plików w katalogu domowym.",
-    "interfacePageLinkGiveFeedback": "Przekaż opinię",
     "interfacePageLinkReportIssues": "Zgłoś problemy",
     "interfaceSnapCount": "{n, plural, =0{bez programów} =1{1 program} few{{n} programy} many{{n} programów} other{{n} programów}}",
     "@interfaceSnapCount": {

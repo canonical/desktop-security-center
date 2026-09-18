@@ -135,9 +135,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Lue lisää';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Anna palautetta';
-
-  @override
   String get interfacePageLinkReportIssues => 'Ilmoita ongelmista';
 
   @override

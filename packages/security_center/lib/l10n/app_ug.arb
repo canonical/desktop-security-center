@@ -44,7 +44,6 @@
     "cameraInterfacePageDescription": "ئەپنىڭ كامېرايىڭىزنى زىيارەت قىلىشىغا يول قويىدۇ.",
     "interfacePageTitle": "ئىجازەت باشقۇرۇش",
     "interfacePageLinkLearnMore": "مول بىلىم",
-    "interfacePageLinkGiveFeedback": "پىكىر بېرىڭ",
     "interfacePageLinkReportIssues": "مەسىلە مەلۇم قىلىڭ",
     "interfaceSnapCount": "{n, plural, =0{ئەپ يوق} =1{1 ئەپ} other {{n} ئەپ}}",
     "@interfaceSnapCount": {

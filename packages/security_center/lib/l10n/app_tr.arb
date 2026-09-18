@@ -39,7 +39,6 @@
     "homeInterfacePageDescription": "Ev klasöründeki dosyalara erişim izinlerini yönetin.",
     "interfacePageTitle": "İzinleri yönet",
     "interfacePageLinkLearnMore": "Daha fazla bilgi edin",
-    "interfacePageLinkGiveFeedback": "Geri bildirimde bulunun",
     "interfacePageLinkReportIssues": "Sorunları bildirin",
     "interfaceSnapCount": "{n, plural, =0{uygulama yok} =1{1 uygulama} other {{n} uygulama}}",
     "@interfaceSnapCount": {

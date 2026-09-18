@@ -39,7 +39,6 @@
     "homeInterfacePageDescription": "إدارة الأذونات للوصول إلى الملفات الموجودة في المجلد الرئيسي الخاص بك.",
     "interfacePageTitle": "إدارة الأذونات",
     "interfacePageLinkLearnMore": "التعرف على المزيد",
-    "interfacePageLinkGiveFeedback": "تقديم ملاحظات",
     "interfacePageLinkReportIssues": "الإبلاغ عن المشكلات",
     "interfaceSnapCount": "{n, plural, =0{لا توجد تطبيقات} =1{تطبيق واحد} other {{n} تطبيقات}}",
     "@interfaceSnapCount": {

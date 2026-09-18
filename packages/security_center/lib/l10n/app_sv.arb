@@ -12,7 +12,6 @@
     "homeInterfacePageTitle": "Hemkatalog",
     "interfacePageTitle": "Hantera behörigheter",
     "interfacePageLinkLearnMore": "Läs mer",
-    "interfacePageLinkGiveFeedback": "Ge återkoppling",
     "interfaceSnapCount": "{n, plural, =0{inga program} =1{1 program} other {{n} flera program}}",
     "@interfaceSnapCount": {
         "placeholders": {

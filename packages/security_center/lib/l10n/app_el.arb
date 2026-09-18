@@ -55,7 +55,6 @@
     "cameraInterfacePageDescription": "Να επιτρέπεται στις εφαρμογές να έχουν πρόσβαση στις κάμερές σας.",
     "microphoneInterfacePageTitle": "Μικρόφωνο",
     "microphoneInterfacePageDescription": "Να επιτρέπεται στις εφαρμογές να έχουν πρόσβαση στο μικρόφωνό σας.",
-    "interfacePageLinkGiveFeedback": "Υποβολή σχολίων",
     "interfaceSnapCount": "{n, plural, =0{καμία εφαρμογή} =1{1 εφαρμογή} other{{n} εφαρμογές}}",
     "@interfaceSnapCount": {
         "placeholders": {

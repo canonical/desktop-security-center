@@ -44,7 +44,6 @@
     "cameraInterfacePageDescription": "ອະນຸຍາດໃຫ້ແອັບເຂົ້າເຖິງກ້ອງຂອງທ່ານ.",
     "interfacePageTitle": "ຈັດການການອະນຸຍາດ",
     "interfacePageLinkLearnMore": "ຮຽນຮູ້ເພີ່ມເຕີມ",
-    "interfacePageLinkGiveFeedback": "ໃຫ້ຄຳຕິຊົມ",
     "interfacePageLinkReportIssues": "ລາຍງານບັນຫາ",
     "interfaceSnapCount": "{n, plural, =0{ບໍ່ມີແອັບ} =1{1 ແອັບ} other {{n} ແອັບ}}",
     "@interfaceSnapCount": {

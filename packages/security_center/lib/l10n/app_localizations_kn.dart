@@ -134,9 +134,6 @@ class AppLocalizationsKn extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'ಪ್ರತಿಕ್ರಿಯೆ ನೀಡಿ';
-
-  @override
   String get interfacePageLinkReportIssues => 'ಸಮಸ್ಯೆಗಳನ್ನು ವರದಿ ಮಾಡಿ';
 
   @override

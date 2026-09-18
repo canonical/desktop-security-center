@@ -39,7 +39,6 @@
     "homeInterfacePageDescription": "사용자의 홈 폴더의 파일에 접근하는 권한을 관리합니다.",
     "interfacePageTitle": "권한 관리",
     "interfacePageLinkLearnMore": "더 알아보기",
-    "interfacePageLinkGiveFeedback": "피드백 작성",
     "interfacePageLinkReportIssues": "이슈 보고",
     "interfaceSnapCount": "{n, plural, =0{앱 없음} =1{1개의 앱} other {{n}개의 앱}}",
     "@interfaceSnapCount": {

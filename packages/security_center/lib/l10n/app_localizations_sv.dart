@@ -134,9 +134,6 @@ class AppLocalizationsSv extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Läs mer';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Ge återkoppling';
-
-  @override
   String get interfacePageLinkReportIssues => 'Rapportera problem';
 
   @override

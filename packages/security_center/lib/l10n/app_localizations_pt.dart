@@ -135,9 +135,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Saber mais';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Dar opinião';
-
-  @override
   String get interfacePageLinkReportIssues => 'Reportar problemas';
 
   @override
@@ -829,9 +826,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get interfacePageLinkLearnMore => 'Saber mais';
-
-  @override
-  String get interfacePageLinkGiveFeedback => 'Dê seu feedback';
 
   @override
   String get interfacePageLinkReportIssues => 'Reportar problemas';

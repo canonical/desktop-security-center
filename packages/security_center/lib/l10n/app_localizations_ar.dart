@@ -133,9 +133,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'التعرف على المزيد';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'تقديم ملاحظات';
-
-  @override
   String get interfacePageLinkReportIssues => 'الإبلاغ عن المشكلات';
 
   @override

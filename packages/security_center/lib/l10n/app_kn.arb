@@ -44,7 +44,6 @@
     "cameraInterfacePageDescription": "ನಿಮ್ಮ ಕ್ಯಾಮರಾಗಳನ್ನು ಪ್ರವೇಶಿಸಲು ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಅನುಮತಿಸಿ.",
     "interfacePageTitle": "ಅನುಮತಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
     "interfacePageLinkLearnMore": "ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ",
-    "interfacePageLinkGiveFeedback": "ಪ್ರತಿಕ್ರಿಯೆ ನೀಡಿ",
     "interfacePageLinkReportIssues": "ಸಮಸ್ಯೆಗಳನ್ನು ವರದಿ ಮಾಡಿ",
     "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 app} other {{n} apps}}",
     "@interfaceSnapCount": {

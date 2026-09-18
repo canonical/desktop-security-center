@@ -134,9 +134,6 @@ class AppLocalizationsUg extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'مول بىلىم';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'پىكىر بېرىڭ';
-
-  @override
   String get interfacePageLinkReportIssues => 'مەسىلە مەلۇم قىلىڭ';
 
   @override

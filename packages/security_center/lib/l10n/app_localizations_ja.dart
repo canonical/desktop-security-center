@@ -127,9 +127,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get interfacePageLinkLearnMore => '詳しく知る';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'フィードバック';
-
-  @override
   String get interfacePageLinkReportIssues => '問題を報告';
 
   @override

@@ -24,7 +24,6 @@
     "homeInterfacePageDescription": "管理访问您主文件夹中文件的权限。",
     "interfacePageTitle": "管理权限",
     "interfacePageLinkLearnMore": "了解更多",
-    "interfacePageLinkGiveFeedback": "意见反馈",
     "interfacePageLinkReportIssues": "报告问题",
     "interfaceSnapCount": "{n, plural, =0{0 个应用} =1{1 个应用} other {{n} 个应用}}",
     "@interfaceSnapCount": {

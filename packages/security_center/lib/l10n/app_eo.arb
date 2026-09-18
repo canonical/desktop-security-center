@@ -24,7 +24,6 @@
     "snapRulesPageEmptyTileLabel": "Neniu regulo ankoraŭ",
     "snapRulesRemoveAll": "Forigi ĉiujn regulojn",
     "interfacePageTitle": "Administri permesojn",
-    "interfacePageLinkGiveFeedback": "Recenzi",
     "snapRulesPageDescription": "Administri permesojn de {snap} pri {interface}.",
     "@snapRulesPageDescription": {
         "placeholders": {

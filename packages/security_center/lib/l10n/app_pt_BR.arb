@@ -44,7 +44,6 @@
     "cameraInterfacePageDescription": "Permita que os aplicativos acessem suas câmeras.",
     "interfacePageTitle": "Gerenciar permissões",
     "interfacePageLinkLearnMore": "Saber mais",
-    "interfacePageLinkGiveFeedback": "Dê seu feedback",
     "interfacePageLinkReportIssues": "Reportar problemas",
     "interfaceSnapCount": "{n, plural, =0{nenhum aplicativo} =1{1 aplicativo} other {{n} aplicativos}}",
     "@interfaceSnapCount": {

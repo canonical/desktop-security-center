@@ -132,9 +132,6 @@ class AppLocalizationsFa extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'دانستن بیش‌تر';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'دادن بازخورد';
-
-  @override
   String get interfacePageLinkReportIssues => 'گزارش اشکال‌ها';
 
   @override

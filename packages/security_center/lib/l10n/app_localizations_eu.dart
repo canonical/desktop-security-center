@@ -134,9 +134,6 @@ class AppLocalizationsEu extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Informazio gehiago';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Eman iritzia';
-
-  @override
   String get interfacePageLinkReportIssues => 'Eman arazoen berri';
 
   @override

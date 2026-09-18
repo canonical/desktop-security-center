@@ -135,9 +135,6 @@ class AppLocalizationsCs extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Dozvědět se více';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Poskytnout zpětnou vazbu';
-
-  @override
   String get interfacePageLinkReportIssues => 'Nahlásit problémy';
 
   @override

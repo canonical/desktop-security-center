@@ -53,7 +53,6 @@
     "microphoneInterfacePageDescription": "Baimendu aplikazioei mikrofonoa atzitzea.",
     "interfacePageTitle": "Kudeatu baimenak",
     "interfacePageLinkLearnMore": "Informazio gehiago",
-    "interfacePageLinkGiveFeedback": "Eman iritzia",
     "interfacePageLinkReportIssues": "Eman arazoen berri",
     "interfaceSnapCount": "{n, plural, =0{aplikaziorik ez} =1{aplikazio 1} other {{n} aplikazio}}",
     "@interfaceSnapCount": {

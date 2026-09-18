@@ -136,9 +136,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Tudjon meg többet';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Visszajelzés küldése';
-
-  @override
   String get interfacePageLinkReportIssues => 'Hiba jelentése';
 
   @override

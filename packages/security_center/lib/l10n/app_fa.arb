@@ -24,7 +24,6 @@
     "snapPermissionsPageTitle": "اجازه‌های کاره",
     "homeInterfacePageTitle": "شاخهٔ خانه",
     "interfacePageTitle": "مدیریت اجازه‌ها",
-    "interfacePageLinkGiveFeedback": "دادن بازخورد",
     "snapRulesPageEmptyTileLabel": "هنوز بدون قاعده",
     "snapRulesRemoveAll": "برداشتن همهٔ قاعده‌ها",
     "snapRulesPageDescription": "مدیریت اجازه‌های {interface} برای {snap}.",

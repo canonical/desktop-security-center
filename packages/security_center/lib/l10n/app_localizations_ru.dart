@@ -136,9 +136,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Подробнее';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Отправить отзыв';
-
-  @override
   String get interfacePageLinkReportIssues => 'Сообщить о проблеме';
 
   @override

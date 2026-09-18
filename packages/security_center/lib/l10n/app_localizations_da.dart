@@ -133,9 +133,6 @@ class AppLocalizationsDa extends AppLocalizations {
   String get interfacePageLinkLearnMore => 'Læs mere';
 
   @override
-  String get interfacePageLinkGiveFeedback => 'Giv feedback';
-
-  @override
   String get interfacePageLinkReportIssues => 'Rapportér problemer';
 
   @override

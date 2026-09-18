@@ -23,7 +23,6 @@
     "homeInterfacePageDescription": "Керувати дозволами на доступ до файлів у теці «Домівка».",
     "interfacePageTitle": "Керувати дозволами",
     "interfacePageLinkLearnMore": "Докладніше",
-    "interfacePageLinkGiveFeedback": "Надіслати відгук",
     "interfacePageLinkReportIssues": "Повідомити про проблеми",
     "snapdRuleCategoryForeverDenied": "Завжди забороняти",
     "snapPermissionExecuteLabel": "Виконання",

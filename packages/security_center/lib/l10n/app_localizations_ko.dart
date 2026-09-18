@@ -127,9 +127,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get interfacePageLinkLearnMore => '더 알아보기';
 
   @override
-  String get interfacePageLinkGiveFeedback => '피드백 작성';
-
-  @override
   String get interfacePageLinkReportIssues => '이슈 보고';
 
   @override
