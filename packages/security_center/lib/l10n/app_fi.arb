@@ -263,5 +263,6 @@
         }
     },
     "ubuntuProComplianceUSGTitle": "Ubuntun tietoturvaohje (USG)",
-    "ubuntuProESMTitle": "Laajennettu tietoturvan ylläpito (ESM)"
+    "ubuntuProESMTitle": "Laajennettu tietoturvan ylläpito (ESM)",
+    "snapPermissionsErrorTitle": ""
 }
