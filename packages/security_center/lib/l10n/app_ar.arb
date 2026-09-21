@@ -263,5 +263,6 @@
     "ubuntuProFeatureEnableError": "",
     "diskEncryptionPageRemovePinButton": "",
     "ubuntuProDisablePrompt": "",
-    "diskEncryptionPageAddPinDialogSaveButton": ""
+    "diskEncryptionPageAddPinDialogSaveButton": "",
+    "snapPermissionAccessLabel": "وصول"
 }
