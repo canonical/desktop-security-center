@@ -7,7 +7,7 @@
     "snapPermissionsExperimentalLabel": "Experimentálne",
     "interfacePageLinkLearnMore": "Zistiť viac",
     "interfacePageTitle": "Spravovať oprávnenia",
-    "snapPermissionsOtherDescription": "Ďalšie oprávnenia môžete spravovať v časti Nastavenia › Aplikácie.",
+    "snapPermissionsOtherDescription": "",
     "snapPermissionsEnableWarning": "Táto experimentálna funkcia slúži na riadenie prístupu k systémovým zdrojom.",
     "snapdRuleCategorySessionAllowed": "Povolené do odhlásenia",
     "snapdRuleCategoryForeverAllowed": "Vždy povolené",
@@ -36,7 +36,7 @@
     },
     "snapdRuleCategoryForeverDenied": "Vždy odmietnuté",
     "snapdRuleCategorySessionDenied": "Odmietnuté do odhlásenia",
-    "snapPermissionsEnableTitle": "Vyžadovať systémové oprávnenia",
+    "snapPermissionsEnableTitle": "",
     "snapRulesPageDescription": "Spravujte oprávnenia k {interface} pre {snap}.",
     "@snapRulesPageDescription": {
         "placeholders": {
@@ -199,7 +199,7 @@
             }
         }
     },
-    "ubuntuProMagicError": "Nepodarilo sa aktivovať Ubuntu Pro, prosím, skúste to znova",
+    "ubuntuProMagicError": "",
     "ubuntuProEnableToken": "Aktivovať pomocou tokenu",
     "ubuntuProEnableTokenError": "Nepodarilo sa aktivovať Ubuntu Pro",
     "ubuntuProEnableTokenSubtitle": "Od vášho IT administrátora alebo z {proLink}",
@@ -221,11 +221,11 @@
     "ubuntuProTokenLabel": "Token",
     "ubuntuProDisablePro": "Deaktivovať Ubuntu Pro",
     "ubuntuProDisable": "Deaktivovať",
-    "ubuntuProDisablePrompt": "Deaktivovaním Ubuntu Pro sa toto zariadenie odpojí od vášho predplatného. Chcete pokračovať?",
+    "ubuntuProDisablePrompt": "",
     "ubuntuProEnable": "Aktivovať",
     "ubuntuProCancel": "Zrušiť",
-    "ubuntuProFeatureEnableError": "Funkciu sa nepodarilo aktivovať, prosím, skúste to znova.",
-    "ubuntuProFeatureDisableError": "Funkciu sa nepodarilo deaktivovať, prosím, skúste to znova.",
+    "ubuntuProFeatureEnableError": "",
+    "ubuntuProFeatureDisableError": "",
     "ubuntuProCompliance": "Dodržiavanie štandardov a hardening",
     "ubuntuProComplianceDisclaimer": "Odporúča sa iba na podporu požiadaviek FedRAMP, HIPAA a ďalších štandardov a hardeningu.",
     "ubuntuProComplianceUSGTitle": "Sprievodca zabezpečením Ubuntu (USG)",
