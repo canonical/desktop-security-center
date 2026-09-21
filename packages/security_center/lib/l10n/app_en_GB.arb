@@ -1,1 +1,268 @@
-{}
+{
+    "diskEncryptionPageReplaceDialogErrorBody": "Something went wrong replacing your recovery key, your old key will remain valid.",
+    "ubuntuProESMUniverseTitle": "Universe packages (esm-apps)",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Learn more",
+    "recoveryKeyPassphraseHeader": "Change passphrase",
+    "diskEncryptionPageAddPassphraseButton": "Add passphrase...",
+    "recoveryKeyPassphraseNew": "New passphrase",
+    "recoveryKeyExceptionFilePermissionTitle": "Failed to save your recovery key to file",
+    "diskEncryptionPageAdditionalSecurityHeader": "Additional security",
+    "recoveryKeyPinDialogHeader": "Change PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "You will need to enter your PIN every time your computer starts. This PIN is different from your user password.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Recovery key replacement failed",
+    "recoveryKeyExceptionFileSystemBody": "You do not have permission to write to that folder. Try a different location or use another method.",
+    "snapPermissionsExperimentalLabel": "Experimental",
+    "ubuntuProEnablePro": "Enable Ubuntu Pro",
+    "ubuntuProFeatureDisableError": "Could not disable the feature, please try again.",
+    "recoveryKeyPassphrasePinSuccessBody": "You PIN was successfully updated.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "diskEncryptionPageCheckKey": "Check recovery key...",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Encryption recovery key",
+    "ubuntuProLivepatchShowTitle": "Show Livepatch status in the top bar",
+    "ubuntuProNotSupportedSnapdDetails": "Update snapd to manage Ubuntu Pro",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro is enabled",
+    "ubuntuProEnableMagicSubtitle": "You will be able to create an account for free",
+    "recoveryKeyPassphraseCurrentError": "Incorrect passphrase, try again",
+    "ubuntuProDisable": "Disable",
+    "diskEncryptionPageDialogHeaderCheckKey": "Check recovery key",
+    "recoveryKeyPinCurrent": "Current PIN",
+    "ubuntuProCancel": "Cancel",
+    "diskEncryptionPageAddPinButton": "Add PIN...",
+    "diskEncryptionPageStoreYourKey": "The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.",
+    "cameraRulesPageEmptyTileLabel": "No apps requested access yet",
+    "ubuntuProEnableToken": "Enable with a token",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Remember to keep it somewhere safe.",
+    "diskEncryptionPageAddingPin": "Adding PIN, this may take a few seconds...",
+    "diskEncryptionPageReplaceDialogShowQR": "Show QR code",
+    "diskEncryptionPageReplaceDialogAcknowledge": "I saved my recovery key somewhere safe",
+    "recoveryKeyPinEntropyOptimal": "PIN is long enough",
+    "ubuntuProESMTitle": "Expanded Security Maintenance (ESM)",
+    "diskEncryptionPageRecoveryKey": "Recovery key",
+    "ubuntuProLivepatchEnableTitle": "Enable Livepatch",
+    "ubuntuProEnable": "Enable",
+    "diskEncryptionPageInvalidKey": "Invalid key",
+    "diskEncryptionPageLearnMore": "Learn more about hardware-backed encryption",
+    "recoveryKeyTPMExplanationBody": "The encryption keys are stored in your computer's Trusted Platform Module (TPM).",
+    "ubuntuProESMMainTitle": "Main packages (esm-infra)",
+    "recoveryKeyPassphraseButton": "Change passphrase...",
+    "ubuntuProComplianceFIPSUpdates": "FIPS with updates",
+    "recoveryKeyFilePickerFilter": "Text files",
+    "diskEncryptionPageCopySemanticLabel": "Copy",
+    "ubuntuProTokenPrompt": "Get an Ubuntu Pro token from your administrator or from {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "recoveryKeyPassphraseChange": "Change",
+    "recoveryKeyTPMEnabled": "Hardware-backed encryption is enabled",
+    "diskEncryptionPageTitle": "Disk encryption",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Failed to retrieve the encryption status of this computer.",
+    "microphoneInterfacePageTitle": "Microphone",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Fair passphrase, make it longer or more complex for better security",
+    "ubuntuProNotSupported": "Ubuntu Pro is not available for this Ubuntu version",
+    "recoveryKeyPassphraseDialogHeader": "Change passphrase",
+    "diskEncryptionPageClipboardNotification": "Copied to clipboard",
+    "snapRulesPageEmptyTileLabel": "No rules yet",
+    "diskEncryptionPageKeyDoesntWorkBody": "Check the key or replace it with a new one.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "If you forget your passphrase, you can regain access to the disk by using the recovery key.",
+    "recoveryKeyEncrpytionPassphraseHeader": "Encryption passphrase",
+    "ubuntuProComplianceFIPSDescription": "A US and Canadian government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.",
+    "microphoneInterfacePageDescription": "Allow apps to access your microphone.",
+    "diskEncryptionPageReplaceDialogHeader": "Replace recovery key",
+    "recoveryKeyPinCurrentError": "Incorrect PIN, try again",
+    "recoveryKeyPassphraseShow": "Show",
+    "ubuntuProDisabled": "Enterprise-grade security and compliance for your computer. Always free for personal use. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Learn about Ubuntu Pro",
+    "diskEncryptionPageAddPinDialogHeading": "Add PIN",
+    "ubuntuProLivepatchEnableDescription": "Apply kernel security updates while the system runs",
+    "ubuntuProESMDescription": "ESM provides 10 years of security patches for the entire Ubuntu Archive. Get continuous vulnerability management for critical, high and selected medium CVEs.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "Your computer's TPM configuration is not in a supported state.",
+    "diskEncryptionPageAddingPassphrase": "Adding passphrase, this may take a few seconds...",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "snapPermissionAccessLabel": "Access",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Add passphrase",
+    "cameraInterfacePageTitle": "Camera",
+    "diskEncryptionPageKeyWorksBody": "Remember to keep it somewhere safe.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu Security Guide (USG)",
+    "recoveryKeyPassphraseConfirmError": "Passphrases do not match, try again",
+    "diskEncryptionPageCheck": "Check",
+    "diskEncryptionPageReplaceDialogSave": "Save to file",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "You passphrase was successfully updated.",
+    "ubuntuProMagicPrompt": "Log in with your Ubuntu One account, or create one for free.",
+    "ubuntuProComplianceFIPSPrompt": "Choose your preferred FIPS option",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "If you forget your PIN, you can regain access to the disk by using the recovery key.",
+    "recoveryKeyPassphraseBody": "You need to enter your passphrase every time your computer starts.",
+    "recoveryKeyPinBody": "You need to enter your PIN every time your computer starts.",
+    "appTitle": "Security Centre",
+    "ubuntuProEnableTokenError": "Unable to enable Ubuntu Pro",
+    "snapPermissionsEnableWarning": "This is an experimental feature for controlling access to your system’s resources.",
+    "ubuntuProComplianceFIPSEnable": "Enable FIPS",
+    "recoveryKeyFilePickerTitle": "Save recovery key file",
+    "snapdRuleCategorySessionAllowed": "Allow until logout",
+    "ubuntuProESMUniverseDescription": "Additional security updates for Ubuntu Universe packages until {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageRemovingPassphrase": "Removing passphrase, this may take a few seconds...",
+    "recoveryKeyPassphraseEntropyOptimal": "Strong passphrase",
+    "recoveryKeyPassphraseHide": "Hide",
+    "snapPermissionsEnablingLabel": "Enabling, this may take a few seconds...",
+    "ubuntuProEnableMagic": "Enable with Ubuntu One account",
+    "ubuntuProComplianceUSGDescription": "Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customisations.",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Check the Security Centre and snapd are up to date.",
+    "snapPermissionsDisablingLabel": "Disabling, this may take a few seconds...",
+    "snapRulesCount": "{n, plural, =0{no rules} =1{1 rule} other{{n} rules}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Encryption settings not available",
+    "recoveryKeyPassphraseCurrent": "Current passphrase",
+    "diskEncryptionPageReplaceDialogQRBody": "Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Recovery key replaced",
+    "diskEncryptionPageError": "Error",
+    "diskEncryptionPageReplaceDialogReplace": "Replace",
+    "recoveryKeyPinEntropyBelowOptimal": "Fair PIN, make it longer or less predictable for better security",
+    "recoveryKeyPassphraseEnabled": "Encryption passphrase is enabled",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro requires an LTS release",
+    "recoveryKeyExceptionFilePermissionBody": "You do not have permission to write to that file location.",
+    "ubuntuProComplianceFIPSDisclaimer": "Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.",
+    "recoveryKeyExceptionDisallowedPathTitle": "Recovery key file cannot be saved in a temporary location",
+    "recoveryKeyPinConfirmError": "PINs do not match, try again",
+    "diskEncryptionPageKeyDoesntWork": "Recovery key does not work",
+    "ubuntuProMagicError": "Unable to enable Ubuntu Pro, please try again",
+    "diskEncryptionPageReplaceDialogDiscard": "Discard",
+    "recoveryKeyTPMExplanationLearnMore": "Learn more about hardware-backed encryption",
+    "recoveryKeyPinConfirm": "Confirm PIN",
+    "ubuntuProEnableTokenSubtitle": "From your IT admin or from {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "recoveryKeyExceptionUnknownTitle": "Unknown error",
+    "diskEncryptionPageEnterKey": "Enter your recovery key",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Security Centre cannot connect to the snapd interface",
+    "diskEncryptionPageValidKey": "Valid key",
+    "snapPermissionReadLabel": "Read",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "To fix this, run this command in the terminal:",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Passphrase updated",
+    "snapRulesRemoveAll": "Remove all rules",
+    "diskEncryptionPageStoreYourKeyWithLink": "The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "snapPermissionsErrorTitle": "Something went wrong",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.",
+    "recoveryKeySomethingWentWrongHeader": "Something went wrong",
+    "diskEncryptionPageReplaceDialogBody": "Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key any more.",
+    "ubuntuProComplianceDocumentation": "Security compliance documentation",
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "recoveryKeyPinEntropyBelowMin": "Weak PIN, make it longer or less predictable",
+    "diskEncryptionPageKeyWorks": "Recovery key works",
+    "interfacePageLinkReportIssues": "Report issues",
+    "recoveryKeyPinEnabled": "Encryption PIN is enabled",
+    "snapRulesResetAllPermissions": "Reset all permissions",
+    "diskEncryptionPageReplaceButton": "Replace recovery key...",
+    "homeInterfacePageDescription": "Manage permissions to access files in your Home folder.",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.",
+    "ubuntuProDisablePro": "Disable Ubuntu Pro",
+    "recoveryKeyExceptionFileSystemTitle": "Recovery key file not saved",
+    "ubuntuProESMMainDescription": "Security updates for Ubuntu Main packages until {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "recoveryKeyPinButton": "Change PIN...",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS without updates",
+    "snapdRuleCategoryForeverDenied": "Deny always",
+    "snapPermissionsPageTitle": "App permissions",
+    "recoveryKeyPinNew": "New PIN",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN updated",
+    "recoveryKeyPassphraseConfirm": "Confirm passphrase",
+    "ubuntuProCompliance": "Compliance and hardening",
+    "snapPermissionExecuteLabel": "Execute",
+    "diskEncryptionPageRemovePassphraseButton": "Remove passphrase...",
+    "snapPermissionWriteLabel": "Write",
+    "snapdRuleCategorySessionDenied": "Deny until logout",
+    "snapPermissionsOtherDescription": "You can manage other permissions in Settings › Applications.",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Installs FIPS 140-2 validated packages and allows for regular security updates.",
+    "interfacePageTitle": "Manage permissions",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "Your snapd version is not supported",
+    "recoveryKeyExceptionDisallowedPathBody": "Try a different location, such as a removable drive, or use another method.",
+    "homeInterfacePageTitle": "Home folder",
+    "snapRulesPageDescription": "Manage {interface} permissions for {snap}.",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageAdditionalSecurityBody": "You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.",
+    "cameraInterfacePageDescription": "Allow apps to access your cameras.",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro is not supported by this snapd version",
+    "diskEncryptionPageRemovingPin": "Removing PIN, this may take a few seconds...",
+    "interfaceSnapCount": "{n, plural, =0{no apps} =1{1 app} other {{n} apps}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "recoveryKeyPassphraseNewError": "Must be at least 4 characters long",
+    "ubuntuProMagicDescription": "You can also log in at {attachLink} and enter the code {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProMagicContinueInBrowser": "Continue in browser",
+    "ubuntuProComplianceDisclaimer": "Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.",
+    "snapdRuleCategoryForeverAllowed": "Allow always",
+    "recoveryKeyPinHeader": "Encryption PIN",
+    "ubuntuProFeatureEnableError": "Could not enable the feature, please try again.",
+    "diskEncryptionPageRemovePinButton": "Remove PIN...",
+    "snapPermissionsEnableTitle": "Require apps to ask for system permissions",
+    "recoveryKeyPassphraseEntropyBelowMin": "Weak passphrase, make it longer or more complex",
+    "ubuntuProDisablePrompt": "Disabling Ubuntu Pro will detach your subscription from this machine. Do you want to proceed?",
+    "interfacePageLinkLearnMore": "Learn more",
+    "diskEncryptionPageAddPinDialogSaveButton": "Add"
+}
