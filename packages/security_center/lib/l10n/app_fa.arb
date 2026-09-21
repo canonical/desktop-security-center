@@ -101,5 +101,168 @@
     "recoveryKeyPassphraseEnabled": "عبارت عبور رمزنگاری به کار افتاده",
     "recoveryKeyPassphraseCurrentError": "عبارت عبور نادرست. تلاش دوباره",
     "recoveryKeyPinEnabled": "پین رمزنگاری به کار افتاده",
-    "recoveryKeyPinCurrentError": "پین نادرست. تلاش دوباره"
+    "recoveryKeyPinCurrentError": "پین نادرست. تلاش دوباره",
+    "diskEncryptionPageReplaceDialogErrorBody": "",
+    "ubuntuProESMUniverseTitle": "",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "",
+    "diskEncryptionPageAddPassphraseButton": "",
+    "recoveryKeyExceptionFilePermissionTitle": "",
+    "diskEncryptionPageAdditionalSecurityHeader": "",
+    "diskEncryptionPageAddPinDialogBodyMain": "",
+    "recoveryKeyExceptionFileSystemBody": "",
+    "ubuntuProEnablePro": "",
+    "ubuntuProFeatureDisableError": "",
+    "recoveryKeyPassphrasePinSuccessBody": "",
+    "ubuntuProComplianceFIPSTitle": "",
+    "diskEncryptionPageReplaceDialogQRHeader": "",
+    "ubuntuProLivepatchShowTitle": "",
+    "ubuntuProNotSupportedSnapdDetails": "",
+    "ubuntuProPageTitle": "",
+    "ubuntuProEnabled": "",
+    "ubuntuProEnableMagicSubtitle": "",
+    "ubuntuProDisable": "",
+    "ubuntuProCancel": "",
+    "diskEncryptionPageAddPinButton": "",
+    "diskEncryptionPageStoreYourKey": "",
+    "cameraRulesPageEmptyTileLabel": "",
+    "ubuntuProEnableToken": "",
+    "diskEncryptionPageReplaceDialogSuccessBody": "",
+    "diskEncryptionPageAddingPin": "",
+    "diskEncryptionPageReplaceDialogAcknowledge": "",
+    "recoveryKeyPinEntropyOptimal": "",
+    "ubuntuProESMTitle": "",
+    "ubuntuProLivepatchEnableTitle": "",
+    "ubuntuProEnable": "",
+    "diskEncryptionPageLearnMore": "",
+    "recoveryKeyTPMExplanationBody": "",
+    "ubuntuProESMMainTitle": "",
+    "ubuntuProComplianceFIPSUpdates": "",
+    "ubuntuProTokenPrompt": "",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "",
+    "microphoneInterfacePageTitle": "",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "",
+    "ubuntuProNotSupported": "",
+    "diskEncryptionPageKeyDoesntWorkBody": "",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "",
+    "ubuntuProComplianceFIPSDescription": "",
+    "microphoneInterfacePageDescription": "",
+    "ubuntuProDisabled": "",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "",
+    "diskEncryptionPageAddPinDialogHeading": "",
+    "ubuntuProLivepatchEnableDescription": "",
+    "ubuntuProESMDescription": "",
+    "diskEncryptionPageErrorUnsupportedStateBody": "",
+    "diskEncryptionPageAddingPassphrase": "",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "",
+    "diskEncryptionPageAddPassphraseDialogHeading": "",
+    "diskEncryptionPageKeyWorksBody": "",
+    "ubuntuProComplianceUSGTitle": "",
+    "recoveryKeyPassphraseConfirmError": "",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "",
+    "ubuntuProMagicPrompt": "",
+    "ubuntuProComplianceFIPSPrompt": "",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "",
+    "recoveryKeyPassphraseBody": "",
+    "recoveryKeyPinBody": "",
+    "ubuntuProEnableTokenError": "",
+    "ubuntuProComplianceFIPSEnable": "",
+    "ubuntuProESMUniverseDescription": "",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageRemovingPassphrase": "",
+    "ubuntuProEnableMagic": "",
+    "ubuntuProComplianceUSGDescription": "",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "",
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "",
+    "diskEncryptionPageReplaceDialogQRBody": "",
+    "recoveryKeyPinEntropyBelowOptimal": "",
+    "ubuntuProNotSupportedDetails": "",
+    "recoveryKeyExceptionFilePermissionBody": "",
+    "ubuntuProComplianceFIPSDisclaimer": "",
+    "recoveryKeyPinConfirmError": "",
+    "diskEncryptionPageKeyDoesntWork": "",
+    "ubuntuProMagicError": "",
+    "recoveryKeyTPMExplanationLearnMore": "",
+    "ubuntuProEnableTokenSubtitle": "",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "",
+    "diskEncryptionPageStoreYourKeyWithLink": "",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "snapPermissionsErrorTitle": "",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "",
+    "diskEncryptionPageReplaceDialogBody": "",
+    "ubuntuProComplianceDocumentation": "",
+    "ubuntuProLivepatchTitle": "",
+    "recoveryKeyPinEntropyBelowMin": "",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "",
+    "ubuntuProDisablePro": "",
+    "ubuntuProESMMainDescription": "",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProComplianceFIPSNoUpdates": "",
+    "ubuntuProCompliance": "",
+    "diskEncryptionPageRemovePassphraseButton": "",
+    "ubuntuProComplianceFIPSUpdatesDescription": "",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "",
+    "recoveryKeyExceptionDisallowedPathBody": "",
+    "diskEncryptionPageAdditionalSecurityBody": "",
+    "ubuntuProNotSupportedSnapd": "",
+    "diskEncryptionPageRemovingPin": "",
+    "recoveryKeyPassphraseNewError": "",
+    "ubuntuProMagicDescription": "",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "",
+    "ubuntuProMagicContinueInBrowser": "",
+    "ubuntuProComplianceDisclaimer": "",
+    "ubuntuProFeatureEnableError": "",
+    "diskEncryptionPageRemovePinButton": "",
+    "recoveryKeyPassphraseEntropyBelowMin": "",
+    "ubuntuProDisablePrompt": "",
+    "diskEncryptionPageAddPinDialogSaveButton": ""
 }
