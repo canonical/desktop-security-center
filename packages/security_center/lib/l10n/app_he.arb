@@ -258,5 +258,11 @@
             }
         }
     },
-    "snapPermissionsErrorTitle": "משהו השתבש"
+    "snapPermissionsErrorTitle": "משהו השתבש",
+    "ubuntuProESMUniverseTitle": "",
+    "ubuntuProESMTitle": "",
+    "ubuntuProComplianceFIPSDescription": "",
+    "ubuntuProESMDescription": "",
+    "ubuntuProComplianceUSGTitle": "",
+    "ubuntuProComplianceUSGDescription": ""
 }
