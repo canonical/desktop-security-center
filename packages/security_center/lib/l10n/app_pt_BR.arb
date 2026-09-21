@@ -165,5 +165,42 @@
     "recoveryKeyPinEntropyBelowMin": "PIN fraco, torna-o mais longo ou menos previsível",
     "recoveryKeyPinEntropyBelowOptimal": "PIN justo, torne-o mais longo ou menos previsível para maior segurança",
     "recoveryKeyPinEntropyOptimal": "O PIN é longo o suficiente",
-    "recoveryKeySomethingWentWrongHeader": "Algo deu errado"
+    "recoveryKeySomethingWentWrongHeader": "Algo deu errado",
+    "ubuntuProESMUniverseTitle": "",
+    "ubuntuProComplianceFIPSTitle": "",
+    "ubuntuProLivepatchShowTitle": "",
+    "ubuntuProPageTitle": "",
+    "ubuntuProESMTitle": "",
+    "ubuntuProLivepatchEnableTitle": "",
+    "ubuntuProESMMainTitle": "",
+    "ubuntuProComplianceFIPSUpdates": "",
+    "ubuntuProComplianceFIPSDescription": "",
+    "ubuntuProLivepatchEnableDescription": "",
+    "ubuntuProESMDescription": "",
+    "ubuntuProComplianceFIPSPrompt": "",
+    "ubuntuProComplianceFIPSEnable": "",
+    "ubuntuProESMUniverseDescription": "",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProComplianceUSGDescription": "",
+    "ubuntuProComplianceFIPSDisclaimer": "",
+    "ubuntuProComplianceDocumentation": "",
+    "ubuntuProLivepatchTitle": "",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "",
+    "ubuntuProESMMainDescription": "",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProComplianceFIPSNoUpdates": "",
+    "ubuntuProComplianceFIPSUpdatesDescription": "",
+    "ubuntuProTokenLabel": ""
 }
