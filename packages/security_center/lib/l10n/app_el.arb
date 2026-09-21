@@ -263,5 +263,6 @@
     "ubuntuProLivepatchTitle": "Livepatch για τον πυρήνα",
     "ubuntuProLivepatchEnableTitle": "Ενεργοποίηση του Livepatch",
     "ubuntuProLivepatchEnableDescription": "Εφαρμογή των ενημερώσεων ασφαλείας του πυρήνα ενώ το σύστημα βρίσκεται σε λειτουργία",
-    "ubuntuProLivepatchShowTitle": "Εμφάνιση της κατάστασης του Livepatch στην πάνω μπάρα"
+    "ubuntuProLivepatchShowTitle": "Εμφάνιση της κατάστασης του Livepatch στην πάνω μπάρα",
+    "snapPermissionsErrorTitle": ""
 }
