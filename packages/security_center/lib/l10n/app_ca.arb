@@ -36,7 +36,7 @@
     "homeInterfacePageTitle": "Carpeta d'usuari",
     "homeInterfacePageDescription": "Administra els permisos per accedir als fitxers a la carpeta d'usuari.",
     "interfacePageTitle": "Administra els permisos",
-    "interfacePageLinkLearnMore": "Apreneu més",
+    "interfacePageLinkLearnMore": "Més informació",
     "interfacePageLinkReportIssues": "Informeu els problemes",
     "interfaceSnapCount": "{n, plural, =0{sense aplicacions} =1{1 aplicació} other {{n} aplicacions}}",
     "@interfaceSnapCount": {
