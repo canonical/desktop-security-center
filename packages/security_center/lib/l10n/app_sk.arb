@@ -7,7 +7,6 @@
     "snapPermissionsExperimentalLabel": "Experimentálne",
     "interfacePageLinkLearnMore": "Zistiť viac",
     "interfacePageTitle": "Spravovať oprávnenia",
-    "snapPermissionsOtherDescription": "",
     "snapPermissionsEnableWarning": "Táto experimentálna funkcia slúži na riadenie prístupu k systémovým zdrojom.",
     "snapdRuleCategorySessionAllowed": "Povolené do odhlásenia",
     "snapdRuleCategoryForeverAllowed": "Vždy povolené",
@@ -36,7 +35,6 @@
     },
     "snapdRuleCategoryForeverDenied": "Vždy odmietnuté",
     "snapdRuleCategorySessionDenied": "Odmietnuté do odhlásenia",
-    "snapPermissionsEnableTitle": "",
     "snapRulesPageDescription": "Spravujte oprávnenia k {interface} pre {snap}.",
     "@snapRulesPageDescription": {
         "placeholders": {
@@ -199,7 +197,6 @@
             }
         }
     },
-    "ubuntuProMagicError": "",
     "ubuntuProEnableToken": "Aktivovať pomocou tokenu",
     "ubuntuProEnableTokenError": "Nepodarilo sa aktivovať Ubuntu Pro",
     "ubuntuProEnableTokenSubtitle": "Od vášho IT administrátora alebo z {proLink}",
@@ -221,11 +218,8 @@
     "ubuntuProTokenLabel": "Token",
     "ubuntuProDisablePro": "Deaktivovať Ubuntu Pro",
     "ubuntuProDisable": "Deaktivovať",
-    "ubuntuProDisablePrompt": "",
     "ubuntuProEnable": "Aktivovať",
     "ubuntuProCancel": "Zrušiť",
-    "ubuntuProFeatureEnableError": "",
-    "ubuntuProFeatureDisableError": "",
     "ubuntuProCompliance": "Dodržiavanie štandardov a hardening",
     "ubuntuProComplianceDisclaimer": "Odporúča sa iba na podporu požiadaviek FedRAMP, HIPAA a ďalších štandardov a hardeningu.",
     "ubuntuProComplianceUSGTitle": "Sprievodca zabezpečením Ubuntu (USG)",
