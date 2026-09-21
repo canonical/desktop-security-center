@@ -165,5 +165,104 @@
     "diskEncryptionPageAddingPin": "பின்னைச் சேர்க்கிறது, இதற்குச் சில வினாடிகள் ஆகலாம்...",
     "diskEncryptionPageAddingPassphrase": "கடவுச்சொற்றொடரைச் சேர்க்கிறது, இதற்கு சில வினாடிகள் ஆகலாம்...",
     "diskEncryptionPageRemovingPin": "பின்னை அகற்றுகிறது, இதற்கு சில வினாடிகள் ஆகலாம்...",
-    "diskEncryptionPageRemovingPassphrase": "கடவுச்சொற்றொடரை அகற்றுகிறது, இதற்கு சில வினாடிகள் ஆகலாம்..."
+    "diskEncryptionPageRemovingPassphrase": "கடவுச்சொற்றொடரை அகற்றுகிறது, இதற்கு சில வினாடிகள் ஆகலாம்...",
+    "ubuntuProESMUniverseTitle": "",
+    "ubuntuProEnablePro": "",
+    "ubuntuProFeatureDisableError": "",
+    "ubuntuProComplianceFIPSTitle": "",
+    "ubuntuProLivepatchShowTitle": "",
+    "ubuntuProNotSupportedSnapdDetails": "",
+    "ubuntuProPageTitle": "",
+    "ubuntuProEnabled": "",
+    "ubuntuProEnableMagicSubtitle": "",
+    "ubuntuProDisable": "",
+    "ubuntuProCancel": "",
+    "ubuntuProEnableToken": "",
+    "ubuntuProESMTitle": "",
+    "ubuntuProLivepatchEnableTitle": "",
+    "ubuntuProEnable": "",
+    "ubuntuProESMMainTitle": "",
+    "ubuntuProComplianceFIPSUpdates": "",
+    "ubuntuProTokenPrompt": "",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "microphoneInterfacePageTitle": "",
+    "ubuntuProNotSupported": "",
+    "ubuntuProComplianceFIPSDescription": "",
+    "microphoneInterfacePageDescription": "",
+    "ubuntuProDisabled": "",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "",
+    "ubuntuProLivepatchEnableDescription": "",
+    "ubuntuProESMDescription": "",
+    "ubuntuProComplianceUSGTitle": "",
+    "ubuntuProMagicPrompt": "",
+    "ubuntuProComplianceFIPSPrompt": "",
+    "ubuntuProEnableTokenError": "",
+    "ubuntuProComplianceFIPSEnable": "",
+    "ubuntuProESMUniverseDescription": "",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProEnableMagic": "",
+    "ubuntuProComplianceUSGDescription": "",
+    "ubuntuProNotSupportedDetails": "",
+    "ubuntuProComplianceFIPSDisclaimer": "",
+    "ubuntuProMagicError": "",
+    "ubuntuProEnableTokenSubtitle": "",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "snapPermissionsErrorTitle": "",
+    "ubuntuProComplianceDocumentation": "",
+    "ubuntuProLivepatchTitle": "",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "",
+    "ubuntuProDisablePro": "",
+    "ubuntuProESMMainDescription": "",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProComplianceFIPSNoUpdates": "",
+    "ubuntuProCompliance": "",
+    "ubuntuProComplianceFIPSUpdatesDescription": "",
+    "ubuntuProNotSupportedSnapd": "",
+    "ubuntuProMagicDescription": "",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "",
+    "ubuntuProMagicContinueInBrowser": "",
+    "ubuntuProComplianceDisclaimer": "",
+    "ubuntuProFeatureEnableError": "",
+    "ubuntuProDisablePrompt": ""
 }
