@@ -110,7 +110,7 @@
     "recoveryKeyPinButton": "改变PIN...",
     "recoveryKeyPassphraseShow": "显示",
     "recoveryKeyPassphraseHide": "隐藏",
-    "recoveryKeyPinBody": "您需要在开机的时候输入PIN以解锁此磁盘。您可以修改PIN但是不能禁用它。",
+    "recoveryKeyPinBody": "您需要在每次计算机开机的时候输入PIN。",
     "recoveryKeyPinDialogHeader": "更改PIN",
     "recoveryKeyPinConfirmError": "PIN不匹配，请重试",
     "recoveryKeyPinConfirm": "确认PIN",
@@ -262,5 +262,7 @@
     "diskEncryptionPageRemovePassphraseButton": "移除密码短语…",
     "cameraInterfacePageDescription": "允许应用访问您的相机。",
     "diskEncryptionPageRemovePinButton": "移除 PIN…",
-    "diskEncryptionPageAddPinDialogSaveButton": "添加"
+    "diskEncryptionPageAddPinDialogSaveButton": "添加",
+    "diskEncryptionPageRemovingPin": "正在移除PIN码，此过程可能需要几秒钟...",
+    "ubuntuProMagicContinueInBrowser": "在浏览器继续"
 }
