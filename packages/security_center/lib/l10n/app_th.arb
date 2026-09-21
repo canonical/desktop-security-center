@@ -215,5 +215,54 @@
     "diskEncryptionPageRemovePinButton": "",
     "recoveryKeyPassphraseEntropyBelowMin": "",
     "ubuntuProDisablePrompt": "",
-    "diskEncryptionPageAddPinDialogSaveButton": ""
+    "diskEncryptionPageAddPinDialogSaveButton": "",
+    "snapPermissionsExperimentalLabel": "ทดลอง",
+    "cameraRulesPageEmptyTileLabel": "ยังไม่มีแอปใดขอสิทธิ์เข้าถึง",
+    "microphoneInterfacePageTitle": "ไมโครโฟน",
+    "snapRulesPageEmptyTileLabel": "ยังไม่มีกฎ",
+    "microphoneInterfacePageDescription": "อนุญาตให้แอปเข้าถึงไมโครโฟนของคุณ",
+    "snapPermissionAccessLabel": "เข้าถึง",
+    "cameraInterfacePageTitle": "กล้อง",
+    "appTitle": "ศูนย์ความปลอดภัย",
+    "snapPermissionsEnableWarning": "นี่คือฟีเจอร์ทดลองสำหรับควบคุมการเข้าถึงทรัพยากรต่างๆ ของระบบคุณ",
+    "snapdRuleCategorySessionAllowed": "อนุญาตจนกว่าจะออกจากระบบ",
+    "snapPermissionsEnablingLabel": "กำลังเปิดใช้งาน อาจใช้เวลาสักครู่...",
+    "snapPermissionsDisablingLabel": "กำลังปิดใช้งาน อาจใช้เวลาสักครู่...",
+    "snapRulesCount": "{n, plural, =0{ไม่มีกฎ} =1{กฎ 1 ข้อ} other{กฎ {n} ข้อ}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "snapPermissionReadLabel": "อ่าน",
+    "snapRulesRemoveAll": "ลบกฎทั้งหมด",
+    "snapPermissionsErrorTitle": "มีบางอย่างผิดพลาด",
+    "interfacePageLinkReportIssues": "รายงานปัญหา",
+    "snapRulesResetAllPermissions": "ตั้งค่าการกำหนดสิทธิ์ทั้งหมดใหม่",
+    "homeInterfacePageDescription": "จัดการสิทธิ์การเข้าถึงไฟล์ในโฟลเดอร์บ้านของคุณ",
+    "snapdRuleCategoryForeverDenied": "ปฏิเสธเสมอ",
+    "snapPermissionsPageTitle": "การกำหนดสิทธิ์ของแอป",
+    "snapPermissionExecuteLabel": "ปฏิบัติการ",
+    "snapPermissionWriteLabel": "เขียน",
+    "snapdRuleCategorySessionDenied": "ปฏิเสธจนกว่าจะออกจากระบบ",
+    "snapPermissionsOtherDescription": "คุณสามารถจัดการการกำหนดสิทธิ์อื่นๆ ได้ใน การตั้งค่า › แอปพลิเคชัน",
+    "interfacePageTitle": "จัดการการกำหนดสิทธิ์",
+    "homeInterfacePageTitle": "โฟลเดอร์บ้าน",
+    "snapRulesPageDescription": "จัดการการกำหนดสิทธิ์ {interface} สำหรับ {snap}",
+    "@snapRulesPageDescription": {
+        "placeholders": {
+            "interface": {
+                "type": "String"
+            },
+            "snap": {
+                "type": "String"
+            }
+        }
+    },
+    "cameraInterfacePageDescription": "อนุญาตให้แอปเข้าถึงกล้องของคุณ",
+    "snapdRuleCategoryForeverAllowed": "อนุญาตเสมอ",
+    "snapPermissionsEnableTitle": "กำหนดให้แอปต้องขออนุญาตเข้าถึงระบบ",
+    "interfacePageLinkLearnMore": "เรียนรู้เพิ่มเติม"
 }
