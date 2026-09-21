@@ -37,7 +37,7 @@
             }
         }
     },
-    "snapPermissionsEnableTitle": "Wymagaj, aby programy prosiły o uprawnienia systemowe",
+    "snapPermissionsEnableTitle": "Wymagaj, aby programy w piaskownicy prosiły o uprawnienia",
     "appTitle": "Centrum zabezpieczeń",
     "snapdRuleCategorySessionAllowed": "Zezwalaj do momentu wylogowania",
     "snapPermissionExecuteLabel": "Wykonywanie",
@@ -264,5 +264,11 @@
     "ubuntuProLivepatchEnableTitle": "Włącz Livepatch",
     "ubuntuProLivepatchEnableDescription": "Stosuj aktualizacje zabezpieczeń jądra podczas działania systemu",
     "ubuntuProLivepatchShowTitle": "Pokazuj status Livepatch na górnym pasku",
-    "snapPermissionsErrorTitle": "Wystąpił problem"
+    "snapPermissionsErrorTitle": "Wystąpił problem",
+    "permissionRulePopupMenuSemanticLabel": "Aktualizuj uprawnienia",
+    "snapdRuleCategoryTemporarilyAllowed": "Zezwól tymczasowo",
+    "snapdRuleCategoryTemporarilyDenied": "Odmów tymczasowo",
+    "snapdRuleCategoryAskAlways": "Zawsze pytaj",
+    "ubuntuProLoadingLabel": "Może to potrwać kilka sekund...",
+    "ubuntuProDisableError": "Nie udało się wyłączyć Ubuntu Pro, spróbuj ponownie"
 }
