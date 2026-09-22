@@ -15,7 +15,7 @@
     "snapPermissionWriteLabel": "Idatzi",
     "snapPermissionExecuteLabel": "Exekutatu",
     "snapPermissionAccessLabel": "Atzitzea",
-    "snapPermissionsEnableTitle": "Behartu aplikazioak sistemako baimenak eskatzera",
+    "snapPermissionsEnableTitle": "Behartu isolatutako aplikazioak baimenak eskatzera",
     "snapPermissionsEnableWarning": "Hau eginbide esperimentala da, sistemako baliabideetara sarbidea kontrolatzeko.",
     "snapPermissionsEnablingLabel": "Gaitzen, honek segundo batzuk beharko ditu...",
     "snapPermissionsDisablingLabel": "Ezgaitzen, honek segundo batzuk beharko ditu...",
@@ -221,7 +221,7 @@
     "ubuntuProTokenLabel": "Tokena",
     "ubuntuProDisablePro": "Ezgaitu Ubuntu Pro",
     "ubuntuProDisable": "Ezgaitu",
-    "ubuntuProDisablePrompt": "Ubuntu Pro ezgaitzen baduzu, makina hau harpidetzatik askatuko du. Jarraitu nahi duzu?",
+    "ubuntuProDisablePrompt": "Ubuntu Pro ezgaitzen baduzu, ordenagailu hau harpidetzatik askatuko du. Jarraitu nahi duzu?",
     "ubuntuProEnable": "Gaitu",
     "ubuntuProCancel": "Utzi",
     "ubuntuProFeatureEnableError": "Ezin izan da eginbidea gaitu, saiatu berriz.",
@@ -264,5 +264,11 @@
     "ubuntuProComplianceFIPSDisclaimer": "FIPS gaitzea ezin da desegin, eta Livepatch betiko ezgaituko da.",
     "ubuntuProComplianceFIPSUpdatesDescription": "FIPS 140-2k balioztatutako paketeak instalatzen ditu, eta aldian aldiko segurtasun-eguneratzeak ahalbidetzen ditu.",
     "ubuntuProComplianceFIPSNoUpdatesDescription": "FIPS 140-2k balioztatutako paketeak instalatzen ditu. Hauek ez dira eguneratuko hurrengo berziurtapenera arte.",
-    "snapPermissionsErrorTitle": "Arazoren bat egon da"
+    "snapPermissionsErrorTitle": "Arazoren bat egon da",
+    "permissionRulePopupMenuSemanticLabel": "Eguneratu baimenak",
+    "snapdRuleCategoryTemporarilyAllowed": "Baimendu aldi baterako",
+    "snapdRuleCategoryTemporarilyDenied": "Ukatu aldi baterako",
+    "snapdRuleCategoryAskAlways": "Galdetu beti",
+    "ubuntuProLoadingLabel": "Honek segundo batzuk beharko ditu...",
+    "ubuntuProDisableError": "Ezin izan da Ubuntu Pro ezgaitu, saiatu berriz"
 }
