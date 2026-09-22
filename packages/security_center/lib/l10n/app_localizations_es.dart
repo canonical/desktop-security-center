@@ -131,7 +131,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get interfacePageTitle => 'Gestionar permisos';
 
   @override
-  String get interfacePageLinkLearnMore => 'Más información';
+  String get interfacePageLinkLearnMore => 'Conocer más';
 
   @override
   String get interfacePageLinkReportIssues => 'Informar de problemas';
@@ -222,7 +222,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get diskEncryptionPageReplaceDialogShowQR => 'Mostrar el código QR';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Guardar como archivo';
+  String get diskEncryptionPageReplaceDialogSave => 'Guardar en un archivo';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
@@ -309,7 +309,7 @@ class AppLocalizationsEs extends AppLocalizations {
       'Agregar frase de paso';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Agregar PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'Añadir PIN';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
@@ -336,17 +336,17 @@ class AppLocalizationsEs extends AppLocalizations {
       'Puede fijar una frase de paso o un PIN para seguridad adicional. Necesitarás introducirlo cada vez que inicie su equipo.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Aprender más';
+  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Conocer más';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Agregar';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'Añadir';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Retirar PIN...';
+  String get diskEncryptionPageRemovePinButton => 'Quitar PIN…';
 
   @override
   String get diskEncryptionPageRemovePassphraseButton =>
-      'Retirar frase de acceso...';
+      'Quitar frase de acceso…';
 
   @override
   String get diskEncryptionPageAddingPin =>
@@ -366,7 +366,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'No se ha guardado la clave de recuperación';
+      'No se guardó el archivo de la clave de recuperación';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
@@ -693,14 +693,14 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM ofrece 10 años de parches de seguridad para más de 25 000 paquetes de código abierto. Disfrute de una gestión continua de vulnerabilidades para CVE de gravedad crítica, alta y media.';
+      'ESM ofrece 10 años de parches de seguridad para todo el archivo de Ubuntu. Aproveche la gestión continua de vulnerabilidades para CVE críticas, de alto riesgo y algunas de riesgo medio seleccionadas.';
 
   @override
   String get ubuntuProESMMainTitle => 'Paquetes principales (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Actualizaciones de seguridad para 2300 paquetes de Ubuntu Main hasta el $year';
+    return 'Actualizaciones de seguridad para los paquetes de Ubuntu Main hasta $year';
   }
 
   @override

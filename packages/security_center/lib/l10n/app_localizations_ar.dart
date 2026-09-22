@@ -45,7 +45,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'تنفيذ';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'وصول';
 
   @override
   String get snapPermissionsEnableTitle =>

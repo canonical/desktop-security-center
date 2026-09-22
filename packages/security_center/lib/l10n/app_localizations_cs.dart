@@ -166,7 +166,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Zjistěte více o šifrování jištěné hardwarem';
+      'Zjistěte více o hardwarově podporovaném šifrování';
 
   @override
   String get diskEncryptionPageCheckKey => 'Zkontrolovat záchranný klíč…';
@@ -392,7 +392,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get recoveryKeyTPMEnabled =>
-      'Šifrování obsluhované pomocí hardware je zapnuté';
+      'Hardwarově podporované šifrování je zapnuté';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
@@ -400,7 +400,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Zjistit víc o šifrování obsluhovaném hardwarem';
+      'Zjistěte více o hardwarově podporovaném šifrování';
 
   @override
   String get recoveryKeyPassphraseEnabled =>

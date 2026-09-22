@@ -16,7 +16,7 @@
             }
         }
     },
-    "interfacePageLinkLearnMore": "Más información",
+    "interfacePageLinkLearnMore": "Conocer más",
     "interfacePageLinkReportIssues": "Informar de problemas",
     "interfaceSnapCount": "{n, plural, =0{sin aplicaciones} =1{1 aplicación} other {{n} aplicaciones}}",
     "@interfaceSnapCount": {
@@ -78,7 +78,7 @@
     "diskEncryptionPageReplaceDialogHeader": "Reemplazar clave de recuperación",
     "diskEncryptionPageReplaceDialogBody": "Guarde la nueva clave de recuperación en un lugar seguro. Una vez reemplazada, ya no podrá usar la clave vieja.",
     "diskEncryptionPageReplaceDialogShowQR": "Mostrar el código QR",
-    "diskEncryptionPageReplaceDialogSave": "Guardar como archivo",
+    "diskEncryptionPageReplaceDialogSave": "Guardar en un archivo",
     "diskEncryptionPageReplaceDialogReplace": "Reemplazar",
     "diskEncryptionPageReplaceDialogAcknowledge": "He guardado mi clave de recuperación en un lugar seguro",
     "diskEncryptionPageReplaceDialogDiscard": "Descartar",
@@ -92,7 +92,7 @@
     "diskEncryptionPageErrorUnsupportedStateBody": "La configuración TPM de su equipo no está en un estado soportado.",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "El centro de seguridad no pudo conectarse a la interfaz de snapd",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
-    "recoveryKeyExceptionFileSystemTitle": "No se ha guardado la clave de recuperación",
+    "recoveryKeyExceptionFileSystemTitle": "No se guardó el archivo de la clave de recuperación",
     "diskEncryptionPageReplaceDialogQRBody": "Escanee el código QR para copiar la clave de recuperación y guardarla en un lugar seguro, como un gestor de contraseñas. También puede tomar una foto para usarlo más tarde.",
     "diskEncryptionPageErrorUnsupportedSnapdHeader": "Su versión de snapd no tiene soporte",
     "diskEncryptionPageErrorUnsupportedSnapdBody": "Compruebe que el Centro de seguridad y snapd están actualizados.",
@@ -151,7 +151,7 @@
     "diskEncryptionPageAddPinButton": "Agregar PIN…",
     "diskEncryptionPageAddPassphraseButton": "Agregar frase de paso...",
     "diskEncryptionPageAddPassphraseDialogHeading": "Agregar frase de paso",
-    "diskEncryptionPageAddPinDialogHeading": "Agregar PIN",
+    "diskEncryptionPageAddPinDialogHeading": "Añadir PIN",
     "diskEncryptionPageAddPinDialogBodyMain": "Necesitará introducir su PIN cada vez que inicie su equipo. Este PIN es diferente de su contraseña de usuario.",
     "diskEncryptionPageAddPinDialogBodyRecovery": "Si olvida su PIN, puede obtener acceso al disco utilizando la clave de recuperación.",
     "microphoneInterfacePageTitle": "Micrófono",
@@ -160,10 +160,10 @@
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Si olvida su frase de paso, puede obtener acceso al disco utilizando la llave de recuperación.",
     "diskEncryptionPageAdditionalSecurityHeader": "Seguridad adicional",
     "diskEncryptionPageAdditionalSecurityBody": "Puede fijar una frase de paso o un PIN para seguridad adicional. Necesitarás introducirlo cada vez que inicie su equipo.",
-    "diskEncryptionPageAdditionalSecurityLearnMore": "Aprender más",
-    "diskEncryptionPageAddPinDialogSaveButton": "Agregar",
-    "diskEncryptionPageRemovePinButton": "Retirar PIN...",
-    "diskEncryptionPageRemovePassphraseButton": "Retirar frase de acceso...",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Conocer más",
+    "diskEncryptionPageAddPinDialogSaveButton": "Añadir",
+    "diskEncryptionPageRemovePinButton": "Quitar PIN…",
+    "diskEncryptionPageRemovePassphraseButton": "Quitar frase de acceso…",
     "diskEncryptionPageAddingPin": "Añadir PIN, esto puede tomar unos pocos segundos...",
     "diskEncryptionPageAddingPassphrase": "Añadir frase de paso, esta puede tomar unos pocos segundos...",
     "diskEncryptionPageRemovingPin": "Retirar PIN, esto puede tomar unos pocos segundos...",
@@ -227,8 +227,8 @@
     },
     "ubuntuProComplianceFIPSDisclaimer": "No es posible revertir la activación de FIPS y Livepatch se desactivará permanentemente.",
     "ubuntuProESMUniverseTitle": "Paquetes del universo (esm-apps)",
-    "ubuntuProESMDescription": "ESM ofrece 10 años de parches de seguridad para más de 25 000 paquetes de código abierto. Disfrute de una gestión continua de vulnerabilidades para CVE de gravedad crítica, alta y media.",
-    "ubuntuProESMMainDescription": "Actualizaciones de seguridad para 2300 paquetes de Ubuntu Main hasta el {year}",
+    "ubuntuProESMDescription": "ESM ofrece 10 años de parches de seguridad para todo el archivo de Ubuntu. Aproveche la gestión continua de vulnerabilidades para CVE críticas, de alto riesgo y algunas de riesgo medio seleccionadas.",
+    "ubuntuProESMMainDescription": "Actualizaciones de seguridad para los paquetes de Ubuntu Main hasta {year}",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {

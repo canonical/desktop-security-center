@@ -10,7 +10,7 @@
     "snapPermissionsEnableWarning": "See on katseline funktsionaalsus, mis võimaldab kontrollida ligipääsu süsteemiressurssidele.",
     "snapPermissionsEnablingLabel": "Lülitan sisse, selleks võib kuluda mõni sekund...",
     "snapPermissionsExperimentalLabel": "Katseline",
-    "snapPermissionsOtherDescription": "Muid õigusi saad hallata valikust „Sätted › Rakendused“.",
+    "snapPermissionsOtherDescription": "Muid õigusi saad hallata valikust „Seadistused › Rakendused“.",
     "snapPermissionsPageTitle": "Rakenduste õigused",
     "snapRulesPageDescription": "Halda „{snap}“ paketi õigusi „{interface}“ liidese kasutamisel.",
     "@snapRulesPageDescription": {
@@ -37,7 +37,7 @@
             }
         }
     },
-    "snapPermissionsEnableTitle": "Eelda, et rakendused küsivad operatsioonisüsteemilt õigusi",
+    "snapPermissionsEnableTitle": "Nõua, et aedikkäituses rakendused küsiksid õigusi",
     "snapRulesCount": "{n, plural, =0{reeglid on määratlemata} =1{1 reegel} other{{n} reeglit}}",
     "@snapRulesCount": {
         "placeholders": {
@@ -181,7 +181,7 @@
     "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
     "ubuntuProDisablePro": "Eemalda Ubuntu Pro kasutuselt",
     "ubuntuProDisable": "Eemalda kasutuselt",
-    "ubuntuProDisablePrompt": "Ubuntu Pro kasutuselt eemaldamisel eemaldatakse sellest masinast ka vastav tellimus. Kas sa soovid jätkata?",
+    "ubuntuProDisablePrompt": "Ubuntu Pro kasutuselt eemaldamisel eemaldatakse sellest arvutist ka vastav tellimus. Kas sa soovid jätkata?",
     "ubuntuProMagicContinueInBrowser": "Jätka veebibrauseris",
     "ubuntuProDisabled": "Suurettevõtte tasemel turvalisus ja vastavus sinu arvutile. Isiklikuks kasutuseks alatiseks tasuta saadaval. {learnMoreLink}",
     "@ubuntuProDisabled": {
@@ -225,8 +225,8 @@
         }
     },
     "ubuntuProTokenLabel": "Tunnusluba",
-    "ubuntuProFeatureEnableError": "Funktsionaalsuse sisselülitamine ei õnnestunud, palun proovi uuesti.",
-    "ubuntuProFeatureDisableError": "Funktsionaalsuse väljalülitamine ei õnnestunud, palun proovi uuesti.",
+    "ubuntuProFeatureEnableError": "Selle funktsionaalsuse sisselülitamine ei õnnestunud, palun proovi uuesti.",
+    "ubuntuProFeatureDisableError": "Selle funktsionaalsuse väljalülitamine ei õnnestunud, palun proovi uuesti.",
     "ubuntuProCompliance": "Vastavusreeglid ja süsteemi tugevdamine",
     "ubuntuProComplianceDisclaimer": "Soovitatud kasutamiseks FedRAMP-i, HIPAA või muude sarnaste tugevdus- ja vastavusnõuete puhul.",
     "ubuntuProComplianceUSGTitle": "Ubuntu turvajuhend (Ubuntu Security Guide - USG)",
@@ -264,5 +264,11 @@
     "ubuntuProComplianceFIPSUpdatesDescription": "Paigaldab FIPS 140-2 vastavusega paketid ja võimaldab regulaarselt turvauuendusi teha.",
     "ubuntuProComplianceFIPSNoUpdates": "Ilma uuendusteta FIPS",
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Paigaldab FIPS 140-2 vastavusega paketid, aga neid ei uuendata kuni järgmise kordussertifitseerimiseni.",
-    "snapPermissionsErrorTitle": "Midagi läks valesti"
+    "snapPermissionsErrorTitle": "Midagi läks valesti",
+    "permissionRulePopupMenuSemanticLabel": "Uuenda õigusi",
+    "snapdRuleCategoryTemporarilyAllowed": "Luba ajutiselt",
+    "snapdRuleCategoryTemporarilyDenied": "Keela ajutiselt",
+    "snapdRuleCategoryAskAlways": "Küsi alati",
+    "ubuntuProLoadingLabel": "Selleks võib kuluda paar sekundit...",
+    "ubuntuProDisableError": "Ubuntu Pro väljalülitamine ei õnnestunud, palun proovi uuesti"
 }

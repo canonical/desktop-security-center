@@ -21,19 +21,19 @@ class AppLocalizationsUk extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Завжди дозволяти';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Оновити дозволи';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Завжди забороняти';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Дозволити тимчасово';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Тимчасово відмовити';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Завжди запитувати';
 
   @override
   String get snapPermissionReadLabel => 'Читання';
@@ -49,7 +49,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Вимагати від застосунків запитувати про системні дозволи';
+      'Вимагати, щоб застосунки в ізольованому середовищі запитували дозволи';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -68,7 +68,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get snapPermissionsOtherDescription =>
-      'Ви можете керувати іншими дозволами в Налаштуваннях › Програми.';
+      'Інші дозволи можна налаштувати в розділі «Налаштування» › «Застосунки».';
 
   @override
   String get snapPermissionsPageTitle => 'Дозволи застосунків';
@@ -553,7 +553,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro увімкнено';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Це може зайняти кілька секунд...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -561,7 +561,7 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
-  String get ubuntuProLearnMore => 'Дізнайтеся про Ubuntu Pro';
+  String get ubuntuProLearnMore => 'Докладніше про Ubuntu Pro';
 
   @override
   String get ubuntuProEnablePro => 'Увімкнути Ubuntu Pro';
@@ -588,7 +588,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get ubuntuProMagicError =>
-      'Не вдалося ввімкнути Ubuntu Pro, спробуйте ще раз';
+      'Не вдалося активувати Ubuntu Pro. Спробуйте ще раз';
 
   @override
   String get ubuntuProEnableToken => 'Увімкнути за допомогою токена';
@@ -617,10 +617,11 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Вимкнення Ubuntu Pro від\'єднає вашу підписку від цього комп’ютера. Продовжити?';
+      'Вимкнення Ubuntu Pro призведе до від’єднання вашої передплати від цього комп’ютера. Чи бажаєте продовжити?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Не вдалося вимкнути Ubuntu Pro. Спробуйте ще раз';
 
   @override
   String get ubuntuProEnable => 'Увімкнути';
@@ -630,11 +631,11 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Не вдалося ввімкнути функцію, спробуйте ще раз.';
+      'Не вдалося увімкнути цю функцію. Спробуйте ще раз.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Не вдалося вимкнути функцію, спробуйте ще раз.';
+      'Не вдалося вимкнути цю функцію. Спробуйте ще раз.';
 
   @override
   String get ubuntuProCompliance => 'Відповідність та посилення захисту';

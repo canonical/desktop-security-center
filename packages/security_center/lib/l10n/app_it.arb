@@ -8,11 +8,11 @@
     "snapPermissionWriteLabel": "Scrittura",
     "snapPermissionExecuteLabel": "Eseguibile",
     "snapPermissionsEnableWarning": "Questa è una funzionalità sperimentale per controllare l'accesso alle tue risorse di sistema.",
-    "snapPermissionsEnablingLabel": "L'attivazione potrebbe richiedere alcuni secondi...",
-    "snapPermissionsDisablingLabel": "La disabilitazione potrebbe richiedere alcuni secondi...",
+    "snapPermissionsEnablingLabel": "Attivazione in corso, potrebbero essere necessari alcuni secondi...",
+    "snapPermissionsDisablingLabel": "Disabilitazione in corso, potrebbero essere necessari alcuni secondi...",
     "snapPermissionsExperimentalLabel": "Sperimentale",
     "snapPermissionsOtherDescription": "Puoi gestire gli altri permessi in Impostazioni › Applicazioni.",
-    "snapPermissionsPageTitle": "Permessi delle app",
+    "snapPermissionsPageTitle": "Permessi delle applicazioni",
     "snapRulesPageDescription": "Gestisci i permessi di {interface} per {snap}.",
     "@snapRulesPageDescription": {
         "placeholders": {
@@ -31,5 +31,238 @@
     "interfacePageLinkReportIssues": "Segnala errori",
     "snapPermissionsEnableTitle": "Impone alle app di richiedere i permessi di sistema",
     "homeInterfacePageTitle": "Cartella Home",
-    "homeInterfacePageDescription": "Gestisci i permessi per accedere ai file della tua cartella Home."
+    "homeInterfacePageDescription": "Gestisci i permessi per accedere ai file della tua cartella Home.",
+    "diskEncryptionPageReplaceDialogErrorBody": "Si è verificato un errore durante la sostituzione della chiave di ripristino. La vecchia chiave rimarrà valida.",
+    "ubuntuProESMUniverseTitle": "Pacchetti Universe (esm-apps)",
+    "diskEncryptionPageAdditionalSecurityLearnMore": "Scopri di più",
+    "recoveryKeyPassphraseHeader": "Modifica passphrase",
+    "diskEncryptionPageAddPassphraseButton": "Aggiungi passphrase...",
+    "recoveryKeyPassphraseNew": "Nuova passphrase",
+    "recoveryKeyExceptionFilePermissionTitle": "Impossibile salvare la chiave di ripristino nel file",
+    "diskEncryptionPageAdditionalSecurityHeader": "Sicurezza aggiuntiva",
+    "recoveryKeyPinDialogHeader": "Modifica PIN",
+    "diskEncryptionPageAddPinDialogBodyMain": "Dovrai inserire il tuo PIN ogni volta che il computer si avvia. Questo PIN è diverso dalla tua password utente.",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Sostituzione della chiave di ripristino non riuscita",
+    "recoveryKeyExceptionFileSystemBody": "Non hai i permessi per scrivere in quella cartella. Prova a scegliere una posizione diversa o usa un altro metodo.",
+    "ubuntuProEnablePro": "Abilita Ubuntu Pro",
+    "ubuntuProFeatureDisableError": "Impossibile disabilitare la funzionalità, riprova.",
+    "recoveryKeyPassphrasePinSuccessBody": "Il PIN è stato aggiornato correttamente.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "diskEncryptionPageCheckKey": "Verifica la chiave di ripristino...",
+    "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Chiave di ripristino della crittografia",
+    "ubuntuProLivepatchShowTitle": "Mostra lo stato di Livepatch nella barra superiore",
+    "ubuntuProNotSupportedSnapdDetails": "Aggiorna snapd per gestire Ubuntu Pro",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro è abilitato",
+    "ubuntuProEnableMagicSubtitle": "Potrai creare un account gratuitamente",
+    "recoveryKeyPassphraseCurrentError": "Passphrase errata, riprova",
+    "ubuntuProDisable": "Disabilita",
+    "diskEncryptionPageDialogHeaderCheckKey": "Verifica la chiave di ripristino",
+    "recoveryKeyPinCurrent": "PIN attuale",
+    "ubuntuProCancel": "Annulla",
+    "diskEncryptionPageAddPinButton": "Aggiungi PIN...",
+    "diskEncryptionPageStoreYourKey": "La chiave di ripristino ti consente di riottenere l'accesso ai tuoi dati se il disco non riesce a sbloccarsi durante l'avvio. Salvala in un luogo sicuro.",
+    "cameraRulesPageEmptyTileLabel": "Nessuna app ha ancora richiesto l'accesso",
+    "ubuntuProEnableToken": "Abilita con un token",
+    "diskEncryptionPageReplaceDialogSuccessBody": "Ricorda di conservarla in un luogo sicuro.",
+    "diskEncryptionPageAddingPin": "Aggiunta del PIN in corso, potrebbero essere necessari alcuni secondi...",
+    "diskEncryptionPageReplaceDialogShowQR": "Mostra codice QR",
+    "diskEncryptionPageReplaceDialogAcknowledge": "Ho salvato la mia chiave di ripristino in un luogo sicuro",
+    "recoveryKeyPinEntropyOptimal": "Il PIN è abbastanza lungo",
+    "ubuntuProESMTitle": "Expanded Security Maintenance (ESM)",
+    "diskEncryptionPageRecoveryKey": "Chiave di ripristino",
+    "ubuntuProLivepatchEnableTitle": "Abilita Livepatch",
+    "ubuntuProEnable": "Abilita",
+    "diskEncryptionPageInvalidKey": "Chiave non valida",
+    "diskEncryptionPageLearnMore": "Scopri di più sulla crittografia basata sull'hardware",
+    "recoveryKeyTPMExplanationBody": "Le chiavi di crittografia sono archiviate nel Trusted Platform Module (TPM) del tuo computer.",
+    "ubuntuProESMMainTitle": "Pacchetti principali (esm-infra)",
+    "recoveryKeyPassphraseButton": "Modifica passphrase...",
+    "ubuntuProComplianceFIPSUpdates": "FIPS con aggiornamenti",
+    "recoveryKeyFilePickerFilter": "File di testo",
+    "diskEncryptionPageCopySemanticLabel": "Copia",
+    "ubuntuProTokenPrompt": "Ottieni un token Ubuntu Pro dal tuo amministratore o da {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "recoveryKeyPassphraseChange": "Modifica",
+    "recoveryKeyTPMEnabled": "La crittografia con supporto hardware è attiva",
+    "diskEncryptionPageTitle": "Crittografia del disco",
+    "diskEncryptionPageErrorFailedToRetrieveStatusBody": "Impossibile recuperare lo stato della crittografia di questo computer.",
+    "microphoneInterfacePageTitle": "Microfono",
+    "recoveryKeyPassphraseEntropyBelowOptimal": "Passphrase discreta, rendila più lunga o complessa per una maggiore sicurezza",
+    "ubuntuProNotSupported": "Ubuntu Pro non è disponibile per questa versione di Ubuntu",
+    "recoveryKeyPassphraseDialogHeader": "Modifica passphrase",
+    "diskEncryptionPageClipboardNotification": "Copiato negli appunti",
+    "diskEncryptionPageKeyDoesntWorkBody": "Verifica la chiave o sostituiscila con una nuova.",
+    "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Se dimentichi la passphrase, puoi riottenere l'accesso al disco utilizzando la chiave di ripristino.",
+    "recoveryKeyEncrpytionPassphraseHeader": "Passphrase di crittografia",
+    "ubuntuProComplianceFIPSDescription": "Una certificazione dei moduli crittografici dei governi di Stati Uniti e Canada per la conformità allo standard di protezione dei dati FIPS 140-2.",
+    "microphoneInterfacePageDescription": "Consenti alle app di accedere al tuo microfono.",
+    "diskEncryptionPageReplaceDialogHeader": "Sostituisci la chiave di ripristino",
+    "recoveryKeyPinCurrentError": "PIN errato, riprova",
+    "recoveryKeyPassphraseShow": "Mostra",
+    "ubuntuProDisabled": "Sicurezza e conformità di livello aziendale per il tuo computer. Sempre gratuito per uso personale. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Scopri Ubuntu Pro",
+    "diskEncryptionPageAddPinDialogHeading": "Aggiungi PIN",
+    "ubuntuProLivepatchEnableDescription": "Applica aggiornamenti di sicurezza del kernel mentre il sistema è in esecuzione",
+    "ubuntuProESMDescription": "ESM fornisce 10 anni di patch di sicurezza per l'intero archivio Ubuntu. Ottieni una gestione continua delle vulnerabilità per CVE critiche, elevate e alcune CVE di gravità media selezionate.",
+    "diskEncryptionPageErrorUnsupportedStateBody": "La configurazione TPM del computer non è in uno stato supportato.",
+    "diskEncryptionPageAddingPassphrase": "Aggiunta della passphrase in corso, potrebbero essere necessari alcuni secondi...",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "snapPermissionAccessLabel": "Accesso",
+    "diskEncryptionPageAddPassphraseDialogHeading": "Aggiungi passphrase",
+    "cameraInterfacePageTitle": "Fotocamera",
+    "diskEncryptionPageKeyWorksBody": "Ricorda di conservarla in un luogo sicuro.",
+    "ubuntuProComplianceUSGTitle": "Ubuntu Security Guide (USG)",
+    "recoveryKeyPassphraseConfirmError": "Le passphrase non corrispondono, riprova",
+    "diskEncryptionPageCheck": "Verifica",
+    "diskEncryptionPageReplaceDialogSave": "Salva su file",
+    "recoveryKeyPassphrasePassphraseSuccessBody": "La passphrase è stata aggiornata correttamente.",
+    "ubuntuProMagicPrompt": "Accedi con il tuo account Ubuntu One o creane uno gratuitamente.",
+    "ubuntuProComplianceFIPSPrompt": "Scegli l'opzione FIPS preferita",
+    "diskEncryptionPageAddPinDialogBodyRecovery": "Se dimentichi il PIN, puoi riottenere l'accesso al disco utilizzando la chiave di ripristino.",
+    "recoveryKeyPassphraseBody": "Devi inserire la tua passphrase ogni volta che avvii il computer.",
+    "recoveryKeyPinBody": "Dovrai inserire il PIN ogni volta che avvii il computer.",
+    "ubuntuProEnableTokenError": "Impossibile abilitare Ubuntu Pro",
+    "ubuntuProComplianceFIPSEnable": "Abilita FIPS",
+    "recoveryKeyFilePickerTitle": "Salva il file della chiave di ripristino",
+    "ubuntuProESMUniverseDescription": "Aggiornamenti di sicurezza aggiuntivi per i pacchetti Universe di Ubuntu fino al {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageRemovingPassphrase": "Rimozione della passphrase in corso, potrebbero essere necessari alcuni secondi...",
+    "recoveryKeyPassphraseEntropyOptimal": "Passphrase sicura",
+    "recoveryKeyPassphraseHide": "Nascondi",
+    "ubuntuProEnableMagic": "Abilita con l'account Ubuntu One",
+    "ubuntuProComplianceUSGDescription": "Automatizza l'hardening e l'auditing con benchmark CIS e profili DISA-STIG, consentendo personalizzazioni specifiche per l'ambiente.",
+    "diskEncryptionPageErrorUnsupportedSnapdBody": "Verifica che Security Center e snapd siano aggiornati.",
+    "snapRulesCount": "{n, plural,=0{nessuna regola}=1{1 regola}other{{n} regole}}",
+    "@snapRulesCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "diskEncryptionPageErrorFailedToRetrieveStatusHeader": "Impostazioni di crittografia non disponibili",
+    "recoveryKeyPassphraseCurrent": "Passphrase attuale",
+    "diskEncryptionPageReplaceDialogQRBody": "Scansiona il codice QR per copiare la chiave di ripristino e salvarla in un luogo sicuro, ad esempio in un gestore di password. Puoi anche scattare una foto per utilizzarla in seguito.",
+    "diskEncryptionPageReplaceDialogSuccessHeader": "Chiave di ripristino sostituita",
+    "diskEncryptionPageError": "Errore",
+    "diskEncryptionPageReplaceDialogReplace": "Sostituisci",
+    "recoveryKeyPinEntropyBelowOptimal": "PIN discreto, rendilo più lungo o meno prevedibile per una maggiore sicurezza",
+    "recoveryKeyPassphraseEnabled": "La passphrase di crittografia è attiva",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro richiede una versione LTS",
+    "recoveryKeyExceptionFilePermissionBody": "Non hai i permessi per scrivere in quella posizione del file.",
+    "ubuntuProComplianceFIPSDisclaimer": "L'abilitazione di FIPS non può essere annullata e Livepatch verrà disabilitato in modo permanente.",
+    "recoveryKeyExceptionDisallowedPathTitle": "Impossibile salvare il file della chiave di ripristino in una posizione temporanea",
+    "recoveryKeyPinConfirmError": "I PIN non corrispondono, riprova",
+    "diskEncryptionPageKeyDoesntWork": "La chiave di ripristino non funziona",
+    "ubuntuProMagicError": "Impossibile abilitare Ubuntu Pro, riprova",
+    "diskEncryptionPageReplaceDialogDiscard": "Scarta",
+    "recoveryKeyTPMExplanationLearnMore": "Scopri di più sulla crittografia con supporto hardware",
+    "recoveryKeyPinConfirm": "Conferma PIN",
+    "ubuntuProEnableTokenSubtitle": "Dal tuo amministratore IT o da {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "recoveryKeyExceptionUnknownTitle": "Errore sconosciuto",
+    "diskEncryptionPageEnterKey": "Inserisci la tua chiave di ripristino",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "Security Center non può connettersi all'interfaccia snapd",
+    "diskEncryptionPageValidKey": "Chiave valida",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Per risolvere il problema, esegui questo comando nel terminale:",
+    "recoveryKeyPassphrasePassphraseSuccessHeader": "Passphrase aggiornata",
+    "diskEncryptionPageStoreYourKeyWithLink": "La chiave di ripristino ti consente di riottenere l'accesso ai tuoi dati se il disco non riesce a sbloccarsi durante l'avvio. Salvala in un luogo sicuro. {learnMoreLink}",
+    "@diskEncryptionPageStoreYourKeyWithLink": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "snapPermissionsErrorTitle": "Qualcosa è andato storto",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Dovrai inserire la tua passphrase ogni volta che il computer si avvia. Questa passphrase è diversa dalla tua password utente.",
+    "recoveryKeySomethingWentWrongHeader": "Si è verificato un errore",
+    "diskEncryptionPageReplaceDialogBody": "Salva la nuova chiave di ripristino in un luogo sicuro. Una volta sostituita, non potrai più utilizzare la vecchia chiave.",
+    "ubuntuProComplianceDocumentation": "Documentazione sulla conformità alla sicurezza",
+    "ubuntuProLivepatchTitle": "Kernel Livepatch",
+    "recoveryKeyPinEntropyBelowMin": "PIN debole, rendilo più lungo o meno prevedibile",
+    "diskEncryptionPageKeyWorks": "La chiave di ripristino funziona",
+    "recoveryKeyPinEnabled": "Il PIN di crittografia è attivo",
+    "snapRulesResetAllPermissions": "Reimposta tutti i permessi",
+    "diskEncryptionPageReplaceButton": "Sostituisci la chiave di ripristino...",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Installa pacchetti convalidati FIPS 140-2. Questi non verranno aggiornati fino alla prossima ricertificazione.",
+    "ubuntuProDisablePro": "Disabilita Ubuntu Pro",
+    "recoveryKeyExceptionFileSystemTitle": "File della chiave di ripristino non salvato",
+    "ubuntuProESMMainDescription": "Aggiornamenti di sicurezza per i pacchetti Main di Ubuntu fino al {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "recoveryKeyPinButton": "Modifica PIN...",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS senza aggiornamenti",
+    "recoveryKeyPinNew": "Nuovo PIN",
+    "recoveryKeyPassphrasePinSuccessHeader": "PIN aggiornato",
+    "recoveryKeyPassphraseConfirm": "Conferma passphrase",
+    "ubuntuProCompliance": "Conformità e hardening",
+    "diskEncryptionPageRemovePassphraseButton": "Rimuovi passphrase...",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Installa pacchetti convalidati FIPS 140-2 e consente regolari aggiornamenti di sicurezza.",
+    "diskEncryptionPageErrorUnsupportedSnapdHeader": "La tua versione di snapd non è supportata",
+    "recoveryKeyExceptionDisallowedPathBody": "Prova una posizione diversa, ad esempio un'unità rimovibile, oppure usa un altro metodo.",
+    "diskEncryptionPageAdditionalSecurityBody": "Puoi impostare una passphrase o un PIN per una maggiore sicurezza. Dovrai inserirlo ogni volta che avvii il computer.",
+    "cameraInterfacePageDescription": "Consenti alle app di accedere alle tue fotocamere.",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro non è supportato da questa versione di snapd",
+    "diskEncryptionPageRemovingPin": "Rimozione del PIN in corso, potrebbero essere necessari alcuni secondi...",
+    "interfaceSnapCount": "{n, plural, =0{nessuna app} =1{1 app} other {{n} app}}",
+    "@interfaceSnapCount": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "recoveryKeyPassphraseNewError": "Deve contenere almeno 4 caratteri",
+    "ubuntuProMagicDescription": "Puoi anche accedere a {attachLink} e inserire il codice {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProMagicContinueInBrowser": "Continua nel browser",
+    "ubuntuProComplianceDisclaimer": "Consigliato solo per supportare FedRAMP, HIPAA e altri requisiti di conformità e hardening.",
+    "recoveryKeyPinHeader": "PIN di crittografia",
+    "ubuntuProFeatureEnableError": "Impossibile abilitare la funzionalità, riprova.",
+    "diskEncryptionPageRemovePinButton": "Rimuovi PIN...",
+    "recoveryKeyPassphraseEntropyBelowMin": "Passphrase debole, rendila più lunga o complessa",
+    "ubuntuProDisablePrompt": "La disabilitazione di Ubuntu Pro scollegherà il tuo abbonamento da questa macchina. Vuoi procedere?",
+    "diskEncryptionPageAddPinDialogSaveButton": "Aggiungi"
 }

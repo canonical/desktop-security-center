@@ -165,5 +165,67 @@
     "recoveryKeyPinEntropyBelowMin": "PIN fraco, torna-o mais longo ou menos previsível",
     "recoveryKeyPinEntropyBelowOptimal": "PIN justo, torne-o mais longo ou menos previsível para maior segurança",
     "recoveryKeyPinEntropyOptimal": "O PIN é longo o suficiente",
-    "recoveryKeySomethingWentWrongHeader": "Algo deu errado"
+    "recoveryKeySomethingWentWrongHeader": "Algo deu errado",
+    "ubuntuProEnablePro": "Habilite Ubuntu Pro",
+    "ubuntuProFeatureDisableError": "Não foi possível desabilitar esse recurso, por favor, tente novamente.",
+    "ubuntuProNotSupportedSnapdDetails": "Atualize snapd para gerenciar o Ubuntu Pro",
+    "ubuntuProEnabled": "Ubuntu Pro está habilitado",
+    "ubuntuProEnableMagicSubtitle": "Você poderá criar uma conta gratuitamente",
+    "ubuntuProDisable": "Desabilitar",
+    "ubuntuProCancel": "Cancelar",
+    "ubuntuProEnableToken": "Habilite com um token",
+    "ubuntuProEnable": "Habilitar",
+    "ubuntuProTokenPrompt": "Obtenha um token do Ubuntu Pro com seu administrador ou em {proLink}",
+    "@ubuntuProTokenPrompt": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "microphoneInterfacePageTitle": "Microfone",
+    "ubuntuProNotSupported": "Ubuntu Pro não está disponível para essa versão do Ubuntu",
+    "microphoneInterfacePageDescription": "Permite aplicativos acessarem seu microfone.",
+    "ubuntuProDisabled": "Segurança de nível empresarial e conformidade para seu computador. Sempre gratuito para uso pessoal. {learnMoreLink}",
+    "@ubuntuProDisabled": {
+        "placeholders": {
+            "learnMoreLink": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProLearnMore": "Aprenda sobre Ubuntu Pro",
+    "ubuntuProComplianceUSGTitle": "Guia de segurança Ubuntu (GSU)",
+    "ubuntuProMagicPrompt": "Conecte-se com sua conta Ubuntu One, ou crie uma gratuitamente.",
+    "ubuntuProEnableTokenError": "Não foi possível habilitar o Ubuntu Pro",
+    "ubuntuProEnableMagic": "Habilite com uma conta Ubuntu One",
+    "ubuntuProNotSupportedDetails": "Ubuntu Pro requer uma versão LTS",
+    "ubuntuProMagicError": "Não foi possível habilitar o Ubuntu Pro, por favor, tente novamente",
+    "ubuntuProEnableTokenSubtitle": "Do seu administrador de TI ou de {proLink}",
+    "@ubuntuProEnableTokenSubtitle": {
+        "placeholders": {
+            "proLink": {
+                "type": "String"
+            }
+        }
+    },
+    "snapPermissionsErrorTitle": "Algo errado aconteceu",
+    "ubuntuProDisablePro": "Desabilitar Ubuntu Pro",
+    "ubuntuProCompliance": "Conformidade e melhora da segurança",
+    "ubuntuProNotSupportedSnapd": "Ubuntu Pro não é suportado por essa versão snapd",
+    "ubuntuProMagicDescription": "Você também pode se conectar em {attachLink} e inserir o código {attachCode}",
+    "@ubuntuProMagicDescription": {
+        "placeholders": {
+            "attachLink": {
+                "type": "String"
+            },
+            "attachCode": {
+                "type": "String"
+            }
+        }
+    },
+    "ubuntuProMagicContinueInBrowser": "Continue no navegador",
+    "ubuntuProComplianceDisclaimer": "Recomendado apenas para auxiliar no atendimento a requisitos de FedRAMP, HIPAA e outros requisitos de conformidade e endurecimento de segurança (*hardening*).",
+    "ubuntuProFeatureEnableError": "Não foi possível habilitar esse recurso, por favor, tente novamente.",
+    "ubuntuProDisablePrompt": "Desabilitar o Ubuntu Pro desconectará sua assinatura dessa máquina. Você quer continuar?"
 }

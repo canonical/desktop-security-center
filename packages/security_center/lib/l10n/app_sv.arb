@@ -3,7 +3,7 @@
     "snapdRuleCategoryForeverDenied": "Neka alltid",
     "snapPermissionReadLabel": "Läs",
     "snapPermissionExecuteLabel": "Exekvera",
-    "snapPermissionsEnableTitle": "Kräv program att be om systembehörigheter",
+    "snapPermissionsEnableTitle": "Kräv program i sandlådor att be om rättigheter",
     "snapPermissionsEnableWarning": "Det här är en experimentell funktion för att kontrollera åtkomst till ditt systems resurser.",
     "snapPermissionsDisablingLabel": "Inaktiverar, detta kan ta några sekunder...",
     "snapPermissionsPageTitle": "Programbehörigheter",
@@ -264,5 +264,11 @@
     "ubuntuProLivepatchEnableTitle": "Aktivera Livepatch",
     "ubuntuProLivepatchEnableDescription": "Tillämpa säkerhetsuppdateringar för kärnan medan systemet körs",
     "ubuntuProLivepatchShowTitle": "Visa Livepatch-status i övre fältet",
-    "snapPermissionsErrorTitle": "Något blev fel"
+    "snapPermissionsErrorTitle": "Något blev fel",
+    "permissionRulePopupMenuSemanticLabel": "Uppdatera rättigheter",
+    "snapdRuleCategoryTemporarilyAllowed": "Tillåt tillfälligt",
+    "snapdRuleCategoryTemporarilyDenied": "Neka tillfälligt",
+    "snapdRuleCategoryAskAlways": "Fråga alltid",
+    "ubuntuProLoadingLabel": "Detta kan ta en liten stund...",
+    "ubuntuProDisableError": "Kunde inte inaktivera Ubuntu Pro, försök igen"
 }

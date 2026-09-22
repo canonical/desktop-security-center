@@ -74,7 +74,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get snapPermissionsPageTitle => 'App-machtigingen';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Er ging iets fout';
 
   @override
   String snapRulesCount(int n) {
@@ -122,11 +122,11 @@ class AppLocalizationsNl extends AppLocalizations {
       'Apps toegang geven tot uw camera\'s.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'Microfoon';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'Applicaties toegang geven tot de microfoon.';
 
   @override
   String get interfacePageTitle => 'Machtigingen beheren';
@@ -157,15 +157,16 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'Met de herstelcode kunt u weer toegang krijgen tot uw gegevens als uw schijf niet kan worden ontgrendeld tijdens het opstarten. Bewaar deze op een veilige plek.';
+      'Met de herstelcode kunt u weer toegang krijgen tot uw gegevens als de schijf niet kan worden ontgrendeld tijdens het opstarten. Bewaar deze op een veilige plek.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'De herstelcode stelt je in staat om weer toegang te krijgen tot je gegevens als je schijf tijdens het opstarten niet ontgrendeld kan worden. Bewaar het op een veilige plaats. $learnMoreLink';
+    return 'De herstelcode stelt je in staat om weer toegang te krijgen tot je gegevens als de schijf tijdens het opstarten niet ontgrendeld kan worden. Bewaar het op een veilige plaats. $learnMoreLink';
   }
 
   @override
-  String get diskEncryptionPageLearnMore => 'Met informatie over herstelcodes';
+  String get diskEncryptionPageLearnMore =>
+      'Meer informatie over hardwarematige versleutelingen';
 
   @override
   String get diskEncryptionPageCheckKey => 'Herstelcode controleren…';
@@ -293,68 +294,69 @@ class AppLocalizationsNl extends AppLocalizations {
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'Voeg PIN toe...';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton => 'Voeg wachtwoord toe...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading =>
+      'Voeg wachtwoord toe';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'Voeg PIN toe';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'De PIN is nodig elke keer de computer wordt heropgestart. De PIN kan verschillen van het gebruikerswachtwoord.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'Als de PIN vergeten wordt, kan de schijf nogsteeds ontgrendeld worden met de herstelcode.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'Dit wachtwoord is nodig elke keer de computer wordt heropgestart. Dit wachtwoord kan verschillen van het gebruikerswachtwoord.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'Bij verlies van dit wachtwoord kan de schijf ontgrendeld worden met de herstelcode.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+  String get diskEncryptionPageAdditionalSecurityHeader => 'Extra beveiliging';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'Een PIN of wachtwoord kan worden ingesteld voor extra beveiliging. Deze moet worden ingevoerd telkens de computer wordt heropgestart.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Meer info';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'Toevoegen';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'Verwijder PIN...';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton =>
+      'Verwijder wachtwoord...';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'PIN aan het toevoegen, dit kan even duren...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'Wachtwoord aan het toevoegen, dit kan even duren...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'PIN aan het verwijderen, dit kan even duren...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'Wachtwoord aan het verwijderen, dit kan even duren...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
@@ -410,7 +412,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'U moet uw wachtwoord tijdens het opstarten invoeren om de schijf te ontgrendelen. U kunt de wachtwoordzin wijzigen, maar niet uitschakelen.';
+      'Het wachtwoord moet ingevoerd worden telkens de computer wordt heropgestart.';
 
   @override
   String get recoveryKeyPassphraseButton => 'Wachtwoordzin wijzigen…';
@@ -452,7 +454,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get recoveryKeyPinBody =>
-      'U moet uw pincode invoeren tijdens het opstarten om de schijf te ontgrendelen. U kunt de pincode wijzigen, maar niet uitschakelen.';
+      'U moet uw pincode invoeren tijdens het opstarten om de schijf te ontgrendelen.';
 
   @override
   String get recoveryKeyPinButton => 'Pincode wijzigen…';
@@ -531,189 +533,189 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+      'Ubuntu Pro is niet beschikbaar voor deze Ubuntu-versie';
 
   @override
   String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+      'Ubuntu Pro werkt alleen met LTS-versies';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'Ubuntu Pro wordt niet ondersteund door de huidige snapd-versie';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'Update snapd om Ubuntu Pro te beheren';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Ubuntu Pro is ingeschakeld';
 
   @override
   String get ubuntuProLoadingLabel => 'This may take a few seconds...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'Beveiliging en compliance van enterpriseniveau voor uw computer. Altijd gratis voor persoonlijk gebruik. $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore => 'Meer info over Ubuntu Pro';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Ubuntu Pro inschakelen';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'Inschakelen met Ubuntu One-account';
 
   @override
-  String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+  String get ubuntuProEnableMagicSubtitle => 'Accounts aanmaken is gratis';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+      'Log in met een Ubuntu One-account, of maak er gratis een aan.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => 'Verdergaan in browser';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return 'Of log in op $attachLink en vul de code $attachCode in';
   }
 
   @override
-  String get ubuntuProMagicError => 'Unable to enable Ubuntu Pro, try again';
+  String get ubuntuProMagicError =>
+      'Er ging iets fout bij het inschakelen van Ubuntu Pro, probeer het opnieuw';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'Inschakelen met behulp van een token';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError =>
+      'Er ging iets fout bij het inschakelen van Ubuntu Pro';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'Van uw IT-administrator of van $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'Krijg een Ubuntu Pro-token van uw administrator of van $proLink';
   }
 
   @override
   String get ubuntuProTokenLabel => 'Token';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Ubuntu Pro Uitzetten';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => 'Uitschakelen';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
+      'Ubuntu Pro uitschakelen verbreekt de verbinding tussen uw abonnement en dit apparaat. Wilt u verdergaan?';
 
   @override
   String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => 'Inschakelen';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'Annuleren';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, try again.';
+      'Kon de functie niet inschakelen, probeer het opnieuw.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, try again.';
+      'Kon de functie niet uitschakelen, probeer het opnieuw.';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance => 'Compliance en verharding';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'Enkel aanbevolen om te assisteren bij FedRAMP, HIPAA en andere compliance- en verhardingseisen.';
 
   @override
-  String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
+  String get ubuntuProComplianceUSGTitle => 'Ubuntu Beveiligingshandboek (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'Automatiseert verharding en controles met het CIS benchmark en DISA-STIG profielen terwijl het omgevingsspecifieke aanpassingen mogelijk houdt.';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'Een cryptografische modulecertificaat of compliance met de FIPS 140-2 gegevensbeschermingsstandaard uitgegeven door de Amerikaanse en Canadese overheden.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'FIPS Inschakelen';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'FIPS inschakelen kan niet worden teruggedraaid en Livepatch wordt permanent uitgeschakeld.';
 
   @override
-  String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+  String get ubuntuProComplianceFIPSPrompt => 'Kies je voorkeurs-FIPS-optie';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS met updates';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'Installeert FIPS 140-2 gevalideerde pakketten en staat normale beveiligingsupdates toe.';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS zonder updates';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'Installeert FIPS 140-2 gevalideerde pakketten. Deze worden niet geüpdatet tot de volgende certificatie.';
 
   @override
   String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+      'Beveiligingscompliance documentatie';
 
   @override
-  String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
+  String get ubuntuProESMTitle => 'Uitgebreid Beveiligingsonderhoud (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for the entire Ubuntu Archive. Get continuous vulnerability management for critical, high and selected medium CVEs.';
+      'ESM biedt 10 jaar lang beveiligingspatches voor het gehele Ubuntu-archief. Krijg continu kwetsbaarheidsbeheer voor kritieke, hoge en geselecteerde middelgrote CVE\'s.';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'Hoofdpakketten (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for Ubuntu Main packages until $year';
+    return 'Beveiligingsupdates voor Ubuntu hoofdpakketten tot $year';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'Universe-pakketten (esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for Ubuntu Universe packages until $year';
+    return 'Extra beveiligingsupdates voor Ubuntu Universe-pakketten tot $year';
   }
 
   @override
   String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'Livepatch Inschakelen';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'Pas kernelbeveiligingsupdates toe terwijl het systeem opstaat';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+      'Toon Livepatch-status in de balk bovenaan';
 }

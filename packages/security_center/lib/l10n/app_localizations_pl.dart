@@ -23,19 +23,19 @@ class AppLocalizationsPl extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Zezwalaj zawsze';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Aktualizuj uprawnienia';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Odmawiaj zawsze';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Zezwól tymczasowo';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Odmów tymczasowo';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Zawsze pytaj';
 
   @override
   String get snapPermissionReadLabel => 'Odczyt';
@@ -51,7 +51,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Wymagaj, aby programy prosiły o uprawnienia systemowe';
+      'Wymagaj, aby programy w piaskownicy prosiły o uprawnienia';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -550,7 +550,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro włączono';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Może to potrwać kilka sekund...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -616,7 +616,8 @@ class AppLocalizationsPl extends AppLocalizations {
       'Wyłączenie Ubuntu Pro spowoduje odłączenie Twojej subskrypcji od tego komputera. Czy chcesz kontynuować?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Nie udało się wyłączyć Ubuntu Pro, spróbuj ponownie';
 
   @override
   String get ubuntuProEnable => 'Włącz';

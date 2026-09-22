@@ -47,7 +47,7 @@
             }
         }
     },
-    "snapPermissionsEnableTitle": "Exigir que las aplicacions demanden d’autorizacions al sistèma",
+    "snapPermissionsEnableTitle": "Exigir que las aplicacions isoladas demanden d’autorizacions",
     "diskEncryptionPageTitle": "Chiframent de disc",
     "diskEncryptionPageRecoveryKey": "Clau de recuperacion",
     "diskEncryptionPageCheck": "Verificar",
@@ -199,7 +199,7 @@
             }
         }
     },
-    "ubuntuProMagicError": "Activacion d'Ubuntu Pro impossibla, mercés de tornar ensajar",
+    "ubuntuProMagicError": "Activacion d'Ubuntu Pro impossibla, tornatz ensajar",
     "ubuntuProEnableToken": "Activar amb un geton",
     "ubuntuProEnableTokenError": "Activacion d'Ubuntu Pro impossibla",
     "ubuntuProTokenLabel": "Geton",
@@ -221,8 +221,8 @@
             }
         }
     },
-    "ubuntuProFeatureEnableError": "Impossible d'activar la foncionalitat, mercés de tornar ensajar.",
-    "ubuntuProFeatureDisableError": "Impossible de desactivar la foncionalitat, mercés de tornar ensajar.",
+    "ubuntuProFeatureEnableError": "Impossible d'activar la foncionalitat, tornatz ensajar.",
+    "ubuntuProFeatureDisableError": "Impossible de desactivar la foncionalitat, tornatz ensajar.",
     "ubuntuProComplianceUSGTitle": "Guida de seguretat Ubuntu (USG)",
     "ubuntuProComplianceFIPSPrompt": "Causissètz vòstra opcion FIPS preferida",
     "ubuntuProComplianceFIPSUpdates": "FIPS amb mesas a jorn",
@@ -238,7 +238,7 @@
     "ubuntuProComplianceFIPSDescription": "Una certificacion de modul criptografic dels govèrns dels EUA e delbCanadà per la conformitat amb la nòrma de proteccion de donadas FIPS 140-2.",
     "ubuntuProComplianceFIPSUpdatesDescription": "Installa de paquets validats FIPS 140-2 e permet de mesas a jorn de seguretat regularas.",
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Installa los paquets validats FIPS 140-2. Aqueles seràn pas meses a jorn fins a la recertificacion venenta.",
-    "ubuntuProDisablePrompt": "Desactivar Ubuntu Pro destacarà vòstre abonament d'aquesta maquina. Volètz contunhar ?",
+    "ubuntuProDisablePrompt": "Desactivar Ubuntu Pro destacarà vòstre abonament d'aqueste ordinator. Volètz contunhar ?",
     "ubuntuProCompliance": "Conformitat e endureciment",
     "ubuntuProComplianceDisclaimer": "Recomandat sonque per ajudar amb FedRAMP, HIPAA e d'autras exigéncias de conformitat e de securizacion.",
     "ubuntuProComplianceUSGDescription": "Automatiza lo refortiment e l'audit amb los perfils de referéncia CIS e DISA-STIG tot permetent d'adaptacions especificas a l'environament.",
@@ -264,5 +264,11 @@
         }
     },
     "ubuntuProLivepatchEnableDescription": "Aplicar las mesas a jorn de seguretat del nuclèu mentre que lo sistèma fonciona",
-    "snapPermissionsErrorTitle": "Quicòm a fracassat"
+    "snapPermissionsErrorTitle": "Quicòm a fracassat",
+    "permissionRulePopupMenuSemanticLabel": "Actualizar las autorizacions",
+    "snapdRuleCategoryTemporarilyAllowed": "Autorizar temporàriament",
+    "snapdRuleCategoryTemporarilyDenied": "Refusar temporàriament",
+    "snapdRuleCategoryAskAlways": "Totjorn demandar",
+    "ubuntuProLoadingLabel": "Aquò pòt tardar unas segondas...",
+    "ubuntuProDisableError": "Desactivacion d’Ubuntu Pro impossibla, tornatz ensajar"
 }

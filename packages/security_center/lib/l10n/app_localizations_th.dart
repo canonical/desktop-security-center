@@ -9,22 +9,22 @@ class AppLocalizationsTh extends AppLocalizations {
   AppLocalizationsTh([String locale = 'th']) : super(locale);
 
   @override
-  String get appTitle => 'Security Center';
+  String get appTitle => 'ศูนย์ความปลอดภัย';
 
   @override
-  String get snapdRuleCategorySessionAllowed => 'Allow until logout';
+  String get snapdRuleCategorySessionAllowed => 'อนุญาตจนกว่าจะออกจากระบบ';
 
   @override
-  String get snapdRuleCategorySessionDenied => 'Deny until logout';
+  String get snapdRuleCategorySessionDenied => 'ปฏิเสธจนกว่าจะออกจากระบบ';
 
   @override
-  String get snapdRuleCategoryForeverAllowed => 'Allow always';
+  String get snapdRuleCategoryForeverAllowed => 'อนุญาตเสมอ';
 
   @override
   String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
 
   @override
-  String get snapdRuleCategoryForeverDenied => 'Deny always';
+  String get snapdRuleCategoryForeverDenied => 'ปฏิเสธเสมอ';
 
   @override
   String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
@@ -36,104 +36,103 @@ class AppLocalizationsTh extends AppLocalizations {
   String get snapdRuleCategoryAskAlways => 'Ask always';
 
   @override
-  String get snapPermissionReadLabel => 'Read';
+  String get snapPermissionReadLabel => 'อ่าน';
 
   @override
-  String get snapPermissionWriteLabel => 'Write';
+  String get snapPermissionWriteLabel => 'เขียน';
 
   @override
-  String get snapPermissionExecuteLabel => 'Execute';
+  String get snapPermissionExecuteLabel => 'ปฏิบัติการ';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'เข้าถึง';
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Require sandboxed apps to ask for permissions';
+      'กำหนดให้แอปในแซนด์บ็อกซ์ต้องขอสิทธิ์การอนุญาต';
 
   @override
   String get snapPermissionsEnableWarning =>
-      'This is an experimental feature for controlling access to your system’s resources.';
+      'นี่คือฟีเจอร์ทดลองสำหรับควบคุมการเข้าถึงทรัพยากรต่างๆ ของระบบคุณ';
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Enabling, this may take a few seconds...';
+      'กำลังเปิดใช้งาน อาจใช้เวลาสักครู่...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Disabling, this may take a few seconds...';
+      'กำลังปิดใช้งาน อาจใช้เวลาสักครู่...';
 
   @override
-  String get snapPermissionsExperimentalLabel => 'Experimental';
+  String get snapPermissionsExperimentalLabel => 'ทดลอง';
 
   @override
   String get snapPermissionsOtherDescription =>
-      'You can manage other permissions in Settings › Apps.';
+      'คุณสามารถจัดการการกำหนดสิทธิ์อื่นๆ ได้ใน การตั้งค่า › แอปพลิเคชัน';
 
   @override
-  String get snapPermissionsPageTitle => 'App permissions';
+  String get snapPermissionsPageTitle => 'การกำหนดสิทธิ์ของแอป';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'มีบางอย่างผิดพลาด';
 
   @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n rules',
-      one: '1 rule',
-      zero: 'no rules',
+      other: 'กฎ $n ข้อ',
+      one: 'กฎ 1 ข้อ',
+      zero: 'ไม่มีกฎ',
     );
     return '$_temp0';
   }
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Manage $interface permissions for $snap.';
+    return 'จัดการการกำหนดสิทธิ์ $interface สำหรับ $snap';
   }
 
   @override
-  String get snapRulesPageEmptyTileLabel => 'No rules yet';
+  String get snapRulesPageEmptyTileLabel => 'ยังไม่มีกฎ';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel => 'ยังไม่มีแอปใดขอสิทธิ์เข้าถึง';
 
   @override
-  String get snapRulesRemoveAll => 'Remove all rules';
+  String get snapRulesRemoveAll => 'ลบกฎทั้งหมด';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => 'ตั้งค่าการกำหนดสิทธิ์ทั้งหมดใหม่';
 
   @override
-  String get homeInterfacePageTitle => 'Home folder';
+  String get homeInterfacePageTitle => 'โฟลเดอร์โฮม';
 
   @override
   String get homeInterfacePageDescription =>
-      'Manage permissions to access files in your Home folder.';
+      'จัดการสิทธิ์การเข้าถึงไฟล์ในโฟลเดอร์บ้านของคุณ';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'กล้อง';
 
   @override
-  String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+  String get cameraInterfacePageDescription => 'อนุญาตให้แอปเข้าถึงกล้องของคุณ';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'ไมโครโฟน';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'อนุญาตให้แอปเข้าถึงไมโครโฟนของคุณ';
 
   @override
-  String get interfacePageTitle => 'Manage permissions';
+  String get interfacePageTitle => 'จัดการการกำหนดสิทธิ์';
 
   @override
-  String get interfacePageLinkLearnMore => 'Learn more';
+  String get interfacePageLinkLearnMore => 'เรียนรู้เพิ่มเติม';
 
   @override
-  String get interfacePageLinkReportIssues => 'Report issues';
+  String get interfacePageLinkReportIssues => 'รายงานปัญหา';
 
   @override
   String interfaceSnapCount(int n) {

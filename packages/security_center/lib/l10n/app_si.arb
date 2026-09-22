@@ -1,16 +1,9 @@
 {
-  "snapdRuleCategorySessionAllowed": "නික්මෙන තෙක් ඉඩ දෙන්න",
-  "@snapdRuleCategorySessionAllowed": {},
-  "snapdRuleCategoryForeverDenied": "සැමවිට ප්‍රතික්‍ෂේප",
-  "@snapdRuleCategoryForeverDenied": {},
-  "snapPermissionReadLabel": "කියවීම",
-  "@snapPermissionReadLabel": {},
-  "snapPermissionWriteLabel": "ලිවීම",
-  "@snapPermissionWriteLabel": {},
-  "snapPermissionsExperimentalLabel": "පරීක්‍ෂාත්මක",
-  "@snapPermissionsExperimentalLabel": {},
-  "appTitle": "ආරක්‍ෂණ මධ්‍යස්ථානය",
-  "@appTitle": {},
-  "snapdRuleCategoryForeverAllowed": "සැමවිට ඉඩ දෙන්න",
-  "@snapdRuleCategoryForeverAllowed": {}
+    "snapdRuleCategorySessionAllowed": "නික්මෙන තෙක් ඉඩ දෙන්න",
+    "snapdRuleCategoryForeverDenied": "සැමවිට ප්‍රතික්‍ෂේප",
+    "snapPermissionReadLabel": "කියවීම",
+    "snapPermissionWriteLabel": "ලිවීම",
+    "snapPermissionsExperimentalLabel": "පරීක්‍ෂාත්මක",
+    "appTitle": "ආරක්‍ෂණ මධ්‍යස්ථානය",
+    "snapdRuleCategoryForeverAllowed": "සැමවිට ඉඩ දෙන්න"
 }

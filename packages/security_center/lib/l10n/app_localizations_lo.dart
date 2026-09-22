@@ -675,14 +675,14 @@ class AppLocalizationsLo extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM ໃຫ້ບໍລິການແພັດຄວາມປອດໄພເປັນເວລາ 10 ປີ ສຳລັບແພັກເກັດໂອເພນຊອດຫຼາຍກວ່າ 25,000 ແພັກເກັດ. ໄດ້ຮັບການຈັດການຊ່ອງໂຫວ່ແບບຕໍ່ເນື່ອງສຳລັບ CVE ລະດັບວິກິດ, ສູງ ແລະ ກາງ.';
+      'ESM ໃຫ້ການປັບປຸງຄວາມປອດໄພເປັນເວລາ 10 ປີ ສຳລັບຄັງເກັບຂໍ້ມູນ Ubuntu ທັງໝົດ. ຮັບການຈັດການຈຸດອ່ອນແບບຕໍ່ເນື່ອງ ສຳລັບ CVEs ໃນລະດັບວິກິດ, ສູງ ແລະ ລະດັບປານກາງທີ່ຖືກຄັດເລືອກ.';
 
   @override
   String get ubuntuProESMMainTitle => 'ແພັກເກັດຫຼັກ (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'ການອັບເດດຄວາມປອດໄພສຳລັບ 2,300 ແພັກເກັດ Ubuntu Main ຈົນເຖິງປີ $year';
+    return 'ການອັບເດດຄວາມປອດໄພສຳລັບແພັກເກດ Ubuntu Main ຈົນເຖິງປີ $year';
   }
 
   @override
@@ -690,7 +690,7 @@ class AppLocalizationsLo extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'ການອັບເດດຄວາມປອດໄພເພີ່ມເຕີມສຳລັບແພັກເກັດ Ubuntu Universe ຫຼາຍກວ່າ 23,000 ແພັກເກັດ ຈົນເຖິງປີ $year';
+    return 'ການອັບເດດຄວາມປອດໄພເພີ່ມເຕີມສຳລັບແພັກເກດ Ubuntu Universe ຈົນເຖິງປີ $year';
   }
 
   @override

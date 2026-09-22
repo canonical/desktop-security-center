@@ -713,7 +713,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
+  String get ubuntuProLivepatchTitle => 'Livepatch pour le noyau';
 
   @override
   String get ubuntuProLivepatchEnableTitle => 'Activer Livepatch';

@@ -27,7 +27,7 @@
     "snapdRuleCategoryForeverDenied": "Завжди забороняти",
     "snapPermissionExecuteLabel": "Виконання",
     "snapPermissionsDisablingLabel": "Вимкнення, це може тривати кілька секунд...",
-    "snapPermissionsOtherDescription": "Ви можете керувати іншими дозволами в Налаштуваннях › Програми.",
+    "snapPermissionsOtherDescription": "Інші дозволи можна налаштувати в розділі «Налаштування» › «Застосунки».",
     "snapRulesPageDescription": "Керувати дозволами {interface} для {snap}.",
     "@snapRulesPageDescription": {
         "placeholders": {
@@ -47,7 +47,7 @@
             }
         }
     },
-    "snapPermissionsEnableTitle": "Вимагати від застосунків запитувати про системні дозволи",
+    "snapPermissionsEnableTitle": "Вимагати, щоб застосунки в ізольованому середовищі запитували дозволи",
     "diskEncryptionPageTitle": "Шифрування диска",
     "diskEncryptionPageRecoveryKey": "Ключ відновлення",
     "diskEncryptionPageStoreYourKey": "Ключ відновлення дає змогу відновити доступ до ваших даних, якщо диск не вдасться розблокувати під час завантаження. Збережіть його в безпечному місці.",
@@ -182,7 +182,7 @@
             }
         }
     },
-    "ubuntuProLearnMore": "Дізнайтеся про Ubuntu Pro",
+    "ubuntuProLearnMore": "Докладніше про Ubuntu Pro",
     "ubuntuProEnablePro": "Увімкнути Ubuntu Pro",
     "ubuntuProEnableMagic": "Увімкнути за допомогою облікового запису Ubuntu One",
     "ubuntuProEnableMagicSubtitle": "Ви зможете створити обліковий запис безкоштовно",
@@ -199,7 +199,7 @@
             }
         }
     },
-    "ubuntuProMagicError": "Не вдалося ввімкнути Ubuntu Pro, спробуйте ще раз",
+    "ubuntuProMagicError": "Не вдалося активувати Ubuntu Pro. Спробуйте ще раз",
     "ubuntuProEnableToken": "Увімкнути за допомогою токена",
     "ubuntuProEnableTokenError": "Не вдається ввімкнути Ubuntu Pro",
     "ubuntuProEnableTokenSubtitle": "Від вашого ІТ-адміністратора або з {proLink}",
@@ -221,11 +221,11 @@
     "ubuntuProTokenLabel": "Токен",
     "ubuntuProDisablePro": "Вимкнути Ubuntu Pro",
     "ubuntuProDisable": "Вимкнути",
-    "ubuntuProDisablePrompt": "Вимкнення Ubuntu Pro від'єднає вашу підписку від цього комп’ютера. Продовжити?",
+    "ubuntuProDisablePrompt": "Вимкнення Ubuntu Pro призведе до від’єднання вашої передплати від цього комп’ютера. Чи бажаєте продовжити?",
     "ubuntuProEnable": "Увімкнути",
     "ubuntuProCancel": "Скасувати",
-    "ubuntuProFeatureEnableError": "Не вдалося ввімкнути функцію, спробуйте ще раз.",
-    "ubuntuProFeatureDisableError": "Не вдалося вимкнути функцію, спробуйте ще раз.",
+    "ubuntuProFeatureEnableError": "Не вдалося увімкнути цю функцію. Спробуйте ще раз.",
+    "ubuntuProFeatureDisableError": "Не вдалося вимкнути цю функцію. Спробуйте ще раз.",
     "ubuntuProCompliance": "Відповідність та посилення захисту",
     "ubuntuProComplianceDisclaimer": "Рекомендовано лише для допомоги з FedRAMP, HIPAA та іншими вимогами щодо відповідності та посилення безпеки.",
     "ubuntuProComplianceUSGTitle": "Посібник з безпеки Ubuntu (USG)",
@@ -264,5 +264,11 @@
     "ubuntuProLivepatchEnableTitle": "Увімкнути Livepatch",
     "ubuntuProLivepatchEnableDescription": "Застосовуйте оновлення безпеки ядра під час роботи системи",
     "ubuntuProLivepatchShowTitle": "Показати стан Livepatch у верхній панелі",
-    "snapPermissionsErrorTitle": "Щось пішло не так"
+    "snapPermissionsErrorTitle": "Щось пішло не так",
+    "permissionRulePopupMenuSemanticLabel": "Оновити дозволи",
+    "snapdRuleCategoryTemporarilyAllowed": "Дозволити тимчасово",
+    "snapdRuleCategoryTemporarilyDenied": "Тимчасово відмовити",
+    "snapdRuleCategoryAskAlways": "Завжди запитувати",
+    "ubuntuProLoadingLabel": "Це може зайняти кілька секунд...",
+    "ubuntuProDisableError": "Не вдалося вимкнути Ubuntu Pro. Спробуйте ще раз"
 }
