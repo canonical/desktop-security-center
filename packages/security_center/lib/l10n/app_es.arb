@@ -92,7 +92,7 @@
     "diskEncryptionPageErrorUnsupportedStateBody": "La configuración TPM de su equipo no está en un estado soportado.",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "El centro de seguridad no pudo conectarse a la interfaz de snapd",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
-    "recoveryKeyExceptionFileSystemTitle": "No se guardó la clave de recuperación",
+    "recoveryKeyExceptionFileSystemTitle": "No se guardó el archivo de la clave de recuperación",
     "diskEncryptionPageReplaceDialogQRBody": "Escanee el código QR para copiar la clave de recuperación y guardarla en un lugar seguro, como un gestor de contraseñas. También puede tomar una foto para usarlo más tarde.",
     "diskEncryptionPageErrorUnsupportedSnapdHeader": "Su versión de snapd no tiene soporte",
     "diskEncryptionPageErrorUnsupportedSnapdBody": "Compruebe que el Centro de seguridad y snapd están actualizados.",
