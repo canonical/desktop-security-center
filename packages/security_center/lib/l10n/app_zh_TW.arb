@@ -243,7 +243,7 @@
     "ubuntuProESMTitle": "擴展安全維護 (ESM)",
     "ubuntuProESMDescription": "ESM 為整個 Ubuntu 軟體庫提供長達 10 年的安全性修補程式。針對關鍵級、高風險級以及部分中風險級的 CVE，提供持續性的漏洞管理服務。",
     "ubuntuProESMMainTitle": "主要軟體包 (esm-infra)",
-    "ubuntuProESMMainDescription": "Ubuntu Main 軟體包的安全更新將持續至 {year}",
+    "ubuntuProESMMainDescription": "Ubuntu Main 套件的安全性更新將持續至 {year} 年",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
