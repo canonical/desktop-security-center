@@ -175,7 +175,7 @@
     "ubuntuProCancel": "Cancelar",
     "ubuntuProEnableToken": "Habilite com um token",
     "ubuntuProEnable": "Habilitar",
-    "ubuntuProTokenPrompt": "Obtenha um token do Ubuntu Pro do seu administrador ou {proLink}",
+    "ubuntuProTokenPrompt": "Obtenha um token do Ubuntu Pro com seu administrador ou em {proLink}",
     "@ubuntuProTokenPrompt": {
         "placeholders": {
             "proLink": {
@@ -186,7 +186,7 @@
     "microphoneInterfacePageTitle": "Microfone",
     "ubuntuProNotSupported": "Ubuntu Pro não está disponível para essa versão do Ubuntu",
     "microphoneInterfacePageDescription": "Permite aplicativos acessarem seu microfone.",
-    "ubuntuProDisabled": "Segurança de nível empresarial e conformidade para seu computador. Gratuito para uso pessoal. {learnMoreLink}",
+    "ubuntuProDisabled": "Segurança de nível empresarial e conformidade para seu computador. Sempre gratuito para uso pessoal. {learnMoreLink}",
     "@ubuntuProDisabled": {
         "placeholders": {
             "learnMoreLink": {
