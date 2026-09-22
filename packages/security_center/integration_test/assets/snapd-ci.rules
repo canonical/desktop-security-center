@@ -1,0 +1,5 @@
+polkit.addRule(function(action, subject) {
+    if (action.id == "io.snapcraft.snapd.manage") {
+        return polkit.Result.YES;
+    }
+});
