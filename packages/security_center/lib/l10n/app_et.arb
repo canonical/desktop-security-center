@@ -37,7 +37,7 @@
             }
         }
     },
-    "snapPermissionsEnableTitle": "Eelda, et aedikkäituses rakendused küsivad õigusi",
+    "snapPermissionsEnableTitle": "Nõua, et aedikkäituses rakendused küsiksid õigusi",
     "snapRulesCount": "{n, plural, =0{reeglid on määratlemata} =1{1 reegel} other{{n} reeglit}}",
     "@snapRulesCount": {
         "placeholders": {
