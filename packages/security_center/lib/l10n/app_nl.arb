@@ -148,7 +148,7 @@
     "snapRulesResetAllPermissions": "Alle machtigingen opnieuw instellen",
     "cameraInterfacePageTitle": "Camera",
     "cameraInterfacePageDescription": "Apps toegang geven tot uw camera's.",
-    "ubuntuProESMUniverseTitle": "Universumpakketten (esm-apps)",
+    "ubuntuProESMUniverseTitle": "Universe-pakketten (esm-apps)",
     "diskEncryptionPageAdditionalSecurityLearnMore": "Meer info",
     "diskEncryptionPageAddPassphraseButton": "Voeg wachtwoord toe...",
     "diskEncryptionPageAdditionalSecurityHeader": "Extra beveiliging",
@@ -159,7 +159,7 @@
     "ubuntuProLivepatchShowTitle": "Toon Livepatch-status in de balk bovenaan",
     "ubuntuProNotSupportedSnapdDetails": "Update snapd om Ubuntu Pro te beheren",
     "ubuntuProPageTitle": "Ubuntu Pro",
-    "ubuntuProEnabled": "Ubuntu Pro staat uit",
+    "ubuntuProEnabled": "Ubuntu Pro is ingeschakeld",
     "ubuntuProEnableMagicSubtitle": "Accounts aanmaken is gratis",
     "ubuntuProDisable": "Uitschakelen",
     "ubuntuProCancel": "Annuleren",
@@ -184,7 +184,7 @@
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Bij verlies van dit wachtwoord kan de schijf ontgrendeld worden met de herstelcode.",
     "ubuntuProComplianceFIPSDescription": "Een cryptografische modulecertificaat of compliance met de FIPS 140-2 gegevensbeschermingsstandaard uitgegeven door de Amerikaanse en Canadese overheden.",
     "microphoneInterfacePageDescription": "Applicaties toegang geven tot de microfoon.",
-    "ubuntuProDisabled": "Professionele beveiliging en compliance voor uw computer. Altijd gratis voor persoonlijk gebruik.{learnMoreLink}",
+    "ubuntuProDisabled": "Beveiliging en compliance van enterpriseniveau voor uw computer. Altijd gratis voor persoonlijk gebruik. {learnMoreLink}",
     "@ubuntuProDisabled": {
         "placeholders": {
             "learnMoreLink": {
@@ -195,16 +195,16 @@
     "ubuntuProLearnMore": "Meer info over Ubuntu Pro",
     "diskEncryptionPageAddPinDialogHeading": "Voeg PIN toe",
     "ubuntuProLivepatchEnableDescription": "Pas kernelbeveiligingsupdates toe terwijl het systeem opstaat",
-    "ubuntuProESMDescription": "Met ESM krijgt het gehele Ubuntu-archief gedurende 10 jaar beveiligingsupdates. Krijf continu kwetsbaarheidsbeheer voor kritieke, hoge en geselecteerde middelgrote CVE's.",
+    "ubuntuProESMDescription": "ESM biedt 10 jaar lang beveiligingspatches voor het gehele Ubuntu-archief. Krijg continu kwetsbaarheidsbeheer voor kritieke, hoge en geselecteerde middelgrote CVE's.",
     "diskEncryptionPageAddingPassphrase": "Wachtwoord aan het toevoegen, dit kan even duren...",
     "diskEncryptionPageAddPassphraseDialogHeading": "Voeg wachtwoord toe",
     "ubuntuProComplianceUSGTitle": "Ubuntu Beveiligingshandboek (USG)",
     "ubuntuProMagicPrompt": "Log in met een Ubuntu One-account, of maak er gratis een aan.",
-    "ubuntuProComplianceFIPSPrompt": "Kies je lievelings-FIPS-optie",
+    "ubuntuProComplianceFIPSPrompt": "Kies je voorkeurs-FIPS-optie",
     "diskEncryptionPageAddPinDialogBodyRecovery": "Als de PIN vergeten wordt, kan de schijf nogsteeds ontgrendeld worden met de herstelcode.",
     "ubuntuProEnableTokenError": "Er ging iets fout bij het inschakelen van Ubuntu Pro",
     "ubuntuProComplianceFIPSEnable": "FIPS Inschakelen",
-    "ubuntuProESMUniverseDescription": "Extra beveiligingsupdates voor Ubuntu Universumpakketten tot {year}",
+    "ubuntuProESMUniverseDescription": "Extra beveiligingsupdates voor Ubuntu Universe-pakketten tot {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
