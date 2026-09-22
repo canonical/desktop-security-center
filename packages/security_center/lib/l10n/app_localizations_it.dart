@@ -45,7 +45,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get snapPermissionExecuteLabel => 'Eseguibile';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => 'Accesso';
 
   @override
   String get snapPermissionsEnableTitle =>
@@ -57,11 +57,11 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'L\'attivazione potrebbe richiedere alcuni secondi...';
+      'Attivazione in corso, potrebbero essere necessari alcuni secondi...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'La disabilitazione potrebbe richiedere alcuni secondi...';
+      'Disabilitazione in corso, potrebbero essere necessari alcuni secondi...';
 
   @override
   String get snapPermissionsExperimentalLabel => 'Sperimentale';
@@ -71,19 +71,19 @@ class AppLocalizationsIt extends AppLocalizations {
       'Puoi gestire gli altri permessi in Impostazioni › Applicazioni.';
 
   @override
-  String get snapPermissionsPageTitle => 'Permessi delle app';
+  String get snapPermissionsPageTitle => 'Permessi delle applicazioni';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Qualcosa è andato storto';
 
   @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n rules',
-      one: '1 rule',
-      zero: 'no rules',
+      other: '$n regole',
+      one: '1 regola',
+      zero: 'nessuna regola',
     );
     return '$_temp0';
   }
@@ -97,13 +97,14 @@ class AppLocalizationsIt extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Ancora nessuna regola';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel =>
+      'Nessuna app ha ancora richiesto l\'accesso';
 
   @override
   String get snapRulesRemoveAll => 'Rimuovi tutte le regole';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => 'Reimposta tutti i permessi';
 
   @override
   String get homeInterfacePageTitle => 'Cartella Home';
@@ -113,18 +114,18 @@ class AppLocalizationsIt extends AppLocalizations {
       'Gestisci i permessi per accedere ai file della tua cartella Home.';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => 'Fotocamera';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+      'Consenti alle app di accedere alle tue fotocamere.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'Microfono';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'Consenti alle app di accedere al tuo microfono.';
 
   @override
   String get interfacePageTitle => 'Gestione permessi';
@@ -140,571 +141,582 @@ class AppLocalizationsIt extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n apps',
+      other: '$n app',
       one: '1 app',
-      zero: 'no apps',
+      zero: 'nessuna app',
     );
     return '$_temp0';
   }
 
   @override
-  String get diskEncryptionPageTitle => 'Disk encryption';
+  String get diskEncryptionPageTitle => 'Crittografia del disco';
 
   @override
-  String get diskEncryptionPageRecoveryKey => 'Recovery key';
+  String get diskEncryptionPageRecoveryKey => 'Chiave di ripristino';
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe.';
+      'La chiave di ripristino ti consente di riottenere l\'accesso ai tuoi dati se il disco non riesce a sbloccarsi durante l\'avvio. Salvala in un luogo sicuro.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'The recovery key lets you regain access to your data if the disk fails to unlock during startup. Save it somewhere safe. $learnMoreLink';
+    return 'La chiave di ripristino ti consente di riottenere l\'accesso ai tuoi dati se il disco non riesce a sbloccarsi durante l\'avvio. Salvala in un luogo sicuro. $learnMoreLink';
   }
 
   @override
   String get diskEncryptionPageLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'Scopri di più sulla crittografia basata sull\'hardware';
 
   @override
-  String get diskEncryptionPageCheckKey => 'Check recovery key...';
+  String get diskEncryptionPageCheckKey =>
+      'Verifica la chiave di ripristino...';
 
   @override
-  String get diskEncryptionPageDialogHeaderCheckKey => 'Check recovery key';
+  String get diskEncryptionPageDialogHeaderCheckKey =>
+      'Verifica la chiave di ripristino';
 
   @override
-  String get diskEncryptionPageCheck => 'Check';
+  String get diskEncryptionPageCheck => 'Verifica';
 
   @override
-  String get diskEncryptionPageValidKey => 'Valid key';
+  String get diskEncryptionPageValidKey => 'Chiave valida';
 
   @override
-  String get diskEncryptionPageInvalidKey => 'Invalid key';
+  String get diskEncryptionPageInvalidKey => 'Chiave non valida';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Enter your recovery key';
+  String get diskEncryptionPageEnterKey =>
+      'Inserisci la tua chiave di ripristino';
 
   @override
-  String get diskEncryptionPageKeyWorks => 'Recovery key works';
+  String get diskEncryptionPageKeyWorks => 'La chiave di ripristino funziona';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
-      'Remember to keep it somewhere safe.';
+      'Ricorda di conservarla in un luogo sicuro.';
 
   @override
-  String get diskEncryptionPageKeyDoesntWork => 'Recovery key does not work';
+  String get diskEncryptionPageKeyDoesntWork =>
+      'La chiave di ripristino non funziona';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Check the key or replace it with a new one.';
+      'Verifica la chiave o sostituiscila con una nuova.';
 
   @override
-  String get diskEncryptionPageError => 'Error';
+  String get diskEncryptionPageError => 'Errore';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Replace recovery key...';
+  String get diskEncryptionPageReplaceButton =>
+      'Sostituisci la chiave di ripristino...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Replace recovery key';
+  String get diskEncryptionPageReplaceDialogHeader =>
+      'Sostituisci la chiave di ripristino';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Save the new recovery key somewhere safe. Once you replace it, you will not be able to use the old key anymore.';
+      'Salva la nuova chiave di ripristino in un luogo sicuro. Una volta sostituita, non potrai più utilizzare la vecchia chiave.';
 
   @override
-  String get diskEncryptionPageReplaceDialogShowQR => 'Show QR code';
+  String get diskEncryptionPageReplaceDialogShowQR => 'Mostra codice QR';
 
   @override
-  String get diskEncryptionPageReplaceDialogSave => 'Save to file';
+  String get diskEncryptionPageReplaceDialogSave => 'Salva su file';
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'I saved my recovery key somewhere safe';
+      'Ho salvato la mia chiave di ripristino in un luogo sicuro';
 
   @override
-  String get diskEncryptionPageReplaceDialogReplace => 'Replace';
+  String get diskEncryptionPageReplaceDialogReplace => 'Sostituisci';
 
   @override
-  String get diskEncryptionPageReplaceDialogDiscard => 'Discard';
+  String get diskEncryptionPageReplaceDialogDiscard => 'Scarta';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Recovery key replaced';
+      'Chiave di ripristino sostituita';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Remember to keep it somewhere safe.';
+      'Ricorda di conservarla in un luogo sicuro.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Recovery key replacement failed';
+      'Sostituzione della chiave di ripristino non riuscita';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Something went wrong replacing your recovery key, your old key will remain vaild.';
+      'Si è verificato un errore durante la sostituzione della chiave di ripristino. La vecchia chiave rimarrà valida.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop - Encryption recovery key';
+      'Ubuntu Desktop - Chiave di ripristino della crittografia';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Scan the QR code to copy the recovery key and save it somewhere safe, such as a password manager. You can also take a photo for later use.';
+      'Scansiona il codice QR per copiare la chiave di ripristino e salvarla in un luogo sicuro, ad esempio in un gestore di password. Puoi anche scattare una foto per utilizzarla in seguito.';
 
   @override
-  String get diskEncryptionPageClipboardNotification => 'Copied to clipboard';
+  String get diskEncryptionPageClipboardNotification => 'Copiato negli appunti';
 
   @override
-  String get diskEncryptionPageCopySemanticLabel => 'Copy';
+  String get diskEncryptionPageCopySemanticLabel => 'Copia';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Encryption settings not available';
+      'Impostazioni di crittografia non disponibili';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
-      'Failed to retrieve the encryption status of this computer.';
+      'Impossibile recuperare lo stato della crittografia di questo computer.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedStateBody =>
-      'Your computer\'s TPM configuration is not in a supported state.';
+      'La configurazione TPM del computer non è in uno stato supportato.';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdHeader =>
-      'Your snapd version is not supported';
+      'La tua versione di snapd non è supportata';
 
   @override
   String get diskEncryptionPageErrorUnsupportedSnapdBody =>
-      'Check the Security Center and snapd are up to date.';
+      'Verifica che Security Center e snapd siano aggiornati.';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceHeader =>
-      'Security Center cannot connect to the snapd interface';
+      'Security Center non può connettersi all\'interfaccia snapd';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'To fix this, run this command in the terminal:';
+      'Per risolvere il problema, esegui questo comando nel terminale:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => 'Aggiungi PIN...';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton => 'Aggiungi passphrase...';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading =>
+      'Aggiungi passphrase';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => 'Aggiungi PIN';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      'Dovrai inserire il tuo PIN ogni volta che il computer si avvia. Questo PIN è diverso dalla tua password utente.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      'Se dimentichi il PIN, puoi riottenere l\'accesso al disco utilizzando la chiave di ripristino.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      'Dovrai inserire la tua passphrase ogni volta che il computer si avvia. Questa passphrase è diversa dalla tua password utente.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
+      'Se dimentichi la passphrase, puoi riottenere l\'accesso al disco utilizzando la chiave di ripristino.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+      'Sicurezza aggiuntiva';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
+      'Puoi impostare una passphrase o un PIN per una maggiore sicurezza. Dovrai inserirlo ogni volta che avvii il computer.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Scopri di più';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => 'Aggiungi';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => 'Rimuovi PIN...';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton =>
+      'Rimuovi passphrase...';
 
   @override
   String get diskEncryptionPageAddingPin =>
-      'Adding PIN, this may take a few seconds...';
+      'Aggiunta del PIN in corso, potrebbero essere necessari alcuni secondi...';
 
   @override
   String get diskEncryptionPageAddingPassphrase =>
-      'Adding passphrase, this may take a few seconds...';
+      'Aggiunta della passphrase in corso, potrebbero essere necessari alcuni secondi...';
 
   @override
   String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+      'Rimozione del PIN in corso, potrebbero essere necessari alcuni secondi...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
-      'Removing passphrase, this may take a few seconds...';
+      'Rimozione della passphrase in corso, potrebbero essere necessari alcuni secondi...';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Recovery key file not saved';
+      'File della chiave di ripristino non salvato';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Recovery key file cannot be saved in a temporary location';
+      'Impossibile salvare il file della chiave di ripristino in una posizione temporanea';
 
   @override
-  String get recoveryKeyExceptionUnknownTitle => 'Unknown error';
+  String get recoveryKeyExceptionUnknownTitle => 'Errore sconosciuto';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Failed to save your recovery key to file';
+      'Impossibile salvare la chiave di ripristino nel file';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'You do not have permission to write to that file location.';
+      'Non hai i permessi per scrivere in quella posizione del file.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'You do not have permission to write to that folder. Try a different location or use another method.';
+      'Non hai i permessi per scrivere in quella cartella. Prova a scegliere una posizione diversa o usa un altro metodo.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Try a different location, such as a removable drive, or use another method.';
+      'Prova una posizione diversa, ad esempio un\'unità rimovibile, oppure usa un altro metodo.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Save recovery key file';
+  String get recoveryKeyFilePickerTitle =>
+      'Salva il file della chiave di ripristino';
 
   @override
-  String get recoveryKeyFilePickerFilter => 'Text files';
+  String get recoveryKeyFilePickerFilter => 'File di testo';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardware-backed encryption is enabled';
+  String get recoveryKeyTPMEnabled =>
+      'La crittografia con supporto hardware è attiva';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'The encryption keys are stored in your computer\'s Trusted Platform Module (TPM).';
+      'Le chiavi di crittografia sono archiviate nel Trusted Platform Module (TPM) del tuo computer.';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Learn more about hardware-backed encryption';
+      'Scopri di più sulla crittografia con supporto hardware';
 
   @override
-  String get recoveryKeyPassphraseEnabled => 'Encryption passphrase is enabled';
+  String get recoveryKeyPassphraseEnabled =>
+      'La passphrase di crittografia è attiva';
 
   @override
-  String get recoveryKeyPassphraseHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseHeader => 'Modifica passphrase';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'You need to enter your passphrase every time your computer starts.';
+      'Devi inserire la tua passphrase ogni volta che avvii il computer.';
 
   @override
-  String get recoveryKeyPassphraseButton => 'Change passphrase...';
+  String get recoveryKeyPassphraseButton => 'Modifica passphrase...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => 'Current passphrase';
+  String get recoveryKeyPassphraseCurrent => 'Passphrase attuale';
 
   @override
-  String get recoveryKeyPassphraseNew => 'New passphrase';
+  String get recoveryKeyPassphraseNew => 'Nuova passphrase';
 
   @override
-  String get recoveryKeyPassphraseConfirm => 'Confirm passphrase';
+  String get recoveryKeyPassphraseConfirm => 'Conferma passphrase';
 
   @override
-  String get recoveryKeyPassphraseCurrentError =>
-      'Incorrect passphrase, try again';
+  String get recoveryKeyPassphraseCurrentError => 'Passphrase errata, riprova';
 
   @override
   String get recoveryKeyPassphraseNewError =>
-      'Must be at least 4 characters long';
+      'Deve contenere almeno 4 caratteri';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
-      'Passphrases do not match, try again';
+      'Le passphrase non corrispondono, riprova';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Change passphrase';
+  String get recoveryKeyPassphraseDialogHeader => 'Modifica passphrase';
 
   @override
-  String get recoveryKeyPinEnabled => 'Encryption PIN is enabled';
+  String get recoveryKeyPinEnabled => 'Il PIN di crittografia è attivo';
 
   @override
-  String get recoveryKeyPinHeader => 'Encryption PIN';
+  String get recoveryKeyPinHeader => 'PIN di crittografia';
 
   @override
-  String get recoveryKeyEncrpytionPassphraseHeader => 'Encryption passphrase';
+  String get recoveryKeyEncrpytionPassphraseHeader =>
+      'Passphrase di crittografia';
 
   @override
   String get recoveryKeyPinBody =>
-      'You need to enter your PIN every time your computer starts.';
+      'Dovrai inserire il PIN ogni volta che avvii il computer.';
 
   @override
-  String get recoveryKeyPinButton => 'Change PIN...';
+  String get recoveryKeyPinButton => 'Modifica PIN...';
 
   @override
-  String get recoveryKeyPinCurrent => 'Current PIN';
+  String get recoveryKeyPinCurrent => 'PIN attuale';
 
   @override
-  String get recoveryKeyPinNew => 'New PIN';
+  String get recoveryKeyPinNew => 'Nuovo PIN';
 
   @override
-  String get recoveryKeyPinConfirm => 'Confirm PIN';
+  String get recoveryKeyPinConfirm => 'Conferma PIN';
 
   @override
-  String get recoveryKeyPinCurrentError => 'Incorrect PIN, try again';
+  String get recoveryKeyPinCurrentError => 'PIN errato, riprova';
 
   @override
-  String get recoveryKeyPinConfirmError => 'PINs do not match, try again';
+  String get recoveryKeyPinConfirmError => 'I PIN non corrispondono, riprova';
 
   @override
-  String get recoveryKeyPinDialogHeader => 'Change PIN';
+  String get recoveryKeyPinDialogHeader => 'Modifica PIN';
 
   @override
-  String get recoveryKeyPassphraseShow => 'Show';
+  String get recoveryKeyPassphraseShow => 'Mostra';
 
   @override
-  String get recoveryKeyPassphraseHide => 'Hide';
+  String get recoveryKeyPassphraseHide => 'Nascondi';
 
   @override
-  String get recoveryKeyPassphraseChange => 'Change';
+  String get recoveryKeyPassphraseChange => 'Modifica';
 
   @override
-  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN updated';
+  String get recoveryKeyPassphrasePinSuccessHeader => 'PIN aggiornato';
 
   @override
   String get recoveryKeyPassphrasePinSuccessBody =>
-      'You PIN was successfully updated.';
+      'Il PIN è stato aggiornato correttamente.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
-      'Passphrase updated';
+      'Passphrase aggiornata';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'You passphrase was successfully updated.';
+      'La passphrase è stata aggiornata correttamente.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Weak passphrase, make it longer or more complex';
+      'Passphrase debole, rendila più lunga o complessa';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Fair passphrase, make it longer or more complex for better security';
+      'Passphrase discreta, rendila più lunga o complessa per una maggiore sicurezza';
 
   @override
-  String get recoveryKeyPassphraseEntropyOptimal => 'Strong passphrase';
+  String get recoveryKeyPassphraseEntropyOptimal => 'Passphrase sicura';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Weak PIN, make it longer or less predictable';
+      'PIN debole, rendilo più lungo o meno prevedibile';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Fair PIN, make it longer or less predictable for better security';
+      'PIN discreto, rendilo più lungo o meno prevedibile per una maggiore sicurezza';
 
   @override
-  String get recoveryKeyPinEntropyOptimal => 'PIN is long enough';
+  String get recoveryKeyPinEntropyOptimal => 'Il PIN è abbastanza lungo';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => 'Something went wrong';
+  String get recoveryKeySomethingWentWrongHeader => 'Si è verificato un errore';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro is not available for this Ubuntu version';
+      'Ubuntu Pro non è disponibile per questa versione di Ubuntu';
 
   @override
   String get ubuntuProNotSupportedDetails =>
-      'Ubuntu Pro requires an LTS release';
+      'Ubuntu Pro richiede una versione LTS';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro is not supported by this snapd version';
+      'Ubuntu Pro non è supportato da questa versione di snapd';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
-      'Update snapd to manage Ubuntu Pro';
+      'Aggiorna snapd per gestire Ubuntu Pro';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Ubuntu Pro è abilitato';
 
   @override
   String get ubuntuProLoadingLabel => 'This may take a few seconds...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Enterprise-grade security and compliance for your computer. Always free for personal use. $learnMoreLink';
+    return 'Sicurezza e conformità di livello aziendale per il tuo computer. Sempre gratuito per uso personale. $learnMoreLink';
   }
 
   @override
-  String get ubuntuProLearnMore => 'Learn about Ubuntu Pro';
+  String get ubuntuProLearnMore => 'Scopri Ubuntu Pro';
 
   @override
-  String get ubuntuProEnablePro => 'Enable Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Abilita Ubuntu Pro';
 
   @override
-  String get ubuntuProEnableMagic => 'Enable with Ubuntu One account';
+  String get ubuntuProEnableMagic => 'Abilita con l\'account Ubuntu One';
 
   @override
   String get ubuntuProEnableMagicSubtitle =>
-      'You will be able to create an account for free';
+      'Potrai creare un account gratuitamente';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Log in with your Ubuntu One account, or create one for free.';
+      'Accedi con il tuo account Ubuntu One o creane uno gratuitamente.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => 'Continua nel browser';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'You can also log in at $attachLink and enter the code $attachCode';
+    return 'Puoi anche accedere a $attachLink e inserire il codice $attachCode';
   }
 
   @override
-  String get ubuntuProMagicError => 'Unable to enable Ubuntu Pro, try again';
+  String get ubuntuProMagicError => 'Impossibile abilitare Ubuntu Pro, riprova';
 
   @override
-  String get ubuntuProEnableToken => 'Enable with a token';
+  String get ubuntuProEnableToken => 'Abilita con un token';
 
   @override
-  String get ubuntuProEnableTokenError => 'Unable to enable Ubuntu Pro';
+  String get ubuntuProEnableTokenError => 'Impossibile abilitare Ubuntu Pro';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'From your IT admin or from $proLink';
+    return 'Dal tuo amministratore IT o da $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Get an Ubuntu Pro token from your administrator or from $proLink';
+    return 'Ottieni un token Ubuntu Pro dal tuo amministratore o da $proLink';
   }
 
   @override
   String get ubuntuProTokenLabel => 'Token';
 
   @override
-  String get ubuntuProDisablePro => 'Disable Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Disabilita Ubuntu Pro';
 
   @override
-  String get ubuntuProDisable => 'Disable';
+  String get ubuntuProDisable => 'Disabilita';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Disabling Ubuntu Pro will detach your subscription from this computer. Do you want to proceed?';
+      'La disabilitazione di Ubuntu Pro scollegherà il tuo abbonamento da questa macchina. Vuoi procedere?';
 
   @override
   String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
 
   @override
-  String get ubuntuProEnable => 'Enable';
+  String get ubuntuProEnable => 'Abilita';
 
   @override
-  String get ubuntuProCancel => 'Cancel';
+  String get ubuntuProCancel => 'Annulla';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Could not enable the feature, try again.';
+      'Impossibile abilitare la funzionalità, riprova.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Could not disable the feature, try again.';
+      'Impossibile disabilitare la funzionalità, riprova.';
 
   @override
-  String get ubuntuProCompliance => 'Compliance and hardening';
+  String get ubuntuProCompliance => 'Conformità e hardening';
 
   @override
   String get ubuntuProComplianceDisclaimer =>
-      'Only recommended to assist with FedRAMP, HIPAA and other compliance and hardening requirements.';
+      'Consigliato solo per supportare FedRAMP, HIPAA e altri requisiti di conformità e hardening.';
 
   @override
   String get ubuntuProComplianceUSGTitle => 'Ubuntu Security Guide (USG)';
 
   @override
   String get ubuntuProComplianceUSGDescription =>
-      'Automates hardening and auditing with CIS benchmark and DISA-STIG profiles while allowing for environment-specific customizations.';
+      'Automatizza l\'hardening e l\'auditing con benchmark CIS e profili DISA-STIG, consentendo personalizzazioni specifiche per l\'ambiente.';
 
   @override
   String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'A US and Canada government cryptographic module certification of compliance with the FIPS 140-2 data protection standard.';
+      'Una certificazione dei moduli crittografici dei governi di Stati Uniti e Canada per la conformità allo standard di protezione dei dati FIPS 140-2.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Enable FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'Abilita FIPS';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Enabling FIPS cannot be reversed and Livepatch will be permanently disabled.';
+      'L\'abilitazione di FIPS non può essere annullata e Livepatch verrà disabilitato in modo permanente.';
 
   @override
   String get ubuntuProComplianceFIPSPrompt =>
-      'Choose your preferred FIPS option';
+      'Scegli l\'opzione FIPS preferita';
 
   @override
-  String get ubuntuProComplianceFIPSUpdates => 'FIPS with updates';
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS con aggiornamenti';
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages and allows for regular security updates.';
+      'Installa pacchetti convalidati FIPS 140-2 e consente regolari aggiornamenti di sicurezza.';
 
   @override
-  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS without updates';
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS senza aggiornamenti';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Installs FIPS 140-2 validated packages. These will not be updated until the next recertification.';
+      'Installa pacchetti convalidati FIPS 140-2. Questi non verranno aggiornati fino alla prossima ricertificazione.';
 
   @override
   String get ubuntuProComplianceDocumentation =>
-      'Security compliance documentation';
+      'Documentazione sulla conformità alla sicurezza';
 
   @override
   String get ubuntuProESMTitle => 'Expanded Security Maintenance (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM provides 10 years of security patches for the entire Ubuntu Archive. Get continuous vulnerability management for critical, high and selected medium CVEs.';
+      'ESM fornisce 10 anni di patch di sicurezza per l\'intero archivio Ubuntu. Ottieni una gestione continua delle vulnerabilità per CVE critiche, elevate e alcune CVE di gravità media selezionate.';
 
   @override
-  String get ubuntuProESMMainTitle => 'Main packages (esm-infra)';
+  String get ubuntuProESMMainTitle => 'Pacchetti principali (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Security updates for Ubuntu Main packages until $year';
+    return 'Aggiornamenti di sicurezza per i pacchetti Main di Ubuntu fino al $year';
   }
 
   @override
-  String get ubuntuProESMUniverseTitle => 'Universe packages (esm-apps)';
+  String get ubuntuProESMUniverseTitle => 'Pacchetti Universe (esm-apps)';
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Additional security updates for Ubuntu Universe packages until $year';
+    return 'Aggiornamenti di sicurezza aggiuntivi per i pacchetti Universe di Ubuntu fino al $year';
   }
 
   @override
   String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Enable Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'Abilita Livepatch';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Apply kernel security updates while the system runs';
+      'Applica aggiornamenti di sicurezza del kernel mentre il sistema è in esecuzione';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Show Livepatch status in the top bar';
+      'Mostra lo stato di Livepatch nella barra superiore';
 }

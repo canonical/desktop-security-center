@@ -21,19 +21,19 @@ class AppLocalizationsSv extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Tillåt alltid';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Uppdatera rättigheter';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Neka alltid';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Tillåt tillfälligt';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Neka tillfälligt';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Fråga alltid';
 
   @override
   String get snapPermissionReadLabel => 'Läs';
@@ -49,7 +49,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Kräv program att be om systembehörigheter';
+      'Kräv program i sandlådor att be om rättigheter';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -547,7 +547,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro är aktiverat';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Detta kan ta en liten stund...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -613,7 +613,8 @@ class AppLocalizationsSv extends AppLocalizations {
       'Att inaktivera Ubuntu Pro kommer att koppla bort din prenumeration från den här datorn. Vill du fortsätta?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Kunde inte inaktivera Ubuntu Pro, försök igen';
 
   @override
   String get ubuntuProEnable => 'Aktivera';

@@ -45,7 +45,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get snapPermissionExecuteLabel => '执行';
 
   @override
-  String get snapPermissionAccessLabel => 'Access';
+  String get snapPermissionAccessLabel => '访问';
 
   @override
   String get snapPermissionsEnableTitle => '要求应用程序申请系统权限';
@@ -69,7 +69,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get snapPermissionsPageTitle => '应用程序权限';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => '出现了一些问题';
 
   @override
   String snapRulesCount(int n) {
@@ -92,13 +92,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => '尚无规则';
 
   @override
-  String get cameraRulesPageEmptyTileLabel => 'No apps requested access yet';
+  String get cameraRulesPageEmptyTileLabel => '当前没有应用请求访问权限';
 
   @override
   String get snapRulesRemoveAll => '删除所有规则';
 
   @override
-  String get snapRulesResetAllPermissions => 'Reset all permissions';
+  String get snapRulesResetAllPermissions => '重置所有权限';
 
   @override
   String get homeInterfacePageTitle => '主文件夹';
@@ -107,18 +107,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeInterfacePageDescription => '管理访问您主文件夹中文件的权限。';
 
   @override
-  String get cameraInterfacePageTitle => 'Camera';
+  String get cameraInterfacePageTitle => '摄像头';
 
   @override
-  String get cameraInterfacePageDescription =>
-      'Allow apps to access your cameras.';
+  String get cameraInterfacePageDescription => '允许应用访问您的相机。';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => '麦克风';
 
   @override
-  String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+  String get microphoneInterfacePageDescription => '允许应用访问您的麦克风。';
 
   @override
   String get interfacePageTitle => '管理权限';
@@ -149,15 +147,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      '恢复密钥让您恢复访问您的数据当您的磁盘在启动时无法解锁。请在一些安全的地方保存。';
+      '如果磁盘在启动时无法解锁，恢复密钥可让您重新访问数据。请将其保存在安全的地方。';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return '恢复密钥让您恢复访问您的数据当您的磁盘在启动时无法解锁。请在一些安全的地方保存。$learnMoreLink';
+    return '如果磁盘在启动时无法解锁，恢复密钥可让您重新访问数据。请将其保存在安全的地方。$learnMoreLink';
   }
 
   @override
-  String get diskEncryptionPageLearnMore => '了解更多关于恢复密钥';
+  String get diskEncryptionPageLearnMore => '了解更多关于硬件支持的加密';
 
   @override
   String get diskEncryptionPageCheckKey => '检查恢复密钥...';
@@ -267,59 +265,58 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      '要修复这个，在终端中输入：';
+      '为了修复此问题，在终端中输入以下指令：';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
       'snap connect desktop-security-center:snap-fde-control';
 
   @override
-  String get diskEncryptionPageAddPinButton => 'Add PIN...';
+  String get diskEncryptionPageAddPinButton => '添加 PIN…';
 
   @override
-  String get diskEncryptionPageAddPassphraseButton => 'Add passphrase...';
+  String get diskEncryptionPageAddPassphraseButton => '添加密码短语…';
 
   @override
-  String get diskEncryptionPageAddPassphraseDialogHeading => 'Add passphrase';
+  String get diskEncryptionPageAddPassphraseDialogHeading => '添加密码短语';
 
   @override
-  String get diskEncryptionPageAddPinDialogHeading => 'Add PIN';
+  String get diskEncryptionPageAddPinDialogHeading => '添加 PIN';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'You will need to enter your PIN every time your computer starts. This PIN is different from your user password.';
+      '每次启动电脑时，您需要输入 PIN 码。此 PIN 码与您的用户密码不同。';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'If you forget your PIN, you can regain access to the disk by using the recovery key.';
+      '如果您忘记 PIN 码，您可以使用恢复密钥重新访问磁盘。';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.';
+      '每次电脑启动时，您需要输入您的密码短语。此密码短语与您的用户密码不同。';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
       'If you forget your passphrase, you can regain access to the disk by using the recovery key.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityHeader =>
-      'Additional security';
+  String get diskEncryptionPageAdditionalSecurityHeader => '额外的安全措施';
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
       'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.';
 
   @override
-  String get diskEncryptionPageAdditionalSecurityLearnMore => 'Learn more';
+  String get diskEncryptionPageAdditionalSecurityLearnMore => '了解更多';
 
   @override
-  String get diskEncryptionPageAddPinDialogSaveButton => 'Add';
+  String get diskEncryptionPageAddPinDialogSaveButton => '添加';
 
   @override
-  String get diskEncryptionPageRemovePinButton => 'Remove PIN...';
+  String get diskEncryptionPageRemovePinButton => '移除 PIN…';
 
   @override
-  String get diskEncryptionPageRemovePassphraseButton => 'Remove passphrase...';
+  String get diskEncryptionPageRemovePassphraseButton => '移除密码短语…';
 
   @override
   String get diskEncryptionPageAddingPin =>
@@ -330,8 +327,7 @@ class AppLocalizationsZh extends AppLocalizations {
       'Adding passphrase, this may take a few seconds...';
 
   @override
-  String get diskEncryptionPageRemovingPin =>
-      'Removing PIN, this may take a few seconds...';
+  String get diskEncryptionPageRemovingPin => '正在移除PIN码，此过程可能需要几秒钟...';
 
   @override
   String get diskEncryptionPageRemovingPassphrase =>
@@ -379,26 +375,26 @@ class AppLocalizationsZh extends AppLocalizations {
   String get recoveryKeyPassphraseEnabled => '密码加密已启用';
 
   @override
-  String get recoveryKeyPassphraseHeader => '修改密码';
+  String get recoveryKeyPassphraseHeader => '修改密码短语';
 
   @override
   String get recoveryKeyPassphraseBody =>
       '您需要在开机的时候输入您的密码以解锁磁盘。您可以修改密码但是不能禁用它。';
 
   @override
-  String get recoveryKeyPassphraseButton => '修改密码...';
+  String get recoveryKeyPassphraseButton => '修改密码短语...';
 
   @override
-  String get recoveryKeyPassphraseCurrent => '当前密码';
+  String get recoveryKeyPassphraseCurrent => '当前密码短语';
 
   @override
-  String get recoveryKeyPassphraseNew => '新密码';
+  String get recoveryKeyPassphraseNew => '新密码短语';
 
   @override
-  String get recoveryKeyPassphraseConfirm => '确认密码';
+  String get recoveryKeyPassphraseConfirm => '确认密码短语';
 
   @override
-  String get recoveryKeyPassphraseCurrentError => '错误的密码，请重试';
+  String get recoveryKeyPassphraseCurrentError => '错误的密码短语，请重试';
 
   @override
   String get recoveryKeyPassphraseNewError => '必须至少4个字符长';
@@ -419,7 +415,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get recoveryKeyEncrpytionPassphraseHeader => '加密密码';
 
   @override
-  String get recoveryKeyPinBody => '您需要在开机的时候输入PIN以解锁此磁盘。您可以修改PIN但是不能禁用它。';
+  String get recoveryKeyPinBody => '您需要在每次计算机开机的时候输入PIN。';
 
   @override
   String get recoveryKeyPinButton => '改变PIN...';
@@ -483,7 +479,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get recoveryKeyPinEntropyOptimal => 'PIN足够长';
 
   @override
-  String get recoveryKeySomethingWentWrongHeader => '发生了一些错误';
+  String get recoveryKeySomethingWentWrongHeader => '出现了一些问题';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
@@ -505,7 +501,7 @@ class AppLocalizationsZh extends AppLocalizations {
       'Update snapd to manage Ubuntu Pro';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro is enabled';
+  String get ubuntuProEnabled => 'Ubuntu Pro 已启用';
 
   @override
   String get ubuntuProLoadingLabel => 'This may take a few seconds...';
@@ -533,7 +529,7 @@ class AppLocalizationsZh extends AppLocalizations {
       'Log in with your Ubuntu One account, or create one for free.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Continue in browser';
+  String get ubuntuProMagicContinueInBrowser => '在浏览器继续';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
@@ -728,6 +724,9 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get snapPermissionsPageTitle => '應用程式權限';
+
+  @override
+  String get snapPermissionsErrorTitle => '發生了錯誤';
 
   @override
   String snapRulesCount(int n) {
@@ -1277,14 +1276,14 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM 為 25,000 多個開源軟體包提供長達 10 年的安全性修補程式。針對關鍵、高風險及中風險的 CVE，提供持續性的漏洞管理服務。';
+      'ESM 為整個 Ubuntu 軟體庫提供長達 10 年的安全性修補程式。針對關鍵級、高風險級以及部分中風險級的 CVE，提供持續性的漏洞管理服務。';
 
   @override
   String get ubuntuProESMMainTitle => '主要軟體包 (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return '2,300 個 Ubuntu Main 軟體包的安全更新，直至 $year';
+    return 'Ubuntu Main 套件的安全性更新將持續至 $year 年';
   }
 
   @override
@@ -1292,7 +1291,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return '針對超過 23,000 個 Ubuntu Universe 軟體包的額外安全性更新，有效期至 $year';
+    return '針對 Ubuntu Universe 軟體包的額外安全性更新，有效期至 $year';
   }
 
   @override

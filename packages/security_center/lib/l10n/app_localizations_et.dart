@@ -21,19 +21,19 @@ class AppLocalizationsEt extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Luba alati';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Uuenda õigusi';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Keela alati';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Luba ajutiselt';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Keela ajutiselt';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Küsi alati';
 
   @override
   String get snapPermissionReadLabel => 'Lugemine';
@@ -49,7 +49,7 @@ class AppLocalizationsEt extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Eelda, et rakendused küsivad operatsioonisüsteemilt õigusi';
+      'Nõua, et aedikkäituses rakendused küsiksid õigusi';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -68,7 +68,7 @@ class AppLocalizationsEt extends AppLocalizations {
 
   @override
   String get snapPermissionsOtherDescription =>
-      'Muid õigusi saad hallata valikust „Sätted › Rakendused“.';
+      'Muid õigusi saad hallata valikust „Seadistused › Rakendused“.';
 
   @override
   String get snapPermissionsPageTitle => 'Rakenduste õigused';
@@ -545,7 +545,7 @@ class AppLocalizationsEt extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro on kasutusel';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Selleks võib kuluda paar sekundit...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -609,10 +609,11 @@ class AppLocalizationsEt extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Ubuntu Pro kasutuselt eemaldamisel eemaldatakse sellest masinast ka vastav tellimus. Kas sa soovid jätkata?';
+      'Ubuntu Pro kasutuselt eemaldamisel eemaldatakse sellest arvutist ka vastav tellimus. Kas sa soovid jätkata?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Ubuntu Pro väljalülitamine ei õnnestunud, palun proovi uuesti';
 
   @override
   String get ubuntuProEnable => 'Lülita sisse';
@@ -622,11 +623,11 @@ class AppLocalizationsEt extends AppLocalizations {
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Funktsionaalsuse sisselülitamine ei õnnestunud, palun proovi uuesti.';
+      'Selle funktsionaalsuse sisselülitamine ei õnnestunud, palun proovi uuesti.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Funktsionaalsuse väljalülitamine ei õnnestunud, palun proovi uuesti.';
+      'Selle funktsionaalsuse väljalülitamine ei õnnestunud, palun proovi uuesti.';
 
   @override
   String get ubuntuProCompliance => 'Vastavusreeglid ja süsteemi tugevdamine';

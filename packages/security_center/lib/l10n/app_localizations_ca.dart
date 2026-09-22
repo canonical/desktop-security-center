@@ -133,7 +133,7 @@ class AppLocalizationsCa extends AppLocalizations {
   String get interfacePageTitle => 'Administra els permisos';
 
   @override
-  String get interfacePageLinkLearnMore => 'Apreneu més';
+  String get interfacePageLinkLearnMore => 'Més informació';
 
   @override
   String get interfacePageLinkReportIssues => 'Informeu els problemes';

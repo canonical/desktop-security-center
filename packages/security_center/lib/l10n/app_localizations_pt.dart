@@ -778,6 +778,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get snapPermissionsPageTitle => 'Permissões do aplicativo';
 
   @override
+  String get snapPermissionsErrorTitle => 'Algo errado aconteceu';
+
+  @override
   String snapRulesCount(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
@@ -820,6 +823,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get cameraInterfacePageDescription =>
       'Permita que os aplicativos acessem suas câmeras.';
+
+  @override
+  String get microphoneInterfacePageTitle => 'Microfone';
+
+  @override
+  String get microphoneInterfacePageDescription =>
+      'Permite aplicativos acessarem seu microfone.';
 
   @override
   String get interfacePageTitle => 'Gerenciar permissões';
@@ -1220,4 +1230,107 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get recoveryKeySomethingWentWrongHeader => 'Algo deu errado';
+
+  @override
+  String get ubuntuProNotSupported =>
+      'Ubuntu Pro não está disponível para essa versão do Ubuntu';
+
+  @override
+  String get ubuntuProNotSupportedDetails => 'Ubuntu Pro requer uma versão LTS';
+
+  @override
+  String get ubuntuProNotSupportedSnapd =>
+      'Ubuntu Pro não é suportado por essa versão snapd';
+
+  @override
+  String get ubuntuProNotSupportedSnapdDetails =>
+      'Atualize snapd para gerenciar o Ubuntu Pro';
+
+  @override
+  String get ubuntuProEnabled => 'Ubuntu Pro está habilitado';
+
+  @override
+  String ubuntuProDisabled(String learnMoreLink) {
+    return 'Segurança de nível empresarial e conformidade para seu computador. Sempre gratuito para uso pessoal. $learnMoreLink';
+  }
+
+  @override
+  String get ubuntuProLearnMore => 'Aprenda sobre Ubuntu Pro';
+
+  @override
+  String get ubuntuProEnablePro => 'Habilite Ubuntu Pro';
+
+  @override
+  String get ubuntuProEnableMagic => 'Habilite com uma conta Ubuntu One';
+
+  @override
+  String get ubuntuProEnableMagicSubtitle =>
+      'Você poderá criar uma conta gratuitamente';
+
+  @override
+  String get ubuntuProMagicPrompt =>
+      'Conecte-se com sua conta Ubuntu One, ou crie uma gratuitamente.';
+
+  @override
+  String get ubuntuProMagicContinueInBrowser => 'Continue no navegador';
+
+  @override
+  String ubuntuProMagicDescription(String attachLink, String attachCode) {
+    return 'Você também pode se conectar em $attachLink e inserir o código $attachCode';
+  }
+
+  @override
+  String get ubuntuProMagicError =>
+      'Não foi possível habilitar o Ubuntu Pro, por favor, tente novamente';
+
+  @override
+  String get ubuntuProEnableToken => 'Habilite com um token';
+
+  @override
+  String get ubuntuProEnableTokenError =>
+      'Não foi possível habilitar o Ubuntu Pro';
+
+  @override
+  String ubuntuProEnableTokenSubtitle(String proLink) {
+    return 'Do seu administrador de TI ou de $proLink';
+  }
+
+  @override
+  String ubuntuProTokenPrompt(String proLink) {
+    return 'Obtenha um token do Ubuntu Pro com seu administrador ou em $proLink';
+  }
+
+  @override
+  String get ubuntuProDisablePro => 'Desabilitar Ubuntu Pro';
+
+  @override
+  String get ubuntuProDisable => 'Desabilitar';
+
+  @override
+  String get ubuntuProDisablePrompt =>
+      'Desabilitar o Ubuntu Pro desconectará sua assinatura dessa máquina. Você quer continuar?';
+
+  @override
+  String get ubuntuProEnable => 'Habilitar';
+
+  @override
+  String get ubuntuProCancel => 'Cancelar';
+
+  @override
+  String get ubuntuProFeatureEnableError =>
+      'Não foi possível habilitar esse recurso, por favor, tente novamente.';
+
+  @override
+  String get ubuntuProFeatureDisableError =>
+      'Não foi possível desabilitar esse recurso, por favor, tente novamente.';
+
+  @override
+  String get ubuntuProCompliance => 'Conformidade e melhora da segurança';
+
+  @override
+  String get ubuntuProComplianceDisclaimer =>
+      'Recomendado apenas para auxiliar no atendimento a requisitos de FedRAMP, HIPAA e outros requisitos de conformidade e endurecimento de segurança (*hardening*).';
+
+  @override
+  String get ubuntuProComplianceUSGTitle => 'Guia de segurança Ubuntu (GSU)';
 }
