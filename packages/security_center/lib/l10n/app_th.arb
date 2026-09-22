@@ -32,7 +32,7 @@
     "snapdRuleCategorySessionDenied": "ปฏิเสธจนกว่าจะออกจากระบบ",
     "snapPermissionsOtherDescription": "คุณสามารถจัดการการกำหนดสิทธิ์อื่นๆ ได้ใน การตั้งค่า › แอปพลิเคชัน",
     "interfacePageTitle": "จัดการการกำหนดสิทธิ์",
-    "homeInterfacePageTitle": "โฟลเดอร์บ้าน",
+    "homeInterfacePageTitle": "โฟลเดอร์โฮม",
     "snapRulesPageDescription": "จัดการการกำหนดสิทธิ์ {interface} สำหรับ {snap}",
     "@snapRulesPageDescription": {
         "placeholders": {
@@ -46,6 +46,6 @@
     },
     "cameraInterfacePageDescription": "อนุญาตให้แอปเข้าถึงกล้องของคุณ",
     "snapdRuleCategoryForeverAllowed": "อนุญาตเสมอ",
-    "snapPermissionsEnableTitle": "กำหนดให้แอปต้องขออนุญาตเข้าถึงระบบ",
+    "snapPermissionsEnableTitle": "กำหนดให้แอปในแซนด์บ็อกซ์ต้องขอสิทธิ์การอนุญาต",
     "interfacePageLinkLearnMore": "เรียนรู้เพิ่มเติม"
 }
