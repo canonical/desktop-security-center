@@ -41,7 +41,7 @@
     "recoveryKeyExceptionFilePermissionTitle": "Impossibile salvare la chiave di ripristino nel file",
     "diskEncryptionPageAdditionalSecurityHeader": "Sicurezza aggiuntiva",
     "recoveryKeyPinDialogHeader": "Modifica PIN",
-    "diskEncryptionPageAddPinDialogBodyMain": "Dovrai inserire il tuo PIN ogni volta che avvii il computer. Questo PIN è diverso dalla password del tuo utente.",
+    "diskEncryptionPageAddPinDialogBodyMain": "Dovrai inserire il tuo PIN ogni volta che il computer si avvia. Questo PIN è diverso dalla tua password utente.",
     "diskEncryptionPageReplaceDialogErrorHeader": "Sostituzione della chiave di ripristino non riuscita",
     "recoveryKeyExceptionFileSystemBody": "Non hai i permessi per scrivere in quella cartella. Prova a scegliere una posizione diversa o usa un altro metodo.",
     "ubuntuProEnablePro": "Abilita Ubuntu Pro",
@@ -201,7 +201,7 @@
         }
     },
     "snapPermissionsErrorTitle": "Qualcosa è andato storto",
-    "diskEncryptionPageAddPassphraseDialogBodyMain": "Dovrai inserire la tua passphrase ogni volta che avvii il computer. Questa passphrase è diversa dalla password del tuo utente.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Dovrai inserire la tua passphrase ogni volta che il computer si avvia. Questa passphrase è diversa dalla tua password utente.",
     "recoveryKeySomethingWentWrongHeader": "Si è verificato un errore",
     "diskEncryptionPageReplaceDialogBody": "Salva la nuova chiave di ripristino in un luogo sicuro. Una volta sostituita, non potrai più utilizzare la vecchia chiave.",
     "ubuntuProComplianceDocumentation": "Documentazione sulla conformità alla sicurezza",
@@ -229,7 +229,7 @@
     "recoveryKeyPassphraseConfirm": "Conferma passphrase",
     "ubuntuProCompliance": "Conformità e hardening",
     "diskEncryptionPageRemovePassphraseButton": "Rimuovi passphrase...",
-    "ubuntuProComplianceFIPSUpdatesDescription": "Installa pacchetti convalidati FIPS 140-2 e consente normali aggiornamenti di sicurezza.",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Installa pacchetti convalidati FIPS 140-2 e consente regolari aggiornamenti di sicurezza.",
     "diskEncryptionPageErrorUnsupportedSnapdHeader": "La tua versione di snapd non è supportata",
     "recoveryKeyExceptionDisallowedPathBody": "Prova una posizione diversa, ad esempio un'unità rimovibile, oppure usa un altro metodo.",
     "diskEncryptionPageAdditionalSecurityBody": "Puoi impostare una passphrase o un PIN per una maggiore sicurezza. Dovrai inserirlo ogni volta che avvii il computer.",
@@ -245,7 +245,7 @@
         }
     },
     "recoveryKeyPassphraseNewError": "Deve contenere almeno 4 caratteri",
-    "ubuntuProMagicDescription": "Puoi anche accedere a {attachLink} e inserire il codice{attachCode}",
+    "ubuntuProMagicDescription": "Puoi anche accedere a {attachLink} e inserire il codice {attachCode}",
     "@ubuntuProMagicDescription": {
         "placeholders": {
             "attachLink": {
