@@ -8,70 +8,31 @@ on:
   workflow_dispatch:
 
 jobs:
-  setup:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: Atsumi3/actions-setup-fvm@0.0.3
-      - uses: bluefireteam/melos-action@v2
-      - run: melos generate
-      - run: melos gen-l10n
-      - uses: actions/cache@v3
-        with:
-          path: .
-          key: ${{ runner.os }}-repo-${{ github.sha }}-generated
-
   analyze:
-    runs-on: ubuntu-22.04
-    needs: setup
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v3
-      - name: Restore repository cache
-        uses: actions/cache@v3
-        with:
-          path: .
-          key: ${{ runner.os }}-repo-${{ github.sha }}-generated
-          restore-keys: |
-            ${{ runner.os }}-repo-
-      - uses: Atsumi3/actions-setup-fvm@0.0.3
-      - uses: bluefireteam/melos-action@v2
+      - uses: canonical/desktop-engineering/gh-actions/flutter/setup@e1069c189573b3525a60f54c5107ea3264f80805
+      - run: melos generate
       - run: melos analyze --fatal-infos
 
   format:
-    runs-on: ubuntu-22.04
-    needs: setup
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v3
-      - name: Restore repository cache
-        uses: actions/cache@v3
-        with:
-          path: .
-          key: ${{ runner.os }}-repo-${{ github.sha }}-generated
-          restore-keys: |
-            ${{ runner.os }}-repo-
-      - uses: Atsumi3/actions-setup-fvm@0.0.3
-      - uses: bluefireteam/melos-action@v2
+      - uses: canonical/desktop-engineering/gh-actions/flutter/setup@e1069c189573b3525a60f54c5107ea3264f80805
       - run: melos format:exclude
 
   l10n:
-    runs-on: ubuntu-22.04
-    needs: setup
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v3
-      - name: Restore repository cache
-        uses: actions/cache@v3
-        with:
-          path: .
-          key: ${{ runner.os }}-repo-${{ github.sha }}-generated
-      - uses: Atsumi3/actions-setup-fvm@0.0.3
-      - uses: bluefireteam/melos-action@v2
+      - uses: canonical/desktop-engineering/gh-actions/flutter/setup@e1069c189573b3525a60f54c5107ea3264f80805
+      - run: melos generate
       - run: melos gen-l10n
       - name: Check for outdated l10n
         if: github.event_name == 'pull_request'
         run: ./scripts/check-outdated-files.sh
       - name: Create PR
         if: github.event_name == 'push'
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           add-paths: |
             **/l10n/*.dart
@@ -82,22 +43,13 @@ jobs:
           delete-branch: true
 
   test:
-    runs-on: ubuntu-22.04
-    needs: setup
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v3
-      - name: Restore repository cache
-        uses: actions/cache@v3
-        with:
-          path: .
-          key: ${{ runner.os }}-repo-${{ github.sha }}-generated
-          restore-keys: |
-            ${{ runner.os }}-repo-
-      - uses: Atsumi3/actions-setup-fvm@0.0.3
-      - uses: bluefireteam/melos-action@v2
+      - uses: canonical/desktop-engineering/gh-actions/flutter/setup@e1069c189573b3525a60f54c5107ea3264f80805
       - run: sudo apt update && sudo apt install -y lcov
+      - run: melos generate
       - run: melos coverage
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
@@ -120,28 +72,19 @@ jobs:
           installTics: true
 
   security-center:
-    runs-on: ubuntu-22.04
-    needs: setup
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v3
-      - name: Restore repository cache
-        uses: actions/cache@v3
-        with:
-          path: .
-          key: ${{ runner.os }}-repo-${{ github.sha }}-generated
-          restore-keys: |
-            ${{ runner.os }}-repo-
-      - uses: Atsumi3/actions-setup-fvm@0.0.3
-      - uses: bluefireteam/melos-action@v2
+      - uses: canonical/desktop-engineering/gh-actions/flutter/setup@e1069c189573b3525a60f54c5107ea3264f80805
+      - run: melos generate
       - name: Install dependencies
         run: sudo apt update && sudo apt install -y clang cmake libglib2.0-dev libgtk-3-dev liblzma-dev ninja-build pkg-config polkitd xvfb ubuntu-advantage-desktop-daemon update-notifier
       - name: Setup apparmor prompting
         run: |
-          sudo snap refresh snapd --channel=latest/edge
+          sudo snap install snapd --channel=latest/edge
           sudo snap install prompting-client
           sudo snap set system experimental.apparmor-prompting=true
       - name: Setup polkit rules
-        run: sudo cp packages/security_center/integration_test/assets/snapd-ci.pkla /var/lib/polkit-1/localauthority/50-local.d/
+        run: sudo install -m 0644 packages/security_center/integration_test/assets/snapd-ci.rules /etc/polkit-1/rules.d/49-snapd-ci.rules
       - name: Run integration tests
         working-directory: packages/security_center
         run: xvfb-run -a -s '-screen 0 1024x768x24 +extension GLX' flutter test integration_test

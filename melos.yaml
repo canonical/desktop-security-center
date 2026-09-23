@@ -33,6 +33,7 @@ scripts:
         '**/*.mocks.dart' \
         '**/l10n/*.dart' \
         '**/*.pb*.dart' \
+        --ignore-errors unused,unused \
         -o coverage/lcov.info
 
   # format all packages
