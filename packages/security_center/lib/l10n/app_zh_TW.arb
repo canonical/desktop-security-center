@@ -11,7 +11,7 @@
     "snapPermissionExecuteLabel": "執行",
     "snapPermissionsEnableWarning": "這是一項實驗性功能，用於控制對系統資源的存取。",
     "snapPermissionsExperimentalLabel": "實驗性的",
-    "snapPermissionsOtherDescription": "您可以在「設定」>「程式」中管理其他權限。",
+    "snapPermissionsOtherDescription": "您可以在「設定」›「應用程式」中管理其他權限。",
     "snapPermissionsPageTitle": "應用程式權限",
     "snapRulesPageDescription": "管理 {snap} 的{interface}權限。",
     "@snapRulesPageDescription": {
@@ -31,7 +31,7 @@
     "interfacePageTitle": "管理權限",
     "interfacePageLinkLearnMore": "了解更多",
     "interfacePageLinkReportIssues": "回報問題",
-    "snapPermissionsEnableTitle": "要求應用程式請求系統權限",
+    "snapPermissionsEnableTitle": "要求沙盒化應用程式必須請求權限",
     "snapRulesCount": "{n, plural, =0{沒有規則} =1{1 條規則} other{{n} 條規則}}",
     "@snapRulesCount": {
         "placeholders": {
@@ -264,5 +264,11 @@
     "ubuntuProLivepatchEnableTitle": "啟用 Livepatch",
     "ubuntuProLivepatchEnableDescription": "在系統運行時套用核心安全性更新",
     "ubuntuProLivepatchShowTitle": "在頂端列顯示 Livepatch 狀態",
-    "snapPermissionsErrorTitle": "發生了錯誤"
+    "snapPermissionsErrorTitle": "發生了錯誤",
+    "permissionRulePopupMenuSemanticLabel": "更新權限",
+    "snapdRuleCategoryTemporarilyAllowed": "暫時允許",
+    "snapdRuleCategoryTemporarilyDenied": "暫時拒絕",
+    "snapdRuleCategoryAskAlways": "總是詢問",
+    "ubuntuProLoadingLabel": "這可能需要幾秒鐘…",
+    "ubuntuProDisableError": "無法停用 Ubuntu Pro，請重試"
 }
