@@ -21,19 +21,19 @@ class AppLocalizationsEu extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Baimendu beti';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Eguneratu baimenak';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Ukatu beti';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Baimendu aldi baterako';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Ukatu aldi baterako';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Galdetu beti';
 
   @override
   String get snapPermissionReadLabel => 'Irakurri';
@@ -49,7 +49,7 @@ class AppLocalizationsEu extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Behartu aplikazioak sistemako baimenak eskatzera';
+      'Behartu isolatutako aplikazioak baimenak eskatzera';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -551,7 +551,7 @@ class AppLocalizationsEu extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro gaituta dago';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Honek segundo batzuk beharko ditu...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -614,10 +614,11 @@ class AppLocalizationsEu extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Ubuntu Pro ezgaitzen baduzu, makina hau harpidetzatik askatuko du. Jarraitu nahi duzu?';
+      'Ubuntu Pro ezgaitzen baduzu, ordenagailu hau harpidetzatik askatuko du. Jarraitu nahi duzu?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Ezin izan da Ubuntu Pro ezgaitu, saiatu berriz';
 
   @override
   String get ubuntuProEnable => 'Gaitu';

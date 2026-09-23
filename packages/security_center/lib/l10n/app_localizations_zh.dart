@@ -690,7 +690,19 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get snapdRuleCategoryForeverAllowed => '總是允許';
 
   @override
+  String get permissionRulePopupMenuSemanticLabel => '更新權限';
+
+  @override
   String get snapdRuleCategoryForeverDenied => '總是拒絕';
+
+  @override
+  String get snapdRuleCategoryTemporarilyAllowed => '暫時允許';
+
+  @override
+  String get snapdRuleCategoryTemporarilyDenied => '暫時拒絕';
+
+  @override
+  String get snapdRuleCategoryAskAlways => '總是詢問';
 
   @override
   String get snapPermissionReadLabel => '讀取';
@@ -705,7 +717,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get snapPermissionAccessLabel => '存取';
 
   @override
-  String get snapPermissionsEnableTitle => '要求應用程式請求系統權限';
+  String get snapPermissionsEnableTitle => '要求沙盒化應用程式必須請求權限';
 
   @override
   String get snapPermissionsEnableWarning => '這是一項實驗性功能，用於控制對系統資源的存取。';
@@ -720,7 +732,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get snapPermissionsExperimentalLabel => '實驗性的';
 
   @override
-  String get snapPermissionsOtherDescription => '您可以在「設定」>「程式」中管理其他權限。';
+  String get snapPermissionsOtherDescription => '您可以在「設定」›「應用程式」中管理其他權限。';
 
   @override
   String get snapPermissionsPageTitle => '應用程式權限';
@@ -1153,6 +1165,9 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get ubuntuProEnabled => '已啟用 Ubuntu Pro';
 
   @override
+  String get ubuntuProLoadingLabel => '這可能需要幾秒鐘…';
+
+  @override
   String ubuntuProDisabled(String learnMoreLink) {
     return '為您的電腦提供企業級的安全防護與合規性。個人使用始終免費。$learnMoreLink';
   }
@@ -1210,6 +1225,9 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get ubuntuProDisablePrompt => '停用 Ubuntu Pro 將解除您在此台電腦上的訂閱。您要繼續嗎？';
+
+  @override
+  String get ubuntuProDisableError => '無法停用 Ubuntu Pro，請重試';
 
   @override
   String get ubuntuProEnable => '啟用';
