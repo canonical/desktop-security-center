@@ -1,6 +1,6 @@
 {
     "snapdRuleCategorySessionDenied": "Zamítnout do odhlášení",
-    "snapPermissionsEnableTitle": "Vyžadovat, aby aplikace žádaly o oprávnění pro přístupy v systému",
+    "snapPermissionsEnableTitle": "Vyžadovat, aby izolované aplikace žádaly o oprávnění",
     "snapPermissionsDisablingLabel": "Deaktivuje se – může to trvat několik sekund…",
     "snapPermissionsEnablingLabel": "Aktivuje se – může to trvat několik sekund…",
     "snapPermissionsOtherDescription": "Další oprávnění můžete spravovat v Nastavení › Aplikace.",
@@ -199,7 +199,7 @@
             }
         }
     },
-    "ubuntuProMagicError": "Nelze povolit Ubuntu Pro, zkuste to prosím znovu",
+    "ubuntuProMagicError": "Nelze povolit Ubuntu Pro, zkuste to znovu",
     "ubuntuProEnableToken": "Povolit pomocí tokenu",
     "ubuntuProEnableTokenError": "Nelze povolit Ubuntu Pro",
     "ubuntuProEnableTokenSubtitle": "Od vašeho IT administrátora nebo z {proLink}",
@@ -224,8 +224,8 @@
     "ubuntuProDisablePrompt": "Zakázáním Ubuntu Pro se vaše předplatné odpojí od tohoto počítače. Chcete pokračovat?",
     "ubuntuProEnable": "Povolit",
     "ubuntuProCancel": "Zrušit",
-    "ubuntuProFeatureEnableError": "Funkci se nepodařilo aktivovat, zkuste to prosím znovu.",
-    "ubuntuProFeatureDisableError": "Funkci se nepodařilo zakázat, zkuste to prosím znovu.",
+    "ubuntuProFeatureEnableError": "Funkci se nepodařilo aktivovat, zkuste to znovu.",
+    "ubuntuProFeatureDisableError": "Funkci se nepodařilo zakázat, zkuste to znovu.",
     "ubuntuProCompliance": "Zabezpečení a shoda",
     "ubuntuProComplianceDisclaimer": "Doporučeno pouze pro pomoc s FedRAMP, HIPAA a dalšími požadavky na zabezpečení a shodu.",
     "ubuntuProComplianceUSGTitle": "Průvodce zabezpečením Ubuntu (USG)",
@@ -264,5 +264,11 @@
     "ubuntuProLivepatchEnableTitle": "Povolit Livepatch",
     "ubuntuProLivepatchEnableDescription": "Aplikovat aktualizace zabezpečení jádra za chodu systému",
     "ubuntuProLivepatchShowTitle": "Zobrazit stav Livepatch v horní liště",
-    "snapPermissionsErrorTitle": "Něco se nepovedlo"
+    "snapPermissionsErrorTitle": "Něco se nepovedlo",
+    "permissionRulePopupMenuSemanticLabel": "Aktualizovat oprávnění",
+    "snapdRuleCategoryTemporarilyAllowed": "Dočasně povolit",
+    "snapdRuleCategoryTemporarilyDenied": "Dočasně zamítnout",
+    "snapdRuleCategoryAskAlways": "Vždy se ptát",
+    "ubuntuProLoadingLabel": "Toto může trvat několik sekund...",
+    "ubuntuProDisableError": "Nepodařilo se zakázat Ubuntu Pro, zkuste to znovu"
 }
