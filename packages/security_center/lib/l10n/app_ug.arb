@@ -8,7 +8,7 @@
     "snapPermissionWriteLabel": "يېزىش",
     "snapPermissionExecuteLabel": "ئىجرا قىلىش",
     "snapPermissionAccessLabel": "زىيارەت",
-    "snapPermissionsEnableTitle": "ئەپ سىستېما ئىجازىتى ئىلتىماس قىلىشى زۆرۈر",
+    "snapPermissionsEnableTitle": "قۇم قۇتىدا سىنالغان ئەپ ئىجازەت ئىلتىماس قىلىشى زۆرۈر",
     "snapPermissionsEnableWarning": "بۇ سىستېما مەنبەسىنى زىيارەت قىلىشنى تىزگىنلەيدىغان تەجرىبە خاراكتېرلىك ئىقتىدار.",
     "snapPermissionsEnablingLabel": "قوزغىتىۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…",
     "snapPermissionsDisablingLabel": "چەكلەۋاتىدۇ، بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…",
@@ -264,5 +264,11 @@
     "ubuntuProLivepatchTitle": "يادرو شۇئان ياماق",
     "ubuntuProLivepatchEnableTitle": "شۇئان ياماقنى قوزغات",
     "ubuntuProLivepatchEnableDescription": "سىستېما ئىجرا قىلىنىۋاتقاندا يادرونىڭ بىخەتەرلىك يېڭىلىنىشىنى قوللىنىدۇ",
-    "ubuntuProLivepatchShowTitle": "شۇئان ياماق ھالىتىنى چوققا بالداقتا كۆرسىتىدۇ"
+    "ubuntuProLivepatchShowTitle": "شۇئان ياماق ھالىتىنى چوققا بالداقتا كۆرسىتىدۇ",
+    "permissionRulePopupMenuSemanticLabel": "ئىجازەت يېڭىلا",
+    "snapdRuleCategoryTemporarilyAllowed": "ۋاقىتلىق يول قوي",
+    "snapdRuleCategoryTemporarilyDenied": "ۋاقىتلىق رەت قىل",
+    "snapdRuleCategoryAskAlways": "ھەمىشە سورا",
+    "ubuntuProLoadingLabel": "بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…",
+    "ubuntuProDisableError": "Ubuntu Pro نى چەكلىيەلمەيدۇ، قايتا سىناڭ"
 }

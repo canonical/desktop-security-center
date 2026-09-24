@@ -21,19 +21,19 @@ class AppLocalizationsUg extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'ھەمىشە يول قويىدۇ';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'ئىجازەت يېڭىلا';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'ھەمىشە رەت قىلىدۇ';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'ۋاقىتلىق يول قوي';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'ۋاقىتلىق رەت قىل';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'ھەمىشە سورا';
 
   @override
   String get snapPermissionReadLabel => 'ئوقۇش';
@@ -49,7 +49,7 @@ class AppLocalizationsUg extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'ئەپ سىستېما ئىجازىتى ئىلتىماس قىلىشى زۆرۈر';
+      'قۇم قۇتىدا سىنالغان ئەپ ئىجازەت ئىلتىماس قىلىشى زۆرۈر';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -549,7 +549,7 @@ class AppLocalizationsUg extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro قوزغىتىلغان';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن…';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -613,7 +613,8 @@ class AppLocalizationsUg extends AppLocalizations {
       'Ubuntu Pro نى چەكلىسىڭىز بۇ كومپيۇتېردىكى مۇشتەرىلىكىڭىز توختايدۇ. داۋاملاشتۇرامسىز؟';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Ubuntu Pro نى چەكلىيەلمەيدۇ، قايتا سىناڭ';
 
   @override
   String get ubuntuProEnable => 'قوزغات';

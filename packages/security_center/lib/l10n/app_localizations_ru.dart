@@ -22,19 +22,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Разрешать всегда';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Обновить разрешения';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Никогда не разрешать';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Разрешить временно';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Запретить временно';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Спрашивать всегда';
 
   @override
   String get snapPermissionReadLabel => 'Чтение';
@@ -50,7 +50,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Требовать с приложений запрос системных разрешений';
+      'Требовать с изолированных приложений запрос системных разрешений';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -557,7 +557,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ubuntuProEnabled => 'Сервис Ubuntu Pro активирован';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Это может занять несколько секунд...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -623,7 +623,8 @@ class AppLocalizationsRu extends AppLocalizations {
       'Отключение Ubuntu Pro отменит привязку подписки к этому компьютеру. Хотите продолжить?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Не удалось отключить Ubuntu Pro. Попробуйте ещё раз';
 
   @override
   String get ubuntuProEnable => 'Включить';
