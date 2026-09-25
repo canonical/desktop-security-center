@@ -199,7 +199,7 @@
             }
         }
     },
-    "ubuntuProMagicError": "Ubuntu Pro kann nicht aktiviert werden, bitte versuchen Sie es erneut",
+    "ubuntuProMagicError": "Ubuntu Pro kann nicht aktiviert werden, versuchen Sie es erneut",
     "ubuntuProEnableToken": "Mit einem Token aktivieren",
     "ubuntuProEnableTokenError": "Ubuntu Pro kann nicht aktiviert werden",
     "ubuntuProEnableTokenSubtitle": "Von Ihrem IT-Administrator oder von {proLink}",
