@@ -7,7 +7,7 @@
     "snapdRuleCategoryForeverDenied": "Immer verweigern",
     "snapPermissionReadLabel": "Lesen",
     "snapPermissionExecuteLabel": "Ausführen",
-    "snapPermissionsEnableTitle": "In einer Sandbox ausgeführte Apps müssen um Berechtigungen fragen",
+    "snapPermissionsEnableTitle": "In einer Sandbox ausgeführte Apps müssen nach Berechtigungen fragen",
     "snapPermissionsDisablingLabel": "Wird deaktiviert, dies kann einige Sekunden dauern ...",
     "snapPermissionsPageTitle": "App-Berechtigungen",
     "snapRulesPageDescription": "{interface}-Berechtigungen für {snap} verwalten.",
