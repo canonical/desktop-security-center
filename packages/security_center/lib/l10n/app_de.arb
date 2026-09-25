@@ -7,7 +7,7 @@
     "snapdRuleCategoryForeverDenied": "Immer verweigern",
     "snapPermissionReadLabel": "Lesen",
     "snapPermissionExecuteLabel": "Ausführen",
-    "snapPermissionsEnableTitle": "Apps müssen nach Systemberechtigungen fragen",
+    "snapPermissionsEnableTitle": "In einer Sandbox ausgeführte Apps müssen nach Berechtigungen fragen",
     "snapPermissionsDisablingLabel": "Wird deaktiviert, dies kann einige Sekunden dauern ...",
     "snapPermissionsPageTitle": "App-Berechtigungen",
     "snapRulesPageDescription": "{interface}-Berechtigungen für {snap} verwalten.",
@@ -38,7 +38,7 @@
     "snapPermissionWriteLabel": "Schreiben",
     "snapPermissionsEnableWarning": "Dies ist eine experimentelle Funktion zur Kontrolle des Zugriffs auf die Ressourcen Ihres Systems.",
     "snapPermissionsEnablingLabel": "Wird aktiviert, dies kann einige Sekunden dauern ...",
-    "snapPermissionsOtherDescription": "Sie können andere Berechtigungen unter Einstellungen › Anwendungen verwalten.",
+    "snapPermissionsOtherDescription": "Sie können andere Berechtigungen unter Einstellungen › Apps verwalten.",
     "snapRulesCount": "{n, plural, =0{keine Regeln} =1{1 Regel} other{{n} Regeln}}",
     "@snapRulesCount": {
         "placeholders": {
@@ -221,11 +221,11 @@
     "ubuntuProTokenLabel": "Token",
     "ubuntuProDisablePro": "Ubuntu Pro deaktivieren",
     "ubuntuProDisable": "Deaktivieren",
-    "ubuntuProDisablePrompt": "Durch die Deaktivierung von Ubuntu Pro wird Ihr Abonnement von diesem Gerät getrennt. Möchten Sie fortfahren?",
+    "ubuntuProDisablePrompt": "Durch die Deaktivierung von Ubuntu Pro wird Ihr Abonnement von diesem Computer getrennt. Möchten Sie fortfahren?",
     "ubuntuProEnable": "Aktivieren",
     "ubuntuProCancel": "Abbrechen",
-    "ubuntuProFeatureEnableError": "Die Funktion konnte nicht aktiviert werden, bitte versuchen Sie es erneut.",
-    "ubuntuProFeatureDisableError": "Die Funktion konnte nicht deaktiviert werden, bitte versuchen Sie es erneut.",
+    "ubuntuProFeatureEnableError": "Die Funktion konnte nicht aktiviert werden, versuchen Sie es erneut.",
+    "ubuntuProFeatureDisableError": "Die Funktion konnte nicht deaktiviert werden, versuchen Sie es erneut.",
     "ubuntuProCompliance": "Compliance und Härtung",
     "ubuntuProComplianceDisclaimer": "Nur zur Erfüllung von FedRAMP- und HIPAA-Anforderungen sowie anderen Compliance- und Sicherheitsanforderungen empfohlen.",
     "ubuntuProComplianceUSGDescription": "Automatisiert die Härtung und Auditierung mit CIS-Benchmark- und DISA-STIG-Profilen und ermöglicht gleichzeitig umgebungsspezifische Anpassungen.",
@@ -263,5 +263,11 @@
     "ubuntuProLivepatchEnableTitle": "Livepatch aktivieren",
     "ubuntuProLivepatchEnableDescription": "Kernel-Sicherheitsaktualisierungen während des laufenden Systems anwenden",
     "ubuntuProLivepatchShowTitle": "Livepatch-Status in der oberen Leiste anzeigen",
-    "snapPermissionsErrorTitle": "Irgendetwas ist schiefgelaufen"
+    "snapPermissionsErrorTitle": "Irgendetwas ist schiefgelaufen",
+    "permissionRulePopupMenuSemanticLabel": "Berechtigungen aktualisieren",
+    "snapdRuleCategoryTemporarilyAllowed": "Vorübergehend zulassen",
+    "snapdRuleCategoryTemporarilyDenied": "Vorübergehend verweigern",
+    "snapdRuleCategoryAskAlways": "Immer nachfragen",
+    "ubuntuProLoadingLabel": "Das kann ein paar Sekunden dauern ...",
+    "ubuntuProDisableError": "Ubuntu Pro konnte nicht deaktiviert werden, versuchen Sie es erneut"
 }

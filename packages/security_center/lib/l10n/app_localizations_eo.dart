@@ -21,19 +21,19 @@ class AppLocalizationsEo extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Permesi ĉiam';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Ĝisdatigi permesojn';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Malpermesi ĉiam';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Permesi provizore';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Malpermesi provizore';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Demandi ĉiam';
 
   @override
   String get snapPermissionReadLabel => 'Legi';
@@ -49,7 +49,7 @@ class AppLocalizationsEo extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Igi programojn peti por sistemaj permesoj';
+      'Devigi izolitajn programojn peti permesojn';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -68,7 +68,7 @@ class AppLocalizationsEo extends AppLocalizations {
 
   @override
   String get snapPermissionsOtherDescription =>
-      'Vi povas administri aliajn permesojn ĉe «Agordoj › Aplikoj».';
+      'Vi povas administri aliajn permesojn ĉe «Agordoj › Apoj».';
 
   @override
   String get snapPermissionsPageTitle => 'Programaj permesoj';
@@ -542,7 +542,7 @@ class AppLocalizationsEo extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro estas ŝaltita';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Ĉi tio povas daŭri kelkajn sekundojn...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -574,8 +574,7 @@ class AppLocalizationsEo extends AppLocalizations {
   }
 
   @override
-  String get ubuntuProMagicError =>
-      'Malsukcesis ŝalti Ubuntu Pro, bonvolu reprovi';
+  String get ubuntuProMagicError => 'Malsukcesis ŝalti Ubuntu Pro, reprovu';
 
   @override
   String get ubuntuProEnableToken => 'Ŝalti per ĵetono';
@@ -607,7 +606,8 @@ class AppLocalizationsEo extends AppLocalizations {
       'Malŝaltante Ubuntu Pro, vi dekroĉos vian abonon de ĉi tiu komputilo. Ĉu daŭrigi?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Malsukcesis malŝalti Ubuntu Pro, reprovu';
 
   @override
   String get ubuntuProEnable => 'Ŝalti';
@@ -617,11 +617,11 @@ class AppLocalizationsEo extends AppLocalizations {
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Malsukcesis ŝalti funkcion, bonvolu reprovi.';
+      'Malsukcesis ŝalti la funkcion, reprovu.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Malsukcesis malŝalti funkcion, bonvolu reprovi.';
+      'Malsukcesis malŝalti la funkcion, reprovu.';
 
   @override
   String get ubuntuProCompliance => 'Konformiĝo kaj malmoligo';

@@ -21,19 +21,20 @@ class AppLocalizationsDe extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Immer zulassen';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel =>
+      'Berechtigungen aktualisieren';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Immer verweigern';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Vorübergehend zulassen';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Vorübergehend verweigern';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Immer nachfragen';
 
   @override
   String get snapPermissionReadLabel => 'Lesen';
@@ -49,7 +50,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Apps müssen nach Systemberechtigungen fragen';
+      'In einer Sandbox ausgeführte Apps müssen nach Berechtigungen fragen';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -68,7 +69,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get snapPermissionsOtherDescription =>
-      'Sie können andere Berechtigungen unter Einstellungen › Anwendungen verwalten.';
+      'Sie können andere Berechtigungen unter Einstellungen › Apps verwalten.';
 
   @override
   String get snapPermissionsPageTitle => 'App-Berechtigungen';
@@ -559,7 +560,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro ist aktiviert';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Das kann ein paar Sekunden dauern ...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -623,10 +624,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Durch die Deaktivierung von Ubuntu Pro wird Ihr Abonnement von diesem Gerät getrennt. Möchten Sie fortfahren?';
+      'Durch die Deaktivierung von Ubuntu Pro wird Ihr Abonnement von diesem Computer getrennt. Möchten Sie fortfahren?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Ubuntu Pro konnte nicht deaktiviert werden, versuchen Sie es erneut';
 
   @override
   String get ubuntuProEnable => 'Aktivieren';
@@ -636,11 +638,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Die Funktion konnte nicht aktiviert werden, bitte versuchen Sie es erneut.';
+      'Die Funktion konnte nicht aktiviert werden, versuchen Sie es erneut.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Die Funktion konnte nicht deaktiviert werden, bitte versuchen Sie es erneut.';
+      'Die Funktion konnte nicht deaktiviert werden, versuchen Sie es erneut.';
 
   @override
   String get ubuntuProCompliance => 'Compliance und Härtung';
