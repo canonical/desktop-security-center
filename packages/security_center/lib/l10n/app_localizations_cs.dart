@@ -21,19 +21,19 @@ class AppLocalizationsCs extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Vždy povolit';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Aktualizovat oprávnění';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Vždy zamítnout';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Dočasně povolit';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Dočasně zamítnout';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Vždy se ptát';
 
   @override
   String get snapPermissionReadLabel => 'Čtení';
@@ -49,7 +49,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Vyžadovat, aby aplikace žádaly o oprávnění pro přístupy v systému';
+      'Vyžadovat, aby izolované aplikace žádaly o oprávnění';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -546,7 +546,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro je povoleno';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Toto může trvat několik sekund...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -579,8 +579,7 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get ubuntuProMagicError =>
-      'Nelze povolit Ubuntu Pro, zkuste to prosím znovu';
+  String get ubuntuProMagicError => 'Nelze povolit Ubuntu Pro, zkuste to znovu';
 
   @override
   String get ubuntuProEnableToken => 'Povolit pomocí tokenu';
@@ -612,7 +611,8 @@ class AppLocalizationsCs extends AppLocalizations {
       'Zakázáním Ubuntu Pro se vaše předplatné odpojí od tohoto počítače. Chcete pokračovat?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Nepodařilo se zakázat Ubuntu Pro, zkuste to znovu';
 
   @override
   String get ubuntuProEnable => 'Povolit';
@@ -622,11 +622,11 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Funkci se nepodařilo aktivovat, zkuste to prosím znovu.';
+      'Funkci se nepodařilo aktivovat, zkuste to znovu.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Funkci se nepodařilo zakázat, zkuste to prosím znovu.';
+      'Funkci se nepodařilo zakázat, zkuste to znovu.';
 
   @override
   String get ubuntuProCompliance => 'Zabezpečení a shoda';
