@@ -3,7 +3,7 @@
     "snapPermissionReadLabel": "Legi",
     "snapPermissionWriteLabel": "Skribi",
     "snapPermissionExecuteLabel": "Ruli",
-    "snapPermissionsEnableTitle": "Igi izolitajn programojn peti por permesoj",
+    "snapPermissionsEnableTitle": "Devigi izolitajn programojn peti permesojn",
     "snapPermissionsEnableWarning": "Jen eksperimenta funkcio por kontroli uzojn de sistemaĵoj.",
     "snapPermissionsExperimentalLabel": "Eksperimente",
     "snapPermissionsPageTitle": "Programaj permesoj",
@@ -187,8 +187,8 @@
     "ubuntuProComplianceFIPSPrompt": "Elektu vian preferatan opcion pri FIPS",
     "ubuntuProComplianceFIPSUpdates": "FIPS kun ĝisdatigoj",
     "ubuntuProComplianceFIPSNoUpdates": "FIPS sen ĝisdatigoj",
-    "ubuntuProFeatureEnableError": "Malsukcesis ŝalti funkcion, reprovu.",
-    "ubuntuProFeatureDisableError": "Malsukcesis malŝalti funkcion, reprovu.",
+    "ubuntuProFeatureEnableError": "Malsukcesis ŝalti la funkcion, reprovu.",
+    "ubuntuProFeatureDisableError": "Malsukcesis malŝalti la funkcion, reprovu.",
     "ubuntuProEnableToken": "Ŝalti per ĵetono",
     "ubuntuProDisablePro": "Malŝalti Ubuntu Pro",
     "ubuntuProESMMainDescription": "Sekurigaj ĝisdatigoj por ĉefaj pakoj de Ubuntu ĝis {year}",
@@ -269,6 +269,6 @@
     "snapdRuleCategoryAskAlways": "Demandi ĉiam",
     "snapdRuleCategoryTemporarilyAllowed": "Permesi provizore",
     "snapdRuleCategoryTemporarilyDenied": "Malpermesi provizore",
-    "permissionRulePopupMenuSemanticLabel": "Modifi permesojn",
-    "ubuntuProLoadingLabel": "Bonvolu atendi kelkajn sekundojn…"
+    "permissionRulePopupMenuSemanticLabel": "Ĝisdatigi permesojn",
+    "ubuntuProLoadingLabel": "Ĉi tio povas daŭri kelkajn sekundojn..."
 }
