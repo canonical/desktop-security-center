@@ -594,7 +594,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get ubuntuProMagicError =>
-      'Ubuntu Pro kann nicht aktiviert werden, bitte versuchen Sie es erneut';
+      'Ubuntu Pro kann nicht aktiviert werden, versuchen Sie es erneut';
 
   @override
   String get ubuntuProEnableToken => 'Mit einem Token aktivieren';
