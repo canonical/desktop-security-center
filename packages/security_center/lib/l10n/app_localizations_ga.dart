@@ -22,19 +22,19 @@ class AppLocalizationsGa extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Ceadaigh i gcónaí';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Nuashonraigh na ceadanna';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Diúltaigh i gcónaí';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Ceadaigh go sealadach';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Diúltaigh go sealadach';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Cuir ceist i gcónaí';
 
   @override
   String get snapPermissionReadLabel => 'Léigh';
@@ -50,7 +50,7 @@ class AppLocalizationsGa extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Éilíonn aipeanna ceadanna córais a iarraidh';
+      'Ceangail ar aipeanna i mbosca gainimh ceadanna a iarraidh';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -69,7 +69,7 @@ class AppLocalizationsGa extends AppLocalizations {
 
   @override
   String get snapPermissionsOtherDescription =>
-      'Is féidir leat ceadanna eile a bhainistiú i Socruithe › Feidhmchláir.';
+      'Is féidir leat ceadanna eile a bhainistiú faoi Socruithe › Aipeanna.';
 
   @override
   String get snapPermissionsPageTitle => 'Ceadanna aipeanna';
@@ -555,7 +555,8 @@ class AppLocalizationsGa extends AppLocalizations {
   String get ubuntuProEnabled => 'Tá Ubuntu Pro cumasaithe';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel =>
+      'D’fhéadfadh sé seo cúpla soicind a thógáil...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -590,7 +591,7 @@ class AppLocalizationsGa extends AppLocalizations {
 
   @override
   String get ubuntuProMagicError =>
-      'Ní féidir Ubuntu Pro a chumasú, déan iarracht arís';
+      'Ní féidir Ubuntu Pro a chumasú; déan iarracht arís';
 
   @override
   String get ubuntuProEnableToken => 'Cumasaigh le comhartha';
@@ -619,10 +620,11 @@ class AppLocalizationsGa extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Má dhíchumasaíonn tú Ubuntu Pro, bainfear do shíntiús ón meaisín seo. Ar mhaith leat dul ar aghaidh?';
+      'Má dhíchumasaíonn tú Ubuntu Pro, dícheanglófar do shíntiús ón ríomhaire seo. Ar mhaith leat leanúint ar aghaidh?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Níorbh fhéidir Ubuntu Pro a dhíchumasú; déan iarracht arís';
 
   @override
   String get ubuntuProEnable => 'Cumasaigh';
@@ -632,11 +634,11 @@ class AppLocalizationsGa extends AppLocalizations {
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Níorbh fhéidir an ghné a chumasú, déan iarracht arís.';
+      'Níorbh fhéidir an ghné a chumasú; déan iarracht arís.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Níorbh fhéidir an ghné a dhíchumasú, déan iarracht arís.';
+      'Níorbh fhéidir an ghné a dhíchumasú; déan iarracht arís.';
 
   @override
   String get ubuntuProCompliance => 'Comhlíonadh agus cruaiteadh';
