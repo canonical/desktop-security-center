@@ -47,7 +47,7 @@
             }
         }
     },
-    "snapPermissionsEnableTitle": "לדרוש מהיישומים לבקש הרשאות מערכת",
+    "snapPermissionsEnableTitle": "לדרוש מיישומים מבודדים לבקש הרשאות",
     "diskEncryptionPageTitle": "הצפנת הכונן",
     "diskEncryptionPageRecoveryKey": "מפתח שחזור",
     "diskEncryptionPageStoreYourKey": "מפתח השחזור מאפשר לך להחזיר לעצמך את הגישה לנתונים שלך אם הכונן לא מפוענח עם עליית המערכת. כדאי לשמור אותו במקום בטוח.",
@@ -258,5 +258,9 @@
             }
         }
     },
-    "snapPermissionsErrorTitle": "משהו השתבש"
+    "snapPermissionsErrorTitle": "משהו השתבש",
+    "permissionRulePopupMenuSemanticLabel": "עדכון הרשאות",
+    "snapdRuleCategoryTemporarilyAllowed": "לאפשר זמנית",
+    "snapdRuleCategoryTemporarilyDenied": "לדחות זמנית",
+    "snapdRuleCategoryAskAlways": "תמיד לשאול"
 }
