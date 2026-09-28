@@ -235,7 +235,7 @@
             }
         }
     },
-    "ubuntuProDisablePrompt": "השבתת Ubuntu Pro תנתק את המינוי שלך מהמכונה הזאת. להמשיך?",
+    "ubuntuProDisablePrompt": "השבתת Ubuntu Pro תנתק את המינוי שלך מהמחשב הזה. להמשיך?",
     "ubuntuProComplianceFIPSDisclaimer": "אי אפשר לחזור בך מהפעלת FIPS והטלאה חיה תושבת לצמיתות.",
     "ubuntuProComplianceDisclaimer": "מומלץ רק לעזרה עם FedRAMP,‏ HIPAA ודרישות תקינת אבטחה והקשחה.",
     "ubuntuProLivepatchTitle": "הטלאה חיה של הליבה",
@@ -262,5 +262,7 @@
     "permissionRulePopupMenuSemanticLabel": "עדכון הרשאות",
     "snapdRuleCategoryTemporarilyAllowed": "לאפשר זמנית",
     "snapdRuleCategoryTemporarilyDenied": "לדחות זמנית",
-    "snapdRuleCategoryAskAlways": "תמיד לשאול"
+    "snapdRuleCategoryAskAlways": "תמיד לשאול",
+    "ubuntuProLoadingLabel": "עלול לארוך מספר דקות…",
+    "ubuntuProDisableError": "לא ניתן להשבית את Ubuntu Pro, נא לנסות שוב"
 }
