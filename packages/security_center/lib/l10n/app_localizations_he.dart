@@ -21,19 +21,19 @@ class AppLocalizationsHe extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'לאפשר תמיד';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'עדכון הרשאות';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'לדחות תמיד';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'לאפשר זמנית';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'לדחות זמנית';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'תמיד לשאול';
 
   @override
   String get snapPermissionReadLabel => 'קריאה';
@@ -48,7 +48,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get snapPermissionAccessLabel => 'גישה';
 
   @override
-  String get snapPermissionsEnableTitle => 'לדרוש מהיישומים לבקש הרשאות מערכת';
+  String get snapPermissionsEnableTitle => 'לדרוש מיישומים מבודדים לבקש הרשאות';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -536,7 +536,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro פעיל';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'זה עשוי להימשך מספר שניות…';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -598,10 +598,11 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'השבתת Ubuntu Pro תנתק את המינוי שלך מהמכונה הזאת. להמשיך?';
+      'השבתת Ubuntu Pro תנתק את המינוי שלך מהמחשב הזה. להמשיך?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'לא ניתן להשבית את Ubuntu Pro, נא לנסות שוב';
 
   @override
   String get ubuntuProEnable => 'הפעלה';
