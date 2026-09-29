@@ -49,7 +49,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Vyžadovať, aby sandboxované aplikácie žiadali o oprávnenia';
+      'Vyžadovať, aby izolované aplikácie žiadali o oprávnenia';
 
   @override
   String get snapPermissionsEnableWarning =>

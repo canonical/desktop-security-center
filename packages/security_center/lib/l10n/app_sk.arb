@@ -263,7 +263,7 @@
     "snapdRuleCategoryTemporarilyAllowed": "Dočasne povolené",
     "snapdRuleCategoryTemporarilyDenied": "Dočasne odmietnuté",
     "snapdRuleCategoryAskAlways": "Vždy sa opýtať",
-    "snapPermissionsEnableTitle": "Vyžadovať, aby sandboxované aplikácie žiadali o oprávnenia",
+    "snapPermissionsEnableTitle": "Vyžadovať, aby izolované aplikácie žiadali o oprávnenia",
     "snapPermissionsOtherDescription": "Ďalšie oprávnenia spravujte v Nastaveniach › Aplikácie.",
     "ubuntuProLoadingLabel": "Môže to trvať niekoľko sekúnd...",
     "ubuntuProMagicError": "Nepodarilo sa aktivovať Ubuntu Pro, skúste to znova",

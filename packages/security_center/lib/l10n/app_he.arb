@@ -47,7 +47,7 @@
             }
         }
     },
-    "snapPermissionsEnableTitle": "לדרוש מהיישומים לבקש הרשאות מערכת",
+    "snapPermissionsEnableTitle": "לדרוש מיישומים מבודדים לבקש הרשאות",
     "diskEncryptionPageTitle": "הצפנת הכונן",
     "diskEncryptionPageRecoveryKey": "מפתח שחזור",
     "diskEncryptionPageStoreYourKey": "מפתח השחזור מאפשר לך להחזיר לעצמך את הגישה לנתונים שלך אם הכונן לא מפוענח עם עליית המערכת. כדאי לשמור אותו במקום בטוח.",
@@ -235,7 +235,7 @@
             }
         }
     },
-    "ubuntuProDisablePrompt": "השבתת Ubuntu Pro תנתק את המינוי שלך מהמכונה הזאת. להמשיך?",
+    "ubuntuProDisablePrompt": "השבתת Ubuntu Pro תנתק את המינוי שלך מהמחשב הזה. להמשיך?",
     "ubuntuProComplianceFIPSDisclaimer": "אי אפשר לחזור בך מהפעלת FIPS והטלאה חיה תושבת לצמיתות.",
     "ubuntuProComplianceDisclaimer": "מומלץ רק לעזרה עם FedRAMP,‏ HIPAA ודרישות תקינת אבטחה והקשחה.",
     "ubuntuProLivepatchTitle": "הטלאה חיה של הליבה",
@@ -258,5 +258,11 @@
             }
         }
     },
-    "snapPermissionsErrorTitle": "משהו השתבש"
+    "snapPermissionsErrorTitle": "משהו השתבש",
+    "permissionRulePopupMenuSemanticLabel": "עדכון הרשאות",
+    "snapdRuleCategoryTemporarilyAllowed": "לאפשר זמנית",
+    "snapdRuleCategoryTemporarilyDenied": "לדחות זמנית",
+    "snapdRuleCategoryAskAlways": "תמיד לשאול",
+    "ubuntuProLoadingLabel": "זה עשוי להימשך מספר שניות…",
+    "ubuntuProDisableError": "לא ניתן להשבית את Ubuntu Pro, נא לנסות שוב"
 }
