@@ -263,6 +263,6 @@
     "snapdRuleCategoryTemporarilyAllowed": "לאפשר זמנית",
     "snapdRuleCategoryTemporarilyDenied": "לדחות זמנית",
     "snapdRuleCategoryAskAlways": "תמיד לשאול",
-    "ubuntuProLoadingLabel": "זה עשוי להימשך מספר שניות…",
+    "ubuntuProLoadingLabel": "עשוי לארוך מספר שניות…",
     "ubuntuProDisableError": "לא ניתן להשבית את Ubuntu Pro, נא לנסות שוב"
 }
