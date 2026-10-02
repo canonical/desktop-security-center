@@ -91,6 +91,15 @@ class SystemDataContainer with _$SystemDataContainer {
       _$SystemDataContainerFromJson(json);
 }
 
+/// snapd.dart's [SnapdStorageEncryptedResponse] doesn't have the auto-repair
+/// fields yet.
+@freezed
+class StorageEncryptedResponse with _$StorageEncryptedResponse {
+  const factory StorageEncryptedResponse({
+    required SnapdStorageEncryptionStatus status,
+  }) = _StorageEncryptedResponse;
+}
+
 /// A service for managing recovery keys.
 abstract class DiskEncryptionService {
   /// Generates and returns a new recovery key.
@@ -125,5 +134,5 @@ abstract class DiskEncryptionService {
   });
 
   /// Gets the TPM backed FDE status from snapd.
-  Future<SnapdStorageEncryptedResponse> getStorageEncrypted();
+  Future<StorageEncryptedResponse> getStorageEncrypted();
 }
