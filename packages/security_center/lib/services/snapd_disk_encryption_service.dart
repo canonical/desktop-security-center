@@ -162,4 +162,11 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   @override
   Future<EncryptionSupportCheck> checkEncryptionSupport() async =>
       throw UnsupportedError(_repairUnsupported);
+
+  @override
+  Future<EncryptionSupportCheck> fixEncryptionSupport(
+    String action, {
+    Map<String, dynamic>? args,
+  }) async =>
+      throw UnsupportedError(_repairUnsupported);
 }

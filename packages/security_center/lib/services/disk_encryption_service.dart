@@ -188,5 +188,12 @@ abstract class DiskEncryptionService {
   /// Gets the TPM backed FDE status from snapd.
   Future<StorageEncryptedResponse> getStorageEncrypted();
 
+  /// Must run before [fixEncryptionSupport], which uses the check snapd keeps
+  /// in memory. A snapd restart loses it.
   Future<EncryptionSupportCheck> checkEncryptionSupport();
+
+  Future<EncryptionSupportCheck> fixEncryptionSupport(
+    String action, {
+    Map<String, dynamic>? args,
+  });
 }
