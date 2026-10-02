@@ -46,6 +46,10 @@ void main() {
         name: 'checkEncryptionSupport',
         call: (service) => service.checkEncryptionSupport(),
       ),
+      (
+        name: 'fixEncryptionSupport',
+        call: (service) => service.fixEncryptionSupport('proceed'),
+      ),
     ];
 
     for (final tc in cases) {
