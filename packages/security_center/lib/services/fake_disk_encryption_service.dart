@@ -49,6 +49,9 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
   String _auth = '12345';
 
+  List<EncryptionCheckError> _issues = const [];
+  bool _volumesAuthRequired = false;
+
   /// Generates a fake recovery key and key ID.
   @override
   Future<SnapdGenerateRecoveryKeyResponse> generateRecoveryKey() async {
@@ -219,12 +222,45 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<EncryptionSupportCheck> checkEncryptionSupport() async =>
-      const EncryptionSupportCheck(
-        support: EncryptionSupport.available,
-        features: {
+  Future<EncryptionSupportCheck> checkEncryptionSupport() async {
+    _issues = const [];
+    _volumesAuthRequired = false;
+    return _supportCheck();
+  }
+
+  @override
+  Future<EncryptionSupportCheck> fixEncryptionSupport(
+    String action, {
+    Map<String, dynamic>? args,
+  }) async {
+    switch (action) {
+      case 'enable-tpm-via-firmware':
+      case 'enable-and-clear-tpm-via-firmware':
+        _issues = const [
+          EncryptionCheckError(
+            kind: 'reboot-required',
+            message: 'a reboot is required to complete the action',
+            actions: ['reboot'],
+          ),
+        ];
+      case 'proceed':
+        _issues = const [];
+        _volumesAuthRequired = true;
+    }
+    return _supportCheck();
+  }
+
+  EncryptionSupportCheck _supportCheck() => EncryptionSupportCheck(
+        support: _issues.isEmpty
+            ? EncryptionSupport.available
+            : EncryptionSupport.unavailable,
+        errors: _issues,
+        features: const {
           EncryptionFeature.pinAuth,
           EncryptionFeature.passphraseAuth,
+        },
+        requirements: {
+          if (_volumesAuthRequired) EncryptionRequirement.volumesAuth,
         },
       );
 }
