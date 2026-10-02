@@ -53,6 +53,9 @@ class FeatureService {
     return _hasGreaterSnapdVersion(snapdVersion, '2.75.1');
   }
 
+  // snapd.dart can't make the repair calls yet, so only the fake can repair.
+  bool get supportsReprovision => isDryRun;
+
   bool _hasStorageEncryptedManaged() {
     final result = _runProcess('snapctl', ['system-mode']);
     if (result.exitCode != 0) {
