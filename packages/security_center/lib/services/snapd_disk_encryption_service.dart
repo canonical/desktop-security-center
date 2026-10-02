@@ -169,4 +169,8 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
     Map<String, dynamic>? args,
   }) async =>
       throw UnsupportedError(_repairUnsupported);
+
+  @override
+  Future<String> generateRepairRecoveryKey() async =>
+      throw UnsupportedError(_repairUnsupported);
 }

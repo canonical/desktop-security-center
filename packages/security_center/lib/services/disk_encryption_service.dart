@@ -196,4 +196,6 @@ abstract class DiskEncryptionService {
     String action, {
     Map<String, dynamic>? args,
   });
+
+  Future<String> generateRepairRecoveryKey();
 }
