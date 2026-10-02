@@ -123,6 +123,35 @@ enum RepairRecommendation {
   requirePlatformReset,
 }
 
+@freezed
+class EncryptionSupportCheck with _$EncryptionSupportCheck {
+  const factory EncryptionSupportCheck({
+    required EncryptionSupport support,
+    String? unavailableReason,
+    @Default(<EncryptionCheckError>[]) List<EncryptionCheckError> errors,
+    @Default(<EncryptionFeature>{}) Set<EncryptionFeature> features,
+    @Default(<EncryptionRequirement>{}) Set<EncryptionRequirement> requirements,
+  }) = _EncryptionSupportCheck;
+}
+
+/// [kind] and [actions] stay strings: secboot keeps adding new ones, and an
+/// action goes back to snapd as is.
+@freezed
+class EncryptionCheckError with _$EncryptionCheckError {
+  const factory EncryptionCheckError({
+    required String kind,
+    required String message,
+    @Default(<String>[]) List<String> actions,
+  }) = _EncryptionCheckError;
+}
+
+/// [unknown] is a value from a newer snapd.
+enum EncryptionSupport { available, unavailable, defective, disabled, unknown }
+
+enum EncryptionFeature { pinAuth, passphraseAuth }
+
+enum EncryptionRequirement { volumesAuth }
+
 /// A service for managing recovery keys.
 abstract class DiskEncryptionService {
   /// Generates and returns a new recovery key.
@@ -158,4 +187,6 @@ abstract class DiskEncryptionService {
 
   /// Gets the TPM backed FDE status from snapd.
   Future<StorageEncryptedResponse> getStorageEncrypted();
+
+  Future<EncryptionSupportCheck> checkEncryptionSupport();
 }

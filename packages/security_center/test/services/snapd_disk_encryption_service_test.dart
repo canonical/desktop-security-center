@@ -36,6 +36,28 @@ void main() {
       ),
     );
   });
+
+  group('repair calls throw UnsupportedError', () {
+    final cases = <({
+      String name,
+      Future<void> Function(SnapdDiskEncryptionService service) call,
+    })>[
+      (
+        name: 'checkEncryptionSupport',
+        call: (service) => service.checkEncryptionSupport(),
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        final snapd = _FakeSnapdService(storageEncryptionStatus: 'active');
+        addTearDown(snapd.close);
+        final service = SnapdDiskEncryptionService(snapd);
+
+        await expectLater(tc.call(service), throwsUnsupportedError);
+      });
+    }
+  });
 }
 
 class _FakeSnapdService extends SnapdService {
