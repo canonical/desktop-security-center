@@ -100,6 +100,8 @@ class StorageEncryptedResponse with _$StorageEncryptedResponse {
 
     /// Null from snapd before 2.76, which doesn't report it.
     AutoRepairResult? autoRepairResult,
+    @Default(<RepairRecommendation>{})
+    Set<RepairRecommendation> recommendations,
   }) = _StorageEncryptedResponse;
 }
 
@@ -113,6 +115,12 @@ enum AutoRepairResult {
 
   /// A result from a newer snapd.
   unknown,
+}
+
+enum RepairRecommendation {
+  permitManual,
+  requireReprovision,
+  requirePlatformReset,
 }
 
 /// A service for managing recovery keys.
