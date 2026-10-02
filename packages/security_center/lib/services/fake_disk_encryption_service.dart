@@ -5,6 +5,57 @@ import 'dart:math';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:snapd/snapd.dart';
 
+/// Scenarios for `--test-fde-repair`. The issues are copied from secboot, so
+/// dry-run shows what snapd would send.
+enum FakeRepairScenario {
+  none('none'),
+  needsRepair('needs-repair'),
+  tpmDisabled('tpm-disabled', [
+    EncryptionCheckError(
+      kind: 'tpm-device-disabled',
+      message:
+          'error with TPM2 device: TPM2 device is present but is currently disabled by the platform firmware',
+      actions: [
+        'enable-tpm-via-firmware',
+        'enable-and-clear-tpm-via-firmware',
+        'reboot-to-fw-settings',
+      ],
+    ),
+  ]),
+  firmwareSettings('firmware-settings', [
+    EncryptionCheckError(
+      kind: 'invalid-secure-boot-mode',
+      message:
+          'error with secure boot policy (PCR7) measurements: secure boot is enabled but not in deployed mode',
+      actions: ['reboot-to-fw-settings'],
+    ),
+  ]),
+  contactOem('contact-oem', [
+    EncryptionCheckError(
+      kind: 'host-security',
+      message:
+          'error with system security: CPU debugging features are not disabled and locked',
+      actions: ['contact-oem'],
+    ),
+  ]),
+
+  /// After `proceed`, `volumes-auth` is required, so dry-run reaches the PIN
+  /// or passphrase step.
+  noHardwareRootOfTrust('no-hardware-root-of-trust', [
+    EncryptionCheckError(
+      kind: 'no-hardware-root-of-trust',
+      message:
+          'error with system security: no hardware root-of-trust properly configured',
+      actions: ['proceed'],
+    ),
+  ]);
+
+  const FakeRepairScenario(this.flag, [this.issues = const []]);
+
+  final String flag;
+  final List<EncryptionCheckError> issues;
+}
+
 class FakeDiskEncryptionService implements DiskEncryptionService {
   FakeDiskEncryptionService({
     required this.systemVolumes,
@@ -12,6 +63,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     Map<String, String>? initialRecoveryKeys,
     this.storageEncryptionStatus = SnapdStorageEncryptionStatus.active,
     this.indeterminateCallCount = 0,
+    this.repairScenario = FakeRepairScenario.none,
   }) : _recoveryKeys = initialRecoveryKeys ?? {};
 
   /// Load initial system volumes from a JSON file.
@@ -21,6 +73,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     SnapdStorageEncryptionStatus storageEncryptionStatus =
         SnapdStorageEncryptionStatus.active,
     int indeterminateCallCount = 0,
+    FakeRepairScenario repairScenario = FakeRepairScenario.none,
   }) {
     final raw = File(path).readAsStringSync();
     final json = jsonDecode(raw) as Map<String, dynamic>;
@@ -32,6 +85,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       checkError: checkError,
       storageEncryptionStatus: storageEncryptionStatus,
       indeterminateCallCount: indeterminateCallCount,
+      repairScenario: repairScenario,
     );
   }
 
@@ -49,9 +103,11 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
   String _auth = '12345';
 
+  final FakeRepairScenario repairScenario;
   List<EncryptionCheckError> _issues = const [];
   bool _volumesAuthRequired = false;
   String? _repairKey;
+  bool _repaired = false;
 
   /// Generates a fake recovery key and key ID.
   @override
@@ -221,12 +277,25 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
         status: SnapdStorageEncryptionStatus.indeterminate,
       );
     }
-    return StorageEncryptedResponse(status: storageEncryptionStatus);
+    if (repairScenario == FakeRepairScenario.none) {
+      return StorageEncryptedResponse(status: storageEncryptionStatus);
+    }
+    return StorageEncryptedResponse(
+      // Before clearing the TPM, the flow asks for the recovery key unless the
+      // status is `recovery`. `degraded` lets dry-run show that step.
+      status: repairScenario == FakeRepairScenario.tpmDisabled
+          ? SnapdStorageEncryptionStatus.degraded
+          : SnapdStorageEncryptionStatus.recovery,
+      autoRepairResult: AutoRepairResult.failedKeyslots,
+      recommendations: {
+        if (!_repaired) RepairRecommendation.requireReprovision,
+      },
+    );
   }
 
   @override
   Future<EncryptionSupportCheck> checkEncryptionSupport() async {
-    _issues = const [];
+    _issues = repairScenario.issues;
     _volumesAuthRequired = false;
     return _supportCheck();
   }
@@ -285,5 +354,6 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     _recoveryKeys['default-recovery'] = key;
     // Reprovisioning removes any PIN or passphrase.
     await replacePlatformKey(authMode: AuthMode.none);
+    _repaired = true;
   }
 }
