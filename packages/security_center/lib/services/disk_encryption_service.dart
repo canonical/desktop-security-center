@@ -188,8 +188,8 @@ abstract class DiskEncryptionService {
   /// Gets the TPM backed FDE status from snapd.
   Future<StorageEncryptedResponse> getStorageEncrypted();
 
-  /// Must run before [fixEncryptionSupport], which uses the check snapd keeps
-  /// in memory. A snapd restart loses it.
+  /// Must run before [fixEncryptionSupport] and [reprovision], which use the
+  /// check snapd keeps in memory. A snapd restart loses it.
   Future<EncryptionSupportCheck> checkEncryptionSupport();
 
   Future<EncryptionSupportCheck> fixEncryptionSupport(
@@ -197,5 +197,12 @@ abstract class DiskEncryptionService {
     Map<String, dynamic>? args,
   });
 
+  /// The key [reprovision] sets as the recovery key. snapd keeps it, and drops
+  /// it after 5 minutes or one reprovision, even a failed one, so generate one
+  /// per attempt.
   Future<String> generateRepairRecoveryKey();
+
+  /// Seals without a PIN or passphrase, so when the check requires one, add it
+  /// afterwards with [replacePlatformKey].
+  Future<void> reprovision({void Function()? onAuthorized});
 }

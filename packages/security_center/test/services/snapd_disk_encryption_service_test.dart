@@ -54,6 +54,10 @@ void main() {
         name: 'generateRepairRecoveryKey',
         call: (service) => service.generateRepairRecoveryKey(),
       ),
+      (
+        name: 'reprovision',
+        call: (service) => service.reprovision(),
+      ),
     ];
 
     for (final tc in cases) {
