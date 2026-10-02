@@ -51,6 +51,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
   List<EncryptionCheckError> _issues = const [];
   bool _volumesAuthRequired = false;
+  String? _repairKey;
 
   /// Generates a fake recovery key and key ID.
   @override
@@ -267,5 +268,22 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       );
 
   @override
-  Future<String> generateRepairRecoveryKey() async => _randomRecoveryKey();
+  Future<String> generateRepairRecoveryKey() async {
+    final key = _randomRecoveryKey();
+    _repairKey = key;
+    return key;
+  }
+
+  @override
+  Future<void> reprovision({void Function()? onAuthorized}) async {
+    final key = _repairKey;
+    if (key == null) {
+      throw StateError('reprovision called before generateRepairRecoveryKey');
+    }
+    onAuthorized?.call();
+
+    _recoveryKeys['default-recovery'] = key;
+    // Reprovisioning removes any PIN or passphrase.
+    await replacePlatformKey(authMode: AuthMode.none);
+  }
 }
