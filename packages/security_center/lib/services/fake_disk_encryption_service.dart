@@ -56,10 +56,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   @override
   Future<SnapdGenerateRecoveryKeyResponse> generateRecoveryKey() async {
     await Future.delayed(const Duration(seconds: 2));
-    final rand = Random();
-    final lastSegment = rand.nextInt(100000).toString().padLeft(5, '0');
-    final recoveryKey =
-        '55055-39320-64491-48436-47667-15525-36879-$lastSegment';
+    final recoveryKey = _randomRecoveryKey();
     final keyId = DateTime.now().millisecondsSinceEpoch.toString();
 
     _recoveryKeys[keyId] = recoveryKey;
@@ -67,6 +64,11 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       recoveryKey: recoveryKey,
       keyId: keyId,
     );
+  }
+
+  String _randomRecoveryKey() {
+    final lastSegment = Random().nextInt(100000).toString().padLeft(5, '0');
+    return '55055-39320-64491-48436-47667-15525-36879-$lastSegment';
   }
 
   /// Adds an existing recovery key (by keyId) to the first available slot.
@@ -263,4 +265,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
           if (_volumesAuthRequired) EncryptionRequirement.volumesAuth,
         },
       );
+
+  @override
+  Future<String> generateRepairRecoveryKey() async => _randomRecoveryKey();
 }
