@@ -97,7 +97,22 @@ class SystemDataContainer with _$SystemDataContainer {
 class StorageEncryptedResponse with _$StorageEncryptedResponse {
   const factory StorageEncryptedResponse({
     required SnapdStorageEncryptionStatus status,
+
+    /// Null from snapd before 2.76, which doesn't report it.
+    AutoRepairResult? autoRepairResult,
   }) = _StorageEncryptedResponse;
+}
+
+enum AutoRepairResult {
+  notInitialized,
+  notAttempted,
+  failedPlatformInit,
+  failedKeyslots,
+  failedEncryptionSupport,
+  success,
+
+  /// A result from a newer snapd.
+  unknown,
 }
 
 /// A service for managing recovery keys.

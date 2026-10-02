@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/snapd_disk_encryption_service.dart';
 import 'package:security_center/services/snapd_service.dart';
 import 'package:snapd/snapd.dart';
@@ -21,6 +22,19 @@ void main() {
     final response = await service.getStorageEncrypted();
 
     expect(response.status, SnapdStorageEncryptionStatus.failed);
+  });
+
+  test('maps the status and reports no auto-repair result', () async {
+    final snapd = _FakeSnapdService(storageEncryptionStatus: 'active');
+    addTearDown(snapd.close);
+    final service = SnapdDiskEncryptionService(snapd);
+
+    expect(
+      await service.getStorageEncrypted(),
+      const StorageEncryptedResponse(
+        status: SnapdStorageEncryptionStatus.active,
+      ),
+    );
   });
 }
 
