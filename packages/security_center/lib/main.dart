@@ -40,6 +40,12 @@ Future<void> main(List<String> args) async {
       'test-rules',
       help: 'Path to a JSON file containing test rules',
       defaultsTo: 'integration_test/assets/test_rules.json',
+    )
+    ..addOption(
+      'test-fde-repair',
+      help: 'TPM/FDE repair scenario for --dry-run',
+      allowed: FakeRepairScenario.values.map((scenario) => scenario.flag),
+      defaultsTo: FakeRepairScenario.none.flag,
     );
 
   final ArgResults argResults;
@@ -87,6 +93,9 @@ Future<void> main(List<String> args) async {
     registerService<DiskEncryptionService>(
       () => FakeDiskEncryptionService.fromFile(
         'integration_test/assets/test_containers.json',
+        repairScenario: FakeRepairScenario.values.firstWhere(
+          (scenario) => scenario.flag == argResults['test-fde-repair'],
+        ),
       ),
     );
   } else {
