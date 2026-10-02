@@ -50,6 +50,10 @@ void main() {
         name: 'fixEncryptionSupport',
         call: (service) => service.fixEncryptionSupport('proceed'),
       ),
+      (
+        name: 'generateRepairRecoveryKey',
+        call: (service) => service.generateRepairRecoveryKey(),
+      ),
     ];
 
     for (final tc in cases) {
