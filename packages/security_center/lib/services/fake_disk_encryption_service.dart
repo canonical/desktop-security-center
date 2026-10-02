@@ -208,13 +208,13 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<SnapdStorageEncryptedResponse> getStorageEncrypted() async {
+  Future<StorageEncryptedResponse> getStorageEncrypted() async {
     if (_storageEncryptedCalls < indeterminateCallCount) {
       _storageEncryptedCalls++;
-      return SnapdStorageEncryptedResponse(
+      return const StorageEncryptedResponse(
         status: SnapdStorageEncryptionStatus.indeterminate,
       );
     }
-    return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
+    return StorageEncryptedResponse(status: storageEncryptionStatus);
   }
 }
