@@ -173,4 +173,8 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   @override
   Future<String> generateRepairRecoveryKey() async =>
       throw UnsupportedError(_repairUnsupported);
+
+  @override
+  Future<void> reprovision({void Function()? onAuthorized}) async =>
+      throw UnsupportedError(_repairUnsupported);
 }
