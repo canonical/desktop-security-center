@@ -217,4 +217,14 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     }
     return StorageEncryptedResponse(status: storageEncryptionStatus);
   }
+
+  @override
+  Future<EncryptionSupportCheck> checkEncryptionSupport() async =>
+      const EncryptionSupportCheck(
+        support: EncryptionSupport.available,
+        features: {
+          EncryptionFeature.pinAuth,
+          EncryptionFeature.passphraseAuth,
+        },
+      );
 }
