@@ -5,6 +5,8 @@ import 'package:ubuntu_logger/ubuntu_logger.dart';
 
 final _log = Logger('snapd_disk_encryption_service');
 
+const _repairUnsupported = 'snapd.dart cannot repair TPM/FDE yet';
+
 class SnapdDiskEncryptionService implements DiskEncryptionService {
   SnapdDiskEncryptionService(this._snapd);
   final SnapdService _snapd;
@@ -154,4 +156,10 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
       );
     }
   }
+
+  // An Error, not an Exception, so a wrong supportsReprovision gate gets past
+  // the callers' handlers and fails loudly.
+  @override
+  Future<EncryptionSupportCheck> checkEncryptionSupport() async =>
+      throw UnsupportedError(_repairUnsupported);
 }
