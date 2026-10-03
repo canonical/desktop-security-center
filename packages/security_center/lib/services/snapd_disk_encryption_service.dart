@@ -5,6 +5,8 @@ import 'package:ubuntu_logger/ubuntu_logger.dart';
 
 final _log = Logger('snapd_disk_encryption_service');
 
+const _repairUnsupported = 'snapd.dart cannot repair TPM/FDE yet';
+
 class SnapdDiskEncryptionService implements DiskEncryptionService {
   SnapdDiskEncryptionService(this._snapd);
   final SnapdService _snapd;
@@ -143,14 +145,36 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<SnapdStorageEncryptedResponse> getStorageEncrypted() async {
+  Future<StorageEncryptedResponse> getStorageEncrypted() async {
     try {
-      return await _snapd.getStorageEncrypted();
+      final response = await _snapd.getStorageEncrypted();
+      return StorageEncryptedResponse(status: response.status);
     } on ArgumentError catch (e) {
       _log.error('Failed to parse storage encryption status: $e');
-      return SnapdStorageEncryptedResponse(
+      return const StorageEncryptedResponse(
         status: SnapdStorageEncryptionStatus.failed,
       );
     }
   }
+
+  // An Error, not an Exception, so a wrong supportsReprovision gate gets past
+  // the callers' handlers and fails loudly.
+  @override
+  Future<EncryptionSupportCheck> checkEncryptionSupport() async =>
+      throw UnsupportedError(_repairUnsupported);
+
+  @override
+  Future<EncryptionSupportCheck> fixEncryptionSupport(
+    String action, {
+    Map<String, dynamic>? args,
+  }) async =>
+      throw UnsupportedError(_repairUnsupported);
+
+  @override
+  Future<String> generateRepairRecoveryKey() async =>
+      throw UnsupportedError(_repairUnsupported);
+
+  @override
+  Future<void> reprovision({void Function()? onAuthorized}) async =>
+      throw UnsupportedError(_repairUnsupported);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/snapd_disk_encryption_service.dart';
 import 'package:security_center/services/snapd_service.dart';
 import 'package:snapd/snapd.dart';
@@ -21,6 +22,53 @@ void main() {
     final response = await service.getStorageEncrypted();
 
     expect(response.status, SnapdStorageEncryptionStatus.failed);
+  });
+
+  test('maps the status and reports no auto-repair result', () async {
+    final snapd = _FakeSnapdService(storageEncryptionStatus: 'active');
+    addTearDown(snapd.close);
+    final service = SnapdDiskEncryptionService(snapd);
+
+    expect(
+      await service.getStorageEncrypted(),
+      const StorageEncryptedResponse(
+        status: SnapdStorageEncryptionStatus.active,
+      ),
+    );
+  });
+
+  group('repair calls throw UnsupportedError', () {
+    final cases = <({
+      String name,
+      Future<void> Function(SnapdDiskEncryptionService service) call,
+    })>[
+      (
+        name: 'checkEncryptionSupport',
+        call: (service) => service.checkEncryptionSupport(),
+      ),
+      (
+        name: 'fixEncryptionSupport',
+        call: (service) => service.fixEncryptionSupport('proceed'),
+      ),
+      (
+        name: 'generateRepairRecoveryKey',
+        call: (service) => service.generateRepairRecoveryKey(),
+      ),
+      (
+        name: 'reprovision',
+        call: (service) => service.reprovision(),
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        final snapd = _FakeSnapdService(storageEncryptionStatus: 'active');
+        addTearDown(snapd.close);
+        final service = SnapdDiskEncryptionService(snapd);
+
+        await expectLater(tc.call(service), throwsUnsupportedError);
+      });
+    }
   });
 }
 
