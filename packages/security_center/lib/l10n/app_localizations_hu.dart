@@ -22,19 +22,19 @@ class AppLocalizationsHu extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Engedélyezés mindig';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Frissítési jogosultságok';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Letiltás mindig';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Engedélyezés átmenetileg';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Letiltás átmenetileg';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Mindig kérdezzen';
 
   @override
   String get snapPermissionReadLabel => 'Olvasás';
@@ -50,7 +50,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Megkövetelés az alkalmazásoktól, hogy rendszerjogosultságokat kérjenek';
+      'Megkövetelés az elzárt környezetben futó alkalmazásoktól, hogy jogosultságokat kérjenek';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -553,7 +553,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get ubuntuProEnabled => 'Az Ubuntu Pro engedélyezve van';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Ez eltarthat néhány másodpercig…';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -621,7 +621,8 @@ class AppLocalizationsHu extends AppLocalizations {
       'Az Ubuntu Pro letiltása leválasztja az előfizetését erről a számítógépről. Szeretné folytatni?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Nem sikerült letiltani az Ubuntu Pro szolgáltatást, próbálja meg újra';
 
   @override
   String get ubuntuProEnable => 'Engedélyezés';
