@@ -16,7 +16,7 @@
             }
         }
     },
-    "snapPermissionsEnableTitle": "Megkövetelés az alkalmazásoktól, hogy rendszerjogosultságokat kérjenek",
+    "snapPermissionsEnableTitle": "Megkövetelés az elzárt környezetben futó alkalmazásoktól, hogy jogosultságokat kérjenek",
     "snapPermissionReadLabel": "Olvasás",
     "snapdRuleCategoryForeverAllowed": "Engedélyezés mindig",
     "snapPermissionWriteLabel": "Írás",
@@ -264,5 +264,11 @@
     "ubuntuProLivepatchEnableTitle": "A Livepatch engedélyezése",
     "ubuntuProLivepatchEnableDescription": "A rendszermag biztonsági frissítéseinek telepítése a rendszer futása közben",
     "ubuntuProLivepatchShowTitle": "Livepatch-állapot megjelenítése a felső sávon",
-    "snapPermissionsErrorTitle": "Valami probléma történt"
+    "snapPermissionsErrorTitle": "Valami probléma történt",
+    "permissionRulePopupMenuSemanticLabel": "Frissítési jogosultságok",
+    "snapdRuleCategoryTemporarilyAllowed": "Engedélyezés átmenetileg",
+    "snapdRuleCategoryTemporarilyDenied": "Letiltás átmenetileg",
+    "snapdRuleCategoryAskAlways": "Mindig kérdezzen",
+    "ubuntuProLoadingLabel": "Ez eltarthat néhány másodpercig…",
+    "ubuntuProDisableError": "Nem sikerült letiltani az Ubuntu Pro szolgáltatást, próbálja meg újra"
 }
