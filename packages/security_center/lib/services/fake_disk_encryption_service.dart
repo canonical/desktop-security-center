@@ -349,6 +349,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     if (key == null) {
       throw StateError('reprovision called before generateRepairRecoveryKey');
     }
+    _repairKey = null;
     onAuthorized?.call();
 
     _recoveryKeys['default-recovery'] = key;
