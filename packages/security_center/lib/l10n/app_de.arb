@@ -269,5 +269,6 @@
     "snapdRuleCategoryTemporarilyDenied": "Vorübergehend verweigern",
     "snapdRuleCategoryAskAlways": "Immer nachfragen",
     "ubuntuProLoadingLabel": "Das kann ein paar Sekunden dauern ...",
-    "ubuntuProDisableError": "Ubuntu Pro konnte nicht deaktiviert werden, versuchen Sie es erneut"
+    "ubuntuProDisableError": "Ubuntu Pro konnte nicht deaktiviert werden, versuchen Sie es erneut",
+    "ubuntuProComplianceUSGTitle": "Ubuntu Security Guide (USG)"
 }
