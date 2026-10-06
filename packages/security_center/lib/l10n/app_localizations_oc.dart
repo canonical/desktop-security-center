@@ -619,7 +619,7 @@ class AppLocalizationsOc extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Desactivar Ubuntu Pro destacarà vòstre abonament d\'aqueste ordinator. Volètz contunhar ?';
+      'Desactivar Ubuntu Pro destacarà vòstre abonament d\'aqueste ordenador. Volètz contunhar ?';
 
   @override
   String get ubuntuProDisableError =>
