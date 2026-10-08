@@ -91,67 +91,6 @@ class SystemDataContainer with _$SystemDataContainer {
       _$SystemDataContainerFromJson(json);
 }
 
-/// snapd.dart's [SnapdStorageEncryptedResponse] doesn't have the auto-repair
-/// fields yet.
-@freezed
-class StorageEncryptedResponse with _$StorageEncryptedResponse {
-  const factory StorageEncryptedResponse({
-    required SnapdStorageEncryptionStatus status,
-
-    /// Null from snapd before 2.76, which doesn't report it.
-    AutoRepairResult? autoRepairResult,
-    @Default(<RepairRecommendation>{})
-    Set<RepairRecommendation> recommendations,
-  }) = _StorageEncryptedResponse;
-}
-
-enum AutoRepairResult {
-  notInitialized,
-  notAttempted,
-  failedPlatformInit,
-  failedKeyslots,
-  failedEncryptionSupport,
-  success,
-
-  /// A result from a newer snapd.
-  unknown,
-}
-
-enum RepairRecommendation {
-  permitManual,
-  requireReprovision,
-  requirePlatformReset,
-}
-
-@freezed
-class EncryptionSupportCheck with _$EncryptionSupportCheck {
-  const factory EncryptionSupportCheck({
-    required EncryptionSupport support,
-    String? unavailableReason,
-    @Default(<EncryptionCheckError>[]) List<EncryptionCheckError> errors,
-    @Default(<EncryptionFeature>{}) Set<EncryptionFeature> features,
-    @Default(<EncryptionRequirement>{}) Set<EncryptionRequirement> requirements,
-  }) = _EncryptionSupportCheck;
-}
-
-/// [kind] and [actions] stay strings: secboot keeps adding new ones, and an
-/// action goes back to snapd as is.
-@freezed
-class EncryptionCheckError with _$EncryptionCheckError {
-  const factory EncryptionCheckError({
-    required String kind,
-    required String message,
-    @Default(<String>[]) List<String> actions,
-  }) = _EncryptionCheckError;
-}
-
-/// [unknown] is a value from a newer snapd.
-enum EncryptionSupport { available, unavailable, defective, disabled, unknown }
-
-enum EncryptionFeature { pinAuth, passphraseAuth }
-
-enum EncryptionRequirement { volumesAuth }
-
 /// A service for managing recovery keys.
 abstract class DiskEncryptionService {
   /// Generates and returns a new recovery key.
@@ -186,21 +125,22 @@ abstract class DiskEncryptionService {
   });
 
   /// Gets the TPM backed FDE status from snapd.
-  Future<StorageEncryptedResponse> getStorageEncrypted();
+  Future<SnapdStorageEncryptedResponse> getStorageEncrypted();
 
   /// Must run before [fixEncryptionSupport] and [reprovision], which use the
   /// check snapd keeps in memory. A snapd restart loses it.
-  Future<EncryptionSupportCheck> checkEncryptionSupport();
+  Future<SnapdSystemDetails> getRunningSystemDetails();
 
-  Future<EncryptionSupportCheck> fixEncryptionSupport(
-    String action, {
+  Future<SnapdSystemDetails> fixEncryptionSupport(
+    String fixAction, {
     Map<String, dynamic>? args,
   });
 
   /// The key [reprovision] sets as the recovery key. snapd keeps it, and drops
   /// it after 5 minutes or one reprovision, even a failed one, so generate one
   /// per attempt.
-  Future<String> generateRepairRecoveryKey();
+  Future<SnapdGenerateReprovisionRecoveryKeyResponse>
+      generateReprovisionRecoveryKey();
 
   /// Seals without a PIN or passphrase, so when the check requires one, add it
   /// afterwards with [replacePlatformKey].

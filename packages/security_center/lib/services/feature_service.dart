@@ -53,7 +53,8 @@ class FeatureService {
     return _hasGreaterSnapdVersion(snapdVersion, '2.75.1');
   }
 
-  // snapd.dart can't make the repair calls yet, so only the fake can repair.
+  // snapd doesn't let desktop users make the repair calls yet, so only the fake
+  // can repair.
   bool get supportsReprovision => isDryRun;
 
   bool _hasStorageEncryptedManaged() {

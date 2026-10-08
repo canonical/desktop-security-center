@@ -509,7 +509,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
     }
   }
 
-  Future<StorageEncryptedResponse> _getStorageEncrypted() async {
+  Future<SnapdStorageEncryptedResponse> _getStorageEncrypted() async {
     try {
       return await _service.getStorageEncrypted();
     } on SnapdException {
