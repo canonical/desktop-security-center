@@ -129,10 +129,10 @@ abstract class DiskEncryptionService {
 
   /// Must run before [fixEncryptionSupport] and [reprovision], which use the
   /// check snapd keeps in memory. A snapd restart loses it.
-  Future<SnapdSystemDetails> getRunningSystemDetails();
+  Future<SnapdSystemResponse> getSystem();
 
-  Future<SnapdSystemDetails> fixEncryptionSupport(
-    String fixAction, {
+  Future<SnapdSystemResponse> fixEncryptionSupport(
+    SnapdFixAction fixAction, {
     Map<String, dynamic>? args,
   });
 

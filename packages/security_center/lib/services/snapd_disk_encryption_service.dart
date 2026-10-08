@@ -155,13 +155,13 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<SnapdSystemDetails> getRunningSystemDetails() {
-    return _snapd.getRunningSystemDetails();
+  Future<SnapdSystemResponse> getSystem() {
+    return _snapd.getSystem();
   }
 
   @override
-  Future<SnapdSystemDetails> fixEncryptionSupport(
-    String fixAction, {
+  Future<SnapdSystemResponse> fixEncryptionSupport(
+    SnapdFixAction fixAction, {
     Map<String, dynamic>? args,
   }) {
     return _snapd.fixEncryptionSupport(fixAction, args: args);
