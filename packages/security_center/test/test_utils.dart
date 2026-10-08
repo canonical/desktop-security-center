@@ -167,11 +167,11 @@ DiskEncryptionService registerMockDiskEncryptionService({
     }
     if (storageEncryptedCalls < indeterminateCallCount) {
       storageEncryptedCalls++;
-      return const StorageEncryptedResponse(
+      return SnapdStorageEncryptedResponse(
         status: SnapdStorageEncryptionStatus.indeterminate,
       );
     }
-    return StorageEncryptedResponse(status: storageEncryptionStatus);
+    return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
   });
 
   when(service.enumerateKeySlots()).thenAnswer((_) async {
@@ -447,6 +447,7 @@ SnapdService registerMockSnapdService({
 
   when(client.enablePrompting()).thenAnswer(toggleReply);
   when(client.disablePrompting()).thenAnswer(toggleReply);
+  when(client.reprovision()).thenAnswer((_) async => changeId);
 
   when(
     client.watchChange(changeId),

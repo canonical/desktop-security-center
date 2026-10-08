@@ -11,7 +11,7 @@ enum FakeRepairScenario {
   none('none'),
   needsRepair('needs-repair'),
   tpmDisabled('tpm-disabled', [
-    EncryptionCheckError(
+    SnapdAvailabilityCheckError(
       kind: 'tpm-device-disabled',
       message:
           'error with TPM2 device: TPM2 device is present but is currently disabled by the platform firmware',
@@ -23,7 +23,7 @@ enum FakeRepairScenario {
     ),
   ]),
   firmwareSettings('firmware-settings', [
-    EncryptionCheckError(
+    SnapdAvailabilityCheckError(
       kind: 'invalid-secure-boot-mode',
       message:
           'error with secure boot policy (PCR7) measurements: secure boot is enabled but not in deployed mode',
@@ -31,7 +31,7 @@ enum FakeRepairScenario {
     ),
   ]),
   contactOem('contact-oem', [
-    EncryptionCheckError(
+    SnapdAvailabilityCheckError(
       kind: 'host-security',
       message:
           'error with system security: CPU debugging features are not disabled and locked',
@@ -42,7 +42,7 @@ enum FakeRepairScenario {
   /// After `proceed`, `volumes-auth` is required, so dry-run reaches the PIN
   /// or passphrase step.
   noHardwareRootOfTrust('no-hardware-root-of-trust', [
-    EncryptionCheckError(
+    SnapdAvailabilityCheckError(
       kind: 'no-hardware-root-of-trust',
       message:
           'error with system security: no hardware root-of-trust properly configured',
@@ -53,7 +53,7 @@ enum FakeRepairScenario {
   const FakeRepairScenario(this.flag, [this.issues = const []]);
 
   final String flag;
-  final List<EncryptionCheckError> issues;
+  final List<SnapdAvailabilityCheckError> issues;
 }
 
 class FakeDiskEncryptionService implements DiskEncryptionService {
@@ -104,7 +104,8 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   String _auth = '12345';
 
   final FakeRepairScenario repairScenario;
-  List<EncryptionCheckError> _issues = const [];
+  // null until the first check, like snapd's check context.
+  List<SnapdAvailabilityCheckError>? _issues;
   bool _volumesAuthRequired = false;
   String? _repairKey;
   bool _repaired = false;
@@ -270,46 +271,51 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<StorageEncryptedResponse> getStorageEncrypted() async {
+  Future<SnapdStorageEncryptedResponse> getStorageEncrypted() async {
     if (_storageEncryptedCalls < indeterminateCallCount) {
       _storageEncryptedCalls++;
-      return const StorageEncryptedResponse(
+      return SnapdStorageEncryptedResponse(
         status: SnapdStorageEncryptionStatus.indeterminate,
       );
     }
     if (repairScenario == FakeRepairScenario.none) {
-      return StorageEncryptedResponse(status: storageEncryptionStatus);
+      return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
     }
-    return StorageEncryptedResponse(
+    return SnapdStorageEncryptedResponse(
       // Before clearing the TPM, the flow asks for the recovery key unless the
       // status is `recovery`. `degraded` lets dry-run show that step.
       status: repairScenario == FakeRepairScenario.tpmDisabled
           ? SnapdStorageEncryptionStatus.degraded
           : SnapdStorageEncryptionStatus.recovery,
-      autoRepairResult: AutoRepairResult.failedKeyslots,
-      recommendations: {
-        if (!_repaired) RepairRecommendation.requireReprovision,
-      },
+      autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
+      recommendations: [
+        if (!_repaired) SnapdRecommendedRemedialAction.requireReprovision,
+      ],
     );
   }
 
   @override
-  Future<EncryptionSupportCheck> checkEncryptionSupport() async {
+  Future<SnapdSystemDetails> getRunningSystemDetails() async {
     _issues = repairScenario.issues;
     _volumesAuthRequired = false;
-    return _supportCheck();
+    return _systemDetails();
   }
 
   @override
-  Future<EncryptionSupportCheck> fixEncryptionSupport(
-    String action, {
+  Future<SnapdSystemDetails> fixEncryptionSupport(
+    String fixAction, {
     Map<String, dynamic>? args,
   }) async {
-    switch (action) {
+    if (_issues == null) {
+      throw SnapdException(
+        message: 'cannot run check action without prior check',
+      );
+    }
+    switch (fixAction) {
       case 'enable-tpm-via-firmware':
       case 'enable-and-clear-tpm-via-firmware':
         _issues = const [
-          EncryptionCheckError(
+          SnapdAvailabilityCheckError(
             kind: 'reboot-required',
             message: 'a reboot is required to complete the action',
             actions: ['reboot'],
@@ -319,38 +325,46 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
         _issues = const [];
         _volumesAuthRequired = true;
     }
-    return _supportCheck();
+    return _systemDetails();
   }
 
-  EncryptionSupportCheck _supportCheck() => EncryptionSupportCheck(
-        support: _issues.isEmpty
-            ? EncryptionSupport.available
-            : EncryptionSupport.unavailable,
-        errors: _issues,
-        features: const {
-          EncryptionFeature.pinAuth,
-          EncryptionFeature.passphraseAuth,
-        },
-        requirements: {
-          if (_volumesAuthRequired) EncryptionRequirement.volumesAuth,
-        },
+  SnapdSystemDetails _systemDetails() => SnapdSystemDetails(
+        storageEncryption: SnapdStorageEncryption(
+          support: _issues!.isEmpty
+              ? SnapdStorageEncryptionSupport.available
+              : SnapdStorageEncryptionSupport.unavailable,
+          availabilityCheckErrors: _issues!,
+          features: const [
+            SnapdStorageEncryptionFeature.pinAuth,
+            SnapdStorageEncryptionFeature.passphraseAuth,
+          ],
+          requirements: [
+            if (_volumesAuthRequired)
+              SnapdStorageEncryptionRequirement.volumesAuth,
+          ],
+        ),
       );
 
   @override
-  Future<String> generateRepairRecoveryKey() async {
+  Future<SnapdGenerateReprovisionRecoveryKeyResponse>
+      generateReprovisionRecoveryKey() async {
     final key = _randomRecoveryKey();
     _repairKey = key;
-    return key;
+    return SnapdGenerateReprovisionRecoveryKeyResponse(recoveryKey: key);
   }
 
   @override
   Future<void> reprovision({void Function()? onAuthorized}) async {
-    final key = _repairKey;
-    if (key == null) {
-      throw StateError('reprovision called before generateRepairRecoveryKey');
-    }
-    _repairKey = null;
+    // Like snapd, which accepts the change first, then fails it.
     onAuthorized?.call();
+    if (_issues == null) {
+      throw Exception('missing post install check context');
+    }
+    final key = _repairKey;
+    _repairKey = null;
+    if (key == null) {
+      throw Exception('missing recovery key');
+    }
 
     _recoveryKeys['default-recovery'] = key;
     // Reprovisioning removes any PIN or passphrase.

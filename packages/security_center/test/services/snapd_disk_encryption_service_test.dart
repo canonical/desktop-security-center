@@ -1,8 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/snapd_disk_encryption_service.dart';
 import 'package:security_center/services/snapd_service.dart';
 import 'package:snapd/snapd.dart';
+
+import '../test_utils.dart';
 
 void main() {
   test('snapd.dart throws ArgumentError for unknown storage status', () {
@@ -24,49 +25,31 @@ void main() {
     expect(response.status, SnapdStorageEncryptionStatus.failed);
   });
 
-  test('maps the status and reports no auto-repair result', () async {
-    final snapd = _FakeSnapdService(storageEncryptionStatus: 'active');
-    addTearDown(snapd.close);
-    final service = SnapdDiskEncryptionService(snapd);
-
-    expect(
-      await service.getStorageEncrypted(),
-      const StorageEncryptedResponse(
-        status: SnapdStorageEncryptionStatus.active,
-      ),
-    );
-  });
-
-  group('repair calls throw UnsupportedError', () {
-    final cases = <({
-      String name,
-      Future<void> Function(SnapdDiskEncryptionService service) call,
-    })>[
+  group('reprovision', () {
+    for (final testCase in [
+      (name: 'completes when the change succeeds', err: null, want: completes),
       (
-        name: 'checkEncryptionSupport',
-        call: (service) => service.checkEncryptionSupport(),
+        name: 'throws when the change fails',
+        err: 'missing recovery key',
+        want: throwsException,
       ),
-      (
-        name: 'fixEncryptionSupport',
-        call: (service) => service.fixEncryptionSupport('proceed'),
-      ),
-      (
-        name: 'generateRepairRecoveryKey',
-        call: (service) => service.generateRepairRecoveryKey(),
-      ),
-      (
-        name: 'reprovision',
-        call: (service) => service.reprovision(),
-      ),
-    ];
+    ]) {
+      test(testCase.name, () async {
+        final snapd = registerMockSnapdService(
+          changeId: 'reprovision',
+          changes: [
+            const SnapdChange(id: 'reprovision'),
+            SnapdChange(id: 'reprovision', ready: true, err: testCase.err),
+          ],
+        );
+        var authorized = false;
 
-    for (final tc in cases) {
-      test(tc.name, () async {
-        final snapd = _FakeSnapdService(storageEncryptionStatus: 'active');
-        addTearDown(snapd.close);
-        final service = SnapdDiskEncryptionService(snapd);
-
-        await expectLater(tc.call(service), throwsUnsupportedError);
+        await expectLater(
+          SnapdDiskEncryptionService(snapd)
+              .reprovision(onAuthorized: () => authorized = true),
+          testCase.want,
+        );
+        expect(authorized, isTrue);
       });
     }
   });
