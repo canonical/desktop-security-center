@@ -5,8 +5,6 @@ import 'package:ubuntu_logger/ubuntu_logger.dart';
 
 final _log = Logger('snapd_disk_encryption_service');
 
-const _repairUnsupported = 'snapd.dart cannot repair TPM/FDE yet';
-
 class SnapdDiskEncryptionService implements DiskEncryptionService {
   SnapdDiskEncryptionService(this._snapd);
   final SnapdService _snapd;
@@ -145,36 +143,46 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<StorageEncryptedResponse> getStorageEncrypted() async {
+  Future<SnapdStorageEncryptedResponse> getStorageEncrypted() async {
     try {
-      final response = await _snapd.getStorageEncrypted();
-      return StorageEncryptedResponse(status: response.status);
+      return await _snapd.getStorageEncrypted();
     } on ArgumentError catch (e) {
       _log.error('Failed to parse storage encryption status: $e');
-      return const StorageEncryptedResponse(
+      return SnapdStorageEncryptedResponse(
         status: SnapdStorageEncryptionStatus.failed,
       );
     }
   }
 
-  // An Error, not an Exception, so a wrong supportsReprovision gate gets past
-  // the callers' handlers and fails loudly.
   @override
-  Future<EncryptionSupportCheck> checkEncryptionSupport() async =>
-      throw UnsupportedError(_repairUnsupported);
+  Future<SnapdSystemDetails> getRunningSystemDetails() {
+    return _snapd.getRunningSystemDetails();
+  }
 
   @override
-  Future<EncryptionSupportCheck> fixEncryptionSupport(
-    String action, {
+  Future<SnapdSystemDetails> fixEncryptionSupport(
+    String fixAction, {
     Map<String, dynamic>? args,
-  }) async =>
-      throw UnsupportedError(_repairUnsupported);
+  }) {
+    return _snapd.fixEncryptionSupport(fixAction, args: args);
+  }
 
   @override
-  Future<String> generateRepairRecoveryKey() async =>
-      throw UnsupportedError(_repairUnsupported);
+  Future<SnapdGenerateReprovisionRecoveryKeyResponse>
+      generateReprovisionRecoveryKey() {
+    return _snapd.generateReprovisionRecoveryKey();
+  }
 
   @override
-  Future<void> reprovision({void Function()? onAuthorized}) async =>
-      throw UnsupportedError(_repairUnsupported);
+  Future<void> reprovision({void Function()? onAuthorized}) async {
+    final changeId = await _snapd.reprovision();
+
+    onAuthorized?.call();
+
+    final result =
+        await _snapd.watchChange(changeId).firstWhere((change) => change.ready);
+    if (result.err != null) {
+      throw Exception('reprovision encountered an error: ${result.err!}');
+    }
+  }
 }
