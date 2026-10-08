@@ -12,30 +12,30 @@ enum FakeRepairScenario {
   needsRepair('needs-repair'),
   tpmDisabled('tpm-disabled', [
     SnapdAvailabilityCheckError(
-      kind: 'tpm-device-disabled',
+      kind: SnapdAvailabilityCheckErrorKind.tpmDeviceDisabled,
       message:
           'error with TPM2 device: TPM2 device is present but is currently disabled by the platform firmware',
       actions: [
-        'enable-tpm-via-firmware',
-        'enable-and-clear-tpm-via-firmware',
-        'reboot-to-fw-settings',
+        SnapdFixAction.enableTpmViaFirmware,
+        SnapdFixAction.enableAndClearTpmViaFirmware,
+        SnapdFixAction.rebootToFwSettings,
       ],
     ),
   ]),
   firmwareSettings('firmware-settings', [
     SnapdAvailabilityCheckError(
-      kind: 'invalid-secure-boot-mode',
+      kind: SnapdAvailabilityCheckErrorKind.invalidSecureBootMode,
       message:
           'error with secure boot policy (PCR7) measurements: secure boot is enabled but not in deployed mode',
-      actions: ['reboot-to-fw-settings'],
+      actions: [SnapdFixAction.rebootToFwSettings],
     ),
   ]),
   contactOem('contact-oem', [
     SnapdAvailabilityCheckError(
-      kind: 'host-security',
+      kind: SnapdAvailabilityCheckErrorKind.hostSecurity,
       message:
           'error with system security: CPU debugging features are not disabled and locked',
-      actions: ['contact-oem'],
+      actions: [SnapdFixAction.contactOem],
     ),
   ]),
 
@@ -43,10 +43,10 @@ enum FakeRepairScenario {
   /// or passphrase step.
   noHardwareRootOfTrust('no-hardware-root-of-trust', [
     SnapdAvailabilityCheckError(
-      kind: 'no-hardware-root-of-trust',
+      kind: SnapdAvailabilityCheckErrorKind.noHardwareRootOfTrust,
       message:
           'error with system security: no hardware root-of-trust properly configured',
-      actions: ['proceed'],
+      actions: [SnapdFixAction.proceed],
     ),
   ]);
 
@@ -295,15 +295,15 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<SnapdSystemDetails> getRunningSystemDetails() async {
+  Future<SnapdSystemResponse> getSystem() async {
     _issues = repairScenario.issues;
     _volumesAuthRequired = false;
     return _systemDetails();
   }
 
   @override
-  Future<SnapdSystemDetails> fixEncryptionSupport(
-    String fixAction, {
+  Future<SnapdSystemResponse> fixEncryptionSupport(
+    SnapdFixAction fixAction, {
     Map<String, dynamic>? args,
   }) async {
     if (_issues == null) {
@@ -312,23 +312,25 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       );
     }
     switch (fixAction) {
-      case 'enable-tpm-via-firmware':
-      case 'enable-and-clear-tpm-via-firmware':
+      case SnapdFixAction.enableTpmViaFirmware:
+      case SnapdFixAction.enableAndClearTpmViaFirmware:
         _issues = const [
           SnapdAvailabilityCheckError(
-            kind: 'reboot-required',
+            kind: SnapdAvailabilityCheckErrorKind.rebootRequired,
             message: 'a reboot is required to complete the action',
-            actions: ['reboot'],
+            actions: [SnapdFixAction.reboot],
           ),
         ];
-      case 'proceed':
+      case SnapdFixAction.proceed:
         _issues = const [];
         _volumesAuthRequired = true;
+      default:
+        break;
     }
     return _systemDetails();
   }
 
-  SnapdSystemDetails _systemDetails() => SnapdSystemDetails(
+  SnapdSystemResponse _systemDetails() => SnapdSystemResponse(
         storageEncryption: SnapdStorageEncryption(
           support: _issues!.isEmpty
               ? SnapdStorageEncryptionSupport.available
