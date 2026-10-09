@@ -1975,79 +1975,79 @@ void main() {
   group('TpmAuthenticationModel needsRepair', () {
     final cases = [
       (
-        name: 'failed platform init',
+        name: 'needs repair when auto-repair failed platform init',
         autoRepairResult: SnapdAutoRepairResult.failedPlatformInit,
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         supportsReprovision: true,
-        expected: true,
+        expectNeedsRepair: true,
       ),
       (
-        name: 'failed keyslots',
+        name: 'needs repair when auto-repair failed keyslots',
         autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         supportsReprovision: true,
-        expected: true,
+        expectNeedsRepair: true,
       ),
       (
-        name: 'failed encryption support',
+        name: 'needs repair when auto-repair failed encryption support',
         autoRepairResult: SnapdAutoRepairResult.failedEncryptionSupport,
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         supportsReprovision: true,
-        expected: true,
+        expectNeedsRepair: true,
       ),
       (
-        name: 'not attempted',
+        name: 'needs repair when auto-repair was not attempted',
         autoRepairResult: SnapdAutoRepairResult.notAttempted,
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         supportsReprovision: true,
-        expected: true,
+        expectNeedsRepair: true,
       ),
       (
-        name: 'no auto-repair result',
+        name: 'needs repair when snapd sends no auto-repair result',
         autoRepairResult: null,
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         supportsReprovision: true,
-        expected: true,
+        expectNeedsRepair: true,
       ),
       (
-        name: 'not initialized',
+        name: 'no repair before auto-repair is initialized',
         autoRepairResult: SnapdAutoRepairResult.notInitialized,
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         supportsReprovision: true,
-        expected: false,
+        expectNeedsRepair: false,
       ),
       (
-        name: 'repair not supported',
+        name: 'no repair when repair is not supported',
         autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         supportsReprovision: false,
-        expected: false,
+        expectNeedsRepair: false,
       ),
       (
-        name: 'only permit manual',
+        name: 'no repair when snapd only recommends permit-manual',
         autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
         recommendations: [SnapdRecommendedRemedialAction.permitManual],
         supportsReprovision: true,
-        expected: false,
+        expectNeedsRepair: false,
       ),
       (
-        name: 'only require platform reset',
+        name: 'no repair when snapd only recommends require-platform-reset',
         autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
         recommendations: [SnapdRecommendedRemedialAction.requirePlatformReset],
         supportsReprovision: true,
-        expected: false,
+        expectNeedsRepair: false,
       ),
       (
-        name: 'no recommendations',
+        name: 'no repair without recommendations',
         autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
         recommendations: <SnapdRecommendedRemedialAction>[],
         supportsReprovision: true,
-        expected: false,
+        expectNeedsRepair: false,
       ),
     ];
 
     for (final tc in cases) {
-      test('needsRepair is ${tc.expected} when ${tc.name}', () async {
+      test(tc.name, () async {
         registerMockDiskEncryptionService(
           autoRepairResult: tc.autoRepairResult,
           recommendations: tc.recommendations,
@@ -2058,7 +2058,7 @@ void main() {
         final state =
             await container.read(tpmAuthenticationModelProvider.future);
 
-        expect(state.needsRepair, tc.expected);
+        expect(state.needsRepair, tc.expectNeedsRepair);
       });
     }
 
