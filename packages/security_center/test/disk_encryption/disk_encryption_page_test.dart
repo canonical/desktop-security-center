@@ -1971,4 +1971,115 @@ void main() {
       });
     }
   });
+
+  group('TpmAuthenticationModel needsRepair', () {
+    final cases = [
+      (
+        name: 'failed platform init',
+        autoRepairResult: SnapdAutoRepairResult.failedPlatformInit,
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        supportsReprovision: true,
+        expected: true,
+      ),
+      (
+        name: 'failed keyslots',
+        autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        supportsReprovision: true,
+        expected: true,
+      ),
+      (
+        name: 'failed encryption support',
+        autoRepairResult: SnapdAutoRepairResult.failedEncryptionSupport,
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        supportsReprovision: true,
+        expected: true,
+      ),
+      (
+        name: 'not attempted',
+        autoRepairResult: SnapdAutoRepairResult.notAttempted,
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        supportsReprovision: true,
+        expected: true,
+      ),
+      (
+        name: 'no auto-repair result',
+        autoRepairResult: null,
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        supportsReprovision: true,
+        expected: true,
+      ),
+      (
+        name: 'not initialized',
+        autoRepairResult: SnapdAutoRepairResult.notInitialized,
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        supportsReprovision: true,
+        expected: false,
+      ),
+      (
+        name: 'repair not supported',
+        autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        supportsReprovision: false,
+        expected: false,
+      ),
+      (
+        name: 'only permit manual',
+        autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
+        recommendations: [SnapdRecommendedRemedialAction.permitManual],
+        supportsReprovision: true,
+        expected: false,
+      ),
+      (
+        name: 'only require platform reset',
+        autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
+        recommendations: [SnapdRecommendedRemedialAction.requirePlatformReset],
+        supportsReprovision: true,
+        expected: false,
+      ),
+      (
+        name: 'no recommendations',
+        autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
+        recommendations: <SnapdRecommendedRemedialAction>[],
+        supportsReprovision: true,
+        expected: false,
+      ),
+    ];
+
+    for (final tc in cases) {
+      test('needsRepair is ${tc.expected} when ${tc.name}', () async {
+        registerMockDiskEncryptionService(
+          autoRepairResult: tc.autoRepairResult,
+          recommendations: tc.recommendations,
+        );
+        registerMockFeatureService(supportsReprovision: tc.supportsReprovision);
+        final container = createContainer();
+
+        final state =
+            await container.read(tpmAuthenticationModelProvider.future);
+
+        expect(state.needsRepair, tc.expected);
+      });
+    }
+
+    test('changeAuthMode keeps needsRepair', () async {
+      registerMockDiskEncryptionService(
+        autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      );
+      registerMockFeatureService(supportsReprovision: true);
+      final container = createContainer();
+      final model = container.read(tpmAuthenticationModelProvider.notifier);
+      await container.read(tpmAuthenticationModelProvider.future);
+
+      await model.changeAuthMode(
+        AuthMode.passphrase,
+        passphrase: 'a passphrase',
+      );
+
+      final state = container.read(tpmAuthenticationModelProvider).value!;
+      expect(state.operationError, isNull);
+      expect(state.needsRepair, isTrue);
+    });
+  });
 }
