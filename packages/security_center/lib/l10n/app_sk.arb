@@ -138,7 +138,7 @@
     "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
     "recoveryKeyExceptionFilePermissionTitle": "Nepodarilo sa uložiť váš obnovovací kľúč do súboru",
     "recoveryKeyExceptionFilePermissionBody": "Nemáte povolenie na zápis do tohto umiestnenia súboru.",
-    "recoveryKeyTPMExplanationBody": "Šifrovacie kľúče sú uložené v dôveryhodnom platformovom module (TPM) vášho počítača.",
+    "recoveryKeyTPMExplanationBody": "Šifrovacie kľúče sú uložené v module Trusted Platform Module (TPM) vášho počítača.",
     "recoveryKeyTPMExplanationLearnMore": "Zistiť viac o šifrovaní s hardvérovou podporou",
     "recoveryKeyEncrpytionPassphraseHeader": "Šifrovacia prístupová fráza",
     "cameraRulesPageEmptyTileLabel": "Zatiaľ o prístup nežiadali žiadne aplikácie",
