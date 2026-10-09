@@ -15,25 +15,25 @@ class AppLocalizationsSk extends AppLocalizations {
   String get snapdRuleCategorySessionAllowed => 'Povolené do odhlásenia';
 
   @override
-  String get snapdRuleCategorySessionDenied => 'Odmietnuté do odhlásenia';
+  String get snapdRuleCategorySessionDenied => 'Zamietnuté do odhlásenia';
 
   @override
-  String get snapdRuleCategoryForeverAllowed => 'Vždy povolené';
+  String get snapdRuleCategoryForeverAllowed => 'Povolené vždy';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Aktualizovať oprávnenia';
+  String get permissionRulePopupMenuSemanticLabel => 'Aktualizovať povolenia';
 
   @override
-  String get snapdRuleCategoryForeverDenied => 'Vždy odmietnuté';
+  String get snapdRuleCategoryForeverDenied => 'Zamietnuté vždy';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Dočasne povolené';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Povolené dočasne';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Dočasne odmietnuté';
+  String get snapdRuleCategoryTemporarilyDenied => 'Zamietnuté dočasne';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Vždy sa opýtať';
+  String get snapdRuleCategoryAskAlways => 'Vždy sa pýtať';
 
   @override
   String get snapPermissionReadLabel => 'Čítanie';
@@ -49,29 +49,29 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Vyžadovať, aby izolované aplikácie žiadali o oprávnenia';
+      'Vyžadovať, aby izolované aplikácie žiadali o povolenia';
 
   @override
   String get snapPermissionsEnableWarning =>
-      'Táto experimentálna funkcia slúži na riadenie prístupu k systémovým zdrojom.';
+      'Toto je experimentálna funkcia na riadenie prístupu k zdrojom vášho systému.';
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Aktivuje sa, môže to trvať niekoľko sekúnd...';
+      'Povoľuje sa, môže to trvať niekoľko sekúnd...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Deaktivuje sa, môže to trvať niekoľko sekúnd...';
+      'Zakazuje sa, môže to trvať niekoľko sekúnd...';
 
   @override
   String get snapPermissionsExperimentalLabel => 'Experimentálne';
 
   @override
   String get snapPermissionsOtherDescription =>
-      'Ďalšie oprávnenia spravujte v Nastaveniach › Aplikácie.';
+      'Ďalšie povolenia môžete spravovať v časti Nastavenia › Aplikácie.';
 
   @override
-  String get snapPermissionsPageTitle => 'Oprávnenia aplikácie';
+  String get snapPermissionsPageTitle => 'Povolenia aplikácií';
 
   @override
   String get snapPermissionsErrorTitle => 'Niečo sa pokazilo';
@@ -91,45 +91,45 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Spravujte oprávnenia k $interface pre $snap.';
+    return 'Spravujte povolenia $interface pre aplikáciu $snap.';
   }
 
   @override
-  String get snapRulesPageEmptyTileLabel => 'Zatiaľ nie sú žiadne pravidlá';
+  String get snapRulesPageEmptyTileLabel => 'Zatiaľ žiadne pravidlá';
 
   @override
   String get cameraRulesPageEmptyTileLabel =>
-      'Žiadne aplikácie zatiaľ nežiadali o prístup';
+      'Zatiaľ o prístup nežiadali žiadne aplikácie';
 
   @override
   String get snapRulesRemoveAll => 'Odstrániť všetky pravidlá';
 
   @override
-  String get snapRulesResetAllPermissions => 'Obnoviť všetky oprávnenia';
+  String get snapRulesResetAllPermissions => 'Obnoviť všetky povolenia';
 
   @override
   String get homeInterfacePageTitle => 'Domovský priečinok';
 
   @override
   String get homeInterfacePageDescription =>
-      'Spravujte oprávnenia na prístup k súborom v domovskom priečinku.';
+      'Spravujte povolenia na prístup k súborom vo vašom domovskom priečinku.';
 
   @override
   String get cameraInterfacePageTitle => 'Kamera';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Povoliť aplikáciám prístup ku kamerám.';
+      'Povoľte aplikáciám prístup k vašim kamerám.';
 
   @override
   String get microphoneInterfacePageTitle => 'Mikrofón';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Povoliť aplikáciám prístup k mikrofónu.';
+      'Povoľte aplikáciám prístup k vášmu mikrofónu.';
 
   @override
-  String get interfacePageTitle => 'Spravovať oprávnenia';
+  String get interfacePageTitle => 'Spravovať povolenia';
 
   @override
   String get interfacePageLinkLearnMore => 'Zistiť viac';
@@ -158,11 +158,11 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'Obnovovací kľúč umožní znova získať prístup k údajom, ak sa disk pri spustení neodomkne. Uložte ho na bezpečné miesto.';
+      'Obnovovací kľúč vám umožní získať späť prístup k vašim údajom, ak sa disk počas spúšťania nepodarí odomknúť. Uložte ho na bezpečné miesto.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'Obnovovací kľúč umožní znova získať prístup k údajom, ak sa disk pri spustení neodomkne. Uložte ho na bezpečné miesto. $learnMoreLink';
+    return 'Obnovovací kľúč vám umožní získať späť prístup k vašim údajom, ak sa disk počas spúšťania nepodarí odomknúť. Uložte ho na bezpečné miesto. $learnMoreLink';
   }
 
   @override
@@ -174,7 +174,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageDialogHeaderCheckKey =>
-      'Kontrola obnovovacieho kľúča';
+      'Skontrolovať obnovovací kľúč';
 
   @override
   String get diskEncryptionPageCheck => 'Skontrolovať';
@@ -186,34 +186,35 @@ class AppLocalizationsSk extends AppLocalizations {
   String get diskEncryptionPageInvalidKey => 'Neplatný kľúč';
 
   @override
-  String get diskEncryptionPageEnterKey => 'Zadajte obnovovací kľúč';
+  String get diskEncryptionPageEnterKey => 'Zadajte svoj obnovovací kľúč';
 
   @override
   String get diskEncryptionPageKeyWorks => 'Obnovovací kľúč funguje';
 
   @override
   String get diskEncryptionPageKeyWorksBody =>
-      'Nezabudnite ho uložiť na bezpečné miesto.';
+      'Nezabudnite si ho uschovať na bezpečnom mieste.';
 
   @override
   String get diskEncryptionPageKeyDoesntWork => 'Obnovovací kľúč nefunguje';
 
   @override
   String get diskEncryptionPageKeyDoesntWorkBody =>
-      'Skontrolujte kľúč alebo ho nahraďte novým.';
+      'Skontrolujte kľúč alebo ho vymeňte za nový.';
 
   @override
   String get diskEncryptionPageError => 'Chyba';
 
   @override
-  String get diskEncryptionPageReplaceButton => 'Vymeniť obnovovací kľúč...';
+  String get diskEncryptionPageReplaceButton => 'Nahradiť obnovovací kľúč...';
 
   @override
-  String get diskEncryptionPageReplaceDialogHeader => 'Vymeniť obnovovací kľúč';
+  String get diskEncryptionPageReplaceDialogHeader =>
+      'Nahradiť obnovovací kľúč';
 
   @override
   String get diskEncryptionPageReplaceDialogBody =>
-      'Uložte nový obnovovací kľúč na bezpečné miesto. Po výmene už starý kľúč nebude fungovať.';
+      'Uložte nový obnovovací kľúč na bezpečné miesto. Po jeho nahradení už nebudete môcť používať starý kľúč.';
 
   @override
   String get diskEncryptionPageReplaceDialogShowQR => 'Zobraziť QR kód';
@@ -223,7 +224,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageReplaceDialogAcknowledge =>
-      'Uložil(a) som obnovovací kľúč na bezpečné miesto';
+      'Uložil som svoj obnovovací kľúč na bezpečné miesto';
 
   @override
   String get diskEncryptionPageReplaceDialogReplace => 'Nahradiť';
@@ -233,27 +234,27 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessHeader =>
-      'Obnovovací kľúč vymenený';
+      'Obnovovací kľúč bol nahradený';
 
   @override
   String get diskEncryptionPageReplaceDialogSuccessBody =>
-      'Nezabudnite ho uložiť na bezpečné miesto.';
+      'Nezabudnite si ho uschovať na bezpečnom mieste.';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Výmena obnovovacieho kľúča zlyhala';
+      'Nahrádzanie obnovovacieho kľúča zlyhalo';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
-      'Pri výmene obnovovacieho kľúča nastala chyba, starý kľúč zostáva platný.';
+      'Pri nahrádzaní vášho obnovovacieho kľúča sa vyskytla chyba, váš starý kľúč zostane platný.';
 
   @override
   String get diskEncryptionPageReplaceDialogQRHeader =>
-      'Ubuntu Desktop – obnovovací kľúč šifrovania';
+      'Ubuntu Desktop - Obnovovací kľúč šifrovania';
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Naskenujte QR kód na skopírovanie obnovovacieho kľúča a uložte ho na bezpečné miesto, napríklad do správcu hesiel. Môžete si tiež urobiť fotku na neskoršie použitie.';
+      'Naskenujte QR kód a skopírujte obnovovací kľúč, potom ho uložte na bezpečné miesto, napríklad do správcu hesiel. Pre neskoršie použitie si môžete urobiť aj fotografiu.';
 
   @override
   String get diskEncryptionPageClipboardNotification =>
@@ -264,7 +265,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusHeader =>
-      'Nastavenia šifrovania nie sú dostupné';
+      'Nastavenia šifrovania nie sú k dispozícii';
 
   @override
   String get diskEncryptionPageErrorFailedToRetrieveStatusBody =>
@@ -288,7 +289,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
-      'Na opravu spustite tento príkaz v termináli:';
+      'Ak to chcete opraviť, spustite v termináli tento príkaz:';
 
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
@@ -310,19 +311,19 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'PIN budete musieť zadať pri každom spustení počítača. Tento PIN sa líši od vášho používateľského hesla.';
+      'Pri každom spustení počítača budete musieť zadať svoj kód PIN. Tento kód PIN je iný ako vaše heslo používateľa.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
-      'Ak zabudnete PIN, môžete znovu získať prístup k disku pomocou obnovovacieho kľúča.';
+      'Ak zabudnete svoj kód PIN, môžete získať späť prístup k disku pomocou obnovovacieho kľúča.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'Prístupovú frázu budete musieť zadať pri každom spustení počítača. Táto fráza sa líši od vášho používateľského hesla.';
+      'Pri každom spustení počítača budete musieť zadať svoju prístupovú frázu. Táto prístupová fráza je iná ako vaše heslo používateľa.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
-      'Ak zabudnete prístupovú frázu, môžete znovu získať prístup k disku pomocou obnovovacieho kľúča.';
+      'Ak zabudnete svoju prístupovú frázu, môžete získať späť prístup k disku pomocou obnovovacieho kľúča.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityHeader =>
@@ -330,7 +331,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'Pre vyššie zabezpečenie nastavte prístupovú frázu alebo PIN. Budete ju musieť zadať pri každom spustení počítača.';
+      'Pre dodatočné zabezpečenie môžete nastaviť prístupovú frázu alebo kód PIN. Budete ho musieť zadať pri každom spustení počítača.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityLearnMore => 'Zistiť viac';
@@ -363,58 +364,58 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
-      'Súbor kľúča na obnovenie nebol uložený';
+      'Súbor obnovovacieho kľúča nebol uložený';
 
   @override
   String get recoveryKeyExceptionDisallowedPathTitle =>
-      'Súbor kľúča na obnovenie nemožno uložiť do dočasného umiestnenia';
+      'Súbor obnovovacieho kľúča nie je možné uložiť do dočasného umiestnenia';
 
   @override
   String get recoveryKeyExceptionUnknownTitle => 'Neznáma chyba';
 
   @override
   String get recoveryKeyExceptionFilePermissionTitle =>
-      'Nepodarilo sa uložiť obnovovací kľúč do súboru';
+      'Nepodarilo sa uložiť váš obnovovací kľúč do súboru';
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'Nemáte oprávnenie zapisovať do tohto umiestnenia súboru.';
+      'Nemáte povolenie na zápis do tohto umiestnenia súboru.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
-      'Nemáte oprávnenie na zápis do tohto priečinka. Skúste iné umiestnenie alebo použite inú metódu.';
+      'Nemáte povolenie na zápis do tohto priečinka. Skúste iné umiestnenie alebo použite inú metódu.';
 
   @override
   String get recoveryKeyExceptionDisallowedPathBody =>
-      'Skúste iné umiestnenie, napríklad vymeniteľný disk, alebo použite inú metódu.';
+      'Skúste iné umiestnenie, napríklad vymeniteľnú jednotku, alebo použite inú metódu.';
 
   @override
-  String get recoveryKeyFilePickerTitle => 'Uložiť súbor kľúča na obnovenie';
+  String get recoveryKeyFilePickerTitle => 'Uložiť súbor obnovovacieho kľúča';
 
   @override
   String get recoveryKeyFilePickerFilter => 'Textové súbory';
 
   @override
-  String get recoveryKeyTPMEnabled => 'Hardvérové šifrovanie je zapnuté';
+  String get recoveryKeyTPMEnabled => 'Hardvérové šifrovanie je povolené';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
-      'Šifrovacie kľúče sú uložené v Trusted Platform Module (TPM) vášho počítača.';
+      'Šifrovacie kľúče sú uložené v module Trusted Platform Module (TPM) vášho počítača.';
 
   @override
   String get recoveryKeyTPMExplanationLearnMore =>
-      'Zistiť viac o hardvérovom šifrovaní';
+      'Zistiť viac o šifrovaní s hardvérovou podporou';
 
   @override
   String get recoveryKeyPassphraseEnabled =>
-      'Šifrovacia prístupová fráza je zapnutá';
+      'Šifrovacia prístupová fráza je povolená';
 
   @override
   String get recoveryKeyPassphraseHeader => 'Zmeniť prístupovú frázu';
 
   @override
   String get recoveryKeyPassphraseBody =>
-      'Prístupovú frázu budete musieť zadať pri každom spustení počítača.';
+      'Pri každom spustení počítača musíte zadať svoju prístupovú frázu.';
 
   @override
   String get recoveryKeyPassphraseButton => 'Zmeniť prístupovú frázu...';
@@ -454,7 +455,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get recoveryKeyPinBody =>
-      'PIN budete musieť zadať pri každom spustení počítača.';
+      'Pri každom spustení počítača musíte zadať svoj PIN.';
 
   @override
   String get recoveryKeyPinButton => 'Zmeniť PIN...';
@@ -491,7 +492,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get recoveryKeyPassphrasePinSuccessBody =>
-      'PIN bol úspešne aktualizovaný.';
+      'Váš PIN bol úspešne aktualizovaný.';
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessHeader =>
@@ -499,26 +500,26 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get recoveryKeyPassphrasePassphraseSuccessBody =>
-      'Prístupová fráza bola úspešne aktualizovaná.';
+      'Vaša prístupová fráza bola úspešne aktualizovaná.';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowMin =>
-      'Slabá prístupová fráza, vytvorte ju dlhšiu alebo zložitejšiu';
+      'Slabá prístupová fráza, predĺžte ju alebo ju urobte zložitejšou';
 
   @override
   String get recoveryKeyPassphraseEntropyBelowOptimal =>
-      'Priemerná prístupová fráza, vytvorte ju dlhšiu alebo zložitejšiu pre lepšie zabezpečenie';
+      'Prijateľná prístupová fráza, pre lepšie zabezpečenie ju predĺžte alebo urobte zložitejšou';
 
   @override
   String get recoveryKeyPassphraseEntropyOptimal => 'Silná prístupová fráza';
 
   @override
   String get recoveryKeyPinEntropyBelowMin =>
-      'Slabý PIN, vytvorte ho dlhší alebo menej predvídateľný';
+      'Slabý PIN, predĺžte ho alebo ho urobte menej predvídateľným';
 
   @override
   String get recoveryKeyPinEntropyBelowOptimal =>
-      'Priemerný PIN, vytvorte ho dlhší alebo menej predvídateľný pre lepšie zabezpečenie';
+      'Prijateľný PIN, pre lepšie zabezpečenie ho predĺžte alebo urobte menej predvídateľným';
 
   @override
   String get recoveryKeyPinEntropyOptimal => 'PIN je dostatočne dlhý';
@@ -531,104 +532,105 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get ubuntuProNotSupported =>
-      'Ubuntu Pro nie je dostupné pre túto verziu Ubuntu';
+      'Ubuntu Pro nie je pre túto verziu Ubuntu k dispozícii';
 
   @override
   String get ubuntuProNotSupportedDetails => 'Ubuntu Pro vyžaduje vydanie LTS';
 
   @override
   String get ubuntuProNotSupportedSnapd =>
-      'Ubuntu Pro nie je podporované touto verziou snapd';
+      'Táto verzia snapd nepodporuje Ubuntu Pro';
 
   @override
   String get ubuntuProNotSupportedSnapdDetails =>
       'Aktualizujte snapd na správu Ubuntu Pro';
 
   @override
-  String get ubuntuProEnabled => 'Ubuntu Pro je aktivované';
+  String get ubuntuProEnabled => 'Ubuntu Pro je povolené';
 
   @override
   String get ubuntuProLoadingLabel => 'Môže to trvať niekoľko sekúnd...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Podnikové zabezpečenie a dodržiavanie štandardov pre váš počítač. Vždy zadarmo na osobné použitie. $learnMoreLink';
+    return 'Bezpečnosť a dodržiavanie predpisov na podnikovej úrovni pre váš počítač. Vždy zdarma pre osobné použitie. $learnMoreLink';
   }
 
   @override
   String get ubuntuProLearnMore => 'Zistiť viac o Ubuntu Pro';
 
   @override
-  String get ubuntuProEnablePro => 'Aktivovať Ubuntu Pro';
+  String get ubuntuProEnablePro => 'Povoliť Ubuntu Pro';
 
   @override
-  String get ubuntuProEnableMagic => 'Aktivovať pomocou účtu Ubuntu One';
+  String get ubuntuProEnableMagic => 'Povoliť pomocou účtu Ubuntu One';
 
   @override
-  String get ubuntuProEnableMagicSubtitle => 'Účet si môžete vytvoriť zadarmo';
+  String get ubuntuProEnableMagicSubtitle =>
+      'Budete si môcť bezplatne vytvoriť účet';
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Prihláste sa pomocou účtu Ubuntu One alebo si ho zadarmo vytvorte.';
+      'Prihláste sa pomocou svojho účtu Ubuntu One alebo si ho vytvorte zdarma.';
 
   @override
   String get ubuntuProMagicContinueInBrowser => 'Pokračovať v prehliadači';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'Môžete sa tiež prihlásiť na $attachLink a zadať kód $attachCode';
+    return 'Môžete sa tiež prihlásiť na adrese $attachLink a zadať kód $attachCode';
   }
 
   @override
   String get ubuntuProMagicError =>
-      'Nepodarilo sa aktivovať Ubuntu Pro, skúste to znova';
+      'Nepodarilo sa povoliť Ubuntu Pro, skúste to znova';
 
   @override
-  String get ubuntuProEnableToken => 'Aktivovať pomocou tokenu';
+  String get ubuntuProEnableToken => 'Povoliť pomocou tokenu';
 
   @override
-  String get ubuntuProEnableTokenError => 'Nepodarilo sa aktivovať Ubuntu Pro';
+  String get ubuntuProEnableTokenError => 'Nepodarilo sa povoliť Ubuntu Pro';
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'Od vášho IT administrátora alebo z $proLink';
+    return 'Od vášho správcu IT alebo z $proLink';
   }
 
   @override
   String ubuntuProTokenPrompt(String proLink) {
-    return 'Získajte token Ubuntu Pro od vášho administrátora alebo z $proLink';
+    return 'Získajte token Ubuntu Pro od svojho správcu alebo z $proLink';
   }
 
   @override
   String get ubuntuProTokenLabel => 'Token';
 
   @override
-  String get ubuntuProDisablePro => 'Deaktivovať Ubuntu Pro';
+  String get ubuntuProDisablePro => 'Zakázať Ubuntu Pro';
 
   @override
-  String get ubuntuProDisable => 'Deaktivovať';
+  String get ubuntuProDisable => 'Zakázať';
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Deaktivácia Ubuntu Pro odpojí vaše predplatné od tohto počítača. Chcete pokračovať?';
+      'Zakázanie Ubuntu Pro odpojí vaše predplatné od tohto počítača. Chcete pokračovať?';
 
   @override
   String get ubuntuProDisableError =>
-      'Nepodarilo sa deaktivovať Ubuntu Pro, skúste to znova';
+      'Nepodarilo sa zakázať Ubuntu Pro, skúste to znova';
 
   @override
-  String get ubuntuProEnable => 'Aktivovať';
+  String get ubuntuProEnable => 'Povoliť';
 
   @override
   String get ubuntuProCancel => 'Zrušiť';
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Nepodarilo sa aktivovať funkciu, skúste to znova.';
+      'Nepodarilo sa povoliť funkciu, skúste to znova.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Nepodarilo sa deaktivovať funkciu, skúste to znova.';
+      'Nepodarilo sa zakázať funkciu, skúste to znova.';
 
   @override
   String get ubuntuProCompliance => 'Dodržiavanie štandardov a hardening';
@@ -653,11 +655,11 @@ class AppLocalizationsSk extends AppLocalizations {
       'Certifikácia kryptografických modulov podľa štandardu FIPS 140-2 používaná vládami USA a Kanady.';
 
   @override
-  String get ubuntuProComplianceFIPSEnable => 'Aktivovať FIPS';
+  String get ubuntuProComplianceFIPSEnable => 'Povoliť FIPS';
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Aktivácia FIPS je nevratná a Livepatch bude natrvalo deaktivovaný.';
+      'Povolenie FIPS nie je možné vrátiť späť a funkcia Livepatch bude trvalo zakázaná.';
 
   @override
   String get ubuntuProComplianceFIPSPrompt =>
@@ -668,32 +670,32 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get ubuntuProComplianceFIPSUpdatesDescription =>
-      'Nainštaluje balíky validované podľa FIPS 140-2 a umožní pravidelné bezpečnostné aktualizácie.';
+      'Inštaluje balíky overené podľa FIPS 140-2 a umožňuje pravidelné bezpečnostné aktualizácie.';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdates => 'FIPS bez aktualizácií';
 
   @override
   String get ubuntuProComplianceFIPSNoUpdatesDescription =>
-      'Nainštaluje balíky validované podľa FIPS 140-2, ktoré sa nebudú aktualizovať až do ďalšej recertifikácie.';
+      'Inštaluje balíky overené podľa FIPS 140-2. Tieto nebudú aktualizované až do ďalšej recertifikácie.';
 
   @override
   String get ubuntuProComplianceDocumentation =>
-      'Dokumentácia k bezpečnostným štandardom';
+      'Dokumentácia o bezpečnostnom súlade';
 
   @override
   String get ubuntuProESMTitle => 'Rozšírená údržba zabezpečenia (ESM)';
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM poskytuje bezpečnostné opravy na 10 rokov pre celý Archív Ubuntu. Získajte nepretržité riadenie zraniteľností pre kritické, vysoké a vybrané stredné CVE.';
+      'ESM poskytuje 10 rokov bezpečnostných záplat pre celý archív Ubuntu. Získajte nepretržitú správu zraniteľností pre kritické, vysoké a vybrané stredné CVE.';
 
   @override
   String get ubuntuProESMMainTitle => 'Hlavné balíky (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Bezpečnostné aktualizácie pre balíky Ubuntu Main do roku $year';
+    return 'Bezpečnostné aktualizácie pre hlavné balíky Ubuntu do roku $year';
   }
 
   @override
@@ -708,13 +710,13 @@ class AppLocalizationsSk extends AppLocalizations {
   String get ubuntuProLivepatchTitle => 'Kernel Livepatch';
 
   @override
-  String get ubuntuProLivepatchEnableTitle => 'Aktivovať Livepatch';
+  String get ubuntuProLivepatchEnableTitle => 'Povoliť Livepatch';
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Aplikovať bezpečnostné aktualizácie jadra počas behu systému';
+      'Používanie bezpečnostných aktualizácií jadra počas behu systému';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
-      'Zobraziť stav Livepatch v hornej lište';
+      'Zobraziť stav Livepatch v hornom paneli';
 }

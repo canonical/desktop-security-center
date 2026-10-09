@@ -8,7 +8,7 @@
     "snapPermissionWriteLabel": "Escribir",
     "snapPermissionExecuteLabel": "Executar",
     "snapPermissionAccessLabel": "Acceso",
-    "snapPermissionsEnableTitle": "Requirir ás aplicacións que pidan permisos do sistema",
+    "snapPermissionsEnableTitle": "Require ás aplicacións en contorno illado que soliciten permisos",
     "snapPermissionsEnableWarning": "Isto é unha característica experimental para controlar o acceso aos recursos do teu sistema.",
     "snapPermissionsEnablingLabel": "Habilitando, isto pode tardar uns segundos...",
     "snapPermissionsDisablingLabel": "Inhabilitando, isto pode tardar uns segundos...",
@@ -199,7 +199,7 @@
             }
         }
     },
-    "ubuntuProMagicError": "Non se puido activar Ubuntu Pro. Téntao de novo",
+    "ubuntuProMagicError": "Non se puido activar Ubuntu Pro, téntao de novo",
     "ubuntuProEnableToken": "Activar cun token",
     "ubuntuProEnableTokenError": "Non se pode activar Ubuntu Pro",
     "ubuntuProEnableTokenSubtitle": "Do teu administrador informático ou de {proLink}",
@@ -221,11 +221,11 @@
     "ubuntuProTokenLabel": "Token",
     "ubuntuProDisablePro": "Desactivar Ubuntu Pro",
     "ubuntuProDisable": "Desactivar",
-    "ubuntuProDisablePrompt": "Desactivar Ubuntu Pro desvinculará a túa subscrición desta máquina. Queres continuar?",
+    "ubuntuProDisablePrompt": "Desactivar Ubuntu Pro desvinculará a túa subscrición deste computador. Queres continuar?",
     "ubuntuProEnable": "Activar",
     "ubuntuProCancel": "Cancelar",
-    "ubuntuProFeatureEnableError": "Non se puido activar a funcionalidade. Téntao de novo.",
-    "ubuntuProFeatureDisableError": "Non se puido desactivar a funcionalidade. Téntao de novo.",
+    "ubuntuProFeatureEnableError": "Non se puido activar a funcionalidade, téntao de novo.",
+    "ubuntuProFeatureDisableError": "Non se puido desactivar a funcionalidade, téntao de novo.",
     "ubuntuProCompliance": "Conformidade e endurecemento",
     "ubuntuProComplianceDisclaimer": "Só recomendado para axudar con FedRAMP, HIPAA e outros requisitos de cumprimento e endurecemento.",
     "ubuntuProComplianceUSGTitle": "Guía de seguranza de Ubuntu (USG)",
@@ -264,5 +264,11 @@
     "ubuntuProLivepatchEnableTitle": "Activar Livepatch",
     "ubuntuProLivepatchEnableDescription": "Aplicar as actualizacións de seguranza do kernel mentres o sistema se executa",
     "ubuntuProLivepatchShowTitle": "Mostrar o estado de Livepatch na barra superior",
-    "snapPermissionsErrorTitle": "Algo fallou"
+    "snapPermissionsErrorTitle": "Algo fallou",
+    "permissionRulePopupMenuSemanticLabel": "Actualizar permisos",
+    "snapdRuleCategoryTemporarilyAllowed": "Permitir temporalmente",
+    "snapdRuleCategoryTemporarilyDenied": "Denegar temporalmente",
+    "snapdRuleCategoryAskAlways": "Preguntar sempre",
+    "ubuntuProLoadingLabel": "Isto pode levar uns segundos...",
+    "ubuntuProDisableError": "Non se puido desactivar Ubuntu Pro; téntao de novo"
 }
