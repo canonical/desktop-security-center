@@ -494,9 +494,9 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
       };
 
       // snapd decides at boot whether to auto-repair, so there is nothing to
-      // repair before it reports a result. This model fetches once and stays
-      // alive, so a page opened before that check finishes offers no repair
-      // until the next start. Poll here if users hit that.
+      // repair before it reports a result. This model doesn't poll, so a page
+      // opened before that check finishes offers no repair until the state is
+      // fetched again. Poll here if users hit that.
       final needsRepair = storageStatus.recommendations
               .contains(SnapdRecommendedRemedialAction.requireReprovision) &&
           storageStatus.autoRepairResult !=
