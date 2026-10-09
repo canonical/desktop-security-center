@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:security_center/services/snapd_disk_encryption_service.dart';
 import 'package:security_center/services/snapd_service.dart';
 import 'package:snapd/snapd.dart';
@@ -42,16 +43,38 @@ void main() {
             SnapdChange(id: 'reprovision', ready: true, err: testCase.err),
           ],
         );
-        var authorized = false;
+        var authorizedCount = 0;
 
         await expectLater(
           SnapdDiskEncryptionService(snapd)
-              .reprovision(onAuthorized: () => authorized = true),
+              .reprovision(onAuthorized: () => authorizedCount++),
           testCase.want,
         );
-        expect(authorized, isTrue);
+        expect(authorizedCount, 1);
+        verify(snapd.reprovision()).called(1);
+        verify(snapd.watchChange('reprovision')).called(1);
       });
     }
+
+    test('does not start a change when authorization is cancelled', () async {
+      final snapd = registerMockSnapdService(
+        changeId: 'reprovision',
+        authCancelled: true,
+      );
+      var authorized = false;
+
+      await expectLater(
+        SnapdDiskEncryptionService(snapd)
+            .reprovision(onAuthorized: () => authorized = true),
+        throwsA(
+          isA<SnapdException>()
+              .having((error) => error.kind, 'kind', 'auth-cancelled'),
+        ),
+      );
+
+      expect(authorized, isFalse);
+      verifyNever(snapd.watchChange('reprovision'));
+    });
   });
 }
 

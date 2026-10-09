@@ -178,6 +178,14 @@ factory: true
         wantReprovision: false,
       ),
       (
+        name: 'snapd version 2.78 still requires dry-run for reprovision',
+        snapdVersion: '2.78',
+        isDryRun: false,
+        wantMicrophone: true,
+        wantPro: true,
+        wantReprovision: false,
+      ),
+      (
         name: 'snapd version null, no microphone or pro interface',
         snapdVersion: null,
         isDryRun: false,

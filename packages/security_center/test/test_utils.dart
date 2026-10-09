@@ -453,7 +453,7 @@ SnapdService registerMockSnapdService({
 
   when(client.enablePrompting()).thenAnswer(toggleReply);
   when(client.disablePrompting()).thenAnswer(toggleReply);
-  when(client.reprovision()).thenAnswer((_) async => changeId);
+  when(client.reprovision()).thenAnswer(toggleReply);
 
   when(
     client.watchChange(changeId),
