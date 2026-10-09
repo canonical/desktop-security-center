@@ -493,10 +493,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         SnapdSystemVolumeAuthMode.none || null => AuthMode.none,
       };
 
-      // snapd decides at boot whether to auto-repair, so there is nothing to
-      // repair before it reports a result. This model doesn't poll, so a page
-      // opened before that check finishes offers no repair until the state is
-      // fetched again. Poll here if users hit that.
+      // snapd may still auto-repair while the result is not-initialized
       final needsRepair = storageStatus.recommendations
               .contains(SnapdRecommendedRemedialAction.requireReprovision) &&
           storageStatus.autoRepairResult !=
