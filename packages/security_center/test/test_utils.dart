@@ -128,7 +128,7 @@ Override processRunnerOverride(Map<String, String> mountByPath) {
 }
 
 @GenerateMocks([DiskEncryptionService])
-DiskEncryptionService registerMockDiskEncryptionService({
+MockDiskEncryptionService registerMockDiskEncryptionService({
   bool checkRecoveryKey = true,
   bool checkError = false,
   bool authCancelled = false,
@@ -158,6 +158,8 @@ DiskEncryptionService registerMockDiskEncryptionService({
   List<SnapdRecommendedRemedialAction> recommendations = const [],
   int indeterminateCallCount = 0,
   Object? storageEncryptionError,
+  bool reprovisionError = false,
+  SnapdAuthErrorKind? reprovisionSnapdAuthErrorKind,
 }) {
   final service = MockDiskEncryptionService();
   var currentAuthMode = authMode;
@@ -365,6 +367,28 @@ DiskEncryptionService registerMockDiskEncryptionService({
       );
     }
     currentAuthMode = requestedAuthMode;
+  });
+  when(service.reprovision(onAuthorized: anyNamed('onAuthorized')))
+      .thenAnswer((invocation) async {
+    final onAuthorized =
+        invocation.namedArguments[#onAuthorized] as void Function()?;
+
+    // Auth-related errors happen during the polkit prompt itself, before
+    // the snapd RPC is accepted — so onAuthorized must NOT fire in this path.
+    if (reprovisionSnapdAuthErrorKind != null) {
+      throw SnapdException(
+        message: 'Mock reprovision auth error',
+        kind: reprovisionSnapdAuthErrorKind.snapdKind,
+      );
+    }
+
+    onAuthorized?.call();
+
+    if (reprovisionError) {
+      throw Exception('Mock reprovision error');
+    }
+    // Reprovisioning removes any PIN or passphrase
+    currentAuthMode = AuthMode.none;
   });
   when(service.pinPassphraseEntropyCheck(any, any))
       .thenAnswer((invocation) async {
