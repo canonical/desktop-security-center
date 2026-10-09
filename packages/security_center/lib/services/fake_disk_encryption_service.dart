@@ -295,14 +295,14 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<SnapdSystemResponse> getSystem() async {
+  Future<SnapdSystemsResponse> getSystems() async {
     _issues = repairScenario.issues;
     _volumesAuthRequired = false;
     return _systemDetails();
   }
 
   @override
-  Future<SnapdSystemResponse> fixEncryptionSupport(
+  Future<SnapdSystemsResponse> fixEncryptionSupport(
     SnapdFixAction fixAction, {
     Map<String, dynamic>? args,
   }) async {
@@ -330,7 +330,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     return _systemDetails();
   }
 
-  SnapdSystemResponse _systemDetails() => SnapdSystemResponse(
+  SnapdSystemsResponse _systemDetails() => SnapdSystemsResponse(
         storageEncryption: SnapdStorageEncryption(
           support: _issues!.isEmpty
               ? SnapdStorageEncryptionSupport.available
