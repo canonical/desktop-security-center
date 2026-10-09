@@ -335,6 +335,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
           support: _issues!.isEmpty
               ? SnapdStorageEncryptionSupport.available
               : SnapdStorageEncryptionSupport.unavailable,
+          unavailableReason: _issues!.isEmpty ? null : _issues!.first.message,
           availabilityCheckErrors: _issues!,
           features: const [
             SnapdStorageEncryptionFeature.pinAuth,
@@ -366,6 +367,9 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     _repairKey = null;
     if (key == null) {
       throw Exception('missing recovery key');
+    }
+    if (_issues!.isNotEmpty) {
+      throw Exception('postinstall check found some issues');
     }
 
     _recoveryKeys['default-recovery'] = key;
