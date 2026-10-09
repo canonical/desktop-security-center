@@ -195,9 +195,6 @@ sealed class ChangeAuthModeDialogState with _$ChangeAuthModeDialogState {
 class TpmAuthState with _$TpmAuthState {
   const factory TpmAuthState({
     required AuthMode currentAuthMode,
-
-    /// Set when snapd recommends reprovisioning to repair TPM/FDE and the
-    /// repair is supported.
     @Default(false) bool needsRepair,
     TpmFdeOperation? pendingOperation,
     TpmFdeOperationException? operationError,
@@ -416,6 +413,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
 @Riverpod(keepAlive: true)
 class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   late final _service = getService<DiskEncryptionService>();
+  late final _featureService = getService<FeatureService>();
 
   @visibleForTesting
   static Duration maxRetryDuration = const Duration(minutes: 2);
@@ -499,14 +497,11 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
       // repair before it reports a result. This model fetches once and stays
       // alive, so a page opened before that check finishes offers no repair
       // until the next start. Poll here if users hit that.
-      //
-      // The FeatureService check comes last on purpose, so short-circuiting
-      // keeps tests that never repair from needing a FeatureService.
       final needsRepair = storageStatus.recommendations
               .contains(SnapdRecommendedRemedialAction.requireReprovision) &&
           storageStatus.autoRepairResult !=
               SnapdAutoRepairResult.notInitialized &&
-          getService<FeatureService>().supportsReprovision;
+          _featureService.supportsReprovision;
 
       return TpmAuthState(
         currentAuthMode: currentAuthMode,
@@ -562,11 +557,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         onAuthorized: onAuthorized,
       );
 
-      // Refresh state, including the current mode
-      final updatedState = await _fetchState();
-      state = AsyncData(
-        updatedState.copyWith(pendingOperation: null, operationError: null),
-      );
+      state = AsyncData(await _fetchState());
     } on Exception catch (e) {
       final exception = TpmFdeOperationException.from(e, operation);
       state = AsyncData(
