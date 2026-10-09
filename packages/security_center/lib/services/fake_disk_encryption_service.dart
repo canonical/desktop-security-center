@@ -5,8 +5,7 @@ import 'dart:math';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:snapd/snapd.dart';
 
-/// Scenarios for `--test-fde-repair`. The issues are copied from secboot, so
-/// dry-run shows what snapd would send.
+/// Scenarios for `--test-fde-repair`. The issues are copied from secboot.
 enum FakeRepairScenario {
   none('none'),
   needsRepair('needs-repair'),
@@ -39,8 +38,7 @@ enum FakeRepairScenario {
     ),
   ]),
 
-  /// After `proceed`, `volumes-auth` is required, so dry-run reaches the PIN
-  /// or passphrase step.
+  /// `proceed` makes snapd require a PIN or passphrase.
   noHardwareRootOfTrust('no-hardware-root-of-trust', [
     SnapdAvailabilityCheckError(
       kind: SnapdAvailabilityCheckErrorKind.noHardwareRootOfTrust,
@@ -104,7 +102,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   String _auth = '12345';
 
   final FakeRepairScenario repairScenario;
-  // null until the first check, like snapd's check context.
+  // Stays null until the first check, like snapd's check context
   List<SnapdAvailabilityCheckError>? _issues;
   bool _volumesAuthRequired = false;
   String? _repairKey;
@@ -282,8 +280,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
     }
     return SnapdStorageEncryptedResponse(
-      // Before clearing the TPM, the flow asks for the recovery key unless the
-      // status is `recovery`. `degraded` lets dry-run show that step.
+      // Not `recovery`, so clearing the TPM checks the recovery key first
       status: repairScenario == FakeRepairScenario.tpmDisabled
           ? SnapdStorageEncryptionStatus.degraded
           : SnapdStorageEncryptionStatus.recovery,
@@ -358,7 +355,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
   @override
   Future<void> reprovision({void Function()? onAuthorized}) async {
-    // Like snapd, which accepts the change first, then fails it.
+    // snapd accepts the change first, then fails it
     onAuthorized?.call();
     if (_issues == null) {
       throw Exception('missing post install check context');
@@ -373,7 +370,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     }
 
     _recoveryKeys['default-recovery'] = key;
-    // Reprovisioning removes any PIN or passphrase.
+    // Reprovisioning removes any PIN or passphrase
     await replacePlatformKey(authMode: AuthMode.none);
     _repaired = true;
   }

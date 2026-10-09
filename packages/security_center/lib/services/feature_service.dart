@@ -53,8 +53,7 @@ class FeatureService {
     return _hasGreaterSnapdVersion(snapdVersion, '2.75.1');
   }
 
-  // snapd doesn't let desktop users make the repair calls yet, so only the fake
-  // can repair.
+  // snapd doesn't allow repair calls from desktop users yet
   bool get supportsReprovision => isDryRun;
 
   bool _hasStorageEncryptedManaged() {
