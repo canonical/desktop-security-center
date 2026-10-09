@@ -2170,4 +2170,94 @@ void main() {
       verify(service.enumerateKeySlots()).called(2);
     });
   });
+
+  group('TpmAuthenticationModel repair', () {
+    final cases = [
+      (
+        name: 'reprovisions and refreshes the state',
+        newMode: null,
+        passphrase: null,
+        reprovisionError: false,
+        reprovisionSnapdAuthErrorKind: null,
+        replacePlatformKeyError: false,
+        expectAuthorized: true,
+        expectAuthMode: AuthMode.none,
+        expectErrorOperation: null,
+      ),
+      (
+        name: 'enrols the chosen PIN after the repair',
+        newMode: AuthMode.pin,
+        passphrase: '1234',
+        reprovisionError: false,
+        reprovisionSnapdAuthErrorKind: null,
+        replacePlatformKeyError: false,
+        expectAuthorized: true,
+        expectAuthMode: AuthMode.pin,
+        expectErrorOperation: null,
+      ),
+      (
+        name: 'reports a failed repair',
+        newMode: null,
+        passphrase: null,
+        reprovisionError: true,
+        reprovisionSnapdAuthErrorKind: null,
+        replacePlatformKeyError: false,
+        expectAuthorized: true,
+        expectAuthMode: AuthMode.pin,
+        expectErrorOperation: TpmFdeOperation.repair,
+      ),
+      (
+        name: 'reports a cancelled repair',
+        newMode: null,
+        passphrase: null,
+        reprovisionError: false,
+        reprovisionSnapdAuthErrorKind: SnapdAuthErrorKind.authCancelled,
+        replacePlatformKeyError: false,
+        expectAuthorized: false,
+        expectAuthMode: AuthMode.pin,
+        expectErrorOperation: TpmFdeOperation.repair,
+      ),
+      (
+        name: 'reports a failed PIN enrolment after a successful repair',
+        newMode: AuthMode.pin,
+        passphrase: '1234',
+        reprovisionError: false,
+        reprovisionSnapdAuthErrorKind: null,
+        replacePlatformKeyError: true,
+        expectAuthorized: true,
+        expectAuthMode: AuthMode.none,
+        expectErrorOperation: TpmFdeOperation.addPin,
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          reprovisionError: tc.reprovisionError,
+          reprovisionSnapdAuthErrorKind: tc.reprovisionSnapdAuthErrorKind,
+          replacePlatformKeyError: tc.replacePlatformKeyError,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+        final model = container.read(tpmAuthenticationModelProvider.notifier);
+        await container.read(tpmAuthenticationModelProvider.future);
+
+        var authorized = false;
+        await model.repair(
+          newMode: tc.newMode,
+          passphrase: tc.passphrase,
+          onAuthorized: () => authorized = true,
+        );
+
+        final state = container.read(tpmAuthenticationModelProvider).value!;
+        expect(authorized, tc.expectAuthorized);
+        expect(state.pendingOperation, isNull);
+        expect(state.operationError?.operation, tc.expectErrorOperation);
+        expect(state.currentAuthMode, tc.expectAuthMode);
+        verify(service.reprovision(onAuthorized: anyNamed('onAuthorized')))
+            .called(1);
+      });
+    }
+  });
 }

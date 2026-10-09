@@ -94,7 +94,8 @@ enum TpmFdeOperation {
   changePin,
   changePassphrase,
   removePin,
-  removePassphrase;
+  removePassphrase,
+  repair;
 
   factory TpmFdeOperation.adding(AuthMode mode) => switch (mode) {
         AuthMode.pin => TpmFdeOperation.addPin,
@@ -576,6 +577,39 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         dismissOperationError();
       case _:
         break;
+    }
+  }
+
+  Future<void> repair({
+    AuthMode? newMode,
+    String? passphrase,
+    void Function()? onAuthorized,
+  }) async {
+    assert(state.hasValue, 'State must be loaded before repairing');
+
+    state = AsyncData(
+      state.value!.copyWith(
+        pendingOperation: TpmFdeOperation.repair,
+        operationError: null,
+      ),
+    );
+
+    try {
+      await _service.reprovision(onAuthorized: onAuthorized);
+      state = AsyncData(await _fetchState());
+      // The new keys have no PIN or passphrase, so enrol the chosen one
+      if (newMode != null && newMode != AuthMode.none) {
+        await changeAuthMode(newMode, passphrase: passphrase);
+      }
+    } on Exception catch (e) {
+      final exception =
+          TpmFdeOperationException.from(e, TpmFdeOperation.repair);
+      state = AsyncData(
+        state.value!.copyWith(
+          pendingOperation: null,
+          operationError: exception,
+        ),
+      );
     }
   }
 
