@@ -980,10 +980,11 @@ packages:
   snapd:
     dependency: "direct main"
     description:
-      name: snapd
-      sha256: "2c82bb4bd2803ba88874bd63dc7e9c83287b7bbc5b57494d5717050b9b76c54e"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: main
+      resolved-ref: f29c91e3292f139617311da23d5ae76cc98320cd
+      url: "https://github.com/canonical/snapd.dart.git"
+    source: git
     version: "0.7.7"
   source_gen:
     dependency: transitive
