@@ -21,19 +21,19 @@ class AppLocalizationsGl extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Permitir sempre';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Actualizar permisos';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Negar sempre';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Permitir temporalmente';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Denegar temporalmente';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Preguntar sempre';
 
   @override
   String get snapPermissionReadLabel => 'Ler';
@@ -49,7 +49,7 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Requirir ás aplicacións que pidan permisos do sistema';
+      'Require ás aplicacións en contorno illado que soliciten permisos';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -555,7 +555,7 @@ class AppLocalizationsGl extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro está activado';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Isto pode levar uns segundos...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -589,7 +589,7 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get ubuntuProMagicError =>
-      'Non se puido activar Ubuntu Pro. Téntao de novo';
+      'Non se puido activar Ubuntu Pro, téntao de novo';
 
   @override
   String get ubuntuProEnableToken => 'Activar cun token';
@@ -618,10 +618,11 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Desactivar Ubuntu Pro desvinculará a túa subscrición desta máquina. Queres continuar?';
+      'Desactivar Ubuntu Pro desvinculará a túa subscrición deste computador. Queres continuar?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Non se puido desactivar Ubuntu Pro; téntao de novo';
 
   @override
   String get ubuntuProEnable => 'Activar';
@@ -631,11 +632,11 @@ class AppLocalizationsGl extends AppLocalizations {
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Non se puido activar a funcionalidade. Téntao de novo.';
+      'Non se puido activar a funcionalidade, téntao de novo.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Non se puido desactivar a funcionalidade. Téntao de novo.';
+      'Non se puido desactivar a funcionalidade, téntao de novo.';
 
   @override
   String get ubuntuProCompliance => 'Conformidade e endurecemento';
