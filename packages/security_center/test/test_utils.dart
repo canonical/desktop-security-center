@@ -142,6 +142,7 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
   bool replacePlatformKeyError = false,
   SnapdAuthErrorKind? replacePlatformKeySnapdAuthErrorKind,
   String? replacePlatformKeySnapdErrorKind,
+  Future<void>? replacePlatformKeyPromptAnswered,
   AuthMode authMode = AuthMode.pin,
   EntropyResponse Function(String)? entropyResponseBuilder,
   bool enumerateKeySlots404Error = false,
@@ -176,6 +177,7 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
 }) {
   final service = MockDiskEncryptionService();
   var currentAuthMode = authMode;
+  var repaired = false;
 
   var storageEncryptedCalls = 0;
   when(service.getStorageEncrypted()).thenAnswer((_) async {
@@ -194,7 +196,7 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
           storageEncryptionStatus,
       autoRepairResult:
           autoRepairResultSequence?.elementAtOrNull(call) ?? autoRepairResult,
-      recommendations: recommendations,
+      recommendations: repaired ? const [] : recommendations,
     );
   });
 
@@ -359,6 +361,9 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
       throw Exception('Mock replace platform key error: missing passphrase');
     }
 
+    if (replacePlatformKeyPromptAnswered != null) {
+      await replacePlatformKeyPromptAnswered;
+    }
     // Auth-related errors happen during the polkit prompt itself, before
     // the snapd RPC is accepted — so onAuthorized must NOT fire in this path.
     if (replacePlatformKeySnapdAuthErrorKind != null) {
@@ -413,6 +418,7 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
     }
     // Reprovisioning removes any PIN or passphrase
     currentAuthMode = AuthMode.none;
+    repaired = true;
   });
   when(service.pinPassphraseEntropyCheck(any, any))
       .thenAnswer((invocation) async {
