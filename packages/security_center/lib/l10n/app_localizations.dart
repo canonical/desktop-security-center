@@ -813,6 +813,84 @@ abstract class AppLocalizations {
   /// **'Removing passphrase, this may take a few seconds...'**
   String get diskEncryptionPageRemovingPassphrase;
 
+  /// No description provided for @diskEncryptionPageRepairHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Disk encryption needs repair'**
+  String get diskEncryptionPageRepairHeader;
+
+  /// No description provided for @diskEncryptionPageRepairBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic repair failed during decryption. Repair the disk now to start the computer without a recovery key.'**
+  String get diskEncryptionPageRepairBody;
+
+  /// No description provided for @diskEncryptionPageRepairButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Start repair...'**
+  String get diskEncryptionPageRepairButton;
+
+  /// No description provided for @diskEncryptionPageRepairing.
+  ///
+  /// In en, this message translates to:
+  /// **'Repairing...'**
+  String get diskEncryptionPageRepairing;
+
+  /// No description provided for @diskEncryptionPageRepairDialogHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair encryption'**
+  String get diskEncryptionPageRepairDialogHeader;
+
+  /// No description provided for @diskEncryptionPageRepairDialogErrorHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Hardware-backed encryption could not be repaired'**
+  String get diskEncryptionPageRepairDialogErrorHeader;
+
+  /// No description provided for @diskEncryptionPageRepairDialogNotNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'Disk encryption no longer needs repair.'**
+  String get diskEncryptionPageRepairDialogNotNeeded;
+
+  /// No description provided for @diskEncryptionPageRepairDialogPinOrPassphraseRemovedHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Any PIN and passphrase will be removed'**
+  String get diskEncryptionPageRepairDialogPinOrPassphraseRemovedHeader;
+
+  /// No description provided for @diskEncryptionPageRepairDialogPinOrPassphraseRemovedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You can add them again after repair.'**
+  String get diskEncryptionPageRepairDialogPinOrPassphraseRemovedBody;
+
+  /// No description provided for @diskEncryptionPageRepairDialogKeyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Save the new recovery key somewhere safe. Once repairing completes, you will not be able to use the old key anymore.'**
+  String get diskEncryptionPageRepairDialogKeyBody;
+
+  /// No description provided for @diskEncryptionPageRepairDialogKeyWarningHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Old recovery keys will stop working'**
+  String get diskEncryptionPageRepairDialogKeyWarningHeader;
+
+  /// No description provided for @diskEncryptionPageRepairDialogKeyWarningBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You may want to let your IT administrator know you are re-encrypting the disk in case they are storing any recovery keys.'**
+  String get diskEncryptionPageRepairDialogKeyWarningBody;
+
+  /// No description provided for @diskEncryptionPageRepairDialogRepair.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair'**
+  String get diskEncryptionPageRepairDialogRepair;
+
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.
   ///
   /// In en, this message translates to:
@@ -872,6 +950,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hardware-backed encryption is enabled'**
   String get recoveryKeyTPMEnabled;
+
+  /// No description provided for @recoveryKeyTPMNeedsRepair.
+  ///
+  /// In en, this message translates to:
+  /// **'Hardware-backed encryption is enabled but needs repair'**
+  String get recoveryKeyTPMNeedsRepair;
 
   /// No description provided for @recoveryKeyTPMExplanationBody.
   ///
@@ -1100,6 +1184,432 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong'**
   String get recoveryKeySomethingWentWrongHeader;
+
+  /// No description provided for @passphraseTypePassphraseTileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Require a passphrase on startup'**
+  String get passphraseTypePassphraseTileTitle;
+
+  /// No description provided for @passphraseTypePinTileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Require a PIN on startup'**
+  String get passphraseTypePinTileTitle;
+
+  /// No description provided for @passphraseTypePageBodyAuthRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Hardware-backed encryption requires additional security in this computer.'**
+  String get passphraseTypePageBodyAuthRequired;
+
+  /// No description provided for @tpmActionPageTitleActionable.
+  ///
+  /// In en, this message translates to:
+  /// **'There is an issue with hardware-backed encryption'**
+  String get tpmActionPageTitleActionable;
+
+  /// No description provided for @tpmActionDetailsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical details'**
+  String get tpmActionDetailsLabel;
+
+  /// No description provided for @tpmActionSolutionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Solution {n}: {text}'**
+  String tpmActionSolutionLabel(int n, String text);
+
+  /// No description provided for @tpmActionSingleSolutionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Solution: {text}'**
+  String tpmActionSingleSolutionLabel(String text);
+
+  /// No description provided for @tpmActionErrorSupportLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Try the solutions below or contact IT support.'**
+  String get tpmActionErrorSupportLabel;
+
+  /// No description provided for @tpmActionErrorSupportSingleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Try the solution below or contact IT support.'**
+  String get tpmActionErrorSupportSingleLabel;
+
+  /// No description provided for @tpmActionErrorKindInternal.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal error.'**
+  String get tpmActionErrorKindInternal;
+
+  /// No description provided for @tpmActionErrorKindShutdownRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Power off is required.'**
+  String get tpmActionErrorKindShutdownRequired;
+
+  /// No description provided for @tpmActionErrorKindRebootRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart is required.'**
+  String get tpmActionErrorKindRebootRequired;
+
+  /// No description provided for @tpmActionErrorKindUnexpectedAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Unexpected action.'**
+  String get tpmActionErrorKindUnexpectedAction;
+
+  /// No description provided for @tpmActionErrorKindMissingArgument.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing argument.'**
+  String get tpmActionErrorKindMissingArgument;
+
+  /// No description provided for @tpmActionErrorKindInvalidArgument.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid argument.'**
+  String get tpmActionErrorKindInvalidArgument;
+
+  /// No description provided for @tpmActionErrorKindActionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Action failed.'**
+  String get tpmActionErrorKindActionFailed;
+
+  /// No description provided for @tpmActionErrorKindRunningInVm.
+  ///
+  /// In en, this message translates to:
+  /// **'The current environment is a virtual machine.'**
+  String get tpmActionErrorKindRunningInVm;
+
+  /// No description provided for @tpmActionErrorKindSystemNotEfi.
+  ///
+  /// In en, this message translates to:
+  /// **'This computer is using older firmware (legacy BIOS) that is not compatible with this encryption method.'**
+  String get tpmActionErrorKindSystemNotEfi;
+
+  /// No description provided for @tpmActionErrorKindEfiVariableAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'There is an issue with this computer\'s firmware.'**
+  String get tpmActionErrorKindEfiVariableAccess;
+
+  /// No description provided for @tpmActionErrorKindNoSuitableTpm2Device.
+  ///
+  /// In en, this message translates to:
+  /// **'This computer does not have the required security hardware (TPM 2.0) for this encryption method.'**
+  String get tpmActionErrorKindNoSuitableTpm2Device;
+
+  /// No description provided for @tpmActionErrorKindTpmDeviceDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'This computer\'s TPM is disabled.'**
+  String get tpmActionErrorKindTpmDeviceDisabled;
+
+  /// No description provided for @tpmActionErrorKindTpmHierarchiesOwned.
+  ///
+  /// In en, this message translates to:
+  /// **'This computer\'s TPM is already in use by another system or application.'**
+  String get tpmActionErrorKindTpmHierarchiesOwned;
+
+  /// No description provided for @tpmActionErrorKindTpmDeviceLockoutLockedOut.
+  ///
+  /// In en, this message translates to:
+  /// **'This computer\'s TPM is currently locked.'**
+  String get tpmActionErrorKindTpmDeviceLockoutLockedOut;
+
+  /// No description provided for @tpmActionErrorKindInsufficientTpmStorage.
+  ///
+  /// In en, this message translates to:
+  /// **'This computer\'s TPM does not have enough storage available.'**
+  String get tpmActionErrorKindInsufficientTpmStorage;
+
+  /// No description provided for @tpmActionErrorKindUnsupportedPlatform.
+  ///
+  /// In en, this message translates to:
+  /// **'This computer is not compatible with hardware-backed encryption.'**
+  String get tpmActionErrorKindUnsupportedPlatform;
+
+  /// No description provided for @tpmActionErrorKindInsufficientDmaProtection.
+  ///
+  /// In en, this message translates to:
+  /// **'This computer is missing a required security feature (DMA protection).'**
+  String get tpmActionErrorKindInsufficientDmaProtection;
+
+  /// No description provided for @tpmActionErrorKindNoKernelIommu.
+  ///
+  /// In en, this message translates to:
+  /// **'This computer is missing a required security feature (IOMMU).'**
+  String get tpmActionErrorKindNoKernelIommu;
+
+  /// No description provided for @tpmActionErrorKindHostSecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'There is an issue with this computer\'s security configuration.'**
+  String get tpmActionErrorKindHostSecurity;
+
+  /// No description provided for @tpmActionErrorKindSysPrepApplicationsPresent.
+  ///
+  /// In en, this message translates to:
+  /// **'There is software running at startup that might prevent a secure connection with the computer\'s TPM.'**
+  String get tpmActionErrorKindSysPrepApplicationsPresent;
+
+  /// No description provided for @tpmActionErrorKindAbsolutePresent.
+  ///
+  /// In en, this message translates to:
+  /// **'Absolute Persistence Module is enabled in this computer.'**
+  String get tpmActionErrorKindAbsolutePresent;
+
+  /// No description provided for @tpmActionErrorKindInvalidSecureBootMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Secure boot is disabled in this computer or is not set in deployed mode.'**
+  String get tpmActionErrorKindInvalidSecureBootMode;
+
+  /// No description provided for @tpmActionErrorKindWeakSecureBootAlgorithmDetected.
+  ///
+  /// In en, this message translates to:
+  /// **'Some of the certificates verifying software in this computer are outdated or use weak protection.'**
+  String get tpmActionErrorKindWeakSecureBootAlgorithmDetected;
+
+  /// No description provided for @tpmActionErrorKindPreOsSecureBootAuthByEnrolledDigests.
+  ///
+  /// In en, this message translates to:
+  /// **'This computer is using a manual allowlist to verify software at startup.'**
+  String get tpmActionErrorKindPreOsSecureBootAuthByEnrolledDigests;
+
+  /// No description provided for @tpmActionErrorKindAddonDriversPresent.
+  ///
+  /// In en, this message translates to:
+  /// **'Add-on drivers are present.'**
+  String get tpmActionErrorKindAddonDriversPresent;
+
+  /// No description provided for @tpmActionErrorKindNoHardwareRootOfTrust.
+  ///
+  /// In en, this message translates to:
+  /// **'This computer is missing a required security feature (hardware root of trust).'**
+  String get tpmActionErrorKindNoHardwareRootOfTrust;
+
+  /// No description provided for @tpmActionErrorKindGenericTpm.
+  ///
+  /// In en, this message translates to:
+  /// **'There is an issue with this computer\'s TPM.'**
+  String get tpmActionErrorKindGenericTpm;
+
+  /// No description provided for @tpmActionErrorKindGenericFirmware.
+  ///
+  /// In en, this message translates to:
+  /// **'There is an issue with this computer\'s firmware.'**
+  String get tpmActionErrorKindGenericFirmware;
+
+  /// No description provided for @tpmActionFixActionReboot.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart'**
+  String get tpmActionFixActionReboot;
+
+  /// No description provided for @tpmActionFixActionShutdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Power off'**
+  String get tpmActionFixActionShutdown;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart to firmware settings'**
+  String get tpmActionFixActionRebootToFwSettings;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart and press the settings key repeatedly during startup (commonly F2, F10 or Delete).'**
+  String get tpmActionFixActionRebootToFwSettingsInstructions;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable DMA protection manually'**
+  String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsInsufficientTpmStorage.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear TPM manually'**
+  String get tpmActionFixActionRebootToFwSettingsInsufficientTpmStorage;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsInvalidSecureBootMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable secure boot manually'**
+  String get tpmActionFixActionRebootToFwSettingsInvalidSecureBootMode;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsNoKernelIommu.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable IOMMU manually'**
+  String get tpmActionFixActionRebootToFwSettingsNoKernelIommu;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsNoSuitablePcrBank.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable PCR banks manually'**
+  String get tpmActionFixActionRebootToFwSettingsNoSuitablePcrBank;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsTpmDeviceDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable TPM manually'**
+  String get tpmActionFixActionRebootToFwSettingsTpmDeviceDisabled;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsTpmDeviceLockoutLockedOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear TPM manually'**
+  String get tpmActionFixActionRebootToFwSettingsTpmDeviceLockoutLockedOut;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsTpmHierarchiesOwned.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear TPM manually'**
+  String get tpmActionFixActionRebootToFwSettingsTpmHierarchiesOwned;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsAbsolutePresent.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable Absolute Persistence Module manually'**
+  String get tpmActionFixActionRebootToFwSettingsAbsolutePresent;
+
+  /// No description provided for @tpmActionFixActionContactOem.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact OEM'**
+  String get tpmActionFixActionContactOem;
+
+  /// No description provided for @tpmActionFixActionContactOsVendor.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact OS vendor'**
+  String get tpmActionFixActionContactOsVendor;
+
+  /// No description provided for @tpmActionFixActionEnableTpmViaFirmware.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable TPM on restart'**
+  String get tpmActionFixActionEnableTpmViaFirmware;
+
+  /// No description provided for @tpmActionFixActionEnableAndClearTpmViaFirmware.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable and clear TPM on restart'**
+  String get tpmActionFixActionEnableAndClearTpmViaFirmware;
+
+  /// No description provided for @tpmActionFixActionClearTpmViaFirmware.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear TPM on restart'**
+  String get tpmActionFixActionClearTpmViaFirmware;
+
+  /// No description provided for @tpmActionFixActionClearTpm.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear TPM'**
+  String get tpmActionFixActionClearTpm;
+
+  /// No description provided for @tpmActionFixActionProceed.
+  ///
+  /// In en, this message translates to:
+  /// **'Ignore'**
+  String get tpmActionFixActionProceed;
+
+  /// No description provided for @tpmActionFixActionRebootDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart the computer to complete previous actions.'**
+  String get tpmActionFixActionRebootDescription;
+
+  /// No description provided for @tpmActionFixActionRebootTpmDeviceFailureDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Restarting the computer may fix the issue.'**
+  String get tpmActionFixActionRebootTpmDeviceFailureDescription;
+
+  /// No description provided for @tpmActionFixActionShutdownDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Power off the computer to complete previous actions.'**
+  String get tpmActionFixActionShutdownDescription;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You can do this in your computer\'s firmware settings.'**
+  String get tpmActionFixActionRebootToFwSettingsDescription;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsWithDocsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You might be able to do this in your computer\'s firmware settings. Check the documentation of the CPU vendor for guidance.'**
+  String get tpmActionFixActionRebootToFwSettingsWithDocsDescription;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsInvalidSecureBootModeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Check secure boot mode is set to \"deployed\".'**
+  String get tpmActionFixActionRebootToFwSettingsInvalidSecureBootModeHint;
+
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsNoKernelIommuHint.
+  ///
+  /// In en, this message translates to:
+  /// **'This feature might be referred to as \"Virtualization Technology\", \"VT-d\" or \"AMD-Vi\".'**
+  String get tpmActionFixActionRebootToFwSettingsNoKernelIommuHint;
+
+  /// No description provided for @tpmActionFixActionProceedDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Ignoring this issue might result in a less secure installation.'**
+  String get tpmActionFixActionProceedDescription;
+
+  /// No description provided for @tpmActionIgnoreAndContinueLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Ignore and continue'**
+  String get tpmActionIgnoreAndContinueLabel;
+
+  /// No description provided for @tpmActionFixActionClearTpmWarningTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clearing the TPM erases all encryption keys'**
+  String get tpmActionFixActionClearTpmWarningTitle;
+
+  /// No description provided for @tpmActionFixActionClearTpmWarningBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You will lose access to all data in encrypted drives for which you do not have recovery keys. It will also break other features that depend on the TPM, such as authentication and certificates.'**
+  String get tpmActionFixActionClearTpmWarningBody;
+
+  /// No description provided for @tpmActionFixActionClearTpmConfirmationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'I understand the risk'**
+  String get tpmActionFixActionClearTpmConfirmationLabel;
+
+  /// No description provided for @tpmActionFixActionCaveatConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'You might be asked to confirm this action on restart.'**
+  String get tpmActionFixActionCaveatConfirm;
+
+  /// No description provided for @tpmActionFixActionCaveatRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Then you will need to start the repair again.'**
+  String get tpmActionFixActionCaveatRetry;
 
   /// No description provided for @ubuntuProPageTitle.
   ///
