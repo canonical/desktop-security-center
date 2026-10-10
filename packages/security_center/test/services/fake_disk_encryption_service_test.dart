@@ -103,4 +103,17 @@ void main() {
     final status = await service.getStorageEncrypted();
     expect(status.recommendations, isEmpty);
   });
+
+  test('fixEncryptionSupport rejects a fix before getSystems checks support',
+      () async {
+    final service = FakeDiskEncryptionService.fromFile(
+      'integration_test/assets/test_containers.json',
+      repairScenario: FakeRepairScenario.tpmDisabled,
+    );
+
+    await expectLater(
+      service.fixEncryptionSupport(SnapdFixAction.enableTpmViaFirmware),
+      throwsA(isA<SnapdException>()),
+    );
+  });
 }
