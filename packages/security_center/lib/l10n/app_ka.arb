@@ -15,7 +15,7 @@
     "interfacePageTitle": "წვდომების მართვა",
     "snapRulesRemoveAll": "ყველა წესის წაშლა",
     "interfacePageLinkLearnMore": "გაიგეთ მეტი",
-    "snapPermissionsEnableTitle": "აპებისთვის სისტემური უფლებების მოთხოვნის აუცილებლობა",
+    "snapPermissionsEnableTitle": "სენდბოქსში გაშვებული აპებისთვის უფლებების მოთხოვნის აუცილებლობა",
     "homeInterfacePageDescription": "მართეთ წვდომები თქვენს საწყის საქაღალდეში ფაილებთან წვდომისთვის.",
     "interfacePageLinkReportIssues": "პრობლემების ანგარიში",
     "snapPermissionsDisablingLabel": "ითიშება. ამას, შეიძლება რამდენიმე წამი დასჭირდეს...",
@@ -258,11 +258,17 @@
             }
         }
     },
-    "ubuntuProDisablePrompt": "Ubuntu Pro-ის გამორთვა გააუქმებს ამ მანქანის გამოწერას. გააგრძელებთ?",
+    "ubuntuProDisablePrompt": "Ubuntu Pro-ის გამორთვა გააუქმებს ამ კომპიუტერის გამოწერას. გააგრძელებთ?",
     "ubuntuProComplianceDisclaimer": "მხოლოდ, რეკომენდებულია, FedRAMP, HIPAA და სხვა სტანდარტებთან თავსებადობისა და უსაფრთხოების გაძლიერების მოთხოვნებისთვის.",
     "ubuntuProComplianceUSGDescription": "ახდენს უსაფრთხოების გაძლიერებისა და აუდიტის ავტომატიზაციას CIS წარმადობის შემოწმებითა და DISA-STIG პროფილით გარემოზე დამოკიდებული ცვლილებების შეტანის საშუალებით.",
     "ubuntuProComplianceFIPSDescription": "აშშ-ისა და კანადის მთავრობების კრიპტოგრაფიული მოდულის სერტიფიკაცია FIPS 140-2 მონაცემების დაცვის სტანდარტებთან თავსებადობის შესახებ.",
     "ubuntuProComplianceFIPSNoUpdatesDescription": "დააყენებს FIPS 140-2-ით გადამოწმებულ პაკეტებს. ესენი არ განახლდება შემდეგ რესერტიფიკაციამდე.",
     "ubuntuProESMDescription": "ESM მოგაწვდით 10-წლიან უსაფრთხოების Ubuntu-ის სრული არქივისთვის. მიიღეთ უწყვეტი მოწყვლადობის მართვა კრიტიკული, მაღალი და საშუალო CVE-ებისთვის.",
-    "snapPermissionsErrorTitle": "რაღაც არასწორია"
+    "snapPermissionsErrorTitle": "რაღაც არასწორია",
+    "snapdRuleCategoryTemporarilyDenied": "დროებით უარყოფა",
+    "snapdRuleCategoryAskAlways": "ყოველთვის კითხვა",
+    "permissionRulePopupMenuSemanticLabel": "განახლების წვდომები",
+    "snapdRuleCategoryTemporarilyAllowed": "დროებით დაშვება",
+    "ubuntuProLoadingLabel": "ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...",
+    "ubuntuProDisableError": "Ubuntu Pro-ის გამორთვა შეუძლებელია. კიდევ სცადეთ"
 }
