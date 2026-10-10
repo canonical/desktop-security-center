@@ -3425,6 +3425,93 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(RepairDialog), findsNothing);
   });
+
+  group('repair banner', () {
+    final cases = [
+      (name: 'shows when the disk needs repair', needsRepair: true),
+      (name: 'hides when the disk needs no repair', needsRepair: false),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final container = createContainer();
+        registerMockDiskEncryptionService(
+          recommendations: [
+            if (tc.needsRepair)
+              SnapdRecommendedRemedialAction.requireReprovision,
+          ],
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        await tester.pumpAppWithProviders(
+          (_) => const DiskEncryptionPage(),
+          container,
+        );
+        await tester.pumpAndSettle();
+
+        final l10n = tester.l10n;
+        expect(
+          find.text(l10n.diskEncryptionPageRepairHeader),
+          tc.needsRepair ? findsOneWidget : findsNothing,
+        );
+        expect(
+          find.text(l10n.recoveryKeyTPMNeedsRepair),
+          tc.needsRepair ? findsOneWidget : findsNothing,
+        );
+        expect(
+          find.text(l10n.recoveryKeyTPMEnabled),
+          tc.needsRepair ? findsNothing : findsOneWidget,
+        );
+      });
+    }
+  });
+
+  testWidgets('repair banner opens the repair dialog', (tester) async {
+    final container = createContainer();
+    registerMockDiskEncryptionService(
+      recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+    );
+    registerMockFeatureService(supportsReprovision: true);
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageRepairButton));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(RepairDialog), findsOneWidget);
+  });
+
+  testWidgets('repair banner waits for other changes', (tester) async {
+    final promptAnswered = Completer<void>();
+    final container = createContainer();
+    registerMockDiskEncryptionService(
+      recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      replacePlatformKeyPromptAnswered: promptAnswered.future,
+    );
+    registerMockFeatureService(supportsReprovision: true);
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    final l10n = tester.l10n;
+    final startRepairButton = find.widgetWithText(
+      OutlinedButton,
+      l10n.diskEncryptionPageRepairButton,
+    );
+    final removePinButton = find.text(l10n.diskEncryptionPageRemovePinButton);
+    await tester.ensureVisible(removePinButton);
+    await tester.tap(removePinButton);
+    await tester.pump();
+    expect(tester.widget<OutlinedButton>(startRepairButton).enabled, isFalse);
+
+    promptAnswered.complete();
+    await tester.pumpAndSettle();
+    expect(tester.widget<OutlinedButton>(startRepairButton).enabled, isTrue);
+  });
 }
 
 // The dialog model is auto-dispose, so keep it alive while its check runs

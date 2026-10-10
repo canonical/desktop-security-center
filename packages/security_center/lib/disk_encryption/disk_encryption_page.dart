@@ -57,6 +57,10 @@ class EncryptionPageBody extends ConsumerWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (data.needsRepair) ...[
+              _RepairBanner(tpmState: data),
+              const SizedBox(height: 32),
+            ],
             _AuthStatusTileList(tpmState: data),
             const SizedBox(height: 32),
             const _RecoveryKeyActions(),
@@ -1314,7 +1318,9 @@ class _AuthStatusTileList extends StatelessWidget {
       children: [
         YaruListTile(
           leading: const Icon(YaruIcons.lock, size: 24),
-          titleText: l10n.recoveryKeyTPMEnabled,
+          titleText: tpmState.needsRepair
+              ? l10n.recoveryKeyTPMNeedsRepair
+              : l10n.recoveryKeyTPMEnabled,
         ),
         // Show enabled status row when not loading and has auth enabled
         if (currentMode != AuthMode.none && pendingOperation == null) ...[
@@ -1340,6 +1346,37 @@ class _AuthStatusTileList extends StatelessWidget {
           ),
         ],
       ],
+    );
+  }
+}
+
+class _RepairBanner extends StatelessWidget {
+  const _RepairBanner({required this.tpmState});
+
+  final TpmAuthState tpmState;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    return YaruInfoBox(
+      title: Text(l10n.diskEncryptionPageRepairHeader),
+      yaruInfoType: YaruInfoType.warning,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l10n.diskEncryptionPageRepairBody),
+          const SizedBox(height: 8),
+          OutlinedButton(
+            onPressed: tpmState.isLoading
+                ? null
+                : () {
+                    showRepairDialog(context);
+                  },
+            child: Text(l10n.diskEncryptionPageRepairButton),
+          ),
+        ],
+      ),
     );
   }
 }
