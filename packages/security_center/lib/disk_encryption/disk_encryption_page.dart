@@ -8,6 +8,8 @@ import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:snapd/snapd.dart';
+import 'package:ubuntu_localizations/ubuntu_localizations.dart';
 import 'package:yaru/yaru.dart';
 
 const _learnMoreUrl =
@@ -508,6 +510,298 @@ class ChangeAuthModeDialog extends ConsumerWidget {
               ),
           ].separatedBy(const SizedBox(height: 16)),
         ),
+      ),
+    );
+  }
+}
+
+void showRepairDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (_) => const RepairDialog(),
+  );
+}
+
+class RepairDialog extends ConsumerWidget {
+  const RepairDialog({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dialogState = ref.watch(repairDialogModelProvider).dialogState;
+    final l10n = AppLocalizations.of(context);
+
+    if (dialogState is RepairDialogStateAuthCancelled) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pop();
+      });
+    }
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: AlertDialog(
+        title: YaruDialogTitleBar(
+          title: Text(l10n.diskEncryptionPageRepairDialogHeader),
+        ),
+        titlePadding: EdgeInsets.zero,
+        content: SizedBox(
+          width: 460,
+          child: SingleChildScrollView(
+            child: switch (dialogState) {
+              RepairDialogStateIssue(:final issue) =>
+                _RepairIssue(issue: issue),
+              RepairDialogStateUnavailable(:final issue) =>
+                _RepairUnavailable(issue: issue),
+              RepairDialogStateError(:final e) => _RepairError(e: e),
+              _ => const YaruLinearProgressIndicator(),
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _RepairIssue extends ConsumerWidget {
+  const _RepairIssue({required this.issue});
+
+  final SnapdAvailabilityCheckError issue;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    // Contacting the OEM or OS vendor isn't a fix the user can make here
+    final fixes = issue.actions
+        .where(
+          (action) =>
+              action != SnapdFixAction.contactOem &&
+              action != SnapdFixAction.contactOsVendor,
+        )
+        .toList();
+    final proceedOnly = fixes.singleOrNull == SnapdFixAction.proceed;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        YaruInfoBox(
+          title: Text(l10n.tpmActionPageTitleActionable),
+          subtitle: Text(
+            proceedOnly
+                ? l10n.tpmActionFixActionProceedDescription
+                : fixes.length == 1
+                    ? l10n.tpmActionErrorSupportSingleLabel
+                    : l10n.tpmActionErrorSupportLabel,
+          ),
+          yaruInfoType: YaruInfoType.warning,
+        ),
+        Text(issue.kind.localizedDescription(l10n)),
+        if (!proceedOnly)
+          YaruExpansionPanel(
+            shrinkWrap: true,
+            headers: [
+              for (final (i, fix) in fixes.indexed)
+                Text(
+                  fixes.length == 1
+                      ? l10n.tpmActionSingleSolutionLabel(
+                          fix.localizedTitle(l10n, issue.kind),
+                        )
+                      : l10n.tpmActionSolutionLabel(
+                          i + 1,
+                          fix.localizedTitle(l10n, issue.kind),
+                        ),
+                ),
+            ],
+            children: [
+              for (final fix in fixes) _RepairFix(fix: fix, kind: issue.kind),
+            ],
+          ),
+        Hyperlink(text: l10n.diskEncryptionPageLearnMore, url: _learnMoreUrl),
+        _RepairTechnicalDetails(issue: issue),
+        if (proceedOnly)
+          Wrap(
+            alignment: WrapAlignment.end,
+            spacing: 16,
+            children: [
+              OutlinedButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(UbuntuLocalizations.of(context).cancelLabel),
+              ),
+              ElevatedButton(
+                onPressed: () => ref
+                    .read(repairDialogModelProvider.notifier)
+                    .applyFix(SnapdFixAction.proceed),
+                child: Text(l10n.tpmActionIgnoreAndContinueLabel),
+              ),
+            ],
+          ),
+      ].separatedBy(const SizedBox(height: 16)),
+    );
+  }
+}
+
+class _RepairFix extends ConsumerStatefulWidget {
+  const _RepairFix({required this.fix, required this.kind});
+
+  final SnapdFixAction fix;
+  final SnapdAvailabilityCheckErrorKind kind;
+
+  @override
+  ConsumerState<_RepairFix> createState() => _RepairFixState();
+}
+
+class _RepairFixState extends ConsumerState<_RepairFix> {
+  var _riskAccepted = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final fix = widget.fix;
+    final description = [
+      fix.localizedDescription(l10n, widget.kind),
+      fix.localizedFirmwareHint(l10n, widget.kind),
+    ].nonNulls.join(' ');
+    final caveat = fix.localizedCaveat(l10n);
+    final unlockedWithRecoveryKey = ref
+        .watch(tpmAuthenticationModelProvider)
+        .value!
+        .unlockedWithRecoveryKey;
+    final keyChecked = !fix.clearsTpm ||
+        unlockedWithRecoveryKey ||
+        ref.watch(checkRecoveryKeyDialogModelProvider) ==
+            CheckRecoveryKeyDialogState.result(true);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        kYaruPagePadding,
+        0,
+        kYaruPagePadding,
+        kYaruPagePadding,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (description.isNotEmpty) Text(description),
+          if (fix == SnapdFixAction.rebootToFwSettings)
+            Text(l10n.tpmActionFixActionRebootToFwSettingsInstructions),
+          if (caveat != null) Text(caveat),
+          if (fix.clearsTpm) ...[
+            YaruInfoBox(
+              title: Text(l10n.tpmActionFixActionClearTpmWarningTitle),
+              subtitle: Text(l10n.tpmActionFixActionClearTpmWarningBody),
+              yaruInfoType: YaruInfoType.warning,
+            ),
+            if (!unlockedWithRecoveryKey) const _RecoveryKeyCheck(),
+            YaruCheckButton(
+              title: Text(
+                l10n.tpmActionFixActionClearTpmConfirmationLabel,
+                maxLines: 2,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              value: _riskAccepted,
+              onChanged: (value) =>
+                  setState(() => _riskAccepted = value ?? false),
+            ),
+          ],
+          if (!fix.isExternal)
+            OutlinedButton(
+              onPressed: keyChecked && (_riskAccepted || !fix.clearsTpm)
+                  ? () =>
+                      ref.read(repairDialogModelProvider.notifier).applyFix(fix)
+                  : null,
+              child: Text(
+                fix == SnapdFixAction.proceed
+                    ? l10n.tpmActionIgnoreAndContinueLabel
+                    : fix.localizedTitle(l10n, widget.kind),
+              ),
+            ),
+        ].separatedBy(const SizedBox(height: 16)),
+      ),
+    );
+  }
+}
+
+class _RepairUnavailable extends StatelessWidget {
+  const _RepairUnavailable({required this.issue});
+
+  final SnapdAvailabilityCheckError issue;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        YaruInfoBox(
+          title: Text(l10n.diskEncryptionPageRepairDialogErrorHeader),
+          subtitle: Text(issue.kind.localizedDescription(l10n)),
+          yaruInfoType: YaruInfoType.danger,
+        ),
+        Hyperlink(text: l10n.diskEncryptionPageLearnMore, url: _learnMoreUrl),
+        _RepairTechnicalDetails(issue: issue),
+      ].separatedBy(const SizedBox(height: 16)),
+    );
+  }
+}
+
+class _RepairError extends ConsumerWidget {
+  const _RepairError({required this.e});
+
+  final Exception e;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    if (e is RepairNotAvailableException) {
+      return YaruInfoBox(
+        subtitle: Text(l10n.diskEncryptionPageRepairDialogNotNeeded),
+        yaruInfoType: YaruInfoType.information,
+      );
+    }
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        YaruInfoBox(
+          title: Text(l10n.diskEncryptionPageRepairDialogErrorHeader),
+          subtitle: Text(
+            switch (e) {
+              final TpmStateException e => e.localizedBody(l10n),
+              _ => _dialogErrorMessage(e),
+            },
+          ),
+          yaruInfoType: YaruInfoType.danger,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            OutlinedButton(
+              onPressed: ref.read(repairDialogModelProvider.notifier).retry,
+              child: Text(UbuntuLocalizations.of(context).retryLabel),
+            ),
+          ],
+        ),
+      ].separatedBy(const SizedBox(height: 16)),
+    );
+  }
+}
+
+class _RepairTechnicalDetails extends StatelessWidget {
+  const _RepairTechnicalDetails({required this.issue});
+
+  final SnapdAvailabilityCheckError issue;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return YaruExpandable(
+      expandButtonPosition: YaruExpandableButtonPosition.start,
+      expandIconSemanticLabel: l10n.tpmActionDetailsLabel,
+      header: Text(l10n.tpmActionDetailsLabel),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(issue.kind.name.toKebabCase()),
+          Text(issue.message),
+        ],
       ),
     );
   }
