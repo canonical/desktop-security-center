@@ -163,6 +163,7 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
   bool reprovisionError = false,
   SnapdAuthErrorKind? reprovisionSnapdAuthErrorKind,
   String? reprovisionSnapdErrorKind,
+  Future<void>? reprovisionPromptAnswered,
   List<SnapdAvailabilityCheckError> availabilityCheckErrors = const [],
   SnapdStorageEncryptionSupport? encryptionSupport,
   bool volumesAuthRequired = false,
@@ -388,6 +389,7 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
     final onAuthorized =
         invocation.namedArguments[#onAuthorized] as void Function()?;
 
+    if (reprovisionPromptAnswered != null) await reprovisionPromptAnswered;
     // Auth-related errors happen during the polkit prompt itself, before
     // the snapd RPC is accepted — so onAuthorized must NOT fire in this path.
     if (reprovisionSnapdAuthErrorKind != null) {

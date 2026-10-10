@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:file/memory.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -3318,6 +3321,109 @@ void main() {
 
     expect(container.read(passphrase).newPass, isEmpty);
     expect(find.text('oldpass'), findsNothing);
+  });
+
+  group('repair dialog repairs', () {
+    final cases = [
+      (name: 'with the new recovery key', newPin: null),
+      (name: 'and adds the chosen PIN', newPin: '5678'),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final newPin = tc.newPin;
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          authMode: AuthMode.none,
+          volumesAuthRequired: newPin != null,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+        await _showRepairDialog(tester, container);
+
+        final l10n = tester.l10n;
+        if (newPin != null) {
+          final continueLabel =
+              UbuntuLocalizations.of(tester.context).continueLabel;
+          await tester.tap(find.text(l10n.passphraseTypePinTileTitle));
+          await tester.tap(find.text(continueLabel));
+          await tester.pumpAndSettle();
+          await tester.enterText(find.byType(TextField).at(0), newPin);
+          await tester.enterText(find.byType(TextField).at(1), newPin);
+          await tester.pumpAndSettle(debounceDelay);
+          await tester.tap(find.text(continueLabel));
+          await tester.pumpAndSettle();
+        }
+
+        expect(find.text('mock-reprovision-key'), findsOneWidget);
+        final repairButton = find.widgetWithText(
+          ElevatedButton,
+          l10n.diskEncryptionPageRepairDialogRepair,
+        );
+        expect(tester.widget<ElevatedButton>(repairButton).enabled, isFalse);
+
+        await tester.tap(
+          find.text(l10n.diskEncryptionPageReplaceDialogAcknowledge),
+        );
+        await tester.pump();
+        await tester.ensureVisible(repairButton);
+        await tester.tap(repairButton);
+        await tester.pumpAndSettle();
+
+        expect(find.byType(RepairDialog), findsNothing);
+        verify(service.reprovision(onAuthorized: anyNamed('onAuthorized')))
+            .called(1);
+        expect(
+          container.read(tpmAuthenticationModelProvider).value!.currentAuthMode,
+          newPin != null ? AuthMode.pin : AuthMode.none,
+        );
+        if (newPin != null) {
+          verify(
+            service.replacePlatformKey(
+              authMode: AuthMode.pin,
+              pin: newPin,
+              onAuthorized: anyNamed('onAuthorized'),
+            ),
+          ).called(1);
+        }
+      });
+    }
+  });
+
+  testWidgets('repair dialog stays open while the repair starts',
+      (tester) async {
+    final promptAnswered = Completer<void>();
+    registerMockDiskEncryptionService(
+      recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      authMode: AuthMode.none,
+      reprovisionPromptAnswered: promptAnswered.future,
+    );
+    registerMockFeatureService(supportsReprovision: true);
+    final container = createContainer();
+    await _showRepairDialog(tester, container);
+
+    final l10n = tester.l10n;
+    expect(find.byType(YaruWindowControl), findsOneWidget);
+    await tester.tap(
+      find.text(l10n.diskEncryptionPageReplaceDialogAcknowledge),
+    );
+    await tester.pump();
+    final repairButton = find.text(l10n.diskEncryptionPageRepairDialogRepair);
+    await tester.ensureVisible(repairButton);
+    await tester.tap(repairButton);
+    await tester.pump();
+
+    expect(find.byType(YaruWindowControl), findsNothing);
+    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+    expect(
+      ModalRoute.of(tester.element(find.byType(RepairDialog)))!.isActive,
+      isTrue,
+    );
+
+    promptAnswered.complete();
+    await tester.pumpAndSettle();
+    expect(find.byType(RepairDialog), findsNothing);
   });
 }
 
