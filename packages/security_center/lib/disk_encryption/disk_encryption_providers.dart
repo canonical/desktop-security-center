@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:security_center/services/feature_service.dart';
 import 'package:security_center/widgets/file_picker_dialog.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
@@ -247,6 +248,7 @@ sealed class ChangeAuthModeDialogState with _$ChangeAuthModeDialogState {
 class TpmAuthState with _$TpmAuthState {
   const factory TpmAuthState({
     required AuthMode currentAuthMode,
+    @Default(false) bool needsRepair,
     @Default(false) bool unlockedWithRecoveryKey,
     TpmFdeOperation? pendingOperation,
     TpmFdeOperationException? operationError,
@@ -494,6 +496,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
 @Riverpod(keepAlive: true)
 class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   late final _service = getService<DiskEncryptionService>();
+  late final _featureService = getService<FeatureService>();
 
   @visibleForTesting
   static Duration maxRetryDuration = const Duration(minutes: 2);
@@ -575,6 +578,8 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
       return TpmAuthState(
         currentAuthMode: currentAuthMode,
+        needsRepair:
+            storageStatus.needsRepair && _featureService.supportsReprovision,
         unlockedWithRecoveryKey:
             storageStatus.status == SnapdStorageEncryptionStatus.recovery,
       );
