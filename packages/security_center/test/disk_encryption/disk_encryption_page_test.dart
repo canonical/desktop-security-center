@@ -1,6 +1,7 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:file/memory.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:path/path.dart' as p;
@@ -2260,4 +2261,536 @@ void main() {
       });
     }
   });
+
+  group('RepairDialogModel issues', () {
+    const tpmDisabled = SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.tpmDeviceDisabled,
+      message: 'Mock issue',
+      actions: [SnapdFixAction.enableTpmViaFirmware],
+    );
+    const rebootRequired = SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.rebootRequired,
+      message: 'Mock issue',
+      actions: [SnapdFixAction.reboot],
+    );
+    const tpmFailure = SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.tpmDeviceFailure,
+      message: 'Mock issue',
+      actions: [SnapdFixAction.contactOem],
+    );
+    const noPcrBank = SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.noSuitablePcrBank,
+      message: 'Mock issue',
+    );
+    const reason = SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.internalError,
+      message: 'Mock unavailable reason',
+    );
+
+    final cases = [
+      (
+        name: 'shows the top-priority issue',
+        availabilityCheckErrors: [tpmDisabled, noPcrBank],
+        encryptionSupport: null,
+        expectState: RepairDialogState.issue(tpmDisabled),
+      ),
+      (
+        name: 'shows an issue the user fixes outside the app',
+        availabilityCheckErrors: [rebootRequired],
+        encryptionSupport: null,
+        expectState: RepairDialogState.issue(rebootRequired),
+      ),
+      (
+        name: 'shows an issue only the vendor can fix as unavailable',
+        availabilityCheckErrors: [tpmFailure],
+        encryptionSupport: null,
+        expectState: RepairDialogState.unavailable(tpmFailure),
+      ),
+      (
+        name: 'shows an issue without fixes as unavailable',
+        availabilityCheckErrors: [noPcrBank],
+        encryptionSupport: null,
+        expectState: RepairDialogState.unavailable(noPcrBank),
+      ),
+      (
+        name: 'shows the reason when snapd sends no issues',
+        availabilityCheckErrors: <SnapdAvailabilityCheckError>[],
+        encryptionSupport: SnapdStorageEncryptionSupport.unavailable,
+        expectState: RepairDialogState.unavailable(reason),
+      ),
+      (
+        name: 'treats defective support as unavailable',
+        availabilityCheckErrors: <SnapdAvailabilityCheckError>[],
+        encryptionSupport: SnapdStorageEncryptionSupport.defective,
+        expectState: RepairDialogState.unavailable(reason),
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          availabilityCheckErrors: tc.availabilityCheckErrors,
+          encryptionSupport: tc.encryptionSupport,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+
+        expect(await _openRepairDialog(container), tc.expectState);
+      });
+    }
+  });
+
+  group('RepairDialogModel steps', () {
+    final cases = [
+      (
+        name: 'asks for a PIN or passphrase when the check requires one',
+        volumesAuthRequired: true,
+        authMode: AuthMode.none,
+        expectState: RepairDialogState.setPinOrPassphrase(),
+      ),
+      (
+        name: 'asks for a new PIN or passphrase instead of the current one',
+        volumesAuthRequired: true,
+        authMode: AuthMode.pin,
+        expectState: RepairDialogState.setPinOrPassphrase(),
+      ),
+      (
+        name: 'warns that the current PIN or passphrase will be removed',
+        volumesAuthRequired: false,
+        authMode: AuthMode.pin,
+        expectState: RepairDialogState.pinOrPassphraseWillBeRemoved(),
+      ),
+      (
+        name: 'goes straight to the recovery key otherwise',
+        volumesAuthRequired: false,
+        authMode: AuthMode.none,
+        expectState: RepairDialogState.saveKey(
+          const SnapdGenerateReprovisionRecoveryKeyResponse(
+            recoveryKey: 'mock-reprovision-key',
+          ),
+          false,
+        ),
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          volumesAuthRequired: tc.volumesAuthRequired,
+          authMode: tc.authMode,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+
+        expect(await _openRepairDialog(container), tc.expectState);
+      });
+    }
+  });
+
+  group('RepairDialogModel check', () {
+    final cases = [
+      (
+        name: 'closes when the admin prompt is cancelled',
+        getSystemsError: null,
+        getSystemsSnapdAuthErrorKind: SnapdAuthErrorKind.authCancelled,
+        expectState: RepairDialogState.authCancelled(),
+      ),
+      (
+        name: 'fails when snapd sends a value it does not know',
+        getSystemsError: ArgumentError('Mock unknown value'),
+        getSystemsSnapdAuthErrorKind: null,
+        expectState: RepairDialogState.error(TpmStateExceptionFailed()),
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          getSystemsError: tc.getSystemsError,
+          getSystemsSnapdAuthErrorKind: tc.getSystemsSnapdAuthErrorKind,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+
+        expect(await _openRepairDialog(container), tc.expectState);
+      });
+    }
+  });
+
+  group('RepairDialogModel availability', () {
+    final cases = [
+      (
+        name: 'fails while the status is indeterminate',
+        // The page, then the dialog's check
+        statusSequence: [
+          SnapdStorageEncryptionStatus.active,
+          SnapdStorageEncryptionStatus.indeterminate,
+        ],
+        autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      ),
+      (
+        name: 'fails while auto-repair is not initialized',
+        statusSequence: null,
+        autoRepairResult: SnapdAutoRepairResult.notInitialized,
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      ),
+      (
+        name: 'fails when snapd no longer recommends a repair',
+        statusSequence: null,
+        autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
+        recommendations: <SnapdRecommendedRemedialAction>[],
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        final service = registerMockDiskEncryptionService(
+          storageEncryptionStatusSequence: tc.statusSequence,
+          autoRepairResult: tc.autoRepairResult,
+          recommendations: tc.recommendations,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+
+        expect(
+          await _openRepairDialog(container),
+          isA<RepairDialogStateError>()
+              .having((s) => s.e, 'e', isA<RepairNotAvailableException>()),
+        );
+        verifyNever(service.getSystems());
+      });
+    }
+  });
+
+  group('RepairDialogModel applyFix', () {
+    const tpmDisabled = SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.tpmDeviceDisabled,
+      message: 'Mock issue',
+      actions: [SnapdFixAction.enableTpmViaFirmware],
+    );
+    const noHardwareRootOfTrust = SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.noHardwareRootOfTrust,
+      message: 'Mock issue',
+      actions: [SnapdFixAction.proceed],
+    );
+    final fixError = Exception('Mock fix encryption support error');
+
+    final cases = [
+      (
+        name: 'applies the fix and goes on with the new check',
+        fixEncryptionSupportError: null,
+        fixEncryptionSupportSnapdAuthErrorKind: null,
+        expectState: RepairDialogState.saveKey(
+          const SnapdGenerateReprovisionRecoveryKeyResponse(
+            recoveryKey: 'mock-reprovision-key',
+          ),
+          false,
+        ),
+      ),
+      (
+        name: 'returns to the issue when the admin prompt is cancelled',
+        fixEncryptionSupportError: null,
+        fixEncryptionSupportSnapdAuthErrorKind:
+            SnapdAuthErrorKind.authCancelled,
+        expectState: RepairDialogState.issue(tpmDisabled),
+      ),
+      (
+        name: 'fails when the fix fails',
+        fixEncryptionSupportError: fixError,
+        fixEncryptionSupportSnapdAuthErrorKind: null,
+        expectState: RepairDialogState.error(fixError),
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          authMode: AuthMode.none,
+          availabilityCheckErrors: [tpmDisabled],
+          fixEncryptionSupportError: tc.fixEncryptionSupportError,
+          fixEncryptionSupportSnapdAuthErrorKind:
+              tc.fixEncryptionSupportSnapdAuthErrorKind,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+        await _openRepairDialog(container);
+
+        await container
+            .read(repairDialogModelProvider.notifier)
+            .applyFix(SnapdFixAction.enableTpmViaFirmware);
+
+        expect(
+          container.read(repairDialogModelProvider).dialogState,
+          tc.expectState,
+        );
+        verify(
+          service.fixEncryptionSupport(SnapdFixAction.enableTpmViaFirmware),
+        ).called(1);
+      });
+    }
+
+    test('accepts only the current issue when it proceeds', () async {
+      final service = registerMockDiskEncryptionService(
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        authMode: AuthMode.none,
+        availabilityCheckErrors: [noHardwareRootOfTrust],
+      );
+      registerMockFeatureService(supportsReprovision: true);
+      final container = createContainer();
+      await _openRepairDialog(container);
+
+      await container
+          .read(repairDialogModelProvider.notifier)
+          .applyFix(SnapdFixAction.proceed);
+
+      verify(
+        service.fixEncryptionSupport(
+          SnapdFixAction.proceed,
+          args: {
+            'error-kinds': ['no-hardware-root-of-trust'],
+          },
+        ),
+      ).called(1);
+    });
+  });
+
+  group('RepairDialogModel recovery key', () {
+    final cases = [
+      (
+        name: 'closes when the admin prompt after the check is cancelled',
+        volumesAuthRequired: false,
+        authMode: AuthMode.none,
+        expectState: RepairDialogState.authCancelled(),
+      ),
+      (
+        name: 'returns to the PIN step when the admin prompt is cancelled',
+        volumesAuthRequired: true,
+        authMode: AuthMode.none,
+        expectState: RepairDialogState.setPinOrPassphrase(),
+      ),
+      (
+        name: 'returns to the warning when the admin prompt is cancelled',
+        volumesAuthRequired: false,
+        authMode: AuthMode.pin,
+        expectState: RepairDialogState.pinOrPassphraseWillBeRemoved(),
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          volumesAuthRequired: tc.volumesAuthRequired,
+          authMode: tc.authMode,
+          generateReprovisionRecoveryKeySnapdAuthErrorKind:
+              SnapdAuthErrorKind.authCancelled,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+        final step = await _openRepairDialog(container);
+        final model = container.read(repairDialogModelProvider.notifier);
+
+        if (step is RepairDialogStateSetPinOrPassphrase) {
+          final pinModel = container
+              .read(changeAuthModeDialogModelProvider(AuthMode.pin).notifier);
+          await pinModel.setNewPass('1234');
+          await pinModel.setConfirmPass('1234');
+          await pumpEventQueue();
+          await model.continueWithPinOrPassphrase(AuthMode.pin);
+        } else if (step is RepairDialogStatePinOrPassphraseWillBeRemoved) {
+          await model.continueToKey();
+        }
+
+        expect(
+          container.read(repairDialogModelProvider).dialogState,
+          tc.expectState,
+        );
+        verify(service.generateReprovisionRecoveryKey()).called(1);
+      });
+    }
+  });
+
+  group('RepairDialogModel startRepair', () {
+    test('starts the repair, then adds the chosen PIN', () async {
+      final service = registerMockDiskEncryptionService(
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        authMode: AuthMode.none,
+        volumesAuthRequired: true,
+      );
+      registerMockFeatureService(supportsReprovision: true);
+      final container = createContainer();
+      await _openRepairDialog(container);
+      final pinModel = container
+          .read(changeAuthModeDialogModelProvider(AuthMode.pin).notifier);
+      await pinModel.setNewPass('1234');
+      await pinModel.setConfirmPass('1234');
+      await pumpEventQueue();
+      final model = container.read(repairDialogModelProvider.notifier);
+      await model.continueWithPinOrPassphrase(AuthMode.pin);
+      model.acknowledge(true);
+
+      var authorized = false;
+      await model.startRepair(onAuthorized: () => authorized = true);
+
+      final state = container.read(tpmAuthenticationModelProvider).value!;
+      expect(authorized, isTrue);
+      expect(state.operationError, isNull);
+      // Reprovisioning removes the PIN, so it's only set if added afterwards
+      expect(state.currentAuthMode, AuthMode.pin);
+      verify(service.reprovision(onAuthorized: anyNamed('onAuthorized')))
+          .called(1);
+      verify(
+        service.replacePlatformKey(
+          authMode: AuthMode.pin,
+          pin: '1234',
+          onAuthorized: anyNamed('onAuthorized'),
+        ),
+      ).called(1);
+    });
+
+    final cases = [
+      (
+        name: 'returns to the key when the admin prompt is cancelled',
+        reprovisionSnapdAuthErrorKind: SnapdAuthErrorKind.authCancelled,
+        reprovisionSnapdErrorKind: null,
+        expectError: false,
+      ),
+      (
+        name: 'shows the error when snapd refuses the repair',
+        reprovisionSnapdAuthErrorKind: null,
+        reprovisionSnapdErrorKind: 'snap-change-conflict',
+        expectError: true,
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          authMode: AuthMode.none,
+          reprovisionSnapdAuthErrorKind: tc.reprovisionSnapdAuthErrorKind,
+          reprovisionSnapdErrorKind: tc.reprovisionSnapdErrorKind,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+        await _openRepairDialog(container);
+        final model = container.read(repairDialogModelProvider.notifier);
+        model.acknowledge(true);
+        final saveKey = container.read(repairDialogModelProvider).dialogState;
+
+        var authorized = false;
+        await model.startRepair(onAuthorized: () => authorized = true);
+
+        final tpmState = container.read(tpmAuthenticationModelProvider).value!;
+        final dialogState =
+            container.read(repairDialogModelProvider).dialogState;
+        expect(authorized, isFalse);
+        if (tc.expectError) {
+          expect(
+            dialogState,
+            RepairDialogState.error(tpmState.operationError!),
+          );
+        } else {
+          expect(dialogState, saveKey);
+          expect(tpmState.operationError, isNull);
+        }
+        verify(service.reprovision(onAuthorized: anyNamed('onAuthorized')))
+            .called(1);
+      });
+    }
+  });
+
+  group('RepairDialogModel startRepair availability', () {
+    final cases = [
+      (
+        name: 'refuses to start while the status is indeterminate',
+        // The page, the dialog's check, then the check before the repair
+        statusSequence: [
+          SnapdStorageEncryptionStatus.active,
+          SnapdStorageEncryptionStatus.active,
+          SnapdStorageEncryptionStatus.indeterminate,
+        ],
+        autoRepairResultSequence: null,
+      ),
+      (
+        name: 'refuses to start while auto-repair is not initialized',
+        statusSequence: null,
+        autoRepairResultSequence: [
+          SnapdAutoRepairResult.failedKeyslots,
+          SnapdAutoRepairResult.failedKeyslots,
+          SnapdAutoRepairResult.notInitialized,
+        ],
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          authMode: AuthMode.none,
+          storageEncryptionStatusSequence: tc.statusSequence,
+          autoRepairResultSequence: tc.autoRepairResultSequence,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+        await _openRepairDialog(container);
+        final model = container.read(repairDialogModelProvider.notifier);
+        model.acknowledge(true);
+
+        await model.startRepair();
+
+        expect(
+          container.read(repairDialogModelProvider).dialogState,
+          isA<RepairDialogStateError>()
+              .having((s) => s.e, 'e', isA<RepairNotAvailableException>()),
+        );
+        verifyNever(
+          service.reprovision(onAuthorized: anyNamed('onAuthorized')),
+        );
+      });
+    }
+  });
+
+  group('RepairDialogModel retry', () {
+    test('starts over from the check', () async {
+      final service = registerMockDiskEncryptionService(
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        authMode: AuthMode.none,
+        generateReprovisionRecoveryKeyError: true,
+      );
+      registerMockFeatureService(supportsReprovision: true);
+      final container = createContainer();
+      expect(
+        await _openRepairDialog(container),
+        isA<RepairDialogStateError>(),
+      );
+
+      container.read(repairDialogModelProvider.notifier).retry();
+      await pumpEventQueue();
+
+      expect(
+        container.read(repairDialogModelProvider).dialogState,
+        isA<RepairDialogStateError>(),
+      );
+      // The page, then each of the dialog's checks
+      verify(service.getStorageEncrypted()).called(3);
+      verify(service.getSystems()).called(2);
+      verify(service.generateReprovisionRecoveryKey()).called(2);
+    });
+  });
+}
+
+// The dialog model is auto-dispose, so keep it alive while its check runs
+Future<RepairDialogState> _openRepairDialog(
+  ProviderContainer container,
+) async {
+  await container.read(tpmAuthenticationModelProvider.future);
+  container.listen(repairDialogModelProvider, (_, __) {});
+  await pumpEventQueue();
+  return container.read(repairDialogModelProvider).dialogState;
 }
