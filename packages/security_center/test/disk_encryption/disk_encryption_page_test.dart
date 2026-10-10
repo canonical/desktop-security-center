@@ -2737,6 +2737,24 @@ void main() {
       ).called(1);
     });
 
+    test('refuses to start before the new key is acknowledged', () async {
+      final service = registerMockDiskEncryptionService(
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        authMode: AuthMode.none,
+      );
+      registerMockFeatureService(supportsReprovision: true);
+      final container = createContainer();
+      final saveKey = await _openRepairDialog(container);
+      final model = container.read(repairDialogModelProvider.notifier);
+
+      await expectLater(model.startRepair(), throwsA(isA<StateError>()));
+
+      expect(container.read(repairDialogModelProvider).dialogState, saveKey);
+      verifyNever(
+        service.reprovision(onAuthorized: anyNamed('onAuthorized')),
+      );
+    });
+
     final cases = [
       (
         name: 'returns to the key when the admin prompt is cancelled',
