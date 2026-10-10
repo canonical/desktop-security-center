@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:security_center/services/feature_service.dart';
 import 'package:security_center/widgets/file_picker_dialog.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
@@ -194,6 +195,7 @@ sealed class ChangeAuthModeDialogState with _$ChangeAuthModeDialogState {
 class TpmAuthState with _$TpmAuthState {
   const factory TpmAuthState({
     required AuthMode currentAuthMode,
+    @Default(false) bool needsRepair,
     TpmFdeOperation? pendingOperation,
     TpmFdeOperationException? operationError,
   }) = _TpmAuthState;
@@ -411,6 +413,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
 @Riverpod(keepAlive: true)
 class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   late final _service = getService<DiskEncryptionService>();
+  late final _featureService = getService<FeatureService>();
 
   @visibleForTesting
   static Duration maxRetryDuration = const Duration(minutes: 2);
@@ -419,11 +422,10 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
   @override
   Future<TpmAuthState> build() async {
-    final currentMode = await _fetchCurrentAuthMode();
-    return TpmAuthState(currentAuthMode: currentMode);
+    return _fetchState();
   }
 
-  Future<AuthMode> _fetchCurrentAuthMode() async {
+  Future<TpmAuthState> _fetchState() async {
     try {
       // Check TPM-backed FDE status with exponential backoff retry
       // for indeterminate state (see LP#2147606)
@@ -485,18 +487,23 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
       final authMode = defaultKeySlot.authMode;
 
-      if (authMode != null) {
-        switch (authMode) {
-          case SnapdSystemVolumeAuthMode.none:
-            return AuthMode.none;
-          case SnapdSystemVolumeAuthMode.pin:
-            return AuthMode.pin;
-          case SnapdSystemVolumeAuthMode.passphrase:
-            return AuthMode.passphrase;
-        }
-      }
+      final currentAuthMode = switch (authMode) {
+        SnapdSystemVolumeAuthMode.pin => AuthMode.pin,
+        SnapdSystemVolumeAuthMode.passphrase => AuthMode.passphrase,
+        SnapdSystemVolumeAuthMode.none || null => AuthMode.none,
+      };
 
-      return AuthMode.none;
+      // snapd may still auto-repair while the result is not-initialized
+      final needsRepair = storageStatus.recommendations
+              .contains(SnapdRecommendedRemedialAction.requireReprovision) &&
+          storageStatus.autoRepairResult !=
+              SnapdAutoRepairResult.notInitialized &&
+          _featureService.supportsReprovision;
+
+      return TpmAuthState(
+        currentAuthMode: currentAuthMode,
+        needsRepair: needsRepair,
+      );
     } on SnapdException catch (e) {
       _log.error('Failed to determine TPM authentication mode: $e');
       if (e.statusCode == 404) {
@@ -547,15 +554,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         onAuthorized: onAuthorized,
       );
 
-      // Refresh current mode
-      final updatedMode = await _fetchCurrentAuthMode();
-      state = AsyncData(
-        state.value!.copyWith(
-          currentAuthMode: updatedMode,
-          pendingOperation: null,
-          operationError: null,
-        ),
-      );
+      state = AsyncData(await _fetchState());
     } on Exception catch (e) {
       final exception = TpmFdeOperationException.from(e, operation);
       state = AsyncData(

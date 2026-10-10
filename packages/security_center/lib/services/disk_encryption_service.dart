@@ -126,4 +126,26 @@ abstract class DiskEncryptionService {
 
   /// Gets the TPM backed FDE status from snapd.
   Future<SnapdStorageEncryptedResponse> getStorageEncrypted();
+
+  /// Checks whether the running system can use TPM backed FDE.
+  ///
+  /// [fixEncryptionSupport] and [reprovision] need this check first.
+  Future<SnapdSystemsResponse> getSystems();
+
+  /// Runs [fixAction] for an issue the last check found, then checks again.
+  Future<SnapdSystemsResponse> fixEncryptionSupport(
+    SnapdFixAction fixAction, {
+    Map<String, dynamic>? args,
+  });
+
+  /// Generates the recovery key that [reprovision] sets.
+  ///
+  /// The key works for one [reprovision] attempt within 5 minutes.
+  Future<SnapdGenerateReprovisionRecoveryKeyResponse>
+      generateReprovisionRecoveryKey();
+
+  /// Reprovisions the TPM and creates new keys for the encrypted disks.
+  ///
+  /// The new keys have no PIN or passphrase. Add one with [replacePlatformKey].
+  Future<void> reprovision({void Function()? onAuthorized});
 }

@@ -154,6 +154,8 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool authModeMismatch = false,
   SnapdStorageEncryptionStatus storageEncryptionStatus =
       SnapdStorageEncryptionStatus.active,
+  SnapdAutoRepairResult? autoRepairResult,
+  List<SnapdRecommendedRemedialAction> recommendations = const [],
   int indeterminateCallCount = 0,
   Object? storageEncryptionError,
 }) {
@@ -171,7 +173,11 @@ DiskEncryptionService registerMockDiskEncryptionService({
         status: SnapdStorageEncryptionStatus.indeterminate,
       );
     }
-    return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
+    return SnapdStorageEncryptedResponse(
+      status: storageEncryptionStatus,
+      autoRepairResult: autoRepairResult,
+      recommendations: recommendations,
+    );
   });
 
   when(service.enumerateKeySlots()).thenAnswer((_) async {
@@ -447,6 +453,7 @@ SnapdService registerMockSnapdService({
 
   when(client.enablePrompting()).thenAnswer(toggleReply);
   when(client.disablePrompting()).thenAnswer(toggleReply);
+  when(client.reprovision()).thenAnswer(toggleReply);
 
   when(
     client.watchChange(changeId),
@@ -469,11 +476,13 @@ FeatureService registerMockFeatureService({
   bool isDiskEncryptionAvailable = true,
   bool isDryRun = false,
   bool supportsMicrophone = false,
+  bool supportsReprovision = false,
 }) {
   final service = MockFeatureService();
   when(service.isDiskEncryptionAvailable).thenReturn(isDiskEncryptionAvailable);
   when(service.isDryRun).thenReturn(isDryRun);
   when(service.supportsMicrophone).thenReturn(supportsMicrophone);
+  when(service.supportsReprovision).thenReturn(supportsReprovision);
 
   registerMockService<FeatureService>(service);
   addTearDown(unregisterService<FeatureService>);

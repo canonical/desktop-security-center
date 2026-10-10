@@ -5,6 +5,55 @@ import 'dart:math';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:snapd/snapd.dart';
 
+/// Scenarios for `--test-fde-repair`. The issues are copied from secboot.
+enum FakeRepairScenario {
+  none('none'),
+  needsRepair('needs-repair'),
+  tpmDisabled('tpm-disabled', [
+    SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.tpmDeviceDisabled,
+      message:
+          'error with TPM2 device: TPM2 device is present but is currently disabled by the platform firmware',
+      actions: [
+        SnapdFixAction.enableTpmViaFirmware,
+        SnapdFixAction.enableAndClearTpmViaFirmware,
+        SnapdFixAction.rebootToFwSettings,
+      ],
+    ),
+  ]),
+  firmwareSettings('firmware-settings', [
+    SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.invalidSecureBootMode,
+      message:
+          'error with secure boot policy (PCR7) measurements: secure boot is enabled but not in deployed mode',
+      actions: [SnapdFixAction.rebootToFwSettings],
+    ),
+  ]),
+  contactOem('contact-oem', [
+    SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.hostSecurity,
+      message:
+          'error with system security: CPU debugging features are not disabled and locked',
+      actions: [SnapdFixAction.contactOem],
+    ),
+  ]),
+
+  /// `proceed` makes snapd require a PIN or passphrase.
+  noHardwareRootOfTrust('no-hardware-root-of-trust', [
+    SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.noHardwareRootOfTrust,
+      message:
+          'error with system security: no hardware root-of-trust properly configured',
+      actions: [SnapdFixAction.proceed],
+    ),
+  ]);
+
+  const FakeRepairScenario(this.flag, [this.issues = const []]);
+
+  final String flag;
+  final List<SnapdAvailabilityCheckError> issues;
+}
+
 class FakeDiskEncryptionService implements DiskEncryptionService {
   FakeDiskEncryptionService({
     required this.systemVolumes,
@@ -12,6 +61,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     Map<String, String>? initialRecoveryKeys,
     this.storageEncryptionStatus = SnapdStorageEncryptionStatus.active,
     this.indeterminateCallCount = 0,
+    this.repairScenario = FakeRepairScenario.none,
   }) : _recoveryKeys = initialRecoveryKeys ?? {};
 
   /// Load initial system volumes from a JSON file.
@@ -21,6 +71,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     SnapdStorageEncryptionStatus storageEncryptionStatus =
         SnapdStorageEncryptionStatus.active,
     int indeterminateCallCount = 0,
+    FakeRepairScenario repairScenario = FakeRepairScenario.none,
   }) {
     final raw = File(path).readAsStringSync();
     final json = jsonDecode(raw) as Map<String, dynamic>;
@@ -32,6 +83,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       checkError: checkError,
       storageEncryptionStatus: storageEncryptionStatus,
       indeterminateCallCount: indeterminateCallCount,
+      repairScenario: repairScenario,
     );
   }
 
@@ -49,14 +101,18 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
 
   String _auth = '12345';
 
+  final FakeRepairScenario repairScenario;
+  // Stays null until the first check, like snapd's check context
+  List<SnapdAvailabilityCheckError>? _issues;
+  bool _volumesAuthRequired = false;
+  String? _repairKey;
+  bool _repaired = false;
+
   /// Generates a fake recovery key and key ID.
   @override
   Future<SnapdGenerateRecoveryKeyResponse> generateRecoveryKey() async {
     await Future.delayed(const Duration(seconds: 2));
-    final rand = Random();
-    final lastSegment = rand.nextInt(100000).toString().padLeft(5, '0');
-    final recoveryKey =
-        '55055-39320-64491-48436-47667-15525-36879-$lastSegment';
+    final recoveryKey = _randomRecoveryKey();
     final keyId = DateTime.now().millisecondsSinceEpoch.toString();
 
     _recoveryKeys[keyId] = recoveryKey;
@@ -64,6 +120,11 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       recoveryKey: recoveryKey,
       keyId: keyId,
     );
+  }
+
+  String _randomRecoveryKey() {
+    final lastSegment = Random().nextInt(100000).toString().padLeft(5, '0');
+    return '55055-39320-64491-48436-47667-15525-36879-$lastSegment';
   }
 
   /// Adds an existing recovery key (by keyId) to the first available slot.
@@ -215,6 +276,102 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
         status: SnapdStorageEncryptionStatus.indeterminate,
       );
     }
-    return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
+    if (repairScenario == FakeRepairScenario.none) {
+      return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
+    }
+    return SnapdStorageEncryptedResponse(
+      // Not `recovery`, so clearing the TPM checks the recovery key first
+      status: repairScenario == FakeRepairScenario.tpmDisabled
+          ? SnapdStorageEncryptionStatus.degraded
+          : SnapdStorageEncryptionStatus.recovery,
+      autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
+      recommendations: [
+        if (!_repaired) SnapdRecommendedRemedialAction.requireReprovision,
+      ],
+    );
+  }
+
+  @override
+  Future<SnapdSystemsResponse> getSystems() async {
+    _issues = repairScenario.issues;
+    _volumesAuthRequired = false;
+    return _systemDetails();
+  }
+
+  @override
+  Future<SnapdSystemsResponse> fixEncryptionSupport(
+    SnapdFixAction fixAction, {
+    Map<String, dynamic>? args,
+  }) async {
+    if (_issues == null) {
+      throw SnapdException(
+        message: 'cannot run check action without prior check',
+      );
+    }
+    switch (fixAction) {
+      case SnapdFixAction.enableTpmViaFirmware:
+      case SnapdFixAction.enableAndClearTpmViaFirmware:
+        _issues = const [
+          SnapdAvailabilityCheckError(
+            kind: SnapdAvailabilityCheckErrorKind.rebootRequired,
+            message: 'a reboot is required to complete the action',
+            actions: [SnapdFixAction.reboot],
+          ),
+        ];
+      case SnapdFixAction.proceed:
+        _issues = const [];
+        _volumesAuthRequired = true;
+      default:
+        break;
+    }
+    return _systemDetails();
+  }
+
+  SnapdSystemsResponse _systemDetails() => SnapdSystemsResponse(
+        storageEncryption: SnapdStorageEncryption(
+          support: _issues!.isEmpty
+              ? SnapdStorageEncryptionSupport.available
+              : SnapdStorageEncryptionSupport.unavailable,
+          unavailableReason: _issues!.isEmpty ? null : _issues!.first.message,
+          availabilityCheckErrors: _issues!,
+          features: const [
+            SnapdStorageEncryptionFeature.pinAuth,
+            SnapdStorageEncryptionFeature.passphraseAuth,
+          ],
+          requirements: [
+            if (_volumesAuthRequired)
+              SnapdStorageEncryptionRequirement.volumesAuth,
+          ],
+        ),
+      );
+
+  @override
+  Future<SnapdGenerateReprovisionRecoveryKeyResponse>
+      generateReprovisionRecoveryKey() async {
+    final key = _randomRecoveryKey();
+    _repairKey = key;
+    return SnapdGenerateReprovisionRecoveryKeyResponse(recoveryKey: key);
+  }
+
+  @override
+  Future<void> reprovision({void Function()? onAuthorized}) async {
+    // snapd accepts the change first, then fails it
+    onAuthorized?.call();
+    if (_issues == null) {
+      throw Exception('missing post install check context');
+    }
+    final key = _repairKey;
+    _repairKey = null;
+    if (key == null) {
+      throw Exception('missing recovery key');
+    }
+    if (_issues!.isNotEmpty) {
+      throw Exception('postinstall check found some issues');
+    }
+
+    _recoveryKeys['default-recovery'] = key;
+    // Reprovisioning removes any PIN or passphrase
+    await replacePlatformKey(authMode: AuthMode.none);
+    _repaired = true;
   }
 }
