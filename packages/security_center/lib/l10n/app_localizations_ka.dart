@@ -21,19 +21,19 @@ class AppLocalizationsKa extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'ყოველთვის დაშვება';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'განახლების წვდომები';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'ყოველთვის აკრძალვა';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'დროებით დაშვება';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'დროებით უარყოფა';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'ყოველთვის კითხვა';
 
   @override
   String get snapPermissionReadLabel => 'წაკითხვა';
@@ -49,7 +49,7 @@ class AppLocalizationsKa extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'აპებისთვის სისტემური უფლებების მოთხოვნის აუცილებლობა';
+      'სენდბოქსში გაშვებული აპებისთვის უფლებების მოთხოვნის აუცილებლობა';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -549,7 +549,8 @@ class AppLocalizationsKa extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro ჩართულია';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel =>
+      'ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -612,10 +613,11 @@ class AppLocalizationsKa extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Ubuntu Pro-ის გამორთვა გააუქმებს ამ მანქანის გამოწერას. გააგრძელებთ?';
+      'Ubuntu Pro-ის გამორთვა გააუქმებს ამ კომპიუტერის გამოწერას. გააგრძელებთ?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Ubuntu Pro-ის გამორთვა შეუძლებელია. კიდევ სცადეთ';
 
   @override
   String get ubuntuProEnable => 'ჩართვა';

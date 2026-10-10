@@ -15,22 +15,22 @@ class AppLocalizationsSk extends AppLocalizations {
   String get snapdRuleCategorySessionAllowed => 'Povolené do odhlásenia';
 
   @override
-  String get snapdRuleCategorySessionDenied => 'Zamietnuté do odhlásenia';
+  String get snapdRuleCategorySessionDenied => 'Zamietnuť do odhlásenia';
 
   @override
-  String get snapdRuleCategoryForeverAllowed => 'Povolené vždy';
+  String get snapdRuleCategoryForeverAllowed => 'Vždy povoliť';
 
   @override
   String get permissionRulePopupMenuSemanticLabel => 'Aktualizovať povolenia';
 
   @override
-  String get snapdRuleCategoryForeverDenied => 'Zamietnuté vždy';
+  String get snapdRuleCategoryForeverDenied => 'Vždy zamietnuť';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Povolené dočasne';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Povoliť dočasne';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Zamietnuté dočasne';
+  String get snapdRuleCategoryTemporarilyDenied => 'Dočasne zamietnuť';
 
   @override
   String get snapdRuleCategoryAskAlways => 'Vždy sa pýtať';
@@ -57,11 +57,11 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'Povoľuje sa, môže to trvať niekoľko sekúnd...';
+      'Aktivuje sa, môže to trvať niekoľko sekúnd...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'Zakazuje sa, môže to trvať niekoľko sekúnd...';
+      'Deaktivuje sa, môže to trvať niekoľko sekúnd...';
 
   @override
   String get snapPermissionsExperimentalLabel => 'Experimentálne';
@@ -91,7 +91,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String snapRulesPageDescription(String interface, String snap) {
-    return 'Spravujte povolenia $interface pre aplikáciu $snap.';
+    return 'Spravujte povolenia $interface pre $snap.';
   }
 
   @override
@@ -242,7 +242,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageReplaceDialogErrorHeader =>
-      'Nahrádzanie obnovovacieho kľúča zlyhalo';
+      'Výmena obnovovacieho kľúča zlyhala';
 
   @override
   String get diskEncryptionPageReplaceDialogErrorBody =>
@@ -254,7 +254,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageReplaceDialogQRBody =>
-      'Naskenujte QR kód a skopírujte obnovovací kľúč, potom ho uložte na bezpečné miesto, napríklad do správcu hesiel. Pre neskoršie použitie si môžete urobiť aj fotografiu.';
+      'Naskenujte QR kód a skopírujte obnovovací kľúč, potom ho uložte na bezpečné miesto, napríklad do správcu hesiel. Na neskoršie použitie si môžete urobiť aj fotografiu.';
 
   @override
   String get diskEncryptionPageClipboardNotification =>
@@ -553,7 +553,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Bezpečnosť a dodržiavanie predpisov na podnikovej úrovni pre váš počítač. Vždy zdarma pre osobné použitie. $learnMoreLink';
+    return 'Bezpečnosť a dodržiavanie predpisov na podnikovej úrovni pre váš počítač. Vždy zadarmo pre osobné použitie. $learnMoreLink';
   }
 
   @override
@@ -571,7 +571,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Prihláste sa pomocou svojho účtu Ubuntu One alebo si ho vytvorte zdarma.';
+      'Prihláste sa pomocou svojho účtu Ubuntu One alebo si ho vytvorte zadarmo.';
 
   @override
   String get ubuntuProMagicContinueInBrowser => 'Pokračovať v prehliadači';
@@ -714,7 +714,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get ubuntuProLivepatchEnableDescription =>
-      'Používanie bezpečnostných aktualizácií jadra počas behu systému';
+      'Aplikovať bezpečnostné aktualizácie jadra počas behu systému';
 
   @override
   String get ubuntuProLivepatchShowTitle =>
