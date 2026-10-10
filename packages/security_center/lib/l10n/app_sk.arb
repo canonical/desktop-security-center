@@ -1,7 +1,7 @@
 {
     "appTitle": "Centrum zabezpečenia",
-    "snapPermissionsEnablingLabel": "Povoľuje sa, môže to trvať niekoľko sekúnd...",
-    "snapPermissionsDisablingLabel": "Zakazuje sa, môže to trvať niekoľko sekúnd...",
+    "snapPermissionsEnablingLabel": "Aktivuje sa, môže to trvať niekoľko sekúnd...",
+    "snapPermissionsDisablingLabel": "Deaktivuje sa, môže to trvať niekoľko sekúnd...",
     "snapPermissionsPageTitle": "Povolenia aplikácií",
     "interfacePageLinkReportIssues": "Nahlásiť problémy",
     "snapPermissionsExperimentalLabel": "Experimentálne",
@@ -9,7 +9,7 @@
     "interfacePageTitle": "Spravovať povolenia",
     "snapPermissionsEnableWarning": "Toto je experimentálna funkcia na riadenie prístupu k zdrojom vášho systému.",
     "snapdRuleCategorySessionAllowed": "Povolené do odhlásenia",
-    "snapdRuleCategoryForeverAllowed": "Povolené vždy",
+    "snapdRuleCategoryForeverAllowed": "Vždy povoliť",
     "snapPermissionReadLabel": "Čítanie",
     "snapPermissionExecuteLabel": "Spúšťanie",
     "snapPermissionWriteLabel": "Zapisovanie",
@@ -33,9 +33,9 @@
             }
         }
     },
-    "snapdRuleCategoryForeverDenied": "Zamietnuté vždy",
-    "snapdRuleCategorySessionDenied": "Zamietnuté do odhlásenia",
-    "snapRulesPageDescription": "Spravujte povolenia {interface} pre aplikáciu {snap}.",
+    "snapdRuleCategoryForeverDenied": "Vždy zamietnuť",
+    "snapdRuleCategorySessionDenied": "Zamietnuť do odhlásenia",
+    "snapRulesPageDescription": "Spravujte povolenia {interface} pre {snap}.",
     "@snapRulesPageDescription": {
         "placeholders": {
             "interface": {
@@ -69,7 +69,7 @@
     "diskEncryptionPageReplaceDialogReplace": "Nahradiť",
     "diskEncryptionPageReplaceDialogDiscard": "Zahodiť",
     "diskEncryptionPageReplaceDialogSuccessHeader": "Obnovovací kľúč bol nahradený",
-    "diskEncryptionPageReplaceDialogErrorHeader": "Nahrádzanie obnovovacieho kľúča zlyhalo",
+    "diskEncryptionPageReplaceDialogErrorHeader": "Výmena obnovovacieho kľúča zlyhala",
     "diskEncryptionPageReplaceDialogQRHeader": "Ubuntu Desktop - Obnovovací kľúč šifrovania",
     "diskEncryptionPageClipboardNotification": "Skopírované do schránky",
     "recoveryKeyExceptionUnknownTitle": "Neznáma chyba",
@@ -81,7 +81,7 @@
     "diskEncryptionPageReplaceButton": "Nahradiť obnovovací kľúč...",
     "diskEncryptionPageReplaceDialogSuccessBody": "Nezabudnite si ho uschovať na bezpečnom mieste.",
     "diskEncryptionPageReplaceDialogErrorBody": "Pri nahrádzaní vášho obnovovacieho kľúča sa vyskytla chyba, váš starý kľúč zostane platný.",
-    "diskEncryptionPageReplaceDialogQRBody": "Naskenujte QR kód a skopírujte obnovovací kľúč, potom ho uložte na bezpečné miesto, napríklad do správcu hesiel. Pre neskoršie použitie si môžete urobiť aj fotografiu.",
+    "diskEncryptionPageReplaceDialogQRBody": "Naskenujte QR kód a skopírujte obnovovací kľúč, potom ho uložte na bezpečné miesto, napríklad do správcu hesiel. Na neskoršie použitie si môžete urobiť aj fotografiu.",
     "recoveryKeyExceptionFileSystemTitle": "Súbor obnovovacieho kľúča nebol uložený",
     "diskEncryptionPageCopySemanticLabel": "Kopírovať",
     "recoveryKeyPassphraseEnabled": "Šifrovacia prístupová fráza je povolená",
@@ -172,7 +172,7 @@
     "ubuntuProNotSupportedSnapd": "Táto verzia snapd nepodporuje Ubuntu Pro",
     "ubuntuProNotSupportedSnapdDetails": "Aktualizujte snapd na správu Ubuntu Pro",
     "ubuntuProEnabled": "Ubuntu Pro je povolené",
-    "ubuntuProDisabled": "Bezpečnosť a dodržiavanie predpisov na podnikovej úrovni pre váš počítač. Vždy zdarma pre osobné použitie. {learnMoreLink}",
+    "ubuntuProDisabled": "Bezpečnosť a dodržiavanie predpisov na podnikovej úrovni pre váš počítač. Vždy zadarmo pre osobné použitie. {learnMoreLink}",
     "@ubuntuProDisabled": {
         "placeholders": {
             "learnMoreLink": {
@@ -184,7 +184,7 @@
     "ubuntuProEnablePro": "Povoliť Ubuntu Pro",
     "ubuntuProEnableMagic": "Povoliť pomocou účtu Ubuntu One",
     "ubuntuProEnableMagicSubtitle": "Budete si môcť bezplatne vytvoriť účet",
-    "ubuntuProMagicPrompt": "Prihláste sa pomocou svojho účtu Ubuntu One alebo si ho vytvorte zdarma.",
+    "ubuntuProMagicPrompt": "Prihláste sa pomocou svojho účtu Ubuntu One alebo si ho vytvorte zadarmo.",
     "ubuntuProMagicContinueInBrowser": "Pokračovať v prehliadači",
     "ubuntuProMagicDescription": "Môžete sa tiež prihlásiť na adrese {attachLink} a zadať kód {attachCode}",
     "@ubuntuProMagicDescription": {
@@ -256,12 +256,12 @@
     },
     "ubuntuProLivepatchTitle": "Kernel Livepatch",
     "ubuntuProLivepatchEnableTitle": "Povoliť Livepatch",
-    "ubuntuProLivepatchEnableDescription": "Používanie bezpečnostných aktualizácií jadra počas behu systému",
+    "ubuntuProLivepatchEnableDescription": "Aplikovať bezpečnostné aktualizácie jadra počas behu systému",
     "ubuntuProLivepatchShowTitle": "Zobraziť stav Livepatch v hornom paneli",
     "snapPermissionsErrorTitle": "Niečo sa pokazilo",
     "permissionRulePopupMenuSemanticLabel": "Aktualizovať povolenia",
-    "snapdRuleCategoryTemporarilyAllowed": "Povolené dočasne",
-    "snapdRuleCategoryTemporarilyDenied": "Zamietnuté dočasne",
+    "snapdRuleCategoryTemporarilyAllowed": "Povoliť dočasne",
+    "snapdRuleCategoryTemporarilyDenied": "Dočasne zamietnuť",
     "snapdRuleCategoryAskAlways": "Vždy sa pýtať",
     "snapPermissionsEnableTitle": "Vyžadovať, aby izolované aplikácie žiadali o povolenia",
     "snapPermissionsOtherDescription": "Ďalšie povolenia môžete spravovať v časti Nastavenia › Aplikácie.",
