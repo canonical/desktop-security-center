@@ -2559,6 +2559,90 @@ void main() {
     });
   });
 
+  group('RepairDialogModel clearing the TPM', () {
+    const tpmDisabled = SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.tpmDeviceDisabled,
+      message: 'Mock issue',
+      actions: [SnapdFixAction.enableAndClearTpmViaFirmware],
+    );
+
+    final cases = [
+      (
+        name: 'refuses before the recovery key is checked',
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.degraded,
+        checkKey: false,
+        checkRecoveryKey: true,
+        expectError: true,
+      ),
+      (
+        name: 'refuses when the recovery key check fails',
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.degraded,
+        checkKey: true,
+        checkRecoveryKey: false,
+        expectError: true,
+      ),
+      (
+        name: 'applies the fix after the recovery key is checked',
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.degraded,
+        checkKey: true,
+        checkRecoveryKey: true,
+        expectError: false,
+      ),
+      (
+        name: 'applies the fix after a recovery key boot',
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.recovery,
+        checkKey: false,
+        checkRecoveryKey: true,
+        expectError: false,
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        final service = registerMockDiskEncryptionService(
+          storageEncryptionStatus: tc.storageEncryptionStatus,
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          authMode: AuthMode.none,
+          availabilityCheckErrors: [tpmDisabled],
+          checkRecoveryKey: tc.checkRecoveryKey,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+        await _openRepairDialog(container);
+        if (tc.checkKey) {
+          // The repair dialog watches the check, which keeps its model alive
+          container.listen(checkRecoveryKeyDialogModelProvider, (_, __) {});
+          final keyCheck =
+              container.read(checkRecoveryKeyDialogModelProvider.notifier);
+          keyCheck.setKeyToCheck('abcdef');
+          await keyCheck.checkRecoveryKey();
+        }
+        final model = container.read(repairDialogModelProvider.notifier);
+
+        if (tc.expectError) {
+          await expectLater(
+            model.applyFix(SnapdFixAction.enableAndClearTpmViaFirmware),
+            throwsA(isA<StateError>()),
+          );
+          expect(
+            container.read(repairDialogModelProvider).dialogState,
+            RepairDialogState.issue(tpmDisabled),
+          );
+          verifyNever(
+            service.fixEncryptionSupport(any, args: anyNamed('args')),
+          );
+        } else {
+          await model.applyFix(SnapdFixAction.enableAndClearTpmViaFirmware);
+          verify(
+            service.fixEncryptionSupport(
+              SnapdFixAction.enableAndClearTpmViaFirmware,
+            ),
+          ).called(1);
+        }
+      });
+    }
+  });
+
   group('RepairDialogModel recovery key', () {
     final cases = [
       (
