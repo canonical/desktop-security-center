@@ -3226,6 +3226,99 @@ void main() {
 
     expect(find.byType(RepairDialog), findsNothing);
   });
+
+  group('repair dialog asks for a', () {
+    final cases = [
+      (name: 'passphrase', authMode: AuthMode.passphrase, newPass: 'newpass'),
+      (name: 'PIN', authMode: AuthMode.pin, newPass: '5678'),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          volumesAuthRequired: true,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+        await _showRepairDialog(tester, container);
+
+        final l10n = tester.l10n;
+        expect(
+          find.text(l10n.diskEncryptionPageAdditionalSecurityHeader),
+          findsOneWidget,
+        );
+        if (tc.authMode == AuthMode.pin) {
+          await tester.tap(find.text(l10n.passphraseTypePinTileTitle));
+        }
+        final continueButton = find.widgetWithText(
+          OutlinedButton,
+          UbuntuLocalizations.of(tester.context).continueLabel,
+        );
+        await tester.tap(continueButton);
+        await tester.pumpAndSettle();
+        expect(tester.widget<OutlinedButton>(continueButton).enabled, isFalse);
+
+        final textFields = find.byType(TextField);
+        await tester.enterText(textFields.at(0), tc.newPass);
+        await tester.enterText(textFields.at(1), tc.newPass);
+        await tester.pumpAndSettle(debounceDelay);
+        await tester.tap(continueButton);
+        await tester.pump();
+
+        verify(service.pinPassphraseEntropyCheck(tc.authMode, tc.newPass))
+            .called(1);
+        verify(service.generateReprovisionRecoveryKey()).called(1);
+      });
+    }
+  });
+
+  testWidgets('repair dialog warns that the PIN or passphrase will be removed',
+      (tester) async {
+    final service = registerMockDiskEncryptionService(
+      recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      authMode: AuthMode.passphrase,
+    );
+    registerMockFeatureService(supportsReprovision: true);
+    final container = createContainer();
+    await _showRepairDialog(tester, container);
+
+    expect(
+      find.text(
+        tester.l10n.diskEncryptionPageRepairDialogPinOrPassphraseRemovedHeader,
+      ),
+      findsOneWidget,
+    );
+    await tester.tap(
+      find.text(UbuntuLocalizations.of(tester.context).continueLabel),
+    );
+    await tester.pump();
+
+    verify(service.generateReprovisionRecoveryKey()).called(1);
+  });
+
+  testWidgets('repair dialog starts without an earlier passphrase',
+      (tester) async {
+    registerMockDiskEncryptionService(
+      recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      volumesAuthRequired: true,
+    );
+    registerMockFeatureService(supportsReprovision: true);
+    final container = createContainer();
+    final passphrase = changeAuthModeDialogModelProvider(AuthMode.passphrase);
+    await container.read(passphrase.notifier).setNewPass('oldpass');
+    await tester.pump(Duration.zero);
+    expect(container.read(passphrase).newPass, 'oldpass');
+
+    await _showRepairDialog(tester, container);
+    await tester.tap(
+      find.text(UbuntuLocalizations.of(tester.context).continueLabel),
+    );
+    await tester.pumpAndSettle();
+
+    expect(container.read(passphrase).newPass, isEmpty);
+    expect(find.text('oldpass'), findsNothing);
+  });
 }
 
 // The dialog model is auto-dispose, so keep it alive while its check runs
