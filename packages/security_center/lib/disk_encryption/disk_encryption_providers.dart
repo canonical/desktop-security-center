@@ -1180,7 +1180,10 @@ class RepairDialogModel extends _$RepairDialogModel {
   Future<void> startRepair({void Function()? onAuthorized}) async {
     assert(state.dialogState is RepairDialogStateSaveKey);
     final saveKey = state.dialogState as RepairDialogStateSaveKey;
-    assert(saveKey.acknowledged);
+    // The repair replaces the recovery key, so this stays in release builds
+    if (!saveKey.acknowledged) {
+      throw StateError('The new recovery key must be acknowledged first');
+    }
     final flow = _flow;
 
     state = state.copyWith(dialogState: RepairDialogState.startingRepair());
