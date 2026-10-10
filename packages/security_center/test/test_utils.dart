@@ -128,7 +128,7 @@ Override processRunnerOverride(Map<String, String> mountByPath) {
 }
 
 @GenerateMocks([DiskEncryptionService])
-DiskEncryptionService registerMockDiskEncryptionService({
+MockDiskEncryptionService registerMockDiskEncryptionService({
   bool checkRecoveryKey = true,
   bool checkError = false,
   bool authCancelled = false,
@@ -154,8 +154,28 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool authModeMismatch = false,
   SnapdStorageEncryptionStatus storageEncryptionStatus =
       SnapdStorageEncryptionStatus.active,
+  List<SnapdStorageEncryptionStatus>? storageEncryptionStatusSequence,
+  SnapdAutoRepairResult? autoRepairResult,
+  List<SnapdAutoRepairResult>? autoRepairResultSequence,
+  List<SnapdRecommendedRemedialAction> recommendations = const [],
   int indeterminateCallCount = 0,
   Object? storageEncryptionError,
+  bool reprovisionError = false,
+  SnapdAuthErrorKind? reprovisionSnapdAuthErrorKind,
+  String? reprovisionSnapdErrorKind,
+  List<SnapdAvailabilityCheckError> availabilityCheckErrors = const [],
+  SnapdStorageEncryptionSupport? encryptionSupport,
+  bool volumesAuthRequired = false,
+  List<SnapdStorageEncryptionFeature> encryptionFeatures = const [
+    SnapdStorageEncryptionFeature.passphraseAuth,
+    SnapdStorageEncryptionFeature.pinAuth,
+  ],
+  Object? checkEncryptionSupportError,
+  SnapdAuthErrorKind? checkEncryptionSupportSnapdAuthErrorKind,
+  bool generateReprovisionRecoveryKeyError = false,
+  SnapdAuthErrorKind? generateReprovisionRecoveryKeySnapdAuthErrorKind,
+  Object? fixEncryptionSupportError,
+  SnapdAuthErrorKind? fixEncryptionSupportSnapdAuthErrorKind,
 }) {
   final service = MockDiskEncryptionService();
   var currentAuthMode = authMode;
@@ -171,7 +191,14 @@ DiskEncryptionService registerMockDiskEncryptionService({
         status: SnapdStorageEncryptionStatus.indeterminate,
       );
     }
-    return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
+    final call = storageEncryptedCalls++;
+    return SnapdStorageEncryptedResponse(
+      status: storageEncryptionStatusSequence?.elementAtOrNull(call) ??
+          storageEncryptionStatus,
+      autoRepairResult:
+          autoRepairResultSequence?.elementAtOrNull(call) ?? autoRepairResult,
+      recommendations: recommendations,
+    );
   });
 
   when(service.enumerateKeySlots()).thenAnswer((_) async {
@@ -360,6 +387,35 @@ DiskEncryptionService registerMockDiskEncryptionService({
     }
     currentAuthMode = requestedAuthMode;
   });
+  when(service.reprovision(onAuthorized: anyNamed('onAuthorized')))
+      .thenAnswer((invocation) async {
+    final onAuthorized =
+        invocation.namedArguments[#onAuthorized] as void Function()?;
+
+    // Auth-related errors happen during the polkit prompt itself, before
+    // the snapd RPC is accepted — so onAuthorized must NOT fire in this path.
+    if (reprovisionSnapdAuthErrorKind != null) {
+      throw SnapdException(
+        message: 'Mock reprovision auth error',
+        kind: reprovisionSnapdAuthErrorKind.snapdKind,
+      );
+    }
+    // snapd also refuses a conflicting change before accepting it
+    if (reprovisionSnapdErrorKind != null) {
+      throw SnapdException(
+        message: 'Mock reprovision snapd error',
+        kind: reprovisionSnapdErrorKind,
+      );
+    }
+
+    onAuthorized?.call();
+
+    if (reprovisionError) {
+      throw Exception('Mock reprovision error');
+    }
+    // Reprovisioning removes any PIN or passphrase
+    currentAuthMode = AuthMode.none;
+  });
   when(service.pinPassphraseEntropyCheck(any, any))
       .thenAnswer((invocation) async {
     if (entropyCheckError) {
@@ -383,6 +439,69 @@ DiskEncryptionService registerMockDiskEncryptionService({
       optimalEntropyBits: 6,
     );
     return EntropyResponse.fromSnapdEntropyResponse(snapdResponse);
+  });
+
+  SnapdStorageEncryption storageEncryption(
+    SnapdStorageEncryptionSupport support,
+    List<SnapdAvailabilityCheckError> errors,
+  ) =>
+      SnapdStorageEncryption(
+        support: support,
+        unavailableReason: support == SnapdStorageEncryptionSupport.available
+            ? null
+            : errors.firstOrNull?.message ?? 'Mock unavailable reason',
+        availabilityCheckErrors: errors,
+        features: encryptionFeatures,
+        requirements: [
+          if (volumesAuthRequired)
+            SnapdStorageEncryptionRequirement.volumesAuth,
+        ],
+      );
+
+  when(service.checkEncryptionSupport()).thenAnswer((_) async {
+    if (checkEncryptionSupportSnapdAuthErrorKind != null) {
+      throw SnapdException(
+        message: 'Mock check encryption support auth error',
+        kind: checkEncryptionSupportSnapdAuthErrorKind.snapdKind,
+      );
+    }
+    if (checkEncryptionSupportError != null) {
+      throw checkEncryptionSupportError;
+    }
+    return storageEncryption(
+      encryptionSupport ??
+          (availabilityCheckErrors.isEmpty
+              ? SnapdStorageEncryptionSupport.available
+              : SnapdStorageEncryptionSupport.unavailable),
+      availabilityCheckErrors,
+    );
+  });
+  when(service.fixEncryptionSupport(any, args: anyNamed('args')))
+      .thenAnswer((_) async {
+    if (fixEncryptionSupportSnapdAuthErrorKind != null) {
+      throw SnapdException(
+        message: 'Mock fix encryption support auth error',
+        kind: fixEncryptionSupportSnapdAuthErrorKind.snapdKind,
+      );
+    }
+    if (fixEncryptionSupportError != null) {
+      throw fixEncryptionSupportError;
+    }
+    return storageEncryption(SnapdStorageEncryptionSupport.available, const []);
+  });
+  when(service.generateReprovisionRecoveryKey()).thenAnswer((_) async {
+    if (generateReprovisionRecoveryKeySnapdAuthErrorKind != null) {
+      throw SnapdException(
+        message: 'Mock generate reprovision recovery key auth error',
+        kind: generateReprovisionRecoveryKeySnapdAuthErrorKind.snapdKind,
+      );
+    }
+    if (generateReprovisionRecoveryKeyError) {
+      throw Exception('Mock generate reprovision recovery key error');
+    }
+    return SnapdGenerateReprovisionRecoveryKeyResponse(
+      recoveryKey: 'mock-reprovision-key',
+    );
   });
   registerMockService<DiskEncryptionService>(service);
   addTearDown(unregisterService<DiskEncryptionService>);
