@@ -3179,6 +3179,151 @@ void main() {
     await tester.pumpAndSettle();
     expect(tester.widget<OutlinedButton>(startRepairButton).enabled, isTrue);
   });
+
+  group('repair progress', () {
+    final cases = [
+      (name: 'with a PIN', authMode: AuthMode.pin, reprovisionError: false),
+      (
+        name: 'with a passphrase',
+        authMode: AuthMode.passphrase,
+        reprovisionError: false,
+      ),
+      (
+        name: 'without a PIN or passphrase',
+        authMode: AuthMode.none,
+        reprovisionError: false,
+      ),
+      (name: 'that fails', authMode: AuthMode.pin, reprovisionError: true),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final promptAnswered = Completer<void>();
+        final container = createContainer();
+        registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          authMode: tc.authMode,
+          reprovisionError: tc.reprovisionError,
+          reprovisionPromptAnswered: promptAnswered.future,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        await tester.pumpAppWithProviders(
+          (_) => const DiskEncryptionPage(),
+          container,
+        );
+        await tester.pumpAndSettle();
+
+        final l10n = tester.l10n;
+        await tester.tap(find.text(l10n.diskEncryptionPageRepairButton));
+        await tester.pumpAndSettle();
+        final repairButton =
+            find.text(l10n.diskEncryptionPageRepairDialogRepair);
+        // The dialog first warns that the repair removes the PIN or passphrase
+        if (tc.authMode != AuthMode.none) {
+          await tester.tap(repairButton);
+          await tester.pumpAndSettle();
+        }
+        await tester.tap(
+          find.text(l10n.diskEncryptionPageReplaceDialogAcknowledge),
+        );
+        await tester.pump();
+        await tester.ensureVisible(repairButton);
+        await tester.tap(repairButton);
+        await tester.pump();
+
+        expect(find.text(l10n.diskEncryptionPageRepairing), findsOneWidget);
+        expect(find.text(l10n.recoveryKeyTPMNeedsRepair), findsNothing);
+        expect(find.text(l10n.diskEncryptionPageRepairHeader), findsNothing);
+        for (final label in [
+          l10n.diskEncryptionPageCheckKey,
+          l10n.diskEncryptionPageReplaceButton,
+          ...switch (tc.authMode) {
+            AuthMode.pin => [
+                l10n.recoveryKeyPinButton,
+                l10n.diskEncryptionPageRemovePinButton,
+              ],
+            AuthMode.passphrase => [
+                l10n.recoveryKeyPassphraseButton,
+                l10n.diskEncryptionPageRemovePassphraseButton,
+              ],
+            AuthMode.none => [
+                l10n.diskEncryptionPageAddPassphraseButton,
+                l10n.diskEncryptionPageAddPinButton,
+              ],
+          },
+        ]) {
+          final button = find.widgetWithText(OutlinedButton, label);
+          expect(tester.widget<OutlinedButton>(button).enabled, isFalse);
+        }
+
+        promptAnswered.complete();
+        await tester.pumpAndSettle();
+
+        expect(find.text(l10n.diskEncryptionPageRepairing), findsNothing);
+        expect(
+          find.text(l10n.diskEncryptionPageRepairHeader),
+          tc.reprovisionError ? findsOneWidget : findsNothing,
+        );
+        expect(
+          find.text(l10n.recoveryKeySomethingWentWrongHeader),
+          tc.reprovisionError ? findsOneWidget : findsNothing,
+        );
+        expect(
+          find.text(l10n.recoveryKeyTPMEnabled),
+          tc.reprovisionError ? findsNothing : findsOneWidget,
+        );
+      });
+    }
+  });
+
+  testWidgets('repair progress reports a failure to add the new PIN',
+      (tester) async {
+    final container = createContainer();
+    final service = registerMockDiskEncryptionService(
+      recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      authMode: AuthMode.none,
+      volumesAuthRequired: true,
+      replacePlatformKeyError: true,
+    );
+    registerMockFeatureService(supportsReprovision: true);
+    await tester.pumpAppWithProviders(
+      (_) => const DiskEncryptionPage(),
+      container,
+    );
+    await tester.pumpAndSettle();
+
+    final l10n = tester.l10n;
+    final continueLabel = UbuntuLocalizations.of(tester.context).continueLabel;
+    await tester.tap(find.text(l10n.diskEncryptionPageRepairButton));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10n.passphraseTypePinTileTitle));
+    await tester.tap(find.text(continueLabel));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).at(0), '5678');
+    await tester.enterText(find.byType(TextField).at(1), '5678');
+    await tester.pumpAndSettle(debounceDelay);
+    await tester.tap(find.text(continueLabel));
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.text(l10n.diskEncryptionPageReplaceDialogAcknowledge),
+    );
+    await tester.pump();
+    final repairButton = find.text(l10n.diskEncryptionPageRepairDialogRepair);
+    await tester.ensureVisible(repairButton);
+    await tester.tap(repairButton);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(RepairDialog), findsNothing);
+    expect(find.text(l10n.diskEncryptionPageRepairHeader), findsNothing);
+    expect(find.text(l10n.recoveryKeySomethingWentWrongHeader), findsOneWidget);
+    verify(
+      service.replacePlatformKey(
+        authMode: AuthMode.pin,
+        pin: '5678',
+        onAuthorized: anyNamed('onAuthorized'),
+      ),
+    ).called(1);
+  });
 }
 
 // The page opens the dialog only once its state has loaded

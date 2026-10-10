@@ -57,13 +57,14 @@ class EncryptionPageBody extends ConsumerWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (data.needsRepair) ...[
+            if (data.needsRepair &&
+                data.pendingOperation != TpmFdeOperation.repair) ...[
               _RepairBanner(tpmState: data),
               const SizedBox(height: 32),
             ],
             _AuthStatusTileList(tpmState: data),
             const SizedBox(height: 32),
-            const _RecoveryKeyActions(),
+            _RecoveryKeyActions(tpmState: data),
             const SizedBox(height: 32),
             // TPM Authentication specific content
             switch (data.currentAuthMode) {
@@ -1152,10 +1153,6 @@ class _NoneAuthenticationActions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final isAdding = switch (tpmState.pendingOperation) {
-      TpmFdeOperation.addPin || TpmFdeOperation.addPassphrase => true,
-      _ => false,
-    };
     final hasError = tpmState.operationError != null;
 
     return Column(
@@ -1174,7 +1171,7 @@ class _NoneAuthenticationActions extends ConsumerWidget {
           spacing: 16,
           children: [
             OutlinedButton(
-              onPressed: isAdding
+              onPressed: tpmState.isLoading
                   ? null
                   : () {
                       showChangeAuthModeDialog(
@@ -1188,7 +1185,7 @@ class _NoneAuthenticationActions extends ConsumerWidget {
               ),
             ),
             OutlinedButton(
-              onPressed: isAdding
+              onPressed: tpmState.isLoading
                   ? null
                   : () {
                       showChangeAuthModeDialog(
@@ -1225,10 +1222,6 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final isRemoving = switch (tpmState.pendingOperation) {
-      TpmFdeOperation.removePin || TpmFdeOperation.removePassphrase => true,
-      _ => false,
-    };
     final hasError = tpmState.operationError != null;
 
     return Column(
@@ -1245,7 +1238,7 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
           spacing: 16,
           children: [
             OutlinedButton(
-              onPressed: isRemoving
+              onPressed: tpmState.isLoading
                   ? null
                   : () {
                       showChangeAuthDialog(
@@ -1256,7 +1249,7 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
               child: Text(l10n.recoveryKeyPassphraseButton),
             ),
             OutlinedButton(
-              onPressed: isRemoving
+              onPressed: tpmState.isLoading
                   ? null
                   : () {
                       ref
@@ -1292,10 +1285,6 @@ class _PinAuthenticationActions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final isRemoving = switch (tpmState.pendingOperation) {
-      TpmFdeOperation.removePin || TpmFdeOperation.removePassphrase => true,
-      _ => false,
-    };
     final hasError = tpmState.operationError != null;
 
     return Column(
@@ -1312,7 +1301,7 @@ class _PinAuthenticationActions extends ConsumerWidget {
           spacing: 16,
           children: [
             OutlinedButton(
-              onPressed: isRemoving
+              onPressed: tpmState.isLoading
                   ? null
                   : () {
                       showChangeAuthDialog(context, AuthMode.pin);
@@ -1320,7 +1309,7 @@ class _PinAuthenticationActions extends ConsumerWidget {
               child: Text(l10n.recoveryKeyPinButton),
             ),
             OutlinedButton(
-              onPressed: isRemoving
+              onPressed: tpmState.isLoading
                   ? null
                   : () {
                       ref
@@ -1347,11 +1336,15 @@ class _PinAuthenticationActions extends ConsumerWidget {
 }
 
 class _RecoveryKeyActions extends StatelessWidget {
-  const _RecoveryKeyActions();
+  const _RecoveryKeyActions({required this.tpmState});
+
+  final TpmAuthState tpmState;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    // The repair replaces the recovery key
+    final isRepairing = tpmState.pendingOperation == TpmFdeOperation.repair;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1368,15 +1361,19 @@ class _RecoveryKeyActions extends StatelessWidget {
           spacing: 16,
           children: [
             OutlinedButton(
-              onPressed: () {
-                showCheckRecoveryKeyDialog(context);
-              },
+              onPressed: isRepairing
+                  ? null
+                  : () {
+                      showCheckRecoveryKeyDialog(context);
+                    },
               child: Text(l10n.diskEncryptionPageCheckKey),
             ),
             OutlinedButton(
-              onPressed: () {
-                showReplaceRecoveryKeyDialog(context);
-              },
+              onPressed: isRepairing
+                  ? null
+                  : () {
+                      showReplaceRecoveryKeyDialog(context);
+                    },
               child: Text(l10n.diskEncryptionPageReplaceButton),
             ),
           ],
@@ -1396,6 +1393,7 @@ class _AuthStatusTileList extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final pendingOperation = tpmState.pendingOperation;
     final currentMode = tpmState.currentAuthMode;
+    final isRepairing = pendingOperation == TpmFdeOperation.repair;
 
     String? loadingMessage;
     if (pendingOperation != null) {
@@ -1413,10 +1411,17 @@ class _AuthStatusTileList extends StatelessWidget {
     return YaruTileList(
       children: [
         YaruListTile(
-          leading: const Icon(YaruIcons.lock, size: 24),
-          titleText: tpmState.needsRepair
-              ? l10n.recoveryKeyTPMNeedsRepair
-              : l10n.recoveryKeyTPMEnabled,
+          leading: isRepairing
+              ? const SizedBox.square(
+                  dimension: yaruProgressSize,
+                  child: YaruCircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Icon(YaruIcons.lock, size: 24),
+          titleText: isRepairing
+              ? l10n.diskEncryptionPageRepairing
+              : tpmState.needsRepair
+                  ? l10n.recoveryKeyTPMNeedsRepair
+                  : l10n.recoveryKeyTPMEnabled,
         ),
         // Show enabled status row when not loading and has auth enabled
         if (currentMode != AuthMode.none && pendingOperation == null) ...[

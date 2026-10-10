@@ -181,6 +181,7 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
 }) {
   final service = MockDiskEncryptionService();
   var currentAuthMode = authMode;
+  var repaired = false;
 
   var storageEncryptedCalls = 0;
   when(service.getStorageEncrypted()).thenAnswer((_) async {
@@ -198,7 +199,7 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
       status: storageEncryptionStatusSequence?.elementAtOrNull(call) ??
           storageEncryptionStatus,
       autoRepairResult: autoRepairResult,
-      recommendations: recommendations,
+      recommendations: repaired ? const [] : recommendations,
     );
   });
 
@@ -426,6 +427,7 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
     }
     // Reprovisioning removes any PIN or passphrase
     currentAuthMode = AuthMode.none;
+    repaired = true;
   });
   when(service.pinPassphraseEntropyCheck(any, any))
       .thenAnswer((invocation) async {
