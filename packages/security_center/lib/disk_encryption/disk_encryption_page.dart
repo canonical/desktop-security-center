@@ -8,6 +8,8 @@ import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
+import 'package:snapd/snapd.dart';
+import 'package:ubuntu_localizations/ubuntu_localizations.dart';
 import 'package:yaru/yaru.dart';
 
 const _learnMoreUrl =
@@ -125,73 +127,82 @@ void showCheckRecoveryKeyDialog(BuildContext context) {
   showDialog(context: context, builder: (_) => const CheckRecoveryKeyDialog());
 }
 
-class CheckRecoveryKeyDialog extends ConsumerWidget {
+class CheckRecoveryKeyDialog extends StatelessWidget {
   const CheckRecoveryKeyDialog({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final data = ref.watch(checkRecoveryKeyDialogModelProvider);
-    final notifier = ref.read(checkRecoveryKeyDialogModelProvider.notifier);
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return AlertDialog(
       title: YaruDialogTitleBar(
         title: Text(l10n.diskEncryptionPageDialogHeaderCheckKey),
       ),
       titlePadding: EdgeInsets.zero,
-      content: SizedBox(
+      content: const SizedBox(
         width: 460,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              autofocus: true,
-              style: Theme.of(context).textTheme.bodyMedium,
-              decoration: InputDecoration(
-                labelText: l10n.diskEncryptionPageRecoveryKey,
-                hintText: 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
-              ),
-              onChanged: notifier.setKeyToCheck,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: switch (data) {
-                  CheckRecoveryKeyDialogStateInput() =>
-                    notifier.checkRecoveryKey,
-                  _ => null,
-                },
-                child: data is CheckRecoveryKeyDialogStateLoading
-                    ? SizedBox.square(
-                        dimension: yaruProgressSize,
-                        child: YaruCircularProgressIndicator(
-                          strokeWidth: 2,
-                        ),
-                      )
-                    : Text(l10n.diskEncryptionPageCheck),
-              ),
-            ),
-            if (data is CheckRecoveryKeyDialogStateResult)
-              if (data.valid)
-                YaruInfoBox(
-                  title: Text(l10n.diskEncryptionPageKeyWorks),
-                  subtitle: Text(l10n.diskEncryptionPageKeyWorksBody),
-                  yaruInfoType: YaruInfoType.success,
-                )
-              else
-                YaruInfoBox(
-                  title: Text(l10n.diskEncryptionPageKeyDoesntWork),
-                  subtitle: Text(l10n.diskEncryptionPageKeyDoesntWorkBody),
-                  yaruInfoType: YaruInfoType.danger,
-                ),
-            if (data is CheckRecoveryKeyDialogStateError)
-              YaruInfoBox(
-                title: Text(l10n.recoveryKeySomethingWentWrongHeader),
-                subtitle: Text(data.e.toString()),
-                yaruInfoType: YaruInfoType.danger,
-              ),
-          ].separatedBy(const SizedBox(height: 16)),
-        ),
+        child: _RecoveryKeyCheck(),
       ),
+    );
+  }
+}
+
+class _RecoveryKeyCheck extends ConsumerWidget {
+  const _RecoveryKeyCheck();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final data = ref.watch(checkRecoveryKeyDialogModelProvider);
+    final notifier = ref.read(checkRecoveryKeyDialogModelProvider.notifier);
+    final l10n = AppLocalizations.of(context);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        TextField(
+          autofocus: true,
+          style: Theme.of(context).textTheme.bodyMedium,
+          decoration: InputDecoration(
+            labelText: l10n.diskEncryptionPageRecoveryKey,
+            hintText: 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
+          ),
+          onChanged: notifier.setKeyToCheck,
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: OutlinedButton(
+            onPressed: switch (data) {
+              CheckRecoveryKeyDialogStateInput() => notifier.checkRecoveryKey,
+              _ => null,
+            },
+            child: data is CheckRecoveryKeyDialogStateLoading
+                ? SizedBox.square(
+                    dimension: yaruProgressSize,
+                    child: YaruCircularProgressIndicator(
+                      strokeWidth: 2,
+                    ),
+                  )
+                : Text(l10n.diskEncryptionPageCheck),
+          ),
+        ),
+        if (data is CheckRecoveryKeyDialogStateResult)
+          if (data.valid)
+            YaruInfoBox(
+              title: Text(l10n.diskEncryptionPageKeyWorks),
+              subtitle: Text(l10n.diskEncryptionPageKeyWorksBody),
+              yaruInfoType: YaruInfoType.success,
+            )
+          else
+            YaruInfoBox(
+              title: Text(l10n.diskEncryptionPageKeyDoesntWork),
+              subtitle: Text(l10n.diskEncryptionPageKeyDoesntWorkBody),
+              yaruInfoType: YaruInfoType.danger,
+            ),
+        if (data is CheckRecoveryKeyDialogStateError)
+          YaruInfoBox(
+            title: Text(l10n.recoveryKeySomethingWentWrongHeader),
+            subtitle: Text(data.e.toString()),
+            yaruInfoType: YaruInfoType.danger,
+          ),
+      ].separatedBy(const SizedBox(height: 16)),
     );
   }
 }
@@ -499,6 +510,535 @@ class ChangeAuthModeDialog extends ConsumerWidget {
               ),
           ].separatedBy(const SizedBox(height: 16)),
         ),
+      ),
+    );
+  }
+}
+
+void showRepairDialog(BuildContext context) {
+  // The PIN and passphrase models keep their state between dialogs
+  ProviderScope.containerOf(context, listen: false)
+    ..invalidate(changeAuthModeDialogModelProvider(AuthMode.pin))
+    ..invalidate(changeAuthModeDialogModelProvider(AuthMode.passphrase));
+  showDialog(
+    context: context,
+    builder: (_) => const RepairDialog(),
+  );
+}
+
+class RepairDialog extends ConsumerWidget {
+  const RepairDialog({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dialogState = ref.watch(repairDialogModelProvider).dialogState;
+    final l10n = AppLocalizations.of(context);
+
+    if (dialogState is RepairDialogStateAuthCancelled) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pop();
+      });
+    }
+    final title = switch (dialogState) {
+      RepairDialogStateSetPinOrPassphrase() =>
+        l10n.diskEncryptionPageAdditionalSecurityHeader,
+      RepairDialogStateGeneratingKey() ||
+      RepairDialogStateSaveKey() =>
+        l10n.diskEncryptionPageRecoveryKey,
+      _ => l10n.diskEncryptionPageRepairDialogHeader,
+    };
+    // The dialog handles the admin prompt's answer, so it stays open until then
+    final isStartingRepair = dialogState is RepairDialogStateStartingRepair;
+
+    return PopScope(
+      canPop: !isStartingRepair,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: AlertDialog(
+          title: YaruDialogTitleBar(
+            title: Text(title),
+            isClosable: !isStartingRepair,
+          ),
+          titlePadding: EdgeInsets.zero,
+          content: SizedBox(
+            width: 460,
+            child: SingleChildScrollView(
+              child: switch (dialogState) {
+                RepairDialogStateIssue(:final issue) =>
+                  _RepairIssue(issue: issue),
+                RepairDialogStateUnavailable(:final issue) =>
+                  _RepairUnavailable(issue: issue),
+                RepairDialogStateSetPinOrPassphrase() =>
+                  const _RepairPinOrPassphrase(),
+                RepairDialogStatePinOrPassphraseWillBeRemoved() =>
+                  const _RepairPinOrPassphraseRemoved(),
+                RepairDialogStateGeneratingKey() => const _RepairRecoveryKey(),
+                RepairDialogStateSaveKey(:final key, :final acknowledged) =>
+                  _RepairRecoveryKey(
+                    recoveryKey: key.recoveryKey,
+                    acknowledged: acknowledged,
+                  ),
+                RepairDialogStateError(:final e) => _RepairError(e: e),
+                _ => const YaruLinearProgressIndicator(),
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _RepairIssue extends ConsumerWidget {
+  const _RepairIssue({required this.issue});
+
+  final SnapdAvailabilityCheckError issue;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    // Contacting the OEM or OS vendor isn't a fix the user can make here
+    final fixes = issue.actions
+        .where(
+          (action) =>
+              action != SnapdFixAction.contactOem &&
+              action != SnapdFixAction.contactOsVendor,
+        )
+        .toList();
+    final proceedOnly = fixes.singleOrNull == SnapdFixAction.proceed;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        YaruInfoBox(
+          title: Text(l10n.tpmActionPageTitleActionable),
+          subtitle: Text(
+            proceedOnly
+                ? l10n.tpmActionFixActionProceedDescription
+                : fixes.length == 1
+                    ? l10n.tpmActionErrorSupportSingleLabel
+                    : l10n.tpmActionErrorSupportLabel,
+          ),
+          yaruInfoType: YaruInfoType.warning,
+        ),
+        Text(issue.kind.localizedDescription(l10n)),
+        if (!proceedOnly)
+          YaruExpansionPanel(
+            shrinkWrap: true,
+            headers: [
+              for (final (i, fix) in fixes.indexed)
+                Text(
+                  fixes.length == 1
+                      ? l10n.tpmActionSingleSolutionLabel(
+                          fix.localizedTitle(l10n, issue.kind),
+                        )
+                      : l10n.tpmActionSolutionLabel(
+                          i + 1,
+                          fix.localizedTitle(l10n, issue.kind),
+                        ),
+                ),
+            ],
+            children: [
+              for (final fix in fixes) _RepairFix(fix: fix, kind: issue.kind),
+            ],
+          ),
+        Hyperlink(text: l10n.diskEncryptionPageLearnMore, url: _learnMoreUrl),
+        _RepairTechnicalDetails(issue: issue),
+        if (proceedOnly)
+          Wrap(
+            alignment: WrapAlignment.end,
+            spacing: 16,
+            children: [
+              OutlinedButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(UbuntuLocalizations.of(context).cancelLabel),
+              ),
+              ElevatedButton(
+                onPressed: () => ref
+                    .read(repairDialogModelProvider.notifier)
+                    .applyFix(SnapdFixAction.proceed),
+                child: Text(l10n.tpmActionIgnoreAndContinueLabel),
+              ),
+            ],
+          ),
+      ].separatedBy(const SizedBox(height: 16)),
+    );
+  }
+}
+
+class _RepairFix extends ConsumerStatefulWidget {
+  const _RepairFix({required this.fix, required this.kind});
+
+  final SnapdFixAction fix;
+  final SnapdAvailabilityCheckErrorKind kind;
+
+  @override
+  ConsumerState<_RepairFix> createState() => _RepairFixState();
+}
+
+class _RepairFixState extends ConsumerState<_RepairFix> {
+  var _riskAccepted = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final fix = widget.fix;
+    final description = [
+      fix.localizedDescription(l10n, widget.kind),
+      fix.localizedFirmwareHint(l10n, widget.kind),
+    ].nonNulls.join(' ');
+    final caveat = fix.localizedCaveat(l10n);
+    final unlockedWithRecoveryKey = ref
+        .watch(tpmAuthenticationModelProvider)
+        .value!
+        .unlockedWithRecoveryKey;
+    final keyChecked = !fix.clearsTpm ||
+        unlockedWithRecoveryKey ||
+        ref.watch(checkRecoveryKeyDialogModelProvider) ==
+            CheckRecoveryKeyDialogState.result(true);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        kYaruPagePadding,
+        0,
+        kYaruPagePadding,
+        kYaruPagePadding,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (description.isNotEmpty) Text(description),
+          if (fix == SnapdFixAction.rebootToFwSettings)
+            Text(l10n.tpmActionFixActionRebootToFwSettingsInstructions),
+          if (caveat != null) Text(caveat),
+          if (fix.clearsTpm) ...[
+            YaruInfoBox(
+              title: Text(l10n.tpmActionFixActionClearTpmWarningTitle),
+              subtitle: Text(l10n.tpmActionFixActionClearTpmWarningBody),
+              yaruInfoType: YaruInfoType.warning,
+            ),
+            if (!unlockedWithRecoveryKey) const _RecoveryKeyCheck(),
+            YaruCheckButton(
+              title: Text(
+                l10n.tpmActionFixActionClearTpmConfirmationLabel,
+                maxLines: 2,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              value: _riskAccepted,
+              onChanged: (value) =>
+                  setState(() => _riskAccepted = value ?? false),
+            ),
+          ],
+          if (!fix.isExternal)
+            OutlinedButton(
+              onPressed: keyChecked && (_riskAccepted || !fix.clearsTpm)
+                  ? () =>
+                      ref.read(repairDialogModelProvider.notifier).applyFix(fix)
+                  : null,
+              child: Text(
+                fix == SnapdFixAction.proceed
+                    ? l10n.tpmActionIgnoreAndContinueLabel
+                    : fix.localizedTitle(l10n, widget.kind),
+              ),
+            ),
+        ].separatedBy(const SizedBox(height: 16)),
+      ),
+    );
+  }
+}
+
+class _RepairPinOrPassphrase extends ConsumerStatefulWidget {
+  const _RepairPinOrPassphrase();
+
+  @override
+  ConsumerState<_RepairPinOrPassphrase> createState() =>
+      _RepairPinOrPassphraseState();
+}
+
+class _RepairPinOrPassphraseState
+    extends ConsumerState<_RepairPinOrPassphrase> {
+  var _authMode = AuthMode.passphrase;
+  var _authModeChosen = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final continueLabel = Text(UbuntuLocalizations.of(context).continueLabel);
+
+    if (!_authModeChosen) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l10n.passphraseTypePageBodyAuthRequired),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              YaruRadioButton(
+                value: AuthMode.passphrase,
+                groupValue: _authMode,
+                onChanged: (_) =>
+                    setState(() => _authMode = AuthMode.passphrase),
+                title: Text(l10n.passphraseTypePassphraseTileTitle),
+              ),
+              YaruRadioButton(
+                value: AuthMode.pin,
+                groupValue: _authMode,
+                onChanged: (_) => setState(() => _authMode = AuthMode.pin),
+                title: Text(l10n.passphraseTypePinTileTitle),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              OutlinedButton(
+                onPressed: () => setState(() => _authModeChosen = true),
+                child: continueLabel,
+              ),
+            ],
+          ),
+        ].separatedBy(const SizedBox(height: 16)),
+      );
+    }
+
+    final model = ref.watch(changeAuthModeDialogModelProvider(_authMode));
+    final notifier =
+        ref.read(changeAuthModeDialogModelProvider(_authMode).notifier);
+    final canContinue =
+        model.dialogState is ChangeAuthModeDialogStateInput && notifier.isValid;
+    final isPin = _authMode == AuthMode.pin;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          isPin
+              ? l10n.diskEncryptionPageAddPinDialogBodyMain
+              : l10n.diskEncryptionPageAddPassphraseDialogBodyMain,
+        ),
+        Text(
+          isPin
+              ? l10n.diskEncryptionPageAddPinDialogBodyRecovery
+              : l10n.diskEncryptionPageAddPassphraseDialogBodyRecovery,
+        ),
+        AddPassphraseFormField(authMode: _authMode),
+        AddConfirmPassphraseFormField(authMode: _authMode),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            OutlinedButton(
+              onPressed: canContinue
+                  ? () => ref
+                      .read(repairDialogModelProvider.notifier)
+                      .continueWithPinOrPassphrase(_authMode)
+                  : null,
+              child: continueLabel,
+            ),
+          ],
+        ),
+        if (model.dialogState case ChangeAuthModeDialogStateError(:final e))
+          YaruInfoBox(
+            title: Text(l10n.recoveryKeySomethingWentWrongHeader),
+            subtitle: Text(_dialogErrorMessage(e)),
+            yaruInfoType: YaruInfoType.danger,
+          ),
+      ].separatedBy(const SizedBox(height: 16)),
+    );
+  }
+}
+
+class _RepairPinOrPassphraseRemoved extends ConsumerWidget {
+  const _RepairPinOrPassphraseRemoved();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final ubuntuL10n = UbuntuLocalizations.of(context);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        YaruInfoBox(
+          title: Text(
+            l10n.diskEncryptionPageRepairDialogPinOrPassphraseRemovedHeader,
+          ),
+          subtitle: Text(
+            l10n.diskEncryptionPageRepairDialogPinOrPassphraseRemovedBody,
+          ),
+          yaruInfoType: YaruInfoType.warning,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            OutlinedButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(ubuntuL10n.cancelLabel),
+            ),
+            ElevatedButton(
+              onPressed:
+                  ref.read(repairDialogModelProvider.notifier).continueToKey,
+              child: Text(ubuntuL10n.continueLabel),
+            ),
+          ].separatedBy(const SizedBox(width: 16)),
+        ),
+      ].separatedBy(const SizedBox(height: 16)),
+    );
+  }
+}
+
+class _RepairRecoveryKey extends ConsumerWidget {
+  const _RepairRecoveryKey({this.recoveryKey, this.acknowledged = false});
+
+  final String? recoveryKey;
+  final bool acknowledged;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final saveError = ref.watch(repairDialogModelProvider).error;
+    final notifier = ref.read(repairDialogModelProvider.notifier);
+    final key = recoveryKey;
+
+    Future<void> handleRepair() async {
+      final navigator = Navigator.of(context);
+      await notifier.startRepair(
+        onAuthorized: () {
+          if (navigator.mounted) navigator.pop();
+        },
+      );
+    }
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l10n.diskEncryptionPageRepairDialogKeyBody),
+        YaruInfoBox(
+          title: Text(l10n.diskEncryptionPageRepairDialogKeyWarningHeader),
+          subtitle: Text(l10n.diskEncryptionPageRepairDialogKeyWarningBody),
+          yaruInfoType: YaruInfoType.warning,
+        ),
+        RecoveryKeyPanel(
+          recoveryKey: key == null ? const AsyncLoading() : AsyncData(key),
+          actionsEnabled: true,
+          saveError: saveError,
+          onSaveErrorChanged: notifier.setError,
+          onSaveToFile: notifier.writeRecoveryKey,
+        ),
+        YaruCheckButton(
+          title: Text(
+            l10n.diskEncryptionPageReplaceDialogAcknowledge,
+            maxLines: 2,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          value: acknowledged,
+          onChanged: key == null
+              ? null
+              : (value) => notifier.acknowledge(value ?? false),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            OutlinedButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(UbuntuLocalizations.of(context).cancelLabel),
+            ),
+            ElevatedButton(
+              onPressed: acknowledged ? handleRepair : null,
+              child: Text(l10n.diskEncryptionPageRepairDialogRepair),
+            ),
+          ].separatedBy(const SizedBox(width: 16)),
+        ),
+      ].separatedBy(const SizedBox(height: 16)),
+    );
+  }
+}
+
+class _RepairUnavailable extends StatelessWidget {
+  const _RepairUnavailable({required this.issue});
+
+  final SnapdAvailabilityCheckError issue;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        YaruInfoBox(
+          title: Text(l10n.diskEncryptionPageRepairDialogErrorHeader),
+          subtitle: Text(issue.kind.localizedDescription(l10n)),
+          yaruInfoType: YaruInfoType.danger,
+        ),
+        Hyperlink(text: l10n.diskEncryptionPageLearnMore, url: _learnMoreUrl),
+        _RepairTechnicalDetails(issue: issue),
+      ].separatedBy(const SizedBox(height: 16)),
+    );
+  }
+}
+
+class _RepairError extends ConsumerWidget {
+  const _RepairError({required this.e});
+
+  final Exception e;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    if (e is RepairNotAvailableException) {
+      return YaruInfoBox(
+        subtitle: Text(l10n.diskEncryptionPageRepairDialogNotNeeded),
+        yaruInfoType: YaruInfoType.information,
+      );
+    }
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        YaruInfoBox(
+          title: Text(l10n.diskEncryptionPageRepairDialogErrorHeader),
+          subtitle: Text(
+            switch (e) {
+              final TpmStateException e => e.localizedBody(l10n),
+              _ => _dialogErrorMessage(e),
+            },
+          ),
+          yaruInfoType: YaruInfoType.danger,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            OutlinedButton(
+              onPressed: ref.read(repairDialogModelProvider.notifier).retry,
+              child: Text(UbuntuLocalizations.of(context).retryLabel),
+            ),
+          ],
+        ),
+      ].separatedBy(const SizedBox(height: 16)),
+    );
+  }
+}
+
+class _RepairTechnicalDetails extends StatelessWidget {
+  const _RepairTechnicalDetails({required this.issue});
+
+  final SnapdAvailabilityCheckError issue;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return YaruExpandable(
+      expandButtonPosition: YaruExpandableButtonPosition.start,
+      expandIconSemanticLabel: l10n.tpmActionDetailsLabel,
+      header: Text(l10n.tpmActionDetailsLabel),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(issue.kind.name.toKebabCase()),
+          Text(issue.message),
+        ],
       ),
     );
   }
