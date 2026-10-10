@@ -68,6 +68,22 @@ extension SnapdFixActionRepair on SnapdFixAction {
         SnapdFixAction.proceed =>
           false,
       };
+
+  bool get clearsTpm => switch (this) {
+        SnapdFixAction.enableAndClearTpmViaFirmware ||
+        SnapdFixAction.clearTpmViaFirmware ||
+        SnapdFixAction.clearTpmSimple ||
+        SnapdFixAction.clearTpm =>
+          true,
+        SnapdFixAction.reboot ||
+        SnapdFixAction.shutdown ||
+        SnapdFixAction.rebootToFwSettings ||
+        SnapdFixAction.contactOem ||
+        SnapdFixAction.contactOsVendor ||
+        SnapdFixAction.enableTpmViaFirmware ||
+        SnapdFixAction.proceed =>
+          false,
+      };
 }
 
 @freezed
@@ -228,6 +244,7 @@ class TpmAuthState with _$TpmAuthState {
   const factory TpmAuthState({
     required AuthMode currentAuthMode,
     @Default(false) bool needsRepair,
+    @Default(false) bool unlockedWithRecoveryKey,
     TpmFdeOperation? pendingOperation,
     TpmFdeOperationException? operationError,
   }) = _TpmAuthState;
@@ -554,6 +571,8 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         currentAuthMode: currentAuthMode,
         needsRepair:
             storageStatus.needsRepair && _featureService.supportsReprovision,
+        unlockedWithRecoveryKey:
+            storageStatus.status == SnapdStorageEncryptionStatus.recovery,
       );
     } on SnapdException catch (e) {
       _log.error('Failed to determine TPM authentication mode: $e');
@@ -1072,6 +1091,18 @@ class RepairDialogModel extends _$RepairDialogModel {
       current.issue.actions.contains(action) && !action.isExternal,
       'Only a fix that snapd runs for the current issue can be applied',
     );
+    // Clearing the TPM can lock the user out of the disk unless they have the
+    // recovery key, so this guard stays in release builds
+    if (action.clearsTpm) {
+      final tpmState = ref.read(tpmAuthenticationModelProvider).value!;
+      final keyCheck = ref.read(checkRecoveryKeyDialogModelProvider);
+      if (!tpmState.unlockedWithRecoveryKey &&
+          keyCheck != CheckRecoveryKeyDialogState.result(true)) {
+        throw StateError(
+          '$action clears the TPM, so the recovery key must be checked first',
+        );
+      }
+    }
     final flow = _flow;
 
     state = state.copyWith(dialogState: RepairDialogState.applyingFix(action));
