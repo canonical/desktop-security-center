@@ -824,7 +824,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get tpmActionFixActionProceedDescription =>
-      'Ignoring this issue might result in a less secure installation.';
+      'Ignoring the issue might result in a less secure installation.';
 
   @override
   String get tpmActionIgnoreAndContinueLabel => 'Ignore and continue';
