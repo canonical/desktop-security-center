@@ -166,6 +166,10 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
   List<SnapdAvailabilityCheckError> availabilityCheckErrors = const [],
   SnapdStorageEncryptionSupport? encryptionSupport,
   bool volumesAuthRequired = false,
+  List<SnapdStorageEncryptionFeature> encryptionFeatures = const [
+    SnapdStorageEncryptionFeature.passphraseAuth,
+    SnapdStorageEncryptionFeature.pinAuth,
+  ],
   Object? getSystemsError,
   SnapdAuthErrorKind? getSystemsSnapdAuthErrorKind,
   bool generateReprovisionRecoveryKeyError = false,
@@ -448,6 +452,7 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
               ? null
               : errors.firstOrNull?.message ?? 'Mock unavailable reason',
           availabilityCheckErrors: errors,
+          features: encryptionFeatures,
           requirements: [
             if (volumesAuthRequired)
               SnapdStorageEncryptionRequirement.volumesAuth,
