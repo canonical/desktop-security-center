@@ -2961,6 +2961,7 @@ void main() {
         expectTexts: (l10n) => [
               l10n.tpmActionFixActionProceedDescription,
               l10n.tpmActionErrorKindNoHardwareRootOfTrust,
+              l10n.tpmActionFixActionProceedDescription,
               l10n.tpmActionIgnoreAndContinueLabel,
             ],
       ),
@@ -3002,8 +3003,12 @@ void main() {
 
         await _showRepairDialog(tester, container);
 
-        for (final text in tc.expectTexts(tester.l10n)) {
-          expect(find.text(text), findsOneWidget);
+        final texts = tc.expectTexts(tester.l10n);
+        for (final text in texts) {
+          expect(
+            find.text(text),
+            findsNWidgets(texts.where((t) => t == text).length),
+          );
         }
       });
     }
