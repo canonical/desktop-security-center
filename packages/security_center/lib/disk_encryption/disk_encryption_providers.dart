@@ -42,9 +42,14 @@ extension EntropyResponseSemantic on EntropyResponse {
 }
 
 extension SnapdStorageEncryptedResponseRepair on SnapdStorageEncryptedResponse {
-  // Wait while snapd can't tell the status, or may still auto-repair
+  // The page treats any other status as a failure. Wait while snapd may still
+  // auto-repair
   bool get needsRepair =>
-      status != SnapdStorageEncryptionStatus.indeterminate &&
+      const {
+        SnapdStorageEncryptionStatus.active,
+        SnapdStorageEncryptionStatus.degraded,
+        SnapdStorageEncryptionStatus.recovery,
+      }.contains(status) &&
       recommendations
           .contains(SnapdRecommendedRemedialAction.requireReprovision) &&
       autoRepairResult != SnapdAutoRepairResult.notInitialized;

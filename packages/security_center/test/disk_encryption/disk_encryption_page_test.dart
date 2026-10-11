@@ -2433,6 +2433,24 @@ void main() {
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
       ),
       (
+        name: 'fails when the status is failed',
+        statusSequence: [
+          SnapdStorageEncryptionStatus.active,
+          SnapdStorageEncryptionStatus.failed,
+        ],
+        autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      ),
+      (
+        name: 'fails when encryption is inactive',
+        statusSequence: [
+          SnapdStorageEncryptionStatus.active,
+          SnapdStorageEncryptionStatus.inactive,
+        ],
+        autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      ),
+      (
         name: 'fails while auto-repair is not initialized',
         statusSequence: null,
         autoRepairResult: SnapdAutoRepairResult.notInitialized,
@@ -2816,6 +2834,24 @@ void main() {
           SnapdStorageEncryptionStatus.active,
           SnapdStorageEncryptionStatus.active,
           SnapdStorageEncryptionStatus.indeterminate,
+        ],
+        autoRepairResultSequence: null,
+      ),
+      (
+        name: 'refuses to start when the status is failed',
+        statusSequence: [
+          SnapdStorageEncryptionStatus.active,
+          SnapdStorageEncryptionStatus.active,
+          SnapdStorageEncryptionStatus.failed,
+        ],
+        autoRepairResultSequence: null,
+      ),
+      (
+        name: 'refuses to start when encryption is inactive',
+        statusSequence: [
+          SnapdStorageEncryptionStatus.active,
+          SnapdStorageEncryptionStatus.active,
+          SnapdStorageEncryptionStatus.inactive,
         ],
         autoRepairResultSequence: null,
       ),
