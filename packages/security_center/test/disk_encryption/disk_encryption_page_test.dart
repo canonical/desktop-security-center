@@ -3298,7 +3298,7 @@ void main() {
       findsOneWidget,
     );
     await tester.tap(
-      find.text(UbuntuLocalizations.of(tester.context).continueLabel),
+      find.text(tester.l10n.diskEncryptionPageRepairDialogRepair),
     );
     await tester.pump();
 
