@@ -687,6 +687,7 @@ class _RepairIssue extends ConsumerWidget {
           yaruInfoType: YaruInfoType.warning,
         ),
         Text(issue.kind.localizedDescription(l10n)),
+        if (proceedOnly) Text(l10n.tpmActionFixActionProceedDescription),
         if (!proceedOnly)
           YaruExpansionPanel(
             shrinkWrap: true,
@@ -710,21 +711,24 @@ class _RepairIssue extends ConsumerWidget {
         Hyperlink(text: l10n.diskEncryptionPageLearnMore, url: _learnMoreUrl),
         _RepairTechnicalDetails(issue: issue),
         if (proceedOnly)
-          Wrap(
-            alignment: WrapAlignment.end,
-            spacing: 16,
-            children: [
-              OutlinedButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(UbuntuLocalizations.of(context).cancelLabel),
-              ),
-              ElevatedButton(
-                onPressed: () => ref
-                    .read(repairDialogModelProvider.notifier)
-                    .applyFix(SnapdFixAction.proceed),
-                child: Text(l10n.tpmActionIgnoreAndContinueLabel),
-              ),
-            ],
+          SizedBox(
+            width: double.infinity,
+            child: Wrap(
+              alignment: WrapAlignment.end,
+              spacing: 16,
+              children: [
+                OutlinedButton(
+                  onPressed: () => ref
+                      .read(repairDialogModelProvider.notifier)
+                      .applyFix(SnapdFixAction.proceed),
+                  child: Text(l10n.tpmActionIgnoreAndContinueLabel),
+                ),
+                OutlinedButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text(UbuntuLocalizations.of(context).cancelLabel),
+                ),
+              ],
+            ),
           ),
       ].separatedBy(const SizedBox(height: 16)),
     );
