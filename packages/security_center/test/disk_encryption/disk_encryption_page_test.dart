@@ -2364,6 +2364,52 @@ void main() {
     }
   });
 
+  group('repair dialog skips the choice when snapd only supports a', () {
+    final cases = [
+      (
+        name: 'passphrase',
+        feature: SnapdStorageEncryptionFeature.passphraseAuth,
+        authMode: AuthMode.passphrase,
+        newPass: 'newpass',
+      ),
+      (
+        name: 'PIN',
+        feature: SnapdStorageEncryptionFeature.pinAuth,
+        authMode: AuthMode.pin,
+        newPass: '5678',
+      ),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          volumesAuthRequired: true,
+          encryptionFeatures: [tc.feature],
+        );
+        final container = createContainer();
+        await _showRepairDialog(tester, container);
+
+        expect(
+          find.text(tester.l10n.passphraseTypePageBodyAuthRequired),
+          findsNothing,
+        );
+        final textFields = find.byType(TextField);
+        await tester.enterText(textFields.at(0), tc.newPass);
+        await tester.enterText(textFields.at(1), tc.newPass);
+        await tester.pumpAndSettle(debounceDelay);
+        await tester.tap(
+          find.text(UbuntuLocalizations.of(tester.context).continueLabel),
+        );
+        await tester.pump();
+
+        verify(service.pinPassphraseEntropyCheck(tc.authMode, tc.newPass))
+            .called(1);
+        verify(service.generateReprovisionRecoveryKey()).called(1);
+      });
+    }
+  });
+
   testWidgets('repair dialog warns that the PIN or passphrase will be removed',
       (tester) async {
     final service = registerMockDiskEncryptionService(
