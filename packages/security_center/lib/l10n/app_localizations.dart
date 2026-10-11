@@ -1572,7 +1572,7 @@ abstract class AppLocalizations {
   /// No description provided for @tpmActionFixActionProceedDescription.
   ///
   /// In en, this message translates to:
-  /// **'Ignoring this issue might result in a less secure installation.'**
+  /// **'Ignoring the issue might result in a less secure installation.'**
   String get tpmActionFixActionProceedDescription;
 
   /// No description provided for @tpmActionIgnoreAndContinueLabel.
