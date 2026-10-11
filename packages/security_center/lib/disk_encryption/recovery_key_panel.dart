@@ -145,8 +145,8 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
         title: Text(l10n.diskEncryptionPageReplaceDialogQRHeader),
       ),
       titlePadding: EdgeInsets.zero,
-      content: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 500),
+      content: SizedBox(
+        width: 460,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
