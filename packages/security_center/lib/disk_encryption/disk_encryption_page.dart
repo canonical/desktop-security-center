@@ -883,7 +883,7 @@ class _RepairPinOrPassphraseRemoved extends ConsumerWidget {
             ElevatedButton(
               onPressed:
                   ref.read(repairDialogModelProvider.notifier).continueToKey,
-              child: Text(ubuntuL10n.continueLabel),
+              child: Text(l10n.diskEncryptionPageRepairDialogRepair),
             ),
           ].separatedBy(const SizedBox(width: 16)),
         ),
