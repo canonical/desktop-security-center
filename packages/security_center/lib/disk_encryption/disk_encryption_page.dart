@@ -607,8 +607,8 @@ class RepairDialog extends ConsumerWidget {
                   _RepairIssue(issue: issue),
                 RepairDialogStateUnavailable(:final issue) =>
                   _RepairUnavailable(issue: issue),
-                RepairDialogStateSetPinOrPassphrase() =>
-                  const _RepairPinOrPassphrase(),
+                RepairDialogStateSetPinOrPassphrase(:final authModes) =>
+                  _RepairPinOrPassphrase(authModes: authModes),
                 RepairDialogStatePinOrPassphraseWillBeRemoved() =>
                   const _RepairPinOrPassphraseRemoved(),
                 RepairDialogStateGeneratingKey() => const _RepairRecoveryKey(),
@@ -792,7 +792,9 @@ class _RepairFixState extends ConsumerState<_RepairFix> {
 }
 
 class _RepairPinOrPassphrase extends ConsumerStatefulWidget {
-  const _RepairPinOrPassphrase();
+  const _RepairPinOrPassphrase({required this.authModes});
+
+  final List<AuthMode> authModes;
 
   @override
   ConsumerState<_RepairPinOrPassphrase> createState() =>
@@ -801,8 +803,9 @@ class _RepairPinOrPassphrase extends ConsumerStatefulWidget {
 
 class _RepairPinOrPassphraseState
     extends ConsumerState<_RepairPinOrPassphrase> {
-  var _authMode = AuthMode.passphrase;
-  var _authModeChosen = false;
+  late var _authMode = widget.authModes.first;
+  // With one option, there is nothing to choose
+  late var _authModeChosen = widget.authModes.length == 1;
 
   @override
   Widget build(BuildContext context) {
