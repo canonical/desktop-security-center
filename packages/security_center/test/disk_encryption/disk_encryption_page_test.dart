@@ -2347,13 +2347,17 @@ void main() {
         name: 'asks for a PIN or passphrase when the check requires one',
         volumesAuthRequired: true,
         authMode: AuthMode.none,
-        expectState: RepairDialogState.setPinOrPassphrase(),
+        expectState: RepairDialogState.setPinOrPassphrase(
+          [AuthMode.passphrase, AuthMode.pin],
+        ),
       ),
       (
         name: 'asks for a new PIN or passphrase instead of the current one',
         volumesAuthRequired: true,
         authMode: AuthMode.pin,
-        expectState: RepairDialogState.setPinOrPassphrase(),
+        expectState: RepairDialogState.setPinOrPassphrase(
+          [AuthMode.passphrase, AuthMode.pin],
+        ),
       ),
       (
         name: 'warns that the current PIN or passphrase will be removed',
@@ -2380,6 +2384,43 @@ void main() {
           recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
           volumesAuthRequired: tc.volumesAuthRequired,
           authMode: tc.authMode,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+
+        expect(await _openRepairDialog(container), tc.expectState);
+      });
+    }
+  });
+
+  group('RepairDialogModel supported auth modes', () {
+    final cases = [
+      (
+        name: 'offers only a passphrase when snapd supports only that',
+        encryptionFeatures: [SnapdStorageEncryptionFeature.passphraseAuth],
+        expectState:
+            RepairDialogState.setPinOrPassphrase([AuthMode.passphrase]),
+      ),
+      (
+        name: 'offers only a PIN when snapd supports only that',
+        encryptionFeatures: [SnapdStorageEncryptionFeature.pinAuth],
+        expectState: RepairDialogState.setPinOrPassphrase([AuthMode.pin]),
+      ),
+      (
+        name: 'fails when snapd supports neither',
+        encryptionFeatures: <SnapdStorageEncryptionFeature>[],
+        expectState:
+            RepairDialogState.error(TpmStateExceptionUnsupportedState()),
+      ),
+    ];
+
+    for (final tc in cases) {
+      test(tc.name, () async {
+        registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          volumesAuthRequired: true,
+          authMode: AuthMode.none,
+          encryptionFeatures: tc.encryptionFeatures,
         );
         registerMockFeatureService(supportsReprovision: true);
         final container = createContainer();
@@ -2673,7 +2714,9 @@ void main() {
         name: 'returns to the PIN step when the admin prompt is cancelled',
         volumesAuthRequired: true,
         authMode: AuthMode.none,
-        expectState: RepairDialogState.setPinOrPassphrase(),
+        expectState: RepairDialogState.setPinOrPassphrase(
+          [AuthMode.passphrase, AuthMode.pin],
+        ),
       ),
       (
         name: 'returns to the warning when the admin prompt is cancelled',

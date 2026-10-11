@@ -302,7 +302,7 @@ sealed class RepairDialogState with _$RepairDialogState {
       RepairDialogStateApplyingFix;
   factory RepairDialogState.unavailable(SnapdAvailabilityCheckError issue) =
       RepairDialogStateUnavailable;
-  factory RepairDialogState.setPinOrPassphrase() =
+  factory RepairDialogState.setPinOrPassphrase(List<AuthMode> authModes) =
       RepairDialogStateSetPinOrPassphrase;
   factory RepairDialogState.pinOrPassphraseWillBeRemoved() =
       RepairDialogStatePinOrPassphraseWillBeRemoved;
@@ -1073,8 +1073,20 @@ class RepairDialogModel extends _$RepairDialogModel {
     // volumes-auth means the new keys need a PIN or passphrase
     if (encryption.requirements
         .contains(SnapdStorageEncryptionRequirement.volumesAuth)) {
-      state =
-          state.copyWith(dialogState: RepairDialogState.setPinOrPassphrase());
+      final authModes = [
+        if (encryption.features
+            .contains(SnapdStorageEncryptionFeature.passphraseAuth))
+          AuthMode.passphrase,
+        if (encryption.features.contains(SnapdStorageEncryptionFeature.pinAuth))
+          AuthMode.pin,
+      ];
+      if (authModes.isEmpty) {
+        _log.error('snapd requires a PIN or passphrase, but supports neither');
+        throw TpmStateExceptionUnsupportedState();
+      }
+      state = state.copyWith(
+        dialogState: RepairDialogState.setPinOrPassphrase(authModes),
+      );
       return;
     }
     final authMode =
@@ -1138,6 +1150,12 @@ class RepairDialogModel extends _$RepairDialogModel {
 
   Future<void> continueWithPinOrPassphrase(AuthMode authMode) async {
     assert(state.dialogState is RepairDialogStateSetPinOrPassphrase);
+    assert(
+      (state.dialogState as RepairDialogStateSetPinOrPassphrase)
+          .authModes
+          .contains(authMode),
+      'Only a PIN or passphrase that snapd supports can be set',
+    );
     assert(
       ref.read(changeAuthModeDialogModelProvider(authMode).notifier).isValid,
       'The PIN or passphrase must be valid',
