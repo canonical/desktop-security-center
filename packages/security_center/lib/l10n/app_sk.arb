@@ -54,7 +54,7 @@
     "diskEncryptionPageCheck": "Skontrolovať",
     "diskEncryptionPageEnterKey": "Zadajte svoj obnovovací kľúč",
     "diskEncryptionPageDialogHeaderCheckKey": "Skontrolovať obnovovací kľúč",
-    "diskEncryptionPageKeyDoesntWorkBody": "Skontrolujte kľúč alebo ho vymeňte za nový.",
+    "diskEncryptionPageKeyDoesntWorkBody": "Skontrolujte kľúč alebo ho nahraďte novým.",
     "diskEncryptionPageError": "Chyba",
     "diskEncryptionPageKeyWorksBody": "Nezabudnite si ho uschovať na bezpečnom mieste.",
     "diskEncryptionPageTitle": "Šifrovanie disku",
