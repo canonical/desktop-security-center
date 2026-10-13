@@ -130,10 +130,10 @@ abstract class DiskEncryptionService {
   /// Checks whether the running system can use TPM backed FDE.
   ///
   /// [fixEncryptionSupport] and [reprovision] need this check first.
-  Future<SnapdSystemsResponse> getSystems();
+  Future<SnapdStorageEncryption> checkEncryptionSupport();
 
   /// Runs [fixAction] for an issue the last check found, then checks again.
-  Future<SnapdSystemsResponse> fixEncryptionSupport(
+  Future<SnapdStorageEncryption> fixEncryptionSupport(
     SnapdFixAction fixAction, {
     Map<String, dynamic>? args,
   });
