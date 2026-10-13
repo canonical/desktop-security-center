@@ -2006,6 +2006,7 @@ void main() {
       String name,
       List<SnapdRecommendedRemedialAction> recommendations,
       List<SnapdAvailabilityCheckError> availabilityCheckErrors,
+      SnapdStorageEncryptionSupport? encryptionSupport,
       Object? checkEncryptionSupportError,
       List<String> Function(AppLocalizations l10n) expectTexts,
     })>[
@@ -2013,6 +2014,7 @@ void main() {
         name: 'each solution to the issue',
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [tpmDisabled],
+        encryptionSupport: null,
         checkEncryptionSupportError: null,
         expectTexts: (l10n) => [
               l10n.tpmActionPageTitleActionable,
@@ -2032,6 +2034,7 @@ void main() {
         name: 'the only solution, without contacting the vendor',
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [tpmDisabledOneFix],
+        encryptionSupport: null,
         checkEncryptionSupportError: null,
         expectTexts: (l10n) => [
               l10n.tpmActionErrorSupportSingleLabel,
@@ -2044,6 +2047,7 @@ void main() {
         name: 'an issue the user can only ignore',
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [noRootOfTrust],
+        encryptionSupport: null,
         checkEncryptionSupportError: null,
         expectTexts: (l10n) => [
               l10n.tpmActionFixActionProceedDescription,
@@ -2053,9 +2057,21 @@ void main() {
             ],
       ),
       (
+        name: 'only the top-priority issue',
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        availabilityCheckErrors: [tpmDisabled, tpmFailure],
+        encryptionSupport: null,
+        checkEncryptionSupportError: null,
+        expectTexts: (l10n) => [
+              l10n.tpmActionPageTitleActionable,
+              l10n.tpmActionErrorKindTpmDeviceDisabled,
+            ],
+      ),
+      (
         name: 'an issue without fixes',
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [tpmFailure],
+        encryptionSupport: null,
         checkEncryptionSupportError: null,
         expectTexts: (l10n) => [
               l10n.diskEncryptionPageRepairDialogErrorHeader,
@@ -2063,17 +2079,54 @@ void main() {
             ],
       ),
       (
+        name: 'the reason snapd gives without an issue',
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        availabilityCheckErrors: [],
+        encryptionSupport: SnapdStorageEncryptionSupport.unavailable,
+        checkEncryptionSupportError: null,
+        expectTexts: (l10n) => [
+              l10n.diskEncryptionPageRepairDialogErrorHeader,
+              l10n.tpmActionErrorKindInternal,
+              'Mock unavailable reason',
+            ],
+      ),
+      (
+        name: 'defective support as unavailable',
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        availabilityCheckErrors: [],
+        encryptionSupport: SnapdStorageEncryptionSupport.defective,
+        checkEncryptionSupportError: null,
+        expectTexts: (l10n) => [
+              l10n.diskEncryptionPageRepairDialogErrorHeader,
+              l10n.tpmActionErrorKindInternal,
+              'Mock unavailable reason',
+            ],
+      ),
+      (
         name: 'a failed check',
         recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [],
+        encryptionSupport: null,
         checkEncryptionSupportError:
             Exception('Mock check encryption support error'),
         expectTexts: (l10n) => [l10n.diskEncryptionPageRepairDialogErrorHeader],
       ),
       (
+        name: 'an unknown value from snapd as a failed check',
+        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+        availabilityCheckErrors: [],
+        encryptionSupport: null,
+        checkEncryptionSupportError: ArgumentError('Mock unknown value'),
+        expectTexts: (l10n) => [
+              l10n.diskEncryptionPageRepairDialogErrorHeader,
+              l10n.diskEncryptionPageErrorFailedToRetrieveStatusBody,
+            ],
+      ),
+      (
         name: 'that no repair is needed',
         recommendations: [],
         availabilityCheckErrors: [],
+        encryptionSupport: null,
         checkEncryptionSupportError: null,
         expectTexts: (l10n) => [l10n.diskEncryptionPageRepairDialogNotNeeded],
       ),
@@ -2084,6 +2137,7 @@ void main() {
         registerMockDiskEncryptionService(
           recommendations: tc.recommendations,
           availabilityCheckErrors: tc.availabilityCheckErrors,
+          encryptionSupport: tc.encryptionSupport,
           checkEncryptionSupportError: tc.checkEncryptionSupportError,
         );
         final container = createContainer();
@@ -2097,6 +2151,59 @@ void main() {
             findsNWidgets(texts.where((t) => t == text).length),
           );
         }
+      });
+    }
+  });
+
+  group('repair dialog offers no repair when', () {
+    final cases = [
+      (
+        name: 'the status is indeterminate',
+        // The page, then the dialog's check
+        storageEncryptionStatusSequence: [
+          SnapdStorageEncryptionStatus.active,
+          SnapdStorageEncryptionStatus.indeterminate,
+        ],
+        autoRepairResult: null,
+      ),
+      (
+        name: 'the status is failed',
+        storageEncryptionStatusSequence: [
+          SnapdStorageEncryptionStatus.active,
+          SnapdStorageEncryptionStatus.failed,
+        ],
+        autoRepairResult: null,
+      ),
+      (
+        name: 'encryption is inactive',
+        storageEncryptionStatusSequence: [
+          SnapdStorageEncryptionStatus.active,
+          SnapdStorageEncryptionStatus.inactive,
+        ],
+        autoRepairResult: null,
+      ),
+      (
+        name: 'auto-repair is not initialized',
+        storageEncryptionStatusSequence: null,
+        autoRepairResult: SnapdAutoRepairResult.notInitialized,
+      ),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          storageEncryptionStatusSequence: tc.storageEncryptionStatusSequence,
+          autoRepairResult: tc.autoRepairResult,
+        );
+        final container = createContainer();
+        await _showRepairDialog(tester, container);
+
+        expect(
+          find.text(tester.l10n.diskEncryptionPageRepairDialogNotNeeded),
+          findsOneWidget,
+        );
+        verifyNever(service.checkEncryptionSupport());
       });
     }
   });
@@ -2178,6 +2285,68 @@ void main() {
     }
   });
 
+  group('repair dialog fix', () {
+    final cases = <({
+      String name,
+      Object? fixEncryptionSupportError,
+      SnapdAuthErrorKind? fixEncryptionSupportSnapdAuthErrorKind,
+      String Function(AppLocalizations l10n) expectText,
+    })>[
+      (
+        name: 'returns to the issue when the admin prompt is cancelled',
+        fixEncryptionSupportError: null,
+        fixEncryptionSupportSnapdAuthErrorKind:
+            SnapdAuthErrorKind.authCancelled,
+        expectText: (l10n) => l10n.tpmActionErrorKindTpmDeviceDisabled,
+      ),
+      (
+        name: 'shows the error when it fails',
+        fixEncryptionSupportError:
+            Exception('Mock fix encryption support error'),
+        fixEncryptionSupportSnapdAuthErrorKind: null,
+        expectText: (l10n) => l10n.diskEncryptionPageRepairDialogErrorHeader,
+      ),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          availabilityCheckErrors: [
+            const SnapdAvailabilityCheckError(
+              kind: SnapdAvailabilityCheckErrorKind.tpmDeviceDisabled,
+              message: 'Mock issue',
+              actions: [SnapdFixAction.enableTpmViaFirmware],
+            ),
+          ],
+          fixEncryptionSupportError: tc.fixEncryptionSupportError,
+          fixEncryptionSupportSnapdAuthErrorKind:
+              tc.fixEncryptionSupportSnapdAuthErrorKind,
+        );
+        final container = createContainer();
+        await _showRepairDialog(tester, container);
+
+        final l10n = tester.l10n;
+        await tester.tap(
+          find.text(
+            l10n.tpmActionSingleSolutionLabel(
+              l10n.tpmActionFixActionEnableTpmViaFirmware,
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        await tester
+            .tap(find.text(l10n.tpmActionFixActionEnableTpmViaFirmware));
+        await tester.pumpAndSettle();
+
+        expect(find.text(tc.expectText(l10n)), findsOneWidget);
+        verify(
+          service.fixEncryptionSupport(SnapdFixAction.enableTpmViaFirmware),
+        ).called(1);
+      });
+    }
+  });
+
   testWidgets('repair dialog leaves a restart to the user', (tester) async {
     registerMockDiskEncryptionService(
       recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
@@ -2220,11 +2389,19 @@ void main() {
         name: 'needs the recovery key and the risk accepted',
         storageEncryptionStatus: SnapdStorageEncryptionStatus.degraded,
         expectKeyCheck: true,
+        checkRecoveryKey: true,
       ),
       (
         name: 'needs only the risk accepted after a recovery key boot',
         storageEncryptionStatus: SnapdStorageEncryptionStatus.recovery,
         expectKeyCheck: false,
+        checkRecoveryKey: true,
+      ),
+      (
+        name: 'stays disabled when the recovery key check fails',
+        storageEncryptionStatus: SnapdStorageEncryptionStatus.degraded,
+        expectKeyCheck: true,
+        checkRecoveryKey: false,
       ),
     ];
 
@@ -2234,6 +2411,7 @@ void main() {
           recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
           storageEncryptionStatus: tc.storageEncryptionStatus,
           availabilityCheckErrors: [tpmDisabled],
+          checkRecoveryKey: tc.checkRecoveryKey,
         );
         final container = createContainer();
         await _showRepairDialog(tester, container);
@@ -2274,36 +2452,66 @@ void main() {
           await tester.ensureVisible(checkButton);
           await tester.tap(checkButton);
           await tester.pumpAndSettle();
-          expect(tester.widget<OutlinedButton>(fixButton).enabled, isTrue);
+          expect(
+            tester.widget<OutlinedButton>(fixButton).enabled,
+            tc.checkRecoveryKey,
+          );
         }
 
         await tester.ensureVisible(fixButton);
         await tester.tap(fixButton);
         await tester.pump();
-        verify(
-          service.fixEncryptionSupport(
-            SnapdFixAction.enableAndClearTpmViaFirmware,
-          ),
-        ).called(1);
+        if (tc.checkRecoveryKey) {
+          verify(
+            service.fixEncryptionSupport(
+              SnapdFixAction.enableAndClearTpmViaFirmware,
+            ),
+          ).called(1);
+        } else {
+          verifyNever(
+            service.fixEncryptionSupport(any, args: anyNamed('args')),
+          );
+        }
       });
     }
   });
 
-  testWidgets('repair dialog retries a failed check', (tester) async {
-    final service = registerMockDiskEncryptionService(
-      recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
-      checkEncryptionSupportError:
-          Exception('Mock check encryption support error'),
-    );
-    final container = createContainer();
-    await _showRepairDialog(tester, container);
+  group('repair dialog retries a failed', () {
+    final cases = [
+      (
+        name: 'check',
+        checkEncryptionSupportError:
+            Exception('Mock check encryption support error'),
+        generateReprovisionRecoveryKeyError: false,
+      ),
+      (
+        name: 'recovery key',
+        checkEncryptionSupportError: null,
+        generateReprovisionRecoveryKeyError: true,
+      ),
+    ];
 
-    await tester.tap(
-      find.text(UbuntuLocalizations.of(tester.context).retryLabel),
-    );
-    await tester.pumpAndSettle();
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          authMode: AuthMode.none,
+          checkEncryptionSupportError: tc.checkEncryptionSupportError,
+          generateReprovisionRecoveryKeyError:
+              tc.generateReprovisionRecoveryKeyError,
+        );
+        final container = createContainer();
+        await _showRepairDialog(tester, container);
 
-    verify(service.checkEncryptionSupport()).called(2);
+        await tester.tap(
+          find.text(UbuntuLocalizations.of(tester.context).retryLabel),
+        );
+        await tester.pumpAndSettle();
+
+        // The retry starts over from the check
+        verify(service.checkEncryptionSupport()).called(2);
+      });
+    }
   });
 
   testWidgets('repair dialog closes when the admin prompt is cancelled',
@@ -2410,6 +2618,23 @@ void main() {
     }
   });
 
+  testWidgets('repair dialog fails when snapd supports no PIN or passphrase',
+      (tester) async {
+    final service = registerMockDiskEncryptionService(
+      recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      volumesAuthRequired: true,
+      encryptionFeatures: [],
+    );
+    final container = createContainer();
+    await _showRepairDialog(tester, container);
+
+    expect(
+      find.text(tester.l10n.diskEncryptionPageErrorUnsupportedStateBody),
+      findsOneWidget,
+    );
+    verifyNever(service.generateReprovisionRecoveryKey());
+  });
+
   testWidgets('repair dialog warns that the PIN or passphrase will be removed',
       (tester) async {
     final service = registerMockDiskEncryptionService(
@@ -2433,6 +2658,74 @@ void main() {
     verify(service.generateReprovisionRecoveryKey()).called(1);
   });
 
+  group('repair dialog cancelling the admin prompt for the new key', () {
+    final cases = <({
+      String name,
+      bool volumesAuthRequired,
+      AuthMode authMode,
+      String Function(AppLocalizations l10n)? expectHeader,
+    })>[
+      (
+        name: 'closes the dialog',
+        volumesAuthRequired: false,
+        authMode: AuthMode.none,
+        expectHeader: null,
+      ),
+      (
+        name: 'returns to the PIN or passphrase step',
+        volumesAuthRequired: true,
+        authMode: AuthMode.none,
+        expectHeader: (l10n) => l10n.diskEncryptionPageAdditionalSecurityHeader,
+      ),
+      (
+        name: 'returns to the warning',
+        volumesAuthRequired: false,
+        authMode: AuthMode.pin,
+        expectHeader: (l10n) =>
+            l10n.diskEncryptionPageRepairDialogPinOrPassphraseRemovedHeader,
+      ),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          volumesAuthRequired: tc.volumesAuthRequired,
+          authMode: tc.authMode,
+          generateReprovisionRecoveryKeySnapdAuthErrorKind:
+              SnapdAuthErrorKind.authCancelled,
+        );
+        final container = createContainer();
+        await _showRepairDialog(tester, container);
+
+        final l10n = tester.l10n;
+        if (tc.volumesAuthRequired) {
+          final continueButton =
+              find.text(UbuntuLocalizations.of(tester.context).continueLabel);
+          await tester.tap(continueButton);
+          await tester.pumpAndSettle();
+          await tester.enterText(find.byType(TextField).at(0), 'newpass');
+          await tester.enterText(find.byType(TextField).at(1), 'newpass');
+          await tester.pumpAndSettle(debounceDelay);
+          await tester.tap(continueButton);
+        } else if (tc.authMode != AuthMode.none) {
+          await tester.tap(
+            find.text(l10n.diskEncryptionPageRepairDialogRepair),
+          );
+        }
+        await tester.pumpAndSettle();
+
+        final expectHeader = tc.expectHeader;
+        if (expectHeader == null) {
+          expect(find.byType(RepairDialog), findsNothing);
+        } else {
+          expect(find.text(expectHeader(l10n)), findsOneWidget);
+        }
+        verify(service.generateReprovisionRecoveryKey()).called(1);
+      });
+    }
+  });
+
   testWidgets('repair dialog starts without an earlier passphrase',
       (tester) async {
     registerMockDiskEncryptionService(
@@ -2440,18 +2733,22 @@ void main() {
       volumesAuthRequired: true,
     );
     final container = createContainer();
-    final passphrase = changeAuthModeDialogModelProvider(AuthMode.passphrase);
-    await container.read(passphrase.notifier).setNewPass('oldpass');
-    await tester.pump(Duration.zero);
-    expect(container.read(passphrase).newPass, 'oldpass');
-
     await _showRepairDialog(tester, container);
-    await tester.tap(
-      find.text(UbuntuLocalizations.of(tester.context).continueLabel),
-    );
+    final continueButton =
+        find.text(UbuntuLocalizations.of(tester.context).continueLabel);
+    await tester.tap(continueButton);
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).first, 'oldpass');
+    await tester.pumpAndSettle(debounceDelay);
+    expect(find.text('oldpass'), findsOneWidget);
+    await tester.tap(find.byType(YaruWindowControl));
     await tester.pumpAndSettle();
 
-    expect(container.read(passphrase).newPass, isEmpty);
+    showRepairDialog(tester.context);
+    await tester.pumpAndSettle();
+    await tester.tap(continueButton);
+    await tester.pumpAndSettle();
+
     expect(find.text('oldpass'), findsNothing);
   });
 
@@ -2504,10 +2801,6 @@ void main() {
         expect(find.byType(RepairDialog), findsNothing);
         verify(service.reprovision(onAuthorized: anyNamed('onAuthorized')))
             .called(1);
-        expect(
-          container.read(tpmAuthenticationModelProvider).value!.currentAuthMode,
-          newPin != null ? AuthMode.pin : AuthMode.none,
-        );
         if (newPin != null) {
           verify(
             service.replacePlatformKey(
@@ -2516,9 +2809,96 @@ void main() {
               onAuthorized: anyNamed('onAuthorized'),
             ),
           ).called(1);
+        } else {
+          verifyNever(
+            service.replacePlatformKey(
+              authMode: anyNamed('authMode'),
+              passphrase: anyNamed('passphrase'),
+              pin: anyNamed('pin'),
+              onAuthorized: anyNamed('onAuthorized'),
+            ),
+          );
         }
       });
     }
+  });
+
+  group('repair dialog stops the repair when', () {
+    final cases = [
+      (
+        name: 'the admin prompt is cancelled',
+        reprovisionSnapdAuthErrorKind: SnapdAuthErrorKind.authCancelled,
+        reprovisionSnapdErrorKind: null,
+        // The user can try again with the same key
+        expectText: 'mock-reprovision-key',
+      ),
+      (
+        name: 'snapd refuses it',
+        reprovisionSnapdAuthErrorKind: null,
+        reprovisionSnapdErrorKind: 'snap-change-conflict',
+        expectText: 'Mock reprovision snapd error',
+      ),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        final service = registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          authMode: AuthMode.none,
+          reprovisionSnapdAuthErrorKind: tc.reprovisionSnapdAuthErrorKind,
+          reprovisionSnapdErrorKind: tc.reprovisionSnapdErrorKind,
+        );
+        final container = createContainer();
+        await _showRepairDialog(tester, container);
+
+        final l10n = tester.l10n;
+        await tester.tap(
+          find.text(l10n.diskEncryptionPageReplaceDialogAcknowledge),
+        );
+        await tester.pump();
+        final repairButton =
+            find.text(l10n.diskEncryptionPageRepairDialogRepair);
+        await tester.ensureVisible(repairButton);
+        await tester.tap(repairButton);
+        await tester.pumpAndSettle();
+
+        expect(find.text(tc.expectText), findsOneWidget);
+        verify(service.reprovision(onAuthorized: anyNamed('onAuthorized')))
+            .called(1);
+      });
+    }
+  });
+
+  testWidgets('repair dialog checks again that the disk needs a repair',
+      (tester) async {
+    final service = registerMockDiskEncryptionService(
+      recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      authMode: AuthMode.none,
+      // The page, the dialog's check, then the check before the repair
+      storageEncryptionStatusSequence: [
+        SnapdStorageEncryptionStatus.active,
+        SnapdStorageEncryptionStatus.active,
+        SnapdStorageEncryptionStatus.inactive,
+      ],
+    );
+    final container = createContainer();
+    await _showRepairDialog(tester, container);
+
+    final l10n = tester.l10n;
+    await tester.tap(
+      find.text(l10n.diskEncryptionPageReplaceDialogAcknowledge),
+    );
+    await tester.pump();
+    final repairButton = find.text(l10n.diskEncryptionPageRepairDialogRepair);
+    await tester.ensureVisible(repairButton);
+    await tester.tap(repairButton);
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(l10n.diskEncryptionPageRepairDialogNotNeeded),
+      findsOneWidget,
+    );
+    verifyNever(service.reprovision(onAuthorized: anyNamed('onAuthorized')));
   });
 
   testWidgets('repair dialog stays open while the repair starts',
