@@ -292,14 +292,14 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   }
 
   @override
-  Future<SnapdSystemsResponse> getSystems() async {
+  Future<SnapdStorageEncryption> checkEncryptionSupport() async {
     _issues = repairScenario.issues;
     _volumesAuthRequired = false;
-    return _systemDetails();
+    return _storageEncryption();
   }
 
   @override
-  Future<SnapdSystemsResponse> fixEncryptionSupport(
+  Future<SnapdStorageEncryption> fixEncryptionSupport(
     SnapdFixAction fixAction, {
     Map<String, dynamic>? args,
   }) async {
@@ -324,25 +324,23 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       default:
         break;
     }
-    return _systemDetails();
+    return _storageEncryption();
   }
 
-  SnapdSystemsResponse _systemDetails() => SnapdSystemsResponse(
-        storageEncryption: SnapdStorageEncryption(
-          support: _issues!.isEmpty
-              ? SnapdStorageEncryptionSupport.available
-              : SnapdStorageEncryptionSupport.unavailable,
-          unavailableReason: _issues!.isEmpty ? null : _issues!.first.message,
-          availabilityCheckErrors: _issues!,
-          features: const [
-            SnapdStorageEncryptionFeature.pinAuth,
-            SnapdStorageEncryptionFeature.passphraseAuth,
-          ],
-          requirements: [
-            if (_volumesAuthRequired)
-              SnapdStorageEncryptionRequirement.volumesAuth,
-          ],
-        ),
+  SnapdStorageEncryption _storageEncryption() => SnapdStorageEncryption(
+        support: _issues!.isEmpty
+            ? SnapdStorageEncryptionSupport.available
+            : SnapdStorageEncryptionSupport.unavailable,
+        unavailableReason: _issues!.isEmpty ? null : _issues!.first.message,
+        availabilityCheckErrors: _issues!,
+        features: const [
+          SnapdStorageEncryptionFeature.pinAuth,
+          SnapdStorageEncryptionFeature.passphraseAuth,
+        ],
+        requirements: [
+          if (_volumesAuthRequired)
+            SnapdStorageEncryptionRequirement.volumesAuth,
+        ],
       );
 
   @override
