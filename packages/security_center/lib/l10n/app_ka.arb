@@ -258,7 +258,7 @@
             }
         }
     },
-    "ubuntuProDisablePrompt": "Ubuntu Pro-ის გამორთვა გააუქმებს ამ კომპიუტერის გამოწერას. გააგრძელებთ?",
+    "ubuntuProDisablePrompt": "Ubuntu Pro-ის გამორთვა ჩახსნის თქვენს გამოწერას ამ კომპიუტერიდან. გსურთ გაგრძელება?",
     "ubuntuProComplianceDisclaimer": "მხოლოდ, რეკომენდებულია, FedRAMP, HIPAA და სხვა სტანდარტებთან თავსებადობისა და უსაფრთხოების გაძლიერების მოთხოვნებისთვის.",
     "ubuntuProComplianceUSGDescription": "ახდენს უსაფრთხოების გაძლიერებისა და აუდიტის ავტომატიზაციას CIS წარმადობის შემოწმებითა და DISA-STIG პროფილით გარემოზე დამოკიდებული ცვლილებების შეტანის საშუალებით.",
     "ubuntuProComplianceFIPSDescription": "აშშ-ისა და კანადის მთავრობების კრიპტოგრაფიული მოდულის სერტიფიკაცია FIPS 140-2 მონაცემების დაცვის სტანდარტებთან თავსებადობის შესახებ.",
@@ -266,9 +266,9 @@
     "ubuntuProESMDescription": "ESM მოგაწვდით 10-წლიან უსაფრთხოების Ubuntu-ის სრული არქივისთვის. მიიღეთ უწყვეტი მოწყვლადობის მართვა კრიტიკული, მაღალი და საშუალო CVE-ებისთვის.",
     "snapPermissionsErrorTitle": "რაღაც არასწორია",
     "snapdRuleCategoryTemporarilyDenied": "დროებით უარყოფა",
-    "snapdRuleCategoryAskAlways": "ყოველთვის კითხვა",
-    "permissionRulePopupMenuSemanticLabel": "განახლების წვდომები",
+    "snapdRuleCategoryAskAlways": "ყოველთვის შეკითხვა",
+    "permissionRulePopupMenuSemanticLabel": "ნებართვების განახლება",
     "snapdRuleCategoryTemporarilyAllowed": "დროებით დაშვება",
     "ubuntuProLoadingLabel": "ამას, შეიძლება, რამდენიმე წამი დასჭირდეს...",
-    "ubuntuProDisableError": "Ubuntu Pro-ის გამორთვა შეუძლებელია. კიდევ სცადეთ"
+    "ubuntuProDisableError": "Ubuntu Pro-ის გამორთვა ვერ მოხერხდა, კიდევ სცადეთ"
 }
