@@ -131,6 +131,7 @@ Override processRunnerOverride(Map<String, String> mountByPath) {
 MockDiskEncryptionService registerMockDiskEncryptionService({
   bool checkRecoveryKey = true,
   bool checkError = false,
+  String? checkRecoveryKeySnapdErrorKind,
   bool authCancelled = false,
   bool replaceError = false,
   bool generateError = false,
@@ -292,6 +293,12 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
       throw SnapdException(
         message: 'Mock auth cancelled',
         kind: 'auth-cancelled',
+      );
+    }
+    if (checkRecoveryKeySnapdErrorKind != null) {
+      throw SnapdException(
+        message: 'Mock check recovery key snapd error',
+        kind: checkRecoveryKeySnapdErrorKind,
       );
     }
     if (!checkRecoveryKey) {
