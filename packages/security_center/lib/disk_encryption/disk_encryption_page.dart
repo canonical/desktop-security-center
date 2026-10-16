@@ -1032,7 +1032,6 @@ class _RepairRecoveryKey extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final saveError = ref.watch(repairDialogModelProvider).error;
     final notifier = ref.read(repairDialogModelProvider.notifier);
-    final key = recoveryKey;
 
     Future<void> handleRepair() async {
       final navigator = Navigator.of(context);
@@ -1054,7 +1053,9 @@ class _RepairRecoveryKey extends ConsumerWidget {
           yaruInfoType: YaruInfoType.warning,
         ),
         RecoveryKeyPanel(
-          recoveryKey: key == null ? const AsyncLoading() : AsyncData(key),
+          recoveryKey: recoveryKey == null
+              ? const AsyncLoading()
+              : AsyncData(recoveryKey!),
           actionsEnabled: true,
           saveError: saveError,
           onSaveErrorChanged: notifier.setError,
@@ -1067,7 +1068,7 @@ class _RepairRecoveryKey extends ConsumerWidget {
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           value: acknowledged,
-          onChanged: key == null
+          onChanged: recoveryKey == null
               ? null
               : (value) => notifier.acknowledge(value ?? false),
         ),
