@@ -867,10 +867,28 @@ abstract class AppLocalizations {
   /// **'You can add them again after repair.'**
   String get diskEncryptionPageRepairDialogPinOrPassphraseRemovedBody;
 
+  /// No description provided for @diskEncryptionPageRepairDialogCheckKeyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Clearing the TPM erases all encryption keys. Check that your recovery key works before continuing, since you may need it to start the computer.'**
+  String get diskEncryptionPageRepairDialogCheckKeyBody;
+
+  /// No description provided for @diskEncryptionPageRepairDialogKeyDoesntWorkBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the key and try again.'**
+  String get diskEncryptionPageRepairDialogKeyDoesntWorkBody;
+
+  /// No description provided for @diskEncryptionPageRepairDialogKeyHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'New recovery key'**
+  String get diskEncryptionPageRepairDialogKeyHeader;
+
   /// No description provided for @diskEncryptionPageRepairDialogKeyBody.
   ///
   /// In en, this message translates to:
-  /// **'Save the new recovery key somewhere safe. Once repairing completes, you will not be able to use the old key anymore.'**
+  /// **'Repairing replaces your recovery key. Save the new recovery key somewhere safe. Once repairing completes, you will not be able to use the old key anymore.'**
   String get diskEncryptionPageRepairDialogKeyBody;
 
   /// No description provided for @diskEncryptionPageRepairDialogKeyWarningHeader.
@@ -1572,7 +1590,7 @@ abstract class AppLocalizations {
   /// No description provided for @tpmActionFixActionProceedDescription.
   ///
   /// In en, this message translates to:
-  /// **'Ignoring the issue might result in a less secure installation.'**
+  /// **'Ignoring the issue might make this computer less secure.'**
   String get tpmActionFixActionProceedDescription;
 
   /// No description provided for @tpmActionIgnoreAndContinueLabel.

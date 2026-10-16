@@ -285,10 +285,12 @@ extension SnapdFixActionL10n on SnapdFixAction {
         SnapdFixAction.shutdown ||
         SnapdFixAction.rebootToFwSettings =>
           l10n.tpmActionFixActionCaveatRetry,
+        // These restart too, so the repair has to be started again after them
         SnapdFixAction.enableTpmViaFirmware ||
         SnapdFixAction.enableAndClearTpmViaFirmware ||
         SnapdFixAction.clearTpmViaFirmware =>
-          l10n.tpmActionFixActionCaveatConfirm,
+          '${l10n.tpmActionFixActionCaveatConfirm} '
+              '${l10n.tpmActionFixActionCaveatRetry}',
         _ => null,
       };
 }
