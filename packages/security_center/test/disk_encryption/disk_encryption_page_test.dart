@@ -2413,7 +2413,8 @@ void main() {
           recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
           storageEncryptionStatus: tc.storageEncryptionStatus,
           availabilityCheckErrors: [tpmDisabled],
-          checkRecoveryKey: tc.checkRecoveryKey,
+          checkRecoveryKeySnapdErrorKind:
+              tc.checkRecoveryKey ? null : 'invalid-recovery-key',
         );
         final container = createContainer();
         await _showRepairDialog(tester, container);
@@ -2438,31 +2439,46 @@ void main() {
         await tester.ensureVisible(riskCheck);
         await tester.tap(riskCheck);
         await tester.pumpAndSettle();
-        expect(
-          tester.widget<OutlinedButton>(fixButton).enabled,
-          !tc.expectKeyCheck,
-        );
-        expect(
-          find.byType(TextField),
-          tc.expectKeyCheck ? findsOneWidget : findsNothing,
-        );
-
-        if (tc.expectKeyCheck) {
-          await tester.enterText(find.byType(TextField), 'mock-recovery-key');
-          await tester.pump();
-          final checkButton = find.text(l10n.diskEncryptionPageCheck);
-          await tester.ensureVisible(checkButton);
-          await tester.tap(checkButton);
-          await tester.pumpAndSettle();
-          expect(
-            tester.widget<OutlinedButton>(fixButton).enabled,
-            tc.checkRecoveryKey,
-          );
-        }
+        expect(tester.widget<OutlinedButton>(fixButton).enabled, isTrue);
 
         await tester.ensureVisible(fixButton);
         await tester.tap(fixButton);
         await tester.pump();
+        expect(
+          find.text(l10n.diskEncryptionPageRepairDialogCheckKeyBody),
+          tc.expectKeyCheck ? findsOneWidget : findsNothing,
+        );
+
+        if (tc.expectKeyCheck) {
+          verifyNever(
+            service.fixEncryptionSupport(any, args: anyNamed('args')),
+          );
+          final checkedFixButton = find.widgetWithText(
+            ElevatedButton,
+            l10n.tpmActionFixActionEnableAndClearTpmViaFirmware,
+          );
+          expect(
+            tester.widget<ElevatedButton>(checkedFixButton).enabled,
+            isFalse,
+          );
+
+          await tester.enterText(find.byType(TextField), 'mock-recovery-key');
+          await tester.pump();
+          await tester.tap(find.text(l10n.diskEncryptionPageCheck));
+          await tester.pumpAndSettle();
+          expect(
+            find.text(l10n.diskEncryptionPageRepairDialogKeyDoesntWorkBody),
+            tc.checkRecoveryKey ? findsNothing : findsOneWidget,
+          );
+          expect(
+            tester.widget<ElevatedButton>(checkedFixButton).enabled,
+            tc.checkRecoveryKey,
+          );
+
+          await tester.tap(checkedFixButton);
+          await tester.pump();
+        }
+
         if (tc.checkRecoveryKey) {
           verify(
             service.fixEncryptionSupport(
@@ -2660,6 +2676,33 @@ void main() {
     verify(service.generateReprovisionRecoveryKey()).called(1);
   });
 
+  testWidgets('repair dialog focuses the main action before Cancel',
+      (tester) async {
+    registerMockDiskEncryptionService(
+      recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      authMode: AuthMode.passphrase,
+    );
+    final container = createContainer();
+    await _showRepairDialog(tester, container);
+
+    final repair = find.text(tester.l10n.diskEncryptionPageRepairDialogRepair);
+    final cancel =
+        find.text(UbuntuLocalizations.of(tester.context).cancelLabel);
+    expect(tester.getCenter(cancel).dx, lessThan(tester.getCenter(repair).dx));
+
+    bool hasFocus(Finder button) =>
+        Focus.of(tester.element(button)).hasPrimaryFocus;
+    // The close button in the title bar may come first
+    for (var i = 0; i < 3 && !hasFocus(repair) && !hasFocus(cancel); i++) {
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pump();
+    }
+    expect(hasFocus(repair), isTrue);
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.pump();
+    expect(hasFocus(cancel), isTrue);
+  });
+
   group('repair dialog cancelling the admin prompt for the new key', () {
     final cases = <({
       String name,
@@ -2785,6 +2828,10 @@ void main() {
           await tester.pumpAndSettle();
         }
 
+        expect(
+          find.text(l10n.diskEncryptionPageRepairDialogKeyHeader),
+          findsOneWidget,
+        );
         expect(find.text('mock-reprovision-key'), findsOneWidget);
         final repairButton = find.widgetWithText(
           ElevatedButton,
