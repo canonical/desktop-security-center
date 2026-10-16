@@ -1,12 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:security_center/app_permissions/home_interface.dart';
 import 'package:security_center/app_permissions/rules_providers.dart';
 import 'package:security_center/app_permissions/snapd_interface.dart';
+import 'package:security_center/disk_encryption/disk_encryption_page.dart';
+import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
+import 'package:security_center/l10n.dart';
 import 'package:security_center/main.dart' as app;
+import 'package:security_center/services/fake_disk_encryption_service.dart';
 import 'package:security_center/services/snapd_service.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
@@ -49,6 +54,58 @@ void main() {
     await tester.pumpAndSettle();
 
     await expectSnapdRules([]);
+  });
+
+  testWidgets('repair disk encryption', (tester) async {
+    // The only scenario that shows every step of the repair
+    await app.main([
+      '--dry-run',
+      '--test-fde-repair=${FakeRepairScenario.noHardwareRootOfTrust.flag}',
+    ]);
+    await tester.pumpAndSettle();
+
+    final l10n = tester.l10n;
+    await tester.tap(find.text(l10n.diskEncryptionPageTitle));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10n.diskEncryptionPageRepairButton));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text(l10n.tpmActionIgnoreAndContinueLabel));
+    await tester.pumpAndSettle();
+
+    final continueButton = find.text(
+      // ignore: use_build_context_synchronously
+      UbuntuLocalizations.of(tester.context).continueLabel,
+    );
+    await tester.tap(find.text(l10n.passphraseTypePassphraseTileTitle));
+    await tester.tap(continueButton);
+    await tester.pumpAndSettle();
+    final textFields = find.descendant(
+      of: find.byType(RepairDialog),
+      matching: find.byType(TextField),
+    );
+    await tester.enterText(textFields.at(0), 'newpass');
+    await tester.enterText(textFields.at(1), 'newpass');
+    await tester.pumpAndSettle(ChangeAuthDialogModel.debounceDuration);
+    await tester.tap(continueButton);
+    await tester.pumpAndSettle();
+
+    await tester.tap(
+      find.text(l10n.diskEncryptionPageReplaceDialogAcknowledge),
+    );
+    await tester.pump();
+    final repairButton = find.text(l10n.diskEncryptionPageRepairDialogRepair);
+    await tester.ensureVisible(repairButton);
+    await tester.tap(repairButton);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(RepairDialog), findsNothing);
+    expect(find.text(l10n.diskEncryptionPageRepairHeader), findsNothing);
+    expect(find.text(l10n.recoveryKeyTPMEnabled), findsOneWidget);
+    expect(
+      find.text(l10n.diskEncryptionPageRemovePassphraseButton),
+      findsOneWidget,
+    );
   });
 }
 
