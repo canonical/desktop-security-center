@@ -14,6 +14,7 @@ import 'package:security_center/l10n.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/feature_service.dart';
+import 'package:security_center/services/power_service.dart';
 import 'package:security_center/services/snapd_service.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -617,6 +618,21 @@ FeatureService registerMockFeatureService({
 
   registerMockService<FeatureService>(service);
   addTearDown(unregisterService<FeatureService>);
+  return service;
+}
+
+@GenerateMocks([PowerService])
+PowerService registerMockPowerService({Exception? error}) {
+  final service = MockPowerService();
+  Future<void> answer(_) async {
+    if (error != null) throw error;
+  }
+
+  when(service.reboot()).thenAnswer(answer);
+  when(service.powerOff()).thenAnswer(answer);
+
+  registerMockService<PowerService>(service);
+  addTearDown(unregisterService<PowerService>);
   return service;
 }
 

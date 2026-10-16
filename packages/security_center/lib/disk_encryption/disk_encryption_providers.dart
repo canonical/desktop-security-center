@@ -8,6 +8,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/feature_service.dart';
+import 'package:security_center/services/power_service.dart';
 import 'package:security_center/widgets/file_picker_dialog.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
@@ -300,6 +301,12 @@ sealed class RepairDialogState with _$RepairDialogState {
     SnapdAvailabilityCheckError issue,
     SnapdFixAction action,
   ) = RepairDialogStateCheckKey;
+  factory RepairDialogState.confirmPowerAction(
+    SnapdAvailabilityCheckError issue,
+    SnapdFixAction action, {
+    @Default(false) bool pending,
+    Exception? error,
+  }) = RepairDialogStateConfirmPowerAction;
   factory RepairDialogState.applyingFix(SnapdFixAction action) =
       RepairDialogStateApplyingFix;
   factory RepairDialogState.unavailable(SnapdAvailabilityCheckError issue) =
@@ -1010,6 +1017,7 @@ class RepairDialogModelData with _$RepairDialogModelData {
 @riverpod
 class RepairDialogModel extends _$RepairDialogModel {
   late final _service = getService<DiskEncryptionService>();
+  late final _power = getService<PowerService>();
   late final FileSystem _fs = ref.read(fileSystemProvider);
 
   // Changes on close and retry, so an older flow stops calling snapd
@@ -1152,6 +1160,48 @@ class RepairDialogModel extends _$RepairDialogModel {
       // The fix didn't run, so the issue is still there
       state = state.copyWith(
         dialogState: _isAuthCancelled(e) ? current : RepairDialogState.error(e),
+      );
+    }
+  }
+
+  void continueToPowerAction(SnapdFixAction action) {
+    assert(state.dialogState is RepairDialogStateIssue);
+    final issue = (state.dialogState as RepairDialogStateIssue).issue;
+    assert(
+      issue.actions.contains(action) && action.isExternal,
+      'Only a fix that the user does for the current issue can be confirmed',
+    );
+    state = state.copyWith(
+      dialogState: RepairDialogState.confirmPowerAction(issue, action),
+    );
+  }
+
+  Future<void> runPowerAction() async {
+    assert(state.dialogState is RepairDialogStateConfirmPowerAction);
+    final confirm = state.dialogState as RepairDialogStateConfirmPowerAction;
+    if (confirm.pending) return;
+    final request = switch (confirm.action) {
+      SnapdFixAction.shutdown => _power.powerOff,
+      // snapd's shutdown interface doesn't allow logind's
+      // SetRebootToFirmwareSetup, so the step tells the user how to open the
+      // firmware settings
+      SnapdFixAction.reboot ||
+      SnapdFixAction.rebootToFwSettings =>
+        _power.reboot,
+      final action => throw StateError('$action is not a restart or power off'),
+    };
+    final flow = _flow;
+
+    state = state.copyWith(
+      dialogState: confirm.copyWith(pending: true, error: null),
+    );
+    try {
+      await request();
+      // Stays pending, since logind ends the session soon
+    } on Exception catch (e) {
+      if (flow != _flow) return;
+      state = state.copyWith(
+        dialogState: confirm.copyWith(pending: false, error: e),
       );
     }
   }
