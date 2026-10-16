@@ -903,11 +903,35 @@ abstract class AppLocalizations {
   /// **'You may want to let your IT administrator know you are re-encrypting the disk in case they are storing any recovery keys.'**
   String get diskEncryptionPageRepairDialogKeyWarningBody;
 
+  /// No description provided for @diskEncryptionPageRepairDialogKeyNotUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Your current recovery key still works. The new key was not used, so you can discard it.'**
+  String get diskEncryptionPageRepairDialogKeyNotUsed;
+
   /// No description provided for @diskEncryptionPageRepairDialogRepair.
   ///
   /// In en, this message translates to:
   /// **'Repair'**
   String get diskEncryptionPageRepairDialogRepair;
+
+  /// No description provided for @diskEncryptionPageRepairDialogNotNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get diskEncryptionPageRepairDialogNotNow;
+
+  /// No description provided for @diskEncryptionPageRepairDialogRestartNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart now'**
+  String get diskEncryptionPageRepairDialogRestartNow;
+
+  /// No description provided for @diskEncryptionPageRepairDialogPowerOffNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Power off now'**
+  String get diskEncryptionPageRepairDialogPowerOffNow;
 
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.
   ///

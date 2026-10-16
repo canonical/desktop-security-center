@@ -409,7 +409,20 @@ class AppLocalizationsKm extends AppLocalizations {
       'You may want to let your IT administrator know you are re-encrypting the disk in case they are storing any recovery keys.';
 
   @override
+  String get diskEncryptionPageRepairDialogKeyNotUsed =>
+      'Your current recovery key still works. The new key was not used, so you can discard it.';
+
+  @override
   String get diskEncryptionPageRepairDialogRepair => 'Repair';
+
+  @override
+  String get diskEncryptionPageRepairDialogNotNow => 'Not now';
+
+  @override
+  String get diskEncryptionPageRepairDialogRestartNow => 'Restart now';
+
+  @override
+  String get diskEncryptionPageRepairDialogPowerOffNow => 'Power off now';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
