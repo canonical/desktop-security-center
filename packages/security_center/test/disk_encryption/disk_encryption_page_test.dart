@@ -2006,7 +2006,6 @@ void main() {
 
     final cases = <({
       String name,
-      List<SnapdRecommendedRemedialAction> recommendations,
       List<SnapdAvailabilityCheckError> availabilityCheckErrors,
       SnapdStorageEncryptionSupport? encryptionSupport,
       Object? checkEncryptionSupportError,
@@ -2014,7 +2013,6 @@ void main() {
     })>[
       (
         name: 'each solution to the issue',
-        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [tpmDisabled],
         encryptionSupport: null,
         checkEncryptionSupportError: null,
@@ -2034,7 +2032,6 @@ void main() {
       ),
       (
         name: 'the only solution, without contacting the vendor',
-        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [tpmDisabledOneFix],
         encryptionSupport: null,
         checkEncryptionSupportError: null,
@@ -2047,7 +2044,6 @@ void main() {
       ),
       (
         name: 'an issue the user can only ignore',
-        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [noRootOfTrust],
         encryptionSupport: null,
         checkEncryptionSupportError: null,
@@ -2060,7 +2056,6 @@ void main() {
       ),
       (
         name: 'only the top-priority issue',
-        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [tpmDisabled, tpmFailure],
         encryptionSupport: null,
         checkEncryptionSupportError: null,
@@ -2071,7 +2066,6 @@ void main() {
       ),
       (
         name: 'an issue without fixes',
-        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [tpmFailure],
         encryptionSupport: null,
         checkEncryptionSupportError: null,
@@ -2082,7 +2076,6 @@ void main() {
       ),
       (
         name: 'the reason snapd gives without an issue',
-        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [],
         encryptionSupport: SnapdStorageEncryptionSupport.unavailable,
         checkEncryptionSupportError: null,
@@ -2094,7 +2087,6 @@ void main() {
       ),
       (
         name: 'defective support as unavailable',
-        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [],
         encryptionSupport: SnapdStorageEncryptionSupport.defective,
         checkEncryptionSupportError: null,
@@ -2106,7 +2098,6 @@ void main() {
       ),
       (
         name: 'a failed check',
-        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [],
         encryptionSupport: null,
         checkEncryptionSupportError:
@@ -2115,7 +2106,6 @@ void main() {
       ),
       (
         name: 'an unknown value from snapd as a failed check',
-        recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
         availabilityCheckErrors: [],
         encryptionSupport: null,
         checkEncryptionSupportError: ArgumentError('Mock unknown value'),
@@ -2124,20 +2114,12 @@ void main() {
               l10n.diskEncryptionPageErrorFailedToRetrieveStatusBody,
             ],
       ),
-      (
-        name: 'that no repair is needed',
-        recommendations: [],
-        availabilityCheckErrors: [],
-        encryptionSupport: null,
-        checkEncryptionSupportError: null,
-        expectTexts: (l10n) => [l10n.diskEncryptionPageRepairDialogNotNeeded],
-      ),
     ];
 
     for (final tc in cases) {
       testWidgets(tc.name, (tester) async {
         registerMockDiskEncryptionService(
-          recommendations: tc.recommendations,
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
           availabilityCheckErrors: tc.availabilityCheckErrors,
           encryptionSupport: tc.encryptionSupport,
           checkEncryptionSupportError: tc.checkEncryptionSupportError,
@@ -2159,7 +2141,12 @@ void main() {
   });
 
   group('repair dialog offers no repair when', () {
-    final cases = [
+    final cases = <({
+      String name,
+      List<SnapdStorageEncryptionStatus>? storageEncryptionStatusSequence,
+      List<SnapdAutoRepairResult?>? autoRepairResultSequence,
+      List<List<SnapdRecommendedRemedialAction>>? recommendationsSequence,
+    })>[
       (
         name: 'the status is indeterminate',
         // The page, then the dialog's check
@@ -2167,7 +2154,8 @@ void main() {
           SnapdStorageEncryptionStatus.active,
           SnapdStorageEncryptionStatus.indeterminate,
         ],
-        autoRepairResult: null,
+        autoRepairResultSequence: null,
+        recommendationsSequence: null,
       ),
       (
         name: 'the status is failed',
@@ -2175,7 +2163,8 @@ void main() {
           SnapdStorageEncryptionStatus.active,
           SnapdStorageEncryptionStatus.failed,
         ],
-        autoRepairResult: null,
+        autoRepairResultSequence: null,
+        recommendationsSequence: null,
       ),
       (
         name: 'encryption is inactive',
@@ -2183,12 +2172,23 @@ void main() {
           SnapdStorageEncryptionStatus.active,
           SnapdStorageEncryptionStatus.inactive,
         ],
-        autoRepairResult: null,
+        autoRepairResultSequence: null,
+        recommendationsSequence: null,
       ),
       (
         name: 'auto-repair is not initialized',
         storageEncryptionStatusSequence: null,
-        autoRepairResult: SnapdAutoRepairResult.notInitialized,
+        autoRepairResultSequence: [null, SnapdAutoRepairResult.notInitialized],
+        recommendationsSequence: null,
+      ),
+      (
+        name: 'snapd no longer recommends a repair',
+        storageEncryptionStatusSequence: null,
+        autoRepairResultSequence: null,
+        recommendationsSequence: [
+          [SnapdRecommendedRemedialAction.requireReprovision],
+          [],
+        ],
       ),
     ];
 
@@ -2197,7 +2197,8 @@ void main() {
         final service = registerMockDiskEncryptionService(
           recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
           storageEncryptionStatusSequence: tc.storageEncryptionStatusSequence,
-          autoRepairResult: tc.autoRepairResult,
+          autoRepairResultSequence: tc.autoRepairResultSequence,
+          recommendationsSequence: tc.recommendationsSequence,
         );
         registerMockFeatureService(supportsReprovision: true);
         final container = createContainer();
@@ -2381,7 +2382,13 @@ void main() {
       find.text(tester.l10n.tpmActionFixActionRebootDescription),
       findsOneWidget,
     );
-    expect(find.byType(OutlinedButton), findsNothing);
+    expect(
+      find.descendant(
+        of: find.byType(RepairDialog),
+        matching: find.byType(OutlinedButton),
+      ),
+      findsNothing,
+    );
   });
 
   group('repair dialog clearing the TPM', () {
@@ -2778,7 +2785,13 @@ void main() {
         if (expectHeader == null) {
           expect(find.byType(RepairDialog), findsNothing);
         } else {
-          expect(find.text(expectHeader(l10n)), findsOneWidget);
+          expect(
+            find.descendant(
+              of: find.byType(RepairDialog),
+              matching: find.text(expectHeader(l10n)),
+            ),
+            findsOneWidget,
+          );
         }
         verify(service.generateReprovisionRecoveryKey()).called(1);
       });
@@ -2804,7 +2817,7 @@ void main() {
     await tester.tap(find.byType(YaruWindowControl));
     await tester.pumpAndSettle();
 
-    showRepairDialog(tester.context);
+    await tester.tap(find.text(tester.l10n.diskEncryptionPageRepairButton));
     await tester.pumpAndSettle();
     await tester.tap(continueButton);
     await tester.pumpAndSettle();
@@ -2928,7 +2941,13 @@ void main() {
         await tester.tap(repairButton);
         await tester.pumpAndSettle();
 
-        expect(find.text(tc.expectText), findsOneWidget);
+        expect(
+          find.descendant(
+            of: find.byType(RepairDialog),
+            matching: find.text(tc.expectText),
+          ),
+          findsOneWidget,
+        );
         verify(service.reprovision(onAuthorized: anyNamed('onAuthorized')))
             .called(1);
       });
@@ -3326,13 +3345,16 @@ void main() {
   });
 }
 
-// The page opens the dialog only once its state has loaded
+// Opens the dialog from the page's banner, as the user does
 Future<void> _showRepairDialog(
   WidgetTester tester,
   ProviderContainer container,
 ) async {
-  await tester.pumpAppWithProviders((_) => const SizedBox(), container);
-  await container.read(tpmAuthenticationModelProvider.future);
-  showRepairDialog(tester.context);
+  await tester.pumpAppWithProviders(
+    (_) => const DiskEncryptionPage(),
+    container,
+  );
+  await tester.pumpAndSettle();
+  await tester.tap(find.text(tester.l10n.diskEncryptionPageRepairButton));
   await tester.pumpAndSettle();
 }
