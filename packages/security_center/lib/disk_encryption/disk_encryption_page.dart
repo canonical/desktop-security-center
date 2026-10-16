@@ -624,6 +624,18 @@ class RepairDialog extends ConsumerWidget {
                   _RepairIssue(issue: issue),
                 RepairDialogStateCheckKey(:final issue, :final action) =>
                   _RepairCheckKey(fix: action, kind: issue.kind),
+                RepairDialogStateConfirmPowerAction(
+                  :final issue,
+                  :final action,
+                  :final pending,
+                  :final error,
+                ) =>
+                  _RepairPowerAction(
+                    action: action,
+                    kind: issue.kind,
+                    pending: pending,
+                    error: error,
+                  ),
                 RepairDialogStateUnavailable(:final issue) =>
                   _RepairUnavailable(issue: issue),
                 RepairDialogStateSetPinOrPassphrase(:final authModes) =>
@@ -729,9 +741,10 @@ class _RepairIssue extends ConsumerWidget {
 // Cancel on the left and the main action on the right, as in other dialogs in
 // the system, but the main action gets the keyboard focus first
 class _RepairDialogActions extends StatelessWidget {
-  const _RepairDialogActions({required this.mainAction});
+  const _RepairDialogActions({required this.mainAction, this.cancelLabel});
 
   final Widget mainAction;
+  final String? cancelLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -755,7 +768,9 @@ class _RepairDialogActions extends StatelessWidget {
                 order: const NumericFocusOrder(2),
                 child: OutlinedButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: Text(UbuntuLocalizations.of(context).cancelLabel),
+                  child: Text(
+                    cancelLabel ?? UbuntuLocalizations.of(context).cancelLabel,
+                  ),
                 ),
               ),
               FocusTraversalOrder(
@@ -787,11 +802,6 @@ class _RepairFixState extends ConsumerState<_RepairFix> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final fix = widget.fix;
-    final description = [
-      fix.localizedDescription(l10n, widget.kind),
-      fix.localizedFirmwareHint(l10n, widget.kind),
-    ].nonNulls.join(' ');
-    final caveat = fix.localizedCaveat(l10n);
 
     // The panel centres content narrower than itself
     return Container(
@@ -805,10 +815,7 @@ class _RepairFixState extends ConsumerState<_RepairFix> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (description.isNotEmpty) Text(description),
-          if (fix == SnapdFixAction.rebootToFwSettings)
-            Text(l10n.tpmActionFixActionRebootToFwSettingsInstructions),
-          if (caveat != null) Text(caveat),
+          ..._fixTexts(l10n, fix, widget.kind),
           if (fix.clearsTpm) ...[
             YaruInfoBox(
               title: Text(l10n.tpmActionFixActionClearTpmWarningTitle),
@@ -826,7 +833,14 @@ class _RepairFixState extends ConsumerState<_RepairFix> {
                   setState(() => _riskAccepted = value ?? false),
             ),
           ],
-          if (!fix.isExternal)
+          if (fix.isExternal)
+            OutlinedButton(
+              onPressed: () => ref
+                  .read(repairDialogModelProvider.notifier)
+                  .continueToPowerAction(fix),
+              child: Text(UbuntuLocalizations.of(context).continueLabel),
+            )
+          else
             OutlinedButton(
               onPressed: _riskAccepted || !fix.clearsTpm
                   ? () =>
@@ -840,6 +854,72 @@ class _RepairFixState extends ConsumerState<_RepairFix> {
             ),
         ].separatedBy(const SizedBox(height: 16)),
       ),
+    );
+  }
+}
+
+// The fix's panel and the step that confirms a restart or power off say the
+// same
+List<Widget> _fixTexts(
+  AppLocalizations l10n,
+  SnapdFixAction fix,
+  SnapdAvailabilityCheckErrorKind kind,
+) {
+  final description = [
+    fix.localizedDescription(l10n, kind),
+    fix.localizedFirmwareHint(l10n, kind),
+  ].nonNulls.join(' ');
+  final caveat = fix.localizedCaveat(l10n);
+  return [
+    if (description.isNotEmpty) Text(description),
+    if (fix == SnapdFixAction.rebootToFwSettings)
+      Text(l10n.tpmActionFixActionRebootToFwSettingsInstructions),
+    if (caveat != null) Text(caveat),
+  ];
+}
+
+class _RepairPowerAction extends ConsumerWidget {
+  const _RepairPowerAction({
+    required this.action,
+    required this.kind,
+    required this.pending,
+    this.error,
+  });
+
+  final SnapdFixAction action;
+  final SnapdAvailabilityCheckErrorKind kind;
+  final bool pending;
+  final Exception? error;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ..._fixTexts(l10n, action, kind),
+        if (error != null)
+          YaruInfoBox(
+            title: Text(l10n.recoveryKeySomethingWentWrongHeader),
+            subtitle: Text(_dialogErrorMessage(error!)),
+            yaruInfoType: YaruInfoType.danger,
+          ),
+        _RepairDialogActions(
+          cancelLabel: l10n.diskEncryptionPageRepairDialogNotNow,
+          mainAction: ElevatedButton(
+            autofocus: true,
+            onPressed: pending
+                ? null
+                : ref.read(repairDialogModelProvider.notifier).runPowerAction,
+            child: Text(
+              action == SnapdFixAction.shutdown
+                  ? l10n.diskEncryptionPageRepairDialogPowerOffNow
+                  : l10n.diskEncryptionPageRepairDialogRestartNow,
+            ),
+          ),
+        ),
+      ].separatedBy(const SizedBox(height: 16)),
     );
   }
 }
