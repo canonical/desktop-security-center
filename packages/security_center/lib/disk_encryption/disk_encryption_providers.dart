@@ -219,8 +219,6 @@ sealed class TpmStateException with _$TpmStateException implements Exception {
       TpmStateExceptionUnsupportedState;
 }
 
-class RepairNotAvailableException implements Exception {}
-
 /// Dialog state for managing the flow to update an existing pin or passphrase.
 @freezed
 sealed class ChangeAuthDialogState with _$ChangeAuthDialogState {
@@ -317,8 +315,9 @@ sealed class RepairDialogState with _$RepairDialogState {
     bool acknowledged,
   ) = RepairDialogStateSaveKey;
   factory RepairDialogState.startingRepair() = RepairDialogStateStartingRepair;
+  factory RepairDialogState.keyNotUsed() = RepairDialogStateKeyNotUsed;
   factory RepairDialogState.error(Exception e) = RepairDialogStateError;
-  factory RepairDialogState.authCancelled() = RepairDialogStateAuthCancelled;
+  factory RepairDialogState.closed() = RepairDialogStateClosed;
 }
 
 /// Dialog model for managing the flow to update an existing pin or passphrase.
@@ -1028,8 +1027,14 @@ class RepairDialogModel extends _$RepairDialogModel {
   Future<void> _check() async {
     final flow = _flow;
     try {
-      await _checkRepairAvailable();
+      final needsRepair = await _needsRepair();
       if (flow != _flow) return;
+      if (!needsRepair) {
+        // Nothing to tell the user, since the page shows the new status
+        ref.invalidate(tpmAuthenticationModelProvider);
+        state = state.copyWith(dialogState: RepairDialogState.closed());
+        return;
+      }
       final encryption = await _request(_service.checkEncryptionSupport());
       if (flow != _flow) return;
       await _continueAfterCheck(encryption);
@@ -1037,16 +1042,14 @@ class RepairDialogModel extends _$RepairDialogModel {
       if (flow != _flow) return;
       state = state.copyWith(
         dialogState: _isAuthCancelled(e)
-            ? RepairDialogState.authCancelled()
+            ? RepairDialogState.closed()
             : RepairDialogState.error(e),
       );
     }
   }
 
-  Future<void> _checkRepairAvailable() async {
-    final storage = await _request(_service.getStorageEncrypted());
-    if (!storage.needsRepair) throw RepairNotAvailableException();
-  }
+  Future<bool> _needsRepair() async =>
+      (await _request(_service.getStorageEncrypted())).needsRepair;
 
   Future<void> _continueAfterCheck(SnapdStorageEncryption encryption) async {
     // Show one issue at a time, top priority first. snapd may also send only
@@ -1101,7 +1104,7 @@ class RepairDialogModel extends _$RepairDialogModel {
       return;
     }
     // Nothing to go back to, so a cancelled prompt closes the dialog
-    await _generateKey(cancelledState: RepairDialogState.authCancelled());
+    await _generateKey(cancelledState: RepairDialogState.closed());
   }
 
   Future<void> applyFix(SnapdFixAction action) async {
@@ -1220,15 +1223,22 @@ class RepairDialogModel extends _$RepairDialogModel {
     final flow = _flow;
 
     state = state.copyWith(dialogState: RepairDialogState.startingRepair());
+    final bool needsRepair;
     try {
       // The status can change while the user saves the key
-      await _checkRepairAvailable();
+      needsRepair = await _needsRepair();
     } on Exception catch (e) {
       if (flow != _flow) return;
       state = state.copyWith(dialogState: RepairDialogState.error(e));
       return;
     }
     if (flow != _flow) return;
+    if (!needsRepair) {
+      // The disk keeps its current recovery key until a repair replaces it
+      ref.invalidate(tpmAuthenticationModelProvider);
+      state = state.copyWith(dialogState: RepairDialogState.keyNotUsed());
+      return;
+    }
 
     // The page model runs the repair, so its progress shows after the dialog
     // closes
