@@ -579,7 +579,7 @@ class RepairDialog extends ConsumerWidget {
     final dialogState = ref.watch(repairDialogModelProvider).dialogState;
     final l10n = AppLocalizations.of(context);
 
-    if (dialogState is RepairDialogStateAuthCancelled) {
+    if (dialogState is RepairDialogStateClosed) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pop();
       });
@@ -630,6 +630,13 @@ class RepairDialog extends ConsumerWidget {
                   _RepairRecoveryKey(
                     recoveryKey: key.recoveryKey,
                     acknowledged: acknowledged,
+                  ),
+                RepairDialogStateKeyNotUsed() => YaruInfoBox(
+                    subtitle: Text(
+                      '${l10n.diskEncryptionPageRepairDialogNotNeeded} '
+                      '${l10n.diskEncryptionPageRepairDialogKeyNotUsed}',
+                    ),
+                    yaruInfoType: YaruInfoType.information,
                   ),
                 RepairDialogStateError(:final e) => _RepairError(e: e),
                 _ => const YaruLinearProgressIndicator(),
@@ -1096,12 +1103,6 @@ class _RepairError extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    if (e is RepairNotAvailableException) {
-      return YaruInfoBox(
-        subtitle: Text(l10n.diskEncryptionPageRepairDialogNotNeeded),
-        yaruInfoType: YaruInfoType.information,
-      );
-    }
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
