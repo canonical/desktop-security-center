@@ -296,6 +296,10 @@ sealed class RepairDialogState with _$RepairDialogState {
   factory RepairDialogState.checking() = RepairDialogStateChecking;
   factory RepairDialogState.issue(SnapdAvailabilityCheckError issue) =
       RepairDialogStateIssue;
+  factory RepairDialogState.checkKey(
+    SnapdAvailabilityCheckError issue,
+    SnapdFixAction action,
+  ) = RepairDialogStateCheckKey;
   factory RepairDialogState.applyingFix(SnapdFixAction action) =
       RepairDialogStateApplyingFix;
   factory RepairDialogState.unavailable(SnapdAvailabilityCheckError issue) =
@@ -1096,23 +1100,30 @@ class RepairDialogModel extends _$RepairDialogModel {
   }
 
   Future<void> applyFix(SnapdFixAction action) async {
-    assert(state.dialogState is RepairDialogStateIssue);
-    final current = state.dialogState as RepairDialogStateIssue;
+    final current = state.dialogState;
+    final issue = switch (current) {
+      RepairDialogStateIssue(:final issue) ||
+      RepairDialogStateCheckKey(:final issue) =>
+        issue,
+      _ => throw StateError('There is no issue to fix in $current'),
+    };
     assert(
-      current.issue.actions.contains(action) && !action.isExternal,
+      issue.actions.contains(action) && !action.isExternal,
       'Only a fix that snapd runs for the current issue can be applied',
     );
     // Clearing the TPM can lock the user out of the disk unless they have the
-    // recovery key, so this guard stays in release builds
-    if (action.clearsTpm) {
-      final tpmState = ref.read(tpmAuthenticationModelProvider).value!;
-      final keyCheck = ref.read(checkRecoveryKeyDialogModelProvider);
-      if (!tpmState.unlockedWithRecoveryKey &&
-          keyCheck != CheckRecoveryKeyDialogState.result(true)) {
-        throw StateError(
-          '$action clears the TPM, so the recovery key must be checked first',
-        );
-      }
+    // recovery key, so the key has to work before the fix runs
+    if (action.clearsTpm &&
+        !ref
+            .read(tpmAuthenticationModelProvider)
+            .value!
+            .unlockedWithRecoveryKey &&
+        ref.read(checkRecoveryKeyDialogModelProvider) !=
+            CheckRecoveryKeyDialogState.result(true)) {
+      state = state.copyWith(
+        dialogState: RepairDialogState.checkKey(issue, action),
+      );
+      return;
     }
     final flow = _flow;
 
@@ -1121,7 +1132,7 @@ class RepairDialogModel extends _$RepairDialogModel {
       // Without error-kinds, proceed also accepts issues the user hasn't seen
       final args = action == SnapdFixAction.proceed
           ? {
-              'error-kinds': [current.issue.kind.name.toKebabCase()],
+              'error-kinds': [issue.kind.name.toKebabCase()],
             }
           : null;
       final encryption =
