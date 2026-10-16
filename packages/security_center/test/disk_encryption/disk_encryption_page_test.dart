@@ -2306,6 +2306,59 @@ void main() {
     }
   });
 
+  testWidgets('repair dialog shows the issue that a fix leads to',
+      (tester) async {
+    registerMockDiskEncryptionService(
+      recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      availabilityCheckErrors: [
+        const SnapdAvailabilityCheckError(
+          kind: SnapdAvailabilityCheckErrorKind.tpmDeviceDisabled,
+          message: 'Mock issue',
+          actions: [
+            SnapdFixAction.enableTpmViaFirmware,
+            SnapdFixAction.enableAndClearTpmViaFirmware,
+            SnapdFixAction.rebootToFwSettings,
+          ],
+        ),
+      ],
+      fixAvailabilityCheckErrors: [
+        const SnapdAvailabilityCheckError(
+          kind: SnapdAvailabilityCheckErrorKind.rebootRequired,
+          message: 'Mock issue',
+          actions: [SnapdFixAction.reboot],
+        ),
+      ],
+    );
+    registerMockFeatureService(supportsReprovision: true);
+    final container = createContainer();
+    await _showRepairDialog(tester, container);
+
+    final l10n = tester.l10n;
+    await tester.tap(
+      find.text(
+        l10n.tpmActionSolutionLabel(
+          1,
+          l10n.tpmActionFixActionEnableTpmViaFirmware,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    final enableTpm = find.widgetWithText(
+      OutlinedButton,
+      l10n.tpmActionFixActionEnableTpmViaFirmware,
+    );
+    await tester.ensureVisible(enableTpm);
+    await tester.tap(enableTpm);
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(
+        l10n.tpmActionSingleSolutionLabel(l10n.tpmActionFixActionReboot),
+      ),
+      findsOneWidget,
+    );
+  });
+
   group('repair dialog fix', () {
     final cases = <({
       String name,

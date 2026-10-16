@@ -181,6 +181,7 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
   SnapdAuthErrorKind? generateReprovisionRecoveryKeySnapdAuthErrorKind,
   Object? fixEncryptionSupportError,
   SnapdAuthErrorKind? fixEncryptionSupportSnapdAuthErrorKind,
+  List<SnapdAvailabilityCheckError> fixAvailabilityCheckErrors = const [],
 }) {
   final service = MockDiskEncryptionService();
   var currentAuthMode = authMode;
@@ -506,7 +507,12 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
     if (fixEncryptionSupportError != null) {
       throw fixEncryptionSupportError;
     }
-    return storageEncryption(SnapdStorageEncryptionSupport.available, const []);
+    return storageEncryption(
+      fixAvailabilityCheckErrors.isEmpty
+          ? SnapdStorageEncryptionSupport.available
+          : SnapdStorageEncryptionSupport.unavailable,
+      fixAvailabilityCheckErrors,
+    );
   });
   when(service.generateReprovisionRecoveryKey()).thenAnswer((_) async {
     if (generateReprovisionRecoveryKeySnapdAuthErrorKind != null) {
