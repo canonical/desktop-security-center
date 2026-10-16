@@ -1396,15 +1396,11 @@ class _AuthStatusTileList extends StatelessWidget {
         // Show loading indicator if an operation is in progress
         if (loadingMessage != null) ...[
           YaruListTile(
-            titleText: loadingMessage,
-            subtitle: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(height: 8),
-                YaruLinearProgressIndicator(),
-              ],
+            leading: const SizedBox.square(
+              dimension: yaruProgressSize,
+              child: YaruCircularProgressIndicator(strokeWidth: 2),
             ),
+            titleText: loadingMessage,
           ),
         ],
       ],
