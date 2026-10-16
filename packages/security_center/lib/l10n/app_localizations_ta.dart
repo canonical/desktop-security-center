@@ -392,8 +392,19 @@ class AppLocalizationsTa extends AppLocalizations {
       'You can add them again after repair.';
 
   @override
+  String get diskEncryptionPageRepairDialogCheckKeyBody =>
+      'Clearing the TPM erases all encryption keys. Check that your recovery key works before continuing, since you may need it to start the computer.';
+
+  @override
+  String get diskEncryptionPageRepairDialogKeyDoesntWorkBody =>
+      'Check the key and try again.';
+
+  @override
+  String get diskEncryptionPageRepairDialogKeyHeader => 'New recovery key';
+
+  @override
   String get diskEncryptionPageRepairDialogKeyBody =>
-      'Save the new recovery key somewhere safe. Once repairing completes, you will not be able to use the old key anymore.';
+      'Repairing replaces your recovery key. Save the new recovery key somewhere safe. Once repairing completes, you will not be able to use the old key anymore.';
 
   @override
   String get diskEncryptionPageRepairDialogKeyWarningHeader =>
@@ -822,7 +833,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get tpmActionFixActionProceedDescription =>
-      'Ignoring the issue might result in a less secure installation.';
+      'Ignoring the issue might make this computer less secure.';
 
   @override
   String get tpmActionIgnoreAndContinueLabel => 'Ignore and continue';
