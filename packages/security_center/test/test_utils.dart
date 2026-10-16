@@ -158,7 +158,9 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
       SnapdStorageEncryptionStatus.active,
   List<SnapdStorageEncryptionStatus>? storageEncryptionStatusSequence,
   SnapdAutoRepairResult? autoRepairResult,
+  List<SnapdAutoRepairResult?>? autoRepairResultSequence,
   List<SnapdRecommendedRemedialAction> recommendations = const [],
+  List<List<SnapdRecommendedRemedialAction>>? recommendationsSequence,
   int indeterminateCallCount = 0,
   Object? storageEncryptionError,
   bool reprovisionError = false,
@@ -198,8 +200,11 @@ MockDiskEncryptionService registerMockDiskEncryptionService({
     return SnapdStorageEncryptedResponse(
       status: storageEncryptionStatusSequence?.elementAtOrNull(call) ??
           storageEncryptionStatus,
-      autoRepairResult: autoRepairResult,
-      recommendations: repaired ? const [] : recommendations,
+      autoRepairResult:
+          autoRepairResultSequence?.elementAtOrNull(call) ?? autoRepairResult,
+      recommendations: repaired
+          ? const []
+          : recommendationsSequence?.elementAtOrNull(call) ?? recommendations,
     );
   });
 
