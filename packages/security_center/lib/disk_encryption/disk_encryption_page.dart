@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
@@ -706,6 +707,7 @@ class _RepairIssue extends ConsumerWidget {
         if (proceedOnly)
           _RepairDialogActions(
             mainAction: OutlinedButton(
+              autofocus: true,
               onPressed: () => ref
                   .read(repairDialogModelProvider.notifier)
                   .applyFix(SnapdFixAction.proceed),
@@ -726,27 +728,35 @@ class _RepairDialogActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: FocusTraversalGroup(
-        policy: OrderedTraversalPolicy(),
-        child: Wrap(
-          alignment: WrapAlignment.end,
-          spacing: 16,
-          runSpacing: 16,
-          children: [
-            FocusTraversalOrder(
-              order: const NumericFocusOrder(2),
-              child: OutlinedButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(UbuntuLocalizations.of(context).cancelLabel),
+    // The main action takes the focus as soon as its step shows, so a key
+    // still held down from the step before would press it too
+    return Focus(
+      canRequestFocus: false,
+      onKeyEvent: (_, event) => event is KeyRepeatEvent
+          ? KeyEventResult.handled
+          : KeyEventResult.ignored,
+      child: SizedBox(
+        width: double.infinity,
+        child: FocusTraversalGroup(
+          policy: OrderedTraversalPolicy(),
+          child: Wrap(
+            alignment: WrapAlignment.end,
+            spacing: 16,
+            runSpacing: 16,
+            children: [
+              FocusTraversalOrder(
+                order: const NumericFocusOrder(2),
+                child: OutlinedButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text(UbuntuLocalizations.of(context).cancelLabel),
+                ),
               ),
-            ),
-            FocusTraversalOrder(
-              order: const NumericFocusOrder(1),
-              child: mainAction,
-            ),
-          ],
+              FocusTraversalOrder(
+                order: const NumericFocusOrder(1),
+                child: mainAction,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -986,6 +996,7 @@ class _RepairPinOrPassphraseRemoved extends ConsumerWidget {
         ),
         _RepairDialogActions(
           mainAction: ElevatedButton(
+            autofocus: true,
             onPressed:
                 ref.read(repairDialogModelProvider.notifier).continueToKey,
             child: Text(l10n.diskEncryptionPageRepairDialogRepair),
