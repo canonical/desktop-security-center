@@ -2138,7 +2138,7 @@ void main() {
     }
   });
 
-  group('repair dialog offers no repair when', () {
+  group('repair dialog closes when', () {
     final cases = <({
       String name,
       List<SnapdStorageEncryptionStatus>? storageEncryptionStatusSequence,
@@ -2202,13 +2202,28 @@ void main() {
         final container = createContainer();
         await _showRepairDialog(tester, container);
 
-        expect(
-          find.text(tester.l10n.diskEncryptionPageRepairDialogNotNeeded),
-          findsOneWidget,
-        );
+        expect(find.byType(RepairDialog), findsNothing);
         verifyNever(service.checkEncryptionSupport());
       });
     }
+  });
+
+  testWidgets('repair banner hides once the dialog finds no repair is needed',
+      (tester) async {
+    registerMockDiskEncryptionService(
+      // The page, the dialog's check, then the page again
+      recommendationsSequence: [
+        [SnapdRecommendedRemedialAction.requireReprovision],
+        [],
+        [],
+      ],
+    );
+    registerMockFeatureService(supportsReprovision: true);
+    final container = createContainer();
+    await _showRepairDialog(tester, container);
+
+    expect(find.byType(RepairDialog), findsNothing);
+    expect(find.text(tester.l10n.diskEncryptionPageRepairHeader), findsNothing);
   });
 
   group('repair dialog applies', () {
@@ -3029,10 +3044,12 @@ void main() {
     final service = registerMockDiskEncryptionService(
       recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
       authMode: AuthMode.none,
-      // The page, the dialog's check, then the check before the repair
+      // The page, the dialog's check, the check before the repair, then the
+      // page again
       storageEncryptionStatusSequence: [
         SnapdStorageEncryptionStatus.active,
         SnapdStorageEncryptionStatus.active,
+        SnapdStorageEncryptionStatus.inactive,
         SnapdStorageEncryptionStatus.inactive,
       ],
     );
@@ -3050,11 +3067,16 @@ void main() {
     await tester.tap(repairButton);
     await tester.pumpAndSettle();
 
+    // The user saved a key that won't be used
     expect(
-      find.text(l10n.diskEncryptionPageRepairDialogNotNeeded),
+      find.text(
+        '${l10n.diskEncryptionPageRepairDialogNotNeeded} '
+        '${l10n.diskEncryptionPageRepairDialogKeyNotUsed}',
+      ),
       findsOneWidget,
     );
     verifyNever(service.reprovision(onAuthorized: anyNamed('onAuthorized')));
+    expect(find.text(l10n.diskEncryptionPageRepairHeader), findsNothing);
   });
 
   testWidgets('repair dialog stays open while the repair starts',
