@@ -645,8 +645,10 @@ class RepairDialog extends ConsumerWidget {
             child: SingleChildScrollView(
               padding: const EdgeInsets.only(bottom: 24),
               child: switch (dialogState) {
+                // A fix can lead straight to another issue, which mustn't
+                // keep the open solutions or ticked checkboxes of the last one
                 RepairDialogStateIssue(:final issue) =>
-                  _RepairIssue(issue: issue),
+                  _RepairIssue(key: ValueKey(issue), issue: issue),
                 RepairDialogStateCheckKey(:final issue, :final action) =>
                   _RepairCheckKey(fix: action, kind: issue.kind),
                 RepairDialogStateConfirmPowerAction(
@@ -692,7 +694,7 @@ class RepairDialog extends ConsumerWidget {
 }
 
 class _RepairIssue extends ConsumerWidget {
-  const _RepairIssue({required this.issue});
+  const _RepairIssue({required this.issue, super.key});
 
   final SnapdAvailabilityCheckError issue;
 
