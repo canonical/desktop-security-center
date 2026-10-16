@@ -2693,7 +2693,56 @@ void main() {
     verify(service.generateReprovisionRecoveryKey()).called(1);
   });
 
-  testWidgets('repair dialog focuses the main action before Cancel',
+  group('repair dialog focuses the main action before Cancel', () {
+    const noRootOfTrust = SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.noHardwareRootOfTrust,
+      message: 'Mock issue',
+      actions: [SnapdFixAction.proceed],
+    );
+    final cases = <({
+      String name,
+      List<SnapdAvailabilityCheckError> availabilityCheckErrors,
+      String Function(AppLocalizations l10n) mainAction,
+    })>[
+      (
+        name: 'in the PIN or passphrase warning',
+        availabilityCheckErrors: [],
+        mainAction: (l10n) => l10n.diskEncryptionPageRepairDialogRepair,
+      ),
+      (
+        name: 'for an issue the user can only ignore',
+        availabilityCheckErrors: [noRootOfTrust],
+        mainAction: (l10n) => l10n.tpmActionIgnoreAndContinueLabel,
+      ),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          authMode: AuthMode.passphrase,
+          availabilityCheckErrors: tc.availabilityCheckErrors,
+        );
+        registerMockFeatureService(supportsReprovision: true);
+        final container = createContainer();
+        await _showRepairDialog(tester, container);
+
+        bool hasFocus(Finder button) =>
+            Focus.of(tester.element(button)).hasPrimaryFocus;
+        expect(hasFocus(find.text(tc.mainAction(tester.l10n))), isTrue);
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.pump();
+        expect(
+          hasFocus(
+            find.text(UbuntuLocalizations.of(tester.context).cancelLabel),
+          ),
+          isTrue,
+        );
+      });
+    }
+  });
+
+  testWidgets('repair dialog puts Cancel to the left of the main action',
       (tester) async {
     registerMockDiskEncryptionService(
       recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
@@ -2707,18 +2756,41 @@ void main() {
     final cancel =
         find.text(UbuntuLocalizations.of(tester.context).cancelLabel);
     expect(tester.getCenter(cancel).dx, lessThan(tester.getCenter(repair).dx));
+  });
 
-    bool hasFocus(Finder button) =>
-        Focus.of(tester.element(button)).hasPrimaryFocus;
-    // The close button in the title bar may come first
-    for (var i = 0; i < 3 && !hasFocus(repair) && !hasFocus(cancel); i++) {
-      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
-      await tester.pump();
-    }
-    expect(hasFocus(repair), isTrue);
-    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+  testWidgets('repair dialog ignores a key held down from the step before',
+      (tester) async {
+    const noRootOfTrust = SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.noHardwareRootOfTrust,
+      message: 'Mock issue',
+      actions: [SnapdFixAction.proceed],
+    );
+    final service = registerMockDiskEncryptionService(
+      recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+      authMode: AuthMode.passphrase,
+      availabilityCheckErrors: [noRootOfTrust],
+    );
+    registerMockFeatureService(supportsReprovision: true);
+    final container = createContainer();
+    await _showRepairDialog(tester, container);
+
+    // Ignores the issue, then the next step's main action has the focus
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
+    await tester.pumpAndSettle();
+    expect(
+      find.text(
+        tester.l10n.diskEncryptionPageRepairDialogPinOrPassphraseRemovedHeader,
+      ),
+      findsOneWidget,
+    );
+    await tester.sendKeyRepeatEvent(LogicalKeyboardKey.enter);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.enter);
     await tester.pump();
-    expect(hasFocus(cancel), isTrue);
+    verifyNever(service.generateReprovisionRecoveryKey());
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.pump();
+    verify(service.generateReprovisionRecoveryKey()).called(1);
   });
 
   group('repair dialog cancelling the admin prompt for the new key', () {
