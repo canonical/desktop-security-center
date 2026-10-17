@@ -21,19 +21,19 @@ class AppLocalizationsFi extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Salli aina';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Päivitä oikeudet';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Estä aina';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Salli väliaikaisesti';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Estä väliaikaisesti';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Kysy aina';
 
   @override
   String get snapPermissionReadLabel => 'Lue';
@@ -49,7 +49,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Vaadi sovellusten kysyä järjestelmän käyttöoikeuksia';
+      'Vaadi eristettyjen sovellusten kysyä käyttöoikeuksia';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -74,7 +74,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Sovelluksen oikeudet';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Jokin meni pieleen';
 
   @override
   String snapRulesCount(int n) {
@@ -546,7 +546,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro on käytössä';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Tässä saattaa kestää muutama sekunti...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -609,10 +609,11 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Ubuntun Pro:n poistaminen käytöstä irrottaa tilauksesi tästä koneesta. Haluatko jatkaa?';
+      'Ubuntun Pro:n poistaminen käytöstä irrottaa tilauksesi tästä tietokoneesta. Haluatko jatkaa?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Ubuntu Pro:n poistaminen käytöstä ei onnistunut, yritä uudelleen';
 
   @override
   String get ubuntuProEnable => 'Ota käyttöön';
@@ -683,14 +684,14 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM tarjoaa 10 vuoden tietoturvatuen yli 25 000:lle avoimen lähdekoodin paketille. Saat jatkuvan haavoittuvuushallinnan kriittisille, suurille ja keskitason CVE:ille.';
+      'ESM tarjoaa 10 vuoden tietoturvatuen Ubuntun koko pakettiarkistolle. Saat jatkuvan haavoittuvuushallinnan kriittisille, suurille ja valituille keskitason CVE:ille.';
 
   @override
   String get ubuntuProESMMainTitle => 'Main-paketit (esm-infra)';
 
   @override
   String ubuntuProESMMainDescription(int year) {
-    return 'Tietoturvapäivitykset 2300:lle Ubuntun Main-paketille vuoteen $year asti';
+    return 'Tietoturvapäivitykset Ubuntun Main-paketeille vuoteen $year asti';
   }
 
   @override
@@ -698,7 +699,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Tietoturvan lisäpäivitykset 23 000:lle Ubuntun Universe-paketille vuoteen $year asti';
+    return 'Tietoturvan lisäpäivitykset Ubuntun Universe-paketeille vuoteen $year asti';
   }
 
   @override

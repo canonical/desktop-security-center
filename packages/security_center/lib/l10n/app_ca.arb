@@ -46,7 +46,7 @@
             }
         }
     },
-    "snapPermissionsEnableTitle": "Exigeix a les aplicacions que demanin permisos al sistema",
+    "snapPermissionsEnableTitle": "Exigeix a les aplicacions en espais aïllats que demanin permisos",
     "snapRulesPageEmptyTileLabel": "Encara no hi ha regles",
     "diskEncryptionPageTitle": "Xifratge del disc",
     "diskEncryptionPageRecoveryKey": "Clau de recuperació",
@@ -229,7 +229,7 @@
         }
     },
     "ubuntuProDisablePro": "Desactiva Ubuntu Pro",
-    "ubuntuProDisablePrompt": "Desactivant Ubuntu Pro se separarà la vostra subscripció d'aquesta màquina. Voleu continuar?",
+    "ubuntuProDisablePrompt": "Desactivant l'Ubuntu Pro es desvincularà la vostra subscripció d'aquest ordinador. Voleu continuar?",
     "ubuntuProFeatureEnableError": "No s'ha pogut habilitar la característica. Torneu-ho a provar.",
     "ubuntuProFeatureDisableError": "No s'ha pogut desactivar la funció. Torneu-ho a provar.",
     "ubuntuProCompliance": "Compliment i enduriment",
@@ -264,5 +264,11 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "permissionRulePopupMenuSemanticLabel": "Actualitza els permisos",
+    "snapdRuleCategoryTemporarilyAllowed": "Permet temporalment",
+    "snapdRuleCategoryTemporarilyDenied": "Denega temporalment",
+    "snapdRuleCategoryAskAlways": "Pregunta sempre",
+    "ubuntuProLoadingLabel": "Aquest procés pot trigar uns segons...",
+    "ubuntuProDisableError": "No es pot desactivar l'Ubuntu Pro, proveu-ho de nou"
 }

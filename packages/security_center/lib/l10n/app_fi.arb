@@ -18,7 +18,7 @@
     "snapdRuleCategorySessionDenied": "Estä uloskirjautumiseen asti",
     "snapPermissionWriteLabel": "Kirjoita",
     "snapPermissionExecuteLabel": "Suorita",
-    "snapPermissionsEnableTitle": "Vaadi sovellusten kysyä järjestelmän käyttöoikeuksia",
+    "snapPermissionsEnableTitle": "Vaadi eristettyjen sovellusten kysyä käyttöoikeuksia",
     "snapPermissionsEnableWarning": "Tämä on kokeellinen ominaisuus, jonka avulla on mahdollista hallita pääsyä järjestelmän resursseihin.",
     "snapPermissionsEnablingLabel": "Otetaan käyttöön, tämä kestää hetken...",
     "snapPermissionsOtherDescription": "Voit hallita muita oikeuksia menemällä Asetukset › Sovellukset.",
@@ -213,7 +213,7 @@
     "ubuntuProTokenLabel": "Poletti",
     "ubuntuProDisablePro": "Poista Ubuntu Pro käytöstä",
     "ubuntuProDisable": "Poista käytöstä",
-    "ubuntuProDisablePrompt": "Ubuntun Pro:n poistaminen käytöstä irrottaa tilauksesi tästä koneesta. Haluatko jatkaa?",
+    "ubuntuProDisablePrompt": "Ubuntun Pro:n poistaminen käytöstä irrottaa tilauksesi tästä tietokoneesta. Haluatko jatkaa?",
     "ubuntuProEnable": "Ota käyttöön",
     "ubuntuProCancel": "Peru",
     "ubuntuProFeatureEnableError": "Ominaisuutta ei voitu ottaa käyttöön, yritä uudelleen.",
@@ -234,9 +234,9 @@
     "ubuntuProComplianceDisclaimer": "Suositeltu käytettäväksi vain FedRAMP-, HIPAA- ja muiden vaatimustenmukaisuus- ja koventamisvaatimusten avustamiseen.",
     "ubuntuProComplianceUSGDescription": "Automatisoi koventamista ja auditoimista CIS-mittausta ja DISA-STIG-profiileja vasten samalla sallien ympäristökohtaisia mukautuksia.",
     "ubuntuProComplianceFIPSDescription": "Yhdysvaltain ja Kanadan valtionhallinnon salakirjoitusmoduulin sertifiointi FIPS 140-2 -datasuojaustandardin vaatimustenmukaisuutta vasten.",
-    "ubuntuProESMDescription": "ESM tarjoaa 10 vuoden tietoturvatuen yli 25 000:lle avoimen lähdekoodin paketille. Saat jatkuvan haavoittuvuushallinnan kriittisille, suurille ja keskitason CVE:ille.",
+    "ubuntuProESMDescription": "ESM tarjoaa 10 vuoden tietoturvatuen Ubuntun koko pakettiarkistolle. Saat jatkuvan haavoittuvuushallinnan kriittisille, suurille ja valituille keskitason CVE:ille.",
     "ubuntuProESMMainTitle": "Main-paketit (esm-infra)",
-    "ubuntuProESMMainDescription": "Tietoturvapäivitykset 2300:lle Ubuntun Main-paketille vuoteen {year} asti",
+    "ubuntuProESMMainDescription": "Tietoturvapäivitykset Ubuntun Main-paketeille vuoteen {year} asti",
     "@ubuntuProESMMainDescription": {
         "placeholders": {
             "year": {
@@ -245,7 +245,7 @@
         }
     },
     "ubuntuProESMUniverseTitle": "Universe-paketit (esm-apps)",
-    "ubuntuProESMUniverseDescription": "Tietoturvan lisäpäivitykset 23 000:lle Ubuntun Universe-paketille vuoteen {year} asti",
+    "ubuntuProESMUniverseDescription": "Tietoturvan lisäpäivitykset Ubuntun Universe-paketeille vuoteen {year} asti",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
@@ -263,5 +263,12 @@
         }
     },
     "ubuntuProComplianceUSGTitle": "Ubuntun tietoturvaohje (USG)",
-    "ubuntuProESMTitle": "Laajennettu tietoturvan ylläpito (ESM)"
+    "ubuntuProESMTitle": "Laajennettu tietoturvan ylläpito (ESM)",
+    "snapdRuleCategoryTemporarilyAllowed": "Salli väliaikaisesti",
+    "snapdRuleCategoryTemporarilyDenied": "Estä väliaikaisesti",
+    "snapdRuleCategoryAskAlways": "Kysy aina",
+    "snapPermissionsErrorTitle": "Jokin meni pieleen",
+    "ubuntuProLoadingLabel": "Tässä saattaa kestää muutama sekunti...",
+    "permissionRulePopupMenuSemanticLabel": "Päivitä oikeudet",
+    "ubuntuProDisableError": "Ubuntu Pro:n poistaminen käytöstä ei onnistunut, yritä uudelleen"
 }
