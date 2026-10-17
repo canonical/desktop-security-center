@@ -8,7 +8,7 @@
     "interfacePageLinkLearnMore": "Zistiť viac",
     "interfacePageTitle": "Spravovať povolenia",
     "snapPermissionsEnableWarning": "Toto je experimentálna funkcia na riadenie prístupu k zdrojom vášho systému.",
-    "snapdRuleCategorySessionAllowed": "Povolené do odhlásenia",
+    "snapdRuleCategorySessionAllowed": "Povoliť do odhlásenia",
     "snapdRuleCategoryForeverAllowed": "Vždy povoliť",
     "snapPermissionReadLabel": "Čítanie",
     "snapPermissionExecuteLabel": "Spúšťanie",
