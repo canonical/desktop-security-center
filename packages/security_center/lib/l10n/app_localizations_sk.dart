@@ -12,7 +12,7 @@ class AppLocalizationsSk extends AppLocalizations {
   String get appTitle => 'Centrum zabezpečenia';
 
   @override
-  String get snapdRuleCategorySessionAllowed => 'Povolené do odhlásenia';
+  String get snapdRuleCategorySessionAllowed => 'Povoliť do odhlásenia';
 
   @override
   String get snapdRuleCategorySessionDenied => 'Zamietnuť do odhlásenia';

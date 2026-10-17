@@ -23,19 +23,19 @@ class AppLocalizationsCa extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Permet sempre';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Actualitza els permisos';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Rebutja sempre';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Permet temporalment';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Denega temporalment';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Pregunta sempre';
 
   @override
   String get snapPermissionReadLabel => 'Lectura';
@@ -51,7 +51,7 @@ class AppLocalizationsCa extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Exigeix a les aplicacions que demanin permisos al sistema';
+      'Exigeix a les aplicacions en espais aïllats que demanin permisos';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -557,7 +557,7 @@ class AppLocalizationsCa extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro està habilitat';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Aquest procés pot trigar uns segons...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -621,10 +621,11 @@ class AppLocalizationsCa extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Desactivant Ubuntu Pro se separarà la vostra subscripció d\'aquesta màquina. Voleu continuar?';
+      'Desactivant l\'Ubuntu Pro es desvincularà la vostra subscripció d\'aquest ordinador. Voleu continuar?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'No es pot desactivar l\'Ubuntu Pro, proveu-ho de nou';
 
   @override
   String get ubuntuProEnable => 'Activa';
