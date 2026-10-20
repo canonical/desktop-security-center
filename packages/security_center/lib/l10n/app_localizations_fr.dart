@@ -29,13 +29,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get snapdRuleCategoryForeverDenied => 'Refuser toujours';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Autoriser temporairement';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Refuser temporairement';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Demander toujours';
 
   @override
   String get snapPermissionReadLabel => 'Lecture';
@@ -51,7 +51,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Exiger que les apps demandent des autorisations système';
+      'Exiger que les apps en sandbox demandent les autorisations';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -70,7 +70,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get snapPermissionsOtherDescription =>
-      'Vous pouvez gérer d’autres autorisations dans Paramètres › Applications.';
+      'Vous pouvez gérer d’autres autorisations dans Paramètres › Apps.';
 
   @override
   String get snapPermissionsPageTitle => 'Permissions d\'app';
@@ -557,7 +557,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro est activé';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Cela peut prendre quelques secondes ...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -591,7 +591,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ubuntuProMagicError =>
-      'Impossible d’activer Ubuntu Pro, veuillez réessayer';
+      'Impossible d’activer Ubuntu Pro, réessayez';
 
   @override
   String get ubuntuProEnableToken => 'Activer avec un jeton';
@@ -620,10 +620,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Désactiver Ubuntu Pro détachera votre abonnement de cette machine. Voulez-vous continuer ?';
+      'Désactiver Ubuntu Pro détachera votre abonnement de cet ordinateur. Voulez-vous continuer ?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'Impossible de désactiver Ubuntu Pro, réessayez';
 
   @override
   String get ubuntuProEnable => 'Activer';
@@ -633,11 +634,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Impossible d’activer la fonctionnalité, veuillez réessayer.';
+      'Impossible d’activer la fonctionnalité, réessayez.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Impossible de désactiver la fonctionnalité, veuillez réessayer.';
+      'Impossible de désactiver la fonctionnalité, réessayez.';
 
   @override
   String get ubuntuProCompliance => 'Conformité et durcissement';
