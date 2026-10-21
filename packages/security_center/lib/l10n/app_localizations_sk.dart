@@ -311,7 +311,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageAddPinDialogBodyMain =>
-      'Pri každom spustení počítača budete musieť zadať svoj kód PIN. Tento kód PIN je iný ako vaše heslo používateľa.';
+      'Pri každom spustení počítača budete musieť zadať svoj kód PIN. Tento kód PIN je iný ako vaše používateľské heslo.';
 
   @override
   String get diskEncryptionPageAddPinDialogBodyRecovery =>
@@ -319,7 +319,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyMain =>
-      'Pri každom spustení počítača budete musieť zadať svoju prístupovú frázu. Táto prístupová fráza je iná ako vaše heslo používateľa.';
+      'Pri každom spustení počítača budete musieť zadať svoju prístupovú frázu. Táto prístupová fráza je iná ako vaše používateľské heslo.';
 
   @override
   String get diskEncryptionPageAddPassphraseDialogBodyRecovery =>
@@ -331,7 +331,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'Pre dodatočné zabezpečenie môžete nastaviť prístupovú frázu alebo kód PIN. Budete ho musieť zadať pri každom spustení počítača.';
+      'Pre dodatočné zabezpečenie môžete nastaviť prístupovú frázu alebo kód PIN. Tento údaj budete musieť zadať pri každom spustení počítača.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityLearnMore => 'Zistiť viac';
@@ -379,7 +379,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'Nemáte povolenie na zápis do tohto umiestnenia súboru.';
+      'Nemáte oprávnenie na zápis na toto miesto.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>
@@ -434,7 +434,7 @@ class AppLocalizationsSk extends AppLocalizations {
       'Nesprávna prístupová fráza, skúste to znova';
 
   @override
-  String get recoveryKeyPassphraseNewError => 'Musí mať aspoň 4 znaky';
+  String get recoveryKeyPassphraseNewError => 'Musí obsahovať aspoň 4 znaky';
 
   @override
   String get recoveryKeyPassphraseConfirmError =>
@@ -553,7 +553,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
-    return 'Bezpečnosť a dodržiavanie predpisov na podnikovej úrovni pre váš počítač. Vždy zadarmo pre osobné použitie. $learnMoreLink';
+    return 'Bezpečnosť a dodržiavanie predpisov na podnikovej úrovni pre váš počítač. Vždy bezplatne pre osobné použitie. $learnMoreLink';
   }
 
   @override
@@ -571,7 +571,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Prihláste sa pomocou svojho účtu Ubuntu One alebo si ho vytvorte zadarmo.';
+      'Prihláste sa pomocou svojho účtu Ubuntu One alebo si ho vytvorte bezplatne.';
 
   @override
   String get ubuntuProMagicContinueInBrowser => 'Pokračovať v prehliadači';
@@ -593,7 +593,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String ubuntuProEnableTokenSubtitle(String proLink) {
-    return 'Od vášho správcu IT alebo z $proLink';
+    return 'Od vášho IT správcu alebo z $proLink';
   }
 
   @override
@@ -659,7 +659,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get ubuntuProComplianceFIPSDisclaimer =>
-      'Povolenie FIPS nie je možné vrátiť späť a funkcia Livepatch bude trvalo zakázaná.';
+      'Zapnutie FIPS nie je možné zvrátiť a funkcia Livepatch bude trvalo deaktivovaná.';
 
   @override
   String get ubuntuProComplianceFIPSPrompt =>
@@ -688,7 +688,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get ubuntuProESMDescription =>
-      'ESM poskytuje 10 rokov bezpečnostných záplat pre celý archív Ubuntu. Získajte nepretržitú správu zraniteľností pre kritické, vysoké a vybrané stredné CVE.';
+      'ESM poskytuje 10 rokov bezpečnostných záplat pre celý archív Ubuntu. Získajte nepretržitú správu zraniteľností pre kritické, vysoké a vybrané stredne závažné CVE.';
 
   @override
   String get ubuntuProESMMainTitle => 'Hlavné balíky (esm-infra)';

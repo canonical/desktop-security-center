@@ -91,7 +91,7 @@
     "recoveryKeyPassphraseNew": "Nová prístupová fráza",
     "recoveryKeyPassphraseConfirm": "Potvrdiť prístupovú frázu",
     "recoveryKeyPassphraseCurrentError": "Nesprávna prístupová fráza, skúste to znova",
-    "recoveryKeyPassphraseNewError": "Musí mať aspoň 4 znaky",
+    "recoveryKeyPassphraseNewError": "Musí obsahovať aspoň 4 znaky",
     "recoveryKeyPassphraseConfirmError": "Prístupové frázy sa nezhodujú, skúste to znova",
     "recoveryKeyPassphraseDialogHeader": "Zmeniť prístupovú frázu",
     "recoveryKeyPinHeader": "Šifrovací PIN",
@@ -137,7 +137,7 @@
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Ak to chcete opraviť, spustite v termináli tento príkaz:",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
     "recoveryKeyExceptionFilePermissionTitle": "Nepodarilo sa uložiť váš obnovovací kľúč do súboru",
-    "recoveryKeyExceptionFilePermissionBody": "Nemáte povolenie na zápis do tohto umiestnenia súboru.",
+    "recoveryKeyExceptionFilePermissionBody": "Nemáte oprávnenie na zápis na toto miesto.",
     "recoveryKeyTPMExplanationBody": "Šifrovacie kľúče sú uložené v module Trusted Platform Module (TPM) vášho počítača.",
     "recoveryKeyTPMExplanationLearnMore": "Zistiť viac o šifrovaní s hardvérovou podporou",
     "recoveryKeyEncrpytionPassphraseHeader": "Šifrovacia prístupová fráza",
@@ -150,12 +150,12 @@
     "diskEncryptionPageAddPassphraseButton": "Pridať prístupovú frázu...",
     "diskEncryptionPageAddPassphraseDialogHeading": "Pridať prístupovú frázu",
     "diskEncryptionPageAddPinDialogHeading": "Pridať PIN",
-    "diskEncryptionPageAddPinDialogBodyMain": "Pri každom spustení počítača budete musieť zadať svoj kód PIN. Tento kód PIN je iný ako vaše heslo používateľa.",
+    "diskEncryptionPageAddPinDialogBodyMain": "Pri každom spustení počítača budete musieť zadať svoj kód PIN. Tento kód PIN je iný ako vaše používateľské heslo.",
     "diskEncryptionPageAddPinDialogBodyRecovery": "Ak zabudnete svoj kód PIN, môžete získať späť prístup k disku pomocou obnovovacieho kľúča.",
-    "diskEncryptionPageAddPassphraseDialogBodyMain": "Pri každom spustení počítača budete musieť zadať svoju prístupovú frázu. Táto prístupová fráza je iná ako vaše heslo používateľa.",
+    "diskEncryptionPageAddPassphraseDialogBodyMain": "Pri každom spustení počítača budete musieť zadať svoju prístupovú frázu. Táto prístupová fráza je iná ako vaše používateľské heslo.",
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Ak zabudnete svoju prístupovú frázu, môžete získať späť prístup k disku pomocou obnovovacieho kľúča.",
     "diskEncryptionPageAdditionalSecurityHeader": "Dodatočné zabezpečenie",
-    "diskEncryptionPageAdditionalSecurityBody": "Pre dodatočné zabezpečenie môžete nastaviť prístupovú frázu alebo kód PIN. Budete ho musieť zadať pri každom spustení počítača.",
+    "diskEncryptionPageAdditionalSecurityBody": "Pre dodatočné zabezpečenie môžete nastaviť prístupovú frázu alebo kód PIN. Tento údaj budete musieť zadať pri každom spustení počítača.",
     "diskEncryptionPageAdditionalSecurityLearnMore": "Zistiť viac",
     "diskEncryptionPageAddPinDialogSaveButton": "Pridať",
     "diskEncryptionPageRemovePinButton": "Odstrániť PIN...",
@@ -172,7 +172,7 @@
     "ubuntuProNotSupportedSnapd": "Táto verzia snapd nepodporuje Ubuntu Pro",
     "ubuntuProNotSupportedSnapdDetails": "Aktualizujte snapd na správu Ubuntu Pro",
     "ubuntuProEnabled": "Ubuntu Pro je povolené",
-    "ubuntuProDisabled": "Bezpečnosť a dodržiavanie predpisov na podnikovej úrovni pre váš počítač. Vždy zadarmo pre osobné použitie. {learnMoreLink}",
+    "ubuntuProDisabled": "Bezpečnosť a dodržiavanie predpisov na podnikovej úrovni pre váš počítač. Vždy bezplatne pre osobné použitie. {learnMoreLink}",
     "@ubuntuProDisabled": {
         "placeholders": {
             "learnMoreLink": {
@@ -184,7 +184,7 @@
     "ubuntuProEnablePro": "Povoliť Ubuntu Pro",
     "ubuntuProEnableMagic": "Povoliť pomocou účtu Ubuntu One",
     "ubuntuProEnableMagicSubtitle": "Budete si môcť bezplatne vytvoriť účet",
-    "ubuntuProMagicPrompt": "Prihláste sa pomocou svojho účtu Ubuntu One alebo si ho vytvorte zadarmo.",
+    "ubuntuProMagicPrompt": "Prihláste sa pomocou svojho účtu Ubuntu One alebo si ho vytvorte bezplatne.",
     "ubuntuProMagicContinueInBrowser": "Pokračovať v prehliadači",
     "ubuntuProMagicDescription": "Môžete sa tiež prihlásiť na adrese {attachLink} a zadať kód {attachCode}",
     "@ubuntuProMagicDescription": {
@@ -199,7 +199,7 @@
     },
     "ubuntuProEnableToken": "Povoliť pomocou tokenu",
     "ubuntuProEnableTokenError": "Nepodarilo sa povoliť Ubuntu Pro",
-    "ubuntuProEnableTokenSubtitle": "Od vášho správcu IT alebo z {proLink}",
+    "ubuntuProEnableTokenSubtitle": "Od vášho IT správcu alebo z {proLink}",
     "@ubuntuProEnableTokenSubtitle": {
         "placeholders": {
             "proLink": {
@@ -227,7 +227,7 @@
     "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
     "ubuntuProComplianceFIPSDescription": "Certifikácia kryptografických modulov podľa štandardu FIPS 140-2 používaná vládami USA a Kanady.",
     "ubuntuProComplianceFIPSEnable": "Povoliť FIPS",
-    "ubuntuProComplianceFIPSDisclaimer": "Povolenie FIPS nie je možné vrátiť späť a funkcia Livepatch bude trvalo zakázaná.",
+    "ubuntuProComplianceFIPSDisclaimer": "Zapnutie FIPS nie je možné zvrátiť a funkcia Livepatch bude trvalo deaktivovaná.",
     "ubuntuProComplianceFIPSPrompt": "Vyberte preferovanú možnosť FIPS",
     "ubuntuProComplianceFIPSUpdates": "FIPS s aktualizáciami",
     "ubuntuProComplianceFIPSUpdatesDescription": "Inštaluje balíky overené podľa FIPS 140-2 a umožňuje pravidelné bezpečnostné aktualizácie.",
@@ -235,7 +235,7 @@
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Inštaluje balíky overené podľa FIPS 140-2. Tieto nebudú aktualizované až do ďalšej recertifikácie.",
     "ubuntuProComplianceDocumentation": "Dokumentácia o bezpečnostnom súlade",
     "ubuntuProESMTitle": "Rozšírená údržba zabezpečenia (ESM)",
-    "ubuntuProESMDescription": "ESM poskytuje 10 rokov bezpečnostných záplat pre celý archív Ubuntu. Získajte nepretržitú správu zraniteľností pre kritické, vysoké a vybrané stredné CVE.",
+    "ubuntuProESMDescription": "ESM poskytuje 10 rokov bezpečnostných záplat pre celý archív Ubuntu. Získajte nepretržitú správu zraniteľností pre kritické, vysoké a vybrané stredne závažné CVE.",
     "ubuntuProESMMainTitle": "Hlavné balíky (esm-infra)",
     "ubuntuProESMMainDescription": "Bezpečnostné aktualizácie pre hlavné balíky Ubuntu do roku {year}",
     "@ubuntuProESMMainDescription": {
