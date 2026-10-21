@@ -379,7 +379,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get recoveryKeyExceptionFilePermissionBody =>
-      'Nemáte oprávnenie na zápis na toto miesto.';
+      'Nemáte oprávnenie na zápis do tohto umiestnenia súboru.';
 
   @override
   String get recoveryKeyExceptionFileSystemBody =>

@@ -21,19 +21,19 @@ class AppLocalizationsJa extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => '常に許可';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'パーミッションを更新';
 
   @override
   String get snapdRuleCategoryForeverDenied => '常に拒否';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => '一時的に許可';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => '一時的に拒否';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => '常に尋ねる';
 
   @override
   String get snapPermissionReadLabel => '読み取り';
@@ -48,7 +48,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get snapPermissionAccessLabel => 'アクセス';
 
   @override
-  String get snapPermissionsEnableTitle => 'システムのパーミッションを求めるようアプリに要求する';
+  String get snapPermissionsEnableTitle => 'サンドボックス内のアプリにパーミッションを尋ねるよう要求する';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -516,7 +516,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Proは有効です';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'これには数秒かかります...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -576,10 +576,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Ubuntu Proを無効にするとこのマシンをサブスクリプションから除外することになります。継続しますか？';
+      'Ubuntu Proを無効にすると、このPCをサブスクリプションから除外することになります。継続しますか？';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError => 'Ubuntu Proを無効にできません。やり直してください';
 
   @override
   String get ubuntuProEnable => '有効';
