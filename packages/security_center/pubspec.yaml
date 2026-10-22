@@ -37,7 +37,7 @@ dependencies:
   snapd:
     git:
       url: https://github.com/canonical/snapd.dart.git
-      ref: main
+      ref: f29c91e3292f139617311da23d5ae76cc98320cd
   ubuntu_localizations: ^0.5.2+1
   ubuntu_logger: ^0.2.0
   ubuntu_service: ^0.4.0

@@ -106,7 +106,6 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   List<SnapdAvailabilityCheckError>? _issues;
   bool _volumesAuthRequired = false;
   String? _repairKey;
-  bool _repaired = false;
 
   /// Generates a fake recovery key and key ID.
   @override
@@ -123,7 +122,8 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   }
 
   String _randomRecoveryKey() {
-    final lastSegment = Random().nextInt(100000).toString().padLeft(5, '0');
+    // Each segment is a 16-bit number, zero-extended to 5 digits
+    final lastSegment = Random().nextInt(65536).toString().padLeft(5, '0');
     return '55055-39320-64491-48436-47667-15525-36879-$lastSegment';
   }
 
@@ -161,7 +161,12 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
             _recoveryKeys['default-recovery'] == recoveryKey)) {
       return;
     }
-    throw Exception('Recovery key does not work');
+    // snapd rejects a wrong key with this kind, which the dialogs show as a
+    // result rather than an error
+    throw SnapdException(
+      message: 'recovery key does not work',
+      kind: 'invalid-recovery-key',
+    );
   }
 
   @override
@@ -280,13 +285,15 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
     }
     return SnapdStorageEncryptedResponse(
-      // Not `recovery`, so clearing the TPM checks the recovery key first
+      // Like snapd, which checks once per boot, this stays until a restart even
+      // after a repair. Not `recovery` for tpm-disabled, so clearing the TPM
+      // checks the recovery key first
       status: repairScenario == FakeRepairScenario.tpmDisabled
           ? SnapdStorageEncryptionStatus.degraded
           : SnapdStorageEncryptionStatus.recovery,
       autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
-      recommendations: [
-        if (!_repaired) SnapdRecommendedRemedialAction.requireReprovision,
+      recommendations: const [
+        SnapdRecommendedRemedialAction.requireReprovision,
       ],
     );
   }
@@ -294,7 +301,6 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   @override
   Future<SnapdStorageEncryption> checkEncryptionSupport() async {
     _issues = repairScenario.issues;
-    _volumesAuthRequired = false;
     return _storageEncryption();
   }
 
@@ -370,6 +376,5 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     _recoveryKeys['default-recovery'] = key;
     // Reprovisioning removes any PIN or passphrase
     await replacePlatformKey(authMode: AuthMode.none);
-    _repaired = true;
   }
 }
