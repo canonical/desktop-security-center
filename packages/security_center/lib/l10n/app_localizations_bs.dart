@@ -425,7 +425,15 @@ class AppLocalizationsBs extends AppLocalizations {
   String get diskEncryptionPageRepairDialogNotNow => 'Not now';
 
   @override
+  String get diskEncryptionPageRepairDialogRestartBody =>
+      'Restart the computer to complete previous actions. Then start the repair again.';
+
+  @override
   String get diskEncryptionPageRepairDialogRestartNow => 'Restart now';
+
+  @override
+  String get diskEncryptionPageRepairDialogPowerOffBody =>
+      'Power off the computer to complete previous actions. Then start the repair again.';
 
   @override
   String get diskEncryptionPageRepairDialogPowerOffNow => 'Power off now';
@@ -492,6 +500,9 @@ class AppLocalizationsBs extends AppLocalizations {
   String get recoveryKeyPassphraseButton => 'Change passphrase...';
 
   @override
+  String get recoveryKeyPassphrase => 'Passphrase';
+
+  @override
   String get recoveryKeyPassphraseCurrent => 'Current passphrase';
 
   @override
@@ -530,6 +541,9 @@ class AppLocalizationsBs extends AppLocalizations {
 
   @override
   String get recoveryKeyPinButton => 'Change PIN...';
+
+  @override
+  String get recoveryKeyPin => 'PIN';
 
   @override
   String get recoveryKeyPinCurrent => 'Current PIN';
@@ -622,17 +636,8 @@ class AppLocalizationsBs extends AppLocalizations {
   }
 
   @override
-  String tpmActionSingleSolutionLabel(String text) {
-    return 'Solution: $text';
-  }
-
-  @override
   String get tpmActionErrorSupportLabel =>
       'Try the solutions below or contact IT support.';
-
-  @override
-  String get tpmActionErrorSupportSingleLabel =>
-      'Try the solution below or contact IT support.';
 
   @override
   String get tpmActionErrorKindInternal => 'Internal error.';
@@ -644,15 +649,6 @@ class AppLocalizationsBs extends AppLocalizations {
   String get tpmActionErrorKindRebootRequired => 'Restart is required.';
 
   @override
-  String get tpmActionErrorKindUnexpectedAction => 'Unexpected action.';
-
-  @override
-  String get tpmActionErrorKindMissingArgument => 'Missing argument.';
-
-  @override
-  String get tpmActionErrorKindInvalidArgument => 'Invalid argument.';
-
-  @override
   String get tpmActionErrorKindActionFailed => 'Action failed.';
 
   @override
@@ -662,10 +658,6 @@ class AppLocalizationsBs extends AppLocalizations {
   @override
   String get tpmActionErrorKindSystemNotEfi =>
       'This computer is using older firmware (legacy BIOS) that is not compatible with this encryption method.';
-
-  @override
-  String get tpmActionErrorKindEfiVariableAccess =>
-      'There is an issue with this computer\'s firmware.';
 
   @override
   String get tpmActionErrorKindNoSuitableTpm2Device =>
@@ -790,12 +782,6 @@ class AppLocalizationsBs extends AppLocalizations {
       'Disable Absolute Persistence Module manually';
 
   @override
-  String get tpmActionFixActionContactOem => 'Contact OEM';
-
-  @override
-  String get tpmActionFixActionContactOsVendor => 'Contact OS vendor';
-
-  @override
   String get tpmActionFixActionEnableTpmViaFirmware => 'Enable TPM on restart';
 
   @override
@@ -863,8 +849,7 @@ class AppLocalizationsBs extends AppLocalizations {
       'You might be asked to confirm this action on restart.';
 
   @override
-  String get tpmActionFixActionCaveatRetry =>
-      'Then you will need to start the repair again.';
+  String get tpmActionFixActionCaveatRetry => 'Then start the repair again.';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';

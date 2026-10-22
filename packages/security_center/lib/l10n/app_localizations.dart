@@ -762,7 +762,7 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageAdditionalSecurityBody.
   ///
   /// In en, this message translates to:
-  /// **'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.'**
+  /// **'You can set a passphrase or a PIN for additional security. You will need to enter it every time the computer starts.'**
   String get diskEncryptionPageAdditionalSecurityBody;
 
   /// No description provided for @diskEncryptionPageAdditionalSecurityLearnMore.
@@ -921,11 +921,23 @@ abstract class AppLocalizations {
   /// **'Not now'**
   String get diskEncryptionPageRepairDialogNotNow;
 
+  /// No description provided for @diskEncryptionPageRepairDialogRestartBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart the computer to complete previous actions. Then start the repair again.'**
+  String get diskEncryptionPageRepairDialogRestartBody;
+
   /// No description provided for @diskEncryptionPageRepairDialogRestartNow.
   ///
   /// In en, this message translates to:
   /// **'Restart now'**
   String get diskEncryptionPageRepairDialogRestartNow;
+
+  /// No description provided for @diskEncryptionPageRepairDialogPowerOffBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Power off the computer to complete previous actions. Then start the repair again.'**
+  String get diskEncryptionPageRepairDialogPowerOffBody;
 
   /// No description provided for @diskEncryptionPageRepairDialogPowerOffNow.
   ///
@@ -1035,6 +1047,12 @@ abstract class AppLocalizations {
   /// **'Change passphrase...'**
   String get recoveryKeyPassphraseButton;
 
+  /// No description provided for @recoveryKeyPassphrase.
+  ///
+  /// In en, this message translates to:
+  /// **'Passphrase'**
+  String get recoveryKeyPassphrase;
+
   /// No description provided for @recoveryKeyPassphraseCurrent.
   ///
   /// In en, this message translates to:
@@ -1106,6 +1124,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change PIN...'**
   String get recoveryKeyPinButton;
+
+  /// No description provided for @recoveryKeyPin.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN'**
+  String get recoveryKeyPin;
 
   /// No description provided for @recoveryKeyPinCurrent.
   ///
@@ -1263,23 +1287,11 @@ abstract class AppLocalizations {
   /// **'Solution {n}: {text}'**
   String tpmActionSolutionLabel(int n, String text);
 
-  /// No description provided for @tpmActionSingleSolutionLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Solution: {text}'**
-  String tpmActionSingleSolutionLabel(String text);
-
   /// No description provided for @tpmActionErrorSupportLabel.
   ///
   /// In en, this message translates to:
   /// **'Try the solutions below or contact IT support.'**
   String get tpmActionErrorSupportLabel;
-
-  /// No description provided for @tpmActionErrorSupportSingleLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Try the solution below or contact IT support.'**
-  String get tpmActionErrorSupportSingleLabel;
 
   /// No description provided for @tpmActionErrorKindInternal.
   ///
@@ -1299,24 +1311,6 @@ abstract class AppLocalizations {
   /// **'Restart is required.'**
   String get tpmActionErrorKindRebootRequired;
 
-  /// No description provided for @tpmActionErrorKindUnexpectedAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Unexpected action.'**
-  String get tpmActionErrorKindUnexpectedAction;
-
-  /// No description provided for @tpmActionErrorKindMissingArgument.
-  ///
-  /// In en, this message translates to:
-  /// **'Missing argument.'**
-  String get tpmActionErrorKindMissingArgument;
-
-  /// No description provided for @tpmActionErrorKindInvalidArgument.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid argument.'**
-  String get tpmActionErrorKindInvalidArgument;
-
   /// No description provided for @tpmActionErrorKindActionFailed.
   ///
   /// In en, this message translates to:
@@ -1334,12 +1328,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This computer is using older firmware (legacy BIOS) that is not compatible with this encryption method.'**
   String get tpmActionErrorKindSystemNotEfi;
-
-  /// No description provided for @tpmActionErrorKindEfiVariableAccess.
-  ///
-  /// In en, this message translates to:
-  /// **'There is an issue with this computer\'s firmware.'**
-  String get tpmActionErrorKindEfiVariableAccess;
 
   /// No description provided for @tpmActionErrorKindNoSuitableTpm2Device.
   ///
@@ -1527,18 +1515,6 @@ abstract class AppLocalizations {
   /// **'Disable Absolute Persistence Module manually'**
   String get tpmActionFixActionRebootToFwSettingsAbsolutePresent;
 
-  /// No description provided for @tpmActionFixActionContactOem.
-  ///
-  /// In en, this message translates to:
-  /// **'Contact OEM'**
-  String get tpmActionFixActionContactOem;
-
-  /// No description provided for @tpmActionFixActionContactOsVendor.
-  ///
-  /// In en, this message translates to:
-  /// **'Contact OS vendor'**
-  String get tpmActionFixActionContactOsVendor;
-
   /// No description provided for @tpmActionFixActionEnableTpmViaFirmware.
   ///
   /// In en, this message translates to:
@@ -1650,7 +1626,7 @@ abstract class AppLocalizations {
   /// No description provided for @tpmActionFixActionCaveatRetry.
   ///
   /// In en, this message translates to:
-  /// **'Then you will need to start the repair again.'**
+  /// **'Then start the repair again.'**
   String get tpmActionFixActionCaveatRetry;
 
   /// No description provided for @ubuntuProPageTitle.
