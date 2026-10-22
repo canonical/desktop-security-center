@@ -41,7 +41,7 @@
     "snapdRuleCategorySessionDenied": "ログアウトまで拒否",
     "snapdRuleCategoryForeverAllowed": "常に許可",
     "snapdRuleCategoryForeverDenied": "常に拒否",
-    "snapPermissionsEnableTitle": "システムのパーミッションを求めるようアプリに要求する",
+    "snapPermissionsEnableTitle": "サンドボックス内のアプリにパーミッションを尋ねるよう要求する",
     "snapPermissionsEnableWarning": "これはコンピューターのリソースへのアクセスを制御するための実験的な機能です。",
     "snapPermissionsEnablingLabel": "有効にしています。数秒かかることがあります...",
     "snapPermissionsDisablingLabel": "無効にしています。数秒かかることがあります...",
@@ -207,7 +207,7 @@
         }
     },
     "ubuntuProDisablePro": "Ubuntu Proを無効にする",
-    "ubuntuProDisablePrompt": "Ubuntu Proを無効にするとこのマシンをサブスクリプションから除外することになります。継続しますか？",
+    "ubuntuProDisablePrompt": "Ubuntu Proを無効にすると、このPCをサブスクリプションから除外することになります。継続しますか？",
     "ubuntuProFeatureEnableError": "機能を有効にできません。やり直してください。",
     "ubuntuProFeatureDisableError": "機能を無効にできません。やり直してください。",
     "ubuntuProCompliance": "コンプライアンスとハードニング",
@@ -264,5 +264,11 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "ubuntuProLoadingLabel": "これには数秒かかります...",
+    "ubuntuProDisableError": "Ubuntu Proを無効にできません。やり直してください",
+    "snapdRuleCategoryTemporarilyAllowed": "一時的に許可",
+    "snapdRuleCategoryTemporarilyDenied": "一時的に拒否",
+    "snapdRuleCategoryAskAlways": "常に尋ねる",
+    "permissionRulePopupMenuSemanticLabel": "パーミッションを更新"
 }
