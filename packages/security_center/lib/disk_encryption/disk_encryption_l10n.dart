@@ -83,6 +83,12 @@ extension AuthModeL10n on AuthMode {
         AuthMode.none => throw _unreachable,
       };
 
+  String localizedHint(AppLocalizations l10n) => switch (this) {
+        AuthMode.passphrase => l10n.recoveryKeyPassphrase,
+        AuthMode.pin => l10n.recoveryKeyPin,
+        AuthMode.none => throw _unreachable,
+      };
+
   String localizedNewHint(AppLocalizations l10n) => switch (this) {
         AuthMode.passphrase => l10n.recoveryKeyPassphraseNew,
         AuthMode.pin => l10n.recoveryKeyPinNew,
@@ -245,52 +251,50 @@ extension SnapdFixActionL10n on SnapdFixAction {
         SnapdFixAction.proceed => l10n.tpmActionFixActionProceed,
       };
 
-  String? localizedDescription(
+  // One string per paragraph, since joining translated sentences can read
+  // wrongly in other languages
+  List<String> localizedBody(
     AppLocalizations l10n,
     SnapdAvailabilityCheckErrorKind kind,
   ) =>
       switch (this) {
-        SnapdFixAction.reboot =>
-          kind == SnapdAvailabilityCheckErrorKind.tpmDeviceFailure
-              ? l10n.tpmActionFixActionRebootTpmDeviceFailureDescription
-              : l10n.tpmActionFixActionRebootDescription,
-        SnapdFixAction.shutdown => l10n.tpmActionFixActionShutdownDescription,
-        SnapdFixAction.rebootToFwSettings => switch (kind) {
-            SnapdAvailabilityCheckErrorKind.noSuitablePcrBank ||
-            SnapdAvailabilityCheckErrorKind.noKernelIommu =>
-              l10n.tpmActionFixActionRebootToFwSettingsWithDocsDescription,
-            _ => l10n.tpmActionFixActionRebootToFwSettingsDescription,
-          },
-        SnapdFixAction.proceed => l10n.tpmActionFixActionProceedDescription,
-        _ => null,
-      };
-
-  String? localizedFirmwareHint(
-    AppLocalizations l10n,
-    SnapdAvailabilityCheckErrorKind kind,
-  ) =>
-      switch (this) {
-        SnapdFixAction.rebootToFwSettings => switch (kind) {
-            SnapdAvailabilityCheckErrorKind.invalidSecureBootMode => l10n
-                .tpmActionFixActionRebootToFwSettingsInvalidSecureBootModeHint,
-            SnapdAvailabilityCheckErrorKind.noKernelIommu =>
+        SnapdFixAction.reboot => [
+            kind == SnapdAvailabilityCheckErrorKind.tpmDeviceFailure
+                ? l10n.tpmActionFixActionRebootTpmDeviceFailureDescription
+                : l10n.tpmActionFixActionRebootDescription,
+            l10n.tpmActionFixActionCaveatRetry,
+          ],
+        SnapdFixAction.shutdown => [
+            l10n.tpmActionFixActionShutdownDescription,
+            l10n.tpmActionFixActionCaveatRetry,
+          ],
+        SnapdFixAction.rebootToFwSettings => [
+            switch (kind) {
+              SnapdAvailabilityCheckErrorKind.noSuitablePcrBank ||
+              SnapdAvailabilityCheckErrorKind.noKernelIommu =>
+                l10n.tpmActionFixActionRebootToFwSettingsWithDocsDescription,
+              _ => l10n.tpmActionFixActionRebootToFwSettingsDescription,
+            },
+            if (kind == SnapdAvailabilityCheckErrorKind.invalidSecureBootMode)
+              l10n.tpmActionFixActionRebootToFwSettingsInvalidSecureBootModeHint,
+            if (kind == SnapdAvailabilityCheckErrorKind.noKernelIommu)
               l10n.tpmActionFixActionRebootToFwSettingsNoKernelIommuHint,
-            _ => null,
-          },
-        _ => null,
-      };
-
-  String? localizedCaveat(AppLocalizations l10n) => switch (this) {
-        SnapdFixAction.reboot ||
-        SnapdFixAction.shutdown ||
-        SnapdFixAction.rebootToFwSettings =>
-          l10n.tpmActionFixActionCaveatRetry,
+            l10n.tpmActionFixActionRebootToFwSettingsInstructions,
+            l10n.tpmActionFixActionCaveatRetry,
+          ],
         // These restart too, so the repair has to be started again after them
         SnapdFixAction.enableTpmViaFirmware ||
         SnapdFixAction.enableAndClearTpmViaFirmware ||
         SnapdFixAction.clearTpmViaFirmware =>
-          '${l10n.tpmActionFixActionCaveatConfirm} '
-              '${l10n.tpmActionFixActionCaveatRetry}',
-        _ => null,
+          [
+            l10n.tpmActionFixActionCaveatConfirm,
+            l10n.tpmActionFixActionCaveatRetry,
+          ],
+        SnapdFixAction.proceed => [l10n.tpmActionFixActionProceedDescription],
+        SnapdFixAction.contactOem ||
+        SnapdFixAction.contactOsVendor ||
+        SnapdFixAction.clearTpmSimple ||
+        SnapdFixAction.clearTpm =>
+          [],
       };
 }

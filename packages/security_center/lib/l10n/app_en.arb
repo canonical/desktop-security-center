@@ -181,7 +181,7 @@
     "diskEncryptionPageAddPassphraseDialogBodyMain": "You will need to enter your passphrase every time your computer starts. This passphrase is different from your user password.",
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "If you forget your passphrase, you can regain access to the disk by using the recovery key.",
     "diskEncryptionPageAdditionalSecurityHeader": "Additional security",
-    "diskEncryptionPageAdditionalSecurityBody": "You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.",
+    "diskEncryptionPageAdditionalSecurityBody": "You can set a passphrase or a PIN for additional security. You will need to enter it every time the computer starts.",
     "@diskEncryptionPageAdditionalSecurityBody": {},
     "diskEncryptionPageAdditionalSecurityLearnMore": "Learn more",
     "diskEncryptionPageAddPinDialogSaveButton": "Add",
@@ -209,8 +209,12 @@
     "diskEncryptionPageRepairDialogKeyNotUsed": "Your current recovery key still works. The new key was not used, so you can discard it.",
     "diskEncryptionPageRepairDialogRepair": "Repair",
     "diskEncryptionPageRepairDialogNotNow": "Not now",
+    "diskEncryptionPageRepairDialogRestartBody": "Restart the computer to complete previous actions. Then start the repair again.",
     "diskEncryptionPageRepairDialogRestartNow": "Restart now",
+    "diskEncryptionPageRepairDialogRestartFailed": "Could not restart the computer. Restart it from the system menu instead.",
+    "diskEncryptionPageRepairDialogPowerOffBody": "Power off the computer to complete previous actions. Then start the repair again.",
     "diskEncryptionPageRepairDialogPowerOffNow": "Power off now",
+    "diskEncryptionPageRepairDialogPowerOffFailed": "Could not power off the computer. Power it off from the system menu instead.",
     "recoveryKeyExceptionFileSystemTitle": "Recovery key file not saved",
     "recoveryKeyExceptionDisallowedPathTitle": "Recovery key file cannot be saved in a temporary location",
     "recoveryKeyExceptionUnknownTitle": "Unknown error",
@@ -228,6 +232,7 @@
     "recoveryKeyPassphraseHeader": "Change passphrase",
     "recoveryKeyPassphraseBody": "You need to enter your passphrase every time your computer starts.",
     "recoveryKeyPassphraseButton": "Change passphrase...",
+    "recoveryKeyPassphrase": "Passphrase",
     "recoveryKeyPassphraseCurrent": "Current passphrase",
     "recoveryKeyPassphraseNew": "New passphrase",
     "recoveryKeyPassphraseConfirm": "Confirm passphrase",
@@ -240,6 +245,7 @@
     "recoveryKeyEncrpytionPassphraseHeader": "Encryption passphrase",
     "recoveryKeyPinBody": "You need to enter your PIN every time your computer starts.",
     "recoveryKeyPinButton": "Change PIN...",
+    "recoveryKeyPin": "PIN",
     "recoveryKeyPinCurrent": "Current PIN",
     "recoveryKeyPinNew": "New PIN",
     "recoveryKeyPinConfirm": "Confirm PIN",
@@ -276,16 +282,7 @@
             }
         }
     },
-    "tpmActionSingleSolutionLabel": "Solution: {text}",
-    "@tpmActionSingleSolutionLabel": {
-        "placeholders": {
-            "text": {
-                "type": "String"
-            }
-        }
-    },
     "tpmActionErrorSupportLabel": "Try the solutions below or contact IT support.",
-    "tpmActionErrorSupportSingleLabel": "Try the solution below or contact IT support.",
     "tpmActionErrorKindInternal": "Internal error.",
     "tpmActionErrorKindShutdownRequired": "Power off is required.",
     "tpmActionErrorKindRebootRequired": "Restart is required.",
@@ -347,7 +344,7 @@
     "tpmActionFixActionClearTpmWarningBody": "You will lose access to all data in encrypted drives for which you do not have recovery keys. It will also break other features that depend on the TPM, such as authentication and certificates.",
     "tpmActionFixActionClearTpmConfirmationLabel": "I understand the risk",
     "tpmActionFixActionCaveatConfirm": "You might be asked to confirm this action on restart.",
-    "tpmActionFixActionCaveatRetry": "Then you will need to start the repair again.",
+    "tpmActionFixActionCaveatRetry": "Then start the repair again.",
     "ubuntuProPageTitle": "Ubuntu Pro",
     "ubuntuProNotSupported": "Ubuntu Pro is not available for this Ubuntu version",
 
