@@ -756,7 +756,7 @@ abstract class AppLocalizations {
   /// No description provided for @diskEncryptionPageAdditionalSecurityBody.
   ///
   /// In en, this message translates to:
-  /// **'You can set a passphrase or a PIN for additional security. You will need to enter it every time your computer starts.'**
+  /// **'You can set a passphrase or a PIN for additional security. You will need to enter it every time the computer starts.'**
   String get diskEncryptionPageAdditionalSecurityBody;
 
   /// No description provided for @diskEncryptionPageAdditionalSecurityLearnMore.
@@ -915,17 +915,41 @@ abstract class AppLocalizations {
   /// **'Not now'**
   String get diskEncryptionPageRepairDialogNotNow;
 
+  /// No description provided for @diskEncryptionPageRepairDialogRestartBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart the computer to complete previous actions. Then start the repair again.'**
+  String get diskEncryptionPageRepairDialogRestartBody;
+
   /// No description provided for @diskEncryptionPageRepairDialogRestartNow.
   ///
   /// In en, this message translates to:
   /// **'Restart now'**
   String get diskEncryptionPageRepairDialogRestartNow;
 
+  /// No description provided for @diskEncryptionPageRepairDialogRestartFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not restart the computer. Restart it from the system menu instead.'**
+  String get diskEncryptionPageRepairDialogRestartFailed;
+
+  /// No description provided for @diskEncryptionPageRepairDialogPowerOffBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Power off the computer to complete previous actions. Then start the repair again.'**
+  String get diskEncryptionPageRepairDialogPowerOffBody;
+
   /// No description provided for @diskEncryptionPageRepairDialogPowerOffNow.
   ///
   /// In en, this message translates to:
   /// **'Power off now'**
   String get diskEncryptionPageRepairDialogPowerOffNow;
+
+  /// No description provided for @diskEncryptionPageRepairDialogPowerOffFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not power off the computer. Power it off from the system menu instead.'**
+  String get diskEncryptionPageRepairDialogPowerOffFailed;
 
   /// No description provided for @recoveryKeyExceptionFileSystemTitle.
   ///
@@ -1029,6 +1053,12 @@ abstract class AppLocalizations {
   /// **'Change passphrase...'**
   String get recoveryKeyPassphraseButton;
 
+  /// No description provided for @recoveryKeyPassphrase.
+  ///
+  /// In en, this message translates to:
+  /// **'Passphrase'**
+  String get recoveryKeyPassphrase;
+
   /// No description provided for @recoveryKeyPassphraseCurrent.
   ///
   /// In en, this message translates to:
@@ -1100,6 +1130,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change PIN...'**
   String get recoveryKeyPinButton;
+
+  /// No description provided for @recoveryKeyPin.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN'**
+  String get recoveryKeyPin;
 
   /// No description provided for @recoveryKeyPinCurrent.
   ///
@@ -1257,23 +1293,11 @@ abstract class AppLocalizations {
   /// **'Solution {n}: {text}'**
   String tpmActionSolutionLabel(int n, String text);
 
-  /// No description provided for @tpmActionSingleSolutionLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Solution: {text}'**
-  String tpmActionSingleSolutionLabel(String text);
-
   /// No description provided for @tpmActionErrorSupportLabel.
   ///
   /// In en, this message translates to:
   /// **'Try the solutions below or contact IT support.'**
   String get tpmActionErrorSupportLabel;
-
-  /// No description provided for @tpmActionErrorSupportSingleLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Try the solution below or contact IT support.'**
-  String get tpmActionErrorSupportSingleLabel;
 
   /// No description provided for @tpmActionErrorKindInternal.
   ///
@@ -1644,7 +1668,7 @@ abstract class AppLocalizations {
   /// No description provided for @tpmActionFixActionCaveatRetry.
   ///
   /// In en, this message translates to:
-  /// **'Then you will need to start the repair again.'**
+  /// **'Then start the repair again.'**
   String get tpmActionFixActionCaveatRetry;
 
   /// No description provided for @ubuntuProPageTitle.
