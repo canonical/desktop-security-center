@@ -207,11 +207,11 @@ extension SnapdFixActionL10n on SnapdFixAction {
       switch (this) {
         SnapdFixAction.reboot => l10n.tpmActionFixActionReboot,
         SnapdFixAction.shutdown => l10n.tpmActionFixActionShutdown,
+        SnapdFixAction.rebootToFwSettings when clearsTpm(kind) =>
+          l10n.tpmActionFixActionRebootToFwSettingsClearTpm,
         SnapdFixAction.rebootToFwSettings => switch (kind) {
             SnapdAvailabilityCheckErrorKind.insufficientDmaProtection => l10n
                 .tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection,
-            SnapdAvailabilityCheckErrorKind.insufficientTpmStorage =>
-              l10n.tpmActionFixActionRebootToFwSettingsInsufficientTpmStorage,
             SnapdAvailabilityCheckErrorKind.invalidSecureBootMode =>
               l10n.tpmActionFixActionRebootToFwSettingsInvalidSecureBootMode,
             SnapdAvailabilityCheckErrorKind.noKernelIommu =>
@@ -220,10 +220,6 @@ extension SnapdFixActionL10n on SnapdFixAction {
               l10n.tpmActionFixActionRebootToFwSettingsNoSuitablePcrBank,
             SnapdAvailabilityCheckErrorKind.tpmDeviceDisabled =>
               l10n.tpmActionFixActionRebootToFwSettingsTpmDeviceDisabled,
-            SnapdAvailabilityCheckErrorKind.tpmDeviceLockoutLockedOut => l10n
-                .tpmActionFixActionRebootToFwSettingsTpmDeviceLockoutLockedOut,
-            SnapdAvailabilityCheckErrorKind.tpmHierarchiesOwned =>
-              l10n.tpmActionFixActionRebootToFwSettingsTpmHierarchiesOwned,
             SnapdAvailabilityCheckErrorKind.absolutePresent =>
               l10n.tpmActionFixActionRebootToFwSettingsAbsolutePresent,
             _ => l10n.tpmActionFixActionRebootToFwSettings,

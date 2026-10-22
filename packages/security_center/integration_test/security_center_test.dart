@@ -86,7 +86,7 @@ void main() {
     );
     await tester.enterText(textFields.at(0), 'newpass');
     await tester.enterText(textFields.at(1), 'newpass');
-    await tester.pumpAndSettle(ChangeAuthDialogModel.debounceDuration);
+    await tester.pumpAndSettle(ChangeAuthModeDialogModel.debounceDuration);
     await tester.tap(continueButton);
     await tester.pumpAndSettle();
 

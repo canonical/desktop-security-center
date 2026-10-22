@@ -4,8 +4,5 @@ import 'package:security_center/services/power_service.dart';
 // power off
 class FakePowerService implements PowerService {
   @override
-  Future<void> reboot() async {}
-
-  @override
-  Future<void> powerOff() async {}
+  Future<void> run(PowerAction action) async {}
 }

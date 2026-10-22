@@ -90,7 +90,8 @@ Future<void> main(List<String> args) async {
     );
   }
 
-  // Register disk encryption service
+  // Register disk encryption service, and the power service for the repair
+  // steps that restart or power off
   if (featureService.isDryRun) {
     registerService<DiskEncryptionService>(
       () => FakeDiskEncryptionService.fromFile(
@@ -100,16 +101,11 @@ Future<void> main(List<String> args) async {
         ),
       ),
     );
+    registerService<PowerService>(FakePowerService.new);
   } else {
     registerService<DiskEncryptionService>(
       () => SnapdDiskEncryptionService(getService<SnapdService>()),
     );
-  }
-
-  // Register power service, for the repair steps that restart or power off
-  if (featureService.isDryRun) {
-    registerService<PowerService>(FakePowerService.new);
-  } else {
     registerService<PowerService>(PowerService.new);
   }
 

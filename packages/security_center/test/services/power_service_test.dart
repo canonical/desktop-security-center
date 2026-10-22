@@ -8,17 +8,9 @@ import 'power_service_test.mocks.dart';
 
 @GenerateMocks([DBusClient])
 void main() {
-  final cases = <({
-    String name,
-    Future<void> Function(PowerService service) call,
-    String method,
-  })>[
-    (name: 'restarts', call: (service) => service.reboot(), method: 'Reboot'),
-    (
-      name: 'powers off',
-      call: (service) => service.powerOff(),
-      method: 'PowerOff',
-    ),
+  final cases = [
+    (name: 'restarts', action: PowerAction.reboot, method: 'Reboot'),
+    (name: 'powers off', action: PowerAction.powerOff, method: 'PowerOff'),
   ];
 
   for (final tc in cases) {
@@ -37,7 +29,7 @@ void main() {
         ),
       ).thenAnswer((_) async => DBusMethodSuccessResponse());
 
-      await tc.call(PowerService(client: client));
+      await PowerService(client: client).run(tc.action);
 
       verify(
         client.callMethod(
