@@ -2,6 +2,7 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/disk_encryption/dialog_design.dart';
 import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
@@ -71,6 +72,9 @@ class RecoveryKeyPanel extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final key = recoveryKey.valueOrNull;
     final error = saveError;
+    // Fills the field's suffix slot, so the 24 px icon isn't squeezed into
+    // Yaru's 20 px default button
+    const copyButtonSize = 32.0;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -85,44 +89,52 @@ class RecoveryKeyPanel extends ConsumerWidget {
             decoration: InputDecoration(
               labelText: l10n.diskEncryptionPageRecoveryKey,
               suffixIcon: YaruIconButton(
+                iconSize: copyButtonSize,
                 tooltip: l10n.diskEncryptionPageCopySemanticLabel,
                 icon: Icon(
                   YaruIcons.copy,
-                  size: 16,
+                  size: 24,
                   semanticLabel: l10n.diskEncryptionPageCopySemanticLabel,
                 ),
                 onPressed: () => _copyToClipboard(context, key),
               ),
               suffixIconConstraints: BoxConstraints(
-                maxWidth: 32,
-                maxHeight: 32,
+                maxWidth: copyButtonSize,
+                maxHeight: copyButtonSize,
               ),
             ),
             readOnly: true,
             minLines: 1,
             maxLines: 2,
           ),
-        Row(
-          children: [
-            OutlinedButton(
-              onPressed: actionsEnabled && key != null
-                  ? () => _saveToFile(context, ref, key)
-                  : null,
-              child: Text(l10n.diskEncryptionPageReplaceDialogSave),
-            ),
-            OutlinedButton(
-              onPressed: actionsEnabled && key != null
-                  ? () => showDialog(
-                        context: context,
-                        builder: (_) => _RecoveryKeyQRDialog(recoveryKey: key),
-                      )
-                  : null,
-              child: Text(l10n.diskEncryptionPageReplaceDialogShowQR),
-            ),
-          ].separatedBy(const SizedBox(width: 16)),
+        // Start-aligned like a Row, since the Column centres a Wrap
+        Align(
+          alignment: AlignmentDirectional.centerStart,
+          child: Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              OutlinedButton(
+                onPressed: actionsEnabled && key != null
+                    ? () => _saveToFile(context, ref, key)
+                    : null,
+                child: Text(l10n.diskEncryptionPageReplaceDialogSave),
+              ),
+              OutlinedButton(
+                onPressed: actionsEnabled && key != null
+                    ? () => showDialog(
+                          context: context,
+                          builder: (_) =>
+                              _RecoveryKeyQRDialog(recoveryKey: key),
+                        )
+                    : null,
+                child: Text(l10n.diskEncryptionPageReplaceDialogShowQR),
+              ),
+            ],
+          ),
         ),
         if (error != null)
-          YaruInfoBox(
+          DialogInfoBox(
             title: Text(error.localizedTitle(l10n)),
             subtitle: Text(error.localizedBody(l10n)),
             yaruInfoType: YaruInfoType.danger,
@@ -140,27 +152,35 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    return AlertDialog(
-      title: YaruDialogTitleBar(
-        title: Text(l10n.diskEncryptionPageReplaceDialogQRHeader),
-      ),
-      titlePadding: EdgeInsets.zero,
-      content: SizedBox(
-        width: 460,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(l10n.diskEncryptionPageReplaceDialogQRBody),
-            BarcodeWidget(
-              margin: const EdgeInsets.all(16),
-              color: Theme.of(context).colorScheme.onSurface,
-              barcode: Barcode.qrCode(),
-              data: recoveryKey,
-              width: 200,
-              height: 200,
-            ),
-            Text(recoveryKey),
-          ],
+    return DialogDesignTheme(
+      child: AlertDialog(
+        title: YaruDialogTitleBar(
+          title: Text(l10n.diskEncryptionPageReplaceDialogQRHeader),
+          shape: dialogTitleBarShape,
+        ),
+        titlePadding: EdgeInsets.zero,
+        contentPadding: dialogContentPadding,
+        content: SizedBox(
+          width: 435,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(l10n.diskEncryptionPageReplaceDialogQRBody),
+              BarcodeWidget(
+                margin: const EdgeInsets.all(16),
+                // Black on white in the dark theme too, as QR readers expect
+                backgroundColor: Colors.white,
+                barcode: Barcode.qrCode(),
+                data: recoveryKey,
+                // The 4-module blank border that QR readers need, as in the
+                // design: a recovery key's code is 29 modules, 37 with the border
+                padding: const EdgeInsets.all(200 * 4 / 37),
+                width: 200,
+                height: 200,
+              ),
+              Text(recoveryKey),
+            ],
+          ),
         ),
       ),
     );

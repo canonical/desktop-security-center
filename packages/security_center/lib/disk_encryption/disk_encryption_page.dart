@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:security_center/disk_encryption/dialog_design.dart';
 import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/disk_encryption/recovery_key_panel.dart';
@@ -131,14 +132,18 @@ class CheckRecoveryKeyDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return AlertDialog(
-      title: YaruDialogTitleBar(
-        title: Text(l10n.diskEncryptionPageDialogHeaderCheckKey),
-      ),
-      titlePadding: EdgeInsets.zero,
-      content: const SizedBox(
-        width: 460,
-        child: _RecoveryKeyCheck(),
+    return DialogDesignTheme(
+      child: AlertDialog(
+        title: YaruDialogTitleBar(
+          title: Text(l10n.diskEncryptionPageDialogHeaderCheckKey),
+          shape: dialogTitleBarShape,
+        ),
+        titlePadding: EdgeInsets.zero,
+        contentPadding: dialogContentPadding,
+        content: const SizedBox(
+          width: 435,
+          child: _RecoveryKeyCheck(),
+        ),
       ),
     );
   }
@@ -183,19 +188,19 @@ class _RecoveryKeyCheck extends ConsumerWidget {
         ),
         if (data is CheckRecoveryKeyDialogStateResult)
           if (data.valid)
-            YaruInfoBox(
+            DialogInfoBox(
               title: Text(l10n.diskEncryptionPageKeyWorks),
               subtitle: Text(l10n.diskEncryptionPageKeyWorksBody),
               yaruInfoType: YaruInfoType.success,
             )
           else
-            YaruInfoBox(
+            DialogInfoBox(
               title: Text(l10n.diskEncryptionPageKeyDoesntWork),
               subtitle: Text(l10n.diskEncryptionPageKeyDoesntWorkBody),
               yaruInfoType: YaruInfoType.danger,
             ),
         if (data is CheckRecoveryKeyDialogStateError)
-          YaruInfoBox(
+          DialogInfoBox(
             title: Text(l10n.recoveryKeySomethingWentWrongHeader),
             subtitle: Text(data.e.toString()),
             yaruInfoType: YaruInfoType.danger,
@@ -210,6 +215,29 @@ void showReplaceRecoveryKeyDialog(BuildContext context) {
     context: context,
     builder: (_) => const ReplaceRecoveryKeyDialog(),
   );
+}
+
+// Shows the panel's snack bar above the barrier. The Scaffold takes Esc for a
+// drawer even when it has none, so this hands Esc back to the dialog
+class _DialogScaffold extends StatelessWidget {
+  const _DialogScaffold({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Actions(
+        actions: <Type, Action<Intent>>{
+          DismissIntent: CallbackAction<DismissIntent>(
+            onInvoke: (_) => Navigator.of(context).maybePop(),
+          ),
+        },
+        child: child,
+      ),
+    );
+  }
 }
 
 class ReplaceRecoveryKeyDialog extends ConsumerWidget {
@@ -233,98 +261,112 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
         Navigator.of(context).pop();
       });
     }
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: AlertDialog(
-        title: YaruDialogTitleBar(
-          title: Text(l10n.diskEncryptionPageReplaceDialogHeader),
-        ),
-        titlePadding: EdgeInsets.zero,
-        content: SizedBox(
-          width: 460,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(l10n.diskEncryptionPageReplaceDialogBody),
-                RecoveryKeyPanel(
-                  recoveryKey: recoveryKey.whenData((r) => r.recoveryKey),
-                  actionsEnabled: replaceDialogState
-                          is! ReplaceRecoveryKeyDialogStateGenerating &&
-                      replaceDialogState is! ReplaceRecoveryKeyDialogStateError,
-                  saveError: replaceDialogError,
-                  onSaveErrorChanged: replaceNotifier.setError,
-                  onSaveToFile: replaceNotifier.writeRecoveryKey,
-                ),
-                YaruCheckButton(
-                  title: Text(
-                    l10n.diskEncryptionPageReplaceDialogAcknowledge,
-                    maxLines: 2,
-                    // TODO: remove hardcoded style once this is avialable in yaru.
-                    style: Theme.of(context).textTheme.bodyMedium,
+    return _DialogScaffold(
+      child: DialogDesignTheme(
+        child: AlertDialog(
+          title: YaruDialogTitleBar(
+            title: Text(l10n.diskEncryptionPageReplaceDialogHeader),
+            shape: dialogTitleBarShape,
+          ),
+          titlePadding: EdgeInsets.zero,
+          contentPadding: dialogContentPadding,
+          content: SizedBox(
+            width: 435,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(l10n.diskEncryptionPageReplaceDialogBody),
+                  RecoveryKeyPanel(
+                    recoveryKey: recoveryKey.whenData((r) => r.recoveryKey),
+                    actionsEnabled: replaceDialogState
+                            is! ReplaceRecoveryKeyDialogStateGenerating &&
+                        replaceDialogState
+                            is! ReplaceRecoveryKeyDialogStateError,
+                    saveError: replaceDialogError,
+                    onSaveErrorChanged: replaceNotifier.setError,
+                    onSaveToFile: replaceNotifier.writeRecoveryKey,
                   ),
-                  value:
-                      replaceDialogState is ReplaceRecoveryKeyDialogStateInput
-                          ? replaceDialogState.acknowledged
-                          : false,
-                  onChanged: replaceDialogState
-                          is ReplaceRecoveryKeyDialogStateInput
-                      ? (value) => replaceNotifier.acknowledge(value ?? false)
-                      : null,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    OutlinedButton(
-                      onPressed: replaceDialogState
-                              is ReplaceRecoveryKeyDialogStateInput
-                          ? () => Navigator.of(context).pop()
-                          : null,
-                      child: Text(l10n.diskEncryptionPageReplaceDialogDiscard),
+                  // 28 px below the key's buttons, as in the design
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: DialogToggle(
+                      height: 24,
+                      indent: 4,
+                      child: YaruCheckButton(
+                        title: Text(
+                          l10n.diskEncryptionPageReplaceDialogAcknowledge,
+                          maxLines: 2,
+                          // TODO: remove hardcoded style once this is avialable in yaru.
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        value: replaceDialogState
+                                is ReplaceRecoveryKeyDialogStateInput
+                            ? replaceDialogState.acknowledged
+                            : false,
+                        onChanged: replaceDialogState
+                                is ReplaceRecoveryKeyDialogStateInput
+                            ? (value) =>
+                                replaceNotifier.acknowledge(value ?? false)
+                            : null,
+                      ),
                     ),
-                    ElevatedButton(
-                      onPressed: replaceDialogState
-                                  is ReplaceRecoveryKeyDialogStateInput &&
-                              replaceDialogState.acknowledged == true &&
-                              !recoveryKey.isLoading
-                          ? () => replaceNotifier.replaceRecoveryKey(
-                                recoveryKey.value!.keyId,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      OutlinedButton(
+                        onPressed: replaceDialogState
+                                is ReplaceRecoveryKeyDialogStateInput
+                            ? () => Navigator.of(context).pop()
+                            : null,
+                        child:
+                            Text(l10n.diskEncryptionPageReplaceDialogDiscard),
+                      ),
+                      ElevatedButton(
+                        onPressed: replaceDialogState
+                                    is ReplaceRecoveryKeyDialogStateInput &&
+                                replaceDialogState.acknowledged == true &&
+                                !recoveryKey.isLoading
+                            ? () => replaceNotifier.replaceRecoveryKey(
+                                  recoveryKey.value!.keyId,
+                                )
+                            : null,
+                        child: replaceDialogState
+                                is ReplaceRecoveryKeyDialogStateLoading
+                            ? SizedBox.square(
+                                dimension: yaruProgressSize,
+                                child: YaruCircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
                               )
-                          : null,
-                      child: replaceDialogState
-                              is ReplaceRecoveryKeyDialogStateLoading
-                          ? SizedBox.square(
-                              dimension: yaruProgressSize,
-                              child: YaruCircularProgressIndicator(
-                                strokeWidth: 2,
+                            : Text(
+                                l10n.diskEncryptionPageReplaceDialogReplace,
                               ),
-                            )
-                          : Text(
-                              l10n.diskEncryptionPageReplaceDialogReplace,
-                            ),
-                    ),
-                  ].separatedBy(const SizedBox(width: 16)),
-                ),
-                if (recoveryKey.isLoading) SizedBox.shrink(),
-                if (replaceDialogState
-                        is ReplaceRecoveryKeyDialogStateSuccess &&
-                    replaceDialogError == null)
-                  YaruInfoBox(
-                    title: Text(
-                      l10n.diskEncryptionPageReplaceDialogSuccessHeader,
-                    ),
-                    subtitle: Text(
-                      l10n.diskEncryptionPageReplaceDialogSuccessBody,
-                    ),
-                    yaruInfoType: YaruInfoType.success,
+                      ),
+                    ].separatedBy(const SizedBox(width: 10)),
                   ),
-                if (replaceDialogState is ReplaceRecoveryKeyDialogStateError)
-                  YaruInfoBox(
-                    title: Text(l10n.recoveryKeySomethingWentWrongHeader),
-                    subtitle: Text(replaceDialogState.e.toString()),
-                    yaruInfoType: YaruInfoType.danger,
-                  ),
-              ].separatedBy(const SizedBox(height: 16)),
+                  if (recoveryKey.isLoading) SizedBox.shrink(),
+                  if (replaceDialogState
+                          is ReplaceRecoveryKeyDialogStateSuccess &&
+                      replaceDialogError == null)
+                    DialogInfoBox(
+                      title: Text(
+                        l10n.diskEncryptionPageReplaceDialogSuccessHeader,
+                      ),
+                      subtitle: Text(
+                        l10n.diskEncryptionPageReplaceDialogSuccessBody,
+                      ),
+                      yaruInfoType: YaruInfoType.success,
+                    ),
+                  if (replaceDialogState is ReplaceRecoveryKeyDialogStateError)
+                    DialogInfoBox(
+                      title: Text(l10n.recoveryKeySomethingWentWrongHeader),
+                      subtitle: Text(replaceDialogState.e.toString()),
+                      yaruInfoType: YaruInfoType.danger,
+                    ),
+                ].separatedBy(const SizedBox(height: 16)),
+              ),
             ),
           ),
         ),
