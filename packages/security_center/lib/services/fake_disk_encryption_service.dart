@@ -21,22 +21,6 @@ enum FakeRepairScenario {
       ],
     ),
   ]),
-  firmwareSettings('firmware-settings', [
-    SnapdAvailabilityCheckError(
-      kind: SnapdAvailabilityCheckErrorKind.invalidSecureBootMode,
-      message:
-          'error with secure boot policy (PCR7) measurements: secure boot is enabled but not in deployed mode',
-      actions: [SnapdFixAction.rebootToFwSettings],
-    ),
-  ]),
-  contactOem('contact-oem', [
-    SnapdAvailabilityCheckError(
-      kind: SnapdAvailabilityCheckErrorKind.hostSecurity,
-      message:
-          'error with system security: CPU debugging features are not disabled and locked',
-      actions: [SnapdFixAction.contactOem],
-    ),
-  ]),
 
   /// `proceed` makes snapd require a PIN or passphrase.
   noHardwareRootOfTrust('no-hardware-root-of-trust', [
@@ -123,7 +107,8 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   }
 
   String _randomRecoveryKey() {
-    final lastSegment = Random().nextInt(100000).toString().padLeft(5, '0');
+    // Each segment is a 16-bit number, zero-extended to 5 digits
+    final lastSegment = Random().nextInt(65536).toString().padLeft(5, '0');
     return '55055-39320-64491-48436-47667-15525-36879-$lastSegment';
   }
 
@@ -161,7 +146,12 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
             _recoveryKeys['default-recovery'] == recoveryKey)) {
       return;
     }
-    throw Exception('Recovery key does not work');
+    // snapd rejects a wrong key with this kind, which the dialogs show as a
+    // result rather than an error
+    throw SnapdException(
+      message: 'recovery key does not work',
+      kind: 'invalid-recovery-key',
+    );
   }
 
   @override
@@ -280,10 +270,13 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
     }
     return SnapdStorageEncryptedResponse(
-      // Not `recovery`, so clearing the TPM checks the recovery key first
-      status: repairScenario == FakeRepairScenario.tpmDisabled
-          ? SnapdStorageEncryptionStatus.degraded
-          : SnapdStorageEncryptionStatus.recovery,
+      // A completed repair leaves the system operating normally again
+      status: _repaired
+          ? SnapdStorageEncryptionStatus.active
+          // Not `recovery`, so clearing the TPM checks the recovery key first
+          : repairScenario == FakeRepairScenario.tpmDisabled
+              ? SnapdStorageEncryptionStatus.degraded
+              : SnapdStorageEncryptionStatus.recovery,
       autoRepairResult: SnapdAutoRepairResult.failedKeyslots,
       recommendations: [
         if (!_repaired) SnapdRecommendedRemedialAction.requireReprovision,
@@ -294,7 +287,6 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
   @override
   Future<SnapdStorageEncryption> checkEncryptionSupport() async {
     _issues = repairScenario.issues;
-    _volumesAuthRequired = false;
     return _storageEncryption();
   }
 

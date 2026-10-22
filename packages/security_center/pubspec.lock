@@ -981,7 +981,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
+      ref: f29c91e3292f139617311da23d5ae76cc98320cd
       resolved-ref: f29c91e3292f139617311da23d5ae76cc98320cd
       url: "https://github.com/canonical/snapd.dart.git"
     source: git
