@@ -6,11 +6,15 @@ class Hyperlink extends StatelessWidget {
   const Hyperlink({
     required this.text,
     required this.url,
+    this.style,
     super.key,
   });
 
   final String text;
   final String url;
+
+  /// Merged over the default style: the accent colour, underlined.
+  final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,7 @@ class Hyperlink extends StatelessWidget {
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             decoration: TextDecoration.underline,
-          ),
+          ).merge(style),
         ),
       ),
     );
