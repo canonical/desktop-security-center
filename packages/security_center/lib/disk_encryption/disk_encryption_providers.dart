@@ -75,15 +75,20 @@ extension SnapdFixActionRepair on SnapdFixAction {
           false,
       };
 
-  bool get clearsTpm => switch (this) {
+  bool clearsTpm(SnapdAvailabilityCheckErrorKind kind) => switch (this) {
         SnapdFixAction.enableAndClearTpmViaFirmware ||
         SnapdFixAction.clearTpmViaFirmware ||
         SnapdFixAction.clearTpmSimple ||
         SnapdFixAction.clearTpm =>
           true,
+        // For these issues, the user clears the TPM in the firmware settings
+        SnapdFixAction.rebootToFwSettings => const {
+            SnapdAvailabilityCheckErrorKind.insufficientTpmStorage,
+            SnapdAvailabilityCheckErrorKind.tpmDeviceLockoutLockedOut,
+            SnapdAvailabilityCheckErrorKind.tpmHierarchiesOwned,
+          }.contains(kind),
         SnapdFixAction.reboot ||
         SnapdFixAction.shutdown ||
-        SnapdFixAction.rebootToFwSettings ||
         SnapdFixAction.contactOem ||
         SnapdFixAction.contactOsVendor ||
         SnapdFixAction.enableTpmViaFirmware ||
@@ -509,6 +514,10 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   @visibleForTesting
   static Duration initialRetryDelay = const Duration(seconds: 2);
 
+  // shortcut: forgotten when the app restarts; store it per boot if people
+  // reopen the app before restarting and repair again
+  var _repaired = false;
+
   @override
   Future<TpmAuthState> build() async {
     return _fetchState();
@@ -584,8 +593,10 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
       return TpmAuthState(
         currentAuthMode: currentAuthMode,
-        needsRepair:
-            storageStatus.needsRepair && _featureService.supportsReprovision,
+        // snapd keeps asking for the repair until the computer restarts
+        needsRepair: storageStatus.needsRepair &&
+            _featureService.supportsReprovision &&
+            !_repaired,
         unlockedWithRecoveryKey:
             storageStatus.status == SnapdStorageEncryptionStatus.recovery,
       );
@@ -667,13 +678,20 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
       ),
     );
 
+    var reprovisioned = false;
     try {
       await _service.reprovision(onAuthorized: onAuthorized);
+      reprovisioned = true;
+      _repaired = true;
+      // Kept if the status check fails: the new keys need no repair, and have
+      // no PIN or passphrase until one is added below
+      state = AsyncData(
+        state.value!.copyWith(
+          needsRepair: false,
+          currentAuthMode: AuthMode.none,
+        ),
+      );
       state = AsyncData(await _fetchState());
-      // The new keys have no PIN or passphrase, so enrol the chosen one
-      if (newMode != null && newMode != AuthMode.none) {
-        await changeAuthMode(newMode, passphrase: passphrase);
-      }
     } on Exception catch (e) {
       final exception =
           TpmFdeOperationException.from(e, TpmFdeOperation.repair);
@@ -683,6 +701,12 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
           operationError: exception,
         ),
       );
+    }
+
+    // Enrol even if the status check failed, or the disk goes on unlocking
+    // without the chosen PIN or passphrase
+    if (reprovisioned && newMode != null && newMode != AuthMode.none) {
+      await changeAuthMode(newMode, passphrase: passphrase);
     }
   }
 
@@ -1124,12 +1148,12 @@ class RepairDialogModel extends _$RepairDialogModel {
       _ => throw StateError('There is no issue to fix in $current'),
     };
     assert(
-      issue.actions.contains(action) && !action.isExternal,
-      'Only a fix that snapd runs for the current issue can be applied',
+      issue.actions.contains(action),
+      'Only a fix for the current issue can be applied',
     );
     // Clearing the TPM can lock the user out of the disk unless they have the
     // recovery key, so the key has to work before the fix runs
-    if (action.clearsTpm &&
+    if (action.clearsTpm(issue.kind) &&
         !ref
             .read(tpmAuthenticationModelProvider)
             .value!
@@ -1138,6 +1162,13 @@ class RepairDialogModel extends _$RepairDialogModel {
             CheckRecoveryKeyDialogState.result(true)) {
       state = state.copyWith(
         dialogState: RepairDialogState.checkKey(issue, action),
+      );
+      return;
+    }
+    // The user does this one, so they confirm before it restarts or powers off
+    if (action.isExternal) {
+      state = state.copyWith(
+        dialogState: RepairDialogState.confirmPowerAction(issue, action),
       );
       return;
     }
@@ -1164,18 +1195,6 @@ class RepairDialogModel extends _$RepairDialogModel {
     }
   }
 
-  void continueToPowerAction(SnapdFixAction action) {
-    assert(state.dialogState is RepairDialogStateIssue);
-    final issue = (state.dialogState as RepairDialogStateIssue).issue;
-    assert(
-      issue.actions.contains(action) && action.isExternal,
-      'Only a fix that the user does for the current issue can be confirmed',
-    );
-    state = state.copyWith(
-      dialogState: RepairDialogState.confirmPowerAction(issue, action),
-    );
-  }
-
   Future<void> runPowerAction() async {
     assert(state.dialogState is RepairDialogStateConfirmPowerAction);
     final confirm = state.dialogState as RepairDialogStateConfirmPowerAction;
@@ -1199,6 +1218,8 @@ class RepairDialogModel extends _$RepairDialogModel {
       await request();
       // Stays pending, since logind ends the session soon
     } on Exception catch (e) {
+      // The dialog shows what the user can do instead of this error
+      _log.error('Failed to restart or power off: $e');
       if (flow != _flow) return;
       state = state.copyWith(
         dialogState: confirm.copyWith(pending: false, error: e),

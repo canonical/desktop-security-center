@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:security_center/widgets/hyperlink.dart';
 import 'package:yaru/yaru.dart';
 
 // The disk encryption design's sizes, which differ from Yaru's
@@ -164,6 +165,33 @@ class DialogInfoBox extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// A [Hyperlink] as the design draws links: in Yaru's link colour, not
+/// underlined, in a row 20 px tall.
+class DialogHyperlink extends StatelessWidget {
+  const DialogHyperlink({required this.text, required this.url, super.key});
+
+  final String text;
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    final fontSize =
+        DefaultTextStyle.of(context).style.fontSize ?? kDefaultFontSize;
+    return DefaultTextStyle.merge(
+      // Hyperlink pads its line by 1 px on each side for its focus border
+      style: TextStyle(height: 18 / fontSize),
+      child: Hyperlink(
+        text: text,
+        url: url,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.link,
+          decoration: TextDecoration.none,
+        ),
       ),
     );
   }
