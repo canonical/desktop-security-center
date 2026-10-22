@@ -10,21 +10,22 @@ import 'package:yaru/yaru.dart';
 
 const defaultRecoveryKeyFileName = 'recovery-key.txt';
 
-class RecoveryKeyPanel extends ConsumerWidget {
+class RecoveryKeyPanel extends ConsumerStatefulWidget {
   const RecoveryKeyPanel({
     required this.recoveryKey,
     required this.actionsEnabled,
-    required this.saveError,
-    required this.onSaveErrorChanged,
-    required this.onSaveToFile,
     super.key,
   });
 
   final AsyncValue<String> recoveryKey;
   final bool actionsEnabled;
-  final RecoveryKeyException? saveError;
-  final void Function(RecoveryKeyException? error) onSaveErrorChanged;
-  final Future<void> Function(Uri uri, String recoveryKey) onSaveToFile;
+
+  @override
+  ConsumerState<RecoveryKeyPanel> createState() => RecoveryKeyPanelState();
+}
+
+class RecoveryKeyPanelState extends ConsumerState<RecoveryKeyPanel> {
+  RecoveryKeyException? _saveError;
 
   void _copyToClipboard(BuildContext context, String text) {
     final l10n = AppLocalizations.of(context);
@@ -41,7 +42,9 @@ class RecoveryKeyPanel extends ConsumerWidget {
   ) async {
     final l10n = AppLocalizations.of(context);
     final filePicker = ref.read(filePickerProvider);
-    onSaveErrorChanged(null);
+    final fileSystem = ref.read(fileSystemProvider);
+    setState(() => _saveError = null);
+    RecoveryKeyException? error;
     try {
       final uri = await filePicker(
         context: context,
@@ -55,27 +58,30 @@ class RecoveryKeyPanel extends ConsumerWidget {
         ],
       );
       if (uri.toString() == '') {
-        onSaveErrorChanged(RecoveryKeyExceptionFilePermission());
-        return;
-      }
-      if (uri != null) {
-        await onSaveToFile(uri, key);
+        error = RecoveryKeyExceptionFilePermission();
+      } else if (uri != null) {
+        await fileSystem.file(uri.path).writeAsString(key);
       }
     } on Exception catch (e) {
-      onSaveErrorChanged(RecoveryKeyException.from(e));
+      error = RecoveryKeyException.from(e);
     }
+    // The dialog can close while the file picker is open
+    if (mounted) setState(() => _saveError = error);
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final key = recoveryKey.valueOrNull;
-    final error = saveError;
+    final key = widget.recoveryKey.valueOrNull;
+    final error = _saveError;
+    // The copy button fills the field's suffix slot, so its 24 px icon isn't
+    // squeezed into Yaru's 20 px default button
+    const copyButtonSize = 32.0;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (recoveryKey is AsyncLoading)
+        if (widget.recoveryKey is AsyncLoading)
           YaruLinearProgressIndicator()
         else if (key != null)
           TextFormField(
@@ -85,17 +91,18 @@ class RecoveryKeyPanel extends ConsumerWidget {
             decoration: InputDecoration(
               labelText: l10n.diskEncryptionPageRecoveryKey,
               suffixIcon: YaruIconButton(
+                iconSize: copyButtonSize,
                 tooltip: l10n.diskEncryptionPageCopySemanticLabel,
                 icon: Icon(
                   YaruIcons.copy,
-                  size: 16,
+                  size: 24,
                   semanticLabel: l10n.diskEncryptionPageCopySemanticLabel,
                 ),
                 onPressed: () => _copyToClipboard(context, key),
               ),
               suffixIconConstraints: BoxConstraints(
-                maxWidth: 32,
-                maxHeight: 32,
+                maxWidth: copyButtonSize,
+                maxHeight: copyButtonSize,
               ),
             ),
             readOnly: true,
@@ -105,13 +112,13 @@ class RecoveryKeyPanel extends ConsumerWidget {
         Row(
           children: [
             OutlinedButton(
-              onPressed: actionsEnabled && key != null
+              onPressed: widget.actionsEnabled && key != null
                   ? () => _saveToFile(context, ref, key)
                   : null,
               child: Text(l10n.diskEncryptionPageReplaceDialogSave),
             ),
             OutlinedButton(
-              onPressed: actionsEnabled && key != null
+              onPressed: widget.actionsEnabled && key != null
                   ? () => showDialog(
                         context: context,
                         builder: (_) => _RecoveryKeyQRDialog(recoveryKey: key),
@@ -119,7 +126,7 @@ class RecoveryKeyPanel extends ConsumerWidget {
                   : null,
               child: Text(l10n.diskEncryptionPageReplaceDialogShowQR),
             ),
-          ].separatedBy(const SizedBox(width: 16)),
+          ].separatedBy(const SizedBox(width: 8)),
         ),
         if (error != null)
           YaruInfoBox(
@@ -153,9 +160,13 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
             Text(l10n.diskEncryptionPageReplaceDialogQRBody),
             BarcodeWidget(
               margin: const EdgeInsets.all(16),
-              color: Theme.of(context).colorScheme.onSurface,
+              // Black on white in the dark theme too, as QR readers expect
+              backgroundColor: Colors.white,
               barcode: Barcode.qrCode(),
               data: recoveryKey,
+              // At least the blank border of 4 modules that QR readers need,
+              // as in the design
+              padding: const EdgeInsets.all(24),
               width: 200,
               height: 200,
             ),

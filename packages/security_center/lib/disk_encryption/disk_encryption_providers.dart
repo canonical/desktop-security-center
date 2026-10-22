@@ -610,14 +610,12 @@ class ReplaceRecoveryKeyDialogModelData
     with _$ReplaceRecoveryKeyDialogModelData {
   factory ReplaceRecoveryKeyDialogModelData({
     required ReplaceRecoveryKeyDialogState dialogState,
-    RecoveryKeyException? error,
   }) = _ReplaceRecoveryKeyDialogModelData;
 }
 
 @riverpod
 class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
   late final _service = getService<DiskEncryptionService>();
-  late final FileSystem _fs = ref.read(fileSystemProvider);
 
   @override
   ReplaceRecoveryKeyDialogModelData build() {
@@ -663,7 +661,6 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
       await _service.replaceRecoveryKey(key);
       state = state.copyWith(
         dialogState: ReplaceRecoveryKeyDialogState.success(),
-        error: null,
       );
     } on Exception catch (e) {
       state = state.copyWith(
@@ -677,18 +674,6 @@ class ReplaceRecoveryKeyDialogModel extends _$ReplaceRecoveryKeyDialogModel {
     state = state.copyWith(
       dialogState: ReplaceRecoveryKeyDialogStateInput(acknowledged),
     );
-  }
-
-  Future<void> writeRecoveryKey(Uri uri, String recoveryKey) async {
-    assert(
-      state.dialogState is ReplaceRecoveryKeyDialogStateInput ||
-          state.dialogState is ReplaceRecoveryKeyDialogStateSuccess,
-    );
-    await _fs.file(uri.path).writeAsString(recoveryKey);
-  }
-
-  void setError(RecoveryKeyException? error) {
-    state = state.copyWith(error: error);
   }
 }
 

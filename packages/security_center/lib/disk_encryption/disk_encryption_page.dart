@@ -212,6 +212,30 @@ void showReplaceRecoveryKeyDialog(BuildContext context) {
   );
 }
 
+// Gives the recovery key panel's snack bar a place above the barrier. The
+// Scaffold takes Esc for a drawer, even without one, so it's handed back to
+// the dialog here
+class _DialogScaffold extends StatelessWidget {
+  const _DialogScaffold({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Actions(
+        actions: <Type, Action<Intent>>{
+          DismissIntent: CallbackAction<DismissIntent>(
+            onInvoke: (_) => Navigator.of(context).maybePop(),
+          ),
+        },
+        child: child,
+      ),
+    );
+  }
+}
+
 class ReplaceRecoveryKeyDialog extends ConsumerWidget {
   const ReplaceRecoveryKeyDialog({super.key});
 
@@ -219,7 +243,6 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final replaceDialogModel = ref.watch(replaceRecoveryKeyDialogModelProvider);
     final replaceDialogState = replaceDialogModel.dialogState;
-    final replaceDialogError = replaceDialogModel.error;
     final replaceNotifier = ref.read(
       replaceRecoveryKeyDialogModelProvider.notifier,
     );
@@ -233,9 +256,8 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
         Navigator.of(context).pop();
       });
     }
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: AlertDialog(
+    return _DialogScaffold(
+      child: AlertDialog(
         title: YaruDialogTitleBar(
           title: Text(l10n.diskEncryptionPageReplaceDialogHeader),
         ),
@@ -252,9 +274,6 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   actionsEnabled: replaceDialogState
                           is! ReplaceRecoveryKeyDialogStateGenerating &&
                       replaceDialogState is! ReplaceRecoveryKeyDialogStateError,
-                  saveError: replaceDialogError,
-                  onSaveErrorChanged: replaceNotifier.setError,
-                  onSaveToFile: replaceNotifier.writeRecoveryKey,
                 ),
                 YaruCheckButton(
                   title: Text(
@@ -306,9 +325,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   ].separatedBy(const SizedBox(width: 16)),
                 ),
                 if (recoveryKey.isLoading) SizedBox.shrink(),
-                if (replaceDialogState
-                        is ReplaceRecoveryKeyDialogStateSuccess &&
-                    replaceDialogError == null)
+                if (replaceDialogState is ReplaceRecoveryKeyDialogStateSuccess)
                   YaruInfoBox(
                     title: Text(
                       l10n.diskEncryptionPageReplaceDialogSuccessHeader,

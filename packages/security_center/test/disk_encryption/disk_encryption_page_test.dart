@@ -542,9 +542,11 @@ void main() {
             find.text(tester.l10n.recoveryKeyExceptionFilePermissionTitle),
             findsOneWidget,
           );
+          // The replace succeeded, so its success stays while the panel shows
+          // the save error
           expect(
             find.text(tester.l10n.diskEncryptionPageReplaceDialogSuccessHeader),
-            findsNothing,
+            findsOneWidget,
           );
         } else {
           // verify the in-memory FS got the right content
