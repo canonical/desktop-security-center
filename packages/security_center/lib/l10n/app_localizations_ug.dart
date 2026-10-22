@@ -426,10 +426,26 @@ class AppLocalizationsUg extends AppLocalizations {
   String get diskEncryptionPageRepairDialogNotNow => 'Not now';
 
   @override
+  String get diskEncryptionPageRepairDialogRestartBody =>
+      'Restart the computer to complete previous actions. Then start the repair again.';
+
+  @override
   String get diskEncryptionPageRepairDialogRestartNow => 'Restart now';
 
   @override
+  String get diskEncryptionPageRepairDialogRestartFailed =>
+      'Could not restart the computer. Restart it from the system menu instead.';
+
+  @override
+  String get diskEncryptionPageRepairDialogPowerOffBody =>
+      'Power off the computer to complete previous actions. Then start the repair again.';
+
+  @override
   String get diskEncryptionPageRepairDialogPowerOffNow => 'Power off now';
+
+  @override
+  String get diskEncryptionPageRepairDialogPowerOffFailed =>
+      'Could not power off the computer. Power it off from the system menu instead.';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
@@ -496,6 +512,9 @@ class AppLocalizationsUg extends AppLocalizations {
   String get recoveryKeyPassphraseButton => 'ئىم ئىبارە ئۆزگەرت…';
 
   @override
+  String get recoveryKeyPassphrase => 'Passphrase';
+
+  @override
   String get recoveryKeyPassphraseCurrent => 'نۆۋەتتىكى ئىم ئىبارە';
 
   @override
@@ -534,6 +553,9 @@ class AppLocalizationsUg extends AppLocalizations {
 
   @override
   String get recoveryKeyPinButton => 'PIN ئۆزگەرت…';
+
+  @override
+  String get recoveryKeyPin => 'PIN';
 
   @override
   String get recoveryKeyPinCurrent => 'نۆۋەتتىكى PIN';
@@ -626,17 +648,8 @@ class AppLocalizationsUg extends AppLocalizations {
   }
 
   @override
-  String tpmActionSingleSolutionLabel(String text) {
-    return 'Solution: $text';
-  }
-
-  @override
   String get tpmActionErrorSupportLabel =>
       'Try the solutions below or contact IT support.';
-
-  @override
-  String get tpmActionErrorSupportSingleLabel =>
-      'Try the solution below or contact IT support.';
 
   @override
   String get tpmActionErrorKindInternal => 'Internal error.';
@@ -867,8 +880,7 @@ class AppLocalizationsUg extends AppLocalizations {
       'You might be asked to confirm this action on restart.';
 
   @override
-  String get tpmActionFixActionCaveatRetry =>
-      'Then you will need to start the repair again.';
+  String get tpmActionFixActionCaveatRetry => 'Then start the repair again.';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
