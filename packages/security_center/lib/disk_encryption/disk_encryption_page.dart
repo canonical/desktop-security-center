@@ -288,10 +288,13 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
             shape: dialogTitleBarShape,
           ),
           titlePadding: EdgeInsets.zero,
-          contentPadding: dialogContentPadding,
+          // The side and bottom padding in the scroll view scroll with the
+          // content and leave room for the checkbox's hover effect
+          contentPadding: EdgeInsets.only(top: dialogContentPadding.top),
           content: SizedBox(
-            width: 435,
+            width: 483,
             child: SingleChildScrollView(
+              padding: dialogContentPadding.copyWith(top: 0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
