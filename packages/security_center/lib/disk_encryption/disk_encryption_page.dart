@@ -219,10 +219,17 @@ void showReplaceRecoveryKeyDialog(BuildContext context) {
 
 // Shows the panel's snack bar above the barrier. The Scaffold takes Esc for a
 // drawer even when it has none, so this hands Esc back to the dialog
-class _DialogScaffold extends StatelessWidget {
+class _DialogScaffold extends StatefulWidget {
   const _DialogScaffold({required this.child});
 
   final Widget child;
+
+  @override
+  State<_DialogScaffold> createState() => _DialogScaffoldState();
+}
+
+class _DialogScaffoldState extends State<_DialogScaffold> {
+  bool _isQRCodeShown = false;
 
   @override
   Widget build(BuildContext context) {
@@ -234,7 +241,19 @@ class _DialogScaffold extends StatelessWidget {
             onInvoke: (_) => Navigator.of(context).maybePop(),
           ),
         },
-        child: child,
+        // ModalRoute.isCurrentOf would hide the dialog behind the file chooser
+        child: NotificationListener<RecoveryKeyQRCodeNotification>(
+          onNotification: (notification) {
+            setState(() => _isQRCodeShown = notification.isShown);
+            return true;
+          },
+          child: Visibility(
+            visible: !_isQRCodeShown,
+            // The hidden panel must stay mounted to report the QR code closing
+            maintainState: true,
+            child: widget.child,
+          ),
+        ),
       ),
     );
   }
