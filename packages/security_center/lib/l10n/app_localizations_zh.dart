@@ -807,7 +807,8 @@ class AppLocalizationsZh extends AppLocalizations {
       'You might be asked to confirm this action on restart.';
 
   @override
-  String get tpmActionFixActionCaveatRetry => 'Then start the repair again.';
+  String get tpmActionFixActionCaveatRetry =>
+      'Then you will need to start the repair again.';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
