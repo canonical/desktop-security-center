@@ -1467,12 +1467,6 @@ abstract class AppLocalizations {
   /// **'Enable DMA protection manually'**
   String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection;
 
-  /// No description provided for @tpmActionFixActionRebootToFwSettingsInsufficientTpmStorage.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear TPM manually'**
-  String get tpmActionFixActionRebootToFwSettingsInsufficientTpmStorage;
-
   /// No description provided for @tpmActionFixActionRebootToFwSettingsInvalidSecureBootMode.
   ///
   /// In en, this message translates to:
@@ -1497,17 +1491,11 @@ abstract class AppLocalizations {
   /// **'Enable TPM manually'**
   String get tpmActionFixActionRebootToFwSettingsTpmDeviceDisabled;
 
-  /// No description provided for @tpmActionFixActionRebootToFwSettingsTpmDeviceLockoutLockedOut.
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsClearTpm.
   ///
   /// In en, this message translates to:
   /// **'Clear TPM manually'**
-  String get tpmActionFixActionRebootToFwSettingsTpmDeviceLockoutLockedOut;
-
-  /// No description provided for @tpmActionFixActionRebootToFwSettingsTpmHierarchiesOwned.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear TPM manually'**
-  String get tpmActionFixActionRebootToFwSettingsTpmHierarchiesOwned;
+  String get tpmActionFixActionRebootToFwSettingsClearTpm;
 
   /// No description provided for @tpmActionFixActionRebootToFwSettingsAbsolutePresent.
   ///

@@ -740,10 +740,6 @@ class AppLocalizationsHe extends AppLocalizations {
       'Enable DMA protection manually';
 
   @override
-  String get tpmActionFixActionRebootToFwSettingsInsufficientTpmStorage =>
-      'Clear TPM manually';
-
-  @override
   String get tpmActionFixActionRebootToFwSettingsInvalidSecureBootMode =>
       'Enable secure boot manually';
 
@@ -760,11 +756,7 @@ class AppLocalizationsHe extends AppLocalizations {
       'Enable TPM manually';
 
   @override
-  String get tpmActionFixActionRebootToFwSettingsTpmDeviceLockoutLockedOut =>
-      'Clear TPM manually';
-
-  @override
-  String get tpmActionFixActionRebootToFwSettingsTpmHierarchiesOwned =>
+  String get tpmActionFixActionRebootToFwSettingsClearTpm =>
       'Clear TPM manually';
 
   @override

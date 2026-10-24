@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:security_center/services/feature_service.dart';
+import 'package:security_center/services/power_service.dart';
 import 'package:security_center/widgets/file_picker_dialog.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
@@ -38,6 +40,72 @@ extension EntropyResponseSemantic on EntropyResponse {
     }
     return SemanticEntropy.optimal;
   }
+}
+
+extension SnapdStorageEncryptedResponseRepair on SnapdStorageEncryptedResponse {
+  // The page treats any other status as a failure. Wait while snapd may still
+  // auto-repair
+  bool get needsRepair =>
+      const {
+        SnapdStorageEncryptionStatus.active,
+        SnapdStorageEncryptionStatus.degraded,
+        SnapdStorageEncryptionStatus.recovery,
+      }.contains(status) &&
+      recommendations
+          .contains(SnapdRecommendedRemedialAction.requireReprovision) &&
+      autoRepairResult != SnapdAutoRepairResult.notInitialized;
+}
+
+extension SnapdFixActionRepair on SnapdFixAction {
+  /// Whether the user does this action instead of snapd, as in secboot's
+  /// IsExternalAction.
+  bool get isExternal => switch (this) {
+        SnapdFixAction.reboot ||
+        SnapdFixAction.shutdown ||
+        SnapdFixAction.rebootToFwSettings ||
+        SnapdFixAction.contactOem ||
+        SnapdFixAction.contactOsVendor =>
+          true,
+        SnapdFixAction.enableTpmViaFirmware ||
+        SnapdFixAction.enableAndClearTpmViaFirmware ||
+        SnapdFixAction.clearTpmViaFirmware ||
+        SnapdFixAction.clearTpmSimple ||
+        SnapdFixAction.clearTpm ||
+        SnapdFixAction.proceed =>
+          false,
+      };
+
+  bool clearsTpm(SnapdAvailabilityCheckErrorKind kind) => switch (this) {
+        SnapdFixAction.enableAndClearTpmViaFirmware ||
+        SnapdFixAction.clearTpmViaFirmware ||
+        SnapdFixAction.clearTpmSimple ||
+        SnapdFixAction.clearTpm =>
+          true,
+        // For these issues, the user clears the TPM in the firmware settings
+        SnapdFixAction.rebootToFwSettings => const {
+            SnapdAvailabilityCheckErrorKind.insufficientTpmStorage,
+            SnapdAvailabilityCheckErrorKind.tpmDeviceLockoutLockedOut,
+            SnapdAvailabilityCheckErrorKind.tpmHierarchiesOwned,
+          }.contains(kind),
+        SnapdFixAction.reboot ||
+        SnapdFixAction.shutdown ||
+        SnapdFixAction.contactOem ||
+        SnapdFixAction.contactOsVendor ||
+        SnapdFixAction.enableTpmViaFirmware ||
+        SnapdFixAction.proceed =>
+          false,
+      };
+}
+
+extension SnapdAvailabilityCheckErrorRepair on SnapdAvailabilityCheckError {
+  // Contacting the OEM or OS vendor isn't a fix the user can make here
+  List<SnapdFixAction> get fixes => actions
+      .where(
+        (action) =>
+            action != SnapdFixAction.contactOem &&
+            action != SnapdFixAction.contactOsVendor,
+      )
+      .toList();
 }
 
 @freezed
@@ -93,7 +161,8 @@ enum TpmFdeOperation {
   changePin,
   changePassphrase,
   removePin,
-  removePassphrase;
+  removePassphrase,
+  repair;
 
   factory TpmFdeOperation.adding(AuthMode mode) => switch (mode) {
         AuthMode.pin => TpmFdeOperation.addPin,
@@ -194,6 +263,8 @@ sealed class ChangeAuthModeDialogState with _$ChangeAuthModeDialogState {
 class TpmAuthState with _$TpmAuthState {
   const factory TpmAuthState({
     required AuthMode currentAuthMode,
+    @Default(false) bool needsRepair,
+    @Default(false) bool unlockedWithRecoveryKey,
     TpmFdeOperation? pendingOperation,
     TpmFdeOperationException? operationError,
   }) = _TpmAuthState;
@@ -234,6 +305,40 @@ sealed class CheckRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
       CheckRecoveryKeyDialogStateLoading;
   factory CheckRecoveryKeyDialogState.error(Exception e) =
       CheckRecoveryKeyDialogStateError;
+}
+
+/// Dialog state for managing the repair flow.
+@freezed
+sealed class RepairDialogState with _$RepairDialogState {
+  factory RepairDialogState.working() = RepairDialogStateWorking;
+  factory RepairDialogState.issue(SnapdAvailabilityCheckError issue) =
+      RepairDialogStateIssue;
+  factory RepairDialogState.checkKey(
+    SnapdAvailabilityCheckError issue,
+    SnapdFixAction action,
+  ) = RepairDialogStateCheckKey;
+  factory RepairDialogState.confirmPowerAction(
+    SnapdAvailabilityCheckError issue,
+    SnapdFixAction action, {
+    @Default(false) bool pending,
+    Exception? error,
+  }) = RepairDialogStateConfirmPowerAction;
+  factory RepairDialogState.unavailable(SnapdAvailabilityCheckError issue) =
+      RepairDialogStateUnavailable;
+  factory RepairDialogState.setPinOrPassphrase(List<AuthMode> authModes) =
+      RepairDialogStateSetPinOrPassphrase;
+  factory RepairDialogState.pinOrPassphraseWillBeRemoved() =
+      RepairDialogStatePinOrPassphraseWillBeRemoved;
+  factory RepairDialogState.generatingKey() = RepairDialogStateGeneratingKey;
+  // Holds the response, since its toString() hides the key
+  factory RepairDialogState.saveKey(
+    SnapdGenerateReprovisionRecoveryKeyResponse key,
+    bool acknowledged,
+  ) = RepairDialogStateSaveKey;
+  factory RepairDialogState.startingRepair() = RepairDialogStateStartingRepair;
+  factory RepairDialogState.keyNotUsed() = RepairDialogStateKeyNotUsed;
+  factory RepairDialogState.error(Exception e) = RepairDialogStateError;
+  factory RepairDialogState.closed() = RepairDialogStateClosed;
 }
 
 /// Dialog model for managing the flow to update an existing pin or passphrase.
@@ -411,6 +516,7 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
 @Riverpod(keepAlive: true)
 class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   late final _service = getService<DiskEncryptionService>();
+  late final _featureService = getService<FeatureService>();
 
   @visibleForTesting
   static Duration maxRetryDuration = const Duration(minutes: 2);
@@ -419,17 +525,16 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
   @override
   Future<TpmAuthState> build() async {
-    final currentMode = await _fetchCurrentAuthMode();
-    return TpmAuthState(currentAuthMode: currentMode);
+    return _fetchState();
   }
 
-  Future<AuthMode> _fetchCurrentAuthMode() async {
+  Future<TpmAuthState> _fetchState() async {
     try {
       // Check TPM-backed FDE status with exponential backoff retry
       // for indeterminate state (see LP#2147606)
       final stopwatch = Stopwatch()..start();
       var delay = initialRetryDelay;
-      var storageStatus = await _getStorageEncrypted();
+      var storageStatus = await _request(_service.getStorageEncrypted());
       while (
           storageStatus.status == SnapdStorageEncryptionStatus.indeterminate &&
               stopwatch.elapsed < maxRetryDuration) {
@@ -441,7 +546,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         final remaining = maxRetryDuration - stopwatch.elapsed;
         await Future.delayed(delay < remaining ? delay : remaining);
         delay *= 2;
-        storageStatus = await _getStorageEncrypted();
+        storageStatus = await _request(_service.getStorageEncrypted());
       }
 
       switch (storageStatus.status) {
@@ -485,18 +590,19 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
       final authMode = defaultKeySlot.authMode;
 
-      if (authMode != null) {
-        switch (authMode) {
-          case SnapdSystemVolumeAuthMode.none:
-            return AuthMode.none;
-          case SnapdSystemVolumeAuthMode.pin:
-            return AuthMode.pin;
-          case SnapdSystemVolumeAuthMode.passphrase:
-            return AuthMode.passphrase;
-        }
-      }
+      final currentAuthMode = switch (authMode) {
+        SnapdSystemVolumeAuthMode.pin => AuthMode.pin,
+        SnapdSystemVolumeAuthMode.passphrase => AuthMode.passphrase,
+        SnapdSystemVolumeAuthMode.none || null => AuthMode.none,
+      };
 
-      return AuthMode.none;
+      return TpmAuthState(
+        currentAuthMode: currentAuthMode,
+        needsRepair:
+            storageStatus.needsRepair && _featureService.supportsReprovision,
+        unlockedWithRecoveryKey:
+            storageStatus.status == SnapdStorageEncryptionStatus.recovery,
+      );
     } on SnapdException catch (e) {
       _log.error('Failed to determine TPM authentication mode: $e');
       if (e.statusCode == 404) {
@@ -505,17 +611,6 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
       if (e.statusCode == 403) {
         throw SnapdStateExceptionUnconnectedSnapInterface();
       }
-      throw TpmStateExceptionFailed();
-    }
-  }
-
-  Future<SnapdStorageEncryptedResponse> _getStorageEncrypted() async {
-    try {
-      return await _service.getStorageEncrypted();
-    } on SnapdException {
-      rethrow;
-    } on ArgumentError catch (e) {
-      _log.error('Failed to parse storage encryption status: $e');
       throw TpmStateExceptionFailed();
     }
   }
@@ -547,15 +642,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         onAuthorized: onAuthorized,
       );
 
-      // Refresh current mode
-      final updatedMode = await _fetchCurrentAuthMode();
-      state = AsyncData(
-        state.value!.copyWith(
-          currentAuthMode: updatedMode,
-          pendingOperation: null,
-          operationError: null,
-        ),
-      );
+      state = AsyncData(await _fetchState());
     } on Exception catch (e) {
       final exception = TpmFdeOperationException.from(e, operation);
       state = AsyncData(
@@ -577,6 +664,52 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         dismissOperationError();
       case _:
         break;
+    }
+  }
+
+  Future<void> repair({
+    AuthMode? newMode,
+    String? passphrase,
+    void Function()? onAuthorized,
+  }) async {
+    assert(state.hasValue, 'State must be loaded before repairing');
+
+    state = AsyncData(
+      state.value!.copyWith(
+        pendingOperation: TpmFdeOperation.repair,
+        operationError: null,
+      ),
+    );
+
+    var reprovisioned = false;
+    try {
+      await _service.reprovision(onAuthorized: onAuthorized);
+      reprovisioned = true;
+      // Kept if the status check fails: the new keys need no repair, and have
+      // no PIN or passphrase until one is added below
+      state = AsyncData(
+        state.value!.copyWith(
+          needsRepair: false,
+          currentAuthMode: AuthMode.none,
+        ),
+      );
+      state = AsyncData(await _fetchState());
+    } on Exception catch (e) {
+      final exception =
+          TpmFdeOperationException.from(e, TpmFdeOperation.repair);
+      state = AsyncData(
+        state.value!.copyWith(
+          pendingOperation: null,
+          operationError: exception,
+        ),
+      );
+    }
+
+    // The new keys have no PIN or passphrase, so enrol the chosen one. Do it
+    // even if the status check failed, or the disk goes on unlocking without
+    // it; changeAuthMode checks the status again and reports what still fails
+    if (reprovisioned && newMode != null && newMode != AuthMode.none) {
+      await changeAuthMode(newMode, passphrase: passphrase);
     }
   }
 
@@ -882,5 +1015,288 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
       return false;
     }
     return true;
+  }
+}
+
+@riverpod
+class RepairDialogModel extends _$RepairDialogModel {
+  late final _service = getService<DiskEncryptionService>();
+  late final _power = getService<PowerService>();
+
+  // Changes on close and retry, so an older flow stops calling snapd
+  var _flow = 0;
+  ({AuthMode mode, String passphrase})? _newAuth;
+
+  @override
+  RepairDialogState build() {
+    ref.onDispose(() => _flow++);
+    _newAuth = null;
+    // Nothing to go back to, so a cancelled prompt closes the dialog
+    final closed = RepairDialogState.closed();
+    unawaited(
+      _ifRepairNeeded(
+        () => _step(
+          _service.checkEncryptionSupport,
+          _continueAfterCheck,
+          cancelled: closed,
+        ),
+        // Nothing to tell the user, since the page shows the new status
+        otherwise: closed,
+        cancelled: closed,
+      ),
+    );
+    return RepairDialogState.working();
+  }
+
+  // Calls snapd, then [then] with its answer. If the user cancels the admin
+  // prompt, the dialog goes back to [cancelled], and any other failure shows
+  // the error step. Once the dialog closes or restarts, nothing changes
+  Future<void> _step<T>(
+    Future<T> Function() request,
+    FutureOr<void> Function(T answer) then, {
+    RepairDialogState? cancelled,
+  }) async {
+    final flow = _flow;
+    try {
+      final answer = await _request(request());
+      if (flow == _flow) await then(answer);
+    } on Exception catch (e) {
+      if (flow != _flow) return;
+      final authCancelled = e is SnapdException &&
+          SnapdAuthErrorKind.fromKind(e.kind) ==
+              SnapdAuthErrorKind.authCancelled;
+      state = cancelled != null && authCancelled
+          ? cancelled
+          : RepairDialogState.error(e);
+    }
+  }
+
+  // The disk can stop needing a repair while the dialog is open. Then the page
+  // loads the new status, and the dialog shows [otherwise] instead of [then]
+  Future<void> _ifRepairNeeded(
+    Future<void> Function() then, {
+    required RepairDialogState otherwise,
+    RepairDialogState? cancelled,
+  }) =>
+      _step(
+        _service.getStorageEncrypted,
+        (status) async {
+          if (status.needsRepair) {
+            await then();
+          } else {
+            ref.invalidate(tpmAuthenticationModelProvider);
+            state = otherwise;
+          }
+        },
+        cancelled: cancelled,
+      );
+
+  Future<void> _continueAfterCheck(SnapdStorageEncryption encryption) async {
+    // Show one issue at a time, top priority first. snapd may also send only
+    // a reason
+    final issue = encryption.availabilityCheckErrors.firstOrNull ??
+        (encryption.support == SnapdStorageEncryptionSupport.available
+            ? null
+            : SnapdAvailabilityCheckError(
+                kind: SnapdAvailabilityCheckErrorKind.internalError,
+                message: encryption.unavailableReason ?? '',
+              ));
+    if (issue != null) {
+      state = issue.fixes.isEmpty
+          ? RepairDialogState.unavailable(issue)
+          : RepairDialogState.issue(issue);
+      return;
+    }
+
+    // volumes-auth means the new keys need a PIN or passphrase
+    if (encryption.requirements
+        .contains(SnapdStorageEncryptionRequirement.volumesAuth)) {
+      final authModes = [
+        if (encryption.features
+            .contains(SnapdStorageEncryptionFeature.passphraseAuth))
+          AuthMode.passphrase,
+        if (encryption.features.contains(SnapdStorageEncryptionFeature.pinAuth))
+          AuthMode.pin,
+      ];
+      if (authModes.isEmpty) {
+        _log.error('snapd requires a PIN or passphrase, but supports neither');
+        throw TpmStateExceptionUnsupportedState();
+      }
+      state = RepairDialogState.setPinOrPassphrase(authModes);
+      return;
+    }
+    final authMode =
+        ref.read(tpmAuthenticationModelProvider).value!.currentAuthMode;
+    if (authMode != AuthMode.none) {
+      state = RepairDialogState.pinOrPassphraseWillBeRemoved();
+      return;
+    }
+    // Nothing to go back to, so a cancelled prompt closes the dialog
+    await _generateKey(cancelled: RepairDialogState.closed());
+  }
+
+  Future<void> applyFix(SnapdFixAction action) async {
+    final current = state;
+    final issue = switch (current) {
+      RepairDialogStateIssue(:final issue) ||
+      RepairDialogStateCheckKey(:final issue) =>
+        issue,
+      _ => throw StateError('There is no issue to fix in $current'),
+    };
+    assert(
+      issue.actions.contains(action),
+      'Only a fix for the current issue can be applied',
+    );
+    // Clearing the TPM can lock the user out of the disk unless they have the
+    // recovery key, so the key has to work before the fix runs
+    if (action.clearsTpm(issue.kind) &&
+        !ref
+            .read(tpmAuthenticationModelProvider)
+            .value!
+            .unlockedWithRecoveryKey &&
+        ref.read(checkRecoveryKeyDialogModelProvider) !=
+            CheckRecoveryKeyDialogState.result(true)) {
+      state = RepairDialogState.checkKey(issue, action);
+      return;
+    }
+    // The user does this one, so they confirm before it restarts or powers off
+    if (action.isExternal) {
+      state = RepairDialogState.confirmPowerAction(issue, action);
+      return;
+    }
+    state = RepairDialogState.working();
+    // Without error-kinds, proceed also accepts issues the user hasn't seen
+    final args = action == SnapdFixAction.proceed
+        ? {
+            'error-kinds': [issue.kind.name.toKebabCase()],
+          }
+        : null;
+    await _step(
+      () => _service.fixEncryptionSupport(action, args: args),
+      _continueAfterCheck,
+      // The fix didn't run, so the issue is still there
+      cancelled: current,
+    );
+  }
+
+  Future<void> runPowerAction() async {
+    assert(state is RepairDialogStateConfirmPowerAction);
+    final confirm = state as RepairDialogStateConfirmPowerAction;
+    if (confirm.pending) return;
+    final powerAction = switch (confirm.action) {
+      SnapdFixAction.shutdown => PowerAction.powerOff,
+      // snapd's shutdown interface doesn't allow logind's
+      // SetRebootToFirmwareSetup, so the step tells the user how to open the
+      // firmware settings
+      SnapdFixAction.reboot ||
+      SnapdFixAction.rebootToFwSettings =>
+        PowerAction.reboot,
+      final action => throw StateError('$action is not a restart or power off'),
+    };
+    final flow = _flow;
+
+    state = confirm.copyWith(pending: true, error: null);
+    try {
+      await _power.run(powerAction);
+      // Stays pending, since logind ends the session soon
+    } on Exception catch (e) {
+      if (flow != _flow) return;
+      state = confirm.copyWith(pending: false, error: e);
+    }
+  }
+
+  Future<void> continueToKey() async {
+    assert(state is RepairDialogStatePinOrPassphraseWillBeRemoved);
+    await _generateKey(cancelled: state);
+  }
+
+  Future<void> continueWithPinOrPassphrase(AuthMode authMode) async {
+    assert(state is RepairDialogStateSetPinOrPassphrase);
+    assert(
+      (state as RepairDialogStateSetPinOrPassphrase)
+          .authModes
+          .contains(authMode),
+      'Only a PIN or passphrase that snapd supports can be set',
+    );
+    assert(
+      ref.read(changeAuthModeDialogModelProvider(authMode).notifier).isValid,
+      'The PIN or passphrase must be valid',
+    );
+    _newAuth = (
+      mode: authMode,
+      passphrase: ref.read(changeAuthModeDialogModelProvider(authMode)).newPass,
+    );
+    await _generateKey(cancelled: state);
+  }
+
+  Future<void> _generateKey({required RepairDialogState cancelled}) async {
+    state = RepairDialogState.generatingKey();
+    await _step(
+      _service.generateReprovisionRecoveryKey,
+      (key) => state = RepairDialogState.saveKey(key, false),
+      cancelled: cancelled,
+    );
+  }
+
+  void acknowledge(bool acknowledged) {
+    assert(state is RepairDialogStateSaveKey);
+    state = (state as RepairDialogStateSaveKey)
+        .copyWith(acknowledged: acknowledged);
+  }
+
+  Future<void> startRepair({void Function()? onAuthorized}) async {
+    assert(state is RepairDialogStateSaveKey);
+    final saveKey = state as RepairDialogStateSaveKey;
+    // The repair replaces the recovery key, so this stays in release builds
+    if (!saveKey.acknowledged) {
+      throw StateError('The new recovery key must be acknowledged first');
+    }
+    // The page model runs the repair, so its progress shows after the dialog
+    // closes
+    final page = ref.read(tpmAuthenticationModelProvider.notifier);
+
+    state = RepairDialogState.startingRepair();
+    // The status can change while the user saves the key
+    await _ifRepairNeeded(
+      () => _step(
+        () => page.repair(
+          newMode: _newAuth?.mode,
+          passphrase: _newAuth?.passphrase,
+          onAuthorized: onAuthorized,
+        ),
+        (_) {
+          final tpmState = ref.read(tpmAuthenticationModelProvider).valueOrNull;
+          switch (tpmState?.operationError) {
+            // onAuthorized already closed the dialog when the prompt was
+            // answered
+            case null:
+              break;
+            case TpmFdeOperationSnapdAuthException(
+                kind: SnapdAuthErrorKind.authCancelled,
+                operation: TpmFdeOperation.repair,
+              ):
+              page.dismissOperationError();
+              // The repair didn't start, so the user can try again with the
+              // same key
+              state = saveKey;
+            case final exception:
+              state = RepairDialogState.error(exception);
+          }
+        },
+      ),
+      // The disk keeps its current recovery key until a repair replaces it
+      otherwise: RepairDialogState.keyNotUsed(),
+    );
+  }
+}
+
+// snapd.dart throws ArgumentError for values it doesn't know, like those from
+// a newer snapd
+Future<T> _request<T>(Future<T> request) async {
+  try {
+    return await request;
+  } on ArgumentError catch (e) {
+    _log.error('Failed to parse the snapd response: $e');
+    throw TpmStateExceptionFailed();
   }
 }

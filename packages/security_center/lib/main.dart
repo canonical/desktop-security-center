@@ -10,9 +10,11 @@ import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/fake_app_permissions_service.dart';
 import 'package:security_center/services/fake_disk_encryption_service.dart';
+import 'package:security_center/services/fake_power_service.dart';
 import 'package:security_center/services/fake_ubuntu_pro_dbus_service.dart';
 import 'package:security_center/services/fake_ubuntu_pro_service.dart';
 import 'package:security_center/services/feature_service.dart';
+import 'package:security_center/services/power_service.dart';
 import 'package:security_center/services/snapd_app_permissions_service.dart';
 import 'package:security_center/services/snapd_disk_encryption_service.dart';
 import 'package:security_center/services/snapd_service.dart';
@@ -88,7 +90,8 @@ Future<void> main(List<String> args) async {
     );
   }
 
-  // Register disk encryption service
+  // Register disk encryption service, and the power service for the repair
+  // steps that restart or power off
   if (featureService.isDryRun) {
     registerService<DiskEncryptionService>(
       () => FakeDiskEncryptionService.fromFile(
@@ -98,10 +101,12 @@ Future<void> main(List<String> args) async {
         ),
       ),
     );
+    registerService<PowerService>(FakePowerService.new);
   } else {
     registerService<DiskEncryptionService>(
       () => SnapdDiskEncryptionService(getService<SnapdService>()),
     );
+    registerService<PowerService>(PowerService.new);
   }
 
   // Register Ubuntu Pro services
