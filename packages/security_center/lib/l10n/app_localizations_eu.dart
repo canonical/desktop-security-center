@@ -362,6 +362,85 @@ class AppLocalizationsEu extends AppLocalizations {
       'Pasaesaldia kentzen, honek segundo batzuk beharko ditu...';
 
   @override
+  String get diskEncryptionPageRepairHeader => 'Disk encryption needs repair';
+
+  @override
+  String get diskEncryptionPageRepairBody =>
+      'Automatic repair failed during decryption. Repair the disk now to start the computer without a recovery key.';
+
+  @override
+  String get diskEncryptionPageRepairButton => 'Start repair...';
+
+  @override
+  String get diskEncryptionPageRepairing => 'Repairing...';
+
+  @override
+  String get diskEncryptionPageRepairDialogHeader => 'Repair encryption';
+
+  @override
+  String get diskEncryptionPageRepairDialogErrorHeader =>
+      'Hardware-backed encryption could not be repaired';
+
+  @override
+  String get diskEncryptionPageRepairDialogNotNeeded =>
+      'Disk encryption no longer needs repair.';
+
+  @override
+  String get diskEncryptionPageRepairDialogPinOrPassphraseRemovedHeader =>
+      'Any PIN and passphrase will be removed';
+
+  @override
+  String get diskEncryptionPageRepairDialogPinOrPassphraseRemovedBody =>
+      'You can add them again after repair.';
+
+  @override
+  String get diskEncryptionPageRepairDialogCheckKeyBody =>
+      'Clearing the TPM erases all encryption keys. Check that your recovery key works before continuing, since you may need it to start the computer.';
+
+  @override
+  String get diskEncryptionPageRepairDialogKeyDoesntWorkBody =>
+      'Check the key and try again.';
+
+  @override
+  String get diskEncryptionPageRepairDialogKeyHeader => 'New recovery key';
+
+  @override
+  String get diskEncryptionPageRepairDialogKeyBody =>
+      'Repairing replaces your recovery key. Save the new recovery key somewhere safe. Once repairing completes, you will not be able to use the old key anymore.';
+
+  @override
+  String get diskEncryptionPageRepairDialogKeyWarningHeader =>
+      'Old recovery keys will stop working';
+
+  @override
+  String get diskEncryptionPageRepairDialogKeyWarningBody =>
+      'You may want to let your IT administrator know you are re-encrypting the disk in case they are storing any recovery keys.';
+
+  @override
+  String get diskEncryptionPageRepairDialogKeyNotUsed =>
+      'Your current recovery key still works. The new key was not used, so you can discard it.';
+
+  @override
+  String get diskEncryptionPageRepairDialogRepair => 'Repair';
+
+  @override
+  String get diskEncryptionPageRepairDialogNotNow => 'Not now';
+
+  @override
+  String get diskEncryptionPageRepairDialogRestartBody =>
+      'Restart the computer to complete previous actions. Then start the repair again.';
+
+  @override
+  String get diskEncryptionPageRepairDialogRestartNow => 'Restart now';
+
+  @override
+  String get diskEncryptionPageRepairDialogPowerOffBody =>
+      'Power off the computer to complete previous actions. Then start the repair again.';
+
+  @override
+  String get diskEncryptionPageRepairDialogPowerOffNow => 'Power off now';
+
+  @override
   String get recoveryKeyExceptionFileSystemTitle =>
       'Berreskuratze gakoaren fitxategia ez da gorde';
 
@@ -399,6 +478,10 @@ class AppLocalizationsEu extends AppLocalizations {
   String get recoveryKeyTPMEnabled => 'Hardware bidezko zifratzea gaituta dago';
 
   @override
+  String get recoveryKeyTPMNeedsRepair =>
+      'Hardware-backed encryption is enabled but needs repair';
+
+  @override
   String get recoveryKeyTPMExplanationBody =>
       'Zifratze gakoak ordenagailuaren Konfiantzazko Plataforma Moduluan (TPM) gordetzen dira.';
 
@@ -419,6 +502,9 @@ class AppLocalizationsEu extends AppLocalizations {
 
   @override
   String get recoveryKeyPassphraseButton => 'Aldatu pasaesaldia...';
+
+  @override
+  String get recoveryKeyPassphrase => 'Passphrase';
 
   @override
   String get recoveryKeyPassphraseCurrent => 'Uneko pasaesaldia';
@@ -460,6 +546,9 @@ class AppLocalizationsEu extends AppLocalizations {
 
   @override
   String get recoveryKeyPinButton => 'Aldatu PINa...';
+
+  @override
+  String get recoveryKeyPin => 'PIN';
 
   @override
   String get recoveryKeyPinCurrent => 'Uneko PINa';
@@ -527,6 +616,246 @@ class AppLocalizationsEu extends AppLocalizations {
 
   @override
   String get recoveryKeySomethingWentWrongHeader => 'Zerbaitek huts egin du';
+
+  @override
+  String get passphraseTypePassphraseTileTitle =>
+      'Require a passphrase on startup';
+
+  @override
+  String get passphraseTypePinTileTitle => 'Require a PIN on startup';
+
+  @override
+  String get passphraseTypePageBodyAuthRequired =>
+      'Hardware-backed encryption requires additional security in this computer.';
+
+  @override
+  String get tpmActionPageTitleActionable =>
+      'There is an issue with hardware-backed encryption';
+
+  @override
+  String get tpmActionDetailsLabel => 'Technical details';
+
+  @override
+  String tpmActionSolutionLabel(int n, String text) {
+    return 'Solution $n: $text';
+  }
+
+  @override
+  String get tpmActionErrorSupportLabel =>
+      'Try the solutions below or contact IT support.';
+
+  @override
+  String get tpmActionErrorKindInternal => 'Internal error.';
+
+  @override
+  String get tpmActionErrorKindShutdownRequired => 'Power off is required.';
+
+  @override
+  String get tpmActionErrorKindRebootRequired => 'Restart is required.';
+
+  @override
+  String get tpmActionErrorKindActionFailed => 'Action failed.';
+
+  @override
+  String get tpmActionErrorKindRunningInVm =>
+      'The current environment is a virtual machine.';
+
+  @override
+  String get tpmActionErrorKindSystemNotEfi =>
+      'This computer is using older firmware (legacy BIOS) that is not compatible with this encryption method.';
+
+  @override
+  String get tpmActionErrorKindNoSuitableTpm2Device =>
+      'This computer does not have the required security hardware (TPM 2.0) for this encryption method.';
+
+  @override
+  String get tpmActionErrorKindTpmDeviceDisabled =>
+      'This computer\'s TPM is disabled.';
+
+  @override
+  String get tpmActionErrorKindTpmHierarchiesOwned =>
+      'This computer\'s TPM is already in use by another system or application.';
+
+  @override
+  String get tpmActionErrorKindTpmDeviceLockoutLockedOut =>
+      'This computer\'s TPM is currently locked.';
+
+  @override
+  String get tpmActionErrorKindInsufficientTpmStorage =>
+      'This computer\'s TPM does not have enough storage available.';
+
+  @override
+  String get tpmActionErrorKindUnsupportedPlatform =>
+      'This computer is not compatible with hardware-backed encryption.';
+
+  @override
+  String get tpmActionErrorKindInsufficientDmaProtection =>
+      'This computer is missing a required security feature (DMA protection).';
+
+  @override
+  String get tpmActionErrorKindNoKernelIommu =>
+      'This computer is missing a required security feature (IOMMU).';
+
+  @override
+  String get tpmActionErrorKindHostSecurity =>
+      'There is an issue with this computer\'s security configuration.';
+
+  @override
+  String get tpmActionErrorKindSysPrepApplicationsPresent =>
+      'There is software running at startup that might prevent a secure connection with the computer\'s TPM.';
+
+  @override
+  String get tpmActionErrorKindAbsolutePresent =>
+      'Absolute Persistence Module is enabled in this computer.';
+
+  @override
+  String get tpmActionErrorKindInvalidSecureBootMode =>
+      'Secure boot is disabled in this computer or is not set in deployed mode.';
+
+  @override
+  String get tpmActionErrorKindWeakSecureBootAlgorithmDetected =>
+      'Some of the certificates verifying software in this computer are outdated or use weak protection.';
+
+  @override
+  String get tpmActionErrorKindPreOsSecureBootAuthByEnrolledDigests =>
+      'This computer is using a manual allowlist to verify software at startup.';
+
+  @override
+  String get tpmActionErrorKindAddonDriversPresent =>
+      'Add-on drivers are present.';
+
+  @override
+  String get tpmActionErrorKindNoHardwareRootOfTrust =>
+      'This computer is missing a required security feature (hardware root of trust).';
+
+  @override
+  String get tpmActionErrorKindGenericTpm =>
+      'There is an issue with this computer\'s TPM.';
+
+  @override
+  String get tpmActionErrorKindGenericFirmware =>
+      'There is an issue with this computer\'s firmware.';
+
+  @override
+  String get tpmActionFixActionReboot => 'Restart';
+
+  @override
+  String get tpmActionFixActionShutdown => 'Power off';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettings =>
+      'Restart to firmware settings';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsInstructions =>
+      'Restart and press the settings key repeatedly during startup (commonly F2, F10 or Delete).';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection =>
+      'Enable DMA protection manually';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsInsufficientTpmStorage =>
+      'Clear TPM manually';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsInvalidSecureBootMode =>
+      'Enable secure boot manually';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsNoKernelIommu =>
+      'Enable IOMMU manually';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsNoSuitablePcrBank =>
+      'Enable PCR banks manually';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsTpmDeviceDisabled =>
+      'Enable TPM manually';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsTpmDeviceLockoutLockedOut =>
+      'Clear TPM manually';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsTpmHierarchiesOwned =>
+      'Clear TPM manually';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsAbsolutePresent =>
+      'Disable Absolute Persistence Module manually';
+
+  @override
+  String get tpmActionFixActionEnableTpmViaFirmware => 'Enable TPM on restart';
+
+  @override
+  String get tpmActionFixActionEnableAndClearTpmViaFirmware =>
+      'Enable and clear TPM on restart';
+
+  @override
+  String get tpmActionFixActionClearTpmViaFirmware => 'Clear TPM on restart';
+
+  @override
+  String get tpmActionFixActionClearTpm => 'Clear TPM';
+
+  @override
+  String get tpmActionFixActionProceed => 'Ignore';
+
+  @override
+  String get tpmActionFixActionRebootDescription =>
+      'Restart the computer to complete previous actions.';
+
+  @override
+  String get tpmActionFixActionRebootTpmDeviceFailureDescription =>
+      'Restarting the computer may fix the issue.';
+
+  @override
+  String get tpmActionFixActionShutdownDescription =>
+      'Power off the computer to complete previous actions.';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsDescription =>
+      'You can do this in your computer\'s firmware settings.';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsWithDocsDescription =>
+      'You might be able to do this in your computer\'s firmware settings. Check the documentation of the CPU vendor for guidance.';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsInvalidSecureBootModeHint =>
+      'Check secure boot mode is set to \"deployed\".';
+
+  @override
+  String get tpmActionFixActionRebootToFwSettingsNoKernelIommuHint =>
+      'This feature might be referred to as \"Virtualization Technology\", \"VT-d\" or \"AMD-Vi\".';
+
+  @override
+  String get tpmActionFixActionProceedDescription =>
+      'Ignoring the issue might make this computer less secure.';
+
+  @override
+  String get tpmActionIgnoreAndContinueLabel => 'Ignore and continue';
+
+  @override
+  String get tpmActionFixActionClearTpmWarningTitle =>
+      'Clearing the TPM erases all encryption keys';
+
+  @override
+  String get tpmActionFixActionClearTpmWarningBody =>
+      'You will lose access to all data in encrypted drives for which you do not have recovery keys. It will also break other features that depend on the TPM, such as authentication and certificates.';
+
+  @override
+  String get tpmActionFixActionClearTpmConfirmationLabel =>
+      'I understand the risk';
+
+  @override
+  String get tpmActionFixActionCaveatConfirm =>
+      'You might be asked to confirm this action on restart.';
+
+  @override
+  String get tpmActionFixActionCaveatRetry =>
+      'Then you will need to start the repair again.';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';
