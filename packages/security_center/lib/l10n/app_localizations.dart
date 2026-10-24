@@ -1674,7 +1674,7 @@ abstract class AppLocalizations {
   /// No description provided for @tpmActionFixActionCaveatRetry.
   ///
   /// In en, this message translates to:
-  /// **'Then start the repair again.'**
+  /// **'Then you will need to start the repair again.'**
   String get tpmActionFixActionCaveatRetry;
 
   /// No description provided for @ubuntuProPageTitle.
