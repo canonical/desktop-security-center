@@ -344,7 +344,7 @@
     "tpmActionFixActionClearTpmWarningBody": "You will lose access to all data in encrypted drives for which you do not have recovery keys. It will also break other features that depend on the TPM, such as authentication and certificates.",
     "tpmActionFixActionClearTpmConfirmationLabel": "I understand the risk",
     "tpmActionFixActionCaveatConfirm": "You might be asked to confirm this action on restart.",
-    "tpmActionFixActionCaveatRetry": "Then start the repair again.",
+    "tpmActionFixActionCaveatRetry": "Then you will need to start the repair again.",
     "ubuntuProPageTitle": "Ubuntu Pro",
     "ubuntuProNotSupported": "Ubuntu Pro is not available for this Ubuntu version",
 
