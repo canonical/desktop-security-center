@@ -67,6 +67,19 @@ class RecoveryKeyPanel extends ConsumerWidget {
     }
   }
 
+  Future<void> _showQRCode(BuildContext context, String key) async {
+    const RecoveryKeyQRCodeNotification(isShown: true).dispatch(context);
+    await showDialog<void>(
+      context: context,
+      // The dialog holding the panel already dims the page
+      barrierColor: Colors.transparent,
+      builder: (_) => _RecoveryKeyQRDialog(recoveryKey: key),
+    );
+    if (context.mounted) {
+      const RecoveryKeyQRCodeNotification(isShown: false).dispatch(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
@@ -122,11 +135,7 @@ class RecoveryKeyPanel extends ConsumerWidget {
               ),
               OutlinedButton(
                 onPressed: actionsEnabled && key != null
-                    ? () => showDialog(
-                          context: context,
-                          builder: (_) =>
-                              _RecoveryKeyQRDialog(recoveryKey: key),
-                        )
+                    ? () => _showQRCode(context, key)
                     : null,
                 child: Text(l10n.diskEncryptionPageReplaceDialogShowQR),
               ),
@@ -142,6 +151,13 @@ class RecoveryKeyPanel extends ConsumerWidget {
       ].separatedBy(const SizedBox(height: 16)),
     );
   }
+}
+
+/// Dispatched by [RecoveryKeyPanel] when its QR code dialog opens and closes.
+class RecoveryKeyQRCodeNotification extends Notification {
+  const RecoveryKeyQRCodeNotification({required this.isShown});
+
+  final bool isShown;
 }
 
 class _RecoveryKeyQRDialog extends ConsumerWidget {
