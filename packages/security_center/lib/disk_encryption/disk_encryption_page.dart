@@ -281,9 +281,12 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
           title: Text(l10n.diskEncryptionPageReplaceDialogHeader),
         ),
         titlePadding: EdgeInsets.zero,
+        // Bottom padding in the scroll view, so it scrolls with the content
+        contentPadding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
         content: SizedBox(
           width: 460,
           child: SingleChildScrollView(
+            padding: const EdgeInsets.only(bottom: 24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
