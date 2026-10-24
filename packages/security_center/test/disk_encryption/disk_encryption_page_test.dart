@@ -280,7 +280,7 @@ void main() {
 
     final qrCode = find.byType(BarcodeWidget);
     expect(qrCode, findsOneWidget);
-    expect(find.text('mock-recovery-key'), findsAtLeast(2));
+    expect(find.text('mock-recovery-key'), findsOneWidget);
   });
 
   testWidgets('Show recovery key replacement QR code', (tester) async {
@@ -311,7 +311,7 @@ void main() {
 
     final qrCode = find.byType(BarcodeWidget);
     expect(qrCode, findsOneWidget);
-    expect(find.text('mock-recovery-key'), findsAtLeast(2));
+    expect(find.text('mock-recovery-key'), findsOneWidget);
   });
 
   testWidgets('recovery key generation fails', (tester) async {
@@ -542,9 +542,11 @@ void main() {
             find.text(tester.l10n.recoveryKeyExceptionFilePermissionTitle),
             findsOneWidget,
           );
+          // The replace succeeded, so its success stays while the panel shows
+          // the save error
           expect(
             find.text(tester.l10n.diskEncryptionPageReplaceDialogSuccessHeader),
-            findsNothing,
+            findsOneWidget,
           );
         } else {
           // verify the in-memory FS got the right content

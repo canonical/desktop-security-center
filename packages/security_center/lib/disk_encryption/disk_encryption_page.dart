@@ -1,20 +1,17 @@
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
+import 'package:security_center/disk_encryption/recovery_key_panel.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
-import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
 
 const _learnMoreUrl =
     'https://documentation.ubuntu.com/desktop/en/latest/explanation/hardware-backed-disk-encryption/';
-const defaultRecoveryKeyFileName = 'recovery-key.txt';
 
 const yaruProgressSize = 20.0;
 
@@ -128,73 +125,82 @@ void showCheckRecoveryKeyDialog(BuildContext context) {
   showDialog(context: context, builder: (_) => const CheckRecoveryKeyDialog());
 }
 
-class CheckRecoveryKeyDialog extends ConsumerWidget {
+class CheckRecoveryKeyDialog extends StatelessWidget {
   const CheckRecoveryKeyDialog({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final data = ref.watch(checkRecoveryKeyDialogModelProvider);
-    final notifier = ref.read(checkRecoveryKeyDialogModelProvider.notifier);
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return AlertDialog(
       title: YaruDialogTitleBar(
         title: Text(l10n.diskEncryptionPageDialogHeaderCheckKey),
       ),
       titlePadding: EdgeInsets.zero,
-      content: SizedBox(
+      content: const SizedBox(
         width: 460,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              autofocus: true,
-              style: Theme.of(context).textTheme.bodyMedium,
-              decoration: InputDecoration(
-                labelText: l10n.diskEncryptionPageRecoveryKey,
-                hintText: 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
-              ),
-              onChanged: notifier.setKeyToCheck,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: switch (data) {
-                  CheckRecoveryKeyDialogStateInput() =>
-                    notifier.checkRecoveryKey,
-                  _ => null,
-                },
-                child: data is CheckRecoveryKeyDialogStateLoading
-                    ? SizedBox.square(
-                        dimension: yaruProgressSize,
-                        child: YaruCircularProgressIndicator(
-                          strokeWidth: 2,
-                        ),
-                      )
-                    : Text(l10n.diskEncryptionPageCheck),
-              ),
-            ),
-            if (data is CheckRecoveryKeyDialogStateResult)
-              if (data.valid)
-                YaruInfoBox(
-                  title: Text(l10n.diskEncryptionPageKeyWorks),
-                  subtitle: Text(l10n.diskEncryptionPageKeyWorksBody),
-                  yaruInfoType: YaruInfoType.success,
-                )
-              else
-                YaruInfoBox(
-                  title: Text(l10n.diskEncryptionPageKeyDoesntWork),
-                  subtitle: Text(l10n.diskEncryptionPageKeyDoesntWorkBody),
-                  yaruInfoType: YaruInfoType.danger,
-                ),
-            if (data is CheckRecoveryKeyDialogStateError)
-              YaruInfoBox(
-                title: Text(l10n.recoveryKeySomethingWentWrongHeader),
-                subtitle: Text(data.e.toString()),
-                yaruInfoType: YaruInfoType.danger,
-              ),
-          ].separatedBy(const SizedBox(height: 16)),
-        ),
+        child: _RecoveryKeyCheck(),
       ),
+    );
+  }
+}
+
+class _RecoveryKeyCheck extends ConsumerWidget {
+  const _RecoveryKeyCheck();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final data = ref.watch(checkRecoveryKeyDialogModelProvider);
+    final notifier = ref.read(checkRecoveryKeyDialogModelProvider.notifier);
+    final l10n = AppLocalizations.of(context);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        TextField(
+          autofocus: true,
+          style: Theme.of(context).textTheme.bodyMedium,
+          decoration: InputDecoration(
+            labelText: l10n.diskEncryptionPageRecoveryKey,
+            hintText: 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
+          ),
+          onChanged: notifier.setKeyToCheck,
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: OutlinedButton(
+            onPressed: switch (data) {
+              CheckRecoveryKeyDialogStateInput() => notifier.checkRecoveryKey,
+              _ => null,
+            },
+            child: data is CheckRecoveryKeyDialogStateLoading
+                ? SizedBox.square(
+                    dimension: yaruProgressSize,
+                    child: YaruCircularProgressIndicator(
+                      strokeWidth: 2,
+                    ),
+                  )
+                : Text(l10n.diskEncryptionPageCheck),
+          ),
+        ),
+        if (data is CheckRecoveryKeyDialogStateResult)
+          if (data.valid)
+            YaruInfoBox(
+              title: Text(l10n.diskEncryptionPageKeyWorks),
+              subtitle: Text(l10n.diskEncryptionPageKeyWorksBody),
+              yaruInfoType: YaruInfoType.success,
+            )
+          else
+            YaruInfoBox(
+              title: Text(l10n.diskEncryptionPageKeyDoesntWork),
+              subtitle: Text(l10n.diskEncryptionPageKeyDoesntWorkBody),
+              yaruInfoType: YaruInfoType.danger,
+            ),
+        if (data is CheckRecoveryKeyDialogStateError)
+          YaruInfoBox(
+            title: Text(l10n.recoveryKeySomethingWentWrongHeader),
+            subtitle: Text(data.e.toString()),
+            yaruInfoType: YaruInfoType.danger,
+          ),
+      ].separatedBy(const SizedBox(height: 16)),
     );
   }
 }
@@ -206,27 +212,60 @@ void showReplaceRecoveryKeyDialog(BuildContext context) {
   );
 }
 
-class ReplaceRecoveryKeyDialog extends ConsumerWidget {
-  const ReplaceRecoveryKeyDialog({super.key});
+// Gives the recovery key panel's snack bar a place above the barrier. The
+// Scaffold takes Esc for a drawer, even without one, so it's handed back to
+// the dialog here
+class _DialogScaffold extends StatefulWidget {
+  const _DialogScaffold({required this.child});
 
-  void saveToClipboard(BuildContext context, String text) {
-    final l10n = AppLocalizations.of(context);
-    Clipboard.setData(ClipboardData(text: text));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n.diskEncryptionPageClipboardNotification)),
+  final Widget child;
+
+  @override
+  State<_DialogScaffold> createState() => _DialogScaffoldState();
+}
+
+class _DialogScaffoldState extends State<_DialogScaffold> {
+  bool _isQRCodeShown = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Actions(
+        actions: <Type, Action<Intent>>{
+          DismissIntent: CallbackAction<DismissIntent>(
+            onInvoke: (_) => Navigator.of(context).maybePop(),
+          ),
+        },
+        // ModalRoute.isCurrentOf would hide the dialog behind the file chooser
+        child: NotificationListener<RecoveryKeyQRCodeNotification>(
+          onNotification: (notification) {
+            setState(() => _isQRCodeShown = notification.isShown);
+            return true;
+          },
+          child: Visibility(
+            visible: !_isQRCodeShown,
+            // The hidden panel must stay mounted to report the QR code closing
+            maintainState: true,
+            child: widget.child,
+          ),
+        ),
+      ),
     );
   }
+}
+
+class ReplaceRecoveryKeyDialog extends ConsumerWidget {
+  const ReplaceRecoveryKeyDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final replaceDialogModel = ref.watch(replaceRecoveryKeyDialogModelProvider);
     final replaceDialogState = replaceDialogModel.dialogState;
-    final replaceDialogError = replaceDialogModel.error;
     final replaceNotifier = ref.read(
       replaceRecoveryKeyDialogModelProvider.notifier,
     );
     final recoveryKey = ref.watch(generatedRecoveryKeyModelProvider);
-    final filePicker = ref.read(filePickerProvider);
 
     final l10n = AppLocalizations.of(context);
 
@@ -236,118 +275,28 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
         Navigator.of(context).pop();
       });
     }
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: AlertDialog(
+    return _DialogScaffold(
+      child: AlertDialog(
         title: YaruDialogTitleBar(
           title: Text(l10n.diskEncryptionPageReplaceDialogHeader),
         ),
         titlePadding: EdgeInsets.zero,
+        // Bottom padding in the scroll view, so it scrolls with the content
+        contentPadding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
         content: SizedBox(
           width: 460,
           child: SingleChildScrollView(
+            padding: const EdgeInsets.only(bottom: 24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(l10n.diskEncryptionPageReplaceDialogBody),
-                if (recoveryKey is AsyncLoading)
-                  YaruLinearProgressIndicator()
-                else if (recoveryKey is AsyncData)
-                  TextFormField(
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    onTap: () => saveToClipboard(
-                      context,
-                      recoveryKey.value!.recoveryKey,
-                    ),
-                    initialValue: recoveryKey.value!.recoveryKey,
-                    decoration: InputDecoration(
-                      labelText: l10n.diskEncryptionPageRecoveryKey,
-                      suffixIcon: YaruIconButton(
-                        tooltip: l10n.diskEncryptionPageCopySemanticLabel,
-                        icon: Icon(
-                          YaruIcons.copy,
-                          size: 16,
-                          semanticLabel:
-                              l10n.diskEncryptionPageCopySemanticLabel,
-                        ),
-                        onPressed: () => saveToClipboard(
-                          context,
-                          recoveryKey.value!.recoveryKey,
-                        ),
-                      ),
-                      suffixIconConstraints: BoxConstraints(
-                        maxWidth: 32,
-                        maxHeight: 32,
-                      ),
-                    ),
-                    readOnly: true,
-                    minLines: 1,
-                    maxLines: 2,
-                  ),
-                Row(
-                  children: [
-                    OutlinedButton(
-                      onPressed: replaceDialogState
-                                  is! ReplaceRecoveryKeyDialogStateGenerating &&
-                              replaceDialogState
-                                  is! ReplaceRecoveryKeyDialogStateError
-                          ? () async {
-                              replaceNotifier.setError(null);
-                              try {
-                                final uri = await filePicker(
-                                  context: context,
-                                  title: l10n.recoveryKeyFilePickerTitle,
-                                  defaultFileName: defaultRecoveryKeyFileName,
-                                  filters: [
-                                    XdgFileChooserFilter(
-                                      l10n.recoveryKeyFilePickerFilter,
-                                      [XdgFileChooserGlobPattern('*.txt')],
-                                    ),
-                                  ],
-                                );
-                                if (uri.toString() == '') {
-                                  replaceNotifier.setError(
-                                    RecoveryKeyExceptionFilePermission(),
-                                  );
-                                  return;
-                                }
-                                if (uri != null) {
-                                  await replaceNotifier.writeRecoveryKey(
-                                    uri,
-                                    recoveryKey.value!.recoveryKey,
-                                  );
-                                }
-                              } on Exception catch (e) {
-                                replaceNotifier.setError(
-                                  RecoveryKeyException.from(e),
-                                );
-                              }
-                            }
-                          : null,
-                      child: Text(l10n.diskEncryptionPageReplaceDialogSave),
-                    ),
-                    OutlinedButton(
-                      onPressed: replaceDialogState
-                                  is! ReplaceRecoveryKeyDialogStateGenerating &&
-                              replaceDialogState
-                                  is! ReplaceRecoveryKeyDialogStateError
-                          ? () => showDialog(
-                                context: context,
-                                builder: (_) => _RecoveryKeyQRDialog(
-                                  recoveryKey: recoveryKey.value!.recoveryKey,
-                                ),
-                              )
-                          : null,
-                      child: Text(l10n.diskEncryptionPageReplaceDialogShowQR),
-                    ),
-                  ].separatedBy(const SizedBox(width: 16)),
+                RecoveryKeyPanel(
+                  recoveryKey: recoveryKey.whenData((r) => r.recoveryKey),
+                  actionsEnabled: replaceDialogState
+                          is! ReplaceRecoveryKeyDialogStateGenerating &&
+                      replaceDialogState is! ReplaceRecoveryKeyDialogStateError,
                 ),
-                if (replaceDialogError != null)
-                  YaruInfoBox(
-                    title: Text(replaceDialogError.localizedTitle(l10n)),
-                    subtitle: Text(replaceDialogError.localizedBody(l10n)),
-                    yaruInfoType: YaruInfoType.danger,
-                  ),
                 YaruCheckButton(
                   title: Text(
                     l10n.diskEncryptionPageReplaceDialogAcknowledge,
@@ -398,9 +347,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   ].separatedBy(const SizedBox(width: 16)),
                 ),
                 if (recoveryKey.isLoading) SizedBox.shrink(),
-                if (replaceDialogState
-                        is ReplaceRecoveryKeyDialogStateSuccess &&
-                    replaceDialogError == null)
+                if (replaceDialogState is ReplaceRecoveryKeyDialogStateSuccess)
                   YaruInfoBox(
                     title: Text(
                       l10n.diskEncryptionPageReplaceDialogSuccessHeader,
@@ -599,41 +546,6 @@ class ChangeAuthModeDialog extends ConsumerWidget {
                 yaruInfoType: YaruInfoType.danger,
               ),
           ].separatedBy(const SizedBox(height: 16)),
-        ),
-      ),
-    );
-  }
-}
-
-class _RecoveryKeyQRDialog extends ConsumerWidget {
-  const _RecoveryKeyQRDialog({required this.recoveryKey});
-
-  final String recoveryKey;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-    return AlertDialog(
-      title: YaruDialogTitleBar(
-        title: Text(l10n.diskEncryptionPageReplaceDialogQRHeader),
-      ),
-      titlePadding: EdgeInsets.zero,
-      content: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 500),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(l10n.diskEncryptionPageReplaceDialogQRBody),
-            BarcodeWidget(
-              margin: const EdgeInsets.all(16),
-              color: Theme.of(context).colorScheme.onSurface,
-              barcode: Barcode.qrCode(),
-              data: recoveryKey,
-              width: 200,
-              height: 200,
-            ),
-            Text(recoveryKey),
-          ],
         ),
       ),
     );
