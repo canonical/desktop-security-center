@@ -23,7 +23,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Autoriser toujours';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel =>
+      'Mettre à jour autorisations';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Refuser toujours';
