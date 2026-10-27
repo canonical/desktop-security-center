@@ -269,5 +269,6 @@
     "snapdRuleCategoryTemporarilyDenied": "Refuser temporairement",
     "snapdRuleCategoryAskAlways": "Demander toujours",
     "ubuntuProLoadingLabel": "Cela peut prendre quelques secondes ...",
-    "ubuntuProDisableError": "Impossible de désactiver Ubuntu Pro, réessayez"
+    "ubuntuProDisableError": "Impossible de désactiver Ubuntu Pro, réessayez",
+    "permissionRulePopupMenuSemanticLabel": "Mettre à jour autorisations"
 }
