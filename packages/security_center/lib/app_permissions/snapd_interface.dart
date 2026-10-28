@@ -39,7 +39,7 @@ enum SnapdInterface {
 
 /// Permission level constraints for a [SnapdRule].
 @freezed
-class PermissionConstraints with _$PermissionConstraints {
+abstract class PermissionConstraints with _$PermissionConstraints {
   const factory PermissionConstraints({
     required SnapdRequestOutcome outcome,
     required SnapdRequestLifespan lifespan,

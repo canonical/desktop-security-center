@@ -6,7 +6,7 @@ part 'disk_encryption_service.g.dart';
 
 /// A Class to model an Entropy response from Snapd
 @freezed
-class EntropyResponse with _$EntropyResponse {
+abstract class EntropyResponse with _$EntropyResponse {
   const factory EntropyResponse({
     required bool success,
     required int entropyBits,
@@ -31,7 +31,7 @@ class EntropyResponse with _$EntropyResponse {
 
 /// A Class to model the recovery key details returned.
 @freezed
-class RecoveryKeyDetails with _$RecoveryKeyDetails {
+abstract class RecoveryKeyDetails with _$RecoveryKeyDetails {
   const factory RecoveryKeyDetails({
     required String recoveryKey,
     required String keyId,
@@ -51,7 +51,7 @@ enum AuthMode { none, pin, passphrase }
 
 /// A class to model the key slot on a LUKS container.
 @freezed
-class KeySlot with _$KeySlot {
+abstract class KeySlot with _$KeySlot {
   const factory KeySlot({
     /// The key slot name, used to identify the key slot.
     required String name,
@@ -67,7 +67,7 @@ class KeySlot with _$KeySlot {
 
 /// A class to model the system data container returned by snapd.
 @freezed
-class SystemDataContainer with _$SystemDataContainer {
+abstract class SystemDataContainer with _$SystemDataContainer {
   const factory SystemDataContainer({
     /// Containr role. For enumerating with a TPM, we expect a system-data and a system-save.
     required String containerRole,

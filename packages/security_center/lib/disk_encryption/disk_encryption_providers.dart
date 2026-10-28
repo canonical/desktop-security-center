@@ -191,7 +191,7 @@ sealed class ChangeAuthModeDialogState with _$ChangeAuthModeDialogState {
 
 /// State for TPM authentication mode, including pending operations to change current platform key.
 @freezed
-class TpmAuthState with _$TpmAuthState {
+abstract class TpmAuthState with _$TpmAuthState {
   const factory TpmAuthState({
     required AuthMode currentAuthMode,
     TpmFdeOperation? pendingOperation,
@@ -238,7 +238,7 @@ sealed class CheckRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
 
 /// Dialog model for managing the flow to update an existing pin or passphrase.
 @freezed
-class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
+abstract class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
   factory ChangeAuthDialogModelData({
     required ChangeAuthDialogState dialogState,
     required AuthMode authMode,
@@ -252,7 +252,8 @@ class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
 
 /// Dialog model for managing the flow to swap between pin and passphrase.
 @freezed
-class ChangeAuthModeDialogModelData with _$ChangeAuthModeDialogModelData {
+abstract class ChangeAuthModeDialogModelData
+    with _$ChangeAuthModeDialogModelData {
   factory ChangeAuthModeDialogModelData({
     required ChangeAuthModeDialogState dialogState,
     required AuthMode newAuthMode,
@@ -606,7 +607,7 @@ typedef ProcessRunner = Future<ProcessResult> Function(
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @freezed
-class ReplaceRecoveryKeyDialogModelData
+abstract class ReplaceRecoveryKeyDialogModelData
     with _$ReplaceRecoveryKeyDialogModelData {
   factory ReplaceRecoveryKeyDialogModelData({
     required ReplaceRecoveryKeyDialogState dialogState,

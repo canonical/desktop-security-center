@@ -22,7 +22,7 @@ String getUbuntuProMagicLink(String userCode) {
 }
 
 @freezed
-class MagicAttachResponse with _$MagicAttachResponse {
+abstract class MagicAttachResponse with _$MagicAttachResponse {
   // ignore: invalid_annotation_target
   @JsonSerializable(fieldRename: FieldRename.none)
   const factory MagicAttachResponse({

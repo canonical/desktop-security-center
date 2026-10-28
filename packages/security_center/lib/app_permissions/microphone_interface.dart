@@ -11,7 +11,7 @@ part 'microphone_interface.g.dart';
 
 /// Constraints for a microphone interface [SnapdRule].
 @freezed
-class MicrophoneRuleConstraints with _$MicrophoneRuleConstraints {
+abstract class MicrophoneRuleConstraints with _$MicrophoneRuleConstraints {
   const factory MicrophoneRuleConstraints({
     required Map<MicrophonePermission, PermissionConstraints> permissions,
   }) = _MicrophoneRuleConstraints;
