@@ -8,7 +8,7 @@ part 'home_interface.g.dart';
 
 /// Constraints for a home interface [SnapdRule].
 @freezed
-class HomeRuleConstraints with _$HomeRuleConstraints {
+abstract class HomeRuleConstraints with _$HomeRuleConstraints {
   const factory HomeRuleConstraints({
     required String pathPattern,
     required Map<HomePermission, PermissionConstraints> permissions,
@@ -19,7 +19,7 @@ class HomeRuleConstraints with _$HomeRuleConstraints {
 }
 
 @freezed
-class OldHomeRuleConstraints with _$OldHomeRuleConstraints {
+abstract class OldHomeRuleConstraints with _$OldHomeRuleConstraints {
   const factory OldHomeRuleConstraints({
     required String pathPattern,
     required List<String> permissions,
