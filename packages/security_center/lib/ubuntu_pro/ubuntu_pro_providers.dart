@@ -83,7 +83,7 @@ class UbuntuProPageModel extends _$UbuntuProPageModel {
 }
 
 @freezed
-class UbuntuProData with _$UbuntuProData {
+abstract class UbuntuProData with _$UbuntuProData {
   factory UbuntuProData({
     @Default('') String token,
   }) = _UbuntuProData;
@@ -121,7 +121,7 @@ Stream<List<String>> updateNotifierStream(Ref ref) async* {
 }
 
 @freezed
-class GSettingsUpdateNotifierData with _$GSettingsUpdateNotifierData {
+abstract class GSettingsUpdateNotifierData with _$GSettingsUpdateNotifierData {
   factory GSettingsUpdateNotifierData({
     required bool showStatusIcon,
   }) = _GSettingsUpdateNotifierData;
@@ -154,7 +154,7 @@ sealed class UbuntuProFeatureState with _$UbuntuProFeatureState {
 }
 
 @freezed
-class UbuntuProFeatureData with _$UbuntuProFeatureData {
+abstract class UbuntuProFeatureData with _$UbuntuProFeatureData {
   factory UbuntuProFeatureData({
     required UbuntuProFeatureState state,
     required UbuntuProFeature? data,
@@ -242,7 +242,7 @@ enum FIPSType {
 }
 
 @freezed
-class FIPSData with _$FIPSData {
+abstract class FIPSData with _$FIPSData {
   factory FIPSData({
     required FIPSType type,
     required bool canEnable,
@@ -291,7 +291,7 @@ class FIPSModel extends _$FIPSModel {
 }
 
 @freezed
-class MagicAttachData with _$MagicAttachData {
+abstract class MagicAttachData with _$MagicAttachData {
   factory MagicAttachData({
     required MagicAttachResponse response,
   }) = _MagicAttachData;

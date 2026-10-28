@@ -101,6 +101,7 @@ factory: true
         isDryRun: false,
         wantMicrophone: false,
         wantPro: false,
+        wantReprovision: false,
       ),
       (
         name: 'snapd version == 2.75, microphone support, no pro supported',
@@ -108,6 +109,7 @@ factory: true
         isDryRun: false,
         wantMicrophone: true,
         wantPro: false,
+        wantReprovision: false,
       ),
       (
         name: 'snapd version == 2.75.1, microphone and pro interface supported',
@@ -115,6 +117,7 @@ factory: true
         isDryRun: false,
         wantMicrophone: true,
         wantPro: true,
+        wantReprovision: false,
       ),
       (
         name: 'snapd version > 2.75, microphone and pro interface supported',
@@ -122,6 +125,7 @@ factory: true
         isDryRun: false,
         wantMicrophone: true,
         wantPro: true,
+        wantReprovision: false,
       ),
       (
         name:
@@ -130,6 +134,7 @@ factory: true
         isDryRun: false,
         wantMicrophone: true,
         wantPro: true,
+        wantReprovision: false,
       ),
       (
         name:
@@ -138,6 +143,7 @@ factory: true
         isDryRun: false,
         wantMicrophone: false,
         wantPro: false,
+        wantReprovision: false,
       ),
       (
         name: 'snapd version with dev hash suffix',
@@ -145,6 +151,7 @@ factory: true
         isDryRun: false,
         wantMicrophone: true,
         wantPro: true,
+        wantReprovision: false,
       ),
       (
         name: 'snapd version 2.74.1',
@@ -152,6 +159,7 @@ factory: true
         isDryRun: false,
         wantMicrophone: false,
         wantPro: false,
+        wantReprovision: false,
       ),
       (
         name: 'snapd version 2.75.0',
@@ -159,6 +167,7 @@ factory: true
         isDryRun: false,
         wantMicrophone: true,
         wantPro: false,
+        wantReprovision: false,
       ),
       (
         name: 'snapd version 2.75.1',
@@ -166,6 +175,15 @@ factory: true
         isDryRun: false,
         wantMicrophone: true,
         wantPro: true,
+        wantReprovision: false,
+      ),
+      (
+        name: 'snapd version 2.78 still requires dry-run for reprovision',
+        snapdVersion: '2.78',
+        isDryRun: false,
+        wantMicrophone: true,
+        wantPro: true,
+        wantReprovision: false,
       ),
       (
         name: 'snapd version null, no microphone or pro interface',
@@ -173,6 +191,7 @@ factory: true
         isDryRun: false,
         wantMicrophone: false,
         wantPro: false,
+        wantReprovision: false,
       ),
       (
         name: 'dry run mode always returns true',
@@ -180,6 +199,7 @@ factory: true
         isDryRun: true,
         wantMicrophone: true,
         wantPro: true,
+        wantReprovision: true,
       ),
       (
         name: 'dry run mode with null version returns true',
@@ -187,6 +207,7 @@ factory: true
         isDryRun: true,
         wantMicrophone: true,
         wantPro: true,
+        wantReprovision: true,
       ),
     ]) {
       test(testCase.name, () {
@@ -202,6 +223,10 @@ factory: true
         expect(
           service.supportsProControl,
           equals(testCase.wantPro),
+        );
+        expect(
+          service.supportsReprovision,
+          equals(testCase.wantReprovision),
         );
       });
     }
