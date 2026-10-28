@@ -53,8 +53,12 @@ class FeatureService {
     return _hasGreaterSnapdVersion(snapdVersion, '2.75.1');
   }
 
-  // snapd doesn't allow repair calls from desktop users yet
-  bool get supportsReprovision => isDryRun;
+  // TODO: for local testing; use the snapd release with desktop access
+  bool get supportsReprovision {
+    if (isDryRun) return true;
+
+    return _hasGreaterSnapdVersion(snapdVersion, '2.78');
+  }
 
   bool _hasStorageEncryptedManaged() {
     final result = _runProcess('snapctl', ['system-mode']);
