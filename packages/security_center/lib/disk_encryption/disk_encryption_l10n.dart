@@ -161,7 +161,11 @@ extension SnapdAvailabilityCheckErrorKindL10n
           l10n.tpmActionErrorKindEfiVariableAccess,
         SnapdAvailabilityCheckErrorKind.noSuitableTpm2Device =>
           l10n.tpmActionErrorKindNoSuitableTpm2Device,
-        SnapdAvailabilityCheckErrorKind.tpmDeviceFailure =>
+        SnapdAvailabilityCheckErrorKind.tpmDeviceFailure ||
+        SnapdAvailabilityCheckErrorKind.measuredBoot ||
+        SnapdAvailabilityCheckErrorKind.tpmCommandFailed ||
+        SnapdAvailabilityCheckErrorKind.invalidTpmResponse ||
+        SnapdAvailabilityCheckErrorKind.tpmCommunication =>
           l10n.tpmActionErrorKindGenericTpm,
         SnapdAvailabilityCheckErrorKind.tpmDeviceDisabled =>
           l10n.tpmActionErrorKindTpmDeviceDisabled,
@@ -171,16 +175,9 @@ extension SnapdAvailabilityCheckErrorKindL10n
           l10n.tpmActionErrorKindTpmDeviceLockoutLockedOut,
         SnapdAvailabilityCheckErrorKind.insufficientTpmStorage =>
           l10n.tpmActionErrorKindInsufficientTpmStorage,
-        SnapdAvailabilityCheckErrorKind.noSuitablePcrBank =>
+        SnapdAvailabilityCheckErrorKind.noSuitablePcrBank ||
+        SnapdAvailabilityCheckErrorKind.tpmPcrUnusable =>
           l10n.tpmActionErrorKindGenericFirmware,
-        SnapdAvailabilityCheckErrorKind.measuredBoot =>
-          l10n.tpmActionErrorKindGenericTpm,
-        SnapdAvailabilityCheckErrorKind.tpmCommandFailed =>
-          l10n.tpmActionErrorKindGenericTpm,
-        SnapdAvailabilityCheckErrorKind.invalidTpmResponse =>
-          l10n.tpmActionErrorKindGenericTpm,
-        SnapdAvailabilityCheckErrorKind.tpmCommunication =>
-          l10n.tpmActionErrorKindGenericTpm,
         SnapdAvailabilityCheckErrorKind.unsupportedPlatform =>
           l10n.tpmActionErrorKindUnsupportedPlatform,
         SnapdAvailabilityCheckErrorKind.insufficientDmaProtection =>
@@ -189,8 +186,6 @@ extension SnapdAvailabilityCheckErrorKindL10n
           l10n.tpmActionErrorKindNoKernelIommu,
         SnapdAvailabilityCheckErrorKind.hostSecurity =>
           l10n.tpmActionErrorKindHostSecurity,
-        SnapdAvailabilityCheckErrorKind.tpmPcrUnusable =>
-          l10n.tpmActionErrorKindGenericFirmware,
         SnapdAvailabilityCheckErrorKind.addonDriversPresent =>
           l10n.tpmActionErrorKindAddonDriversPresent,
         SnapdAvailabilityCheckErrorKind.sysPrepApplicationsPresent =>
