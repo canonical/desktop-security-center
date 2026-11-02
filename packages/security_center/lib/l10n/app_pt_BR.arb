@@ -8,12 +8,12 @@
     "snapPermissionWriteLabel": "Escrever",
     "snapPermissionExecuteLabel": "Executar",
     "snapPermissionAccessLabel": "Acesso",
-    "snapPermissionsEnableTitle": "Exigir que os aplicativos solicitem permissões do sistema",
+    "snapPermissionsEnableTitle": "Exigir que aplicativos em sandbox solicitem permissões",
     "snapPermissionsEnableWarning": "Esta é uma funcionalidade experimental para controlar o acesso aos recursos do seu sistema.",
     "snapPermissionsEnablingLabel": "A ativação pode levar alguns segundos...",
     "snapPermissionsDisablingLabel": "Desativar pode levar alguns segundos...",
     "snapPermissionsExperimentalLabel": "Experimental",
-    "snapPermissionsOtherDescription": "Você pode gerenciar outras permissões em Configurações › Aplicativos.",
+    "snapPermissionsOtherDescription": "Você pode gerenciar outras permissões em Configurações › Apps.",
     "snapPermissionsPageTitle": "Permissões do aplicativo",
     "snapRulesCount": "{n, plural, =0{sem regras} =1{1 regra} other{{n} regras}}",
     "@snapRulesCount": {
@@ -99,7 +99,7 @@
     "diskEncryptionPageErrorUnsupportedSnapdBody": "Verifique se o Centro de Segurança e o snapd estão atualizados.",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "O Centro de Segurança não consegue se conectar à interface snapd",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Para corrigir isso, execute o seguinte comando no terminal:",
-    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap conecta com desktop-security-center:snap-fde-control",
     "recoveryKeyExceptionFileSystemTitle": "O arquivo da chave de recuperação não foi salvo",
     "diskEncryptionPageAddPinButton": "Adicione um PIN...",
     "diskEncryptionPageAddPassphraseButton": "Adicionar senha...",
@@ -140,7 +140,7 @@
     "recoveryKeyPassphraseCurrentError": "Senha incorreta, tente novamente",
     "recoveryKeyPassphraseNewError": "Deve ter pelo menos 4 caracteres",
     "recoveryKeyPassphraseConfirmError": "As senhas não coincidem, tente novamente",
-    "recoveryKeyPassphraseDialogHeader": "Alterar senha",
+    "recoveryKeyPassphraseDialogHeader": "Alterar a senha",
     "recoveryKeyPinEnabled": "O PIN de criptografia está ativado",
     "recoveryKeyPinHeader": "PIN de criptografia",
     "recoveryKeyEncrpytionPassphraseHeader": "Senha de criptografia",
@@ -167,7 +167,7 @@
     "recoveryKeyPinEntropyOptimal": "O PIN é longo o suficiente",
     "recoveryKeySomethingWentWrongHeader": "Algo deu errado",
     "ubuntuProEnablePro": "Habilite Ubuntu Pro",
-    "ubuntuProFeatureDisableError": "Não foi possível desabilitar esse recurso, por favor, tente novamente.",
+    "ubuntuProFeatureDisableError": "Não foi possível desabilitar esse recurso, tente novamente.",
     "ubuntuProNotSupportedSnapdDetails": "Atualize snapd para gerenciar o Ubuntu Pro",
     "ubuntuProEnabled": "Ubuntu Pro está habilitado",
     "ubuntuProEnableMagicSubtitle": "Você poderá criar uma conta gratuitamente",
@@ -200,7 +200,7 @@
     "ubuntuProEnableTokenError": "Não foi possível habilitar o Ubuntu Pro",
     "ubuntuProEnableMagic": "Habilite com uma conta Ubuntu One",
     "ubuntuProNotSupportedDetails": "Ubuntu Pro requer uma versão LTS",
-    "ubuntuProMagicError": "Não foi possível habilitar o Ubuntu Pro, por favor, tente novamente",
+    "ubuntuProMagicError": "Não foi possível habilitar o Ubuntu Pro, tente novamente",
     "ubuntuProEnableTokenSubtitle": "Do seu administrador de TI ou de {proLink}",
     "@ubuntuProEnableTokenSubtitle": {
         "placeholders": {
@@ -226,6 +226,49 @@
     },
     "ubuntuProMagicContinueInBrowser": "Continue no navegador",
     "ubuntuProComplianceDisclaimer": "Recomendado apenas para auxiliar no atendimento a requisitos de FedRAMP, HIPAA e outros requisitos de conformidade e endurecimento de segurança (*hardening*).",
-    "ubuntuProFeatureEnableError": "Não foi possível habilitar esse recurso, por favor, tente novamente.",
-    "ubuntuProDisablePrompt": "Desabilitar o Ubuntu Pro desconectará sua assinatura dessa máquina. Você quer continuar?"
+    "ubuntuProFeatureEnableError": "Não foi possível habilitar esse recurso, tente novamente.",
+    "ubuntuProDisablePrompt": "Desabilitar o Ubuntu Pro desconectará sua assinatura deste computador. Você quer continuar?",
+    "permissionRulePopupMenuSemanticLabel": "Atualizar permissões",
+    "snapdRuleCategoryTemporarilyAllowed": "Permitir temporariamente",
+    "snapdRuleCategoryTemporarilyDenied": "Negar temporariamente",
+    "snapdRuleCategoryAskAlways": "Sempre perguntar",
+    "ubuntuProPageTitle": "Ubuntu Pro",
+    "ubuntuProLoadingLabel": "Isso pode levar alguns segundos...",
+    "ubuntuProTokenLabel": "Token",
+    "ubuntuProDisableError": "Não foi possível desativar o Ubuntu Pro, tente novamente",
+    "ubuntuProComplianceUSGDescription": "Automatiza o reforço e a auditoria com perfis de benchmark CIS e DISA-STIG, ao mesmo tempo em que permite personalizações específicas do ambiente.",
+    "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
+    "ubuntuProComplianceFIPSDescription": "Uma certificação de módulo criptográfico do governo dos EUA e Canadá de conformidade com o padrão de proteção de dados FIPS 140-2.",
+    "ubuntuProComplianceFIPSEnable": "Ativar FIPS",
+    "ubuntuProComplianceFIPSDisclaimer": "A ativação do FIPS não pode ser revertida e o Livepatch será desativado permanentemente.",
+    "ubuntuProComplianceFIPSPrompt": "Escolha sua opção FIPS preferida",
+    "ubuntuProComplianceFIPSUpdates": "FIPS com atualizações",
+    "ubuntuProComplianceFIPSUpdatesDescription": "Instala pacotes validados pelo FIPS 140-2 e permite atualizações regulares de segurança.",
+    "ubuntuProComplianceFIPSNoUpdates": "FIPS sem atualizações",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Instala pacotes validados pelo FIPS 140-2. Elas não serão atualizadas até a próxima recertificação.",
+    "ubuntuProComplianceDocumentation": "Documentação de conformidade de segurança",
+    "ubuntuProESMTitle": "Manutenção de Segurança Expandida (ESM)",
+    "ubuntuProESMDescription": "O ESM fornece 10 anos de patches de segurança para todo o Ubuntu Archive. Obtenha gerenciamento contínuo de vulnerabilidades para CVEs críticos, altos e médios selecionados.",
+    "ubuntuProESMMainTitle": "Pacotes principais (esm-infra)",
+    "ubuntuProESMMainDescription": "Atualizações de segurança para pacotes principais do Ubuntu até {year}",
+    "@ubuntuProESMMainDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProESMUniverseTitle": "Pacotes do universo (esm-apps)",
+    "ubuntuProESMUniverseDescription": "Atualizações de segurança adicionais para pacotes do Ubuntu Universe até {year}",
+    "@ubuntuProESMUniverseDescription": {
+        "placeholders": {
+            "year": {
+                "type": "int"
+            }
+        }
+    },
+    "ubuntuProLivepatchTitle": "Kernel-Livepatch",
+    "ubuntuProLivepatchEnableTitle": "Habilitar Livepatch",
+    "ubuntuProLivepatchEnableDescription": "Aplique atualizações de segurança do kernel enquanto o sistema é executado",
+    "ubuntuProLivepatchShowTitle": "Mostrar o estado do Livepatch na barra superior"
 }
