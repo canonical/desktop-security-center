@@ -18,6 +18,8 @@ class RecoveryKeyPanel extends ConsumerWidget {
     required this.saveError,
     required this.onSaveErrorChanged,
     required this.onSaveToFile,
+    required this.acknowledged,
+    required this.onAcknowledgedChanged,
     super.key,
   });
 
@@ -26,6 +28,10 @@ class RecoveryKeyPanel extends ConsumerWidget {
   final RecoveryKeyException? saveError;
   final void Function(RecoveryKeyException? error) onSaveErrorChanged;
   final Future<void> Function(Uri uri, String recoveryKey) onSaveToFile;
+  final bool acknowledged;
+
+  /// Null disables the checkbox.
+  final void Function(bool acknowledged)? onAcknowledgedChanged;
 
   void _copyToClipboard(BuildContext context, String text) {
     final l10n = AppLocalizations.of(context);
@@ -148,6 +154,26 @@ class RecoveryKeyPanel extends ConsumerWidget {
             subtitle: Text(error.localizedBody(l10n)),
             yaruInfoType: YaruInfoType.danger,
           ),
+        // 28 px below the key's buttons, as in the design
+        Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: DialogToggle(
+            height: 24,
+            indent: 4,
+            child: YaruCheckButton(
+              title: Text(
+                l10n.diskEncryptionPageReplaceDialogAcknowledge,
+                maxLines: 2,
+                // TODO: remove hardcoded style once this is available in yaru.
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              value: acknowledged,
+              onChanged: onAcknowledgedChanged == null
+                  ? null
+                  : (value) => onAcknowledgedChanged!(value ?? false),
+            ),
+          ),
+        ),
       ].separatedBy(const SizedBox(height: 16)),
     );
   }
