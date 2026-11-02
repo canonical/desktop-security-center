@@ -75,6 +75,10 @@ extension SnapdFixActionRepair on SnapdFixAction {
           false,
       };
 
+  bool get isContact =>
+      this == SnapdFixAction.contactOem ||
+      this == SnapdFixAction.contactOsVendor;
+
   bool clearsTpm(SnapdAvailabilityCheckErrorKind kind) => switch (this) {
         SnapdFixAction.enableAndClearTpmViaFirmware ||
         SnapdFixAction.clearTpmViaFirmware ||
@@ -307,15 +311,10 @@ sealed class RepairDialogState with _$RepairDialogState {
     SnapdFixAction action,
   ) = RepairDialogStateCheckKey;
   factory RepairDialogState.confirmPowerAction(
-    SnapdAvailabilityCheckError issue,
     SnapdFixAction action, {
     @Default(false) bool pending,
     Exception? error,
   }) = RepairDialogStateConfirmPowerAction;
-  factory RepairDialogState.applyingFix(SnapdFixAction action) =
-      RepairDialogStateApplyingFix;
-  factory RepairDialogState.unavailable(SnapdAvailabilityCheckError issue) =
-      RepairDialogStateUnavailable;
   factory RepairDialogState.setPinOrPassphrase(List<AuthMode> authModes) =
       RepairDialogStateSetPinOrPassphrase;
   factory RepairDialogState.pinOrPassphraseWillBeRemoved() =
@@ -324,8 +323,9 @@ sealed class RepairDialogState with _$RepairDialogState {
   // Holds the response, since its toString() hides the key
   factory RepairDialogState.saveKey(
     SnapdGenerateReprovisionRecoveryKeyResponse key,
-    bool acknowledged,
-  ) = RepairDialogStateSaveKey;
+    bool acknowledged, {
+    RecoveryKeyException? saveError,
+  }) = RepairDialogStateSaveKey;
   factory RepairDialogState.startingRepair() = RepairDialogStateStartingRepair;
   factory RepairDialogState.keyNotUsed() = RepairDialogStateKeyNotUsed;
   factory RepairDialogState.error(Exception e) = RepairDialogStateError;
@@ -1031,14 +1031,6 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
   }
 }
 
-@freezed
-abstract class RepairDialogModelData with _$RepairDialogModelData {
-  factory RepairDialogModelData({
-    required RepairDialogState dialogState,
-    RecoveryKeyException? error,
-  }) = _RepairDialogModelData;
-}
-
 @riverpod
 class RepairDialogModel extends _$RepairDialogModel {
   late final _service = getService<DiskEncryptionService>();
@@ -1050,11 +1042,11 @@ class RepairDialogModel extends _$RepairDialogModel {
   ({AuthMode mode, String passphrase})? _newAuth;
 
   @override
-  RepairDialogModelData build() {
+  RepairDialogState build() {
     ref.onDispose(() => _flow++);
     _newAuth = null;
     unawaited(_check());
-    return RepairDialogModelData(dialogState: RepairDialogState.checking());
+    return RepairDialogState.checking();
   }
 
   Future<void> _check() async {
@@ -1065,7 +1057,7 @@ class RepairDialogModel extends _$RepairDialogModel {
       if (!needsRepair) {
         // Nothing to tell the user, since the page shows the new status
         ref.invalidate(tpmAuthenticationModelProvider);
-        state = state.copyWith(dialogState: RepairDialogState.closed());
+        state = RepairDialogState.closed();
         return;
       }
       final encryption = await _request(_service.checkEncryptionSupport());
@@ -1073,11 +1065,9 @@ class RepairDialogModel extends _$RepairDialogModel {
       await _continueAfterCheck(encryption);
     } on Exception catch (e) {
       if (flow != _flow) return;
-      state = state.copyWith(
-        dialogState: _isAuthCancelled(e)
-            ? RepairDialogState.closed()
-            : RepairDialogState.error(e),
-      );
+      state = _isAuthCancelled(e)
+          ? RepairDialogState.closed()
+          : RepairDialogState.error(e);
     }
   }
 
@@ -1095,17 +1085,7 @@ class RepairDialogModel extends _$RepairDialogModel {
                 message: encryption.unavailableReason ?? '',
               ));
     if (issue != null) {
-      // Contacting the OEM or OS vendor isn't a fix the user can make here
-      final canFix = issue.actions.any(
-        (action) =>
-            action != SnapdFixAction.contactOem &&
-            action != SnapdFixAction.contactOsVendor,
-      );
-      state = state.copyWith(
-        dialogState: canFix
-            ? RepairDialogState.issue(issue)
-            : RepairDialogState.unavailable(issue),
-      );
+      state = RepairDialogState.issue(issue);
       return;
     }
 
@@ -1123,17 +1103,13 @@ class RepairDialogModel extends _$RepairDialogModel {
         _log.error('snapd requires a PIN or passphrase, but supports neither');
         throw TpmStateExceptionUnsupportedState();
       }
-      state = state.copyWith(
-        dialogState: RepairDialogState.setPinOrPassphrase(authModes),
-      );
+      state = RepairDialogState.setPinOrPassphrase(authModes);
       return;
     }
     final authMode =
         ref.read(tpmAuthenticationModelProvider).value!.currentAuthMode;
     if (authMode != AuthMode.none) {
-      state = state.copyWith(
-        dialogState: RepairDialogState.pinOrPassphraseWillBeRemoved(),
-      );
+      state = RepairDialogState.pinOrPassphraseWillBeRemoved();
       return;
     }
     // Nothing to go back to, so a cancelled prompt closes the dialog
@@ -1141,7 +1117,7 @@ class RepairDialogModel extends _$RepairDialogModel {
   }
 
   Future<void> applyFix(SnapdFixAction action) async {
-    final current = state.dialogState;
+    final current = state;
     final issue = switch (current) {
       RepairDialogStateIssue(:final issue) ||
       RepairDialogStateCheckKey(:final issue) =>
@@ -1149,8 +1125,8 @@ class RepairDialogModel extends _$RepairDialogModel {
       _ => throw StateError('There is no issue to fix in $current'),
     };
     assert(
-      issue.actions.contains(action),
-      'Only a fix for the current issue can be applied',
+      issue.actions.contains(action) && !action.isContact,
+      'Only a fix the dialog offers for the current issue can be applied',
     );
     // Clearing the TPM can lock the user out of the disk unless they have the
     // recovery key, so the key has to work before the fix runs
@@ -1161,21 +1137,17 @@ class RepairDialogModel extends _$RepairDialogModel {
             .unlockedWithRecoveryKey &&
         ref.read(checkRecoveryKeyDialogModelProvider) !=
             CheckRecoveryKeyDialogState.result(true)) {
-      state = state.copyWith(
-        dialogState: RepairDialogState.checkKey(issue, action),
-      );
+      state = RepairDialogState.checkKey(issue, action);
       return;
     }
     // The user does this one, so they confirm before it restarts or powers off
     if (action.isExternal) {
-      state = state.copyWith(
-        dialogState: RepairDialogState.confirmPowerAction(issue, action),
-      );
+      state = RepairDialogState.confirmPowerAction(action);
       return;
     }
     final flow = _flow;
 
-    state = state.copyWith(dialogState: RepairDialogState.applyingFix(action));
+    state = RepairDialogState.checking();
     try {
       // Without error-kinds, proceed also accepts issues the user hasn't seen
       final args = action == SnapdFixAction.proceed
@@ -1190,15 +1162,12 @@ class RepairDialogModel extends _$RepairDialogModel {
     } on Exception catch (e) {
       if (flow != _flow) return;
       // The fix didn't run, so the issue is still there
-      state = state.copyWith(
-        dialogState: _isAuthCancelled(e) ? current : RepairDialogState.error(e),
-      );
+      state = _isAuthCancelled(e) ? current : RepairDialogState.error(e);
     }
   }
 
   Future<void> runPowerAction() async {
-    assert(state.dialogState is RepairDialogStateConfirmPowerAction);
-    final confirm = state.dialogState as RepairDialogStateConfirmPowerAction;
+    final confirm = state as RepairDialogStateConfirmPowerAction;
     if (confirm.pending) return;
     final request = switch (confirm.action) {
       SnapdFixAction.shutdown => _power.powerOff,
@@ -1212,9 +1181,7 @@ class RepairDialogModel extends _$RepairDialogModel {
     };
     final flow = _flow;
 
-    state = state.copyWith(
-      dialogState: confirm.copyWith(pending: true, error: null),
-    );
+    state = confirm.copyWith(pending: true, error: null);
     try {
       await request();
       // Stays pending, since logind ends the session soon
@@ -1222,21 +1189,18 @@ class RepairDialogModel extends _$RepairDialogModel {
       // The dialog shows what the user can do instead of this error
       _log.error('Failed to restart or power off: $e');
       if (flow != _flow) return;
-      state = state.copyWith(
-        dialogState: confirm.copyWith(pending: false, error: e),
-      );
+      state = confirm.copyWith(pending: false, error: e);
     }
   }
 
   Future<void> continueToKey() async {
-    assert(state.dialogState is RepairDialogStatePinOrPassphraseWillBeRemoved);
-    await _generateKey(cancelledState: state.dialogState);
+    assert(state is RepairDialogStatePinOrPassphraseWillBeRemoved);
+    await _generateKey(cancelledState: state);
   }
 
   Future<void> continueWithPinOrPassphrase(AuthMode authMode) async {
-    assert(state.dialogState is RepairDialogStateSetPinOrPassphrase);
     assert(
-      (state.dialogState as RepairDialogStateSetPinOrPassphrase)
+      (state as RepairDialogStateSetPinOrPassphrase)
           .authModes
           .contains(authMode),
       'Only a PIN or passphrase that snapd supports can be set',
@@ -1249,32 +1213,25 @@ class RepairDialogModel extends _$RepairDialogModel {
       mode: authMode,
       passphrase: ref.read(changeAuthModeDialogModelProvider(authMode)).newPass,
     );
-    await _generateKey(cancelledState: state.dialogState);
+    await _generateKey(cancelledState: state);
   }
 
   Future<void> _generateKey({required RepairDialogState cancelledState}) async {
     final flow = _flow;
-    state = state.copyWith(dialogState: RepairDialogState.generatingKey());
+    state = RepairDialogState.generatingKey();
     try {
       final key = await _service.generateReprovisionRecoveryKey();
       if (flow != _flow) return;
-      state =
-          state.copyWith(dialogState: RepairDialogState.saveKey(key, false));
+      state = RepairDialogState.saveKey(key, false);
     } on Exception catch (e) {
       if (flow != _flow) return;
-      state = state.copyWith(
-        dialogState:
-            _isAuthCancelled(e) ? cancelledState : RepairDialogState.error(e),
-      );
+      state = _isAuthCancelled(e) ? cancelledState : RepairDialogState.error(e);
     }
   }
 
   void acknowledge(bool acknowledged) {
-    assert(state.dialogState is RepairDialogStateSaveKey);
-    state = state.copyWith(
-      dialogState: (state.dialogState as RepairDialogStateSaveKey)
-          .copyWith(acknowledged: acknowledged),
-    );
+    state = (state as RepairDialogStateSaveKey)
+        .copyWith(acknowledged: acknowledged);
   }
 
   Future<void> writeRecoveryKey(Uri uri, String recoveryKey) async {
@@ -1282,33 +1239,35 @@ class RepairDialogModel extends _$RepairDialogModel {
   }
 
   void setError(RecoveryKeyException? error) {
-    state = state.copyWith(error: error);
+    // The file chooser doesn't block the dialog, which may have moved on
+    if (state case final RepairDialogStateSaveKey saveKey) {
+      state = saveKey.copyWith(saveError: error);
+    }
   }
 
   Future<void> startRepair({void Function()? onAuthorized}) async {
-    assert(state.dialogState is RepairDialogStateSaveKey);
-    final saveKey = state.dialogState as RepairDialogStateSaveKey;
+    final saveKey = state as RepairDialogStateSaveKey;
     // The repair replaces the recovery key, so this stays in release builds
     if (!saveKey.acknowledged) {
       throw StateError('The new recovery key must be acknowledged first');
     }
     final flow = _flow;
 
-    state = state.copyWith(dialogState: RepairDialogState.startingRepair());
+    state = RepairDialogState.startingRepair();
     final bool needsRepair;
     try {
       // The status can change while the user saves the key
       needsRepair = await _needsRepair();
     } on Exception catch (e) {
       if (flow != _flow) return;
-      state = state.copyWith(dialogState: RepairDialogState.error(e));
+      state = RepairDialogState.error(e);
       return;
     }
     if (flow != _flow) return;
     if (!needsRepair) {
       // The disk keeps its current recovery key until a repair replaces it
       ref.invalidate(tpmAuthenticationModelProvider);
-      state = state.copyWith(dialogState: RepairDialogState.keyNotUsed());
+      state = RepairDialogState.keyNotUsed();
       return;
     }
 
@@ -1332,15 +1291,15 @@ class RepairDialogModel extends _$RepairDialogModel {
         ):
         page.dismissOperationError();
         // The repair didn't start, so the user can try again with the same key
-        state = state.copyWith(dialogState: saveKey);
+        state = saveKey;
       case final exception:
-        state = state.copyWith(dialogState: RepairDialogState.error(exception));
+        state = RepairDialogState.error(exception);
     }
   }
 
   // snapd may have lost the check or used up the key, so start over
   void retry() {
-    assert(state.dialogState is RepairDialogStateError);
+    assert(state is RepairDialogStateError);
     ref.invalidateSelf();
   }
 }
