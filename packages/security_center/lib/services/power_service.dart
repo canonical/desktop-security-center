@@ -6,11 +6,8 @@ class PowerService {
 
   final DBusClient _client;
 
-  /// Asks logind to restart the computer.
-  ///
-  /// Completes once logind starts the restart, and throws a
-  /// [DBusMethodResponseException] if it refuses, as when the user doesn't
-  /// authorize it.
+  /// Asks logind to restart; throws [DBusMethodResponseException] if
+  /// polkit authorization is refused or fails.
   Future<void> reboot() => _call('Reboot');
 
   /// Asks logind to power off the computer, as [reboot] does to restart it.
