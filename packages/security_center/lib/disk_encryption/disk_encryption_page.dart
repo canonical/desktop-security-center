@@ -217,9 +217,8 @@ void showReplaceRecoveryKeyDialog(BuildContext context) {
   );
 }
 
-// Lays out the dialogs that show a new recovery key. The Scaffold shows the
-// panel's snack bar above the barrier, but takes Esc for a drawer even when it
-// has none, so this hands Esc back to the dialog
+// Scaffold displays the snack bar above the barrier; forward Esc back
+// to the dialog since Scaffold intercepts Esc even without a drawer.
 class _DialogScaffold extends StatefulWidget {
   const _DialogScaffold({
     required this.title,

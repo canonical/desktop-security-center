@@ -17,10 +17,7 @@ const dialogControlRadius = 6.0;
 /// The padding around the content of a disk encryption dialog.
 const dialogContentPadding = EdgeInsets.fromLTRB(24, 29, 24, 29);
 
-/// The shape of a [YaruDialogTitleBar] in a [DialogDesignTheme].
-///
-/// The title bar paints its own background, so its corners must follow the
-/// dialog's.
+/// Top corners follow dialog radius since title bar paints its own background.
 const dialogTitleBarShape = RoundedRectangleBorder(
   borderRadius: BorderRadius.vertical(top: Radius.circular(_dialogRadius)),
 );
@@ -112,9 +109,8 @@ T? _withRadius<T extends ShapeBorder>(T? shape, double radius) {
   };
 }
 
-/// Like [YaruInfoBox], with the design's 6 px corners and 20 px lines.
-///
-/// YaruInfoBox ignores its borderRadius as of yaru 10.2.0.
+/// [YaruInfoBox] with 6 px corners and 20 px lines; works around
+/// YaruInfoBox ignoring its borderRadius as of yaru 10.2.0.
 class DialogInfoBox extends StatelessWidget {
   const DialogInfoBox({
     required this.title,
@@ -169,12 +165,8 @@ class DialogInfoBox extends StatelessWidget {
   }
 }
 
-/// Lays out a [YaruCheckButton] or [YaruRadioButton] as the design does: in a
-/// row [height] px tall, with the indicator [indent] px in and the title 8 px
-/// after it.
-///
-/// The row grows with larger text. The toggle keeps its own size, so its hover
-/// effect paints past the row.
+/// Lays out toggles to design specs ([height] px tall, [indent] px indicator)
+/// while preserving hover bounds when text scales up.
 class DialogToggle extends StatelessWidget {
   const DialogToggle({
     required this.height,
