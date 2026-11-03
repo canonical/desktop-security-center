@@ -1171,9 +1171,8 @@ class RepairDialogModel extends _$RepairDialogModel {
     if (confirm.pending) return;
     final request = switch (confirm.action) {
       SnapdFixAction.shutdown => _power.powerOff,
-      // snapd's shutdown interface doesn't allow logind's
-      // SetRebootToFirmwareSetup, so the step tells the user how to open the
-      // firmware settings
+      // snapd shutdown plug blocks logind SetRebootToFirmwareSetup, so
+      // step guides the user to open firmware settings manually.
       SnapdFixAction.reboot ||
       SnapdFixAction.rebootToFwSettings =>
         _power.reboot,

@@ -695,8 +695,8 @@ class _RepairIssue extends ConsumerWidget {
             // chevron. The other sides keep the panel's default 10
             expandIconPadding:
                 const EdgeInsets.fromLTRB(10, 10, _solutionInset - 5, 10),
-            // The panel turns the icon a quarter on expand. A quarter more makes
-            // it point down when collapsed and up when expanded, as designed
+            // Extra quarter turn makes chevron point down when collapsed
+            // and up when expanded, matching design.
             expandIconBuilder: (isExpanded) => AnimatedRotation(
               turns: isExpanded ? .25 : 0,
               duration: kThemeAnimationDuration,
