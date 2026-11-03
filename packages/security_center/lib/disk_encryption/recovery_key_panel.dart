@@ -214,8 +214,8 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
                 backgroundColor: Colors.white,
                 barcode: Barcode.qrCode(),
                 data: recoveryKey,
-                // The 4-module blank border that QR readers need, as in the
-                // design: a recovery key's code is 29 modules, 37 with the border
+                // QR readers require a 4-module blank quiet zone border:
+                // a recovery key is 29 modules, totaling 37 with border.
                 padding: const EdgeInsets.all(200 * 4 / 37),
                 width: 200,
                 height: 200,
