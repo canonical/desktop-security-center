@@ -737,7 +737,19 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get snapdRuleCategoryForeverAllowed => 'Permitir sempre';
 
   @override
+  String get permissionRulePopupMenuSemanticLabel => 'Atualizar permissões';
+
+  @override
   String get snapdRuleCategoryForeverDenied => 'Negar sempre';
+
+  @override
+  String get snapdRuleCategoryTemporarilyAllowed => 'Permitir temporariamente';
+
+  @override
+  String get snapdRuleCategoryTemporarilyDenied => 'Negar temporariamente';
+
+  @override
+  String get snapdRuleCategoryAskAlways => 'Sempre perguntar';
 
   @override
   String get snapPermissionReadLabel => 'Ler';
@@ -753,7 +765,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Exigir que os aplicativos solicitem permissões do sistema';
+      'Exigir que aplicativos em sandbox solicitem permissões';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -772,7 +784,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get snapPermissionsOtherDescription =>
-      'Você pode gerenciar outras permissões em Configurações › Aplicativos.';
+      'Você pode gerenciar outras permissões em Configurações › Apps.';
 
   @override
   String get snapPermissionsPageTitle => 'Permissões do aplicativo';
@@ -1146,7 +1158,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'As senhas não coincidem, tente novamente';
 
   @override
-  String get recoveryKeyPassphraseDialogHeader => 'Alterar senha';
+  String get recoveryKeyPassphraseDialogHeader => 'Alterar a senha';
 
   @override
   String get recoveryKeyPinEnabled => 'O PIN de criptografia está ativado';
@@ -1232,6 +1244,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get recoveryKeySomethingWentWrongHeader => 'Algo deu errado';
 
   @override
+  String get ubuntuProPageTitle => 'Ubuntu Pro';
+
+  @override
   String get ubuntuProNotSupported =>
       'Ubuntu Pro não está disponível para essa versão do Ubuntu';
 
@@ -1248,6 +1263,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ubuntuProEnabled => 'Ubuntu Pro está habilitado';
+
+  @override
+  String get ubuntuProLoadingLabel => 'Isso pode levar alguns segundos...';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -1281,7 +1299,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ubuntuProMagicError =>
-      'Não foi possível habilitar o Ubuntu Pro, por favor, tente novamente';
+      'Não foi possível habilitar o Ubuntu Pro, tente novamente';
 
   @override
   String get ubuntuProEnableToken => 'Habilite com um token';
@@ -1301,6 +1319,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get ubuntuProTokenLabel => 'Token';
+
+  @override
   String get ubuntuProDisablePro => 'Desabilitar Ubuntu Pro';
 
   @override
@@ -1308,7 +1329,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ubuntuProDisablePrompt =>
-      'Desabilitar o Ubuntu Pro desconectará sua assinatura dessa máquina. Você quer continuar?';
+      'Desabilitar o Ubuntu Pro desconectará sua assinatura deste computador. Você quer continuar?';
+
+  @override
+  String get ubuntuProDisableError =>
+      'Não foi possível desativar o Ubuntu Pro, tente novamente';
 
   @override
   String get ubuntuProEnable => 'Habilitar';
@@ -1318,11 +1343,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ubuntuProFeatureEnableError =>
-      'Não foi possível habilitar esse recurso, por favor, tente novamente.';
+      'Não foi possível habilitar esse recurso, tente novamente.';
 
   @override
   String get ubuntuProFeatureDisableError =>
-      'Não foi possível desabilitar esse recurso, por favor, tente novamente.';
+      'Não foi possível desabilitar esse recurso, tente novamente.';
 
   @override
   String get ubuntuProCompliance => 'Conformidade e melhora da segurança';
@@ -1333,4 +1358,81 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ubuntuProComplianceUSGTitle => 'Guia de segurança Ubuntu (GSU)';
+
+  @override
+  String get ubuntuProComplianceUSGDescription =>
+      'Automatiza o reforço e a auditoria com perfis de benchmark CIS e DISA-STIG, ao mesmo tempo em que permite personalizações específicas do ambiente.';
+
+  @override
+  String get ubuntuProComplianceFIPSTitle => 'FIPS 140-2';
+
+  @override
+  String get ubuntuProComplianceFIPSDescription =>
+      'Uma certificação de módulo criptográfico dos governos dos EUA e do Canadá de conformidade com o padrão de proteção de dados FIPS 140-2.';
+
+  @override
+  String get ubuntuProComplianceFIPSEnable => 'Ativar FIPS';
+
+  @override
+  String get ubuntuProComplianceFIPSDisclaimer =>
+      'A ativação do FIPS não pode ser revertida e o Livepatch será desativado permanentemente.';
+
+  @override
+  String get ubuntuProComplianceFIPSPrompt =>
+      'Escolha sua opção FIPS preferida';
+
+  @override
+  String get ubuntuProComplianceFIPSUpdates => 'FIPS com atualizações';
+
+  @override
+  String get ubuntuProComplianceFIPSUpdatesDescription =>
+      'Instala pacotes validados pelo FIPS 140-2 e permite atualizações regulares de segurança.';
+
+  @override
+  String get ubuntuProComplianceFIPSNoUpdates => 'FIPS sem atualizações';
+
+  @override
+  String get ubuntuProComplianceFIPSNoUpdatesDescription =>
+      'Instala pacotes validados pelo FIPS 140-2. Eles não serão atualizados até a próxima recertificação.';
+
+  @override
+  String get ubuntuProComplianceDocumentation =>
+      'Documentação de conformidade de segurança';
+
+  @override
+  String get ubuntuProESMTitle => 'Manutenção de Segurança Expandida (ESM)';
+
+  @override
+  String get ubuntuProESMDescription =>
+      'O ESM fornece 10 anos de patches de segurança para todo o Ubuntu Archive. Obtenha gerenciamento contínuo de vulnerabilidades para CVEs críticos, altos e médios selecionados.';
+
+  @override
+  String get ubuntuProESMMainTitle => 'Pacotes principais (esm-infra)';
+
+  @override
+  String ubuntuProESMMainDescription(int year) {
+    return 'Atualizações de segurança para pacotes principais do Ubuntu até $year';
+  }
+
+  @override
+  String get ubuntuProESMUniverseTitle => 'Pacotes Universe (esm-apps)';
+
+  @override
+  String ubuntuProESMUniverseDescription(int year) {
+    return 'Atualizações de segurança adicionais para pacotes do Ubuntu Universe até $year';
+  }
+
+  @override
+  String get ubuntuProLivepatchTitle => 'Kernel-Livepatch';
+
+  @override
+  String get ubuntuProLivepatchEnableTitle => 'Habilitar Livepatch';
+
+  @override
+  String get ubuntuProLivepatchEnableDescription =>
+      'Aplique atualizações de segurança do kernel enquanto o sistema é executado';
+
+  @override
+  String get ubuntuProLivepatchShowTitle =>
+      'Mostrar o estado do Livepatch na barra superior';
 }
