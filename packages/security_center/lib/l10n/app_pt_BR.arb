@@ -99,7 +99,7 @@
     "diskEncryptionPageErrorUnsupportedSnapdBody": "Verifique se o Centro de Segurança e o snapd estão atualizados.",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "O Centro de Segurança não consegue se conectar à interface snapd",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Para corrigir isso, execute o seguinte comando no terminal:",
-    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap conecta com desktop-security-center:snap-fde-control",
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
     "recoveryKeyExceptionFileSystemTitle": "O arquivo da chave de recuperação não foi salvo",
     "diskEncryptionPageAddPinButton": "Adicione um PIN...",
     "diskEncryptionPageAddPassphraseButton": "Adicionar senha...",
@@ -238,14 +238,14 @@
     "ubuntuProDisableError": "Não foi possível desativar o Ubuntu Pro, tente novamente",
     "ubuntuProComplianceUSGDescription": "Automatiza o reforço e a auditoria com perfis de benchmark CIS e DISA-STIG, ao mesmo tempo em que permite personalizações específicas do ambiente.",
     "ubuntuProComplianceFIPSTitle": "FIPS 140-2",
-    "ubuntuProComplianceFIPSDescription": "Uma certificação de módulo criptográfico do governo dos EUA e Canadá de conformidade com o padrão de proteção de dados FIPS 140-2.",
+    "ubuntuProComplianceFIPSDescription": "Uma certificação de módulo criptográfico dos governos dos EUA e do Canadá de conformidade com o padrão de proteção de dados FIPS 140-2.",
     "ubuntuProComplianceFIPSEnable": "Ativar FIPS",
     "ubuntuProComplianceFIPSDisclaimer": "A ativação do FIPS não pode ser revertida e o Livepatch será desativado permanentemente.",
     "ubuntuProComplianceFIPSPrompt": "Escolha sua opção FIPS preferida",
     "ubuntuProComplianceFIPSUpdates": "FIPS com atualizações",
     "ubuntuProComplianceFIPSUpdatesDescription": "Instala pacotes validados pelo FIPS 140-2 e permite atualizações regulares de segurança.",
     "ubuntuProComplianceFIPSNoUpdates": "FIPS sem atualizações",
-    "ubuntuProComplianceFIPSNoUpdatesDescription": "Instala pacotes validados pelo FIPS 140-2. Elas não serão atualizadas até a próxima recertificação.",
+    "ubuntuProComplianceFIPSNoUpdatesDescription": "Instala pacotes validados pelo FIPS 140-2. Eles não serão atualizados até a próxima recertificação.",
     "ubuntuProComplianceDocumentation": "Documentação de conformidade de segurança",
     "ubuntuProESMTitle": "Manutenção de Segurança Expandida (ESM)",
     "ubuntuProESMDescription": "O ESM fornece 10 anos de patches de segurança para todo o Ubuntu Archive. Obtenha gerenciamento contínuo de vulnerabilidades para CVEs críticos, altos e médios selecionados.",
@@ -258,7 +258,7 @@
             }
         }
     },
-    "ubuntuProESMUniverseTitle": "Pacotes do universo (esm-apps)",
+    "ubuntuProESMUniverseTitle": "Pacotes Universe (esm-apps)",
     "ubuntuProESMUniverseDescription": "Atualizações de segurança adicionais para pacotes do Ubuntu Universe até {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
