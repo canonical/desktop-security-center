@@ -14,6 +14,7 @@ import 'package:security_center/l10n.dart';
 import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/feature_service.dart';
+import 'package:security_center/services/power_service.dart';
 import 'package:security_center/services/snapd_service.dart';
 import 'package:snapd/snapd.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -128,9 +129,10 @@ Override processRunnerOverride(Map<String, String> mountByPath) {
 }
 
 @GenerateMocks([DiskEncryptionService])
-DiskEncryptionService registerMockDiskEncryptionService({
+MockDiskEncryptionService registerMockDiskEncryptionService({
   bool checkRecoveryKey = true,
   bool checkError = false,
+  String? checkRecoveryKeySnapdErrorKind,
   bool authCancelled = false,
   bool replaceError = false,
   bool generateError = false,
@@ -154,16 +156,31 @@ DiskEncryptionService registerMockDiskEncryptionService({
   bool authModeMismatch = false,
   SnapdStorageEncryptionStatus storageEncryptionStatus =
       SnapdStorageEncryptionStatus.active,
+  List<SnapdStorageEncryptionStatus>? storageEncryptionStatusSequence,
+  List<SnapdRecommendedRemedialAction> recommendations = const [],
   int indeterminateCallCount = 0,
   Object? storageEncryptionError,
+  Object? storageEncryptionErrorAfterRepair,
+  bool reprovisionError = false,
+  Object? reprovisionRefusal,
+  List<SnapdAvailabilityCheckError> availabilityCheckErrors = const [],
+  bool volumesAuthRequired = false,
+  List<SnapdStorageEncryptionFeature> encryptionFeatures = const [
+    SnapdStorageEncryptionFeature.passphraseAuth,
+    SnapdStorageEncryptionFeature.pinAuth,
+  ],
 }) {
   final service = MockDiskEncryptionService();
   var currentAuthMode = authMode;
+  var repaired = false;
 
   var storageEncryptedCalls = 0;
   when(service.getStorageEncrypted()).thenAnswer((_) async {
     if (storageEncryptionError != null) {
       throw storageEncryptionError;
+    }
+    if (repaired && storageEncryptionErrorAfterRepair != null) {
+      throw storageEncryptionErrorAfterRepair;
     }
     if (storageEncryptedCalls < indeterminateCallCount) {
       storageEncryptedCalls++;
@@ -171,7 +188,12 @@ DiskEncryptionService registerMockDiskEncryptionService({
         status: SnapdStorageEncryptionStatus.indeterminate,
       );
     }
-    return SnapdStorageEncryptedResponse(status: storageEncryptionStatus);
+    final call = storageEncryptedCalls++;
+    return SnapdStorageEncryptedResponse(
+      status: storageEncryptionStatusSequence?.elementAtOrNull(call) ??
+          storageEncryptionStatus,
+      recommendations: repaired ? const [] : recommendations,
+    );
   });
 
   when(service.enumerateKeySlots()).thenAnswer((_) async {
@@ -268,6 +290,12 @@ DiskEncryptionService registerMockDiskEncryptionService({
         kind: 'auth-cancelled',
       );
     }
+    if (checkRecoveryKeySnapdErrorKind != null) {
+      throw SnapdException(
+        message: 'Mock check recovery key snapd error',
+        kind: checkRecoveryKeySnapdErrorKind,
+      );
+    }
     if (!checkRecoveryKey) {
       throw Exception('Recovery key does not work');
     }
@@ -360,6 +388,24 @@ DiskEncryptionService registerMockDiskEncryptionService({
     }
     currentAuthMode = requestedAuthMode;
   });
+  when(service.reprovision(onAuthorized: anyNamed('onAuthorized')))
+      .thenAnswer((invocation) async {
+    final onAuthorized =
+        invocation.namedArguments[#onAuthorized] as void Function()?;
+
+    // The polkit prompt and snapd's own checks refuse the change before the
+    // snapd RPC is accepted — so onAuthorized must NOT fire in this path.
+    if (reprovisionRefusal != null) throw reprovisionRefusal;
+
+    onAuthorized?.call();
+
+    if (reprovisionError) {
+      throw Exception('Mock reprovision error');
+    }
+    // Reprovisioning removes any PIN or passphrase
+    currentAuthMode = AuthMode.none;
+    repaired = true;
+  });
   when(service.pinPassphraseEntropyCheck(any, any))
       .thenAnswer((invocation) async {
     if (entropyCheckError) {
@@ -384,6 +430,32 @@ DiskEncryptionService registerMockDiskEncryptionService({
     );
     return EntropyResponse.fromSnapdEntropyResponse(snapdResponse);
   });
+
+  SnapdStorageEncryption storageEncryption(
+    List<SnapdAvailabilityCheckError> errors,
+  ) =>
+      SnapdStorageEncryption(
+        support: errors.isEmpty
+            ? SnapdStorageEncryptionSupport.available
+            : SnapdStorageEncryptionSupport.unavailable,
+        unavailableReason: errors.firstOrNull?.message,
+        availabilityCheckErrors: errors,
+        features: encryptionFeatures,
+        requirements: [
+          if (volumesAuthRequired)
+            SnapdStorageEncryptionRequirement.volumesAuth,
+        ],
+      );
+
+  when(service.checkEncryptionSupport())
+      .thenAnswer((_) async => storageEncryption(availabilityCheckErrors));
+  when(service.fixEncryptionSupport(any, args: anyNamed('args')))
+      .thenAnswer((_) async => storageEncryption(const []));
+  when(service.generateReprovisionRecoveryKey()).thenAnswer(
+    (_) async => SnapdGenerateReprovisionRecoveryKeyResponse(
+      recoveryKey: 'mock-reprovision-key',
+    ),
+  );
   registerMockService<DiskEncryptionService>(service);
   addTearDown(unregisterService<DiskEncryptionService>);
   return service;
@@ -470,14 +542,27 @@ FeatureService registerMockFeatureService({
   bool isDiskEncryptionAvailable = true,
   bool isDryRun = false,
   bool supportsMicrophone = false,
+  bool supportsReprovision = false,
 }) {
   final service = MockFeatureService();
   when(service.isDiskEncryptionAvailable).thenReturn(isDiskEncryptionAvailable);
   when(service.isDryRun).thenReturn(isDryRun);
   when(service.supportsMicrophone).thenReturn(supportsMicrophone);
+  when(service.supportsReprovision).thenReturn(supportsReprovision);
 
   registerMockService<FeatureService>(service);
   addTearDown(unregisterService<FeatureService>);
+  return service;
+}
+
+@GenerateMocks([PowerService])
+PowerService registerMockPowerService() {
+  final service = MockPowerService();
+  when(service.reboot()).thenAnswer((_) async {});
+  when(service.powerOff()).thenAnswer((_) async {});
+
+  registerMockService<PowerService>(service);
+  addTearDown(unregisterService<PowerService>);
   return service;
 }
 
