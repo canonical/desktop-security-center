@@ -2,10 +2,11 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:security_center/disk_encryption/dialog_design.dart';
+import 'package:security_center/constants.dart';
 import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/l10n/app_localizations.dart';
+import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:xdg_desktop_portal/xdg_desktop_portal.dart';
 import 'package:yaru/yaru.dart';
 
@@ -149,7 +150,7 @@ class RecoveryKeyPanel extends ConsumerWidget {
           ),
         ),
         if (error != null)
-          DialogInfoBox(
+          YaruInfoBox(
             title: Text(error.localizedTitle(l10n)),
             subtitle: Text(error.localizedBody(l10n)),
             yaruInfoType: YaruInfoType.danger,
@@ -157,21 +158,17 @@ class RecoveryKeyPanel extends ConsumerWidget {
         // 28 px below the key's buttons, as in the design
         Padding(
           padding: const EdgeInsets.only(top: 12),
-          child: DialogToggle(
-            height: 24,
-            indent: 4,
-            child: YaruCheckButton(
-              title: Text(
-                l10n.diskEncryptionPageReplaceDialogAcknowledge,
-                maxLines: 2,
-                // TODO: remove hardcoded style once this is available in yaru.
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              value: acknowledged,
-              onChanged: onAcknowledgedChanged == null
-                  ? null
-                  : (value) => onAcknowledgedChanged!(value ?? false),
+          child: YaruCheckButton(
+            title: Text(
+              l10n.diskEncryptionPageReplaceDialogAcknowledge,
+              maxLines: 2,
+              // TODO: remove hardcoded style once this is available in yaru.
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
+            value: acknowledged,
+            onChanged: onAcknowledgedChanged == null
+                ? null
+                : (value) => onAcknowledgedChanged!(value ?? false),
           ),
         ),
       ].separatedBy(const SizedBox(height: 16)),
@@ -194,21 +191,20 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    return DialogDesignTheme(
-      child: AlertDialog(
-        title: YaruDialogTitleBar(
-          title: Text(l10n.diskEncryptionPageReplaceDialogQRHeader),
-          shape: dialogTitleBarShape,
-        ),
-        titlePadding: EdgeInsets.zero,
-        contentPadding: dialogContentPadding,
-        content: SizedBox(
-          width: 435,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(l10n.diskEncryptionPageReplaceDialogQRBody),
-              BarcodeWidget(
+    return AlertDialog(
+      title: YaruDialogTitleBar(
+        title: Text(l10n.diskEncryptionPageReplaceDialogQRHeader),
+      ),
+      titlePadding: EdgeInsets.zero,
+      contentPadding: EdgeInsets.zero,
+      content: Container(
+        constraints: const BoxConstraints(maxWidth: kDialogWidth),
+        child: ScrollablePage(
+          padding: const EdgeInsets.all(kPageSectionGap),
+          children: [
+            Text(l10n.diskEncryptionPageReplaceDialogQRBody),
+            Center(
+              child: BarcodeWidget(
                 margin: const EdgeInsets.all(16),
                 // Black on white in the dark theme too, as QR readers expect
                 backgroundColor: Colors.white,
@@ -220,9 +216,9 @@ class _RecoveryKeyQRDialog extends ConsumerWidget {
                 width: 200,
                 height: 200,
               ),
-              Text(recoveryKey),
-            ],
-          ),
+            ),
+            Center(child: Text(recoveryKey)),
+          ],
         ),
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:security_center/disk_encryption/dialog_design.dart';
+import 'package:security_center/constants.dart';
 import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/disk_encryption/recovery_key_panel.dart';
@@ -132,17 +132,17 @@ class CheckRecoveryKeyDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return DialogDesignTheme(
-      child: AlertDialog(
-        title: YaruDialogTitleBar(
-          title: Text(l10n.diskEncryptionPageDialogHeaderCheckKey),
-          shape: dialogTitleBarShape,
-        ),
-        titlePadding: EdgeInsets.zero,
-        contentPadding: dialogContentPadding,
-        content: const SizedBox(
-          width: 435,
-          child: _RecoveryKeyCheck(),
+    return AlertDialog(
+      title: YaruDialogTitleBar(
+        title: Text(l10n.diskEncryptionPageDialogHeaderCheckKey),
+      ),
+      titlePadding: EdgeInsets.zero,
+      contentPadding: EdgeInsets.zero,
+      content: Container(
+        constraints: BoxConstraints(maxWidth: kDialogWidth),
+        child: ScrollablePage(
+          padding: EdgeInsets.all(kPageSectionGap),
+          children: const [_RecoveryKeyCheck()],
         ),
       ),
     );
@@ -188,19 +188,19 @@ class _RecoveryKeyCheck extends ConsumerWidget {
         ),
         if (data is CheckRecoveryKeyDialogStateResult)
           if (data.valid)
-            DialogInfoBox(
+            YaruInfoBox(
               title: Text(l10n.diskEncryptionPageKeyWorks),
               subtitle: Text(l10n.diskEncryptionPageKeyWorksBody),
               yaruInfoType: YaruInfoType.success,
             )
           else
-            DialogInfoBox(
+            YaruInfoBox(
               title: Text(l10n.diskEncryptionPageKeyDoesntWork),
               subtitle: Text(l10n.diskEncryptionPageKeyDoesntWorkBody),
               yaruInfoType: YaruInfoType.danger,
             ),
         if (data is CheckRecoveryKeyDialogStateError)
-          DialogInfoBox(
+          YaruInfoBox(
             title: Text(l10n.recoveryKeySomethingWentWrongHeader),
             subtitle: Text(data.e.toString()),
             yaruInfoType: YaruInfoType.danger,
@@ -255,22 +255,15 @@ class _DialogScaffoldState extends State<_DialogScaffold> {
             visible: !_isQRCodeShown,
             // The hidden panel must stay mounted to report the QR code closing
             maintainState: true,
-            child: DialogDesignTheme(
-              child: AlertDialog(
-                title: YaruDialogTitleBar(
-                  title: Text(widget.title),
-                  shape: dialogTitleBarShape,
-                ),
-                titlePadding: EdgeInsets.zero,
-                // The side and bottom padding in the scroll view scroll with
-                // the content and leave room for the toggles' hover effects
-                contentPadding: EdgeInsets.only(top: dialogContentPadding.top),
-                content: SizedBox(
-                  width: 483,
-                  child: SingleChildScrollView(
-                    padding: dialogContentPadding.copyWith(top: 0),
-                    child: widget.child,
-                  ),
+            child: AlertDialog(
+              title: YaruDialogTitleBar(title: Text(widget.title)),
+              titlePadding: EdgeInsets.zero,
+              contentPadding: EdgeInsets.zero,
+              content: Container(
+                constraints: BoxConstraints(maxWidth: kDialogWidth),
+                child: ScrollablePage(
+                  padding: EdgeInsets.all(kPageSectionGap),
+                  children: [widget.child],
                 ),
               ),
             ),
@@ -357,13 +350,13 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
           ),
           if (replaceDialogState is ReplaceRecoveryKeyDialogStateSuccess &&
               replaceDialogError == null)
-            DialogInfoBox(
+            YaruInfoBox(
               title: Text(l10n.diskEncryptionPageReplaceDialogSuccessHeader),
               subtitle: Text(l10n.diskEncryptionPageReplaceDialogSuccessBody),
               yaruInfoType: YaruInfoType.success,
             ),
           if (replaceDialogState is ReplaceRecoveryKeyDialogStateError)
-            DialogInfoBox(
+            YaruInfoBox(
               title: Text(l10n.recoveryKeySomethingWentWrongHeader),
               subtitle: Text(_dialogErrorMessage(replaceDialogState.e)),
               yaruInfoType: YaruInfoType.danger,
