@@ -7,6 +7,7 @@ import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/disk_encryption/recovery_key_panel.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
+import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:snapd/snapd.dart';
@@ -80,7 +81,7 @@ class EncryptionPageBody extends ConsumerWidget {
               AuthMode.none => _NoneAuthenticationActions(tpmState: data),
             },
             const SizedBox(height: 32),
-            DialogHyperlink(
+            Hyperlink(
               text: l10n.diskEncryptionPageLearnMore,
               url: _learnMoreUrl,
             ),
@@ -274,23 +275,20 @@ class _DialogScaffoldState extends State<_DialogScaffold> {
             visible: !_isQRCodeShown,
             // The hidden panel must stay mounted to report the QR code closing
             maintainState: true,
-            child: DialogDesignTheme(
-              child: AlertDialog(
-                title: YaruDialogTitleBar(
-                  title: Text(widget.title),
-                  isClosable: widget.isClosable,
-                  shape: dialogTitleBarShape,
-                ),
-                titlePadding: EdgeInsets.zero,
-                // The side and bottom padding in the scroll view scroll with
-                // the content and leave room for the toggles' hover effects
-                contentPadding: EdgeInsets.only(top: dialogContentPadding.top),
-                content: SizedBox(
-                  width: 483,
-                  child: SingleChildScrollView(
-                    padding: dialogContentPadding.copyWith(top: 0),
-                    child: widget.child,
-                  ),
+            child: AlertDialog(
+              title: YaruDialogTitleBar(
+                title: Text(widget.title),
+                isClosable: widget.isClosable,
+              ),
+              titlePadding: EdgeInsets.zero,
+              contentPadding: EdgeInsets.zero,
+              // A tight width keeps AlertDialog from measuring the content's
+              // intrinsics, which a scroll view can't report
+              content: SizedBox(
+                width: kDialogWidth,
+                child: ScrollablePage(
+                  padding: EdgeInsets.all(kPageSectionGap),
+                  children: [widget.child],
                 ),
               ),
             ),
@@ -643,7 +641,7 @@ class RepairDialog extends ConsumerWidget {
           RepairDialogStateGeneratingKey() => const _RepairRecoveryKey(),
           final RepairDialogStateSaveKey saveKey =>
             _RepairRecoveryKey(saveKey: saveKey),
-          RepairDialogStateKeyNotUsed() => DialogInfoBox(
+          RepairDialogStateKeyNotUsed() => YaruInfoBox(
               title: Text(l10n.diskEncryptionPageRepairDialogNotNeeded),
               subtitle: Text(l10n.diskEncryptionPageRepairDialogKeyNotUsed),
               yaruInfoType: YaruInfoType.information,
@@ -675,7 +673,7 @@ class _RepairIssue extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DialogInfoBox(
+        YaruInfoBox(
           title: Text(l10n.tpmActionPageTitleActionable),
           subtitle: Text(
             proceedOnly
@@ -689,7 +687,6 @@ class _RepairIssue extends ConsumerWidget {
         if (!proceedOnly)
           YaruExpansionPanel(
             shrinkWrap: true,
-            borderRadius: BorderRadius.circular(dialogControlRadius),
             headerPadding: const EdgeInsets.only(left: _solutionInset),
             // Yaru's 34 px expand button already leaves 5 px around the 24 px
             // chevron. The other sides keep the panel's default 10
@@ -715,7 +712,7 @@ class _RepairIssue extends ConsumerWidget {
               for (final fix in fixes) _RepairFix(fix: fix, kind: issue.kind),
             ],
           ),
-        DialogHyperlink(
+        Hyperlink(
           text: l10n.diskEncryptionPageLearnMore,
           url: _learnMoreUrl,
         ),
@@ -815,24 +812,20 @@ class _RepairFixState extends ConsumerState<_RepairFix> {
         children: [
           ...fix.localizedBody(l10n, widget.kind).map(Text.new),
           if (clearsTpm) ...[
-            DialogInfoBox(
+            YaruInfoBox(
               title: Text(l10n.tpmActionFixActionClearTpmWarningTitle),
               subtitle: Text(l10n.tpmActionFixActionClearTpmWarningBody),
               yaruInfoType: YaruInfoType.warning,
             ),
-            DialogToggle(
-              height: 24,
-              indent: 4,
-              child: YaruCheckButton(
-                title: Text(
-                  l10n.tpmActionFixActionClearTpmConfirmationLabel,
-                  maxLines: 2,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                value: _riskAccepted,
-                onChanged: (value) =>
-                    setState(() => _riskAccepted = value ?? false),
+            YaruCheckButton(
+              title: Text(
+                l10n.tpmActionFixActionClearTpmConfirmationLabel,
+                maxLines: 2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
+              value: _riskAccepted,
+              onChanged: (value) =>
+                  setState(() => _riskAccepted = value ?? false),
             ),
           ],
           OutlinedButton(
@@ -876,7 +869,7 @@ class _RepairPowerAction extends ConsumerWidget {
           Text(l10n.tpmActionFixActionRebootToFwSettingsInstructions),
         // logind's error names D-Bus internals, so say what the user can do
         if (confirm.error != null)
-          DialogInfoBox(
+          YaruInfoBox(
             title: Text(l10n.recoveryKeySomethingWentWrongHeader),
             subtitle: Text(
               isPowerOff
@@ -970,17 +963,14 @@ class _RepairPinOrPassphraseState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               for (final authMode in widget.authModes)
-                DialogToggle(
-                  height: 28,
-                  child: YaruRadioButton(
-                    value: authMode,
-                    groupValue: _authMode,
-                    onChanged: (_) => setState(() => _authMode = authMode),
-                    title: Text(
-                      authMode == AuthMode.pin
-                          ? l10n.passphraseTypePinTileTitle
-                          : l10n.passphraseTypePassphraseTileTitle,
-                    ),
+                YaruRadioButton(
+                  value: authMode,
+                  groupValue: _authMode,
+                  onChanged: (_) => setState(() => _authMode = authMode),
+                  title: Text(
+                    authMode == AuthMode.pin
+                        ? l10n.passphraseTypePinTileTitle
+                        : l10n.passphraseTypePassphraseTileTitle,
                   ),
                 ),
             ],
@@ -1044,7 +1034,7 @@ class _RepairPinOrPassphraseState
           ],
         ),
         if (model.dialogState case ChangeAuthModeDialogStateError(:final e))
-          DialogInfoBox(
+          YaruInfoBox(
             title: Text(l10n.recoveryKeySomethingWentWrongHeader),
             subtitle: Text(_dialogErrorMessage(e)),
             yaruInfoType: YaruInfoType.danger,
@@ -1063,7 +1053,7 @@ class _RepairPinOrPassphraseRemoved extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        DialogInfoBox(
+        YaruInfoBox(
           title: Text(
             l10n.diskEncryptionPageRepairDialogPinOrPassphraseRemovedHeader,
           ),
@@ -1112,7 +1102,7 @@ class _RepairRecoveryKey extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(l10n.diskEncryptionPageRepairDialogKeyBody),
-        DialogInfoBox(
+        YaruInfoBox(
           title: Text(l10n.diskEncryptionPageRepairDialogKeyWarningHeader),
           subtitle: Text(l10n.diskEncryptionPageRepairDialogKeyWarningBody),
           yaruInfoType: YaruInfoType.warning,
@@ -1157,12 +1147,12 @@ class _RepairUnavailable extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DialogInfoBox(
+        YaruInfoBox(
           title: Text(l10n.diskEncryptionPageRepairDialogErrorHeader),
           subtitle: Text(issue.kind.localizedDescription(l10n)),
           yaruInfoType: YaruInfoType.danger,
         ),
-        DialogHyperlink(
+        Hyperlink(
           text: l10n.diskEncryptionPageLearnMore,
           url: _learnMoreUrl,
         ),
@@ -1183,7 +1173,7 @@ class _RepairError extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        DialogInfoBox(
+        YaruInfoBox(
           title: Text(l10n.diskEncryptionPageRepairDialogErrorHeader),
           subtitle: Text(
             switch (e) {
@@ -1566,26 +1556,23 @@ class _RepairBanner extends StatelessWidget {
     return Semantics(
       container: true,
       liveRegion: true,
-      // The design gives this box and its button the dialogs' sizes
-      child: DialogDesignTheme(
-        child: DialogInfoBox(
-          title: Text(l10n.diskEncryptionPageRepairHeader),
-          yaruInfoType: YaruInfoType.warning,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(l10n.diskEncryptionPageRepairBody),
-              const SizedBox(height: 8),
-              OutlinedButton(
-                onPressed: tpmState.isLoading
-                    ? null
-                    : () {
-                        showRepairDialog(context);
-                      },
-                child: Text(l10n.diskEncryptionPageRepairButton),
-              ),
-            ],
-          ),
+      child: YaruInfoBox(
+        title: Text(l10n.diskEncryptionPageRepairHeader),
+        yaruInfoType: YaruInfoType.warning,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.diskEncryptionPageRepairBody),
+            const SizedBox(height: 8),
+            OutlinedButton(
+              onPressed: tpmState.isLoading
+                  ? null
+                  : () {
+                      showRepairDialog(context);
+                    },
+              child: Text(l10n.diskEncryptionPageRepairButton),
+            ),
+          ],
         ),
       ),
     );
