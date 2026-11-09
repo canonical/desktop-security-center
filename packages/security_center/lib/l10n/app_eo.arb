@@ -3,10 +3,10 @@
     "snapPermissionReadLabel": "Legi",
     "snapPermissionWriteLabel": "Skribi",
     "snapPermissionExecuteLabel": "Ruli",
-    "snapPermissionsEnableTitle": "Devigi izolitajn programojn peti permesojn",
+    "snapPermissionsEnableTitle": "Devigi izolitajn apojn peti permesojn",
     "snapPermissionsEnableWarning": "Jen eksperimenta funkcio por kontroli uzojn de sistemaĵoj.",
     "snapPermissionsExperimentalLabel": "Eksperimente",
-    "snapPermissionsPageTitle": "Programaj permesoj",
+    "snapPermissionsPageTitle": "Apaj permesoj",
     "snapRulesCount": "{n, plural, =0{neniu regulo} =1{1 regulo} other{{n} reguloj}}",
     "@snapRulesCount": {
         "placeholders": {
@@ -39,7 +39,7 @@
     "snapdRuleCategorySessionDenied": "Malpermesi ĝis adiaŭo",
     "snapdRuleCategorySessionAllowed": "Permesi ĝis adiaŭo",
     "snapdRuleCategoryForeverAllowed": "Permesi ĉiam",
-    "interfaceSnapCount": "{n, plural, =0{neniu programo} =1{1 programo} other {{n} programoj}}",
+    "interfaceSnapCount": "{n, plural, =0{neniu apo} =1{1 apo} other {{n} apoj}}",
     "@interfaceSnapCount": {
         "placeholders": {
             "n": {
@@ -144,9 +144,9 @@
     "diskEncryptionPageErrorUnsupportedStateBody": "La Fidata Platforma Modulo (TPM) de via komputilo ne estas en subtenata stato.",
     "recoveryKeyTPMExplanationBody": "La ĉifraj ŝlosiloj konserviĝas en la Fidata Platforma Modulo (TPM) de via komputilo.",
     "snapPermissionAccessLabel": "Atingi",
-    "cameraRulesPageEmptyTileLabel": "Neniu programo petis atingon ankoraŭ",
+    "cameraRulesPageEmptyTileLabel": "Neniu apo petis atingon ankoraŭ",
     "cameraInterfacePageTitle": "Kamerao",
-    "cameraInterfacePageDescription": "Permesi al programoj atingi viajn kamerojn.",
+    "cameraInterfacePageDescription": "Permesi al apoj atingi viajn kamerojn.",
     "snapRulesResetAllPermissions": "Apriorigi ĉiujn permesojn",
     "diskEncryptionPageAddPinDialogSaveButton": "Aldoni",
     "diskEncryptionPageAddPinButton": "Aldoni PIN…",
@@ -167,7 +167,7 @@
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Se vi forgesos vian pasfrazon, vi povos reatingi la diskon per la restaŭra ŝlosilo.",
     "diskEncryptionPageAdditionalSecurityBody": "Vi povas starigi pasfrazon aŭ PIN por plia sekureco. Vi devos tajpi ĝin ĉiun fojon, kiam via komputilo startos.",
     "microphoneInterfacePageTitle": "Mikrofono",
-    "microphoneInterfacePageDescription": "Permesi al programoj atingi vian mikrofonon.",
+    "microphoneInterfacePageDescription": "Permesi al apoj atingi vian mikrofonon.",
     "ubuntuProPageTitle": "Ubuntu Pro",
     "ubuntuProNotSupported": "Ubuntu Pro ne estas disponebla por ĉi tiu versio de Ubuntu",
     "ubuntuProNotSupportedDetails": "Ubuntu Pro postulas daŭre subtenatan version (LTS)",
