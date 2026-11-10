@@ -49,7 +49,7 @@ class AppLocalizationsEo extends AppLocalizations {
 
   @override
   String get snapPermissionsEnableTitle =>
-      'Devigi izolitajn programojn peti permesojn';
+      'Devigi izolitajn apojn peti permesojn';
 
   @override
   String get snapPermissionsEnableWarning =>
@@ -71,7 +71,7 @@ class AppLocalizationsEo extends AppLocalizations {
       'Vi povas administri aliajn permesojn ĉe «Agordoj › Apoj».';
 
   @override
-  String get snapPermissionsPageTitle => 'Programaj permesoj';
+  String get snapPermissionsPageTitle => 'Apaj permesoj';
 
   @override
   String get snapPermissionsErrorTitle => 'Io fiaskis';
@@ -97,8 +97,7 @@ class AppLocalizationsEo extends AppLocalizations {
   String get snapRulesPageEmptyTileLabel => 'Neniu regulo ankoraŭ';
 
   @override
-  String get cameraRulesPageEmptyTileLabel =>
-      'Neniu programo petis atingon ankoraŭ';
+  String get cameraRulesPageEmptyTileLabel => 'Neniu apo petis atingon ankoraŭ';
 
   @override
   String get snapRulesRemoveAll => 'Forigi ĉiujn regulojn';
@@ -118,14 +117,14 @@ class AppLocalizationsEo extends AppLocalizations {
 
   @override
   String get cameraInterfacePageDescription =>
-      'Permesi al programoj atingi viajn kamerojn.';
+      'Permesi al apoj atingi viajn kamerojn.';
 
   @override
   String get microphoneInterfacePageTitle => 'Mikrofono';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Permesi al programoj atingi vian mikrofonon.';
+      'Permesi al apoj atingi vian mikrofonon.';
 
   @override
   String get interfacePageTitle => 'Administri permesojn';
@@ -141,9 +140,9 @@ class AppLocalizationsEo extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n programoj',
-      one: '1 programo',
-      zero: 'neniu programo',
+      other: '$n apoj',
+      one: '1 apo',
+      zero: 'neniu apo',
     );
     return '$_temp0';
   }
