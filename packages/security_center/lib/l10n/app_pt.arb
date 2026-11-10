@@ -9,8 +9,8 @@
     "snapPermissionExecuteLabel": "Executar",
     "snapPermissionsEnableTitle": "Requer aplicações para solicitar por permissões do sistema",
     "snapPermissionsEnableWarning": "É uma funcionalidade experimental para controlar o acesso aos recursos do seu sistema.",
-    "snapPermissionsEnablingLabel": "A ativar, pode demorar uns segundos...",
-    "snapPermissionsDisablingLabel": "A desativar, pode demorar uns segundos...",
+    "snapPermissionsEnablingLabel": "A ativar, isto pode demorar uns segundos...",
+    "snapPermissionsDisablingLabel": "A desativar, isto pode demorar uns segundos...",
     "snapPermissionsExperimentalLabel": "Experimental",
     "snapPermissionsOtherDescription": "Pode gerir outras permissões em Definições > Aplicações.",
     "snapPermissionsPageTitle": "Permissões de Aplicação",
@@ -123,10 +123,10 @@
     "recoveryKeyPassphraseBody": "Tem de inserir a sua frase passe durante o arranque para desbloquear o disco. Pode-a alterar, mas não desativá-la.",
     "recoveryKeyPinBody": "Tem de inserir o seu CÓDIGO durante o arranque para desbloquear o disco. Pode alterá-lo, mas não desativá-lo.",
     "snapPermissionAccessLabel": "Acesso",
-    "cameraRulesPageEmptyTileLabel": "Nenhum aplicativo solicitou acesso ainda",
+    "cameraRulesPageEmptyTileLabel": "Nenhuma aplicação solicitou ainda acesso",
     "snapRulesResetAllPermissions": "Redefinir todas as permissões",
-    "cameraInterfacePageTitle": "Câmera",
-    "cameraInterfacePageDescription": "Permita que os aplicativos acessem suas câmeras.",
+    "cameraInterfacePageTitle": "Câmara",
+    "cameraInterfacePageDescription": "Permita que as aplicações acedam às suas câmaras.",
     "diskEncryptionPageStoreYourKeyWithLink": "A chave de recuperação permite que você recupere o acesso aos seus dados caso o disco não desbloqueie durante a inicialização. Guarde-a em um local seguro. {learnMoreLink}",
     "@diskEncryptionPageStoreYourKeyWithLink": {
         "placeholders": {
@@ -142,5 +142,12 @@
     "diskEncryptionPageErrorUnsupportedSnapdBody": "Verifique se o Centro de Segurança e o snapd estão atualizados.",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceHeader": "O Centro de Segurança não consegue se conectar à interface snapd",
     "diskEncryptionPageErrorUnconnectedSnapInterfaceBody": "Para corrigir isso, execute o seguinte comando no terminal:",
-    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control"
+    "diskEncryptionPageErrorUnconnectedSnapInterfaceCommand": "snap connect desktop-security-center:snap-fde-control",
+    "permissionRulePopupMenuSemanticLabel": "Atualizar Permissões",
+    "snapdRuleCategoryTemporarilyAllowed": "Permitir temporariamente",
+    "snapdRuleCategoryTemporarilyDenied": "Negar temporariamente",
+    "snapdRuleCategoryAskAlways": "Perguntar sempre",
+    "snapPermissionsErrorTitle": "Ocorreu algo de errado",
+    "microphoneInterfacePageTitle": "Microfone",
+    "microphoneInterfacePageDescription": "Permita que as aplicações acedam ao seu microfone."
 }

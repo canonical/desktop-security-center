@@ -22,19 +22,19 @@ class AppLocalizationsPt extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Permitir sempre';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Atualizar Permissões';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Negar sempre';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Permitir temporariamente';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Negar temporariamente';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Perguntar sempre';
 
   @override
   String get snapPermissionReadLabel => 'Ler';
@@ -58,11 +58,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get snapPermissionsEnablingLabel =>
-      'A ativar, pode demorar uns segundos...';
+      'A ativar, isto pode demorar uns segundos...';
 
   @override
   String get snapPermissionsDisablingLabel =>
-      'A desativar, pode demorar uns segundos...';
+      'A desativar, isto pode demorar uns segundos...';
 
   @override
   String get snapPermissionsExperimentalLabel => 'Experimental';
@@ -75,7 +75,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get snapPermissionsPageTitle => 'Permissões de Aplicação';
 
   @override
-  String get snapPermissionsErrorTitle => 'Something went wrong';
+  String get snapPermissionsErrorTitle => 'Ocorreu algo de errado';
 
   @override
   String snapRulesCount(int n) {
@@ -99,7 +99,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cameraRulesPageEmptyTileLabel =>
-      'Nenhum aplicativo solicitou acesso ainda';
+      'Nenhuma aplicação solicitou ainda acesso';
 
   @override
   String get snapRulesRemoveAll => 'Remover todas as regras';
@@ -115,18 +115,18 @@ class AppLocalizationsPt extends AppLocalizations {
       'Gerir permissões para aceder aos ficheiros na sua pasta de Início.';
 
   @override
-  String get cameraInterfacePageTitle => 'Câmera';
+  String get cameraInterfacePageTitle => 'Câmara';
 
   @override
   String get cameraInterfacePageDescription =>
-      'Permita que os aplicativos acessem suas câmeras.';
+      'Permita que as aplicações acedam às suas câmaras.';
 
   @override
-  String get microphoneInterfacePageTitle => 'Microphone';
+  String get microphoneInterfacePageTitle => 'Microfone';
 
   @override
   String get microphoneInterfacePageDescription =>
-      'Allow apps to access your microphone.';
+      'Permita que as aplicações acedam ao seu microfone.';
 
   @override
   String get interfacePageTitle => 'Gerir permissões';
