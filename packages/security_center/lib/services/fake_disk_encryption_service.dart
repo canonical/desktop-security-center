@@ -29,6 +29,16 @@ enum FakeRepairScenario {
       actions: [SnapdFixAction.rebootToFwSettings],
     ),
   ]),
+
+  /// secboot asks for this after a fix, but this starts with it so the power
+  /// off step is quick to reach.
+  shutdownRequired('shutdown-required', [
+    SnapdAvailabilityCheckError(
+      kind: SnapdAvailabilityCheckErrorKind.shutdownRequired,
+      message: 'a shutdown is required to complete the action',
+      actions: [SnapdFixAction.shutdown],
+    ),
+  ]),
   contactOem('contact-oem', [
     SnapdAvailabilityCheckError(
       kind: SnapdAvailabilityCheckErrorKind.hostSecurity,
