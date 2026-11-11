@@ -283,6 +283,7 @@
         }
     },
     "tpmActionErrorSupportLabel": "Try the solutions below or contact IT support.",
+    "tpmActionErrorSupportLabelSingle": "Try the solution below or contact IT support.",
     "tpmActionErrorKindInternal": "Internal error.",
     "tpmActionErrorKindShutdownRequired": "Power off is required.",
     "tpmActionErrorKindRebootRequired": "Restart is required.",

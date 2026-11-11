@@ -655,6 +655,10 @@ class AppLocalizationsHu extends AppLocalizations {
       'Try the solutions below or contact IT support.';
 
   @override
+  String get tpmActionErrorSupportLabelSingle =>
+      'Try the solution below or contact IT support.';
+
+  @override
   String get tpmActionErrorKindInternal => 'Internal error.';
 
   @override
