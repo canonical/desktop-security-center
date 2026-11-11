@@ -8,6 +8,7 @@ import 'package:mockito/mockito.dart';
 import 'package:path/path.dart' as p;
 import 'package:security_center/disk_encryption/disk_encryption_page.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
+import 'package:security_center/disk_encryption/repair_dialog.dart';
 import 'package:security_center/l10n.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/power_service.dart';
