@@ -36,8 +36,8 @@
         }
     },
     "homeInterfacePageDescription": "Administri permesojn uzi dosierojn en via hejma dosierujo.",
-    "snapdRuleCategorySessionDenied": "Malpermesi ĝis adiaŭo",
-    "snapdRuleCategorySessionAllowed": "Permesi ĝis adiaŭo",
+    "snapdRuleCategorySessionDenied": "Malpermesi ĝis elsaluto",
+    "snapdRuleCategorySessionAllowed": "Permesi ĝis elsaluto",
     "snapdRuleCategoryForeverAllowed": "Permesi ĉiam",
     "interfaceSnapCount": "{n, plural, =0{neniu apo} =1{1 apo} other {{n} apoj}}",
     "@interfaceSnapCount": {
@@ -211,15 +211,15 @@
     "ubuntuProMagicError": "Malsukcesis ŝalti Ubuntu Pro, reprovu",
     "ubuntuProNotSupportedSnapd": "Ĉi tiu versio de snapd ne subtenas Ubuntu Pro",
     "ubuntuProNotSupportedSnapdDetails": "Ĝisdatigu snapd por administri Ubuntu Pro",
-    "ubuntuProMagicPrompt": "Salutu per via konto Ubuntu One, aŭ kreu konton senkoste.",
+    "ubuntuProMagicPrompt": "Ensalutu per via konto Ubuntu One, aŭ kreu konton senkoste.",
     "ubuntuProComplianceFIPSDisclaimer": "Ŝaltado de FIPS ne estas malfarebla; Livepatch estos porĉiame malŝaltita.",
     "ubuntuProComplianceFIPSUpdatesDescription": "Instali pakojn validajn por FIPS 140-2, kun regulaj ĝisdatigoj pri sekureco.",
     "ubuntuProComplianceFIPSNoUpdatesDescription": "Instali pakojn validajn por FIPS 140-2. Tiuj ne estos ĝisdatigitaj ĝis la sekva validecokontrolo.",
     "ubuntuProLivepatchTitle": "Livepatch por kerno",
     "ubuntuProLivepatchEnableTitle": "Ŝalti Livepatch",
     "ubuntuProLivepatchShowTitle": "Montri staton de Livepatch en la supra breto",
-    "ubuntuProMagicContinueInBrowser": "Daŭri en TTT-legilo",
-    "ubuntuProMagicDescription": "Vi ankaŭ povas saluti ĉe {attachLink}, tajpante la kodon {attachCode}",
+    "ubuntuProMagicContinueInBrowser": "Daŭri en retumilo",
+    "ubuntuProMagicDescription": "Vi ankaŭ povas ensaluti ĉe {attachLink}, tajpante la kodon {attachCode}",
     "@ubuntuProMagicDescription": {
         "placeholders": {
             "attachLink": {
