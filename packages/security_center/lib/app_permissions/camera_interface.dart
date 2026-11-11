@@ -11,7 +11,7 @@ part 'camera_interface.g.dart';
 
 /// Constraints for a camera interface [SnapdRule].
 @freezed
-class CameraRuleConstraints with _$CameraRuleConstraints {
+abstract class CameraRuleConstraints with _$CameraRuleConstraints {
   const factory CameraRuleConstraints({
     required Map<CameraPermission, PermissionConstraints> permissions,
   }) = _CameraRuleConstraints;
