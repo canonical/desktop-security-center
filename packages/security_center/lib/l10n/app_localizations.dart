@@ -1299,6 +1299,12 @@ abstract class AppLocalizations {
   /// **'Try the solutions below or contact IT support.'**
   String get tpmActionErrorSupportLabel;
 
+  /// No description provided for @tpmActionErrorSupportLabelSingle.
+  ///
+  /// In en, this message translates to:
+  /// **'Try the solution below or contact IT support.'**
+  String get tpmActionErrorSupportLabelSingle;
+
   /// No description provided for @tpmActionErrorKindInternal.
   ///
   /// In en, this message translates to:
