@@ -676,8 +676,8 @@ class _RepairIssue extends ConsumerWidget {
         YaruInfoBox(
           title: Text(l10n.tpmActionPageTitleActionable),
           subtitle: Text(
-            proceedOnly
-                ? l10n.tpmActionFixActionProceedDescription
+            fixes.length == 1
+                ? l10n.tpmActionErrorSupportLabelSingle
                 : l10n.tpmActionErrorSupportLabel,
           ),
           yaruInfoType: YaruInfoType.warning,
@@ -860,13 +860,13 @@ class _RepairPowerAction extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          isPowerOff
-              ? l10n.diskEncryptionPageRepairDialogPowerOffBody
-              : l10n.diskEncryptionPageRepairDialogRestartBody,
-        ),
-        if (confirm.action == SnapdFixAction.rebootToFwSettings)
+        if (isPowerOff)
+          Text(l10n.diskEncryptionPageRepairDialogPowerOffBody)
+        else if (confirm.action == SnapdFixAction.rebootToFwSettings) ...[
           Text(l10n.tpmActionFixActionRebootToFwSettingsInstructions),
+          Text(l10n.tpmActionFixActionCaveatRetry),
+        ] else
+          Text(l10n.diskEncryptionPageRepairDialogRestartBody),
         // logind's error names D-Bus internals, so say what the user can do
         if (confirm.error != null)
           YaruInfoBox(
