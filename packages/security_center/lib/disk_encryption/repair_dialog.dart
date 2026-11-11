@@ -617,35 +617,20 @@ class _RepairTechnicalDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
-    // The design's 16 px chevron. YaruExpandable takes its button's size from
-    // the icon button theme, which Yaru holds at 34 px
-    const chevronSize = Size.square(16);
-    return Theme(
-      data: theme.copyWith(
-        iconButtonTheme: IconButtonThemeData(
-          style: theme.iconButtonTheme.style?.copyWith(
-            minimumSize: const WidgetStatePropertyAll(chevronSize),
-            maximumSize: const WidgetStatePropertyAll(chevronSize),
-            iconSize: WidgetStatePropertyAll(chevronSize.width),
-          ),
-        ),
-      ),
-      child: YaruExpandable(
-        expandButtonPosition: YaruExpandableButtonPosition.start,
-        expandIconPadding: const EdgeInsetsDirectional.only(end: 8),
-        expandIconSemanticLabel: l10n.tpmActionDetailsLabel,
-        header: Text(l10n.tpmActionDetailsLabel),
-        // The expandable centres content narrower than itself
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(issue.kind.name.toKebabCase()),
-              Text(issue.message),
-            ],
-          ),
+    return YaruExpandable(
+      expandButtonPosition: YaruExpandableButtonPosition.start,
+      expandIconPadding: const EdgeInsetsDirectional.only(end: 8),
+      expandIconSemanticLabel: l10n.tpmActionDetailsLabel,
+      header: Text(l10n.tpmActionDetailsLabel),
+      // The expandable centres content narrower than itself
+      child: SizedBox(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(issue.kind.name.toKebabCase()),
+            Text(issue.message),
+          ],
         ),
       ),
     );
