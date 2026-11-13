@@ -287,10 +287,6 @@ class AppLocalizationsLo extends AppLocalizations {
       'ເພື່ອແກ້ໄຂບັນຫານີ້, ໃຫ້ລັນຄຳສັ່ງນີ້ໃນ terminal:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'ເຊື່ອມຕໍ່ desktop-security-center:snap-fde-control ຂອງ snap';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'ເພີ່ມ PIN...';
 
   @override

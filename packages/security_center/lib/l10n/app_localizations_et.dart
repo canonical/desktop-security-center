@@ -288,10 +288,6 @@ class AppLocalizationsEt extends AppLocalizations {
       'Vea parandamiseks käivita terminalis järgnev käsk:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'Lisa PIN-kood...';
 
   @override

@@ -290,10 +290,6 @@ class AppLocalizationsTa extends AppLocalizations {
       'இதை சரிசெய்ய, இந்த கட்டளையை முனையத்தில் இயக்கவும்:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap இணை desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'பின்னைச் சேர்...';
 
   @override

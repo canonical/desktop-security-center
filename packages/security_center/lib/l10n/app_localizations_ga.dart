@@ -294,10 +294,6 @@ class AppLocalizationsGa extends AppLocalizations {
       'Chun é seo a shocrú, rith an t-ordú seo sa teirminéal:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect ionad-slándála-deisce: snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'Cuir PIN leis...';
 
   @override

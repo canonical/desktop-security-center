@@ -288,10 +288,6 @@ class AppLocalizationsEo extends AppLocalizations {
       'Por ripari tion, rulu la jenan komandon en la terminalo:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'Aldoni PIN…';
 
   @override

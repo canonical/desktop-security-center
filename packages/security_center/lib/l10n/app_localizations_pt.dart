@@ -293,10 +293,6 @@ class AppLocalizationsPt extends AppLocalizations {
       'Para corrigir isso, execute o seguinte comando no terminal:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'Add PIN...';
 
   @override
@@ -1007,10 +1003,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
       'Para corrigir isso, execute o seguinte comando no terminal:';
-
-  @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
 
   @override
   String get diskEncryptionPageAddPinButton => 'Adicione um PIN...';

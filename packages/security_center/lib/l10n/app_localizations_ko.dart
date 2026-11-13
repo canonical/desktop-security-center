@@ -275,10 +275,6 @@ class AppLocalizationsKo extends AppLocalizations {
       '이 문제를 해결하려면 터미널에서 다음 명령어를 실행하세요:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'Add PIN...';
 
   @override

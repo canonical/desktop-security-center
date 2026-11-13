@@ -289,10 +289,6 @@ class AppLocalizationsFi extends AppLocalizations {
       'Korjataksesi tämän, suorita seuraava komento päätteessä:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'Lisää PIN...';
 
   @override

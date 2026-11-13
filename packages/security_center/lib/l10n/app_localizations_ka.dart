@@ -289,10 +289,6 @@ class AppLocalizationsKa extends AppLocalizations {
       'რომ გაასწოროთ, ტერმინალში ეს ბრძანება გაუშვით:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'PIN-კოდის დამატება...';
 
   @override

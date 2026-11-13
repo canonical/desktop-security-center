@@ -295,10 +295,6 @@ class AppLocalizationsPl extends AppLocalizations {
       'W celu naprawy uruchom to polecenie w terminalu:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'Dodaj kod PIN...';
 
   @override

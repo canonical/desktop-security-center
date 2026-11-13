@@ -289,10 +289,6 @@ class AppLocalizationsKn extends AppLocalizations {
       'ಇದನ್ನು ಸರಿಪಡಿಸಲು, ಟರ್ಮಿನಲ್‌ನಲ್ಲಿ ಈ ಆಜ್ಞೆಯನ್ನು ಚಲಾಯಿಸಿ:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'ಇತರ ಆಯ್ಕೆಗಳುಸ್ನ್ಯಾಪ್ ಕನೆಕ್ಟ್ ಡೆಸ್ಕ್‌ಟಾಪ್-ಸೆಕ್ಯುರಿಟಿ-ಸೆಂಟರ್:ಸ್ನ್ಯಾಪ್-ಎಫ್‌ಡಿ-ಕಂಟ್ರೋಲ್';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'ಪಿನ್ ಸೇರಿಸಿ...';
 
   @override

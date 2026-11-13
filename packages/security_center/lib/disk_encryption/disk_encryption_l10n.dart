@@ -40,7 +40,7 @@ extension SnapdStateExceptionL10n on SnapdStateException {
   String? localizedCommand(AppLocalizations l10n) => switch (this) {
         SnapdStateExceptionUnsupportedSnapdVersion() => null,
         SnapdStateExceptionUnconnectedSnapInterface() =>
-          l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceCommand,
+          'snap connect desktop-security-center:snap-fde-control', // The command should not be translated
       };
 }
 
