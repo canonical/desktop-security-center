@@ -12,10 +12,10 @@ class AppLocalizationsEo extends AppLocalizations {
   String get appTitle => 'Sekureca Centro';
 
   @override
-  String get snapdRuleCategorySessionAllowed => 'Permesi ĝis adiaŭo';
+  String get snapdRuleCategorySessionAllowed => 'Permesi ĝis elsaluto';
 
   @override
-  String get snapdRuleCategorySessionDenied => 'Malpermesi ĝis adiaŭo';
+  String get snapdRuleCategorySessionDenied => 'Malpermesi ĝis elsaluto';
 
   @override
   String get snapdRuleCategoryForeverAllowed => 'Permesi ĉiam';
@@ -103,7 +103,7 @@ class AppLocalizationsEo extends AppLocalizations {
   String get snapRulesRemoveAll => 'Forigi ĉiujn regulojn';
 
   @override
-  String get snapRulesResetAllPermissions => 'Apriorigi ĉiujn permesojn';
+  String get snapRulesResetAllPermissions => 'Defaŭltigi ĉiujn permesojn';
 
   @override
   String get homeInterfacePageTitle => 'Hejmdosierujo';
@@ -155,11 +155,11 @@ class AppLocalizationsEo extends AppLocalizations {
 
   @override
   String get diskEncryptionPageStoreYourKey =>
-      'La restaŭra ŝlosilo ebligas al vi reakiri viajn datenojn, se vi ne povas malŝlosi la diskon dum starto. Konservu ĝin en sekura loko.';
+      'La restaŭra ŝlosilo ebligas al vi reakiri viajn datumojn, se vi ne povas malŝlosi la diskon dum starto. Konservu ĝin en sekura loko.';
 
   @override
   String diskEncryptionPageStoreYourKeyWithLink(String learnMoreLink) {
-    return 'La restaŭra ŝlosilo ebligas reatingi viajn datenojn, se oni malsukcesas malŝlosi la diskon dum starto. Konservu ĝin en sekura loko. $learnMoreLink';
+    return 'La restaŭra ŝlosilo ebligas reatingi viajn datumojn, se oni malsukcesas malŝlosi la diskon dum starto. Konservu ĝin en sekura loko. $learnMoreLink';
   }
 
   @override
@@ -558,14 +558,14 @@ class AppLocalizationsEo extends AppLocalizations {
 
   @override
   String get ubuntuProMagicPrompt =>
-      'Salutu per via konto Ubuntu One, aŭ kreu konton senkoste.';
+      'Ensalutu per via konto Ubuntu One, aŭ kreu konton senkoste.';
 
   @override
-  String get ubuntuProMagicContinueInBrowser => 'Daŭri en TTT-legilo';
+  String get ubuntuProMagicContinueInBrowser => 'Daŭri en retumilo';
 
   @override
   String ubuntuProMagicDescription(String attachLink, String attachCode) {
-    return 'Vi ankaŭ povas saluti ĉe $attachLink, tajpante la kodon $attachCode';
+    return 'Vi ankaŭ povas ensaluti ĉe $attachLink, tajpante la kodon $attachCode';
   }
 
   @override
@@ -638,7 +638,7 @@ class AppLocalizationsEo extends AppLocalizations {
 
   @override
   String get ubuntuProComplianceFIPSDescription =>
-      'Atestado de konformeco de ĉifraj moduloj al la datenprotekta normo FIPS 140-2 de la Usona kaj Kanada registaroj.';
+      'Atestado de konformeco de ĉifraj moduloj al la datumprotekta normo FIPS 140-2 de la Usona kaj Kanada registaroj.';
 
   @override
   String get ubuntuProComplianceFIPSEnable => 'Ŝalti FIPS';
