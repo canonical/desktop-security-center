@@ -292,10 +292,6 @@ class AppLocalizationsEu extends AppLocalizations {
       'Hau konpontzeko, exekutatu komando hau terminalean:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'Gehitu PINa...';
 
   @override

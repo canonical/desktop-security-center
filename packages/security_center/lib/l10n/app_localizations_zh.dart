@@ -268,10 +268,6 @@ class AppLocalizationsZh extends AppLocalizations {
       '为了修复此问题，在终端中输入以下指令：';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => '添加 PIN…';
 
   @override
@@ -935,10 +931,6 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   @override
   String get diskEncryptionPageErrorUnconnectedSnapInterfaceBody =>
       '為了解決此問題, 請於終端機中執行下列指令:';
-
-  @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
 
   @override
   String get diskEncryptionPageAddPinButton => '加入 PIN...';

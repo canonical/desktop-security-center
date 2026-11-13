@@ -294,10 +294,6 @@ class AppLocalizationsEs extends AppLocalizations {
       'Para solucionar esto, ejecute este comando en la terminal:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'Agregar PIN…';
 
   @override

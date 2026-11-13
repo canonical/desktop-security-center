@@ -292,10 +292,6 @@ class AppLocalizationsHu extends AppLocalizations {
       'Ennek javításához futtassa ezt a parancsot a terminálban:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'PIN-kód hozzáadása…';
 
   @override

@@ -290,10 +290,6 @@ class AppLocalizationsCs extends AppLocalizations {
       'Opravíte to spuštěním tohoto příkazu v terminálu:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'Přidat kód PIN...';
 
   @override

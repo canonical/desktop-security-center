@@ -276,10 +276,6 @@ class AppLocalizationsJa extends AppLocalizations {
       '修正するには次のコマンドを実行します:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'PINを追加...';
 
   @override

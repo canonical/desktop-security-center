@@ -283,10 +283,6 @@ class AppLocalizationsHe extends AppLocalizations {
       'כדי לתקן את זה, יש להריץ את הפקודה הזאת במסוף:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snap connect desktop-security-center:snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'הוספת קוד אישי (PIN)…';
 
   @override

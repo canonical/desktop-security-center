@@ -293,10 +293,6 @@ class AppLocalizationsUg extends AppLocalizations {
       'بۇنى ئوڭشاش ئۈچۈن، تۆۋەندىكى بۇيرۇق تېرمىنالدا ئىجرا قىلىنىدۇ:';
 
   @override
-  String get diskEncryptionPageErrorUnconnectedSnapInterfaceCommand =>
-      'snapd ئۈستەلئۈستى بىخەتەرلىك مەركىزىگە باغلاندى: snap-fde-control';
-
-  @override
   String get diskEncryptionPageAddPinButton => 'PIN قوش…';
 
   @override
