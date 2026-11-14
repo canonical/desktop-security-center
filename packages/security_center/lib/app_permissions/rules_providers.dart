@@ -317,7 +317,7 @@ class SnapMicrophoneRulesModel extends _$SnapMicrophoneRulesModel {
 }
 
 @freezed
-class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
+abstract class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
   const factory SnapdHomeRuleFragment({
     required String ruleId,
     required bool deleteRuleOnRemoval,
@@ -385,7 +385,7 @@ class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
 }
 
 @freezed
-class SnapdCameraRuleFragment with _$SnapdCameraRuleFragment {
+abstract class SnapdCameraRuleFragment with _$SnapdCameraRuleFragment {
   const factory SnapdCameraRuleFragment({
     required String ruleId,
     required String snap,
@@ -428,7 +428,7 @@ class SnapdCameraRuleFragment with _$SnapdCameraRuleFragment {
 }
 
 @freezed
-class SnapdMicrophoneRuleFragment with _$SnapdMicrophoneRuleFragment {
+abstract class SnapdMicrophoneRuleFragment with _$SnapdMicrophoneRuleFragment {
   const factory SnapdMicrophoneRuleFragment({
     required String ruleId,
     required String snap,
