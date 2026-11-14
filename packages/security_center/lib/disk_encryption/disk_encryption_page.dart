@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:security_center/constants.dart';
+import 'package:security_center/disk_encryption/disk_encryption_dialog_widgets.dart';
 import 'package:security_center/disk_encryption/disk_encryption_l10n.dart';
 import 'package:security_center/disk_encryption/disk_encryption_providers.dart';
 import 'package:security_center/disk_encryption/recovery_key_panel.dart';
+import 'package:security_center/disk_encryption/repair_dialog.dart';
 import 'package:security_center/l10n/app_localizations.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/hyperlink.dart';
 import 'package:security_center/widgets/passphrase_widgets.dart';
 import 'package:security_center/widgets/scrollable_page.dart';
 import 'package:yaru/yaru.dart';
-
-const _learnMoreUrl =
-    'https://documentation.ubuntu.com/desktop/en/latest/explanation/hardware-backed-disk-encryption/';
-
-const yaruProgressSize = 20.0;
-
-String _dialogErrorMessage(Exception e) => switch (e) {
-      final TpmFdeOperationException e => e.causeByMessage(),
-      _ => e.toString(),
-    };
 
 class DiskEncryptionPage extends ConsumerWidget {
   const DiskEncryptionPage({super.key});
@@ -56,9 +48,14 @@ class EncryptionPageBody extends ConsumerWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (data.needsRepair &&
+                data.pendingOperation != TpmFdeOperation.repair) ...[
+              _RepairBanner(tpmState: data),
+              const SizedBox(height: 32),
+            ],
             _AuthStatusTileList(tpmState: data),
             const SizedBox(height: 32),
-            const _RecoveryKeyActions(),
+            _RecoveryKeyActions(tpmState: data),
             const SizedBox(height: 32),
             // TPM Authentication specific content
             switch (data.currentAuthMode) {
@@ -70,7 +67,7 @@ class EncryptionPageBody extends ConsumerWidget {
             const SizedBox(height: 32),
             Hyperlink(
               text: l10n.diskEncryptionPageLearnMore,
-              url: _learnMoreUrl,
+              url: diskEncryptionDocumentationUrl,
             ),
           ],
         );
@@ -142,70 +139,9 @@ class CheckRecoveryKeyDialog extends StatelessWidget {
         constraints: BoxConstraints(maxWidth: kDialogWidth),
         child: ScrollablePage(
           padding: EdgeInsets.all(kPageSectionGap),
-          children: const [_RecoveryKeyCheck()],
+          children: const [RecoveryKeyCheck()],
         ),
       ),
-    );
-  }
-}
-
-class _RecoveryKeyCheck extends ConsumerWidget {
-  const _RecoveryKeyCheck();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final data = ref.watch(checkRecoveryKeyDialogModelProvider);
-    final notifier = ref.read(checkRecoveryKeyDialogModelProvider.notifier);
-    final l10n = AppLocalizations.of(context);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        TextField(
-          autofocus: true,
-          style: Theme.of(context).textTheme.bodyMedium,
-          decoration: InputDecoration(
-            labelText: l10n.diskEncryptionPageRecoveryKey,
-            hintText: 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
-          ),
-          onChanged: notifier.setKeyToCheck,
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton(
-            onPressed: switch (data) {
-              CheckRecoveryKeyDialogStateInput() => notifier.checkRecoveryKey,
-              _ => null,
-            },
-            child: data is CheckRecoveryKeyDialogStateLoading
-                ? SizedBox.square(
-                    dimension: yaruProgressSize,
-                    child: YaruCircularProgressIndicator(
-                      strokeWidth: 2,
-                    ),
-                  )
-                : Text(l10n.diskEncryptionPageCheck),
-          ),
-        ),
-        if (data is CheckRecoveryKeyDialogStateResult)
-          if (data.valid)
-            YaruInfoBox(
-              title: Text(l10n.diskEncryptionPageKeyWorks),
-              subtitle: Text(l10n.diskEncryptionPageKeyWorksBody),
-              yaruInfoType: YaruInfoType.success,
-            )
-          else
-            YaruInfoBox(
-              title: Text(l10n.diskEncryptionPageKeyDoesntWork),
-              subtitle: Text(l10n.diskEncryptionPageKeyDoesntWorkBody),
-              yaruInfoType: YaruInfoType.danger,
-            ),
-        if (data is CheckRecoveryKeyDialogStateError)
-          YaruInfoBox(
-            title: Text(l10n.recoveryKeySomethingWentWrongHeader),
-            subtitle: Text(data.e.toString()),
-            yaruInfoType: YaruInfoType.danger,
-          ),
-      ].separatedBy(const SizedBox(height: 16)),
     );
   }
 }
@@ -215,63 +151,6 @@ void showReplaceRecoveryKeyDialog(BuildContext context) {
     context: context,
     builder: (_) => const ReplaceRecoveryKeyDialog(),
   );
-}
-
-// Scaffold displays the snack bar above the barrier; forward Esc back
-// to the dialog since Scaffold intercepts Esc even without a drawer.
-class _DialogScaffold extends StatefulWidget {
-  const _DialogScaffold({
-    required this.title,
-    required this.child,
-  });
-
-  final String title;
-  final Widget child;
-
-  @override
-  State<_DialogScaffold> createState() => _DialogScaffoldState();
-}
-
-class _DialogScaffoldState extends State<_DialogScaffold> {
-  bool _isQRCodeShown = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Actions(
-        actions: <Type, Action<Intent>>{
-          DismissIntent: CallbackAction<DismissIntent>(
-            onInvoke: (_) => Navigator.of(context).maybePop(),
-          ),
-        },
-        // ModalRoute.isCurrentOf would hide the dialog behind the file chooser
-        child: NotificationListener<RecoveryKeyQRCodeNotification>(
-          onNotification: (notification) {
-            setState(() => _isQRCodeShown = notification.isShown);
-            return true;
-          },
-          child: Visibility(
-            visible: !_isQRCodeShown,
-            // The hidden panel must stay mounted to report the QR code closing
-            maintainState: true,
-            child: AlertDialog(
-              title: YaruDialogTitleBar(title: Text(widget.title)),
-              titlePadding: EdgeInsets.zero,
-              contentPadding: EdgeInsets.zero,
-              content: Container(
-                constraints: BoxConstraints(maxWidth: kDialogWidth),
-                child: ScrollablePage(
-                  padding: EdgeInsets.all(kPageSectionGap),
-                  children: [widget.child],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
 
 class ReplaceRecoveryKeyDialog extends ConsumerWidget {
@@ -295,7 +174,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
         Navigator.of(context).pop();
       });
     }
-    return _DialogScaffold(
+    return DiskEncryptionDialog(
       title: l10n.diskEncryptionPageReplaceDialogHeader,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -358,7 +237,8 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
           if (replaceDialogState is ReplaceRecoveryKeyDialogStateError)
             YaruInfoBox(
               title: Text(l10n.recoveryKeySomethingWentWrongHeader),
-              subtitle: Text(_dialogErrorMessage(replaceDialogState.e)),
+              subtitle:
+                  Text(diskEncryptionDialogErrorMessage(replaceDialogState.e)),
               yaruInfoType: YaruInfoType.danger,
             ),
         ].separatedBy(const SizedBox(height: 16)),
@@ -440,7 +320,7 @@ class ChangeAuthDialog extends ConsumerWidget {
               YaruInfoBox(
                 title: Text(l10n.recoveryKeySomethingWentWrongHeader),
                 subtitle: Text(
-                  _dialogErrorMessage(
+                  diskEncryptionDialogErrorMessage(
                     (model.dialogState as ChangeAuthDialogStateError).e,
                   ),
                 ),
@@ -537,7 +417,7 @@ class ChangeAuthModeDialog extends ConsumerWidget {
             if (model.dialogState case ChangeAuthModeDialogStateError(:final e))
               YaruInfoBox(
                 title: Text(l10n.recoveryKeySomethingWentWrongHeader),
-                subtitle: Text(_dialogErrorMessage(e)),
+                subtitle: Text(diskEncryptionDialogErrorMessage(e)),
                 yaruInfoType: YaruInfoType.danger,
               ),
           ].separatedBy(const SizedBox(height: 16)),
@@ -555,10 +435,6 @@ class _NoneAuthenticationActions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final isAdding = switch (tpmState.pendingOperation) {
-      TpmFdeOperation.addPin || TpmFdeOperation.addPassphrase => true,
-      _ => false,
-    };
     final hasError = tpmState.operationError != null;
 
     return Column(
@@ -577,7 +453,7 @@ class _NoneAuthenticationActions extends ConsumerWidget {
           spacing: 16,
           children: [
             OutlinedButton(
-              onPressed: isAdding
+              onPressed: tpmState.isLoading
                   ? null
                   : () {
                       showChangeAuthModeDialog(
@@ -591,7 +467,7 @@ class _NoneAuthenticationActions extends ConsumerWidget {
               ),
             ),
             OutlinedButton(
-              onPressed: isAdding
+              onPressed: tpmState.isLoading
                   ? null
                   : () {
                       showChangeAuthModeDialog(
@@ -628,10 +504,6 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final isRemoving = switch (tpmState.pendingOperation) {
-      TpmFdeOperation.removePin || TpmFdeOperation.removePassphrase => true,
-      _ => false,
-    };
     final hasError = tpmState.operationError != null;
 
     return Column(
@@ -648,7 +520,7 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
           spacing: 16,
           children: [
             OutlinedButton(
-              onPressed: isRemoving
+              onPressed: tpmState.isLoading
                   ? null
                   : () {
                       showChangeAuthDialog(
@@ -659,7 +531,7 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
               child: Text(l10n.recoveryKeyPassphraseButton),
             ),
             OutlinedButton(
-              onPressed: isRemoving
+              onPressed: tpmState.isLoading
                   ? null
                   : () {
                       ref
@@ -695,10 +567,6 @@ class _PinAuthenticationActions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final isRemoving = switch (tpmState.pendingOperation) {
-      TpmFdeOperation.removePin || TpmFdeOperation.removePassphrase => true,
-      _ => false,
-    };
     final hasError = tpmState.operationError != null;
 
     return Column(
@@ -715,7 +583,7 @@ class _PinAuthenticationActions extends ConsumerWidget {
           spacing: 16,
           children: [
             OutlinedButton(
-              onPressed: isRemoving
+              onPressed: tpmState.isLoading
                   ? null
                   : () {
                       showChangeAuthDialog(context, AuthMode.pin);
@@ -723,7 +591,7 @@ class _PinAuthenticationActions extends ConsumerWidget {
               child: Text(l10n.recoveryKeyPinButton),
             ),
             OutlinedButton(
-              onPressed: isRemoving
+              onPressed: tpmState.isLoading
                   ? null
                   : () {
                       ref
@@ -750,11 +618,15 @@ class _PinAuthenticationActions extends ConsumerWidget {
 }
 
 class _RecoveryKeyActions extends StatelessWidget {
-  const _RecoveryKeyActions();
+  const _RecoveryKeyActions({required this.tpmState});
+
+  final TpmAuthState tpmState;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    // The repair replaces the recovery key
+    final isRepairing = tpmState.pendingOperation == TpmFdeOperation.repair;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -771,15 +643,19 @@ class _RecoveryKeyActions extends StatelessWidget {
           spacing: 16,
           children: [
             OutlinedButton(
-              onPressed: () {
-                showCheckRecoveryKeyDialog(context);
-              },
+              onPressed: isRepairing
+                  ? null
+                  : () {
+                      showCheckRecoveryKeyDialog(context);
+                    },
               child: Text(l10n.diskEncryptionPageCheckKey),
             ),
             OutlinedButton(
-              onPressed: () {
-                showReplaceRecoveryKeyDialog(context);
-              },
+              onPressed: isRepairing
+                  ? null
+                  : () {
+                      showReplaceRecoveryKeyDialog(context);
+                    },
               child: Text(l10n.diskEncryptionPageReplaceButton),
             ),
           ],
@@ -799,6 +675,7 @@ class _AuthStatusTileList extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final pendingOperation = tpmState.pendingOperation;
     final currentMode = tpmState.currentAuthMode;
+    final isRepairing = pendingOperation == TpmFdeOperation.repair;
 
     String? loadingMessage;
     if (pendingOperation != null) {
@@ -816,8 +693,17 @@ class _AuthStatusTileList extends StatelessWidget {
     return YaruTileList(
       children: [
         YaruListTile(
-          leading: const Icon(YaruIcons.lock, size: 24),
-          titleText: l10n.recoveryKeyTPMEnabled,
+          leading: isRepairing
+              ? const SizedBox.square(
+                  dimension: yaruProgressSize,
+                  child: YaruCircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Icon(YaruIcons.lock, size: 24),
+          titleText: isRepairing
+              ? l10n.diskEncryptionPageRepairing
+              : tpmState.needsRepair
+                  ? l10n.recoveryKeyTPMNeedsRepair
+                  : l10n.recoveryKeyTPMEnabled,
         ),
         // Show enabled status row when not loading and has auth enabled
         if (currentMode != AuthMode.none && pendingOperation == null) ...[
@@ -831,18 +717,51 @@ class _AuthStatusTileList extends StatelessWidget {
         // Show loading indicator if an operation is in progress
         if (loadingMessage != null) ...[
           YaruListTile(
-            titleText: loadingMessage,
-            subtitle: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(height: 8),
-                YaruLinearProgressIndicator(),
-              ],
+            leading: const SizedBox.square(
+              dimension: yaruProgressSize,
+              child: YaruCircularProgressIndicator(strokeWidth: 2),
             ),
+            titleText: loadingMessage,
           ),
         ],
       ],
+    );
+  }
+}
+
+class _RepairBanner extends StatelessWidget {
+  const _RepairBanner({required this.tpmState});
+
+  final TpmAuthState tpmState;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    // Read out when it appears after the page has loaded, as after a failed
+    // repair, like a snack bar
+    return Semantics(
+      container: true,
+      liveRegion: true,
+      child: YaruInfoBox(
+        title: Text(l10n.diskEncryptionPageRepairHeader),
+        yaruInfoType: YaruInfoType.warning,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.diskEncryptionPageRepairBody),
+            const SizedBox(height: 8),
+            OutlinedButton(
+              onPressed: tpmState.isLoading
+                  ? null
+                  : () {
+                      showRepairDialog(context);
+                    },
+              child: Text(l10n.diskEncryptionPageRepairButton),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -328,10 +328,14 @@ class AddPassphraseFormField extends ConsumerStatefulWidget {
     required this.authMode,
     super.key,
     this.fieldWidth,
+    this.labelText,
   });
 
   final double? fieldWidth;
   final AuthMode authMode;
+
+  /// Defaults to "New passphrase" or "New PIN".
+  final String? labelText;
 
   @override
   ConsumerState<AddPassphraseFormField> createState() =>
@@ -377,7 +381,8 @@ class _AddPassphraseFormFieldState
             child: TextFormField(
               controller: _controller,
               decoration: InputDecoration(
-                labelText: widget.authMode.localizedNewHint(lang),
+                labelText:
+                    widget.labelText ?? widget.authMode.localizedNewHint(lang),
                 errorText: model.entropy != null && !model.entropy!.success
                     ? model.entropy?.semanticEntropy.localizedHint(
                         l10n,
