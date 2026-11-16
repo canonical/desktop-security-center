@@ -186,8 +186,16 @@ factory: true
         wantReprovision: false,
       ),
       (
-        name: 'snapd version 2.78, reprovision supported',
+        name: 'snapd version 2.78, no reprovision',
         snapdVersion: '2.78',
+        isDryRun: false,
+        wantMicrophone: true,
+        wantPro: true,
+        wantReprovision: false,
+      ),
+      (
+        name: 'snapd version 2.79, reprovision supported',
+        snapdVersion: '2.79',
         isDryRun: false,
         wantMicrophone: true,
         wantPro: true,

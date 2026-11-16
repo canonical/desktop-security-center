@@ -53,11 +53,10 @@ class FeatureService {
     return _hasGreaterSnapdVersion(snapdVersion, '2.75.1');
   }
 
-  // TODO: for local testing; use the snapd release with desktop access
   bool get supportsReprovision {
     if (isDryRun) return true;
 
-    return _hasGreaterSnapdVersion(snapdVersion, '2.78');
+    return _hasGreaterSnapdVersion(snapdVersion, '2.79');
   }
 
   bool _hasStorageEncryptedManaged() {
