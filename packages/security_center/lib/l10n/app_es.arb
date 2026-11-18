@@ -236,7 +236,7 @@
             }
         }
     },
-    "ubuntuProESMUniverseDescription": "Actualizaciones de seguridad adicionales para más de 23 000 paquetes de Ubuntu Universe hasta el {year}",
+    "ubuntuProESMUniverseDescription": "Actualizaciones de seguridad adicionales para paquetes Universe de Ubuntu hasta el {year}",
     "@ubuntuProESMUniverseDescription": {
         "placeholders": {
             "year": {
@@ -264,5 +264,11 @@
         }
     },
     "ubuntuProComplianceDisclaimer": "Solo se recomienda para asistir con requisitos de FedRAMP, HIPAA y otros estándares de cumplimiento y seguridad.",
-    "ubuntuProComplianceFIPSDescription": "Certificación de módulos criptográficos de los gobiernos de EE. UU. y Canadá sobre el cumplimiento del estándar de protección de datos FIPS 140-2."
+    "ubuntuProComplianceFIPSDescription": "Certificación de módulos criptográficos de los gobiernos de EE. UU. y Canadá sobre el cumplimiento del estándar de protección de datos FIPS 140-2.",
+    "permissionRulePopupMenuSemanticLabel": "Actualizar permisos",
+    "snapdRuleCategoryTemporarilyAllowed": "Permitir temporalmente",
+    "snapdRuleCategoryTemporarilyDenied": "Denegar temporalmente",
+    "snapdRuleCategoryAskAlways": "Siempre preguntar",
+    "ubuntuProLoadingLabel": "Esto puede demorar unos segundos…",
+    "ubuntuProDisableError": "No se pudo desactivar Ubuntu Pro; inténtelo de nuevo"
 }
