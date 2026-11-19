@@ -81,13 +81,9 @@ abstract class UbuntuProFeature with _$UbuntuProFeature {
 class UbuntuProFeatureService {
   UbuntuProFeatureService({
     DBusClient? client,
-    @visibleForTesting DBusRemoteObjectManager? objectManager,
-    @visibleForTesting DBusRemoteObject Function(String path)? objectFactory,
-  }) : _dbusClient = client ?? DBusClient.system(),
-       // ignore: prefer_initializing_formals
-       _objectManager = objectManager,
-       // ignore: prefer_initializing_formals
-       _objectFactory = objectFactory;
+    @visibleForTesting this._objectManager,
+    @visibleForTesting this._objectFactory,
+  }) : _dbusClient = client ?? DBusClient.system();
 
   DBusRemoteObjectManager? _objectManager;
   DBusRemoteObject Function(String path)? _objectFactory;
@@ -283,11 +279,9 @@ class UbuntuProFeatureService {
 class UbuntuProManagerService {
   UbuntuProManagerService({
     DBusClient? client,
-    @visibleForTesting DBusRemoteObjectManager? objectManager,
+    @visibleForTesting this._objectManager,
     @visibleForTesting FileSystem? fs,
   }) : _dbusClient = client ?? DBusClient.system(),
-       // ignore: prefer_initializing_formals
-       _objectManager = objectManager,
        _fs = fs ?? LocalFileSystem();
 
   final FileSystem _fs;

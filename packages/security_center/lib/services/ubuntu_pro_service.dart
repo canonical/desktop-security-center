@@ -1,6 +1,3 @@
-// Named parameters can't use private initializing formals.
-// ignore_for_file: prefer_initializing_formals
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -43,14 +40,11 @@ abstract class MagicAttachResponse with _$MagicAttachResponse {
 
 class MagicAttachService {
   MagicAttachService({
-    String defaultEtcPath = '/etc/ubuntu-advantage',
-    String defaultConfigFile = 'uaclient.conf',
-    String v1MagicAttach = '/v1/magic-attach',
+    this._defaultEtcPath = '/etc/ubuntu-advantage',
+    this._defaultConfigFile = 'uaclient.conf',
+    this._v1MagicAttach = '/v1/magic-attach',
     @visibleForTesting FileSystem? fs,
-  }) : _defaultEtcPath = defaultEtcPath,
-       _defaultConfigFile = defaultConfigFile,
-       _v1MagicAttach = v1MagicAttach,
-       _fs = fs ?? LocalFileSystem();
+  }) : _fs = fs ?? LocalFileSystem();
 
   final FileSystem _fs;
   final String _defaultEtcPath;
