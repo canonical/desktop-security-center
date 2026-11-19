@@ -12,9 +12,7 @@ void main() {
   });
 
   test('returns failed status when snapd returns an unknown status', () async {
-    final snapd = _FakeSnapdService(
-      storageEncryptionStatus: 'future-status',
-    );
+    final snapd = _FakeSnapdService(storageEncryptionStatus: 'future-status');
     addTearDown(snapd.close);
     final service = SnapdDiskEncryptionService(snapd);
 

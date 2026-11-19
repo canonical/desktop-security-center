@@ -12,8 +12,7 @@ void main() {
         name: 'outside snap confinment, no TPM/FDE',
         exitCode: 1,
         stdout: '',
-        stderr:
-            'error: snapctl: cannot invoke snapctl operation commands (here "system-mode") from outside of a snap',
+        stderr: 'error: snapctl: cannot invoke snapctl operation commands (here "system-mode") from outside of a snap',
         ubuntuDataEncExists: false,
         expectedResult: false,
       ),
@@ -30,8 +29,7 @@ storage-encrypted: managed
         expectedResult: true,
       ),
       (
-        name:
-            'fallback to checking for ubuntu-data-enc if snapctl result is negative',
+        name: 'fallback to checking for ubuntu-data-enc if snapctl result is negative',
         exitCode: 0,
         stdout: '''system-mode: install
 seed-loaded: true
@@ -124,16 +122,14 @@ factory: true
         wantPro: true,
       ),
       (
-        name:
-            'snapd version with v prefix, microphone and pro interface supported',
+        name: 'snapd version with v prefix, microphone and pro interface supported',
         snapdVersion: 'v2.75.1',
         isDryRun: false,
         wantMicrophone: true,
         wantPro: true,
       ),
       (
-        name:
-            'snapd version with v prefix, no microphone or pro interface supported',
+        name: 'snapd version with v prefix, no microphone or pro interface supported',
         snapdVersion: 'v2.74',
         isDryRun: false,
         wantMicrophone: false,
@@ -195,14 +191,8 @@ factory: true
           snapdVersion: testCase.snapdVersion,
         );
 
-        expect(
-          service.supportsMicrophone,
-          equals(testCase.wantMicrophone),
-        );
-        expect(
-          service.supportsProControl,
-          equals(testCase.wantPro),
-        );
+        expect(service.supportsMicrophone, equals(testCase.wantMicrophone));
+        expect(service.supportsProControl, equals(testCase.wantPro));
       });
     }
   });

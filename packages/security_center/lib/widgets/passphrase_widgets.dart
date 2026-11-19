@@ -44,10 +44,12 @@ class _CurrentPassphraseFormFieldState
   @override
   Widget build(BuildContext context) {
     final model = ref.watch(changeAuthDialogModelProvider(widget.authMode));
-    final notifier =
-        ref.watch(changeAuthDialogModelProvider(widget.authMode).notifier);
+    final notifier = ref.watch(
+      changeAuthDialogModelProvider(widget.authMode).notifier,
+    );
     final lang = AppLocalizations.of(context);
-    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess ||
+    final isDisabled =
+        model.dialogState is ChangeAuthDialogStateSuccess ||
         (model.dialogState is ChangeAuthDialogStateError &&
             (model.dialogState as ChangeAuthDialogStateError).fatal);
 
@@ -71,10 +73,7 @@ class _CurrentPassphraseFormFieldState
             model.dialogState is! ChangeAuthDialogStateError)
           Padding(
             padding: const EdgeInsets.only(left: 10.0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: SuccessIcon(),
-            ),
+            child: Align(alignment: Alignment.centerLeft, child: SuccessIcon()),
           ),
       ],
     );
@@ -114,10 +113,12 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
   @override
   Widget build(BuildContext context) {
     final model = ref.watch(changeAuthDialogModelProvider(widget.authMode));
-    final notifier =
-        ref.watch(changeAuthDialogModelProvider(widget.authMode).notifier);
+    final notifier = ref.watch(
+      changeAuthDialogModelProvider(widget.authMode).notifier,
+    );
     final lang = AppLocalizations.of(context);
-    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess ||
+    final isDisabled =
+        model.dialogState is ChangeAuthDialogStateSuccess ||
         (model.dialogState is ChangeAuthDialogStateError &&
             (model.dialogState as ChangeAuthDialogStateError).fatal);
     final l10n = AppLocalizations.of(context);
@@ -141,7 +142,8 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
                         widget.authMode,
                       )
                     : null,
-                helperText: model.entropy?.semanticEntropy ==
+                helperText:
+                    model.entropy?.semanticEntropy ==
                             SemanticEntropy.belowOptimal ||
                         model.entropy?.semanticEntropy ==
                             SemanticEntropy.optimal
@@ -151,9 +153,8 @@ class _PassphraseFormFieldState extends ConsumerState<PassphraseFormField> {
                       )
                     : null,
                 helperStyle: Theme.of(context).textTheme.bodySmall,
-                errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
+                errorStyle: Theme.of(context).textTheme.bodySmall
+                    ?.copyWith(color: Theme.of(context).colorScheme.error),
                 helperMaxLines: 2,
                 errorMaxLines: 2,
               ),
@@ -213,10 +214,12 @@ class _ConfirmPassphraseFormFieldState
   @override
   Widget build(BuildContext context) {
     final model = ref.watch(changeAuthDialogModelProvider(widget.authMode));
-    final notifier =
-        ref.watch(changeAuthDialogModelProvider(widget.authMode).notifier);
+    final notifier = ref.watch(
+      changeAuthDialogModelProvider(widget.authMode).notifier,
+    );
     final lang = AppLocalizations.of(context);
-    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess ||
+    final isDisabled =
+        model.dialogState is ChangeAuthDialogStateSuccess ||
         (model.dialogState is ChangeAuthDialogStateError &&
             (model.dialogState as ChangeAuthDialogStateError).fatal);
 
@@ -236,9 +239,8 @@ class _ConfirmPassphraseFormFieldState
                 errorText: !notifier.passphraseConfirmed
                     ? widget.authMode.localizedConfirmError(lang)
                     : null,
-                errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
+                errorStyle: Theme.of(context).textTheme.bodySmall
+                    ?.copyWith(color: Theme.of(context).colorScheme.error),
               ),
               obscureText: !model.showPassphrase,
               enabled: !isDisabled,
@@ -253,10 +255,7 @@ class _ConfirmPassphraseFormFieldState
             model.dialogState is! ChangeAuthDialogStateError)
           Padding(
             padding: const EdgeInsets.only(left: 10.0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: SuccessIcon(),
-            ),
+            child: Align(alignment: Alignment.centerLeft, child: SuccessIcon()),
           ),
       ],
     );
@@ -287,7 +286,8 @@ class _SecurityKeyShowButton extends ConsumerWidget {
     final model = ref.watch(changeAuthDialogModelProvider(authMode));
     final notifier = ref.read(changeAuthDialogModelProvider(authMode).notifier);
     final showSecurityKey = model.showPassphrase;
-    final isDisabled = model.dialogState is ChangeAuthDialogStateSuccess ||
+    final isDisabled =
+        model.dialogState is ChangeAuthDialogStateSuccess ||
         (model.dialogState is ChangeAuthDialogStateError &&
             (model.dialogState as ChangeAuthDialogStateError).fatal);
 
@@ -357,10 +357,12 @@ class _AddPassphraseFormFieldState
   @override
   Widget build(BuildContext context) {
     final model = ref.watch(changeAuthModeDialogModelProvider(widget.authMode));
-    final notifier =
-        ref.watch(changeAuthModeDialogModelProvider(widget.authMode).notifier);
+    final notifier = ref.watch(
+      changeAuthModeDialogModelProvider(widget.authMode).notifier,
+    );
     final lang = AppLocalizations.of(context);
-    final isDisabled = model.dialogState is ChangeAuthModeDialogStateSuccess ||
+    final isDisabled =
+        model.dialogState is ChangeAuthModeDialogStateSuccess ||
         (model.dialogState is ChangeAuthModeDialogStateError &&
             (model.dialogState as ChangeAuthModeDialogStateError).fatal);
     final l10n = AppLocalizations.of(context);
@@ -384,7 +386,8 @@ class _AddPassphraseFormFieldState
                         widget.authMode,
                       )
                     : null,
-                helperText: model.entropy?.semanticEntropy ==
+                helperText:
+                    model.entropy?.semanticEntropy ==
                             SemanticEntropy.belowOptimal ||
                         model.entropy?.semanticEntropy ==
                             SemanticEntropy.optimal
@@ -394,9 +397,8 @@ class _AddPassphraseFormFieldState
                       )
                     : null,
                 helperStyle: Theme.of(context).textTheme.bodySmall,
-                errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
+                errorStyle: Theme.of(context).textTheme.bodySmall
+                    ?.copyWith(color: Theme.of(context).colorScheme.error),
                 helperMaxLines: 2,
                 errorMaxLines: 2,
                 suffixIcon: AddAuthShowButton(authMode: widget.authMode),
@@ -457,10 +459,12 @@ class _AddConfirmPassphraseFormFieldState
   @override
   Widget build(BuildContext context) {
     final model = ref.watch(changeAuthModeDialogModelProvider(widget.authMode));
-    final notifier =
-        ref.watch(changeAuthModeDialogModelProvider(widget.authMode).notifier);
+    final notifier = ref.watch(
+      changeAuthModeDialogModelProvider(widget.authMode).notifier,
+    );
     final lang = AppLocalizations.of(context);
-    final isDisabled = model.dialogState is ChangeAuthModeDialogStateSuccess ||
+    final isDisabled =
+        model.dialogState is ChangeAuthModeDialogStateSuccess ||
         (model.dialogState is ChangeAuthModeDialogStateError &&
             (model.dialogState as ChangeAuthModeDialogStateError).fatal);
 
@@ -480,9 +484,8 @@ class _AddConfirmPassphraseFormFieldState
                 errorText: !notifier.passphraseConfirmed
                     ? widget.authMode.localizedConfirmError(lang)
                     : null,
-                errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
+                errorStyle: Theme.of(context).textTheme.bodySmall
+                    ?.copyWith(color: Theme.of(context).colorScheme.error),
               ),
               obscureText: !model.showPassphrase,
               enabled: !isDisabled,
@@ -497,10 +500,7 @@ class _AddConfirmPassphraseFormFieldState
             model.dialogState is! ChangeAuthModeDialogStateError)
           Padding(
             padding: const EdgeInsets.only(left: 10.0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: SuccessIcon(),
-            ),
+            child: Align(alignment: Alignment.centerLeft, child: SuccessIcon()),
           ),
       ],
     );
@@ -517,10 +517,12 @@ class AddAuthShowButton extends ConsumerWidget {
     final theme = Theme.of(context);
     final lang = AppLocalizations.of(context);
     final model = ref.watch(changeAuthModeDialogModelProvider(authMode));
-    final notifier =
-        ref.read(changeAuthModeDialogModelProvider(authMode).notifier);
+    final notifier = ref.read(
+      changeAuthModeDialogModelProvider(authMode).notifier,
+    );
     final showSecurityKey = model.showPassphrase;
-    final isDisabled = model.dialogState is ChangeAuthModeDialogStateSuccess ||
+    final isDisabled =
+        model.dialogState is ChangeAuthModeDialogStateSuccess ||
         (model.dialogState is ChangeAuthModeDialogStateError &&
             (model.dialogState as ChangeAuthModeDialogStateError).fatal);
 

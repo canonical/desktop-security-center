@@ -42,47 +42,47 @@ enum Routes {
   });
 
   factory Routes.fromRoute(String route) => Routes.values.firstWhere(
-        (e) => e.route == route,
-        orElse: () => throw ArgumentError('Unknown route: $route'),
-      );
+    (e) => e.route == route,
+    orElse: () => throw ArgumentError('Unknown route: $route'),
+  );
 
   final String route;
   final Widget Function(
     BuildContext context, [
     Map<String, String> queryParameters,
-  ]) builder;
+  ])
+  builder;
   final String Function(
     AppLocalizations l10n, [
     Map<String, String> queryParameters,
-  ]) title;
+  ])
+  title;
   final IconData Function(bool selected)? icon;
 
   // App Permissions
   static Widget _appPermissionsBuilder(
     BuildContext context, [
     Map<String, String> queryParameters = const {},
-  ]) =>
-      switch (queryParameters) {
-        {'snap': final snap, 'interface': final interface} => AppRulesPage(
-            snap: snap,
-            interface: SnapdInterface.fromString(interface),
-          ),
-        {'interface': final interface} => SnapsPage(
-            interface: SnapdInterface.fromString(interface),
-          ),
-        _ => const InterfacesPage(),
-      };
+  ]) => switch (queryParameters) {
+    {'snap': final snap, 'interface': final interface} => AppRulesPage(
+      snap: snap,
+      interface: SnapdInterface.fromString(interface),
+    ),
+    {'interface': final interface} => SnapsPage(
+      interface: SnapdInterface.fromString(interface),
+    ),
+    _ => const InterfacesPage(),
+  };
   static String _appPermissionsTitle(
     AppLocalizations l10n, [
     Map<String, String> queryParameters = const {},
-  ]) =>
-      switch (queryParameters) {
-        {'snap': final snap} => snap,
-        {'interface': final interface} => SnapdInterface.fromString(
-            interface,
-          ).localizedTitle(l10n),
-        _ => l10n.snapPermissionsPageTitle,
-      };
+  ]) => switch (queryParameters) {
+    {'snap': final snap} => snap,
+    {'interface': final interface} => SnapdInterface.fromString(
+      interface,
+    ).localizedTitle(l10n),
+    _ => l10n.snapPermissionsPageTitle,
+  };
   static IconData _appPermissionsIcon(bool selected) =>
       selected ? YaruIcons.app_grid : YaruIcons.app_grid;
 
@@ -90,14 +90,12 @@ enum Routes {
   static Widget _diskEncryptionBuilder(
     BuildContext context, [
     Map<String, String> queryParameters = const {},
-  ]) =>
-      const DiskEncryptionPage();
+  ]) => const DiskEncryptionPage();
 
   static String _diskEncryptionTitle(
     AppLocalizations l10n, [
     Map<String, String> queryParameters = const {},
-  ]) =>
-      l10n.diskEncryptionPageTitle;
+  ]) => l10n.diskEncryptionPageTitle;
 
   static IconData _diskEncryptionIcon(bool selected) =>
       selected ? YaruIcons.lock_filled : YaruIcons.lock;
@@ -106,14 +104,12 @@ enum Routes {
   static Widget _ubuntuProBuilder(
     BuildContext context, [
     Map<String, String> queryParameters = const {},
-  ]) =>
-      const UbuntuProPage();
+  ]) => const UbuntuProPage();
 
   static String _ubuntuProTitle(
     AppLocalizations l10n, [
     Map<String, String> queryParameters = const {},
-  ]) =>
-      l10n.ubuntuProPageTitle;
+  ]) => l10n.ubuntuProPageTitle;
 
   static IconData _ubuntuProIcon(bool selected) =>
       selected ? YaruIcons.ubuntu_logo_simple : YaruIcons.ubuntu_logo_simple;
@@ -139,18 +135,11 @@ enum Routes {
     return Routes.fromRoute(route).title(l10n, queryParameters);
   }
 
-  static YaruMasterTileBuilder get tileBuilder => (
-        context,
-        index,
-        selected,
-        availableWidth,
-      ) =>
-          YaruMasterTile(
-            leading: Icon(availableRoutes[index].icon?.call(selected)),
-            title: Text(
-              availableRoutes[index].title(AppLocalizations.of(context)),
-            ),
-          );
+  static YaruMasterTileBuilder get tileBuilder =>
+      (context, index, selected, availableWidth) => YaruMasterTile(
+        leading: Icon(availableRoutes[index].icon?.call(selected)),
+        title: Text(availableRoutes[index].title(AppLocalizations.of(context))),
+      );
   static IndexedWidgetBuilder get pageBuilder =>
       (context, index) => availableRoutes[index].builder(context);
 

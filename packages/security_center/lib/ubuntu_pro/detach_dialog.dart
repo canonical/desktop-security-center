@@ -14,9 +14,7 @@ class DetachDialog extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
 
     return AlertDialog(
-      title: YaruDialogTitleBar(
-        title: Text(l10n.ubuntuProDisablePro),
-      ),
+      title: YaruDialogTitleBar(title: Text(l10n.ubuntuProDisablePro)),
       titlePadding: EdgeInsets.zero,
       actions: [
         OutlinedButton(
@@ -39,9 +37,7 @@ class DetachDialog extends ConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(l10n.ubuntuProDisablePrompt),
-          ],
+          children: [Text(l10n.ubuntuProDisablePrompt)],
         ),
       ),
     );

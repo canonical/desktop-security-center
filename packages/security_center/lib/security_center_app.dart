@@ -64,26 +64,24 @@ extension SecurityCenterThemeX on ThemeData {
 
     InputDecorationThemeData withInputFallback(
       InputDecorationThemeData theme,
-    ) =>
-        theme.copyWith(
-          labelStyle: withFallback(theme.labelStyle),
-          floatingLabelStyle: withFallback(theme.floatingLabelStyle),
-          helperStyle: withFallback(theme.helperStyle),
-          hintStyle: withFallback(theme.hintStyle),
-          errorStyle: withFallback(theme.errorStyle),
-          prefixStyle: withFallback(theme.prefixStyle),
-          suffixStyle: withFallback(theme.suffixStyle),
-          counterStyle: withFallback(theme.counterStyle),
-        );
+    ) => theme.copyWith(
+      labelStyle: withFallback(theme.labelStyle),
+      floatingLabelStyle: withFallback(theme.floatingLabelStyle),
+      helperStyle: withFallback(theme.helperStyle),
+      hintStyle: withFallback(theme.hintStyle),
+      errorStyle: withFallback(theme.errorStyle),
+      prefixStyle: withFallback(theme.prefixStyle),
+      suffixStyle: withFallback(theme.suffixStyle),
+      counterStyle: withFallback(theme.counterStyle),
+    );
 
     WidgetStateProperty<TextStyle?>? withStateFallback(
       WidgetStateProperty<TextStyle?>? style,
-    ) =>
-        style == null
-            ? null
-            : WidgetStateProperty.resolveWith(
-                (states) => withFallback(style.resolve(states)),
-              );
+    ) => style == null
+        ? null
+        : WidgetStateProperty.resolveWith(
+            (states) => withFallback(style.resolve(states)),
+          );
 
     return copyWith(
       textTheme: textTheme.apply(fontFamilyFallback: cjkFallback),
@@ -151,40 +149,40 @@ List<String> _cjkFallbackFor(Locale locale) {
 
   return switch ((locale.languageCode, locale.scriptCode, locale.countryCode)) {
     ('ja', _, _) => const [
-        japanese,
-        simplifiedChinese,
-        traditionalChinese,
-        hongKongChinese,
-        korean,
-      ],
+      japanese,
+      simplifiedChinese,
+      traditionalChinese,
+      hongKongChinese,
+      korean,
+    ],
     ('ko', _, _) => const [
-        korean,
-        simplifiedChinese,
-        traditionalChinese,
-        hongKongChinese,
-        japanese,
-      ],
+      korean,
+      simplifiedChinese,
+      traditionalChinese,
+      hongKongChinese,
+      japanese,
+    ],
     ('zh', _, 'HK') => const [
-        hongKongChinese,
-        traditionalChinese,
-        simplifiedChinese,
-        japanese,
-        korean,
-      ],
+      hongKongChinese,
+      traditionalChinese,
+      simplifiedChinese,
+      japanese,
+      korean,
+    ],
     ('zh', 'Hant', _) || ('zh', _, 'TW') => const [
-        traditionalChinese,
-        hongKongChinese,
-        simplifiedChinese,
-        japanese,
-        korean,
-      ],
+      traditionalChinese,
+      hongKongChinese,
+      simplifiedChinese,
+      japanese,
+      korean,
+    ],
     _ => const [
-        simplifiedChinese,
-        traditionalChinese,
-        hongKongChinese,
-        japanese,
-        korean,
-      ],
+      simplifiedChinese,
+      traditionalChinese,
+      hongKongChinese,
+      japanese,
+      korean,
+    ],
   };
 }
 
@@ -236,10 +234,7 @@ class _TitleBar extends ConsumerWidget implements PreferredSizeWidget {
             title: Text(AppLocalizations.of(context).appTitle),
           ),
         ),
-        const SizedBox(
-          height: kYaruTitleBarHeight,
-          child: VerticalDivider(),
-        ),
+        const SizedBox(height: kYaruTitleBarHeight, child: VerticalDivider()),
         Expanded(
           child: YaruWindowTitleBar(
             border: BorderSide.none,

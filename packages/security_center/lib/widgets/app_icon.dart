@@ -19,26 +19,27 @@ class AppIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final placeholder = YaruPlaceholderIcon(size: Size.square(size));
     return switch (snapIcon) {
-      AsyncValue(:final value, hasValue: true) => value != null
-          ? SizedBox.square(
-              dimension: size,
-              child: switch (value.contentType) {
-                'image/svg+xml' => ScalableImageWidget(
+      AsyncValue(:final value, hasValue: true) =>
+        value != null
+            ? SizedBox.square(
+                dimension: size,
+                child: switch (value.contentType) {
+                  'image/svg+xml' => ScalableImageWidget(
                     si: ScalableImage.fromSvgString(
                       utf8.decode(value.bytes),
                       warnF: _log.debug,
                     ),
                   ),
-                _ => Image.memory(
+                  _ => Image.memory(
                     value.bytes,
                     errorBuilder: (_, e, __) {
                       _log.error('Error decoding snap icon: $e');
                       return SizedBox.shrink();
                     },
-                  )
-              },
-            )
-          : placeholder,
+                  ),
+                },
+              )
+            : placeholder,
       AsyncValue(hasError: true) => placeholder,
       _ => SizedBox.square(dimension: size),
     };

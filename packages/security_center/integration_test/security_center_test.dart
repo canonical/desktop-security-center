@@ -63,26 +63,24 @@ void expectHomeRule(WidgetTester tester, SnapdRuleMask rule) {
   for (final ruleFragment in ruleFragments) {
     // This verifies that the specified rule is displayed in the UI by checking
     // that the widgets in the following list share a unique common ancestor.
-    final tile = [
-      find.text(ruleFragment.pathPattern),
-      find.text(
-        ruleFragment.permissions
-            .map((permission) => permission.localize(tester.l10n))
-            .join(', '),
-      ),
-    ]
-        // List of sets of ancestors for each text widget.
-        .map(
-          (finder) => find
-              .ancestor(
-                of: finder,
-                matching: find.byType(YaruListTile),
-              )
-              .evaluate()
-              .toSet(),
-        )
-        // Intersection of all sets.
-        .reduce((value, element) => value.intersection(element));
+    final tile =
+        [
+              find.text(ruleFragment.pathPattern),
+              find.text(
+                ruleFragment.permissions
+                    .map((permission) => permission.localize(tester.l10n))
+                    .join(', '),
+              ),
+            ]
+            // List of sets of ancestors for each text widget.
+            .map(
+              (finder) => find
+                  .ancestor(of: finder, matching: find.byType(YaruListTile))
+                  .evaluate()
+                  .toSet(),
+            )
+            // Intersection of all sets.
+            .reduce((value, element) => value.intersection(element));
 
     expect(tile.length, equals(1));
   }

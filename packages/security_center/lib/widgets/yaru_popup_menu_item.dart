@@ -86,8 +86,9 @@ class _YaruPopupMenuItemState<T>
     _mountedItems--; // Decrement the count of mounted items before checking if it's zero
     if (_mountedItems == 0) {
       FocusManager.instance.removeEarlyKeyEventHandler(_handleKeyEvent);
-      GestureBinding.instance.pointerRouter
-          .removeGlobalRoute(_handlePointerEvent);
+      GestureBinding.instance.pointerRouter.removeGlobalRoute(
+        _handlePointerEvent,
+      );
     }
     super.dispose();
   }

@@ -82,9 +82,7 @@ void main() {
           builder: (context, ref, _) {
             return MaterialApp(
               home: const Scaffold(),
-              routes: {
-                '/foo': (_) => const SizedBox(),
-              },
+              routes: {'/foo': (_) => const SizedBox()},
               navigatorObservers: [AppNavigatorObserver(ref)],
             );
           },
@@ -100,11 +98,7 @@ void main() {
 
     expect(
       container.read(routeSettingsProvider),
-      isA<RouteSettings>().having(
-        (settings) => settings.name,
-        'name',
-        '/foo',
-      ),
+      isA<RouteSettings>().having((settings) => settings.name, 'name', '/foo'),
     );
 
     unawaited(
@@ -117,11 +111,7 @@ void main() {
 
     expect(
       container.read(routeSettingsProvider),
-      isA<RouteSettings>().having(
-        (settings) => settings.name,
-        'name',
-        '/foo',
-      ),
+      isA<RouteSettings>().having((settings) => settings.name, 'name', '/foo'),
     );
 
     Navigator.of(tester.context).pop();
@@ -129,16 +119,13 @@ void main() {
 
     expect(
       container.read(routeSettingsProvider),
-      isA<RouteSettings>().having(
-        (settings) => settings.name,
-        'name',
-        '/foo',
-      ),
+      isA<RouteSettings>().having((settings) => settings.name, 'name', '/foo'),
     );
   });
 
-  testWidgets('navigator observer restores unnamed page routes',
-      (tester) async {
+  testWidgets('navigator observer restores unnamed page routes', (
+    tester,
+  ) async {
     final container = createContainer();
     await tester.pumpWidget(
       UncontrolledProviderScope(
@@ -147,9 +134,7 @@ void main() {
           builder: (context, ref, _) {
             return MaterialApp(
               home: const Scaffold(),
-              routes: {
-                '/foo': (_) => const SizedBox(),
-              },
+              routes: {'/foo': (_) => const SizedBox()},
               navigatorObservers: [AppNavigatorObserver(ref)],
             );
           },
@@ -159,19 +144,14 @@ void main() {
     await tester.pump();
 
     unawaited(
-      Navigator.of(tester.context).push(
-        MaterialPageRoute<void>(builder: (_) => const SizedBox()),
-      ),
+      Navigator.of(tester.context)
+          .push(MaterialPageRoute<void>(builder: (_) => const SizedBox())),
     );
     await tester.pump();
 
     expect(
       container.read(routeSettingsProvider),
-      isA<RouteSettings>().having(
-        (settings) => settings.name,
-        'name',
-        isNull,
-      ),
+      isA<RouteSettings>().having((settings) => settings.name, 'name', isNull),
     );
 
     unawaited(Navigator.of(tester.context).pushNamed('/foo'));
@@ -179,11 +159,7 @@ void main() {
 
     expect(
       container.read(routeSettingsProvider),
-      isA<RouteSettings>().having(
-        (settings) => settings.name,
-        'name',
-        '/foo',
-      ),
+      isA<RouteSettings>().having((settings) => settings.name, 'name', '/foo'),
     );
 
     Navigator.of(tester.context).pop();
@@ -191,11 +167,7 @@ void main() {
 
     expect(
       container.read(routeSettingsProvider),
-      isA<RouteSettings>().having(
-        (settings) => settings.name,
-        'name',
-        isNull,
-      ),
+      isA<RouteSettings>().having((settings) => settings.name, 'name', isNull),
     );
   });
 }

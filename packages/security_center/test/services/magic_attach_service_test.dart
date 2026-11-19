@@ -7,25 +7,28 @@ import '../utils/ubuntu_pro_utils.dart';
 
 void main() {
   group('magic attach', () {
-    final testCases = <({
-      String name,
-      bool expireToken,
-      String wantToken,
-      String wantContractToken,
-    })>[
-      (
-        name: 'success',
-        expireToken: false,
-        wantToken: 'foo',
-        wantContractToken: 'contractToken',
-      ),
-      (
-        name: 'expired token',
-        expireToken: true,
-        wantToken: 'foo',
-        wantContractToken: '',
-      ),
-    ];
+    final testCases =
+        <
+          ({
+            String name,
+            bool expireToken,
+            String wantToken,
+            String wantContractToken,
+          })
+        >[
+          (
+            name: 'success',
+            expireToken: false,
+            wantToken: 'foo',
+            wantContractToken: 'contractToken',
+          ),
+          (
+            name: 'expired token',
+            expireToken: true,
+            wantToken: 'foo',
+            wantContractToken: '',
+          ),
+        ];
 
     for (final testCase in testCases) {
       test(testCase.name, () async {
@@ -40,9 +43,7 @@ void main() {
           uaclientConf: mockUaclientConf(server.port),
         );
 
-        final service = MagicAttachService(
-          fs: fs,
-        );
+        final service = MagicAttachService(fs: fs);
 
         final token = await service.newToken();
         expect(token.token, equals(testCase.wantToken));

@@ -23,9 +23,7 @@ class FIPSDialog extends ConsumerWidget {
     }
 
     return AlertDialog(
-      title: YaruDialogTitleBar(
-        title: Text(l10n.ubuntuProComplianceFIPSTitle),
-      ),
+      title: YaruDialogTitleBar(title: Text(l10n.ubuntuProComplianceFIPSTitle)),
       titlePadding: EdgeInsets.zero,
       contentPadding: EdgeInsets.zero,
       actions: [
@@ -36,9 +34,7 @@ class FIPSDialog extends ConsumerWidget {
           child: provider.state is UbuntuProFeatureStateLoading
               ? SizedBox.square(
                   dimension: theme.textTheme.bodyMedium?.fontSize,
-                  child: YaruCircularProgressIndicator(
-                    strokeWidth: 2,
-                  ),
+                  child: YaruCircularProgressIndicator(strokeWidth: 2),
                 )
               : Text(l10n.ubuntuProEnable),
         ),
@@ -57,8 +53,9 @@ class FIPSDialog extends ConsumerWidget {
               children: [
                 Text(
                   l10n.ubuntuProComplianceFIPSPrompt,
-                  style: theme.textTheme.bodyMedium
-                      ?.copyWith(fontWeight: FontWeight.w500),
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
                 const _FIPSOptions(),
               ].separatedBy(const SizedBox(height: kPageSubsectionGap)),
@@ -105,15 +102,13 @@ class _FIPSOptionsState extends ConsumerState<_FIPSOptions> {
           groupValue: fipsProvider.type,
           onChanged: fipsUpdatesToggle
               ? (value) => ref
-                  .read(fIPSModelProvider.notifier)
-                  .setType(FIPSType.fipsUpdates)
+                    .read(fIPSModelProvider.notifier)
+                    .setType(FIPSType.fipsUpdates)
               : null,
         ),
         YaruRadioListTile(
           title: Text(l10n.ubuntuProComplianceFIPSNoUpdates),
-          subtitle: Text(
-            l10n.ubuntuProComplianceFIPSNoUpdatesDescription,
-          ),
+          subtitle: Text(l10n.ubuntuProComplianceFIPSNoUpdatesDescription),
           contentPadding: const EdgeInsets.symmetric(
             vertical: 8,
             horizontal: 16,
@@ -122,7 +117,7 @@ class _FIPSOptionsState extends ConsumerState<_FIPSOptions> {
           groupValue: fipsProvider.type,
           onChanged: fipsCanToggle
               ? (value) =>
-                  ref.read(fIPSModelProvider.notifier).setType(FIPSType.fips)
+                    ref.read(fIPSModelProvider.notifier).setType(FIPSType.fips)
               : null,
         ),
       ],

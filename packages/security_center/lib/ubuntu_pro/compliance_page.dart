@@ -17,8 +17,9 @@ class ComplianceHardeningPage extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
 
-    final usgProvider =
-        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.usg));
+    final usgProvider = ref.watch(
+      ubuntuProFeatureModelProvider(UbuntuProFeatureType.usg),
+    );
     final fipsProvider = ref.watch(fIPSModelProvider);
 
     return ScrollablePage(
@@ -37,12 +38,12 @@ class ComplianceHardeningPage extends ConsumerWidget {
               value: usgProvider.enabled,
               onChanged: usgProvider.canToggle
                   ? (value) => ref
-                      .read(
-                        ubuntuProFeatureModelProvider(
-                          UbuntuProFeatureType.usg,
-                        ).notifier,
-                      )
-                      .toggleFeature(value)
+                        .read(
+                          ubuntuProFeatureModelProvider(
+                            UbuntuProFeatureType.usg,
+                          ).notifier,
+                        )
+                        .toggleFeature(value)
                   : null,
               title: _LoadingText(
                 text: l10n.ubuntuProComplianceUSGTitle,
@@ -72,9 +73,9 @@ class ComplianceHardeningPage extends ConsumerWidget {
               value: fipsProvider.enabled,
               onChanged: fipsProvider.canEnable
                   ? (_) => showDialog(
-                        context: context,
-                        builder: (_) => const FIPSDialog(),
-                      )
+                      context: context,
+                      builder: (_) => const FIPSDialog(),
+                    )
                   : null,
               title: Text(l10n.ubuntuProComplianceFIPSTitle),
               subtitle: Column(

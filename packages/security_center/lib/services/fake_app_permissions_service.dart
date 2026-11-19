@@ -7,12 +7,12 @@ import 'package:security_center/services/app_permissions_service.dart';
 
 extension on SnapdRuleMask {
   SnapdRule toSnapdRule() => SnapdRule(
-        id: hashCode.toString(),
-        timestamp: DateTime.now(),
-        snap: snap,
-        interface: interface,
-        constraints: constraints,
-      );
+    id: hashCode.toString(),
+    timestamp: DateTime.now(),
+    snap: snap,
+    interface: interface,
+    constraints: constraints,
+  );
 }
 
 class FakeAppPermissionsService implements AppPermissionsService {
@@ -32,15 +32,17 @@ class FakeAppPermissionsService implements AppPermissionsService {
   @override
   Future<void> addRule(SnapdRuleMask rule) async {
     rules.add(rule.toSnapdRule());
-    _statusController
-        .add(AppPermissionsServiceStatus.enabled(List.from(rules)));
+    _statusController.add(
+      AppPermissionsServiceStatus.enabled(List.from(rules)),
+    );
   }
 
   @override
   Future<void> removeRule(String id) async {
     rules.removeWhere((rule) => rule.id == id);
-    _statusController
-        .add(AppPermissionsServiceStatus.enabled(List.from(rules)));
+    _statusController.add(
+      AppPermissionsServiceStatus.enabled(List.from(rules)),
+    );
   }
 
   @override
@@ -50,23 +52,22 @@ class FakeAppPermissionsService implements AppPermissionsService {
 
     // Setting a permission to 'null' causes snapd to remove it from the permission map
     if (rule.interface == SnapdInterface.home.toString()) {
-      (rule.constraints['permissions'] as Map<String, dynamic>)
-          .removeWhere((k, v) => v == null);
+      (rule.constraints['permissions'] as Map<String, dynamic>).removeWhere(
+        (k, v) => v == null,
+      );
     }
   }
 
   @override
-  Future<void> removeAllRules({
-    required String snap,
-    String? interface,
-  }) async {
+  Future<void> removeAllRules({required String snap, String? interface}) async {
     rules.removeWhere(
       (rule) =>
           (rule.snap == snap) &&
           (interface == null || rule.interface == interface),
     );
-    _statusController
-        .add(AppPermissionsServiceStatus.enabled(List.from(rules)));
+    _statusController.add(
+      AppPermissionsServiceStatus.enabled(List.from(rules)),
+    );
   }
 
   @override

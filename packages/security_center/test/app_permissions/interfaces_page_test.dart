@@ -62,22 +62,19 @@ void main() {
   });
 
   group('microphone interface visibility', () {
-    for (final testCase in <({
-      String name,
-      bool supportsMicrophone,
-      Matcher expected,
-    })>[
-      (
-        name: 'hidden when snapd version < 2.75',
-        supportsMicrophone: false,
-        expected: findsNothing,
-      ),
-      (
-        name: 'shown when snapd version >= 2.75',
-        supportsMicrophone: true,
-        expected: findsOneWidget,
-      ),
-    ]) {
+    for (final testCase
+        in <({String name, bool supportsMicrophone, Matcher expected})>[
+          (
+            name: 'hidden when snapd version < 2.75',
+            supportsMicrophone: false,
+            expected: findsNothing,
+          ),
+          (
+            name: 'shown when snapd version >= 2.75',
+            supportsMicrophone: true,
+            expected: findsOneWidget,
+          ),
+        ]) {
       testWidgets(testCase.name, (tester) async {
         final container = createContainer();
         registerMockAppPermissionsService(
@@ -123,26 +120,30 @@ void main() {
 
   group('toggle prompting', () {
     group('toggling', () {
-      for (final testCase in <({
-        String name,
-        bool enabled,
-        void Function(AppPermissionsService) expectedCallback,
-      })>[
-        (
-          name: 'enable',
-          enabled: false,
-          expectedCallback: (service) => service.enable(),
-        ),
-        (
-          name: 'disable',
-          enabled: true,
-          expectedCallback: (service) => service.disable(),
-        ),
-      ]) {
+      for (final testCase
+          in <
+            ({
+              String name,
+              bool enabled,
+              void Function(AppPermissionsService) expectedCallback,
+            })
+          >[
+            (
+              name: 'enable',
+              enabled: false,
+              expectedCallback: (service) => service.enable(),
+            ),
+            (
+              name: 'disable',
+              enabled: true,
+              expectedCallback: (service) => service.disable(),
+            ),
+          ]) {
         testWidgets(testCase.name, (tester) async {
           final container = createContainer();
-          final service =
-              registerMockAppPermissionsService(enabled: testCase.enabled);
+          final service = registerMockAppPermissionsService(
+            enabled: testCase.enabled,
+          );
           await tester.pumpApp(
             (_) => UncontrolledProviderScope(
               container: container,
@@ -166,31 +167,34 @@ void main() {
       }
     });
     group('loading state', () {
-      for (final testCase in <({
-        String name,
-        AppPermissionsServiceStatus status,
-        String Function(AppLocalizations)? expectedLabel,
-        bool expectProgressIndicator,
-      })>[
-        (
-          name: 'enabling',
-          status: AppPermissionsServiceStatusEnabling(0.0),
-          expectedLabel: (l10n) => l10n.snapPermissionsEnablingLabel,
-          expectProgressIndicator: true,
-        ),
-        (
-          name: 'disabling',
-          status: AppPermissionsServiceStatusDisabling(0.0),
-          expectedLabel: (l10n) => l10n.snapPermissionsDisablingLabel,
-          expectProgressIndicator: true,
-        ),
-        (
-          name: 'waiting for auth',
-          status: AppPermissionsServiceStatusWaitingForAuth(),
-          expectedLabel: null,
-          expectProgressIndicator: false,
-        ),
-      ]) {
+      for (final testCase
+          in <
+            ({
+              String name,
+              AppPermissionsServiceStatus status,
+              String Function(AppLocalizations)? expectedLabel,
+              bool expectProgressIndicator,
+            })
+          >[
+            (
+              name: 'enabling',
+              status: AppPermissionsServiceStatusEnabling(0.0),
+              expectedLabel: (l10n) => l10n.snapPermissionsEnablingLabel,
+              expectProgressIndicator: true,
+            ),
+            (
+              name: 'disabling',
+              status: AppPermissionsServiceStatusDisabling(0.0),
+              expectedLabel: (l10n) => l10n.snapPermissionsDisablingLabel,
+              expectProgressIndicator: true,
+            ),
+            (
+              name: 'waiting for auth',
+              status: AppPermissionsServiceStatusWaitingForAuth(),
+              expectedLabel: null,
+              expectProgressIndicator: false,
+            ),
+          ]) {
         testWidgets(testCase.name, (tester) async {
           final container = createContainer();
           registerMockAppPermissionsService();
@@ -226,18 +230,13 @@ void main() {
           child: const InterfacesPage(),
         ),
       );
-      container.read(promptingStatusModelProvider.notifier).state =
-          AsyncData(AppPermissionsServiceStatusError('snapd error'));
+      container.read(promptingStatusModelProvider.notifier).state = AsyncData(
+        AppPermissionsServiceStatusError('snapd error'),
+      );
       await tester.pump();
 
-      expect(
-        find.text('snapd error'),
-        findsOneWidget,
-      );
-      expect(
-        find.text(tester.l10n.snapPermissionsErrorTitle),
-        findsOneWidget,
-      );
+      expect(find.text('snapd error'), findsOneWidget);
+      expect(find.text(tester.l10n.snapPermissionsErrorTitle), findsOneWidget);
     });
   });
 }

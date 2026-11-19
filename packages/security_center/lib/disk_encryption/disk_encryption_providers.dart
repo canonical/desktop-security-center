@@ -5,6 +5,7 @@ import 'package:file/file.dart';
 import 'package:file/local.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/widgets/file_picker_dialog.dart';
@@ -18,11 +19,7 @@ part 'disk_encryption_providers.g.dart';
 
 final _log = Logger('disk_encryption_providers');
 
-enum SemanticEntropy {
-  belowMin,
-  belowOptimal,
-  optimal;
-}
+enum SemanticEntropy { belowMin, belowOptimal, optimal }
 
 extension EntropyResponseSemantic on EntropyResponse {
   SemanticEntropy get semanticEntropy {
@@ -53,10 +50,10 @@ sealed class RecoveryKeyException
       RecoveryKeyExceptionUnknown;
 
   factory RecoveryKeyException.from(Object? e) => switch (e) {
-        final FileSystemException _ => RecoveryKeyException.fileSystem(),
-        final RecoveryKeyException e => e,
-        final e => RecoveryKeyException.unknown(rawError: e.toString()),
-      };
+    final FileSystemException _ => RecoveryKeyException.fileSystem(),
+    final RecoveryKeyException e => e,
+    final e => RecoveryKeyException.unknown(rawError: e.toString()),
+  };
 }
 
 @freezed
@@ -81,10 +78,10 @@ enum SnapdAuthErrorKind {
   final String snapdKind;
 
   static SnapdAuthErrorKind? fromKind(String? kind) => switch (kind) {
-        'auth-cancelled' => SnapdAuthErrorKind.authCancelled,
-        'login-required' => SnapdAuthErrorKind.authLoginRequired,
-        _ => null,
-      };
+    'auth-cancelled' => SnapdAuthErrorKind.authCancelled,
+    'login-required' => SnapdAuthErrorKind.authLoginRequired,
+    _ => null,
+  };
 }
 
 enum TpmFdeOperation {
@@ -96,22 +93,22 @@ enum TpmFdeOperation {
   removePassphrase;
 
   factory TpmFdeOperation.adding(AuthMode mode) => switch (mode) {
-        AuthMode.pin => TpmFdeOperation.addPin,
-        AuthMode.passphrase => TpmFdeOperation.addPassphrase,
-        AuthMode.none => throw ArgumentError.value(mode),
-      };
+    AuthMode.pin => TpmFdeOperation.addPin,
+    AuthMode.passphrase => TpmFdeOperation.addPassphrase,
+    AuthMode.none => throw ArgumentError.value(mode),
+  };
 
   factory TpmFdeOperation.changing(AuthMode mode) => switch (mode) {
-        AuthMode.pin => TpmFdeOperation.changePin,
-        AuthMode.passphrase => TpmFdeOperation.changePassphrase,
-        AuthMode.none => throw ArgumentError.value(mode),
-      };
+    AuthMode.pin => TpmFdeOperation.changePin,
+    AuthMode.passphrase => TpmFdeOperation.changePassphrase,
+    AuthMode.none => throw ArgumentError.value(mode),
+  };
 
   factory TpmFdeOperation.removing(AuthMode mode) => switch (mode) {
-        AuthMode.pin => TpmFdeOperation.removePin,
-        AuthMode.passphrase => TpmFdeOperation.removePassphrase,
-        AuthMode.none => throw ArgumentError.value(mode),
-      };
+    AuthMode.pin => TpmFdeOperation.removePin,
+    AuthMode.passphrase => TpmFdeOperation.removePassphrase,
+    AuthMode.none => throw ArgumentError.value(mode),
+  };
 }
 
 @freezed
@@ -191,7 +188,7 @@ sealed class ChangeAuthModeDialogState with _$ChangeAuthModeDialogState {
 
 /// State for TPM authentication mode, including pending operations to change current platform key.
 @freezed
-class TpmAuthState with _$TpmAuthState {
+abstract class TpmAuthState with _$TpmAuthState {
   const factory TpmAuthState({
     required AuthMode currentAuthMode,
     TpmFdeOperation? pendingOperation,
@@ -238,7 +235,7 @@ sealed class CheckRecoveryKeyDialogState with _$CheckRecoveryKeyDialogState {
 
 /// Dialog model for managing the flow to update an existing pin or passphrase.
 @freezed
-class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
+abstract class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
   factory ChangeAuthDialogModelData({
     required ChangeAuthDialogState dialogState,
     required AuthMode authMode,
@@ -252,7 +249,8 @@ class ChangeAuthDialogModelData with _$ChangeAuthDialogModelData {
 
 /// Dialog model for managing the flow to swap between pin and passphrase.
 @freezed
-class ChangeAuthModeDialogModelData with _$ChangeAuthModeDialogModelData {
+abstract class ChangeAuthModeDialogModelData
+    with _$ChangeAuthModeDialogModelData {
   factory ChangeAuthModeDialogModelData({
     required ChangeAuthModeDialogState dialogState,
     required AuthMode newAuthMode,
@@ -303,15 +301,12 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
       );
       switch (exception) {
         case TpmFdeOperationSnapdAuthException(
-            kind: SnapdAuthErrorKind.authCancelled,
-          ):
+          kind: SnapdAuthErrorKind.authCancelled,
+        ):
           state = state.copyWith(dialogState: ChangeAuthDialogState.input());
         case _:
           state = state.copyWith(
-            dialogState: ChangeAuthDialogState.error(
-              exception,
-              false,
-            ),
+            dialogState: ChangeAuthDialogState.error(exception, false),
           );
       }
     }
@@ -322,56 +317,50 @@ class ChangeAuthDialogModel extends _$ChangeAuthDialogModel {
     state = state.copyWith(showPassphrase: !state.showPassphrase);
   }
 
-  Future<void> setConfirmPass(
-    String value, {
-    bool debounce = false,
-  }) async {
+  Future<void> setConfirmPass(String value, {bool debounce = false}) async {
     if (state.dialogState is! ChangeAuthDialogStateInput) return;
     _confirmTimer?.cancel();
-    _confirmTimer =
-        Timer(debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
-            () async {
-      state = state.copyWith(
-        confirmPass: value,
-        dialogState: ChangeAuthDialogStateInput(),
-      );
-    });
+    _confirmTimer = Timer(
+      debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
+      () async {
+        state = state.copyWith(
+          confirmPass: value,
+          dialogState: ChangeAuthDialogStateInput(),
+        );
+      },
+    );
   }
 
-  Future<void> setNewPass(
-    String value, {
-    bool debounce = false,
-  }) async {
+  Future<void> setNewPass(String value, {bool debounce = false}) async {
     if (state.dialogState is! ChangeAuthDialogStateInput) return;
     _newPassTimer?.cancel();
-    _newPassTimer =
-        Timer(debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
-            () async {
-      state = state.copyWith(
-        newPass: value,
-        dialogState: ChangeAuthDialogStateInput(),
-      );
-      if (value.isEmpty) {
-        _log.debug('new passphrase is empty');
-        state = state.copyWith(entropy: null);
-        return;
-      }
-      try {
-        final response = await _service.pinPassphraseEntropyCheck(
-          state.authMode,
-          value,
-        );
+    _newPassTimer = Timer(
+      debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
+      () async {
         state = state.copyWith(
-          entropy: response,
+          newPass: value,
+          dialogState: ChangeAuthDialogStateInput(),
         );
-      } on Exception catch (e) {
-        state = state.copyWith(
-          entropy: null,
-          dialogState: ChangeAuthDialogStateError(e, true),
-        );
-        _log.error(e);
-      }
-    });
+        if (value.isEmpty) {
+          _log.debug('new passphrase is empty');
+          state = state.copyWith(entropy: null);
+          return;
+        }
+        try {
+          final response = await _service.pinPassphraseEntropyCheck(
+            state.authMode,
+            value,
+          );
+          state = state.copyWith(entropy: response);
+        } on Exception catch (e) {
+          state = state.copyWith(
+            entropy: null,
+            dialogState: ChangeAuthDialogStateError(e, true),
+          );
+          _log.error(e);
+        }
+      },
+    );
   }
 
   set oldPass(String value) {
@@ -430,9 +419,9 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
       final stopwatch = Stopwatch()..start();
       var delay = initialRetryDelay;
       var storageStatus = await _getStorageEncrypted();
-      while (
-          storageStatus.status == SnapdStorageEncryptionStatus.indeterminate &&
-              stopwatch.elapsed < maxRetryDuration) {
+      while (storageStatus.status ==
+              SnapdStorageEncryptionStatus.indeterminate &&
+          stopwatch.elapsed < maxRetryDuration) {
         _log.info(
           'Storage encryption state is indeterminate, '
           'retrying in ${delay.inSeconds}s '
@@ -533,10 +522,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
         : TpmFdeOperation.adding(newMode);
 
     state = AsyncData(
-      state.value!.copyWith(
-        pendingOperation: operation,
-        operationError: null,
-      ),
+      state.value!.copyWith(pendingOperation: operation, operationError: null),
     );
 
     try {
@@ -570,10 +556,10 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
   Future<void> removeAuthMode({void Function()? onAuthorized}) async {
     await changeAuthMode(AuthMode.none, onAuthorized: onAuthorized);
 
-    switch (state.valueOrNull?.operationError) {
+    switch (state.value?.operationError) {
       case TpmFdeOperationSnapdAuthException(
-          kind: SnapdAuthErrorKind.authCancelled
-        ):
+        kind: SnapdAuthErrorKind.authCancelled,
+      ):
         dismissOperationError();
       case _:
         break;
@@ -582,9 +568,7 @@ class TpmAuthenticationModel extends _$TpmAuthenticationModel {
 
   void dismissOperationError() {
     if (state.hasValue) {
-      state = AsyncData(
-        state.value!.copyWith(operationError: null),
-      );
+      state = AsyncData(state.value!.copyWith(operationError: null));
     }
   }
 }
@@ -606,7 +590,7 @@ typedef ProcessRunner = Future<ProcessResult> Function(
 final processRunnerProvider = Provider<ProcessRunner>((_) => Process.run);
 
 @freezed
-class ReplaceRecoveryKeyDialogModelData
+abstract class ReplaceRecoveryKeyDialogModelData
     with _$ReplaceRecoveryKeyDialogModelData {
   factory ReplaceRecoveryKeyDialogModelData({
     required ReplaceRecoveryKeyDialogState dialogState,
@@ -773,18 +757,18 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
     );
   }
 
-  Future<void> replaceAuthMode({
-    void Function()? onAuthorized,
-  }) async {
+  Future<void> replaceAuthMode({void Function()? onAuthorized}) async {
     assert(state.dialogState is ChangeAuthModeDialogStateInput);
     try {
       state = state.copyWith(dialogState: ChangeAuthModeDialogState.loading());
-      await ref.read(tpmAuthenticationModelProvider.notifier).changeAuthMode(
+      await ref
+          .read(tpmAuthenticationModelProvider.notifier)
+          .changeAuthMode(
             state.newAuthMode,
             passphrase: state.newPass,
             onAuthorized: onAuthorized,
           );
-      final tpmState = ref.read(tpmAuthenticationModelProvider).valueOrNull;
+      final tpmState = ref.read(tpmAuthenticationModelProvider).value;
       switch (tpmState?.operationError) {
         case null:
           state = state.copyWith(
@@ -794,10 +778,11 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
           break;
 
         case TpmFdeOperationSnapdAuthException(
-            kind: SnapdAuthErrorKind.authCancelled
-          ):
-          state =
-              state.copyWith(dialogState: ChangeAuthModeDialogState.input());
+          kind: SnapdAuthErrorKind.authCancelled,
+        ):
+          state = state.copyWith(
+            dialogState: ChangeAuthModeDialogState.input(),
+          );
           ref
               .read(tpmAuthenticationModelProvider.notifier)
               .dismissOperationError();
@@ -805,10 +790,7 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
 
         case final exception:
           state = state.copyWith(
-            dialogState: ChangeAuthModeDialogState.error(
-              exception,
-              false,
-            ),
+            dialogState: ChangeAuthModeDialogState.error(exception, false),
           );
           break;
       }
@@ -824,56 +806,50 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
     state = state.copyWith(showPassphrase: !state.showPassphrase);
   }
 
-  Future<void> setConfirmPass(
-    String value, {
-    bool debounce = false,
-  }) async {
+  Future<void> setConfirmPass(String value, {bool debounce = false}) async {
     if (state.dialogState is! ChangeAuthModeDialogStateInput) return;
     _confirmTimer?.cancel();
-    _confirmTimer =
-        Timer(debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
-            () async {
-      state = state.copyWith(
-        confirmPass: value,
-        dialogState: ChangeAuthModeDialogStateInput(),
-      );
-    });
+    _confirmTimer = Timer(
+      debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
+      () async {
+        state = state.copyWith(
+          confirmPass: value,
+          dialogState: ChangeAuthModeDialogStateInput(),
+        );
+      },
+    );
   }
 
-  Future<void> setNewPass(
-    String value, {
-    bool debounce = false,
-  }) async {
+  Future<void> setNewPass(String value, {bool debounce = false}) async {
     if (state.dialogState is! ChangeAuthModeDialogStateInput) return;
     _newPassTimer?.cancel();
-    _newPassTimer =
-        Timer(debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
-            () async {
-      state = state.copyWith(
-        newPass: value,
-        dialogState: ChangeAuthModeDialogStateInput(),
-      );
-      if (value.isEmpty) {
-        _log.debug('new passphrase is empty');
-        state = state.copyWith(entropy: null);
-        return;
-      }
-      try {
-        final response = await _service.pinPassphraseEntropyCheck(
-          state.newAuthMode,
-          value,
-        );
+    _newPassTimer = Timer(
+      debounce && value.isNotEmpty ? debounceDuration : Duration.zero,
+      () async {
         state = state.copyWith(
-          entropy: response,
+          newPass: value,
+          dialogState: ChangeAuthModeDialogStateInput(),
         );
-      } on Exception catch (e) {
-        state = state.copyWith(
-          entropy: null,
-          dialogState: ChangeAuthModeDialogStateError(e, true),
-        );
-        _log.error(e);
-      }
-    });
+        if (value.isEmpty) {
+          _log.debug('new passphrase is empty');
+          state = state.copyWith(entropy: null);
+          return;
+        }
+        try {
+          final response = await _service.pinPassphraseEntropyCheck(
+            state.newAuthMode,
+            value,
+          );
+          state = state.copyWith(entropy: response);
+        } on Exception catch (e) {
+          state = state.copyWith(
+            entropy: null,
+            dialogState: ChangeAuthModeDialogStateError(e, true),
+          );
+          _log.error(e);
+        }
+      },
+    );
   }
 
   bool get isValid {

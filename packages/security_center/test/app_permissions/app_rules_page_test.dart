@@ -45,10 +45,7 @@ void main() {
             'path-pattern': '/home/ubuntu/**',
             // multiple permissions get removed individually
             'permissions': {
-              'read': {
-                'outcome': 'allow',
-                'lifespan': 'forever',
-              },
+              'read': {'outcome': 'allow', 'lifespan': 'forever'},
             },
           },
         ),
@@ -68,14 +65,8 @@ void main() {
           constraints: {
             'path-pattern': '/home/ubuntu/**',
             'permissions': {
-              'read': {
-                'outcome': 'allow',
-                'lifespan': 'forever',
-              },
-              'write': {
-                'outcome': 'allow',
-                'lifespan': 'forever',
-              },
+              'read': {'outcome': 'allow', 'lifespan': 'forever'},
+              'write': {'outcome': 'allow', 'lifespan': 'forever'},
             },
           },
         ),
@@ -105,12 +96,9 @@ void main() {
       ),
     );
     verify(
-      mockRulesService.patchRule(
-        'ruleId',
-        {
-          'permissions': {'read': null},
-        },
-      ),
+      mockRulesService.patchRule('ruleId', {
+        'permissions': {'read': null},
+      }),
     ).called(1);
 
     final removeAll = find.text(tester.l10n.snapRulesRemoveAll);

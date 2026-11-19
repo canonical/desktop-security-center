@@ -16,10 +16,6 @@ class EmptyRulesTile extends StatelessWidget {
       _ => l10n.snapRulesPageEmptyTileLabel,
     };
 
-    return YaruListTile(
-      titleText: text,
-      centerTitle: true,
-      enabled: false,
-    );
+    return YaruListTile(titleText: text, centerTitle: true, enabled: false);
   }
 }

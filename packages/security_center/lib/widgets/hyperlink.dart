@@ -3,11 +3,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 import 'package:yaru/constants.dart';
 
 class Hyperlink extends StatelessWidget {
-  const Hyperlink({
-    required this.text,
-    required this.url,
-    super.key,
-  });
+  const Hyperlink({required this.text, required this.url, super.key});
 
   final String text;
   final String url;
@@ -31,10 +27,7 @@ class Hyperlink extends StatelessWidget {
 }
 
 class _HyperlinkFocusBorder extends StatefulWidget {
-  const _HyperlinkFocusBorder({
-    required this.url,
-    required this.child,
-  });
+  const _HyperlinkFocusBorder({required this.url, required this.child});
 
   final String url;
   final Widget child;
@@ -61,8 +54,9 @@ class _HyperlinkFocusBorderState extends State<_HyperlinkFocusBorder> {
                 width: borderWidth,
               )
             : null,
-        borderRadius:
-            const BorderRadius.all(Radius.circular(kYaruButtonRadius + 2)),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(kYaruButtonRadius + 2),
+        ),
       ),
       child: InkWell(
         onTap: () => launchUrlString(widget.url),
@@ -71,8 +65,9 @@ class _HyperlinkFocusBorderState extends State<_HyperlinkFocusBorder> {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         focusColor: Colors.transparent,
-        borderRadius:
-            const BorderRadius.all(Radius.circular(kYaruButtonRadius + 2)),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(kYaruButtonRadius + 2),
+        ),
         child: widget.child,
       ),
     );

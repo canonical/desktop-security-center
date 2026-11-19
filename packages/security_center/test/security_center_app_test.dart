@@ -49,9 +49,8 @@ void main() {
         everyElement(fallback),
       );
       expect(
-        _textStylesOf(
-          theme.primaryTextTheme,
-        ).map((style) => style.fontFamilyFallback),
+        _textStylesOf(theme.primaryTextTheme)
+            .map((style) => style.fontFamilyFallback),
         everyElement(fallback),
       );
       expect(theme.appBarTheme.titleTextStyle!.fontFamilyFallback, fallback);
@@ -61,10 +60,7 @@ void main() {
         fallback,
       );
       expect(theme.chipTheme.labelStyle!.fontFamilyFallback, fallback);
-      expect(
-        theme.chipTheme.secondaryLabelStyle!.fontFamilyFallback,
-        fallback,
-      );
+      expect(theme.chipTheme.secondaryLabelStyle!.fontFamilyFallback, fallback);
       expect(
         theme.menuButtonTheme.style!.textStyle!.resolve({})!.fontFamilyFallback,
         fallback,
@@ -78,9 +74,8 @@ void main() {
         everyElement(fallback),
       );
       expect(
-        _textStylesOf(
-          dropdownInputTheme,
-        ).map((style) => style.fontFamilyFallback),
+        _textStylesOf(dropdownInputTheme)
+            .map((style) => style.fontFamilyFallback),
         everyElement(fallback),
       );
     });
@@ -126,7 +121,8 @@ void main() {
 
           // Assert availableRoutes is built correctly based on storage encryption status
           expect(Routes.availableRoutes, contains(Routes.appPermissions));
-          final shouldShowDiskEncryption = tc.storageEncryptionStatus !=
+          final shouldShowDiskEncryption =
+              tc.storageEncryptionStatus !=
               SnapdStorageEncryptionStatus.inactive;
           expect(
             Routes.availableRoutes,
@@ -157,30 +153,30 @@ void main() {
 }
 
 Iterable<TextStyle> _textStylesOf(Object theme) => switch (theme) {
-      TextTheme() => [
-          theme.displayLarge!,
-          theme.displayMedium!,
-          theme.displaySmall!,
-          theme.headlineLarge!,
-          theme.headlineMedium!,
-          theme.headlineSmall!,
-          theme.titleLarge!,
-          theme.titleMedium!,
-          theme.titleSmall!,
-          theme.bodyLarge!,
-          theme.bodyMedium!,
-          theme.bodySmall!,
-          theme.labelLarge!,
-          theme.labelMedium!,
-          theme.labelSmall!,
-        ],
-      InputDecorationThemeData() => [
-          theme.errorStyle!,
-          theme.helperStyle!,
-          theme.hintStyle!,
-          theme.labelStyle!,
-          theme.prefixStyle!,
-          theme.suffixStyle!,
-        ],
-      _ => throw ArgumentError.value(theme),
-    };
+  TextTheme() => [
+    theme.displayLarge!,
+    theme.displayMedium!,
+    theme.displaySmall!,
+    theme.headlineLarge!,
+    theme.headlineMedium!,
+    theme.headlineSmall!,
+    theme.titleLarge!,
+    theme.titleMedium!,
+    theme.titleSmall!,
+    theme.bodyLarge!,
+    theme.bodyMedium!,
+    theme.bodySmall!,
+    theme.labelLarge!,
+    theme.labelMedium!,
+    theme.labelSmall!,
+  ],
+  InputDecorationThemeData() => [
+    theme.errorStyle!,
+    theme.helperStyle!,
+    theme.hintStyle!,
+    theme.labelStyle!,
+    theme.prefixStyle!,
+    theme.suffixStyle!,
+  ],
+  _ => throw ArgumentError.value(theme),
+};

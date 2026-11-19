@@ -34,8 +34,9 @@ class _Body extends StatelessWidget {
       children: [
         ...[
           _PromptingSwitch(promptingStatus: promptingStatus),
-          if (promptingStatus
-              case AppPermissionsServiceStatusError(error: final error))
+          if (promptingStatus case AppPermissionsServiceStatusError(
+            error: final error,
+          ))
             YaruInfoBox(
               yaruInfoType: YaruInfoType.danger,
               title: Text(l10n.snapPermissionsErrorTitle),
@@ -64,15 +65,14 @@ enum _Link {
   reportIssues;
 
   String get url => switch (this) {
-        learnMore =>
-          'https://discourse.ubuntu.com/t/ubuntu-desktop-s-24-10-dev-cycle-part-5-introducing-permissions-prompting/47963',
-        reportIssues =>
-          'https://github.com/canonical/desktop-security-center/issues/new/choose',
-      };
+    learnMore => 'https://discourse.ubuntu.com/t/ubuntu-desktop-s-24-10-dev-cycle-part-5-introducing-permissions-prompting/47963',
+    reportIssues =>
+      'https://github.com/canonical/desktop-security-center/issues/new/choose',
+  };
   String localize(AppLocalizations l10n) => switch (this) {
-        learnMore => l10n.interfacePageLinkLearnMore,
-        reportIssues => l10n.interfacePageLinkReportIssues,
-      };
+    learnMore => l10n.interfacePageLinkLearnMore,
+    reportIssues => l10n.interfacePageLinkReportIssues,
+  };
 }
 
 class _Links extends StatelessWidget {
@@ -95,9 +95,7 @@ class _Links extends StatelessWidget {
 }
 
 class _PromptingSwitch extends ConsumerWidget {
-  const _PromptingSwitch({
-    required this.promptingStatus,
-  });
+  const _PromptingSwitch({required this.promptingStatus});
 
   final AppPermissionsServiceStatus promptingStatus;
 
@@ -119,9 +117,8 @@ class _PromptingSwitch extends ConsumerWidget {
                 Flexible(
                   child: Text(
                     l10n.snapPermissionsEnableTitle,
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontWeight: FontWeight.normal,
-                        ),
+                    style: Theme.of(context).textTheme.labelLarge
+                        ?.copyWith(fontWeight: FontWeight.normal),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -135,8 +132,9 @@ class _PromptingSwitch extends ConsumerWidget {
             onChanged: switch (promptingStatus) {
               AppPermissionsServiceStatusError() ||
               AppPermissionsServiceStatusDisabled() ||
-              AppPermissionsServiceStatusEnabled() =>
-                (value) => value ? notifier.enable() : notifier.disable(),
+              AppPermissionsServiceStatusEnabled() => (
+                value,
+              ) => value ? notifier.enable() : notifier.disable(),
               _ => null,
             },
           ),
@@ -165,7 +163,9 @@ class _InterfaceList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(interfaceSnapCountsProvider).when(
+    return ref
+        .watch(interfaceSnapCountsProvider)
+        .when(
           data: (interfaceSnapCounts) {
             final l10n = AppLocalizations.of(context);
             final tiles = interfaceSnapCounts.entries
@@ -177,13 +177,12 @@ class _InterfaceList extends ConsumerWidget {
                       interfaceSnapCount.value > 0
                           ? l10n.interfaceSnapCount(interfaceSnapCount.value)
                           : (interfaceSnapCount.key == SnapdInterface.camera
-                              ? l10n.cameraRulesPageEmptyTileLabel
-                              : l10n.snapRulesPageEmptyTileLabel),
+                                ? l10n.cameraRulesPageEmptyTileLabel
+                                : l10n.snapRulesPageEmptyTileLabel),
                     ),
                     trailing: const Icon(YaruIcons.go_next),
-                    onTap: () => Navigator.of(context).pushSnapPermissions(
-                      interface: interfaceSnapCount.key,
-                    ),
+                    onTap: () => Navigator.of(context)
+                        .pushSnapPermissions(interface: interfaceSnapCount.key),
                   ),
                 )
                 .toList();

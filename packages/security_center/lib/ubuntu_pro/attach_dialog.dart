@@ -115,9 +115,9 @@ class _MagicLinkDialog extends ConsumerWidget {
             ? [
                 ElevatedButton(
                   onPressed: () {
-                    ref.read(ubuntuProPageModelProvider.notifier).attach(
-                          data.response.contractToken!,
-                        );
+                    ref
+                        .read(ubuntuProPageModelProvider.notifier)
+                        .attach(data.response.contractToken!);
                     Navigator.of(context, rootNavigator: true).pop();
                   },
                   child: Text(l10n.ubuntuProEnable),
@@ -141,8 +141,8 @@ class _MagicLinkDialog extends ConsumerWidget {
                         data: (data) => data.validContract
                             ? null
                             : () => launchUrlString(
-                                  getUbuntuProMagicLink(data.response.userCode),
-                                ),
+                                getUbuntuProMagicLink(data.response.userCode),
+                              ),
                       ),
                       child: magicAttachProvider.when(
                         data: (data) =>
@@ -150,22 +150,18 @@ class _MagicLinkDialog extends ConsumerWidget {
                         error: (error, _) => Text(error.toString()),
                         loading: () => SizedBox.square(
                           dimension: theme.textTheme.bodyMedium?.fontSize,
-                          child: YaruCircularProgressIndicator(
-                            strokeWidth: 2,
-                          ),
+                          child: YaruCircularProgressIndicator(strokeWidth: 2),
                         ),
                       ),
                     ),
                     const SizedBox(width: 10),
                     Visibility(
-                      visible: magicAttachProvider.whenOrNull(
+                      visible:
+                          magicAttachProvider.whenOrNull(
                             data: (data) => data.validContract,
                           ) ??
                           false,
-                      child: Icon(
-                        YaruIcons.ok,
-                        color: Colors.green,
-                      ),
+                      child: Icon(YaruIcons.ok, color: Colors.green),
                     ),
                   ],
                 ),
@@ -251,9 +247,7 @@ class _TokenDialogState extends ConsumerState<_TokenDialog> {
               ),
             ),
             TextField(
-              decoration: InputDecoration(
-                labelText: l10n.ubuntuProTokenLabel,
-              ),
+              decoration: InputDecoration(labelText: l10n.ubuntuProTokenLabel),
               onChanged: (value) => ref
                   .read(ubuntuProAttachModelProvider.notifier)
                   .setToken(value),

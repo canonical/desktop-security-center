@@ -152,15 +152,11 @@ UbuntuProManagerService registerMockUbuntuProManagerService({
     );
   } else {
     when(service.detach()).thenAnswer((_) async {
-      stream.add(
-        data.copyWith(attached: false),
-      );
+      stream.add(data.copyWith(attached: false));
     });
   }
   when(service.attach(validToken)).thenAnswer((_) async {
-    stream.add(
-      data.copyWith(attached: true),
-    );
+    stream.add(data.copyWith(attached: true));
   });
   when(service.attach(invalidToken)).thenThrow(
     DBusMethodResponseException(DBusMethodErrorResponse('Invalid token')),
@@ -200,13 +196,15 @@ UbuntuProFeatureService registerMockUbuntuProFeatureService({
     when(service.isEnabled(featureType))
         .thenAnswer((_) => featureMap[featureType]!.enabled);
     when(service.enableFeature(featureType)).thenAnswer((_) async {
-      featureMap[featureType] =
-          featureMap[featureType]!.copyWith(status: 'enabled');
+      featureMap[featureType] = featureMap[featureType]!.copyWith(
+        status: 'enabled',
+      );
       stream.add(featureType);
     });
     when(service.disableFeature(featureType)).thenAnswer((_) async {
-      featureMap[featureType] =
-          featureMap[featureType]!.copyWith(status: 'disabled');
+      featureMap[featureType] = featureMap[featureType]!.copyWith(
+        status: 'disabled',
+      );
       stream.add(featureType);
     });
   }
@@ -255,35 +253,34 @@ MockDBusRemoteObject mockFeatureObject({
 
   when(object.propertiesChanged).thenAnswer((_) => stream.stream);
 
-  when(
-    object.callMethod('com.canonical.UbuntuAdvantage.Service', 'Enable', []),
-  ).thenAnswer((_) async {
-    if (!attached) {
-      throw DBusMethodResponseException(
-        DBusMethodErrorResponse('Not attached'),
-      );
-    }
+  when(object.callMethod('com.canonical.UbuntuAdvantage.Service', 'Enable', []))
+      .thenAnswer((_) async {
+        if (!attached) {
+          throw DBusMethodResponseException(
+            DBusMethodErrorResponse('Not attached'),
+          );
+        }
 
-    stream.add(
-      DBusPropertiesChangedSignal(
-        DBusSignal(
-          sender: ':1.557',
-          path: DBusObjectPath(
-            '/com/canonical/UbuntuAdvantage/Services/${type.toPathPart()}',
+        stream.add(
+          DBusPropertiesChangedSignal(
+            DBusSignal(
+              sender: ':1.557',
+              path: DBusObjectPath(
+                '/com/canonical/UbuntuAdvantage/Services/${type.toPathPart()}',
+              ),
+              interface: 'org.freedesktop.DBus.Properties',
+              name: 'PropertiesChanged',
+              values: [
+                DBusString('com.canonical.UbuntuAdvantage.Service'),
+                DBusDict.stringVariant({'Status': DBusString('enabled')}),
+                DBusArray.string([]),
+              ],
+            ),
           ),
-          interface: 'org.freedesktop.DBus.Properties',
-          name: 'PropertiesChanged',
-          values: [
-            DBusString('com.canonical.UbuntuAdvantage.Service'),
-            DBusDict.stringVariant({'Status': DBusString('enabled')}),
-            DBusArray.string([]),
-          ],
-        ),
-      ),
-    );
+        );
 
-    return DBusMethodSuccessResponse([]);
-  });
+        return DBusMethodSuccessResponse([]);
+      });
 
   when(
     object.callMethod('com.canonical.UbuntuAdvantage.Service', 'Disable', []),
@@ -335,7 +332,7 @@ class FakeFeatureManagerObject extends Fake implements DBusRemoteObjectManager {
 
   @override
   Future<Map<DBusObjectPath, Map<String, Map<String, DBusValue>>>>
-      getManagedObjects() async {
+  getManagedObjects() async {
     return attached ? attachedManagedObjects(enabled) : detachedManagedObjects;
   }
 
@@ -351,21 +348,16 @@ class FakeFeatureManagerObject extends Fake implements DBusRemoteObjectManager {
             DBusObjectPath(
               '/com/canonical/UbuntuAdvantage/Services/${type.toPathPart()}',
             ),
-            DBusDict(
-              DBusSignature('s'),
-              DBusSignature('a{sv}'),
-              {
-                DBusString('com.canonical.UbuntuAdvantage.Service'):
-                    DBusDict.stringVariant(
-                  {
-                    'Name': DBusString(type.name.toKebabCase()),
-                    'Description': DBusString('description'),
-                    'Entitled': DBusString('yes'),
-                    'Status': DBusString(enabled ? 'enabled' : 'disabled'),
-                  },
-                ),
-              },
-            ),
+            DBusDict(DBusSignature('s'), DBusSignature('a{sv}'), {
+              DBusString(
+                'com.canonical.UbuntuAdvantage.Service',
+              ): DBusDict.stringVariant({
+                'Name': DBusString(type.name.toKebabCase()),
+                'Description': DBusString('description'),
+                'Entitled': DBusString('yes'),
+                'Status': DBusString(enabled ? 'enabled' : 'disabled'),
+              }),
+            }),
           ],
         ),
       ),
@@ -393,9 +385,7 @@ class FakeFeatureManagerObject extends Fake implements DBusRemoteObjectManager {
 }
 
 @GenerateMocks([DBusRemoteObjectManager])
-MockDBusRemoteObjectManager mockProManagerObject({
-  bool attached = false,
-}) {
+MockDBusRemoteObjectManager mockProManagerObject({bool attached = false}) {
   final objectManager = MockDBusRemoteObjectManager();
   final stream = StreamController<DBusPropertiesChangedSignal>.broadcast();
   addTearDown(stream.close);
@@ -435,9 +425,7 @@ MockDBusRemoteObjectManager mockProManagerObject({
       [DBusString(invalidToken)],
     ),
   ).thenThrow(
-    DBusMethodResponseException(
-      DBusMethodErrorResponse('Invalid token'),
-    ),
+    DBusMethodResponseException(DBusMethodErrorResponse('Invalid token')),
   );
   when(
     objectManager.callMethod(
@@ -519,7 +507,8 @@ version,codename,series,created,release,eol,eol-server,eol-esm
 26.04 LTS,Resolute Raccoon,resolute,2025-10-09,2026-04-23,2031-05-29,2031-05-29,2036-04-23
 ''';
 
-String mockUaclientConf(int port) => '''
+String mockUaclientConf(int port) =>
+    '''
 contract_url: http://localhost:$port
 log_level: debug
 ''';
@@ -529,12 +518,14 @@ Map<DBusObjectPath, Map<String, Map<String, DBusValue>>> attachedManagedObjects(
 ) {
   final enabledString = enabled ? 'enabled' : 'disabled';
   return {
-    DBusObjectPath('/com/canonical/UbuntuAdvantage/Services/realtime_2dkernel'):
-        {
+    DBusObjectPath(
+      '/com/canonical/UbuntuAdvantage/Services/realtime_2dkernel',
+    ): {
       'com.canonical.UbuntuAdvantage.Service': {
         'Name': DBusString('realtime-kernel'),
-        'Description':
-            DBusString('Ubuntu kernel with PREEMPT_RT patches integrated'),
+        'Description': DBusString(
+          'Ubuntu kernel with PREEMPT_RT patches integrated',
+        ),
         'Entitled': DBusString('yes'),
         'Status': DBusString(enabledString),
       },
@@ -550,8 +541,9 @@ Map<DBusObjectPath, Map<String, Map<String, DBusValue>>> attachedManagedObjects(
     DBusObjectPath('/com/canonical/UbuntuAdvantage/Services/landscape'): {
       'com.canonical.UbuntuAdvantage.Service': {
         'Name': DBusString('landscape'),
-        'Description':
-            DBusString('Management and administration tool for Ubuntu'),
+        'Description': DBusString(
+          'Management and administration tool for Ubuntu',
+        ),
         'Entitled': DBusString('yes'),
         'Status': DBusString(enabledString),
       },
@@ -567,8 +559,9 @@ Map<DBusObjectPath, Map<String, Map<String, DBusValue>>> attachedManagedObjects(
     DBusObjectPath('/com/canonical/UbuntuAdvantage/Services/esm_2dapps'): {
       'com.canonical.UbuntuAdvantage.Service': {
         'Name': DBusString('esm-apps'),
-        'Description':
-            DBusString('Expanded Security Maintenance for Applications'),
+        'Description': DBusString(
+          'Expanded Security Maintenance for Applications',
+        ),
         'Entitled': DBusString('yes'),
         'Status': DBusString(enabledString),
       },
@@ -610,8 +603,9 @@ Map<DBusObjectPath, Map<String, Map<String, DBusValue>>> attachedManagedObjects(
     DBusObjectPath('/com/canonical/UbuntuAdvantage/Services/esm_2dinfra'): {
       'com.canonical.UbuntuAdvantage.Service': {
         'Name': DBusString('esm-infra'),
-        'Description':
-            DBusString('Expanded Security Maintenance for Infrastructure'),
+        'Description': DBusString(
+          'Expanded Security Maintenance for Infrastructure',
+        ),
         'Entitled': DBusString('yes'),
         'Status': DBusString(enabledString),
       },

@@ -18,10 +18,7 @@ void main() {
               autofocus: true,
               child: Text('First'),
             ),
-            YaruPopupMenuItem<int>(
-              value: 2,
-              child: Text('Second'),
-            ),
+            YaruPopupMenuItem<int>(value: 2, child: Text('Second')),
           ],
           onSelected: (value) => selected = value,
           child: const Text('Open'),

@@ -9,62 +9,65 @@ import 'ubuntu_pro_dbus_service_test.mocks.dart';
 @GenerateMocks([DBusClient])
 void main() {
   group('attach/detach', () {
-    final testCases = <({
-      String name,
-      bool attached,
-      String osRelease,
-      Future<void> Function(UbuntuProManagerService) callback,
-      int? wantEol,
-      bool wantThrows,
-      bool wantNewData,
-      bool wantAttached,
-      bool wantAvailable,
-    })>[
-      (
-        name: 'Pro attach (non-LTS)',
-        attached: false,
-        osRelease: osReleaseNonLTS,
-        callback: (service) => service.attach(invalidToken),
-        wantEol: null,
-        wantThrows: true,
-        wantNewData: false,
-        wantAttached: false,
-        wantAvailable: false,
-      ),
-      (
-        name: 'Pro attach (invalid token)',
-        attached: false,
-        osRelease: osReleaseLTS,
-        callback: (service) => service.attach(invalidToken),
-        wantEol: 2034,
-        wantThrows: true,
-        wantNewData: false,
-        wantAttached: false,
-        wantAvailable: true,
-      ),
-      (
-        name: 'Pro attach',
-        attached: false,
-        osRelease: osReleaseLTS,
-        callback: (service) => service.attach(validToken),
-        wantEol: 2034,
-        wantThrows: false,
-        wantNewData: true,
-        wantAttached: true,
-        wantAvailable: true,
-      ),
-      (
-        name: 'Pro detach',
-        attached: true,
-        osRelease: osReleaseLTS,
-        callback: (service) => service.detach(),
-        wantEol: 2034,
-        wantThrows: false,
-        wantNewData: true,
-        wantAttached: false,
-        wantAvailable: true,
-      ),
-    ];
+    final testCases =
+        <
+          ({
+            String name,
+            bool attached,
+            String osRelease,
+            Future<void> Function(UbuntuProManagerService) callback,
+            int? wantEol,
+            bool wantThrows,
+            bool wantNewData,
+            bool wantAttached,
+            bool wantAvailable,
+          })
+        >[
+          (
+            name: 'Pro attach (non-LTS)',
+            attached: false,
+            osRelease: osReleaseNonLTS,
+            callback: (service) => service.attach(invalidToken),
+            wantEol: null,
+            wantThrows: true,
+            wantNewData: false,
+            wantAttached: false,
+            wantAvailable: false,
+          ),
+          (
+            name: 'Pro attach (invalid token)',
+            attached: false,
+            osRelease: osReleaseLTS,
+            callback: (service) => service.attach(invalidToken),
+            wantEol: 2034,
+            wantThrows: true,
+            wantNewData: false,
+            wantAttached: false,
+            wantAvailable: true,
+          ),
+          (
+            name: 'Pro attach',
+            attached: false,
+            osRelease: osReleaseLTS,
+            callback: (service) => service.attach(validToken),
+            wantEol: 2034,
+            wantThrows: false,
+            wantNewData: true,
+            wantAttached: true,
+            wantAvailable: true,
+          ),
+          (
+            name: 'Pro detach',
+            attached: true,
+            osRelease: osReleaseLTS,
+            callback: (service) => service.detach(),
+            wantEol: 2034,
+            wantThrows: false,
+            wantNewData: true,
+            wantAttached: false,
+            wantAvailable: true,
+          ),
+        ];
 
     for (final testCase in testCases) {
       test(testCase.name, () async {
@@ -72,9 +75,7 @@ void main() {
           osRelease: testCase.osRelease,
           ubuntuCsv: ubuntuCsv,
         );
-        final objectManager = mockProManagerObject(
-          attached: testCase.attached,
-        );
+        final objectManager = mockProManagerObject(attached: testCase.attached);
         final dbusClient = MockDBusClient();
 
         final service = UbuntuProManagerService(
@@ -119,45 +120,48 @@ void main() {
   });
 
   group('feature enable/disable', () {
-    final testCases = <({
-      String name,
-      bool attached,
-      bool enabled,
-      UbuntuProFeatureType type,
-      Future<void> Function(UbuntuProFeatureService) callback,
-      bool wantEnabled,
-      bool wantNewData,
-    })>[
-      for (final type in UbuntuProFeatureType.values) ...[
-        (
-          name: 'Feature enable (not attached)',
-          attached: false,
-          enabled: false,
-          type: type,
-          callback: (service) => service.enableFeature(type),
-          wantEnabled: false,
-          wantNewData: false,
-        ),
-        (
-          name: 'Feature enable',
-          attached: true,
-          enabled: false,
-          type: type,
-          callback: (service) => service.enableFeature(type),
-          wantEnabled: true,
-          wantNewData: true,
-        ),
-        (
-          name: 'Feature disable',
-          attached: true,
-          enabled: true,
-          type: type,
-          callback: (service) => service.disableFeature(type),
-          wantEnabled: false,
-          wantNewData: true,
-        ),
-      ],
-    ];
+    final testCases =
+        <
+          ({
+            String name,
+            bool attached,
+            bool enabled,
+            UbuntuProFeatureType type,
+            Future<void> Function(UbuntuProFeatureService) callback,
+            bool wantEnabled,
+            bool wantNewData,
+          })
+        >[
+          for (final type in UbuntuProFeatureType.values) ...[
+            (
+              name: 'Feature enable (not attached)',
+              attached: false,
+              enabled: false,
+              type: type,
+              callback: (service) => service.enableFeature(type),
+              wantEnabled: false,
+              wantNewData: false,
+            ),
+            (
+              name: 'Feature enable',
+              attached: true,
+              enabled: false,
+              type: type,
+              callback: (service) => service.enableFeature(type),
+              wantEnabled: true,
+              wantNewData: true,
+            ),
+            (
+              name: 'Feature disable',
+              attached: true,
+              enabled: true,
+              type: type,
+              callback: (service) => service.disableFeature(type),
+              wantEnabled: false,
+              wantNewData: true,
+            ),
+          ],
+        ];
 
     for (final testCase in testCases) {
       test('${testCase.name} (${testCase.type.name})', () async {
@@ -206,27 +210,30 @@ void main() {
   });
 
   group('feature added/removed', () {
-    final testCases = <({
-      String name,
-      UbuntuProFeatureType type,
-      bool attached,
-      bool wantEnabled,
-    })>[
-      for (final type in UbuntuProFeatureType.values) ...[
-        (
-          name: 'Feature added',
-          type: type,
-          attached: false,
-          wantEnabled: true,
-        ),
-        (
-          name: 'Feature removed',
-          type: type,
-          attached: true,
-          wantEnabled: false,
-        ),
-      ],
-    ];
+    final testCases =
+        <
+          ({
+            String name,
+            UbuntuProFeatureType type,
+            bool attached,
+            bool wantEnabled,
+          })
+        >[
+          for (final type in UbuntuProFeatureType.values) ...[
+            (
+              name: 'Feature added',
+              type: type,
+              attached: false,
+              wantEnabled: true,
+            ),
+            (
+              name: 'Feature removed',
+              type: type,
+              attached: true,
+              wantEnabled: false,
+            ),
+          ],
+        ];
 
     for (final testCase in testCases) {
       test('${testCase.name} (${testCase.type.name})', () async {
@@ -256,9 +263,7 @@ void main() {
         final streamCalled = expectLater(
           service.stream,
           emits(
-            predicate<UbuntuProFeatureType>(
-              (data) => data == testCase.type,
-            ),
+            predicate<UbuntuProFeatureType>((data) => data == testCase.type),
           ),
         );
 

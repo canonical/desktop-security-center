@@ -15,10 +15,7 @@ void main() {
       constraints: {
         'path-pattern': '/home/bob/Downloads/**',
         'permissions': {
-          'read': {
-            'outcome': 'allow',
-            'lifespan': 'forever',
-          },
+          'read': {'outcome': 'allow', 'lifespan': 'forever'},
         },
       },
     ),
@@ -34,79 +31,68 @@ void main() {
     expireAfter: '',
   );
   group('status stream', () {
-    final testCases = <({
-      String name,
-      bool promptingEnabled,
-      bool promptingSupported,
-      List<NoticesEvent> noticeEvents,
-      List<AppPermissionsServiceStatus> expectedStatuses
-    })>[
-      (
-        name: 'successful rule update',
-        promptingEnabled: true,
-        promptingSupported: true,
-        noticeEvents: [
-          NoticesEvent.success([testNotice]),
-        ],
-        expectedStatuses: [
-          AppPermissionsServiceStatus.enabled(testRules),
-        ],
-      ),
-      (
-        name: 'empty notices don\'t change status',
-        promptingEnabled: true,
-        promptingSupported: true,
-        noticeEvents: [
-          NoticesEvent.success([testNotice]),
-          NoticesEvent.success([]),
-        ],
-        expectedStatuses: [
-          AppPermissionsServiceStatus.enabled(testRules),
-        ],
-      ),
-      (
-        name: 'retry after error',
-        promptingEnabled: true,
-        promptingSupported: true,
-        noticeEvents: [
-          NoticesEvent.success([testNotice]),
-          NoticesEvent.error(SnapdException(message: 'error')),
-          NoticesEvent.success([testNotice]),
-        ],
-        expectedStatuses: [
-          AppPermissionsServiceStatus.enabled(testRules),
-        ],
-      ),
-      (
-        name: 'prompting unsupported and disabled',
-        promptingEnabled: false,
-        promptingSupported: false,
-        noticeEvents: [
-          NoticesEvent.success([]),
-        ],
-        expectedStatuses: [
-          AppPermissionsServiceStatus.unavailable(),
-        ],
-      ),
-      (
-        name: 'prompting supported but disabled',
-        promptingEnabled: false,
-        promptingSupported: true,
-        noticeEvents: [],
-        expectedStatuses: [
-          AppPermissionsServiceStatus.disabled(),
-        ],
-      ),
-      (
-        name: 'prompting enabled but unsupported',
-        promptingEnabled: true,
-        promptingSupported: false,
-        noticeEvents: [],
-        expectedStatuses: [
-          AppPermissionsServiceStatus.unavailable(),
-        ],
-      ),
-    ];
+    final testCases =
+        <
+          ({
+            String name,
+            bool promptingEnabled,
+            bool promptingSupported,
+            List<NoticesEvent> noticeEvents,
+            List<AppPermissionsServiceStatus> expectedStatuses,
+          })
+        >[
+          (
+            name: 'successful rule update',
+            promptingEnabled: true,
+            promptingSupported: true,
+            noticeEvents: [
+              NoticesEvent.success([testNotice]),
+            ],
+            expectedStatuses: [AppPermissionsServiceStatus.enabled(testRules)],
+          ),
+          (
+            name: 'empty notices don\'t change status',
+            promptingEnabled: true,
+            promptingSupported: true,
+            noticeEvents: [
+              NoticesEvent.success([testNotice]),
+              NoticesEvent.success([]),
+            ],
+            expectedStatuses: [AppPermissionsServiceStatus.enabled(testRules)],
+          ),
+          (
+            name: 'retry after error',
+            promptingEnabled: true,
+            promptingSupported: true,
+            noticeEvents: [
+              NoticesEvent.success([testNotice]),
+              NoticesEvent.error(SnapdException(message: 'error')),
+              NoticesEvent.success([testNotice]),
+            ],
+            expectedStatuses: [AppPermissionsServiceStatus.enabled(testRules)],
+          ),
+          (
+            name: 'prompting unsupported and disabled',
+            promptingEnabled: false,
+            promptingSupported: false,
+            noticeEvents: [NoticesEvent.success([])],
+            expectedStatuses: [AppPermissionsServiceStatus.unavailable()],
+          ),
+          (
+            name: 'prompting supported but disabled',
+            promptingEnabled: false,
+            promptingSupported: true,
+            noticeEvents: [],
+            expectedStatuses: [AppPermissionsServiceStatus.disabled()],
+          ),
+          (
+            name: 'prompting enabled but unsupported',
+            promptingEnabled: true,
+            promptingSupported: false,
+            noticeEvents: [],
+            expectedStatuses: [AppPermissionsServiceStatus.unavailable()],
+          ),
+        ];
 
     for (final testCase in testCases) {
       test(testCase.name, () async {
@@ -130,73 +116,76 @@ void main() {
   });
 
   group('toggling prompting feature', () {
-    final testCases = <({
-      String name,
-      bool enabled,
-      Future<void> Function(AppPermissionsService) callback,
-      bool authCancelled,
-      String? changeErr,
-      List<AppPermissionsServiceStatus> expectedStatuses
-    })>[
-      // The mock service doesn't have a mutable state, so it will return the
-      // same status after enabling/disabling the feature. This test asserts
-      // that the intermediate statuses are emitted correctly and the service
-      // emits a status update before and after the feature is toggled.
-      (
-        name: 'enable',
-        enabled: true,
-        callback: (service) => service.enable(),
-        authCancelled: false,
-        changeErr: null,
-        expectedStatuses: [
-          AppPermissionsServiceStatus.enabled([]),
-          AppPermissionsServiceStatus.waitingForAuth(),
-          AppPermissionsServiceStatus.enabling(0.0),
-          AppPermissionsServiceStatus.enabling(0.5),
-          AppPermissionsServiceStatus.enabled([]),
-        ],
-      ),
-      (
-        name: 'disable',
-        enabled: false,
-        callback: (service) => service.disable(),
-        authCancelled: false,
-        changeErr: null,
-        expectedStatuses: [
-          AppPermissionsServiceStatus.disabled(),
-          AppPermissionsServiceStatus.waitingForAuth(),
-          AppPermissionsServiceStatus.disabling(0.0),
-          AppPermissionsServiceStatus.disabling(0.5),
-          AppPermissionsServiceStatus.disabled(),
-        ],
-      ),
-      (
-        name: 'auth cancelled',
-        enabled: false,
-        callback: (service) => service.enable(),
-        authCancelled: true,
-        changeErr: null,
-        expectedStatuses: [
-          AppPermissionsServiceStatus.disabled(),
-          AppPermissionsServiceStatus.waitingForAuth(),
-          AppPermissionsServiceStatus.disabled(),
-        ],
-      ),
-      (
-        name: 'error when enabling',
-        enabled: false,
-        callback: (service) => service.enable(),
-        authCancelled: false,
-        changeErr: 'snapd change error',
-        expectedStatuses: [
-          AppPermissionsServiceStatus.disabled(),
-          AppPermissionsServiceStatus.waitingForAuth(),
-          AppPermissionsServiceStatus.enabling(0.0),
-          AppPermissionsServiceStatus.enabling(0.5),
-          AppPermissionsServiceStatus.error('snapd change error'),
-        ],
-      ),
-    ];
+    final testCases =
+        <
+          ({
+            String name,
+            bool enabled,
+            Future<void> Function(AppPermissionsService) callback,
+            bool authCancelled,
+            String? changeErr,
+            List<AppPermissionsServiceStatus> expectedStatuses,
+          })
+        >[
+          // The mock service doesn't have a mutable state, so it will return the
+          // same status after enabling/disabling the feature. This test asserts
+          // that the intermediate statuses are emitted correctly and the service
+          // emits a status update before and after the feature is toggled.
+          (
+            name: 'enable',
+            enabled: true,
+            callback: (service) => service.enable(),
+            authCancelled: false,
+            changeErr: null,
+            expectedStatuses: [
+              AppPermissionsServiceStatus.enabled([]),
+              AppPermissionsServiceStatus.waitingForAuth(),
+              AppPermissionsServiceStatus.enabling(0.0),
+              AppPermissionsServiceStatus.enabling(0.5),
+              AppPermissionsServiceStatus.enabled([]),
+            ],
+          ),
+          (
+            name: 'disable',
+            enabled: false,
+            callback: (service) => service.disable(),
+            authCancelled: false,
+            changeErr: null,
+            expectedStatuses: [
+              AppPermissionsServiceStatus.disabled(),
+              AppPermissionsServiceStatus.waitingForAuth(),
+              AppPermissionsServiceStatus.disabling(0.0),
+              AppPermissionsServiceStatus.disabling(0.5),
+              AppPermissionsServiceStatus.disabled(),
+            ],
+          ),
+          (
+            name: 'auth cancelled',
+            enabled: false,
+            callback: (service) => service.enable(),
+            authCancelled: true,
+            changeErr: null,
+            expectedStatuses: [
+              AppPermissionsServiceStatus.disabled(),
+              AppPermissionsServiceStatus.waitingForAuth(),
+              AppPermissionsServiceStatus.disabled(),
+            ],
+          ),
+          (
+            name: 'error when enabling',
+            enabled: false,
+            callback: (service) => service.enable(),
+            authCancelled: false,
+            changeErr: 'snapd change error',
+            expectedStatuses: [
+              AppPermissionsServiceStatus.disabled(),
+              AppPermissionsServiceStatus.waitingForAuth(),
+              AppPermissionsServiceStatus.enabling(0.0),
+              AppPermissionsServiceStatus.enabling(0.5),
+              AppPermissionsServiceStatus.error('snapd change error'),
+            ],
+          ),
+        ];
 
     for (final testCase in testCases) {
       test(testCase.name, () async {

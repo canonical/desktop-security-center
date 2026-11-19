@@ -19,9 +19,9 @@ const defaultRecoveryKeyFileName = 'recovery-key.txt';
 const yaruProgressSize = 20.0;
 
 String _dialogErrorMessage(Exception e) => switch (e) {
-      final TpmFdeOperationException e => e.causeByMessage(),
-      _ => e.toString(),
-    };
+  final TpmFdeOperationException e => e.causeByMessage(),
+  _ => e.toString(),
+};
 
 class DiskEncryptionPage extends ConsumerWidget {
   const DiskEncryptionPage({super.key});
@@ -37,11 +37,7 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ScrollablePage(
-      children: [
-        EncryptionPageBody(),
-      ],
-    );
+    return ScrollablePage(children: [EncryptionPageBody()]);
   }
 }
 
@@ -65,8 +61,9 @@ class EncryptionPageBody extends ConsumerWidget {
             // TPM Authentication specific content
             switch (data.currentAuthMode) {
               AuthMode.pin => _PinAuthenticationActions(tpmState: data),
-              AuthMode.passphrase =>
-                _PassphraseAuthenticationActions(tpmState: data),
+              AuthMode.passphrase => _PassphraseAuthenticationActions(
+                tpmState: data,
+              ),
               AuthMode.none => _NoneAuthenticationActions(tpmState: data),
             },
             const SizedBox(height: 32),
@@ -79,20 +76,20 @@ class EncryptionPageBody extends ConsumerWidget {
       },
       error: (e, stack) => switch (e) {
         final SnapdStateException snapdError => YaruInfoBox(
-            title: Text(snapdError.localizedHeader(l10n)),
-            subtitle: _buildSnapdErrorSubtitle(context, snapdError, l10n),
-            yaruInfoType: YaruInfoType.warning,
-          ),
+          title: Text(snapdError.localizedHeader(l10n)),
+          subtitle: _buildSnapdErrorSubtitle(context, snapdError, l10n),
+          yaruInfoType: YaruInfoType.warning,
+        ),
         final TpmStateException tpmError => YaruInfoBox(
-            title: Text(tpmError.localizedHeader(l10n)),
-            subtitle: Text(tpmError.localizedBody(l10n)),
-            yaruInfoType: YaruInfoType.danger,
-          ),
+          title: Text(tpmError.localizedHeader(l10n)),
+          subtitle: Text(tpmError.localizedBody(l10n)),
+          yaruInfoType: YaruInfoType.danger,
+        ),
         _ => YaruInfoBox(
-            title: Text(l10n.recoveryKeySomethingWentWrongHeader),
-            subtitle: Text(e.toString()),
-            yaruInfoType: YaruInfoType.danger,
-          ),
+          title: Text(l10n.recoveryKeySomethingWentWrongHeader),
+          subtitle: Text(e.toString()),
+          yaruInfoType: YaruInfoType.danger,
+        ),
       },
       loading: () => const YaruLinearProgressIndicator(),
     );
@@ -166,9 +163,7 @@ class CheckRecoveryKeyDialog extends ConsumerWidget {
                 child: data is CheckRecoveryKeyDialogStateLoading
                     ? SizedBox.square(
                         dimension: yaruProgressSize,
-                        child: YaruCircularProgressIndicator(
-                          strokeWidth: 2,
-                        ),
+                        child: YaruCircularProgressIndicator(strokeWidth: 2),
                       )
                     : Text(l10n.diskEncryptionPageCheck),
               ),
@@ -287,7 +282,8 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                 Row(
                   children: [
                     OutlinedButton(
-                      onPressed: replaceDialogState
+                      onPressed:
+                          replaceDialogState
                                   is! ReplaceRecoveryKeyDialogStateGenerating &&
                               replaceDialogState
                                   is! ReplaceRecoveryKeyDialogStateError
@@ -327,16 +323,17 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                       child: Text(l10n.diskEncryptionPageReplaceDialogSave),
                     ),
                     OutlinedButton(
-                      onPressed: replaceDialogState
+                      onPressed:
+                          replaceDialogState
                                   is! ReplaceRecoveryKeyDialogStateGenerating &&
                               replaceDialogState
                                   is! ReplaceRecoveryKeyDialogStateError
                           ? () => showDialog(
-                                context: context,
-                                builder: (_) => _RecoveryKeyQRDialog(
-                                  recoveryKey: recoveryKey.value!.recoveryKey,
-                                ),
-                              )
+                              context: context,
+                              builder: (_) => _RecoveryKeyQRDialog(
+                                recoveryKey: recoveryKey.value!.recoveryKey,
+                              ),
+                            )
                           : null,
                       child: Text(l10n.diskEncryptionPageReplaceDialogShowQR),
                     ),
@@ -357,10 +354,10 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   ),
                   value:
                       replaceDialogState is ReplaceRecoveryKeyDialogStateInput
-                          ? replaceDialogState.acknowledged
-                          : false,
-                  onChanged: replaceDialogState
-                          is ReplaceRecoveryKeyDialogStateInput
+                      ? replaceDialogState.acknowledged
+                      : false,
+                  onChanged:
+                      replaceDialogState is ReplaceRecoveryKeyDialogStateInput
                       ? (value) => replaceNotifier.acknowledge(value ?? false)
                       : null,
                 ),
@@ -368,22 +365,25 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     OutlinedButton(
-                      onPressed: replaceDialogState
+                      onPressed:
+                          replaceDialogState
                               is ReplaceRecoveryKeyDialogStateInput
                           ? () => Navigator.of(context).pop()
                           : null,
                       child: Text(l10n.diskEncryptionPageReplaceDialogDiscard),
                     ),
                     ElevatedButton(
-                      onPressed: replaceDialogState
+                      onPressed:
+                          replaceDialogState
                                   is ReplaceRecoveryKeyDialogStateInput &&
                               replaceDialogState.acknowledged == true &&
                               !recoveryKey.isLoading
                           ? () => replaceNotifier.replaceRecoveryKey(
-                                recoveryKey.value!.keyId,
-                              )
+                              recoveryKey.value!.keyId,
+                            )
                           : null,
-                      child: replaceDialogState
+                      child:
+                          replaceDialogState
                               is ReplaceRecoveryKeyDialogStateLoading
                           ? SizedBox.square(
                               dimension: yaruProgressSize,
@@ -391,9 +391,7 @@ class ReplaceRecoveryKeyDialog extends ConsumerWidget {
                                 strokeWidth: 2,
                               ),
                             )
-                          : Text(
-                              l10n.diskEncryptionPageReplaceDialogReplace,
-                            ),
+                          : Text(l10n.diskEncryptionPageReplaceDialogReplace),
                     ),
                   ].separatedBy(const SizedBox(width: 16)),
                 ),
@@ -465,16 +463,15 @@ class ChangeAuthDialog extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
-                  onPressed: model.dialogState is ChangeAuthDialogStateInput &&
+                  onPressed:
+                      model.dialogState is ChangeAuthDialogStateInput &&
                           notifier.isValid
                       ? notifier.changePinPassphrase
                       : null,
                   child: model.dialogState is ChangeAuthDialogStateLoading
                       ? SizedBox.square(
                           dimension: yaruProgressSize,
-                          child: YaruCircularProgressIndicator(
-                            strokeWidth: 2,
-                          ),
+                          child: YaruCircularProgressIndicator(strokeWidth: 2),
                         )
                       : Text(l10n.recoveryKeyPassphraseChange),
                 ),
@@ -533,8 +530,9 @@ class ChangeAuthModeDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final model = ref.watch(changeAuthModeDialogModelProvider(authMode));
-    final notifier =
-        ref.read(changeAuthModeDialogModelProvider(authMode).notifier);
+    final notifier = ref.read(
+      changeAuthModeDialogModelProvider(authMode).notifier,
+    );
     assert(authMode != AuthMode.none);
 
     final title = switch (authMode) {
@@ -572,8 +570,10 @@ class ChangeAuthModeDialog extends ConsumerWidget {
       title: YaruDialogTitleBar(title: Text(title)),
       titlePadding: EdgeInsets.zero,
       contentPadding: EdgeInsets.zero,
-      insetPadding:
-          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 16.0),
+      insetPadding: const EdgeInsets.symmetric(
+        horizontal: 40.0,
+        vertical: 16.0,
+      ),
       content: SizedBox(
         width: 460,
         child: ScrollablePage(
@@ -662,9 +662,7 @@ class _NoneAuthenticationActions extends ConsumerWidget {
           style: Theme.of(context).textTheme.titleSmall,
         ),
         const SizedBox(height: 8),
-        Text(
-          l10n.diskEncryptionPageAdditionalSecurityBody,
-        ),
+        Text(l10n.diskEncryptionPageAdditionalSecurityBody),
         const SizedBox(height: 8),
         Wrap(
           spacing: 16,
@@ -679,19 +677,13 @@ class _NoneAuthenticationActions extends ConsumerWidget {
                         ref,
                       );
                     },
-              child: Text(
-                l10n.diskEncryptionPageAddPassphraseButton,
-              ),
+              child: Text(l10n.diskEncryptionPageAddPassphraseButton),
             ),
             OutlinedButton(
               onPressed: isAdding
                   ? null
                   : () {
-                      showChangeAuthModeDialog(
-                        context,
-                        AuthMode.pin,
-                        ref,
-                      );
+                      showChangeAuthModeDialog(context, AuthMode.pin, ref);
                     },
               child: Text(l10n.diskEncryptionPageAddPinButton),
             ),
@@ -702,9 +694,7 @@ class _NoneAuthenticationActions extends ConsumerWidget {
           const SizedBox(height: 8),
           YaruInfoBox(
             title: Text(l10n.recoveryKeySomethingWentWrongHeader),
-            subtitle: Text(
-              tpmState.operationError!.causeByMessage(),
-            ),
+            subtitle: Text(tpmState.operationError!.causeByMessage()),
             yaruInfoType: YaruInfoType.danger,
           ),
         ],
@@ -744,10 +734,7 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
               onPressed: isRemoving
                   ? null
                   : () {
-                      showChangeAuthDialog(
-                        context,
-                        AuthMode.passphrase,
-                      );
+                      showChangeAuthDialog(context, AuthMode.passphrase);
                     },
               child: Text(l10n.recoveryKeyPassphraseButton),
             ),
@@ -759,9 +746,7 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
                           .read(tpmAuthenticationModelProvider.notifier)
                           .removeAuthMode();
                     },
-              child: Text(
-                l10n.diskEncryptionPageRemovePassphraseButton,
-              ),
+              child: Text(l10n.diskEncryptionPageRemovePassphraseButton),
             ),
           ],
         ),
@@ -769,9 +754,7 @@ class _PassphraseAuthenticationActions extends ConsumerWidget {
           const SizedBox(height: 8),
           YaruInfoBox(
             title: Text(l10n.recoveryKeySomethingWentWrongHeader),
-            subtitle: Text(
-              tpmState.operationError!.causeByMessage(),
-            ),
+            subtitle: Text(tpmState.operationError!.causeByMessage()),
             yaruInfoType: YaruInfoType.danger,
           ),
         ],
@@ -831,9 +814,7 @@ class _PinAuthenticationActions extends ConsumerWidget {
           const SizedBox(height: 8),
           YaruInfoBox(
             title: Text(l10n.recoveryKeySomethingWentWrongHeader),
-            subtitle: Text(
-              tpmState.operationError!.causeByMessage(),
-            ),
+            subtitle: Text(tpmState.operationError!.causeByMessage()),
             yaruInfoType: YaruInfoType.danger,
           ),
         ],
@@ -928,10 +909,7 @@ class _AuthStatusTileList extends StatelessWidget {
             subtitle: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(height: 8),
-                YaruLinearProgressIndicator(),
-              ],
+              children: [SizedBox(height: 8), YaruLinearProgressIndicator()],
             ),
           ),
         ],

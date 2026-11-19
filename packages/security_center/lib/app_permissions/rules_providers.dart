@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/app_permissions/camera_interface.dart'
     as camera_interface;
@@ -49,9 +48,7 @@ Future<List<String>> microphoneSnaps(Ref ref) async {
 }
 
 @riverpod
-Future<Map<SnapdInterface, int>> interfaceSnapCounts(
-  Ref ref,
-) async {
+Future<Map<SnapdInterface, int>> interfaceSnapCounts(Ref ref) async {
   final interfaceSnapCounts = <SnapdInterface, int>{};
   final featureService = getService<FeatureService>();
 
@@ -83,24 +80,21 @@ Future<Map<String, int>> snapRuleCounts(
 
   return switch (interface) {
     SnapdInterface.camera => _buildSnapCountsMap(
-        rules,
-        interface.interfaceName,
-        await ref.watch(cameraSnapsProvider.future),
-      ),
+      rules,
+      interface.interfaceName,
+      await ref.watch(cameraSnapsProvider.future),
+    ),
     SnapdInterface.microphone => _buildSnapCountsMap(
-        rules,
-        interface.interfaceName,
-        await ref.watch(microphoneSnapsProvider.future),
-      ),
-    _ => rules.fold<Map<String, int>>(
-        {},
-        (counts, rule) {
-          if (rule.interface == interface.interfaceName) {
-            counts[rule.snap] = (counts[rule.snap] ?? 0) + 1;
-          }
-          return counts;
-        },
-      )
+      rules,
+      interface.interfaceName,
+      await ref.watch(microphoneSnapsProvider.future),
+    ),
+    _ => rules.fold<Map<String, int>>({}, (counts, rule) {
+      if (rule.interface == interface.interfaceName) {
+        counts[rule.snap] = (counts[rule.snap] ?? 0) + 1;
+      }
+      return counts;
+    }),
   };
 }
 
@@ -156,9 +150,7 @@ class SnapRulesModel extends _$SnapRulesModel {
 @riverpod
 class SnapHomeRulesModel extends _$SnapHomeRulesModel {
   @override
-  Future<List<SnapdHomeRuleFragment>> build({
-    required String snap,
-  }) async {
+  Future<List<SnapdHomeRuleFragment>> build({required String snap}) async {
     final rules = await ref.watch(rulesProvider.future);
     return rules
         .where(
@@ -201,9 +193,7 @@ class SnapHomeRulesModel extends _$SnapHomeRulesModel {
 @riverpod
 class SnapCameraRulesModel extends _$SnapCameraRulesModel {
   @override
-  Future<List<SnapdCameraRuleFragment>> build({
-    required String snap,
-  }) async {
+  Future<List<SnapdCameraRuleFragment>> build({required String snap}) async {
     final rules = await ref.watch(rulesProvider.future);
     return rules
         .where(
@@ -230,9 +220,9 @@ class SnapCameraRulesModel extends _$SnapCameraRulesModel {
       permissions: {
         camera_interface.CameraPermission.access:
             camera_interface.PermissionConstraints(
-          outcome: outcome,
-          lifespan: lifespan,
-        ),
+              outcome: outcome,
+              lifespan: lifespan,
+            ),
       },
     );
 
@@ -289,9 +279,9 @@ class SnapMicrophoneRulesModel extends _$SnapMicrophoneRulesModel {
       permissions: {
         microphone_interface.MicrophonePermission.access:
             microphone_interface.PermissionConstraints(
-          outcome: outcome,
-          lifespan: lifespan,
-        ),
+              outcome: outcome,
+              lifespan: lifespan,
+            ),
       },
     );
 
@@ -317,7 +307,7 @@ class SnapMicrophoneRulesModel extends _$SnapMicrophoneRulesModel {
 }
 
 @freezed
-class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
+abstract class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
   const factory SnapdHomeRuleFragment({
     required String ruleId,
     required bool deleteRuleOnRemoval,
@@ -365,8 +355,9 @@ class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
           deleteRuleOnRemoval: true,
           snap: rule.snap,
           pathPattern: constraints.pathPattern,
-          permissions:
-              constraints.permissions.map(HomePermission.fromString).toList(),
+          permissions: constraints.permissions
+              .map(HomePermission.fromString)
+              .toList(),
           outcome: rule.outcome!,
           lifespan: rule.lifespan!,
           expiration: rule.expiration,
@@ -385,7 +376,7 @@ class SnapdHomeRuleFragment with _$SnapdHomeRuleFragment {
 }
 
 @freezed
-class SnapdCameraRuleFragment with _$SnapdCameraRuleFragment {
+abstract class SnapdCameraRuleFragment with _$SnapdCameraRuleFragment {
   const factory SnapdCameraRuleFragment({
     required String ruleId,
     required String snap,
@@ -409,8 +400,9 @@ class SnapdCameraRuleFragment with _$SnapdCameraRuleFragment {
       );
     }
 
-    final constraints =
-        camera_interface.CameraRuleConstraints.fromJson(rule.constraints);
+    final constraints = camera_interface.CameraRuleConstraints.fromJson(
+      rule.constraints,
+    );
 
     // Camera interface should only have 'access' permission
     final permission = constraints.permissions.keys.first;
@@ -428,7 +420,7 @@ class SnapdCameraRuleFragment with _$SnapdCameraRuleFragment {
 }
 
 @freezed
-class SnapdMicrophoneRuleFragment with _$SnapdMicrophoneRuleFragment {
+abstract class SnapdMicrophoneRuleFragment with _$SnapdMicrophoneRuleFragment {
   const factory SnapdMicrophoneRuleFragment({
     required String ruleId,
     required String snap,

@@ -7,8 +7,9 @@ import '../utils/ubuntu_pro_utils.dart';
 
 void main() {
   group('UbuntuProPageModel', () {
-    testWidgets('initial state detached when service not attached',
-        (tester) async {
+    testWidgets('initial state detached when service not attached', (
+      tester,
+    ) async {
       registerMockUbuntuProManagerService(attached: false);
       registerMockUbuntuProFeatureService(featuresEntitled: false);
       final container = createContainer();
@@ -42,8 +43,9 @@ void main() {
       );
     });
 
-    testWidgets('attach success: detached -> attaching -> attached',
-        (tester) async {
+    testWidgets('attach success: detached -> attaching -> attached', (
+      tester,
+    ) async {
       registerMockUbuntuProManagerService(attached: false);
       registerMockUbuntuProFeatureService(featuresEntitled: false);
       final container = createContainer();
@@ -77,8 +79,9 @@ void main() {
       );
     });
 
-    testWidgets('attach failure: detached -> attaching -> error',
-        (tester) async {
+    testWidgets('attach failure: detached -> attaching -> error', (
+      tester,
+    ) async {
       registerMockUbuntuProManagerService(attached: false);
       registerMockUbuntuProFeatureService(featuresEntitled: false);
       final container = createContainer();
@@ -130,8 +133,9 @@ void main() {
       );
     });
 
-    testWidgets('stream does not override attaching state mid-attach',
-        (tester) async {
+    testWidgets('stream does not override attaching state mid-attach', (
+      tester,
+    ) async {
       registerMockUbuntuProManagerService(attached: false);
       registerMockUbuntuProFeatureService(featuresEntitled: false);
       final container = createContainer();
@@ -162,8 +166,9 @@ void main() {
       );
     });
 
-    testWidgets('detach success: attached -> detaching -> detached',
-        (tester) async {
+    testWidgets('detach success: attached -> detaching -> detached', (
+      tester,
+    ) async {
       registerMockUbuntuProManagerService();
       registerMockUbuntuProFeatureService();
       final container = createContainer();
@@ -179,8 +184,9 @@ void main() {
         isA<UbuntuProPageStateAttached>(),
       );
 
-      final detachFuture =
-          container.read(ubuntuProPageModelProvider.notifier).detach();
+      final detachFuture = container
+          .read(ubuntuProPageModelProvider.notifier)
+          .detach();
 
       expect(
         container.read(ubuntuProPageModelProvider),
@@ -196,8 +202,9 @@ void main() {
       );
     });
 
-    testWidgets('detach failure: attached -> detaching -> detachError',
-        (tester) async {
+    testWidgets('detach failure: attached -> detaching -> detachError', (
+      tester,
+    ) async {
       registerMockUbuntuProManagerService(detachThrows: true);
       registerMockUbuntuProFeatureService();
       final container = createContainer();

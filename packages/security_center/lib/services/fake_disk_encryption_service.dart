@@ -109,9 +109,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
     String oldAuth,
     String newAuth,
   ) async {
-    await Future.delayed(
-      const Duration(seconds: 2),
-    );
+    await Future.delayed(const Duration(seconds: 2));
     if (oldAuth != _auth) {
       throw Exception('Auths dont match');
     }
@@ -191,9 +189,7 @@ class FakeDiskEncryptionService implements DiskEncryptionService {
       );
     }
 
-    systemVolumes = SnapdSystemVolumesResponse(
-      byContainerRole: updatedVolumes,
-    );
+    systemVolumes = SnapdSystemVolumesResponse(byContainerRole: updatedVolumes);
   }
 
   SnapdSystemVolumeAuthMode _authModeToSnapd(AuthMode authMode) {

@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:file/memory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mockito/annotations.dart';
@@ -63,6 +65,9 @@ ProviderContainer createContainer({
     parent: parent,
     overrides: [...overrides],
     observers: observers,
+    // Preserve the Riverpod 2 behavior of surfacing provider errors
+    // immediately instead of retrying them automatically.
+    retry: (_, __) => null,
   );
 
   // When the test ends, dispose the container.
@@ -176,18 +181,10 @@ DiskEncryptionService registerMockDiskEncryptionService({
 
   when(service.enumerateKeySlots()).thenAnswer((_) async {
     if (enumerateKeySlots404Error) {
-      throw SnapdException(
-        message: '',
-        kind: '',
-        statusCode: 404,
-      );
+      throw SnapdException(message: '', kind: '', statusCode: 404);
     }
     if (enumerateKeySlots403Error) {
-      throw SnapdException(
-        message: '',
-        kind: '',
-        statusCode: 403,
-      );
+      throw SnapdException(message: '', kind: '', statusCode: 403);
     }
     if (enumerateKeySlotsFailure) {
       throw SnapdException(message: '');
@@ -275,36 +272,36 @@ DiskEncryptionService registerMockDiskEncryptionService({
   });
   when(service.changePinPassphrase(any, any, any))
       .thenAnswer((invocation) async {
-    final authMode = invocation.positionalArguments[0] as AuthMode;
-    final oldPass = invocation.positionalArguments[1] as String;
-    final newPass = invocation.positionalArguments[2] as String;
+        final authMode = invocation.positionalArguments[0] as AuthMode;
+        final oldPass = invocation.positionalArguments[1] as String;
+        final newPass = invocation.positionalArguments[2] as String;
 
-    if (authMode == AuthMode.none) {
-      throw UnimplementedError();
-    }
+        if (authMode == AuthMode.none) {
+          throw UnimplementedError();
+        }
 
-    if (oldPass.isEmpty || newPass.isEmpty) {
-      throw Exception(
-        'Mock change PIN/passphrase error: missing old or new value',
-      );
-    }
+        if (oldPass.isEmpty || newPass.isEmpty) {
+          throw Exception(
+            'Mock change PIN/passphrase error: missing old or new value',
+          );
+        }
 
-    if (changePinPassphraseError) {
-      throw Exception('Mock change PIN/passphrase error');
-    }
-    if (changePinPassphraseSnapdAuthErrorKind != null) {
-      throw SnapdException(
-        message: 'Mock change PIN/passphrase auth error',
-        kind: changePinPassphraseSnapdAuthErrorKind.snapdKind,
-      );
-    }
-    if (changePinPassphraseSnapdErrorKind != null) {
-      throw SnapdException(
-        message: 'Mock change PIN/passphrase snapd error',
-        kind: changePinPassphraseSnapdErrorKind,
-      );
-    }
-  });
+        if (changePinPassphraseError) {
+          throw Exception('Mock change PIN/passphrase error');
+        }
+        if (changePinPassphraseSnapdAuthErrorKind != null) {
+          throw SnapdException(
+            message: 'Mock change PIN/passphrase auth error',
+            kind: changePinPassphraseSnapdAuthErrorKind.snapdKind,
+          );
+        }
+        if (changePinPassphraseSnapdErrorKind != null) {
+          throw SnapdException(
+            message: 'Mock change PIN/passphrase snapd error',
+            kind: changePinPassphraseSnapdErrorKind,
+          );
+        }
+      });
   when(
     service.replacePlatformKey(
       authMode: anyNamed('authMode'),
@@ -360,8 +357,9 @@ DiskEncryptionService registerMockDiskEncryptionService({
     }
     currentAuthMode = requestedAuthMode;
   });
-  when(service.pinPassphraseEntropyCheck(any, any))
-      .thenAnswer((invocation) async {
+  when(service.pinPassphraseEntropyCheck(any, any)).thenAnswer((
+    invocation,
+  ) async {
     if (entropyCheckError) {
       throw Exception('Mock entropy check error');
     }
@@ -448,15 +446,11 @@ SnapdService registerMockSnapdService({
   when(client.enablePrompting()).thenAnswer(toggleReply);
   when(client.disablePrompting()).thenAnswer(toggleReply);
 
-  when(
-    client.watchChange(changeId),
-  ).thenAnswer((_) => Stream.fromIterable(changes));
+  when(client.watchChange(changeId))
+      .thenAnswer((_) => Stream.fromIterable(changes));
 
   when(client.getSnapIcon(any)).thenAnswer(
-    (_) async => SnapIcon(
-      contentType: 'image/png',
-      bytes: Uint8List(0),
-    ),
+    (_) async => SnapIcon(contentType: 'image/png', bytes: Uint8List(0)),
   );
 
   registerServiceInstance<SnapdService>(client);

@@ -27,7 +27,7 @@ extension FeatureTypePath on UbuntuProFeatureType {
 }
 
 @freezed
-class UbuntuProManagerData with _$UbuntuProManagerData {
+abstract class UbuntuProManagerData with _$UbuntuProManagerData {
   factory UbuntuProManagerData({
     required bool attached,
     bool? available,
@@ -36,17 +36,17 @@ class UbuntuProManagerData with _$UbuntuProManagerData {
 }
 
 @freezed
-class UbuntuProFeatureDetails with _$UbuntuProFeatureDetails {
+abstract class UbuntuProFeatureDetails with _$UbuntuProFeatureDetails {
   factory UbuntuProFeatureDetails({
     required UbuntuProFeature data,
     required DBusRemoteObject object,
     required StreamSubscription<DBusPropertiesChangedSignal>
-        propertiesChangedStream,
+    propertiesChangedStream,
   }) = _UbuntuProFeatureDetails;
 }
 
 @freezed
-class UbuntuProFeature with _$UbuntuProFeature {
+abstract class UbuntuProFeature with _$UbuntuProFeature {
   factory UbuntuProFeature({
     required UbuntuProFeatureType? type,
     required String path,
@@ -66,8 +66,9 @@ class UbuntuProFeature with _$UbuntuProFeature {
       name: name,
       entitled: dbusMap['Entitled']!.asString() == 'yes',
       status: dbusMap['Status']!.asString(),
-      type: UbuntuProFeatureType.values
-          .firstWhereOrNull((f) => f.name.toKebabCase() == name),
+      type: UbuntuProFeatureType.values.firstWhereOrNull(
+        (f) => f.name.toKebabCase() == name,
+      ),
     );
   }
 
@@ -82,9 +83,11 @@ class UbuntuProFeatureService {
     DBusClient? client,
     @visibleForTesting DBusRemoteObjectManager? objectManager,
     @visibleForTesting DBusRemoteObject Function(String path)? objectFactory,
-  })  : _dbusClient = client ?? DBusClient.system(),
-        _objectManager = objectManager,
-        _objectFactory = objectFactory;
+  }) : _dbusClient = client ?? DBusClient.system(),
+       // ignore: prefer_initializing_formals
+       _objectManager = objectManager,
+       // ignore: prefer_initializing_formals
+       _objectFactory = objectFactory;
 
   DBusRemoteObjectManager? _objectManager;
   DBusRemoteObject Function(String path)? _objectFactory;
@@ -100,23 +103,26 @@ class UbuntuProFeatureService {
   /// Initializes the service.
   Future<void> init() async {
     _stream = StreamController.broadcast();
-    _objectManager = _objectManager ??
+    _objectManager =
+        _objectManager ??
         DBusRemoteObjectManager(
           _dbusClient,
           name: 'com.canonical.UbuntuAdvantage',
           path: DBusObjectPath('/'),
         );
-    _objectFactory = _objectFactory ??
+    _objectFactory =
+        _objectFactory ??
         (path) => DBusRemoteObject(
-              DBusClient.system(),
-              name: 'com.canonical.UbuntuAdvantage',
-              path: DBusObjectPath(path),
-            );
+          DBusClient.system(),
+          name: 'com.canonical.UbuntuAdvantage',
+          path: DBusObjectPath(path),
+        );
 
     final objects = await _objectManager!.getManagedObjects();
     for (final object in objects.entries) {
-      if (!object.key.value
-          .startsWith('/com/canonical/UbuntuAdvantage/Services/')) {
+      if (!object.key.value.startsWith(
+        '/com/canonical/UbuntuAdvantage/Services/',
+      )) {
         continue;
       }
 
@@ -181,15 +187,17 @@ class UbuntuProFeatureService {
 
   /// Emitted when a feature gets disabled/enabled.
   Future<void> _onPropertiesChanged(DBusPropertiesChangedSignal signal) async {
-    if (!signal.path.value
-        .startsWith('/com/canonical/UbuntuAdvantage/Services/')) {
+    if (!signal.path.value.startsWith(
+      '/com/canonical/UbuntuAdvantage/Services/',
+    )) {
       return;
     }
 
     if (signal.changedProperties['Status'] == null) return;
 
-    final feature = _featureMap.entries
-        .firstWhereOrNull((f) => f.value.data.path == signal.path.value);
+    final feature = _featureMap.entries.firstWhereOrNull(
+      (f) => f.value.data.path == signal.path.value,
+    );
     if (feature == null) return;
 
     _featureMap.update(
@@ -207,8 +215,9 @@ class UbuntuProFeatureService {
   Future<void> _onInterfacesAdded(
     DBusObjectManagerInterfacesAddedSignal signal,
   ) async {
-    if (!signal.changedPath.value
-        .startsWith('/com/canonical/UbuntuAdvantage/Services/')) {
+    if (!signal.changedPath.value.startsWith(
+      '/com/canonical/UbuntuAdvantage/Services/',
+    )) {
       return;
     }
 
@@ -222,13 +231,15 @@ class UbuntuProFeatureService {
   Future<void> _onInterfacesRemoved(
     DBusObjectManagerInterfacesRemovedSignal signal,
   ) async {
-    if (!signal.changedPath.value
-        .startsWith('/com/canonical/UbuntuAdvantage/Services/')) {
+    if (!signal.changedPath.value.startsWith(
+      '/com/canonical/UbuntuAdvantage/Services/',
+    )) {
       return;
     }
 
-    final feature = _featureMap.entries
-        .firstWhereOrNull((f) => f.value.data.path == signal.changedPath.value);
+    final feature = _featureMap.entries.firstWhereOrNull(
+      (f) => f.value.data.path == signal.changedPath.value,
+    );
     if (feature == null) return;
 
     await _removeFeature(feature.key);
@@ -239,10 +250,7 @@ class UbuntuProFeatureService {
     String path,
     Map<String, DBusValue> dbusMap,
   ) async {
-    final featureObj = UbuntuProFeature.fromMap(
-      path,
-      dbusMap,
-    );
+    final featureObj = UbuntuProFeature.fromMap(path, dbusMap);
 
     if (featureObj.type == null) return;
 
@@ -252,8 +260,9 @@ class UbuntuProFeatureService {
       (details) => details.copyWith(data: featureObj),
       ifAbsent: () => UbuntuProFeatureDetails(
         data: featureObj,
-        propertiesChangedStream:
-            dbusObj.propertiesChanged.listen(_onPropertiesChanged),
+        propertiesChangedStream: dbusObj.propertiesChanged.listen(
+          _onPropertiesChanged,
+        ),
         object: dbusObj,
       ),
     );
@@ -276,9 +285,10 @@ class UbuntuProManagerService {
     DBusClient? client,
     @visibleForTesting DBusRemoteObjectManager? objectManager,
     @visibleForTesting FileSystem? fs,
-  })  : _dbusClient = client ?? DBusClient.system(),
-        _objectManager = objectManager,
-        _fs = fs ?? LocalFileSystem();
+  }) : _dbusClient = client ?? DBusClient.system(),
+       // ignore: prefer_initializing_formals
+       _objectManager = objectManager,
+       _fs = fs ?? LocalFileSystem();
 
   final FileSystem _fs;
   DBusRemoteObjectManager? _objectManager;
@@ -297,20 +307,23 @@ class UbuntuProManagerService {
   /// Initializes the service.
   Future<void> init() async {
     _stream = StreamController.broadcast();
-    _objectManager = _objectManager ??
+    _objectManager =
+        _objectManager ??
         DBusRemoteObjectManager(
           _dbusClient,
           name: 'com.canonical.UbuntuAdvantage',
           path: DBusObjectPath('/com/canonical/UbuntuAdvantage/Manager'),
         );
-    _propertiesChangedSignal =
-        _objectManager!.propertiesChanged.listen(_onPropertiesChanged);
+    _propertiesChangedSignal = _objectManager!.propertiesChanged.listen(
+      _onPropertiesChanged,
+    );
 
     final releases = await _getReleases();
     final series = await _getSeries();
     final lts = await _isLTS(series, releases);
-    final eolDate =
-        series != null && lts ? _getEndOfSupport(series, releases) : null;
+    final eolDate = series != null && lts
+        ? _getEndOfSupport(series, releases)
+        : null;
 
     final attached = await _objectManager!.getProperty(
       'com.canonical.UbuntuAdvantage.Manager',
@@ -353,8 +366,9 @@ class UbuntuProManagerService {
   Future<void> _onPropertiesChanged(DBusPropertiesChangedSignal signal) async {
     if (signal.path.value != '/com/canonical/UbuntuAdvantage/Manager') return;
 
-    final attached =
-        signal.values[1].asStringVariantDict()['Attached']?.asBoolean();
+    final attached = signal.values[1]
+        .asStringVariantDict()['Attached']
+        ?.asBoolean();
     if (attached != null) {
       _data = _data.copyWith(attached: attached);
     }

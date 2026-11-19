@@ -90,10 +90,7 @@ void main() {
             interface: 'camera',
             constraints: {
               'permissions': {
-                'access': {
-                  'outcome': 'allow',
-                  'lifespan': 'forever',
-                },
+                'access': {'outcome': 'allow', 'lifespan': 'forever'},
               },
             },
           ),
@@ -104,10 +101,7 @@ void main() {
             interface: 'camera',
             constraints: {
               'permissions': {
-                'access': {
-                  'outcome': 'allow',
-                  'lifespan': 'session',
-                },
+                'access': {'outcome': 'allow', 'lifespan': 'session'},
               },
             },
           ),
@@ -181,10 +175,7 @@ void main() {
             interface: 'camera',
             constraints: {
               'permissions': {
-                'access': {
-                  'outcome': 'allow',
-                  'lifespan': 'forever',
-                },
+                'access': {'outcome': 'allow', 'lifespan': 'forever'},
               },
             },
           ),
@@ -202,8 +193,9 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final permissionMenuWidgets =
-          find.byType(YaruPopupMenuButton<SnapdRuleAction>);
+      final permissionMenuWidgets = find.byType(
+        YaruPopupMenuButton<SnapdRuleAction>,
+      );
       expect(permissionMenuWidgets, findsNWidgets(2));
 
       // Find firefox's switch
@@ -318,8 +310,9 @@ void main() {
       verifyNever((service as MockAppPermissionsService).addRule(any));
     });
 
-    testWidgets('reset button calls removeAllRules for each snap',
-        (tester) async {
+    testWidgets('reset button calls removeAllRules for each snap', (
+      tester,
+    ) async {
       final container = createContainer();
       final service = registerMockAppPermissionsService(
         rules: [
@@ -330,10 +323,7 @@ void main() {
             interface: 'camera',
             constraints: {
               'permissions': {
-                'access': {
-                  'outcome': 'allow',
-                  'lifespan': 'forever',
-                },
+                'access': {'outcome': 'allow', 'lifespan': 'forever'},
               },
             },
           ),
@@ -344,10 +334,7 @@ void main() {
             interface: 'camera',
             constraints: {
               'permissions': {
-                'access': {
-                  'outcome': 'allow',
-                  'lifespan': 'forever',
-                },
+                'access': {'outcome': 'allow', 'lifespan': 'forever'},
               },
             },
           ),
@@ -358,10 +345,7 @@ void main() {
             interface: 'camera',
             constraints: {
               'permissions': {
-                'access': {
-                  'outcome': 'allow',
-                  'lifespan': 'forever',
-                },
+                'access': {'outcome': 'allow', 'lifespan': 'forever'},
               },
             },
           ),
@@ -409,10 +393,7 @@ void main() {
             interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
-                'access': {
-                  'outcome': 'allow',
-                  'lifespan': 'forever',
-                },
+                'access': {'outcome': 'allow', 'lifespan': 'forever'},
               },
             },
           ),
@@ -423,10 +404,7 @@ void main() {
             interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
-                'access': {
-                  'outcome': 'allow',
-                  'lifespan': 'session',
-                },
+                'access': {'outcome': 'allow', 'lifespan': 'session'},
               },
             },
           ),
@@ -489,10 +467,7 @@ void main() {
             interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
-                'access': {
-                  'outcome': 'allow',
-                  'lifespan': 'forever',
-                },
+                'access': {'outcome': 'allow', 'lifespan': 'forever'},
               },
             },
           ),
@@ -642,8 +617,9 @@ void main() {
       verifyNever((service as MockAppPermissionsService).addRule(any));
     });
 
-    testWidgets('reset button calls removeAllRules for each snap',
-        (tester) async {
+    testWidgets('reset button calls removeAllRules for each snap', (
+      tester,
+    ) async {
       final container = createContainer();
       final service = registerMockAppPermissionsService(
         rules: [
@@ -654,10 +630,7 @@ void main() {
             interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
-                'access': {
-                  'outcome': 'allow',
-                  'lifespan': 'forever',
-                },
+                'access': {'outcome': 'allow', 'lifespan': 'forever'},
               },
             },
           ),
@@ -668,10 +641,7 @@ void main() {
             interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
-                'access': {
-                  'outcome': 'allow',
-                  'lifespan': 'forever',
-                },
+                'access': {'outcome': 'allow', 'lifespan': 'forever'},
               },
             },
           ),
@@ -682,10 +652,7 @@ void main() {
             interface: SnapdInterface.microphone.interfaceName,
             constraints: {
               'permissions': {
-                'access': {
-                  'outcome': 'allow',
-                  'lifespan': 'forever',
-                },
+                'access': {'outcome': 'allow', 'lifespan': 'forever'},
               },
             },
           ),

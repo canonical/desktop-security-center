@@ -45,10 +45,7 @@ class _UbuntuProPageState extends ConsumerState<UbuntuProPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              SvgPicture.asset(
-                'assets/Ubuntu-tag.svg',
-                height: 68,
-              ),
+              SvgPicture.asset('assets/Ubuntu-tag.svg', height: 68),
               const SizedBox(width: 8),
               Text(
                 l10n.ubuntuProPageTitle,
@@ -199,96 +196,94 @@ class _UbuntuProStatus extends ConsumerWidget {
 
     return switch (pageState) {
       UbuntuProPageStateAttached() || UbuntuProPageStateDetachError() => Column(
-          children: [
-            const SizedBox(height: kPageSectionGap),
-            YaruTileList(
-              children: [
-                YaruListTile(
-                  leading: const Icon(YaruIcons.checkmark, size: kIconSize),
-                  titleText: l10n.ubuntuProEnabled,
-                ),
-              ],
-            ),
-            if (pageState is UbuntuProPageStateDetachError) ...[
-              const SizedBox(height: kPageSubsectionGap),
-              YaruInfoBox(
-                yaruInfoType: YaruInfoType.danger,
-                child: Text(l10n.ubuntuProDisableError),
+        children: [
+          const SizedBox(height: kPageSectionGap),
+          YaruTileList(
+            children: [
+              YaruListTile(
+                leading: const Icon(YaruIcons.checkmark, size: kIconSize),
+                titleText: l10n.ubuntuProEnabled,
               ),
             ],
+          ),
+          if (pageState is UbuntuProPageStateDetachError) ...[
+            const SizedBox(height: kPageSubsectionGap),
+            YaruInfoBox(
+              yaruInfoType: YaruInfoType.danger,
+              child: Text(l10n.ubuntuProDisableError),
+            ),
           ],
-        ),
+        ],
+      ),
       UbuntuProPageStateAttaching() => Column(
-          children: [
-            const SizedBox(height: kPageSectionGap),
-            YaruTileList(
-              children: [
-                YaruListTile(
-                  titleText: l10n.ubuntuProLoadingLabel,
-                  subtitle: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(height: 8),
-                      YaruLinearProgressIndicator(),
-                    ],
-                  ),
+        children: [
+          const SizedBox(height: kPageSectionGap),
+          YaruTileList(
+            children: [
+              YaruListTile(
+                titleText: l10n.ubuntuProLoadingLabel,
+                subtitle: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(height: 8),
+                    YaruLinearProgressIndicator(),
+                  ],
                 ),
-              ],
-            ),
-          ],
-        ),
-      UbuntuProPageStateDetaching() => Column(
-          children: [
-            const SizedBox(height: kPageSectionGap),
-            YaruTileList(
-              children: [
-                YaruListTile(
-                  titleText: l10n.ubuntuProLoadingLabel,
-                  subtitle: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(height: 8),
-                      YaruLinearProgressIndicator(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      UbuntuProPageStateDetached() || UbuntuProPageStateAttachError() => Column(
-          children: [
-            MarkdownText(
-              l10n.ubuntuProDisabled(
-                l10n.ubuntuProLearnMore.link(kUbuntuProLink),
-              ),
-              alignment: WrapAlignment.center,
-            ),
-            const SizedBox(height: kPageSectionGap),
-            ElevatedButton(
-              onPressed: () {
-                ref
-                    .read(ubuntuProPageModelProvider.notifier)
-                    .clearAttachError();
-                showDialog(
-                  context: context,
-                  builder: (_) => const AttachDialog(),
-                );
-              },
-              child: Text(l10n.ubuntuProEnablePro),
-            ),
-            if (pageState is UbuntuProPageStateAttachError) ...[
-              const SizedBox(height: kPageSubsectionGap),
-              YaruInfoBox(
-                yaruInfoType: YaruInfoType.danger,
-                child: Text(l10n.ubuntuProEnableTokenError),
               ),
             ],
-            const SizedBox(height: kPageSectionGap),
+          ),
+        ],
+      ),
+      UbuntuProPageStateDetaching() => Column(
+        children: [
+          const SizedBox(height: kPageSectionGap),
+          YaruTileList(
+            children: [
+              YaruListTile(
+                titleText: l10n.ubuntuProLoadingLabel,
+                subtitle: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(height: 8),
+                    YaruLinearProgressIndicator(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      UbuntuProPageStateDetached() || UbuntuProPageStateAttachError() => Column(
+        children: [
+          MarkdownText(
+            l10n.ubuntuProDisabled(
+              l10n.ubuntuProLearnMore.link(kUbuntuProLink),
+            ),
+            alignment: WrapAlignment.center,
+          ),
+          const SizedBox(height: kPageSectionGap),
+          ElevatedButton(
+            onPressed: () {
+              ref.read(ubuntuProPageModelProvider.notifier).clearAttachError();
+              showDialog(
+                context: context,
+                builder: (_) => const AttachDialog(),
+              );
+            },
+            child: Text(l10n.ubuntuProEnablePro),
+          ),
+          if (pageState is UbuntuProPageStateAttachError) ...[
+            const SizedBox(height: kPageSubsectionGap),
+            YaruInfoBox(
+              yaruInfoType: YaruInfoType.danger,
+              child: Text(l10n.ubuntuProEnableTokenError),
+            ),
           ],
-        ),
+          const SizedBox(height: kPageSectionGap),
+        ],
+      ),
     };
   }
 }
@@ -305,18 +300,21 @@ class _ESMSection extends ConsumerWidget {
     final pageState = ref.watch(ubuntuProPageModelProvider);
     final attaching = pageState is UbuntuProPageStateAttaching;
     final proProvider = ref.watch(ubuntuProStatusProvider);
-    final esmAppProvider =
-        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.esmApps));
-    final esmInfraProvider =
-        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.esmInfra));
+    final esmAppProvider = ref.watch(
+      ubuntuProFeatureModelProvider(UbuntuProFeatureType.esmApps),
+    );
+    final esmInfraProvider = ref.watch(
+      ubuntuProFeatureModelProvider(UbuntuProFeatureType.esmInfra),
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           l10n.ubuntuProESMTitle,
-          style:
-              theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
         ),
         Text(l10n.ubuntuProESMDescription),
         YaruTileList(
@@ -329,12 +327,12 @@ class _ESMSection extends ConsumerWidget {
               value: esmInfraProvider.enabled,
               onChanged: !attaching && esmInfraProvider.canToggle
                   ? (value) => ref
-                      .read(
-                        ubuntuProFeatureModelProvider(
-                          UbuntuProFeatureType.esmInfra,
-                        ).notifier,
-                      )
-                      .toggleFeature(value)
+                        .read(
+                          ubuntuProFeatureModelProvider(
+                            UbuntuProFeatureType.esmInfra,
+                          ).notifier,
+                        )
+                        .toggleFeature(value)
                   : null,
               title: _LoadingText(
                 text: l10n.ubuntuProESMMainTitle,
@@ -372,12 +370,12 @@ class _ESMSection extends ConsumerWidget {
               value: esmAppProvider.enabled,
               onChanged: !attaching && esmAppProvider.canToggle
                   ? (value) => ref
-                      .read(
-                        ubuntuProFeatureModelProvider(
-                          UbuntuProFeatureType.esmApps,
-                        ).notifier,
-                      )
-                      .toggleFeature(value)
+                        .read(
+                          ubuntuProFeatureModelProvider(
+                            UbuntuProFeatureType.esmApps,
+                          ).notifier,
+                        )
+                        .toggleFeature(value)
                   : null,
               title: _LoadingText(
                 text: l10n.ubuntuProESMUniverseTitle,
@@ -423,8 +421,9 @@ class _LivepatchSection extends ConsumerWidget {
 
     final pageState = ref.watch(ubuntuProPageModelProvider);
     final attaching = pageState is UbuntuProPageStateAttaching;
-    final livepatchProvider = ref
-        .watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.livepatch));
+    final livepatchProvider = ref.watch(
+      ubuntuProFeatureModelProvider(UbuntuProFeatureType.livepatch),
+    );
     final statusIconProvider = ref.watch(gSettingsUpdateNotifierModelProvider);
 
     return Column(
@@ -432,8 +431,9 @@ class _LivepatchSection extends ConsumerWidget {
       children: [
         Text(
           l10n.ubuntuProLivepatchTitle,
-          style:
-              theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
         ),
         YaruTileList(
           children: [
@@ -445,12 +445,12 @@ class _LivepatchSection extends ConsumerWidget {
               value: livepatchProvider.enabled,
               onChanged: !attaching && livepatchProvider.canToggle
                   ? (value) => ref
-                      .read(
-                        ubuntuProFeatureModelProvider(
-                          UbuntuProFeatureType.livepatch,
-                        ).notifier,
-                      )
-                      .toggleFeature(value)
+                        .read(
+                          ubuntuProFeatureModelProvider(
+                            UbuntuProFeatureType.livepatch,
+                          ).notifier,
+                        )
+                        .toggleFeature(value)
                   : null,
               title: _LoadingText(
                 text: l10n.ubuntuProLivepatchEnableTitle,
@@ -474,16 +474,18 @@ class _LivepatchSection extends ConsumerWidget {
               ),
             ),
             YaruSwitchListTile(
-              value: statusIconProvider.whenOrNull(
+              value:
+                  statusIconProvider.whenOrNull(
                     data: (data) => data.showStatusIcon,
                   ) ??
                   false,
-              onChanged: !attaching &&
+              onChanged:
+                  !attaching &&
                       livepatchProvider.enabled &&
                       livepatchProvider.canToggle
                   ? (value) => ref
-                      .read(gSettingsUpdateNotifierModelProvider.notifier)
-                      .toggleStatusIcon(value)
+                        .read(gSettingsUpdateNotifierModelProvider.notifier)
+                        .toggleStatusIcon(value)
                   : null,
               title: Text(l10n.ubuntuProLivepatchShowTitle),
               contentPadding: const EdgeInsets.symmetric(

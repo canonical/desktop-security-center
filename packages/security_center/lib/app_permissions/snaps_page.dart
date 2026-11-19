@@ -22,8 +22,9 @@ class SnapsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final snapRuleCounts =
-        ref.watch(snapRuleCountsProvider(interface: interface));
+    final snapRuleCounts = ref.watch(
+      snapRuleCountsProvider(interface: interface),
+    );
     return snapRuleCounts.when(
       data: (snapRuleCounts) =>
           _Body(snapRuleCounts: snapRuleCounts, interface: interface),
@@ -44,17 +45,17 @@ class _Body extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return switch (interface) {
       SnapdInterface.home => _HomeInterfaceBody(
-          snapRuleCounts: snapRuleCounts,
-          interface: interface,
-        ),
+        snapRuleCounts: snapRuleCounts,
+        interface: interface,
+      ),
       SnapdInterface.camera => _CameraInterfaceBody(
-          snapRuleCounts: snapRuleCounts,
-          interface: interface,
-        ),
+        snapRuleCounts: snapRuleCounts,
+        interface: interface,
+      ),
       SnapdInterface.microphone => _MicrophoneInterfaceBody(
-          snapRuleCounts: snapRuleCounts,
-          interface: interface,
-        ),
+        snapRuleCounts: snapRuleCounts,
+        interface: interface,
+      ),
     };
   }
 }
@@ -75,18 +76,18 @@ class _HomeInterfaceBody extends ConsumerWidget {
           (e) => _HomeInterfaceAppTile(
             snapName: e.key,
             ruleCount: e.value,
-            onTap: () => Navigator.of(context).pushSnapPermissions(
-              interface: interface,
-              snap: e.key,
-            ),
+            onTap: () =>
+                Navigator.of(context)
+                    .pushSnapPermissions(interface: interface, snap: e.key),
           ),
         )
         .toList();
     return ScrollablePage(
       children: [
         YaruTileList(
-          children:
-              tiles.isEmpty ? [EmptyRulesTile(interface: interface)] : tiles,
+          children: tiles.isEmpty
+              ? [EmptyRulesTile(interface: interface)]
+              : tiles,
         ),
       ],
     );
@@ -106,11 +107,7 @@ class _CameraInterfaceBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final appTiles = snapRuleCounts.entries
-        .map(
-          (e) => _CameraInterfaceAppTile(
-            snapName: e.key,
-          ),
-        )
+        .map((e) => _CameraInterfaceAppTile(snapName: e.key))
         .toList();
 
     return ScrollablePage(
@@ -155,11 +152,7 @@ class _MicrophoneInterfaceBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final appTiles = snapRuleCounts.entries
-        .map(
-          (e) => _MicrophoneInterfaceAppTile(
-            snapName: e.key,
-          ),
-        )
+        .map((e) => _MicrophoneInterfaceAppTile(snapName: e.key))
         .toList();
 
     return ScrollablePage(
@@ -206,9 +199,7 @@ class _HomeInterfaceAppTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     return YaruListTile(
-      leading: AppIcon(
-        snapIcon: ref.watch(snapIconProvider(snapName)),
-      ),
+      leading: AppIcon(snapIcon: ref.watch(snapIconProvider(snapName))),
       titleText: ref.watch(snapTitleOrNameProvider(snapName)),
       subtitle: Text(l10n.snapRulesCount(ruleCount)),
       trailing: const Icon(YaruIcons.go_next),
@@ -218,16 +209,15 @@ class _HomeInterfaceAppTile extends ConsumerWidget {
 }
 
 class _CameraInterfaceAppTile extends ConsumerWidget {
-  const _CameraInterfaceAppTile({
-    required this.snapName,
-  });
+  const _CameraInterfaceAppTile({required this.snapName});
 
   final String snapName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier =
-        ref.read(snapCameraRulesModelProvider(snap: snapName).notifier);
+    final notifier = ref.read(
+      snapCameraRulesModelProvider(snap: snapName).notifier,
+    );
     final cameraRules = ref.watch(snapCameraRulesModelProvider(snap: snapName));
 
     final activeAction = cameraRules.when(
@@ -256,9 +246,7 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
     );
 
     return YaruListTile(
-      leading: AppIcon(
-        snapIcon: ref.watch(snapIconProvider(snapName)),
-      ),
+      leading: AppIcon(snapIcon: ref.watch(snapIconProvider(snapName))),
       titleText: ref.watch(snapTitleOrNameProvider(snapName)),
       trailing: PermissionRulePopupMenu(
         selectedAction: activeAction,
@@ -279,18 +267,18 @@ class _CameraInterfaceAppTile extends ConsumerWidget {
 }
 
 class _MicrophoneInterfaceAppTile extends ConsumerWidget {
-  const _MicrophoneInterfaceAppTile({
-    required this.snapName,
-  });
+  const _MicrophoneInterfaceAppTile({required this.snapName});
 
   final String snapName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier =
-        ref.read(snapMicrophoneRulesModelProvider(snap: snapName).notifier);
-    final microphoneRules =
-        ref.watch(snapMicrophoneRulesModelProvider(snap: snapName));
+    final notifier = ref.read(
+      snapMicrophoneRulesModelProvider(snap: snapName).notifier,
+    );
+    final microphoneRules = ref.watch(
+      snapMicrophoneRulesModelProvider(snap: snapName),
+    );
 
     final activeAction = microphoneRules.when(
       data: (rules) {
@@ -320,9 +308,7 @@ class _MicrophoneInterfaceAppTile extends ConsumerWidget {
     );
 
     return YaruListTile(
-      leading: AppIcon(
-        snapIcon: ref.watch(snapIconProvider(snapName)),
-      ),
+      leading: AppIcon(snapIcon: ref.watch(snapIconProvider(snapName))),
       titleText: ref.watch(snapTitleOrNameProvider(snapName)),
       trailing: PermissionRulePopupMenu(
         selectedAction: activeAction,

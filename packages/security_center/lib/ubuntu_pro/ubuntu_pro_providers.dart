@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dbus/dbus.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:riverpod/misc.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:security_center/services/ubuntu_pro_dbus_service.dart';
 import 'package:security_center/services/ubuntu_pro_service.dart';
@@ -83,10 +83,8 @@ class UbuntuProPageModel extends _$UbuntuProPageModel {
 }
 
 @freezed
-class UbuntuProData with _$UbuntuProData {
-  factory UbuntuProData({
-    @Default('') String token,
-  }) = _UbuntuProData;
+abstract class UbuntuProData with _$UbuntuProData {
+  factory UbuntuProData({@Default('') String token}) = _UbuntuProData;
 
   const UbuntuProData._();
 
@@ -121,10 +119,9 @@ Stream<List<String>> updateNotifierStream(Ref ref) async* {
 }
 
 @freezed
-class GSettingsUpdateNotifierData with _$GSettingsUpdateNotifierData {
-  factory GSettingsUpdateNotifierData({
-    required bool showStatusIcon,
-  }) = _GSettingsUpdateNotifierData;
+abstract class GSettingsUpdateNotifierData with _$GSettingsUpdateNotifierData {
+  factory GSettingsUpdateNotifierData({required bool showStatusIcon}) =
+      _GSettingsUpdateNotifierData;
 }
 
 @riverpod
@@ -154,7 +151,7 @@ sealed class UbuntuProFeatureState with _$UbuntuProFeatureState {
 }
 
 @freezed
-class UbuntuProFeatureData with _$UbuntuProFeatureData {
+abstract class UbuntuProFeatureData with _$UbuntuProFeatureData {
   factory UbuntuProFeatureData({
     required UbuntuProFeatureState state,
     required UbuntuProFeature? data,
@@ -183,8 +180,8 @@ class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
       state: feature == null
           ? UbuntuProFeatureState.unavailable()
           : _service.isEnabled(featureType)
-              ? UbuntuProFeatureState.enabled()
-              : UbuntuProFeatureState.disabled(),
+          ? UbuntuProFeatureState.enabled()
+          : UbuntuProFeatureState.disabled(),
       data: feature,
       stream: subscription,
     );
@@ -200,8 +197,8 @@ class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
       state: feature == null
           ? UbuntuProFeatureState.unavailable()
           : _service.isEnabled(featureType)
-              ? UbuntuProFeatureState.enabled()
-              : UbuntuProFeatureState.disabled(),
+          ? UbuntuProFeatureState.enabled()
+          : UbuntuProFeatureState.disabled(),
     );
   }
 
@@ -236,13 +233,10 @@ class UbuntuProFeatureModel extends _$UbuntuProFeatureModel {
   }
 }
 
-enum FIPSType {
-  fips,
-  fipsUpdates,
-}
+enum FIPSType { fips, fipsUpdates }
 
 @freezed
-class FIPSData with _$FIPSData {
+abstract class FIPSData with _$FIPSData {
   factory FIPSData({
     required FIPSType type,
     required bool canEnable,
@@ -255,12 +249,15 @@ class FIPSData with _$FIPSData {
 class FIPSModel extends _$FIPSModel {
   @override
   FIPSData build() {
-    final fipsProvider =
-        ref.watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.fips));
-    final fipsUpdatesProvider = ref
-        .watch(ubuntuProFeatureModelProvider(UbuntuProFeatureType.fipsUpdates));
+    final fipsProvider = ref.watch(
+      ubuntuProFeatureModelProvider(UbuntuProFeatureType.fips),
+    );
+    final fipsUpdatesProvider = ref.watch(
+      ubuntuProFeatureModelProvider(UbuntuProFeatureType.fipsUpdates),
+    );
 
-    final enabled = (fipsProvider.data?.enabled ?? false) ||
+    final enabled =
+        (fipsProvider.data?.enabled ?? false) ||
         (fipsUpdatesProvider.data?.enabled ?? false);
     final canEnable = !enabled && (fipsProvider.data?.entitled ?? false);
 
@@ -291,10 +288,9 @@ class FIPSModel extends _$FIPSModel {
 }
 
 @freezed
-class MagicAttachData with _$MagicAttachData {
-  factory MagicAttachData({
-    required MagicAttachResponse response,
-  }) = _MagicAttachData;
+abstract class MagicAttachData with _$MagicAttachData {
+  factory MagicAttachData({required MagicAttachResponse response}) =
+      _MagicAttachData;
 
   const MagicAttachData._();
 
@@ -311,22 +307,18 @@ class MagicAttachModel extends _$MagicAttachModel {
   @override
   Future<MagicAttachData> build() async {
     final response = await _service.newToken();
-    _timer = Timer.periodic(
-      refreshDuration,
-      (timer) => updateToken(),
-    );
+    _timer = Timer.periodic(refreshDuration, (timer) => updateToken());
     ref.onDispose(() => _timer.cancel());
 
-    return MagicAttachData(
-      response: response,
-    );
+    return MagicAttachData(response: response);
   }
 
   Future<void> updateToken() async {
     if (!state.hasValue) return;
 
-    final contractResponse =
-        await _service.getContractToken(state.value!.response.token);
+    final contractResponse = await _service.getContractToken(
+      state.value!.response.token,
+    );
     state = AsyncData(state.value!.copyWith(response: contractResponse));
 
     if (state.value!.validContract) {

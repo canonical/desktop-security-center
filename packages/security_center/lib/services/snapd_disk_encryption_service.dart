@@ -25,8 +25,9 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
       case AuthMode.passphrase:
         changeId = await _snapd.changePassphrase(oldPass, newPass);
     }
-    final result =
-        await _snapd.watchChange(changeId).firstWhere((change) => change.ready);
+    final result = await _snapd
+        .watchChange(changeId)
+        .firstWhere((change) => change.ready);
     if (result.err != null) {
       throw Exception(
         'changePinPassphrase encountered an error: ${result.err!}',
@@ -54,8 +55,9 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
   @override
   Future<void> replaceRecoveryKey(String keyId) async {
     final changeId = await _snapd.replaceRecoveryKey(keyId);
-    final result =
-        await _snapd.watchChange(changeId).firstWhere((change) => change.ready);
+    final result = await _snapd
+        .watchChange(changeId)
+        .firstWhere((change) => change.ready);
     if (result.err != null) {
       // TODO: this error message
       throw Exception(
@@ -132,8 +134,9 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
 
     onAuthorized?.call();
 
-    final result =
-        await _snapd.watchChange(changeId).firstWhere((change) => change.ready);
+    final result = await _snapd
+        .watchChange(changeId)
+        .firstWhere((change) => change.ready);
     if (result.err != null) {
       throw Exception(
         'replacePlatformKey encountered an error: ${result.err!}',

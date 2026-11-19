@@ -13,33 +13,33 @@ enum SnapdInterface {
   microphone;
 
   static SnapdInterface fromString(String? name) => switch (name) {
-        'home' => home,
-        'camera' => camera,
-        'audio-record' => microphone,
-        _ => throw ArgumentError('Unknown interface: $name'),
-      };
+    'home' => home,
+    'camera' => camera,
+    'audio-record' => microphone,
+    _ => throw ArgumentError('Unknown interface: $name'),
+  };
 
   String localizedTitle(AppLocalizations l10n) => switch (this) {
-        home => l10n.homeInterfacePageTitle,
-        camera => l10n.cameraInterfacePageTitle,
-        microphone => l10n.microphoneInterfacePageTitle,
-      };
+    home => l10n.homeInterfacePageTitle,
+    camera => l10n.cameraInterfacePageTitle,
+    microphone => l10n.microphoneInterfacePageTitle,
+  };
   IconData get icon => switch (this) {
-        home => YaruIcons.folder,
-        camera => YaruIcons.camera_photo,
-        microphone => YaruIcons.microphone
-      };
+    home => YaruIcons.folder,
+    camera => YaruIcons.camera_photo,
+    microphone => YaruIcons.microphone,
+  };
 
   String get interfaceName => switch (this) {
-        home => 'home',
-        camera => 'camera',
-        microphone => 'audio-record',
-      };
+    home => 'home',
+    camera => 'camera',
+    microphone => 'audio-record',
+  };
 }
 
 /// Permission level constraints for a [SnapdRule].
 @freezed
-class PermissionConstraints with _$PermissionConstraints {
+abstract class PermissionConstraints with _$PermissionConstraints {
   const factory PermissionConstraints({
     required SnapdRequestOutcome outcome,
     required SnapdRequestLifespan lifespan,

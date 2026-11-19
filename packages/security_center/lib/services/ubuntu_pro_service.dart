@@ -1,3 +1,6 @@
+// Named parameters can't use private initializing formals.
+// ignore_for_file: prefer_initializing_formals
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -22,7 +25,7 @@ String getUbuntuProMagicLink(String userCode) {
 }
 
 @freezed
-class MagicAttachResponse with _$MagicAttachResponse {
+abstract class MagicAttachResponse with _$MagicAttachResponse {
   // ignore: invalid_annotation_target
   @JsonSerializable(fieldRename: FieldRename.none)
   const factory MagicAttachResponse({
@@ -44,10 +47,10 @@ class MagicAttachService {
     String defaultConfigFile = 'uaclient.conf',
     String v1MagicAttach = '/v1/magic-attach',
     @visibleForTesting FileSystem? fs,
-  })  : _defaultEtcPath = defaultEtcPath,
-        _defaultConfigFile = defaultConfigFile,
-        _v1MagicAttach = v1MagicAttach,
-        _fs = fs ?? LocalFileSystem();
+  }) : _defaultEtcPath = defaultEtcPath,
+       _defaultConfigFile = defaultConfigFile,
+       _v1MagicAttach = v1MagicAttach,
+       _fs = fs ?? LocalFileSystem();
 
   final FileSystem _fs;
   final String _defaultEtcPath;
@@ -74,8 +77,10 @@ class MagicAttachService {
   /// Query for a potential contract from a previously generated token.
   Future<MagicAttachResponse> getContractToken(String token) async {
     final uri = Uri.parse(_apiBase).replace(path: _v1MagicAttach);
-    final response =
-        await http.get(uri, headers: {'Authorization': 'Bearer $token'});
+    final response = await http.get(
+      uri,
+      headers: {'Authorization': 'Bearer $token'},
+    );
 
     if (response.statusCode >= 300) {
       throw HttpException(
@@ -113,8 +118,8 @@ class MagicAttachService {
 
 class GSettingsIconService {
   GSettingsIconService({GSettings? settingsClient})
-      : _settingsClient =
-            settingsClient ?? GSettings('com.ubuntu.update-notifier');
+    : _settingsClient =
+          settingsClient ?? GSettings('com.ubuntu.update-notifier');
 
   final GSettings _settingsClient;
   late final StreamController<List<String>> _stream;
@@ -124,8 +129,9 @@ class GSettingsIconService {
 
   void init() {
     _stream = StreamController.broadcast();
-    _streamSubscription =
-        _settingsClient.keysChanged.listen((data) => _stream.add(data));
+    _streamSubscription = _settingsClient.keysChanged.listen(
+      (data) => _stream.add(data),
+    );
   }
 
   Future<void> dispose() async {
@@ -134,8 +140,9 @@ class GSettingsIconService {
   }
 
   Future<bool> getStatusIcon() async {
-    final showStatusIcon =
-        await _settingsClient.get('show-livepatch-status-icon');
+    final showStatusIcon = await _settingsClient.get(
+      'show-livepatch-status-icon',
+    );
     return showStatusIcon.asBoolean();
   }
 

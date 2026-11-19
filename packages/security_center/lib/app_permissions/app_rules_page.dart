@@ -18,27 +18,24 @@ class AppRulesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return switch (interface) {
-      SnapdInterface.home => ref
-          .watch(snapHomeRulesModelProvider(snap: snap))
-          .when(
-            data: (ruleFragments) => _HomeBody(
-              snap: snap,
-              ruleFragments: ruleFragments,
+      SnapdInterface.home =>
+        ref
+            .watch(snapHomeRulesModelProvider(snap: snap))
+            .when(
+              data: (ruleFragments) =>
+                  _HomeBody(snap: snap, ruleFragments: ruleFragments),
+              error: (error, _) => ErrorWidget(error),
+              loading: () =>
+                  const Center(child: YaruCircularProgressIndicator()),
             ),
-            error: (error, _) => ErrorWidget(error),
-            loading: () => const Center(child: YaruCircularProgressIndicator()),
-          ),
       SnapdInterface.camera => const SizedBox.shrink(),
-      SnapdInterface.microphone => const SizedBox.shrink()
+      SnapdInterface.microphone => const SizedBox.shrink(),
     };
   }
 }
 
 class _HomeBody extends ConsumerWidget {
-  const _HomeBody({
-    required this.snap,
-    required this.ruleFragments,
-  });
+  const _HomeBody({required this.snap, required this.ruleFragments});
 
   final String snap;
   final List<SnapdHomeRuleFragment> ruleFragments;
@@ -51,11 +48,7 @@ class _HomeBody extends ConsumerWidget {
     return ScrollablePage(
       children: [
         if (ruleFragments.isEmpty) ...[
-          const YaruTileList(
-            children: [
-              EmptyRulesTile(),
-            ],
-          ),
+          const YaruTileList(children: [EmptyRulesTile()]),
           const SizedBox(height: 32),
         ],
         for (final category in SnapdRuleAction.values)
@@ -99,10 +92,7 @@ class _HomeRuleSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
+        Text(title, style: Theme.of(context).textTheme.titleSmall),
         const SizedBox(height: 8),
         _RuleList(
           ruleFragments: ruleFragments,
@@ -121,20 +111,20 @@ class _RuleList extends YaruTileList {
     required void Function(String id) onRemoveRule,
     required void Function(String id, List<HomePermission> perms) onRemovePerms,
   }) : super(
-          children: ruleFragments
-              .map(
-                (ruleFragment) => RuleTile(
-                  ruleFragment: ruleFragment,
-                  onRemove: () => ruleFragment.deleteRuleOnRemoval
-                      ? onRemoveRule(ruleFragment.ruleId)
-                      : onRemovePerms(
-                          ruleFragment.ruleId,
-                          ruleFragment.permissions,
-                        ),
-                ),
-              )
-              .toList(),
-        );
+         children: ruleFragments
+             .map(
+               (ruleFragment) => RuleTile(
+                 ruleFragment: ruleFragment,
+                 onRemove: () => ruleFragment.deleteRuleOnRemoval
+                     ? onRemoveRule(ruleFragment.ruleId)
+                     : onRemovePerms(
+                         ruleFragment.ruleId,
+                         ruleFragment.permissions,
+                       ),
+               ),
+             )
+             .toList(),
+       );
 }
 
 class RuleTile extends StatelessWidget {

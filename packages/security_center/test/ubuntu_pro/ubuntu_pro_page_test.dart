@@ -10,10 +10,7 @@ import '../utils/ubuntu_pro_utils.dart';
 void main() {
   group('pro attach', () {
     testWidgets('unavailable', (tester) async {
-      registerMockUbuntuProManagerService(
-        attached: false,
-        available: false,
-      );
+      registerMockUbuntuProManagerService(attached: false, available: false);
       registerMockUbuntuProFeatureService(
         featuresEnabled: false,
         featuresEntitled: false,
@@ -60,10 +57,7 @@ void main() {
       expect(find.byType(AlertDialog), findsNothing);
       expect(find.textContaining(tester.l10n.ubuntuProDisabled('')), findsOne);
       expect(
-        find.widgetWithText(
-          ElevatedButton,
-          tester.l10n.ubuntuProEnablePro,
-        ),
+        find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProEnablePro),
         findsOne,
       );
     });
@@ -164,10 +158,7 @@ void main() {
       expect(find.byType(AlertDialog), findsNothing);
       expect(find.text(tester.l10n.ubuntuProEnabled), findsOne);
       expect(
-        find.widgetWithText(
-          ElevatedButton,
-          tester.l10n.ubuntuProDisablePro,
-        ),
+        find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProDisablePro),
         findsOne,
       );
     });
@@ -259,8 +250,10 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(AlertDialog), findsOne);
-      final enableFinder =
-          find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProEnable);
+      final enableFinder = find.widgetWithText(
+        ElevatedButton,
+        tester.l10n.ubuntuProEnable,
+      );
       expect(enableFinder, findsNothing);
 
       await tester.pumpAndSettle(MagicAttachModel.refreshDuration);
@@ -273,10 +266,7 @@ void main() {
       expect(find.byType(AlertDialog), findsNothing);
       expect(find.text(tester.l10n.ubuntuProEnabled), findsOne);
       expect(
-        find.widgetWithText(
-          ElevatedButton,
-          tester.l10n.ubuntuProDisablePro,
-        ),
+        find.widgetWithText(ElevatedButton, tester.l10n.ubuntuProDisablePro),
         findsOne,
       );
     });
@@ -392,17 +382,17 @@ void main() {
     testWidgets('esm infra toggleable', (tester) async {
       registerMockGSettingsIconService();
       registerMockUbuntuProManagerService();
-      registerMockUbuntuProFeatureService(
-        featuresEnabled: false,
-      );
+      registerMockUbuntuProFeatureService(featuresEnabled: false);
       await _pumpUbuntuProPage(tester);
 
       final esmInfraTile = find.ancestor(
         of: find.text(tester.l10n.ubuntuProESMMainTitle),
         matching: find.byType(YaruSwitchListTile),
       );
-      final esmInfraSwitch =
-          find.descendant(of: esmInfraTile, matching: find.byType(YaruSwitch));
+      final esmInfraSwitch = find.descendant(
+        of: esmInfraTile,
+        matching: find.byType(YaruSwitch),
+      );
       expect(esmInfraTile, findsOne);
       expect(tester.widget<YaruSwitch>(esmInfraSwitch).checked, isFalse);
 
@@ -420,17 +410,17 @@ void main() {
     testWidgets('esm apps toggleable', (tester) async {
       registerMockGSettingsIconService();
       registerMockUbuntuProManagerService();
-      registerMockUbuntuProFeatureService(
-        featuresEnabled: false,
-      );
+      registerMockUbuntuProFeatureService(featuresEnabled: false);
       await _pumpUbuntuProPage(tester);
 
       final esmAppsTile = find.ancestor(
         of: find.text(tester.l10n.ubuntuProESMUniverseTitle),
         matching: find.byType(YaruSwitchListTile),
       );
-      final esmAppsSwitch =
-          find.descendant(of: esmAppsTile, matching: find.byType(YaruSwitch));
+      final esmAppsSwitch = find.descendant(
+        of: esmAppsTile,
+        matching: find.byType(YaruSwitch),
+      );
       expect(esmAppsTile, findsOne);
       expect(tester.widget<YaruSwitch>(esmAppsSwitch).checked, isFalse);
 
@@ -448,17 +438,17 @@ void main() {
     testWidgets('livepatch toggleable', (tester) async {
       registerMockGSettingsIconService();
       registerMockUbuntuProManagerService();
-      registerMockUbuntuProFeatureService(
-        featuresEnabled: false,
-      );
+      registerMockUbuntuProFeatureService(featuresEnabled: false);
       await _pumpUbuntuProPage(tester);
 
       final livepatchTile = find.ancestor(
         of: find.text(tester.l10n.ubuntuProLivepatchEnableTitle),
         matching: find.byType(YaruSwitchListTile),
       );
-      final livepatchSwitch =
-          find.descendant(of: livepatchTile, matching: find.byType(YaruSwitch));
+      final livepatchSwitch = find.descendant(
+        of: livepatchTile,
+        matching: find.byType(YaruSwitch),
+      );
       expect(livepatchTile, findsOne);
       expect(tester.widget<YaruSwitch>(livepatchSwitch).checked, isFalse);
 
@@ -514,10 +504,7 @@ void main() {
 Future<void> _pumpUbuntuProPage(WidgetTester tester) async {
   final container = createContainer();
 
-  await tester.pumpAppWithProviders(
-    (_) => const UbuntuProPage(),
-    container,
-  );
+  await tester.pumpAppWithProviders((_) => const UbuntuProPage(), container);
   await tester.pumpAndSettle();
 }
 

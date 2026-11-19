@@ -413,8 +413,9 @@ void main() {
           memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
         }
         final fsOv = fileSystemOverride(memFs);
-        final pickerOv =
-            filePickerOverride(tc.expectError ? Uri.parse('') : tc.uri);
+        final pickerOv = filePickerOverride(
+          tc.expectError ? Uri.parse('') : tc.uri,
+        );
         final runnerOv = processRunnerOverride({
           p.dirname(tc.uri.path): '/dev/sda1',
         });
@@ -484,8 +485,9 @@ void main() {
           memFs.directory(p.dirname(tc.uri.path)).createSync(recursive: true);
         }
         final fsOv = fileSystemOverride(memFs);
-        final pickerOv =
-            filePickerOverride(tc.expectError ? Uri.parse('') : tc.uri);
+        final pickerOv = filePickerOverride(
+          tc.expectError ? Uri.parse('') : tc.uri,
+        );
         final runnerOv = processRunnerOverride({
           p.dirname(tc.uri.path): '/dev/sda1',
         });
@@ -897,10 +899,7 @@ void main() {
             find.text('Exception: Mock change PIN/passphrase error'),
             findsOneWidget,
           );
-          expect(
-            find.textContaining('TpmFdeOperationException'),
-            findsNothing,
-          );
+          expect(find.textContaining('TpmFdeOperationException'), findsNothing);
 
           // Fields should remain enabled on error (so user can retry)
           for (var i = 0; i < 3; i++) {
@@ -926,8 +925,9 @@ void main() {
     }
   });
 
-  testWidgets('change auth - auth cancelled preserves input with no error',
-      (tester) async {
+  testWidgets('change auth - auth cancelled preserves input with no error', (
+    tester,
+  ) async {
     final container = createContainer();
     registerMockDiskEncryptionService(
       changePinPassphraseSnapdAuthErrorKind: SnapdAuthErrorKind.authCancelled,
@@ -1153,8 +1153,7 @@ void main() {
         storageEncryptionStatus: SnapdStorageEncryptionStatus.indeterminate,
       ),
       (
-        name:
-            '403 error from enumerate keyslots API (snap-fde-control interface)',
+        name: '403 error from enumerate keyslots API (snap-fde-control interface)',
         authMode: AuthMode.pin,
         enumerateKeySlots404Error: false,
         enumerateKeySlots403Error: true,
@@ -1205,7 +1204,8 @@ void main() {
         await tester.pumpAndSettle();
 
         // Check if this is a happy path (no errors)
-        final isHappyPath = !tc.enumerateKeySlots404Error &&
+        final isHappyPath =
+            !tc.enumerateKeySlots404Error &&
             !tc.enumerateKeySlots403Error &&
             !tc.enumerateKeySlotsFailure &&
             !tc.missingDefaultKeySlot &&
@@ -1217,10 +1217,7 @@ void main() {
 
         if (isHappyPath) {
           // Verify TPM enabled message is always shown in happy path
-          expect(
-            find.text(tester.l10n.recoveryKeyTPMEnabled),
-            findsOneWidget,
-          );
+          expect(find.text(tester.l10n.recoveryKeyTPMEnabled), findsOneWidget);
 
           // Verify auth mode specific message based on auth mode
           switch (tc.authMode) {
@@ -1243,9 +1240,7 @@ void main() {
               break;
             case AuthMode.passphrase:
               expect(
-                find.text(
-                  tester.l10n.recoveryKeyPassphraseEnabled,
-                ),
+                find.text(tester.l10n.recoveryKeyPassphraseEnabled),
                 findsOneWidget,
               );
               break;
@@ -1269,7 +1264,8 @@ void main() {
             expect(
               find.text(
                 tester
-                    .l10n.diskEncryptionPageErrorUnconnectedSnapInterfaceHeader,
+                    .l10n
+                    .diskEncryptionPageErrorUnconnectedSnapInterfaceHeader,
               ),
               findsOneWidget,
             );
@@ -1278,9 +1274,10 @@ void main() {
                 (widget) =>
                     widget is RichText &&
                     widget.text.toPlainText().contains(
-                          tester.l10n
-                              .diskEncryptionPageErrorUnconnectedSnapInterfaceBody,
-                        ),
+                      tester
+                          .l10n
+                          .diskEncryptionPageErrorUnconnectedSnapInterfaceBody,
+                    ),
               ),
               findsOneWidget,
             );
@@ -1379,66 +1376,68 @@ void main() {
     }
   });
 
-  group('add auth mode - submit disabled when new and confirm do not match',
-      () {
-    final cases = [
-      (name: 'Pin', authMode: AuthMode.pin),
-      (name: 'Passphrase', authMode: AuthMode.passphrase),
-    ];
+  group(
+    'add auth mode - submit disabled when new and confirm do not match',
+    () {
+      final cases = [
+        (name: 'Pin', authMode: AuthMode.pin),
+        (name: 'Passphrase', authMode: AuthMode.passphrase),
+      ];
 
-    for (final tc in cases) {
-      testWidgets(tc.name, (tester) async {
-        final container = createContainer();
-        registerMockDiskEncryptionService(authMode: AuthMode.none);
-        await tester.pumpAppWithProviders(
-          (_) => const DiskEncryptionPage(),
-          container,
-        );
-        await tester.pumpAndSettle();
+      for (final tc in cases) {
+        testWidgets(tc.name, (tester) async {
+          final container = createContainer();
+          registerMockDiskEncryptionService(authMode: AuthMode.none);
+          await tester.pumpAppWithProviders(
+            (_) => const DiskEncryptionPage(),
+            container,
+          );
+          await tester.pumpAndSettle();
 
-        // Open add dialog based on auth mode
-        final buttonText = tc.authMode == AuthMode.pin
-            ? tester.l10n.diskEncryptionPageAddPinButton
-            : tester.l10n.diskEncryptionPageAddPassphraseButton;
+          // Open add dialog based on auth mode
+          final buttonText = tc.authMode == AuthMode.pin
+              ? tester.l10n.diskEncryptionPageAddPinButton
+              : tester.l10n.diskEncryptionPageAddPassphraseButton;
 
-        expect(find.text(buttonText), findsOneWidget);
-        await tester.tap(find.text(buttonText));
-        await tester.pumpAndSettle();
+          expect(find.text(buttonText), findsOneWidget);
+          await tester.tap(find.text(buttonText));
+          await tester.pumpAndSettle();
 
-        // Find the text fields and save button
-        final textFields = find.byType(TextField);
-        expect(textFields, findsNWidgets(2));
+          // Find the text fields and save button
+          final textFields = find.byType(TextField);
+          expect(textFields, findsNWidgets(2));
 
-        final saveButton = find.widgetWithText(
-          ElevatedButton,
-          tester.l10n.diskEncryptionPageAddPinDialogSaveButton,
-        );
-        expect(saveButton, findsOneWidget);
+          final saveButton = find.widgetWithText(
+            ElevatedButton,
+            tester.l10n.diskEncryptionPageAddPinDialogSaveButton,
+          );
+          expect(saveButton, findsOneWidget);
 
-        // Initially button should be disabled (no input)
-        expect(tester.widget<ElevatedButton>(saveButton).enabled, isFalse);
+          // Initially button should be disabled (no input)
+          expect(tester.widget<ElevatedButton>(saveButton).enabled, isFalse);
 
-        // Enter valid new auth, but mismatched confirm
-        if (tc.authMode == AuthMode.pin) {
-          await tester.enterText(textFields.at(0), '5678');
-          await tester.enterText(textFields.at(1), '9999');
-        } else {
-          await tester.enterText(textFields.at(0), 'newpass');
-          await tester.enterText(textFields.at(1), 'different');
-        }
-        await tester.pumpAndSettle(debounceDelay);
+          // Enter valid new auth, but mismatched confirm
+          if (tc.authMode == AuthMode.pin) {
+            await tester.enterText(textFields.at(0), '5678');
+            await tester.enterText(textFields.at(1), '9999');
+          } else {
+            await tester.enterText(textFields.at(0), 'newpass');
+            await tester.enterText(textFields.at(1), 'different');
+          }
+          await tester.pumpAndSettle(debounceDelay);
 
-        // Button should still be disabled due to validation error
-        expect(tester.widget<ElevatedButton>(saveButton).enabled, isFalse);
+          // Button should still be disabled due to validation error
+          expect(tester.widget<ElevatedButton>(saveButton).enabled, isFalse);
 
-        // Check that appropriate mismatch error message is visible
-        final expectedError = tc.authMode == AuthMode.pin
-            ? tester.l10n.recoveryKeyPinConfirmError
-            : tester.l10n.recoveryKeyPassphraseConfirmError;
-        expect(find.text(expectedError), findsOneWidget);
-      });
-    }
-  });
+          // Check that appropriate mismatch error message is visible
+          final expectedError = tc.authMode == AuthMode.pin
+              ? tester.l10n.recoveryKeyPinConfirmError
+              : tester.l10n.recoveryKeyPassphraseConfirmError;
+          expect(find.text(expectedError), findsOneWidget);
+        });
+      }
+    },
+  );
 
   group('add auth mode - entropy hinting', () {
     final cases = [
@@ -1554,8 +1553,9 @@ void main() {
       find.text(tester.l10n.diskEncryptionPageAddPassphraseButton),
       findsOneWidget,
     );
-    await tester
-        .tap(find.text(tester.l10n.diskEncryptionPageAddPassphraseButton));
+    await tester.tap(
+      find.text(tester.l10n.diskEncryptionPageAddPassphraseButton),
+    );
     await tester.pumpAndSettle(debounceDelay);
 
     // Find new auth text field and enter text
@@ -1671,10 +1671,7 @@ void main() {
             find.text('Exception: Mock replace platform key error'),
             findsOneWidget,
           );
-          expect(
-            find.textContaining('TpmFdeOperationException'),
-            findsNothing,
-          );
+          expect(find.textContaining('TpmFdeOperationException'), findsNothing);
 
           // Add buttons should be re-enabled after error
           final addButtonText = tc.authMode == AuthMode.pin
@@ -1692,8 +1689,9 @@ void main() {
     }
   });
 
-  testWidgets('add auth mode - auth cancelled preserves input with no error',
-      (tester) async {
+  testWidgets('add auth mode - auth cancelled preserves input with no error', (
+    tester,
+  ) async {
     final container = createContainer();
     registerMockDiskEncryptionService(
       authMode: AuthMode.none,
@@ -1730,8 +1728,9 @@ void main() {
     expect(tester.widget<TextField>(textFields.at(1)).controller?.text, '5678');
   });
 
-  testWidgets('add auth mode - generic snapd error shows cause message',
-      (tester) async {
+  testWidgets('add auth mode - generic snapd error shows cause message', (
+    tester,
+  ) async {
     const snapdKind = 'some-other-snapd-error';
     final container = createContainer();
     registerMockDiskEncryptionService(
@@ -1760,10 +1759,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(
-      find.text('Mock replace platform key snapd error'),
-      findsOneWidget,
-    );
+    expect(find.text('Mock replace platform key snapd error'), findsOneWidget);
     expect(
       find.textContaining('SnapdException(kind: $snapdKind'),
       findsNothing,
@@ -1876,10 +1872,7 @@ void main() {
           // Button should still be visible and re-enabled
           final removeButton = find.widgetWithText(OutlinedButton, buttonText);
           expect(removeButton, findsOneWidget);
-          expect(
-            tester.widget<OutlinedButton>(removeButton).enabled,
-            isTrue,
-          );
+          expect(tester.widget<OutlinedButton>(removeButton).enabled, isTrue);
           final statusText = tc.authMode == AuthMode.pin
               ? tester.l10n.recoveryKeyPinEnabled
               : tester.l10n.recoveryKeyPassphraseEnabled;
@@ -1894,8 +1887,9 @@ void main() {
     }
   });
 
-  testWidgets('remove auth mode - auth cancelled leaves state unchanged',
-      (tester) async {
+  testWidgets('remove auth mode - auth cancelled leaves state unchanged', (
+    tester,
+  ) async {
     final container = createContainer();
     registerMockDiskEncryptionService(
       replacePlatformKeySnapdAuthErrorKind: SnapdAuthErrorKind.authCancelled,

@@ -16,18 +16,14 @@ class FeatureService {
     this.snapdVersion,
     @visibleForTesting FileSystem? fs,
     @visibleForTesting
-    ProcessResult Function(
-      String executable,
-      List<String> arguments,
-    )? runProcess,
-  })  : _fs = fs ?? LocalFileSystem(),
-        _runProcess = runProcess ?? Process.runSync;
+    ProcessResult Function(String executable, List<String> arguments)?
+    runProcess,
+  }) : _fs = fs ?? LocalFileSystem(),
+       _runProcess = runProcess ?? Process.runSync;
 
   final FileSystem _fs;
-  final ProcessResult Function(
-    String executable,
-    List<String> arguments,
-  ) _runProcess;
+  final ProcessResult Function(String executable, List<String> arguments)
+  _runProcess;
   final bool isDryRun;
   final String? snapdVersion;
   bool? _isUsingFde;

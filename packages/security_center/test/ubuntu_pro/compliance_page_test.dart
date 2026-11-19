@@ -26,17 +26,17 @@ void main() {
 
     testWidgets('USG toggleable', (tester) async {
       registerMockUbuntuProManagerService();
-      registerMockUbuntuProFeatureService(
-        featuresEnabled: false,
-      );
+      registerMockUbuntuProFeatureService(featuresEnabled: false);
       await _pumpCompliancePage(tester);
 
       final usgTile = find.ancestor(
         of: find.text(tester.l10n.ubuntuProComplianceUSGTitle),
         matching: find.byType(YaruSwitchListTile),
       );
-      final usgSwitch =
-          find.descendant(of: usgTile, matching: find.byType(YaruSwitch));
+      final usgSwitch = find.descendant(
+        of: usgTile,
+        matching: find.byType(YaruSwitch),
+      );
       expect(usgTile, findsOne);
       expect(usgSwitch, findsOne);
       expect(tester.widget<YaruSwitch>(usgSwitch).checked, isFalse);
@@ -54,17 +54,17 @@ void main() {
 
     testWidgets('FIPS toggleable', (tester) async {
       registerMockUbuntuProManagerService();
-      registerMockUbuntuProFeatureService(
-        featuresEnabled: false,
-      );
+      registerMockUbuntuProFeatureService(featuresEnabled: false);
       await _pumpCompliancePage(tester);
 
       final fipsTile = find.ancestor(
         of: find.text(tester.l10n.ubuntuProComplianceFIPSTitle),
         matching: find.byType(YaruSwitchListTile),
       );
-      final fipsSwitch =
-          find.descendant(of: fipsTile, matching: find.byType(YaruSwitch));
+      final fipsSwitch = find.descendant(
+        of: fipsTile,
+        matching: find.byType(YaruSwitch),
+      );
       expect(fipsTile, findsOne);
       expect(fipsSwitch, findsOne);
       expect(tester.widget<YaruSwitch>(fipsSwitch).checked, isFalse);

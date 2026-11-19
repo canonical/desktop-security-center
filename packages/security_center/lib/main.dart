@@ -28,10 +28,7 @@ Future<void> main(List<String> args) async {
   Logger.setup(path: '');
 
   final parser = ArgParser()
-    ..addFlag(
-      'dry-run',
-      help: 'Use a fake rules service instead of snapd',
-    )
+    ..addFlag('dry-run', help: 'Use a fake rules service instead of snapd')
     ..addFlag(
       'enable-camera-interface',
       help: 'Enable the experimental camera interface',
@@ -55,9 +52,9 @@ Future<void> main(List<String> args) async {
   // Create and register feature service to determine available features
   final featureService = FeatureService(
     isDryRun: argResults.flag('dry-run'),
-    snapdVersion: await getService<SnapdService>()
-        .systemInfo()
-        .then((info) => info.version),
+    snapdVersion: await getService<SnapdService>().systemInfo().then(
+      (info) => info.version,
+    ),
   );
   registerServiceInstance<FeatureService>(featureService);
 
@@ -68,16 +65,14 @@ Future<void> main(List<String> args) async {
 
   if (featureService.isDryRun) {
     registerService<AppPermissionsService>(
-      () => FakeAppPermissionsService.fromFile(
-        argResults['test-rules'] as String,
-      )..init(),
+      () =>
+          FakeAppPermissionsService.fromFile(argResults['test-rules'] as String)
+            ..init(),
       dispose: (service) => service.dispose(),
     );
   } else {
     registerService<AppPermissionsService>(
-      () => SnapdAppPermissionsService(
-        getService<SnapdService>(),
-      )..init(),
+      () => SnapdAppPermissionsService(getService<SnapdService>())..init(),
       dispose: (service) => service.dispose(),
     );
   }
@@ -129,5 +124,9 @@ Future<void> main(List<String> args) async {
   // Initialize available routes
   await AvailableRoutes.init();
 
-  runApp(const ProviderScope(child: SecurityCenterApp()));
+  // Riverpod 3 retries failed providers automatically. Keep the previous
+  // (Riverpod 2) behavior, where providers surface errors immediately.
+  runApp(
+    ProviderScope(retry: (_, __) => null, child: const SecurityCenterApp()),
+  );
 }

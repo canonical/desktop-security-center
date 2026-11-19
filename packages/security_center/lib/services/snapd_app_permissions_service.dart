@@ -81,13 +81,14 @@ class SnapdAppPermissionsService implements AppPermissionsService {
     final systemInfo = await _snapd
         .systemInfo()
         .then(
-          (systemInfo) => systemInfo.features?['apparmor-prompting']
-              as Map<String, dynamic>?,
+          (systemInfo) =>
+              systemInfo.features?['apparmor-prompting']
+                  as Map<String, dynamic>?,
         )
         .onError((e, __) {
-      _log.error('Error while fetching system info: $e');
-      return null;
-    });
+          _log.error('Error while fetching system info: $e');
+          return null;
+        });
 
     final isSupported = systemInfo?['supported'] as bool? ?? false;
     final isEnabled = systemInfo?['enabled'] as bool? ?? false;
@@ -105,13 +106,10 @@ class SnapdAppPermissionsService implements AppPermissionsService {
 
         final promptingInfo = await _getPromptingInfo();
         if (promptingInfo.isSupported && promptingInfo.isEnabled) {
-          final rules = await _snapd.getRules().onError(
-            (e, __) {
-              _log.error('Error while fetching rules: $e');
-              return [];
-            },
-            test: (e) => e is HttpException,
-          );
+          final rules = await _snapd.getRules().onError((e, __) {
+            _log.error('Error while fetching rules: $e');
+            return [];
+          }, test: (e) => e is HttpException);
           _emitStatus(AppPermissionsServiceStatus.enabled(rules));
         } else {
           if (promptingInfo.isSupported) {
@@ -143,14 +141,8 @@ class SnapdAppPermissionsService implements AppPermissionsService {
       _snapd.patchRule(id, constraints);
 
   @override
-  Future<void> removeAllRules({
-    required String snap,
-    String? interface,
-  }) =>
-      _snapd.removeRules(
-        snap,
-        interface: interface,
-      );
+  Future<void> removeAllRules({required String snap, String? interface}) =>
+      _snapd.removeRules(snap, interface: interface);
 
   Future<void> _guard(
     Future<String> Function() action,
@@ -188,15 +180,11 @@ class SnapdAppPermissionsService implements AppPermissionsService {
   }
 
   @override
-  Future<void> enable() => _guard(
-        _snapd.enablePrompting,
-        AppPermissionsServiceStatus.enabling,
-      );
+  Future<void> enable() =>
+      _guard(_snapd.enablePrompting, AppPermissionsServiceStatus.enabling);
   @override
-  Future<void> disable() => _guard(
-        _snapd.disablePrompting,
-        AppPermissionsServiceStatus.disabling,
-      );
+  Future<void> disable() =>
+      _guard(_snapd.disablePrompting, AppPermissionsServiceStatus.disabling);
 
   @override
   Future<List<String>> getSnapsWithInterface(String interface) async {

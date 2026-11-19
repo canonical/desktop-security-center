@@ -20,19 +20,17 @@ void main() {
     final fragments = SnapdHomeRuleFragment.fromRule(rule);
     expect(
       fragments,
-      equals(
-        [
-          const SnapdHomeRuleFragment(
-            ruleId: 'ruleId',
-            deleteRuleOnRemoval: true,
-            snap: 'firefox',
-            pathPattern: '/home/ubuntu/**',
-            permissions: [HomePermission.read, HomePermission.write],
-            outcome: SnapdRequestOutcome.allow,
-            lifespan: SnapdRequestLifespan.forever,
-          ),
-        ],
-      ),
+      equals([
+        const SnapdHomeRuleFragment(
+          ruleId: 'ruleId',
+          deleteRuleOnRemoval: true,
+          snap: 'firefox',
+          pathPattern: '/home/ubuntu/**',
+          permissions: [HomePermission.read, HomePermission.write],
+          outcome: SnapdRequestOutcome.allow,
+          lifespan: SnapdRequestLifespan.forever,
+        ),
+      ]),
     );
   });
 
@@ -45,10 +43,7 @@ void main() {
       constraints: {
         'path-pattern': '/home/ubuntu/**',
         'permissions': {
-          'read': {
-            'outcome': 'allow',
-            'lifespan': 'forever',
-          },
+          'read': {'outcome': 'allow', 'lifespan': 'forever'},
         },
       },
     );
@@ -56,19 +51,17 @@ void main() {
     final fragments = SnapdHomeRuleFragment.fromRule(rule);
     expect(
       fragments,
-      equals(
-        [
-          const SnapdHomeRuleFragment(
-            ruleId: 'ruleId',
-            deleteRuleOnRemoval: true,
-            snap: 'firefox',
-            pathPattern: '/home/ubuntu/**',
-            permissions: [HomePermission.read],
-            outcome: SnapdRequestOutcome.allow,
-            lifespan: SnapdRequestLifespan.forever,
-          ),
-        ],
-      ),
+      equals([
+        const SnapdHomeRuleFragment(
+          ruleId: 'ruleId',
+          deleteRuleOnRemoval: true,
+          snap: 'firefox',
+          pathPattern: '/home/ubuntu/**',
+          permissions: [HomePermission.read],
+          outcome: SnapdRequestOutcome.allow,
+          lifespan: SnapdRequestLifespan.forever,
+        ),
+      ]),
     );
   });
 
@@ -81,14 +74,8 @@ void main() {
       constraints: {
         'path-pattern': '/home/ubuntu/**',
         'permissions': {
-          'read': {
-            'outcome': 'allow',
-            'lifespan': 'forever',
-          },
-          'write': {
-            'outcome': 'deny',
-            'lifespan': 'session',
-          },
+          'read': {'outcome': 'allow', 'lifespan': 'forever'},
+          'write': {'outcome': 'deny', 'lifespan': 'session'},
         },
       },
     );
@@ -96,28 +83,26 @@ void main() {
     final fragments = SnapdHomeRuleFragment.fromRule(rule);
     expect(
       fragments,
-      equals(
-        [
-          const SnapdHomeRuleFragment(
-            ruleId: 'ruleId',
-            deleteRuleOnRemoval: false,
-            snap: 'firefox',
-            pathPattern: '/home/ubuntu/**',
-            permissions: [HomePermission.read],
-            outcome: SnapdRequestOutcome.allow,
-            lifespan: SnapdRequestLifespan.forever,
-          ),
-          const SnapdHomeRuleFragment(
-            ruleId: 'ruleId',
-            deleteRuleOnRemoval: false,
-            snap: 'firefox',
-            pathPattern: '/home/ubuntu/**',
-            permissions: [HomePermission.write],
-            outcome: SnapdRequestOutcome.deny,
-            lifespan: SnapdRequestLifespan.session,
-          ),
-        ],
-      ),
+      equals([
+        const SnapdHomeRuleFragment(
+          ruleId: 'ruleId',
+          deleteRuleOnRemoval: false,
+          snap: 'firefox',
+          pathPattern: '/home/ubuntu/**',
+          permissions: [HomePermission.read],
+          outcome: SnapdRequestOutcome.allow,
+          lifespan: SnapdRequestLifespan.forever,
+        ),
+        const SnapdHomeRuleFragment(
+          ruleId: 'ruleId',
+          deleteRuleOnRemoval: false,
+          snap: 'firefox',
+          pathPattern: '/home/ubuntu/**',
+          permissions: [HomePermission.write],
+          outcome: SnapdRequestOutcome.deny,
+          lifespan: SnapdRequestLifespan.session,
+        ),
+      ]),
     );
   });
 }
