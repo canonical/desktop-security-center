@@ -27,7 +27,7 @@ extension FeatureTypePath on UbuntuProFeatureType {
 }
 
 @freezed
-class UbuntuProManagerData with _$UbuntuProManagerData {
+abstract class UbuntuProManagerData with _$UbuntuProManagerData {
   factory UbuntuProManagerData({
     required bool attached,
     bool? available,
@@ -36,7 +36,7 @@ class UbuntuProManagerData with _$UbuntuProManagerData {
 }
 
 @freezed
-class UbuntuProFeatureDetails with _$UbuntuProFeatureDetails {
+abstract class UbuntuProFeatureDetails with _$UbuntuProFeatureDetails {
   factory UbuntuProFeatureDetails({
     required UbuntuProFeature data,
     required DBusRemoteObject object,
@@ -46,7 +46,7 @@ class UbuntuProFeatureDetails with _$UbuntuProFeatureDetails {
 }
 
 @freezed
-class UbuntuProFeature with _$UbuntuProFeature {
+abstract class UbuntuProFeature with _$UbuntuProFeature {
   factory UbuntuProFeature({
     required UbuntuProFeatureType? type,
     required String path,

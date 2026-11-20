@@ -153,4 +153,38 @@ class SnapdDiskEncryptionService implements DiskEncryptionService {
       );
     }
   }
+
+  @override
+  Future<SnapdStorageEncryption> checkEncryptionSupport() async {
+    final system = await _snapd.getSystems();
+    return system.storageEncryption;
+  }
+
+  @override
+  Future<SnapdStorageEncryption> fixEncryptionSupport(
+    SnapdFixAction fixAction, {
+    Map<String, dynamic>? args,
+  }) async {
+    final system = await _snapd.fixEncryptionSupport(fixAction, args: args);
+    return system.storageEncryption;
+  }
+
+  @override
+  Future<SnapdGenerateReprovisionRecoveryKeyResponse>
+      generateReprovisionRecoveryKey() {
+    return _snapd.generateReprovisionRecoveryKey();
+  }
+
+  @override
+  Future<void> reprovision({void Function()? onAuthorized}) async {
+    final changeId = await _snapd.reprovision();
+
+    onAuthorized?.call();
+
+    final result =
+        await _snapd.watchChange(changeId).firstWhere((change) => change.ready);
+    if (result.err != null) {
+      throw Exception('reprovision encountered an error: ${result.err!}');
+    }
+  }
 }

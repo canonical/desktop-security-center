@@ -10,9 +10,11 @@ import 'package:security_center/services/app_permissions_service.dart';
 import 'package:security_center/services/disk_encryption_service.dart';
 import 'package:security_center/services/fake_app_permissions_service.dart';
 import 'package:security_center/services/fake_disk_encryption_service.dart';
+import 'package:security_center/services/fake_power_service.dart';
 import 'package:security_center/services/fake_ubuntu_pro_dbus_service.dart';
 import 'package:security_center/services/fake_ubuntu_pro_service.dart';
 import 'package:security_center/services/feature_service.dart';
+import 'package:security_center/services/power_service.dart';
 import 'package:security_center/services/snapd_app_permissions_service.dart';
 import 'package:security_center/services/snapd_disk_encryption_service.dart';
 import 'package:security_center/services/snapd_service.dart';
@@ -40,6 +42,12 @@ Future<void> main(List<String> args) async {
       'test-rules',
       help: 'Path to a JSON file containing test rules',
       defaultsTo: 'integration_test/assets/test_rules.json',
+    )
+    ..addOption(
+      'test-fde-repair',
+      help: 'TPM/FDE repair scenario for --dry-run',
+      allowed: FakeRepairScenario.values.map((scenario) => scenario.flag),
+      defaultsTo: FakeRepairScenario.none.flag,
     );
 
   final ArgResults argResults;
@@ -87,12 +95,22 @@ Future<void> main(List<String> args) async {
     registerService<DiskEncryptionService>(
       () => FakeDiskEncryptionService.fromFile(
         'integration_test/assets/test_containers.json',
+        repairScenario: FakeRepairScenario.values.firstWhere(
+          (scenario) => scenario.flag == argResults['test-fde-repair'],
+        ),
       ),
     );
   } else {
     registerService<DiskEncryptionService>(
       () => SnapdDiskEncryptionService(getService<SnapdService>()),
     );
+  }
+
+  // Register power service, for the repair steps that restart or power off
+  if (featureService.isDryRun) {
+    registerService<PowerService>(FakePowerService.new);
+  } else {
+    registerService<PowerService>(PowerService.new);
   }
 
   // Register Ubuntu Pro services
