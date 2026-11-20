@@ -155,7 +155,6 @@
     "diskEncryptionPageAddPassphraseDialogBodyMain": "Pri každom spustení počítača budete musieť zadať svoju prístupovú frázu. Táto prístupová fráza je iná ako vaše používateľské heslo.",
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Ak zabudnete svoju prístupovú frázu, môžete získať späť prístup k disku pomocou obnovovacieho kľúča.",
     "diskEncryptionPageAdditionalSecurityHeader": "Dodatočné zabezpečenie",
-    "diskEncryptionPageAdditionalSecurityBody": "",
     "diskEncryptionPageAdditionalSecurityLearnMore": "Zistiť viac",
     "diskEncryptionPageAddPinDialogSaveButton": "Pridať",
     "diskEncryptionPageRemovePinButton": "Odstrániť PIN...",
