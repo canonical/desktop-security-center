@@ -157,7 +157,7 @@
     "diskEncryptionPageAddPassphraseDialogBodyMain": "Вам потрібно буде вводити свою парольну фразу щоразу під час запуску комп'ютера. Ця парольна фраза відрізняється від вашого пароля користувача.",
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Якщо ви забудете свою парольну фразу, ви можете відновити доступ до диска за допомогою ключа відновлення.",
     "diskEncryptionPageAdditionalSecurityHeader": "Додаткова безпека",
-    "diskEncryptionPageAdditionalSecurityBody": "Ви можете встановити парольну фразу або PIN-код для додаткової безпеки. Вам потрібно буде вводити це щоразу під час запуску комп'ютера.",
+    "diskEncryptionPageAdditionalSecurityBody": "Ви можете встановити парольну фразу або PIN-код для додаткової безфДля додаткового захисту ви можете встановити пароль або PIN-код. Його потрібно буде вводити під час кожного запуску комп’ютера.пеки. Вам потрібно буде вводити це щоразу під час запуску комп'ютера.",
     "diskEncryptionPageAdditionalSecurityLearnMore": "Дізнатися більше",
     "diskEncryptionPageAddPinDialogSaveButton": "Додати",
     "diskEncryptionPageRemovePinButton": "Видалити PIN...",
@@ -270,5 +270,12 @@
     "snapdRuleCategoryTemporarilyDenied": "Тимчасово відмовити",
     "snapdRuleCategoryAskAlways": "Завжди запитувати",
     "ubuntuProLoadingLabel": "Це може зайняти кілька секунд...",
-    "ubuntuProDisableError": "Не вдалося вимкнути Ubuntu Pro. Спробуйте ще раз"
+    "ubuntuProDisableError": "Не вдалося вимкнути Ubuntu Pro. Спробуйте ще раз",
+    "diskEncryptionPageRepairHeader": "Шифрування диска потребує виправлення",
+    "diskEncryptionPageRepairBody": "Під час розшифрування автоматичне відновлення не вдалося. Відновіть диск зараз, щоб запустити комп’ютер без ключа відновлення.",
+    "diskEncryptionPageRepairButton": "Почати ремонт...",
+    "diskEncryptionPageRepairing": "Відновлення...",
+    "diskEncryptionPageRepairDialogHeader": "Відновлення шифрування",
+    "diskEncryptionPageRepairDialogErrorHeader": "Шифрування з апаратним забезпеченням не вдалося відновити",
+    "diskEncryptionPageRepairDialogNotNeeded": "Шифрування диска більше не потребує відновлення."
 }
