@@ -1497,6 +1497,12 @@ abstract class AppLocalizations {
   /// **'Restart and press the settings key repeatedly during startup (commonly F2, F10 or Delete).'**
   String get tpmActionFixActionRebootToFwSettingsInstructions;
 
+  /// No description provided for @tpmActionFixActionRebootToFwSettingsAutomatic.
+  ///
+  /// In en, this message translates to:
+  /// **'The computer will restart and open its firmware settings.'**
+  String get tpmActionFixActionRebootToFwSettingsAutomatic;
+
   /// No description provided for @tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection.
   ///
   /// In en, this message translates to:

@@ -781,6 +781,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Restart and press the settings key repeatedly during startup (commonly F2, F10 or Delete).';
 
   @override
+  String get tpmActionFixActionRebootToFwSettingsAutomatic =>
+      'The computer will restart and open its firmware settings.';
+
+  @override
   String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection =>
       'Enable DMA protection manually';
 

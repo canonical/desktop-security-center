@@ -315,6 +315,7 @@
     "tpmActionFixActionShutdown": "Power off",
     "tpmActionFixActionRebootToFwSettings": "Restart to firmware settings",
     "tpmActionFixActionRebootToFwSettingsInstructions": "Restart and press the settings key repeatedly during startup (commonly F2, F10 or Delete).",
+    "tpmActionFixActionRebootToFwSettingsAutomatic": "The computer will restart and open its firmware settings.",
     "tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection": "Enable DMA protection manually",
     "tpmActionFixActionRebootToFwSettingsInsufficientTpmStorage": "Clear TPM manually",
     "tpmActionFixActionRebootToFwSettingsInvalidSecureBootMode": "Enable secure boot manually",

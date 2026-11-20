@@ -263,7 +263,11 @@ class _RepairPowerAction extends ConsumerWidget {
         if (isPowerOff)
           Text(l10n.diskEncryptionPageRepairDialogPowerOffBody)
         else if (confirm.action == SnapdFixAction.rebootToFwSettings) ...[
-          Text(l10n.tpmActionFixActionRebootToFwSettingsInstructions),
+          Text(
+            confirm.opensFirmwareSettings
+                ? l10n.tpmActionFixActionRebootToFwSettingsAutomatic
+                : l10n.tpmActionFixActionRebootToFwSettingsInstructions,
+          ),
           Text(l10n.tpmActionFixActionCaveatRetry),
         ] else
           Text(l10n.diskEncryptionPageRepairDialogRestartBody),
