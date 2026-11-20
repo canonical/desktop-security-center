@@ -13,7 +13,7 @@ dependencies:
   barcode_widget: ^2.0.4
   collection: ^1.18.0
   csv: ^6.0.0
-  dbus: ^0.7.12
+  dbus: ^0.8.0
   file: ^7.0.0
   flutter:
     sdk: flutter
