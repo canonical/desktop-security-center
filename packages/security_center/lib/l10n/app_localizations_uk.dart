@@ -328,7 +328,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'Ви можете встановити парольну фразу або PIN-код для додаткової безпеки. Вам потрібно буде вводити це щоразу під час запуску комп\'ютера.';
+      'Ви можете встановити парольну фразу або PIN-код для додаткової безфДля додаткового захисту ви можете встановити пароль або PIN-код. Його потрібно буде вводити під час кожного запуску комп’ютера.пеки. Вам потрібно буде вводити це щоразу під час запуску комп\'ютера.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityLearnMore =>
@@ -361,91 +361,95 @@ class AppLocalizationsUk extends AppLocalizations {
       'Видалення парольної фрази, це може тривати кілька секунд...';
 
   @override
-  String get diskEncryptionPageRepairHeader => 'Disk encryption needs repair';
+  String get diskEncryptionPageRepairHeader =>
+      'Шифрування диска потребує виправлення';
 
   @override
   String get diskEncryptionPageRepairBody =>
-      'Automatic repair failed during decryption. Repair the disk now to start the computer without a recovery key.';
+      'Під час розшифрування автоматичне відновлення не вдалося. Відновіть диск зараз, щоб запустити комп’ютер без ключа відновлення.';
 
   @override
-  String get diskEncryptionPageRepairButton => 'Start repair...';
+  String get diskEncryptionPageRepairButton => 'Почати ремонт...';
 
   @override
-  String get diskEncryptionPageRepairing => 'Repairing...';
+  String get diskEncryptionPageRepairing => 'Відновлення...';
 
   @override
-  String get diskEncryptionPageRepairDialogHeader => 'Repair encryption';
+  String get diskEncryptionPageRepairDialogHeader => 'Відновлення шифрування';
 
   @override
   String get diskEncryptionPageRepairDialogErrorHeader =>
-      'Hardware-backed encryption could not be repaired';
+      'Шифрування з апаратним забезпеченням не вдалося відновити';
 
   @override
   String get diskEncryptionPageRepairDialogNotNeeded =>
-      'Disk encryption no longer needs repair.';
+      'Шифрування диска більше не потребує відновлення.';
 
   @override
   String get diskEncryptionPageRepairDialogPinOrPassphraseRemovedHeader =>
-      'Any PIN and passphrase will be removed';
+      'Будь-який PIN-код та пароль будуть видалені';
 
   @override
   String get diskEncryptionPageRepairDialogPinOrPassphraseRemovedBody =>
-      'You can add them again after repair.';
+      'Ви зможете додати їх знову після ремонту.';
 
   @override
   String get diskEncryptionPageRepairDialogCheckKeyBody =>
-      'Clearing the TPM erases all encryption keys. Check that your recovery key works before continuing, since you may need it to start the computer.';
+      'Скидання TPM призводить до видалення всіх ключів шифрування. Перш ніж продовжувати, переконайтеся, що ваш ключ відновлення працює, оскільки він може знадобитися для запуску комп’ютера.';
 
   @override
   String get diskEncryptionPageRepairDialogKeyDoesntWorkBody =>
-      'Check the key and try again.';
+      'Перевірте ключ і спробуйте ще раз.';
 
   @override
-  String get diskEncryptionPageRepairDialogKeyHeader => 'New recovery key';
+  String get diskEncryptionPageRepairDialogKeyHeader =>
+      'Новий ключ відновлення';
 
   @override
   String get diskEncryptionPageRepairDialogKeyBody =>
-      'Repairing replaces your recovery key. Save the new recovery key somewhere safe. Once repairing completes, you will not be able to use the old key anymore.';
+      'Під час відновлення замінюється ваш ключ відновлення. Збережіть новий ключ відновлення в надійному місці. Після завершення відновлення ви більше не зможете використовувати старий ключ.';
 
   @override
   String get diskEncryptionPageRepairDialogKeyWarningHeader =>
-      'Old recovery keys will stop working';
+      'Старі ключі відновлення перестануть діяти';
 
   @override
   String get diskEncryptionPageRepairDialogKeyWarningBody =>
-      'You may want to let your IT administrator know you are re-encrypting the disk in case they are storing any recovery keys.';
+      'Можливо, вам варто повідомити свого ІТ-адміністратора про те, що ви повторно шифруєте диск, на випадок, якщо у нього зберігаються якісь ключі відновлення.';
 
   @override
   String get diskEncryptionPageRepairDialogKeyNotUsed =>
-      'Your current recovery key still works. The new key was not used, so you can discard it.';
+      'Ваш поточний ключ відновлення все ще діє. Новий ключ не використовувався, тому його можна викинути.';
 
   @override
-  String get diskEncryptionPageRepairDialogRepair => 'Repair';
+  String get diskEncryptionPageRepairDialogRepair => 'Ремонт';
 
   @override
-  String get diskEncryptionPageRepairDialogNotNow => 'Not now';
+  String get diskEncryptionPageRepairDialogNotNow => 'Не зараз';
 
   @override
   String get diskEncryptionPageRepairDialogRestartBody =>
-      'Restart the computer to complete previous actions. Then start the repair again.';
+      'Перезапустіть комп’ютер, щоб завершити попередні дії. Потім знову запустіть процедуру відновлення.';
 
   @override
-  String get diskEncryptionPageRepairDialogRestartNow => 'Restart now';
+  String get diskEncryptionPageRepairDialogRestartNow =>
+      'Перезавантажити зараз';
 
   @override
   String get diskEncryptionPageRepairDialogRestartFailed =>
-      'Could not restart the computer. Restart it from the system menu instead.';
+      'Не вдалося перезапустити комп’ютер. Замість цього перезапустіть його через системне меню.';
 
   @override
   String get diskEncryptionPageRepairDialogPowerOffBody =>
-      'Power off the computer to complete previous actions. Then start the repair again.';
+      'Вимкніть комп’ютер, щоб завершити попередні дії. Потім знову запустіть процедуру відновлення.';
 
   @override
-  String get diskEncryptionPageRepairDialogPowerOffNow => 'Power off now';
+  String get diskEncryptionPageRepairDialogPowerOffNow =>
+      'Вимкнути живлення зараз';
 
   @override
   String get diskEncryptionPageRepairDialogPowerOffFailed =>
-      'Could not power off the computer. Power it off from the system menu instead.';
+      'Не вдалося вимкнути комп’ютер. Вимкніть його за допомогою системного меню.';
 
   @override
   String get recoveryKeyExceptionFileSystemTitle =>
@@ -485,7 +489,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get recoveryKeyTPMNeedsRepair =>
-      'Hardware-backed encryption is enabled but needs repair';
+      'Шифрування з апаратним забезпеченням увімкнено, але потребує виправлення';
 
   @override
   String get recoveryKeyTPMExplanationBody =>
@@ -510,7 +514,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get recoveryKeyPassphraseButton => 'Змінити парольну фразу...';
 
   @override
-  String get recoveryKeyPassphrase => 'Passphrase';
+  String get recoveryKeyPassphrase => 'Пароль-фраза';
 
   @override
   String get recoveryKeyPassphraseCurrent => 'Поточна парольна фраза';
@@ -553,7 +557,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get recoveryKeyPinButton => 'Змінити PIN-код...';
 
   @override
-  String get recoveryKeyPin => 'PIN';
+  String get recoveryKeyPin => 'PIN-код';
 
   @override
   String get recoveryKeyPinCurrent => 'Поточний PIN-код';
@@ -626,266 +630,271 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get passphraseTypePassphraseTileTitle =>
-      'Require a passphrase on startup';
+      'Вимагати введення парольної фрази під час запуску';
 
   @override
-  String get passphraseTypePinTileTitle => 'Require a PIN on startup';
+  String get passphraseTypePinTileTitle =>
+      'Вимагати введення PIN-коду під час запуску';
 
   @override
   String get passphraseTypePageBodyAuthRequired =>
-      'Hardware-backed encryption requires additional security in this computer.';
+      'Шифрування з апаратним забезпеченням вимагає додаткових заходів безпеки на цьому комп’ютері.';
 
   @override
   String get tpmActionPageTitleActionable =>
-      'There is an issue with hardware-backed encryption';
+      'Виникла проблема з шифруванням, що забезпечується апаратними засобами';
 
   @override
-  String get tpmActionDetailsLabel => 'Technical details';
+  String get tpmActionDetailsLabel => 'Технічні деталі';
 
   @override
   String tpmActionSolutionLabel(int n, String text) {
-    return 'Solution $n: $text';
+    return 'Рішення $n: $text';
   }
 
   @override
   String get tpmActionErrorSupportLabel =>
-      'Try the solutions below or contact IT support.';
+      'Спробуйте скористатися наведеними нижче рішеннями або зверніться до служби ІТ-підтримки.';
 
   @override
   String get tpmActionErrorSupportLabelSingle =>
-      'Try the solution below or contact IT support.';
+      'Спробуйте скористатися наведеним нижче рішенням або зверніться до служби ІТ-підтримки.';
 
   @override
-  String get tpmActionErrorKindInternal => 'Internal error.';
+  String get tpmActionErrorKindInternal => 'Внутрішня помилка.';
 
   @override
-  String get tpmActionErrorKindShutdownRequired => 'Power off is required.';
+  String get tpmActionErrorKindShutdownRequired =>
+      'Необхідно вимкнути живлення.';
 
   @override
-  String get tpmActionErrorKindRebootRequired => 'Restart is required.';
+  String get tpmActionErrorKindRebootRequired => 'Потрібен перезапуск.';
 
   @override
-  String get tpmActionErrorKindUnexpectedAction => 'Unexpected action.';
+  String get tpmActionErrorKindUnexpectedAction => 'Несподівана дія.';
 
   @override
-  String get tpmActionErrorKindMissingArgument => 'Missing argument.';
+  String get tpmActionErrorKindMissingArgument => 'Відсутній аргумент.';
 
   @override
-  String get tpmActionErrorKindInvalidArgument => 'Invalid argument.';
+  String get tpmActionErrorKindInvalidArgument => 'Неправильний аргумент.';
 
   @override
-  String get tpmActionErrorKindActionFailed => 'Action failed.';
+  String get tpmActionErrorKindActionFailed => 'Дія не вдалася.';
 
   @override
   String get tpmActionErrorKindRunningInVm =>
-      'The current environment is a virtual machine.';
+      'Поточне середовище — це віртуальна машина.';
 
   @override
   String get tpmActionErrorKindSystemNotEfi =>
-      'This computer is using older firmware (legacy BIOS) that is not compatible with this encryption method.';
+      'Цей комп’ютер використовує застарілу прошивку (застарілий BIOS), яка не сумісна з цим методом шифрування.';
 
   @override
   String get tpmActionErrorKindEfiVariableAccess =>
-      'There is an issue with this computer\'s firmware.';
+      'У прошивці цього комп\'ютера виникла проблема.';
 
   @override
   String get tpmActionErrorKindNoSuitableTpm2Device =>
-      'This computer does not have the required security hardware (TPM 2.0) for this encryption method.';
+      'Цей комп\'ютер не має необхідного апаратного забезпечення безпеки (TPM 2.0) для цього методу шифрування.';
 
   @override
   String get tpmActionErrorKindTpmDeviceDisabled =>
-      'This computer\'s TPM is disabled.';
+      'Модуль TPM цього комп\'ютера вимкнено.';
 
   @override
   String get tpmActionErrorKindTpmHierarchiesOwned =>
-      'This computer\'s TPM is already in use by another system or application.';
+      'Модуль TPM цього комп\'ютера вже використовується іншою системою або програмою.';
 
   @override
   String get tpmActionErrorKindTpmDeviceLockoutLockedOut =>
-      'This computer\'s TPM is currently locked.';
+      'Модуль TPM цього комп\'ютера наразі заблоковано.';
 
   @override
   String get tpmActionErrorKindInsufficientTpmStorage =>
-      'This computer\'s TPM does not have enough storage available.';
+      'У модулі TPM цього комп\'ютера недостатньо вільного місця.';
 
   @override
   String get tpmActionErrorKindUnsupportedPlatform =>
-      'This computer is not compatible with hardware-backed encryption.';
+      'Цей комп\'ютер не підтримує шифрування на рівні апаратного забезпечення.';
 
   @override
   String get tpmActionErrorKindInsufficientDmaProtection =>
-      'This computer is missing a required security feature (DMA protection).';
+      'У цьому комп\'ютері відсутня необхідна функція безпеки (захист від DMA).';
 
   @override
   String get tpmActionErrorKindNoKernelIommu =>
-      'This computer is missing a required security feature (IOMMU).';
+      'У цьому комп\'ютері відсутня необхідна функція безпеки (IOMMU).';
 
   @override
   String get tpmActionErrorKindHostSecurity =>
-      'There is an issue with this computer\'s security configuration.';
+      'У налаштуваннях безпеки цього комп\'ютера виявлено проблему.';
 
   @override
   String get tpmActionErrorKindSysPrepApplicationsPresent =>
-      'There is software running at startup that might prevent a secure connection with the computer\'s TPM.';
+      'Під час запуску системи працює програмне забезпечення, яке може перешкоджати встановленню безпечного з’єднання з модулем TPM комп’ютера.';
 
   @override
   String get tpmActionErrorKindAbsolutePresent =>
-      'Absolute Persistence Module is enabled in this computer.';
+      'На цьому комп’ютері увімкнено модуль «Абсолютна стійкість».';
 
   @override
   String get tpmActionErrorKindInvalidSecureBootMode =>
-      'Secure boot is disabled in this computer or is not set in deployed mode.';
+      'На цьому комп’ютері функція безпечного завантаження вимкнена або не налаштована в режимі розгортання.';
 
   @override
   String get tpmActionErrorKindWeakSecureBootAlgorithmDetected =>
-      'Some of the certificates verifying software in this computer are outdated or use weak protection.';
+      'Деякі сертифікати, що підтверджують автентичність програмного забезпечення на цьому комп’ютері, застаріли або мають слабкий рівень захисту.';
 
   @override
   String get tpmActionErrorKindPreOsSecureBootAuthByEnrolledDigests =>
-      'This computer is using a manual allowlist to verify software at startup.';
+      'Цей комп’ютер використовує ручний список дозволених програм для перевірки програмного забезпечення під час запуску.';
 
   @override
   String get tpmActionErrorKindAddonDriversPresent =>
-      'Add-on drivers are present.';
+      'Наявні додаткові драйвери.';
 
   @override
   String get tpmActionErrorKindNoHardwareRootOfTrust =>
-      'This computer is missing a required security feature (hardware root of trust).';
+      'У цьому комп’ютері відсутня необхідна функція безпеки (апаратний корінь довіри).';
 
   @override
   String get tpmActionErrorKindGenericTpm =>
-      'There is an issue with this computer\'s TPM.';
+      'У модулі TPM цього комп\'ютера виникла проблема.';
 
   @override
   String get tpmActionErrorKindGenericFirmware =>
-      'There is an issue with this computer\'s firmware.';
+      'У прошивці цього комп\'ютера виникла проблема.';
 
   @override
-  String get tpmActionFixActionReboot => 'Restart';
+  String get tpmActionFixActionReboot => 'Перезапуск';
 
   @override
-  String get tpmActionFixActionShutdown => 'Power off';
+  String get tpmActionFixActionShutdown => 'Вимкнення';
 
   @override
   String get tpmActionFixActionRebootToFwSettings =>
-      'Restart to firmware settings';
+      'Скинути налаштування до заводських';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsInstructions =>
-      'Restart and press the settings key repeatedly during startup (commonly F2, F10 or Delete).';
+      'Перезапустіть систему та під час завантаження кілька разів натисніть клавішу налаштувань (зазвичай це F2, F10 або Delete).';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection =>
-      'Enable DMA protection manually';
+      'Увімкнути захист DMA вручну';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsInsufficientTpmStorage =>
-      'Clear TPM manually';
+      'Очистити TPM вручну';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsInvalidSecureBootMode =>
-      'Enable secure boot manually';
+      'Увімкнути безпечний запуск вручну';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsNoKernelIommu =>
-      'Enable IOMMU manually';
+      'Увімкнути IOMMU вручну';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsNoSuitablePcrBank =>
-      'Enable PCR banks manually';
+      'Увімкнути банки PCR вручну';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsTpmDeviceDisabled =>
-      'Enable TPM manually';
+      'Увімкнути TPM вручну';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsTpmDeviceLockoutLockedOut =>
-      'Clear TPM manually';
+      'Очистити TPM вручну';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsTpmHierarchiesOwned =>
-      'Clear TPM manually';
+      'Очистити TPM вручну';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsAbsolutePresent =>
-      'Disable Absolute Persistence Module manually';
+      'Вимкнути модуль «Абсолютна стійкість» вручну';
 
   @override
-  String get tpmActionFixActionContactOem => 'Contact OEM';
+  String get tpmActionFixActionContactOem => 'Зв\'язатися з OEM-виробником';
 
   @override
-  String get tpmActionFixActionContactOsVendor => 'Contact OS vendor';
+  String get tpmActionFixActionContactOsVendor =>
+      'Звернутися до постачальника ОС';
 
   @override
-  String get tpmActionFixActionEnableTpmViaFirmware => 'Enable TPM on restart';
+  String get tpmActionFixActionEnableTpmViaFirmware =>
+      'Увімкнути TPM після перезапуску';
 
   @override
   String get tpmActionFixActionEnableAndClearTpmViaFirmware =>
-      'Enable and clear TPM on restart';
+      'Увімкнути та скинути TPM після перезапуску';
 
   @override
-  String get tpmActionFixActionClearTpmViaFirmware => 'Clear TPM on restart';
+  String get tpmActionFixActionClearTpmViaFirmware =>
+      'Очистити TPM під час перезапуску';
 
   @override
-  String get tpmActionFixActionClearTpm => 'Clear TPM';
+  String get tpmActionFixActionClearTpm => 'Очистити TPM';
 
   @override
-  String get tpmActionFixActionProceed => 'Ignore';
+  String get tpmActionFixActionProceed => 'Ігнорувати';
 
   @override
   String get tpmActionFixActionRebootDescription =>
-      'Restart the computer to complete previous actions.';
+      'Перезапустіть комп’ютер, щоб завершити попередні дії.';
 
   @override
   String get tpmActionFixActionRebootTpmDeviceFailureDescription =>
-      'Restarting the computer may fix the issue.';
+      'Перезавантаження комп\'ютера може вирішити цю проблему.';
 
   @override
   String get tpmActionFixActionShutdownDescription =>
-      'Power off the computer to complete previous actions.';
+      'Вимкніть комп’ютер, щоб завершити попередні дії.';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsDescription =>
-      'You can do this in your computer\'s firmware settings.';
+      'Ви можете це зробити в налаштуваннях прошивки вашого комп’ютера.';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsWithDocsDescription =>
-      'You might be able to do this in your computer\'s firmware settings. Check the documentation of the CPU vendor for guidance.';
+      'Можливо, це можна зробити в налаштуваннях прошивки вашого комп’ютера. Для отримання докладних вказівок зверніться до документації виробника процесора.';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsInvalidSecureBootModeHint =>
-      'Check secure boot mode is set to \"deployed\".';
+      'Перевірте, чи для режиму безпечного завантаження встановлено значення «deployed».';
 
   @override
   String get tpmActionFixActionRebootToFwSettingsNoKernelIommuHint =>
-      'This feature might be referred to as \"Virtualization Technology\", \"VT-d\" or \"AMD-Vi\".';
+      'Цю функцію можуть називати «технологією віртуалізації», «VT-d» або «AMD-Vi».';
 
   @override
   String get tpmActionFixActionProceedDescription =>
-      'Ignoring the issue might make this computer less secure.';
+      'Ігнорування цієї проблеми може знизити рівень безпеки цього комп’ютера.';
 
   @override
-  String get tpmActionIgnoreAndContinueLabel => 'Ignore and continue';
+  String get tpmActionIgnoreAndContinueLabel => 'Ігнорувати або продовжити';
 
   @override
   String get tpmActionFixActionClearTpmWarningTitle =>
-      'Clearing the TPM erases all encryption keys';
+      'Скидання TPM призводить до видалення всіх ключів шифрування';
 
   @override
   String get tpmActionFixActionClearTpmWarningBody =>
-      'You will lose access to all data in encrypted drives for which you do not have recovery keys. It will also break other features that depend on the TPM, such as authentication and certificates.';
+      'Ви втратите доступ до всіх даних на зашифрованих дисках, для яких у вас немає ключів відновлення. Крім того, це призведе до порушення роботи інших функцій, що залежать від модуля TPM, таких як аутентифікація та сертифікати.';
 
   @override
   String get tpmActionFixActionClearTpmConfirmationLabel =>
-      'I understand the risk';
+      'Я усвідомлюю ризик';
 
   @override
   String get tpmActionFixActionCaveatConfirm =>
-      'You might be asked to confirm this action on restart.';
+      'Під час перезапуску вас можуть попросити підтвердити цю дію.';
 
   @override
   String get tpmActionFixActionCaveatRetry =>
-      'Then you will need to start the repair again.';
+      'Тоді вам доведеться розпочати ремонт заново.';
 
   @override
   String get ubuntuProPageTitle => 'Ubuntu Pro';

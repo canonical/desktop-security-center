@@ -21,19 +21,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String get snapdRuleCategoryForeverAllowed => 'Permitir siempre';
 
   @override
-  String get permissionRulePopupMenuSemanticLabel => 'Update Permissions';
+  String get permissionRulePopupMenuSemanticLabel => 'Actualizar permisos';
 
   @override
   String get snapdRuleCategoryForeverDenied => 'Denegar siempre';
 
   @override
-  String get snapdRuleCategoryTemporarilyAllowed => 'Allow temporarily';
+  String get snapdRuleCategoryTemporarilyAllowed => 'Permitir temporalmente';
 
   @override
-  String get snapdRuleCategoryTemporarilyDenied => 'Deny temporarily';
+  String get snapdRuleCategoryTemporarilyDenied => 'Denegar temporalmente';
 
   @override
-  String get snapdRuleCategoryAskAlways => 'Ask always';
+  String get snapdRuleCategoryAskAlways => 'Siempre preguntar';
 
   @override
   String get snapPermissionReadLabel => 'Lectura';
@@ -912,7 +912,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get ubuntuProEnabled => 'Ubuntu Pro está activado';
 
   @override
-  String get ubuntuProLoadingLabel => 'This may take a few seconds...';
+  String get ubuntuProLoadingLabel => 'Esto puede demorar unos segundos…';
 
   @override
   String ubuntuProDisabled(String learnMoreLink) {
@@ -978,7 +978,8 @@ class AppLocalizationsEs extends AppLocalizations {
       'Si desactiva Ubuntu Pro, su suscripción dejará de estar asociada a este equipo. ¿Quiere continuar?';
 
   @override
-  String get ubuntuProDisableError => 'Could not disable Ubuntu Pro, try again';
+  String get ubuntuProDisableError =>
+      'No se pudo desactivar Ubuntu Pro; inténtelo de nuevo';
 
   @override
   String get ubuntuProEnable => 'Activar';
@@ -1064,7 +1065,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String ubuntuProESMUniverseDescription(int year) {
-    return 'Actualizaciones de seguridad adicionales para más de 23 000 paquetes de Ubuntu Universe hasta el $year';
+    return 'Actualizaciones de seguridad adicionales para paquetes Universe de Ubuntu hasta el $year';
   }
 
   @override
