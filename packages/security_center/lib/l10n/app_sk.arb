@@ -336,7 +336,7 @@
     "tpmActionErrorKindAbsolutePresent": "V tomto počítači je povolený Absolute Persistence Module.",
     "tpmActionErrorKindInvalidSecureBootMode": "V tomto počítači je vypnuté secure boot alebo nie je nastavené v režime nasadenia.",
     "tpmActionErrorKindWeakSecureBootAlgorithmDetected": "Niektoré certifikáty overujúce softvér v tomto počítači sú zastarané alebo používajú slabú ochranu.",
-    "tpmActionErrorKindPreOsSecureBootAuthByEnrolledDigests": "Tento počítač používa manuálny zoznam povolených na overenie softvéru pri spustení.",
+    "tpmActionErrorKindPreOsSecureBootAuthByEnrolledDigests": "Tento počítač používa manuálny zoznam povolení na overenie softvéru pri spustení.",
     "tpmActionErrorKindAddonDriversPresent": "Sú prítomné doplnkové ovládače.",
     "tpmActionErrorKindNoHardwareRootOfTrust": "Tomuto počítaču chýba požadovaná bezpečnostná funkcia (hardvérový koreň dôvery).",
     "tpmActionErrorKindGenericTpm": "Vyskytol sa problém s TPM tohto počítača.",
