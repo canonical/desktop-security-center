@@ -7,7 +7,7 @@ project(runner LANGUAGES CXX)
 set(BINARY_NAME "security_center")
 # The unique GTK application identifier for this application. See:
 # https://wiki.gnome.org/HowDoI/ChooseApplicationID
-set(APPLICATION_ID "com.example.security_center")
+set(APPLICATION_ID "com.canonical.security_center")
 
 # Use the libhandy window directly instead of letting handy_window install its
 # own HdyWindowMixin. The plugin cannot replace an HdyWindow titlebar, and its

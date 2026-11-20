@@ -24,6 +24,12 @@ apps:
       - system-observe
       - shutdown
 
+slots:
+  dbus-name:
+    interface: dbus
+    bus: session
+    name: com.canonical.security_center
+
 parts:
   fvm:
     plugin: nil
