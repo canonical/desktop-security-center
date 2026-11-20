@@ -375,7 +375,7 @@
     "tpmActionFixActionClearTpmConfirmationLabel": "Rozumiem riziku",
     "tpmActionFixActionCaveatConfirm": "Pri reštartovaní môžete byť vyzvaní na potvrdenie tejto akcie.",
     "tpmActionFixActionCaveatRetry": "Potom budete musieť opravu spustiť znova.",
-    "diskEncryptionPageAdditionalSecurityBody": "Pre dodatočné zabezpečenie môžete nastaviť prístupovú frázu alebo PIN. Budete ich musieť zadať pri každom spustení počítača.",
+    "diskEncryptionPageAdditionalSecurityBody": "Pre dodatočné zabezpečenie môžete nastaviť prístupovú frázu alebo kód PIN. Tento údaj budete musieť zadať pri každom spustení počítača.",
     "recoveryKeyPassphrase": "Prístupová fráza",
     "recoveryKeyPin": "PIN"
 }
