@@ -23,6 +23,12 @@ apps:
       - removable-media
       - system-observe
 
+slots:
+  dbus-name:
+    interface: dbus
+    bus: session
+    name: com.canonical.security_center
+
 parts:
   fvm:
     plugin: nil
