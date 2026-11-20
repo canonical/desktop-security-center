@@ -9,6 +9,11 @@ set(BINARY_NAME "security_center")
 # https://wiki.gnome.org/HowDoI/ChooseApplicationID
 set(APPLICATION_ID "com.example.security_center")
 
+# Use the libhandy window directly instead of letting handy_window install its
+# own HdyWindowMixin. The plugin cannot replace an HdyWindow titlebar, and its
+# mixin setup breaks on some non-GNOME X11 window managers.
+set(USE_LIBHANDY ON)
+
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.
 cmake_policy(SET CMP0063 NEW)
