@@ -157,7 +157,7 @@
     "diskEncryptionPageAddPassphraseDialogBodyMain": "Budete muset zadávat vaše heslo při každém zapínaní počítače. Toto heslo je odlišné od uživatelského hesla.",
     "diskEncryptionPageAddPassphraseDialogBodyRecovery": "Pokud zapomenete své heslo, budete moci obnovit přístup k disku díky obnovovacímu klíči.",
     "diskEncryptionPageAdditionalSecurityHeader": "Pokročilé zabezpečení",
-    "diskEncryptionPageAdditionalSecurityBody": "Můžete nastavit PIN kód nebo heslo pro pokročilé zabezpečení. Budete ho muset zadávat při každém zapínaní vašeho zařízení.",
+    "diskEncryptionPageAdditionalSecurityBody": "Můžete nastavit PIN kód nebo heslo pro pokročilé zabezpečení. Budete ho muset zadávat při každém zapínaní zařízení.",
     "diskEncryptionPageAdditionalSecurityLearnMore": "Zjistit více",
     "diskEncryptionPageAddPinDialogSaveButton": "Přidat",
     "diskEncryptionPageRemovePinButton": "Odstranit PIN kód...",
