@@ -283,7 +283,7 @@
     "diskEncryptionPageRepairDialogCheckKeyBody": "A TPM törlése törli az összes titkosítási kulcsot. A folytatás előtt ellenőrizze, hogy a helyreállítási kulcs működik-e, mivel szükség lehet rá a számítógép indításához.",
     "diskEncryptionPageRepairDialogKeyDoesntWorkBody": "Ellenőrizze a kulcsot, és próbálja meg újra.",
     "diskEncryptionPageRepairDialogKeyHeader": "Új helyreállítási kulcs",
-    "diskEncryptionPageRepairDialogKeyBody": "A javítás lecseréli a helyreállítási kulcsot. Mentse el az új helyreállítási kulcsot egy biztonságos helyre. A javítás befejezése többé már nem fogja tudni használni a régi kulcsot.",
+    "diskEncryptionPageRepairDialogKeyBody": "A javítás lecseréli a helyreállítási kulcsot. Mentse el az új helyreállítási kulcsot egy biztonságos helyre. A javítás befejezése után többé már nem fogja tudni használni a régi kulcsot.",
     "diskEncryptionPageRepairDialogKeyWarningHeader": "A régi helyreállítási kulcsok többé nem fognak működni",
     "diskEncryptionPageRepairDialogKeyWarningBody": "Érdemes lehet közölni az informatikai rendszergazdával, hogy Ön újratitkosítja a lemezt, abban az esetben, ha ő bármilyen helyreállítási kulcsot tárol.",
     "diskEncryptionPageRepairDialogKeyNotUsed": "A jelenlegi helyreállítási kulcsa továbbra is működik. Az új kulcs nem lett használva, ezért eldobhatja.",
