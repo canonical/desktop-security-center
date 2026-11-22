@@ -270,5 +270,6 @@
     "snapdRuleCategoryTemporarilyDenied": "Ukatu aldi baterako",
     "snapdRuleCategoryAskAlways": "Galdetu beti",
     "ubuntuProLoadingLabel": "Honek segundo batzuk beharko ditu...",
-    "ubuntuProDisableError": "Ezin izan da Ubuntu Pro ezgaitu, saiatu berriz"
+    "ubuntuProDisableError": "Ezin izan da Ubuntu Pro ezgaitu, saiatu berriz",
+    "diskEncryptionPageRepairHeader": "Diskoaren zifratzeak konpondu beharra dauka"
 }

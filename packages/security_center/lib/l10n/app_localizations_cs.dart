@@ -323,7 +323,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get diskEncryptionPageAdditionalSecurityBody =>
-      'Můžete nastavit PIN kód nebo heslo pro pokročilé zabezpečení. Budete ho muset zadávat při každém zapínaní vašeho zařízení.';
+      'Můžete nastavit PIN kód nebo heslo pro pokročilé zabezpečení. Budete ho muset zadávat při každém zapínaní zařízení.';
 
   @override
   String get diskEncryptionPageAdditionalSecurityLearnMore => 'Zjistit více';
