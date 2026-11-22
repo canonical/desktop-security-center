@@ -350,7 +350,7 @@
     "tpmActionErrorKindNoKernelIommu": "Ĉe ĉi tiu komputilo mankas postulata sekuriga funkcio, nome eneliga memormastrumilo (IOMMU).",
     "tpmActionErrorKindHostSecurity": "Ekzistas problemo pri la sekurecaj agordoj de ĉi tiu komputilo.",
     "tpmActionErrorKindSysPrepApplicationsPresent": "Programo ruliĝanta ĉe starto eble malhelpas sekuran konekton al la Fidata Platforma Modulo (TPM) de ĉi tiu komputilo.",
-    "tpmActionErrorKindAbsolutePresent": "Ĉeestas la modulo Absolute Persistence ĉe ĉi tiu komputilo.",
+    "tpmActionErrorKindAbsolutePresent": "La modulo Absolute Persistence estas aktivigita en ĉi tiu komputilo.",
     "tpmActionErrorKindInvalidSecureBootMode": "Ĉe ĉi tiu komputilo, Sekura Praŝargo estas aŭ malŝaltita aŭ ne estas agordita en disponebla reĝimo.",
     "tpmActionErrorKindWeakSecureBootAlgorithmDetected": "Kelkaj atestiloj por kontroli programojn en ĉi tiu komputilo estas tro malnovaj aŭ uzas malfortajn algoritmojn.",
     "tpmActionErrorKindPreOsSecureBootAuthByEnrolledDigests": "Ĉi tiu komputilo estas uzanta malaŭtomatan permesoliston por kontroli programojn ĉe starto.",
