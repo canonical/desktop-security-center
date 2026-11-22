@@ -358,7 +358,8 @@ class AppLocalizationsEu extends AppLocalizations {
       'Pasaesaldia kentzen, honek segundo batzuk beharko ditu...';
 
   @override
-  String get diskEncryptionPageRepairHeader => 'Disk encryption needs repair';
+  String get diskEncryptionPageRepairHeader =>
+      'Diskoaren zifratzeak konpondu beharra dauka';
 
   @override
   String get diskEncryptionPageRepairBody =>
