@@ -59,6 +59,12 @@ class FeatureService {
     return _hasGreaterSnapdVersion(snapdVersion, '2.79');
   }
 
+  bool get supportsRebootToFirmwareSetup {
+    if (isDryRun) return true;
+
+    return _hasGreaterSnapdVersion(snapdVersion, '2.80');
+  }
+
   bool _hasStorageEncryptedManaged() {
     final result = _runProcess('snapctl', ['system-mode']);
     if (result.exitCode != 0) {

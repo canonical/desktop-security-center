@@ -102,6 +102,7 @@ factory: true
         wantMicrophone: false,
         wantPro: false,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name: 'snapd version == 2.75, microphone support, no pro supported',
@@ -110,6 +111,7 @@ factory: true
         wantMicrophone: true,
         wantPro: false,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name: 'snapd version == 2.75.1, microphone and pro interface supported',
@@ -118,6 +120,7 @@ factory: true
         wantMicrophone: true,
         wantPro: true,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name: 'snapd version > 2.75, microphone and pro interface supported',
@@ -126,6 +129,7 @@ factory: true
         wantMicrophone: true,
         wantPro: true,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name:
@@ -135,6 +139,7 @@ factory: true
         wantMicrophone: true,
         wantPro: true,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name:
@@ -144,6 +149,7 @@ factory: true
         wantMicrophone: false,
         wantPro: false,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name: 'snapd version with dev hash suffix',
@@ -152,6 +158,7 @@ factory: true
         wantMicrophone: true,
         wantPro: true,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name: 'snapd version 2.74.1',
@@ -160,6 +167,7 @@ factory: true
         wantMicrophone: false,
         wantPro: false,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name: 'snapd version 2.75.0',
@@ -168,6 +176,7 @@ factory: true
         wantMicrophone: true,
         wantPro: false,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name: 'snapd version 2.75.1',
@@ -176,6 +185,7 @@ factory: true
         wantMicrophone: true,
         wantPro: true,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name: 'snapd version 2.77.1, no reprovision',
@@ -184,6 +194,7 @@ factory: true
         wantMicrophone: true,
         wantPro: true,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name: 'snapd version 2.78, no reprovision',
@@ -192,6 +203,7 @@ factory: true
         wantMicrophone: true,
         wantPro: true,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name: 'snapd version 2.79, reprovision supported',
@@ -200,6 +212,16 @@ factory: true
         wantMicrophone: true,
         wantPro: true,
         wantReprovision: true,
+        wantRebootToFirmwareSetup: false,
+      ),
+      (
+        name: 'snapd version 2.80, reboot to firmware setup supported',
+        snapdVersion: '2.80',
+        isDryRun: false,
+        wantMicrophone: true,
+        wantPro: true,
+        wantReprovision: true,
+        wantRebootToFirmwareSetup: true,
       ),
       (
         name: 'snapd version null, no microphone or pro interface',
@@ -208,6 +230,7 @@ factory: true
         wantMicrophone: false,
         wantPro: false,
         wantReprovision: false,
+        wantRebootToFirmwareSetup: false,
       ),
       (
         name: 'dry run mode always returns true',
@@ -216,6 +239,7 @@ factory: true
         wantMicrophone: true,
         wantPro: true,
         wantReprovision: true,
+        wantRebootToFirmwareSetup: true,
       ),
       (
         name: 'dry run mode with null version returns true',
@@ -224,6 +248,7 @@ factory: true
         wantMicrophone: true,
         wantPro: true,
         wantReprovision: true,
+        wantRebootToFirmwareSetup: true,
       ),
     ]) {
       test(testCase.name, () {
@@ -243,6 +268,10 @@ factory: true
         expect(
           service.supportsReprovision,
           equals(testCase.wantReprovision),
+        );
+        expect(
+          service.supportsRebootToFirmwareSetup,
+          equals(testCase.wantRebootToFirmwareSetup),
         );
       });
     }

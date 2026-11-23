@@ -544,12 +544,15 @@ FeatureService registerMockFeatureService({
   bool isDryRun = false,
   bool supportsMicrophone = false,
   bool supportsReprovision = false,
+  bool supportsRebootToFirmwareSetup = false,
 }) {
   final service = MockFeatureService();
   when(service.isDiskEncryptionAvailable).thenReturn(isDiskEncryptionAvailable);
   when(service.isDryRun).thenReturn(isDryRun);
   when(service.supportsMicrophone).thenReturn(supportsMicrophone);
   when(service.supportsReprovision).thenReturn(supportsReprovision);
+  when(service.supportsRebootToFirmwareSetup)
+      .thenReturn(supportsRebootToFirmwareSetup);
 
   registerMockService<FeatureService>(service);
   addTearDown(unregisterService<FeatureService>);

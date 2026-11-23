@@ -2059,6 +2059,7 @@ void main() {
     final cases = [
       (
         name: 'opens them when logind can',
+        supportsRebootToFirmwareSetup: true,
         canRebootToFirmwareSetup: true,
         error: null,
         hangs: false,
@@ -2066,16 +2067,27 @@ void main() {
         opensFirmwareSettings: true,
       ),
       (
+        name: 'says how to open them when snapd is too old',
+        supportsRebootToFirmwareSetup: false,
+        canRebootToFirmwareSetup: true,
+        error: null,
+        hangs: false,
+        restartError: null,
+        opensFirmwareSettings: false,
+      ),
+      (
         name: 'says how to open them when logind cannot',
+        supportsRebootToFirmwareSetup: true,
         canRebootToFirmwareSetup: false,
         error: null,
         hangs: false,
         restartError: null,
         opensFirmwareSettings: false,
       ),
-      // As the shutdown interface of older snapd does
+      // As when the shutdown interface is disconnected
       (
         name: 'says how to open them when the check is denied',
+        supportsRebootToFirmwareSetup: true,
         canRebootToFirmwareSetup: true,
         error: Exception('AccessDenied'),
         hangs: false,
@@ -2084,6 +2096,7 @@ void main() {
       ),
       (
         name: 'says how to open them when the check hangs',
+        supportsRebootToFirmwareSetup: true,
         canRebootToFirmwareSetup: true,
         error: null,
         hangs: true,
@@ -2092,6 +2105,7 @@ void main() {
       ),
       (
         name: 'says how to open them when the restart fails',
+        supportsRebootToFirmwareSetup: true,
         canRebootToFirmwareSetup: true,
         error: null,
         hangs: false,
@@ -2117,7 +2131,10 @@ void main() {
           canRebootToFirmwareSetupHangs: tc.hangs,
           rebootToFirmwareSetupError: tc.restartError,
         );
-        await _showRepairDialog(tester);
+        await _showRepairDialog(
+          tester,
+          supportsRebootToFirmwareSetup: tc.supportsRebootToFirmwareSetup,
+        );
         final l10n = tester.l10n;
         await _openSolution(
           tester,
@@ -2132,6 +2149,9 @@ void main() {
         if (tc.hangs) await tester.pump(const Duration(seconds: 5));
         await tester.pumpAndSettle();
 
+        if (!tc.supportsRebootToFirmwareSetup) {
+          verifyNever(power.canRebootToFirmwareSetup());
+        }
         expect(
           find.text(l10n.tpmActionFixActionRebootToFwSettingsAutomatic),
           tc.opensFirmwareSettings ? findsOneWidget : findsNothing,
@@ -2552,8 +2572,12 @@ void main() {
 Future<void> _showRepairDialog(
   WidgetTester tester, {
   List<Override> overrides = const [],
+  bool supportsRebootToFirmwareSetup = true,
 }) async {
-  registerMockFeatureService(supportsReprovision: true);
+  registerMockFeatureService(
+    supportsReprovision: true,
+    supportsRebootToFirmwareSetup: supportsRebootToFirmwareSetup,
+  );
   await tester.pumpAppWithProviders(
     (_) => const DiskEncryptionPage(),
     createContainer(overrides: overrides),

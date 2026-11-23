@@ -1035,6 +1035,7 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
 @riverpod
 class RepairDialogModel extends _$RepairDialogModel {
   late final _service = getService<DiskEncryptionService>();
+  late final _featureService = getService<FeatureService>();
   late final _power = getService<PowerService>();
   late final FileSystem _fs = ref.read(fileSystemProvider);
 
@@ -1206,8 +1207,9 @@ class RepairDialogModel extends _$RepairDialogModel {
     }
   }
 
-  // Any failure, such as snapd denying the call, gives the manual instructions
+  // Older snapd or any failure gives the manual instructions
   Future<bool> _canRebootToFirmwareSetup() async {
+    if (!_featureService.supportsRebootToFirmwareSetup) return false;
     try {
       // dbus has no client-side timeout, so a silent logind would hang Continue
       return await _power
