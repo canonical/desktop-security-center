@@ -762,6 +762,10 @@ class AppLocalizationsEo extends AppLocalizations {
       'Restartigu la komputilon, kaj dum starto ripete premadu la klavon por agordoj (ofte F2, F10, aŭ Forigi).';
 
   @override
+  String get tpmActionFixActionRebootToFwSettingsAutomatic =>
+      'The computer will restart and open its firmware settings.';
+
+  @override
   String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection =>
       'Malaŭtomate ŝalti protekton kontraŭ rekta memoratingo (DMA)';
 

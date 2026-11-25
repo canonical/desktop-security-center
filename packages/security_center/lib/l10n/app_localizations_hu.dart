@@ -777,6 +777,10 @@ class AppLocalizationsHu extends AppLocalizations {
       'Indítsa újra a számítógépet, majd nyomja meg többször a beállítások billentyűjét az indítás során (általában F2, F10 vagy Delete).';
 
   @override
+  String get tpmActionFixActionRebootToFwSettingsAutomatic =>
+      'The computer will restart and open its firmware settings.';
+
+  @override
   String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection =>
       'DMA-védelem kézi engedélyezése';
 

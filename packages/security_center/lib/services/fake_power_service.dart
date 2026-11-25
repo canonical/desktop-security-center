@@ -8,4 +8,10 @@ class FakePowerService implements PowerService {
 
   @override
   Future<void> powerOff() async {}
+
+  @override
+  Future<bool> canRebootToFirmwareSetup() async => true;
+
+  @override
+  Future<void> rebootToFirmwareSetup() async {}
 }

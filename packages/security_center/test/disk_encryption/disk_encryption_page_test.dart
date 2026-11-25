@@ -2055,6 +2055,151 @@ void main() {
     });
   });
 
+  group('repair dialog restarting to the firmware settings', () {
+    final cases = [
+      (
+        name: 'opens them when logind can',
+        supportsRebootToFirmwareSetup: true,
+        canRebootToFirmwareSetup: true,
+        error: null,
+        hangs: false,
+        restartError: null,
+        opensFirmwareSettings: true,
+      ),
+      (
+        name: 'says how to open them when snapd is too old',
+        supportsRebootToFirmwareSetup: false,
+        canRebootToFirmwareSetup: true,
+        error: null,
+        hangs: false,
+        restartError: null,
+        opensFirmwareSettings: false,
+      ),
+      (
+        name: 'says how to open them when logind cannot',
+        supportsRebootToFirmwareSetup: true,
+        canRebootToFirmwareSetup: false,
+        error: null,
+        hangs: false,
+        restartError: null,
+        opensFirmwareSettings: false,
+      ),
+      // As when the shutdown interface is disconnected
+      (
+        name: 'says how to open them when the check is denied',
+        supportsRebootToFirmwareSetup: true,
+        canRebootToFirmwareSetup: true,
+        error: Exception('AccessDenied'),
+        hangs: false,
+        restartError: null,
+        opensFirmwareSettings: false,
+      ),
+      (
+        name: 'says how to open them when the check hangs',
+        supportsRebootToFirmwareSetup: true,
+        canRebootToFirmwareSetup: true,
+        error: null,
+        hangs: true,
+        restartError: null,
+        opensFirmwareSettings: false,
+      ),
+      (
+        name: 'says how to open them when the restart fails',
+        supportsRebootToFirmwareSetup: true,
+        canRebootToFirmwareSetup: true,
+        error: null,
+        hangs: false,
+        restartError: Exception('NotAuthorized'),
+        opensFirmwareSettings: true,
+      ),
+    ];
+
+    for (final tc in cases) {
+      testWidgets(tc.name, (tester) async {
+        registerMockDiskEncryptionService(
+          recommendations: [SnapdRecommendedRemedialAction.requireReprovision],
+          availabilityCheckErrors: [
+            _issue(
+              SnapdAvailabilityCheckErrorKind.noSuitablePcrBank,
+              [SnapdFixAction.rebootToFwSettings],
+            ),
+          ],
+        );
+        final power = registerMockPowerService(
+          canRebootToFirmwareSetup: tc.canRebootToFirmwareSetup,
+          canRebootToFirmwareSetupError: tc.error,
+          canRebootToFirmwareSetupHangs: tc.hangs,
+          rebootToFirmwareSetupError: tc.restartError,
+        );
+        await _showRepairDialog(
+          tester,
+          supportsRebootToFirmwareSetup: tc.supportsRebootToFirmwareSetup,
+        );
+        final l10n = tester.l10n;
+        await _openSolution(
+          tester,
+          1,
+          l10n.tpmActionFixActionRebootToFwSettingsNoSuitablePcrBank,
+        );
+        final continueButton =
+            find.text(UbuntuLocalizations.of(tester.context).continueLabel);
+        await tester.ensureVisible(continueButton);
+        await tester.tap(continueButton);
+        // The check gives up after 5 s
+        if (tc.hangs) await tester.pump(const Duration(seconds: 5));
+        await tester.pumpAndSettle();
+
+        if (!tc.supportsRebootToFirmwareSetup) {
+          verifyNever(power.canRebootToFirmwareSetup());
+        }
+        expect(
+          find.text(l10n.tpmActionFixActionRebootToFwSettingsAutomatic),
+          tc.opensFirmwareSettings ? findsOneWidget : findsNothing,
+        );
+        expect(
+          find.text(l10n.tpmActionFixActionRebootToFwSettingsInstructions),
+          tc.opensFirmwareSettings ? findsNothing : findsOneWidget,
+        );
+
+        await tester
+            .tap(find.text(l10n.diskEncryptionPageRepairDialogRestartNow));
+        await tester.pump();
+        verify(
+          tc.opensFirmwareSettings
+              ? power.rebootToFirmwareSetup()
+              : power.reboot(),
+        ).called(1);
+        verifyNever(
+          tc.opensFirmwareSettings
+              ? power.reboot()
+              : power.rebootToFirmwareSetup(),
+        );
+
+        await tester.pumpAndSettle();
+        expect(
+          find.text(l10n.tpmActionFixActionRebootToFwSettingsInstructions),
+          tc.opensFirmwareSettings && tc.restartError == null
+              ? findsNothing
+              : findsOneWidget,
+        );
+        expect(
+          find.text(l10n.diskEncryptionPageRepairDialogRestartFailed),
+          tc.restartError == null ? findsNothing : findsOneWidget,
+        );
+
+        if (tc.restartError != null) {
+          // A retry restarts plainly, as the instructions on screen say
+          clearInteractions(power);
+          await tester
+              .tap(find.text(l10n.diskEncryptionPageRepairDialogRestartNow));
+          await tester.pump();
+          verify(power.reboot()).called(1);
+          verifyNever(power.rebootToFirmwareSetup());
+        }
+      });
+    }
+  });
+
   group('repair dialog clearing the TPM', () {
     final tpmDisabled = _issue(
       SnapdAvailabilityCheckErrorKind.tpmDeviceDisabled,
@@ -2172,6 +2317,7 @@ void main() {
         ),
       ],
     );
+    registerMockPowerService();
     await _showRepairDialog(tester);
 
     final l10n = tester.l10n;
@@ -2426,8 +2572,12 @@ void main() {
 Future<void> _showRepairDialog(
   WidgetTester tester, {
   List<Override> overrides = const [],
+  bool supportsRebootToFirmwareSetup = true,
 }) async {
-  registerMockFeatureService(supportsReprovision: true);
+  registerMockFeatureService(
+    supportsReprovision: true,
+    supportsRebootToFirmwareSetup: supportsRebootToFirmwareSetup,
+  );
   await tester.pumpAppWithProviders(
     (_) => const DiskEncryptionPage(),
     createContainer(overrides: overrides),

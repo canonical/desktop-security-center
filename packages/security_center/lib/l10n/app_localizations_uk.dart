@@ -781,6 +781,10 @@ class AppLocalizationsUk extends AppLocalizations {
       'Перезапустіть систему та під час завантаження кілька разів натисніть клавішу налаштувань (зазвичай це F2, F10 або Delete).';
 
   @override
+  String get tpmActionFixActionRebootToFwSettingsAutomatic =>
+      'The computer will restart and open its firmware settings.';
+
+  @override
   String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection =>
       'Увімкнути захист DMA вручну';
 

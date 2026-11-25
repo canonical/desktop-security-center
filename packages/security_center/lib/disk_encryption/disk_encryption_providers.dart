@@ -312,6 +312,7 @@ sealed class RepairDialogState with _$RepairDialogState {
   ) = RepairDialogStateCheckKey;
   factory RepairDialogState.confirmPowerAction(
     SnapdFixAction action, {
+    @Default(false) bool opensFirmwareSettings,
     @Default(false) bool pending,
     Exception? error,
   }) = RepairDialogStateConfirmPowerAction;
@@ -1034,6 +1035,7 @@ class ChangeAuthModeDialogModel extends _$ChangeAuthModeDialogModel {
 @riverpod
 class RepairDialogModel extends _$RepairDialogModel {
   late final _service = getService<DiskEncryptionService>();
+  late final _featureService = getService<FeatureService>();
   late final _power = getService<PowerService>();
   late final FileSystem _fs = ref.read(fileSystemProvider);
 
@@ -1140,12 +1142,19 @@ class RepairDialogModel extends _$RepairDialogModel {
       state = RepairDialogState.checkKey(issue, action);
       return;
     }
+    final flow = _flow;
     // The user does this one, so they confirm before it restarts or powers off
     if (action.isExternal) {
-      state = RepairDialogState.confirmPowerAction(action);
+      final opensFirmwareSettings =
+          action == SnapdFixAction.rebootToFwSettings &&
+              await _canRebootToFirmwareSetup();
+      if (flow != _flow || state != current) return;
+      state = RepairDialogState.confirmPowerAction(
+        action,
+        opensFirmwareSettings: opensFirmwareSettings,
+      );
       return;
     }
-    final flow = _flow;
 
     state = RepairDialogState.checking();
     try {
@@ -1171,8 +1180,9 @@ class RepairDialogModel extends _$RepairDialogModel {
     if (confirm.pending) return;
     final request = switch (confirm.action) {
       SnapdFixAction.shutdown => _power.powerOff,
-      // snapd shutdown plug blocks logind SetRebootToFirmwareSetup, so
-      // step guides the user to open firmware settings manually.
+      SnapdFixAction.rebootToFwSettings when confirm.opensFirmwareSettings =>
+        _power.rebootToFirmwareSetup,
+      // Otherwise the step tells the user how to open the firmware settings
       SnapdFixAction.reboot ||
       SnapdFixAction.rebootToFwSettings =>
         _power.reboot,
@@ -1188,7 +1198,26 @@ class RepairDialogModel extends _$RepairDialogModel {
       // The dialog shows what the user can do instead of this error
       _log.error('Failed to restart or power off: $e');
       if (flow != _flow) return;
-      state = confirm.copyWith(pending: false, error: e);
+      // A retry restarts plainly, as the instructions on screen say
+      state = confirm.copyWith(
+        pending: false,
+        error: e,
+        opensFirmwareSettings: false,
+      );
+    }
+  }
+
+  // Older snapd or any failure gives the manual instructions
+  Future<bool> _canRebootToFirmwareSetup() async {
+    if (!_featureService.supportsRebootToFirmwareSetup) return false;
+    try {
+      // dbus has no client-side timeout, so a silent logind would hang Continue
+      return await _power
+          .canRebootToFirmwareSetup()
+          .timeout(const Duration(seconds: 5));
+    } on Exception catch (e) {
+      _log.info('Cannot restart to the firmware settings: $e');
+      return false;
     }
   }
 

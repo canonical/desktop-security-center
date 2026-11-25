@@ -783,6 +783,10 @@ class AppLocalizationsRu extends AppLocalizations {
       'Перезагрузите компьютер и во время запуска несколько раз нажмите клавишу настроек (обычно это F2, F10 или Delete).';
 
   @override
+  String get tpmActionFixActionRebootToFwSettingsAutomatic =>
+      'The computer will restart and open its firmware settings.';
+
+  @override
   String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection =>
       'Включить защиту DMA вручную';
 

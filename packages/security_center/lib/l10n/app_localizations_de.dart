@@ -785,6 +785,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Starten Sie neu und drücken Sie während des Startvorgangs wiederholt die Einstellungstaste (in der Regel F2, F10 oder Entf).';
 
   @override
+  String get tpmActionFixActionRebootToFwSettingsAutomatic =>
+      'The computer will restart and open its firmware settings.';
+
+  @override
   String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection =>
       'DMA-Schutz manuell aktivieren';
 

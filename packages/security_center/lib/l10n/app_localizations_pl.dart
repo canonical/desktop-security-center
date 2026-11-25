@@ -778,6 +778,10 @@ class AppLocalizationsPl extends AppLocalizations {
       'Uruchom ponownie komputer i naciskaj klawisz ustawień kilkakrotnie podczas uruchamiania (najczęściej F2, F10 lub Delete).';
 
   @override
+  String get tpmActionFixActionRebootToFwSettingsAutomatic =>
+      'The computer will restart and open its firmware settings.';
+
+  @override
   String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection =>
       'Włącz ręcznie ochronę DMA';
 

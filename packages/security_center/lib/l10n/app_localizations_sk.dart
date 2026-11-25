@@ -772,6 +772,10 @@ class AppLocalizationsSk extends AppLocalizations {
       'Reštartujte počítač a počas spúšťania opakovane stláčajte kláves nastavení (zvyčajne F2, F10 alebo Delete).';
 
   @override
+  String get tpmActionFixActionRebootToFwSettingsAutomatic =>
+      'The computer will restart and open its firmware settings.';
+
+  @override
   String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection =>
       'Povoliť ochranu DMA manuálne';
 

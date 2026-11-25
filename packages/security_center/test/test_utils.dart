@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:file/memory.dart';
@@ -543,12 +544,15 @@ FeatureService registerMockFeatureService({
   bool isDryRun = false,
   bool supportsMicrophone = false,
   bool supportsReprovision = false,
+  bool supportsRebootToFirmwareSetup = false,
 }) {
   final service = MockFeatureService();
   when(service.isDiskEncryptionAvailable).thenReturn(isDiskEncryptionAvailable);
   when(service.isDryRun).thenReturn(isDryRun);
   when(service.supportsMicrophone).thenReturn(supportsMicrophone);
   when(service.supportsReprovision).thenReturn(supportsReprovision);
+  when(service.supportsRebootToFirmwareSetup)
+      .thenReturn(supportsRebootToFirmwareSetup);
 
   registerMockService<FeatureService>(service);
   addTearDown(unregisterService<FeatureService>);
@@ -556,10 +560,24 @@ FeatureService registerMockFeatureService({
 }
 
 @GenerateMocks([PowerService])
-PowerService registerMockPowerService() {
+PowerService registerMockPowerService({
+  bool canRebootToFirmwareSetup = false,
+  Exception? canRebootToFirmwareSetupError,
+  bool canRebootToFirmwareSetupHangs = false,
+  Exception? rebootToFirmwareSetupError,
+}) {
   final service = MockPowerService();
   when(service.reboot()).thenAnswer((_) async {});
   when(service.powerOff()).thenAnswer((_) async {});
+  when(service.canRebootToFirmwareSetup()).thenAnswer((_) async {
+    if (canRebootToFirmwareSetupHangs) return Completer<bool>().future;
+    return canRebootToFirmwareSetupError == null
+        ? canRebootToFirmwareSetup
+        : throw canRebootToFirmwareSetupError;
+  });
+  when(service.rebootToFirmwareSetup()).thenAnswer((_) async {
+    if (rebootToFirmwareSetupError != null) throw rebootToFirmwareSetupError;
+  });
 
   registerMockService<PowerService>(service);
   addTearDown(unregisterService<PowerService>);

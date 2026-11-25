@@ -770,6 +770,10 @@ class AppLocalizationsSv extends AppLocalizations {
       'Starta om och tryck på inställningstangenten upprepade gånger under uppstarten (ofta F2, F10 eller Delete).';
 
   @override
+  String get tpmActionFixActionRebootToFwSettingsAutomatic =>
+      'The computer will restart and open its firmware settings.';
+
+  @override
   String get tpmActionFixActionRebootToFwSettingsInsufficientDmaProtection =>
       'Aktivera DMA-skydd manuellt';
 
